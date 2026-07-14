@@ -1,0 +1,701 @@
+<script type="text/html" id="pg-notify"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔔 Notifications & Status · Prism</title>
+<style>
+:root{
+  --bg:#0b0e17; --panel:#121623; --panel2:#171d2e; --card:#141b2b; --line:#243049;
+  --ink:#eaf1f9; --muted:#8593a8; --dim:#5b6678;
+  --crit:#c879ff;  --crit-rgb:200,121,255;
+  --neg:#f85149;   --neg-rgb:248,81,73;
+  --warn:#e0a52b;  --warn-rgb:224,165,43;
+  --pos:#3fb950;   --pos-rgb:63,185,80;
+  --info:#4493f8;  --info-rgb:68,147,248;
+  --accent:#ff9900;--accent-rgb:255,153,0;
+  --cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%);
+}
+.c-crit{--c:var(--crit);--c-rgb:200,121,255}.c-neg{--c:var(--neg);--c-rgb:248,81,73}
+.c-warn{--c:var(--warn);--c-rgb:224,165,43}.c-pos{--c:var(--pos);--c-rgb:63,185,80}
+.c-info{--c:var(--info);--c-rgb:68,147,248}.c-accent{--c:var(--accent);--c-rgb:255,153,0}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,rgba(255,153,0,.05),transparent 60%),var(--bg);
+  color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;padding-bottom:90px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em}
+.head{padding:28px 32px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#232f3e,var(--panel));position:relative}
+.head h1{margin:0;font-size:25px;font-weight:800;letter-spacing:-.01em}
+.head p{margin:7px 0 0;color:var(--muted);font-size:13px;max-width:820px}
+.wrap{max-width:1240px;margin:0 auto;padding:22px 32px 0}
+h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:800;margin:26px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.tile .stage{padding:26px 18px;min-height:130px;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,rgba(255,255,255,.012) 0 10px,transparent 10px 20px);position:relative}
+.tile .meta{padding:12px 14px;border-top:1px solid var(--line)}
+.tile .nm{font-weight:700;font-size:13.5px}
+.tile .ref{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--accent);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;display:inline-block;margin-top:6px}
+.tile .desc{color:var(--muted);font-size:12px;margin-top:8px}
+.tile .row{display:flex;gap:8px;margin-top:10px}
+.tile .copy{flex:1;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px;font-size:12px;cursor:pointer;transition:.15s;font-family:inherit}
+.tile .copy:hover{border-color:var(--accent);color:var(--accent)}
+.tile .copy.ok{border-color:var(--pos);color:var(--pos)}
+.el-pill{display:inline-block;background:rgba(var(--c-rgb),.14);color:var(--c);border-radius:11px;padding:3px 10px;font-size:11px;font-weight:800}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important;animation-iteration-count:1!important}}
+</style>
+<style id="notify-styles">
+/* ============================================================================
+   Notifications & Status gallery — namespaced ns-* / nsXxx
+   Real app-feedback UI: toasts, progress, banners, live/connection, skeletons,
+   badges. All color via design tokens (--pos/--neg/--warn/--info/--accent/--crit
+   and -rgb variants). Each widget sets its own --c / --cr so it re-themes cleanly.
+   Everything loops on an ambient cycle and reads clearly at any frozen frame.
+   ============================================================================ */
+
+/* shared shells ----------------------------------------------------------- */
+.ns-toast{position:relative;display:flex;align-items:center;gap:10px;width:224px;
+  padding:11px 13px;border-radius:11px;background:var(--panel2);border:1px solid var(--line);
+  box-shadow:0 10px 26px rgba(0,0,0,.34);color:var(--ink);font-size:12.5px;line-height:1.35;overflow:hidden}
+.ns-toast::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c,var(--info))}
+.ns-tico{flex:0 0 26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(var(--cr,68,147,248),.18);color:var(--c,var(--info));font-weight:800;font-size:14px}
+.ns-tbody{flex:1 1 auto;min-width:0}
+.ns-ttitle{font-weight:700;font-size:12.5px}
+.ns-tsub{color:var(--muted);font-size:11px;margin-top:1px}
+.ns-tx{flex:0 0 auto;color:var(--dim);font-weight:700;font-size:13px;line-height:1}
+
+/* ============================ 1. TOASTS & SNACKBARS ====================== */
+/* slide+fade cycle used by the single-toast variants */
+@keyframes nsSlideIn{0%{opacity:0;transform:translateX(26px) scale(.96)}
+  12%,78%{opacity:1;transform:translateX(0) scale(1)}
+  92%,100%{opacity:0;transform:translateX(26px) scale(.96)}}
+.ns-toast.ns-cycle{animation:nsSlideIn 4.4s ease-in-out infinite}
+
+.ns-t-success{--c:var(--pos);--cr:63,185,80}
+.ns-t-error{--c:var(--neg);--cr:248,81,73}
+.ns-t-warn{--c:var(--warn);--cr:224,165,43}
+.ns-t-info{--c:var(--info);--cr:68,147,248}
+
+/* snackbar: dark pill with an action button */
+.ns-snackbar{display:flex;align-items:center;gap:14px;width:230px;padding:12px 14px;border-radius:10px;
+  background:var(--ink);color:var(--panel);box-shadow:0 10px 26px rgba(0,0,0,.4);font-size:12.5px;
+  animation:nsSlideIn 4.4s ease-in-out infinite}
+.ns-snackbar .ns-sk-msg{flex:1 1 auto}
+.ns-snackbar .ns-sk-act{flex:0 0 auto;color:var(--accent);font-weight:800;text-transform:uppercase;
+  font-size:11px;letter-spacing:.05em;cursor:pointer}
+
+/* stacking toast group — three toasts fade up in sequence, newest on top */
+.ns-stack{display:flex;flex-direction:column;gap:8px;width:222px}
+.ns-stack .ns-toast{width:100%;padding:9px 12px}
+.ns-stack .ns-toast:nth-child(1){animation:nsStackUp 4.5s ease-in-out infinite}
+.ns-stack .ns-toast:nth-child(2){animation:nsStackUp 4.5s ease-in-out .5s infinite}
+.ns-stack .ns-toast:nth-child(3){animation:nsStackUp 4.5s ease-in-out 1s infinite}
+@keyframes nsStackUp{0%{opacity:0;transform:translateY(14px) scale(.94)}
+  18%,82%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:.55;transform:translateY(-4px) scale(.97)}}
+
+/* auto-dismiss toast with a draining countdown bar */
+.ns-count{padding-bottom:14px}
+.ns-count .ns-cbar{position:absolute;left:0;bottom:0;height:3px;width:100%;
+  background:var(--c,var(--info));transform-origin:left;animation:nsDrain 4s linear infinite}
+@keyframes nsDrain{0%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+
+/* toast whose status icon pops in with a spring */
+.ns-pop .ns-tico{animation:nsIconPop 4.4s ease-in-out infinite}
+@keyframes nsIconPop{0%,4%{transform:scale(0);opacity:0}12%{transform:scale(1.35)}
+  18%,80%{transform:scale(1);opacity:1}90%,100%{transform:scale(.4);opacity:0}}
+
+/* ============================ 2. PROGRESS =============================== */
+.ns-track{position:relative;height:7px;border-radius:99px;background:var(--card);overflow:hidden}
+.ns-fill{position:absolute;inset:0 auto 0 0;border-radius:99px;background:var(--c,var(--info))}
+
+/* upload progress toast — bar fills, percent counts (label is illustrative) */
+.ns-upload{--c:var(--info);--cr:68,147,248}
+.ns-upload .ns-track{margin-top:8px}
+.ns-upload .ns-fill{animation:nsUpFill 4s ease-in-out infinite}
+@keyframes nsUpFill{0%{width:0}70%,100%{width:100%}}
+.ns-upload .ns-pct{position:absolute;right:12px;top:9px;font-size:11px;font-weight:800;color:var(--c)}
+
+/* multi-step progress (connected nodes filling left→right) */
+.ns-steps{display:flex;align-items:center;width:220px}
+.ns-steps i{flex:0 0 22px;height:22px;border-radius:50%;background:var(--card);border:2px solid var(--line);
+  display:grid;place-items:center;font-size:11px;font-weight:800;color:var(--muted);z-index:1}
+.ns-steps b{flex:1 1 auto;height:3px;background:var(--card);position:relative;overflow:hidden}
+.ns-steps b::after{content:"";position:absolute;inset:0;background:var(--pos);transform:translateX(-100%)}
+.ns-steps i:nth-child(1){animation:nsStepOn 5s .3s infinite}
+.ns-steps b:nth-child(2)::after{animation:nsStepFill 5s .6s infinite}
+.ns-steps i:nth-child(3){animation:nsStepOn 5s 1.4s infinite}
+.ns-steps b:nth-child(4)::after{animation:nsStepFill 5s 1.7s infinite}
+.ns-steps i:nth-child(5){animation:nsStepOn 5s 2.5s infinite}
+@keyframes nsStepOn{0%,10%{background:var(--card);border-color:var(--line);color:var(--muted)}
+  16%,100%{background:var(--pos);border-color:var(--pos);color:#fff}}
+@keyframes nsStepFill{0%,8%{transform:translateX(-100%)}20%,100%{transform:translateX(0)}}
+
+/* determinate bar that eases to a value and holds */
+.ns-det{--c:var(--pos)}
+.ns-det .ns-fill{animation:nsDet 4.5s ease-in-out infinite}
+@keyframes nsDet{0%{width:8%}45%,75%{width:72%}100%{width:8%}}
+
+/* indeterminate bar — a shuttle of unknown-duration work */
+.ns-indet{--c:var(--info)}
+.ns-indet .ns-fill{width:38%;animation:nsIndet 1.5s cubic-bezier(.65,.05,.36,1) infinite}
+@keyframes nsIndet{0%{left:-40%}100%{left:100%}}
+
+/* circular progress badge (conic ring + count) */
+.ns-ring{position:relative;width:74px;height:74px;border-radius:50%;display:grid;place-items:center;
+  background:conic-gradient(var(--c,var(--accent)) var(--p,0%),var(--card) 0);animation:nsRing 4.5s ease-in-out infinite}
+.ns-ring::before{content:"";position:absolute;width:56px;height:56px;border-radius:50%;background:var(--panel)}
+.ns-ring span{position:relative;font-weight:800;font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums}
+@keyframes nsRing{0%{--p:6%}55%,80%{--p:78%}100%{--p:6%}}
+@property --p{syntax:'<percentage>';inherits:false;initial-value:0%}
+
+/* "saving… → saved ✓" state swap */
+.ns-save{position:relative;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--muted)}
+.ns-save .ns-sp{width:15px;height:15px;border-radius:50%;border:2px solid var(--line);
+  border-top-color:var(--info);animation:nsSpin .8s linear infinite,nsSaveHide 4s step-end infinite}
+.ns-save .ns-ok{position:absolute;color:var(--pos);font-weight:900;opacity:0;animation:nsSaveShow 4s step-end infinite}
+.ns-save .ns-lbl::after{content:"Saving…";animation:nsSaveTxt 4s step-end infinite}
+@keyframes nsSpin{to{transform:rotate(360deg)}}
+@keyframes nsSaveHide{0%,60%{opacity:1}60.01%,100%{opacity:0}}
+@keyframes nsSaveShow{0%,60%{opacity:0}60.01%,100%{opacity:1}}
+@keyframes nsSaveTxt{0%,60%{content:"Saving…";color:var(--muted)}60.01%,100%{content:"Saved";color:var(--pos)}}
+
+/* download-complete pulse (checkmark ripples out) */
+.ns-dl{position:relative;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(var(--pos-rgb),.16);color:var(--pos);font-size:22px;font-weight:900}
+.ns-dl::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--pos);
+  animation:nsDlPulse 2.4s ease-out infinite}
+@keyframes nsDlPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.7);opacity:0}}
+
+/* segmented progress dots filling one by one */
+.ns-seg{display:flex;gap:6px}
+.ns-seg i{width:26px;height:6px;border-radius:99px;background:var(--card)}
+.ns-seg i:nth-child(1){animation:nsSegOn 4s .0s infinite}
+.ns-seg i:nth-child(2){animation:nsSegOn 4s .35s infinite}
+.ns-seg i:nth-child(3){animation:nsSegOn 4s .7s infinite}
+.ns-seg i:nth-child(4){animation:nsSegOn 4s 1.05s infinite}
+.ns-seg i:nth-child(5){animation:nsSegOn 4s 1.4s infinite}
+@keyframes nsSegOn{0%,8%{background:var(--card)}16%,88%{background:var(--accent)}100%{background:var(--card)}}
+
+/* ============================ 3. STATUS BANNERS ========================= */
+.ns-banner{display:flex;align-items:center;gap:10px;width:232px;padding:11px 13px;border-radius:10px;
+  font-size:12.5px;font-weight:600;border:1px solid rgba(var(--cr,63,185,80),.4);
+  background:rgba(var(--cr,63,185,80),.12);color:var(--ink)}
+.ns-banner .ns-bdot{flex:0 0 9px;height:9px;border-radius:50%;background:var(--c,var(--pos));
+  box-shadow:0 0 0 0 rgba(var(--cr,63,185,80),.6);animation:nsPing 2.2s ease-out infinite}
+.ns-banner .ns-bmsg{flex:1 1 auto}
+.ns-banner .ns-bmsg small{display:block;color:var(--muted);font-weight:500;font-size:11px}
+@keyframes nsPing{0%{box-shadow:0 0 0 0 rgba(var(--cr,63,185,80),.55)}70%,100%{box-shadow:0 0 0 8px rgba(var(--cr,63,185,80),0)}}
+
+.ns-b-ok{--c:var(--pos);--cr:63,185,80}
+.ns-b-degraded{--c:var(--warn);--cr:224,165,43}
+.ns-b-resolved{--c:var(--pos);--cr:63,185,80}
+
+/* maintenance banner — swept diagonal caution stripes */
+.ns-maint{--c:var(--info);--cr:68,147,248;position:relative;overflow:hidden}
+.ns-maint::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(45deg,transparent 0 10px,rgba(var(--cr),.10) 10px 20px);
+  background-size:200% 100%;animation:nsSweep 6s linear infinite}
+@keyframes nsSweep{to{background-position:56px 0}}
+
+/* offline / reconnecting banner with animated dots */
+.ns-offline{--c:var(--neg);--cr:248,81,73}
+.ns-offline .ns-dots::after{content:"";animation:nsDots 1.6s steps(4,end) infinite}
+@keyframes nsDots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+
+/* sticky top status bar */
+.ns-statusbar{width:236px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:var(--panel2)}
+.ns-statusbar .ns-sbtop{display:flex;align-items:center;gap:8px;padding:8px 11px;font-size:12px;font-weight:700;
+  background:rgba(var(--pos-rgb),.14);color:var(--ink);border-bottom:1px solid var(--line)}
+.ns-statusbar .ns-sbtop i{width:8px;height:8px;border-radius:50%;background:var(--pos);animation:nsBlink 1.8s ease-in-out infinite}
+.ns-statusbar .ns-sbrow{display:flex;justify-content:space-between;padding:6px 11px;font-size:11px;color:var(--muted)}
+.ns-statusbar .ns-sbrow b{color:var(--pos);font-weight:700}
+@keyframes nsBlink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* status dot legend */
+.ns-legend{display:flex;flex-direction:column;gap:9px;width:180px;font-size:12px}
+.ns-legend div{display:flex;align-items:center;gap:9px;color:var(--muted)}
+.ns-legend i{width:10px;height:10px;border-radius:50%;flex:0 0 auto}
+.ns-legend .ns-l-op{background:var(--pos);animation:nsBlink 2s infinite}
+.ns-legend .ns-l-dg{background:var(--warn);animation:nsBlink 1.2s infinite}
+.ns-legend .ns-l-dn{background:var(--neg);animation:nsBlink .7s infinite}
+
+/* active-incident banner with a scanning highlight */
+.ns-incident{--c:var(--crit);--cr:200,121,255;position:relative;overflow:hidden}
+.ns-incident .ns-bdot{animation:nsBlink .8s infinite;box-shadow:none}
+.ns-incident::after{content:"";position:absolute;top:0;bottom:0;width:40%;
+  background:linear-gradient(90deg,transparent,rgba(var(--cr),.18),transparent);animation:nsScan 3s linear infinite}
+@keyframes nsScan{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
+
+/* update-available banner with a soft breathing glow */
+.ns-update{--c:var(--accent);--cr:255,153,0}
+.ns-update .ns-bpill{margin-left:auto;padding:3px 9px;border-radius:99px;font-size:10.5px;font-weight:800;
+  background:var(--accent);color:#1a1200;animation:nsBreathe 2.6s ease-in-out infinite}
+@keyframes nsBreathe{0%,100%{box-shadow:0 0 0 0 rgba(var(--accent-rgb),.5)}50%{box-shadow:0 0 12px 2px rgba(var(--accent-rgb),.55)}}
+
+/* ============================ 4. LIVE & CONNECTION ====================== */
+/* pulsing LIVE dot */
+.ns-live{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;border-radius:99px;
+  background:rgba(var(--neg-rgb),.14);color:var(--neg);font-weight:800;font-size:12px;letter-spacing:.08em}
+.ns-live i{width:9px;height:9px;border-radius:50%;background:var(--neg);position:relative}
+.ns-live i::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--neg);animation:nsPing 1.8s ease-out infinite}
+
+/* sync spinner that resolves to a check, on a loop */
+.ns-sync{width:40px;height:40px;position:relative}
+.ns-sync .ns-sring{position:absolute;inset:0;border-radius:50%;border:3px solid var(--card);
+  border-top-color:var(--info);animation:nsSpin .9s linear infinite,nsSyncFade 3.6s step-end infinite}
+.ns-sync .ns-scheck{position:absolute;inset:0;display:grid;place-items:center;color:var(--pos);
+  font-size:20px;font-weight:900;opacity:0;animation:nsSyncShow 3.6s step-end infinite}
+@keyframes nsSyncFade{0%,66%{opacity:1}66.01%,100%{opacity:0}}
+@keyframes nsSyncShow{0%,66%{opacity:0;transform:scale(.5)}66.01%{opacity:1;transform:scale(1)}100%{opacity:1;transform:scale(1)}}
+
+/* connection-strength bars */
+.ns-signal{display:flex;align-items:flex-end;gap:4px;height:34px}
+.ns-signal i{width:7px;border-radius:2px;background:var(--pos)}
+.ns-signal i:nth-child(1){height:30%;animation:nsSig 2.4s .0s infinite}
+.ns-signal i:nth-child(2){height:55%;animation:nsSig 2.4s .2s infinite}
+.ns-signal i:nth-child(3){height:78%;animation:nsSig 2.4s .4s infinite}
+.ns-signal i:nth-child(4){height:100%;animation:nsSig 2.4s .6s infinite}
+@keyframes nsSig{0%,100%{opacity:.25;background:var(--muted)}50%{opacity:1;background:var(--pos)}}
+
+/* "typing…" presence bubble */
+.ns-typing{display:flex;align-items:center;gap:5px;padding:9px 13px;border-radius:14px 14px 14px 4px;
+  background:var(--panel2);border:1px solid var(--line)}
+.ns-typing i{width:7px;height:7px;border-radius:50%;background:var(--muted)}
+.ns-typing i:nth-child(1){animation:nsType 1.3s .0s infinite}
+.ns-typing i:nth-child(2){animation:nsType 1.3s .18s infinite}
+.ns-typing i:nth-child(3){animation:nsType 1.3s .36s infinite}
+@keyframes nsType{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
+
+/* heartbeat / last-seen dot */
+.ns-heart{display:inline-flex;align-items:center;gap:9px;font-size:12px;color:var(--muted)}
+.ns-heart i{width:11px;height:11px;border-radius:50%;background:var(--pos);animation:nsHeartbeat 1.4s ease-in-out infinite}
+@keyframes nsHeartbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.4)}30%{transform:scale(1)}45%{transform:scale(1.25)}}
+
+/* websocket "connected" expanding pulse */
+.ns-ws{position:relative;width:48px;height:48px;display:grid;place-items:center}
+.ns-ws b{width:14px;height:14px;border-radius:50%;background:var(--info);z-index:1}
+.ns-ws span{position:absolute;inset:0;margin:auto;width:14px;height:14px;border-radius:50%;
+  border:2px solid var(--info)}
+.ns-ws span:nth-child(2){animation:nsWs 2.4s ease-out infinite}
+.ns-ws span:nth-child(3){animation:nsWs 2.4s ease-out 1.2s infinite}
+@keyframes nsWs{0%{transform:scale(1);opacity:.8}100%{transform:scale(2.6);opacity:0}}
+
+/* recording indicator */
+.ns-rec{display:inline-flex;align-items:center;gap:9px;padding:7px 13px;border-radius:8px;
+  background:var(--panel2);border:1px solid var(--line);font-weight:800;font-size:12px;color:var(--ink);letter-spacing:.05em}
+.ns-rec i{width:11px;height:11px;border-radius:50%;background:var(--neg);animation:nsRec 1.3s ease-in-out infinite}
+@keyframes nsRec{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(var(--neg-rgb),.6)}50%{opacity:.35;box-shadow:0 0 10px 2px rgba(var(--neg-rgb),.5)}}
+
+/* broadcasting signal wave */
+.ns-wave{display:flex;align-items:center;gap:3px;height:32px}
+.ns-wave i{width:4px;border-radius:99px;background:var(--info)}
+.ns-wave i:nth-child(odd){animation:nsWave 1s ease-in-out infinite}
+.ns-wave i:nth-child(even){animation:nsWave 1s ease-in-out .25s infinite}
+.ns-wave i:nth-child(3),.ns-wave i:nth-child(4){animation-delay:.12s}
+@keyframes nsWave{0%,100%{height:22%}50%{height:100%}}
+
+/* online presence ring around an avatar */
+.ns-presence{position:relative;width:46px;height:46px}
+.ns-presence .ns-av{width:100%;height:100%;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--info),var(--crit));color:#fff;font-weight:800;font-size:15px}
+.ns-presence .ns-on{position:absolute;right:-1px;bottom:-1px;width:14px;height:14px;border-radius:50%;
+  background:var(--pos);border:2.5px solid var(--panel)}
+.ns-presence .ns-on::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--pos);animation:nsPing 2s ease-out infinite}
+
+/* ============================ 5. EMPTY STATES & SKELETONS =============== */
+/* shared shimmer sweep (theme-safe, neutral highlight) */
+@keyframes nsShimmer{0%{background-position:180% 0}100%{background-position:-80% 0}}
+.ns-sk{border-radius:6px;background:linear-gradient(90deg,var(--card) 25%,var(--line) 50%,var(--card) 75%);
+  background-size:220% 100%;animation:nsShimmer 1.5s linear infinite}
+
+/* empty-state card (icon + message + CTA) */
+.ns-empty{display:flex;flex-direction:column;align-items:center;gap:9px;width:200px;text-align:center;
+  padding:6px}
+.ns-empty .ns-eic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;
+  background:rgba(var(--info-rgb),.14);color:var(--info);animation:nsFloat 3s ease-in-out infinite}
+.ns-empty .ns-etitle{font-weight:700;font-size:13px;color:var(--ink)}
+.ns-empty .ns-esub{font-size:11.5px;color:var(--muted)}
+.ns-empty .ns-cta{margin-top:3px;padding:6px 14px;border-radius:8px;background:var(--accent);color:#1a1200;
+  font-weight:800;font-size:11.5px}
+@keyframes nsFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* profile skeleton — avatar + lines */
+.ns-skp{display:flex;gap:11px;align-items:center;width:216px}
+.ns-skp .ns-sk-av{flex:0 0 42px;height:42px;border-radius:50%}
+.ns-skp .ns-sk-lines{flex:1 1 auto;display:flex;flex-direction:column;gap:7px}
+.ns-skp .ns-sk-lines span{height:9px;display:block}
+.ns-skp .ns-sk-lines span:nth-child(2){width:65%}
+
+/* card skeleton — media block + text lines */
+.ns-skc{width:200px;display:flex;flex-direction:column;gap:9px}
+.ns-skc .ns-sk-media{height:60px;border-radius:8px}
+.ns-skc .ns-sk-l{height:9px}
+.ns-skc .ns-sk-l.s{width:50%}
+
+/* table skeleton — rows of cells */
+.ns-skt{width:224px;display:flex;flex-direction:column;gap:7px}
+.ns-skt .ns-sk-tr{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px}
+.ns-skt .ns-sk-tr span{height:10px}
+
+/* no-results state */
+.ns-noresult{display:flex;flex-direction:column;align-items:center;gap:8px;width:190px;text-align:center}
+.ns-noresult .ns-nric{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:22px;
+  background:var(--card);color:var(--muted);animation:nsShake 4s ease-in-out infinite}
+.ns-noresult .ns-nrt{font-weight:700;font-size:12.5px;color:var(--ink)}
+.ns-noresult .ns-nrs{font-size:11px;color:var(--muted)}
+@keyframes nsShake{0%,88%,100%{transform:rotate(0)}91%{transform:rotate(-9deg)}94%{transform:rotate(9deg)}97%{transform:rotate(-5deg)}}
+
+/* loading shimmer list */
+.ns-skl{width:220px;display:flex;flex-direction:column;gap:9px}
+.ns-skl .ns-sk-item{display:flex;align-items:center;gap:9px}
+.ns-skl .ns-sk-item i{flex:0 0 20px;height:20px;border-radius:5px}
+.ns-skl .ns-sk-item b{flex:1 1 auto;height:9px;border-radius:6px;display:block}
+.ns-skl .ns-sk-item:nth-child(2) b{width:80%}
+.ns-skl .ns-sk-item:nth-child(3) b{width:60%}
+
+/* paragraph / text-block skeleton */
+.ns-skb{width:214px;display:flex;flex-direction:column;gap:8px}
+.ns-skb .ns-sk-p{height:9px}
+.ns-skb .ns-sk-p:nth-child(3){width:92%}
+.ns-skb .ns-sk-p:nth-child(4){width:70%}
+.ns-skb .ns-sk-h{height:13px;width:55%;margin-bottom:2px}
+
+/* spinner placeholder (loading dots orbit) */
+.ns-spinph{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--muted);font-size:11.5px}
+.ns-spinph .ns-orb{width:34px;height:34px;border-radius:50%;border:3px solid var(--card);
+  border-top-color:var(--accent);border-right-color:var(--accent);animation:nsSpin .8s linear infinite}
+
+/* ============================ 6. BADGES & COUNTS ======================== */
+/* notification bell with count badge that pops */
+.ns-bell{position:relative;width:40px;height:40px;display:grid;place-items:center;font-size:24px;color:var(--muted);
+  transform-origin:top center;animation:nsRing2 3.2s ease-in-out infinite}
+.ns-bell .ns-cnt{position:absolute;top:-2px;right:-3px;min-width:18px;height:18px;padding:0 4px;border-radius:99px;
+  background:var(--neg);color:#fff;font-size:10.5px;font-weight:800;display:grid;place-items:center;
+  border:2px solid var(--panel);animation:nsBadgePop 3.2s ease-in-out infinite}
+@keyframes nsRing2{0%,84%,100%{transform:rotate(0)}88%{transform:rotate(11deg)}92%{transform:rotate(-9deg)}96%{transform:rotate(5deg)}}
+@keyframes nsBadgePop{0%{transform:scale(1)}84%{transform:scale(1)}90%{transform:scale(1.5)}96%{transform:scale(1)}}
+
+/* unread pill */
+.ns-unread{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;
+  background:rgba(var(--info-rgb),.14);color:var(--info);font-weight:700;font-size:12px}
+.ns-unread i{width:8px;height:8px;border-radius:50%;background:var(--info);animation:nsBlink 1.4s infinite}
+
+/* "NEW" ribbon on a corner */
+.ns-ribwrap{position:relative;width:120px;height:80px;border-radius:10px;background:var(--panel2);
+  border:1px solid var(--line);overflow:hidden;display:grid;place-items:center;color:var(--muted);font-size:12px}
+.ns-ribbon{position:absolute;top:12px;right:-30px;width:110px;transform:rotate(45deg);text-align:center;
+  background:var(--accent);color:#1a1200;font-weight:800;font-size:11px;padding:4px 0;letter-spacing:.06em;
+  box-shadow:0 3px 8px rgba(0,0,0,.3);animation:nsRibbon 3s ease-in-out infinite}
+@keyframes nsRibbon{0%,100%{filter:brightness(1)}50%{filter:brightness(1.25)}}
+
+/* animated count-up badge */
+.ns-countup{display:inline-flex;align-items:center;gap:9px;font-size:12px;color:var(--muted)}
+.ns-countup .ns-cu{min-width:40px;height:40px;padding:0 10px;border-radius:10px;display:grid;place-items:center;
+  background:rgba(var(--pos-rgb),.14);color:var(--pos);font-weight:800;font-size:18px;font-variant-numeric:tabular-nums;
+  overflow:hidden}
+.ns-countup .ns-cu b{display:block;animation:nsCountUp 4s cubic-bezier(.2,.7,.3,1) infinite}
+@keyframes nsCountUp{0%{transform:translateY(0)}20%{transform:translateY(-1.2em)}40%{transform:translateY(-2.4em)}
+  60%{transform:translateY(-3.6em)}80%,100%{transform:translateY(-4.8em)}}
+
+/* status chip that transitions color pending→active→done */
+.ns-chip{display:inline-flex;align-items:center;gap:7px;padding:6px 13px;border-radius:99px;font-weight:700;
+  font-size:12px;animation:nsChip 5.4s ease-in-out infinite}
+.ns-chip i{width:8px;height:8px;border-radius:50%;background:currentColor}
+@keyframes nsChip{0%,20%{background:rgba(var(--warn-rgb),.16);color:var(--warn)}
+  40%,58%{background:rgba(var(--info-rgb),.16);color:var(--info)}
+  78%,100%{background:rgba(var(--pos-rgb),.16);color:var(--pos)}}
+
+/* stacked avatars "+3 more" */
+.ns-avstack{display:flex;align-items:center}
+.ns-avstack .ns-a{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;
+  font-weight:800;font-size:12px;border:2px solid var(--panel);margin-left:-10px;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.ns-avstack .ns-a:first-child{margin-left:0}
+.ns-avstack .ns-a1{background:linear-gradient(135deg,var(--info),#2563eb)}
+.ns-avstack .ns-a2{background:linear-gradient(135deg,var(--pos),#15803d)}
+.ns-avstack .ns-a3{background:linear-gradient(135deg,var(--accent),#b45309)}
+.ns-avstack .ns-more{background:var(--card);color:var(--muted);animation:nsBlink 2.4s infinite}
+.ns-avstack .ns-a:hover,.ns-avstack .ns-a{transition:transform .2s}
+.ns-avstack:hover .ns-a{transform:translateX(4px)}
+
+/* priority-level badge that escalates color */
+.ns-prio{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:8px;font-weight:800;
+  font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;animation:nsPrio 5s ease-in-out infinite}
+.ns-prio i{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;
+  border-bottom:8px solid currentColor}
+@keyframes nsPrio{0%,22%{background:rgba(var(--info-rgb),.16);color:var(--info)}
+  38%,56%{background:rgba(var(--warn-rgb),.16);color:var(--warn)}
+  72%,100%{background:rgba(var(--neg-rgb),.16);color:var(--neg)}}
+
+/* dot indicator badge on an icon (unread marker) */
+.ns-dotbadge{position:relative;width:40px;height:40px;display:grid;place-items:center;font-size:22px;color:var(--muted)}
+.ns-dotbadge .ns-d{position:absolute;top:4px;right:5px;width:10px;height:10px;border-radius:50%;background:var(--accent);
+  border:2px solid var(--panel)}
+.ns-dotbadge .ns-d::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--accent);
+  animation:nsPing 1.9s ease-out infinite}
+
+</style>
+</head>
+<body>
+<div class="head">
+  <h1>🔔 Notifications & Status</h1>
+  <p>Toasts, snackbars, progress notifications, status banners, live/connection indicators, empty states, skeletons and count badges — the feedback layer of any app or report.</p>
+</div>
+<div class="wrap">
+<h3 class="sec">🔔 TOASTS &amp; SNACKBARS</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-toast ns-t-success ns-cycle"><span class="ns-tico">✓</span><div class="ns-tbody"><div class="ns-ttitle">Changes saved</div><div class="ns-tsub">Your profile is up to date.</div></div><span class="ns-tx">×</span></div>
+  </div><div class="meta"><div class="nm">Success Toast</div><span class="ref">.ns-t-success</span><div class="desc">Green confirmation toast that slides and fades in; use to acknowledge a completed action.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-toast ns-t-error ns-cycle"><span class="ns-tico">!</span><div class="ns-tbody"><div class="ns-ttitle">Upload failed</div><div class="ns-tsub">Connection lost — try again.</div></div><span class="ns-tx">×</span></div>
+  </div><div class="meta"><div class="nm">Error Toast</div><span class="ref">.ns-t-error</span><div class="desc">Red error toast that slides in; use to surface a failure that needs attention.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-toast ns-t-warn ns-cycle"><span class="ns-tico">▲</span><div class="ns-tbody"><div class="ns-ttitle">Storage almost full</div><div class="ns-tsub">92% of your quota used.</div></div><span class="ns-tx">×</span></div>
+  </div><div class="meta"><div class="nm">Warning Toast</div><span class="ref">.ns-t-warn</span><div class="desc">Amber caution toast; use to warn before a threshold or soft limit is crossed.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-toast ns-t-info ns-cycle"><span class="ns-tico">i</span><div class="ns-tbody"><div class="ns-ttitle">New version available</div><div class="ns-tsub">Refresh to update.</div></div><span class="ns-tx">×</span></div>
+  </div><div class="meta"><div class="nm">Info Toast</div><span class="ref">.ns-t-info</span><div class="desc">Blue informational toast; use for neutral, non-blocking notices.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-snackbar"><span class="ns-sk-msg">Message archived</span><span class="ns-sk-act">Undo</span></div>
+  </div><div class="meta"><div class="nm">Snackbar w/ Action</div><span class="ref">.ns-snackbar</span><div class="desc">Dark snackbar with an inline action; use for reversible operations like undo.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-stack">
+      <div class="ns-toast ns-t-info"><span class="ns-tico">i</span><div class="ns-tbody"><div class="ns-ttitle">Comment added</div></div></div>
+      <div class="ns-toast ns-t-success"><span class="ns-tico">✓</span><div class="ns-tbody"><div class="ns-ttitle">File synced</div></div></div>
+      <div class="ns-toast ns-t-warn"><span class="ns-tico">▲</span><div class="ns-tbody"><div class="ns-ttitle">Rate limit near</div></div></div>
+    </div>
+  </div><div class="meta"><div class="nm">Stacking Toast Group</div><span class="ref">.ns-stack</span><div class="desc">A queue of toasts that stack and rise in sequence; use for bursts of events.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-toast ns-t-info ns-count"><span class="ns-tico">i</span><div class="ns-tbody"><div class="ns-ttitle">Copied to clipboard</div><div class="ns-tsub">Dismissing…</div></div><span class="ns-cbar"></span></div>
+  </div><div class="meta"><div class="nm">Auto-dismiss Countdown</div><span class="ref">.ns-count</span><div class="desc">Toast with a draining progress bar showing time until auto-dismiss.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-toast ns-t-success ns-pop"><span class="ns-tico">✓</span><div class="ns-tbody"><div class="ns-ttitle">Payment received</div><div class="ns-tsub">$49.00 · Pro plan</div></div></div>
+  </div><div class="meta"><div class="nm">Icon-pop Toast</div><span class="ref">.ns-pop</span><div class="desc">Toast whose status icon springs in with a scale pop for extra emphasis.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">📊 PROGRESS NOTIFICATIONS</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-toast ns-upload" style="display:block;width:220px"><div class="ns-ttitle">Uploading report.pdf</div><span class="ns-pct">…</span><div class="ns-track"><div class="ns-fill"></div></div></div>
+  </div><div class="meta"><div class="nm">Upload Progress Toast</div><span class="ref">.ns-upload</span><div class="desc">Toast with a filling bar tracking an in-flight upload; use for file transfers.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-steps"><i>1</i><b></b><i>2</i><b></b><i>3</i></div>
+  </div><div class="meta"><div class="nm">Multi-step Progress</div><span class="ref">.ns-steps</span><div class="desc">Connected step nodes that fill left to right; use for wizards and pipelines.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div style="width:210px"><div class="ns-track ns-det"><div class="ns-fill"></div></div></div>
+  </div><div class="meta"><div class="nm">Determinate Bar</div><span class="ref">.ns-det</span><div class="desc">A bar that eases to a known percentage and holds; use for measurable tasks.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div style="width:210px"><div class="ns-track ns-indet"><div class="ns-fill"></div></div></div>
+  </div><div class="meta"><div class="nm">Indeterminate Bar</div><span class="ref">.ns-indet</span><div class="desc">A shuttling bar for work of unknown duration; use when progress can't be measured.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-ring"><span>78%</span></div>
+  </div><div class="meta"><div class="nm">Circular Progress Badge</div><span class="ref">.ns-ring</span><div class="desc">A conic ring that fills to a value; use as a compact completion indicator.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-save"><span class="ns-sp"></span><span class="ns-ok">✓</span><span class="ns-lbl"></span></div>
+  </div><div class="meta"><div class="nm">Saving → Saved Swap</div><span class="ref">.ns-save</span><div class="desc">A spinner that resolves to a "Saved" check; use for autosave feedback.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-dl">✓</div>
+  </div><div class="meta"><div class="nm">Download-complete Pulse</div><span class="ref">.ns-dl</span><div class="desc">A checkmark that ripples outward on completion; use to confirm a finished download.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-seg"><i></i><i></i><i></i><i></i><i></i></div>
+  </div><div class="meta"><div class="nm">Segmented Progress</div><span class="ref">.ns-seg</span><div class="desc">Discrete segments that light up one by one; use for step or level progress.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">🚦 STATUS BANNERS &amp; INDICATORS</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-banner ns-b-ok"><span class="ns-bdot"></span><span class="ns-bmsg">All systems operational<small>Updated just now</small></span></div>
+  </div><div class="meta"><div class="nm">Operational Banner</div><span class="ref">.ns-b-ok</span><div class="desc">Green all-clear status banner with a pinging dot; use for healthy service state.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-banner ns-b-degraded"><span class="ns-bdot"></span><span class="ns-bmsg">Degraded performance<small>API latency elevated</small></span></div>
+  </div><div class="meta"><div class="nm">Degraded Banner</div><span class="ref">.ns-b-degraded</span><div class="desc">Amber banner signaling partial degradation; use for a non-critical incident.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-banner ns-incident"><span class="ns-bdot"></span><span class="ns-bmsg">Major outage — investigating<small>Incident #4821</small></span></div>
+  </div><div class="meta"><div class="nm">Incident Banner</div><span class="ref">.ns-incident</span><div class="desc">Critical banner with a scanning highlight; use for active, high-severity incidents.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-banner ns-maint ns-b-degraded"><span class="ns-bdot" style="animation:none"></span><span class="ns-bmsg">Scheduled maintenance<small>Sat 02:00–04:00 UTC</small></span></div>
+  </div><div class="meta"><div class="nm">Maintenance Banner</div><span class="ref">.ns-maint</span><div class="desc">Banner with swept caution stripes; use to announce planned downtime windows.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-banner ns-offline"><span class="ns-bdot"></span><span class="ns-bmsg">Reconnecting<span class="ns-dots"></span><small>You're offline</small></span></div>
+  </div><div class="meta"><div class="nm">Offline / Reconnecting</div><span class="ref">.ns-offline</span><div class="desc">Banner with animated dots showing a reconnect attempt; use when the network drops.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-banner ns-update"><span class="ns-bdot" style="animation:none"></span><span class="ns-bmsg">Update available</span><span class="ns-bpill">v2.4</span></div>
+  </div><div class="meta"><div class="nm">Update-available Banner</div><span class="ref">.ns-update</span><div class="desc">Banner with a breathing version pill; use to nudge users toward a new release.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-statusbar"><div class="ns-sbtop"><i></i>All services healthy</div><div class="ns-sbrow"><span>API</span><b>Operational</b></div><div class="ns-sbrow"><span>Dashboard</span><b>Operational</b></div></div>
+  </div><div class="meta"><div class="nm">Sticky Status Bar</div><span class="ref">.ns-statusbar</span><div class="desc">Compact top bar summarizing per-service health; use as a persistent status strip.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-legend"><div><i class="ns-l-op"></i>Operational</div><div><i class="ns-l-dg"></i>Degraded</div><div><i class="ns-l-dn"></i>Down</div></div>
+  </div><div class="meta"><div class="nm">Status Dot Legend</div><span class="ref">.ns-legend</span><div class="desc">A legend of colored status dots; use as a key on dashboards and status pages.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-banner ns-b-resolved"><span class="ns-bdot"></span><span class="ns-bmsg">Incident resolved<small>All services restored</small></span></div>
+  </div><div class="meta"><div class="nm">Resolved / All-clear</div><span class="ref">.ns-b-resolved</span><div class="desc">Green banner confirming recovery; use to close out a resolved incident.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">📡 LIVE &amp; CONNECTION</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-live"><i></i>LIVE</div>
+  </div><div class="meta"><div class="nm">Pulsing Live Dot</div><span class="ref">.ns-live</span><div class="desc">A LIVE pill with a rippling dot; use to mark real-time or streaming content.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-sync"><span class="ns-sring"></span><span class="ns-scheck">✓</span></div>
+  </div><div class="meta"><div class="nm">Sync Spinner → Check</div><span class="ref">.ns-sync</span><div class="desc">A spinner that resolves into a check on a loop; use for background sync state.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-signal"><i></i><i></i><i></i><i></i></div>
+  </div><div class="meta"><div class="nm">Connection Strength</div><span class="ref">.ns-signal</span><div class="desc">Ascending signal bars that sweep active; use for connection or link quality.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-typing"><i></i><i></i><i></i></div>
+  </div><div class="meta"><div class="nm">Typing Presence</div><span class="ref">.ns-typing</span><div class="desc">A chat bubble with bouncing dots; use to show someone is composing a message.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-heart"><i></i>Active now</div>
+  </div><div class="meta"><div class="nm">Heartbeat / Last-seen</div><span class="ref">.ns-heart</span><div class="desc">A dot that beats like a pulse; use for liveness or last-seen presence.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-ws"><b></b><span></span><span></span></div>
+  </div><div class="meta"><div class="nm">WebSocket Connected</div><span class="ref">.ns-ws</span><div class="desc">A node emitting expanding rings; use to signal an open real-time connection.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-rec"><i></i>REC 00:42</div>
+  </div><div class="meta"><div class="nm">Recording Indicator</div><span class="ref">.ns-rec</span><div class="desc">A blinking red dot with a timer; use while capturing audio, video, or a session.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  </div><div class="meta"><div class="nm">Broadcasting Wave</div><span class="ref">.ns-wave</span><div class="desc">An equalizer-style wave; use for live audio, streaming, or an active broadcast.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-presence"><div class="ns-av">JR</div><span class="ns-on"></span></div>
+  </div><div class="meta"><div class="nm">Online Presence Ring</div><span class="ref">.ns-presence</span><div class="desc">An avatar with a pulsing online badge; use to show a user is currently active.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">🫥 EMPTY STATES &amp; SKELETONS</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-empty"><div class="ns-eic">📥</div><div class="ns-etitle">Your inbox is empty</div><div class="ns-esub">New messages will appear here.</div><div class="ns-cta">Compose</div></div>
+  </div><div class="meta"><div class="nm">Empty-state Card</div><span class="ref">.ns-empty</span><div class="desc">Icon, message, and CTA for a blank view; use to guide the user's first action.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-skp"><div class="ns-sk ns-sk-av"></div><div class="ns-sk-lines"><span class="ns-sk"></span><span class="ns-sk"></span></div></div>
+  </div><div class="meta"><div class="nm">Profile Skeleton</div><span class="ref">.ns-skp</span><div class="desc">Shimmering avatar and text lines; use as a placeholder while a profile loads.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-skc"><div class="ns-sk ns-sk-media"></div><div class="ns-sk ns-sk-l"></div><div class="ns-sk ns-sk-l s"></div></div>
+  </div><div class="meta"><div class="nm">Card Skeleton</div><span class="ref">.ns-skc</span><div class="desc">A media block with text lines; use as a placeholder for loading cards.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-skt"><div class="ns-sk-tr"><span class="ns-sk"></span><span class="ns-sk"></span><span class="ns-sk"></span></div><div class="ns-sk-tr"><span class="ns-sk"></span><span class="ns-sk"></span><span class="ns-sk"></span></div><div class="ns-sk-tr"><span class="ns-sk"></span><span class="ns-sk"></span><span class="ns-sk"></span></div></div>
+  </div><div class="meta"><div class="nm">Table Skeleton</div><span class="ref">.ns-skt</span><div class="desc">Rows of shimmering cells; use as a placeholder while table data loads.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-noresult"><div class="ns-nric">🔍</div><div class="ns-nrt">No results found</div><div class="ns-nrs">Try a different search term.</div></div>
+  </div><div class="meta"><div class="nm">No-results State</div><span class="ref">.ns-noresult</span><div class="desc">An empty search result with a shaking glass; use when a query returns nothing.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-skl"><div class="ns-sk-item"><i class="ns-sk"></i><b class="ns-sk"></b></div><div class="ns-sk-item"><i class="ns-sk"></i><b class="ns-sk"></b></div><div class="ns-sk-item"><i class="ns-sk"></i><b class="ns-sk"></b></div></div>
+  </div><div class="meta"><div class="nm">Loading Shimmer List</div><span class="ref">.ns-skl</span><div class="desc">Rows of icon and line placeholders; use while a list of items loads.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-skb"><div class="ns-sk ns-sk-h"></div><div class="ns-sk ns-sk-p"></div><div class="ns-sk ns-sk-p"></div><div class="ns-sk ns-sk-p"></div></div>
+  </div><div class="meta"><div class="nm">Paragraph Skeleton</div><span class="ref">.ns-skb</span><div class="desc">A heading and ragged text lines; use as a placeholder for article or body copy.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-spinph"><div class="ns-orb"></div>Loading…</div>
+  </div><div class="meta"><div class="nm">Spinner Placeholder</div><span class="ref">.ns-spinph</span><div class="desc">A centered spinner with a label; use as a simple full-panel loading state.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">🔴 BADGES &amp; COUNTS</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-bell">🔔<span class="ns-cnt">5</span></div>
+  </div><div class="meta"><div class="nm">Bell w/ Count Badge</div><span class="ref">.ns-bell</span><div class="desc">A shaking bell whose count badge pops; use for unread notification counts.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-unread"><i></i>3 unread</div>
+  </div><div class="meta"><div class="nm">Unread Pill</div><span class="ref">.ns-unread</span><div class="desc">A pill with a blinking dot and count; use to label unread items compactly.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-ribwrap"><div class="ns-ribbon">NEW</div>Feature</div>
+  </div><div class="meta"><div class="nm">"New" Corner Ribbon</div><span class="ref">.ns-ribbon</span><div class="desc">A brightening corner ribbon; use to flag new or featured cards.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-countup"><div class="ns-cu"><b>1<br>2<br>3<br>4<br>5</b></div>signups</div>
+  </div><div class="meta"><div class="nm">Count-up Badge</div><span class="ref">.ns-countup</span><div class="desc">A number that rolls upward; use for animated metric or counter reveals.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-chip"><i></i>Processing</div>
+  </div><div class="meta"><div class="nm">Status Chip Transition</div><span class="ref">.ns-chip</span><div class="desc">A chip that cycles pending → active → done colors; use for evolving job status.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-avstack"><div class="ns-a ns-a1">AB</div><div class="ns-a ns-a2">CD</div><div class="ns-a ns-a3">EF</div><div class="ns-a ns-more">+3</div></div>
+  </div><div class="meta"><div class="nm">Stacked Avatars +more</div><span class="ref">.ns-avstack</span><div class="desc">Overlapping avatars with an overflow count; use to show group participants.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-prio"><i></i>Priority</div>
+  </div><div class="meta"><div class="nm">Priority-level Badge</div><span class="ref">.ns-prio</span><div class="desc">A badge that escalates low → medium → high in color; use for severity or priority.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="ns-dotbadge">✉<span class="ns-d"></span></div>
+  </div><div class="meta"><div class="nm">Dot Indicator Badge</div><span class="ref">.ns-dotbadge</span><div class="desc">An icon with a pinging dot marker; use for a countless "has new activity" hint.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+</div>
+<script>
+function copyViz(btn){
+  var stage=btn.closest('.tile').querySelector('.stage');
+  var html=stage.innerHTML.replace(/\s+$/,'').trim();
+  var usedClasses=new Set();
+  (html.match(/class="[^"]*"/g)||[]).forEach(function(m){m.replace(/class="/,'').replace(/"/,'').split(/\s+/).forEach(function(c){if(c)usedClasses.add(c)})});
+  var cssRules=[];
+  try{var sheets=document.styleSheets;for(var s=0;s<sheets.length;s++){var rules=sheets[s].cssRules;for(var r=0;r<rules.length;r++){var rule=rules[r];if(rule.type===7&&html.indexOf(rule.name)!==-1){cssRules.push(rule.cssText)}if(rule.type===1&&rule.selectorText){for(var uc of usedClasses){if(rule.selectorText.indexOf('.'+uc)!==-1&&!rule.selectorText.includes('.tile')){cssRules.push(rule.cssText);break}}}}}}catch(e){}
+  cssRules=[...new Set(cssRules)];
+  var output='<!-- Prism Component -->\n'+html;
+  if(cssRules.length>0)output+='\n\n<style>\n'+cssRules.join('\n')+'\n</style>';
+  function sgCopy(txt){try{if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(txt).catch(function(){return sgCopyFallback(txt);});}}catch(e){}return Promise.resolve(sgCopyFallback(txt));}
+  function sgCopyFallback(txt){var ta=document.createElement('textarea');ta.value=txt;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';document.body.appendChild(ta);ta.focus();ta.select();try{ta.setSelectionRange(0,txt.length);}catch(e){}var ok=false;try{ok=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);if(!ok)return Promise.reject(new Error('copy failed'));return true;}
+  sgCopy(output).then(function(){var o=btn.dataset.lbl||btn.textContent;btn.dataset.lbl=o;btn.textContent='✓ Copied';btn.classList.add('ok');setTimeout(function(){btn.textContent=o;btn.classList.remove('ok');btn.removeAttribute('data-lbl');},1300);},function(){var o=btn.dataset.lbl||btn.textContent;btn.dataset.lbl=o;btn.textContent='✗ Press ⌘C';btn.classList.add('ok');setTimeout(function(){btn.textContent=o;btn.classList.remove('ok');btn.removeAttribute('data-lbl');},1500);});
+}
+/* data-snip copy for snippet buttons */
+document.addEventListener('click',function(e){var b=e.target.closest('.copy[data-snip]');if(!b)return;var t=b.getAttribute('data-snip');
+  function fb(){var ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta);}
+  (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t).catch(fb):Promise.resolve(fb()));
+  var o=b.dataset.lbl||b.textContent;b.dataset.lbl=o;b.textContent='✓ Copied';b.classList.add('ok');setTimeout(function(){b.textContent=o;b.classList.remove('ok');},1300);
+});
+<\/script>
+</body>
+</html>
+</script>

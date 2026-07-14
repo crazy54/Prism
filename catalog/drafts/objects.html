@@ -1,0 +1,645 @@
+<style>
+/* ==== objects 2026 new facets — namespaced nobj2-* (3D-heavy) ==== */
+:root{
+  --nobj2-a:var(--accent,#ff9900);
+  --nobj2-i:var(--info,#4493f8);
+  --nobj2-p:var(--pos,#3fb950);
+  --nobj2-w:var(--warn,#d29922);
+  --nobj2-n:var(--neg,#f85149);
+  --nobj2-t:var(--teal,#2ec6d6);
+  --nobj2-m:var(--mag,#e0379a);
+  --nobj2-vio:#a371f7;
+  --nobj2-cy:#56d4dd;
+  --nobj2-ln:var(--line,#2b3350);
+  --nobj2-ink:var(--ink,#eaf1f9);
+}
+
+/* shared 3D scaffolding */
+.nobj2-scene{width:150px;height:150px;display:flex;align-items:center;justify-content:center;perspective:620px;perspective-origin:50% 42%}
+.nobj2-face{position:absolute;border:1.5px solid var(--fc,var(--nobj2-i));
+  background:color-mix(in srgb,var(--fc,var(--nobj2-i)) 14%,transparent);
+  box-shadow:inset 0 0 16px color-mix(in srgb,var(--fc,var(--nobj2-i)) 24%,transparent)}
+
+/* 1 — spinning cube */
+.nobj2-cube{position:relative;width:74px;height:74px;transform-style:preserve-3d;animation:nobj2CubeSpin 9s linear infinite}
+@keyframes nobj2CubeSpin{from{transform:rotateX(-24deg) rotateY(0)}to{transform:rotateX(-24deg) rotateY(360deg)}}
+.nobj2-cube .nobj2-face{width:74px;height:74px}
+.nobj2-cf-fr{transform:translateZ(37px)}
+.nobj2-cf-bk{transform:rotateY(180deg) translateZ(37px)}
+.nobj2-cf-ri{transform:rotateY(90deg) translateZ(37px)}
+.nobj2-cf-le{transform:rotateY(-90deg) translateZ(37px)}
+.nobj2-cf-to{transform:rotateX(90deg) translateZ(37px)}
+.nobj2-cf-bo{transform:rotateX(-90deg) translateZ(37px)}
+
+/* 2 — rotating pyramid */
+.nobj2-pyra{position:relative;width:100px;height:100px;transform-style:preserve-3d;animation:nobj2PyraSpin 8s linear infinite}
+@keyframes nobj2PyraSpin{from{transform:rotateX(14deg) rotateY(0)}to{transform:rotateX(14deg) rotateY(360deg)}}
+.nobj2-pyra .nobj2-tri{position:absolute;left:50%;bottom:50%;width:80px;height:70px;margin-left:-40px;
+  transform-origin:50% 100%;clip-path:polygon(50% 0,100% 100%,0 100%);
+  border-bottom:1.5px solid var(--fc);background:color-mix(in srgb,var(--fc) 20%,transparent)}
+.nobj2-pt-1{transform:translateZ(40px) rotateX(-55deg)}
+.nobj2-pt-2{transform:rotateY(90deg) translateZ(40px) rotateX(-55deg)}
+.nobj2-pt-3{transform:rotateY(180deg) translateZ(40px) rotateX(-55deg)}
+.nobj2-pt-4{transform:rotateY(270deg) translateZ(40px) rotateX(-55deg)}
+
+/* 3 — wireframe sphere (layered rings) */
+.nobj2-sphere{position:relative;width:112px;height:112px;transform-style:preserve-3d;animation:nobj2SphereSpin 10s linear infinite}
+@keyframes nobj2SphereSpin{from{transform:rotateX(-14deg) rotateY(0)}to{transform:rotateX(-14deg) rotateY(360deg)}}
+.nobj2-sphere .nobj2-mer{position:absolute;inset:0;border:1.4px solid var(--nobj2-t);border-radius:50%;opacity:.85}
+.nobj2-sphere .nobj2-eq{position:absolute;left:6px;right:6px;top:50%;height:0;border-top:1.4px solid var(--nobj2-cy);opacity:.55}
+.nobj2-sphere .nobj2-core{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff,var(--nobj2-a));box-shadow:0 0 14px var(--nobj2-a)}
+
+/* 4 — 3D gear train */
+.nobj2-geartrain{transform-style:preserve-3d;transform:rotateX(56deg);display:flex;align-items:center}
+.nobj2-g3d{position:relative;width:64px;height:64px;transform-style:preserve-3d}
+.nobj2-g3d.gA{animation:nobj2GearCW 5s linear infinite}
+.nobj2-g3d.gB{margin-left:-14px;animation:nobj2GearCCW 5s linear infinite}
+@keyframes nobj2GearCW{to{transform:rotate(360deg)}}
+@keyframes nobj2GearCCW{to{transform:rotate(-360deg)}}
+.nobj2-g3d .nobj2-gl{position:absolute;inset:0;border-radius:50%;
+  background:repeating-conic-gradient(from 0deg,var(--fc) 0 15deg,transparent 15deg 30deg);
+  -webkit-mask:radial-gradient(transparent 27%,#000 29%);mask:radial-gradient(transparent 27%,#000 29%)}
+.nobj2-g3d .nobj2-hub{position:absolute;left:50%;top:50%;width:20px;height:20px;margin:-10px;border-radius:50%;
+  border:2px solid var(--fc);background:color-mix(in srgb,var(--fc) 22%,transparent);transform:translateZ(9px)}
+
+/* 5 — orbiting planet + moons (perspective) */
+.nobj2-orbit3d{position:relative;width:120px;height:120px;transform-style:preserve-3d;transform:rotateX(64deg)}
+.nobj2-orbit3d .nobj2-sun{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff,var(--nobj2-a));box-shadow:0 0 18px var(--nobj2-a);transform:rotateX(-64deg)}
+.nobj2-orbit3d .nobj2-track{position:absolute;left:50%;top:50%;border:1.2px dashed color-mix(in srgb,var(--nobj2-ink) 30%,transparent);border-radius:50%}
+.nobj2-tk1{width:74px;height:74px;margin:-37px}
+.nobj2-tk2{width:112px;height:112px;margin:-56px}
+.nobj2-orbit3d .nobj2-arm{position:absolute;left:50%;top:50%;width:0;height:0}
+.nobj2-orbit3d .nobj2-arm1{animation:nobj2Orb 4s linear infinite}
+.nobj2-orbit3d .nobj2-arm2{animation:nobj2Orb 8s linear infinite reverse}
+@keyframes nobj2Orb{to{transform:rotate(360deg)}}
+.nobj2-orbit3d .nobj2-planet{position:absolute;border-radius:50%;transform:translateX(37px) rotateX(-64deg);
+  width:16px;height:16px;margin:-8px;background:radial-gradient(circle at 35% 30%,#fff8,var(--nobj2-i))}
+.nobj2-orbit3d .nobj2-arm2 .nobj2-planet{transform:translateX(56px) rotateX(-64deg);
+  background:radial-gradient(circle at 35% 30%,#fff8,var(--nobj2-p))}
+
+/* 6 — folding box */
+.nobj2-fold{position:relative;width:74px;height:74px;transform-style:preserve-3d;animation:nobj2FoldSpin 14s linear infinite}
+@keyframes nobj2FoldSpin{from{transform:rotateX(58deg) rotateZ(0)}to{transform:rotateX(58deg) rotateZ(360deg)}}
+.nobj2-fold .nobj2-base{position:absolute;inset:0}
+.nobj2-fold .nobj2-wall{position:absolute;width:74px;height:74px}
+.nobj2-fw-f{bottom:0;left:0;transform-origin:50% 100%;animation:nobj2FoldF 5s ease-in-out infinite}
+.nobj2-fw-b{top:0;left:0;transform-origin:50% 0;animation:nobj2FoldB 5s ease-in-out infinite}
+.nobj2-fw-r{top:0;right:0;transform-origin:100% 50%;animation:nobj2FoldR 5s ease-in-out infinite}
+.nobj2-fw-l{top:0;left:0;transform-origin:0 50%;animation:nobj2FoldL 5s ease-in-out infinite}
+@keyframes nobj2FoldF{0%,12%{transform:rotateX(0)}46%,72%{transform:rotateX(-90deg)}100%{transform:rotateX(0)}}
+@keyframes nobj2FoldB{0%,12%{transform:rotateX(0)}46%,72%{transform:rotateX(90deg)}100%{transform:rotateX(0)}}
+@keyframes nobj2FoldR{0%,12%{transform:rotateY(0)}46%,72%{transform:rotateY(-90deg)}100%{transform:rotateY(0)}}
+@keyframes nobj2FoldL{0%,12%{transform:rotateY(0)}46%,72%{transform:rotateY(90deg)}100%{transform:rotateY(0)}}
+
+/* 7 — 3D coin (flip) */
+.nobj2-coin{position:relative;width:80px;height:80px;transform-style:preserve-3d;animation:nobj2CoinFlip 4s ease-in-out infinite}
+@keyframes nobj2CoinFlip{0%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
+.nobj2-coin .nobj2-cface{position:absolute;inset:0;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:30px;color:#3a2600;background:radial-gradient(circle at 35% 30%,#ffe08a,var(--nobj2-a));
+  border:3px solid #c47b00}
+.nobj2-coin .nobj2-ch{transform:translateZ(3px)}
+.nobj2-coin .nobj2-ct{transform:rotateY(180deg) translateZ(3px)}
+.nobj2-coin .nobj2-edge{position:absolute;left:50%;top:0;width:6px;height:80px;margin-left:-3px;
+  background:linear-gradient(90deg,#8a5600,#c47b00,#8a5600)}
+.nobj2-coin .nobj2-e1{transform:rotateY(90deg) translateZ(37px)}
+.nobj2-coin .nobj2-e2{transform:rotateY(90deg) translateZ(-37px)}
+
+/* 8 — polyhedron (octahedron) */
+.nobj2-poly{position:relative;width:100px;height:100px;transform-style:preserve-3d;animation:nobj2PolySpin 9s linear infinite}
+@keyframes nobj2PolySpin{from{transform:rotateX(0) rotateY(0)}to{transform:rotateX(360deg) rotateY(360deg)}}
+.nobj2-poly .nobj2-oct{position:absolute;left:50%;bottom:50%;width:76px;height:66px;margin-left:-38px;
+  transform-origin:50% 100%;clip-path:polygon(50% 0,100% 100%,0 100%);
+  border-bottom:1.4px solid var(--fc);background:color-mix(in srgb,var(--fc) 22%,transparent)}
+.nobj2-ou-1{transform:translateZ(38px) rotateX(-54.7deg)}
+.nobj2-ou-2{transform:rotateY(90deg) translateZ(38px) rotateX(-54.7deg)}
+.nobj2-ou-3{transform:rotateY(180deg) translateZ(38px) rotateX(-54.7deg)}
+.nobj2-ou-4{transform:rotateY(270deg) translateZ(38px) rotateX(-54.7deg)}
+.nobj2-od-1{transform:rotateZ(180deg) translateZ(38px) rotateX(-54.7deg)}
+.nobj2-od-2{transform:rotateZ(180deg) rotateY(90deg) translateZ(38px) rotateX(-54.7deg)}
+.nobj2-od-3{transform:rotateZ(180deg) rotateY(180deg) translateZ(38px) rotateX(-54.7deg)}
+.nobj2-od-4{transform:rotateZ(180deg) rotateY(270deg) translateZ(38px) rotateX(-54.7deg)}
+
+/* 9 — rotating server rack */
+.nobj2-rack{position:relative;width:66px;height:98px;transform-style:preserve-3d;animation:nobj2RackTurn 7s ease-in-out infinite}
+@keyframes nobj2RackTurn{0%,100%{transform:rotateX(-8deg) rotateY(-30deg)}50%{transform:rotateX(-8deg) rotateY(30deg)}}
+.nobj2-rack .nobj2-rf{width:66px;height:98px;transform:translateZ(20px);display:flex;flex-direction:column;gap:4px;padding:6px}
+.nobj2-rack .nobj2-rb{width:66px;height:98px;transform:translateZ(-20px)}
+.nobj2-rack .nobj2-rs{width:40px;height:98px;left:13px;transform:rotateY(90deg) translateZ(33px)}
+.nobj2-rack .nobj2-rt{width:66px;height:40px;top:29px;transform:rotateX(90deg) translateZ(49px)}
+.nobj2-rack .nobj2-slot{height:12px;border-radius:2px;border:1px solid color-mix(in srgb,var(--fc) 45%,transparent);
+  background:color-mix(in srgb,var(--fc) 12%,transparent);position:relative}
+.nobj2-rack .nobj2-slot::after{content:"";position:absolute;right:4px;top:50%;width:5px;height:5px;margin-top:-2.5px;
+  border-radius:50%;background:var(--nobj2-p);box-shadow:0 0 6px var(--nobj2-p);animation:nobj2Led 1.4s steps(2) infinite}
+.nobj2-rack .nobj2-slot:nth-child(2)::after{animation-delay:.4s;background:var(--nobj2-a);box-shadow:0 0 6px var(--nobj2-a)}
+.nobj2-rack .nobj2-slot:nth-child(3)::after{animation-delay:.8s}
+@keyframes nobj2Led{0%{opacity:.3}50%{opacity:1}}
+
+/* 10 — 3D map pin */
+.nobj2-pin{position:relative;width:90px;height:120px;transform-style:preserve-3d;animation:nobj2PinSpin 6s linear infinite}
+@keyframes nobj2PinSpin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.nobj2-pin .nobj2-pbody{position:absolute;left:50%;top:6px;width:54px;height:54px;margin-left:-27px;
+  border-radius:50% 50% 50% 0;transform:rotate(-45deg);
+  background:radial-gradient(circle at 35% 30%,#fff9,var(--fc));border:2px solid color-mix(in srgb,var(--fc) 70%,#000)}
+.nobj2-pin .nobj2-pdot{position:absolute;left:50%;top:26px;width:16px;height:16px;margin-left:-8px;border-radius:50%;
+  background:#0c0f18;transform:translateZ(2px)}
+.nobj2-pin .nobj2-pshadow{position:absolute;left:50%;top:104px;width:44px;height:12px;margin-left:-22px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,0,0,.55),transparent 70%);transform:rotateX(80deg);animation:nobj2PinShad 6s ease-in-out infinite}
+@keyframes nobj2PinShad{0%,100%{transform:rotateX(80deg) scale(.8)}50%{transform:rotateX(80deg) scale(1.05)}}
+
+/* 11 — cube grid wave */
+.nobj2-wavegrid{transform-style:preserve-3d;transform:rotateX(60deg) rotateZ(45deg);display:grid;grid-template-columns:repeat(3,26px);gap:6px}
+.nobj2-wavegrid .nobj2-cell{position:relative;width:26px;height:26px;transform-style:preserve-3d;animation:nobj2Wave 2.4s ease-in-out infinite}
+.nobj2-wavegrid .nobj2-ct2{position:absolute;inset:0;transform:translateZ(18px);
+  background:color-mix(in srgb,var(--fc) 26%,transparent);border:1px solid var(--fc)}
+.nobj2-wavegrid .nobj2-cs2{position:absolute;left:0;bottom:0;width:26px;height:18px;transform-origin:bottom;transform:rotateX(90deg);
+  background:color-mix(in srgb,var(--fc) 12%,transparent);border:1px solid color-mix(in srgb,var(--fc) 50%,transparent)}
+@keyframes nobj2Wave{0%,100%{transform:translateZ(0)}50%{transform:translateZ(22px)}}
+
+/* 12 — isometric building */
+.nobj2-building{position:relative;width:60px;height:104px;transform-style:preserve-3d;animation:nobj2BldgTurn 12s linear infinite}
+@keyframes nobj2BldgTurn{from{transform:rotateX(-10deg) rotateY(0)}to{transform:rotateX(-10deg) rotateY(360deg)}}
+.nobj2-building .nobj2-bf{width:60px;height:104px;transform:translateZ(22px);display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:8px 6px;align-content:start}
+.nobj2-building .nobj2-bk2{width:60px;height:104px;transform:translateZ(-22px)}
+.nobj2-building .nobj2-bs2{width:44px;height:104px;left:8px;transform:rotateY(90deg) translateZ(30px)}
+.nobj2-building .nobj2-btop{width:60px;height:44px;top:30px;transform:rotateX(90deg) translateZ(52px)}
+.nobj2-building .nobj2-win{width:100%;height:11px;border-radius:1px;background:color-mix(in srgb,var(--nobj2-cy) 55%,transparent);
+  box-shadow:0 0 5px color-mix(in srgb,var(--nobj2-cy) 60%,transparent);animation:nobj2Win 3s ease-in-out infinite}
+.nobj2-building .nobj2-win:nth-child(3n){animation-delay:.6s}
+.nobj2-building .nobj2-win:nth-child(2n){animation-delay:1.2s}
+@keyframes nobj2Win{0%,100%{opacity:.35}50%{opacity:1}}
+
+/* 13 — extruded 3D arrow */
+.nobj2-arrow3d{position:relative;width:96px;height:64px;transform-style:preserve-3d;animation:nobj2ArrowTurn 6s ease-in-out infinite}
+@keyframes nobj2ArrowTurn{0%,100%{transform:rotateY(-40deg)}50%{transform:rotateY(40deg)}}
+.nobj2-arrow3d .nobj2-al{position:absolute;inset:0;clip-path:polygon(0 30%,55% 30%,55% 10%,100% 50%,55% 90%,55% 70%,0 70%);
+  background:var(--fc)}
+
+/* 14 — tesseract (nested cubes) */
+.nobj2-tess{position:relative;width:100px;height:100px;transform-style:preserve-3d;animation:nobj2TessSpin 11s linear infinite}
+@keyframes nobj2TessSpin{from{transform:rotateX(-20deg) rotateY(0)}to{transform:rotateX(-20deg) rotateY(360deg)}}
+.nobj2-tess .nobj2-tcube{position:absolute;left:50%;top:50%;transform-style:preserve-3d}
+.nobj2-tess .nobj2-tface{position:absolute;border:1.4px solid var(--fc);background:transparent;box-shadow:inset 0 0 12px color-mix(in srgb,var(--fc) 18%,transparent)}
+.nobj2-tess .nobj2-outer{animation:nobj2TessIn 6s ease-in-out infinite}
+.nobj2-tess .nobj2-inner{animation:nobj2TessIn 6s ease-in-out infinite reverse}
+@keyframes nobj2TessIn{0%,100%{transform:rotate(0)}50%{transform:rotateZ(45deg)}}
+.nobj2-tess .nobj2-outer .nobj2-tface{width:88px;height:88px;margin:-44px}
+.nobj2-tess .nobj2-inner .nobj2-tface{width:44px;height:44px;margin:-22px;border-color:var(--nobj2-a)}
+.nobj2-to-fr{transform:translateZ(44px)} .nobj2-to-bk{transform:translateZ(-44px)}
+.nobj2-to-ri{transform:rotateY(90deg) translateZ(44px)} .nobj2-to-le{transform:rotateY(-90deg) translateZ(44px)}
+.nobj2-to-to{transform:rotateX(90deg) translateZ(44px)} .nobj2-to-bo{transform:rotateX(-90deg) translateZ(44px)}
+.nobj2-ti-fr{transform:translateZ(22px)} .nobj2-ti-bk{transform:translateZ(-22px)}
+.nobj2-ti-ri{transform:rotateY(90deg) translateZ(22px)} .nobj2-ti-le{transform:rotateY(-90deg) translateZ(22px)}
+.nobj2-ti-to{transform:rotateX(90deg) translateZ(22px)} .nobj2-ti-bo{transform:rotateX(-90deg) translateZ(22px)}
+
+/* 15 — spinning torus ring (bead ring) */
+.nobj2-torus{position:relative;width:112px;height:112px;transform-style:preserve-3d;animation:nobj2TorusSpin 6s linear infinite}
+@keyframes nobj2TorusSpin{from{transform:rotateX(66deg) rotateZ(0)}to{transform:rotateX(66deg) rotateZ(360deg)}}
+.nobj2-torus .nobj2-bead{position:absolute;top:50%;left:50%;width:18px;height:18px;margin:-9px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff9,var(--fc));box-shadow:0 0 8px color-mix(in srgb,var(--fc) 60%,transparent)}
+
+/* 16 — 3D padlock */
+.nobj2-lock3d{position:relative;width:72px;height:96px;transform-style:preserve-3d;animation:nobj2LockTurn 7s ease-in-out infinite}
+@keyframes nobj2LockTurn{0%,100%{transform:rotateY(-26deg)}50%{transform:rotateY(26deg)}}
+.nobj2-lock3d .nobj2-lb{width:60px;height:54px;left:6px;top:40px;border-radius:8px}
+.nobj2-lb-f{transform:translateZ(14px)} .nobj2-lb-bk{transform:translateZ(-14px)}
+.nobj2-lb-s{width:28px;height:54px;left:22px;transform:rotateY(90deg) translateZ(30px)}
+.nobj2-lb-t{width:60px;height:28px;top:53px;transform:rotateX(90deg) translateZ(27px)}
+.nobj2-lock3d .nobj2-shack{position:absolute;left:50%;top:6px;width:36px;height:44px;margin-left:-18px;
+  border:6px solid color-mix(in srgb,var(--nobj2-ink) 60%,var(--nobj2-ln));border-bottom:none;border-radius:18px 18px 0 0;
+  transform:translateZ(0);animation:nobj2Shack 7s ease-in-out infinite}
+@keyframes nobj2Shack{0%,44%,100%{transform:translateY(0)}60%,86%{transform:translateY(-12px)}}
+.nobj2-lock3d .nobj2-key{position:absolute;left:50%;top:60px;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;
+  background:var(--nobj2-a);transform:translateZ(15px);box-shadow:0 0 8px var(--nobj2-a)}
+
+/* 17 — floating crystal (gem) */
+.nobj2-crystal{position:relative;width:90px;height:120px;transform-style:preserve-3d;animation:nobj2CrySpin 7s linear infinite}
+@keyframes nobj2CrySpin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.nobj2-crystal .nobj2-cwrap{position:absolute;left:50%;top:50%;transform-style:preserve-3d;animation:nobj2Float 3.4s ease-in-out infinite}
+@keyframes nobj2Float{0%,100%{transform:translateY(-6px)}50%{transform:translateY(6px)}}
+.nobj2-crystal .nobj2-gtop{position:absolute;left:50%;bottom:0;width:52px;height:44px;margin-left:-26px;transform-origin:50% 100%;
+  clip-path:polygon(50% 0,100% 100%,0 100%);background:color-mix(in srgb,var(--fc) 40%,transparent);border:1px solid var(--fc)}
+.nobj2-crystal .nobj2-gbot{position:absolute;left:50%;top:0;width:52px;height:60px;margin-left:-26px;transform-origin:50% 0;
+  clip-path:polygon(0 0,100% 0,50% 100%);background:color-mix(in srgb,var(--fc) 26%,transparent);border:1px solid var(--fc)}
+.nobj2-gt-1{transform:translateZ(24px) rotateX(-40deg)} .nobj2-gt-2{transform:rotateY(90deg) translateZ(24px) rotateX(-40deg)}
+.nobj2-gt-3{transform:rotateY(180deg) translateZ(24px) rotateX(-40deg)} .nobj2-gt-4{transform:rotateY(270deg) translateZ(24px) rotateX(-40deg)}
+.nobj2-gb-1{transform:translateZ(24px) rotateX(30deg)} .nobj2-gb-2{transform:rotateY(90deg) translateZ(24px) rotateX(30deg)}
+.nobj2-gb-3{transform:rotateY(180deg) translateZ(24px) rotateX(30deg)} .nobj2-gb-4{transform:rotateY(270deg) translateZ(24px) rotateX(30deg)}
+
+/* 18 — radar dish (3D scan) */
+.nobj2-dish{position:relative;width:120px;height:120px;transform-style:preserve-3d;transform:rotateX(58deg)}
+.nobj2-dish .nobj2-mast{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px;border-radius:50%;background:var(--nobj2-ln)}
+.nobj2-dish .nobj2-spin{position:absolute;left:50%;top:50%;transform-style:preserve-3d;animation:nobj2DishSpin 4s linear infinite}
+@keyframes nobj2DishSpin{to{transform:rotate(360deg)}}
+.nobj2-dish .nobj2-plate{position:absolute;left:-30px;top:-22px;width:60px;height:44px;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 35%,color-mix(in srgb,var(--nobj2-t) 55%,transparent),color-mix(in srgb,var(--nobj2-t) 12%,transparent));
+  border:1.5px solid var(--nobj2-t);transform:translateX(30px) rotateX(-46deg)}
+.nobj2-dish .nobj2-wv{position:absolute;left:36px;top:-14px;width:26px;height:26px;border:2px solid var(--nobj2-t);border-radius:50%;
+  border-color:var(--nobj2-t) transparent transparent transparent;animation:nobj2DishWv 1.6s ease-out infinite}
+.nobj2-dish .nobj2-wv2{animation-delay:.5s}.nobj2-dish .nobj2-wv3{animation-delay:1s}
+@keyframes nobj2DishWv{0%{transform:scale(.4);opacity:0}30%{opacity:1}100%{transform:scale(1.6);opacity:0}}
+
+/* ============ 2D / SVG OBJECTS ============ */
+.nobj2-2d{width:118px;height:118px;overflow:visible}
+/* 19 hourglass */
+.nobj2-hg{transform-box:view-box;transform-origin:59px 59px;animation:nobj2HgFlip 6s ease-in-out infinite}
+@keyframes nobj2HgFlip{0%,80%{transform:rotate(0)}90%,100%{transform:rotate(180deg)}}
+.nobj2-hg-top{transform-box:fill-box;transform-origin:center top;animation:nobj2HgTop 6s ease-in-out infinite}
+@keyframes nobj2HgTop{0%{transform:scaleY(1)}78%,100%{transform:scaleY(.06)}}
+.nobj2-hg-bot{transform-box:fill-box;transform-origin:center bottom;animation:nobj2HgBot 6s ease-in-out infinite}
+@keyframes nobj2HgBot{0%{transform:scaleY(.06)}78%,100%{transform:scaleY(1)}}
+.nobj2-hg-str{animation:nobj2HgStr 6s linear infinite}
+@keyframes nobj2HgStr{0%,78%{opacity:1}80%,100%{opacity:0}}
+/* 20 satellite */
+.nobj2-sat2{transform-box:view-box;transform-origin:59px 59px;animation:nobj2SatWob 5s ease-in-out infinite}
+@keyframes nobj2SatWob{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+.nobj2-sat2-w{transform-box:fill-box;transform-origin:center;animation:nobj2Pulse2 1.8s ease-in-out infinite}
+.nobj2-sat2-w2{animation-delay:.35s}.nobj2-sat2-w3{animation-delay:.7s}
+@keyframes nobj2Pulse2{0%,100%{opacity:.15}50%{opacity:1}}
+/* 21 rocket */
+.nobj2-rk{transform-box:fill-box;transform-origin:center;animation:nobj2RkBob 2.6s ease-in-out infinite}
+@keyframes nobj2RkBob{0%,100%{transform:translateY(3px)}50%{transform:translateY(-7px)}}
+.nobj2-rk-fl{transform-box:fill-box;transform-origin:center top;animation:nobj2RkFl .16s ease-in-out infinite alternate}
+@keyframes nobj2RkFl{0%{transform:scaleY(.6) scaleX(.9);opacity:.8}100%{transform:scaleY(1.3) scaleX(1.05);opacity:1}}
+/* 22 lightbulb */
+.nobj2-bulb-g{transform-box:fill-box;transform-origin:center;animation:nobj2BulbGlow 2.4s ease-in-out infinite}
+@keyframes nobj2BulbGlow{0%,100%{opacity:.25}50%{opacity:1}}
+.nobj2-bulb-fil{stroke-dasharray:60;animation:nobj2BulbFil 2.4s ease-in-out infinite}
+@keyframes nobj2BulbFil{0%,100%{stroke:var(--nobj2-ln)}50%{stroke:var(--nobj2-a)}}
+/* 23 battery */
+.nobj2-bat-fill{transform-box:fill-box;transform-origin:left;animation:nobj2BatChg 3.4s ease-in-out infinite}
+@keyframes nobj2BatChg{0%{transform:scaleX(.08);fill:var(--nobj2-n)}45%{transform:scaleX(.55);fill:var(--nobj2-w)}80%,100%{transform:scaleX(1);fill:var(--nobj2-p)}}
+.nobj2-bat-bolt{transform-box:fill-box;transform-origin:center;animation:nobj2Pulse2 1.3s ease-in-out infinite}
+/* 24 wifi */
+.nobj2-wf{transform-box:fill-box;transform-origin:59px 84px;animation:nobj2WfOn 2s ease-in-out infinite}
+@keyframes nobj2WfOn{0%,100%{opacity:.15}50%{opacity:1}}
+.nobj2-wf2{animation-delay:.25s}.nobj2-wf3{animation-delay:.5s}.nobj2-wf-d{animation-delay:.75s}
+/* 25 gears mesh */
+.nobj2-mesh-a{transform-box:view-box;transform-origin:44px 54px;animation:nobj2MeshCW 5s linear infinite}
+.nobj2-mesh-b{transform-box:view-box;transform-origin:82px 76px;animation:nobj2MeshCCW 3.6s linear infinite}
+@keyframes nobj2MeshCW{to{transform:rotate(360deg)}}
+@keyframes nobj2MeshCCW{to{transform:rotate(-360deg)}}
+/* 26 pendulum */
+.nobj2-pend{transform-box:view-box;transform-origin:59px 22px;animation:nobj2PendSwing 2.2s ease-in-out infinite}
+@keyframes nobj2PendSwing{0%,100%{transform:rotate(32deg)}50%{transform:rotate(-32deg)}}
+/* 27 flag */
+.nobj2-flag path{animation:nobj2FlagWave 2.6s ease-in-out infinite}
+@keyframes nobj2FlagWave{0%,100%{d:path('M32 26 q14 -8 28 0 q14 8 28 0 v22 q-14 8 -28 0 q-14 -8 -28 0 Z')}50%{d:path('M32 26 q14 8 28 0 q14 -8 28 0 v22 q-14 -8 -28 0 q-14 8 -28 0 Z')}}
+/* 28 compass */
+.nobj2-cmp-nd{transform-box:view-box;transform-origin:59px 59px;animation:nobj2CmpSpin 5s ease-in-out infinite}
+@keyframes nobj2CmpSpin{0%{transform:rotate(0)}20%{transform:rotate(140deg)}35%{transform:rotate(110deg)}55%{transform:rotate(300deg)}70%{transform:rotate(280deg)}100%{transform:rotate(360deg)}}
+/* 29 magnet */
+.nobj2-mag-f{transform-box:fill-box;transform-origin:center;animation:nobj2MagF 1.8s ease-in-out infinite}
+.nobj2-mag-f2{animation-delay:.3s}.nobj2-mag-f3{animation-delay:.6s}
+@keyframes nobj2MagF{0%,100%{opacity:.2;transform:scale(.9)}50%{opacity:1;transform:scale(1.05)}}
+/* 30 hot-air balloon */
+.nobj2-bln{transform-box:fill-box;transform-origin:center;animation:nobj2BlnFloat 4s ease-in-out infinite}
+@keyframes nobj2BlnFloat{0%,100%{transform:translateY(4px) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
+.nobj2-bln-fl{transform-box:fill-box;transform-origin:center top;animation:nobj2RkFl .2s ease-in-out infinite alternate}
+
+/* reduced motion — steady the scenes */
+@media(prefers-reduced-motion:reduce){
+  [class*="nobj2-"],[class*="nobj2-"] *{animation-play-state:paused!important}
+}
+</style>
+
+<h3 class="sec">🧊 3D Objects</h3>
+<div class="gallery">
+
+  <!-- 1 CUBE -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-cube" style="--fc:var(--nobj2-i)">
+      <span class="nobj2-face nobj2-cf-fr"></span><span class="nobj2-face nobj2-cf-bk"></span>
+      <span class="nobj2-face nobj2-cf-ri"></span><span class="nobj2-face nobj2-cf-le"></span>
+      <span class="nobj2-face nobj2-cf-to"></span><span class="nobj2-face nobj2-cf-bo"></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Spinning Cube</div><span class="ref">.nobj2-cube</span><div class="desc">A true 6-face CSS cube rotating in perspective — headers, 3D loaders, "build" states.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 2 PYRAMID -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-pyra" style="--fc:var(--nobj2-a)">
+      <span class="nobj2-tri nobj2-pt-1"></span><span class="nobj2-tri nobj2-pt-2"></span>
+      <span class="nobj2-tri nobj2-pt-3"></span><span class="nobj2-tri nobj2-pt-4"></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Rotating Pyramid</div><span class="ref">.nobj2-pyra</span><div class="desc">Four triangular faces hinged to a base, spinning about Y. Landmarks, hierarchy, apex metrics.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 3 WIREFRAME SPHERE -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-sphere">
+      <span class="nobj2-mer" style="transform:rotateY(0)"></span><span class="nobj2-mer" style="transform:rotateY(30deg)"></span>
+      <span class="nobj2-mer" style="transform:rotateY(60deg)"></span><span class="nobj2-mer" style="transform:rotateY(90deg)"></span>
+      <span class="nobj2-mer" style="transform:rotateY(120deg)"></span><span class="nobj2-mer" style="transform:rotateY(150deg)"></span>
+      <span class="nobj2-eq"></span><span class="nobj2-core"></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Wireframe Sphere</div><span class="ref">.nobj2-sphere</span><div class="desc">Layered meridian rings read as a rotating globe. Global/geo, network, coverage sections.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 4 GEAR TRAIN -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-geartrain">
+      <div class="nobj2-g3d gA" style="--fc:var(--nobj2-a)"><span class="nobj2-gl" style="transform:translateZ(0)"></span><span class="nobj2-gl" style="transform:translateZ(-5px)"></span><span class="nobj2-gl" style="transform:translateZ(-10px)"></span><span class="nobj2-hub"></span></div>
+      <div class="nobj2-g3d gB" style="--fc:var(--nobj2-i)"><span class="nobj2-gl" style="transform:translateZ(0)"></span><span class="nobj2-gl" style="transform:translateZ(-5px)"></span><span class="nobj2-gl" style="transform:translateZ(-10px)"></span><span class="nobj2-hub"></span></div>
+    </div></div>
+  </div><div class="meta"><div class="nm">3D Gear Train</div><span class="ref">.nobj2-geartrain</span><div class="desc">Two extruded gears meshing counter-rotate on a tilted plane. Processing, automation, build pipelines.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 5 ORBIT -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-orbit3d">
+      <span class="nobj2-track nobj2-tk1"></span><span class="nobj2-track nobj2-tk2"></span>
+      <span class="nobj2-sun"></span>
+      <span class="nobj2-arm nobj2-arm1"><span class="nobj2-planet"></span></span>
+      <span class="nobj2-arm nobj2-arm2"><span class="nobj2-planet"></span></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Orbiting System</div><span class="ref">.nobj2-orbit3d</span><div class="desc">A star with planets on tilted orbital tracks in real perspective. Ecosystems, dependencies, scale.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 6 FOLDING BOX -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-fold" style="--fc:var(--nobj2-p)">
+      <span class="nobj2-face nobj2-base"></span>
+      <span class="nobj2-face nobj2-wall nobj2-fw-f"></span><span class="nobj2-face nobj2-wall nobj2-fw-b"></span>
+      <span class="nobj2-face nobj2-wall nobj2-fw-r"></span><span class="nobj2-face nobj2-wall nobj2-fw-l"></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Folding Box</div><span class="ref">.nobj2-fold</span><div class="desc">Four walls hinge up from a base and flatten on a loop. Packaging, deploy, "assembling" states.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 7 COIN -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-coin">
+      <span class="nobj2-edge nobj2-e1"></span><span class="nobj2-edge nobj2-e2"></span>
+      <span class="nobj2-cface nobj2-ch">$</span><span class="nobj2-cface nobj2-ct">★</span>
+    </div></div>
+  </div><div class="meta"><div class="nm">3D Coin</div><span class="ref">.nobj2-coin</span><div class="desc">A two-faced coin flipping about its vertical axis with a metal edge. Billing, rewards, currency.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 8 POLYHEDRON -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-poly" style="--fc:var(--nobj2-vio)">
+      <span class="nobj2-oct nobj2-ou-1"></span><span class="nobj2-oct nobj2-ou-2"></span><span class="nobj2-oct nobj2-ou-3"></span><span class="nobj2-oct nobj2-ou-4"></span>
+      <span class="nobj2-oct nobj2-od-1"></span><span class="nobj2-oct nobj2-od-2"></span><span class="nobj2-oct nobj2-od-3"></span><span class="nobj2-oct nobj2-od-4"></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Polyhedron</div><span class="ref">.nobj2-poly</span><div class="desc">An eight-faced octahedron tumbling on two axes. Abstract compute, tokens, "complex object" markers.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 9 SERVER RACK -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-rack" style="--fc:var(--nobj2-t)">
+      <span class="nobj2-face nobj2-rb"></span><span class="nobj2-face nobj2-rs"></span><span class="nobj2-face nobj2-rt"></span>
+      <span class="nobj2-face nobj2-rf"><span class="nobj2-slot"></span><span class="nobj2-slot"></span><span class="nobj2-slot"></span><span class="nobj2-slot"></span><span class="nobj2-slot"></span></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Server Rack</div><span class="ref">.nobj2-rack</span><div class="desc">A rack chassis turning to reveal its depth, LEDs blinking. Infra, fleets, data-center dashboards.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 10 MAP PIN -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-pin" style="--fc:var(--nobj2-n)">
+      <span class="nobj2-pbody"></span><span class="nobj2-pdot"></span><span class="nobj2-pshadow"></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">3D Map Pin</div><span class="ref">.nobj2-pin</span><div class="desc">A teardrop marker spinning in space above its cast shadow. Locations, regions, "you are here".</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 11 CUBE GRID WAVE -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-wavegrid" style="--fc:var(--nobj2-cy)">
+      <span class="nobj2-cell" style="animation-delay:0s"><span class="nobj2-cs2"></span><span class="nobj2-ct2"></span></span>
+      <span class="nobj2-cell" style="animation-delay:.15s"><span class="nobj2-cs2"></span><span class="nobj2-ct2"></span></span>
+      <span class="nobj2-cell" style="animation-delay:.3s"><span class="nobj2-cs2"></span><span class="nobj2-ct2"></span></span>
+      <span class="nobj2-cell" style="animation-delay:.15s"><span class="nobj2-cs2"></span><span class="nobj2-ct2"></span></span>
+      <span class="nobj2-cell" style="animation-delay:.3s"><span class="nobj2-cs2"></span><span class="nobj2-ct2"></span></span>
+      <span class="nobj2-cell" style="animation-delay:.45s"><span class="nobj2-cs2"></span><span class="nobj2-ct2"></span></span>
+      <span class="nobj2-cell" style="animation-delay:.3s"><span class="nobj2-cs2"></span><span class="nobj2-ct2"></span></span>
+      <span class="nobj2-cell" style="animation-delay:.45s"><span class="nobj2-cs2"></span><span class="nobj2-ct2"></span></span>
+      <span class="nobj2-cell" style="animation-delay:.6s"><span class="nobj2-cs2"></span><span class="nobj2-ct2"></span></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Cube Grid Wave</div><span class="ref">.nobj2-wavegrid</span><div class="desc">A 3×3 field of columns rising in a diagonal wave in perspective. Load, density, equalizer visuals.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 12 BUILDING -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-building" style="--fc:var(--nobj2-i)">
+      <span class="nobj2-face nobj2-bk2"></span><span class="nobj2-face nobj2-bs2"></span><span class="nobj2-face nobj2-btop"></span>
+      <span class="nobj2-face nobj2-bf"><i class="nobj2-win"></i><i class="nobj2-win"></i><i class="nobj2-win"></i><i class="nobj2-win"></i><i class="nobj2-win"></i><i class="nobj2-win"></i><i class="nobj2-win"></i><i class="nobj2-win"></i><i class="nobj2-win"></i></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Isometric Tower</div><span class="ref">.nobj2-building</span><div class="desc">A lit tower rotating to show three faces of depth. Enterprise, org, city/scale storytelling.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 13 ARROW -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-arrow3d" style="--fc:var(--nobj2-p)">
+      <span class="nobj2-al" style="transform:translateZ(-18px);filter:brightness(.5)"></span>
+      <span class="nobj2-al" style="transform:translateZ(-12px);filter:brightness(.62)"></span>
+      <span class="nobj2-al" style="transform:translateZ(-6px);filter:brightness(.74)"></span>
+      <span class="nobj2-al" style="transform:translateZ(0);filter:brightness(.86)"></span>
+      <span class="nobj2-al" style="transform:translateZ(6px);filter:brightness(.98)"></span>
+      <span class="nobj2-al" style="transform:translateZ(12px);filter:brightness(1.1)"></span>
+      <span class="nobj2-al" style="transform:translateZ(18px);filter:brightness(1.2)"></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Extruded Arrow</div><span class="ref">.nobj2-arrow3d</span><div class="desc">A depth-extruded arrow swivelling to show its thickness. Direction, growth, "next" CTAs.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 14 TESSERACT -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-tess" style="--fc:var(--nobj2-t)">
+      <span class="nobj2-tcube nobj2-outer">
+        <span class="nobj2-tface nobj2-to-fr"></span><span class="nobj2-tface nobj2-to-bk"></span><span class="nobj2-tface nobj2-to-ri"></span><span class="nobj2-tface nobj2-to-le"></span><span class="nobj2-tface nobj2-to-to"></span><span class="nobj2-tface nobj2-to-bo"></span>
+      </span>
+      <span class="nobj2-tcube nobj2-inner">
+        <span class="nobj2-tface nobj2-ti-fr"></span><span class="nobj2-tface nobj2-ti-bk"></span><span class="nobj2-tface nobj2-ti-ri"></span><span class="nobj2-tface nobj2-ti-le"></span><span class="nobj2-tface nobj2-ti-to"></span><span class="nobj2-tface nobj2-ti-bo"></span>
+      </span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Tesseract</div><span class="ref">.nobj2-tess</span><div class="desc">Nested wireframe cubes twisting against each other — a hypercube feel. AI/abstract, "dimensions".</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 15 TORUS -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-torus" style="--fc:var(--nobj2-m)">
+      <span class="nobj2-bead" style="transform:rotate(0deg) translateX(46px)"></span>
+      <span class="nobj2-bead" style="transform:rotate(30deg) translateX(46px)"></span>
+      <span class="nobj2-bead" style="transform:rotate(60deg) translateX(46px)"></span>
+      <span class="nobj2-bead" style="transform:rotate(90deg) translateX(46px)"></span>
+      <span class="nobj2-bead" style="transform:rotate(120deg) translateX(46px)"></span>
+      <span class="nobj2-bead" style="transform:rotate(150deg) translateX(46px)"></span>
+      <span class="nobj2-bead" style="transform:rotate(180deg) translateX(46px)"></span>
+      <span class="nobj2-bead" style="transform:rotate(210deg) translateX(46px)"></span>
+      <span class="nobj2-bead" style="transform:rotate(240deg) translateX(46px)"></span>
+      <span class="nobj2-bead" style="transform:rotate(270deg) translateX(46px)"></span>
+      <span class="nobj2-bead" style="transform:rotate(300deg) translateX(46px)"></span>
+      <span class="nobj2-bead" style="transform:rotate(330deg) translateX(46px)"></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Torus Ring</div><span class="ref">.nobj2-torus</span><div class="desc">A ring of beads on a tilted plane spinning like a hoop/torus. Cycles, loops, sync indicators.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 16 PADLOCK -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-lock3d" style="--fc:var(--nobj2-w)">
+      <span class="nobj2-shack"></span>
+      <span class="nobj2-face nobj2-lb nobj2-lb-bk"></span><span class="nobj2-face nobj2-lb nobj2-lb-s"></span><span class="nobj2-face nobj2-lb nobj2-lb-t"></span>
+      <span class="nobj2-face nobj2-lb nobj2-lb-f"><span class="nobj2-key"></span></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">3D Padlock</div><span class="ref">.nobj2-lock3d</span><div class="desc">A solid padlock turning in space, shackle lifting on a loop. Security, auth, access states.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 17 CRYSTAL -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-crystal" style="--fc:var(--nobj2-cy)">
+      <span class="nobj2-cwrap">
+        <span class="nobj2-gtop nobj2-gt-1"></span><span class="nobj2-gtop nobj2-gt-2"></span><span class="nobj2-gtop nobj2-gt-3"></span><span class="nobj2-gtop nobj2-gt-4"></span>
+        <span class="nobj2-gbot nobj2-gb-1"></span><span class="nobj2-gbot nobj2-gb-2"></span><span class="nobj2-gbot nobj2-gb-3"></span><span class="nobj2-gbot nobj2-gb-4"></span>
+      </span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Floating Crystal</div><span class="ref">.nobj2-crystal</span><div class="desc">A faceted gem of translucent panes spinning and hovering. Premium tiers, gems, rare states.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 18 RADAR DISH -->
+  <div class="tile is-new"><div class="stage">
+    <div class="nobj2-scene"><div class="nobj2-dish">
+      <span class="nobj2-mast"></span>
+      <span class="nobj2-spin">
+        <span class="nobj2-plate"></span>
+        <span class="nobj2-wv"></span><span class="nobj2-wv nobj2-wv2"></span><span class="nobj2-wv nobj2-wv3"></span>
+      </span>
+    </div></div>
+  </div><div class="meta"><div class="nm">Radar Dish</div><span class="ref">.nobj2-dish</span><div class="desc">A parabolic dish sweeping around its mast, emitting signal rings in 3D. Scanning, telemetry, discovery.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">✦ 2D &amp; SVG Objects</h3>
+<div class="gallery">
+
+  <!-- 19 HOURGLASS -->
+  <div class="tile is-new"><div class="stage">
+    <svg viewBox="0 0 118 118" class="nobj2-2d" fill="none">
+      <g class="nobj2-hg">
+        <path d="M34 20 H84 M34 98 H84" stroke="var(--nobj2-a)" stroke-width="5" stroke-linecap="round"/>
+        <path d="M38 22 L59 59 L38 96 M80 22 L59 59 L80 96" stroke="var(--nobj2-ln)" stroke-width="3"/>
+        <path class="nobj2-hg-top" d="M42 26 L76 26 L59 57 Z" fill="var(--nobj2-a)"/>
+        <path class="nobj2-hg-bot" d="M59 61 L76 92 L42 92 Z" fill="var(--nobj2-a)"/>
+        <line class="nobj2-hg-str" x1="59" y1="57" x2="59" y2="66" stroke="var(--nobj2-a)" stroke-width="2.4"/>
+      </g>
+    </svg>
+  </div><div class="meta"><div class="nm">Hourglass</div><span class="ref">.nobj2-hg</span><div class="desc">Sand drains then the glass flips over. Timers, pending, "please wait" states.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 20 SATELLITE -->
+  <div class="tile is-new"><div class="stage">
+    <svg viewBox="0 0 118 118" class="nobj2-2d" fill="none">
+      <g class="nobj2-sat2">
+        <rect x="49" y="49" width="20" height="20" rx="3" fill="var(--nobj2-i)"/>
+        <rect x="20" y="52" width="24" height="14" rx="2" fill="var(--nobj2-t)" opacity=".8"/>
+        <rect x="74" y="52" width="24" height="14" rx="2" fill="var(--nobj2-t)" opacity=".8"/>
+        <path d="M44 59 H49 M69 59 H74" stroke="var(--nobj2-ln)" stroke-width="3"/>
+        <circle cx="59" cy="42" r="4" fill="var(--nobj2-a)"/>
+        <path class="nobj2-sat2-w" d="M76 30 a20 20 0 0 1 12 12" stroke="var(--nobj2-a)" stroke-width="3" stroke-linecap="round"/>
+        <path class="nobj2-sat2-w nobj2-sat2-w2" d="M80 22 a30 30 0 0 1 18 18" stroke="var(--nobj2-a)" stroke-width="3" stroke-linecap="round"/>
+        <path class="nobj2-sat2-w nobj2-sat2-w3" d="M84 14 a40 40 0 0 1 24 24" stroke="var(--nobj2-a)" stroke-width="3" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div><div class="meta"><div class="nm">Satellite</div><span class="ref">.nobj2-sat2</span><div class="desc">A satellite bobbing while transmitting signal arcs. Comms, uplink, remote telemetry.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 21 ROCKET -->
+  <div class="tile is-new"><div class="stage">
+    <svg viewBox="0 0 118 118" class="nobj2-2d" fill="none">
+      <g class="nobj2-rk">
+        <path d="M59 18 C74 30 74 58 68 74 H50 C44 58 44 30 59 18 Z" fill="var(--nobj2-i)"/>
+        <circle cx="59" cy="44" r="7" fill="#0c0f18" stroke="var(--nobj2-cy)" stroke-width="2"/>
+        <path d="M50 66 L38 82 L50 78 Z M68 66 L80 82 L68 78 Z" fill="var(--nobj2-n)"/>
+        <path class="nobj2-rk-fl" d="M52 74 H66 L59 96 Z" fill="var(--nobj2-a)"/>
+      </g>
+    </svg>
+  </div><div class="meta"><div class="nm">Rocket</div><span class="ref">.nobj2-rk</span><div class="desc">A rocket hovering with a flickering flame. Launches, releases, "shipping" moments.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 22 LIGHTBULB -->
+  <div class="tile is-new"><div class="stage">
+    <svg viewBox="0 0 118 118" class="nobj2-2d" fill="none">
+      <circle class="nobj2-bulb-g" cx="59" cy="50" r="30" fill="var(--nobj2-a)" opacity=".3"/>
+      <path d="M42 62 a20 20 0 1 1 34 0 c-4 6 -6 8 -6 14 H48 c0 -6 -2 -8 -6 -14 Z" stroke="var(--nobj2-a)" stroke-width="3" fill="color-mix(in srgb,var(--nobj2-a) 12%,transparent)"/>
+      <path class="nobj2-bulb-fil" d="M52 60 q7 -12 14 0" stroke="var(--nobj2-a)" stroke-width="3" fill="none"/>
+      <path d="M50 82 H68 M52 88 H66" stroke="var(--nobj2-ln)" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div><div class="meta"><div class="nm">Lightbulb</div><span class="ref">.nobj2-bulb-g</span><div class="desc">A bulb whose halo and filament pulse on. Ideas, insights, "aha" callouts.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 23 BATTERY -->
+  <div class="tile is-new"><div class="stage">
+    <svg viewBox="0 0 118 118" class="nobj2-2d" fill="none">
+      <rect x="24" y="42" width="64" height="34" rx="6" stroke="var(--nobj2-ln)" stroke-width="3"/>
+      <rect x="90" y="52" width="6" height="14" rx="2" fill="var(--nobj2-ln)"/>
+      <rect class="nobj2-bat-fill" x="28" y="46" width="56" height="26" rx="3" fill="var(--nobj2-p)"/>
+      <path class="nobj2-bat-bolt" d="M60 44 L48 62 H58 L54 76 L70 56 H60 Z" fill="#fff"/>
+    </svg>
+  </div><div class="meta"><div class="nm">Battery Charging</div><span class="ref">.nobj2-bat-fill</span><div class="desc">A cell filling red→amber→green with a pulsing bolt. Power, capacity, charge/quota.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 24 WIFI -->
+  <div class="tile is-new"><div class="stage">
+    <svg viewBox="0 0 118 118" class="nobj2-2d" fill="none">
+      <path class="nobj2-wf nobj2-wf3" d="M22 46 a52 52 0 0 1 74 0" stroke="var(--nobj2-t)" stroke-width="6" stroke-linecap="round"/>
+      <path class="nobj2-wf nobj2-wf2" d="M33 60 a36 36 0 0 1 52 0" stroke="var(--nobj2-t)" stroke-width="6" stroke-linecap="round"/>
+      <path class="nobj2-wf" d="M44 74 a20 20 0 0 1 30 0" stroke="var(--nobj2-t)" stroke-width="6" stroke-linecap="round"/>
+      <circle class="nobj2-wf nobj2-wf-d" cx="59" cy="88" r="6" fill="var(--nobj2-t)"/>
+    </svg>
+  </div><div class="meta"><div class="nm">Wi-Fi Pulse</div><span class="ref">.nobj2-wf</span><div class="desc">Signal arcs light up in sequence from the base dot outward. Connectivity, online, broadcast.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 25 GEARS MESH -->
+  <div class="tile is-new"><div class="stage">
+    <svg viewBox="0 0 118 118" class="nobj2-2d" fill="none">
+      <g class="nobj2-mesh-a" fill="var(--nobj2-a)">
+        <circle cx="44" cy="54" r="15"/>
+        <g><rect x="41" y="33" width="6" height="10"/><rect x="41" y="65" width="6" height="10"/><rect x="23" y="51" width="10" height="6"/><rect x="55" y="51" width="10" height="6"/><rect x="28" y="38" width="6" height="9" transform="rotate(45 31 42)"/><rect x="54" y="38" width="6" height="9" transform="rotate(-45 57 42)"/><rect x="28" y="61" width="6" height="9" transform="rotate(-45 31 65)"/><rect x="54" y="61" width="6" height="9" transform="rotate(45 57 65)"/></g>
+        <circle cx="44" cy="54" r="5" fill="#0c0f18"/>
+      </g>
+      <g class="nobj2-mesh-b" fill="var(--nobj2-i)">
+        <circle cx="82" cy="76" r="12"/>
+        <g><rect x="79" y="60" width="6" height="8"/><rect x="79" y="84" width="6" height="8"/><rect x="66" y="73" width="8" height="6"/><rect x="90" y="73" width="8" height="6"/></g>
+        <circle cx="82" cy="76" r="4" fill="#0c0f18"/>
+      </g>
+    </svg>
+  </div><div class="meta"><div class="nm">Gears Mesh</div><span class="ref">.nobj2-mesh-a</span><div class="desc">Two flat gears interlock and counter-rotate. Settings, mechanics, "working" states.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 26 PENDULUM -->
+  <div class="tile is-new"><div class="stage">
+    <svg viewBox="0 0 118 118" class="nobj2-2d" fill="none">
+      <path d="M30 22 H88" stroke="var(--nobj2-ln)" stroke-width="4" stroke-linecap="round"/>
+      <g class="nobj2-pend">
+        <line x1="59" y1="22" x2="59" y2="82" stroke="var(--nobj2-ln)" stroke-width="3"/>
+        <circle cx="59" cy="90" r="12" fill="var(--nobj2-m)"/>
+      </g>
+    </svg>
+  </div><div class="meta"><div class="nm">Pendulum</div><span class="ref">.nobj2-pend</span><div class="desc">A weighted bob swinging on a pivot with easing. Timing, physics, balance/rhythm.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 27 FLAG -->
+  <div class="tile is-new"><div class="stage">
+    <svg viewBox="0 0 118 118" class="nobj2-2d" fill="none">
+      <line x1="32" y1="18" x2="32" y2="100" stroke="var(--nobj2-ln)" stroke-width="5" stroke-linecap="round"/>
+      <g class="nobj2-flag">
+        <path d="M32 26 q14 -8 28 0 q14 8 28 0 v22 q-14 8 -28 0 q-14 -8 -28 0 Z" fill="var(--nobj2-n)"/>
+      </g>
+    </svg>
+  </div><div class="meta"><div class="nm">Waving Flag</div><span class="ref">.nobj2-flag</span><div class="desc">A pennant ripples on the pole via an animated path. Milestones, goals, "flagged" items.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 28 COMPASS -->
+  <div class="tile is-new"><div class="stage">
+    <svg viewBox="0 0 118 118" class="nobj2-2d" fill="none">
+      <circle cx="59" cy="59" r="38" stroke="var(--nobj2-ln)" stroke-width="3"/>
+      <circle cx="59" cy="59" r="44" stroke="var(--nobj2-ln)" stroke-width="2" opacity=".5"/>
+      <g class="nobj2-cmp-nd">
+        <path d="M59 26 L66 59 L59 92 L52 59 Z" fill="var(--nobj2-ln)"/>
+        <path d="M59 26 L66 59 L52 59 Z" fill="var(--nobj2-n)"/>
+      </g>
+      <circle cx="59" cy="59" r="5" fill="var(--nobj2-a)"/>
+    </svg>
+  </div><div class="meta"><div class="nm">Compass</div><span class="ref">.nobj2-cmp-nd</span><div class="desc">A needle hunts and settles toward north. Navigation, direction, "finding your way".</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 29 MAGNET -->
+  <div class="tile is-new"><div class="stage">
+    <svg viewBox="0 0 118 118" class="nobj2-2d" fill="none">
+      <path d="M40 30 v34 a19 19 0 0 0 38 0 v-34" stroke="var(--nobj2-ln)" stroke-width="14" fill="none"/>
+      <path d="M33 30 h14 M71 30 h14" stroke="var(--nobj2-n)" stroke-width="14"/>
+      <g stroke-linecap="round" stroke-width="3" fill="none">
+        <path class="nobj2-mag-f" d="M38 88 q21 12 42 0" stroke="var(--nobj2-i)"/>
+        <path class="nobj2-mag-f nobj2-mag-f2" d="M32 96 q27 16 54 0" stroke="var(--nobj2-i)"/>
+        <path class="nobj2-mag-f nobj2-mag-f3" d="M26 104 q33 20 66 0" stroke="var(--nobj2-i)"/>
+      </g>
+    </svg>
+  </div><div class="meta"><div class="nm">Magnet</div><span class="ref">.nobj2-mag-f</span><div class="desc">A horseshoe magnet with pulsing field lines. Attraction, retention, "pull" metrics.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <!-- 30 HOT-AIR BALLOON -->
+  <div class="tile is-new"><div class="stage">
+    <svg viewBox="0 0 118 118" class="nobj2-2d" fill="none">
+      <g class="nobj2-bln">
+        <path d="M59 16 C82 16 92 36 92 54 C92 72 74 82 59 82 C44 82 26 72 26 54 C26 36 36 16 59 16 Z" fill="var(--nobj2-a)"/>
+        <path d="M59 16 C50 30 50 68 59 82 M59 16 C68 30 68 68 59 82" stroke="#0c0f18" stroke-width="2" opacity=".35"/>
+        <path d="M50 80 L46 92 M68 80 L72 92" stroke="var(--nobj2-ln)" stroke-width="2"/>
+        <rect x="50" y="92" width="18" height="12" rx="2" fill="var(--nobj2-ln)"/>
+        <path class="nobj2-bln-fl" d="M55 82 H63 L59 92 Z" fill="var(--nobj2-w)"/>
+      </g>
+    </svg>
+  </div><div class="meta"><div class="nm">Hot-Air Balloon</div><span class="ref">.nobj2-bln</span><div class="desc">A balloon drifting and rocking gently with a burner flame. Journeys, uplift, exploration.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<script>if(!window.copyViz){window.copyViz=function(btn){try{var s=btn.closest('.tile').querySelector('.stage');var t=s.innerHTML.trim();(navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t):Promise.reject()).catch(function(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta);});var o=btn.textContent;btn.textContent='✓ Copied';setTimeout(function(){btn.textContent=o},1200);}catch(e){}}}</script>

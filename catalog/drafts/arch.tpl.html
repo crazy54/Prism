@@ -1,0 +1,840 @@
+<script type="text/html" id="pg-arch"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗺 Architecture Diagrams · Prism</title>
+<style>
+:root{
+  --bg:#0b0e17; --panel:#121623; --panel2:#171d2e; --card:#141b2b; --line:#243049;
+  --ink:#eaf1f9; --muted:#8593a8; --dim:#5b6678;
+  --crit:#c879ff;  --crit-rgb:200,121,255;
+  --neg:#f85149;   --neg-rgb:248,81,73;
+  --warn:#e0a52b;  --warn-rgb:224,165,43;
+  --pos:#3fb950;   --pos-rgb:63,185,80;
+  --info:#4493f8;  --info-rgb:68,147,248;
+  --accent:#ff9900;--accent-rgb:255,153,0;
+  --cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%);
+}
+.c-crit{--c:var(--crit);--c-rgb:200,121,255}.c-neg{--c:var(--neg);--c-rgb:248,81,73}
+.c-warn{--c:var(--warn);--c-rgb:224,165,43}.c-pos{--c:var(--pos);--c-rgb:63,185,80}
+.c-info{--c:var(--info);--c-rgb:68,147,248}.c-accent{--c:var(--accent);--c-rgb:255,153,0}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,rgba(255,153,0,.05),transparent 60%),var(--bg);
+  color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;padding-bottom:90px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em}
+.head{padding:28px 32px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#232f3e,var(--panel));position:relative}
+.head h1{margin:0;font-size:25px;font-weight:800;letter-spacing:-.01em}
+.head p{margin:7px 0 0;color:var(--muted);font-size:13px;max-width:820px}
+.wrap{max-width:1240px;margin:0 auto;padding:22px 32px 0}
+h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:800;margin:26px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.tile .stage{padding:26px 18px;min-height:130px;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,rgba(255,255,255,.012) 0 10px,transparent 10px 20px);position:relative}
+.tile .meta{padding:12px 14px;border-top:1px solid var(--line)}
+.tile .nm{font-weight:700;font-size:13.5px}
+.tile .ref{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--accent);background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;display:inline-block;margin-top:6px}
+.tile .desc{color:var(--muted);font-size:12px;margin-top:8px}
+.tile .row{display:flex;gap:8px;margin-top:10px}
+.tile .copy{flex:1;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px;font-size:12px;cursor:pointer;transition:.15s;font-family:inherit}
+.tile .copy:hover{border-color:var(--accent);color:var(--accent)}
+.tile .copy.ok{border-color:var(--pos);color:var(--pos)}
+.el-pill{display:inline-block;background:rgba(var(--c-rgb),.14);color:var(--c);border-radius:11px;padding:3px 10px;font-size:11px;font-weight:800}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important;animation-iteration-count:1!important}}
+</style>
+<style id="arch-styles">
+/* ================= Architecture Diagrams gallery — prefix arch- / arch* =================
+   Cloud/AWS-flavored, report-grade diagram building blocks. Fully self-contained, offline.
+   Colour comes ONLY from design tokens. Nodes carry two inline custom props so every
+   family can be recoloured: --ac (a token colour) and --acr (its matching -rgb triplet),
+   e.g. style="--ac:var(--info);--acr:var(--info-rgb)". Both default to --info.
+   No selector references .tile or :hover for load-bearing styling (copy-helper friendly). */
+
+/* ---- shared primitives ---- */
+.arch-svg{display:block;width:100%;height:100%;overflow:visible;font:700 9px ui-sans-serif,system-ui,sans-serif}
+.arch-svg text{fill:var(--ink);text-anchor:middle;dominant-baseline:middle}
+.arch-cap{margin-top:8px;font:600 9.5px/1.3 ui-sans-serif,system-ui,sans-serif;color:var(--muted);text-align:center;letter-spacing:.02em}
+.arch-lbl{font:700 10px/1.1 ui-sans-serif,system-ui,sans-serif;color:var(--muted);letter-spacing:.03em;text-align:center}
+
+/* ---- shared keyframes ---- */
+@keyframes archGlow{0%,100%{box-shadow:0 0 0 rgba(var(--acr,var(--info-rgb)),0),0 1px 0 rgba(0,0,0,.22)}50%{box-shadow:0 0 15px rgba(var(--acr,var(--info-rgb)),.4),0 1px 0 rgba(0,0,0,.22)}}
+@keyframes archPulse{0%,100%{opacity:.55;transform:scale(.9)}50%{opacity:1;transform:scale(1)}}
+@keyframes archDash{to{stroke-dashoffset:-32}}
+@keyframes archPacket{0%{left:2%;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:97%;opacity:0}}
+@keyframes archPacketV{0%{top:4%;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:92%;opacity:0}}
+@keyframes archSpin{to{transform:rotate(360deg)}}
+@keyframes archBreath{0%,100%{box-shadow:0 0 0 rgba(var(--acr,var(--info-rgb)),0)}50%{box-shadow:0 0 18px rgba(var(--acr,var(--info-rgb)),.2)}}
+@keyframes archLight{0%,72%,100%{background:var(--card);border-color:var(--line);color:var(--muted)}12%,40%{background:rgba(var(--pos-rgb),.2);border-color:var(--pos);color:var(--ink);box-shadow:0 0 12px rgba(var(--pos-rgb),.4)}}
+@keyframes archMsg{0%{transform:translateX(64px);opacity:0}18%,82%{opacity:1}100%{transform:translateX(0);opacity:0}}
+@keyframes archScan{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
+@keyframes archBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+/* ======================================================================
+   1 — SERVICE NODES
+   ====================================================================== */
+.arch-node{display:inline-flex;flex-direction:column;align-items:center;gap:6px;padding:2px}
+.arch-ico{position:relative;width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font-size:16px;font-weight:800;font-family:ui-sans-serif,system-ui,sans-serif;color:var(--ac,var(--info));background:linear-gradient(160deg,rgba(var(--acr,var(--info-rgb)),.2),rgba(var(--acr,var(--info-rgb)),.08));border:1px solid rgba(var(--acr,var(--info-rgb)),.55);animation:archGlow 3.4s ease-in-out infinite}
+.arch-node .arch-lbl{max-width:88px}
+
+/* status dot node */
+.arch-nstat{position:relative}
+.arch-nstat .arch-sdot{position:absolute;top:-3px;right:-3px;width:11px;height:11px;border-radius:50%;background:var(--pos);border:2px solid var(--panel);box-shadow:0 0 9px var(--pos);animation:archPulse 1.9s ease-in-out infinite}
+
+/* lambda / compute node — hexagon-ish rounded */
+.arch-lambda .arch-ico{border-radius:12px;font-size:20px}
+
+/* storage bucket node */
+.arch-bucket .arch-ico{border-radius:6px 6px 12px 12px}
+.arch-bucket .arch-ico::after{content:"";position:absolute;width:44px;height:8px;margin-top:-24px;border-radius:6px 6px 0 0;background:rgba(var(--acr,var(--info-rgb)),.35)}
+
+/* database cylinder (pure CSS) */
+.arch-dbcyl{position:relative;width:52px;height:56px;margin-top:8px;border:1px solid rgba(var(--acr,var(--info-rgb)),.6);border-top:none;border-radius:0 0 26px 26px/0 0 14px 14px;background:linear-gradient(180deg,rgba(var(--acr,var(--info-rgb)),.22),rgba(var(--acr,var(--info-rgb)),.08));display:grid;place-items:center;color:var(--ac,var(--info));font:800 12px/1 ui-sans-serif,system-ui,sans-serif;animation:archGlow 3.6s ease-in-out infinite}
+.arch-dbcyl::before{content:"";position:absolute;left:-1px;right:-1px;top:-8px;height:15px;border-radius:50%;background:rgba(var(--acr,var(--info-rgb)),.32);border:1px solid rgba(var(--acr,var(--info-rgb)),.6)}
+.arch-dbcyl::after{content:"";position:absolute;left:-1px;right:-1px;bottom:-8px;height:15px;border-radius:50%;border:1px solid rgba(var(--acr,var(--info-rgb)),.6);border-top:none;background:rgba(var(--acr,var(--info-rgb)),.1)}
+
+/* queue node — stack of messages, one flowing in */
+.arch-qbox{position:relative;display:flex;gap:3px;padding:7px;border:1px solid var(--line);border-radius:9px;background:var(--card);overflow:hidden}
+.arch-qbox .arch-qm{width:11px;height:22px;border-radius:2px;background:linear-gradient(180deg,rgba(var(--warn-rgb),.7),rgba(var(--warn-rgb),.35));border:1px solid rgba(var(--warn-rgb),.6)}
+.arch-qbox .arch-qm.arch-qin{animation:archMsg 2.4s ease-in-out infinite}
+
+/* CDN node — globe rings */
+.arch-cdn .arch-ico{position:relative;border-radius:50%}
+.arch-cdn .arch-ico::before{content:"";position:absolute;inset:6px;border-radius:50%;border:1px solid rgba(var(--acr,var(--info-rgb)),.5)}
+.arch-cdn .arch-ico::after{content:"";position:absolute;inset:6px 16px;border-radius:50%;border:1px solid rgba(var(--acr,var(--info-rgb)),.5)}
+
+/* client / user node */
+.arch-client .arch-ico{border-radius:50% 50% 12px 12px}
+
+/* internet gateway node — dashed diamond */
+.arch-igw .arch-ico{border-radius:10px;transform:rotate(45deg);border-style:dashed}
+.arch-igw .arch-ico span{transform:rotate(-45deg)}
+
+/* API gateway node */
+.arch-api .arch-ico{border-radius:10px}
+
+/* ======================================================================
+   2 — CONNECTORS & FLOWS
+   ====================================================================== */
+/* straight animated flowing dash */
+.arch-conn{position:relative;width:190px;height:20px}
+.arch-conn .arch-svg .arch-ln{stroke:var(--line);stroke-width:2;fill:none}
+.arch-conn .arch-svg .arch-flow{stroke:var(--info);stroke-width:2;fill:none;stroke-linecap:round;stroke-dasharray:7 7;animation:archDash 1.1s linear infinite}
+.arch-arw{fill:var(--info)}
+.arch-arw2{fill:var(--muted)}
+
+/* labeled connector */
+.arch-clabel{position:absolute;left:50%;top:-9px;transform:translateX(-50%);padding:1px 7px;font:800 8px/1.5 ui-sans-serif,system-ui,sans-serif;letter-spacing:.05em;color:var(--info);background:rgba(var(--info-rgb),.14);border:1px solid rgba(var(--info-rgb),.4);border-radius:20px}
+
+/* data-packet dot travelling a wire */
+.arch-track{position:relative;width:200px;height:22px;display:flex;align-items:center}
+.arch-track::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--line);transform:translateY(-50%)}
+.arch-pkt{position:absolute;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--accent);box-shadow:0 0 11px var(--accent);animation:archPacket 2.2s linear infinite}
+.arch-pkt.arch-pkt2{background:var(--info);box-shadow:0 0 11px var(--info);animation-delay:1.1s}
+
+/* inline flow connector used inside mini-diagrams (horizontal) */
+.arch-hop{position:relative;flex:1;min-width:20px;align-self:center;height:2px;background:var(--line)}
+.arch-hop::after{content:"";position:absolute;right:-1px;top:50%;transform:translateY(-50%);border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid var(--line)}
+.arch-hop::before{content:"";position:absolute;top:50%;left:0;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:var(--info);box-shadow:0 0 8px var(--info);animation:archPacket 1.9s linear infinite}
+
+/* ======================================================================
+   3 — CONTAINERS & BOUNDARIES
+   ====================================================================== */
+.arch-box{position:relative;padding:24px 14px 12px;border:1.5px solid rgba(var(--acr,var(--info-rgb)),.55);border-radius:11px;background:rgba(var(--acr,var(--info-rgb)),.055);animation:archBreath 4.4s ease-in-out infinite}
+.arch-box.arch-dashed{border-style:dashed}
+.arch-tag{position:absolute;top:-1px;left:-1px;padding:2px 9px;font:800 8px/1.5 ui-sans-serif,system-ui,sans-serif;letter-spacing:.06em;color:var(--ac,var(--info));background:rgba(var(--acr,var(--info-rgb)),.18);border:1px solid rgba(var(--acr,var(--info-rgb)),.4);border-radius:10px 0 10px 0}
+.arch-row{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.arch-col{display:flex;flex-direction:column;gap:8px;align-items:center}
+
+/* security-group ring */
+.arch-sgwrap{position:relative;width:118px;height:118px;display:grid;place-items:center}
+.arch-sgring{position:absolute;inset:0;border-radius:50%;border:2px dashed rgba(var(--pos-rgb),.6);animation:archSpin 16s linear infinite}
+.arch-sgring.arch-sgring2{inset:14px;border-color:rgba(var(--info-rgb),.5);animation-direction:reverse;animation-duration:22s}
+
+/* ======================================================================
+   4 — FULL MINI-DIAGRAMS  (chips + hops)
+   ====================================================================== */
+.arch-chip{display:inline-flex;flex-direction:column;align-items:center;gap:4px;flex:0 0 auto}
+.arch-chip .arch-ci{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font:800 12px/1 ui-sans-serif,system-ui,sans-serif;color:var(--ac,var(--info));background:linear-gradient(160deg,rgba(var(--acr,var(--info-rgb)),.2),rgba(var(--acr,var(--info-rgb)),.08));border:1px solid rgba(var(--acr,var(--info-rgb)),.55)}
+.arch-chip .arch-ct{font:700 8.5px/1 ui-sans-serif,system-ui,sans-serif;color:var(--muted);letter-spacing:.02em}
+.arch-flowrow{display:flex;align-items:flex-start;gap:0;width:100%;max-width:330px}
+.arch-flowrow .arch-hop{margin-top:16px}
+
+/* CI/CD stages that light up in sequence */
+.arch-pipe{display:flex;gap:8px;align-items:center}
+.arch-pstage{padding:8px 11px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--muted);font:800 9px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.03em;animation:archLight 4.4s ease-in-out infinite}
+.arch-pstage:nth-child(2){animation-delay:.55s}
+.arch-pstage:nth-child(3){animation-delay:1.1s}
+.arch-pstage:nth-child(4){animation-delay:1.65s}
+.arch-pstage:nth-child(5){animation-delay:2.2s}
+.arch-psep{color:var(--dim);font-weight:800}
+
+/* load-balancer fan / branch / multi-AZ use inline SVG (styles below) */
+.arch-dnode{fill:var(--card);stroke:rgba(var(--info-rgb),.7);stroke-width:1.4}
+.arch-dnode.arch-pos{stroke:var(--pos)}
+.arch-dnode.arch-warn{stroke:var(--warn)}
+.arch-dnode.arch-neg{stroke:var(--neg)}
+.arch-dedge{stroke:var(--line);stroke-width:1.6;fill:none}
+.arch-dflow{stroke:rgba(var(--info-rgb),.9);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-dasharray:5 6;animation:archDash 1.2s linear infinite}
+
+/* ======================================================================
+   5 — SEQUENCE & FLOW DIAGRAMS  (mostly SVG)
+   ====================================================================== */
+.arch-life{stroke:var(--line);stroke-width:1.4;stroke-dasharray:3 4}
+.arch-actor{fill:var(--card);stroke:var(--info);stroke-width:1.4}
+.arch-msgln{stroke:var(--accent);stroke-width:1.6;fill:none;stroke-dasharray:80;stroke-dashoffset:80;animation:archDraw 3.2s ease-in-out infinite}
+.arch-msgln.arch-m2{stroke:var(--info);animation-delay:1.1s}
+.arch-msgln.arch-m3{stroke:var(--pos);animation-delay:2.1s}
+@keyframes archDraw{0%{stroke-dashoffset:80}30%,70%{stroke-dashoffset:0}100%{stroke-dashoffset:0;opacity:1}}
+.arch-diamond{fill:rgba(var(--warn-rgb),.14);stroke:var(--warn);stroke-width:1.4}
+.arch-state{fill:rgba(var(--info-rgb),.13);stroke:var(--info);stroke-width:1.4}
+.arch-state.arch-active{fill:rgba(var(--pos-rgb),.2);stroke:var(--pos);animation:archBreathS 3s ease-in-out infinite}
+@keyframes archBreathS{0%,100%{filter:drop-shadow(0 0 0 rgba(var(--pos-rgb),0))}50%{filter:drop-shadow(0 0 6px rgba(var(--pos-rgb),.7))}}
+
+/* swimlanes */
+.arch-lanes{display:flex;flex-direction:column;gap:0;width:100%;max-width:320px;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.arch-lane{display:flex;align-items:center;gap:8px;padding:8px;border-bottom:1px solid var(--line)}
+.arch-lane:last-child{border-bottom:none}
+.arch-lane .arch-lhdr{flex:0 0 52px;font:800 8px/1.2 ui-sans-serif,system-ui,sans-serif;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
+.arch-lane .arch-ltrack{position:relative;flex:1;height:14px;display:flex;align-items:center}
+.arch-lane .arch-ltrack::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--line)}
+.arch-lstep{position:relative;z-index:1;padding:2px 7px;border-radius:6px;font:800 8px/1.3 ui-sans-serif,system-ui,sans-serif;color:var(--ink);background:var(--card);border:1px solid rgba(var(--info-rgb),.55)}
+.arch-ltrack .arch-lpkt{position:absolute;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:archPacket 3s linear infinite}
+
+/* ======================================================================
+   6 — TOPOLOGY & GRAPH  (SVG)
+   ====================================================================== */
+.arch-tnode{fill:rgba(var(--info-rgb),.16);stroke:var(--info);stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:archPulse 3.2s ease-in-out infinite}
+.arch-tnode.arch-hub{fill:rgba(var(--accent-rgb),.2);stroke:var(--accent)}
+.arch-tnode.arch-pos{fill:rgba(var(--pos-rgb),.18);stroke:var(--pos)}
+.arch-tnode.arch-warn{fill:rgba(var(--warn-rgb),.18);stroke:var(--warn)}
+.arch-tnode.arch-neg{fill:rgba(var(--neg-rgb),.18);stroke:var(--neg)}
+.arch-tnode.arch-d2{animation-delay:.5s}
+.arch-tnode.arch-d3{animation-delay:1s}
+.arch-tnode.arch-d4{animation-delay:1.5s}
+.arch-tnode.arch-d5{animation-delay:2s}
+.arch-tedge{stroke:var(--line);stroke-width:1.4;fill:none}
+.arch-tflow{stroke:rgba(var(--info-rgb),.75);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-dasharray:4 6;animation:archDash 1.3s linear infinite}
+.arch-tflow.arch-pos{stroke:rgba(var(--pos-rgb),.85)}
+.arch-tflow.arch-warn{stroke:rgba(var(--warn-rgb),.85)}
+.arch-tflow.arch-neg{stroke:rgba(var(--neg-rgb),.85)}
+
+/* ring topology token orbiting */
+.arch-ringwrap{position:relative;width:130px;height:130px}
+.arch-ringwrap .arch-rspin{position:absolute;inset:0;animation:archSpin 6s linear infinite}
+.arch-ringwrap .arch-rtoken{position:absolute;top:-4px;left:50%;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+
+</style>
+</head>
+<body>
+<div class="head">
+  <h1>🗺 Architecture Diagrams</h1>
+  <p>Cloud/AWS-flavored diagram building blocks — service nodes, animated connectors, VPC/subnet containers, full mini-architectures, sequence & flow diagrams and network topologies. Pure SVG + CSS.</p>
+</div>
+<div class="wrap">
+<h3 class="sec">SERVICE NODES</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-node arch-api" style="--ac:var(--info);--acr:var(--info-rgb)">
+      <div class="arch-ico"><span>API</span></div>
+      <div class="arch-lbl">API Gateway</div>
+    </div>
+  </div><div class="meta"><div class="nm">Service Node</div><span class="ref">.arch-node</span><div class="desc">A labelled service node: an icon box plus a name, glowing gently at idle. The base building block for any AWS-style diagram.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-node arch-nstat" style="--ac:var(--pos);--acr:var(--pos-rgb)">
+      <div class="arch-ico"><span>EC2</span><span class="arch-sdot"></span></div>
+      <div class="arch-lbl">Web Server</div>
+    </div>
+  </div><div class="meta"><div class="nm">Node with Status Dot</div><span class="ref">.arch-nstat</span><div class="desc">A service node with a pulsing health dot in the corner — use it to show a component is live and healthy.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-node arch-lambda" style="--ac:var(--accent);--acr:var(--accent-rgb)">
+      <div class="arch-ico"><span>&lambda;</span></div>
+      <div class="arch-lbl">Lambda Function</div>
+    </div>
+  </div><div class="meta"><div class="nm">Compute / Lambda Node</div><span class="ref">.arch-lambda</span><div class="desc">A serverless compute node marked with the lambda glyph, tinted in the accent colour. Drop it wherever a function runs.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-node arch-bucket" style="--ac:var(--pos);--acr:var(--pos-rgb)">
+      <div class="arch-ico"><span>S3</span></div>
+      <div class="arch-lbl">Object Store</div>
+    </div>
+  </div><div class="meta"><div class="nm">Storage / Bucket Node</div><span class="ref">.arch-bucket</span><div class="desc">An object-storage node with a lidded-bucket silhouette for S3-style buckets and data lakes.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-node" style="--ac:var(--crit);--acr:var(--crit-rgb)">
+      <div class="arch-dbcyl">DB</div>
+      <div class="arch-lbl">Database</div>
+    </div>
+  </div><div class="meta"><div class="nm">Database Cylinder</div><span class="ref">.arch-dbcyl</span><div class="desc">A pure-CSS database cylinder with rounded top and bottom caps — the classic datastore icon, no image needed.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-node" style="--ac:var(--warn);--acr:var(--warn-rgb)">
+      <div class="arch-qbox">
+        <span class="arch-qm arch-qin"></span><span class="arch-qm"></span><span class="arch-qm"></span><span class="arch-qm"></span>
+      </div>
+      <div class="arch-lbl">Message Queue</div>
+    </div>
+  </div><div class="meta"><div class="nm">Queue Node</div><span class="ref">.arch-qbox</span><div class="desc">A queue drawn as a stack of buffered messages with one continuously sliding in — for SQS-style buffers.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-node arch-cdn" style="--ac:var(--info);--acr:var(--info-rgb)">
+      <div class="arch-ico"><span>CDN</span></div>
+      <div class="arch-lbl">Edge / CDN</div>
+    </div>
+  </div><div class="meta"><div class="nm">CDN Node</div><span class="ref">.arch-cdn</span><div class="desc">A content-delivery node drawn as a globe with latitude rings, for CloudFront-style edge caches.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-node arch-client" style="--ac:var(--muted);--acr:var(--info-rgb)">
+      <div class="arch-ico"><span>&#128100;</span></div>
+      <div class="arch-lbl">User / Client</div>
+    </div>
+  </div><div class="meta"><div class="nm">User / Client Node</div><span class="ref">.arch-client</span><div class="desc">A client actor node with a head-and-shoulders shape — the entry point that talks to your system.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-node arch-igw" style="--ac:var(--crit);--acr:var(--crit-rgb)">
+      <div class="arch-ico"><span>IGW</span></div>
+      <div class="arch-lbl">Internet Gateway</div>
+    </div>
+  </div><div class="meta"><div class="nm">Internet-Gateway Node</div><span class="ref">.arch-igw</span><div class="desc">A gateway node drawn as a dashed diamond — the boundary between the public internet and your VPC.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-node" style="--ac:var(--info);--acr:var(--info-rgb)">
+      <div class="arch-ico"><span>ECS</span></div>
+      <div class="arch-lbl">Container Service</div>
+    </div>
+  </div><div class="meta"><div class="nm">Container Node</div><span class="ref">.arch-node</span><div class="desc">A container/ECS service node — reuse the base node with any service label to extend the icon set.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-node arch-nstat" style="--ac:var(--warn);--acr:var(--warn-rgb)">
+      <div class="arch-ico"><span>&#128200;</span><span class="arch-sdot" style="background:var(--warn);box-shadow:0 0 9px var(--warn)"></span></div>
+      <div class="arch-lbl">Monitoring</div>
+    </div>
+  </div><div class="meta"><div class="nm">Monitoring Node</div><span class="ref">.arch-nstat</span><div class="desc">An observability node with an amber pulsing dot — for CloudWatch-style metrics and alarm sources.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">CONNECTORS &amp; FLOWS</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-conn">
+      <svg class="arch-svg" viewBox="0 0 190 20" preserveAspectRatio="none">
+        <line class="arch-ln" x1="2" y1="10" x2="176" y2="10"/>
+        <line class="arch-flow" x1="2" y1="10" x2="176" y2="10"/>
+        <polygon class="arch-arw" points="176,4 188,10 176,16"/>
+      </svg>
+    </div>
+  </div><div class="meta"><div class="nm">Flowing Connector</div><span class="ref">.arch-flow</span><div class="desc">A straight connector with a dashed line that streams toward the arrowhead — shows direction of data at a glance.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-conn" style="height:70px;width:150px">
+      <svg class="arch-svg" viewBox="0 0 150 70">
+        <path class="arch-ln" d="M6 12 H90 V58 H140" fill="none"/>
+        <path class="arch-flow" d="M6 12 H90 V58 H140" fill="none"/>
+        <polygon class="arch-arw" points="140,52 150,58 140,64"/>
+      </svg>
+    </div>
+  </div><div class="meta"><div class="nm">Elbow Connector</div><span class="ref">.arch-flow</span><div class="desc">An orthogonal elbow connector that routes with right-angle bends — the tidy path style used in report diagrams.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-conn">
+      <svg class="arch-svg" viewBox="0 0 190 20" preserveAspectRatio="none">
+        <line class="arch-ln" x1="12" y1="10" x2="178" y2="10"/>
+        <line class="arch-flow" x1="12" y1="10" x2="178" y2="10"/>
+        <polygon class="arch-arw" points="12,4 2,10 12,16"/>
+        <polygon class="arch-arw" points="178,4 188,10 178,16"/>
+      </svg>
+    </div>
+  </div><div class="meta"><div class="nm">Bidirectional Arrow</div><span class="ref">.arch-conn</span><div class="desc">A two-headed connector for peer or sync relationships where traffic flows both ways.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-conn">
+      <span class="arch-clabel">HTTPS</span>
+      <svg class="arch-svg" viewBox="0 0 190 20" preserveAspectRatio="none">
+        <line class="arch-ln" x1="2" y1="10" x2="176" y2="10"/>
+        <line class="arch-flow" x1="2" y1="10" x2="176" y2="10"/>
+        <polygon class="arch-arw" points="176,4 188,10 176,16"/>
+      </svg>
+    </div>
+  </div><div class="meta"><div class="nm">Labeled Connector</div><span class="ref">.arch-clabel</span><div class="desc">A connector carrying a protocol pill (HTTPS, gRPC, TLS) centred on the wire — annotate what travels the edge.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-track">
+      <span class="arch-pkt"></span>
+      <span class="arch-pkt arch-pkt2"></span>
+    </div>
+  </div><div class="meta"><div class="nm">Data Packet on the Wire</div><span class="ref">.arch-pkt</span><div class="desc">Glowing packets travelling a link end to end — a lively way to show live traffic between two nodes.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-conn" style="height:80px;width:170px">
+      <svg class="arch-svg" viewBox="0 0 170 80">
+        <path class="arch-ln" d="M6 40 H60" fill="none"/>
+        <path class="arch-ln" d="M60 40 C100 40 110 12 160 12" fill="none"/>
+        <path class="arch-ln" d="M60 40 H160" fill="none"/>
+        <path class="arch-ln" d="M60 40 C100 40 110 68 160 68" fill="none"/>
+        <path class="arch-flow" d="M6 40 H60" fill="none"/>
+        <path class="arch-flow" d="M60 40 C100 40 110 12 160 12" fill="none"/>
+        <path class="arch-flow" d="M60 40 H160" fill="none"/>
+        <path class="arch-flow" d="M60 40 C100 40 110 68 160 68" fill="none"/>
+        <polygon class="arch-arw" points="160,7 170,12 160,17"/>
+        <polygon class="arch-arw" points="160,35 170,40 160,45"/>
+        <polygon class="arch-arw" points="160,63 170,68 160,73"/>
+      </svg>
+    </div>
+  </div><div class="meta"><div class="nm">Branching Connector</div><span class="ref">.arch-flow</span><div class="desc">A one-to-many fan-out where a single source splits and streams to several targets — think SNS or a dispatcher.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-conn" style="height:52px;width:180px">
+      <svg class="arch-svg" viewBox="0 0 180 52">
+        <line class="arch-ln" x1="6" y1="16" x2="168" y2="16"/>
+        <line class="arch-flow" x1="6" y1="16" x2="168" y2="16"/>
+        <polygon class="arch-arw" points="168,10 178,16 168,22"/>
+        <text x="90" y="9">request</text>
+        <line class="arch-ln" x1="168" y1="38" x2="12" y2="38"/>
+        <line class="arch-flow" x1="168" y1="38" x2="12" y2="38" style="stroke:var(--pos);animation-direction:reverse"/>
+        <polygon class="arch-arw" points="12,32 2,38 12,44" style="fill:var(--pos)"/>
+        <text x="90" y="49">response</text>
+      </svg>
+    </div>
+  </div><div class="meta"><div class="nm">Request / Response Pair</div><span class="ref">.arch-conn</span><div class="desc">A matched pair of arrows: a request flowing out and a response flowing back — a compact round-trip.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-track" style="width:150px">
+      <span class="arch-pkt"></span>
+      <span class="arch-pkt" style="animation-delay:.5s"></span>
+      <span class="arch-pkt" style="animation-delay:1s"></span>
+      <span class="arch-pkt" style="animation-delay:1.5s"></span>
+    </div>
+  </div><div class="meta"><div class="nm">High-Throughput Stream</div><span class="ref">.arch-pkt</span><div class="desc">A dense train of packets pumping across a link — conveys a busy, high-volume data pipe like Kinesis.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-conn" style="height:44px;width:180px">
+      <span class="arch-clabel" style="color:var(--pos);background:rgba(var(--pos-rgb),.14);border-color:rgba(var(--pos-rgb),.4)">VPC Peering</span>
+      <svg class="arch-svg" viewBox="0 0 180 44" preserveAspectRatio="none">
+        <line class="arch-ln" x1="12" y1="30" x2="168" y2="30"/>
+        <line class="arch-flow" x1="12" y1="30" x2="168" y2="30" style="stroke:var(--pos)"/>
+        <polygon class="arch-arw" points="12,24 2,30 12,36" style="fill:var(--pos)"/>
+        <polygon class="arch-arw" points="168,24 178,30 168,36" style="fill:var(--pos)"/>
+      </svg>
+    </div>
+  </div><div class="meta"><div class="nm">Peering Link</div><span class="ref">.arch-clabel</span><div class="desc">A labelled bidirectional link recoloured green — a private peering or VPN tunnel between two networks.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">CONTAINERS &amp; BOUNDARIES</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-box" style="--ac:var(--info);--acr:var(--info-rgb)">
+      <span class="arch-tag">VPC 10.0.0.0/16</span>
+      <div class="arch-row">
+        <div class="arch-chip"><div class="arch-ci">EC2</div><span class="arch-ct">app</span></div>
+        <div class="arch-chip"><div class="arch-ci">DB</div><span class="arch-ct">data</span></div>
+      </div>
+    </div>
+  </div><div class="meta"><div class="nm">VPC Boundary</div><span class="ref">.arch-box</span><div class="desc">A titled boundary box with a corner CIDR tag and a soft breathing outline — wrap resources that share a VPC.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-row">
+      <div class="arch-box arch-dashed" style="--ac:var(--pos);--acr:var(--pos-rgb)">
+        <span class="arch-tag">Public Subnet</span>
+        <div class="arch-chip"><div class="arch-ci">NAT</div><span class="arch-ct">gw</span></div>
+      </div>
+      <div class="arch-box arch-dashed" style="--ac:var(--warn);--acr:var(--warn-rgb)">
+        <span class="arch-tag">Private Subnet</span>
+        <div class="arch-chip"><div class="arch-ci">EC2</div><span class="arch-ct">app</span></div>
+      </div>
+    </div>
+  </div><div class="meta"><div class="nm">Public / Private Subnets</div><span class="ref">.arch-dashed</span><div class="desc">Two dashed subnet boxes colour-coded public and private — the standard split inside a VPC diagram.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-box" style="--ac:var(--crit);--acr:var(--crit-rgb)">
+      <span class="arch-tag">Account 1234 &middot; us-east-1</span>
+      <div class="arch-row">
+        <div class="arch-chip"><div class="arch-ci">S3</div><span class="arch-ct">logs</span></div>
+        <div class="arch-chip"><div class="arch-ci">&lambda;</div><span class="arch-ct">fn</span></div>
+        <div class="arch-chip"><div class="arch-ci">DB</div><span class="arch-ct">rds</span></div>
+      </div>
+    </div>
+  </div><div class="meta"><div class="nm">Account / Region Container</div><span class="ref">.arch-box</span><div class="desc">A container labelled with an account ID and region — the outermost frame for a single-account diagram.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-row">
+      <div class="arch-box arch-dashed" style="--ac:var(--info);--acr:var(--info-rgb)">
+        <span class="arch-tag">AZ-a</span>
+        <div class="arch-chip"><div class="arch-ci">EC2</div><span class="arch-ct">node</span></div>
+      </div>
+      <div class="arch-box arch-dashed" style="--ac:var(--info);--acr:var(--info-rgb)">
+        <span class="arch-tag">AZ-b</span>
+        <div class="arch-chip"><div class="arch-ci">EC2</div><span class="arch-ct">node</span></div>
+      </div>
+    </div>
+  </div><div class="meta"><div class="nm">Availability-Zone Group</div><span class="ref">.arch-box</span><div class="desc">Paired AZ boxes side by side — the visual shorthand for a workload spread across zones.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-sgwrap">
+      <div class="arch-sgring"></div>
+      <div class="arch-sgring arch-sgring2"></div>
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--pos);--acr:var(--pos-rgb)">EC2</div><span class="arch-ct">SG</span></div>
+    </div>
+  </div><div class="meta"><div class="nm">Security-Group Ring</div><span class="ref">.arch-sgring</span><div class="desc">Concentric dashed rings orbiting a protected instance — represents the firewall boundary of a security group.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-box" style="--ac:var(--info);--acr:var(--info-rgb)">
+      <span class="arch-tag">VPC</span>
+      <div class="arch-box arch-dashed" style="--ac:var(--pos);--acr:var(--pos-rgb);margin-top:2px">
+        <span class="arch-tag">Subnet</span>
+        <div class="arch-chip"><div class="arch-ci">EC2</div><span class="arch-ct">instance</span></div>
+      </div>
+    </div>
+  </div><div class="meta"><div class="nm">Nested Container</div><span class="ref">.arch-box</span><div class="desc">A VPC containing a subnet containing an instance — nested boundaries that show ownership and scope.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-box" style="--ac:var(--crit);--acr:var(--crit-rgb)">
+      <span class="arch-tag">Organization</span>
+      <div class="arch-row">
+        <div class="arch-box arch-dashed" style="--ac:var(--info);--acr:var(--info-rgb)"><span class="arch-tag">Prod</span><div class="arch-chip"><div class="arch-ci">&lambda;</div></div></div>
+        <div class="arch-box arch-dashed" style="--ac:var(--warn);--acr:var(--warn-rgb)"><span class="arch-tag">Dev</span><div class="arch-chip"><div class="arch-ci">&lambda;</div></div></div>
+      </div>
+    </div>
+  </div><div class="meta"><div class="nm">Multi-Account Org</div><span class="ref">.arch-box</span><div class="desc">An organization frame wrapping separate prod and dev account boxes — the landing-zone account structure.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">FULL MINI-DIAGRAMS</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-flowrow">
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--muted);--acr:var(--info-rgb)">&#128100;</div><span class="arch-ct">Client</span></div>
+      <div class="arch-hop"></div>
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--info);--acr:var(--info-rgb)">API</div><span class="arch-ct">API</span></div>
+      <div class="arch-hop"></div>
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--crit);--acr:var(--crit-rgb)">DB</div><span class="arch-ct">DB</span></div>
+    </div>
+  </div><div class="meta"><div class="nm">3-Tier Web Architecture</div><span class="ref">.arch-flowrow</span><div class="desc">The canonical client to API to database chain with packets hopping each link — a clean three-tier overview.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-flowrow" style="max-width:360px">
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--info);--acr:var(--info-rgb)">API</div><span class="arch-ct">Gateway</span></div>
+      <div class="arch-hop"></div>
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--accent);--acr:var(--accent-rgb)">&lambda;</div><span class="arch-ct">Lambda</span></div>
+      <div class="arch-hop"></div>
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--crit);--acr:var(--crit-rgb)">DDB</div><span class="arch-ct">DynamoDB</span></div>
+      <div class="arch-hop"></div>
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--pos);--acr:var(--pos-rgb)">S3</div><span class="arch-ct">S3</span></div>
+    </div>
+  </div><div class="meta"><div class="nm">Serverless Flow</div><span class="ref">.arch-flowrow</span><div class="desc">API Gateway → Lambda → DynamoDB → S3 with flowing packets — the reference serverless request path.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 220 130" style="width:220px;height:130px">
+      <path class="arch-dedge" d="M40 65 H92"/>
+      <path class="arch-dedge" d="M128 65 L180 24"/>
+      <path class="arch-dedge" d="M128 65 H180"/>
+      <path class="arch-dedge" d="M128 65 L180 106"/>
+      <path class="arch-dflow" d="M40 65 H92"/>
+      <path class="arch-dflow" d="M128 65 L180 24"/>
+      <path class="arch-dflow" d="M128 65 H180"/>
+      <path class="arch-dflow" d="M128 65 L180 106"/>
+      <rect class="arch-dnode" x="10" y="52" width="30" height="26" rx="6"/><text x="25" y="65">LB</text>
+      <circle class="arch-dnode pos" cx="110" cy="65" r="17"/><text x="110" y="65">ELB</text>
+      <rect class="arch-dnode pos" x="180" y="12" width="34" height="24" rx="6"/><text x="197" y="24">EC2</text>
+      <rect class="arch-dnode pos" x="180" y="53" width="34" height="24" rx="6"/><text x="197" y="65">EC2</text>
+      <rect class="arch-dnode pos" x="180" y="94" width="34" height="24" rx="6"/><text x="197" y="106">EC2</text>
+    </svg>
+  </div><div class="meta"><div class="nm">Load Balancer Fan-out</div><span class="ref">.arch-dflow</span><div class="desc">A load balancer distributing streaming traffic across a fleet of instances — shows horizontal scale.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-flowrow">
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--crit);--acr:var(--crit-rgb)">SNS</div><span class="arch-ct">Topic</span></div>
+      <div class="arch-hop"></div>
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--warn);--acr:var(--warn-rgb)">SQS</div><span class="arch-ct">Queue</span></div>
+      <div class="arch-hop"></div>
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--accent);--acr:var(--accent-rgb)">&lambda;</div><span class="arch-ct">Worker</span></div>
+    </div>
+  </div><div class="meta"><div class="nm">Event-Driven Flow</div><span class="ref">.arch-flowrow</span><div class="desc">SNS fanning to SQS then draining into Lambda — the decoupled publish/subscribe worker pattern.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 220 130" style="width:220px;height:130px">
+      <rect x="8" y="14" width="96" height="102" rx="9" fill="rgba(var(--info-rgb),.06)" stroke="rgba(var(--info-rgb),.5)" stroke-dasharray="4 4"/>
+      <rect x="116" y="14" width="96" height="102" rx="9" fill="rgba(var(--info-rgb),.06)" stroke="rgba(var(--info-rgb),.5)" stroke-dasharray="4 4"/>
+      <text x="56" y="26" style="fill:var(--muted)">AZ-a</text>
+      <text x="164" y="26" style="fill:var(--muted)">AZ-b</text>
+      <path class="arch-dedge" d="M56 62 V88"/><path class="arch-dedge" d="M164 62 V88"/>
+      <path class="arch-dedge" d="M104 100 H116"/>
+      <path class="arch-dflow" d="M104 100 H116"/>
+      <rect class="arch-dnode pos" x="36" y="40" width="40" height="22" rx="5"/><text x="56" y="51">EC2</text>
+      <rect class="arch-dnode pos" x="144" y="40" width="40" height="22" rx="5"/><text x="164" y="51">EC2</text>
+      <rect class="arch-dnode" x="36" y="88" width="40" height="22" rx="5"/><text x="56" y="99">DB</text>
+      <rect class="arch-dnode" x="144" y="88" width="40" height="22" rx="5"/><text x="164" y="99">DB*</text>
+    </svg>
+  </div><div class="meta"><div class="nm">Multi-AZ Deployment</div><span class="ref">.arch-dnode</span><div class="desc">Mirrored app and database tiers across two AZs with a replication link — the standard HA topology.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-pipe">
+      <div class="arch-pstage">Source</div><span class="arch-psep">&rsaquo;</span>
+      <div class="arch-pstage">Build</div><span class="arch-psep">&rsaquo;</span>
+      <div class="arch-pstage">Test</div><span class="arch-psep">&rsaquo;</span>
+      <div class="arch-pstage">Deploy</div>
+    </div>
+  </div><div class="meta"><div class="nm">CI/CD Pipeline</div><span class="ref">.arch-pstage</span><div class="desc">Build → Test → Deploy stages that light up green in sequence — a release pipeline advancing continuously.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 220 120" style="width:220px;height:120px">
+      <path class="arch-dedge" d="M44 30 H176"/><path class="arch-dflow" d="M44 30 H176"/>
+      <path class="arch-dedge" d="M110 42 V78"/><path class="arch-dflow" d="M110 42 V78"/>
+      <rect class="arch-dnode" x="8" y="18" width="36" height="24" rx="6"/><text x="26" y="30">CF</text>
+      <rect class="arch-dnode pos" x="176" y="18" width="40" height="24" rx="6"/><text x="196" y="30">EDGE</text>
+      <circle class="arch-dnode" cx="110" cy="30" r="14"/><text x="110" y="30">WAF</text>
+      <rect class="arch-dnode" x="86" y="80" width="48" height="24" rx="6"/><text x="110" y="92">Origin</text>
+    </svg>
+  </div><div class="meta"><div class="nm">Edge / CDN Path</div><span class="ref">.arch-dflow</span><div class="desc">CloudFront through WAF to an origin with a cached edge branch — a typical content-delivery front end.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-col">
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--muted);--acr:var(--info-rgb)">&#128100;</div><span class="arch-ct">Users</span></div>
+      <div class="arch-conn" style="height:16px;width:2px"><svg class="arch-svg" viewBox="0 0 2 16" preserveAspectRatio="none"><line class="arch-flow" x1="1" y1="0" x2="1" y2="16"/></svg></div>
+      <div class="arch-row">
+        <div class="arch-chip"><div class="arch-ci" style="--ac:var(--info);--acr:var(--info-rgb)">ALB</div><span class="arch-ct">Balancer</span></div>
+      </div>
+      <div class="arch-row">
+        <div class="arch-chip"><div class="arch-ci" style="--ac:var(--pos);--acr:var(--pos-rgb)">EC2</div></div>
+        <div class="arch-chip"><div class="arch-ci" style="--ac:var(--pos);--acr:var(--pos-rgb)">EC2</div></div>
+        <div class="arch-chip"><div class="arch-ci" style="--ac:var(--pos);--acr:var(--pos-rgb)">EC2</div></div>
+      </div>
+    </div>
+  </div><div class="meta"><div class="nm">Vertical Stack Diagram</div><span class="ref">.arch-col</span><div class="desc">A top-down users → balancer → fleet layout — the vertical orientation for taller report figures.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-flowrow" style="max-width:340px">
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--warn);--acr:var(--warn-rgb)">&#128241;</div><span class="arch-ct">IoT</span></div>
+      <div class="arch-hop"></div>
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--info);--acr:var(--info-rgb)">STR</div><span class="arch-ct">Stream</span></div>
+      <div class="arch-hop"></div>
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--accent);--acr:var(--accent-rgb)">&lambda;</div><span class="arch-ct">Process</span></div>
+      <div class="arch-hop"></div>
+      <div class="arch-chip"><div class="arch-ci" style="--ac:var(--crit);--acr:var(--crit-rgb)">WH</div><span class="arch-ct">Warehouse</span></div>
+    </div>
+  </div><div class="meta"><div class="nm">Streaming Data Pipeline</div><span class="ref">.arch-flowrow</span><div class="desc">Devices → stream → processor → warehouse with flowing packets — an ingestion and analytics pipeline.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">SEQUENCE &amp; FLOW DIAGRAMS</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 210 128" style="width:210px;height:128px">
+      <rect class="arch-actor" x="16" y="8" width="44" height="20" rx="5"/><text x="38" y="18">Client</text>
+      <rect class="arch-actor" x="83" y="8" width="44" height="20" rx="5"/><text x="105" y="18">API</text>
+      <rect class="arch-actor" x="150" y="8" width="44" height="20" rx="5"/><text x="172" y="18">DB</text>
+      <line class="arch-life" x1="38" y1="28" x2="38" y2="122"/>
+      <line class="arch-life" x1="105" y1="28" x2="105" y2="122"/>
+      <line class="arch-life" x1="172" y1="28" x2="172" y2="122"/>
+      <line class="arch-msgln" x1="38" y1="48" x2="105" y2="48"/><polygon class="arch-arw" points="105,44 105,52 100,48" style="fill:var(--accent)"/>
+      <line class="arch-msgln arch-m2" x1="105" y1="72" x2="172" y2="72"/><polygon class="arch-arw" points="172,68 172,76 167,72" style="fill:var(--info)"/>
+      <line class="arch-msgln arch-m3" x1="172" y1="98" x2="38" y2="98"/><polygon class="arch-arw" points="38,94 38,102 43,98" style="fill:var(--pos)"/>
+    </svg>
+  </div><div class="meta"><div class="nm">Sequence Diagram</div><span class="ref">.arch-msgln</span><div class="desc">Three lifelines with messages that draw themselves in order — a request tracing through API to DB and back.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 210 130" style="width:210px;height:130px">
+      <path class="arch-dedge" d="M105 30 V42"/>
+      <path class="arch-dedge" d="M75 66 V82"/><path class="arch-dedge" d="M135 66 V82"/>
+      <path class="arch-dedge" d="M60 54 H45 V82" /><path class="arch-dedge" d="M150 54 H165 V82"/>
+      <rect class="arch-state" x="80" y="10" width="50" height="20" rx="10"/><text x="105" y="20">Start</text>
+      <polygon class="arch-diamond" points="105,42 140,60 105,78 70,60"/><text x="105" y="60">ok?</text>
+      <rect class="arch-dnode pos" x="24" y="82" width="42" height="22" rx="5"/><text x="45" y="93">pass</text>
+      <rect class="arch-dnode neg" x="114" y="82" width="42" height="22" rx="5"/><text x="135" y="93">retry</text>
+      <text x="52" y="52" style="fill:var(--pos)">no</text>
+      <text x="158" y="52" style="fill:var(--neg)">yes</text>
+    </svg>
+  </div><div class="meta"><div class="nm">Decision Flowchart</div><span class="ref">.arch-diamond</span><div class="desc">A start node into a decision diamond that branches to two outcomes — a compact yes/no flowchart.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 210 120" style="width:210px;height:120px">
+      <path class="arch-dedge" d="M56 40 H150"/>
+      <path class="arch-dflow" d="M56 40 H150"/>
+      <path class="arch-dedge" d="M150 60 Q120 100 62 60"/>
+      <path class="arch-dflow" d="M150 60 Q120 100 62 60"/>
+      <polygon class="arch-arw" points="150,35 160,40 150,45"/>
+      <polygon class="arch-arw" points="62,55 52,60 62,65"/>
+      <circle class="arch-state arch-active" cx="40" cy="40" r="18"/><text x="40" y="40">Idle</text>
+      <circle class="arch-state" cx="172" cy="40" r="18"/><text x="172" y="40">Run</text>
+      <text x="104" y="30">start</text>
+      <text x="104" y="96">done</text>
+    </svg>
+  </div><div class="meta"><div class="nm">State Machine</div><span class="ref">.arch-state</span><div class="desc">Two states with labelled transitions and one glowing active state — models a simple lifecycle loop.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-lanes">
+      <div class="arch-lane"><span class="arch-lhdr">User</span><div class="arch-ltrack"><span class="arch-lstep">Submit</span><span class="arch-lpkt"></span></div></div>
+      <div class="arch-lane"><span class="arch-lhdr">API</span><div class="arch-ltrack"><span class="arch-lstep">Validate</span><span class="arch-lpkt" style="animation-delay:1s"></span></div></div>
+      <div class="arch-lane"><span class="arch-lhdr">Worker</span><div class="arch-ltrack"><span class="arch-lstep">Process</span><span class="arch-lpkt" style="animation-delay:2s"></span></div></div>
+    </div>
+  </div><div class="meta"><div class="nm">Swimlane Flow</div><span class="ref">.arch-lane</span><div class="desc">Stacked lanes per actor with steps and a packet gliding through each — shows who owns each stage of a flow.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 210 120" style="width:210px;height:120px">
+      <path class="arch-dedge" d="M40 60 H80"/><path class="arch-dflow" d="M40 60 H80"/>
+      <path class="arch-dedge" d="M110 48 H150"/><path class="arch-dflow arch-warn" d="M110 48 H150"/>
+      <path class="arch-dedge" d="M110 72 H150"/><path class="arch-dflow" d="M110 72 H150"/>
+      <circle class="arch-state" cx="26" cy="60" r="14"/><text x="26" y="60">A</text>
+      <rect class="arch-diamond" x="80" y="46" width="30" height="28" transform="rotate(45 95 60)"/><text x="95" y="60">?</text>
+      <rect class="arch-dnode pos" x="150" y="38" width="38" height="20" rx="5"/><text x="169" y="48">B</text>
+      <rect class="arch-dnode" x="150" y="62" width="38" height="20" rx="5"/><text x="169" y="72">C</text>
+    </svg>
+  </div><div class="meta"><div class="nm">Branch Decision Tree</div><span class="ref">.arch-diamond</span><div class="desc">A node feeding a decision that splits into two labelled paths with independent flow colours — a routing tree.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 210 120" style="width:210px;height:120px">
+      <line class="arch-life" x1="50" y1="24" x2="50" y2="112"/>
+      <line class="arch-life" x1="160" y1="24" x2="160" y2="112"/>
+      <rect class="arch-actor" x="28" y="6" width="44" height="18" rx="5"/><text x="50" y="15">App</text>
+      <rect class="arch-actor" x="138" y="6" width="44" height="18" rx="5"/><text x="160" y="15">Cache</text>
+      <rect x="45" y="46" width="10" height="52" fill="rgba(var(--info-rgb),.25)" stroke="var(--info)" stroke-width="1"/>
+      <line class="arch-msgln" x1="55" y1="42" x2="160" y2="42"/><polygon class="arch-arw" points="160,38 160,46 155,42" style="fill:var(--accent)"/>
+      <line class="arch-msgln arch-m3" x1="160" y1="98" x2="55" y2="98"/><polygon class="arch-arw" points="55,94 55,102 60,98" style="fill:var(--pos)"/>
+      <text x="105" y="35">get</text><text x="105" y="112">hit</text>
+    </svg>
+  </div><div class="meta"><div class="nm">Sequence with Activation</div><span class="ref">.arch-msgln</span><div class="desc">A two-lifeline exchange with an activation bar showing the App busy while it waits on the cache.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 210 128" style="width:210px;height:128px">
+      <rect class="arch-state arch-active" x="16" y="52" width="46" height="24" rx="6"/><text x="39" y="64">Pending</text>
+      <rect class="arch-state" x="86" y="14" width="46" height="24" rx="6"/><text x="109" y="26">Running</text>
+      <rect class="arch-state" x="86" y="90" width="46" height="24" rx="6"/><text x="109" y="102">Failed</text>
+      <rect class="arch-state" x="156" y="52" width="46" height="24" rx="6"/><text x="179" y="64">Done</text>
+      <path class="arch-dedge" d="M62 60 L86 30"/><path class="arch-dflow" d="M62 60 L86 30"/>
+      <path class="arch-dedge" d="M62 68 L86 100"/><path class="arch-dflow neg" d="M62 68 L86 100"/>
+      <path class="arch-dedge" d="M132 26 L156 58"/><path class="arch-dflow pos" d="M132 26 L156 58"/>
+    </svg>
+  </div><div class="meta"><div class="nm">Workflow State Graph</div><span class="ref">.arch-state</span><div class="desc">A job progressing Pending → Running → Done with a failure branch — a Step Functions-style execution graph.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">TOPOLOGY &amp; GRAPH</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 150 150" style="width:150px;height:150px">
+      <path class="arch-tedge" d="M75 75 L75 22"/><path class="arch-tedge" d="M75 75 L128 75"/>
+      <path class="arch-tedge" d="M75 75 L75 128"/><path class="arch-tedge" d="M75 75 L22 75"/>
+      <path class="arch-tflow" d="M75 75 L75 22"/><path class="arch-tflow" d="M75 75 L128 75"/>
+      <path class="arch-tflow" d="M75 75 L75 128"/><path class="arch-tflow" d="M75 75 L22 75"/>
+      <circle class="arch-tnode" cx="75" cy="16" r="11"/>
+      <circle class="arch-tnode arch-d2" cx="134" cy="75" r="11"/>
+      <circle class="arch-tnode arch-d3" cx="75" cy="134" r="11"/>
+      <circle class="arch-tnode arch-d4" cx="16" cy="75" r="11"/>
+      <circle class="arch-tnode arch-hub" cx="75" cy="75" r="16"/><text x="75" y="75">hub</text>
+    </svg>
+  </div><div class="meta"><div class="nm">Hub &amp; Spoke Topology</div><span class="ref">.arch-tnode</span><div class="desc">A central hub streaming to pulsing spokes — the transit-gateway or central-account connectivity model.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 150 140" style="width:150px;height:140px">
+      <path class="arch-tedge" d="M30 30 L120 30 M30 30 L30 110 M30 30 L120 110 M120 30 L30 110 M120 30 L120 110 M30 110 L120 110"/>
+      <path class="arch-tflow" d="M30 30 L120 30"/><path class="arch-tflow" d="M30 110 L120 110"/><path class="arch-tflow" d="M30 30 L120 110"/>
+      <circle class="arch-tnode" cx="30" cy="30" r="12"/>
+      <circle class="arch-tnode arch-d2" cx="120" cy="30" r="12"/>
+      <circle class="arch-tnode arch-d3" cx="30" cy="110" r="12"/>
+      <circle class="arch-tnode arch-d4" cx="120" cy="110" r="12"/>
+    </svg>
+  </div><div class="meta"><div class="nm">Mesh Network</div><span class="ref">.arch-tflow</span><div class="desc">Four nodes fully interconnected with flowing edges — a peer mesh where everything talks to everything.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 200 130" style="width:200px;height:130px">
+      <path class="arch-tedge" d="M40 30 L110 30 M110 30 L110 95 M110 30 L170 65"/>
+      <path class="arch-tflow pos" d="M40 30 L110 30"/>
+      <path class="arch-tflow neg" d="M110 30 L110 95"/>
+      <path class="arch-tflow warn" d="M110 30 L170 65"/>
+      <circle class="arch-tnode pos" cx="28" cy="30" r="12"/><text x="28" y="30">web</text>
+      <circle class="arch-tnode pos" cx="110" cy="30" r="12"/><text x="110" y="30">api</text>
+      <circle class="arch-tnode neg" cx="110" cy="107" r="12"/><text x="110" y="107">db</text>
+      <circle class="arch-tnode warn" cx="182" cy="65" r="12"/><text x="182" y="65">svc</text>
+    </svg>
+  </div><div class="meta"><div class="nm">Dependency Graph</div><span class="ref">.arch-tnode</span><div class="desc">Services linked by dependency edges tinted by health — green healthy, amber degraded, red failing.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 200 130" style="width:200px;height:130px">
+      <path class="arch-tedge" d="M100 30 L50 78 M100 30 L150 78 M50 78 L28 116 M50 78 L72 116 M150 78 L172 116"/>
+      <path class="arch-tflow" d="M100 30 L50 78"/><path class="arch-tflow" d="M100 30 L150 78"/>
+      <circle class="arch-tnode arch-hub" cx="100" cy="24" r="12"/><text x="100" y="24">root</text>
+      <circle class="arch-tnode arch-d2" cx="50" cy="84" r="11"/>
+      <circle class="arch-tnode arch-d3" cx="150" cy="84" r="11"/>
+      <rect class="arch-tnode arch-d4" x="18" y="112" width="20" height="16" rx="3"/>
+      <rect class="arch-tnode arch-d4" x="62" y="112" width="20" height="16" rx="3"/>
+      <rect class="arch-tnode arch-d5" x="162" y="112" width="20" height="16" rx="3"/>
+    </svg>
+  </div><div class="meta"><div class="nm">Tree / Org Hierarchy</div><span class="ref">.arch-tnode</span><div class="desc">A root branching into children and leaves — an org-unit or account hierarchy with pulsing nodes.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="arch-ringwrap">
+      <svg class="arch-svg" viewBox="0 0 130 130" style="position:absolute;inset:0">
+        <circle cx="65" cy="65" r="52" class="arch-tedge"/>
+        <circle class="arch-tnode" cx="65" cy="13" r="9"/>
+        <circle class="arch-tnode arch-d2" cx="110" cy="42" r="9"/>
+        <circle class="arch-tnode arch-d3" cx="93" cy="112" r="9"/>
+        <circle class="arch-tnode arch-d4" cx="37" cy="112" r="9"/>
+        <circle class="arch-tnode arch-d5" cx="20" cy="42" r="9"/>
+      </svg>
+      <div class="arch-rspin"><span class="arch-rtoken"></span></div>
+    </div>
+  </div><div class="meta"><div class="nm">Ring Topology</div><span class="ref">.arch-ringwrap</span><div class="desc">Nodes arranged on a ring with a token circulating the loop — the classic token-ring passing model.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 150 150" style="width:150px;height:150px">
+      <path class="arch-tedge" d="M75 75 L75 20 M75 75 L123 47 M75 75 L123 103 M75 75 L75 130 M75 75 L27 103 M75 75 L27 47"/>
+      <path class="arch-tflow" d="M75 75 L75 20"/><path class="arch-tflow" d="M75 75 L123 47"/>
+      <path class="arch-tflow" d="M75 75 L123 103"/><path class="arch-tflow" d="M75 75 L75 130"/>
+      <path class="arch-tflow" d="M75 75 L27 103"/><path class="arch-tflow" d="M75 75 L27 47"/>
+      <circle class="arch-tnode arch-hub" cx="75" cy="75" r="14"/>
+      <circle class="arch-tnode" cx="75" cy="16" r="9"/>
+      <circle class="arch-tnode arch-d2" cx="128" cy="45" r="9"/>
+      <circle class="arch-tnode arch-d3" cx="128" cy="105" r="9"/>
+      <circle class="arch-tnode arch-d4" cx="75" cy="134" r="9"/>
+      <circle class="arch-tnode arch-d5" cx="22" cy="105" r="9"/>
+      <circle class="arch-tnode arch-d2" cx="22" cy="45" r="9"/>
+    </svg>
+  </div><div class="meta"><div class="nm">Star Topology</div><span class="ref">.arch-tnode</span><div class="desc">A single centre wired to many leaf nodes with radiating flows — the star wiring pattern.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <svg class="arch-svg" viewBox="0 0 210 120" style="width:210px;height:120px">
+      <path class="arch-tedge" d="M30 60 H80 M100 40 H150 M100 80 H150 M180 40 V80"/>
+      <path class="arch-tflow" d="M30 60 H80"/>
+      <path class="arch-tflow pos" d="M100 40 H150"/>
+      <path class="arch-tflow warn" d="M100 80 H150"/>
+      <circle class="arch-tnode arch-hub" cx="18" cy="60" r="12"/><text x="18" y="60">GW</text>
+      <rect class="arch-tnode" x="80" y="46" width="24" height="28" rx="5"/><text x="92" y="60">R</text>
+      <rect class="arch-tnode pos" x="150" y="28" width="30" height="24" rx="5"/><text x="165" y="40">A</text>
+      <rect class="arch-tnode warn" x="150" y="68" width="30" height="24" rx="5"/><text x="165" y="80">B</text>
+    </svg>
+  </div><div class="meta"><div class="nm">Network Segments</div><span class="ref">.arch-tnode</span><div class="desc">A gateway routing into segmented zones tinted by role — a network partition or transit routing view.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+</div>
+<script>
+function copyViz(btn){
+  var stage=btn.closest('.tile').querySelector('.stage');
+  var html=stage.innerHTML.replace(/\s+$/,'').trim();
+  var usedClasses=new Set();
+  (html.match(/class="[^"]*"/g)||[]).forEach(function(m){m.replace(/class="/,'').replace(/"/,'').split(/\s+/).forEach(function(c){if(c)usedClasses.add(c)})});
+  var cssRules=[];
+  try{var sheets=document.styleSheets;for(var s=0;s<sheets.length;s++){var rules=sheets[s].cssRules;for(var r=0;r<rules.length;r++){var rule=rules[r];if(rule.type===7&&html.indexOf(rule.name)!==-1){cssRules.push(rule.cssText)}if(rule.type===1&&rule.selectorText){for(var uc of usedClasses){if(rule.selectorText.indexOf('.'+uc)!==-1&&!rule.selectorText.includes('.tile')){cssRules.push(rule.cssText);break}}}}}}catch(e){}
+  cssRules=[...new Set(cssRules)];
+  var output='<!-- Prism Component -->\n'+html;
+  if(cssRules.length>0)output+='\n\n<style>\n'+cssRules.join('\n')+'\n</style>';
+  function sgCopy(txt){try{if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(txt).catch(function(){return sgCopyFallback(txt);});}}catch(e){}return Promise.resolve(sgCopyFallback(txt));}
+  function sgCopyFallback(txt){var ta=document.createElement('textarea');ta.value=txt;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';document.body.appendChild(ta);ta.focus();ta.select();try{ta.setSelectionRange(0,txt.length);}catch(e){}var ok=false;try{ok=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);if(!ok)return Promise.reject(new Error('copy failed'));return true;}
+  sgCopy(output).then(function(){var o=btn.dataset.lbl||btn.textContent;btn.dataset.lbl=o;btn.textContent='✓ Copied';btn.classList.add('ok');setTimeout(function(){btn.textContent=o;btn.classList.remove('ok');btn.removeAttribute('data-lbl');},1300);},function(){var o=btn.dataset.lbl||btn.textContent;btn.dataset.lbl=o;btn.textContent='✗ Press ⌘C';btn.classList.add('ok');setTimeout(function(){btn.textContent=o;btn.classList.remove('ok');btn.removeAttribute('data-lbl');},1500);});
+}
+/* data-snip copy for snippet buttons */
+document.addEventListener('click',function(e){var b=e.target.closest('.copy[data-snip]');if(!b)return;var t=b.getAttribute('data-snip');
+  function fb(){var ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta);}
+  (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t).catch(fb):Promise.resolve(fb()));
+  var o=b.dataset.lbl||b.textContent;b.dataset.lbl=o;b.textContent='✓ Copied';b.classList.add('ok');setTimeout(function(){b.textContent=o;b.classList.remove('ok');},1300);
+});
+<\/script>
+</body>
+</html>
+</script>

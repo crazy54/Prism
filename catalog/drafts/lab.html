@@ -1,0 +1,181 @@
+<style>
+/* ==== Animation Lab 2026 new facets — namespaced nlab2* ==== */
+
+/* ---- 3D scene helpers ---- */
+.nlab2-scene{perspective:600px;display:flex;align-items:center;justify-content:center}
+
+/* 3D coin */
+.nlab2-coin{position:relative;width:70px;height:70px;transform-style:preserve-3d}
+.nlab2-coin .f{position:absolute;inset:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;backface-visibility:hidden}
+.nlab2-coin .heads{background:radial-gradient(circle at 35% 30%,var(--accent),rgba(var(--accent-rgb),.5));color:#1a1200;box-shadow:inset 0 0 0 3px rgba(0,0,0,.15)}
+.nlab2-coin .tails{background:radial-gradient(circle at 35% 30%,var(--crit),rgba(var(--crit-rgb),.5));color:#fff;transform:rotateY(180deg);box-shadow:inset 0 0 0 3px rgba(255,255,255,.15)}
+
+/* 3D cube */
+.nlab2-cube{position:relative;width:60px;height:60px;transform-style:preserve-3d}
+.nlab2-cube .fc{position:absolute;width:60px;height:60px;border:1px solid rgba(var(--info-rgb),.65);background:rgba(var(--info-rgb),.16);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--info)}
+.nlab2-cube .c-fr{transform:translateZ(30px)}
+.nlab2-cube .c-bk{transform:rotateY(180deg) translateZ(30px)}
+.nlab2-cube .c-rt{transform:rotateY(90deg) translateZ(30px)}
+.nlab2-cube .c-lt{transform:rotateY(-90deg) translateZ(30px)}
+.nlab2-cube .c-tp{transform:rotateX(90deg) translateZ(30px)}
+.nlab2-cube .c-bm{transform:rotateX(-90deg) translateZ(30px)}
+
+/* deal-in card */
+.nlab2-deal{width:70px;height:92px;border-radius:10px;background:linear-gradient(140deg,var(--info),rgba(var(--info-rgb),.35));border:1px solid rgba(var(--info-rgb),.55);box-shadow:0 8px 22px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;font-size:26px;color:#fff;font-weight:800}
+
+/* flip-clock digit */
+.nlab2-clock{width:58px;height:74px;border-radius:10px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800;color:var(--accent);position:relative;transform-style:preserve-3d}
+.nlab2-clock::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.4)}
+
+/* orbit */
+.nlab2-orbit{position:relative;width:100px;height:100px;display:flex;align-items:center;justify-content:center}
+.nlab2-orbit .core{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--accent),rgba(var(--accent-rgb),.5));box-shadow:0 0 16px rgba(var(--accent-rgb),.6)}
+.nlab2-orbit .sat{position:absolute;top:50%;left:50%;width:14px;height:14px;margin:-7px;border-radius:50%;background:var(--info);box-shadow:0 0 10px rgba(var(--info-rgb),.75);animation:nlab2Orbit 3s linear infinite}
+
+/* 3D bounce + shadow */
+.nlab2-bouncer{position:relative;width:80px;height:100px}
+.nlab2-ball{position:absolute;top:6px;left:18px;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--crit),rgba(var(--crit-rgb),.5));box-shadow:inset -4px -4px 8px rgba(0,0,0,.3)}
+.nlab2-shadow{position:absolute;bottom:4px;left:50%;width:44px;height:12px;margin-left:-22px;border-radius:50%;background:rgba(0,0,0,.45);filter:blur(3px)}
+
+/* gooey merge */
+.nlab2-goo{position:relative;width:120px;height:60px;filter:blur(1.5px)}
+.nlab2-goo b{position:absolute;top:50%;width:42px;height:42px;margin-top:-21px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--crit),rgba(var(--crit-rgb),.6))}
+.nlab2-goo .gl{left:6px;animation:nlab2GooA 2s ease-in-out infinite}
+.nlab2-goo .gr{right:6px;animation:nlab2GooB 2s ease-in-out infinite}
+
+/* staggered dots */
+.nlab2-dots{display:flex;gap:8px}
+.nlab2-dots span{width:14px;height:14px;border-radius:50%;background:var(--info);animation:nlab2Dots 1.4s ease-in-out infinite}
+
+/* text shimmer */
+.nlab2-shine{font-weight:800;font-size:22px;letter-spacing:1px;background:linear-gradient(90deg,var(--muted),var(--accent),var(--crit),var(--muted));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* text wave */
+.nlab2-wave{font-size:24px;font-weight:800;color:var(--crit);display:flex}
+.nlab2-wave span{display:inline-block;animation:nlab2TextWave 1.4s ease-in-out infinite}
+
+/* equalizer bars */
+.nlab2-eq{display:flex;align-items:flex-end;gap:5px;height:56px}
+.nlab2-eq span{width:8px;height:100%;border-radius:4px;background:linear-gradient(180deg,var(--accent),var(--crit));transform-origin:bottom;animation:nlab2Bars 1.2s ease-in-out infinite}
+
+/* dual spinner */
+.nlab2-spinner{width:56px;height:56px;border-radius:50%;border:5px solid rgba(var(--info-rgb),.18);border-top-color:var(--info);position:relative}
+.nlab2-spinner .in{position:absolute;inset:6px;border-radius:50%;border:4px solid rgba(var(--accent-rgb),.18);border-bottom-color:var(--accent);animation:nlab2Spin .9s linear infinite reverse}
+
+/* particle burst */
+.nlab2-burst{position:relative;width:22px;height:22px}
+.nlab2-burst .core{position:absolute;inset:0;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(var(--accent-rgb),.75)}
+.nlab2-burst i{position:absolute;top:50%;left:50%;width:8px;height:8px;margin:-4px;border-radius:50%;background:var(--crit);animation:nlab2Burst 1.8s ease-out infinite}
+
+/* ====== KEYFRAMES ====== */
+/* 3D motion */
+@keyframes nlab2CoinFlip{0%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
+@keyframes nlab2CubeTumble{from{transform:rotateX(0) rotateY(0)}to{transform:rotateX(360deg) rotateY(360deg)}}
+@keyframes nlab2CardDeal{0%{transform:perspective(700px) translate3d(120px,-70px,-120px) rotateZ(35deg) rotateY(30deg);opacity:0}45%{transform:perspective(700px) translate3d(0,0,0) rotateZ(0) rotateY(0);opacity:1}82%{transform:perspective(700px) translate3d(0,0,0);opacity:1}100%{transform:perspective(700px) translate3d(120px,-70px,-120px) rotateZ(35deg) rotateY(30deg);opacity:0}}
+@keyframes nlab2Fold{0%{transform:perspective(600px) rotateX(-92deg);opacity:0}40%{transform:perspective(600px) rotateX(0);opacity:1}82%{transform:perspective(600px) rotateX(0);opacity:1}100%{transform:perspective(600px) rotateX(-92deg);opacity:0}}
+@keyframes nlab2Orbit{from{transform:rotate(0) translateX(42px) rotate(0)}to{transform:rotate(360deg) translateX(42px) rotate(-360deg)}}
+@keyframes nlab2PerspSwing{0%,100%{transform:perspective(600px) rotateY(-38deg)}50%{transform:perspective(600px) rotateY(38deg)}}
+@keyframes nlab2FlipClock{0%{transform:perspective(320px) rotateX(0)}45%{transform:perspective(320px) rotateX(-88deg)}55%{transform:perspective(320px) rotateX(-88deg)}100%{transform:perspective(320px) rotateX(0)}}
+@keyframes nlab2Bounce3d{0%{transform:translateY(0)}50%{transform:translateY(48px) scaleY(.92)}56%{transform:translateY(50px) scaleY(.78) scaleX(1.18)}62%{transform:translateY(48px) scaleY(.92)}100%{transform:translateY(0)}}
+@keyframes nlab2Shadow{0%{transform:scale(.55);opacity:.22}50%,62%{transform:scale(1);opacity:.5}100%{transform:scale(.55);opacity:.22}}
+
+/* easing / physics / transform */
+@keyframes nlab2Spring{0%{transform:translateY(-60px);opacity:0}45%{transform:translateY(6px);opacity:1}60%{transform:translateY(-3px)}72%{transform:translateY(2px)}82%{transform:translateY(-1px)}90%{transform:translateY(0);opacity:1}100%{transform:translateY(-60px);opacity:0}}
+@keyframes nlab2ElasticScale{0%{transform:scale(0)}50%{transform:scale(1.22)}65%{transform:scale(.9)}78%{transform:scale(1.07)}88%{transform:scale(.97)}94%{transform:scale(1)}100%{transform:scale(0)}}
+@keyframes nlab2Jelly{0%,100%{transform:skewX(0) skewY(0)}22%{transform:skewX(-9deg) skewY(6deg)}33%{transform:skewX(6deg) skewY(-5deg)}44%{transform:skewX(-4deg) skewY(3deg)}55%{transform:skewX(2deg) skewY(-1.5deg)}66%{transform:skewX(-1deg) skewY(1deg)}}
+@keyframes nlab2MagSnap{0%{transform:translateX(-72px);opacity:.15}55%{transform:translateX(-48px);opacity:.5}72%{transform:translateX(7px);opacity:1}82%{transform:translateX(-3px)}90%{transform:translateX(0);opacity:1}100%{transform:translateX(-72px);opacity:.15}}
+@keyframes nlab2BlurIn{0%{filter:blur(12px);opacity:0}40%{filter:blur(0);opacity:1}80%{filter:blur(0);opacity:1}100%{filter:blur(12px);opacity:0}}
+@keyframes nlab2Wipe{0%{clip-path:inset(0 100% 0 0)}40%{clip-path:inset(0 0 0 0)}80%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 100%)}}
+@keyframes nlab2Iris{0%{clip-path:circle(0% at 50% 50%)}40%{clip-path:circle(72% at 50% 50%)}80%{clip-path:circle(72% at 50% 50%)}100%{clip-path:circle(0% at 50% 50%)}}
+@keyframes nlab2MorphLoad{0%{border-radius:12px;transform:rotate(0)}50%{border-radius:50%;transform:rotate(180deg)}100%{border-radius:12px;transform:rotate(360deg)}}
+@keyframes nlab2Dots{0%,80%,100%{transform:scale(.4);opacity:.4}40%{transform:scale(1);opacity:1}}
+@keyframes nlab2GooA{0%,100%{transform:translateX(0) scale(.9)}50%{transform:translateX(30px) scale(1.06)}}
+@keyframes nlab2GooB{0%,100%{transform:translateX(0) scale(.9)}50%{transform:translateX(-30px) scale(1.06)}}
+@keyframes nlab2Rubber{0%,100%{transform:scaleX(1) scaleY(1)}30%{transform:scaleX(1.25) scaleY(.75)}40%{transform:scaleX(.75) scaleY(1.25)}50%{transform:scaleX(1.15) scaleY(.85)}65%{transform:scaleX(.95) scaleY(1.05)}75%{transform:scaleX(1.02) scaleY(.98)}}
+@keyframes nlab2Anticipate{0%{transform:translateX(0) rotate(0)}22%{transform:translateX(-16px) rotate(-8deg)}45%{transform:translateX(4px) rotate(2deg)}60%{transform:translateX(0) rotate(0)}100%{transform:translateX(0) rotate(0)}}
+@keyframes nlab2BounceSettle{0%{transform:translateY(-52px);opacity:0}30%{transform:translateY(0);opacity:1}45%{transform:translateY(-20px)}60%{transform:translateY(0)}72%{transform:translateY(-9px)}84%{transform:translateY(0)}92%{transform:translateY(-3px)}100%{transform:translateY(0)}}
+@keyframes nlab2Pendulum{0%,100%{transform:rotate(32deg)}50%{transform:rotate(-32deg)}}
+@keyframes nlab2Squash{0%,100%{transform:scaleY(1) scaleX(1)}30%{transform:scaleY(.68) scaleX(1.3)}50%{transform:scaleY(1.25) scaleX(.8)}70%{transform:scaleY(.95) scaleX(1.05)}}
+@keyframes nlab2RotSettle{0%{transform:rotate(-200deg) scale(.4);opacity:0}55%{transform:rotate(15deg) scale(1.05);opacity:1}72%{transform:rotate(-6deg)}86%{transform:rotate(2deg)}94%{transform:rotate(0)}100%{transform:rotate(-200deg) scale(.4);opacity:0}}
+@keyframes nlab2TextShimmer{0%{background-position:0% center}100%{background-position:200% center}}
+@keyframes nlab2TextWave{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes nlab2Bars{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+@keyframes nlab2Spin{to{transform:rotate(360deg)}}
+@keyframes nlab2Burst{0%{transform:rotate(var(--a,0deg)) translateX(0) scale(1);opacity:1}70%{opacity:1}100%{transform:rotate(var(--a,0deg)) translateX(46px) scale(.2);opacity:0}}
+@keyframes nlab2Heart{0%,100%{transform:scale(1)}14%{transform:scale(1.16)}28%{transform:scale(1)}42%{transform:scale(1.1)}56%{transform:scale(1)}}
+
+@media(prefers-reduced-motion:reduce){
+  .nlab2-orbit .sat,.nlab2-goo b,.nlab2-dots span,.nlab2-wave span,.nlab2-eq span,.nlab2-spinner .in,.nlab2-burst i{animation:none!important}
+  [style*="nlab2"]{animation-iteration-count:1!important;animation-duration:.001s!important}
+}
+</style>
+
+<h3 class="sec">🧊 3D Motion &amp; Perspective</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-scene"><div class="nlab2-coin" style="animation:nlab2CoinFlip 1.6s ease-in-out infinite"><div class="f heads">$</div><div class="f tails">★</div></div></div></div><div class="meta"><div class="nm">3D Coin Flip</div><div class="ref">nlab2CoinFlip · 1.6s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Two-faced disc spins a full 360° on the Y axis with backface culling — heads and tails alternate like a real coin toss.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-scene"><div class="nlab2-cube" style="animation:nlab2CubeTumble 4s linear infinite"><div class="fc c-fr">1</div><div class="fc c-bk">2</div><div class="fc c-rt">3</div><div class="fc c-lt">4</div><div class="fc c-tp">5</div><div class="fc c-bm">6</div></div></div></div><div class="meta"><div class="nm">Cube Tumble</div><div class="ref">nlab2CubeTumble · 4s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">A real 6-face preserve-3d cube rotating on both X and Y axes for an endless tumbling loop.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-deal" style="animation:nlab2CardDeal 2.4s ease-out infinite">A♠</div></div><div class="meta"><div class="nm">Card Deal-In (depth)</div><div class="ref">nlab2CardDeal · 2.4s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Card is flung in from the upper-right through Z-depth and rotation, settling flat on the table like a dealt hand.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2Fold 2s ease-in-out infinite;transform-origin:top center">▤</div></div><div class="meta"><div class="nm">Folding Reveal</div><div class="ref">nlab2Fold · 2s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Panel hinges down from a -92° fold at its top edge into a flat, front-facing plane — a self-contained 3D unfold.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-orbit"><div class="core"></div><div class="sat"></div></div></div><div class="meta"><div class="nm">Orbiting Element</div><div class="ref">nlab2Orbit · 3s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Satellite circles a glowing core on a fixed radius while counter-rotating so it never tumbles.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2PerspSwing 2s ease-in-out infinite">◱</div></div><div class="meta"><div class="nm">Perspective Swing</div><div class="ref">nlab2PerspSwing · 2s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Element swings between ±38° of Y-axis rotation under perspective, like a sign turning to catch the eye.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-clock" style="animation:nlab2FlipClock 1.6s ease-in-out infinite;transform-origin:center">7</div></div><div class="meta"><div class="nm">Flip-Clock Digit</div><div class="ref">nlab2FlipClock · 1.6s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Split-flap digit card folds down on its X axis and springs back — the classic departure-board flip.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-bouncer"><div class="nlab2-ball" style="animation:nlab2Bounce3d 1.2s cubic-bezier(.5,.05,.5,.95) infinite"></div><div class="nlab2-shadow" style="animation:nlab2Shadow 1.2s cubic-bezier(.5,.05,.5,.95) infinite"></div></div></div><div class="meta"><div class="nm">3D Bounce + Shadow</div><div class="ref">nlab2Bounce3d · 1.2s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Ball drops, squashes on impact, and rebounds while its ground shadow scales and darkens for depth cueing.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">🎛️ Easing, Physics &amp; Motion Studies</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2Spring 1.6s cubic-bezier(.5,1.6,.5,1) infinite">⬡</div></div><div class="meta"><div class="nm">Spring Overshoot</div><div class="ref">nlab2Spring · 1.6s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Drops in and overshoots its rest point with decaying spring bounces before settling.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2ElasticScale 1.8s ease-out infinite">◉</div></div><div class="meta"><div class="nm">Elastic Scale</div><div class="ref">nlab2ElasticScale · 1.8s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Pops from zero past full size and rings down through several elastic scale oscillations.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2Jelly 1.6s ease-in-out infinite">◆</div></div><div class="meta"><div class="nm">Jelly Wobble</div><div class="ref">nlab2Jelly · 1.6s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Skew oscillation on both axes gives a soft gelatinous wobble that damps out each cycle.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2MagSnap 1.6s cubic-bezier(.2,1.4,.4,1) infinite">⇥</div></div><div class="meta"><div class="nm">Magnetic Snap</div><div class="ref">nlab2MagSnap · 1.6s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Drifts in slowly then is yanked the last stretch and snaps to place with a magnetic jolt.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2BlurIn 1.8s ease infinite">≋</div></div><div class="meta"><div class="nm">Blur-In Focus</div><div class="ref">nlab2BlurIn · 1.8s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Resolves from a 12px gaussian blur to crisp — a cinematic focus-pull entrance.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2Wipe 2s ease-in-out infinite">▬</div></div><div class="meta"><div class="nm">Clip-Path Wipe</div><div class="ref">nlab2Wipe · 2s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Reveals left-to-right via an inset clip-path, holds, then wipes back out.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2Iris 2s ease-in-out infinite">◉</div></div><div class="meta"><div class="nm">Iris Reveal</div><div class="ref">nlab2Iris · 2s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Opens through an expanding circular clip-path — the classic camera-iris open and close.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2MorphLoad 2s ease-in-out infinite">◐</div></div><div class="meta"><div class="nm">Morphing Loader</div><div class="ref">nlab2MorphLoad · 2s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Square eases into a circle and back while spinning — a shape-shifting busy indicator.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-dots"><span style="animation-delay:0s"></span><span style="animation-delay:.2s"></span><span style="animation-delay:.4s"></span></div></div><div class="meta"><div class="nm">Staggered Dots</div><div class="ref">nlab2Dots · 1.4s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Three dots pulse in sequence via staggered delays — a lightweight typing / loading cue.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-goo"><b class="gl"></b><b class="gr"></b></div></div><div class="meta"><div class="nm">Gooey Merge</div><div class="ref">nlab2GooA / nlab2GooB · 2s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Two soft blobs slide together and pull apart under a blur filter, reading as merging droplets.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2Rubber 1.6s ease-in-out infinite">▢</div></div><div class="meta"><div class="nm">Rubber Band</div><div class="ref">nlab2Rubber · 1.6s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Stretches wide then tall in damped rebounds like a snapped rubber band settling.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2Anticipate 1.6s ease-in-out infinite">➜</div></div><div class="meta"><div class="nm">Anticipation Wind-Up</div><div class="ref">nlab2Anticipate · 1.6s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Pulls back and tilts against the motion before releasing forward — the animator's anticipation principle.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2BounceSettle 1.8s ease-out infinite">⬇</div></div><div class="meta"><div class="nm">Bounce Settle (physics)</div><div class="ref">nlab2BounceSettle · 1.8s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Drops and bounces with realistically decaying rebound heights until it rests.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2Pendulum 2s ease-in-out infinite;transform-origin:top center">◍</div></div><div class="meta"><div class="nm">Pendulum Swing</div><div class="ref">nlab2Pendulum · 2s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Swings between ±32° pinned at the top edge, easing at each extreme like a pendulum.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2Squash 1.4s ease-in-out infinite">⬤</div></div><div class="meta"><div class="nm">Squash &amp; Stretch</div><div class="ref">nlab2Squash · 1.4s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Flattens wide then stretches tall, preserving volume — the core squash-and-stretch study.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2RotSettle 1.8s cubic-bezier(.2,1,.3,1) infinite">✦</div></div><div class="meta"><div class="nm">Rotate &amp; Settle</div><div class="ref">nlab2RotSettle · 1.8s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Spins in from -200° at small scale and overshoots to rest with a couple of angular corrections.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-shine" style="animation:nlab2TextShimmer 2s linear infinite">SHIMMER</div></div><div class="meta"><div class="nm">Gradient Text Shimmer</div><div class="ref">nlab2TextShimmer · 2s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">A clipped gradient sweeps across the glyphs for a metallic light-pass across the text.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-wave"><span style="animation-delay:0s">W</span><span style="animation-delay:.1s">A</span><span style="animation-delay:.2s">V</span><span style="animation-delay:.3s">E</span></div></div><div class="meta"><div class="nm">Text Wave</div><div class="ref">nlab2TextWave · 1.4s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Per-letter vertical bob with staggered delays sends a ripple through the word.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-eq"><span style="animation-delay:0s"></span><span style="animation-delay:.15s"></span><span style="animation-delay:.3s"></span><span style="animation-delay:.45s"></span><span style="animation-delay:.6s"></span></div></div><div class="meta"><div class="nm">Equalizer Bars</div><div class="ref">nlab2Bars · 1.2s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Staggered vertical bars scale up and down like an audio equalizer / loading meter.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-spinner" style="animation:nlab2Spin 1.2s linear infinite"><div class="in"></div></div></div><div class="meta"><div class="nm">Dual-Ring Spinner</div><div class="ref">nlab2Spin · 1.2s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Two concentric arc rings spin in opposite directions at different speeds — a classic dual loader.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="nlab2-burst"><div class="core"></div><i style="--a:0deg"></i><i style="--a:45deg"></i><i style="--a:90deg"></i><i style="--a:135deg"></i><i style="--a:180deg"></i><i style="--a:225deg"></i><i style="--a:270deg"></i><i style="--a:315deg"></i></div></div><div class="meta"><div class="nm">Particle Burst</div><div class="ref">nlab2Burst · 1.8s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Eight particles fire radially from a core and fade out — a confetti / success burst driven by per-particle angle.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage"><div class="box" style="animation:nlab2Heart 1.4s ease-in-out infinite;background:linear-gradient(135deg,var(--neg),rgba(var(--neg-rgb),.4))">♥</div></div><div class="meta"><div class="nm">Heartbeat Pulse</div><div class="ref">nlab2Heart · 1.4s</div><div class="desc" style="font-size:10.5px;color:var(--muted);margin-top:4px">Double-thump scale pulse mimicking a heartbeat — good for likes, health, or live-status cues.</div><button class="copy" onclick="cpy(this)">Copy</button></div></div>
+
+</div>

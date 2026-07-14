@@ -1,0 +1,624 @@
+<style>
+/* ==== input 2026 new facets — namespaced nin2-* ==== */
+.nin2-scene{perspective:640px}
+.nin2-hide{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+
+/* 1 · 3D flip toggle */
+.nin2-flip3d{display:inline-block;perspective:600px;cursor:pointer;user-select:none}
+.nin2-flip3d .nin2-fcard{position:relative;width:120px;height:52px;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.6,.2,.1,1)}
+.nin2-flip3d input:checked ~ .nin2-fcard{transform:rotateX(180deg)}
+.nin2-flip3d .nin2-face{position:absolute;inset:0;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;letter-spacing:.08em;backface-visibility:hidden;border:1px solid var(--line)}
+.nin2-flip3d .nin2-off{background:var(--panel2);color:var(--muted)}
+.nin2-flip3d .nin2-on{background:linear-gradient(135deg,rgba(var(--accent-rgb),.25),rgba(var(--accent-rgb),.08));color:var(--accent);border-color:rgba(var(--accent-rgb),.5);transform:rotateX(180deg)}
+
+/* 2 · tactile push button with depth */
+.nin2-push{position:relative;border:none;background:none;cursor:pointer;font:inherit;padding:0}
+.nin2-push .nin2-cap{display:block;padding:12px 26px;border-radius:12px;font-weight:800;font-size:14px;color:#1a1200;background:linear-gradient(180deg,#ffc46b,var(--accent));transform:translateY(-6px);transition:transform .08s ease;box-shadow:0 6px 0 #b96a00}
+.nin2-push .nin2-base{position:absolute;inset:0;border-radius:12px;background:#7a4700;box-shadow:0 8px 14px rgba(0,0,0,.4)}
+.nin2-push:active .nin2-cap{transform:translateY(-1px);box-shadow:0 1px 0 #b96a00}
+.nin2-push:focus-visible{outline:2px solid var(--info);outline-offset:4px}
+
+/* 3 · 3D dial / knob */
+.nin2-dial3d{width:120px;text-align:center}
+.nin2-dial3d .nin2-knob{width:96px;height:96px;margin:0 auto;border-radius:50%;position:relative;transform:rotateX(52deg);transform-style:preserve-3d;background:radial-gradient(circle at 50% 38%,var(--panel2),var(--panel));border:1px solid var(--line);box-shadow:0 14px 20px rgba(0,0,0,.45),inset 0 0 0 6px rgba(255,255,255,.03)}
+.nin2-dial3d .nin2-top{position:absolute;inset:14px;border-radius:50%;background:conic-gradient(from 210deg,rgba(var(--accent-rgb),.5),rgba(var(--accent-rgb),.05) 300deg,transparent 300deg);transform:translateZ(14px);transition:transform .4s cubic-bezier(.6,.2,.1,1)}
+.nin2-dial3d .nin2-ptr{position:absolute;top:8px;left:50%;width:4px;height:22px;margin-left:-2px;border-radius:2px;background:var(--accent);transform:translateZ(15px)}
+.nin2-dial3d label{display:inline-block;font-size:11px;color:var(--muted);cursor:pointer;padding:3px 5px;border-radius:6px}
+.nin2-dial3d input:checked + label{color:var(--accent);background:rgba(var(--accent-rgb),.12)}
+.nin2-dial3d .nin2-r0:checked ~ .nin2-knob .nin2-top{transform:translateZ(14px) rotate(-100deg)}
+.nin2-dial3d .nin2-r1:checked ~ .nin2-knob .nin2-top{transform:translateZ(14px) rotate(-40deg)}
+.nin2-dial3d .nin2-r2:checked ~ .nin2-knob .nin2-top{transform:translateZ(14px) rotate(30deg)}
+.nin2-dial3d .nin2-r3:checked ~ .nin2-knob .nin2-top{transform:translateZ(14px) rotate(100deg)}
+
+/* 4 · perspective segmented control */
+.nin2-pseg{display:flex;gap:0;padding:5px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);transform:rotateX(22deg);transform-style:preserve-3d;box-shadow:0 12px 18px rgba(0,0,0,.4)}
+.nin2-pseg label{flex:1;text-align:center;font-size:12px;font-weight:700;color:var(--muted);padding:9px 12px;border-radius:8px;cursor:pointer;transition:.2s;transform:translateZ(0)}
+.nin2-pseg input:checked + label{color:#1a1200;background:linear-gradient(180deg,#ffc46b,var(--accent));transform:translateZ(20px);box-shadow:0 8px 14px rgba(var(--accent-rgb),.35)}
+
+/* 5 · tilting card selector */
+.nin2-tiltsel{display:flex;gap:12px}
+.nin2-tiltsel label{flex:1;perspective:500px;cursor:pointer}
+.nin2-tiltsel .nin2-tc{padding:16px 10px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);text-align:center;transition:transform .35s cubic-bezier(.5,.2,.1,1),box-shadow .35s,border-color .2s;transform:rotateY(0deg)}
+.nin2-tiltsel .nin2-tc .nin2-ico{font-size:24px}
+.nin2-tiltsel .nin2-tc .nin2-lb{font-size:11px;color:var(--muted);margin-top:5px;font-weight:700}
+.nin2-tiltsel input:checked + .nin2-tc{transform:rotateY(-16deg) translateZ(24px);border-color:var(--accent);box-shadow:-10px 10px 22px rgba(0,0,0,.45)}
+.nin2-tiltsel input:checked + .nin2-tc .nin2-lb{color:var(--accent)}
+
+/* 6 · 3D flip-number stepper */
+.nin2-flipnum{display:flex;align-items:center;gap:14px}
+.nin2-flipnum button{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font-size:20px;cursor:pointer;transition:.15s}
+.nin2-flipnum button:hover{border-color:var(--accent);color:var(--accent)}
+.nin2-flipnum .nin2-dig{width:64px;height:64px;perspective:300px}
+.nin2-flipnum .nin2-card{position:relative;width:100%;height:100%;transform-style:preserve-3d;font:800 30px ui-monospace,Menlo,monospace;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);color:var(--accent)}
+.nin2-flipnum .nin2-card.nin2-roll{animation:nin2Roll .35s ease}
+@keyframes nin2Roll{0%{transform:rotateX(0)}50%{transform:rotateX(-90deg)}100%{transform:rotateX(0)}}
+
+/* 7 · floating-label field */
+.nin2-fl{position:relative;width:100%}
+.nin2-fl input{width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:18px 14px 8px;font:14px inherit;outline:none;transition:.2s}
+.nin2-fl input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.15)}
+.nin2-fl label{position:absolute;left:14px;top:15px;color:var(--dim);font-size:14px;pointer-events:none;transition:.18s ease}
+.nin2-fl input:focus + label,.nin2-fl input:not(:placeholder-shown) + label{top:6px;font-size:10.5px;color:var(--accent);font-weight:700;letter-spacing:.04em}
+
+/* 8 · OTP boxes (auto-advance) */
+.nin2-otp{display:flex;gap:8px}
+.nin2-otp input{width:42px;height:50px;text-align:center;font:800 20px ui-monospace,Menlo,monospace;background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--ink);outline:none;transition:.2s}
+.nin2-otp input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.15);transform:translateY(-2px)}
+.nin2-otp input:not(:placeholder-shown){border-color:rgba(var(--accent-rgb),.6);color:var(--accent)}
+
+/* 9 · tag / chip input */
+.nin2-chips{display:flex;flex-wrap:wrap;gap:6px;padding:8px 10px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;min-height:44px;align-items:center;cursor:text;width:100%}
+.nin2-chips:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.15)}
+.nin2-chips .nin2-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(var(--accent-rgb),.14);border:1px solid rgba(var(--accent-rgb),.4);color:var(--accent);padding:3px 4px 3px 9px;border-radius:7px;font-size:11.5px;font-weight:700;animation:nin2Pop .2s ease}
+.nin2-chips .nin2-chip b{cursor:pointer;opacity:.65;font-size:14px;line-height:1;padding:0 3px}
+.nin2-chips .nin2-chip b:hover{opacity:1}
+.nin2-chips input{background:none;border:none;color:var(--ink);font:13px inherit;outline:none;flex:1;min-width:70px}
+.nin2-chips input::placeholder{color:var(--dim)}
+@keyframes nin2Pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+
+/* 10 · multi (dual) range slider */
+.nin2-mrange{width:100%}
+.nin2-mrange .nin2-track{position:relative;height:6px;border-radius:3px;background:var(--panel2);margin:14px 4px}
+.nin2-mrange .nin2-fillbar{position:absolute;top:0;bottom:0;border-radius:3px;background:linear-gradient(90deg,var(--info),var(--accent))}
+.nin2-mrange input[type=range]{position:absolute;top:-7px;left:0;width:100%;height:20px;-webkit-appearance:none;appearance:none;background:none;pointer-events:none;margin:0}
+.nin2-mrange input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;pointer-events:auto;width:18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid var(--panel);box-shadow:0 0 8px rgba(var(--accent-rgb),.4);cursor:pointer}
+.nin2-mrange input[type=range]::-moz-range-thumb{pointer-events:auto;width:16px;height:16px;border-radius:50%;background:var(--accent);border:3px solid var(--panel);cursor:pointer}
+.nin2-mrange .nin2-read{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-weight:700}
+
+/* 11 · color swatch picker */
+.nin2-swatch{display:flex;gap:10px;align-items:center}
+.nin2-swatch label{cursor:pointer}
+.nin2-swatch .nin2-sw{display:block;width:34px;height:34px;border-radius:9px;border:2px solid var(--line);transition:.18s}
+.nin2-swatch label:hover .nin2-sw{transform:scale(1.12)}
+.nin2-swatch input:checked + .nin2-sw{border-color:var(--ink);box-shadow:0 0 0 3px rgba(255,255,255,.15),0 0 12px rgba(255,255,255,.2);transform:scale(1.12)}
+
+/* 12 · star rating (pure CSS reverse) */
+.nin2-star{display:inline-flex;flex-direction:row-reverse;font-size:30px}
+.nin2-star input{position:absolute;opacity:0;width:0;height:0}
+.nin2-star label{color:var(--dim);cursor:pointer;transition:.15s;padding:0 1px}
+.nin2-star label:hover,.nin2-star label:hover ~ label,.nin2-star input:checked ~ label{color:var(--accent);text-shadow:0 0 8px rgba(var(--accent-rgb),.5)}
+.nin2-star label:hover{transform:scale(1.18)}
+
+/* 13 · emoji / mood rating */
+.nin2-emoji{display:inline-flex;gap:6px;font-size:26px}
+.nin2-emoji input{position:absolute;opacity:0;width:0;height:0}
+.nin2-emoji label{filter:grayscale(1) opacity(.55);cursor:pointer;transition:.18s;transform-origin:center bottom}
+.nin2-emoji label:hover{transform:translateY(-4px) scale(1.15);filter:none}
+.nin2-emoji input:checked + label{filter:none;transform:scale(1.3)}
+
+/* 14 · segmented toggle (sliding thumb) */
+.nin2-seg{position:relative;display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:4px}
+.nin2-seg label{position:relative;z-index:2;font-size:12px;font-weight:700;color:var(--muted);padding:7px 18px;cursor:pointer;transition:color .2s}
+.nin2-seg input:checked + label{color:#1a1200}
+.nin2-seg .nin2-thumb{position:absolute;z-index:1;top:4px;bottom:4px;left:0;border-radius:8px;background:var(--accent);transition:transform .32s cubic-bezier(.5,1.6,.4,1),width .32s cubic-bezier(.5,1.6,.4,1);box-shadow:0 2px 8px rgba(var(--accent-rgb),.4)}
+
+/* 15 · switch variants */
+.nin2-sw2{display:flex;flex-direction:column;gap:12px}
+.nin2-sw2 label{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:12px;color:var(--muted)}
+.nin2-sw2 .nin2-tk{width:46px;height:26px;border-radius:13px;background:var(--panel2);border:1px solid var(--line);position:relative;transition:.22s;flex-shrink:0}
+.nin2-sw2 .nin2-tk::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:var(--dim);transition:.22s;display:flex;align-items:center;justify-content:center;font-size:11px}
+.nin2-sw2 input{position:absolute;opacity:0}
+.nin2-sw2 input:checked + .nin2-tk::after{left:23px;background:#fff}
+.nin2-sw2 input:checked + .nin2-acc{background:var(--accent);border-color:var(--accent)}
+.nin2-sw2 input:checked + .nin2-pos{background:var(--pos);border-color:var(--pos)}
+.nin2-sw2 input:checked + .nin2-crit{background:var(--crit);border-color:var(--crit)}
+.nin2-sw2 .nin2-icn::after{content:'✕';color:var(--dim)}
+.nin2-sw2 input:checked + .nin2-icn::after{content:'✓';color:var(--pos)}
+
+/* 16 · number stepper */
+.nin2-step{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--panel2)}
+.nin2-step button{width:40px;height:40px;background:none;border:none;color:var(--ink);font-size:18px;cursor:pointer;transition:.15s}
+.nin2-step button:hover{background:rgba(var(--accent-rgb),.15);color:var(--accent)}
+.nin2-step .nin2-val{width:56px;text-align:center;font:800 15px inherit;color:var(--ink);border-left:1px solid var(--line);border-right:1px solid var(--line);line-height:40px}
+
+/* 17 · search + suggestions dropdown */
+.nin2-search{position:relative;width:100%}
+.nin2-search .nin2-box{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.nin2-search .nin2-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.15)}
+.nin2-search input{background:none;border:none;color:var(--ink);font:13.5px inherit;outline:none;flex:1}
+.nin2-search input::placeholder{color:var(--dim)}
+.nin2-search .nin2-menu{list-style:none;margin:6px 0 0;padding:5px;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 24px rgba(0,0,0,.4);max-height:0;overflow:hidden;opacity:0;transition:.2s;position:absolute;left:0;right:0;z-index:5}
+.nin2-search:focus-within .nin2-menu{max-height:220px;opacity:1}
+.nin2-search .nin2-menu li{padding:8px 10px;border-radius:7px;font-size:12.5px;color:var(--muted);cursor:pointer;display:flex;gap:8px;align-items:center}
+.nin2-search .nin2-menu li:hover,.nin2-search .nin2-menu li.nin2-hi{background:rgba(var(--accent-rgb),.12);color:var(--ink)}
+.nin2-search .nin2-menu li .nin2-k{margin-left:auto;font-size:10px;color:var(--dim)}
+
+/* 18 · password strength meter */
+.nin2-pwd{width:100%}
+.nin2-pwd .nin2-row{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.nin2-pwd .nin2-row:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.15)}
+.nin2-pwd input{background:none;border:none;color:var(--ink);font:13.5px inherit;outline:none;flex:1;letter-spacing:.1em}
+.nin2-pwd .nin2-eye{background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px}
+.nin2-pwd .nin2-bars{display:flex;gap:5px;margin-top:8px}
+.nin2-pwd .nin2-bars i{flex:1;height:5px;border-radius:3px;background:var(--panel2);transition:.3s}
+.nin2-pwd[data-lvl="1"] .nin2-bars i:nth-child(-n+1){background:var(--neg)}
+.nin2-pwd[data-lvl="2"] .nin2-bars i:nth-child(-n+2){background:var(--warn)}
+.nin2-pwd[data-lvl="3"] .nin2-bars i:nth-child(-n+3){background:var(--info)}
+.nin2-pwd[data-lvl="4"] .nin2-bars i{background:var(--pos)}
+.nin2-pwd .nin2-lab{font-size:10.5px;color:var(--muted);margin-top:6px;font-weight:700}
+
+/* 19 · file drop zone */
+.nin2-drop{width:100%;min-height:110px;border:2px dashed var(--line);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:18px;cursor:pointer;transition:.2s;text-align:center}
+.nin2-drop:hover,.nin2-drop.nin2-drag{border-color:var(--accent);background:rgba(var(--accent-rgb),.05)}
+.nin2-drop .nin2-di{font-size:30px;opacity:.7;animation:nin2Float 2.4s ease-in-out infinite}
+.nin2-drop .nin2-dt{font-size:13px;color:var(--muted);font-weight:700}
+.nin2-drop .nin2-dh{font-size:11px;color:var(--dim)}
+@keyframes nin2Float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* 20 · icon toggle group */
+.nin2-tgroup{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:4px;gap:2px}
+.nin2-tgroup label{width:40px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:7px;cursor:pointer;color:var(--muted);font-size:16px;transition:.15s}
+.nin2-tgroup label:hover{color:var(--ink)}
+.nin2-tgroup input:checked + label{background:rgba(var(--accent-rgb),.16);color:var(--accent)}
+
+/* 21 · combobox */
+.nin2-combo{position:relative;width:100%}
+.nin2-combo summary{list-style:none;display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:13px;cursor:pointer;color:var(--ink)}
+.nin2-combo summary::-webkit-details-marker{display:none}
+.nin2-combo summary .nin2-caret{margin-left:auto;color:var(--muted);transition:.2s}
+.nin2-combo[open] summary{border-color:var(--accent)}
+.nin2-combo[open] summary .nin2-caret{transform:rotate(180deg)}
+.nin2-combo .nin2-pop{position:absolute;left:0;right:0;margin-top:6px;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 24px rgba(0,0,0,.4);padding:5px;z-index:5}
+.nin2-combo .nin2-opt{display:block;padding:9px 11px;border-radius:7px;font-size:13px;color:var(--muted);cursor:pointer}
+.nin2-combo .nin2-opt:hover{background:rgba(var(--accent-rgb),.12);color:var(--ink)}
+
+/* 22 · slider with tooltip */
+.nin2-tip{width:100%;padding-top:26px}
+.nin2-tip .nin2-wrap{position:relative}
+.nin2-tip .nin2-bub{position:absolute;top:-30px;transform:translateX(-50%);background:var(--accent);color:#1a1200;font-size:11px;font-weight:800;padding:2px 8px;border-radius:6px;white-space:nowrap}
+.nin2-tip .nin2-bub::after{content:'';position:absolute;left:50%;top:100%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--accent)}
+.nin2-tip input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:3px;outline:none;background:var(--panel2)}
+.nin2-tip input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:3px solid var(--panel);box-shadow:0 0 8px rgba(var(--accent-rgb),.4);cursor:pointer}
+.nin2-tip input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--accent);border:3px solid var(--panel);cursor:pointer}
+
+/* 23 · quantity spinner (round) */
+.nin2-qty{display:inline-flex;align-items:center;gap:14px}
+.nin2-qty button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font-size:18px;cursor:pointer;transition:.15s}
+.nin2-qty button:hover{border-color:var(--accent);color:var(--accent);transform:scale(1.08)}
+.nin2-qty .nin2-n{font:800 22px ui-monospace,Menlo,monospace;color:var(--ink);min-width:34px;text-align:center}
+
+/* 24 · heart / like burst */
+.nin2-heart{position:relative;width:64px;height:64px;border:none;background:none;cursor:pointer}
+.nin2-heart .nin2-hi{font-size:34px;color:var(--dim);transition:.2s;display:inline-block}
+.nin2-heart.nin2-liked .nin2-hi{color:var(--neg);animation:nin2Beat .4s ease}
+.nin2-heart .nin2-burst{position:absolute;inset:0;pointer-events:none}
+.nin2-heart .nin2-burst i{position:absolute;top:50%;left:50%;width:5px;height:5px;border-radius:50%;background:var(--neg);opacity:0}
+.nin2-heart.nin2-liked .nin2-burst i{animation:nin2Spark .5s ease-out}
+@keyframes nin2Beat{0%,100%{transform:scale(1)}30%{transform:scale(1.35)}60%{transform:scale(.9)}}
+@keyframes nin2Spark{0%{opacity:1;transform:translate(-50%,-50%) translate(0,0) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) translate(var(--dx),var(--dy)) scale(.2)}}
+
+/* 25 · copy-to-clipboard field */
+.nin2-copy{display:flex;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:10px;overflow:hidden;width:100%}
+.nin2-copy code{flex:1;padding:11px 13px;font:12px ui-monospace,Menlo,monospace;color:var(--info);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nin2-copy button{border:none;border-left:1px solid var(--line);background:var(--panel);color:var(--muted);padding:0 15px;align-self:stretch;cursor:pointer;font-size:14px;transition:.15s}
+.nin2-copy button:hover{color:var(--accent)}
+.nin2-copy button.nin2-ok{color:var(--pos)}
+
+/* 26 · autosize textarea */
+.nin2-autosz{width:100%}
+.nin2-autosz textarea{width:100%;min-height:44px;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:11px 13px;font:13px inherit;outline:none;resize:none;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.nin2-autosz textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.15)}
+
+/* 27 · formatted phone input */
+.nin2-phone{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 13px;width:100%}
+.nin2-phone:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.15)}
+.nin2-phone .nin2-cc{font-size:13px;color:var(--muted);font-weight:700;padding-right:9px;border-right:1px solid var(--line)}
+.nin2-phone input{background:none;border:none;color:var(--ink);font:14px ui-monospace,Menlo,monospace;outline:none;flex:1;letter-spacing:.04em}
+
+/* 28 · checkbox morph (box → check) */
+.nin2-chkmorph{display:flex;flex-direction:column;gap:12px}
+.nin2-chkmorph label{display:inline-flex;align-items:center;gap:11px;cursor:pointer;font-size:13px;color:var(--muted)}
+.nin2-chkmorph input{position:absolute;opacity:0}
+.nin2-chkmorph .nin2-bx{width:22px;height:22px;border-radius:6px;border:2px solid var(--line);position:relative;transition:.2s}
+.nin2-chkmorph .nin2-bx::after{content:'';position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid #1a1200;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);transition:transform .2s cubic-bezier(.5,1.6,.4,1)}
+.nin2-chkmorph input:checked + .nin2-bx{background:var(--accent);border-color:var(--accent)}
+.nin2-chkmorph input:checked + .nin2-bx::after{transform:rotate(45deg) scale(1)}
+.nin2-chkmorph input:checked ~ .nin2-txt{color:var(--ink)}
+
+/* 29 · radio card group */
+.nin2-radcard{display:flex;flex-direction:column;gap:10px;width:100%}
+.nin2-radcard label{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);cursor:pointer;transition:.18s}
+.nin2-radcard input{position:absolute;opacity:0}
+.nin2-radcard .nin2-rd{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;position:relative;transition:.18s}
+.nin2-radcard .nin2-rd::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--accent);transform:scale(0);transition:.18s}
+.nin2-radcard .nin2-body{flex:1}
+.nin2-radcard .nin2-t{font-size:13px;font-weight:700;color:var(--ink)}
+.nin2-radcard .nin2-s{font-size:11px;color:var(--muted)}
+.nin2-radcard input:checked + label{border-color:var(--accent);background:rgba(var(--accent-rgb),.06)}
+.nin2-radcard input:checked + label .nin2-rd{border-color:var(--accent)}
+.nin2-radcard input:checked + label .nin2-rd::after{transform:scale(1)}
+
+/* 30 · date scrubber */
+.nin2-scrub{width:100%}
+.nin2-scrub .nin2-val{text-align:center;font:800 18px ui-monospace,Menlo,monospace;color:var(--accent);margin-bottom:8px}
+.nin2-scrub .nin2-rail{position:relative;height:34px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.nin2-scrub .nin2-ticks{position:absolute;inset:0;display:flex;align-items:flex-end;padding:0 2px}
+.nin2-scrub .nin2-ticks span{flex:1;background:var(--line);margin:0 .5px;height:8px;border-radius:1px}
+.nin2-scrub .nin2-ticks span:nth-child(7n+1){height:16px;background:var(--dim)}
+.nin2-scrub input[type=range]{position:absolute;inset:0;width:100%;height:100%;-webkit-appearance:none;appearance:none;background:none;margin:0;cursor:ew-resize}
+.nin2-scrub input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:34px;border-radius:4px;background:var(--accent);box-shadow:0 0 10px rgba(var(--accent-rgb),.5);cursor:ew-resize}
+.nin2-scrub input[type=range]::-moz-range-thumb{width:12px;height:34px;border-radius:4px;border:none;background:var(--accent);cursor:ew-resize}
+
+@media(prefers-reduced-motion:reduce){
+  .nin2-flip3d .nin2-fcard,.nin2-dial3d .nin2-top,.nin2-tiltsel .nin2-tc,.nin2-seg .nin2-thumb,.nin2-pseg label{transition-duration:.001s!important}
+  .nin2-drop .nin2-di,.nin2-chips .nin2-chip,.nin2-flipnum .nin2-card.nin2-roll,.nin2-heart.nin2-liked .nin2-hi,.nin2-heart.nin2-liked .nin2-burst i{animation:none!important}
+}
+</style>
+
+<h3 class="sec">🧊 3D &amp; Depth Controls</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <label class="nin2-flip3d"><input type="checkbox" class="nin2-hide" checked>
+      <div class="nin2-fcard"><div class="nin2-face nin2-off">OFF</div><div class="nin2-face nin2-on">ON</div></div>
+    </label>
+  </div><div class="meta"><div class="nm">3D Flip Toggle</div><span class="ref">.nin2-flip3d</span><div class="desc">A switch that physically flips a card in 3D between OFF and ON faces. Pure CSS off a hidden checkbox — click to flip.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <button class="nin2-push"><span class="nin2-base"></span><span class="nin2-cap">Deploy</span></button>
+  </div><div class="meta"><div class="nm">Tactile Push Button</div><span class="ref">.nin2-push</span><div class="desc">A raised key that sinks into its base on press with a real depth shadow. The satisfying physical-button feel for primary actions.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage nin2-scene">
+    <div class="nin2-dial3d">
+      <input type="radio" name="nin2dial" id="nin2d0" class="nin2-hide nin2-r0"><label for="nin2d0">Lo</label>
+      <input type="radio" name="nin2dial" id="nin2d1" class="nin2-hide nin2-r1" checked><label for="nin2d1">Md</label>
+      <input type="radio" name="nin2dial" id="nin2d2" class="nin2-hide nin2-r2"><label for="nin2d2">Hi</label>
+      <input type="radio" name="nin2dial" id="nin2d3" class="nin2-hide nin2-r3"><label for="nin2d3">Max</label>
+      <div class="nin2-knob"><div class="nin2-top"></div><div class="nin2-ptr"></div></div>
+    </div>
+  </div><div class="meta"><div class="nm">3D Dial / Knob</div><span class="ref">.nin2-dial3d</span><div class="desc">A tilted rotary knob whose fill and pointer rotate to the chosen level. Pick a preset to turn the dial. For volume, throttle, or intensity.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage nin2-scene">
+    <div class="nin2-pseg">
+      <input type="radio" name="nin2pseg" id="nin2ps0" class="nin2-hide" checked><label for="nin2ps0">Day</label>
+      <input type="radio" name="nin2pseg" id="nin2ps1" class="nin2-hide"><label for="nin2ps1">Week</label>
+      <input type="radio" name="nin2pseg" id="nin2ps2" class="nin2-hide"><label for="nin2ps2">Month</label>
+    </div>
+  </div><div class="meta"><div class="nm">Perspective Segmented Control</div><span class="ref">.nin2-pseg</span><div class="desc">A tilted segmented control where the active option lifts toward you on the Z axis. Depth makes the selection unmistakable.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-tiltsel">
+      <label><input type="radio" name="nin2tilt" class="nin2-hide" checked><div class="nin2-tc"><div class="nin2-ico">⚡</div><div class="nin2-lb">Fast</div></div></label>
+      <label><input type="radio" name="nin2tilt" class="nin2-hide"><div class="nin2-tc"><div class="nin2-ico">⚖️</div><div class="nin2-lb">Balanced</div></div></label>
+      <label><input type="radio" name="nin2tilt" class="nin2-hide"><div class="nin2-tc"><div class="nin2-ico">🌱</div><div class="nin2-lb">Eco</div></div></label>
+    </div>
+  </div><div class="meta"><div class="nm">Tilting Card Selector</div><span class="ref">.nin2-tiltsel</span><div class="desc">Option cards that swing out in 3D and cast a shadow when chosen. A playful radio group for mode or plan pickers.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-flipnum" data-v="3">
+      <button type="button" data-d="-1">−</button>
+      <div class="nin2-dig"><div class="nin2-card">3</div></div>
+      <button type="button" data-d="1">+</button>
+    </div>
+  </div><div class="meta"><div class="nm">3D Flip-Number Stepper</div><span class="ref">.nin2-flipnum</span><div class="desc">A stepper whose digit does a split-flap flip on the X axis each time the count changes. The mechanical-counter feel for quantities.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">⌨️ Fields, Pickers &amp; Actions</h3>
+<div class="gallery">
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-fl"><input type="text" id="nin2fl1" placeholder=" "><label for="nin2fl1">Email address</label></div>
+  </div><div class="meta"><div class="nm">Floating-Label Field</div><span class="ref">.nin2-fl</span><div class="desc">The label rides up and shrinks into the top on focus or when filled. Saves space while keeping context. Pure CSS via :placeholder-shown.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-otp"><input maxlength="1" placeholder="•" value="4"><input maxlength="1" placeholder="•" value="2"><input maxlength="1" placeholder="•"><input maxlength="1" placeholder="•"><input maxlength="1" placeholder="•"><input maxlength="1" placeholder="•"></div>
+  </div><div class="meta"><div class="nm">OTP / Verification Boxes</div><span class="ref">.nin2-otp</span><div class="desc">Per-digit code cells that auto-advance as you type and jump back on delete. Large monospace glyphs for one-time passcodes.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-chips"><span class="nin2-chip">prod<b>×</b></span><span class="nin2-chip">us-east-1<b>×</b></span><input placeholder="Add tag…"></div>
+  </div><div class="meta"><div class="nm">Tag / Chip Input</div><span class="ref">.nin2-chips</span><div class="desc">Type a value and press Enter to add a removable chip; click × to drop one. For tags, recipients, or filters.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-mrange">
+      <div class="nin2-track"><span class="nin2-fillbar"></span></div>
+      <input type="range" min="0" max="100" value="25" class="nin2-lo"><input type="range" min="0" max="100" value="70" class="nin2-hi">
+      <div class="nin2-read"><span class="nin2-min">$25</span><span class="nin2-max">$70</span></div>
+    </div>
+  </div><div class="meta"><div class="nm">Dual-Handle Range Slider</div><span class="ref">.nin2-mrange</span><div class="desc">Two thumbs pick a min/max window with the span highlighted between them; handles can't cross. The classic price/date filter.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-swatch">
+      <label><input type="radio" name="nin2sw" class="nin2-hide"><span class="nin2-sw" style="background:var(--accent)"></span></label>
+      <label><input type="radio" name="nin2sw" class="nin2-hide" checked><span class="nin2-sw" style="background:var(--info)"></span></label>
+      <label><input type="radio" name="nin2sw" class="nin2-hide"><span class="nin2-sw" style="background:var(--pos)"></span></label>
+      <label><input type="radio" name="nin2sw" class="nin2-hide"><span class="nin2-sw" style="background:var(--crit)"></span></label>
+      <label><input type="radio" name="nin2sw" class="nin2-hide"><span class="nin2-sw" style="background:var(--neg)"></span></label>
+    </div>
+  </div><div class="meta"><div class="nm">Color Swatch Picker</div><span class="ref">.nin2-swatch</span><div class="desc">Preset color chips with a ring on the active choice. For theme, label, or category assignment — all token-driven.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-star">
+      <input type="radio" name="nin2star" id="nin2s5"><label for="nin2s5">★</label>
+      <input type="radio" name="nin2star" id="nin2s4" checked><label for="nin2s4">★</label>
+      <input type="radio" name="nin2star" id="nin2s3"><label for="nin2s3">★</label>
+      <input type="radio" name="nin2star" id="nin2s2"><label for="nin2s2">★</label>
+      <input type="radio" name="nin2star" id="nin2s1"><label for="nin2s1">★</label>
+    </div>
+  </div><div class="meta"><div class="nm">Star Rating</div><span class="ref">.nin2-star</span><div class="desc">Click-to-rate stars that fill on hover and lock on select — pure CSS using a reversed row and sibling selectors.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-emoji">
+      <input type="radio" name="nin2em" id="nin2e1"><label for="nin2e1">😖</label>
+      <input type="radio" name="nin2em" id="nin2e2"><label for="nin2e2">🙁</label>
+      <input type="radio" name="nin2em" id="nin2e3" checked><label for="nin2e3">😐</label>
+      <input type="radio" name="nin2em" id="nin2e4"><label for="nin2e4">🙂</label>
+      <input type="radio" name="nin2em" id="nin2e5"><label for="nin2e5">😄</label>
+    </div>
+  </div><div class="meta"><div class="nm">Emoji / Mood Rating</div><span class="ref">.nin2-emoji</span><div class="desc">Desaturated faces run sad→happy; the chosen one snaps to full color and scales up. A warmer survey scale than stars.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-seg">
+      <input type="radio" name="nin2seg" id="nin2sg0" class="nin2-hide" checked><label for="nin2sg0">All</label>
+      <input type="radio" name="nin2seg" id="nin2sg1" class="nin2-hide"><label for="nin2sg1">Active</label>
+      <input type="radio" name="nin2seg" id="nin2sg2" class="nin2-hide"><label for="nin2sg2">Archived</label>
+      <span class="nin2-thumb"></span>
+    </div>
+  </div><div class="meta"><div class="nm">Segmented Toggle (sliding)</div><span class="ref">.nin2-seg</span><div class="desc">Mutually-exclusive tabs with a springy pill that slides and resizes to the active segment. The upgrade over a joined button row.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-sw2">
+      <label><input type="checkbox" checked><span class="nin2-tk nin2-acc"></span>Notifications</label>
+      <label><input type="checkbox" checked><span class="nin2-tk nin2-pos nin2-icn"></span>Auto-save</label>
+      <label><input type="checkbox"><span class="nin2-tk nin2-crit"></span>Danger mode</label>
+    </div>
+  </div><div class="meta"><div class="nm">Switch Variants</div><span class="ref">.nin2-sw2</span><div class="desc">Semantic toggles tied to tokens — accent, positive, and critical — plus an icon-in-knob style that swaps ✕↔✓.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-step" data-v="8"><button type="button" data-d="-1">−</button><span class="nin2-val">8</span><button type="button" data-d="1">+</button></div>
+  </div><div class="meta"><div class="nm">Number Stepper</div><span class="ref">.nin2-step</span><div class="desc">Increment / decrement a small integer with joined ± buttons and a centered value. For counts and small quantities.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-search">
+      <div class="nin2-box"><span>🔍</span><input placeholder="Search resources…" value="ec2"></div>
+      <ul class="nin2-menu"><li class="nin2-hi">🖥️ EC2 Instances<span class="nin2-k">↵</span></li><li>💾 EBS Volumes</li><li>🌐 Elastic IPs</li><li>🔐 ECR Registries</li></ul>
+    </div>
+  </div><div class="meta"><div class="nm">Search + Suggestions</div><span class="ref">.nin2-search</span><div class="desc">A search box that reveals a keyboard-navigable suggestion dropdown on focus. The universal type-ahead pattern.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-pwd" data-lvl="0">
+      <div class="nin2-row"><input type="password" value="Str0ng!" placeholder="Password"><button type="button" class="nin2-eye">👁</button></div>
+      <div class="nin2-bars"><i></i><i></i><i></i><i></i></div>
+      <div class="nin2-lab">Type to check strength</div>
+    </div>
+  </div><div class="meta"><div class="nm">Password Strength Meter</div><span class="ref">.nin2-pwd</span><div class="desc">Four bars and a label rate strength live as you type, sweeping red→amber→blue→green. The eye reveals or masks the value.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-drop"><div class="nin2-di">☁️</div><div class="nin2-dt">Drop files here</div><div class="nin2-dh">or click to browse · PNG, PDF up to 10 MB</div></div>
+  </div><div class="meta"><div class="nm">File Drop Zone</div><span class="ref">.nin2-drop</span><div class="desc">A dashed zone that glows accent and highlights on drag-over, with a gently floating cloud icon. Click or drop to upload.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-tgroup">
+      <input type="radio" name="nin2tg" id="nin2tg0" class="nin2-hide" checked><label for="nin2tg0">☰</label>
+      <input type="radio" name="nin2tg" id="nin2tg1" class="nin2-hide"><label for="nin2tg1">▦</label>
+      <input type="radio" name="nin2tg" id="nin2tg2" class="nin2-hide"><label for="nin2tg2">≣</label>
+    </div>
+  </div><div class="meta"><div class="nm">Icon Toggle Group</div><span class="ref">.nin2-tgroup</span><div class="desc">A joined set of icon buttons where exactly one stays lit — list vs grid vs compact view switchers and formatting bars.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <details class="nin2-combo"><summary>us-west-2 (Oregon)<span class="nin2-caret">▾</span></summary>
+      <div class="nin2-pop"><span class="nin2-opt">us-east-1 (N. Virginia)</span><span class="nin2-opt">us-west-2 (Oregon)</span><span class="nin2-opt">eu-west-1 (Ireland)</span><span class="nin2-opt">ap-south-1 (Mumbai)</span></div>
+    </details>
+  </div><div class="meta"><div class="nm">Combobox / Dropdown</div><span class="ref">.nin2-combo</span><div class="desc">A native &lt;details&gt; combobox with a rotating caret and a floating option list — zero JS, fully offline.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-tip"><div class="nin2-wrap"><span class="nin2-bub" style="left:60%">60%</span><input type="range" min="0" max="100" value="60"></div></div>
+  </div><div class="meta"><div class="nm">Slider with Tooltip</div><span class="ref">.nin2-tip</span><div class="desc">A range slider topped by a value bubble that tracks the thumb as you drag. Clearer than reading a number elsewhere.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-qty" data-v="2"><button type="button" data-d="-1">−</button><span class="nin2-n">2</span><button type="button" data-d="1">+</button></div>
+  </div><div class="meta"><div class="nm">Quantity Spinner</div><span class="ref">.nin2-qty</span><div class="desc">Round ± buttons flanking a big value — the cart-quantity control that scales the button on hover.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <button class="nin2-heart" type="button"><span class="nin2-hi">♥</span><span class="nin2-burst"><i style="--dx:-18px;--dy:-14px"></i><i style="--dx:18px;--dy:-14px"></i><i style="--dx:-14px;--dy:16px"></i><i style="--dx:14px;--dy:16px"></i><i style="--dx:0;--dy:-22px"></i></span></button>
+  </div><div class="meta"><div class="nm">Like / Heart Burst</div><span class="ref">.nin2-heart</span><div class="desc">A heart that beats and throws a spark burst on the like tap. The delightful micro-reaction from social feeds.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-copy"><code>arn:aws:iam::123456789012:role/PrismDemo</code><button type="button" title="Copy">⧉</button></div>
+  </div><div class="meta"><div class="nm">Copy-to-Clipboard Field</div><span class="ref">.nin2-copy</span><div class="desc">A read-only value with an inline copy button that flashes a green ✓ on success — the canonical way to surface ARNs and keys.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-autosz"><textarea placeholder="Type a message… it grows as you go">This textarea grows to fit its content.</textarea></div>
+  </div><div class="meta"><div class="nm">Autosize Textarea</div><span class="ref">.nin2-autosz</span><div class="desc">A textarea that expands its height to fit the text instead of scrolling. No manual resize handle needed.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-phone"><span class="nin2-cc">🇺🇸 +1</span><input type="tel" placeholder="(555) 000-0000" value="(415) 555-0132"></div>
+  </div><div class="meta"><div class="nm">Formatted Phone Input</div><span class="ref">.nin2-phone</span><div class="desc">A country-code chip plus a field that reflows digits into (xxx) xxx-xxxx as you type, stripping non-numerics.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-chkmorph">
+      <label><input type="checkbox" checked><span class="nin2-bx"></span><span class="nin2-txt">Enable versioning</span></label>
+      <label><input type="checkbox"><span class="nin2-bx"></span><span class="nin2-txt">Require MFA delete</span></label>
+      <label><input type="checkbox" checked><span class="nin2-bx"></span><span class="nin2-txt">Encrypt at rest</span></label>
+    </div>
+  </div><div class="meta"><div class="nm">Checkbox Morph</div><span class="ref">.nin2-chkmorph</span><div class="desc">An empty box that pops a drawn checkmark in with a springy scale when ticked. A crisper alternative to the native control.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-radcard">
+      <input type="radio" name="nin2rc" id="nin2rc0" class="nin2-hide" checked><label for="nin2rc0"><span class="nin2-rd"></span><span class="nin2-body"><span class="nin2-t">Standard</span><span class="nin2-s">Balanced price and speed</span></span></label>
+      <input type="radio" name="nin2rc" id="nin2rc1" class="nin2-hide"><label for="nin2rc1"><span class="nin2-rd"></span><span class="nin2-body"><span class="nin2-t">Priority</span><span class="nin2-s">Fastest, higher cost</span></span></label>
+    </div>
+  </div><div class="meta"><div class="nm">Radio Card Group</div><span class="ref">.nin2-radcard</span><div class="desc">Full-width option cards with a title, description, and radio dot — the plan / tier picker with a clear hit target.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new"><div class="stage">
+    <div class="nin2-scrub" data-days="365"><div class="nin2-val">Day 220</div><div class="nin2-rail"><div class="nin2-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><input type="range" min="0" max="365" value="220"></div></div>
+  </div><div class="meta"><div class="nm">Date Scrubber</div><span class="ref">.nin2-scrub</span><div class="desc">A timeline rail with tick marks you drag a wide handle across; the readout updates live. For scrubbing a range or time offset.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<script>
+/* input 2026 new facets — self-contained, delegated, idempotent */
+(function(){
+  if(window.__nin2Init) return; window.__nin2Init=true;
+  var d=document;
+
+  function on(ev,sel,fn){
+    d.addEventListener(ev,function(e){
+      var t=e.target.closest?e.target.closest(sel):null;
+      if(t) fn(e,t);
+    },ev==='input'||ev==='focusin');
+  }
+
+  /* OTP auto-advance */
+  on('input','.nin2-otp input',function(e,el){
+    el.value=el.value.replace(/[^0-9]/g,'').slice(0,1);
+    if(el.value && el.nextElementSibling) el.nextElementSibling.focus();
+  });
+  on('keydown','.nin2-otp input',function(e,el){
+    if(e.key==='Backspace' && !el.value && el.previousElementSibling){ el.previousElementSibling.focus(); }
+  });
+
+  /* Tag chips add/remove */
+  on('keydown','.nin2-chips input',function(e,el){
+    if(e.key==='Enter'){
+      e.preventDefault();
+      var v=el.value.trim(); if(!v) return;
+      var chip=d.createElement('span'); chip.className='nin2-chip';
+      chip.innerHTML=v.replace(/</g,'&lt;')+'<b>×</b>';
+      el.parentNode.insertBefore(chip,el); el.value='';
+    } else if(e.key==='Backspace' && !el.value){
+      var prev=el.previousElementSibling;
+      if(prev && prev.classList.contains('nin2-chip')) prev.remove();
+    }
+  });
+  on('click','.nin2-chips .nin2-chip b',function(e,el){ el.parentNode.remove(); });
+
+  /* Dual range */
+  function syncRange(box){
+    var lo=box.querySelector('.nin2-lo'), hi=box.querySelector('.nin2-hi');
+    var a=Math.min(+lo.value,+hi.value), b=Math.max(+lo.value,+hi.value);
+    var fill=box.querySelector('.nin2-fillbar');
+    fill.style.left=a+'%'; fill.style.width=(b-a)+'%';
+    box.querySelector('.nin2-min').textContent='$'+a;
+    box.querySelector('.nin2-max').textContent='$'+b;
+  }
+  on('input','.nin2-mrange',function(e,box){ if(e.target.type==='range') syncRange(box); });
+  d.querySelectorAll('.nin2-mrange').forEach(syncRange);
+
+  /* Steppers (joined + round) */
+  function bumpText(root,valSel){
+    root.addEventListener('click',function(e){
+      var b=e.target.closest('button[data-d]'); if(!b) return;
+      var v=(+root.dataset.v||0)+(+b.dataset.d);
+      v=Math.max(0,v); root.dataset.v=v;
+      root.querySelector(valSel).textContent=v;
+    });
+  }
+  d.querySelectorAll('.nin2-step').forEach(function(r){ bumpText(r,'.nin2-val'); });
+  d.querySelectorAll('.nin2-qty').forEach(function(r){ bumpText(r,'.nin2-n'); });
+
+  /* Flip-number stepper */
+  d.querySelectorAll('.nin2-flipnum').forEach(function(root){
+    root.addEventListener('click',function(e){
+      var b=e.target.closest('button[data-d]'); if(!b) return;
+      var v=Math.max(0,(+root.dataset.v||0)+(+b.dataset.d)); root.dataset.v=v;
+      var card=root.querySelector('.nin2-card');
+      card.classList.remove('nin2-roll'); void card.offsetWidth;
+      card.classList.add('nin2-roll');
+      setTimeout(function(){ card.textContent=v; },170);
+    });
+  });
+
+  /* Password strength */
+  function score(p){
+    var s=0; if(p.length>=8)s++; if(/[A-Z]/.test(p)&&/[a-z]/.test(p))s++;
+    if(/[0-9]/.test(p))s++; if(/[^A-Za-z0-9]/.test(p))s++;
+    return p?Math.max(1,s):0;
+  }
+  var LAB=['Type to check strength','Weak','Fair','Good','Strong'];
+  function pwd(root){
+    var inp=root.querySelector('input'), lv=score(inp.value);
+    root.dataset.lvl=lv; root.querySelector('.nin2-lab').textContent=LAB[lv];
+  }
+  on('input','.nin2-pwd',function(e,root){ pwd(root); });
+  on('click','.nin2-pwd .nin2-eye',function(e,el){
+    var inp=el.closest('.nin2-pwd').querySelector('input');
+    inp.type=inp.type==='password'?'text':'password';
+  });
+  d.querySelectorAll('.nin2-pwd').forEach(pwd);
+
+  /* Drop zone drag visual */
+  ['dragover','dragenter'].forEach(function(ev){ on(ev,'.nin2-drop',function(e,el){ e.preventDefault(); el.classList.add('nin2-drag'); }); });
+  ['dragleave','drop'].forEach(function(ev){ on(ev,'.nin2-drop',function(e,el){ e.preventDefault(); el.classList.remove('nin2-drag'); }); });
+
+  /* Slider tooltip */
+  on('input','.nin2-tip input',function(e,el){
+    var bub=el.parentNode.querySelector('.nin2-bub');
+    bub.textContent=el.value+'%'; bub.style.left=el.value+'%';
+  });
+
+  /* Heart burst */
+  on('click','.nin2-heart',function(e,el){
+    el.classList.toggle('nin2-liked');
+    if(el.classList.contains('nin2-liked')){
+      var hi=el.querySelector('.nin2-hi'), b=el.querySelector('.nin2-burst');
+      hi.style.animation='none'; void hi.offsetWidth; hi.style.animation='';
+      b.querySelectorAll('i').forEach(function(p){ p.style.animation='none'; void p.offsetWidth; p.style.animation=''; });
+    }
+  });
+
+  /* Copy-to-clipboard field */
+  on('click','.nin2-copy button',function(e,el){
+    var txt=el.closest('.nin2-copy').querySelector('code').textContent;
+    try{ navigator.clipboard && navigator.clipboard.writeText(txt); }catch(_){}
+    var o=el.textContent; el.textContent='✓'; el.classList.add('nin2-ok');
+    setTimeout(function(){ el.textContent=o; el.classList.remove('nin2-ok'); },1100);
+  });
+
+  /* Autosize textarea */
+  function grow(t){ t.style.height='auto'; t.style.height=Math.min(t.scrollHeight,180)+'px'; }
+  on('input','.nin2-autosz textarea',function(e,el){ grow(el); });
+  d.querySelectorAll('.nin2-autosz textarea').forEach(grow);
+
+  /* Phone formatting */
+  on('input','.nin2-phone input',function(e,el){
+    var v=el.value.replace(/\D/g,'').slice(0,10), out=v;
+    if(v.length>6) out='('+v.slice(0,3)+') '+v.slice(3,6)+'-'+v.slice(6);
+    else if(v.length>3) out='('+v.slice(0,3)+') '+v.slice(3);
+    else if(v.length>0) out='('+v;
+    el.value=out;
+  });
+
+  /* Date scrubber */
+  on('input','.nin2-scrub input',function(e,el){
+    el.closest('.nin2-scrub').querySelector('.nin2-val').textContent='Day '+el.value;
+  });
+
+  /* Segmented toggle sliding thumb */
+  function seg(root){
+    var lab=root.querySelector('input:checked + label'); if(!lab) return;
+    var thumb=root.querySelector('.nin2-thumb'); if(!thumb) return;
+    thumb.style.width=lab.offsetWidth+'px';
+    thumb.style.transform='translateX('+lab.offsetLeft+'px)';
+  }
+  on('change','.nin2-seg',function(e,root){ seg(root); });
+  d.querySelectorAll('.nin2-seg').forEach(seg);
+
+  /* Combobox: pick option closes + updates label */
+  on('click','.nin2-combo .nin2-opt',function(e,el){
+    var det=el.closest('.nin2-combo');
+    det.querySelector('summary').firstChild.textContent=el.textContent;
+    det.open=false;
+  });
+})();
+</script>

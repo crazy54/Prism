@@ -1,0 +1,561 @@
+<style>
+/* ==== ai 2026 new facets — namespaced nai2-* (3D + model internals & agent runtime) ==== */
+
+/* shared 3D helpers */
+.nai2-scene{perspective:640px;width:150px;height:130px;display:flex;align-items:center;justify-content:center}
+@keyframes nai2Spin{to{transform:rotate(1turn)}}
+@keyframes nai2Blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ---- 3D 1: Embedding Cube / point-cloud ---- */
+.nai2-cube{position:relative;width:88px;height:88px;transform-style:preserve-3d;animation:nai2CubeSpin 12s linear infinite}
+.nai2-cube .fc{position:absolute;inset:0;border:1px solid rgba(var(--info-rgb),.5);background:rgba(var(--info-rgb),.07);
+  display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:6px;padding:8px;border-radius:6px}
+.nai2-cube .fc i{border-radius:50%;background:var(--c,var(--info));box-shadow:0 0 6px var(--c,var(--info));animation:nai2CubeDot 2.6s ease-in-out infinite}
+.nai2-cube .f1{transform:translateZ(44px)}.nai2-cube .f2{transform:rotateY(180deg) translateZ(44px)}
+.nai2-cube .f3{transform:rotateY(90deg) translateZ(44px)}.nai2-cube .f4{transform:rotateY(-90deg) translateZ(44px)}
+.nai2-cube .f5{transform:rotateX(90deg) translateZ(44px)}.nai2-cube .f6{transform:rotateX(-90deg) translateZ(44px)}
+@keyframes nai2CubeSpin{0%{transform:rotateX(-22deg) rotateY(0)}100%{transform:rotateX(-22deg) rotateY(360deg)}}
+@keyframes nai2CubeDot{0%,100%{opacity:.25;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+
+/* ---- 3D 2: Attention layer stack (translateZ planes) ---- */
+.nai2-astack{position:relative;width:110px;height:100px;transform-style:preserve-3d;animation:nai2Tilt 9s ease-in-out infinite}
+.nai2-astack .pl{position:absolute;left:50%;top:50%;width:78px;height:78px;margin:-39px 0 0 -39px;border:1px solid rgba(var(--c-rgb,68,147,248),.45);border-radius:8px;
+  background:linear-gradient(135deg,rgba(var(--info-rgb),.22),rgba(var(--crit-rgb),.14));display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(6,1fr)}
+.nai2-astack .pl span{border:.5px solid rgba(255,255,255,.05);animation:nai2Heat 3.2s ease-in-out infinite}
+.nai2-astack .l1{transform:translateZ(-42px)}.nai2-astack .l2{transform:translateZ(-14px)}
+.nai2-astack .l3{transform:translateZ(14px)}.nai2-astack .l4{transform:translateZ(42px)}
+.nai2-astack .l2 span{animation-delay:.4s}.nai2-astack .l3 span{animation-delay:.8s}.nai2-astack .l4 span{animation-delay:1.2s}
+@keyframes nai2Tilt{0%,100%{transform:rotateX(58deg) rotateZ(-32deg)}50%{transform:rotateX(50deg) rotateZ(18deg)}}
+@keyframes nai2Heat{0%,100%{background:transparent}50%{background:rgba(var(--info-rgb),.6)}}
+
+/* ---- 3D 3: Knowledge-graph globe ---- */
+.nai2-globe{position:relative;width:104px;height:104px;transform-style:preserve-3d;animation:nai2Spin 14s linear infinite}
+.nai2-globe .rg{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(var(--info-rgb),.4)}
+.nai2-globe .g1{transform:rotateY(0deg)}.nai2-globe .g2{transform:rotateY(60deg)}.nai2-globe .g3{transform:rotateY(120deg)}
+.nai2-globe .g4{transform:rotateX(70deg)}.nai2-globe .g5{transform:rotateX(70deg) rotateY(60deg)}
+.nai2-globe .nd{position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4.5px;border-radius:50%;background:var(--c,var(--pos));box-shadow:0 0 8px var(--c,var(--pos));animation:nai2Blink 2.4s ease-in-out infinite}
+@keyframes nai2Spin{to{transform:rotate(1turn)}}
+
+/* ---- 3D 4: Token cylinder ---- */
+.nai2-cyl{position:relative;width:120px;height:110px;transform-style:preserve-3d;animation:nai2CylSpin 16s linear infinite}
+.nai2-cyl b{position:absolute;left:50%;top:50%;width:40px;height:18px;margin:-9px 0 0 -20px;border-radius:4px;font-family:ui-monospace,Menlo,monospace;font-size:9px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;background:rgba(var(--accent-rgb),.14);border:1px solid rgba(var(--accent-rgb),.5);color:var(--accent);backface-visibility:hidden}
+@keyframes nai2CylSpin{0%{transform:rotateX(-12deg) rotateY(0)}100%{transform:rotateX(-12deg) rotateY(-360deg)}}
+
+/* ---- 3D 5: Depth-layered transformer blocks ---- */
+.nai2-depth{position:relative;width:120px;height:104px;transform-style:preserve-3d;animation:nai2DepthRot 10s ease-in-out infinite}
+.nai2-depth .blk{position:absolute;left:50%;top:50%;width:96px;height:26px;margin:-13px 0 0 -48px;border-radius:6px;
+  background:linear-gradient(90deg,rgba(var(--crit-rgb),.28),rgba(var(--info-rgb),.28));border:1px solid rgba(var(--c-rgb,200,121,255),.5);
+  display:flex;align-items:center;justify-content:center;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);box-shadow:0 6px 14px rgba(0,0,0,.35)}
+.nai2-depth .b1{transform:translateZ(-40px) translateY(30px)}.nai2-depth .b2{transform:translateZ(-13px) translateY(10px)}
+.nai2-depth .b3{transform:translateZ(14px) translateY(-10px)}.nai2-depth .b4{transform:translateZ(41px) translateY(-30px)}
+@keyframes nai2DepthRot{0%,100%{transform:rotateX(46deg) rotateZ(-18deg)}50%{transform:rotateX(38deg) rotateZ(14deg)}}
+
+/* ---- 3D 6: Isometric MoE expert grid ---- */
+.nai2-iso{position:relative;width:120px;height:110px;transform-style:preserve-3d;transform:rotateX(60deg) rotateZ(45deg)}
+.nai2-iso .grid3{position:absolute;inset:20px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:8px;transform-style:preserve-3d}
+.nai2-iso .col{position:relative;border-radius:3px;background:rgba(var(--info-rgb),.5);transform-style:preserve-3d;animation:nai2Iso 3s ease-in-out infinite}
+.nai2-iso .col::before{content:"";position:absolute;inset:0;border-radius:3px;background:var(--c,var(--accent));transform:translateZ(14px);box-shadow:0 0 10px var(--c,var(--accent))}
+@keyframes nai2Iso{0%,100%{transform:scaleZ(.4)}50%{transform:scaleZ(1.6)}}
+
+/* ============ model internals & agent runtime (2D) ============ */
+
+/* MoE Expert Routing */
+.nai2-moe{position:relative;width:220px;height:96px}
+.nai2-moe .gate{position:absolute;left:4px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:9px;background:var(--panel2);border:2px solid var(--c,var(--accent));display:flex;align-items:center;justify-content:center;font-size:14px}
+.nai2-moe .ex{position:absolute;right:0;width:56px;height:16px;border-radius:5px;font-size:9px;display:flex;align-items:center;justify-content:center;background:var(--panel2);border:1px solid var(--line);color:var(--muted)}
+.nai2-moe .e1{top:2px}.nai2-moe .e2{top:22px}.nai2-moe .e3{top:42px}.nai2-moe .e4{top:62px}.nai2-moe .e5{top:82px}
+.nai2-moe .e2,.nai2-moe .e4{animation:nai2Moe 3.6s ease-in-out infinite}.nai2-moe .e4{animation-delay:1.8s}
+.nai2-moe .wr{position:absolute;left:38px;height:2px;background:var(--line);transform-origin:left center;overflow:hidden}
+.nai2-moe .wr.on::after{content:"";position:absolute;inset:0;width:14px;background:var(--c,var(--accent));box-shadow:0 0 6px var(--c,var(--accent));animation:nai2Flow 1.6s linear infinite}
+@keyframes nai2Moe{0%,100%{border-color:var(--line);color:var(--muted);background:var(--panel2)}50%{border-color:var(--accent);color:var(--accent);background:rgba(var(--accent-rgb),.12)}}
+@keyframes nai2Flow{0%{left:0;opacity:1}100%{left:calc(100% - 14px);opacity:.2}}
+
+/* KV-Cache Eviction */
+.nai2-kv{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;width:100%;max-width:230px}
+.nai2-kv i{aspect-ratio:1;border-radius:4px;background:rgba(var(--info-rgb),.5);border:1px solid rgba(var(--info-rgb),.6);animation:nai2Kv 5s ease-in-out infinite}
+.nai2-kv i:nth-child(1),.nai2-kv i:nth-child(2),.nai2-kv i:nth-child(3){animation-delay:0s}
+.nai2-kv i:nth-child(4),.nai2-kv i:nth-child(5),.nai2-kv i:nth-child(6){animation-delay:.5s}
+.nai2-kv i:nth-child(7),.nai2-kv i:nth-child(8),.nai2-kv i:nth-child(9){animation-delay:1s}
+.nai2-kv i:nth-child(3n){animation-delay:1.6s}
+@keyframes nai2Kv{0%,60%{opacity:1;background:rgba(var(--info-rgb),.5)}75%{opacity:.15;background:rgba(var(--neg-rgb),.5);border-color:var(--neg)}100%{opacity:1;background:rgba(var(--pos-rgb),.5);border-color:var(--pos)}}
+
+/* Beam Search Tree */
+.nai2-beam{position:relative;width:210px;height:100px}
+.nai2-beam .nd{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--panel2);border:1.5px solid var(--line);transform:translate(-50%,-50%)}
+.nai2-beam .nd.best{background:var(--c,var(--pos));border-color:var(--c,var(--pos));box-shadow:0 0 9px var(--c,var(--pos));animation:nai2Blink 2s ease-in-out infinite}
+.nai2-beam .ed{position:absolute;height:1.5px;transform-origin:left center;background:linear-gradient(90deg,var(--line),rgba(var(--line),.2))}
+.nai2-beam .ed.best{background:linear-gradient(90deg,var(--pos),rgba(var(--pos-rgb),.3));height:2px;animation:nai2BeamGlow 2.4s ease-in-out infinite}
+@keyframes nai2BeamGlow{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* Logit Lens */
+.nai2-logit{width:100%;max-width:230px;display:flex;flex-direction:column;gap:6px;font-family:ui-monospace,Menlo,monospace;font-size:10px}
+.nai2-logit .row{display:flex;align-items:center;gap:8px;color:var(--muted);opacity:.35;animation:nai2Logit 4.8s ease-in-out infinite}
+.nai2-logit .row:nth-child(2){animation-delay:.5s}.nai2-logit .row:nth-child(3){animation-delay:1s}.nai2-logit .row:nth-child(4){animation-delay:1.5s}.nai2-logit .row:nth-child(5){animation-delay:2s}
+.nai2-logit .ly{color:var(--dim);width:32px;flex:0 0 auto}
+.nai2-logit .tk{padding:1px 6px;border-radius:4px;background:rgba(var(--c-rgb,68,147,248),.14);border:1px solid rgba(var(--c-rgb,68,147,248),.4);color:var(--c,var(--info));font-weight:700}
+@keyframes nai2Logit{0%,15%{opacity:.3}30%,100%{opacity:1}}
+
+/* RLHF Reward Meter */
+.nai2-reward{width:100%;max-width:220px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.nai2-reward .bar{width:100%;height:14px;border-radius:7px;background:var(--panel2);border:1px solid var(--line);overflow:hidden;position:relative}
+.nai2-reward .bar::after{content:"";position:absolute;inset:0;width:20%;border-radius:7px;background:linear-gradient(90deg,var(--warn),var(--pos));animation:nai2Reward 4s ease-in-out infinite}
+.nai2-reward .fb{display:flex;gap:18px;font-size:20px}
+.nai2-reward .up{animation:nai2Pop 4s ease-in-out infinite}
+.nai2-reward .dn{opacity:.3}
+@keyframes nai2Reward{0%{width:22%}50%{width:88%}100%{width:22%}}
+@keyframes nai2Pop{0%,45%{transform:scale(1)}55%{transform:scale(1.35)}70%,100%{transform:scale(1)}}
+
+/* Speculative Race */
+.nai2-race{width:100%;max-width:230px;display:flex;flex-direction:column;gap:12px}
+.nai2-race .ln{position:relative;height:14px;border-radius:7px;background:var(--panel2);border:1px solid var(--line)}
+.nai2-race .ln .car{position:absolute;top:1px;bottom:1px;left:1px;width:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#06210d}
+.nai2-race .draft .car{background:var(--info);animation:nai2Race 2.4s cubic-bezier(.3,0,.7,1) infinite}
+.nai2-race .tgt .car{background:var(--pos);animation:nai2Race 2.4s cubic-bezier(.5,0,.6,1) infinite;animation-delay:.15s}
+.nai2-race .lb{position:absolute;right:6px;top:1px;font-size:8px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
+@keyframes nai2Race{0%{left:1px}80%,100%{left:calc(100% - 23px)}}
+
+/* Tool-Call Handshake (JSON) */
+.nai2-tool{width:100%;max-width:240px;font-family:ui-monospace,Menlo,monospace;font-size:10px;display:flex;flex-direction:column;gap:7px}
+.nai2-tool .msg{border-radius:7px;padding:6px 9px;border:1px solid var(--line);opacity:0;animation:nai2Tool 4.4s ease-in-out infinite}
+.nai2-tool .req{background:rgba(var(--accent-rgb),.1);border-color:rgba(var(--accent-rgb),.4);color:var(--accent);align-self:flex-start}
+.nai2-tool .res{background:rgba(var(--pos-rgb),.1);border-color:rgba(var(--pos-rgb),.4);color:var(--pos);align-self:flex-end;animation-delay:1.4s}
+@keyframes nai2Tool{0%,10%{opacity:0;transform:translateY(6px)}25%,90%{opacity:1;transform:none}100%{opacity:0}}
+
+/* Guardrail Scan Grid */
+.nai2-guard{position:relative;width:150px;height:88px;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(4,1fr);gap:5px;padding:6px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.nai2-guard i{border-radius:3px;background:rgba(var(--pos-rgb),.18)}
+.nai2-guard i.flag{background:rgba(var(--neg-rgb),.5);animation:nai2Blink 1.2s ease-in-out infinite}
+.nai2-guard::after{content:"";position:absolute;top:0;left:-30%;width:30%;height:100%;background:linear-gradient(90deg,transparent,rgba(var(--pos-rgb),.5),transparent);animation:nai2Sweep 2.6s linear infinite}
+@keyframes nai2Sweep{0%{left:-30%}100%{left:110%}}
+
+/* Hallucination Check */
+.nai2-hallu{width:100%;max-width:230px;display:flex;flex-direction:column;gap:9px;font-size:11px}
+.nai2-hallu .row{display:flex;align-items:center;gap:9px;color:var(--muted)}
+.nai2-hallu .tag{flex:0 0 auto;width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900}
+.nai2-hallu .ok .tag{background:var(--pos);color:#06210d}
+.nai2-hallu .bad .tag{background:var(--neg);color:#2a0606;animation:nai2Blink 1.3s ease-in-out infinite}
+.nai2-hallu .bad{color:var(--neg)}
+.nai2-hallu .row{opacity:0;animation:nai2Tool 5s ease-in-out infinite}
+.nai2-hallu .row:nth-child(2){animation-delay:.7s}.nai2-hallu .row:nth-child(3){animation-delay:1.4s}
+
+/* Context Gauge (circular) */
+.nai2-gauge{position:relative;width:96px;height:96px;border-radius:50%;background:conic-gradient(var(--c,var(--info)) 0 0,var(--panel2) 0 100%);animation:nai2Gauge 4.4s ease-in-out infinite}
+.nai2-gauge::after{content:"73%";position:absolute;inset:11px;border-radius:50%;background:var(--panel);display:flex;align-items:center;justify-content:center;font-family:ui-monospace,Menlo,monospace;font-weight:800;font-size:16px;color:var(--c,var(--info))}
+@keyframes nai2Gauge{0%{background:conic-gradient(var(--c,var(--info)) 0 12%,var(--panel2) 12% 100%)}55%{background:conic-gradient(var(--c,var(--info)) 0 84%,var(--panel2) 84% 100%)}100%{background:conic-gradient(var(--c,var(--info)) 0 12%,var(--panel2) 12% 100%)}}
+
+/* Throughput Meter */
+.nai2-tput{display:flex;align-items:flex-end;gap:4px;height:64px}
+.nai2-tput i{width:9px;border-radius:3px 3px 0 0;background:linear-gradient(180deg,var(--c,var(--pos)),rgba(var(--pos-rgb),.3));animation:nai2Tput 1.3s ease-in-out infinite}
+.nai2-tput i:nth-child(2){animation-delay:.1s}.nai2-tput i:nth-child(3){animation-delay:.2s}.nai2-tput i:nth-child(4){animation-delay:.3s}.nai2-tput i:nth-child(5){animation-delay:.4s}.nai2-tput i:nth-child(6){animation-delay:.5s}.nai2-tput i:nth-child(7){animation-delay:.6s}.nai2-tput i:nth-child(8){animation-delay:.7s}.nai2-tput i:nth-child(9){animation-delay:.8s}
+@keyframes nai2Tput{0%,100%{height:14px}50%{height:60px}}
+
+/* GPU Utilization */
+.nai2-gpu{width:100%;max-width:220px;display:flex;flex-direction:column;gap:8px}
+.nai2-gpu .core{display:flex;align-items:center;gap:8px;font-family:ui-monospace,Menlo,monospace;font-size:9px;color:var(--dim)}
+.nai2-gpu .track{flex:1;height:9px;border-radius:5px;background:var(--panel2);overflow:hidden;position:relative}
+.nai2-gpu .track::after{content:"";position:absolute;inset:0;width:40%;border-radius:5px;background:linear-gradient(90deg,var(--pos),var(--warn),var(--neg));animation:nai2Gpu 3s ease-in-out infinite}
+.nai2-gpu .core:nth-child(2) .track::after{animation-delay:.5s}.nai2-gpu .core:nth-child(3) .track::after{animation-delay:1s}.nai2-gpu .core:nth-child(4) .track::after{animation-delay:1.5s}
+@keyframes nai2Gpu{0%,100%{width:28%}50%{width:94%}}
+
+/* Diffusion Denoise */
+.nai2-diff{position:relative;width:84px;height:84px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.nai2-diff .noise{position:absolute;inset:0;background-image:repeating-conic-gradient(from 0deg,rgba(var(--crit-rgb),.6) 0 4deg,transparent 4deg 8deg),repeating-linear-gradient(45deg,rgba(var(--info-rgb),.5) 0 3px,transparent 3px 6px);animation:nai2Diff 4s ease-in-out infinite}
+.nai2-diff .clean{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;opacity:0;animation:nai2DiffClean 4s ease-in-out infinite}
+@keyframes nai2Diff{0%{opacity:1;filter:blur(0)}70%,100%{opacity:0;filter:blur(6px)}}
+@keyframes nai2DiffClean{0%,55%{opacity:0}80%,100%{opacity:1}}
+
+/* Agent Planning Tree */
+.nai2-plan{width:100%;max-width:230px;display:flex;flex-direction:column;gap:6px;font-size:11px}
+.nai2-plan .stp{display:flex;align-items:center;gap:8px;color:var(--muted);opacity:0;animation:nai2Plan 5s ease-in-out infinite}
+.nai2-plan .stp:nth-child(2){animation-delay:.5s;padding-left:16px}.nai2-plan .stp:nth-child(3){animation-delay:1s;padding-left:16px}.nai2-plan .stp:nth-child(4){animation-delay:1.5s;padding-left:32px}.nai2-plan .stp:nth-child(5){animation-delay:2s}
+.nai2-plan .d{width:8px;height:8px;border-radius:2px;background:var(--c,var(--accent));flex:0 0 auto;transform:rotate(45deg)}
+@keyframes nai2Plan{0%,12%{opacity:0;transform:translateX(-6px)}25%,95%{opacity:1;transform:none}100%{opacity:0}}
+
+/* Memory Read/Write */
+.nai2-rw{display:flex;align-items:center;gap:14px}
+.nai2-rw .store{width:46px;height:52px;border-radius:8px;background:var(--panel2);border:2px solid var(--c,var(--info));display:flex;align-items:center;justify-content:center;font-size:20px;position:relative}
+.nai2-rw .arw{display:flex;flex-direction:column;gap:8px;font-family:ui-monospace,monospace;font-size:9px}
+.nai2-rw .r,.nai2-rw .w{display:flex;align-items:center;gap:4px;padding:2px 6px;border-radius:5px}
+.nai2-rw .w{background:rgba(var(--accent-rgb),.12);color:var(--accent);animation:nai2Blink 2.4s ease-in-out infinite}
+.nai2-rw .r{background:rgba(var(--pos-rgb),.12);color:var(--pos);animation:nai2Blink 2.4s ease-in-out infinite;animation-delay:1.2s}
+
+/* Embedding Drift */
+.nai2-drift{position:relative;width:150px;height:88px;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.nai2-drift .p{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--c,var(--crit));box-shadow:0 0 6px var(--c,var(--crit));animation:nai2Drift 6s ease-in-out infinite}
+@keyframes nai2Drift{0%,100%{transform:translate(0,0);opacity:.5}50%{transform:translate(var(--dx,20px),var(--dy,-14px));opacity:1}}
+
+/* Semantic Cache Hit */
+.nai2-scache{position:relative;width:200px;height:80px}
+.nai2-scache .q{position:absolute;left:0;top:50%;transform:translateY(-50%);padding:4px 8px;border-radius:6px;font-size:10px;background:rgba(var(--info-rgb),.14);border:1px solid rgba(var(--info-rgb),.4);color:var(--info)}
+.nai2-scache .hit{position:absolute;right:0;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:var(--panel2);border:2px solid var(--pos);display:flex;align-items:center;justify-content:center;font-size:16px;animation:nai2Pop 3s ease-in-out infinite}
+.nai2-scache .beam{position:absolute;left:78px;right:52px;top:50%;height:2px;background:var(--line);overflow:hidden}
+.nai2-scache .beam::after{content:"";position:absolute;inset:0;width:16px;background:var(--pos);box-shadow:0 0 6px var(--pos);animation:nai2Flow 1.8s linear infinite}
+
+/* Prefill vs Decode */
+.nai2-phase{width:100%;max-width:230px;display:flex;flex-direction:column;gap:9px}
+.nai2-phase .lb{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.nai2-phase .pf{display:flex;gap:3px}
+.nai2-phase .pf i{flex:1;height:16px;border-radius:3px;background:var(--c,var(--accent));opacity:0;animation:nai2Prefill 4s ease-in-out infinite}
+.nai2-phase .pf i:nth-child(2){animation-delay:.04s}.nai2-phase .pf i:nth-child(3){animation-delay:.08s}.nai2-phase .pf i:nth-child(4){animation-delay:.12s}.nai2-phase .pf i:nth-child(5){animation-delay:.16s}.nai2-phase .pf i:nth-child(6){animation-delay:.2s}
+.nai2-phase .dc{display:flex;gap:5px}
+.nai2-phase .dc i{width:14px;height:14px;border-radius:3px;background:var(--info);opacity:0;animation:nai2Decode 4s ease-in-out infinite}
+.nai2-phase .dc i:nth-child(2){animation-delay:.5s}.nai2-phase .dc i:nth-child(3){animation-delay:1s}.nai2-phase .dc i:nth-child(4){animation-delay:1.5s}
+@keyframes nai2Prefill{0%{opacity:0}10%,45%{opacity:1}55%,100%{opacity:.15}}
+@keyframes nai2Decode{0%,45%{opacity:.15}55%,95%{opacity:1}100%{opacity:.15}}
+
+/* Softmax Distribution */
+.nai2-softmax{display:flex;align-items:flex-end;gap:6px;height:66px}
+.nai2-softmax i{width:16px;border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--c,var(--info)),rgba(var(--info-rgb),.3));animation:nai2Soft 3.6s ease-in-out infinite}
+.nai2-softmax i:nth-child(1){--h:60px}.nai2-softmax i:nth-child(2){--h:34px;animation-delay:.2s}.nai2-softmax i:nth-child(3){--h:20px;animation-delay:.4s}.nai2-softmax i:nth-child(4){--h:12px;animation-delay:.6s}.nai2-softmax i:nth-child(5){--h:7px;animation-delay:.8s}
+@keyframes nai2Soft{0%,100%{height:14px}55%{height:var(--h,30px)}}
+
+/* Positional Encoding */
+.nai2-posenc{width:100%;max-width:230px;height:70px;overflow:hidden}
+.nai2-posenc svg{width:100%;height:70px}
+.nai2-posenc polyline{fill:none;stroke-width:2}
+.nai2-posenc .s1{stroke:var(--info);animation:nai2Wave 4s linear infinite}
+.nai2-posenc .s2{stroke:var(--crit);opacity:.7;animation:nai2Wave 6s linear infinite}
+.nai2-posenc .s3{stroke:var(--accent);opacity:.6;animation:nai2Wave 9s linear infinite}
+@keyframes nai2Wave{from{transform:translateX(0)}to{transform:translateX(-115px)}}
+
+/* LoRA Adapter Merge */
+.nai2-lora{display:flex;align-items:center;gap:8px;font-family:ui-monospace,monospace;font-size:10px}
+.nai2-lora .m{border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--ink);border:1px solid var(--line)}
+.nai2-lora .base{width:44px;height:44px;background:rgba(var(--info-rgb),.14);border-color:rgba(var(--info-rgb),.4)}
+.nai2-lora .a{width:12px;height:44px;background:rgba(var(--accent-rgb),.2);border-color:var(--accent);animation:nai2Lora 3.2s ease-in-out infinite}
+.nai2-lora .b{width:44px;height:12px;background:rgba(var(--accent-rgb),.2);border-color:var(--accent);animation:nai2Lora 3.2s ease-in-out infinite;animation-delay:.4s}
+.nai2-lora .op{color:var(--dim);font-size:14px}
+.nai2-lora .out{width:44px;height:44px;background:rgba(var(--pos-rgb),.16);border-color:var(--pos);animation:nai2Pop 3.2s ease-in-out infinite;animation-delay:.8s}
+@keyframes nai2Lora{0%,100%{box-shadow:0 0 0 rgba(var(--accent-rgb),0)}50%{box-shadow:0 0 12px rgba(var(--accent-rgb),.6)}}
+
+/* Rate-Limit Bucket */
+.nai2-bucket{position:relative;width:70px;height:84px}
+.nai2-bucket .tk{position:absolute;left:50%;top:0;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--c,var(--accent));box-shadow:0 0 6px var(--c,var(--accent));animation:nai2Bucket 2.2s ease-in infinite}
+.nai2-bucket .tk:nth-child(2){animation-delay:.6s}.nai2-bucket .tk:nth-child(3){animation-delay:1.2s}
+.nai2-bucket .pail{position:absolute;bottom:0;left:8px;right:8px;height:40px;border:2px solid var(--line);border-top:none;border-radius:0 0 10px 10px;background:linear-gradient(180deg,rgba(var(--accent-rgb),.05),rgba(var(--accent-rgb),.22))}
+@keyframes nai2Bucket{0%{top:0;opacity:1}70%{top:44px;opacity:1}100%{top:44px;opacity:0}}
+
+/* Reflection Loop */
+.nai2-reflect{position:relative;width:96px;height:96px}
+.nai2-reflect .ring{position:absolute;inset:0;border-radius:50%;border:2px dashed rgba(var(--c-rgb,200,121,255),.5);animation:nai2Spin 8s linear infinite}
+.nai2-reflect .core{position:absolute;inset:24px;border-radius:50%;background:var(--panel2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:18px}
+.nai2-reflect .dot{position:absolute;top:-5px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--c,var(--crit));box-shadow:0 0 8px var(--c,var(--crit))}
+@keyframes nai2Spin{to{transform:rotate(1turn)}}
+
+/* Grammar-Constrained Decode */
+.nai2-grammar{display:flex;flex-wrap:wrap;gap:5px;max-width:230px;justify-content:center}
+.nai2-grammar span{font-family:ui-monospace,monospace;font-size:10px;padding:2px 7px;border-radius:5px;border:1px solid var(--line);color:var(--muted);animation:nai2Gram 3.4s ease-in-out infinite}
+.nai2-grammar .ok{border-color:rgba(var(--pos-rgb),.5);color:var(--pos);background:rgba(var(--pos-rgb),.1)}
+.nai2-grammar .no{border-color:rgba(var(--neg-rgb),.4);color:var(--neg);text-decoration:line-through;opacity:.4}
+.nai2-grammar span:nth-child(2){animation-delay:.3s}.nai2-grammar span:nth-child(3){animation-delay:.6s}.nai2-grammar span:nth-child(4){animation-delay:.9s}.nai2-grammar span:nth-child(5){animation-delay:1.2s}.nai2-grammar span:nth-child(6){animation-delay:1.5s}
+@keyframes nai2Gram{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* reduced motion: steady everything, keep visible */
+@media(prefers-reduced-motion:reduce){
+  [class^="nai2-"],[class*=" nai2-"],[class^="nai2-"] *{animation:none!important;transition:none!important}
+  .nai2-cube{transform:rotateX(-22deg) rotateY(28deg)}
+  .nai2-globe{transform:rotateY(20deg)}
+  .nai2-cyl{transform:rotateX(-12deg) rotateY(24deg)}
+  .nai2-logit .row,.nai2-tool .msg,.nai2-hallu .row,.nai2-plan .stp,.nai2-phase .pf i,.nai2-phase .dc i,.nai2-diff .clean,.nai2-grammar span{opacity:1!important;transform:none!important}
+  .nai2-cube .fc i,.nai2-beam .nd.best,.nai2-globe .nd{opacity:1!important}
+  .nai2-gauge{background:conic-gradient(var(--c,var(--info)) 0 73%,var(--panel2) 73% 100%)!important}
+  .nai2-reward .bar::after{width:70%!important}
+  .nai2-gpu .track::after{width:64%!important}
+  .nai2-tput i,.nai2-softmax i{height:34px!important}
+}
+</style>
+
+<h3 class="sec">🧊 3D &amp; Spatial</h3>
+<div class="grid">
+
+  <div class="panel is-new" style="--c:var(--info)">
+    <div class="ptitle"><span class="tdot"></span>Embedding Cube</div>
+    <div class="pbody"><div class="nai2-scene"><div class="nai2-cube">
+      <div class="fc f1"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="fc f2"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="fc f3"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="fc f4"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="fc f5"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="fc f6"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div></div></div>
+    <div class="cap">A rotating 3D point-cloud cube — the high-dimensional embedding space projected into a spinning lattice.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--info)">
+    <div class="ptitle"><span class="tdot"></span>Attention Layer Stack</div>
+    <div class="pbody"><div class="nai2-scene"><div class="nai2-astack">
+      <div class="pl l1"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="pl l2"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="pl l3"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="pl l4"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </div></div></div>
+    <div class="cap">Four attention heat-maps floating on stacked Z-planes — the transformer's layers seen edge-on in depth.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--pos)">
+    <div class="ptitle"><span class="tdot"></span>Knowledge Globe</div>
+    <div class="pbody"><div class="nai2-scene"><div class="nai2-globe">
+      <div class="rg g1"></div><div class="rg g2"></div><div class="rg g3"></div><div class="rg g4"></div><div class="rg g5"></div>
+      <span class="nd" style="transform:translate3d(40px,-30px,20px)"></span>
+      <span class="nd" style="transform:translate3d(-34px,18px,30px);animation-delay:.6s"></span>
+      <span class="nd" style="transform:translate3d(12px,40px,-24px);animation-delay:1.2s"></span>
+      <span class="nd" style="transform:translate3d(-24px,-36px,-18px);animation-delay:.9s"></span>
+    </div></div></div>
+    <div class="cap">A wireframe knowledge graph wrapped onto a slowly spinning globe — entities glinting as facts link across it.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--accent)">
+    <div class="ptitle"><span class="tdot"></span>Token Cylinder</div>
+    <div class="pbody"><div class="nai2-scene"><div class="nai2-cyl">
+      <b style="transform:rotateY(0deg) translateZ(52px)">the</b>
+      <b style="transform:rotateY(45deg) translateZ(52px)">model</b>
+      <b style="transform:rotateY(90deg) translateZ(52px)">reads</b>
+      <b style="transform:rotateY(135deg) translateZ(52px)">each</b>
+      <b style="transform:rotateY(180deg) translateZ(52px)">token</b>
+      <b style="transform:rotateY(225deg) translateZ(52px)">in</b>
+      <b style="transform:rotateY(270deg) translateZ(52px)">a</b>
+      <b style="transform:rotateY(315deg) translateZ(52px)">ring</b>
+    </div></div></div>
+    <div class="cap">The token sequence wrapped into a rotating 3D cylinder — the context revolving past the read head.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--crit)">
+    <div class="ptitle"><span class="tdot"></span>Transformer Depth</div>
+    <div class="pbody"><div class="nai2-scene"><div class="nai2-depth">
+      <div class="blk b1">layer 1</div><div class="blk b2">layer 2</div><div class="blk b3">layer 3</div><div class="blk b4">layer 4</div>
+    </div></div></div>
+    <div class="cap">Transformer blocks fanned out in depth — the forward pass climbing layer by layer through the network.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--accent)">
+    <div class="ptitle"><span class="tdot"></span>Expert Grid (3D)</div>
+    <div class="pbody"><div class="nai2-scene"><div class="nai2-iso"><div class="grid3">
+      <div class="col" style="animation-delay:0s"></div><div class="col" style="animation-delay:.3s"></div><div class="col" style="animation-delay:.6s"></div>
+      <div class="col" style="animation-delay:.9s"></div><div class="col" style="animation-delay:1.2s"></div><div class="col" style="animation-delay:.4s"></div>
+      <div class="col" style="animation-delay:.7s"></div><div class="col" style="animation-delay:1s"></div><div class="col" style="animation-delay:.2s"></div>
+    </div></div></div></div>
+    <div class="cap">An isometric grid of experts rising and falling in 3D — mixture-of-experts load pulsing across the mesh.</div>
+  </div>
+
+</div>
+
+<h3 class="sec">✦ Model Internals &amp; Agent Runtime</h3>
+<div class="grid">
+
+  <div class="panel is-new w2" style="--c:var(--accent)">
+    <div class="ptitle"><span class="tdot"></span>MoE Expert Routing</div>
+    <div class="pbody"><div class="nai2-moe">
+      <div class="gate">🚦</div>
+      <div class="wr on" style="top:10px;width:170px;transform:rotate(-24deg)"></div>
+      <div class="wr" style="top:29px;width:172px;transform:rotate(-12deg)"></div>
+      <div class="wr on" style="top:49px;width:174px"></div>
+      <div class="wr" style="top:67px;width:172px;transform:rotate(12deg)"></div>
+      <div class="wr" style="top:87px;width:170px;transform:rotate(24deg)"></div>
+      <div class="ex e1">expert 1</div><div class="ex e2">expert 2</div><div class="ex e3">expert 3</div><div class="ex e4">expert 4</div><div class="ex e5">expert 5</div>
+    </div></div>
+    <div class="cap">The gating network fires each token down to its top-k experts — most of the model stays dark.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--info)">
+    <div class="ptitle"><span class="tdot"></span>KV-Cache Eviction</div>
+    <div class="pbody"><div class="nai2-kv"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="cap">Old key/value entries flush red and get recycled as the cache fills — making room for fresh tokens.</div>
+  </div>
+
+  <div class="panel is-new w2" style="--c:var(--pos)">
+    <div class="ptitle"><span class="tdot"></span>Beam Search Tree</div>
+    <div class="pbody"><div class="nai2-beam">
+      <span class="nd" style="left:12px;top:50px"></span>
+      <span class="nd" style="left:80px;top:22px"></span>
+      <span class="nd best" style="left:80px;top:74px"></span>
+      <span class="nd" style="left:150px;top:12px"></span>
+      <span class="nd" style="left:150px;top:40px"></span>
+      <span class="nd best" style="left:150px;top:66px"></span>
+      <span class="nd" style="left:150px;top:90px"></span>
+      <span class="ed" style="left:12px;top:50px;width:70px;transform:rotate(-22deg)"></span>
+      <span class="ed best" style="left:12px;top:50px;width:70px;transform:rotate(20deg)"></span>
+      <span class="ed" style="left:80px;top:22px;width:71px;transform:rotate(-8deg)"></span>
+      <span class="ed" style="left:80px;top:22px;width:71px;transform:rotate(15deg)"></span>
+      <span class="ed best" style="left:80px;top:74px;width:71px;transform:rotate(-7deg)"></span>
+      <span class="ed" style="left:80px;top:74px;width:71px;transform:rotate(14deg)"></span>
+    </div></div>
+    <div class="cap">Candidate sequences branch out; the highest-probability beam glows as low-scoring paths are pruned.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--info)">
+    <div class="ptitle"><span class="tdot"></span>Logit Lens</div>
+    <div class="pbody"><div class="nai2-logit">
+      <div class="row"><span class="ly">L4</span><span class="tk">" the"</span></div>
+      <div class="row"><span class="ly">L8</span><span class="tk">" cat"</span></div>
+      <div class="row"><span class="ly">L16</span><span class="tk">" sat"</span></div>
+      <div class="row"><span class="ly">L24</span><span class="tk">" down"</span></div>
+      <div class="row"><span class="ly">out</span><span class="tk">" quietly"</span></div>
+    </div></div>
+    <div class="cap">Decoding each layer's hidden state to its top token — watching the prediction sharpen with depth.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--pos)">
+    <div class="ptitle"><span class="tdot"></span>RLHF Reward</div>
+    <div class="pbody"><div class="nai2-reward"><div class="bar"></div><div class="fb"><span class="up">👍</span><span class="dn">👎</span></div></div></div>
+    <div class="cap">The reward model scores a response and nudges the policy toward the preferred, thumbs-up answer.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--info)">
+    <div class="ptitle"><span class="tdot"></span>Speculative Race</div>
+    <div class="pbody"><div class="nai2-race">
+      <div class="ln draft"><div class="car">D</div><span class="lb">draft</span></div>
+      <div class="ln tgt"><div class="car">T</div><span class="lb">target</span></div>
+    </div></div>
+    <div class="cap">The tiny draft model sprints ahead guessing tokens; the target model verifies them in a single pass.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--accent)">
+    <div class="ptitle"><span class="tdot"></span>Tool-Call Handshake</div>
+    <div class="pbody"><div class="nai2-tool">
+      <div class="msg req">→ get_weather({"city":"PDX"})</div>
+      <div class="msg res">← {"tempF":58,"sky":"rain"}</div>
+    </div></div>
+    <div class="cap">The model emits a structured tool call and the runtime returns a JSON result to continue reasoning.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--pos)">
+    <div class="ptitle"><span class="tdot"></span>Guardrail Scan</div>
+    <div class="pbody"><div class="nai2-guard"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="flag"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="cap">A moderation sweep passes over the output grid; a flagged cell lights red where policy fires.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--neg)">
+    <div class="ptitle"><span class="tdot"></span>Hallucination Check</div>
+    <div class="pbody"><div class="nai2-hallu">
+      <div class="row ok"><span class="tag">✓</span>Claim supported by source</div>
+      <div class="row bad"><span class="tag">!</span>No evidence for this figure</div>
+      <div class="row ok"><span class="tag">✓</span>Dates match citation</div>
+    </div></div>
+    <div class="cap">Each generated claim is cross-checked against retrieved evidence; the unsupported one gets flagged.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--info)">
+    <div class="ptitle"><span class="tdot"></span>Context Gauge</div>
+    <div class="pbody"><div class="nai2-gauge"></div></div>
+    <div class="cap">A radial gauge tracking how full the context window is as the conversation grows toward the limit.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--pos)">
+    <div class="ptitle"><span class="tdot"></span>Throughput</div>
+    <div class="pbody"><div class="nai2-tput"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="cap">A live tokens-per-second bar meter rippling as the decode loop sustains its output rate.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--pos)">
+    <div class="ptitle"><span class="tdot"></span>GPU Utilization</div>
+    <div class="pbody"><div class="nai2-gpu">
+      <div class="core"><span>gpu0</span><span class="track"></span></div>
+      <div class="core"><span>gpu1</span><span class="track"></span></div>
+      <div class="core"><span>gpu2</span><span class="track"></span></div>
+      <div class="core"><span>gpu3</span><span class="track"></span></div>
+    </div></div>
+    <div class="cap">Per-device utilization bars breathing between idle and saturated as the batch flows across the GPUs.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--crit)">
+    <div class="ptitle"><span class="tdot"></span>Diffusion Denoise</div>
+    <div class="pbody"><div class="nai2-diff"><div class="noise"></div><div class="clean">🖼️</div></div></div>
+    <div class="cap">Random noise resolves step by step into a clean image — the reverse diffusion sampling loop.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--accent)">
+    <div class="ptitle"><span class="tdot"></span>Agent Planning Tree</div>
+    <div class="pbody"><div class="nai2-plan">
+      <div class="stp"><span class="d"></span>Goal: ship the report</div>
+      <div class="stp"><span class="d"></span>Gather metrics</div>
+      <div class="stp"><span class="d"></span>Query cost data</div>
+      <div class="stp"><span class="d"></span>Compute deltas</div>
+      <div class="stp"><span class="d"></span>Draft summary</div>
+    </div></div>
+    <div class="cap">The agent decomposes a goal into sub-tasks, unfolding a plan tree it will execute step by step.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--info)">
+    <div class="ptitle"><span class="tdot"></span>Memory Read/Write</div>
+    <div class="pbody"><div class="nai2-rw">
+      <div class="arw"><span class="w">write ▸</span><span class="r">◂ read</span></div>
+      <div class="store">🧠</div>
+    </div></div>
+    <div class="cap">The agent commits facts to long-term memory and pulls them back — the read/write path to its store.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--crit)">
+    <div class="ptitle"><span class="tdot"></span>Embedding Drift</div>
+    <div class="pbody"><div class="nai2-drift">
+      <span class="p" style="left:22px;top:20px;--dx:26px;--dy:14px"></span>
+      <span class="p" style="left:60px;top:52px;--dx:-18px;--dy:-22px;animation-delay:.8s"></span>
+      <span class="p" style="left:100px;top:28px;--dx:14px;--dy:24px;animation-delay:1.6s"></span>
+      <span class="p" style="left:120px;top:60px;--dx:-24px;--dy:-10px;animation-delay:2.4s"></span>
+      <span class="p" style="left:44px;top:66px;--dx:20px;--dy:-18px;animation-delay:3.2s"></span>
+    </div></div>
+    <div class="cap">Points wander across the embedding plane over time — semantic drift between model or data versions.</div>
+  </div>
+
+  <div class="panel is-new w2" style="--c:var(--pos)">
+    <div class="ptitle"><span class="tdot"></span>Semantic Cache Hit</div>
+    <div class="pbody"><div class="nai2-scache"><div class="q">"reset my password"</div><div class="beam"></div><div class="hit">⚡</div></div></div>
+    <div class="cap">A near-duplicate query matches a cached embedding and returns instantly — no fresh model call needed.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--accent)">
+    <div class="ptitle"><span class="tdot"></span>Prefill vs Decode</div>
+    <div class="pbody"><div class="nai2-phase">
+      <div class="lb">prefill</div>
+      <div class="pf"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="lb">decode</div>
+      <div class="dc"><i></i><i></i><i></i><i></i></div>
+    </div></div>
+    <div class="cap">The prompt is ingested in one parallel prefill burst, then tokens emit one at a time during decode.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--info)">
+    <div class="ptitle"><span class="tdot"></span>Softmax Distribution</div>
+    <div class="pbody"><div class="nai2-softmax"><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="cap">Raw logits normalize into a probability distribution — one token dominating as temperature settles.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--info)">
+    <div class="ptitle"><span class="tdot"></span>Positional Encoding</div>
+    <div class="pbody"><div class="nai2-posenc"><svg viewBox="0 0 230 70" preserveAspectRatio="none">
+      <polyline class="s1" points="0,35 15,15 30,35 45,55 60,35 75,15 90,35 105,55 120,35 135,15 150,35 165,55 180,35 195,15 210,35 230,50"/>
+      <polyline class="s2" points="0,35 23,12 46,35 69,58 92,35 115,12 138,35 161,58 184,35 207,12 230,35"/>
+      <polyline class="s3" points="0,35 34,16 68,35 102,54 136,35 170,16 204,35 230,44"/>
+    </svg></div></div>
+    <div class="cap">Sinusoids at different frequencies stack into positional encodings that give tokens their order.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--accent)">
+    <div class="ptitle"><span class="tdot"></span>LoRA Merge</div>
+    <div class="pbody"><div class="nai2-lora">
+      <div class="m base">W</div><span class="op">+</span><div class="m a">A</div><span class="op">×</span><div class="m b">B</div><span class="op">=</span><div class="m out">W′</div>
+    </div></div>
+    <div class="cap">A low-rank A×B adapter folds into the base weights — LoRA fine-tuning merged for inference.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--accent)">
+    <div class="ptitle"><span class="tdot"></span>Rate-Limit Bucket</div>
+    <div class="pbody"><div class="nai2-bucket"><span class="tk"></span><span class="tk"></span><span class="tk"></span><div class="pail"></div></div></div>
+    <div class="cap">Request tokens drip into the bucket — when it runs dry, calls throttle until it refills.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--crit)">
+    <div class="ptitle"><span class="tdot"></span>Reflection Loop</div>
+    <div class="pbody"><div class="nai2-reflect"><div class="ring"><span class="dot"></span></div><div class="core">🔁</div></div></div>
+    <div class="cap">The agent critiques and revises its own draft in a self-reflection loop before committing an answer.</div>
+  </div>
+
+  <div class="panel is-new" style="--c:var(--pos)">
+    <div class="ptitle"><span class="tdot"></span>Grammar-Constrained Decode</div>
+    <div class="pbody"><div class="nai2-grammar">
+      <span class="ok">{</span><span class="ok">"id"</span><span class="no">hello</span><span class="ok">:</span><span class="no">42.</span><span class="ok">123</span>
+    </div></div>
+    <div class="cap">A JSON grammar masks invalid next tokens — only schema-legal choices survive, guaranteeing valid output.</div>
+  </div>
+
+</div>

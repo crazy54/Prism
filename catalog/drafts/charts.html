@@ -1,0 +1,540 @@
+<style>
+/* ================================================================
+   Charts 2026 new facets — self-contained, inline SVG + CSS.
+   Namespaced n3d-* (3D & perspective) and ncx2-* (2D / statistical).
+   No third-party libs, no network, tokens only. ================= */
+
+/* ---- shared keyframes (namespaced) ---- */
+@keyframes n3dSpin{to{transform:rotateY(360deg)}}
+@keyframes n3dRise{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes n3dSway{0%,100%{transform:rotateX(13deg) rotateY(-26deg)}50%{transform:rotateX(15deg) rotateY(-6deg)}}
+@keyframes n3dTilt{0%,100%{transform:rotateX(52deg) rotateZ(-4deg)}50%{transform:rotateX(52deg) rotateZ(6deg)}}
+@keyframes ncx2Grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes ncx2GrowX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes ncx2Draw{to{stroke-dashoffset:0}}
+@keyframes ncx2Fade{from{opacity:0}to{opacity:1}}
+@keyframes ncx2Pop{0%{transform:scale(0);opacity:0}70%{transform:scale(1.25)}100%{transform:scale(1);opacity:1}}
+@keyframes ncx2Flow{to{transform:translateX(-210px)}}
+@keyframes ncx2Cursor{0%{transform:translateX(0)}100%{transform:translateX(196px)}}
+@keyframes ncx2Needle{0%,100%{transform:rotate(-72deg)}50%{transform:rotate(58deg)}}
+
+/* ================= 3D helpers ================= */
+.n3d-scene{perspective:640px;perspective-origin:50% 42%;display:flex;align-items:center;justify-content:center;min-height:150px}
+
+/* 1. Isometric 3D bar chart — genuine preserve-3d cuboids */
+.n3d-bars{position:relative;width:184px;height:120px;transform-style:preserve-3d;transform:rotateX(13deg) rotateY(-26deg);animation:n3dSway 9s ease-in-out infinite}
+.n3d-bars .floor{position:absolute;left:0;bottom:0;width:184px;height:110px;transform:rotateX(90deg);transform-origin:bottom;background:linear-gradient(var(--line),transparent);opacity:.35}
+.n3d-bars .bar{position:absolute;bottom:0;width:24px;transform-style:preserve-3d;transform-origin:bottom;animation:n3dRise 1s cubic-bezier(.22,1,.36,1) both}
+.n3d-bars .bar span{position:absolute;left:0;top:0}
+.n3d-bars .fF{width:24px;height:100%;background:currentColor;transform:translateZ(11px)}
+.n3d-bars .fR{width:22px;height:100%;right:0;left:auto;background:currentColor;filter:brightness(.6);transform-origin:right;transform:rotateY(90deg)}
+.n3d-bars .fT{width:24px;height:22px;background:currentColor;filter:brightness(1.35);transform-origin:top;transform:rotateX(90deg)}
+
+/* 2. Extruded 3D pie cylinder — stacked conic layers */
+.n3d-cyl{position:relative;width:120px;height:120px;transform-style:preserve-3d;transform:rotateX(62deg);animation:n3dSpin 16s linear infinite}
+.n3d-cyl .ly{position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--info) 0 40%,var(--accent) 40% 64%,var(--pos) 64% 84%,var(--crit) 84% 100%)}
+.n3d-cyl .ly:nth-child(1){transform:translateZ(2px)}
+.n3d-cyl .ly:nth-child(2){transform:translateZ(-2px);filter:brightness(.9)}
+.n3d-cyl .ly:nth-child(3){transform:translateZ(-6px);filter:brightness(.78)}
+.n3d-cyl .ly:nth-child(4){transform:translateZ(-10px);filter:brightness(.66)}
+.n3d-cyl .ly:nth-child(5){transform:translateZ(-14px);filter:brightness(.54)}
+.n3d-cyl .ly:nth-child(6){transform:translateZ(-18px);filter:brightness(.44)}
+
+/* 3. Rotating 3D scatter cube — wireframe + interior points */
+.n3d-cube{position:relative;width:120px;height:120px;transform-style:preserve-3d;transform:rotateX(-22deg) rotateY(0);animation:n3dSpin 12s linear infinite}
+.n3d-cube .fc{position:absolute;inset:0;border:1px solid rgba(var(--info-rgb),.5);background:rgba(var(--info-rgb),.05)}
+.n3d-cube .f1{transform:translateZ(60px)}.n3d-cube .f2{transform:rotateY(180deg) translateZ(60px)}
+.n3d-cube .f3{transform:rotateY(90deg) translateZ(60px)}.n3d-cube .f4{transform:rotateY(-90deg) translateZ(60px)}
+.n3d-cube .f5{transform:rotateX(90deg) translateZ(60px)}.n3d-cube .f6{transform:rotateX(-90deg) translateZ(60px)}
+.n3d-cube .pt{position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4.5px;border-radius:50%;box-shadow:0 0 8px currentColor;background:currentColor;animation:ncx2Fade .9s ease-out both}
+
+/* 4. Layered depth area chart — stacked translucent planes */
+.n3d-depth{position:relative;width:190px;height:110px;transform-style:preserve-3d;transform:rotateX(6deg) rotateY(-30deg);animation:n3dSway 10s ease-in-out infinite}
+.n3d-depth svg{position:absolute;left:0;top:0;width:190px;height:110px}
+.n3d-depth .l1{transform:translateZ(0)}.n3d-depth .l2{transform:translateZ(-24px)}
+.n3d-depth .l3{transform:translateZ(-48px)}.n3d-depth .l4{transform:translateZ(-72px)}
+.n3d-depth polyline{fill:none;stroke-width:2.5;stroke-linejoin:round;stroke-dasharray:340;stroke-dashoffset:340;animation:ncx2Draw 2.4s ease-out forwards}
+
+/* 5. 3D dot globe — rotating latitude rings */
+.n3d-globe{position:relative;width:120px;height:120px;transform-style:preserve-3d;transform:rotateX(-16deg);animation:n3dSpin 14s linear infinite}
+.n3d-globe .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(var(--info-rgb),.45)}
+.n3d-globe .ring:nth-child(1){transform:rotateY(0)}
+.n3d-globe .ring:nth-child(2){transform:rotateY(45deg)}
+.n3d-globe .ring:nth-child(3){transform:rotateY(90deg)}
+.n3d-globe .ring:nth-child(4){transform:rotateY(135deg)}
+.n3d-globe .ring:nth-child(5){transform:rotateX(70deg);border-color:rgba(var(--accent-rgb),.4)}
+.n3d-globe .dot{position:absolute;left:50%;top:50%;width:8px;height:8px;margin:-4px;border-radius:50%;background:var(--pos);box-shadow:0 0 7px var(--pos)}
+
+/* 6. Prism KPI — rotating triangular prism, one KPI per face */
+.n3d-prism{position:relative;width:130px;height:80px;transform-style:preserve-3d;transform:rotateX(-6deg);animation:n3dSpin 11s linear infinite}
+.n3d-prism .face{position:absolute;left:0;top:0;width:130px;height:80px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;backface-visibility:hidden}
+.n3d-prism .face b{font-size:26px;font-weight:800;line-height:1}
+.n3d-prism .face i{font-size:10px;opacity:.85;font-style:normal;margin-top:3px}
+.n3d-prism .p1{background:linear-gradient(135deg,var(--info),rgba(var(--info-rgb),.55));transform:rotateY(0) translateZ(38px)}
+.n3d-prism .p2{background:linear-gradient(135deg,var(--accent),rgba(var(--accent-rgb),.55));transform:rotateY(120deg) translateZ(38px)}
+.n3d-prism .p3{background:linear-gradient(135deg,var(--pos),rgba(var(--pos-rgb),.55));transform:rotateY(240deg) translateZ(38px)}
+
+/* 7. Tilted dashboard card stack */
+.n3d-cards{position:relative;width:150px;height:120px;transform-style:preserve-3d;transform:rotateX(48deg) rotateZ(-30deg);animation:n3dTilt 8s ease-in-out infinite}
+.n3d-cards .card{position:absolute;left:0;top:0;width:150px;height:96px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);box-shadow:0 14px 24px rgba(0,0,0,.35);padding:12px;box-sizing:border-box;animation:ncx2Fade .8s ease-out both}
+.n3d-cards .card .t{font-size:10px;color:var(--muted);font-weight:700}
+.n3d-cards .card .v{font-size:22px;font-weight:800;color:var(--c,var(--info));margin-top:2px}
+.n3d-cards .card .mini{display:flex;align-items:flex-end;gap:3px;height:24px;margin-top:8px}
+.n3d-cards .card .mini i{flex:1;border-radius:2px;background:var(--c,var(--info));opacity:.8}
+.n3d-cards .c1{transform:translateZ(0)}
+.n3d-cards .c2{transform:translateZ(26px)}
+.n3d-cards .c3{transform:translateZ(52px)}
+
+/* 8. Extruded 3D donut ring */
+.n3d-donut{position:relative;width:118px;height:118px;transform-style:preserve-3d;transform:rotateX(64deg);animation:n3dSpin 15s linear infinite}
+.n3d-donut .ly{position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--pos) 0 58%,var(--warn) 58% 82%,var(--neg) 82% 100%);-webkit-mask:radial-gradient(closest-side,transparent 52%,#000 54%);mask:radial-gradient(closest-side,transparent 52%,#000 54%)}
+.n3d-donut .ly:nth-child(2){transform:translateZ(-4px);filter:brightness(.82)}
+.n3d-donut .ly:nth-child(3){transform:translateZ(-8px);filter:brightness(.7)}
+.n3d-donut .ly:nth-child(4){transform:translateZ(-12px);filter:brightness(.58)}
+.n3d-donut .ly:nth-child(5){transform:translateZ(-16px);filter:brightness(.46)}
+
+/* 9. 3D stacked column blocks (cuboid segments) */
+.n3d-stack{position:relative;width:170px;height:120px;transform-style:preserve-3d;transform:rotateX(13deg) rotateY(-24deg);animation:n3dSway 9s ease-in-out infinite}
+.n3d-stack .col{position:absolute;bottom:0;width:30px;transform-style:preserve-3d}
+.n3d-stack .seg{position:relative;width:30px;transform-style:preserve-3d;transform-origin:bottom;animation:n3dRise .9s cubic-bezier(.22,1,.36,1) both}
+.n3d-stack .seg span{position:absolute;left:0;top:0}
+.n3d-stack .fF{width:30px;height:100%;background:currentColor;transform:translateZ(13px)}
+.n3d-stack .fR{width:26px;height:100%;right:0;left:auto;background:currentColor;filter:brightness(.6);transform-origin:right;transform:rotateY(90deg)}
+.n3d-stack .fT{width:30px;height:26px;background:currentColor;filter:brightness(1.35);transform-origin:top;transform:rotateX(90deg)}
+
+/* 10. 3D heat voxel grid */
+.n3d-voxel{position:relative;width:150px;height:120px;transform-style:preserve-3d;transform:rotateX(56deg) rotateZ(-38deg);animation:n3dTilt 10s ease-in-out infinite}
+.n3d-voxel .vx{position:absolute;width:26px;height:26px;transform-style:preserve-3d}
+.n3d-voxel .vx .fT{position:absolute;inset:0;background:currentColor;animation:ncx2Fade .6s ease-out both}
+.n3d-voxel .vx .fF{position:absolute;left:0;bottom:0;width:26px;background:currentColor;filter:brightness(.55);transform-origin:bottom;transform:rotateX(-90deg)}
+.n3d-voxel .vx .fR{position:absolute;right:0;top:0;height:26px;background:currentColor;filter:brightness(.72);transform-origin:right;transform:rotateY(90deg)}
+
+/* 11. Tilted 3D radar plane */
+.n3d-radar{width:150px;height:130px;transform-style:preserve-3d;transform:rotateX(56deg) rotateZ(-8deg);animation:n3dTilt 9s ease-in-out infinite}
+.n3d-radar svg{width:150px;height:130px}
+.n3d-radar .grid{fill:none;stroke:var(--line)}
+.n3d-radar .area{fill:rgba(var(--accent-rgb),.3);stroke:var(--accent);stroke-width:2.5;transform-origin:center;animation:ncx2Pop 1s ease-out both}
+
+/* 12. 3D funnel cone — stacked shrinking discs */
+.n3d-cone{position:relative;width:130px;height:120px;transform-style:preserve-3d;transform:rotateX(60deg);animation:n3dSpin 18s linear infinite}
+.n3d-cone .d{position:absolute;left:50%;top:50%;border-radius:50%;background:linear-gradient(135deg,var(--crit),var(--accent));animation:ncx2Fade .7s ease-out both}
+
+/* 13. Rotating KPI carousel — panels around a ring */
+.n3d-carousel{position:relative;width:140px;height:90px;transform-style:preserve-3d;transform:rotateX(-8deg);animation:n3dSpin 13s linear infinite}
+.n3d-carousel .panel{position:absolute;left:20px;top:15px;width:100px;height:60px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;box-shadow:0 8px 18px rgba(0,0,0,.35)}
+.n3d-carousel .panel:nth-child(1){background:linear-gradient(135deg,var(--info),rgba(var(--info-rgb),.5));transform:rotateY(0) translateZ(72px)}
+.n3d-carousel .panel:nth-child(2){background:linear-gradient(135deg,var(--accent),rgba(var(--accent-rgb),.5));transform:rotateY(72deg) translateZ(72px)}
+.n3d-carousel .panel:nth-child(3){background:linear-gradient(135deg,var(--pos),rgba(var(--pos-rgb),.5));transform:rotateY(144deg) translateZ(72px)}
+.n3d-carousel .panel:nth-child(4){background:linear-gradient(135deg,var(--warn),rgba(var(--warn-rgb),.5));transform:rotateY(216deg) translateZ(72px)}
+.n3d-carousel .panel:nth-child(5){background:linear-gradient(135deg,var(--crit),rgba(var(--crit-rgb),.5));transform:rotateY(288deg) translateZ(72px)}
+
+/* 14. 3D surface mesh — SVG surface on a swaying 3D plane */
+.n3d-mesh{width:190px;height:120px;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-30deg);animation:n3dTilt 11s ease-in-out infinite}
+.n3d-mesh svg{width:190px;height:120px}
+.n3d-mesh path{opacity:0;animation:ncx2Fade 1s ease-out forwards}
+.n3d-mesh line{stroke:rgba(var(--info-rgb),.5)}
+
+/* 15. 3D flowing ribbon trend */
+.n3d-ribbon{position:relative;width:180px;height:100px;transform-style:preserve-3d;transform:rotateX(20deg) rotateY(-24deg);animation:n3dSway 9s ease-in-out infinite}
+.n3d-ribbon .seg{position:absolute;bottom:30px;width:14px;height:6px;transform-style:preserve-3d;animation:ncx2Fade .7s ease-out both}
+.n3d-ribbon .seg .top{position:absolute;inset:0;background:linear-gradient(90deg,var(--info),var(--accent));transform-origin:bottom;transform:rotateX(-90deg)}
+
+/* ================= 2D / statistical (ncx2-*) ================= */
+.ncx2-violin svg{width:200px;height:110px}
+.ncx2-violin path{fill:rgba(var(--info-rgb),.28);stroke:var(--info);stroke-width:1.5;transform-origin:center;animation:ncx2Grow .9s ease-out both}
+.ncx2-violin line{stroke:var(--ink);stroke-width:2}
+.ncx2-violin circle{fill:var(--accent)}
+
+.ncx2-box{display:flex;align-items:flex-end;gap:16px;height:110px}
+.ncx2-box .bx{position:relative;width:26px;height:100%}
+.ncx2-box .whk{position:absolute;left:50%;width:2px;background:var(--muted);transform:translateX(-50%)}
+.ncx2-box .cap{position:absolute;left:20%;right:20%;height:2px;background:var(--muted)}
+.ncx2-box .iqr{position:absolute;left:0;right:0;border:1.5px solid var(--info);background:rgba(var(--info-rgb),.25);border-radius:3px;transform-origin:center;animation:ncx2Grow .9s ease-out both}
+.ncx2-box .med{position:absolute;left:0;right:0;height:2px;background:var(--accent)}
+
+.ncx2-bullet{display:flex;flex-direction:column;gap:12px;width:220px}
+.ncx2-bullet .row{position:relative;height:16px;border-radius:4px;background:linear-gradient(90deg,rgba(var(--neg-rgb),.22),rgba(var(--warn-rgb),.22) 60%,rgba(var(--pos-rgb),.22))}
+.ncx2-bullet .val{position:absolute;left:0;top:4px;height:8px;border-radius:3px;background:var(--ink);transform-origin:left;animation:ncx2GrowX 1.1s ease-out both}
+.ncx2-bullet .tgt{position:absolute;top:-2px;width:3px;height:20px;background:var(--accent)}
+
+.ncx2-sankey svg{width:220px;height:120px}
+.ncx2-sankey path{fill:none;stroke-linecap:round;opacity:0;animation:ncx2Fade 1.2s ease-out forwards}
+.ncx2-sankey rect{animation:ncx2Grow .7s ease-out both;transform-origin:center}
+
+.ncx2-chord svg{width:130px;height:130px}
+.ncx2-chord .arc{fill:none;stroke-width:7}
+.ncx2-chord .link{fill:none;stroke-width:1.5;opacity:0;animation:ncx2Fade 1.4s ease-out forwards}
+
+.ncx2-radrace{position:relative;width:120px;height:120px}
+.ncx2-radrace svg{transform:rotate(-90deg)}
+.ncx2-radrace circle{fill:none;stroke-width:8;stroke-linecap:round;stroke-dasharray:var(--dash);stroke-dashoffset:var(--dash);animation:ncx2Draw 1.8s ease-out forwards}
+
+.ncx2-tree{position:relative;width:210px;height:110px}
+.ncx2-tree i{position:absolute;border-radius:3px;display:flex;align-items:flex-start;justify-content:flex-start;font-size:9px;font-weight:800;color:#fff;padding:3px 4px;box-sizing:border-box;transform-origin:top left;animation:ncx2Pop .7s ease-out both}
+
+.ncx2-waffle{display:grid;grid-template-columns:repeat(10,15px);grid-auto-rows:15px;gap:3px}
+.ncx2-waffle i{border-radius:3px;background:var(--panel2);animation:ncx2Fade .5s ease-out both}
+.ncx2-waffle i.on{background:var(--info)}
+.ncx2-waffle i.on2{background:var(--accent)}
+
+.ncx2-sparkmx{display:grid;grid-template-columns:repeat(3,64px);gap:12px}
+.ncx2-sparkmx .cell{background:var(--panel2);border-radius:6px;padding:5px}
+.ncx2-sparkmx .cell b{font-size:9px;color:var(--muted);font-weight:700;display:block;margin-bottom:2px}
+.ncx2-sparkmx svg{width:54px;height:22px}
+.ncx2-sparkmx polyline{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:90;stroke-dashoffset:90;animation:ncx2Draw 1.6s ease-out forwards}
+
+.ncx2-cstream{position:relative;width:210px;height:96px;overflow:hidden;border-radius:6px}
+.ncx2-cstream .flow{display:flex;width:420px;height:100%;animation:ncx2Flow 6s linear infinite}
+.ncx2-cstream svg{width:210px;height:96px;flex:none}
+
+.ncx2-bump svg{width:210px;height:110px}
+.ncx2-bump polyline{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:300;stroke-dashoffset:300;animation:ncx2Draw 2s ease-out forwards}
+.ncx2-bump circle{animation:ncx2Pop .6s ease-out both}
+
+.ncx2-lollipop{display:flex;flex-direction:column;gap:12px;width:220px}
+.ncx2-lollipop .row{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--muted)}
+.ncx2-lollipop .track{position:relative;flex:1;height:12px}
+.ncx2-lollipop .stem{position:absolute;left:0;top:5px;height:2px;border-radius:2px;background:var(--line);transform-origin:left;animation:ncx2GrowX 1s ease-out both}
+.ncx2-lollipop .pop{position:absolute;top:0;width:12px;height:12px;border-radius:50%;transform:translateX(-50%);animation:ncx2Pop .7s ease-out both}
+
+.ncx2-qq svg{width:180px;height:110px}
+.ncx2-qq .ref{stroke:var(--muted);stroke-width:1.5;stroke-dasharray:4 4}
+.ncx2-qq circle{fill:var(--info);animation:ncx2Pop .6s ease-out both}
+
+.ncx2-arcgauge{position:relative;width:150px;height:96px}
+.ncx2-arcgauge svg{width:150px;height:96px}
+.ncx2-arcgauge .seg{fill:none;stroke-width:12;stroke-linecap:round;stroke-dasharray:var(--dash) 999;stroke-dashoffset:var(--dash);animation:ncx2Draw 1.6s ease-out forwards}
+.ncx2-arcgauge .needle{transform-origin:75px 82px;animation:ncx2Needle 2.8s ease-in-out infinite}
+.ncx2-arcgauge .val{position:absolute;left:0;right:0;bottom:2px;text-align:center;font-size:16px;font-weight:800;color:var(--ink)}
+
+.ncx2-pulse{position:relative;width:200px;height:80px;overflow:hidden}
+.ncx2-pulse svg{width:200px;height:80px}
+.ncx2-pulse polyline{fill:none;stroke:var(--pos);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420;animation:ncx2Draw 3s linear forwards}
+.ncx2-pulse .cursor{position:absolute;top:4px;width:2px;height:72px;background:rgba(var(--pos-rgb),.6);box-shadow:0 0 8px var(--pos);animation:ncx2Cursor 3s linear infinite}
+.ncx2-pulse .cursor::after{content:"";position:absolute;top:0;left:-3px;width:8px;height:8px;border-radius:50%;background:var(--pos);box-shadow:0 0 10px var(--pos)}
+
+/* reduced motion — steady everything, keep final drawn state */
+@media(prefers-reduced-motion:reduce){
+  [class^="n3d-"],[class^="n3d-"] *,[class^="ncx2-"],[class^="ncx2-"] *{
+    animation-duration:.001s!important;animation-iteration-count:1!important;transition:none!important}
+}
+</style>
+
+<h3 class="sec">🧊 3D &amp; Perspective (2026 drop)</h3>
+<div class="gallery">
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-bars">
+      <div class="floor"></div>
+      <div class="bar" style="color:var(--info);left:14px;height:56px;animation-delay:0s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+      <div class="bar" style="color:var(--accent);left:54px;height:92px;animation-delay:.1s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+      <div class="bar" style="color:var(--pos);left:94px;height:70px;animation-delay:.2s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+      <div class="bar" style="color:var(--crit);left:134px;height:110px;animation-delay:.3s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+    </div></div>
+  </div><div class="meta"><div class="nm">Isometric 3D Bars</div><span class="ref">.n3d-bars</span><div class="desc">True preserve-3d cuboids with front, side and top faces, rising on load and swaying in perspective — a spatial take on the classic bar chart.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-cyl"><span class="ly"></span><span class="ly"></span><span class="ly"></span><span class="ly"></span><span class="ly"></span><span class="ly"></span></div></div>
+  </div><div class="meta"><div class="nm">Extruded Pie Cylinder</div><span class="ref">.n3d-cyl</span><div class="desc">A conic pie extruded into a spinning cylinder by stacking depth layers — segment share plus a tangible thickness edge.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-cube">
+      <span class="fc f1"></span><span class="fc f2"></span><span class="fc f3"></span><span class="fc f4"></span><span class="fc f5"></span><span class="fc f6"></span>
+      <span class="pt" style="color:var(--info);transform:translate3d(-30px,-20px,34px);animation-delay:0s"></span>
+      <span class="pt" style="color:var(--accent);transform:translate3d(24px,10px,-18px);animation-delay:.15s"></span>
+      <span class="pt" style="color:var(--pos);transform:translate3d(-8px,26px,10px);animation-delay:.3s"></span>
+      <span class="pt" style="color:var(--crit);transform:translate3d(18px,-24px,28px);animation-delay:.45s"></span>
+      <span class="pt" style="color:var(--warn);transform:translate3d(-26px,4px,-30px);animation-delay:.6s"></span>
+      <span class="pt" style="color:var(--info);transform:translate3d(6px,-6px,-6px);animation-delay:.75s"></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">3D Scatter Cube</div><span class="ref">.n3d-cube</span><div class="desc">Points floating inside a rotating wireframe cube — a genuine three-axis scatter you can read from every angle.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-depth">
+      <svg class="l4" viewBox="0 0 190 110"><polyline points="4,80 40,66 76,74 112,54 148,62 186,44" stroke="var(--crit)" style="animation-delay:.3s"/></svg>
+      <svg class="l3" viewBox="0 0 190 110"><polyline points="4,86 40,72 76,60 112,68 148,50 186,58" stroke="var(--warn)" style="animation-delay:.2s"/></svg>
+      <svg class="l2" viewBox="0 0 190 110"><polyline points="4,74 40,82 76,64 112,72 148,58 186,66" stroke="var(--accent)" style="animation-delay:.1s"/></svg>
+      <svg class="l1" viewBox="0 0 190 110"><polyline points="4,90 40,76 76,82 112,60 148,70 186,52" stroke="var(--info)" style="animation-delay:0s"/></svg>
+    </div></div>
+  </div><div class="meta"><div class="nm">Layered Depth Area</div><span class="ref">.n3d-depth</span><div class="desc">Four self-drawing trend planes stacked along the Z axis — compare several series without the clutter of overlapping fills.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-globe">
+      <span class="ring"></span><span class="ring"></span><span class="ring"></span><span class="ring"></span><span class="ring"></span>
+      <span class="dot" style="transform:translate3d(-40px,-20px,20px)"></span>
+      <span class="dot" style="transform:translate3d(30px,10px,40px);background:var(--accent);box-shadow:0 0 7px var(--accent)"></span>
+      <span class="dot" style="transform:translate3d(10px,-34px,-30px);background:var(--info);box-shadow:0 0 7px var(--info)"></span>
+      <span class="dot" style="transform:translate3d(-18px,28px,-24px);background:var(--warn);box-shadow:0 0 7px var(--warn)"></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">3D Dot Globe</div><span class="ref">.n3d-globe</span><div class="desc">Rotating latitude rings with glowing markers — a compact globe for geo-distributed traffic, edge nodes or PoPs.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-prism">
+      <div class="face p1"><b>99.9%</b><i>uptime</i></div>
+      <div class="face p2"><b>1.2M</b><i>requests</i></div>
+      <div class="face p3"><b>42ms</b><i>p50</i></div>
+    </div></div>
+  </div><div class="meta"><div class="nm">Prism KPI</div><span class="ref">.n3d-prism</span><div class="desc">A triangular prism that rotates through three headline metrics — a space-saving KPI that cycles its own figures.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-cards">
+      <div class="card c1" style="--c:var(--info);animation-delay:0s"><div class="t">TRAFFIC</div><div class="v">8.4k</div><div class="mini"><i style="height:40%"></i><i style="height:70%"></i><i style="height:55%"></i><i style="height:90%"></i><i style="height:65%"></i></div></div>
+      <div class="card c2" style="--c:var(--accent);animation-delay:.12s"><div class="t">LATENCY</div><div class="v">63ms</div><div class="mini"><i style="height:80%"></i><i style="height:60%"></i><i style="height:45%"></i><i style="height:70%"></i><i style="height:50%"></i></div></div>
+      <div class="card c3" style="--c:var(--pos);animation-delay:.24s"><div class="t">HEALTHY</div><div class="v">97%</div><div class="mini"><i style="height:60%"></i><i style="height:75%"></i><i style="height:85%"></i><i style="height:70%"></i><i style="height:95%"></i></div></div>
+    </div></div>
+  </div><div class="meta"><div class="nm">Tilted Card Stack</div><span class="ref">.n3d-cards</span><div class="desc">Dashboard cards floated at different depths on a tilted plane — a layered "deck" summary view for a status wall.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-donut"><span class="ly"></span><span class="ly"></span><span class="ly"></span><span class="ly"></span><span class="ly"></span></div></div>
+  </div><div class="meta"><div class="nm">Extruded 3D Donut</div><span class="ref">.n3d-donut</span><div class="desc">A masked ring given depth by stacked layers, slowly turning — the donut chart with real thickness.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-stack">
+      <div class="col" style="left:16px">
+        <div class="seg" style="color:var(--info);height:34px;animation-delay:0s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+        <div class="seg" style="color:var(--accent);height:30px;animation-delay:.1s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+        <div class="seg" style="color:var(--pos);height:24px;animation-delay:.2s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+      </div>
+      <div class="col" style="left:74px">
+        <div class="seg" style="color:var(--info);height:26px;animation-delay:.15s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+        <div class="seg" style="color:var(--accent);height:40px;animation-delay:.25s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+        <div class="seg" style="color:var(--pos);height:20px;animation-delay:.35s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+      </div>
+      <div class="col" style="left:132px">
+        <div class="seg" style="color:var(--info);height:44px;animation-delay:.3s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+        <div class="seg" style="color:var(--accent);height:22px;animation-delay:.4s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+        <div class="seg" style="color:var(--pos);height:30px;animation-delay:.5s"><span class="fF"></span><span class="fR"></span><span class="fT"></span></div>
+      </div>
+    </div></div>
+  </div><div class="meta"><div class="nm">3D Stacked Columns</div><span class="ref">.n3d-stack</span><div class="desc">Segmented cuboid columns rising in perspective — a stacked bar chart where each part is a solid 3D block.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-voxel">
+      <div class="vx" style="color:var(--pos);left:0;top:0"><span class="fT"></span><span class="fF" style="height:12px"></span><span class="fR" style="width:12px"></span></div>
+      <div class="vx" style="color:var(--warn);left:32px;top:0"><span class="fT" style="animation-delay:.06s"></span><span class="fF" style="height:22px"></span><span class="fR" style="width:22px"></span></div>
+      <div class="vx" style="color:var(--neg);left:64px;top:0"><span class="fT" style="animation-delay:.12s"></span><span class="fF" style="height:32px"></span><span class="fR" style="width:32px"></span></div>
+      <div class="vx" style="color:var(--warn);left:0;top:32px"><span class="fT" style="animation-delay:.06s"></span><span class="fF" style="height:20px"></span><span class="fR" style="width:20px"></span></div>
+      <div class="vx" style="color:var(--neg);left:32px;top:32px"><span class="fT" style="animation-delay:.12s"></span><span class="fF" style="height:36px"></span><span class="fR" style="width:36px"></span></div>
+      <div class="vx" style="color:var(--pos);left:64px;top:32px"><span class="fT" style="animation-delay:.18s"></span><span class="fF" style="height:14px"></span><span class="fR" style="width:14px"></span></div>
+      <div class="vx" style="color:var(--neg);left:0;top:64px"><span class="fT" style="animation-delay:.12s"></span><span class="fF" style="height:30px"></span><span class="fR" style="width:30px"></span></div>
+      <div class="vx" style="color:var(--pos);left:32px;top:64px"><span class="fT" style="animation-delay:.18s"></span><span class="fF" style="height:16px"></span><span class="fR" style="width:16px"></span></div>
+      <div class="vx" style="color:var(--warn);left:64px;top:64px"><span class="fT" style="animation-delay:.24s"></span><span class="fF" style="height:26px"></span><span class="fR" style="width:26px"></span></div>
+    </div></div>
+  </div><div class="meta"><div class="nm">3D Heat Voxels</div><span class="ref">.n3d-voxel</span><div class="desc">A heat matrix extruded into 3D — cell height and colour both encode intensity, so peaks literally stand out.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-radar"><svg viewBox="0 0 150 130">
+      <polygon class="grid" points="75,20 128,52 108,116 42,116 22,52"/>
+      <polygon class="grid" points="75,48 104,66 94,98 56,98 46,66"/>
+      <polygon class="area" points="75,26 120,56 96,108 48,100 34,58"/>
+    </svg></div></div>
+  </div><div class="meta"><div class="nm">3D Radar Plane</div><span class="ref">.n3d-radar</span><div class="desc">A spider chart laid onto a tilted, swaying plane — the profile pops off the surface for a more spatial compare.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-cone">
+      <span class="d" style="width:104px;height:104px;margin:-52px;transform:translateZ(0);animation-delay:0s"></span>
+      <span class="d" style="width:82px;height:82px;margin:-41px;transform:translateZ(-14px);filter:brightness(.85);animation-delay:.12s"></span>
+      <span class="d" style="width:60px;height:60px;margin:-30px;transform:translateZ(-28px);filter:brightness(.72);animation-delay:.24s"></span>
+      <span class="d" style="width:38px;height:38px;margin:-19px;transform:translateZ(-42px);filter:brightness(.6);animation-delay:.36s"></span>
+      <span class="d" style="width:18px;height:18px;margin:-9px;transform:translateZ(-56px);filter:brightness(.5);animation-delay:.48s"></span>
+    </div></div>
+  </div><div class="meta"><div class="nm">3D Funnel Cone</div><span class="ref">.n3d-cone</span><div class="desc">Shrinking discs stacked down the Z axis form a rotating conversion cone — each ring a narrowing funnel stage.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-carousel">
+      <div class="panel">99.9</div><div class="panel">1.2M</div><div class="panel">42ms</div><div class="panel">3.1k</div><div class="panel">0.04%</div>
+    </div></div>
+  </div><div class="meta"><div class="nm">KPI Carousel</div><span class="ref">.n3d-carousel</span><div class="desc">Five metric panels arranged around a rotating ring — an auto-cycling carousel that surfaces one figure at a time.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-mesh"><svg viewBox="0 0 190 120">
+      <g stroke-width="1">
+        <line x1="10" y1="30" x2="180" y2="30"/><line x1="10" y1="60" x2="180" y2="60"/><line x1="10" y1="90" x2="180" y2="90"/>
+        <line x1="10" y1="30" x2="10" y2="90"/><line x1="52" y1="30" x2="52" y2="90"/><line x1="95" y1="30" x2="95" y2="90"/><line x1="137" y1="30" x2="137" y2="90"/><line x1="180" y1="30" x2="180" y2="90"/>
+      </g>
+      <path d="M10,30 C52,10 95,44 137,20 C160,10 175,28 180,30 L180,90 C137,78 95,96 52,74 C30,64 16,82 10,90 Z" fill="rgba(var(--info-rgb),.35)" stroke="var(--info)" stroke-width="2" style="animation-delay:0s"/>
+      <path d="M10,60 C52,44 95,72 137,52 C160,44 175,56 180,58" fill="none" stroke="var(--accent)" stroke-width="2" style="animation-delay:.3s"/>
+    </svg></div></div>
+  </div><div class="meta"><div class="nm">3D Surface Mesh</div><span class="ref">.n3d-mesh</span><div class="desc">A gridded surface plot fixed to a tilted, drifting plane — reads terrain-like highs and lows across two axes.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="3d"><div class="stage">
+    <div class="n3d-scene"><div class="n3d-ribbon">
+      <div class="seg" style="left:6px;animation-delay:0s"><div class="top" style="height:20px"></div></div>
+      <div class="seg" style="left:26px;animation-delay:.08s"><div class="top" style="height:34px"></div></div>
+      <div class="seg" style="left:46px;animation-delay:.16s"><div class="top" style="height:28px"></div></div>
+      <div class="seg" style="left:66px;animation-delay:.24s"><div class="top" style="height:46px"></div></div>
+      <div class="seg" style="left:86px;animation-delay:.32s"><div class="top" style="height:38px"></div></div>
+      <div class="seg" style="left:106px;animation-delay:.4s"><div class="top" style="height:54px"></div></div>
+      <div class="seg" style="left:126px;animation-delay:.48s"><div class="top" style="height:44px"></div></div>
+      <div class="seg" style="left:146px;animation-delay:.56s"><div class="top" style="height:60px"></div></div>
+    </div></div>
+  </div><div class="meta"><div class="nm">3D Ribbon Trend</div><span class="ref">.n3d-ribbon</span><div class="desc">Upright ribbon segments standing off a baseline in perspective — a flowing 3D area/line hybrid for a single series.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>
+
+<h3 class="sec">✦ New — statistical &amp; creative charts (2026 drop)</h3>
+<div class="gallery">
+
+  <div class="tile is-new" data-c="advanced"><div class="stage">
+    <div class="ncx2-violin"><svg viewBox="0 0 200 110">
+      <path d="M40,10 C60,20 62,40 50,55 C62,70 60,90 40,100 C20,90 18,70 30,55 C18,40 20,20 40,10 Z" style="animation-delay:0s"/>
+      <path d="M100,14 C126,26 122,44 108,56 C122,68 126,86 100,98 C74,86 78,68 92,56 C78,44 74,26 100,14 Z" style="animation-delay:.12s;fill:rgba(var(--accent-rgb),.28);stroke:var(--accent)"/>
+      <path d="M160,20 C176,30 174,44 164,55 C174,66 176,80 160,90 C144,80 146,66 156,55 C146,44 144,30 160,20 Z" style="animation-delay:.24s;fill:rgba(var(--pos-rgb),.28);stroke:var(--pos)"/>
+      <line x1="40" y1="40" x2="40" y2="72"/><circle cx="40" cy="56" r="3"/>
+      <line x1="100" y1="44" x2="100" y2="70"/><circle cx="100" cy="56" r="3"/>
+      <line x1="160" y1="46" x2="160" y2="66"/><circle cx="160" cy="55" r="3"/>
+    </svg></div>
+  </div><div class="meta"><div class="nm">Violin Plot</div><span class="ref">.ncx2-violin</span><div class="desc">Mirrored density curves show the full shape of each distribution, with a median marker inside — richer than a box plot.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="advanced"><div class="stage">
+    <div class="ncx2-box">
+      <div class="bx"><span class="whk" style="top:6%;height:88%"></span><span class="cap" style="top:6%"></span><span class="cap" style="bottom:6%"></span><span class="iqr" style="top:28%;height:40%;animation-delay:0s"></span><span class="med" style="top:46%"></span></div>
+      <div class="bx"><span class="whk" style="top:14%;height:80%"></span><span class="cap" style="top:14%"></span><span class="cap" style="bottom:6%"></span><span class="iqr" style="top:36%;height:34%;animation-delay:.1s"></span><span class="med" style="top:52%"></span></div>
+      <div class="bx"><span class="whk" style="top:2%;height:76%"></span><span class="cap" style="top:2%"></span><span class="cap" style="bottom:22%"></span><span class="iqr" style="top:22%;height:44%;animation-delay:.2s"></span><span class="med" style="top:40%"></span></div>
+      <div class="bx"><span class="whk" style="top:20%;height:74%"></span><span class="cap" style="top:20%"></span><span class="cap" style="bottom:6%"></span><span class="iqr" style="top:42%;height:32%;animation-delay:.3s"></span><span class="med" style="top:58%"></span></div>
+    </div>
+  </div><div class="meta"><div class="nm">Box &amp; Whisker</div><span class="ref">.ncx2-box</span><div class="desc">Quartiles, median and whiskers per group — the fastest read on spread, skew and outliers side by side.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="gauge"><div class="stage">
+    <div class="ncx2-bullet">
+      <div class="row"><span class="val" style="width:72%;animation-delay:0s"></span><span class="tgt" style="left:80%"></span></div>
+      <div class="row"><span class="val" style="width:54%;animation-delay:.12s"></span><span class="tgt" style="left:65%"></span></div>
+      <div class="row"><span class="val" style="width:91%;animation-delay:.24s"></span><span class="tgt" style="left:75%"></span></div>
+    </div>
+  </div><div class="meta"><div class="nm">Bullet Chart</div><span class="ref">.ncx2-bullet</span><div class="desc">A measure bar against a target marker on qualitative bands — Stephen Few's compact KPI-vs-goal gauge.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="rankflow"><div class="stage">
+    <div class="ncx2-sankey"><svg viewBox="0 0 220 120">
+      <path d="M24,30 C90,30 130,24 196,24" stroke="rgba(var(--info-rgb),.5)" stroke-width="16" style="animation-delay:0s"/>
+      <path d="M24,60 C90,60 130,52 196,54" stroke="rgba(var(--accent-rgb),.5)" stroke-width="22" style="animation-delay:.2s"/>
+      <path d="M24,60 C90,60 130,92 196,92" stroke="rgba(var(--pos-rgb),.45)" stroke-width="12" style="animation-delay:.35s"/>
+      <path d="M24,92 C90,92 130,92 196,92" stroke="rgba(var(--warn-rgb),.5)" stroke-width="14" style="animation-delay:.5s"/>
+      <rect x="16" y="18" width="9" height="86" rx="3" fill="var(--info)"/>
+      <rect x="196" y="14" width="9" height="24" rx="3" fill="var(--info)" style="animation-delay:.1s"/>
+      <rect x="196" y="42" width="9" height="34" rx="3" fill="var(--accent)" style="animation-delay:.2s"/>
+      <rect x="196" y="80" width="9" height="30" rx="3" fill="var(--pos)" style="animation-delay:.3s"/>
+    </svg></div>
+  </div><div class="meta"><div class="nm">Sankey Mini</div><span class="ref">.ncx2-sankey</span><div class="desc">Flows split and merge between nodes with width proportional to volume — trace where traffic or spend actually goes.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="compare"><div class="stage">
+    <div class="ncx2-chord"><svg viewBox="0 0 130 130">
+      <path class="arc" d="M65,12 A53,53 0 0,1 112,52" stroke="var(--info)"/>
+      <path class="arc" d="M112,52 A53,53 0 0,1 88,110" stroke="var(--accent)"/>
+      <path class="arc" d="M88,110 A53,53 0 0,1 30,102" stroke="var(--pos)"/>
+      <path class="arc" d="M30,102 A53,53 0 0,1 65,12" stroke="var(--crit)"/>
+      <path class="link" d="M70,16 Q65,65 108,58" stroke="var(--info)" style="animation-delay:.2s"/>
+      <path class="link" d="M110,56 Q65,65 84,104" stroke="var(--accent)" style="animation-delay:.5s"/>
+      <path class="link" d="M84,106 Q65,65 34,100" stroke="var(--pos)" style="animation-delay:.8s"/>
+      <path class="link" d="M32,98 Q65,65 68,18" stroke="var(--crit)" style="animation-delay:1.1s"/>
+    </svg></div>
+  </div><div class="meta"><div class="nm">Chord Diagram</div><span class="ref">.ncx2-chord</span><div class="desc">Arc segments linked by ribbons around a circle — visualise pairwise flows between categories, like inter-service calls.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="rankflow"><div class="stage">
+    <div class="ncx2-radrace"><svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="48" stroke="var(--info)" style="--dash:302;animation-delay:0s"/>
+      <circle cx="60" cy="60" r="37" stroke="var(--accent)" style="--dash:232;animation-delay:.15s"/>
+      <circle cx="60" cy="60" r="26" stroke="var(--pos)" style="--dash:163;animation-delay:.3s"/>
+      <circle cx="60" cy="60" r="15" stroke="var(--warn)" style="--dash:94;animation-delay:.45s"/>
+    </svg></div>
+  </div><div class="meta"><div class="nm">Radial Bar Race</div><span class="ref">.ncx2-radrace</span><div class="desc">Concentric arcs of different lengths draw in as a ranked "race" — leaderboard values wrapped into rings.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="density"><div class="stage">
+    <div class="ncx2-tree">
+      <i style="left:0;top:0;width:112px;height:66px;background:var(--info);animation-delay:0s">api 42%</i>
+      <i style="left:116px;top:0;width:94px;height:40px;background:var(--accent);animation-delay:.08s">db 26%</i>
+      <i style="left:116px;top:44px;width:56px;height:22px;background:var(--pos);animation-delay:.16s">cache</i>
+      <i style="left:176px;top:44px;width:34px;height:22px;background:var(--warn);animation-delay:.24s">q</i>
+      <i style="left:0;top:70px;width:66px;height:40px;background:var(--crit);animation-delay:.32s">web 18%</i>
+      <i style="left:70px;top:70px;width:60px;height:40px;background:rgba(var(--info-rgb),.7);animation-delay:.4s">auth</i>
+      <i style="left:134px;top:70px;width:76px;height:40px;background:rgba(var(--accent-rgb),.7);animation-delay:.48s">cdn 9%</i>
+    </div>
+  </div><div class="meta"><div class="nm">Treemap</div><span class="ref">.ncx2-tree</span><div class="desc">Nested rectangles sized by value — resource hogs visibly swell, so cost or usage share reads at a glance.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="density"><div class="stage">
+    <div class="ncx2-waffle">
+      <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on2" style="animation-delay:.05s"></i><i class="on2" style="animation-delay:.05s"></i>
+      <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on2" style="animation-delay:.1s"></i><i style="animation-delay:.1s"></i>
+      <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i style="animation-delay:.15s"></i><i style="animation-delay:.15s"></i>
+      <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on2" style="animation-delay:.2s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.2s"></i>
+      <i class="on"></i><i class="on"></i><i class="on"></i><i class="on2" style="animation-delay:.25s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.25s"></i><i style="animation-delay:.25s"></i>
+    </div>
+  </div><div class="meta"><div class="nm">Waffle Chart</div><span class="ref">.ncx2-waffle</span><div class="desc">A 100-cell square grid where filled cells encode a percentage — a friendlier, countable alternative to a pie.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="trend"><div class="stage">
+    <div class="ncx2-sparkmx">
+      <div class="cell"><b>us-east-1</b><svg viewBox="0 0 54 22"><polyline points="2,16 12,12 22,14 32,6 42,10 52,3" stroke="var(--pos)" style="animation-delay:0s"/></svg></div>
+      <div class="cell"><b>eu-west-1</b><svg viewBox="0 0 54 22"><polyline points="2,8 12,12 22,6 32,14 42,10 52,16" stroke="var(--info)" style="animation-delay:.1s"/></svg></div>
+      <div class="cell"><b>ap-south-1</b><svg viewBox="0 0 54 22"><polyline points="2,18 12,14 22,16 32,10 42,12 52,4" stroke="var(--accent)" style="animation-delay:.2s"/></svg></div>
+      <div class="cell"><b>sa-east-1</b><svg viewBox="0 0 54 22"><polyline points="2,6 12,10 22,8 32,12 42,7 52,11" stroke="var(--warn)" style="animation-delay:.15s"/></svg></div>
+      <div class="cell"><b>ca-central</b><svg viewBox="0 0 54 22"><polyline points="2,14 12,8 22,12 32,5 42,9 52,2" stroke="var(--pos)" style="animation-delay:.25s"/></svg></div>
+      <div class="cell"><b>ap-ne-1</b><svg viewBox="0 0 54 22"><polyline points="2,10 12,16 22,9 32,13 42,6 52,12" stroke="var(--crit)" style="animation-delay:.35s"/></svg></div>
+    </div>
+  </div><div class="meta"><div class="nm">Sparkline Matrix</div><span class="ref">.ncx2-sparkmx</span><div class="desc">Small-multiple sparklines in a labelled grid — scan the trend shape of dozens of series in one compact panel.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="live"><div class="stage">
+    <div class="ncx2-cstream"><div class="flow">
+      <svg viewBox="0 0 210 96" preserveAspectRatio="none">
+        <path d="M0,60 C40,52 80,64 120,50 C160,38 190,52 210,46 L210,70 C190,74 160,60 120,72 C80,82 40,70 0,78 Z" fill="rgba(var(--info-rgb),.5)"/>
+        <path d="M0,44 C40,36 80,46 120,34 C160,24 190,34 210,30 L210,50 C190,54 160,44 120,54 C80,62 40,52 0,60 Z" fill="rgba(var(--accent-rgb),.5)"/>
+        <path d="M0,28 C40,22 80,28 120,20 C160,14 190,20 210,16 L210,34 C190,38 160,30 120,38 C80,44 40,36 0,42 Z" fill="rgba(var(--pos-rgb),.5)"/>
+      </svg>
+      <svg viewBox="0 0 210 96" preserveAspectRatio="none">
+        <path d="M0,60 C40,52 80,64 120,50 C160,38 190,52 210,46 L210,70 C190,74 160,60 120,72 C80,82 40,70 0,78 Z" fill="rgba(var(--info-rgb),.5)"/>
+        <path d="M0,44 C40,36 80,46 120,34 C160,24 190,34 210,30 L210,50 C190,54 160,44 120,54 C80,62 40,52 0,60 Z" fill="rgba(var(--accent-rgb),.5)"/>
+        <path d="M0,28 C40,22 80,28 120,20 C160,14 190,20 210,16 L210,34 C190,38 160,30 120,38 C80,44 40,36 0,42 Z" fill="rgba(var(--pos-rgb),.5)"/>
+      </svg>
+    </div></div>
+  </div><div class="meta"><div class="nm">Contribution Stream</div><span class="ref">.ncx2-cstream</span><div class="desc">Stacked bands scrolling continuously left — a live streamgraph of composition shifting through time.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="rankflow"><div class="stage">
+    <div class="ncx2-bump"><svg viewBox="0 0 210 110">
+      <polyline points="10,20 70,50 130,20 200,50" stroke="var(--info)" style="animation-delay:0s"/>
+      <polyline points="10,50 70,20 130,80 200,20" stroke="var(--accent)" style="animation-delay:.15s"/>
+      <polyline points="10,80 70,80 130,50 200,80" stroke="var(--pos)" style="animation-delay:.3s"/>
+      <g fill="var(--info)"><circle cx="10" cy="20" r="4"/><circle cx="70" cy="50" r="4"/><circle cx="130" cy="20" r="4"/><circle cx="200" cy="50" r="4"/></g>
+      <g fill="var(--accent)"><circle cx="10" cy="50" r="4"/><circle cx="70" cy="20" r="4"/><circle cx="130" cy="80" r="4"/><circle cx="200" cy="20" r="4"/></g>
+      <g fill="var(--pos)"><circle cx="10" cy="80" r="4"/><circle cx="70" cy="80" r="4"/><circle cx="130" cy="50" r="4"/><circle cx="200" cy="80" r="4"/></g>
+    </svg></div>
+  </div><div class="meta"><div class="nm">Bump Chart</div><span class="ref">.ncx2-bump</span><div class="desc">Ranking lines that cross as positions change between periods — see who overtook whom across the leaderboard.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="compare"><div class="stage">
+    <div class="ncx2-lollipop">
+      <div class="row"><span>lambda</span><div class="track"><span class="stem" style="width:82%;animation-delay:0s"></span><span class="pop" style="left:82%;background:var(--info);animation-delay:.5s"></span></div></div>
+      <div class="row"><span>ec2</span><div class="track"><span class="stem" style="width:60%;animation-delay:.1s"></span><span class="pop" style="left:60%;background:var(--accent);animation-delay:.6s"></span></div></div>
+      <div class="row"><span>s3</span><div class="track"><span class="stem" style="width:44%;animation-delay:.2s"></span><span class="pop" style="left:44%;background:var(--pos);animation-delay:.7s"></span></div></div>
+      <div class="row"><span>rds</span><div class="track"><span class="stem" style="width:71%;animation-delay:.3s"></span><span class="pop" style="left:71%;background:var(--warn);animation-delay:.8s"></span></div></div>
+    </div>
+  </div><div class="meta"><div class="nm">Lollipop Chart</div><span class="ref">.ncx2-lollipop</span><div class="desc">Bars distilled to a stem and a dot — less ink, same ranking, ideal when categories are many and values sparse.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="advanced"><div class="stage">
+    <div class="ncx2-qq"><svg viewBox="0 0 180 110">
+      <line class="ref" x1="14" y1="96" x2="166" y2="14"/>
+      <circle cx="24" cy="90" r="3.5" style="animation-delay:0s"/><circle cx="42" cy="80" r="3.5" style="animation-delay:.06s"/><circle cx="58" cy="76" r="3.5" style="animation-delay:.12s"/><circle cx="74" cy="62" r="3.5" style="animation-delay:.18s"/><circle cx="90" cy="58" r="3.5" style="animation-delay:.24s"/><circle cx="106" cy="46" r="3.5" style="animation-delay:.3s"/><circle cx="122" cy="42" r="3.5" style="animation-delay:.36s"/><circle cx="138" cy="28" r="3.5" style="animation-delay:.42s"/><circle cx="156" cy="20" r="3.5" style="animation-delay:.48s"/>
+    </svg></div>
+  </div><div class="meta"><div class="nm">Q–Q / Regression Plot</div><span class="ref">.ncx2-qq</span><div class="desc">Points against a reference line — how closely they hug it tells you the fit or how normal a distribution is.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="gauge"><div class="stage">
+    <div class="ncx2-arcgauge">
+      <svg viewBox="0 0 150 96">
+        <path d="M15,82 A60,60 0 0,1 33,38" class="seg" stroke="var(--pos)" style="--dash:70;animation-delay:0s"/>
+        <path d="M33,38 A60,60 0 0,1 75,15" class="seg" stroke="var(--warn)" style="--dash:64;animation-delay:.2s"/>
+        <path d="M75,15 A60,60 0 0,1 117,38" class="seg" stroke="var(--neg)" style="--dash:64;animation-delay:.4s"/>
+        <path d="M117,38 A60,60 0 0,1 135,82" class="seg" stroke="var(--crit)" style="--dash:70;animation-delay:.6s"/>
+        <g class="needle"><line x1="75" y1="82" x2="75" y2="30" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/></g>
+        <circle cx="75" cy="82" r="5" fill="var(--ink)"/>
+      </svg>
+      <div class="val">SLA 82</div>
+    </div>
+  </div><div class="meta"><div class="nm">Segmented Arc Gauge</div><span class="ref">.ncx2-arcgauge</span><div class="desc">A four-band semicircular gauge with a sweeping needle — instrument-panel read for a single bounded metric.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+  <div class="tile is-new" data-c="live"><div class="stage">
+    <div class="ncx2-pulse">
+      <svg viewBox="0 0 200 80"><defs><linearGradient id="ncx2PulseG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(63,185,80,.4)"/><stop offset="1" stop-color="rgba(63,185,80,0)"/></linearGradient></defs>
+        <path d="M2,58 L26,50 L50,56 L74,34 L98,44 L122,22 L146,38 L170,18 L198,30 L198,78 L2,78 Z" fill="url(#ncx2PulseG)"/>
+        <polyline points="2,58 26,50 50,56 74,34 98,44 122,22 146,38 170,18 198,30"/>
+      </svg>
+      <span class="cursor"></span>
+    </div>
+  </div><div class="meta"><div class="nm">Live Pulse Area</div><span class="ref">.ncx2-pulse</span><div class="desc">A self-drawing area trace swept by a glowing scan cursor — the "streaming right now" signal for a live metric.</div><button class="copy" onclick="copyViz(this)">Copy</button></div></div>
+
+</div>

@@ -1,0 +1,268 @@
+<style id="nfx2-styles">
+/* ==== FX Store 2026 new facets — namespaced nfx2-* (no collisions with fx-*/nfx-*) ====
+   Every effect reads the element's own color via --c / --c-rgb and shared tokens
+   (--panel etc). No hardcoded theme background. Self-contained, pure CSS. ==== */
+
+/* ---------- 🧊 3D & DEPTH ---------- */
+/* Lift: card rises in real 3D space (perspective+translateZ) with a deepening ground shadow */
+.nfx2-lift{transform-style:preserve-3d;animation:nfx2Lift 4s ease-in-out infinite}
+@keyframes nfx2Lift{0%,100%{transform:perspective(720px) rotateX(0) translateZ(0);box-shadow:0 6px 14px rgba(0,0,0,.4)}50%{transform:perspective(720px) rotateX(7deg) translateZ(30px);box-shadow:0 32px 42px rgba(0,0,0,.55),0 0 26px rgba(var(--c-rgb),.3)}}
+
+/* Flip-Glow: the panel tips forward on its X-axis like a hinged tile, glowing at the peak */
+.nfx2-flip{transform-style:preserve-3d;transform-origin:center bottom;animation:nfx2Flip 4.4s ease-in-out infinite}
+@keyframes nfx2Flip{0%,100%{transform:perspective(760px) rotateX(0);box-shadow:0 8px 16px rgba(0,0,0,.4)}50%{transform:perspective(760px) rotateX(52deg);box-shadow:0 26px 36px rgba(0,0,0,.5),0 0 28px rgba(var(--c-rgb),.7)}}
+
+/* Extrude: a stacked colored shadow ladder makes the card a chunky 3D block that deepens as it lifts */
+.nfx2-extrude{animation:nfx2Extrude 3.6s ease-in-out infinite}
+@keyframes nfx2Extrude{0%,100%{transform:translate(0,0);box-shadow:2px 2px 0 rgba(var(--c-rgb),.7),4px 4px 0 rgba(var(--c-rgb),.55),6px 6px 0 rgba(var(--c-rgb),.4),8px 8px 0 rgba(var(--c-rgb),.25)}50%{transform:translate(-6px,-6px);box-shadow:5px 5px 0 rgba(var(--c-rgb),.7),10px 10px 0 rgba(var(--c-rgb),.55),15px 15px 0 rgba(var(--c-rgb),.4),20px 20px 0 rgba(var(--c-rgb),.25)}}
+
+/* Isometric: the card sits on an isometric plane and rises off it along Z with a cast shadow */
+.nfx2-iso{transform-style:preserve-3d;animation:nfx2Iso 5s ease-in-out infinite}
+@keyframes nfx2Iso{0%,100%{transform:perspective(900px) rotateX(48deg) rotateZ(38deg) translateZ(0);box-shadow:-10px 16px 18px rgba(0,0,0,.45)}50%{transform:perspective(900px) rotateX(48deg) rotateZ(38deg) translateZ(26px);box-shadow:-18px 28px 26px rgba(0,0,0,.5),0 0 22px rgba(var(--c-rgb),.3)}}
+
+/* Parallax: layered planes at different Z depths rock together — foreground frame + background glow drift apart */
+.nfx2-parallax{position:relative;transform-style:preserve-3d;animation:nfx2Plx 6s ease-in-out infinite}
+.nfx2-parallax::before{content:"";position:absolute;inset:8px;border:1px solid rgba(var(--c-rgb),.55);border-radius:9px;transform:translateZ(42px);pointer-events:none}
+.nfx2-parallax::after{content:"";position:absolute;inset:-8px;border-radius:16px;background:radial-gradient(circle at 50% 50%,rgba(var(--c-rgb),.18),transparent 70%);transform:translateZ(-34px);pointer-events:none}
+@keyframes nfx2Plx{0%,100%{transform:perspective(700px) rotateY(-13deg)}50%{transform:perspective(700px) rotateY(13deg)}}
+
+/* Perspective-Shimmer: the card tilts through space while a diagonal sheen sweeps the surface */
+.nfx2-perspshimmer{position:relative;overflow:hidden;transform-style:preserve-3d;animation:nfx2Persp 5s ease-in-out infinite}
+.nfx2-perspshimmer::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.28) 50%,transparent 65%);background-size:220% 100%;animation:nfx2Shim 3s linear infinite;pointer-events:none}
+@keyframes nfx2Persp{0%,100%{transform:perspective(720px) rotateX(9deg) rotateY(-9deg)}50%{transform:perspective(720px) rotateX(-9deg) rotateY(9deg)}}
+@keyframes nfx2Shim{0%{background-position:180% 0}100%{background-position:-80% 0}}
+
+/* Swing-3D: the panel swings on its Y-axis like a suspended sign, grounded by a soft shadow */
+.nfx2-swing3d{transform-style:preserve-3d;transform-origin:center;animation:nfx2Swing 4.6s ease-in-out infinite}
+@keyframes nfx2Swing{0%,100%{transform:perspective(780px) rotateY(-38deg);box-shadow:20px 12px 26px rgba(0,0,0,.4)}50%{transform:perspective(780px) rotateY(38deg);box-shadow:-20px 12px 26px rgba(0,0,0,.4)}}
+
+/* Depth-Pop: the card pushes toward you along Z (scales via perspective) with a receding depth ring behind it */
+.nfx2-depth-pop{position:relative;transform-style:preserve-3d;animation:nfx2Pop3d 3s ease-in-out infinite}
+.nfx2-depth-pop::before{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 2px rgba(var(--c-rgb),.4);transform:translateZ(-44px);pointer-events:none}
+@keyframes nfx2Pop3d{0%,100%{transform:perspective(650px) translateZ(0)}50%{transform:perspective(650px) translateZ(42px)}}
+
+/* ---------- ✦ GLOW / BORDER / HOLOGRAPHIC ---------- */
+/* Plasma-Ring: a plasma glow swells around the whole element, inner + outer */
+.nfx2-plasma-ring{animation:nfx2Plasma 3s ease-in-out infinite}
+@keyframes nfx2Plasma{0%,100%{box-shadow:0 0 8px rgba(var(--c-rgb),.4),inset 0 0 0 1px rgba(var(--c-rgb),.4)}50%{box-shadow:0 0 30px rgba(var(--c-rgb),.9),0 0 60px rgba(var(--c-rgb),.4),inset 0 0 0 1px rgba(var(--c-rgb),.85)}}
+
+/* Laser-Border: a single bright laser head streaks around the border loop */
+.nfx2-laser{position:relative;border-radius:12px}
+.nfx2-laser::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:2px;background:conic-gradient(from 0deg,transparent 0 78%,#fff 84%,var(--c) 90%,transparent 96%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:nfx2Spin360 2.2s linear infinite;pointer-events:none}
+@keyframes nfx2Spin360{to{transform:rotate(1turn)}}
+
+/* Prism-Edge: a full-spectrum rainbow runs the border while the fill stays on-theme (--panel) */
+.nfx2-prism{position:relative;border:2px solid transparent!important;background:linear-gradient(var(--panel),var(--panel)) padding-box,linear-gradient(90deg,#ff3b6b,#ffb03b,#3fd97f,#3bd8ff,#a35bff,#ff3b6b) border-box;background-size:300% 100%;animation:nfx2Prism 4s linear infinite}
+@keyframes nfx2Prism{to{background-position:300% 0}}
+
+/* Edge-Cycle: the border glow cycles through the element hue into cool tones and back */
+.nfx2-edgecycle{position:relative}
+.nfx2-edgecycle::before{content:"";position:absolute;inset:-2px;border-radius:inherit;padding:2px;background:linear-gradient(90deg,var(--c),#3bd8ff,#a35bff,var(--c));background-size:300% 100%;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:nfx2Edge 3.5s linear infinite;pointer-events:none}
+@keyframes nfx2Edge{to{background-position:300% 0}}
+
+/* Holo-Grid: an iridescent grid drifts and hue-shifts across the surface, screen-blended */
+.nfx2-holo-grid{position:relative;overflow:hidden}
+.nfx2-holo-grid::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(var(--c-rgb),.25) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--c-rgb),.25) 1px,transparent 1px);background-size:16px 16px;mix-blend-mode:screen;animation:nfx2HoloGrid 5s linear infinite;pointer-events:none}
+@keyframes nfx2HoloGrid{0%{background-position:0 0,0 0;filter:hue-rotate(0)}100%{background-position:0 32px,32px 0;filter:hue-rotate(45deg)}}
+
+/* Oil-Slick: a multi-hue iridescent film drifts over the element color like oil on water */
+.nfx2-oil{position:relative;overflow:hidden;background:linear-gradient(115deg,rgba(var(--c-rgb),.25),rgba(59,216,255,.22) 30%,rgba(163,91,255,.22) 55%,rgba(63,217,127,.22) 80%,rgba(var(--c-rgb),.25))!important;background-size:300% 300%!important;animation:nfx2Oil 7s ease-in-out infinite}
+@keyframes nfx2Oil{0%{background-position:0% 50%;filter:hue-rotate(0)}50%{background-position:100% 50%;filter:hue-rotate(30deg)}100%{background-position:0% 50%;filter:hue-rotate(0)}}
+
+/* Nebula: two soft blurred color clouds slowly rotate and breathe behind the content */
+.nfx2-nebula{position:relative;overflow:hidden}
+.nfx2-nebula::before{content:"";position:absolute;inset:-40%;background:radial-gradient(40% 40% at 30% 35%,rgba(var(--c-rgb),.5),transparent 70%),radial-gradient(45% 45% at 70% 65%,rgba(163,91,255,.35),transparent 70%);filter:blur(14px);animation:nfx2Nebula 8s ease-in-out infinite;pointer-events:none}
+@keyframes nfx2Nebula{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(18deg) scale(1.15)}}
+
+/* Vortex: a swirling conic beam spins behind the surface, softly blurred */
+.nfx2-vortex{position:relative;overflow:hidden}
+.nfx2-vortex::before{content:"";position:absolute;inset:-50%;background:conic-gradient(from 0deg,transparent,rgba(var(--c-rgb),.35),transparent 40%,rgba(var(--c-rgb),.35),transparent 80%);filter:blur(3px);animation:nfx2Spin360 4s linear infinite;pointer-events:none}
+
+/* Magnetic-Pulse: concentric field rings expand outward from the element edge */
+.nfx2-magpulse{position:relative}
+.nfx2-magpulse::before,.nfx2-magpulse::after{content:"";position:absolute;inset:0;border-radius:inherit;border:1px solid rgba(var(--c-rgb),.6);pointer-events:none;animation:nfx2Mag 2.8s ease-out infinite}
+.nfx2-magpulse::after{animation-delay:1.4s}
+@keyframes nfx2Mag{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.35);opacity:0}}
+
+/* Spark-Burst: a cluster of colored sparks twinkles out from a corner */
+.nfx2-spark-burst{position:relative}
+.nfx2-spark-burst::after{content:"";position:absolute;top:10px;right:12px;width:3px;height:3px;border-radius:50%;background:var(--c);box-shadow:10px 4px 0 var(--c),-6px 8px 0 var(--c),4px 14px 0 var(--c),-12px 2px 0 var(--c),14px 12px 0 var(--c),-4px 16px 0 var(--c);animation:nfx2Burst 2.4s ease-in-out infinite;pointer-events:none}
+@keyframes nfx2Burst{0%,100%{opacity:.2;transform:scale(.5)}50%{opacity:1;transform:scale(1.15)}}
+
+/* Star-Field: two layers of twinkling stars fade in and out on offset timing */
+.nfx2-starfield{position:relative;overflow:hidden}
+.nfx2-starfield::before,.nfx2-starfield::after{content:"";position:absolute;inset:0;pointer-events:none;animation:nfx2Star 3s ease-in-out infinite;background-image:radial-gradient(1.5px 1.5px at 20% 30%,#fff,transparent),radial-gradient(1.5px 1.5px at 70% 60%,rgba(var(--c-rgb),.9),transparent),radial-gradient(1px 1px at 40% 80%,#fff,transparent),radial-gradient(1.5px 1.5px at 85% 25%,rgba(var(--c-rgb),.9),transparent),radial-gradient(1px 1px at 55% 15%,#fff,transparent)}
+.nfx2-starfield::after{animation-delay:1.5s;background-image:radial-gradient(1px 1px at 30% 55%,#fff,transparent),radial-gradient(1.5px 1.5px at 60% 35%,rgba(var(--c-rgb),.9),transparent),radial-gradient(1px 1px at 15% 70%,#fff,transparent),radial-gradient(1.5px 1.5px at 90% 78%,#fff,transparent)}
+@keyframes nfx2Star{0%,100%{opacity:.25}50%{opacity:1}}
+
+/* ---------- 💧 GLASS / GLITCH / LIQUID / ENERGY ---------- */
+/* Glass-Sheen: frosted glass tinted by --c with a slow highlight sweeping across */
+.nfx2-glass-sheen{position:relative;overflow:hidden;backdrop-filter:blur(6px) saturate(1.4);-webkit-backdrop-filter:blur(6px) saturate(1.4);background:rgba(var(--c-rgb),.10)!important;border:1px solid rgba(var(--c-rgb),.28)!important}
+.nfx2-glass-sheen::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);background-size:250% 100%;animation:nfx2Sheen 3.6s ease-in-out infinite;pointer-events:none}
+@keyframes nfx2Sheen{0%{background-position:180% 0}55%,100%{background-position:-80% 0}}
+
+/* Frost-Crack: an icy frosted pane with hairline cracks that catch the light and shift */
+.nfx2-frostcrack{position:relative;overflow:hidden;background:rgba(190,225,255,.08)!important;border:1px solid rgba(190,225,255,.3)!important;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.nfx2-frostcrack::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,transparent 45%,rgba(255,255,255,.35) 50%,transparent 55%),linear-gradient(60deg,transparent 60%,rgba(200,235,255,.3) 63%,transparent 66%);background-size:200% 200%;animation:nfx2Frost 4s ease-in-out infinite}
+@keyframes nfx2Frost{0%,100%{background-position:0 0,100% 100%;opacity:.5}50%{background-position:60% 40%,40% 60%;opacity:1}}
+
+/* Glitch-Slice: horizontal slices jump and shear intermittently like a corrupt frame */
+.nfx2-glitch-slice{animation:nfx2Glitch 2.6s steps(1) infinite}
+@keyframes nfx2Glitch{0%,41%,50%,100%{transform:translate(0);clip-path:inset(0)}43%{transform:translate(-4px);clip-path:inset(20% 0 55% 0)}45%{transform:translate(5px);clip-path:inset(60% 0 12% 0)}47%{transform:translate(-3px);clip-path:inset(35% 0 40% 0)}}
+
+/* Shatter: fractured glass crack lines flash across the surface then vanish */
+.nfx2-shatter{position:relative;overflow:hidden}
+.nfx2-shatter::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(45deg,transparent 48%,rgba(255,255,255,.4) 49%,transparent 50%),linear-gradient(-20deg,transparent 60%,rgba(var(--c-rgb),.5) 61%,transparent 62%),linear-gradient(80deg,transparent 30%,rgba(255,255,255,.3) 31%,transparent 32%);animation:nfx2Shatter 3s steps(1) infinite}
+@keyframes nfx2Shatter{0%,60%{opacity:0}62%{opacity:1}64%{opacity:.3}66%{opacity:1}100%{opacity:0}}
+
+/* Liquid-Rise: a wavy colored liquid surges up from the bottom and settles */
+.nfx2-liquid-rise{position:relative;overflow:hidden}
+.nfx2-liquid-rise::after{content:"";position:absolute;left:-25%;right:-25%;bottom:-60%;height:120%;background:rgba(var(--c-rgb),.18);border-radius:42% 46% 0 0;animation:nfx2Liquid 4.5s ease-in-out infinite;pointer-events:none}
+@keyframes nfx2Liquid{0%,100%{transform:translateY(30%) rotate(-4deg)}50%{transform:translateY(6%) rotate(4deg)}}
+
+/* Ripple-Out: concentric rings ripple outward from the center like a dropped stone */
+.nfx2-ripple-out{position:relative;overflow:hidden}
+.nfx2-ripple-out::after{content:"";position:absolute;top:50%;left:50%;width:10px;height:10px;border-radius:50%;border:2px solid rgba(var(--c-rgb),.6);transform:translate(-50%,-50%);animation:nfx2Ripple 2.6s ease-out infinite;pointer-events:none}
+@keyframes nfx2Ripple{0%{width:10px;height:10px;opacity:.8}100%{width:280px;height:280px;opacity:0}}
+
+/* Electric-Arc: two vertical arcs crackle and skew across the surface */
+.nfx2-electric-arc{position:relative;overflow:hidden}
+.nfx2-electric-arc::before,.nfx2-electric-arc::after{content:"";position:absolute;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,rgba(var(--c-rgb),.9),transparent);box-shadow:0 0 8px rgba(var(--c-rgb),.9);opacity:0;pointer-events:none}
+.nfx2-electric-arc::before{left:32%;animation:nfx2Arc 2.8s ease-in-out infinite}
+.nfx2-electric-arc::after{left:66%;animation:nfx2Arc 2.8s ease-in-out infinite .6s}
+@keyframes nfx2Arc{0%,72%,78%,100%{opacity:0;transform:skewX(0)}74%{opacity:1;transform:skewX(-14deg)}76%{opacity:.7;transform:skewX(12deg)}}
+
+/* Beam-Cross: two diagonal light beams sweep across in opposite phase */
+.nfx2-beamcross{position:relative;overflow:hidden}
+.nfx2-beamcross::before,.nfx2-beamcross::after{content:"";position:absolute;top:-60%;height:220%;width:26px;background:linear-gradient(90deg,transparent,rgba(var(--c-rgb),.4),transparent);pointer-events:none}
+.nfx2-beamcross::before{transform:rotate(18deg);animation:nfx2Beam 3.4s linear infinite}
+.nfx2-beamcross::after{transform:rotate(-18deg);animation:nfx2Beam 3.4s linear infinite 1.7s}
+@keyframes nfx2Beam{from{left:-30%}to{left:130%}}
+
+/* Data-Rain: dashed vertical columns scroll downward like a digital rain feed */
+.nfx2-datarain{position:relative;overflow:hidden}
+.nfx2-datarain::after{content:"";position:absolute;left:0;right:0;top:-100%;height:200%;background:repeating-linear-gradient(90deg,transparent 0 10px,rgba(var(--c-rgb),.5) 10px 11px);-webkit-mask:repeating-linear-gradient(180deg,#000 0 8px,transparent 8px 22px);mask:repeating-linear-gradient(180deg,#000 0 8px,transparent 8px 22px);animation:nfx2Rain 2s linear infinite;pointer-events:none}
+@keyframes nfx2Rain{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+
+/* HUD-Brackets: targeting brackets on opposite corners breathe like a lock-on reticle */
+.nfx2-hud{position:relative}
+.nfx2-hud::before,.nfx2-hud::after{content:"";position:absolute;width:18px;height:18px;border:2px solid var(--c);pointer-events:none;animation:nfx2Hud 2s ease-in-out infinite}
+.nfx2-hud::before{top:-5px;left:-5px;border-right:none;border-bottom:none}
+.nfx2-hud::after{bottom:-5px;right:-5px;border-left:none;border-top:none}
+@keyframes nfx2Hud{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* Pulse-Grid: a technical grid overlay pulses its brightness like a charging energy field */
+.nfx2-pulsegrid{position:relative;overflow:hidden}
+.nfx2-pulsegrid::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(var(--c-rgb),.4) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--c-rgb),.4) 1px,transparent 1px);background-size:22px 22px;animation:nfx2PulseGrid 2.4s ease-in-out infinite;pointer-events:none}
+@keyframes nfx2PulseGrid{0%,100%{opacity:.2}50%{opacity:.9}}
+
+/* Heavy 3D motion steadies for reduced-motion users (global rule also stops animations) */
+@media(prefers-reduced-motion:reduce){
+  .nfx2-lift,.nfx2-flip,.nfx2-iso,.nfx2-parallax,.nfx2-perspshimmer,.nfx2-swing3d,.nfx2-depth-pop{transform:none!important}
+}
+</style>
+
+<h3 class="sec">🧊 3D &amp; Depth FX</h3>
+<div class="gallery" id="nfx2G3d">
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="el-card c-info nfx2-lift"><div class="n">3D</div><div class="l">Lift off surface</div></div></div>
+    <div class="meta"><div class="nm">Lift</div><span class="ref">.nfx2-lift</span><div class="desc">The card rises in real 3D space with a deepening ground shadow. Premium "elevated / focused" hero card.</div><div class="row"><button class="copy" data-snip='class="el-card c-info nfx2-lift"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="accent"><div class="stage"><div class="el-card c-accent nfx2-flip"><div class="n">FLIP</div><div class="l">Hinged tile</div></div></div>
+    <div class="meta"><div class="nm">Flip-Glow</div><span class="ref">.nfx2-flip</span><div class="desc">The panel tips forward on its X-axis like a hinged tile and glows at the peak. Great for reveal / mount moments.</div><div class="row"><button class="copy" data-snip='class="el-card c-accent nfx2-flip"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="warn"><div class="stage"><div class="el-card c-warn nfx2-extrude"><div class="n">$30M</div><div class="l">Extruded block</div></div></div>
+    <div class="meta"><div class="nm">Extrude</div><span class="ref">.nfx2-extrude</span><div class="desc">A stacked colored shadow ladder turns the card into a chunky 3D block that deepens as it lifts. Bold, tactile.</div><div class="row"><button class="copy" data-snip='class="el-card c-warn nfx2-extrude"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="pos"><div class="stage"><div class="el-card c-pos nfx2-iso"><div class="n">OK</div><div class="l">Isometric</div></div></div>
+    <div class="meta"><div class="nm">Isometric</div><span class="ref">.nfx2-iso</span><div class="desc">The card sits on an isometric plane and rises off it along Z with a cast shadow. Diagram / game-board feel.</div><div class="row"><button class="copy" data-snip='class="el-card c-pos nfx2-iso"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="crit"><div class="stage"><div class="el-card c-crit nfx2-parallax"><div class="n">Depth</div><div class="l">Layered planes</div></div></div>
+    <div class="meta"><div class="nm">Parallax Layers</div><span class="ref">.nfx2-parallax</span><div class="desc">A foreground frame and a background glow sit at different Z depths and shift apart as the card rocks — true parallax.</div><div class="row"><button class="copy" data-snip='class="el-card c-crit nfx2-parallax"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="el-card c-info nfx2-perspshimmer"><div class="n">Tilt</div><div class="l">Perspective shimmer</div></div></div>
+    <div class="meta"><div class="nm">Perspective Shimmer</div><span class="ref">.nfx2-perspshimmer</span><div class="desc">The card tilts through 3D space while a diagonal sheen sweeps the surface. Luxe, showcase metric tiles.</div><div class="row"><button class="copy" data-snip='class="el-card c-info nfx2-perspshimmer"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="neg"><div class="stage"><div class="el-card c-neg nfx2-swing3d"><div class="n">SWING</div><div class="l">Suspended sign</div></div></div>
+    <div class="meta"><div class="nm">Swing-3D</div><span class="ref">.nfx2-swing3d</span><div class="desc">The panel swings on its Y-axis like a suspended sign, grounded by a moving shadow. Dimensional idle motion.</div><div class="row"><button class="copy" data-snip='class="el-card c-neg nfx2-swing3d"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="accent"><div class="stage"><div class="el-card c-accent nfx2-depth-pop"><div class="n">POP</div><div class="l">Push toward you</div></div></div>
+    <div class="meta"><div class="nm">Depth-Pop</div><span class="ref">.nfx2-depth-pop</span><div class="desc">The card pushes toward you along Z (scaling via perspective) with a receding depth ring behind it. Attention pop.</div><div class="row"><button class="copy" data-snip='class="el-card c-accent nfx2-depth-pop"'>Copy snippet</button></div></div></div>
+
+</div>
+
+<h3 class="sec">✦ Glow, Border &amp; Holographic FX</h3>
+<div class="gallery" id="nfx2Gglow">
+
+  <div class="tile is-new" data-c="crit"><div class="stage"><div class="el-card c-crit nfx2-plasma-ring"><div class="n">☠️ 1</div><div class="l">Plasma glow</div></div></div>
+    <div class="meta"><div class="nm">Plasma-Ring</div><span class="ref">.nfx2-plasma-ring</span><div class="desc">A plasma glow swells around the whole element, inner and outer together. Strong pull for one hero element.</div><div class="row"><button class="copy" data-snip='class="el-card c-crit nfx2-plasma-ring"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="el-card c-info nfx2-laser"><div class="n">SCAN</div><div class="l">Laser border</div></div></div>
+    <div class="meta"><div class="nm">Laser-Border</div><span class="ref">.nfx2-laser</span><div class="desc">A single bright laser head streaks around the border loop. Faster and sharper than a comet trail.</div><div class="row"><button class="copy" data-snip='class="el-card c-info nfx2-laser"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="accent"><div class="stage"><div class="el-card c-accent nfx2-prism"><div class="n">NEW</div><div class="l">Prism edge</div></div></div>
+    <div class="meta"><div class="nm">Prism-Edge</div><span class="ref">.nfx2-prism</span><div class="desc">A full-spectrum rainbow runs the border while the fill stays on-theme. Vivid "featured / new" frame.</div><div class="row"><button class="copy" data-snip='class="el-card c-accent nfx2-prism"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="pos"><div class="stage"><div class="el-card c-pos nfx2-edgecycle"><div class="n">A+</div><div class="l">Edge cycle</div></div></div>
+    <div class="meta"><div class="nm">Edge-Cycle</div><span class="ref">.nfx2-edgecycle</span><div class="desc">The border glow cycles from the element hue into cool tones and back. Calmer than Prism, still eye-catching.</div><div class="row"><button class="copy" data-snip='class="el-card c-pos nfx2-edgecycle"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="el-card c-info nfx2-holo-grid" style="min-height:66px">Holo grid</div></div>
+    <div class="meta"><div class="nm">Holo-Grid</div><span class="ref">.nfx2-holo-grid</span><div class="desc">An iridescent grid drifts and hue-shifts across the surface, screen-blended. Futuristic HUD / telemetry look.</div><div class="row"><button class="copy" data-snip='class="el-card c-info nfx2-holo-grid"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="crit"><div class="stage"><div class="el-card c-crit nfx2-oil" style="min-height:66px">Oil slick</div></div>
+    <div class="meta"><div class="nm">Oil-Slick</div><span class="ref">.nfx2-oil</span><div class="desc">A multi-hue iridescent film drifts over the element color like oil on water. Soap-bubble showcase finish.</div><div class="row"><button class="copy" data-snip='class="el-card c-crit nfx2-oil"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="crit"><div class="stage"><div class="el-card c-crit nfx2-nebula" style="min-height:66px">Nebula</div></div>
+    <div class="meta"><div class="nm">Nebula</div><span class="ref">.nfx2-nebula</span><div class="desc">Two soft blurred color clouds slowly rotate and breathe behind the content. Cosmic, ambient backdrop.</div><div class="row"><button class="copy" data-snip='class="el-card c-crit nfx2-nebula"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="accent"><div class="stage"><div class="el-card c-accent nfx2-vortex" style="min-height:66px">Vortex</div></div>
+    <div class="meta"><div class="nm">Vortex</div><span class="ref">.nfx2-vortex</span><div class="desc">A swirling conic beam spins behind the surface, softly blurred. Energetic "spinning up / processing" vibe.</div><div class="row"><button class="copy" data-snip='class="el-card c-accent nfx2-vortex"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="el-kpi c-info nfx2-magpulse"><div class="n">LIVE</div><div class="l">Field pulse</div></div></div>
+    <div class="meta"><div class="nm">Magnetic-Pulse</div><span class="ref">.nfx2-magpulse</span><div class="desc">Concentric field rings expand outward from the element edge. Lightweight "active / broadcasting" signal.</div><div class="row"><button class="copy" data-snip='class="el-kpi c-info nfx2-magpulse"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="warn"><div class="stage"><div class="el-badge c-warn nfx2-spark-burst">⚡ CHARGED</div></div>
+    <div class="meta"><div class="nm">Spark-Burst</div><span class="ref">.nfx2-spark-burst</span><div class="desc">A cluster of colored sparks twinkles out from a corner. Festive energy for badges and achievement pills.</div><div class="row"><button class="copy" data-snip='class="el-badge c-warn nfx2-spark-burst"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="crit"><div class="stage"><div class="el-card c-crit nfx2-starfield" style="min-height:66px">Star field</div></div>
+    <div class="meta"><div class="nm">Star-Field</div><span class="ref">.nfx2-starfield</span><div class="desc">Two layers of twinkling stars fade in and out on offset timing. Dreamy, deep-space ambient texture.</div><div class="row"><button class="copy" data-snip='class="el-card c-crit nfx2-starfield"'>Copy snippet</button></div></div></div>
+
+</div>
+
+<h3 class="sec">💧 Glass, Glitch, Liquid &amp; Energy FX</h3>
+<div class="gallery" id="nfx2Genergy">
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="el-card c-info nfx2-glass-sheen" style="min-height:66px">Glass sheen</div></div>
+    <div class="meta"><div class="nm">Glass-Sheen</div><span class="ref">.nfx2-glass-sheen</span><div class="desc">Frosted glass tinted by the element color with a slow highlight sweeping across. Clean, premium overlays.</div><div class="row"><button class="copy" data-snip='class="el-card c-info nfx2-glass-sheen"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="el-card c-info nfx2-frostcrack" style="min-height:66px">Frost crack</div></div>
+    <div class="meta"><div class="nm">Frost-Crack</div><span class="ref">.nfx2-frostcrack</span><div class="desc">An icy frosted pane with hairline cracks that catch the light and shift. Cold "frozen / paused" state.</div><div class="row"><button class="copy" data-snip='class="el-card c-info nfx2-frostcrack"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="neg"><div class="stage"><div class="el-card c-neg nfx2-glitch-slice" style="min-height:60px">CORRUPT</div></div>
+    <div class="meta"><div class="nm">Glitch-Slice</div><span class="ref">.nfx2-glitch-slice</span><div class="desc">Horizontal slices jump and shear intermittently like a corrupt frame. Edgy error / failure state.</div><div class="row"><button class="copy" data-snip='class="el-card c-neg nfx2-glitch-slice"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="neg"><div class="stage"><div class="el-card c-neg nfx2-shatter" style="min-height:66px">Shatter</div></div>
+    <div class="meta"><div class="nm">Shatter</div><span class="ref">.nfx2-shatter</span><div class="desc">Fractured glass crack lines flash across the surface then vanish. Sudden "broken / breached" impact.</div><div class="row"><button class="copy" data-snip='class="el-card c-neg nfx2-shatter"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="el-card c-info nfx2-liquid-rise" style="min-height:66px">Filling…</div></div>
+    <div class="meta"><div class="nm">Liquid-Rise</div><span class="ref">.nfx2-liquid-rise</span><div class="desc">A wavy colored liquid surges up from the bottom and settles. Capacity, progress, "filling up" states.</div><div class="row"><button class="copy" data-snip='class="el-card c-info nfx2-liquid-rise"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="pos"><div class="stage"><div class="el-card c-pos nfx2-ripple-out" style="min-height:66px">Ripple</div></div>
+    <div class="meta"><div class="nm">Ripple-Out</div><span class="ref">.nfx2-ripple-out</span><div class="desc">Concentric rings ripple outward from the center like a dropped stone. Click feedback / broadcast pulse.</div><div class="row"><button class="copy" data-snip='class="el-card c-pos nfx2-ripple-out"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="warn"><div class="stage"><div class="el-card c-warn nfx2-electric-arc" style="min-height:66px">⚡ Surge</div></div>
+    <div class="meta"><div class="nm">Electric-Arc</div><span class="ref">.nfx2-electric-arc</span><div class="desc">Two vertical arcs crackle and skew across the surface. High-voltage "power surge / live current" feel.</div><div class="row"><button class="copy" data-snip='class="el-card c-warn nfx2-electric-arc"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="accent"><div class="stage"><div class="el-card c-accent nfx2-beamcross" style="min-height:66px">Beam cross</div></div>
+    <div class="meta"><div class="nm">Beam-Cross</div><span class="ref">.nfx2-beamcross</span><div class="desc">Two diagonal light beams sweep across in opposite phase. Searchlight / premium spotlight motion.</div><div class="row"><button class="copy" data-snip='class="el-card c-accent nfx2-beamcross"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="pos"><div class="stage"><div class="el-card c-pos nfx2-datarain" style="min-height:66px">Data feed</div></div>
+    <div class="meta"><div class="nm">Data-Rain</div><span class="ref">.nfx2-datarain</span><div class="desc">Dashed vertical columns scroll downward like a digital rain feed. Matrix / streaming-data backdrop.</div><div class="row"><button class="copy" data-snip='class="el-card c-pos nfx2-datarain"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="el-kpi c-info nfx2-hud"><div class="n">90%</div><div class="l">Lock-on</div></div></div>
+    <div class="meta"><div class="nm">HUD-Brackets</div><span class="ref">.nfx2-hud</span><div class="desc">Targeting brackets on opposite corners breathe like a lock-on reticle. Needs a little padding around it.</div><div class="row"><button class="copy" data-snip='class="el-kpi c-info nfx2-hud"'>Copy snippet</button></div></div></div>
+
+  <div class="tile is-new" data-c="crit"><div class="stage"><div class="el-card c-crit nfx2-pulsegrid" style="min-height:66px">Charging…</div></div>
+    <div class="meta"><div class="nm">Pulse-Grid</div><span class="ref">.nfx2-pulsegrid</span><div class="desc">A technical grid overlay pulses its brightness like a charging energy field. Sci-fi "powering up" surface.</div><div class="row"><button class="copy" data-snip='class="el-card c-crit nfx2-pulsegrid"'>Copy snippet</button></div></div></div>
+
+</div>

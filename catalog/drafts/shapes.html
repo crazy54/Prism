@@ -1,0 +1,442 @@
+<style>
+/* ==== shapes 2026 new facets — namespaced nsh2-* / @keyframes nsh2* ====
+   Fully self-contained. These do NOT reuse the page's .ts-* layout engine;
+   a trailing idempotent IIFE lays out every per-letter/per-word shape below.
+   Colour comes from the page's --c / --c-rgb (set via c-* classes). ====== */
+
+/* shared glyph */
+.nsh2-g{position:absolute;left:50%;top:50%;font-weight:800;white-space:pre;transform-style:preserve-3d}
+.nsh2-rotor{position:absolute;inset:0;transform-style:preserve-3d}
+
+/* ---------- 3D: rotating ring of text ---------- */
+@keyframes nsh2RingSpin{to{transform:rotateY(360deg)}}
+.nsh2-ring3d{position:relative;width:210px;height:120px;perspective:620px}
+.nsh2-ring3d .nsh2-rotor{animation:nsh2RingSpin 12s linear infinite}
+.nsh2-ring3d .nsh2-g{font-size:19px;color:var(--c);text-shadow:0 0 9px rgba(var(--c-rgb),.55)}
+
+/* ---------- 3D: spinning cylinder of text ---------- */
+@keyframes nsh2CylSpin{from{transform:rotateX(9deg) rotateY(0)}to{transform:rotateX(9deg) rotateY(-360deg)}}
+.nsh2-cylinder{position:relative;width:220px;height:120px;perspective:560px}
+.nsh2-cylinder .nsh2-rotor{animation:nsh2CylSpin 15s linear infinite}
+.nsh2-cylinder .nsh2-g{font-size:15px;color:var(--c);text-shadow:0 0 7px rgba(var(--c-rgb),.5)}
+
+/* ---------- 3D: helix / DNA of characters ---------- */
+.nsh2-helix{position:relative;width:180px;height:130px;perspective:600px}
+.nsh2-helix .nsh2-rotor{animation:nsh2RingSpin 8s linear infinite}
+.nsh2-helix .nsh2-g{font-size:16px;color:var(--c);text-shadow:0 0 8px rgba(var(--c-rgb),.6)}
+
+/* ---------- 3D: spiral staircase of text ---------- */
+.nsh2-staircase{position:relative;width:190px;height:130px;perspective:640px}
+.nsh2-staircase .nsh2-rotor{animation:nsh2RingSpin 13s linear infinite}
+.nsh2-staircase .nsh2-g{font-size:15px;color:var(--c);text-shadow:0 0 8px rgba(var(--c-rgb),.55)}
+
+/* ---------- 3D: letters scattered on a rotating sphere ---------- */
+@keyframes nsh2SphereSpin{from{transform:rotateX(-14deg) rotateY(0)}to{transform:rotateX(-14deg) rotateY(360deg)}}
+.nsh2-sphere{position:relative;width:170px;height:150px;perspective:640px}
+.nsh2-sphere .nsh2-rotor{animation:nsh2SphereSpin 17s linear infinite}
+.nsh2-sphere .nsh2-g{font-size:16px;color:var(--c);text-shadow:0 0 8px rgba(var(--c-rgb),.6)}
+
+/* ---------- 3D: orbiting word cloud on a sphere ---------- */
+.nsh2-cloud3d{position:relative;width:210px;height:150px;perspective:700px}
+.nsh2-cloud3d .nsh2-rotor{animation:nsh2SphereSpin 22s linear infinite}
+.nsh2-cloud3d .nsh2-w{position:absolute;left:50%;top:50%;font-weight:800;font-size:13px;color:var(--c);white-space:nowrap;text-shadow:0 0 8px rgba(var(--c-rgb),.5)}
+
+/* ---------- 3D: extruded / volumetric word (layered translateZ) ---------- */
+@keyframes nsh2Rock{0%,100%{transform:rotateX(6deg) rotateY(-34deg)}50%{transform:rotateX(6deg) rotateY(34deg)}}
+.nsh2-extrude{position:relative;width:200px;height:110px;perspective:720px}
+.nsh2-extrude .nsh2-rotor{animation:nsh2Rock 7s ease-in-out infinite}
+.nsh2-extrude .nsh2-lay{position:absolute;left:50%;top:50%;font-weight:900;font-size:34px;letter-spacing:.02em;white-space:nowrap}
+
+/* ---------- 3D: text wave in depth ---------- */
+@keyframes nsh2W3{0%,100%{transform:translateZ(-30px)}50%{transform:translateZ(30px)}}
+.nsh2-wave3d{position:relative;width:250px;height:100px;perspective:520px;display:flex;align-items:center;justify-content:center}
+.nsh2-wave3d .nsh2-w3rot{transform-style:preserve-3d;transform:rotateX(20deg) rotateY(-8deg);display:flex;gap:1px;font-weight:800;font-size:24px;color:var(--c)}
+.nsh2-wave3d .nsh2-w3o{display:inline-block;transform-style:preserve-3d}
+.nsh2-wave3d .nsh2-w3i{display:inline-block;animation:nsh2W3 2.4s ease-in-out infinite;text-shadow:0 0 8px rgba(var(--c-rgb),.5)}
+
+/* ---------- 3D: tunnel — copies of a word flying at the viewer ---------- */
+@keyframes nsh2Tunnel{0%{transform:translate(-50%,-50%) translateZ(-520px);opacity:0}15%{opacity:1}82%{opacity:1}100%{transform:translate(-50%,-50%) translateZ(190px);opacity:0}}
+.nsh2-tunnel3d{position:relative;width:210px;height:125px;perspective:320px;overflow:hidden;transform-style:preserve-3d}
+.nsh2-tunnel3d span{position:absolute;left:50%;top:50%;font-weight:900;font-size:27px;color:var(--c);white-space:nowrap;text-shadow:0 0 13px rgba(var(--c-rgb),.75);animation:nsh2Tunnel 4.2s linear infinite}
+.nsh2-tunnel3d span:nth-child(1){animation-delay:0s}
+.nsh2-tunnel3d span:nth-child(2){animation-delay:-.84s}
+.nsh2-tunnel3d span:nth-child(3){animation-delay:-1.68s}
+.nsh2-tunnel3d span:nth-child(4){animation-delay:-2.52s}
+.nsh2-tunnel3d span:nth-child(5){animation-delay:-3.36s}
+
+/* ---------- 3D: perspective marquee receding to a vanishing point ---------- */
+@keyframes nsh2Recede{0%{transform:translate(-50%,-50%) translateZ(150px);opacity:0}12%{opacity:1}100%{transform:translate(-50%,-50%) translateZ(-540px);opacity:0}}
+.nsh2-marquee3d{position:relative;width:220px;height:125px;perspective:360px;overflow:hidden}
+.nsh2-marquee3d .nsh2-mq-in{position:absolute;inset:0;transform-style:preserve-3d}
+.nsh2-marquee3d .nsh2-mq-line{position:absolute;left:50%;top:50%;font-weight:800;font-size:21px;color:var(--c);white-space:nowrap;text-shadow:0 0 9px rgba(var(--c-rgb),.6);animation:nsh2Recede 5s linear infinite}
+.nsh2-marquee3d .nsh2-mq-line:nth-child(1){animation-delay:0s}
+.nsh2-marquee3d .nsh2-mq-line:nth-child(2){animation-delay:-1.25s}
+.nsh2-marquee3d .nsh2-mq-line:nth-child(3){animation-delay:-2.5s}
+.nsh2-marquee3d .nsh2-mq-line:nth-child(4){animation-delay:-3.75s}
+
+/* ---------- 3D: rotating text cube ---------- */
+@keyframes nsh2CubeSpin{0%{transform:rotateX(-24deg) rotateY(0)}100%{transform:rotateX(-24deg) rotateY(360deg)}}
+.nsh2-cube{width:120px;height:120px;perspective:640px}
+.nsh2-cube .nsh2-cube-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:nsh2CubeSpin 15s linear infinite}
+.nsh2-cube .nsh2-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;letter-spacing:.02em;color:var(--c);border:2px solid var(--c);background:rgba(var(--c-rgb),.10);text-shadow:0 0 9px rgba(var(--c-rgb),.6)}
+.nsh2-cube .f1{transform:translateZ(60px)}
+.nsh2-cube .f2{transform:rotateY(180deg) translateZ(60px)}
+.nsh2-cube .f3{transform:rotateY(90deg) translateZ(60px)}
+.nsh2-cube .f4{transform:rotateY(-90deg) translateZ(60px)}
+.nsh2-cube .f5{transform:rotateX(90deg) translateZ(60px)}
+.nsh2-cube .f6{transform:rotateX(-90deg) translateZ(60px)}
+
+/* ---------- 3D: carousel of word panels ---------- */
+@keyframes nsh2CarSpin{to{transform:rotateY(360deg)}}
+.nsh2-carousel{width:210px;height:100px;perspective:760px}
+.nsh2-carousel .nsh2-car-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:nsh2CarSpin 16s linear infinite}
+.nsh2-carousel .nsh2-car-panel{position:absolute;left:50%;top:50%;width:120px;height:50px;margin:-25px 0 0 -60px;display:flex;align-items:center;justify-content:center;border:1px solid var(--c);border-radius:9px;background:rgba(var(--c-rgb),.13);color:var(--c);font-weight:800;font-size:14px;text-shadow:0 0 7px rgba(var(--c-rgb),.5)}
+
+/* ---------- 3D: triangular prism of text ---------- */
+.nsh2-prism3d{width:150px;height:96px;perspective:760px}
+.nsh2-prism3d .nsh2-prism-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:nsh2CarSpin 12s linear infinite}
+.nsh2-prism3d .nsh2-prism-face{position:absolute;left:50%;top:50%;width:96px;height:66px;margin:-33px 0 0 -48px;display:flex;align-items:center;justify-content:center;border:1px solid var(--c);border-radius:7px;background:rgba(var(--c-rgb),.13);color:var(--c);font-weight:800;font-size:15px}
+.nsh2-prism3d .p1{transform:rotateY(0) translateZ(52px)}
+.nsh2-prism3d .p2{transform:rotateY(120deg) translateZ(52px)}
+.nsh2-prism3d .p3{transform:rotateY(240deg) translateZ(52px)}
+
+/* ---------- 3D: flip panel (front / back words) ---------- */
+@keyframes nsh2Flip{0%,42%{transform:rotateY(0)}58%,100%{transform:rotateY(180deg)}}
+.nsh2-flipcard{width:150px;height:82px;perspective:640px}
+.nsh2-flipcard .nsh2-flip-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:nsh2Flip 5.5s ease-in-out infinite}
+.nsh2-flipcard .nsh2-flip-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;backface-visibility:hidden;border:1px solid var(--c);border-radius:11px;background:rgba(var(--c-rgb),.13);color:var(--c);font-weight:800;font-size:17px;text-shadow:0 0 8px rgba(var(--c-rgb),.5)}
+.nsh2-flipcard .nsh2-flip-back{transform:rotateY(180deg)}
+
+/* ---------- 3D: book pages fanning open ---------- */
+@keyframes nsh2Page{0%,100%{transform:rotateY(-6deg)}50%{transform:rotateY(-168deg)}}
+.nsh2-book3d{width:160px;height:110px;perspective:820px;display:flex;align-items:center;justify-content:center}
+.nsh2-book3d .nsh2-book-in{position:relative;width:72px;height:98px;transform-style:preserve-3d;transform:rotateX(8deg)}
+.nsh2-book3d .nsh2-page{position:absolute;inset:0;transform-origin:left center;border:1px solid var(--c);border-radius:0 7px 7px 0;background:rgba(var(--c-rgb),.11);color:var(--c);font-weight:700;font-size:10.5px;line-height:1.3;padding:6px;text-align:center;backface-visibility:hidden;animation:nsh2Page 5s ease-in-out infinite}
+
+/* ============================ 2D shaped text ============================ */
+
+/* full circle (whole ring spins, glyphs tangent) */
+@keyframes nsh2Spin2d{to{transform:rotate(360deg)}}
+.nsh2-circle{position:relative;width:150px;height:150px}
+.nsh2-circle .nsh2-rotor{animation:nsh2Spin2d 15s linear infinite}
+.nsh2-circle .nsh2-g{font-size:16px;color:var(--c);text-shadow:0 0 7px rgba(var(--c-rgb),.5)}
+.nsh2-circle .nsh2-hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:20px;color:var(--c);font-weight:800}
+
+/* high-amplitude wave */
+@keyframes nsh2WaveBob{0%,100%{transform:translateY(var(--y,0))}50%{transform:translateY(calc(var(--y,0) * -1))}}
+.nsh2-line{display:inline-flex;font-weight:800;font-size:26px;color:var(--c)}
+.nsh2-line span{display:inline-block;animation:nsh2WaveBob 2s ease-in-out infinite;animation-delay:var(--d,0s)}
+
+/* zigzag path */
+@keyframes nsh2ZigBob{0%,100%{transform:translateY(var(--y,0))}50%{transform:translateY(calc(var(--y,0) * -1))}}
+.nsh2-zigzag{display:inline-flex;font-weight:800;font-size:24px;color:var(--c)}
+.nsh2-zigzag span{display:inline-block;animation:nsh2ZigBob 1.6s ease-in-out infinite;animation-delay:var(--d,0s)}
+
+/* bounce path (ball-bounce baseline) */
+@keyframes nsh2Bounce{0%,100%{transform:translateY(var(--y,0))}50%{transform:translateY(calc(var(--y,0) - 14px))}}
+.nsh2-bounce{display:inline-flex;font-weight:800;font-size:24px;color:var(--c)}
+.nsh2-bounce span{display:inline-block;animation:nsh2Bounce 1.3s cubic-bezier(.5,0,.5,1) infinite;animation-delay:var(--d,0s)}
+
+/* spirals */
+.nsh2-spiralt{position:relative;width:160px;height:160px;animation:nsh2Spin2d 11s linear infinite}
+.nsh2-spiralt .nsh2-g{color:var(--c);text-shadow:0 0 5px rgba(var(--c-rgb),.5)}
+.nsh2-spirall{position:relative;width:170px;height:170px;animation:nsh2Spin2d 20s linear infinite}
+.nsh2-spirall .nsh2-g{color:var(--c);text-shadow:0 0 5px rgba(var(--c-rgb),.5)}
+
+/* filled shapes (repeated text clipped to a silhouette, moving fill) */
+@keyframes nsh2FillShift{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+@keyframes nsh2Pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.nsh2-fill{width:150px;height:150px;line-height:1.05;font-size:12px;font-weight:800;letter-spacing:.02em;text-align:center;
+  word-break:break-all;overflow:hidden;color:#fff;padding:3px;
+  background:linear-gradient(120deg,rgba(var(--c-rgb),.5),rgba(var(--c-rgb),.2) 55%,rgba(var(--c-rgb),.5));
+  background-size:200% 100%;animation:nsh2FillShift 3.6s linear infinite}
+.nsh2-fill.nsh2-star{clip-path:polygon(50% 2%,61% 35%,97% 35%,68% 57%,79% 92%,50% 70%,21% 92%,32% 57%,3% 35%,39% 35%);animation:nsh2FillShift 3.6s linear infinite,nsh2Pulse 3s ease-in-out infinite}
+.nsh2-fill.nsh2-heart{clip-path:path("M75,140 C20,100 8,55 35,33 C55,16 73,28 75,52 C77,28 95,16 115,33 C142,55 130,100 75,140 Z");animation:nsh2FillShift 3.2s linear infinite,nsh2Pulse 2.4s ease-in-out infinite}
+.nsh2-fill.nsh2-arrow{clip-path:polygon(0 32%,55% 32%,55% 10%,100% 50%,55% 90%,55% 68%,0 68%)}
+.nsh2-fill.nsh2-tri{clip-path:polygon(50% 4%,96% 96%,4% 96%)}
+.nsh2-fill.nsh2-hex{clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0 50%)}
+.nsh2-fill.nsh2-diamond{clip-path:polygon(50% 2%,98% 50%,50% 98%,2% 50%)}
+
+/* SVG textPath marquees */
+.nsh2-svg{display:block;margin:0 auto;overflow:visible}
+.nsh2-svg text{font-weight:800;font-size:15px}
+
+@media(prefers-reduced-motion:reduce){
+  [class*="nsh2-"]{animation:none!important}
+}
+</style>
+
+<h3 class="sec">🧊 3D Tunnels &amp; Perspective — text with real depth</h3>
+<div class="gallery">
+
+  <div class="tile is-new" data-c="crit"><div class="stage"><div class="nsh2-tunnel3d c-crit"><span>WARP</span><span>WARP</span><span>WARP</span><span>WARP</span><span>WARP</span></div></div>
+    <div class="meta"><div class="nm">Text Tunnel</div><span class="ref">.nsh2-tunnel3d</span><div class="desc">Copies of a word fly straight at the camera down a true <code>perspective</code> tunnel — each starts far on the Z-axis, scales up, and blows past the viewer. Staggered so a steady stream never leaves the tile empty.</div><button class="copy" data-snip='class="nsh2-tunnel3d c-crit"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="nsh2-ring3d c-info" data-text="PRISM · 3D RING · ">ROTATING RING</div></div>
+    <div class="meta"><div class="nm">3D Ring of Text</div><span class="ref">.nsh2-ring3d</span><div class="desc">Letters distributed around a circle with <code>rotateY</code> + <code>translateZ</code> on a <code>preserve-3d</code> rotor, so the whole band turns in space — near letters large, far letters small. A genuine spinning 3D ring, not a flat circle.</div><button class="copy" data-snip='class="nsh2-ring3d c-info" data-text="PRISM · 3D RING · "'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="pos"><div class="stage"><div class="nsh2-cylinder c-pos" data-text="WRAPPED AROUND A SPINNING DRUM · ">WRAPPED AROUND A SPINNING DRUM · </div></div>
+    <div class="meta"><div class="nm">Cylinder Wrap</div><span class="ref">.nsh2-cylinder</span><div class="desc">A longer string wrapped onto the surface of a slightly tilted cylinder that rotates like a drum. Same <code>translateZ</code> ring math with a bigger radius and an <code>rotateX</code> tilt so you see the barrel curve.</div><button class="copy" data-snip='class="nsh2-cylinder c-pos" data-text="WRAPPED AROUND A SPINNING DRUM · "'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="accent"><div class="stage"><div class="nsh2-cube c-accent"><div class="nsh2-cube-in"><div class="nsh2-face f1">PRISM</div><div class="nsh2-face f2">SHAPE</div><div class="nsh2-face f3">TEXT</div><div class="nsh2-face f4">CUBE</div><div class="nsh2-face f5">3D</div><div class="nsh2-face f6">FX</div></div></div></div>
+    <div class="meta"><div class="nm">Text Cube</div><span class="ref">.nsh2-cube</span><div class="desc">Six labelled faces built with <code>translateZ</code>/<code>rotateX</code>/<code>rotateY</code> on a <code>preserve-3d</code> box that tumbles continuously. Each face carries its own word — a rotating word-die.</div><button class="copy" data-snip='class="nsh2-cube c-accent"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="crit"><div class="stage"><div class="nsh2-helix c-crit" data-text="HELIXSTRAND">HELIXSTRAND</div></div>
+    <div class="meta"><div class="nm">Character Helix</div><span class="ref">.nsh2-helix</span><div class="desc">Characters climb a helix / DNA strand — each glyph gets an increasing <code>rotateY</code> plus a downward <code>translateY</code>, and the whole coil spins. Reads as a twisting double-helix of letters.</div><button class="copy" data-snip='class="nsh2-helix c-crit" data-text="HELIXSTRAND"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="warn"><div class="stage"><div class="nsh2-carousel c-warn" data-words="LAUNCH SCALE SHIP GROW WIN NEXT"></div></div>
+    <div class="meta"><div class="nm">Word Carousel</div><span class="ref">.nsh2-carousel</span><div class="desc">Word panels arranged evenly around a vertical axis with <code>rotateY</code> + <code>translateZ</code>, revolving toward and away from you. A classic 3D carousel where each card is a word.</div><button class="copy" data-snip='class="nsh2-carousel c-warn" data-words="LAUNCH SCALE SHIP GROW WIN NEXT"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="nsh2-marquee3d c-info"><div class="nsh2-mq-in"><div class="nsh2-mq-line">RECEDING HORIZON</div><div class="nsh2-mq-line">RECEDING HORIZON</div><div class="nsh2-mq-line">RECEDING HORIZON</div><div class="nsh2-mq-line">RECEDING HORIZON</div></div></div></div>
+    <div class="meta"><div class="nm">Vanishing Marquee</div><span class="ref">.nsh2-marquee3d</span><div class="desc">Lines of text march away from the viewer down a corridor, shrinking toward a vanishing point and fading out — a perspective marquee. Layered copies keep the corridor full.</div><button class="copy" data-snip='class="nsh2-marquee3d c-info"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="pos"><div class="stage"><div class="nsh2-staircase c-pos" data-text="STEP UP TO THE TOP · ">STEP UP TO THE TOP · </div></div>
+    <div class="meta"><div class="nm">Spiral Staircase</div><span class="ref">.nsh2-staircase</span><div class="desc">Letters descend a spiral staircase — each is rotated around the central axis, dropped a step in Y, and tilted flat with <code>rotateX</code> so it lies like a tread. The stair rotates as one.</div><button class="copy" data-snip='class="nsh2-staircase c-pos" data-text="STEP UP TO THE TOP · "'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="crit"><div class="stage"><div class="nsh2-cloud3d c-crit" data-words="DATA CLOUD INSIGHT SIGNAL METRIC TREND SCALE PULSE NODE EDGE FLOW"></div></div>
+    <div class="meta"><div class="nm">Orbiting Word Cloud</div><span class="ref">.nsh2-cloud3d</span><div class="desc">Words positioned on the surface of a sphere via a golden-angle distribution, the whole globe slowly rotating so tags orbit front-to-back. A true 3D tag cloud.</div><button class="copy" data-snip='class="nsh2-cloud3d c-crit" data-words="DATA CLOUD INSIGHT SIGNAL METRIC TREND"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="nsh2-sphere c-info" data-text="PRISMSPHEREGLOBE3D">PRISMSPHEREGLOBE3D</div></div>
+    <div class="meta"><div class="nm">Letter Sphere</div><span class="ref">.nsh2-sphere</span><div class="desc">Individual glyphs scattered across a rotating sphere (golden-spiral placement, each facing outward). The globe turns so letters wrap over the horizon — dense, planetary.</div><button class="copy" data-snip='class="nsh2-sphere c-info" data-text="PRISMSPHEREGLOBE3D"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="accent"><div class="stage"><div class="nsh2-extrude c-accent"><div class="nsh2-rotor" data-word="DEPTH"></div></div></div>
+    <div class="meta"><div class="nm">Extruded Word</div><span class="ref">.nsh2-extrude</span><div class="desc">A single word stacked as many <code>translateZ</code> layers to fake real extrusion / thickness, shaded front-to-back, gently rocking left-right so you see the volumetric side. Solid 3D lettering.</div><button class="copy" data-snip='class="nsh2-extrude c-accent" (rotor data-word="DEPTH")'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="pos"><div class="stage"><div class="nsh2-wave3d c-pos" data-text="DEPTH WAVE">DEPTH WAVE</div></div>
+    <div class="meta"><div class="nm">Depth Wave</div><span class="ref">.nsh2-wave3d</span><div class="desc">A tilted row of letters where each glyph oscillates along the Z-axis on a staggered delay, so a wave travels through the word in <em>depth</em> rather than up and down. Perspective + preserve-3d.</div><button class="copy" data-snip='class="nsh2-wave3d c-pos" data-text="DEPTH WAVE"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="warn"><div class="stage"><div class="nsh2-flipcard c-warn"><div class="nsh2-flip-in"><div class="nsh2-flip-face">ONLINE</div><div class="nsh2-flip-face nsh2-flip-back">STABLE</div></div></div></div>
+    <div class="meta"><div class="nm">3D Flip Panel</div><span class="ref">.nsh2-flipcard</span><div class="desc">A panel that flips 180° around Y to swap its front word for its back word, using <code>backface-visibility</code> so only the facing side shows. Great for status toggles.</div><button class="copy" data-snip='class="nsh2-flipcard c-warn"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="nsh2-prism3d c-info"><div class="nsh2-prism-in"><div class="nsh2-prism-face p1">FAST</div><div class="nsh2-prism-face p2">SAFE</div><div class="nsh2-prism-face p3">SIMPLE</div></div></div></div>
+    <div class="meta"><div class="nm">Triangular Prism</div><span class="ref">.nsh2-prism3d</span><div class="desc">Three word-faces set 120° apart around a vertical axis form a rotating triangular prism — a compact three-way message wheel built purely from <code>rotateY</code> + <code>translateZ</code>.</div><button class="copy" data-snip='class="nsh2-prism3d c-info"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="accent"><div class="stage"><div class="nsh2-book3d c-accent"><div class="nsh2-book-in"><div class="nsh2-page" style="animation-delay:0s">ONCE</div><div class="nsh2-page" style="animation-delay:-.6s">UPON</div><div class="nsh2-page" style="animation-delay:-1.2s">A</div><div class="nsh2-page" style="animation-delay:-1.8s">TIME</div></div></div></div>
+    <div class="meta"><div class="nm">Fanning Pages</div><span class="ref">.nsh2-book3d</span><div class="desc">Text pages hinged on a left spine fan open and closed around Y with staggered delays, like a flip-book turning. Each page carries a word of the phrase.</div><button class="copy" data-snip='class="nsh2-book3d c-accent"'>Copy snippet</button></div></div>
+
+</div>
+
+<h3 class="sec">🧩 2D Shaped Text — arcs, waves, spirals, filled silhouettes &amp; paths</h3>
+<div class="gallery">
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="nsh2-circle c-info" data-text="★ FULL CIRCLE OF TEXT SPINS ROUND ★ "><span class="nsh2-hub">◍</span></div></div>
+    <div class="meta"><div class="nm">Full Circle</div><span class="ref">.nsh2-circle</span><div class="desc">A complete 360° ring of tangent letters that rotates as a flat disc around a centre glyph — a coin / seal wordmark. Distinct from the arc set: it closes the loop all the way around.</div><button class="copy" data-snip='class="nsh2-circle c-info" data-text="★ FULL CIRCLE OF TEXT SPINS ROUND ★ "'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="pos"><div class="stage"><div class="nsh2-line c-pos" data-amp="26">BIG WAVE</div></div>
+    <div class="meta"><div class="nm">High-Amplitude Wave</div><span class="ref">.nsh2-line</span><div class="desc">Letters sit on a tall sine curve and swing between their baseline and its mirror, giving a big, rolling swell rather than a gentle ripple. Amplitude is set per tile via <code>data-amp</code>.</div><button class="copy" data-snip='class="nsh2-line c-pos" data-amp="26"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="warn"><div class="stage"><div class="nsh2-zigzag c-warn" data-amp="16">ZIG ZAG ZIG</div></div>
+    <div class="meta"><div class="nm">Zigzag Path</div><span class="ref">.nsh2-zigzag</span><div class="desc">Alternating letters snap up and down into a sharp sawtooth, then invert on the beat so the zigzag flips its teeth. A jagged, electric baseline.</div><button class="copy" data-snip='class="nsh2-zigzag c-warn" data-amp="16"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="accent"><div class="stage"><div class="nsh2-bounce c-accent" data-bumps="3" data-amp="30">BOUNCE ALONG</div></div>
+    <div class="meta"><div class="nm">Bounce Path</div><span class="ref">.nsh2-bounce</span><div class="desc">Letters follow a ball-bounce baseline (a series of humps from <code>|sin|</code>) and each hops on a staggered spring ease, so a bounce rolls left-to-right across the word.</div><button class="copy" data-snip='class="nsh2-bounce c-accent" data-bumps="3" data-amp="30"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="crit"><div class="stage"><div class="nsh2-spiralt c-crit" data-text="WINDING TIGHTLY INTO THE VERY CORE">WINDING TIGHTLY INTO THE VERY CORE</div></div>
+    <div class="meta"><div class="nm">Tight Spiral</div><span class="ref">.nsh2-spiralt</span><div class="desc">An Archimedean spiral with a small angular step and slow radial growth, coiling the text into a dense whirlpool that rotates. Hypnotic and compact.</div><button class="copy" data-snip='class="nsh2-spiralt c-crit" data-text="WINDING TIGHTLY INTO THE VERY CORE"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="nsh2-spirall c-info" data-text="LOOSE OPEN GALACTIC ARM OF TEXT">LOOSE OPEN GALACTIC ARM OF TEXT</div></div>
+    <div class="meta"><div class="nm">Loose Spiral</div><span class="ref">.nsh2-spirall</span><div class="desc">The same spiral math opened up — larger step and growth for an airy, galactic-arm spread that sweeps slowly around. Roomy where the tight spiral is dense.</div><button class="copy" data-snip='class="nsh2-spirall c-info" data-text="LOOSE OPEN GALACTIC ARM OF TEXT"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="warn"><div class="stage"><div class="nsh2-fill nsh2-star c-warn">FIVE STAR FIVE STAR FIVE STAR FIVE STAR FIVE STAR FIVE STAR FIVE STAR FIVE STAR FIVE STAR FIVE STAR FIVE STAR FIVE STAR FIVE STAR FIVE</div></div>
+    <div class="meta"><div class="nm">Star Fill (pulsing)</div><span class="ref">.nsh2-fill.nsh2-star</span><div class="desc">Repeated words clipped to a five-point star with a gradient sweeping through the glyphs, plus a gentle scale pulse so the star breathes. Ratings, awards, featured tiles.</div><button class="copy" data-snip='class="nsh2-fill nsh2-star c-warn"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="neg"><div class="stage"><div class="nsh2-fill nsh2-heart c-neg">WE LOVE THIS WE LOVE THIS WE LOVE THIS WE LOVE THIS WE LOVE THIS WE LOVE THIS WE LOVE THIS WE LOVE THIS WE LOVE THIS WE LOVE THIS WE LOVE</div></div>
+    <div class="meta"><div class="nm">Heart Fill (beating)</div><span class="ref">.nsh2-fill.nsh2-heart</span><div class="desc">A heart silhouette (<code>clip-path:path()</code>) packed with a sentiment phrase and a moving gradient, given a soft beat via a scale pulse. Swap the phrase for any message.</div><button class="copy" data-snip='class="nsh2-fill nsh2-heart c-neg"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="pos"><div class="stage"><div class="nsh2-fill nsh2-arrow c-pos">GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO GO</div></div>
+    <div class="meta"><div class="nm">Arrow Fill</div><span class="ref">.nsh2-fill.nsh2-arrow</span><div class="desc">Repeated text clipped to a right-pointing arrow with a gradient sliding in the direction of travel — a directional, "forward / next" wordmark.</div><button class="copy" data-snip='class="nsh2-fill nsh2-arrow c-pos"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage"><div class="nsh2-fill nsh2-tri c-info">DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA DELTA</div></div>
+    <div class="meta"><div class="nm">Triangle Fill</div><span class="ref">.nsh2-fill.nsh2-tri</span><div class="desc">Text poured into a triangle / delta whose narrowing apex crops words to a point, reinforcing the shape while a highlight slides through. Change / play / warning motifs.</div><button class="copy" data-snip='class="nsh2-fill nsh2-tri c-info"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="crit"><div class="stage"><div class="nsh2-fill nsh2-hex c-crit">HEX GRID HEX GRID HEX GRID HEX GRID HEX GRID HEX GRID HEX GRID HEX GRID HEX GRID HEX GRID HEX GRID HEX GRID HEX GRID HEX GRID HEX GRID HEX</div></div>
+    <div class="meta"><div class="nm">Hexagon Fill</div><span class="ref">.nsh2-fill.nsh2-hex</span><div class="desc">Words tiled inside a hexagon silhouette with a moving gradient — a tech / honeycomb / node badge. Tessellate several for a mesh look.</div><button class="copy" data-snip='class="nsh2-fill nsh2-hex c-crit"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="accent"><div class="stage"><div class="nsh2-fill nsh2-diamond c-accent">SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE SHINE</div></div>
+    <div class="meta"><div class="nm">Diamond Fill</div><span class="ref">.nsh2-fill.nsh2-diamond</span><div class="desc">Repeated text clipped to a diamond / gem with a gradient glint sweeping across. Premium, "value / quality" silhouette that reads instantly.</div><button class="copy" data-snip='class="nsh2-fill nsh2-diamond c-accent"'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="info"><div class="stage">
+    <svg class="nsh2-svg" width="220" height="120" viewBox="0 0 200 120">
+      <defs>
+        <path id="nsh2InfPath" d="M100,60 C60,12 12,12 12,60 C12,108 60,108 100,60 C140,12 188,12 188,60 C188,108 140,108 100,60 Z" fill="none"/>
+        <linearGradient id="nsh2GradA" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4493f8"/><stop offset=".5" stop-color="#c879ff"/><stop offset="1" stop-color="#4493f8"/></linearGradient>
+      </defs>
+      <text fill="url(#nsh2GradA)"><textPath href="#nsh2InfPath" startOffset="0%">ENDLESS · INFINITE LOOP OF TEXT · ENDLESS · INFINITE LOOP OF TEXT ·<animate attributeName="startOffset" from="0%" to="100%" dur="9s" repeatCount="indefinite"/></textPath></text>
+    </svg></div>
+    <div class="meta"><div class="nm">Infinity Loop</div><span class="ref">SVG textPath ∞</span><div class="desc">True curved text riding a lemniscate (figure-∞) <code>&lt;path&gt;</code> via <code>&lt;textPath&gt;</code>; an <code>&lt;animate&gt;</code> on <code>startOffset</code> streams the words around both loops forever. Gradient-filled, crisp at any size.</div><button class="copy" data-snip='SVG textPath infinity marquee'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="pos"><div class="stage">
+    <svg class="nsh2-svg" width="220" height="120" viewBox="0 0 200 120" style="--c:#3fb950">
+      <defs><path id="nsh2SPath" d="M12,96 C70,96 60,24 110,24 C150,24 140,96 188,96" fill="none"/></defs>
+      <text fill="#3fb950"><textPath href="#nsh2SPath" startOffset="0%">RIDING A SMOOTH S-CURVE · RIDING A SMOOTH S-CURVE ·<animate attributeName="startOffset" from="0%" to="-50%" dur="7s" repeatCount="indefinite"/></textPath></text>
+      <path d="M12,96 C70,96 60,24 110,24 C150,24 140,96 188,96" fill="none" stroke="rgba(63,185,80,.25)" stroke-width="1.5"/>
+    </svg></div>
+    <div class="meta"><div class="nm">S-Curve Path</div><span class="ref">SVG textPath S</span><div class="desc">Words follow a sweeping S-shaped Bézier and scroll along it like a ribbon on a slalom. The faint guide stroke shows the curve. Smoother than any per-letter transform.</div><button class="copy" data-snip='SVG textPath S-curve marquee'>Copy snippet</button></div></div>
+
+  <div class="tile is-new" data-c="accent"><div class="stage">
+    <svg class="nsh2-svg" width="150" height="150" viewBox="0 0 200 130" style="--c:#ff9900">
+      <defs><path id="nsh2Fig8" d="M100,20 C48,20 48,62 100,62 C152,62 152,110 100,110 C48,110 48,62 100,62 C152,62 152,20 100,20 Z" fill="none"/></defs>
+      <text fill="#ff9900"><textPath href="#nsh2Fig8" startOffset="0%">FIGURE EIGHT · ON A TRACK · FIGURE EIGHT · ON A TRACK ·<animate attributeName="startOffset" from="0%" to="100%" dur="8s" repeatCount="indefinite"/></textPath></text>
+    </svg></div>
+    <div class="meta"><div class="nm">Figure-8 Track</div><span class="ref">SVG textPath 8</span><div class="desc">A vertical figure-eight racetrack where the text laps continuously through the crossover. Same <code>textPath</code> + <code>startOffset</code> technique, stacked instead of side-by-side.</div><button class="copy" data-snip='SVG textPath figure-8 marquee'>Copy snippet</button></div></div>
+
+</div>
+
+<script>
+/* ==== shapes 2026 — self-contained per-letter / per-word layout (idempotent) ====
+   Lays out ONLY .nsh2-* effects; never touches the page's .ts-* engine. ==== */
+(function(){
+  if(window.__nsh2LayoutDone) return; window.__nsh2LayoutDone=true;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var D=Math.PI/180, GA=137.50776*D; // golden angle
+  function chars(s){ return Array.prototype.slice.call(String(s)); }
+  function nb(ch){ return ch===' ' ? ' ' : ch; }
+  function makeRotor(h){ var r=document.createElement('div'); r.className='nsh2-rotor'; h.appendChild(r); return r; }
+  function glyph(ch){ var s=document.createElement('span'); s.className='nsh2-g'; s.textContent=nb(ch); return s; }
+
+  // ---- 3D RING ----
+  document.querySelectorAll('.nsh2-ring3d').forEach(function(h){
+    if(h.dataset.nsh2)return; h.dataset.nsh2=1;
+    var t=(h.getAttribute('data-text')||h.textContent||'RING').trim(); h.textContent='';
+    var arr=chars(t), n=arr.length, fs=19, r=Math.max(66, fs*0.82*n/(2*Math.PI));
+    var rot=makeRotor(h);
+    arr.forEach(function(ch,i){ var g=glyph(ch); g.style.fontSize=fs+'px';
+      g.style.transform='translate(-50%,-50%) rotateY('+(i/n*360)+'deg) translateZ('+r+'px)'; rot.appendChild(g); });
+  });
+
+  // ---- 3D CYLINDER ----
+  document.querySelectorAll('.nsh2-cylinder').forEach(function(h){
+    if(h.dataset.nsh2)return; h.dataset.nsh2=1;
+    var t=(h.getAttribute('data-text')||h.textContent||'CYLINDER').trim(); h.textContent='';
+    var arr=chars(t), n=arr.length, fs=15, r=Math.max(84, fs*0.8*n/(2*Math.PI));
+    var rot=makeRotor(h);
+    arr.forEach(function(ch,i){ var g=glyph(ch); g.style.fontSize=fs+'px';
+      g.style.transform='translate(-50%,-50%) rotateY('+(i/n*360)+'deg) translateZ('+r+'px)'; rot.appendChild(g); });
+  });
+
+  // ---- 3D HELIX ----
+  document.querySelectorAll('.nsh2-helix').forEach(function(h){
+    if(h.dataset.nsh2)return; h.dataset.nsh2=1;
+    var t=(h.getAttribute('data-text')||h.textContent||'HELIX').trim(); h.textContent='';
+    var arr=chars(t), n=arr.length, r=52, dy=90/Math.max(1,n-1), rot=makeRotor(h);
+    arr.forEach(function(ch,i){ var g=glyph(ch);
+      var y=(i-(n-1)/2)*dy;
+      g.style.transform='translate(-50%,-50%) rotateY('+(i*48)+'deg) translateZ('+r+'px) translateY('+y+'px)'; rot.appendChild(g); });
+  });
+
+  // ---- 3D STAIRCASE ----
+  document.querySelectorAll('.nsh2-staircase').forEach(function(h){
+    if(h.dataset.nsh2)return; h.dataset.nsh2=1;
+    var t=(h.getAttribute('data-text')||h.textContent||'STAIRS').trim(); h.textContent='';
+    var arr=chars(t), n=arr.length, r=54, dy=100/Math.max(1,n-1), rot=makeRotor(h);
+    arr.forEach(function(ch,i){ var g=glyph(ch);
+      var y=(i-(n-1)/2)*dy;
+      g.style.transform='translate(-50%,-50%) rotateY('+(i*30)+'deg) translateZ('+r+'px) translateY('+y+'px) rotateX(58deg)'; rot.appendChild(g); });
+  });
+
+  // ---- 3D SPHERE (letters) & CLOUD (words), golden-spiral on a sphere ----
+  function sphereLayout(h,items,cls,fs,R){
+    var rot=makeRotor(h), n=items.length;
+    items.forEach(function(item,i){
+      var el=document.createElement('span'); el.className=cls; el.textContent=(cls==='nsh2-g'?nb(item):item);
+      if(fs)el.style.fontSize=fs+'px';
+      var y=1-2*(i+0.5)/n;               // -1..1
+      var phi=Math.asin(Math.max(-1,Math.min(1,y)));  // latitude
+      var theta=i*GA;                    // longitude
+      el.style.transform='translate(-50%,-50%) rotateY('+(theta/D)+'deg) rotateX('+(-phi/D)+'deg) translateZ('+R+'px)';
+      rot.appendChild(el);
+    });
+  }
+  document.querySelectorAll('.nsh2-sphere').forEach(function(h){
+    if(h.dataset.nsh2)return; h.dataset.nsh2=1;
+    var t=(h.getAttribute('data-text')||h.textContent||'SPHERE').trim(); h.textContent='';
+    sphereLayout(h,chars(t),'nsh2-g',16,62);
+  });
+  document.querySelectorAll('.nsh2-cloud3d').forEach(function(h){
+    if(h.dataset.nsh2)return; h.dataset.nsh2=1;
+    var w=(h.getAttribute('data-words')||h.textContent||'DATA CLOUD').trim().split(/\s+/); h.textContent='';
+    sphereLayout(h,w,'nsh2-w',0,74);
+  });
+
+  // ---- 3D EXTRUDE (layered word) ----
+  document.querySelectorAll('.nsh2-extrude .nsh2-rotor').forEach(function(rot){
+    if(rot.dataset.nsh2)return; rot.dataset.nsh2=1;
+    var word=rot.getAttribute('data-word')||'DEPTH', M=16;
+    for(var i=M-1;i>=0;i--){
+      var s=document.createElement('span'); s.className='nsh2-lay'; s.textContent=word;
+      s.style.transform='translate(-50%,-50%) translateZ('+(-i*2)+'px)';
+      s.style.color = i===0 ? 'var(--c)' : 'rgba(var(--c-rgb),'+(1-i/M*0.72).toFixed(3)+')';
+      rot.appendChild(s);
+    }
+  });
+
+  // ---- 3D DEPTH WAVE ----
+  document.querySelectorAll('.nsh2-wave3d').forEach(function(h){
+    if(h.dataset.nsh2)return; h.dataset.nsh2=1;
+    var t=(h.getAttribute('data-text')||h.textContent||'WAVE').trim(); h.textContent='';
+    var rotw=document.createElement('div'); rotw.className='nsh2-w3rot'; h.appendChild(rotw);
+    chars(t).forEach(function(ch,i){
+      var o=document.createElement('span'); o.className='nsh2-w3o';
+      var inn=document.createElement('span'); inn.className='nsh2-w3i'; inn.textContent=nb(ch);
+      inn.style.animationDelay=(i*0.09)+'s'; o.appendChild(inn); rotw.appendChild(o);
+    });
+  });
+
+  // ---- 3D CAROUSEL (word panels) ----
+  document.querySelectorAll('.nsh2-carousel').forEach(function(h){
+    if(h.dataset.nsh2)return; h.dataset.nsh2=1;
+    var words=(h.getAttribute('data-words')||'ONE TWO THREE').trim().split(/\s+/);
+    var inn=document.createElement('div'); inn.className='nsh2-car-in'; h.appendChild(inn);
+    var n=words.length, r=Math.round(60/Math.tan(Math.PI/n))+60;
+    words.forEach(function(w,i){ var p=document.createElement('div'); p.className='nsh2-car-panel'; p.textContent=w;
+      p.style.transform='rotateY('+(i/n*360)+'deg) translateZ('+r+'px)'; inn.appendChild(p); });
+  });
+
+  // ---- 2D FULL CIRCLE ----
+  document.querySelectorAll('.nsh2-circle').forEach(function(h){
+    if(h.dataset.nsh2)return; h.dataset.nsh2=1;
+    var hub=h.querySelector('.nsh2-hub');
+    var t=(h.getAttribute('data-text')||'PRISM CIRCLE ').toUpperCase();
+    var rot=makeRotor(h), n=t.length, r=62;
+    for(var i=0;i<n;i++){ var g=glyph(t[i]);
+      g.style.transform='translate(-50%,-50%) rotate('+(i/n*360)+'deg) translateY(-'+r+'px)'; rot.appendChild(g); }
+    if(hub)h.appendChild(hub);
+  });
+
+  // ---- 2D WAVE / ZIGZAG / BOUNCE (inline letters) ----
+  document.querySelectorAll('.nsh2-line,.nsh2-zigzag,.nsh2-bounce').forEach(function(h){
+    if(h.dataset.nsh2)return; h.dataset.nsh2=1;
+    var kind=h.classList.contains('nsh2-zigzag')?'zig':h.classList.contains('nsh2-bounce')?'bounce':'wave';
+    var amp=parseFloat(h.getAttribute('data-amp'))|| (kind==='zig'?16:kind==='bounce'?30:24);
+    var bumps=parseFloat(h.getAttribute('data-bumps'))||3;
+    var t=h.textContent; h.textContent='';
+    var arr=chars(t), n=arr.length;
+    arr.forEach(function(ch,i){
+      var s=document.createElement('span'); s.textContent=nb(ch);
+      var y;
+      if(kind==='zig'){ y=(i%2? amp : -amp); }
+      else if(kind==='bounce'){ y=-Math.abs(Math.sin(i/Math.max(1,n)*Math.PI*bumps))*amp; }
+      else { y=Math.sin(i/Math.max(1,n)*Math.PI*2)*amp; }
+      s.style.setProperty('--y', y.toFixed(1)+'px');
+      s.style.setProperty('--d', (i*(kind==='bounce'?0.07:0.09)).toFixed(2)+'s');
+      h.appendChild(s);
+    });
+  });
+
+  // ---- 2D SPIRALS ----
+  document.querySelectorAll('.nsh2-spiralt,.nsh2-spirall').forEach(function(h){
+    if(h.dataset.nsh2)return; h.dataset.nsh2=1;
+    var loose=h.classList.contains('nsh2-spirall');
+    var t=(h.getAttribute('data-text')||h.textContent||'SPIRAL').trim(); h.textContent='';
+    var step=loose?32:20, grow=loose?3.1:2.0, arr=chars(t), n=arr.length;
+    arr.forEach(function(ch,i){ var g=glyph(ch);
+      var th=i*step*D, r=8+i*grow, x=Math.cos(th)*r, y=Math.sin(th)*r;
+      g.style.fontSize=Math.max(9,16-i*0.16)+'px';
+      g.style.transform='translate(-50%,-50%) translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px) rotate('+(th/D+90)+'deg)';
+      h.appendChild(g); });
+  });
+
+  // ---- respect reduced motion for SMIL (SVG <animate>) ----
+  if(reduce){ document.querySelectorAll('.nsh2-svg animate').forEach(function(a){ a.parentNode&&a.parentNode.removeChild(a); }); }
+})();
+</script>

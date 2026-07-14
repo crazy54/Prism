@@ -1,0 +1,519 @@
+/* ===== Maps & Geo gallery — namespaced gmap-* / @keyframes gmap* =====
+   Fully self-contained & offline. No images, tiles, fonts or network.
+   All color via design tokens (--info/--accent/--pos/--warn/--neg/--crit
+   + -rgb triplets + --ink/--muted/--dim/--panel/--panel2/--card/--line).
+   Maps are hand-authored simplified SVG blobs + CSS grids + positioned
+   markers/arcs. Every effect keeps a readable static base at rest. ====== */
+
+/* shared scene / ocean panel */
+.gmap-scene{position:relative;width:250px;height:158px;border-radius:12px;overflow:hidden;
+  background:radial-gradient(120% 140% at 50% -20%,rgba(var(--info-rgb),.10),transparent 60%),var(--panel2);
+  border:1px solid var(--line)}
+.gmap-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.gmap-land{fill:rgba(var(--info-rgb),.30);stroke:rgba(var(--info-rgb),.6);stroke-width:1}
+.gmap-land2{fill:rgba(var(--accent-rgb),.24);stroke:rgba(var(--accent-rgb),.5);stroke-width:1}
+.gmap-grat{fill:none;stroke:rgba(var(--info-rgb),.14);stroke-width:.6}
+
+/* ---------- 1. stylized world w/ pulsing dots ---------- */
+@keyframes gmapPing{0%{transform:scale(.4);opacity:.9}70%{opacity:0}100%{transform:scale(2.6);opacity:0}}
+.gmap-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 8px rgba(var(--accent-rgb),.8);transform:translate(-50%,-50%)}
+.gmap-dot::after{content:"";position:absolute;inset:-3px;border-radius:50%;
+  border:1.5px solid rgba(var(--accent-rgb),.9);animation:gmapPing 2.6s ease-out infinite}
+.gmap-dot.i{background:var(--info);box-shadow:0 0 8px rgba(var(--info-rgb),.8)}
+.gmap-dot.i::after{border-color:rgba(var(--info-rgb),.9);animation-delay:.7s}
+.gmap-dot.p{background:var(--pos);box-shadow:0 0 8px rgba(var(--pos-rgb),.8)}
+.gmap-dot.p::after{border-color:rgba(var(--pos-rgb),.9);animation-delay:1.3s}
+
+/* ---------- 2. simplified US map ---------- */
+.gmap-us .gmap-land{fill:rgba(var(--accent-rgb),.28);stroke:rgba(var(--accent-rgb),.65)}
+.gmap-us-line{fill:none;stroke:rgba(var(--info-rgb),.16);stroke-width:.7}
+@keyframes gmapGlowPulse{0%,100%{opacity:.4}50%{opacity:1}}
+.gmap-us .gmap-star{fill:var(--accent);filter:drop-shadow(0 0 5px rgba(var(--accent-rgb),.9));
+  transform-origin:center;animation:gmapGlowPulse 2.4s ease-in-out infinite}
+
+/* ---------- 3. Europe blob ---------- */
+.gmap-eu .gmap-land{fill:rgba(var(--crit-rgb),.26);stroke:rgba(var(--crit-rgb),.6)}
+.gmap-eu .gmap-cap{fill:var(--crit);filter:drop-shadow(0 0 4px rgba(var(--crit-rgb),.8))}
+
+/* ---------- 4. dotted-grid world ---------- */
+.gmap-dotworld{position:relative;width:250px;height:158px;border-radius:12px;overflow:hidden;
+  background:var(--panel2);border:1px solid var(--line);color:rgba(var(--info-rgb),.16)}
+.gmap-dotbg{position:absolute;inset:0;background-image:radial-gradient(currentColor 1px,transparent 1.6px);
+  background-size:9px 9px}
+.gmap-dotland{position:absolute;color:var(--info);background-image:radial-gradient(currentColor 1.4px,transparent 2px);
+  background-size:9px 9px;opacity:.85;filter:drop-shadow(0 0 4px rgba(var(--info-rgb),.4))}
+@keyframes gmapDotShift{0%,100%{opacity:.55}50%{opacity:.95}}
+.gmap-dotland{animation:gmapDotShift 4s ease-in-out infinite}
+
+/* ---------- 5. rotating globe ---------- */
+.gmap-globe{position:relative;width:132px;height:132px;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,rgba(var(--info-rgb),.6),rgba(var(--info-rgb),.14) 58%,rgba(var(--info-rgb),.03));
+  box-shadow:inset -16px -14px 34px rgba(0,0,0,.5),inset 8px 8px 22px rgba(var(--info-rgb),.25),0 0 26px rgba(var(--info-rgb),.35);
+  overflow:hidden}
+.gmap-globe-lat{position:absolute;inset:0;border-radius:50%;
+  background:repeating-linear-gradient(0deg,transparent 0 13px,rgba(var(--info-rgb),.30) 13px 14px)}
+@keyframes gmapLon{to{background-position:66px 0}}
+.gmap-globe-lon{position:absolute;inset:0;border-radius:50%;background-size:66px 100%;
+  background:repeating-linear-gradient(90deg,transparent 0 15px,rgba(var(--info-rgb),.24) 15px 16px);
+  animation:gmapLon 6s linear infinite}
+.gmap-globe-shine{position:absolute;top:12%;left:20%;width:34%;height:26%;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.35),transparent 70%);filter:blur(2px)}
+
+/* ---------- 6. hex-tile map ---------- */
+.gmap-hex{display:grid;grid-template-columns:repeat(9,20px);gap:2px 2px;width:200px;transform:rotate(-2deg)}
+.gmap-hex .hx{width:20px;height:22px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+  background:rgba(var(--info-rgb),.07);margin-top:0}
+.gmap-hex .r1{margin-top:11px}
+.gmap-hex .hx.on{background:rgba(var(--info-rgb),.4)}
+.gmap-hex .hx.on2{background:rgba(var(--accent-rgb),.5)}
+@keyframes gmapHexGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.6)}}
+.gmap-hex .hx.hot{background:var(--accent);animation:gmapHexGlow 2.2s ease-in-out infinite}
+
+/* ---------- 7. topographic contour region ---------- */
+@keyframes gmapContour{to{background-position:0 -28px}}
+.gmap-relief{position:relative;width:250px;height:158px;border-radius:12px;overflow:hidden;border:1px solid var(--line);
+  background:var(--panel2)}
+.gmap-relief .blob{position:absolute;left:50%;top:52%;width:150px;height:110px;transform:translate(-50%,-50%);
+  border-radius:47% 53% 44% 56%/58% 42% 60% 40%;
+  background:repeating-radial-gradient(circle at 46% 44%,
+    rgba(var(--pos-rgb),.12) 0 6px,rgba(var(--warn-rgb),.16) 6px 12px,rgba(var(--neg-rgb),.14) 12px 18px);
+  background-size:100% 100%;box-shadow:inset 0 0 30px rgba(0,0,0,.35);
+  animation:gmapContour 7s linear infinite}
+.gmap-relief .peak{position:absolute;left:46%;top:44%;width:7px;height:7px;border-radius:50%;background:var(--neg);
+  transform:translate(-50%,-50%);box-shadow:0 0 8px rgba(var(--neg-rgb),.8)}
+
+/* ---------- 8. day/night terminator ---------- */
+@keyframes gmapNight{0%{transform:translateX(-40%)}100%{transform:translateX(140%)}}
+.gmap-night .gmap-land{fill:rgba(var(--warn-rgb),.30);stroke:rgba(var(--warn-rgb),.55)}
+.gmap-night-shade{position:absolute;top:0;bottom:0;width:55%;
+  background:linear-gradient(90deg,transparent,rgba(10,12,20,.55) 40%,rgba(10,12,20,.7));
+  animation:gmapNight 12s linear infinite}
+
+/* ---------- 9. drop pins bounce in ---------- */
+/* wrapper holds screen position; inner .gmap-pin animates the drop so the
+   -45deg teardrop rotation is preserved throughout */
+@keyframes gmapDrop{0%{transform:translateY(-40px) scale(.6) rotate(-45deg);opacity:0}
+  60%{transform:translateY(0) scale(1) rotate(-45deg);opacity:1}
+  75%{transform:translateY(-6px) scale(1) rotate(-45deg)}100%{transform:translateY(0) scale(1) rotate(-45deg)}}
+.gmap-pinwrap{position:absolute;transform:translate(-50%,-100%)}
+.gmap-pin{position:relative;width:16px;height:16px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);
+  transform-origin:bottom center;background:var(--neg);box-shadow:0 3px 6px rgba(0,0,0,.4);border:1.5px solid rgba(255,255,255,.5)}
+.gmap-pin::after{content:"";position:absolute;left:50%;top:45%;width:5px;height:5px;border-radius:50%;
+  background:var(--panel);transform:translate(-50%,-50%) rotate(45deg)}
+.gmap-drop .gmap-pin{animation:gmapDrop 2.4s ease-in-out infinite}
+.gmap-drop .d2 .gmap-pin{animation-delay:.5s}
+.gmap-drop .d3 .gmap-pin{animation-delay:1s}
+.gmap-drop .gmap-pinwrap::before{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:4px;border-radius:50%;
+  background:rgba(0,0,0,.25);transform:translateX(-50%)}
+
+/* ---------- 10. pulsing ping marker (single, large) ---------- */
+.gmap-loc{position:absolute;left:50%;top:50%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);
+  background:var(--info);box-shadow:0 0 10px rgba(var(--info-rgb),.9)}
+.gmap-loc .ring{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(var(--info-rgb),.8);
+  animation:gmapPing 2.4s ease-out infinite}
+.gmap-loc .ring.b{animation-delay:1.2s}
+
+/* ---------- 11. clustered markers ---------- */
+@keyframes gmapClusterPop{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.12)}}
+.gmap-cluster .cl{position:absolute;transform:translate(-50%,-50%);border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font:700 12px/1 system-ui,sans-serif;color:#fff;background:rgba(var(--accent-rgb),.9);
+  box-shadow:0 0 0 6px rgba(var(--accent-rgb),.22),0 2px 6px rgba(0,0,0,.4);animation:gmapClusterPop 3s ease-in-out infinite}
+.gmap-cluster .cl.sm{width:22px;height:22px;font-size:10px}
+.gmap-cluster .cl.md{width:30px;height:30px}
+.gmap-cluster .cl.lg{width:40px;height:40px;font-size:14px;background:rgba(var(--neg-rgb),.9);
+  box-shadow:0 0 0 8px rgba(var(--neg-rgb),.2),0 2px 6px rgba(0,0,0,.4)}
+
+/* ---------- 12. accuracy radius ---------- */
+@keyframes gmapAccuracy{0%,100%{transform:translate(-50%,-50%) scale(.85);opacity:.5}50%{transform:translate(-50%,-50%) scale(1.15);opacity:.15}}
+.gmap-acc .halo{position:absolute;left:50%;top:50%;width:120px;height:120px;border-radius:50%;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(var(--info-rgb),.28),rgba(var(--info-rgb),.06) 60%,transparent 72%);
+  border:1px solid rgba(var(--info-rgb),.4);animation:gmapAccuracy 3.4s ease-in-out infinite}
+.gmap-acc .core{position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);
+  background:var(--info);box-shadow:0 0 10px rgba(var(--info-rgb),.9),0 0 0 3px var(--panel)}
+
+/* ---------- 13. numbered markers ---------- */
+.gmap-num .np{position:absolute;transform:translate(-50%,-100%);width:22px;height:22px;border-radius:50% 50% 50% 0;
+  rotate:-45deg;background:var(--accent);box-shadow:0 3px 6px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
+.gmap-num .np span{rotate:45deg;font:700 11px/1 system-ui,sans-serif;color:#1a1a1a}
+@keyframes gmapNumFloat{0%,100%{translate:0 0}50%{translate:0 -3px}}
+.gmap-num .np{animation:gmapNumFloat 2.6s ease-in-out infinite}
+.gmap-num .n2{animation-delay:.4s;background:var(--info)}
+.gmap-num .n3{animation-delay:.8s;background:var(--pos)}
+.gmap-num .n4{animation-delay:1.2s;background:var(--crit)}
+
+/* ---------- 14. you-are-here beacon ---------- */
+@keyframes gmapBeacon{0%{transform:translate(-50%,-50%) scale(.3);opacity:.9}80%{opacity:0}100%{transform:translate(-50%,-50%) scale(3.4);opacity:0}}
+.gmap-beacon .b-core{position:absolute;left:50%;top:50%;width:16px;height:16px;border-radius:50%;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,#fff,var(--pos) 60%);box-shadow:0 0 14px rgba(var(--pos-rgb),1)}
+.gmap-beacon .b-ring{position:absolute;left:50%;top:50%;width:16px;height:16px;border-radius:50%;
+  border:2px solid var(--pos);animation:gmapBeacon 2.2s ease-out infinite}
+.gmap-beacon .r2{animation-delay:.7s}
+.gmap-beacon .r3{animation-delay:1.4s}
+.gmap-beacon .b-label{position:absolute;left:50%;top:calc(50% - 26px);transform:translateX(-50%);
+  font:700 9px/1 system-ui,sans-serif;color:var(--pos);white-space:nowrap;letter-spacing:.08em}
+
+/* ---------- 15. pin with popup label ---------- */
+.gmap-pop .gmap-pin{background:var(--info)}
+@keyframes gmapPopIn{0%,100%{transform:translate(-50%,0) scale(.9);opacity:.35}50%{transform:translate(-50%,-4px) scale(1);opacity:1}}
+.gmap-pop .bubble{position:absolute;transform:translate(-50%,0);background:var(--card);border:1px solid var(--line);
+  border-radius:8px;padding:4px 8px;font:600 10px/1.3 system-ui,sans-serif;color:var(--ink);white-space:nowrap;
+  box-shadow:0 4px 10px rgba(0,0,0,.35);animation:gmapPopIn 3s ease-in-out infinite}
+.gmap-pop .bubble b{color:var(--info)}
+.gmap-pop .bubble::after{content:"";position:absolute;left:50%;bottom:-5px;width:8px;height:8px;background:var(--card);
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:translateX(-50%) rotate(45deg)}
+
+/* ---------- 16. flag marker planting ---------- */
+@keyframes gmapPlant{0%{transform:translateY(-14px) scale(.7);opacity:0}55%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(0)}}
+@keyframes gmapWaveFlag{0%,100%{transform:skewX(0)}50%{transform:skewX(-10deg)}}
+.gmap-flag .pole{position:absolute;left:50%;bottom:40px;width:2px;height:38px;background:var(--muted);
+  transform-origin:bottom;animation:gmapPlant 3s ease-in-out infinite}
+.gmap-flag .cloth{position:absolute;left:calc(50% + 1px);bottom:66px;width:26px;height:16px;background:var(--neg);
+  transform-origin:left;animation:gmapWaveFlag 1.4s ease-in-out infinite;clip-path:polygon(0 0,100% 0,88% 50%,100% 100%,0 100%)}
+.gmap-flag .base{position:absolute;left:50%;bottom:36px;width:16px;height:5px;border-radius:50%;transform:translateX(-50%);
+  background:rgba(0,0,0,.3)}
+
+/* ---------- 17. great-circle arc draws on ---------- */
+@keyframes gmapDraw{0%{stroke-dashoffset:var(--len)}70%,100%{stroke-dashoffset:0}}
+@keyframes gmapEndpt{0%,60%{opacity:0}70%,100%{opacity:1}}
+.gmap-arc-line{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;
+  stroke-dasharray:var(--len);animation:gmapDraw 4s ease-in-out infinite;
+  filter:drop-shadow(0 0 4px rgba(var(--accent-rgb),.7))}
+.gmap-node{fill:var(--info);filter:drop-shadow(0 0 4px rgba(var(--info-rgb),.8))}
+.gmap-node.end{fill:var(--accent);animation:gmapEndpt 4s ease-in-out infinite}
+
+/* ---------- 18. multi-hop flight path ---------- */
+.gmap-hop-line{fill:none;stroke:var(--info);stroke-width:1.8;stroke-linecap:round;stroke-dasharray:4 4;
+  filter:drop-shadow(0 0 3px rgba(var(--info-rgb),.6))}
+@keyframes gmapHopDash{to{stroke-dashoffset:-16}}
+.gmap-hop-line{animation:gmapHopDash 1s linear infinite}
+.gmap-hop-stop{fill:var(--accent)}
+
+/* ---------- 19. moving dot travels route ---------- */
+.gmap-route-line{fill:none;stroke:rgba(var(--info-rgb),.5);stroke-width:2;stroke-linecap:round}
+@keyframes gmapTravel{0%{offset-distance:0%}100%{offset-distance:100%}}
+.gmap-mover{width:11px;height:11px;border-radius:50%;background:var(--accent);position:absolute;left:-5.5px;top:-5.5px;
+  box-shadow:0 0 10px rgba(var(--accent-rgb),.9);offset-path:path("M24,120 C70,20 150,20 226,64");
+  offset-rotate:0deg;animation:gmapTravel 3.4s cubic-bezier(.5,0,.5,1) infinite}
+.gmap-mover .trail{position:absolute;right:6px;top:50%;width:24px;height:2px;transform:translateY(-50%);
+  background:linear-gradient(90deg,transparent,rgba(var(--accent-rgb),.7))}
+
+/* ---------- 20. animated dashed shipping lane ---------- */
+@keyframes gmapShip{to{stroke-dashoffset:-24}}
+.gmap-lane-line{fill:none;stroke:rgba(var(--info-rgb),.85);stroke-width:2;stroke-dasharray:2 6;stroke-linecap:round;
+  animation:gmapShip 1.4s linear infinite}
+.gmap-lane-port{fill:var(--warn);filter:drop-shadow(0 0 4px rgba(var(--warn-rgb),.7))}
+
+/* ---------- 21. delivery / tracking progress ---------- */
+.gmap-track-base{fill:none;stroke:rgba(var(--info-rgb),.16);stroke-width:3;stroke-linecap:round}
+@keyframes gmapProg{0%{stroke-dashoffset:var(--len)}55%,100%{stroke-dashoffset:0}}
+.gmap-track-fill{fill:none;stroke:var(--pos);stroke-width:3;stroke-linecap:round;stroke-dasharray:var(--len);
+  animation:gmapProg 4.5s ease-in-out infinite;filter:drop-shadow(0 0 4px rgba(var(--pos-rgb),.7))}
+.gmap-track-chk{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--panel);
+  border:2px solid rgba(var(--info-rgb),.3);transform:translate(-50%,-50%)}
+.gmap-track-chk.done{border-color:var(--pos);background:var(--pos)}
+.gmap-track-truck{fill:var(--pos);filter:drop-shadow(0 0 4px rgba(var(--pos-rgb),.8))}
+
+/* ---------- 22. route web between cities ---------- */
+@keyframes gmapWebPulse{0%,100%{opacity:.3}50%{opacity:.85}}
+.gmap-web-line{stroke:rgba(var(--info-rgb),.5);stroke-width:1;animation:gmapWebPulse 3s ease-in-out infinite}
+.gmap-web-line.l2{animation-delay:.6s}
+.gmap-web-line.l3{animation-delay:1.2s}
+.gmap-web-line.l4{animation-delay:1.8s}
+.gmap-web-city{fill:var(--accent);filter:drop-shadow(0 0 4px rgba(var(--accent-rgb),.8))}
+@keyframes gmapCityBlink{0%,100%{r:2.5}50%{r:4}}
+.gmap-web-city{animation:gmapCityBlink 2.4s ease-in-out infinite}
+
+/* ---------- 23. round-trip arcs both directions ---------- */
+.gmap-rt-a{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-dasharray:var(--len);
+  animation:gmapDraw 3.6s ease-in-out infinite}
+.gmap-rt-b{fill:none;stroke:var(--info);stroke-width:1.8;stroke-linecap:round;stroke-dasharray:var(--len);
+  animation:gmapDraw 3.6s ease-in-out infinite;animation-delay:1.8s}
+.gmap-rt-node{fill:var(--warn);filter:drop-shadow(0 0 4px rgba(var(--warn-rgb),.7))}
+
+/* ---------- 24. waypoint route w/ stops ---------- */
+.gmap-wp-line{fill:none;stroke:rgba(var(--accent-rgb),.6);stroke-width:2;stroke-linecap:round;stroke-dasharray:5 5}
+@keyframes gmapWpDash{to{stroke-dashoffset:-20}}
+.gmap-wp-line{animation:gmapWpDash 1.2s linear infinite}
+@keyframes gmapWpPop{0%,100%{transform:translate(-50%,-50%) scale(.85)}50%{transform:translate(-50%,-50%) scale(1.1)}}
+.gmap-wp{position:absolute;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);
+  background:var(--card);border:2px solid var(--accent);box-shadow:0 0 6px rgba(var(--accent-rgb),.5);
+  animation:gmapWpPop 2.6s ease-in-out infinite}
+.gmap-wp.start{border-color:var(--pos);background:var(--pos)}
+.gmap-wp.end{border-color:var(--neg);background:var(--neg)}
+.gmap-wp.w2{animation-delay:.5s}
+.gmap-wp.w3{animation-delay:1s}
+
+/* ---------- 25. choropleth intensities ---------- */
+.gmap-choro .rg{stroke:var(--panel2);stroke-width:1.5;transition:fill .3s}
+@keyframes gmapChoroWake{0%,100%{opacity:.75}50%{opacity:1}}
+.gmap-choro .t1{fill:rgba(var(--info-rgb),.18)}
+.gmap-choro .t2{fill:rgba(var(--info-rgb),.38)}
+.gmap-choro .t3{fill:rgba(var(--info-rgb),.6)}
+.gmap-choro .t4{fill:rgba(var(--info-rgb),.85);animation:gmapChoroWake 3s ease-in-out infinite}
+
+/* ---------- 26. heat-region blob ---------- */
+@keyframes gmapHeat{0%,100%{transform:translate(-50%,-50%) scale(.92);opacity:.85}50%{transform:translate(-50%,-50%) scale(1.06);opacity:1}}
+.gmap-heat .h{position:absolute;left:50%;top:50%;border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:screen;
+  animation:gmapHeat 4s ease-in-out infinite}
+.gmap-heat .h1{width:120px;height:100px;background:radial-gradient(circle,rgba(var(--neg-rgb),.55),transparent 68%)}
+.gmap-heat .h2{width:70px;height:64px;background:radial-gradient(circle,rgba(var(--warn-rgb),.6),transparent 66%);animation-delay:.6s;left:42%;top:44%}
+.gmap-heat .h3{width:44px;height:40px;background:radial-gradient(circle,rgba(var(--accent-rgb),.7),transparent 64%);animation-delay:1.1s;left:56%;top:58%}
+
+/* ---------- 27. selected region glow ---------- */
+@keyframes gmapSelGlow{0%,100%{filter:drop-shadow(0 0 3px rgba(var(--accent-rgb),.6))}50%{filter:drop-shadow(0 0 10px rgba(var(--accent-rgb),1))}}
+.gmap-sel .rg{fill:rgba(var(--info-rgb),.10);stroke:rgba(var(--info-rgb),.2);stroke-width:1}
+.gmap-sel .rg.hot{fill:rgba(var(--accent-rgb),.55);stroke:var(--accent);stroke-width:2;animation:gmapSelGlow 2.4s ease-in-out infinite}
+
+/* ---------- 28. region-fill sweep ---------- */
+@keyframes gmapFillSweep{0%{clip-path:inset(0 100% 0 0)}55%,100%{clip-path:inset(0 0 0 0)}}
+.gmap-sweep .base{fill:rgba(var(--info-rgb),.10);stroke:rgba(var(--info-rgb),.22);stroke-width:1}
+.gmap-sweep-wrap{animation:gmapFillSweep 4s ease-in-out infinite}
+.gmap-sweep-wrap .fill{fill:rgba(var(--pos-rgb),.55);stroke:var(--pos);stroke-width:1.5}
+.gmap-sweep-bar{position:absolute;top:8%;bottom:8%;width:2px;background:var(--pos);box-shadow:0 0 8px rgba(var(--pos-rgb),.9);
+  animation:gmapSweepBar 4s ease-in-out infinite}
+@keyframes gmapSweepBar{0%{left:6%;opacity:1}55%{left:92%;opacity:1}56%,100%{opacity:0}}
+
+/* ---------- 29. legend ---------- */
+.gmap-legend{width:220px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+  font:12px/1.4 system-ui,sans-serif;color:var(--ink)}
+.gmap-legend .lt{font-weight:700;font-size:11px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px;text-transform:uppercase}
+.gmap-legend .row{display:flex;align-items:center;gap:8px;margin:5px 0}
+.gmap-legend .sw{width:26px;height:12px;border-radius:3px;flex:none}
+.gmap-legend .gradbar{height:12px;border-radius:3px;margin:6px 0 4px;
+  background:linear-gradient(90deg,rgba(var(--info-rgb),.15),rgba(var(--info-rgb),.5),var(--info))}
+.gmap-legend .scale{display:flex;justify-content:space-between;font-size:9px;color:var(--dim)}
+@keyframes gmapLegendTick{0%,100%{opacity:.4}50%{opacity:1}}
+.gmap-legend .live{width:7px;height:7px;border-radius:50%;background:var(--pos);animation:gmapLegendTick 1.6s ease-in-out infinite}
+
+/* ---------- 30. animated region borders ---------- */
+@keyframes gmapBorderDraw{0%{stroke-dashoffset:var(--len)}70%,100%{stroke-dashoffset:0}}
+.gmap-border .fillrg{fill:rgba(var(--crit-rgb),.14)}
+.gmap-border .edge{fill:none;stroke:var(--crit);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:var(--len);animation:gmapBorderDraw 4.5s ease-in-out infinite;
+  filter:drop-shadow(0 0 4px rgba(var(--crit-rgb),.6))}
+
+/* ---------- 31. density tiers (stacked) ---------- */
+@keyframes gmapTierRise{0%{transform:scaleY(.2)}60%,100%{transform:scaleY(1)}}
+.gmap-tiers{display:flex;align-items:flex-end;gap:6px;height:120px}
+.gmap-tiers .col{width:26px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px}
+.gmap-tiers .seg{border-radius:2px;transform-origin:bottom;animation:gmapTierRise 3s ease-out infinite}
+.gmap-tiers .s1{height:16px;background:rgba(var(--info-rgb),.3)}
+.gmap-tiers .s2{height:16px;background:rgba(var(--info-rgb),.55)}
+.gmap-tiers .s3{height:16px;background:var(--info)}
+.gmap-tiers .lbl{margin-top:4px;font:9px/1 system-ui,sans-serif;color:var(--dim);text-align:center}
+
+/* ---------- 32. two-region compare ---------- */
+@keyframes gmapCmpFlip{0%,45%{opacity:1}55%,100%{opacity:.25}}
+.gmap-cmp{display:flex;gap:10px}
+.gmap-cmp .side{position:relative;width:96px;height:110px;border-radius:10px;border:1px solid var(--line);overflow:hidden;
+  background:var(--panel2)}
+.gmap-cmp .a .fillrg{fill:rgba(var(--info-rgb),.5);animation:gmapCmpFlip 3.2s ease-in-out infinite}
+.gmap-cmp .b .fillrg{fill:rgba(var(--accent-rgb),.5);animation:gmapCmpFlip 3.2s ease-in-out infinite;animation-delay:1.6s}
+.gmap-cmp .tag{position:absolute;left:8px;bottom:6px;font:700 10px/1 system-ui,sans-serif;color:var(--muted)}
+
+/* ---------- 33. lat/long grid overlay ---------- */
+@keyframes gmapGridScan{0%,100%{opacity:.5}50%{opacity:1}}
+.gmap-grid-svg .g{stroke:rgba(var(--info-rgb),.35);stroke-width:.7;fill:none}
+.gmap-grid-svg .eq{stroke:rgba(var(--accent-rgb),.7);stroke-width:1.2}
+.gmap-grid-svg .lbl{fill:var(--dim);font:8px system-ui,sans-serif}
+.gmap-grid-hair{position:absolute;background:rgba(var(--accent-rgb),.6);animation:gmapGridScan 2.4s ease-in-out infinite}
+
+/* ---------- 34. radar / sonar sweep ---------- */
+@keyframes gmapRadar{to{transform:rotate(360deg)}}
+.gmap-radar{position:relative;width:140px;height:140px;border-radius:50%;overflow:hidden;
+  background:radial-gradient(circle,rgba(var(--pos-rgb),.10),transparent 72%),var(--panel2);
+  border:1px solid rgba(var(--pos-rgb),.4)}
+.gmap-radar .ring{position:absolute;border:1px solid rgba(var(--pos-rgb),.28);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
+.gmap-radar .r1{width:38%;height:38%}.gmap-radar .r2{width:66%;height:66%}.gmap-radar .r3{width:94%;height:94%}
+.gmap-radar .cross{position:absolute;background:rgba(var(--pos-rgb),.28)}
+.gmap-radar .cx{left:0;right:0;top:50%;height:1px}.gmap-radar .cy{top:0;bottom:0;left:50%;width:1px}
+.gmap-radar .sweep{position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(var(--pos-rgb),.6),transparent 55%);
+  mask:radial-gradient(circle,#000 72%,transparent 72%);-webkit-mask:radial-gradient(circle,#000 72%,transparent 72%);
+  animation:gmapRadar 3s linear infinite}
+@keyframes gmapBlipFade{0%,20%{opacity:1}60%,100%{opacity:0}}
+.gmap-radar .blip{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--pos);
+  box-shadow:0 0 8px rgba(var(--pos-rgb),1);animation:gmapBlipFade 3s ease-out infinite}
+
+/* ---------- 35. compass rose ---------- */
+@keyframes gmapCompassWob{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+.gmap-compass{position:relative;width:130px;height:130px}
+.gmap-compass .dial{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(var(--info-rgb),.25);
+  background:radial-gradient(circle,var(--panel2),var(--panel))}
+.gmap-compass .needle{position:absolute;left:50%;top:50%;width:0;height:0;transform-origin:bottom center;
+  animation:gmapCompassWob 5s ease-in-out infinite}
+.gmap-compass .n-n{border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:52px solid var(--neg);
+  transform:translate(-50%,-100%)}
+.gmap-compass .n-s{border-left:7px solid transparent;border-right:7px solid transparent;border-top:52px solid var(--muted);
+  position:absolute;left:50%;top:50%;transform:translate(-50%,0)}
+.gmap-compass .hub{position:absolute;left:50%;top:50%;width:10px;height:10px;border-radius:50%;background:var(--ink);transform:translate(-50%,-50%)}
+.gmap-compass .lbl{position:absolute;left:50%;transform:translateX(-50%);font:700 11px/1 system-ui,sans-serif;color:var(--muted)}
+.gmap-compass .cn{top:4px}.gmap-compass .cs{bottom:4px}.gmap-compass .ce{right:6px;top:50%;transform:translateY(-50%)}
+.gmap-compass .cw{left:6px;top:50%;transform:translateY(-50%)}
+
+/* ---------- 36. coordinate readout HUD ---------- */
+.gmap-hud{width:222px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;
+  font:12px/1.5 ui-monospace,Menlo,monospace;color:var(--ink)}
+.gmap-hud .hd{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;margin-bottom:8px}
+.gmap-hud .row{display:flex;justify-content:space-between;padding:2px 0}
+.gmap-hud .k{color:var(--dim)}
+.gmap-hud .v{color:var(--info);font-weight:700}
+@keyframes gmapHudBlink{0%,100%{opacity:1}50%{opacity:.25}}
+.gmap-hud .cur{color:var(--accent);animation:gmapHudBlink 1s step-end infinite}
+.gmap-hud .fix{width:7px;height:7px;border-radius:50%;background:var(--pos);box-shadow:0 0 6px rgba(var(--pos-rgb),.9);
+  animation:gmapHudBlink 1.4s ease-in-out infinite}
+
+/* ---------- 37. scanning grid ---------- */
+@keyframes gmapScanLine{0%{top:0}100%{top:100%}}
+.gmap-scan{position:relative;width:200px;height:130px;border-radius:10px;overflow:hidden;border:1px solid rgba(var(--info-rgb),.4);
+  background:linear-gradient(0deg,rgba(var(--info-rgb),.05),transparent),var(--panel2)}
+.gmap-scan .mesh{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(var(--info-rgb),.18) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--info-rgb),.18) 1px,transparent 1px);
+  background-size:20px 20px}
+.gmap-scan .line{position:absolute;left:0;right:0;height:22px;
+  background:linear-gradient(0deg,transparent,rgba(var(--info-rgb),.5));border-top:1.5px solid var(--info);
+  animation:gmapScanLine 2.6s linear infinite}
+.gmap-scan .cell{position:absolute;width:18px;height:18px;background:rgba(var(--accent-rgb),.45);
+  box-shadow:0 0 8px rgba(var(--accent-rgb),.6);animation:gmapHexGlow 2s ease-in-out infinite}
+
+/* ---------- 38. scanning for signal ---------- */
+@keyframes gmapSignalGrow{0%{transform:translate(-50%,-50%) scale(.2);opacity:.8}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
+.gmap-signal{position:relative;width:200px;height:130px}
+.gmap-signal .src{position:absolute;left:50%;top:50%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);
+  background:var(--warn);box-shadow:0 0 12px rgba(var(--warn-rgb),1);z-index:2}
+.gmap-signal .wave{position:absolute;left:50%;top:50%;width:150px;height:150px;border-radius:50%;
+  border:2px solid rgba(var(--warn-rgb),.7);animation:gmapSignalGrow 2.4s ease-out infinite}
+.gmap-signal .w2{animation-delay:.8s}.gmap-signal .w3{animation-delay:1.6s}
+.gmap-signal .txt{position:absolute;left:50%;top:calc(50% + 26px);transform:translateX(-50%);
+  font:600 9px/1 system-ui,sans-serif;color:var(--warn);letter-spacing:.1em;animation:gmapHudBlink 1.2s ease-in-out infinite}
+
+/* ---------- 39. targeting crosshair ---------- */
+@keyframes gmapReticle{0%,100%{transform:translate(-50%,-50%) scale(1) rotate(0)}50%{transform:translate(-50%,-50%) scale(.9) rotate(90deg)}}
+.gmap-cross .ret{position:absolute;left:50%;top:50%;width:70px;height:70px;transform:translate(-50%,-50%);
+  border:2px solid rgba(var(--neg-rgb),.8);border-radius:50%;animation:gmapReticle 4s ease-in-out infinite}
+.gmap-cross .ret::before,.gmap-cross .ret::after{content:"";position:absolute;background:rgba(var(--neg-rgb),.8)}
+.gmap-cross .ret::before{left:-14px;right:-14px;top:50%;height:1.5px;transform:translateY(-50%)}
+.gmap-cross .ret::after{top:-14px;bottom:-14px;left:50%;width:1.5px;transform:translateX(-50%)}
+.gmap-cross .tgt{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;transform:translate(-50%,-50%);
+  background:var(--neg);box-shadow:0 0 8px rgba(var(--neg-rgb),1)}
+.gmap-cross .coord{position:absolute;left:50%;top:calc(50% + 44px);transform:translateX(-50%);
+  font:600 9px/1 ui-monospace,monospace;color:var(--neg)}
+
+/* ---------- 40. projection graticule ---------- */
+.gmap-graticule .mer{fill:none;stroke:rgba(var(--info-rgb),.4);stroke-width:.8}
+.gmap-graticule .par{fill:none;stroke:rgba(var(--info-rgb),.28);stroke-width:.7}
+.gmap-graticule .frame{fill:rgba(var(--info-rgb),.06);stroke:rgba(var(--info-rgb),.5);stroke-width:1.2}
+.gmap-graticule .glow{stroke:var(--accent);stroke-width:1.4;fill:none;opacity:.8;animation:gmapChoroWake 3s ease-in-out infinite}
+
+/* ---------- 41. scale ruler / measure ---------- */
+@keyframes gmapMeasure{0%{stroke-dashoffset:var(--len)}60%,100%{stroke-dashoffset:0}}
+.gmap-ruler-line{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:var(--len);stroke-linecap:round;
+  animation:gmapMeasure 4s ease-in-out infinite}
+.gmap-ruler-end{fill:var(--accent)}
+.gmap-ruler .bar{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;font:9px/1 system-ui,sans-serif;color:var(--muted)}
+.gmap-ruler .bar i{width:26px;height:8px;border:1px solid var(--muted);border-top:none}
+.gmap-ruler .bar i:nth-child(odd){background:rgba(var(--info-rgb),.35)}
+.gmap-ruler .dist{position:absolute;left:50%;top:20px;transform:translateX(-50%);font:700 11px/1 ui-monospace,monospace;
+  color:var(--accent);animation:gmapHudBlink 1.4s ease-in-out infinite}
+
+/* ---------- 42. live location dots streaming in ---------- */
+@keyframes gmapStreamIn{0%{transform:translate(-50%,-50%) scale(0);opacity:0}
+  20%{transform:translate(-50%,-50%) scale(1.4);opacity:1}40%{transform:translate(-50%,-50%) scale(1);opacity:1}
+  85%{opacity:1}100%{opacity:.15}}
+.gmap-live .d{position:absolute;width:8px;height:8px;border-radius:50%;transform:translate(-50%,-50%);
+  background:var(--pos);box-shadow:0 0 8px rgba(var(--pos-rgb),.9);animation:gmapStreamIn 3.6s ease-in-out infinite}
+.gmap-live .d.a{animation-delay:.2s}.gmap-live .d.b{animation-delay:.7s;background:var(--info);box-shadow:0 0 8px rgba(var(--info-rgb),.9)}
+.gmap-live .d.c{animation-delay:1.3s;background:var(--accent);box-shadow:0 0 8px rgba(var(--accent-rgb),.9)}
+.gmap-live .d.e{animation-delay:1.9s}.gmap-live .d.f{animation-delay:2.4s;background:var(--info);box-shadow:0 0 8px rgba(var(--info-rgb),.9)}
+.gmap-live .d.g{animation-delay:3s;background:var(--crit);box-shadow:0 0 8px rgba(var(--crit-rgb),.9)}
+.gmap-live .cnt{position:absolute;right:8px;top:8px;font:700 10px/1 ui-monospace,monospace;color:var(--pos)}
+
+/* ---------- 43. traffic / flow particles ---------- */
+.gmap-flow-line{fill:none;stroke:rgba(var(--info-rgb),.16);stroke-width:3;stroke-linecap:round}
+.gmap-flow-line.hot{stroke:rgba(var(--neg-rgb),.3)}
+@keyframes gmapFlowMove{to{stroke-dashoffset:-30}}
+.gmap-flow-parts{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:3 12;animation:gmapFlowMove 1s linear infinite}
+.gmap-flow-parts.g{stroke:var(--pos)}.gmap-flow-parts.y{stroke:var(--warn);animation-duration:1.6s}
+.gmap-flow-parts.r{stroke:var(--neg);animation-duration:2.6s}
+
+/* ---------- 44. satellite ground-track ---------- */
+@keyframes gmapSat{0%{offset-distance:0%}100%{offset-distance:100%}}
+.gmap-sat-track{fill:none;stroke:rgba(var(--crit-rgb),.55);stroke-width:1.4;stroke-dasharray:4 4}
+.gmap-sat{width:10px;height:10px;position:absolute;left:-5px;top:-5px;border-radius:2px;background:var(--crit);
+  box-shadow:0 0 10px rgba(var(--crit-rgb),1);offset-path:path("M6,50 Q60,4 124,60 T244,64");
+  animation:gmapSat 5s linear infinite}
+.gmap-sat-foot{position:absolute;width:40px;height:40px;border-radius:50%;left:-20px;top:-20px;
+  border:1px solid rgba(var(--crit-rgb),.5);background:radial-gradient(circle,rgba(var(--crit-rgb),.2),transparent 70%);
+  offset-path:path("M6,50 Q60,4 124,60 T244,64");animation:gmapSat 5s linear infinite}
+
+/* ---------- 45. spreading outage ripple ---------- */
+@keyframes gmapOutage{0%{transform:translate(-50%,-50%) scale(.1);opacity:.85;border-color:rgba(var(--neg-rgb),.9)}
+  100%{transform:translate(-50%,-50%) scale(1);opacity:0;border-color:rgba(var(--neg-rgb),0)}}
+.gmap-outage .epi{position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:50%;transform:translate(-50%,-50%);
+  background:var(--neg);box-shadow:0 0 14px rgba(var(--neg-rgb),1);z-index:2}
+.gmap-outage .rip{position:absolute;left:50%;top:50%;width:150px;height:150px;border-radius:50%;border:2px solid var(--neg);
+  animation:gmapOutage 3s ease-out infinite}
+.gmap-outage .p2{animation-delay:1s}.gmap-outage .p3{animation-delay:2s}
+.gmap-outage .aff{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--warn);
+  box-shadow:0 0 6px rgba(var(--warn-rgb),.8);animation:gmapHexGlow 1.4s ease-in-out infinite}
+
+/* ---------- 46. data-center map w/ linked nodes ---------- */
+@keyframes gmapLinkFlow{to{stroke-dashoffset:-20}}
+.gmap-dc-link{fill:none;stroke:rgba(var(--info-rgb),.55);stroke-width:1.4;stroke-dasharray:3 6;
+  animation:gmapLinkFlow 1.4s linear infinite}
+@keyframes gmapDcPulse{0%,100%{transform:translate(-50%,-50%) scale(1);box-shadow:0 0 0 0 rgba(var(--info-rgb),.5)}
+  70%{transform:translate(-50%,-50%) scale(1);box-shadow:0 0 0 10px rgba(var(--info-rgb),0)}}
+.gmap-dc .node{position:absolute;width:16px;height:16px;border-radius:4px;transform:translate(-50%,-50%);
+  background:var(--info);box-shadow:0 0 10px rgba(var(--info-rgb),.7);animation:gmapDcPulse 2.6s ease-out infinite}
+.gmap-dc .node.hub{width:22px;height:22px;background:var(--accent);box-shadow:0 0 12px rgba(var(--accent-rgb),.8);border-radius:5px}
+.gmap-dc .node.n2{animation-delay:.5s}.gmap-dc .node.n3{animation-delay:1s}.gmap-dc .node.n4{animation-delay:1.5s}
+.gmap-dc .node .r{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 8px/1 system-ui;color:#1a1a1a}
+
+/* ---------- 47. moving fleet vehicles ---------- */
+.gmap-fleet-road{fill:none;stroke:rgba(var(--info-rgb),.18);stroke-width:4;stroke-linecap:round}
+@keyframes gmapFleet1{0%{offset-distance:0%}100%{offset-distance:100%}}
+@keyframes gmapFleet2{0%{offset-distance:100%}100%{offset-distance:0%}}
+.gmap-fleet .car{width:9px;height:9px;position:absolute;left:-4.5px;top:-4.5px;border-radius:2px}
+.gmap-fleet .c1{background:var(--pos);box-shadow:0 0 8px rgba(var(--pos-rgb),.9);
+  offset-path:path("M14,120 C60,40 150,40 236,96");animation:gmapFleet1 3.2s linear infinite}
+.gmap-fleet .c2{background:var(--info);box-shadow:0 0 8px rgba(var(--info-rgb),.9);
+  offset-path:path("M14,120 C60,40 150,40 236,96");animation:gmapFleet1 3.2s linear infinite;animation-delay:1.4s}
+.gmap-fleet .c3{background:var(--accent);box-shadow:0 0 8px rgba(var(--accent-rgb),.9);
+  offset-path:path("M20,40 C90,120 170,120 240,52");animation:gmapFleet2 4s linear infinite}
+
+/* ---------- 48. global request pulse (arcs firing) ---------- */
+@keyframes gmapPulseArc{0%{stroke-dashoffset:var(--len);opacity:0}10%{opacity:1}
+  55%{stroke-dashoffset:0;opacity:1}80%{opacity:0}100%{stroke-dashoffset:0;opacity:0}}
+.gmap-pulse .arc{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-dasharray:var(--len);
+  animation:gmapPulseArc 3s ease-in-out infinite;filter:drop-shadow(0 0 3px rgba(var(--accent-rgb),.7))}
+.gmap-pulse .arc.a2{stroke:var(--info);animation-delay:.6s}
+.gmap-pulse .arc.a3{stroke:var(--pos);animation-delay:1.2s}
+.gmap-pulse .arc.a4{stroke:var(--crit);animation-delay:1.8s}
+.gmap-pulse .hub{fill:var(--accent);filter:drop-shadow(0 0 6px rgba(var(--accent-rgb),1))}
+
+/* ---------- 49. moving weather front ---------- */
+@keyframes gmapFront{0%{transform:translateX(-30%)}100%{transform:translateX(130%)}}
+.gmap-weather .front{position:absolute;top:-10%;bottom:-10%;width:70px;
+  background:radial-gradient(ellipse at center,rgba(var(--info-rgb),.4),rgba(var(--crit-rgb),.25) 60%,transparent 75%);
+  filter:blur(3px);animation:gmapFront 8s linear infinite}
+.gmap-weather .front.f2{width:50px;animation-duration:11s;animation-delay:-4s;
+  background:radial-gradient(ellipse at center,rgba(var(--warn-rgb),.35),transparent 72%)}
+@keyframes gmapRainBlink{0%,100%{opacity:.2}50%{opacity:.9}}
+.gmap-weather .drop{position:absolute;width:2px;height:7px;border-radius:1px;background:var(--info);
+  animation:gmapRainBlink 1.2s ease-in-out infinite}
+
+/* ---------- 50. seismic / activity monitor ---------- */
+@keyframes gmapSeis{0%{transform:scaleY(.15)}50%{transform:scaleY(1)}100%{transform:scaleY(.3)}}
+.gmap-seis{position:relative;width:220px;height:120px;border-radius:10px;overflow:hidden;border:1px solid var(--line);
+  background:var(--panel2)}
+.gmap-seis .grid{position:absolute;inset:0;background-image:linear-gradient(90deg,rgba(var(--info-rgb),.08) 1px,transparent 1px);
+  background-size:18px 100%}
+.gmap-seis .trace{position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(var(--pos-rgb),.35)}
+.gmap-seis .bars{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-around}
+.gmap-seis .bars i{width:3px;background:var(--pos);border-radius:2px;transform-origin:center;
+  box-shadow:0 0 6px rgba(var(--pos-rgb),.7);animation:gmapSeis 1.1s ease-in-out infinite}
+.gmap-seis .bars i.q{background:var(--neg);box-shadow:0 0 8px rgba(var(--neg-rgb),.9)}
+.gmap-seis .mag{position:absolute;right:8px;top:6px;font:700 10px/1 ui-monospace,monospace;color:var(--neg);
+  animation:gmapHudBlink 1s ease-in-out infinite}
