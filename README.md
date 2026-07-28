@@ -14,7 +14,7 @@ A single-file gallery of **1,235** offline, self-contained CSS/SVG animations, c
 
 ## What Prism is
 
-Prism is **one HTML file** — `Prism.html` — that contains a whole design library of animated elements: charts, visual effects, "AI is thinking" states, 3D objects, form inputs, text treatments and shaped text. Everything is **hand-authored, pure HTML/CSS** (plus tiny inline JS only where an effect genuinely needs it). No fonts, no scripts, no images, no CDNs are fetched — so anything you copy out of Prism runs anywhere, forever, including fully offline.
+Prism is **one HTML file** — `Prism.html` — that contains a whole design library of animated elements: charts, visual effects, "AI is thinking" states, 3D objects, form inputs, text treatments, shaped text, offline maps, notifications, architecture diagrams, and report callouts. Everything is **hand-authored, pure HTML/CSS** (plus tiny inline JS only where an effect genuinely needs it). No fonts, no scripts, no images, no CDNs are fetched — so anything you copy out of Prism runs anywhere, forever, including fully offline.
 
 It serves two audiences at once:
 
