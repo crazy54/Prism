@@ -4,9 +4,9 @@
 
 **One prism. Every facet of your report.**
 
-A single-file gallery of **1,235** offline, self-contained CSS/SVG animations, components and backdrops — built to be browsed by humans *and* parsed by AI agents. Drop it into any static HTML page or GenAI-generated report and it just works. No build step, no dependencies, no network.
+A single-file gallery of **1,668** offline, self-contained CSS/SVG animations, components and backdrops — built to be browsed by humans *and* parsed by AI agents. Drop it into any static HTML page or GenAI-generated report and it just works. No build step, no dependencies, no network.
 
-![Effects](https://img.shields.io/badge/effects-1235-ff9900) | ![Galleries](https://img.shields.io/badge/galleries-12-4493f8) | ![Dependencies](https://img.shields.io/badge/dependencies-0-3fb950) | ![Offline](https://img.shields.io/badge/offline-100%25-3fb950) | ![MCP](https://img.shields.io/badge/MCP-ready-c879ff) | ![Single file](https://img.shields.io/badge/single%20file-HTML-e0a52b)
+![Effects](https://img.shields.io/badge/effects-1668-ff9900) | ![Galleries](https://img.shields.io/badge/galleries-15-4493f8) | ![Dependencies](https://img.shields.io/badge/dependencies-0-3fb950) | ![Offline](https://img.shields.io/badge/offline-100%25-3fb950) | ![MCP](https://img.shields.io/badge/MCP-ready-c879ff) | ![Single file](https://img.shields.io/badge/single%20file-HTML-e0a52b)
 
 </div>
 
@@ -35,7 +35,7 @@ To use an element on your own page: browse to it, click **Copy** (or **Copy snip
 
 ## The galleries
 
-Prism is organized into twelve authored galleries, plus three special views. Every element carries a name, its canonical CSS selector (`.ref`), a one-line description, and a copy affordance.
+Prism is organized into fifteen authored galleries, plus four special views. Every element carries a name, its canonical CSS selector (`.ref`), a one-line description, and a copy affordance.
 
 | Gallery | What's inside | Count |
 |---|---|--:|
@@ -51,6 +51,9 @@ Prism is organized into twelve authored galleries, plus three special views. Eve
 | 🔔 **Notifications & Status** | Toasts, snackbars, progress notifications, status banners, live indicators, empty states, skeletons | 50 |
 | 🗺 **Architecture Diagrams** | Cloud/AWS-flavored diagram blocks — service nodes, animated connectors, VPC containers, mini-architectures, sequence & flow diagrams, topologies | 50 |
 | ⭐ **Callouts & Annotations** | Report chrome — admonition callouts, badges & pills, timelines & steppers, dividers, tooltips, key-value meta | 50 |
+| ◈ **Obsidian Facets** | Callouts, graph links, note chrome, properties, daily notes, Dataview dashboards, Canvas elements, and ambient focus scenes | 130 |
+| 🧭 **Menus & Actions** | Dropdowns, context menus, command palettes, action bars, tab bars, radial menus, and navigation surfaces | 37 |
+| ◆ **Spectrums** | Component families rendered across complete visual languages, from Material UI and glassmorphism to brutalist and solarpunk | 266 |
 
 **Special views:**
 
@@ -60,7 +63,7 @@ Prism is organized into twelve authored galleries, plus three special views. Eve
 
 ### "Facets" — new & updated markers
 
-Prism calls its elements **facets**. The latest release added **528 new facets** across the galleries — including four brand-new galleries (Maps & Geo, Notifications & Status, Architecture Diagrams, Callouts & Annotations) — each marked with a green **NEW** badge and a subtle pulse. When a facet is repaired or refreshed, it's re-tagged with a blue **UPDATED** badge instead — so the gallery visually distinguishes brand-new work from fixes. Both are collected automatically on the **New Facets** page.
+Prism calls its elements **facets**. The current catalog marks **950 facets** as new across the galleries. Recent additions include seven brand-new galleries: Maps & Geo, Notifications & Status, Architecture Diagrams, Callouts & Annotations, Obsidian Facets, Menus & Actions, and Spectrums. New items carry a green **NEW** badge and a subtle pulse. When a facet is repaired or refreshed, it's re-tagged with a blue **UPDATED** badge instead — so the gallery visually distinguishes brand-new work from fixes. Both are collected automatically on the **New Facets** page.
 
 ### ▶ Play Animations
 
@@ -94,12 +97,12 @@ At the very top of `Prism.html`'s `<head>` sits a single tag:
 <script type="application/json" id="prism-catalog"> … </script>
 ```
 
-This is the **JSON island**: a complete, machine-readable catalog of every effect in the file (~3.2 MB), embedded right alongside the human UI. An HTML comment at the top of the document points agents straight to it. Because it's inline JSON, an agent doesn't need to scrape the DOM or understand the page's rendering — it just:
+This is the **JSON island**: a complete, machine-readable catalog of every effect in the file (embedded as multi-megabyte JSON), right alongside the human UI. An HTML comment at the top of the document points agents straight to it. Because it's inline JSON, an agent doesn't need to scrape the DOM or understand the page's rendering — it just:
 
 ```js
 const catalog = JSON.parse(document.getElementById('prism-catalog').textContent);
 catalog._ai;          // read this first: what/howToUse/fields/count
-catalog.effects;      // 1235 records, each with self-contained html + css
+catalog.effects;      // 1668 records, each with self-contained html + css
 ```
 
 ### Why this design is *MCP-ready*
@@ -108,7 +111,7 @@ The [Model Context Protocol](https://modelcontextprotocol.io) lets an AI agent c
 
 - **Self-describing header.** The `_ai` key literally tells the model what the catalog is, how to use it, and what fields each record has — so a fresh agent orients itself with zero prior knowledge.
 - **Every record is composable in isolation.** Each effect ships its own `html` **and** `css` (plus `classes`, `keyframes`, `params`, `needsJs`, `usableAsBackground`, `selfContained`). An agent can drop an effect into a document without loading the rest of the file.
-- **Searchable/filterable dimensions.** `gallery`, `category` (152 of them), `tags`, `ref`, and `description` make `list`, `search`, and `filter` tools trivial to implement.
+- **Searchable/filterable dimensions.** `gallery`, `category`, `tags`, `ref`, and `description` make `list`, `search`, and `filter` tools trivial to implement.
 - **Composition rules are encoded, not implied.** The top-level `tokens.css`, `usage` (compose / recolor / markers), and `galleries` blocks give a `compose()` tool everything it needs to assemble a valid, themeable, self-contained document.
 - **Truly offline.** Since no effect references anything external, composed output is portable by construction — ideal for handing back a finished artifact.
 
