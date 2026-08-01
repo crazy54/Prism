@@ -1,0 +1,30 @@
+{
+  "name": "prism-mcp-server",
+  "version": "1.0.0",
+  "description": "Production-grade MCP server exposing the Prism component catalog for discovery, composition, and facet creation.",
+  "type": "module",
+  "bin": {
+    "prism-mcp": "./cli.js"
+  },
+  "exports": {
+    ".": "./index.js"
+  },
+  "scripts": {
+    "start": "node cli.js start",
+    "test": "node --test test/"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "prism",
+    "catalog",
+    "css",
+    "components",
+    "claude"
+  ],
+  "license": "MIT",
+  "dependencies": {}
+}

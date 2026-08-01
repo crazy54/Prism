@@ -1,0 +1,17 @@
+{
+  "//": "Drop this block into your Claude Desktop config's mcpServers object.",
+  "//_config_path_macos": "~/Library/Application Support/Claude/claude_desktop_config.json",
+  "//_config_path_windows": "%APPDATA%\\Claude\\claude_desktop_config.json",
+  "//_note": "Use absolute paths. Point --catalog at Prism.html (authoritative) not catalog/manifest.json (can be stale).",
+  "mcpServers": {
+    "prism": {
+      "command": "node",
+      "args": [
+        "C:/Users/you/prism-settings-and-custom-themes/prism-mcp-server/cli.js",
+        "start",
+        "--catalog",
+        "C:/Users/you/prism-settings-and-custom-themes/Prism.html"
+      ]
+    }
+  }
+}
