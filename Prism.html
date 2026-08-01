@@ -69081,6 +69081,55 @@ body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,rgba(255,153,0
 .thmbtn.on{border-color:#ff9900;box-shadow:0 0 0 1px #ff9900 inset}
 .thmbtn .sw{display:flex;gap:3px}
 .thmbtn .sw i{width:9px;height:9px;border-radius:50%}
+.thmbtn{overflow:hidden}
+.thmbtn.thmbtn-custom .lbl{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* settings gear + custom-theme modal */
+.sr-gear{margin-left:auto;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#c9d4e3;width:22px;height:22px;border-radius:6px;cursor:pointer;font-size:12px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0;transition:background .15s,color .15s,transform .35s}
+.sr-gear:hover{background:rgba(255,153,0,.16);color:#fff;transform:rotate(60deg)}
+.pr-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;background:rgba(4,7,13,.72);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;transition:opacity .2s ease}
+.pr-modal.open{display:flex;opacity:1}
+.pr-modal-card{width:min(560px,94vw);max-height:90vh;overflow:auto;background:linear-gradient(180deg,#141b2b,#0f1420);border:1px solid var(--line,#243049);border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.6);transform:translateY(12px) scale(.98);transition:transform .25s cubic-bezier(.22,1,.36,1);color:#eaf1f9}
+.pr-modal.open .pr-modal-card{transform:none}
+.pr-mhead{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;background:linear-gradient(180deg,#161d2e,#141b2b);z-index:1}
+.pr-mhead h2{margin:0;font-size:16px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.pr-mhead .sub{font-size:11px;color:#8593a8;font-weight:500;margin-top:2px}
+.pr-x{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#c9d4e3;width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pr-x:hover{background:rgba(248,81,73,.18);color:#fff}
+.pr-mbody{padding:18px 20px}
+.pr-sec-h{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8593a8;font-weight:800;margin:0 0 10px}
+.pr-thlist{display:flex;flex-direction:column;gap:8px}
+.pr-throw{display:flex;align-items:center;gap:10px;padding:9px 11px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:10px}
+.pr-throw .sw{display:flex;gap:4px;flex-shrink:0}
+.pr-throw .sw i{width:13px;height:13px;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.35) inset}
+.pr-throw .nm{flex:1;font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pr-throw.active .nm::after{content:'active';margin-left:8px;font-size:9px;font-weight:800;letter-spacing:.05em;color:#3fb950;background:rgba(63,185,80,.16);border:1px solid rgba(63,185,80,.4);padding:1px 6px;border-radius:8px}
+.pr-empty{font-size:12px;color:#5b6678;font-style:italic;padding:2px 2px 4px}
+.pr-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#dbe4f0;font:inherit;font-size:12px;font-weight:700;padding:7px 13px;border-radius:9px;cursor:pointer;transition:background .15s,border-color .15s;flex-shrink:0}
+.pr-btn:hover{background:rgba(255,255,255,.12)}
+.pr-btn.pri{background:var(--accent,#ff9900);border-color:var(--accent,#ff9900);color:#141005;text-shadow:0 1px 0 rgba(255,255,255,.25)}
+.pr-btn.pri:hover{filter:brightness(1.08);background:var(--accent,#ff9900)}
+.pr-btn.sm{padding:5px 10px;font-size:11px}
+.pr-btn.danger:hover{background:rgba(248,81,73,.2);border-color:rgba(248,81,73,.5);color:#ff9e97}
+.pr-btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:16px}
+.pr-btnrow .spacer{flex:1}
+.pr-field{margin-bottom:14px}
+.pr-field>label{display:block;font-size:11px;font-weight:700;color:#b6c2d4;margin-bottom:5px}
+.pr-name-in{width:100%;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.15);border-radius:9px;color:#eaf1f9;font:inherit;font-size:13px;padding:9px 11px}
+.pr-name-in:focus{outline:none;border-color:var(--accent,#ff9900)}
+.pr-colors{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.pr-color{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:7px 9px}
+.pr-color input[type=color]{-webkit-appearance:none;-moz-appearance:none;appearance:none;width:30px;height:30px;border:none;border-radius:7px;background:none;cursor:pointer;padding:0;flex-shrink:0}
+.pr-color input[type=color]::-webkit-color-swatch-wrapper{padding:0}
+.pr-color input[type=color]::-webkit-color-swatch{border:1px solid rgba(255,255,255,.25);border-radius:7px}
+.pr-color input[type=color]::-moz-color-swatch{border:1px solid rgba(255,255,255,.25);border-radius:7px}
+.pr-color .meta{min-width:0}
+.pr-color .cn{font-size:12px;font-weight:700;line-height:1.2}
+.pr-color .cd{font-size:9.5px;color:#8593a8}
+.pr-preview{margin-top:16px;border:1px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden}
+.pr-pv-head{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8593a8;font-weight:800;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
+.pr-pv-body{padding:14px}
+@media(max-width:520px){.pr-colors{grid-template-columns:1fr}}
 
 .sr-toggle{display:none}
 @media(max-width:860px){
@@ -69108,7 +69157,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,rgba(255,153,0
 <button class="sr-toggle" onclick="document.body.classList.toggle('sr-open')" aria-label="Toggle navigation">☰</button>
 <aside class="prism-rail">
   <a class="sr-brand" href="#charts" data-page="charts"><span class="sr-title">✦ Prism</span><span class="sr-tag">One prism. Every facet of your report.</span></a>
-  <div class="sr-h">Theme</div>
+  <div class="sr-h" style="display:flex;align-items:center">Theme<button class="sr-gear" id="srGear" type="button" aria-label="Theme settings" title="Custom themes &amp; settings">⚙</button></div>
   <div class="sr-themes" id="srThemes">
     <button class="thmbtn on" data-theme="prism" title="Prism (default)"><span class="sw"><i style="background:#ff9900;color:#ff9900"></i><i style="background:#4493f8;color:#4493f8"></i><i style="background:#c879ff;color:#c879ff"></i></span>Prism</button>
     <button class="thmbtn" data-theme="oled" title="OLED — ink black"><span class="sw"><i style="background:#000;color:#000;border:1px solid #333"></i><i style="background:#00e5ff;color:#00e5ff"></i><i style="background:#ff2d78;color:#ff2d78"></i></span>OLED</button>
@@ -69140,6 +69189,50 @@ body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,rgba(255,153,0
   <div id="srSections"></div>
   <div class="sr-foot">Single-file gallery · offline</div>
 </aside>
+
+<!-- ===== Settings / custom-theme modal ===== -->
+<div class="pr-modal" id="prSettings" role="dialog" aria-modal="true" aria-labelledby="prSettingsTitle">
+  <div class="pr-modal-card">
+    <div class="pr-mhead">
+      <div style="flex:1;min-width:0">
+        <h2 id="prSettingsTitle">Settings &amp; Themes</h2>
+        <div class="sub">Build your own color scheme — it re-skins every gallery.</div>
+      </div>
+      <button class="pr-x" id="prSettingsClose" type="button" aria-label="Close settings">✕</button>
+    </div>
+
+    <!-- LIST VIEW -->
+    <div class="pr-mbody" id="prViewList">
+      <div class="pr-sec-h">Available themes</div>
+      <div class="pr-thlist" id="prThemeList"></div>
+      <div class="pr-btnrow">
+        <button class="pr-btn pri" id="prNewTheme" type="button">＋ New custom theme</button>
+        <span class="spacer"></span>
+        <button class="pr-btn danger" id="prResetThemes" type="button" title="Delete all custom themes">Reset all</button>
+      </div>
+    </div>
+
+    <!-- EDITOR VIEW -->
+    <div class="pr-mbody" id="prViewEdit" style="display:none">
+      <div class="pr-field">
+        <label for="prThemeName">Theme name</label>
+        <input class="pr-name-in" id="prThemeName" type="text" maxlength="24" placeholder="My theme" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="pr-sec-h">Palette</div>
+      <div class="pr-colors" id="prColors"></div>
+      <div class="pr-preview">
+        <div class="pr-pv-head">Live preview</div>
+        <div class="pr-pv-body" id="prPreview"></div>
+      </div>
+      <div class="pr-btnrow">
+        <button class="pr-btn" id="prEditBack" type="button">‹ Back</button>
+        <button class="pr-btn danger" id="prDeleteTheme" type="button" style="display:none">Delete</button>
+        <span class="spacer"></span>
+        <button class="pr-btn pri" id="prSaveTheme" type="button">Save &amp; apply</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="sweep" id="sweep"></div>
 <main class="stage"><div class="frame-wrap" id="fw"><iframe id="gv" title="gallery" allow="clipboard-read; clipboard-write"></iframe></div></main>
@@ -98410,6 +98503,228 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
   };
   var THEME_ID='prism-theme-vars';
   var curTheme='prism';
+
+  // ===================== CUSTOM THEMES + SETTINGS (JFH-5) =====================
+  // Users author their own color scheme from a handful of palette tokens. We
+  // compile that palette into the SAME :root override string the built-in
+  // themes use, register it into THEMES, and add a sidebar swatch — so custom
+  // themes flow through the existing applyTheme() path and re-skin every page.
+  var CUSTOM_KEY='prismCustomThemes';
+  var DEFAULT_PALETTE={bg:'#0b0e17',panel:'#121623',ink:'#eaf1f9',muted:'#8593a8',accent:'#ff9900',info:'#4493f8',pos:'#3fb950',warn:'#e0a52b',neg:'#f85149',crit:'#c879ff'};
+  var PALETTE_TOKENS=[
+    {k:'bg',label:'Background',desc:'Page base'},
+    {k:'panel',label:'Panel',desc:'Cards & surfaces'},
+    {k:'ink',label:'Text',desc:'Primary text'},
+    {k:'muted',label:'Muted',desc:'Secondary text'},
+    {k:'accent',label:'Accent',desc:'Brand / primary'},
+    {k:'info',label:'Info',desc:'Links / secondary'},
+    {k:'pos',label:'Positive',desc:'Success'},
+    {k:'warn',label:'Warning',desc:'Caution'},
+    {k:'neg',label:'Negative',desc:'Danger'},
+    {k:'crit',label:'Critical',desc:'Special / peak'}
+  ];
+  var BUILTIN=[
+    {id:'prism',name:'Prism',dots:['#ff9900','#4493f8','#c879ff']},
+    {id:'oled',name:'OLED',dots:['#00e5ff','#ffb300','#ff2d78']},
+    {id:'cyberpunk',name:'Cyberpunk',dots:['#00f0ff','#fee600','#ff00a0']}
+  ];
+  var editingId=null;
+  var editPalette=cloneP(DEFAULT_PALETTE);
+
+  // --- color math ---
+  function hx(h){ h=String(h||'').replace('#',''); if(h.length===3){h=h.charAt(0)+h.charAt(0)+h.charAt(1)+h.charAt(1)+h.charAt(2)+h.charAt(2);} var n=parseInt(h,16); if(isNaN(n)) n=0; return {r:(n>>16)&255,g:(n>>8)&255,b:n&255}; }
+  function rgbStr(h){ var c=hx(h); return c.r+','+c.g+','+c.b; }
+  function toHex(n){ n=Math.max(0,Math.min(255,Math.round(n))); var s=n.toString(16); return s.length<2?'0'+s:s; }
+  function mix(a,b,t){ var x=hx(a),y=hx(b); return '#'+toHex(x.r+(y.r-x.r)*t)+toHex(x.g+(y.g-x.g)*t)+toHex(x.b+(y.b-x.b)*t); }
+  function cloneP(p){ var o={}; for(var k in p){ if(p.hasOwnProperty(k)) o[k]=p[k]; } return o; }
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+  function isHex(v){ return /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(v); }
+  function findCustom(id){ for(var i=0;i<customThemes.length;i++){ if(customThemes[i].id===id) return customThemes[i]; } return null; }
+
+  // --- compile a palette into a :root override (matches built-in theme shape) ---
+  function compilePalette(p){
+    var bg=p.bg,panel=p.panel,ink=p.ink,muted=p.muted,accent=p.accent,info=p.info,pos=p.pos,warn=p.warn,neg=p.neg,crit=p.crit;
+    var panel2=mix(panel,'#ffffff',0.06), card=mix(panel,'#000000',0.10), line=mix(panel,'#ffffff',0.16), dim=mix(muted,bg,0.45);
+    return ':root{'+
+      '--bg:'+bg+';--panel:'+panel+';--panel2:'+panel2+';--card:'+card+';--line:'+line+';'+
+      '--ink:'+ink+';--muted:'+muted+';--dim:'+dim+';'+
+      '--accent:'+accent+';--accent-rgb:'+rgbStr(accent)+';--accent2:'+info+';'+
+      '--crit:'+crit+';--crit-rgb:'+rgbStr(crit)+';'+
+      '--neg:'+neg+';--neg-rgb:'+rgbStr(neg)+';'+
+      '--warn:'+warn+';--warn-rgb:'+rgbStr(warn)+';'+
+      '--pos:'+pos+';--pos-rgb:'+rgbStr(pos)+';'+
+      '--info:'+info+';--info-rgb:'+rgbStr(info)+';'+
+      '--cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%);}'+
+      'body{background:radial-gradient(1100px 600px at 85% -10%,rgba('+rgbStr(accent)+',.06),transparent 60%),'+bg+'!important}'+
+      '.prism-rail{background:linear-gradient(180deg,'+mix(panel,'#ffffff',0.04)+','+bg+' 62%)!important;border-right-color:'+accent+'!important}'+
+      '.prism-rail .sr-title{color:'+ink+'!important}'+
+      '.prism-rail .sr-tag{color:'+accent+'!important}'+
+      '.prism-rail a.sr-link{color:'+muted+'!important}'+
+      '.prism-rail a.sr-link:hover{color:'+ink+'!important}'+
+      '.prism-rail a.sr-link.active{background:rgba('+rgbStr(accent)+',.16)!important;color:'+ink+'!important;border-left-color:'+accent+'!important}'+
+      '.prism-rail a.sr-link.active::after{background:'+accent+'!important;box-shadow:0 0 8px '+accent+'!important}'+
+      '.prism-rail .sr-h{color:'+dim+'!important}'+
+      '.prism-rail a.sr-sub.cur{color:'+accent+'!important;border-left-color:'+accent+'!important}'+
+      '.prism-rail .sr-foot{color:'+dim+'!important}'+
+      '.thmbtn.on{border-color:'+accent+'!important;box-shadow:0 0 0 1px '+accent+' inset!important}'+
+      '.sweep{background:linear-gradient(90deg,transparent,'+accent+','+info+','+crit+',transparent)!important}';
+  }
+
+  // --- persistence ---
+  function loadCustomThemes(){
+    var out=[];
+    try{
+      var raw=localStorage.getItem(CUSTOM_KEY);
+      if(raw){
+        var arr=JSON.parse(raw);
+        if(Object.prototype.toString.call(arr)==='[object Array]'){
+          arr.forEach(function(t){
+            if(t&&t.id&&t.palette){
+              var pal={};
+              PALETTE_TOKENS.forEach(function(tok){ var v=t.palette[tok.k]; pal[tok.k]=isHex(v)?v:DEFAULT_PALETTE[tok.k]; });
+              out.push({id:String(t.id),name:String(t.name||'Custom'),palette:pal});
+            }
+          });
+        }
+      }
+    }catch(e){}
+    return out;
+  }
+  function persistCustom(){ try{ localStorage.setItem(CUSTOM_KEY, JSON.stringify(customThemes)); }catch(e){} }
+
+  // --- register customs into THEMES + refresh sidebar swatches ---
+  function registerCustomThemes(){
+    for(var key in THEMES){ if(THEMES.hasOwnProperty(key) && key.indexOf('custom-')===0){ delete THEMES[key]; } }
+    customThemes.forEach(function(t){ THEMES[t.id]=compilePalette(t.palette); });
+    renderCustomSwatches();
+  }
+  function renderCustomSwatches(){
+    var wrap=document.getElementById('srThemes'); if(!wrap) return;
+    var old=wrap.querySelectorAll('.thmbtn-custom');
+    for(var i=0;i<old.length;i++){ old[i].parentNode.removeChild(old[i]); }
+    customThemes.forEach(function(t){
+      var b=document.createElement('button');
+      b.type='button'; b.className='thmbtn thmbtn-custom'; b.setAttribute('data-theme',t.id); b.title=t.name;
+      b.innerHTML='<span class="sw"><i style="background:'+esc(t.palette.accent)+'"></i><i style="background:'+esc(t.palette.info)+'"></i><i style="background:'+esc(t.palette.crit)+'"></i></span><span class="lbl">'+esc(t.name)+'</span>';
+      wrap.appendChild(b);
+      wireSwatch(b);
+      if(t.id===curTheme) b.classList.add('on');
+    });
+  }
+  function wireSwatch(b){ if(b._wired) return; b._wired=true; b.addEventListener('click', function(){ applyTheme(b.getAttribute('data-theme'), true); }); }
+
+  // --- settings modal ---
+  function openSettings(){ renderList(); showList(); var m=document.getElementById('prSettings'); if(m) m.classList.add('open'); }
+  function closeSettings(){ var m=document.getElementById('prSettings'); if(m) m.classList.remove('open'); }
+  function showList(){ var l=document.getElementById('prViewList'),e=document.getElementById('prViewEdit'); if(l)l.style.display=''; if(e)e.style.display='none'; renderList(); }
+  function showEditor(){ var l=document.getElementById('prViewList'),e=document.getElementById('prViewEdit'); if(l)l.style.display='none'; if(e)e.style.display=''; }
+  function rowHtml(id,name,dots,isCustom){
+    var sw=''; for(var i=0;i<dots.length;i++){ sw+='<i style="background:'+esc(dots[i])+'"></i>'; }
+    return '<div class="pr-throw'+(id===curTheme?' active':'')+'">'+
+      '<span class="sw">'+sw+'</span>'+
+      '<span class="nm">'+esc(name)+'</span>'+
+      '<button class="pr-btn sm" data-act="apply" data-id="'+esc(id)+'">Apply</button>'+
+      (isCustom?'<button class="pr-btn sm" data-act="edit" data-id="'+esc(id)+'">Edit</button>':'')+
+      '</div>';
+  }
+  function renderList(){
+    var list=document.getElementById('prThemeList'); if(!list) return;
+    var rows=[];
+    BUILTIN.forEach(function(b){ rows.push(rowHtml(b.id,b.name,b.dots,false)); });
+    customThemes.forEach(function(t){ rows.push(rowHtml(t.id,t.name,[t.palette.accent,t.palette.info,t.palette.crit],true)); });
+    if(!customThemes.length){ rows.push('<div class="pr-empty">No custom themes yet — create one below.</div>'); }
+    list.innerHTML=rows.join('');
+  }
+  function openEditor(id){
+    editingId=id||null;
+    var del=document.getElementById('prDeleteTheme'), nameInp=document.getElementById('prThemeName');
+    if(editingId){
+      var t=findCustom(editingId);
+      if(t){ editPalette=cloneP(t.palette); if(nameInp) nameInp.value=t.name; if(del) del.style.display=''; }
+      else { editingId=null; }
+    }
+    if(!editingId){ editPalette=cloneP(DEFAULT_PALETTE); if(nameInp) nameInp.value=''; if(del) del.style.display='none'; }
+    renderColorInputs();
+    updatePreview();
+    showEditor();
+  }
+  function renderColorInputs(){
+    var box=document.getElementById('prColors'); if(!box) return;
+    var h='';
+    PALETTE_TOKENS.forEach(function(tok){
+      h+='<label class="pr-color"><input type="color" data-k="'+tok.k+'" value="'+esc(editPalette[tok.k])+'"><span class="meta"><span class="cn">'+esc(tok.label)+'</span><span class="cd">'+esc(tok.desc)+'</span></span></label>';
+    });
+    box.innerHTML=h;
+  }
+  function updatePreview(){
+    var box=document.getElementById('prPreview'); if(!box) return;
+    var p=editPalette, line=mix(p.panel,'#ffffff',0.16);
+    function badge(c,t){ return '<span style="font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;background:rgba('+rgbStr(c)+',.16);border:1px solid '+esc(c)+';color:'+esc(c)+'">'+t+'</span>'; }
+    box.innerHTML=
+      '<div style="background:'+esc(p.bg)+';border-radius:10px;padding:14px">'+
+        '<div style="background:'+esc(p.panel)+';border:1px solid '+esc(line)+';border-radius:10px;padding:12px;box-shadow:0 6px 18px rgba(0,0,0,.25)">'+
+          '<div style="color:'+esc(p.ink)+';font-weight:800;font-size:14px;margin-bottom:2px">Aa Sample panel</div>'+
+          '<div style="color:'+esc(p.muted)+';font-size:11px;margin-bottom:11px">Secondary muted description text.</div>'+
+          '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">'+badge(p.pos,'OK')+badge(p.warn,'Warn')+badge(p.neg,'Error')+badge(p.crit,'Peak')+'</div>'+
+          '<div style="display:flex;gap:8px;align-items:center">'+
+            '<button style="background:'+esc(p.accent)+';color:#12100a;border:none;border-radius:8px;padding:7px 13px;font-weight:800;font-size:12px;cursor:default">Primary</button>'+
+            '<a style="color:'+esc(p.info)+';font-size:12px;font-weight:700;text-decoration:none">View details ›</a>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+  }
+  function saveTheme(){
+    var nameInp=document.getElementById('prThemeName');
+    var name=(nameInp&&nameInp.value?nameInp.value:'').replace(/\s+/g,' ').trim();
+    if(!name) name='Custom';
+    var id;
+    if(editingId){ var t=findCustom(editingId); if(t){ t.name=name; t.palette=cloneP(editPalette); id=t.id; } else { editingId=null; } }
+    if(!editingId){ id='custom-'+(new Date()).getTime(); customThemes.push({id:id,name:name,palette:cloneP(editPalette)}); }
+    persistCustom();
+    registerCustomThemes();
+    applyTheme(id,true);
+    editingId=null;
+    showList();
+  }
+  function deleteTheme(){
+    if(!editingId){ showList(); return; }
+    var wasActive=(curTheme===editingId);
+    customThemes=customThemes.filter(function(t){ return t.id!==editingId; });
+    persistCustom();
+    registerCustomThemes();
+    if(wasActive) applyTheme('prism',true);
+    editingId=null;
+    showList();
+  }
+  function resetAll(){
+    var wasCustom=(String(curTheme).indexOf('custom-')===0);
+    customThemes=[];
+    persistCustom();
+    registerCustomThemes();
+    if(wasCustom) applyTheme('prism',true);
+    renderList();
+  }
+  function wireSettings(){
+    var gear=document.getElementById('srGear'); if(gear) gear.addEventListener('click', openSettings);
+    var closeb=document.getElementById('prSettingsClose'); if(closeb) closeb.addEventListener('click', closeSettings);
+    var modal=document.getElementById('prSettings'); if(modal) modal.addEventListener('click', function(e){ if(e.target===modal) closeSettings(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape'||e.keyCode===27){ var m=document.getElementById('prSettings'); if(m&&m.classList.contains('open')) closeSettings(); } });
+    var nb=document.getElementById('prNewTheme'); if(nb) nb.addEventListener('click', function(){ openEditor(null); });
+    var back=document.getElementById('prEditBack'); if(back) back.addEventListener('click', showList);
+    var save=document.getElementById('prSaveTheme'); if(save) save.addEventListener('click', saveTheme);
+    var del=document.getElementById('prDeleteTheme'); if(del) del.addEventListener('click', deleteTheme);
+    var reset=document.getElementById('prResetThemes'); if(reset) reset.addEventListener('click', function(){ if(customThemes.length && window.confirm('Delete all custom themes? This cannot be undone.')) resetAll(); });
+    var list=document.getElementById('prThemeList');
+    if(list) list.addEventListener('click', function(e){ var btn=e.target&&e.target.closest?e.target.closest('[data-act]'):null; if(!btn) return; var id=btn.getAttribute('data-id'), act=btn.getAttribute('data-act'); if(act==='apply'){ applyTheme(id,true); renderList(); } else if(act==='edit'){ openEditor(id); } });
+    var colors=document.getElementById('prColors');
+    if(colors) colors.addEventListener('input', function(e){ var inp=e.target; if(inp&&inp.getAttribute&&inp.getAttribute('data-k')){ editPalette[inp.getAttribute('data-k')]=inp.value; updatePreview(); } });
+  }
+
+  var customThemes=loadCustomThemes();
+  registerCustomThemes();
+  wireSettings();
+  // ===================== /CUSTOM THEMES + SETTINGS =====================
+
   try{ var saved=localStorage.getItem('prismTheme'); if(saved&&THEMES.hasOwnProperty(saved)) curTheme=saved; }catch(e){}
 
   function injectInto(doc, css){
@@ -98429,10 +98744,8 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
     document.querySelectorAll('.thmbtn').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-theme')===name); });
     if(persist!==false){ try{ localStorage.setItem('prismTheme', name); }catch(e){} }
   }
-  // wire the picker
-  document.querySelectorAll('.thmbtn').forEach(function(b){
-    b.addEventListener('click', function(){ applyTheme(b.getAttribute('data-theme'), true); });
-  });
+  // wire the picker (skip custom swatches — already wired in wireSwatch)
+  document.querySelectorAll('.thmbtn').forEach(function(b){ wireSwatch(b); });
   applyTheme(curTheme, false); // paint the shell immediately on load
   // ===================== /THEME ENGINE =====================
 
