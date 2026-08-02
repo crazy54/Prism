@@ -38,6 +38,27 @@ test('validateCss detects unbalanced braces', () => {
   assert.equal(validateCss('.a{color:red}}').valid, false);
 });
 
+test('validateCss ignores braces inside string literals', () => {
+  // A literal { or } in a content:"" value is not a block delimiter.
+  assert.equal(validateCss('.a::before{content:"{"}').valid, true);
+  assert.equal(validateCss('.a::before{content:"}"}').valid, true);
+  assert.equal(validateCss('.a::before{content:"{}"}\n.b{color:var(--ink)}').valid, true);
+  // escaped quote inside the string must not prematurely close it
+  assert.equal(validateCss('.a::before{content:"\\"{"}').valid, true);
+  // a genuinely unbalanced brace OUTSIDE a string is still caught
+  assert.equal(validateCss('.a::before{content:"{"').valid, false);
+});
+
+test('splitRules ignores braces inside string literals', () => {
+  const rules = splitRules('.a::before{content:"{"}\n.b{color:var(--ink)}');
+  assert.equal(rules.length, 2, 'a brace inside content:"" must not split the rule');
+  assert.ok(rules[0].text.includes('content:"{"'));
+  assert.ok(rules[1].text.includes('--ink'));
+  // close-brace form used to mis-split into garbage rules
+  const closed = splitRules('.a::after{content:"}"}\n.b{color:red}');
+  assert.equal(closed.length, 2);
+});
+
 test('referencedTokens / definedTokens', () => {
   const css = '.a{--local:1;color:var(--ink);background:var(--local)}';
   assert.ok(referencedTokens(css).has('--ink'));

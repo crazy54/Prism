@@ -45,9 +45,13 @@ html = html.replace(/<!-- ===== PRISM CATALOG · AI START HERE ===== -->[\s\S]*?
 html = html.replace(/<!-- ✦ AI-READABLE:[\s\S]*?-->\n?/, '');
 
 // Breadcrumb right after <html lang="en">, island right after </title>.
-html = html.replace('<html lang="en">', '<html lang="en">\n' + BREADCRUMB);
+// Use FUNCTION replacements: a string replacement expands $$, $`, $', $&, $n
+// specials, and ISLAND embeds arbitrary effect html/css/regex data — a stray
+// $' would splice the rest of the file into the island (corruption). A function
+// return is inserted literally, no $-substitution. (Mirrors _splice.mjs.)
+html = html.replace('<html lang="en">', () => '<html lang="en">\n' + BREADCRUMB);
 html = html.replace('<title>✦ Prism · Unified Gallery</title>',
-  '<title>✦ Prism · Unified Gallery</title>\n' + ISLAND);
+  () => '<title>✦ Prism · Unified Gallery</title>\n' + ISLAND);
 
 writeFileSync(HTML, html);
 console.log('Embedded catalog island: ' + withHeader.count + ' effects, ' +
