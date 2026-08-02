@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node cli.js start",
-    "test": "node --test test/"
+    "test": "node --test \"test/*.test.js\""
   },
   "engines": {
     "node": ">=18"

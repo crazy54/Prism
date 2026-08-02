@@ -1,4 +1,4 @@
-// The 15 Prism MCP tools. Each entry: { name, description, inputSchema, handler }.
+// The 20 Prism MCP tools. Each entry: { name, description, inputSchema, handler }.
 // Handlers receive (args, ctx) where ctx = { store, logger } and return a plain
 // JS object (serialized to JSON text by the server). Handlers throw ToolError for
 // structured, actionable failures.
@@ -56,9 +56,195 @@ function matchScore(effect, q) {
   return score;
 }
 
+// --- faceted search engine (shared by search_effects + saved searches) ---
+//
+// Facets are grounded in REAL catalog fields. Two caveats the raw data forces:
+//   1. The `interaction` field is noisy: words are truncated ("tatic"→static,
+//      "focu"→focus, "croll"→scroll), carry stray whitespace, and combine several
+//      interactions in one string ("hover click"). We normalize into a canonical
+//      token set so the facet is usable.
+//   2. There is NO performance/themeCompat field in the catalog, so those spec
+//      facets are intentionally absent rather than faked.
+const INTERACTION_FIX = { tatic: 'static', focu: 'focus', croll: 'scroll' };
+
+/**
+ * Normalize a raw `interaction` value into canonical tokens (may be several).
+ * The source is inconsistent: sometimes a string ("hover click"), sometimes an
+ * array (["focu"," click"]), with truncated words and stray whitespace/commas.
+ * We flatten, split on whitespace AND commas, de-truncate, and de-dupe.
+ */
+export function normalizeInteractions(raw) {
+  if (raw == null) return [];
+  const parts = Array.isArray(raw) ? raw : [raw];
+  const seen = new Set();
+  for (const part of parts) {
+    for (const tok of String(part).toLowerCase().split(/[\s,]+/)) {
+      const t = tok.trim();
+      if (!t) continue;
+      seen.add(INTERACTION_FIX[t] || t);
+    }
+  }
+  return Array.from(seen);
+}
+
+// Multi-value facet dimensions: value(s) extracted per effect. `multi` means an
+// effect can carry several values for the dimension (tags, interactions).
+const FACET_DIMS = {
+  gallery: { get: (e) => (e.gallery ? [e.gallery] : []), label: 'Gallery' },
+  componentType: { get: (e) => (e.componentType ? [e.componentType] : []), label: 'Component type' },
+  spectrum: { get: (e) => (e.spectrum ? [e.spectrum] : []), label: 'Aesthetic (spectrum)' },
+  category: { get: (e) => (e.category ? [e.category] : []), label: 'Category' },
+  tag: { get: (e) => e.tags || [], label: 'Tag', multi: true },
+  interaction: { get: (e) => normalizeInteractions(e.interaction), label: 'Interaction', multi: true, normalized: true },
+};
+
+// Boolean flag dimensions.
+const BOOL_DIMS = {
+  isNew: { get: (e) => !!e.isNew, label: 'New' },
+  usableAsBackground: { get: (e) => !!e.usableAsBackground, label: 'Usable as background' },
+  needsJs: { get: (e) => !!e.needsJs, label: 'Needs JS initializer' },
+  isFixed: { get: (e) => !!e.isFixed, label: 'Fixed / pinned' },
+  selfContained: { get: (e) => !!e.selfContained, label: 'Self-contained' },
+};
+
+// Maps the plural filter keys accepted by search_effects to a facet dimension.
+const FILTER_KEY_TO_DIM = {
+  galleries: 'gallery',
+  componentTypes: 'componentType',
+  spectrums: 'spectrum',
+  categories: 'category',
+  tags: 'tag',
+  interactions: 'interaction',
+};
+
+function asStrArray(v) {
+  if (v == null) return [];
+  return (Array.isArray(v) ? v : [v]).map((x) => String(x)).filter(Boolean);
+}
+
+/**
+ * Apply facet filters to a list of effects.
+ *   - Multi-value OR within a single facet (any selected gallery matches).
+ *   - AND across different facets.
+ *   - tags are AND (an effect must carry every selected tag) — narrowing.
+ *   - boolean flags: only enforced when explicitly true.
+ */
+function applyFilters(list, filters = {}) {
+  if (!filters || typeof filters !== 'object') return list;
+  let out = list;
+  for (const [key, dim] of Object.entries(FILTER_KEY_TO_DIM)) {
+    const wanted = asStrArray(filters[key]);
+    if (!wanted.length) continue;
+    const wantSet = new Set(wanted);
+    const def = FACET_DIMS[dim];
+    if (key === 'tags') {
+      // AND semantics: must carry all selected tags.
+      out = out.filter((e) => {
+        const have = new Set(def.get(e));
+        return wanted.every((t) => have.has(t));
+      });
+    } else {
+      out = out.filter((e) => def.get(e).some((v) => wantSet.has(v)));
+    }
+  }
+  for (const key of Object.keys(BOOL_DIMS)) {
+    if (filters[key] === true) out = out.filter((e) => BOOL_DIMS[key].get(e));
+    else if (filters[key] === false) out = out.filter((e) => !BOOL_DIMS[key].get(e));
+  }
+  return out;
+}
+
+/** Sort effects by a named strategy. `scoreMap` (id->score) drives relevance. */
+function sortEffects(list, sort, scoreMap) {
+  const byName = (a, b) => (a.name || a.id).localeCompare(b.name || b.id);
+  switch (sort) {
+    case 'name':
+      return [...list].sort(byName);
+    case 'newest':
+      return [...list].sort((a, b) => (Number(!!b.isNew) - Number(!!a.isNew)) || byName(a, b));
+    case 'gallery':
+      return [...list].sort((a, b) => String(a.gallery).localeCompare(String(b.gallery)) || byName(a, b));
+    case 'relevance':
+    default:
+      if (scoreMap) {
+        return [...list].sort((a, b) => (scoreMap.get(b.id) || 0) - (scoreMap.get(a.id) || 0) || byName(a, b));
+      }
+      return [...list].sort(byName);
+  }
+}
+
+const SORTS = ['relevance', 'name', 'newest', 'gallery'];
+
+/** Count how many effects carry each value of a facet dimension. */
+function facetValueCounts(list, dimKey) {
+  const def = FACET_DIMS[dimKey];
+  if (!def) return [];
+  const counts = new Map();
+  for (const e of list) {
+    for (const v of def.get(e)) counts.set(v, (counts.get(v) || 0) + 1);
+  }
+  return Array.from(counts.entries())
+    .map(([value, count]) => ({ value, count }))
+    .sort((a, b) => b.count - a.count || String(a.value).localeCompare(String(b.value)));
+}
+
+/** Count effects matching each boolean flag dimension. */
+function boolFlagCounts(list) {
+  const out = {};
+  for (const [key, def] of Object.entries(BOOL_DIMS)) {
+    out[key] = { label: def.label, count: list.filter((e) => def.get(e)).length };
+  }
+  return out;
+}
+
+/** Session-scoped saved-search store, lazily attached to the CatalogStore. */
+function savedSearchStore(store) {
+  if (!store._savedSearches) store._savedSearches = new Map();
+  return store._savedSearches;
+}
+
+function slugifyName(name) {
+  return String(name).toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || 'search';
+}
+
+/**
+ * Core faceted search shared by search_effects and execute_saved_search.
+ * query is optional; when absent, results are all effects matching the filters,
+ * ordered by `sort` (defaults to name when there is no query to rank by).
+ */
+function runSearch(store, { query, gallery, filters, sort, limit, offset } = {}) {
+  let list = store.all();
+  // `gallery` shorthand (back-compat) folds into the galleries filter.
+  const mergedFilters = { ...(filters || {}) };
+  if (gallery) mergedFilters.galleries = [...asStrArray(mergedFilters.galleries), gallery];
+  list = applyFilters(list, mergedFilters);
+
+  const q = (query || '').trim();
+  let scoreMap = null;
+  if (q) {
+    scoreMap = new Map();
+    list = list.filter((e) => {
+      const s = matchScore(e, q);
+      if (s > 0) scoreMap.set(e.id, s);
+      return s > 0;
+    });
+  }
+  const effSort = sort || (q ? 'relevance' : 'name');
+  const ordered = sortEffects(list, effSort, scoreMap);
+  const shaped = ordered.map((e) => {
+    const li = lightEffect(e);
+    if (scoreMap) li.score = scoreMap.get(e.id) || 0;
+    li.interactions = normalizeInteractions(e.interaction);
+    li.spectrum = e.spectrum || null;
+    return li;
+  });
+  const page = paginate(shaped, limit ?? 20, offset ?? 0);
+  return { query: q || null, sort: effSort, filters: mergedFilters, ...page };
+}
+
 export function buildTools() {
   return [
-    // ============================== DISCOVERY (6) ==============================
+    // ============================== DISCOVERY (11) ==============================
     {
       name: 'list_effects',
       description: 'List effects in the catalog with optional filters (gallery, tag, componentType, background-capable, new/fixed). Returns lightweight metadata (no html/css) with pagination.',
@@ -88,28 +274,50 @@ export function buildTools() {
     },
     {
       name: 'search_effects',
-      description: 'Full-text relevance search across effect id, name, description, tags and category. Returns ranked lightweight results. Use get_effect to fetch full html/css for a chosen id.',
+      description: 'Faceted relevance search over the catalog. Full-text ranks across id/name/description/tags/category; the optional `filters` object narrows by gallery, componentType, spectrum (aesthetic), category, tag (AND), and interaction, plus boolean flags (isNew, usableAsBackground, needsJs, isFixed, selfContained). `sort` controls ordering (relevance/name/newest/gallery) and offset/limit paginate. query is optional when filters are given. Use get_available_filters to discover valid facet values.',
       inputSchema: {
         type: 'object',
         properties: {
-          query: { type: 'string', description: 'Search text, e.g. "pulsing kpi card" or "wind backdrop"' },
-          gallery: { type: 'string', description: 'Optional gallery id to restrict the search' },
+          query: { type: 'string', description: 'Search text, e.g. "pulsing kpi card" or "wind backdrop". Optional if filters are supplied.' },
+          gallery: { type: 'string', description: 'Shorthand to restrict to one gallery (folds into filters.galleries).' },
+          filters: {
+            type: 'object',
+            description: 'Facet filters. Array facets are OR within a facet (except tags = AND) and AND across facets. Interaction values are normalized (e.g. static/focus/scroll).',
+            properties: {
+              galleries: { ...strArr, description: 'Match any of these gallery ids' },
+              componentTypes: { ...strArr, description: 'Match any of these componentType values' },
+              spectrums: { ...strArr, description: 'Match any of these spectrum (aesthetic) values' },
+              categories: { ...strArr, description: 'Match any of these category values' },
+              tags: { ...strArr, description: 'Must carry ALL of these tags (AND)' },
+              interactions: { ...strArr, description: 'Match any of these normalized interaction tokens (static, hover, click, focus, scroll, auto-play, drag, toggle, on-load, …)' },
+              isNew: { type: 'boolean' },
+              usableAsBackground: { type: 'boolean' },
+              needsJs: { type: 'boolean' },
+              isFixed: { type: 'boolean' },
+              selfContained: { type: 'boolean' },
+            },
+            additionalProperties: false,
+          },
+          sort: { type: 'string', enum: SORTS, description: 'Ordering. Defaults to relevance when a query is given, else name.' },
           limit: { type: 'integer', minimum: 1, default: 20 },
+          offset: { type: 'integer', minimum: 0, default: 0 },
         },
-        required: ['query'],
         additionalProperties: false,
       },
       handler: (a, { store }) => {
-        if (!a.query || !a.query.trim()) throw new ToolError('query must be a non-empty string', { code: 'invalid_argument' });
-        let list = store.all();
-        if (a.gallery) list = list.filter((e) => e.gallery === a.gallery);
-        const scored = list
-          .map((e) => ({ e, score: matchScore(e, a.query) }))
-          .filter((x) => x.score > 0)
-          .sort((x, y) => y.score - x.score)
-          .slice(0, a.limit ?? 20)
-          .map((x) => ({ ...lightEffect(x.e), score: x.score }));
-        return { query: a.query, total: scored.length, items: scored };
+        const hasQuery = a.query && a.query.trim();
+        const hasFilters = (a.filters && Object.values(a.filters).some((v) => (Array.isArray(v) ? v.length : v != null))) || a.gallery;
+        if (!hasQuery && !hasFilters) {
+          throw new ToolError('Provide a query and/or at least one filter', { code: 'invalid_argument' });
+        }
+        return runSearch(store, {
+          query: a.query,
+          gallery: a.gallery,
+          filters: a.filters,
+          sort: a.sort,
+          limit: a.limit ?? 20,
+          offset: a.offset ?? 0,
+        });
       },
     },
     {
@@ -203,6 +411,152 @@ export function buildTools() {
           uniqueComponentTypes: Object.keys(typeCounts).length,
           topTags: Object.entries(tagCounts).sort((a2, b2) => b2[1] - a2[1]).slice(0, 15).map(([tag, count]) => ({ tag, count })),
         };
+      },
+    },
+
+    {
+      name: 'get_available_filters',
+      description: 'Describe every facet available for search_effects: each array facet (gallery, componentType, spectrum, category, tag, interaction) with its top values and counts, plus the boolean flags and their counts, and the valid sort options. Use this to build a faceted UI or to learn valid filter values before searching.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          topValues: { type: 'integer', minimum: 1, default: 25, description: 'Max values to return per array facet (by frequency). Use list_filter_values for the full list of one facet.' },
+        },
+        additionalProperties: false,
+      },
+      handler: (a, { store }) => {
+        const all = store.all();
+        const top = a.topValues ?? 25;
+        const facets = {};
+        for (const [key, def] of Object.entries(FACET_DIMS)) {
+          const values = facetValueCounts(all, key);
+          facets[key] = {
+            label: def.label,
+            multi: !!def.multi,
+            normalized: !!def.normalized,
+            filterKey: Object.keys(FILTER_KEY_TO_DIM).find((k) => FILTER_KEY_TO_DIM[k] === key),
+            totalValues: values.length,
+            values: values.slice(0, top),
+          };
+        }
+        return {
+          totalEffects: all.length,
+          facets,
+          booleanFlags: boolFlagCounts(all),
+          sorts: SORTS,
+          notes: [
+            'tags filter uses AND (an effect must have every selected tag); all other array facets use OR.',
+            'interaction values are normalized from noisy source data (e.g. "tatic"→static, "focu"→focus, "croll"→scroll).',
+            'No performance or theme-compatibility facet exists in the catalog; those are intentionally omitted.',
+          ],
+        };
+      },
+    },
+    {
+      name: 'list_filter_values',
+      description: 'List the full set of values for a single facet dimension (gallery, componentType, spectrum, category, tag, or interaction) with per-value effect counts. Complements get_available_filters when you need every value of one facet (e.g. all 175 categories).',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          facet: { type: 'string', enum: Object.keys(FACET_DIMS), description: 'Which facet dimension to enumerate' },
+          prefix: { type: 'string', description: 'Optional case-insensitive prefix/substring filter on the value' },
+          limit: { type: 'integer', minimum: 1, default: 200 },
+          offset: { type: 'integer', minimum: 0, default: 0 },
+        },
+        required: ['facet'],
+        additionalProperties: false,
+      },
+      handler: (a, { store }) => {
+        if (!FACET_DIMS[a.facet]) {
+          throw new ToolError(`Unknown facet "${a.facet}"`, { code: 'invalid_argument', data: { validFacets: Object.keys(FACET_DIMS) } });
+        }
+        let values = facetValueCounts(store.all(), a.facet);
+        if (a.prefix) {
+          const p = a.prefix.toLowerCase();
+          values = values.filter((v) => String(v.value).toLowerCase().includes(p));
+        }
+        const page = paginate(values, a.limit ?? 200, a.offset ?? 0);
+        return { facet: a.facet, label: FACET_DIMS[a.facet].label, ...page };
+      },
+    },
+    {
+      name: 'create_saved_search',
+      description: 'Save a named search (query + filters + sort) for reuse this session. Returns an id you can pass to execute_saved_search. Saved searches live in server memory for the current process (they are not persisted to disk).',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          name: { type: 'string', description: 'Human label for the saved search' },
+          query: { type: 'string' },
+          filters: { type: 'object', additionalProperties: true, description: 'Same shape as search_effects.filters' },
+          sort: { type: 'string', enum: SORTS },
+          description: { type: 'string', description: 'Optional note about what this search is for' },
+        },
+        required: ['name'],
+        additionalProperties: false,
+      },
+      handler: (a, { store }) => {
+        const name = String(a.name || '').trim();
+        if (!name) throw new ToolError('name is required', { code: 'invalid_argument' });
+        const hasQuery = a.query && a.query.trim();
+        const hasFilters = a.filters && Object.values(a.filters).some((v) => (Array.isArray(v) ? v.length : v != null));
+        if (!hasQuery && !hasFilters) throw new ToolError('A saved search needs a query and/or at least one filter', { code: 'invalid_argument' });
+        if (a.sort && !SORTS.includes(a.sort)) throw new ToolError(`Invalid sort "${a.sort}"`, { code: 'invalid_argument', data: { validSorts: SORTS } });
+        const saved = savedSearchStore(store);
+        // Stable, collision-resistant id: slug + short numeric suffix.
+        let base = slugifyName(name);
+        let id = base;
+        let n = 2;
+        while (saved.has(id)) id = `${base}-${n++}`;
+        const record = {
+          id,
+          name,
+          description: a.description || '',
+          query: hasQuery ? a.query.trim() : null,
+          filters: a.filters || {},
+          sort: a.sort || null,
+          createdAt: new Date().toISOString(),
+        };
+        saved.set(id, record);
+        return { created: id, savedSearch: record, total: saved.size };
+      },
+    },
+    {
+      name: 'get_saved_searches',
+      description: 'List all saved searches for this session (id, name, query, filters, sort). Empty until create_saved_search is called.',
+      inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+      handler: (a, { store }) => {
+        const saved = savedSearchStore(store);
+        return { total: saved.size, items: Array.from(saved.values()) };
+      },
+    },
+    {
+      name: 'execute_saved_search',
+      description: 'Run a previously saved search by id and return ranked results (same shape as search_effects). Optionally override sort/limit/offset without changing the saved definition.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          id: { type: 'string', description: 'Saved-search id from create_saved_search/get_saved_searches' },
+          sort: { type: 'string', enum: SORTS, description: 'Override the saved sort for this run' },
+          limit: { type: 'integer', minimum: 1, default: 20 },
+          offset: { type: 'integer', minimum: 0, default: 0 },
+        },
+        required: ['id'],
+        additionalProperties: false,
+      },
+      handler: (a, { store }) => {
+        const saved = savedSearchStore(store);
+        const record = saved.get(a.id);
+        if (!record) {
+          throw new ToolError(`No saved search with id "${a.id}"`, { code: 'not_found', data: { available: Array.from(saved.keys()) } });
+        }
+        const res = runSearch(store, {
+          query: record.query,
+          filters: record.filters,
+          sort: a.sort || record.sort,
+          limit: a.limit ?? 20,
+          offset: a.offset ?? 0,
+        });
+        return { savedSearch: { id: record.id, name: record.name }, ...res };
       },
     },
 

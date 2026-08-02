@@ -96496,6 +96496,90 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
   padding:10px 22px;font-size:13px;cursor:pointer;font-family:inherit;transition:.15s}
 .srch-loadmore button:hover{border-color:var(--accent);color:var(--accent)}
 
+/* ---- autocomplete (command-palette suggestion list under the input) ---- */
+.srch-inputwrap{position:relative}
+.srch-ac{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:40;background:var(--panel);
+  border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 46px -12px rgba(0,0,0,.6);
+  overflow:hidden;display:none}
+.srch-ac.open{display:block}
+.srch-ac-item{display:flex;align-items:center;gap:9px;padding:9px 14px;cursor:pointer;font-size:13px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.03)}
+.srch-ac-item:last-child{border-bottom:none}
+.srch-ac-item .k{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);
+  border:1px solid var(--line);border-radius:6px;padding:1px 6px;flex-shrink:0}
+.srch-ac-item .t{flex:1;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srch-ac-item .t mark{background:none;color:var(--accent);font-weight:800}
+.srch-ac-item.active,.srch-ac-item:hover{background:rgba(var(--accent-rgb),.14)}
+
+/* ---- toolbar: sort + view toggle + saved-search actions ---- */
+.srch-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:2px 0}
+.srch-toolbar .grow{flex:1;min-width:8px}
+.srch-tool{display:inline-flex;align-items:center;gap:7px;background:var(--panel2);border:1px solid var(--line);
+  color:var(--muted);border-radius:9px;padding:7px 11px;font-size:12px;font-family:inherit;cursor:pointer;transition:.15s}
+.srch-tool:hover{border-color:var(--accent);color:var(--ink)}
+.srch-tool svg{width:14px;height:14px}
+.srch-sort{display:inline-flex;align-items:center;gap:7px}
+.srch-sort label{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);font-weight:800}
+.srch-select{background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:9px;
+  padding:7px 30px 7px 11px;font-size:12px;font-family:inherit;cursor:pointer;
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238593a8' stroke-width='3'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat:no-repeat;background-position:right 10px center}
+.srch-select:hover,.srch-select:focus{border-color:var(--accent);outline:none}
+.srch-viewtoggle{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.srch-viewtoggle button{background:var(--panel2);border:none;color:var(--dim);padding:7px 10px;cursor:pointer;
+  display:flex;align-items:center;transition:.15s}
+.srch-viewtoggle button.on{background:rgba(var(--accent-rgb),.16);color:var(--accent)}
+.srch-viewtoggle button:hover{color:var(--ink)}
+.srch-viewtoggle button svg{width:15px;height:15px}
+
+/* ---- applied-filter pills (removable) ---- */
+.srch-applied{display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:2px 0}
+.srch-applied:empty{display:none}
+.srch-applied .lbl{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);font-weight:800;margin-right:2px}
+.srch-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(var(--accent-rgb),.14);
+  border:1px solid rgba(var(--accent-rgb),.4);color:var(--ink);border-radius:20px;padding:4px 6px 4px 11px;font-size:11.5px;font-weight:600}
+.srch-pill .dim{color:var(--dim);font-weight:700;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase}
+.srch-pill button{background:rgba(255,255,255,.06);border:none;color:var(--muted);border-radius:50%;
+  width:18px;height:18px;font-size:11px;line-height:1;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center}
+.srch-pill button:hover{background:var(--neg);color:#fff}
+.srch-clearall{background:none;border:1px solid var(--line);color:var(--dim);border-radius:20px;padding:4px 12px;font-size:11px;cursor:pointer;font-family:inherit;transition:.15s}
+.srch-clearall:hover{border-color:var(--neg);color:var(--neg)}
+
+/* ---- saved searches + recent history ---- */
+.srch-saved{display:flex;flex-direction:column;gap:10px}
+.srch-saved-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.srch-saved-row .lbl{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);font-weight:800;margin-right:2px}
+.srch-saved-chip{display:inline-flex;align-items:center;gap:7px;background:var(--panel2);border:1px solid var(--line);
+  color:var(--muted);border-radius:9px;padding:5px 6px 5px 11px;font-size:11.5px;cursor:pointer;font-family:inherit;transition:.15s}
+.srch-saved-chip:hover{border-color:var(--info);color:var(--ink)}
+.srch-saved-chip .star{color:var(--warn)}
+.srch-saved-chip .rm{background:rgba(255,255,255,.06);border:none;color:var(--dim);border-radius:50%;width:17px;height:17px;font-size:10px;cursor:pointer;line-height:1}
+.srch-saved-chip .rm:hover{background:var(--neg);color:#fff}
+.srch-hist-chip{display:inline-flex;align-items:center;gap:6px;background:none;border:1px dashed var(--line);
+  color:var(--dim);border-radius:9px;padding:5px 11px;font-size:11.5px;cursor:pointer;font-family:inherit;transition:.15s}
+.srch-hist-chip:hover{border-color:var(--info);color:var(--ink)}
+
+/* ---- list view (view toggle → single-column rows) ---- */
+.srch-grid.list{grid-template-columns:1fr;gap:10px}
+.srch-grid.list .srch-card{flex-direction:row;align-items:stretch}
+.srch-grid.list .srch-card .srch-stage{width:260px;min-height:0;flex-shrink:0;border-right:1px solid var(--line)}
+.srch-grid.list .srch-card .srch-meta{flex:1;border-top:none}
+.srch-grid.list .srch-card .srch-desc{-webkit-line-clamp:3}
+@media(max-width:720px){.srch-grid.list .srch-card{flex-direction:column}
+  .srch-grid.list .srch-card .srch-stage{width:auto;border-right:none;border-bottom:1px solid var(--line)}}
+
+/* ---- no-results suggestions ---- */
+.srch-suggest{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:6px}
+.srch-suggest button{background:var(--panel2);border:1px solid var(--line);color:var(--info);border-radius:20px;
+  padding:5px 13px;font-size:12px;cursor:pointer;font-family:inherit;transition:.15s}
+.srch-suggest button:hover{border-color:var(--info);background:rgba(var(--info-rgb),.12)}
+
+/* score badge on cards (relevance debugging + signal) */
+.srch-card .srch-score{margin-left:auto;font-size:9.5px;font-weight:800;color:var(--dim);
+  font-variant-numeric:tabular-nums;background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:1px 6px}
+
+.srch-chip.on .rmx{margin-left:2px;opacity:.7}
+
 @media(prefers-reduced-motion:reduce){.srch-card{animation:none}}
 
 </style>
@@ -96503,7 +96587,7 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
 <body>
 <div class="head">
   <h1>🔎 Search</h1>
-  <p>Search all 1,500+ Prism facets by name, gallery, component type, interaction, or design Spectrum. Every piece of this page — the bar, the filter chips, the result cards — is itself a Prism facet.</p>
+  <p>Advanced faceted search across all 1,500+ Prism facets — rank by relevance, filter by gallery, component, interaction, aesthetic Spectrum, tag or status, then save the searches you reuse. Every piece of this page — the bar, the chips, the result cards — is itself a Prism facet.</p>
 </div>
 <div class="wrap">
 <div class="srch-shell">
@@ -96511,11 +96595,33 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
   <div class="srch-bar">
     <div class="srch-inputwrap">
       <svg class="srch-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="srchInput" class="srch-input" placeholder="Search 1,500+ facets — try &quot;animated menu&quot;, &quot;material ui&quot;, or &quot;3d chart&quot;…" autocomplete="off" spellcheck="false">
+      <input type="text" id="srchInput" class="srch-input" placeholder="Search 1,500+ facets — try &quot;animated menu&quot;, &quot;material ui&quot;, or &quot;3d chart&quot;…" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="srchAc" aria-autocomplete="list">
       <button class="srch-clear" id="srchClear" title="Clear" aria-label="Clear search">✕</button>
+      <div class="srch-ac" id="srchAc" role="listbox" aria-label="Search suggestions"></div>
     </div>
     <div class="srch-counts" id="srchCounts">Loading catalog…</div>
   </div>
+
+  <div class="srch-toolbar" id="srchToolbar">
+    <div class="srch-sort">
+      <label for="srchSort">Sort</label>
+      <select class="srch-select" id="srchSort" aria-label="Sort results">
+        <option value="relevance">Relevance</option>
+        <option value="name">Name (A–Z)</option>
+        <option value="newest">Newest first</option>
+        <option value="gallery">Gallery</option>
+      </select>
+    </div>
+    <div class="srch-viewtoggle" id="srchViewToggle" role="group" aria-label="Result layout">
+      <button type="button" data-view="grid" class="on" title="Grid view" aria-label="Grid view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+      <button type="button" data-view="list" title="List view" aria-label="List view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
+    </div>
+    <div class="grow"></div>
+    <button class="srch-tool" id="srchSaveBtn" title="Save this search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><span>Save search</span></button>
+    <button class="srch-tool" id="srchShareBtn" title="Copy a shareable link to this search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg><span>Share</span></button>
+  </div>
+
+  <div class="srch-applied" id="srchApplied"></div>
 
   <div class="srch-facets" id="srchFacets">
     <div class="srch-facetgroup" data-dim="gallery">
@@ -96534,8 +96640,14 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
       <div class="srch-facetlabel">Spectrum</div>
       <div class="srch-chiprow" id="srchSpectrumChips"></div>
     </div>
+    <div class="srch-facetgroup" data-dim="status">
+      <div class="srch-facetlabel">Status &amp; type</div>
+      <div class="srch-chiprow" id="srchStatusChips"></div>
+    </div>
     <button class="srch-resetbtn" id="srchReset">Reset filters</button>
   </div>
+
+  <div class="srch-saved" id="srchSaved"></div>
 
   <div class="srch-results" id="srchResults">
     <div class="srch-empty" id="srchEmptyState">
@@ -96557,14 +96669,48 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
   var GALLERY_LABELS={charts:'Charts & Metrics',fx:'FX Store',lab:'Animation Lab',ai:'AI Working',
     objects:'Animated Objects',input:'Input Methods',text:'Text Effects',shapes:'Text Shapes',
     maps:'Maps & Geo',notify:'Notifications & Status',arch:'Architecture Diagrams',callouts:'Callouts & Annotations',
-    menus:'Menus & Actions',spectrums:'Spectrums'};
+    obsidian:'Obsidian Facets',menus:'Menus & Actions',spectrums:'Spectrums'};
   var SPECTRUM_LABELS={'material-ui':'Material UI','cyberpunk-os':'Cyberpunk OS','neumorphism':'Neumorphism',
     'glassmorphism':'Glassmorphism','brutalist-web':'Brutalist Web','skeuo-hardware':'Skeuo Hardware',
     'retro-terminal':'Retro Terminal','art-deco':'Art Deco','solarpunk':'Solarpunk'};
+  // Boolean/status facets (grounded in real catalog fields — no invented perf/theme flags).
+  var STATUS_DEFS=[
+    {key:'isNew', label:'New', test:function(e){return !!e.isNew;}},
+    {key:'isFixed', label:'Updated / fixed', test:function(e){return !!e.isFixed;}},
+    {key:'usableAsBackground', label:'Background-capable', test:function(e){return !!e.usableAsBackground;}},
+    {key:'needsJs', label:'Needs JS', test:function(e){return !!e.needsJs;}},
+    {key:'selfContained', label:'Self-contained', test:function(e){return e.selfContained!==false;}}
+  ];
+  // Multi-value facet dimensions handled generically (chips + URL + pills).
+  var LIST_DIMS=['gallery','componentType','interaction','spectrum'];
+  var DIM_LABEL={gallery:'Gallery',componentType:'Component',interaction:'Interaction',spectrum:'Spectrum'};
 
   var PAGE_SIZE=48;
-  var state={ q:'', gallery:null, componentType:null, interaction:null, spectrum:null, shown:PAGE_SIZE };
+  var HISTORY_KEY='prism_search_history', SAVED_KEY='prism_saved_searches';
+  var HISTORY_MAX=8, SAVED_MAX=30;
+
+  // ---- interaction normalization (mirrors the MCP server's normalizeInteractions) ----
+  // Source data is noisy: truncated words, stray whitespace/commas, sometimes arrays.
+  var INTERACTION_FIX={tatic:'static', focu:'focus', croll:'scroll'};
+  function normInteractions(raw){
+    if(raw==null) return [];
+    var parts=Array.isArray(raw)?raw:[raw];
+    var seen=[], out=[];
+    parts.forEach(function(part){
+      String(part).toLowerCase().split(/[\s,]+/).forEach(function(tok){
+        var t=tok.trim(); if(!t) return;
+        t=INTERACTION_FIX[t]||t;
+        if(seen.indexOf(t)===-1){ seen.push(t); out.push(t); }
+      });
+    });
+    return out;
+  }
+
+  // state.filters holds arrays per list-dim (multi-select OR) + tags[] (AND) + bool flags.
+  function emptyFilters(){ return {gallery:[],componentType:[],interaction:[],spectrum:[],tags:[]}; }
+  var state={ q:'', filters:emptyFilters(), flags:{}, sort:'relevance', view:'grid', shown:PAGE_SIZE };
   var ALL=[];
+  var suppressUrl=false; // set while applying state FROM the url to avoid a write-back loop
 
   function loadCatalog(){
     try{
@@ -96574,42 +96720,142 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
       return data.effects||[];
     }catch(e){ console.error('search: failed to read catalog', e); return null; }
   }
+  // Precompute normalized interactions + a lowercased search haystack once per effect.
+  function indexCatalog(list){
+    list.forEach(function(e){
+      e._interactions=normInteractions(e.interaction);
+      e._hay={
+        name:(e.name||'').toLowerCase(),
+        id:(e.id||'').toLowerCase(),
+        desc:(e.description||'').toLowerCase(),
+        tags:(e.tags||[]).join(' ').toLowerCase(),
+        gallery:(e.gallery||'').toLowerCase(),
+        ctype:(e.componentType||'').toLowerCase(),
+        spectrum:(e.spectrum||'').toLowerCase()
+      };
+    });
+  }
 
   function esc(s){ return (s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function interactionLabel(v){ return v.charAt(0).toUpperCase()+v.slice(1); }
+  function labelFor(dim,v){
+    if(dim==='gallery') return GALLERY_LABELS[v]||v;
+    if(dim==='spectrum') return SPECTRUM_LABELS[v]||v;
+    if(dim==='interaction') return interactionLabel(v);
+    return v;
+  }
 
-  // ---- facet chip builders ----
-  function countBy(list, keyFn){
+  // ---- weighted relevance ranking ----
+  // Per JFH-8: Name×3, Tags×2, Description×2 (desc lighter per-term), Gallery×1,
+  // plus id/componentType/spectrum signal and exact/prefix bonuses.
+  function scoreOf(eff, terms, phrase){
+    if(!terms.length) return 0;
+    var h=eff._hay, score=0, matchedAll=true;
+    terms.forEach(function(t){
+      var hit=false;
+      if(h.name.indexOf(t)!==-1){ score+=3; hit=true; }
+      if(h.tags.indexOf(t)!==-1){ score+=2; hit=true; }
+      if(h.id.indexOf(t)!==-1){ score+=2; hit=true; }
+      if(h.ctype.indexOf(t)!==-1){ score+=1.5; hit=true; }
+      if(h.spectrum.indexOf(t)!==-1){ score+=1.5; hit=true; }
+      if(h.gallery.indexOf(t)!==-1){ score+=1; hit=true; }
+      if(h.desc.indexOf(t)!==-1){ score+=1; hit=true; }
+      if(!hit) matchedAll=false;
+    });
+    if(!matchedAll) return 0; // every term must appear somewhere (AND)
+    if(h.name===phrase) score+=12;
+    else if(h.name.indexOf(phrase)===0) score+=6;
+    else if(h.name.indexOf(phrase)!==-1) score+=3;
+    if(eff.isNew) score+=0.25; // tiny tie-break toward fresh content
+    return score;
+  }
+
+  function activeFilterCount(){
+    var n=0;
+    LIST_DIMS.forEach(function(d){ n+=state.filters[d].length; });
+    n+=state.filters.tags.length;
+    n+=Object.keys(state.flags).filter(function(k){return state.flags[k];}).length;
+    return n;
+  }
+  function hasCriteria(){ return !!(state.q.trim() || activeFilterCount()); }
+
+  // ---- filter + rank pipeline ----
+  function passesFilters(eff){
+    for(var i=0;i<LIST_DIMS.length;i++){
+      var d=LIST_DIMS[i], sel=state.filters[d]; if(!sel.length) continue;
+      if(d==='interaction'){
+        var got=eff._interactions;
+        if(!sel.some(function(v){return got.indexOf(v)!==-1;})) return false;
+      } else {
+        if(sel.indexOf(eff[d])===-1) return false;
+      }
+    }
+    if(state.filters.tags.length){
+      var tg=eff.tags||[];
+      if(!state.filters.tags.every(function(t){return tg.indexOf(t)!==-1;})) return false;
+    }
+    for(var k in state.flags){
+      if(!state.flags[k]) continue;
+      var def=STATUS_DEFS.filter(function(s){return s.key===k;})[0];
+      if(def && !def.test(eff)) return false;
+    }
+    return true;
+  }
+
+  function results(){
+    var phrase=state.q.trim().toLowerCase();
+    var terms=phrase.split(/\s+/).filter(Boolean);
+    var out=[];
+    for(var i=0;i<ALL.length;i++){
+      var eff=ALL[i];
+      if(!passesFilters(eff)) continue;
+      var sc=terms.length?scoreOf(eff,terms,phrase):0;
+      if(terms.length && sc<=0) continue;
+      eff._score=sc;
+      out.push(eff);
+    }
+    sortResults(out, terms.length>0);
+    return out;
+  }
+
+  function sortResults(list, hasQuery){
+    var byName=function(a,b){return (a.name||a.id).localeCompare(b.name||b.id);};
+    var s=state.sort;
+    if(s==='relevance' && !hasQuery) s='name'; // nothing to rank by → fall back
+    if(s==='name') list.sort(byName);
+    else if(s==='newest') list.sort(function(a,b){return (Number(!!b.isNew)-Number(!!a.isNew))||byName(a,b);});
+    else if(s==='gallery') list.sort(function(a,b){return String(a.gallery).localeCompare(String(b.gallery))||byName(a,b);});
+    else list.sort(function(a,b){return (b._score-a._score)||byName(a,b);}); // relevance
+  }
+
+  // ---- facet chips ----
+  function countBy(list, dim){
     var m={};
     list.forEach(function(eff){
-      var v=keyFn(eff);
-      var vals=Array.isArray(v)?v:(v?[v]:[]);
+      var vals = dim==='interaction' ? eff._interactions : (eff[dim]?[eff[dim]]:[]);
       vals.forEach(function(x){ if(x) m[x]=(m[x]||0)+1; });
     });
     return m;
   }
-
-  // expanded[dim] tracks whether a chip group's "show all" toggle has been opened —
-  // without this, low-count-but-important types (menu, dropdown, context-menu, etc.)
-  // are invisible as CHIPS even though they're fully searchable via free text, since
-  // a topN cap only shows the most common types by default.
   var expanded={};
-
-  function renderChips(containerId, counts, dim, labelFn, topN){
+  function renderChips(containerId, dim, topN){
     var wrap=document.getElementById(containerId);
     wrap.innerHTML='';
+    var counts=countBy(ALL, dim);
+    var sel=state.filters[dim];
+    // Selected values always visible even if below the topN cut.
     var entries=Object.entries(counts).sort(function(a,b){return b[1]-a[1];});
     var truncated = topN && !expanded[dim] && entries.length>topN;
     var shown = truncated ? entries.slice(0, topN) : entries;
+    var shownVals=shown.map(function(p){return p[0];});
+    sel.forEach(function(v){ if(shownVals.indexOf(v)===-1){ shown.push([v, counts[v]||0]); } });
     shown.forEach(function(pair){
-      var val=pair[0], n=pair[1];
+      var val=pair[0], n=pair[1], on=sel.indexOf(val)!==-1;
       var btn=document.createElement('button');
-      btn.type='button'; btn.className='srch-chip'+(state[dim]===val?' on':'');
-      btn.innerHTML='<span>'+esc(labelFn?labelFn(val):val)+'</span><span class="n">'+n+'</span>';
-      btn.addEventListener('click', function(){
-        state[dim]=(state[dim]===val)?null:val;
-        state.shown=PAGE_SIZE;
-        render();
-      });
+      btn.type='button'; btn.className='srch-chip'+(on?' on':'');
+      btn.setAttribute('aria-pressed', on?'true':'false');
+      btn.innerHTML='<span>'+esc(labelFor(dim,val))+'</span><span class="n">'+n+'</span>'+(on?'<span class="rmx">✕</span>':'');
+      btn.addEventListener('click', function(){ toggleFilter(dim,val); });
       wrap.appendChild(btn);
     });
     if(truncated){
@@ -96626,36 +96872,64 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
       wrap.appendChild(less);
     }
   }
-
-  function buildFacets(){
-    renderChips('srchGalleryChips', countBy(ALL, function(e){return e.gallery;}), 'gallery',
-      function(v){return GALLERY_LABELS[v]||v;});
-    renderChips('srchCtypeChips', countBy(ALL, function(e){return e.componentType;}), 'componentType',
-      null, 16);
-    renderChips('srchInteractChips', countBy(ALL, function(e){return e.interaction;}), 'interaction',
-      null);
-    renderChips('srchSpectrumChips', countBy(ALL, function(e){return e.spectrum;}), 'spectrum',
-      function(v){return SPECTRUM_LABELS[v]||v;});
-  }
-
-  // ---- search + filter ----
-  function matches(eff, q){
-    if(!q) return true;
-    var hay=(eff.name+' '+eff.description+' '+eff.gallery+' '+(eff.ref||'')+' '+
-      (eff.tags||[]).join(' ')+' '+(eff.componentType||'')+' '+(eff.spectrum||'')).toLowerCase();
-    return q.split(/\s+/).filter(Boolean).every(function(term){ return hay.indexOf(term)!==-1; });
-  }
-
-  function filtered(){
-    var q=state.q.trim().toLowerCase();
-    return ALL.filter(function(eff){
-      if(!matches(eff,q)) return false;
-      if(state.gallery && eff.gallery!==state.gallery) return false;
-      if(state.componentType && eff.componentType!==state.componentType) return false;
-      if(state.interaction && (eff.interaction||[]).indexOf(state.interaction)===-1) return false;
-      if(state.spectrum && eff.spectrum!==state.spectrum) return false;
-      return true;
+  function renderStatusChips(){
+    var wrap=document.getElementById('srchStatusChips');
+    wrap.innerHTML='';
+    STATUS_DEFS.forEach(function(def){
+      var n=0; for(var i=0;i<ALL.length;i++){ if(def.test(ALL[i])) n++; }
+      var on=!!state.flags[def.key];
+      var btn=document.createElement('button');
+      btn.type='button'; btn.className='srch-chip'+(on?' on':'');
+      btn.setAttribute('aria-pressed', on?'true':'false');
+      btn.innerHTML='<span>'+esc(def.label)+'</span><span class="n">'+n+'</span>'+(on?'<span class="rmx">✕</span>':'');
+      btn.addEventListener('click', function(){ state.flags[def.key]=!state.flags[def.key]; state.shown=PAGE_SIZE; render(); });
+      wrap.appendChild(btn);
     });
+  }
+  function buildFacets(){
+    renderChips('srchGalleryChips','gallery');
+    renderChips('srchCtypeChips','componentType',16);
+    renderChips('srchInteractChips','interaction');
+    renderChips('srchSpectrumChips','spectrum');
+    renderStatusChips();
+  }
+
+  function toggleFilter(dim, val){
+    var arr=state.filters[dim], i=arr.indexOf(val);
+    if(i===-1) arr.push(val); else arr.splice(i,1);
+    state.shown=PAGE_SIZE; render();
+  }
+
+  // ---- applied-filter pills (removable) ----
+  function renderApplied(){
+    var wrap=document.getElementById('srchApplied');
+    wrap.innerHTML='';
+    if(!activeFilterCount()){ return; }
+    var lbl=document.createElement('span'); lbl.className='lbl'; lbl.textContent='Filters'; wrap.appendChild(lbl);
+    function pill(dimLabel, text, onRemove){
+      var p=document.createElement('span'); p.className='srch-pill';
+      p.innerHTML='<span class="dim">'+esc(dimLabel)+'</span><span>'+esc(text)+'</span>';
+      var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Remove '+dimLabel+' '+text); b.textContent='✕';
+      b.addEventListener('click', onRemove); p.appendChild(b); wrap.appendChild(p);
+    }
+    LIST_DIMS.forEach(function(dim){
+      state.filters[dim].slice().forEach(function(v){
+        pill(DIM_LABEL[dim], labelFor(dim,v), function(){ toggleFilter(dim,v); });
+      });
+    });
+    state.filters.tags.slice().forEach(function(t){
+      pill('Tag', t, function(){ toggleFilter('tags',t); });
+    });
+    Object.keys(state.flags).filter(function(k){return state.flags[k];}).forEach(function(k){
+      var def=STATUS_DEFS.filter(function(s){return s.key===k;})[0];
+      pill('Status', def?def.label:k, function(){ state.flags[k]=false; state.shown=PAGE_SIZE; render(); });
+    });
+    var clearAll=document.createElement('button'); clearAll.type='button'; clearAll.className='srch-clearall';
+    clearAll.textContent='Clear all'; clearAll.addEventListener('click', resetFilters); wrap.appendChild(clearAll);
+  }
+
+  function resetFilters(){
+    state.filters=emptyFilters(); state.flags={}; state.shown=PAGE_SIZE; render();
   }
 
   var injectedCss=new Set();
@@ -96670,11 +96944,13 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
     var card=document.createElement('div');
     card.className='srch-card';
     var galLabel=GALLERY_LABELS[eff.gallery]||eff.gallery;
-    var tags=[eff.componentType].concat(eff.interaction||[]).concat(eff.spectrum?[SPECTRUM_LABELS[eff.spectrum]||eff.spectrum]:[]).filter(Boolean);
+    var tags=[eff.componentType].concat(eff._interactions.map(interactionLabel)).concat(eff.spectrum?[SPECTRUM_LABELS[eff.spectrum]||eff.spectrum]:[]).filter(Boolean);
+    var showScore=(state.sort==='relevance' && state.q.trim());
     card.innerHTML=
       '<div class="srch-stage">'+eff.html+'</div>'+
       '<div class="srch-meta">'+
-        '<div class="srch-nm">'+esc(eff.name)+'<span class="srch-gal-badge">'+esc(galLabel)+'</span></div>'+
+        '<div class="srch-nm">'+esc(eff.name)+'<span class="srch-gal-badge">'+esc(galLabel)+'</span>'+
+          (showScore?'<span class="srch-score" title="relevance score">'+(Math.round(eff._score*10)/10)+'</span>':'')+'</div>'+
         '<div class="srch-desc">'+esc(eff.description)+'</div>'+
         (tags.length?'<div class="srch-tagrow">'+tags.map(function(t){return '<span class="srch-tag">'+esc(t)+'</span>';}).join('')+'</div>':'')+
         '<button class="srch-copy" type="button">Copy</button>'+
@@ -96691,34 +96967,261 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
     return card;
   }
 
+  // ---- no-results suggestions: relax the most restrictive knob ----
+  function renderNoResults(empty){
+    var tips=[];
+    if(state.filters.tags.length>1) tips.push({t:'Match any tag instead of all', fn:function(){ state.filters.tags=[state.filters.tags[0]]; render(); }});
+    if(activeFilterCount()>0) tips.push({t:'Clear all filters', fn:resetFilters});
+    if(state.q.trim().split(/\s+/).length>1) tips.push({t:'Search just "'+esc(state.q.trim().split(/\s+/)[0])+'"', fn:function(){ var w=state.q.trim().split(/\s+/)[0]; setQuery(w); }});
+    if(state.q.trim()) tips.push({t:'Clear the search text', fn:function(){ setQuery(''); }});
+    var html='<div class="srch-emptyico">∅</div>'+
+      '<div class="srch-emptytitle">No facets match</div>'+
+      '<div class="srch-emptysub">Nothing matches “'+esc(state.q.trim()||'')+'”'+(activeFilterCount()?' with the current filters':'')+'. Try loosening it:</div>'+
+      '<div class="srch-suggest" id="srchSuggest"></div>';
+    empty.innerHTML=html;
+    var box=empty.querySelector('#srchSuggest');
+    tips.slice(0,4).forEach(function(tip){
+      var b=document.createElement('button'); b.type='button'; b.textContent=tip.t; b.addEventListener('click', tip.fn); box.appendChild(b);
+    });
+  }
+
   function render(){
-    var results=filtered();
+    syncControls();
+    var res=results();
     var grid=document.getElementById('srchGrid');
     var empty=document.getElementById('srchEmptyState');
     var loadMoreWrap=document.getElementById('srchLoadMore');
     var counts=document.getElementById('srchCounts');
+    grid.classList.toggle('list', state.view==='list');
 
-    counts.innerHTML='<b>'+results.length.toLocaleString()+'</b> of '+ALL.length.toLocaleString()+' facets match';
+    if(hasCriteria()) counts.innerHTML='<b>'+res.length.toLocaleString()+'</b> of '+ALL.length.toLocaleString()+' facets match';
+    else counts.innerHTML='<b>'+ALL.length.toLocaleString()+'</b> facets indexed. Search or pick a filter.';
 
-    var hasQueryOrFilter=state.q.trim()||state.gallery||state.componentType||state.interaction||state.spectrum;
-    if(!hasQueryOrFilter){
-      empty.style.display='flex'; grid.style.display='none'; loadMoreWrap.style.display='none';
-      grid.innerHTML='';
+    buildFacets(); renderApplied(); renderSaved(); writeUrl();
+
+    if(!hasCriteria()){
+      empty.innerHTML='<div class="srch-emptyico">◆</div>'+
+        '<div class="srch-emptytitle">Search or pick a filter to begin</div>'+
+        '<div class="srch-emptysub">Every result below is rendered live using Prism\'s own facets — this search bar, these chips, and the result cards are all Prism components.</div>';
+      empty.style.display='flex'; grid.style.display='none'; loadMoreWrap.style.display='none'; grid.innerHTML='';
+      return;
+    }
+    if(!res.length){
+      renderNoResults(empty);
+      empty.style.display='flex'; grid.style.display='none'; loadMoreWrap.style.display='none'; grid.innerHTML='';
       return;
     }
     empty.style.display='none'; grid.style.display='grid';
-
-    var toShow=results.slice(0, state.shown);
+    var toShow=res.slice(0, state.shown);
     grid.innerHTML='';
     var frag=document.createDocumentFragment();
     toShow.forEach(function(eff){ frag.appendChild(cardFor(eff)); });
     grid.appendChild(frag);
+    loadMoreWrap.style.display = (res.length>state.shown) ? 'flex' : 'none';
+  }
 
-    loadMoreWrap.style.display = (results.length>state.shown) ? 'flex' : 'none';
+  // Reflect state into the sort <select> and view toggle without triggering loops.
+  function syncControls(){
+    var sel=document.getElementById('srchSort'); if(sel && sel.value!==state.sort) sel.value=state.sort;
+    document.querySelectorAll('#srchViewToggle button').forEach(function(b){
+      b.classList.toggle('on', b.getAttribute('data-view')===state.view);
+    });
+  }
 
-    // Rebuild chip groups so their counts + .on state reflect the current filters
-    // (cheap: well under 100 chips total).
-    buildFacets();
+  // ================= URL STATE (shareable) =================
+  // Encodes the full search into the parent hash: #search?q=&gallery=&ctype=&int=&spec=&tag=&flags=&sort=
+  function writeUrl(){
+    if(suppressUrl) return;
+    try{
+      var p=[];
+      if(state.q.trim()) p.push('q='+encodeURIComponent(state.q.trim()));
+      if(state.filters.gallery.length) p.push('gallery='+state.filters.gallery.map(encodeURIComponent).join(','));
+      if(state.filters.componentType.length) p.push('ctype='+state.filters.componentType.map(encodeURIComponent).join(','));
+      if(state.filters.interaction.length) p.push('int='+state.filters.interaction.map(encodeURIComponent).join(','));
+      if(state.filters.spectrum.length) p.push('spec='+state.filters.spectrum.map(encodeURIComponent).join(','));
+      if(state.filters.tags.length) p.push('tag='+state.filters.tags.map(encodeURIComponent).join(','));
+      var fl=Object.keys(state.flags).filter(function(k){return state.flags[k];});
+      if(fl.length) p.push('flags='+fl.join(','));
+      if(state.sort!=='relevance') p.push('sort='+state.sort);
+      var hash='#search'+(p.length?('?'+p.join('&')):'');
+      if(parent.location.hash!==hash) parent.history.replaceState(null,'',hash);
+    }catch(e){}
+  }
+  function parseUrl(){
+    try{
+      var hash=parent.location.hash||'';
+      var qi=hash.indexOf('?'); if(qi===-1) return false;
+      var qs=hash.slice(qi+1); var got=false;
+      qs.split('&').forEach(function(kv){
+        var i=kv.indexOf('='); if(i===-1) return;
+        var k=kv.slice(0,i), v=decodeURIComponent(kv.slice(i+1).replace(/\+/g,' '));
+        var list=function(){return v.split(',').map(function(x){return x.trim();}).filter(Boolean);};
+        if(k==='q'){ state.q=v; got=true; }
+        else if(k==='gallery'){ state.filters.gallery=list(); got=true; }
+        else if(k==='ctype'){ state.filters.componentType=list(); got=true; }
+        else if(k==='int'){ state.filters.interaction=list(); got=true; }
+        else if(k==='spec'){ state.filters.spectrum=list(); got=true; }
+        else if(k==='tag'){ state.filters.tags=list(); got=true; }
+        else if(k==='flags'){ list().forEach(function(f){ state.flags[f]=true; }); got=true; }
+        else if(k==='sort'){ if(['relevance','name','newest','gallery'].indexOf(v)!==-1){ state.sort=v; got=true; } }
+      });
+      return got;
+    }catch(e){ return false; }
+  }
+
+  // ================= localStorage: history + saved searches =================
+  function lsGet(key){ try{ return JSON.parse(localStorage.getItem(key)||'[]'); }catch(e){ return []; } }
+  function lsSet(key,val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+
+  function pushHistory(q){
+    q=(q||'').trim(); if(!q) return;
+    var h=lsGet(HISTORY_KEY).filter(function(x){return x.toLowerCase()!==q.toLowerCase();});
+    h.unshift(q); if(h.length>HISTORY_MAX) h=h.slice(0,HISTORY_MAX);
+    lsSet(HISTORY_KEY,h);
+  }
+  function snapshot(){
+    return { q:state.q.trim(),
+      filters:{ gallery:state.filters.gallery.slice(), componentType:state.filters.componentType.slice(),
+        interaction:state.filters.interaction.slice(), spectrum:state.filters.spectrum.slice(), tags:state.filters.tags.slice() },
+      flags:Object.keys(state.flags).filter(function(k){return state.flags[k];}),
+      sort:state.sort };
+  }
+  function describe(snap){
+    var bits=[];
+    if(snap.q) bits.push('“'+snap.q+'”');
+    LIST_DIMS.forEach(function(d){ (snap.filters[d]||[]).forEach(function(v){ bits.push(labelFor(d,v)); }); });
+    (snap.filters.tags||[]).forEach(function(t){ bits.push('#'+t); });
+    (snap.flags||[]).forEach(function(k){ var def=STATUS_DEFS.filter(function(s){return s.key===k;})[0]; bits.push(def?def.label:k); });
+    return bits.join(' · ')||'All facets';
+  }
+  function applySnapshot(snap){
+    state.q=snap.q||'';
+    state.filters=emptyFilters();
+    LIST_DIMS.forEach(function(d){ state.filters[d]=(snap.filters&&snap.filters[d])?snap.filters[d].slice():[]; });
+    state.filters.tags=(snap.filters&&snap.filters.tags)?snap.filters.tags.slice():[];
+    state.flags={}; (snap.flags||[]).forEach(function(k){ state.flags[k]=true; });
+    state.sort=snap.sort||'relevance';
+    state.shown=PAGE_SIZE;
+    document.getElementById('srchInput').value=state.q;
+  }
+  function saveCurrent(){
+    if(!hasCriteria()){ return; }
+    var snap=snapshot();
+    var def=describe(snap);
+    var name=prompt('Name this saved search:', def);
+    if(name===null) return; // cancelled
+    name=name.trim()||def;
+    var saved=lsGet(SAVED_KEY);
+    saved.unshift({ id:'s'+Date.now(), name:name, snap:snap });
+    if(saved.length>SAVED_MAX) saved=saved.slice(0,SAVED_MAX);
+    lsSet(SAVED_KEY,saved);
+    renderSaved();
+  }
+  function renderSaved(){
+    var host=document.getElementById('srchSaved');
+    host.innerHTML='';
+    var saved=lsGet(SAVED_KEY), hist=lsGet(HISTORY_KEY);
+    if(saved.length){
+      var row=document.createElement('div'); row.className='srch-saved-row';
+      var lbl=document.createElement('span'); lbl.className='lbl'; lbl.textContent='Saved'; row.appendChild(lbl);
+      saved.forEach(function(item){
+        var chip=document.createElement('button'); chip.type='button'; chip.className='srch-saved-chip';
+        chip.innerHTML='<span class="star">★</span><span>'+esc(item.name)+'</span>';
+        chip.title=describe(item.snap);
+        chip.addEventListener('click', function(){ applySnapshot(item.snap); render(); document.getElementById('srchInput').focus(); });
+        var rm=document.createElement('button'); rm.type='button'; rm.className='rm'; rm.textContent='✕'; rm.title='Delete saved search';
+        rm.setAttribute('aria-label','Delete saved search '+item.name);
+        rm.addEventListener('click', function(ev){ ev.stopPropagation();
+          lsSet(SAVED_KEY, lsGet(SAVED_KEY).filter(function(x){return x.id!==item.id;})); renderSaved(); });
+        chip.appendChild(rm); row.appendChild(chip);
+      });
+      host.appendChild(row);
+    }
+    if(hist.length){
+      var row2=document.createElement('div'); row2.className='srch-saved-row';
+      var lbl2=document.createElement('span'); lbl2.className='lbl'; lbl2.textContent='Recent'; row2.appendChild(lbl2);
+      hist.forEach(function(q){
+        var chip=document.createElement('button'); chip.type='button'; chip.className='srch-hist-chip';
+        chip.innerHTML='<span>↺</span><span>'+esc(q)+'</span>';
+        chip.addEventListener('click', function(){ setQuery(q); });
+        row2.appendChild(chip);
+      });
+      var clr=document.createElement('button'); clr.type='button'; clr.className='srch-hist-chip'; clr.innerHTML='<span>Clear recent</span>';
+      clr.addEventListener('click', function(){ lsSet(HISTORY_KEY,[]); renderSaved(); });
+      row2.appendChild(clr);
+      host.appendChild(row2);
+    }
+  }
+
+  function setQuery(q){
+    var input=document.getElementById('srchInput');
+    input.value=q; state.q=q; state.shown=PAGE_SIZE; closeAc(); render();
+  }
+
+  // ================= autocomplete =================
+  var acItems=[], acActive=-1, acDeb=null;
+  function buildSuggestions(q){
+    q=q.trim().toLowerCase(); if(!q) return [];
+    var out=[], seenName={};
+    // 1) facet-value matches (gallery / component / spectrum / interaction / tag)
+    function addFacet(dim, val){
+      out.push({ kind:'facet', dim:dim, val:val, label:labelFor(dim,val), key:DIM_LABEL[dim]||(dim==='tags'?'Tag':dim) });
+    }
+    LIST_DIMS.concat(['tags']).forEach(function(dim){
+      if(out.length>=6) return;
+      var counts = dim==='tags' ? countTags() : countBy(ALL, dim);
+      Object.keys(counts).forEach(function(v){
+        if(out.length>=6) return;
+        if(String(labelFor(dim==='tags'?'tag':dim,v)).toLowerCase().indexOf(q)!==-1) addFacet(dim,v);
+      });
+    });
+    // 2) top effect-name matches
+    var names=[];
+    for(var i=0;i<ALL.length && names.length<6;i++){
+      var e=ALL[i];
+      if(e._hay.name.indexOf(q)!==-1 && !seenName[e._hay.name]){ seenName[e._hay.name]=1; names.push(e); }
+    }
+    names.forEach(function(e){ out.push({ kind:'name', val:e.name, label:e.name, key:GALLERY_LABELS[e.gallery]||e.gallery }); });
+    return out.slice(0,9);
+  }
+  var _tagCounts=null;
+  function countTags(){ if(_tagCounts) return _tagCounts; _tagCounts={}; ALL.forEach(function(e){ (e.tags||[]).forEach(function(t){ _tagCounts[t]=(_tagCounts[t]||0)+1; }); }); return _tagCounts; }
+
+  function openAc(list){
+    var ac=document.getElementById('srchAc'); var input=document.getElementById('srchInput');
+    acItems=list; acActive=-1;
+    if(!list.length){ closeAc(); return; }
+    var q=state.q.trim();
+    ac.innerHTML='';
+    list.forEach(function(it, idx){
+      var row=document.createElement('div'); row.className='srch-ac-item'; row.setAttribute('role','option'); row.id='srchAc-'+idx;
+      var label=it.label; var lo=label.toLowerCase(); var pos=lo.indexOf(q.toLowerCase());
+      var text = (pos!==-1 && q) ? esc(label.slice(0,pos))+'<mark>'+esc(label.slice(pos,pos+q.length))+'</mark>'+esc(label.slice(pos+q.length)) : esc(label);
+      row.innerHTML='<span class="k">'+esc(it.key||(it.kind==='name'?'Facet':'Filter'))+'</span><span class="t">'+text+'</span>';
+      row.addEventListener('mousedown', function(ev){ ev.preventDefault(); chooseAc(idx); });
+      ac.appendChild(row);
+    });
+    ac.classList.add('open'); input.setAttribute('aria-expanded','true');
+  }
+  function closeAc(){ var ac=document.getElementById('srchAc'); ac.classList.remove('open'); ac.innerHTML=''; acItems=[]; acActive=-1;
+    document.getElementById('srchInput').setAttribute('aria-expanded','false'); }
+  function moveAc(delta){
+    if(!acItems.length) return;
+    acActive=(acActive+delta+acItems.length)%acItems.length;
+    var rows=document.querySelectorAll('#srchAc .srch-ac-item');
+    rows.forEach(function(r,i){ r.classList.toggle('active', i===acActive); });
+    var input=document.getElementById('srchInput');
+    if(rows[acActive]) input.setAttribute('aria-activedescendant', rows[acActive].id);
+  }
+  function chooseAc(idx){
+    var it=acItems[idx]; if(!it) return;
+    if(it.kind==='facet'){
+      // toggle the facet on; keep any typed query
+      var dim=it.dim, arr=state.filters[dim]; if(arr.indexOf(it.val)===-1) arr.push(it.val);
+      state.shown=PAGE_SIZE; closeAc(); render(); document.getElementById('srchInput').focus();
+    } else {
+      setQuery(it.val); pushHistory(it.val);
+    }
   }
 
   function bootstrap(){
@@ -96727,34 +97230,64 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
       document.getElementById('srchCounts').textContent='Could not load the catalog (parent document not reachable).';
       return;
     }
-    document.getElementById('srchCounts').innerHTML='<b>'+ALL.length.toLocaleString()+'</b> facets indexed. Search or pick a filter.';
-    buildFacets();
+    indexCatalog(ALL);
 
     var input=document.getElementById('srchInput');
+
+    // hydrate state from the shareable URL before first paint
+    suppressUrl=true;
+    var fromUrl=parseUrl();
+    if(fromUrl){ input.value=state.q; }
+    suppressUrl=false;
+
+    // ---- search input + autocomplete ----
     var deb=null;
     input.addEventListener('input', function(){
+      var v=input.value;
       clearTimeout(deb);
-      deb=setTimeout(function(){ state.q=input.value; state.shown=PAGE_SIZE; render(); }, 120);
+      deb=setTimeout(function(){ state.q=v; state.shown=PAGE_SIZE; render(); }, 120);
+      clearTimeout(acDeb);
+      acDeb=setTimeout(function(){ openAc(buildSuggestions(v)); }, 90);
     });
+    input.addEventListener('keydown', function(e){
+      if(e.key==='ArrowDown'){ if(acItems.length){ e.preventDefault(); moveAc(1); } }
+      else if(e.key==='ArrowUp'){ if(acItems.length){ e.preventDefault(); moveAc(-1); } }
+      else if(e.key==='Enter'){
+        if(acActive>=0){ e.preventDefault(); chooseAc(acActive); }
+        else { pushHistory(input.value); closeAc(); renderSaved(); }
+      } else if(e.key==='Escape'){ if(acItems.length){ e.preventDefault(); closeAc(); } }
+    });
+    input.addEventListener('blur', function(){ setTimeout(closeAc,120); pushHistory(input.value); });
+
     document.getElementById('srchClear').addEventListener('click', function(){
-      input.value=''; state.q=''; state.shown=PAGE_SIZE; input.focus(); render();
+      input.value=''; state.q=''; state.shown=PAGE_SIZE; closeAc(); input.focus(); render();
     });
     document.getElementById('srchReset').addEventListener('click', function(){
-      state={ q:'', gallery:null, componentType:null, interaction:null, spectrum:null, shown:PAGE_SIZE };
-      input.value=''; render();
+      state.q=''; input.value=''; resetFilters();
     });
     document.getElementById('srchLoadMoreBtn').addEventListener('click', function(){
       state.shown+=PAGE_SIZE; render();
     });
+    document.getElementById('srchSort').addEventListener('change', function(){
+      state.sort=this.value; state.shown=PAGE_SIZE; render();
+    });
+    document.getElementById('srchViewToggle').addEventListener('click', function(e){
+      var b=e.target.closest('button[data-view]'); if(!b) return;
+      state.view=b.getAttribute('data-view'); render();
+    });
+    document.getElementById('srchSaveBtn').addEventListener('click', saveCurrent);
+    document.getElementById('srchShareBtn').addEventListener('click', function(){
+      writeUrl();
+      var url; try{ url=parent.location.href; }catch(e){ url=location.href; }
+      var btn=document.getElementById('srchShareBtn'); var span=btn.querySelector('span');
+      function fb(){var ta=document.createElement('textarea');ta.value=url;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);}
+      (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(url).catch(fb):fb());
+      var orig=span.textContent; span.textContent='Link copied!'; setTimeout(function(){span.textContent=orig;},1400);
+    });
 
-    // support deep-linking: #search?q=material+ui (read from parent hash if present)
-    try{
-      var hash=parent.location.hash||'';
-      var qm=hash.match(/[?&]q=([^&]+)/);
-      if(qm){ input.value=decodeURIComponent(qm[1].replace(/\+/g,' ')); state.q=input.value; }
-    }catch(e){}
-
+    document.getElementById('srchCounts').innerHTML='<b>'+ALL.length.toLocaleString()+'</b> facets indexed. Search or pick a filter.';
     render();
+    if(fromUrl){ input.focus(); }
   }
 
   if(document.readyState==='loading'){
@@ -98173,7 +98706,15 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
     var swap=function(){
       gv.srcdoc=srcFor(id);
       current=id;
-      if(push){ try{ history.replaceState(null,'','#'+id); }catch(e){} }
+      if(push){ try{
+        // Preserve an existing ?query when (re)loading the page it belongs to, so
+        // shareable deep links like "#search?q=foo&sort=name" survive the initial
+        // route; a normal nav to a different page gets a clean "#id".
+        var curHash=(location.hash||'').replace(/^#/,'');
+        var curBase=curHash.split('?')[0];
+        var newHash=(curBase===id && curHash.indexOf('?')!==-1) ? curHash : id;
+        history.replaceState(null,'','#'+newHash);
+      }catch(e){} }
       // fade the new frame in once it has painted
       gv.onload=function(){
         applyThemeToFrame();   // re-skin the freshly-loaded page to the active theme
@@ -98750,7 +99291,9 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
   // ===================== /THEME ENGINE =====================
 
   // initial page (respect an explicit hash; otherwise auto-pick by device)
-  var hash=(location.hash||'').replace('#','');
+  // Strip any ?query so shareable deep links like "#search?q=foo&sort=name" still
+  // resolve to their page id (the query is read by the page itself, e.g. Search).
+  var hash=(location.hash||'').replace(/^#/,'').split('?')[0];
   var start;
   if(byId[hash]){
     start=hash;                       // user/shared link wins, always

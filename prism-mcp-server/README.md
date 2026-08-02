@@ -67,7 +67,7 @@ Add the server to your `claude_desktop_config.json` (see `examples/claude_deskto
 }
 ```
 
-Restart Claude Desktop; the 15 Prism tools appear in the tools menu.
+Restart Claude Desktop; the 20 Prism tools appear in the tools menu.
 
 ## Use with the Anthropic API
 
@@ -75,17 +75,24 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 
 ---
 
-## Tools (15)
+## Tools (20)
 
-### Discovery (6)
+### Discovery & search (11)
 | Tool | Purpose |
 |------|---------|
 | `list_effects` | List effects with filters (gallery, tag, componentType, background, new) + pagination. Returns light metadata. |
-| `search_effects` | Ranked full-text search over id/name/description/tags/category. |
+| `search_effects` | Faceted relevance search: full-text ranking + a `filters` object (gallery, componentType, spectrum, category, tag [AND], interaction) + boolean flags + `sort` + pagination. |
+| `get_available_filters` | Describe every facet with its top values + counts, the boolean flags, and valid sort options — everything needed to build a faceted UI. |
+| `list_filter_values` | Enumerate the full value set for one facet (e.g. all 175 categories) with per-value counts + prefix filtering. |
+| `create_saved_search` | Save a named query+filters+sort (session memory) and get an id back. |
+| `get_saved_searches` | List saved searches for this session. |
+| `execute_saved_search` | Run a saved search by id (with optional sort/limit override). |
 | `get_effect` | Full record for one effect incl. production-ready `html`/`css`. |
 | `get_theme_variants` | Theme token reference + how to recolor an effect. |
 | `list_galleries` | All galleries with declared vs. live effect counts. |
 | `get_catalog_stats` | Aggregate stats: per-gallery counts, tags, componentTypes, etc. |
+
+> **Facets are grounded in real catalog data.** Available facets: `gallery`, `componentType`, `spectrum` (visual aesthetic), `category`, `tag`, `interaction`. Interaction values are **normalized** from noisy source data (`tatic`→`static`, `focu`→`focus`, `croll`→`scroll`, multi-value strings/arrays split). There is no `performance` or `theme-compatibility` field in the catalog, so those facets are intentionally omitted rather than faked. Saved searches are per-process (in-memory), not persisted to disk.
 
 ### Composition (3)
 | Tool | Purpose |
@@ -130,7 +137,7 @@ prism-mcp-server/
 ├── index.js          # PrismMCPServer (JSON-RPC dispatch) + StdioTransport
 ├── cli.js            # prism-mcp CLI (start / info / tools / help)
 ├── tools/
-│   └── index.js      # the 15 tool definitions (name, description, schema, handler)
+│   └── index.js      # the 20 tool definitions (name, description, schema, handler)
 ├── utils/
 │   ├── catalog.js    # CatalogStore: load island/manifest, index, hot reload, runtime facets
 │   ├── css.js        # split/dedupe/merge/validate CSS; token extraction

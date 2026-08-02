@@ -32,20 +32,130 @@ Result:
 ```
 
 ### `search_effects`
-Request:
+Full-text query, faceted filters, or both. `filters` narrows by facet (OR within a
+facet; `tags` is AND; AND across facets) plus boolean flags. `sort` is one of
+`relevance` (default when a query is present), `name`, `newest`, `gallery`.
+
+Request (query + facets):
 ```json
-{ "name": "search_effects", "arguments": { "query": "pulsing kpi card", "limit": 3 } }
+{
+  "name": "search_effects",
+  "arguments": {
+    "query": "pulsing kpi card",
+    "filters": { "galleries": ["charts"], "interactions": ["auto-play"], "isNew": true },
+    "sort": "relevance",
+    "limit": 3
+  }
+}
 ```
 Result:
 ```json
 {
   "query": "pulsing kpi card",
+  "sort": "relevance",
+  "filters": { "galleries": ["charts"], "interactions": ["auto-play"], "isNew": true },
   "total": 3,
+  "offset": 0,
+  "limit": 3,
+  "returned": 3,
   "items": [
-    { "id": "charts-mini-kpi-row", "name": "Mini KPI Row", "score": 15, "hasCss": true }
+    { "id": "charts-mini-kpi-row", "name": "Mini KPI Row", "score": 15,
+      "interactions": ["auto-play"], "spectrum": null, "hasCss": true }
   ]
 }
 ```
+`query` is optional when at least one filter is given (e.g. browse a gallery by
+`{ "filters": { "galleries": ["fx"] }, "sort": "newest" }`). The legacy
+`{ "query": "...", "gallery": "fx" }` shape still works.
+
+### `get_available_filters`
+Request:
+```json
+{ "name": "get_available_filters", "arguments": { "topValues": 5 } }
+```
+Result:
+```json
+{
+  "totalEffects": 1668,
+  "facets": {
+    "gallery": { "label": "Gallery", "multi": false, "filterKey": "galleries",
+      "totalValues": 15, "values": [ { "value": "spectrums", "count": 266 }, { "value": "charts", "count": 209 } ] },
+    "interaction": { "label": "Interaction", "normalized": true, "filterKey": "interactions",
+      "totalValues": 10, "values": [ { "value": "auto-play", "count": 895 }, { "value": "static", "count": 448 } ] }
+  },
+  "booleanFlags": {
+    "isNew": { "label": "New", "count": 950 },
+    "usableAsBackground": { "label": "Usable as background", "count": 10 }
+  },
+  "sorts": ["relevance","name","newest","gallery"],
+  "notes": ["tags filter uses AND …", "interaction values are normalized …"]
+}
+```
+
+### `list_filter_values`
+Enumerate one facet in full (useful for high-cardinality facets like the 175 categories).
+Request:
+```json
+{ "name": "list_filter_values", "arguments": { "facet": "category", "prefix": "3d", "limit": 5 } }
+```
+Result:
+```json
+{
+  "facet": "category", "label": "Category",
+  "total": 4, "offset": 0, "limit": 5, "returned": 4,
+  "items": [ { "value": "3D Charts & Graphs", "count": 21 }, { "value": "3D Objects", "count": 18 } ]
+}
+```
+Unknown facet → tool error `invalid_argument` with `data.validFacets`.
+
+### `create_saved_search`
+Request:
+```json
+{
+  "name": "create_saved_search",
+  "arguments": {
+    "name": "New glassy charts",
+    "query": "kpi",
+    "filters": { "galleries": ["charts"], "spectrums": ["glassmorphism"] },
+    "sort": "newest"
+  }
+}
+```
+Result:
+```json
+{
+  "created": "new-glassy-charts",
+  "savedSearch": { "id": "new-glassy-charts", "name": "New glassy charts",
+    "query": "kpi", "filters": { "galleries": ["charts"], "spectrums": ["glassmorphism"] },
+    "sort": "newest", "createdAt": "2026-08-02T…Z" },
+  "total": 1
+}
+```
+Needs a query and/or at least one filter, else tool error `invalid_argument`.
+
+### `get_saved_searches`
+Request:
+```json
+{ "name": "get_saved_searches", "arguments": {} }
+```
+Result:
+```json
+{ "total": 1, "items": [ { "id": "new-glassy-charts", "name": "New glassy charts", "…": "…" } ] }
+```
+
+### `execute_saved_search`
+Request:
+```json
+{ "name": "execute_saved_search", "arguments": { "id": "new-glassy-charts", "limit": 3 } }
+```
+Result: same shape as `search_effects`, prefixed with the saved-search identity:
+```json
+{
+  "savedSearch": { "id": "new-glassy-charts", "name": "New glassy charts" },
+  "query": "kpi", "sort": "newest", "total": 3, "items": [ "…" ]
+}
+```
+Unknown id → tool error `not_found` with `data.available` (the known ids).
 
 ### `get_effect`
 Request:
