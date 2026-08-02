@@ -398,7 +398,17 @@ export function buildTools() {
         if (!res.ok) throw new ToolError('Export failed', { code: 'export_failed', data: { errors: res.errors, missing: res.missing } });
         const bundle = { title: a.title || 'Prism Collection', effects: res.effects, css: res.css, html: res.html, initializers: res.initializers, metrics: res.metrics };
         if (a.asDocument) {
-          bundle.document = `<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>${escapeHtml(bundle.title)}</title>\n<style>\n${res.css}\n</style>\n</head>\n<body>\n${res.html}\n</body>\n</html>\n`;
+          // Defense-in-depth: even though the catalog is trusted by design, when we
+          // inline CSS into a <style> block a stray "</style>" (or "</script>") would
+          // close the tag early and let following bytes be parsed as markup/script.
+          // Neutralize those sequences so composed content can't break out of context.
+          const safeCss = neutralizeClosers(res.css);
+          const safeBodyHtml = neutralizeClosers(res.html, /* htmlBody */ true);
+          bundle.document = `<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>${escapeHtml(bundle.title)}</title>\n<style>\n${safeCss}\n</style>\n</head>\n<body>\n${safeBodyHtml}\n</body>\n</html>\n`;
+          if (safeCss !== res.css || safeBodyHtml !== res.html) {
+            bundle.sanitized = true;
+            bundle.warnings = (bundle.warnings || []).concat('Neutralized </style> or </script> sequences in composed content for the generated document.');
+          }
         }
         return bundle;
       },
@@ -439,4 +449,27 @@ export function buildTools() {
 
 function escapeHtml(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+/**
+ * Defense-in-depth for inlining composed content into a generated HTML document.
+ * - In the <style> context (htmlBody=false), the only escape hatch is a literal
+ *   "</style>"; a stray "</script>" is also neutralized for good measure. We break the
+ *   sequence with a CSS-legal backslash escape so the HTML tokenizer won't match it.
+ * - In the <body> context (htmlBody=true), the content is rendered as markup, so we
+ *   neutralize inline <script> openers/closers (facets are self-contained CSS/SVG/DOM
+ *   markup and never carry inline scripts) to prevent script execution.
+ */
+function neutralizeClosers(text, htmlBody = false) {
+  let out = String(text);
+  if (htmlBody) {
+    // Body content is parsed as markup: neutralize any <script>/</script> opener/closer.
+    out = out.replace(/<\s*(\/?)\s*script/gi, '&lt;$1script');
+  } else {
+    // A <style> element's content is raw text that ends only at "</style>"; that closer
+    // is the sole breakout. We also break any style/script token (opening or closing) with
+    // a CSS-legal backslash so no "<script>"/"</style>" substring survives verbatim.
+    out = out.replace(/<\s*(\/?)\s*(style|script)/gi, '<\\$1$2');
+  }
+  return out;
 }
