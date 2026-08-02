@@ -169,7 +169,7 @@ prism-mcp-server/
 node --test          # or: npm test
 ```
 
-50 tests cover every tool, the CSS/compose/validate utilities, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
+80 tests cover every tool (incl. the 6 Collections tools + `export_collection` formats), the CSS/compose/validate utilities, the `CollectionStore`, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
 
 ---
 
