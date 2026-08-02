@@ -19,9 +19,18 @@ export class ToolError extends Error {
 // --- shared schema fragments ---
 const strArr = { type: 'array', items: { type: 'string' } };
 
+/** Coerce to a non-negative integer. Uses Math.trunc(Number(x)), NOT `x | 0`:
+ *  the bitwise-or coerces to a 32-bit signed int, so any value >= 2^31 wraps
+ *  negative and then clamps to 0 — turning a large paging offset into "page 1
+ *  again" (infinite re-paging) and a large limit into "return nothing". */
+function nonNegInt(x, fallback = 0) {
+  const n = Math.trunc(Number(x));
+  return Number.isFinite(n) && n > 0 ? n : fallback;
+}
+
 function paginate(items, limit, offset) {
-  const off = Math.max(0, offset | 0);
-  const lim = limit == null ? items.length : Math.max(0, limit | 0);
+  const off = nonNegInt(offset, 0);
+  const lim = limit == null ? items.length : nonNegInt(limit, 0);
   return {
     total: items.length,
     offset: off,

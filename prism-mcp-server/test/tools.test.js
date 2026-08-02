@@ -28,6 +28,23 @@ test('list_effects pagination offset/limit', () => {
   assert.equal(r.offset, 1);
 });
 
+// Regression (JFH-8 sweep): paginate() coerced offset/limit with `x | 0`, a 32-bit
+// signed conversion. Any value >= 2^31 wrapped negative and clamped to 0 — so a large
+// paging offset silently returned page 1 again (infinite re-paging) and a large limit
+// returned nothing. nonNegInt (Math.trunc(Number(x))) handles the full safe-integer range.
+test('list_effects pagination survives offsets/limits >= 2^31', () => {
+  const ctx = toolCtx();
+  const total = ctx.call('list_effects', {}).total;
+  // A huge offset must be treated as past-the-end (empty), NOT wrapped to page 1.
+  const past = ctx.call('list_effects', { offset: 2147483648, limit: 5 });
+  assert.equal(past.offset, 2147483648, 'offset preserved, not wrapped to 0');
+  assert.equal(past.returned, 0, 'past-the-end offset returns an empty page');
+  assert.equal(past.items.length, 0);
+  // A huge limit must return everything, NOT nothing.
+  const big = ctx.call('list_effects', { limit: 2147483648, offset: 0 });
+  assert.equal(big.returned, total, 'huge limit returns all items, not zero');
+});
+
 test('search_effects ranks by relevance', () => {
   const ctx = toolCtx();
   const r = ctx.call('search_effects', { query: 'pulsing kpi' });
