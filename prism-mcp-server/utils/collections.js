@@ -163,7 +163,15 @@ export class CollectionStore {
       updatedAt: ts,
     };
     this.collections.set(record.id, record);
-    this._persist();
+    // Roll back the in-memory insert if the disk write fails, so a persist error
+    // never leaves a "ghost" collection that is visible via list()/get() and shadows
+    // its name, yet is absent from disk (and so vanishes on the next restart).
+    try {
+      this._persist();
+    } catch (err) {
+      this.collections.delete(record.id);
+      throw err;
+    }
     return clone(record);
   }
 
@@ -185,9 +193,18 @@ export class CollectionStore {
         { code: 'limit_exceeded', data: { limit: LIMITS.maxComponents, resulting: merged.length } },
       );
     }
+    // Snapshot so we can undo the in-memory mutation if persistence fails.
+    const prevComponents = record.components;
+    const prevUpdatedAt = record.updatedAt;
     record.components = merged;
     record.updatedAt = nowIso();
-    this._persist();
+    try {
+      this._persist();
+    } catch (err) {
+      record.components = prevComponents;
+      record.updatedAt = prevUpdatedAt;
+      throw err;
+    }
     return { collection: clone(record), added, skipped: incoming.length - added };
   }
 
@@ -196,11 +213,20 @@ export class CollectionStore {
     const record = this._getRaw(id);
     const drop = new Set(toIdList(effectIds));
     if (!drop.size) throw new CollectionError('Provide at least one component id to remove', { code: 'invalid_argument' });
-    const before = record.components.length;
-    record.components = record.components.filter((c) => !drop.has(c.id));
-    const removed = before - record.components.length;
+    // Snapshot so we can undo the in-memory mutation if persistence fails.
+    const prevComponents = record.components;
+    const prevUpdatedAt = record.updatedAt;
+    const kept = record.components.filter((c) => !drop.has(c.id));
+    const removed = prevComponents.length - kept.length;
+    record.components = kept;
     record.updatedAt = nowIso();
-    this._persist();
+    try {
+      this._persist();
+    } catch (err) {
+      record.components = prevComponents;
+      record.updatedAt = prevUpdatedAt;
+      throw err;
+    }
     return { collection: clone(record), removed };
   }
 
@@ -210,8 +236,17 @@ export class CollectionStore {
     if (!this.collections.has(key)) {
       throw new CollectionError(`No collection with id "${id}"`, { code: 'not_found', data: { id } });
     }
+    // Roll back the in-memory delete if the disk write fails, so a persist error
+    // never removes a collection from the running server that is still on disk (and
+    // so reappears on the next restart), contradicting the thrown error.
+    const removed = this.collections.get(key);
     this.collections.delete(key);
-    this._persist();
+    try {
+      this._persist();
+    } catch (err) {
+      this.collections.set(key, removed);
+      throw err;
+    }
     return { deleted: key };
   }
 

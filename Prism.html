@@ -99486,7 +99486,10 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
     return null;
   }
   function normComponents(arr){
-    var out=[], seen={};
+    // Object.create(null): a bare {} inherits Object.prototype, so an id like
+    // "toString"/"constructor"/"__proto__" reads back truthy and would be silently
+    // dropped as a "dup". A null-proto map has no inherited keys.
+    var out=[], seen=Object.create(null);
     (Array.isArray(arr)?arr:[]).forEach(function(c){
       var rec=normComponent(c); if(!rec) return;
       if(seen[rec.id]) return; seen[rec.id]=1;   // dedup by id
@@ -99495,7 +99498,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
     return out;
   }
   function normTags(arr){
-    var out=[], seen={};
+    var out=[], seen=Object.create(null);
     (Array.isArray(arr)?arr:[]).forEach(function(t){
       var v=String(t==null?'':t).replace(/\s+/g,' ').trim(); if(!v) return;
       var k=v.toLowerCase(); if(seen[k]) return; seen[k]=1;
@@ -99528,7 +99531,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
       if(raw){
         var arr=JSON.parse(raw);
         if(Object.prototype.toString.call(arr)==='[object Array]'){
-          var seenId={};
+          var seenId=Object.create(null);
           arr.forEach(function(c){
             var rec=sanitizeCollection(c);
             if(rec && !seenId[rec.id]){ seenId[rec.id]=1; out.push(rec); }
@@ -99557,6 +99560,17 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
     if(!n) throw collErr('Collection name is required.','invalid_name');
     if(n.length>COLL_LIMITS.maxNameLength) throw collErr('Name must be ≤'+COLL_LIMITS.maxNameLength+' characters.','invalid_name');
     return n;
+  }
+  // Given a desired name, return the closest free variant, appending " (n)" until
+  // unique (respecting the max length). Used by import and undo-restore so neither
+  // can create a second collection sharing an existing name.
+  function dedupeName(desired){
+    var base=String(desired==null?'':desired).replace(/\s+/g,' ').trim().slice(0,COLL_LIMITS.maxNameLength) || 'Untitled collection';
+    var name=base, n=2;
+    while(true){
+      try{ assertNameFree(name,null); return name; }
+      catch(e){ var suffix=' ('+(n++)+')'; name=base.slice(0,COLL_LIMITS.maxNameLength-suffix.length)+suffix; if(n>999) return name; }
+    }
   }
   function toSchema(c){
     var comps=c.components.map(function(x){ return {id:x.id,name:x.name,gallery:x.gallery}; });
@@ -99587,6 +99601,10 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
     create:function(input){
       input=input||{};
       var name=validateName(input.name); assertNameFree(name,null);
+      var comps=normComponents(input.components);
+      // Surface an over-cap set rather than silently truncating it (matches the MCP
+      // store's limit_exceeded behaviour); the import handler shows the error to the user.
+      if(comps.length>COLL_LIMITS.maxComponents) throw collErr('A collection can hold at most '+COLL_LIMITS.maxComponents+' components (got '+comps.length+').','limit_exceeded');
       var rec={
         id:'coll-'+Date.now()+'-'+Math.floor(Math.random()*1e4),
         name:name,
@@ -99594,7 +99612,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
         color:(typeof input.color==='string'&&input.color)?input.color:null,
         icon:(typeof input.icon==='string'&&input.icon)?input.icon:null,
         tags:normTags(input.tags),
-        components:normComponents(input.components).slice(0,COLL_LIMITS.maxComponents),
+        components:comps,
         createdAt:nowISO(), updatedAt:nowISO()
       };
       collections.push(rec); notifyColl(); return clone(rec);
@@ -99611,7 +99629,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
     },
     addComponents:function(id,comps){
       var c=findCollection(id); if(!c) throw collErr('Collection not found.','not_found');
-      var have={}; c.components.forEach(function(x){ have[x.id]=1; });
+      var have=Object.create(null); c.components.forEach(function(x){ have[x.id]=1; });
       var incoming=normComponents(comps), added=0, skipped=0;
       incoming.forEach(function(rec){
         if(have[rec.id]){ skipped++; return; }
@@ -99623,7 +99641,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
     },
     removeComponents:function(id,ids){
       var c=findCollection(id); if(!c) throw collErr('Collection not found.','not_found');
-      var drop={}; (Array.isArray(ids)?ids:[ids]).forEach(function(x){ if(x!=null) drop[String(x)]=1; });
+      var drop=Object.create(null); (Array.isArray(ids)?ids:[ids]).forEach(function(x){ if(x!=null) drop[String(x)]=1; });
       var before=c.components.length;
       c.components=c.components.filter(function(x){ return !drop[x.id]; });
       var removed=before-c.components.length;
@@ -99637,10 +99655,13 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
       return {deleted:null};
     },
     // Re-insert a full record verbatim (used by the manager's undo). Keeps the
-    // original id/timestamps; regenerates the id only on a collision.
+    // original id/timestamps; regenerates the id only on a collision, and dedupes
+    // the name so an undo after a same-name re-create can't produce two "Foo"s
+    // (which would violate the uniqueness invariant and wedge in-place renames).
     restore:function(record){
       var rec=sanitizeCollection(record); if(!rec) throw collErr('Nothing to restore.','invalid');
       if(findCollection(rec.id)) rec.id='coll-'+Date.now()+'-'+Math.floor(Math.random()*1e4);
+      rec.name=dedupeName(rec.name);
       collections.push(rec); notifyColl(); return clone(rec);
     },
     // Import a prism-collection-1.0 object (or a raw {name,components,…}) as a NEW
@@ -99648,10 +99669,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
     importSchema:function(obj){
       if(!obj||typeof obj!=='object') throw collErr('Not a collection file.','invalid_import');
       if(obj.__schema && obj.__schema!==COLLECTION_SCHEMA) throw collErr('Unrecognized schema: '+obj.__schema,'invalid_import');
-      var base=String(obj.name!=null?obj.name:'Imported collection').replace(/\s+/g,' ').trim()||'Imported collection';
-      base=base.slice(0,COLL_LIMITS.maxNameLength);
-      var name=base, n=2;
-      while(true){ try{ assertNameFree(name,null); break; }catch(e){ var suffix=' ('+(n++)+')'; name=base.slice(0,COLL_LIMITS.maxNameLength-suffix.length)+suffix; if(n>999) break; } }
+      var name=dedupeName(String(obj.name!=null?obj.name:'Imported collection').replace(/\s+/g,' ').trim()||'Imported collection');
       return this.create({name:name, description:obj.description, color:obj.color, icon:obj.icon, tags:obj.tags, components:obj.components});
     },
     toSchema:function(id){ var c=findCollection(id); if(!c) throw collErr('Collection not found.','not_found'); return toSchema(c); },

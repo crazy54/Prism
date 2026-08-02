@@ -2,10 +2,55 @@
 // behavior, the 6 collection tools, and the overloaded export_collection.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import os from 'node:os';
+import path from 'node:path';
 import { toolCtx } from './helper.js';
 import { CollectionStore, toExportSchema, COLLECTION_SCHEMA, LIMITS } from '../utils/collections.js';
 
+/** A disk-backed store whose file lives under a nonexistent directory, so every
+ *  _persist() throws (ENOENT) — used to exercise the persist-failure rollback paths. */
+function unwritableStore() {
+  const bad = path.join(os.tmpdir(), `prism-nodir-${process.pid}-${nextBad()}`, 'nested', 'collections.json');
+  return new CollectionStore({ filePath: bad });
+}
+let _bad = 0;
+function nextBad() { return ++_bad; }
+
 // -------------------- CollectionStore unit tests (no fs) --------------------
+
+// Regression (JFH-7 sweep): a failed disk write must not leave the in-memory store
+// diverged from disk. Before the fix, create()/delete()/addComponents()/removeComponents()
+// mutated the Map first and then threw on persist, leaving a "ghost" collection that was
+// visible via list()/get() (shadowing its name) yet absent from disk — or, for delete, a
+// collection gone from the running server but still on disk (reappearing on restart).
+test('CollectionStore create() rolls back the in-memory insert when persist fails', () => {
+  const s = unwritableStore();
+  assert.throws(() => s.create({ name: 'Alpha' }), (e) => e.code === 'persist_failed');
+  assert.equal(s.list().length, 0, 'no ghost entry left behind');
+  // The name must still be free (the failed create must not have reserved it).
+  assert.throws(() => s.create({ name: 'Alpha' }), (e) => e.code === 'persist_failed');
+});
+
+test('CollectionStore delete() rolls back when persist fails', () => {
+  const s = new CollectionStore({ inMemory: true });
+  const c = s.create({ name: 'Beta' });
+  // Flip to disk-backed with an unwritable path so the next _persist throws.
+  s.inMemory = false;
+  s.filePath = path.join(os.tmpdir(), `prism-nodir-${process.pid}-${nextBad()}`, 'nested', 'collections.json');
+  assert.throws(() => s.delete(c.id), (e) => e.code === 'persist_failed');
+  assert.equal(s.has(c.id), true, 'deleted collection is restored in memory after persist failure');
+});
+
+test('CollectionStore addComponents()/removeComponents() roll back when persist fails', () => {
+  const s = new CollectionStore({ inMemory: true });
+  const c = s.create({ name: 'Gamma', components: [{ id: 'x' }] });
+  s.inMemory = false;
+  s.filePath = path.join(os.tmpdir(), `prism-nodir-${process.pid}-${nextBad()}`, 'nested', 'collections.json');
+  assert.throws(() => s.addComponents(c.id, [{ id: 'y' }]), (e) => e.code === 'persist_failed');
+  assert.deepEqual(s.get(c.id).components.map((k) => k.id), ['x'], 'add rolled back');
+  assert.throws(() => s.removeComponents(c.id, ['x']), (e) => e.code === 'persist_failed');
+  assert.deepEqual(s.get(c.id).components.map((k) => k.id), ['x'], 'remove rolled back');
+});
 
 test('CollectionStore create/get/list roundtrip', () => {
   const s = new CollectionStore({ inMemory: true });
