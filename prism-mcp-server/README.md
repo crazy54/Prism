@@ -67,7 +67,7 @@ Add the server to your `claude_desktop_config.json` (see `examples/claude_deskto
 }
 ```
 
-Restart Claude Desktop; the 20 Prism tools appear in the tools menu.
+Restart Claude Desktop; the 23 Prism tools appear in the tools menu.
 
 ## Use with the Anthropic API
 
@@ -75,13 +75,13 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 
 ---
 
-## Tools (20)
+## Tools (23)
 
 ### Discovery & search (11)
 | Tool | Purpose |
 |------|---------|
 | `list_effects` | List effects with filters (gallery, tag, componentType, background, new) + pagination. Returns light metadata. |
-| `search_effects` | Faceted relevance search: full-text ranking + a `filters` object (gallery, componentType, spectrum, category, tag [AND], interaction) + boolean flags + `sort` + pagination. |
+| `search_effects` | Faceted relevance search: full-text ranking + a `filters` object (gallery, componentType, spectrum, category, tag [AND], interaction) + boolean flags (incl. `themeSensitive`) + `sort` + pagination. |
 | `get_available_filters` | Describe every facet with its top values + counts, the boolean flags, and valid sort options — everything needed to build a faceted UI. |
 | `list_filter_values` | Enumerate the full value set for one facet (e.g. all 175 categories) with per-value counts + prefix filtering. |
 | `create_saved_search` | Save a named query+filters+sort (session memory) and get an id back. |
@@ -92,7 +92,16 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 | `list_galleries` | All galleries with declared vs. live effect counts. |
 | `get_catalog_stats` | Aggregate stats: per-gallery counts, tags, componentTypes, etc. |
 
-> **Facets are grounded in real catalog data.** Available facets: `gallery`, `componentType`, `spectrum` (visual aesthetic), `category`, `tag`, `interaction`. Interaction values are **normalized** from noisy source data (`tatic`→`static`, `focu`→`focus`, `croll`→`scroll`, multi-value strings/arrays split). There is no `performance` or `theme-compatibility` field in the catalog, so those facets are intentionally omitted rather than faked. Saved searches are per-process (in-memory), not persisted to disk.
+> **Facets are grounded in real catalog data.** Available facets: `gallery`, `componentType`, `spectrum` (visual aesthetic), `category`, `tag`, `interaction`. Interaction values are **normalized** from noisy source data (`tatic`→`static`, `focu`→`focus`, `croll`→`scroll`, multi-value strings/arrays split). There is no `performance` field in the catalog, so that facet is intentionally omitted rather than faked. The `themeSensitive` facet is **derived** (does the component consume theme tokens?), not a stored field. Saved searches are per-process (in-memory), not persisted to disk.
+
+### Component Variant Matrix (3)
+| Tool | Purpose |
+|------|---------|
+| `get_theme_palette` | Token palette for one theme (or all): complete token map, overrides vs the Prism base, mode (light/dark), and a paste-ready `:root{…}` block. Themes: `prism-dark`, `oled-dark`, `cyberpunk-dark`, `light`, `dark`. |
+| `get_component_variants` | Every theme variant of one component. Prism themes are pure `:root` token swaps over identical HTML/CSS, so this returns the payload **once** plus each theme's token overrides (and the subset the component actually consumes) — not N copies. |
+| `get_variants_for_theme` | Components rendered under a single theme, each with the token values it uses; supports gallery/componentType/spectrum/tag + `themeSensitiveOnly` filters + pagination. |
+
+> **Variants are token-swaps, not copies.** A "variant" is the same component under a different `:root` token set — the exact mechanism Prism's live theme engine uses. Rendering a variant = component `html` + `css` + the chosen theme's token overrides. This is why one payload yields every theme variant without multiplying storage.
 
 ### Composition (3)
 | Tool | Purpose |
@@ -137,15 +146,16 @@ prism-mcp-server/
 ├── index.js          # PrismMCPServer (JSON-RPC dispatch) + StdioTransport
 ├── cli.js            # prism-mcp CLI (start / info / tools / help)
 ├── tools/
-│   └── index.js      # the 20 tool definitions (name, description, schema, handler)
+│   └── index.js      # the 23 tool definitions (name, description, schema, handler)
 ├── utils/
 │   ├── catalog.js    # CatalogStore: load island/manifest, index, hot reload, runtime facets
 │   ├── css.js        # split/dedupe/merge/validate CSS; token extraction
 │   ├── compose.js    # composition engine + layout templates
 │   ├── validate.js   # facet + composition validation
+│   ├── themes.js     # canonical theme token maps (variant matrix) — mirrors Prism.html THEMES
 │   └── logger.js     # stderr logger (never pollutes the stdio JSON-RPC channel)
 ├── examples/         # one example request/response per tool + integration configs
-└── test/             # node:test integration + unit tests (50 tests)
+└── test/             # node:test integration + unit tests (87 tests)
 ```
 
 **Server model.** `new PrismMCPServer(catalogPath, opts)` builds the tool registry and a `CatalogStore`. `await server.load()` reads + indexes the catalog. `server.connect(transport)` wires a transport; `StdioTransport` implements newline-delimited JSON-RPC on stdin/stdout. The transport is pluggable — implement `onMessage(cb)` / `send(obj)` to add HTTP/SSE.
@@ -162,7 +172,7 @@ prism-mcp-server/
 node --test          # or: npm test
 ```
 
-50 tests cover every tool, the CSS/compose/validate utilities, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
+87 tests cover every tool (incl. the variant-matrix tools + `themeSensitive` facet), the CSS/compose/validate utilities, the canonical theme token maps, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
 
 ---
 

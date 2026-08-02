@@ -69279,6 +69279,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,rgba(255,153,0
   <div class="sr-h">Galleries</div>
   <a class="sr-link sr-new-facets" href="#facets" data-page="facets">✦ New Facets</a>
   <a class="sr-link" href="#search" data-page="search">🔎 Search</a>
+  <a class="sr-link" href="#variants" data-page="variants">🎭 Variant Matrix</a>
   <a class="sr-link active" href="#charts" data-page="charts">📊 Charts &amp; Metrics</a>
   <a class="sr-link" href="#fx" data-page="fx">🎇 FX Store</a>
   <a class="sr-link" href="#lab" data-page="lab">🧪 Animation Lab</a>
@@ -97467,6 +97468,449 @@ document.addEventListener('click',function(e){var b=e.target.closest('.copy[data
 </html>
 </script>
 
+<script type="text/html" id="pg-variants"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prism · Component Variant Matrix</title>
+<style>
+:root{
+  --bg:#0b0e17; --panel:#121623; --panel2:#171d2e; --card:#141b2b; --line:#243049;
+  --ink:#eaf1f9; --muted:#8593a8; --dim:#5b6678; --accent:#ff9900; --accent2:#4493f8;
+  --pos:#3fb950; --pos-rgb:63,185,80; --neg:#f85149; --neg-rgb:248,81,73;
+  --warn:#e0a52b; --warn-rgb:224,165,43; --info:#4493f8; --info-rgb:68,147,248;
+  --crit:#c879ff; --crit-rgb:200,121,255; --accent-rgb:255,153,0;
+  --cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5}
+a{color:var(--info)}
+/* ---------- hero ---------- */
+.vm-hero{padding:24px 30px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(var(--accent-rgb),.06),var(--panel))}
+.vm-hero h1{margin:0;font-size:24px;font-weight:800;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.vm-hero h1 .em{filter:drop-shadow(0 0 8px rgba(var(--accent-rgb),.5))}
+.vm-hero p{margin:7px 0 0;color:var(--muted);font-size:13px;max-width:900px}
+.vm-hero .vm-stat{display:inline-flex;align-items:center;gap:7px;margin-top:12px;background:rgba(var(--accent-rgb),.1);border:1px solid rgba(var(--accent-rgb),.4);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;color:var(--ink)}
+.vm-hero .vm-stat .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+/* ---------- toolbar ---------- */
+.vm-tools{position:sticky;top:0;z-index:20;padding:14px 30px;background:rgba(var(--accent-rgb),.02);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.vm-themebar{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.vm-lbl{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-right:2px}
+.vm-tchip{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:20px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font-size:12px;font-weight:700;cursor:pointer;transition:border-color .15s,box-shadow .15s,transform .1s}
+.vm-tchip:hover{transform:translateY(-1px)}
+.vm-tchip .sw{display:inline-flex;gap:2px}
+.vm-tchip .sw i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.vm-tchip.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset,0 0 12px rgba(var(--accent-rgb),.3)}
+.vm-tchip .mode{font-size:9px;opacity:.6;font-weight:700}
+.vm-spacer{flex:1 1 auto}
+.vm-search{position:relative}
+.vm-search input{background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--ink);font-size:13px;padding:8px 12px 8px 32px;width:220px;outline:none}
+.vm-search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.15)}
+.vm-search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;fill:var(--dim)}
+.vm-gal{background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--ink);font-size:13px;padding:8px 10px;outline:none;cursor:pointer}
+.vm-btn{background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--ink);font-size:12px;font-weight:700;padding:8px 13px;cursor:pointer;transition:border-color .15s,transform .1s}
+.vm-btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+.vm-btn.primary{background:var(--accent);color:#12100a;border-color:var(--accent)}
+/* ---------- grid ---------- */
+.vm-wrap{padding:22px 30px 60px}
+.vm-count{font-size:12px;color:var(--muted);margin-bottom:14px}
+.vm-count b{color:var(--ink)}
+.vm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.vm-tile{background:var(--panel);background-image:var(--cardgrad);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .15s,transform .12s,box-shadow .15s}
+.vm-tile:hover{border-color:rgba(var(--accent-rgb),.5);transform:translateY(-2px);box-shadow:0 8px 26px rgba(0,0,0,.28)}
+.vm-stage{position:relative;height:150px;background:var(--bg);border-bottom:1px solid var(--line);overflow:hidden}
+.vm-stage iframe{border:0;width:100%;height:100%;display:block;background:transparent}
+.vm-stage .vm-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:11px}
+.vm-badge{position:absolute;top:8px;left:8px;z-index:3;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:9px;background:rgba(0,0,0,.4);color:#fff;backdrop-filter:blur(3px)}
+.vm-strip{position:absolute;bottom:6px;right:6px;z-index:3;display:flex;gap:3px;padding:3px;border-radius:8px;background:rgba(0,0,0,.35);backdrop-filter:blur(3px)}
+.vm-strip .vm-thumb{width:16px;height:16px;border-radius:4px;border:1px solid rgba(255,255,255,.25);position:relative;overflow:hidden;cursor:pointer;transition:transform .1s}
+.vm-strip .vm-thumb:hover{transform:scale(1.25)}
+.vm-strip .vm-thumb i{position:absolute;left:2px;bottom:2px;width:6px;height:6px;border-radius:50%}
+.vm-meta{padding:11px 13px 13px}
+.vm-nm{font-size:13px;font-weight:700;margin:0 0 3px;display:flex;align-items:center;gap:6px}
+.vm-sub{font-size:11px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px}
+.vm-pill{background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:1px 8px;font-size:10px;color:var(--muted)}
+.vm-acts{display:flex;gap:7px;margin-top:11px}
+.vm-acts button{flex:1;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--ink);font-size:11px;font-weight:700;padding:7px;cursor:pointer;transition:border-color .15s}
+.vm-acts button:hover{border-color:var(--accent)}
+.vm-more{display:flex;justify-content:center;padding:26px}
+.vm-empty{padding:60px 20px;text-align:center;color:var(--muted)}
+/* ---------- matrix modal ---------- */
+.vm-modal{position:fixed;inset:0;z-index:100;display:none;align-items:flex-start;justify-content:center;padding:30px 20px;background:rgba(3,5,10,.72);backdrop-filter:blur(6px);overflow:auto}
+.vm-modal.open{display:flex}
+.vm-modal-card{width:min(1180px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:0 30px 80px rgba(0,0,0,.55);overflow:hidden;animation:vmpop .28s cubic-bezier(.2,.8,.25,1)}
+@keyframes vmpop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.vm-mhead{display:flex;align-items:flex-start;gap:14px;padding:18px 22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(var(--accent-rgb),.06),transparent)}
+.vm-mhead h2{margin:0;font-size:18px;font-weight:800}
+.vm-mhead .sub{color:var(--muted);font-size:12px;margin-top:3px}
+.vm-x{margin-left:auto;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--ink);width:32px;height:32px;font-size:16px;cursor:pointer;flex:none}
+.vm-x:hover{border-color:var(--accent)}
+.vm-mbody{padding:20px 22px}
+.vm-matrix{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.vm-cell{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg)}
+.vm-cell .vm-chead{display:flex;align-items:center;gap:7px;padding:8px 11px;border-bottom:1px solid var(--line);font-size:11px;font-weight:800;background:var(--panel2)}
+.vm-cell .vm-chead .sw{display:inline-flex;gap:2px}
+.vm-cell .vm-chead .sw i{width:8px;height:8px;border-radius:50%}
+.vm-cell .vm-chead .mode{margin-left:auto;font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}
+.vm-cell .vm-cstage{height:160px;position:relative;overflow:hidden}
+.vm-cell iframe{border:0;width:100%;height:100%;display:block}
+/* token override docs */
+.vm-tokens{margin-top:22px;border-top:1px solid var(--line);padding-top:18px}
+.vm-tokens h3{margin:0 0 4px;font-size:13px;font-weight:800}
+.vm-tokens .hint{color:var(--muted);font-size:12px;margin:0 0 12px}
+.vm-ttabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.vm-ttab{padding:5px 11px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font-size:11px;font-weight:700;cursor:pointer}
+.vm-ttab.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.vm-tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.vm-trow{display:flex;align-items:center;gap:9px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--panel2);font-size:11px}
+.vm-trow .chip{width:20px;height:20px;border-radius:6px;border:1px solid var(--line);flex:none}
+.vm-trow .k{font-family:ui-monospace,Menlo,monospace;color:var(--ink);font-weight:700}
+.vm-trow .v{margin-left:auto;font-family:ui-monospace,Menlo,monospace;color:var(--muted)}
+.vm-tokcode{margin-top:14px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;position:relative}
+.vm-tokcode pre{margin:0;overflow:auto;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--muted);max-height:160px}
+.vm-copy{position:absolute;top:8px;right:8px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--ink);font-size:11px;font-weight:700;padding:5px 10px;cursor:pointer}
+.vm-copy:hover{border-color:var(--accent)}
+.vm-copy.ok{border-color:var(--pos);color:var(--pos)}
+@media(prefers-reduced-motion:reduce){
+  .vm-tile,.vm-tchip,.vm-btn{transition:none!important}
+  .vm-modal-card{animation:none!important}
+  .vm-tile:hover,.vm-btn:hover,.vm-tchip:hover{transform:none!important}
+}
+</style>
+</head>
+<body>
+<div class="vm-hero">
+  <h1><span class="em">🎭</span> Component Variant Matrix</h1>
+  <p>Every Prism component rendered <b>live</b> across all themes. Prism's theming is 100% token-based — the same component HTML/CSS re-skins under a different <code>:root</code> token set — so switching themes below is instant, with no page reload. Open any component to see it side-by-side across every theme and copy the exact token overrides.</p>
+  <span class="vm-stat"><span class="dot"></span><span id="vmStat">…</span></span>
+</div>
+
+<div class="vm-tools">
+  <div class="vm-themebar" id="vmThemeBar"><span class="vm-lbl">Theme</span></div>
+  <span class="vm-spacer"></span>
+  <select class="vm-gal" id="vmGal"><option value="">All galleries</option></select>
+  <div class="vm-search"><svg viewBox="0 0 20 20"><path d="M8 3a5 5 0 103.9 8.1l3.5 3.5 1.4-1.4-3.5-3.5A5 5 0 008 3zm0 2a3 3 0 110 6 3 3 0 010-6z"/></svg><input id="vmSearch" type="text" placeholder="Filter components…" autocomplete="off"></div>
+  <button class="vm-btn" id="vmExport">⬇ Export variants.json</button>
+</div>
+
+<div class="vm-wrap">
+  <div class="vm-count" id="vmCount"></div>
+  <div class="vm-grid" id="vmGrid"></div>
+  <div class="vm-more" id="vmMore" style="display:none"><button class="vm-btn" id="vmMoreBtn">Show more components</button></div>
+  <div class="vm-empty" id="vmEmpty" style="display:none">No components match your filter.</div>
+</div>
+
+<div class="vm-modal" id="vmModal" role="dialog" aria-modal="true">
+  <div class="vm-modal-card">
+    <div class="vm-mhead">
+      <div>
+        <h2 id="vmModalTitle">Component</h2>
+        <div class="sub" id="vmModalSub"></div>
+      </div>
+      <button class="vm-x" id="vmModalClose" aria-label="Close">✕</button>
+    </div>
+    <div class="vm-mbody">
+      <div class="vm-matrix" id="vmMatrix"></div>
+      <div class="vm-tokens">
+        <h3>Token overrides</h3>
+        <p class="hint">Each theme changes only these <code>:root</code> tokens relative to the Prism base. Everything else is inherited — that's why one component payload renders every variant.</p>
+        <div class="vm-ttabs" id="vmTokTabs"></div>
+        <div class="vm-tgrid" id="vmTokGrid"></div>
+        <div class="vm-tokcode"><button class="vm-copy" id="vmTokCopy">Copy CSS</button><pre id="vmTokCode"></pre></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+var GALLERY_LABELS={charts:'Charts & Metrics',fx:'FX Store',lab:'Animation Lab',ai:'AI Working',
+  objects:'Animated Objects',input:'Input Methods',text:'Text Effects',shapes:'Text Shapes',
+  maps:'Maps & Geo',notify:'Notifications & Status',arch:'Architecture Diagrams',callouts:'Callouts & Annotations',
+  obsidian:'Obsidian Facets',menus:'Menus & Actions',spectrums:'Spectrums',idea:'Idea Gallery',
+  mobile:'Mobile Gallery',desktop:'Desktop Gallery',facets:'New Facets'};
+var GALLERY_EMOJI={charts:'📊',fx:'🎇',lab:'🧪',ai:'🤖',objects:'⌬',input:'✏️',text:'🔤',shapes:'🌈',
+  maps:'🌍',notify:'🔔',arch:'🗺',callouts:'⭐',obsidian:'◈',menus:'🧭',spectrums:'◆',idea:'🎨',
+  mobile:'📱',desktop:'🖱️',facets:'✦'};
+var PAGE=24;                 // grid batch size (lazy — previews mount as they scroll in)
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+/* ---- data: effects from the island, themes from PrismShell.themeMatrix() ---- */
+var ALL=[], MATRIX=null, THEMES=[], BASE={}, TOKEN_META=[], byTheme={};
+function load(){
+  try{
+    var el=parent.document.getElementById('prism-catalog');
+    if(el){ var d=JSON.parse(el.textContent); ALL=(d.effects||[]).filter(function(e){ return e.html; }); }
+  }catch(e){ ALL=[]; }
+  try{ MATRIX=parent.PrismShell.themeMatrix(); }catch(e){ MATRIX=null; }
+  if(!MATRIX){ MATRIX={base:{},tokenMeta:[],themes:[],activeTheme:'prism-dark'}; }
+  THEMES=MATRIX.themes||[]; BASE=MATRIX.base||{}; TOKEN_META=MATRIX.tokenMeta||[];
+  THEMES.forEach(function(t){ byTheme[t.id]=t; });
+}
+
+/* ---- build a preview srcdoc: base :root + effect css + theme override ----
+   This is exactly how the live app renders — a page whose :root holds the base
+   tokens, with a theme's override tokens layered on top. Class/keyframe-name
+   collisions across effects are moot: each preview is its own iframe document. */
+function tokenCss(tokens){
+  var s=':root{'; for(var k in tokens){ s+=k+':'+tokens[k]+';'; } return s+'}';
+}
+function previewDoc(eff, themeId){
+  var t=byTheme[themeId]||byTheme[MATRIX.activeTheme]||THEMES[0];
+  var tokens=t?t.tokens:BASE;
+  var css=eff.css||'';
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>'+
+    'html,body{margin:0;height:100%}'+
+    'body{display:flex;align-items:center;justify-content:center;padding:12px;'+
+      'font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;'+
+      'background:var(--bg);color:var(--ink);overflow:hidden}'+
+    '.vm-fit{max-width:100%;max-height:100%;transform-origin:center;pointer-events:none}'+
+    '<\/style>'+
+    '<style id="vm-theme">'+tokenCss(tokens)+'<\/style>'+
+    '<style id="vm-fx">'+css+'<\/style>'+
+    '</head><body><div class="vm-fit">'+eff.html+'</div></body></html>';
+}
+// Live theme swap without reload: just rewrite the #vm-theme style in the doc.
+function reskin(iframe, themeId){
+  try{
+    var d=iframe.contentDocument; if(!d) return;
+    var t=byTheme[themeId]; if(!t) return;
+    var st=d.getElementById('vm-theme'); if(st) st.textContent=tokenCss(t.tokens);
+    d.body&&(d.body.style.background='var(--bg)');
+  }catch(e){}
+}
+
+/* ---- state + filtering ---- */
+var currentTheme='prism-dark', q='', gal='', shown=PAGE, tiles=[];
+function results(){
+  var ql=q.toLowerCase();
+  return ALL.filter(function(e){
+    if(gal && e.gallery!==gal) return false;
+    if(!ql) return true;
+    return ((e.name||'')+' '+(e.description||'')+' '+(e.componentType||'')+' '+(e.gallery||'')+' '+((e.tags||[]).join(' '))).toLowerCase().indexOf(ql)!==-1;
+  });
+}
+
+/* ---- lazy preview mounting via IntersectionObserver ---- */
+var io=null;
+function ensureObserver(){
+  if(io||!('IntersectionObserver' in window)) return;
+  io=new IntersectionObserver(function(ents){
+    ents.forEach(function(en){
+      if(en.isIntersecting){ mountTile(en.target); io.unobserve(en.target); }
+    });
+  },{rootMargin:'200px'});
+}
+function mountTile(stage){
+  if(stage._mounted) return; stage._mounted=true;
+  var eff=stage._eff;
+  var f=document.createElement('iframe');
+  f.setAttribute('scrolling','no'); f.setAttribute('tabindex','-1'); f.setAttribute('aria-label',eff.name+' preview');
+  f.srcdoc=previewDoc(eff,currentTheme);
+  stage._frame=f;
+  var ph=stage.querySelector('.vm-ph'); if(ph) ph.style.display='none';
+  stage.appendChild(f);
+}
+
+/* ---- swatch helpers ---- */
+function swatchHtml(t){
+  return '<span class="sw"><i style="background:'+esc(t.tokens['--accent'])+'"></i>'+
+    '<i style="background:'+esc(t.tokens['--info'])+'"></i>'+
+    '<i style="background:'+esc(t.tokens['--crit'])+'"></i></span>';
+}
+function miniThumb(eff,t){
+  // a 16px chip tinted by the theme's bg + accent dot — a cheap "stacked variant" cue
+  return '<span class="vm-thumb" title="'+esc(t.name)+'" data-theme="'+esc(t.id)+'" style="background:'+esc(t.tokens['--bg'])+'">'+
+    '<i style="background:'+esc(t.tokens['--accent'])+'"></i></span>';
+}
+
+/* ---- render grid ---- */
+function cardHtml(eff){
+  var strip=''; THEMES.forEach(function(t){ strip+=miniThumb(eff,t); });
+  var sub='<span class="vm-pill">'+esc(GALLERY_EMOJI[eff.gallery]||'✦')+' '+esc(GALLERY_LABELS[eff.gallery]||eff.gallery)+'</span>';
+  if(eff.componentType) sub+='<span class="vm-pill">'+esc(eff.componentType)+'</span>';
+  return '<div class="vm-tile" data-id="'+esc(eff.id)+'">'+
+    '<div class="vm-stage" data-id="'+esc(eff.id)+'">'+
+      '<span class="vm-badge" id="badge-'+esc(eff.id)+'"></span>'+
+      '<div class="vm-ph">rendering…</div>'+
+      '<div class="vm-strip">'+strip+'</div>'+
+    '</div>'+
+    '<div class="vm-meta">'+
+      '<div class="vm-nm">'+esc(eff.name)+'</div>'+
+      '<div class="vm-sub">'+sub+'</div>'+
+      '<div class="vm-acts">'+
+        '<button data-act="matrix" data-id="'+esc(eff.id)+'">🎭 Compare all themes</button>'+
+        '<button data-act="open" data-id="'+esc(eff.gallery)+'">↗ Gallery</button>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
+}
+function render(){
+  var res=results();
+  var grid=document.getElementById('vmGrid'), empty=document.getElementById('vmEmpty'), more=document.getElementById('vmMore');
+  document.getElementById('vmCount').innerHTML='<b>'+res.length+'</b> component'+(res.length===1?'':'s')+' · <b>'+THEMES.length+'</b> themes each · <b>'+(res.length*THEMES.length).toLocaleString()+'</b> live variants';
+  if(!res.length){ grid.innerHTML=''; empty.style.display=''; more.style.display='none'; return; }
+  empty.style.display='none';
+  var slice=res.slice(0,shown);
+  grid.innerHTML=slice.map(cardHtml).join('');
+  ensureObserver();
+  var byIdEff={}; ALL.forEach(function(e){ byIdEff[e.id]=e; });
+  grid.querySelectorAll('.vm-stage').forEach(function(st){
+    st._eff=byIdEff[st.getAttribute('data-id')];
+    var b=document.getElementById('badge-'+st.getAttribute('data-id')); if(b) b.textContent=(byTheme[currentTheme]||{}).name||'';
+    if(io) io.observe(st); else mountTile(st);
+  });
+  more.style.display=res.length>shown?'':'none';
+}
+
+/* ---- global theme switch: reskin every mounted preview live ---- */
+function setTheme(id){
+  if(!byTheme[id]) return;
+  currentTheme=id;
+  document.querySelectorAll('.vm-tchip').forEach(function(c){ c.classList.toggle('on', c.getAttribute('data-theme')===id); });
+  var nm=(byTheme[id]||{}).name||'';
+  document.querySelectorAll('.vm-stage').forEach(function(st){
+    var b=document.getElementById('badge-'+st.getAttribute('data-id')); if(b) b.textContent=nm;
+    if(st._frame){ reskin(st._frame,id); }
+  });
+}
+function buildThemeBar(){
+  var bar=document.getElementById('vmThemeBar');
+  THEMES.forEach(function(t){
+    var b=document.createElement('button');
+    b.className='vm-tchip'+(t.id===currentTheme?' on':'');
+    b.setAttribute('data-theme',t.id);
+    b.innerHTML=swatchHtml(t)+'<span>'+esc(t.name)+'</span><span class="mode">'+esc(t.mode)+'</span>';
+    b.addEventListener('click',function(){ setTheme(t.id); });
+    bar.appendChild(b);
+  });
+}
+
+/* ---- matrix modal: one component across every theme ---- */
+var modalEff=null, tokTheme=null;
+function openMatrix(eff){
+  modalEff=eff;
+  document.getElementById('vmModalTitle').textContent=eff.name;
+  document.getElementById('vmModalSub').innerHTML=esc(GALLERY_EMOJI[eff.gallery]||'✦')+' '+esc(GALLERY_LABELS[eff.gallery]||eff.gallery)+(eff.componentType?' · '+esc(eff.componentType):'')+' · rendered across '+THEMES.length+' themes';
+  var mx=document.getElementById('vmMatrix');
+  mx.innerHTML=THEMES.map(function(t){
+    return '<div class="vm-cell">'+
+      '<div class="vm-chead">'+swatchHtml(t)+'<span>'+esc(t.name)+'</span><span class="mode">'+esc(t.mode)+'</span></div>'+
+      '<div class="vm-cstage" data-theme="'+esc(t.id)+'"></div>'+
+    '</div>';
+  }).join('');
+  mx.querySelectorAll('.vm-cstage').forEach(function(cs){
+    var f=document.createElement('iframe'); f.setAttribute('scrolling','no'); f.setAttribute('tabindex','-1');
+    f.srcdoc=previewDoc(eff,cs.getAttribute('data-theme'));
+    cs.appendChild(f);
+  });
+  buildTokenDocs(eff);
+  document.getElementById('vmModal').classList.add('open');
+}
+function closeMatrix(){ document.getElementById('vmModal').classList.remove('open'); var mx=document.getElementById('vmMatrix'); if(mx) mx.innerHTML=''; }
+
+function buildTokenDocs(eff){
+  var tabs=document.getElementById('vmTokTabs');
+  tabs.innerHTML=THEMES.map(function(t){ return '<button class="vm-ttab" data-theme="'+esc(t.id)+'">'+esc(t.name)+'</button>'; }).join('');
+  tabs.querySelectorAll('.vm-ttab').forEach(function(b){ b.addEventListener('click',function(){ showTokens(b.getAttribute('data-theme')); }); });
+  // default to a non-base theme so overrides are visible
+  var first=THEMES.filter(function(t){ return t.overrides && Object.keys(t.overrides).length; })[0]||THEMES[0];
+  showTokens(first.id);
+}
+function showTokens(themeId){
+  tokTheme=themeId;
+  var t=byTheme[themeId]; if(!t) return;
+  document.querySelectorAll('.vm-ttab').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-theme')===themeId); });
+  var ov=t.overrides||{}, keys=Object.keys(ov);
+  var grid=document.getElementById('vmTokGrid');
+  if(!keys.length){ grid.innerHTML='<div class="vm-trow"><span class="k">— base theme —</span><span class="v">no overrides</span></div>'; }
+  else{
+    grid.innerHTML=keys.map(function(k){
+      var v=ov[k], isColor=/^#|rgb/.test(v);
+      return '<div class="vm-trow">'+(isColor?'<span class="chip" style="background:'+esc(v)+'"></span>':'')+
+        '<span class="k">'+esc(k)+'</span><span class="v">'+esc(v)+'</span></div>';
+    }).join('');
+  }
+  // full CSS override block for copy
+  var css=':root{ /* '+t.name+' */\n';
+  keys.forEach(function(k){ css+='  '+k+': '+ov[k]+';\n'; });
+  css+='}';
+  document.getElementById('vmTokCode').textContent=keys.length?css:'/* '+t.name+' is the Prism base theme — no token overrides. */';
+}
+
+/* ---- export variants.json (client-side, from live theme data) ---- */
+function exportJson(){
+  var res=results();
+  var doc={
+    schemaVersion:1,
+    source:'Prism Component Variant Matrix (live)',
+    note:'Variants are token-swaps over identical component HTML/CSS. Render = base html+css + chosen theme tokens.',
+    base:BASE,
+    tokenMeta:TOKEN_META,
+    themes:THEMES.map(function(t){ return {id:t.id,name:t.name,mode:t.mode,builtin:!!t.builtin,custom:!!t.custom,tokens:t.tokens,overrides:t.overrides}; }),
+    effects:res.map(function(e){
+      var direct=[]; var surf=((e.html||'')+' '+(e.css||''));
+      TOKEN_META.forEach(function(m){ if(surf.indexOf('var('+m.k)!==-1) direct.push(m.k); });
+      return {id:e.id,gallery:e.gallery,name:e.name,componentType:e.componentType||'',variantCount:THEMES.length,usesTokens:direct};
+    })
+  };
+  var blob=new Blob([JSON.stringify(doc,null,2)],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a'); a.href=url; a.download='variants.json'; document.body.appendChild(a); a.click();
+  setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); },100);
+}
+
+/* ---- wiring ---- */
+function boot(){
+  load();
+  currentTheme=(byTheme[MATRIX.activeTheme]?MATRIX.activeTheme:(THEMES[0]&&THEMES[0].id))||'prism-dark';
+  document.getElementById('vmStat').textContent=ALL.length.toLocaleString()+' components × '+THEMES.length+' themes = '+(ALL.length*THEMES.length).toLocaleString()+' live variants';
+  // gallery dropdown
+  var gsel=document.getElementById('vmGal'), gals={};
+  ALL.forEach(function(e){ gals[e.gallery]=(gals[e.gallery]||0)+1; });
+  Object.keys(gals).sort().forEach(function(g){
+    var o=document.createElement('option'); o.value=g; o.textContent=(GALLERY_EMOJI[g]||'✦')+' '+(GALLERY_LABELS[g]||g)+' ('+gals[g]+')'; gsel.appendChild(o);
+  });
+  buildThemeBar();
+  render();
+
+  gsel.addEventListener('change',function(){ gal=gsel.value; shown=PAGE; render(); });
+  var si=document.getElementById('vmSearch'), deb=null;
+  si.addEventListener('input',function(){ clearTimeout(deb); deb=setTimeout(function(){ q=si.value; shown=PAGE; render(); },160); });
+  document.getElementById('vmMoreBtn').addEventListener('click',function(){ shown+=PAGE; render(); });
+  document.getElementById('vmExport').addEventListener('click',exportJson);
+
+  var byIdEff={}; ALL.forEach(function(e){ byIdEff[e.id]=e; });
+  document.getElementById('vmGrid').addEventListener('click',function(ev){
+    var b=ev.target.closest?ev.target.closest('[data-act]'):null;
+    var thumb=ev.target.closest?ev.target.closest('.vm-thumb'):null;
+    if(thumb){ setTheme(thumb.getAttribute('data-theme')); return; }
+    if(!b) return;
+    var act=b.getAttribute('data-act');
+    if(act==='matrix'){ var e=byIdEff[b.getAttribute('data-id')]; if(e) openMatrix(e); }
+    else if(act==='open'){ try{ parent.PrismShell.go(b.getAttribute('data-id')); }catch(e){} }
+  });
+  document.getElementById('vmModalClose').addEventListener('click',closeMatrix);
+  document.getElementById('vmModal').addEventListener('click',function(e){ if(e.target===this) closeMatrix(); });
+  document.addEventListener('keydown',function(e){ if((e.key==='Escape'||e.keyCode===27)&&document.getElementById('vmModal').classList.contains('open')) closeMatrix(); });
+  document.getElementById('vmTokCopy').addEventListener('click',function(){
+    var code=document.getElementById('vmTokCode').textContent, btn=this;
+    function done(){ btn.textContent='✓ Copied'; btn.classList.add('ok'); setTimeout(function(){ btn.textContent='Copy CSS'; btn.classList.remove('ok'); },1300); }
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(code).then(done).catch(done); } else { done(); }
+  });
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
+})();
+<\/script>
+</body>
+</html>
+</script>
+
 <script type="text/html" id="pg-idea"><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98707,6 +99151,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
   var PAGES=[
     {id:'facets',label:'New Facets',emoji:'✦',title:'New Facets',blurb:'Every component added in the latest release — collected in one place so you can see what\'s new at a glance.'},
     {id:'search',label:'Search',emoji:'🔎',title:'Search',blurb:'Search all facets by name, gallery, component type, interaction, or design Spectrum.'},
+    {id:'variants',label:'Variant Matrix',emoji:'🎭',title:'Component Variant Matrix',blurb:'Every component rendered live across all themes — Prism, OLED, Cyberpunk, Light, Dark and your custom themes. Switch themes with no reload, compare side-by-side, and export the token overrides.'},
     {id:'charts',label:'Charts & Metrics',emoji:'📊',title:'Charts & Metrics',blurb:'KPIs, gauges, progress, trends, comparisons and status — hand-authored inline SVG + CSS.'},
     {id:'fx',label:'FX Store',emoji:'🎇',title:'FX Store',blurb:'Drop-in visual effects: glows, pulses, shimmers, particles and more.'},
     {id:'lab',label:'Animation Lab',emoji:'🧪',title:'Animation Lab',blurb:'Motion experiments — easing, transforms, loaders and keyframe studies.'},
@@ -98889,6 +99334,66 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
       }catch(e){}
       if(current==='search') current=null; // force the frame to reload with the new query
       go('search', true);
+    },
+    // Component Variant Matrix (JFH-9): expose the live theme token maps to the
+    // #variants page. Prism themes are pure :root token overrides applied over
+    // identical component HTML/CSS, so a "variant" is one component under a
+    // different token set. We compute each theme's complete token map (base +
+    // override) here — where THEMES, compilePalette and the user's custom
+    // themes all live — and hand it to the page, which renders variants live.
+    themeMatrix: function(){
+      // Prism default :root — the base every theme layers over (prism == empty override).
+      var BASE={
+        '--bg':'#0b0e17','--panel':'#121623','--panel2':'#171d2e','--card':'#141b2b','--line':'#243049',
+        '--ink':'#eaf1f9','--muted':'#8593a8','--dim':'#5b6678','--accent':'#ff9900','--accent2':'#4493f8',
+        '--pos':'#3fb950','--pos-rgb':'63,185,80','--neg':'#f85149','--neg-rgb':'248,81,73',
+        '--warn':'#e0a52b','--warn-rgb':'224,165,43','--info':'#4493f8','--info-rgb':'68,147,248',
+        '--crit':'#c879ff','--crit-rgb':'200,121,255','--accent-rgb':'255,153,0',
+        '--cardgrad':'linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%)'
+      };
+      function parseRoot(css){
+        var o={}; var m=/:root\s*\{([^}]*)\}/.exec(css||''); if(!m) return o;
+        m[1].split(';').forEach(function(d){ var i=d.indexOf(':'); if(i<0) return;
+          var k=d.slice(0,i).trim(), v=d.slice(i+1).trim(); if(k.slice(0,2)==='--'&&v) o[k]=v; });
+        return o;
+      }
+      function merge(over){ var t={}; for(var k in BASE) t[k]=BASE[k]; for(var j in over) t[j]=over[j]; return t; }
+      function diff(t){ var d={}; for(var k in t){ if(t[k]!==BASE[k]) d[k]=t[k]; } return d; }
+      // synthetic light/dark defaults, compiled with the SAME palette compiler the app uses
+      var LIGHT={bg:'#f4f6fb',panel:'#ffffff',ink:'#161b26',muted:'#5a6474',accent:'#ff9900',info:'#1a73e8',pos:'#1e8e3e',warn:'#b06a00',neg:'#d93025',crit:'#8a3ffc'};
+      var DARK ={bg:'#0a0a0c',panel:'#141418',ink:'#f2f4f8',muted:'#8a909c',accent:'#7aa2ff',info:'#4493f8',pos:'#3fb950',warn:'#e0a52b',neg:'#f85149',crit:'#c879ff'};
+      var list=[
+        {id:'prism-dark',name:'Prism',mode:'dark',builtin:true,tokens:merge({})},
+        {id:'oled-dark',name:'OLED',mode:'dark',builtin:true,tokens:merge(parseRoot(THEMES.oled))},
+        {id:'cyberpunk-dark',name:'Cyberpunk',mode:'dark',builtin:true,tokens:merge(parseRoot(THEMES.cyberpunk))},
+        {id:'light',name:'Light',mode:'light',builtin:false,tokens:merge(parseRoot(compilePalette(LIGHT)))},
+        {id:'dark',name:'Dark',mode:'dark',builtin:false,tokens:merge(parseRoot(compilePalette(DARK)))}
+      ];
+      // append any user custom themes (already compiled into THEMES as override strings)
+      try{
+        customThemes.forEach(function(t){
+          if(THEMES[t.id]) list.push({id:t.id,name:t.name,mode:'dark',builtin:false,custom:true,tokens:merge(parseRoot(THEMES[t.id]))});
+        });
+      }catch(e){}
+      list.forEach(function(t){ t.overrides=diff(t.tokens); });
+      // curTheme uses the shell's THEMES keys ('prism'/'oled'/'cyberpunk'/custom ids);
+      // the matrix keys builtins by id ('prism-dark' etc.). Map so the matrix page
+      // honors the active shell theme (custom ids already match 1:1).
+      var ACTIVE_MAP={prism:'prism-dark',oled:'oled-dark',cyberpunk:'cyberpunk-dark'};
+      var active=ACTIVE_MAP[curTheme]||curTheme;
+      if(!list.some(function(t){ return t.id===active; })) active='prism-dark';
+      return {
+        base:BASE,
+        tokenMeta:[
+          {k:'--bg',label:'Background',desc:'Page base'},{k:'--panel',label:'Panel',desc:'Cards & surfaces'},
+          {k:'--ink',label:'Text',desc:'Primary text'},{k:'--muted',label:'Muted',desc:'Secondary text'},
+          {k:'--accent',label:'Accent',desc:'Brand / primary'},{k:'--info',label:'Info',desc:'Links / secondary'},
+          {k:'--pos',label:'Positive',desc:'Success'},{k:'--warn',label:'Warning',desc:'Caution'},
+          {k:'--neg',label:'Negative',desc:'Danger'},{k:'--crit',label:'Critical',desc:'Special / peak'}
+        ],
+        activeTheme:active,
+        themes:list
+      };
     }
   };
 
