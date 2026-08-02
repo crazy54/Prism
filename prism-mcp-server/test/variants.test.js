@@ -75,8 +75,25 @@ test('get_component_variants relevantOverrides is scoped to consumed tokens', ()
   // charts-kpi-delta consumes --pos; oled changes --pos, so relevantOverrides carries it.
   const oled = r.variants.find((v) => v.theme === 'oled-dark');
   assert.ok('--pos' in oled.relevantOverrides, 'relevant override for consumed token');
+  assert.equal(oled.relevantOverrides['--pos'], oled.overrides['--pos'], 'carries the OVERRIDE value, not the resolved base value');
   // it does NOT consume --bg, so --bg should not appear in relevantOverrides.
   assert.ok(!('--bg' in oled.relevantOverrides));
+});
+
+test('get_component_variants relevantOverrides is a subset of the theme overrides (base theme => empty)', () => {
+  const ctx = toolCtx();
+  const r = ctx.call('get_component_variants', { id: 'charts-kpi-pulse' });
+  for (const v of r.variants) {
+    // a consumed token the theme does NOT override is not "relevant"
+    for (const k of Object.keys(v.relevantOverrides)) {
+      assert.ok(k in v.overrides, `${v.theme}: relevantOverrides key ${k} must be an actual override`);
+      assert.equal(v.relevantOverrides[k], v.overrides[k], `${v.theme}: relevantOverrides[${k}] must equal the override value`);
+    }
+  }
+  // prism-dark is the base (zero overrides) -> nothing is "relevant" even though the component consumes --ink
+  const prism = r.variants.find((v) => v.theme === 'prism-dark');
+  assert.deepEqual(prism.relevantOverrides, {}, 'base theme yields no relevant overrides');
+  assert.ok(r.usesTokens.includes('--ink'), 'sanity: it does consume a token');
 });
 
 test('get_component_variants can restrict to a subset of themes', () => {

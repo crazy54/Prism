@@ -155,7 +155,7 @@ prism-mcp-server/
 │   ├── themes.js     # canonical theme token maps (variant matrix) — mirrors Prism.html THEMES
 │   └── logger.js     # stderr logger (never pollutes the stdio JSON-RPC channel)
 ├── examples/         # one example request/response per tool + integration configs
-└── test/             # node:test integration + unit tests (87 tests)
+└── test/             # node:test integration + unit tests (90 tests)
 ```
 
 **Server model.** `new PrismMCPServer(catalogPath, opts)` builds the tool registry and a `CatalogStore`. `await server.load()` reads + indexes the catalog. `server.connect(transport)` wires a transport; `StdioTransport` implements newline-delimited JSON-RPC on stdin/stdout. The transport is pluggable — implement `onMessage(cb)` / `send(obj)` to add HTTP/SSE.
@@ -172,7 +172,7 @@ prism-mcp-server/
 node --test          # or: npm test
 ```
 
-87 tests cover every tool (incl. the variant-matrix tools + `themeSensitive` facet), the CSS/compose/validate utilities, the canonical theme token maps, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
+90 tests cover every tool (incl. the variant-matrix tools + `themeSensitive` facet), the CSS/compose/validate utilities, the canonical theme token maps, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
 
 ---
 

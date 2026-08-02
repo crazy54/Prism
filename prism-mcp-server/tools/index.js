@@ -438,9 +438,10 @@ export function buildTools() {
             theme: t.id,
             name: t.name,
             mode: t.mode,
-            // only the overrides that this component actually reacts to, plus the full set
+            // the full override set, plus only the overrides this component actually
+            // reacts to (a consumed token the theme does NOT override is not "relevant").
             overrides: t.overrides,
-            relevantOverrides: consumed.reduce((o, k) => { if (t.tokens[k] !== undefined) o[k] = t.tokens[k]; return o; }, {}),
+            relevantOverrides: consumed.reduce((o, k) => { if (t.overrides[k] !== undefined) o[k] = t.overrides[k]; return o; }, {}),
             rootCss: themeRootCss(t.id),
           })),
         };
