@@ -69144,6 +69144,119 @@ body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,rgba(255,153,0
   .prism-rail,.sr-link{animation:none!important;opacity:1;transform:none}
   .frame-wrap{transition:opacity .15s}.veil-mark .sig{animation:none}
 }
+
+/* ===================== FLOATING QUICK-SEARCH WIDGET ===================== */
+/* A draggable, dismissible search launcher that floats over every gallery.
+   Theme-aware (reads the same --accent/--panel vars the theme engine sets on
+   :root). z-index sits above the stage (80/90) but below veil(200)/modal(300). */
+.qs-fab{position:fixed;right:24px;bottom:88px;z-index:150;width:54px;height:54px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  background:linear-gradient(145deg,var(--panel2,#12324c),var(--card,#0f1b2d));
+  border:1px solid var(--accent,#ff9900);color:var(--accent,#ff9900);
+  box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 0 rgba(var(--accent-rgb,255,153,0),.5);
+  transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .25s,border-color .2s,color .2s;
+  animation:qsFabBob 5s ease-in-out infinite}
+.qs-fab svg{width:23px;height:23px;pointer-events:none}
+.qs-fab .qs-kbd{position:absolute;bottom:-6px;right:-6px;font:800 8.5px -apple-system,sans-serif;letter-spacing:.02em;
+  background:var(--accent,#ff9900);color:var(--bg,#0b0e17);padding:2px 5px;border-radius:7px;box-shadow:0 2px 6px rgba(0,0,0,.4);pointer-events:none}
+.qs-fab:hover{transform:scale(1.1) rotate(-6deg);box-shadow:0 14px 36px rgba(0,0,0,.55),0 0 0 8px rgba(var(--accent-rgb,255,153,0),.12)}
+.qs-fab:active{transform:scale(.94)}
+.qs-fab.qs-hidden{opacity:0;transform:scale(.4) translateY(20px);pointer-events:none}
+.qs-fab.qs-dragging{animation:none;transition:none;cursor:grabbing;transform:scale(1.06)}
+@keyframes qsFabBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+/* occasional attention sparkle emitted from the FAB */
+.qs-fab .qs-spark{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--accent,#ff9900);
+  box-shadow:0 0 8px var(--accent,#ff9900);pointer-events:none;opacity:0}
+
+.qs-panel{position:fixed;z-index:151;width:392px;max-width:calc(100vw - 32px);
+  background:var(--panel,#0e1626);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:16px;
+  box-shadow:0 24px 70px rgba(0,0,0,.6),0 0 0 1px rgba(var(--accent-rgb,255,153,0),.08);
+  color:var(--ink,#eaf1f9);overflow:hidden;opacity:0;transform:translateY(12px) scale(.97);
+  transform-origin:bottom right;transition:opacity .2s,transform .24s cubic-bezier(.34,1.4,.5,1);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;pointer-events:none}
+.qs-panel.qs-open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.qs-panel.qs-min .qs-body,.qs-panel.qs-min .qs-inputwrap{display:none}
+.qs-head{display:flex;align-items:center;gap:9px;padding:11px 12px;cursor:grab;
+  background:linear-gradient(180deg,rgba(var(--accent-rgb,255,153,0),.08),transparent);
+  border-bottom:1px solid var(--line,rgba(255,255,255,.08));user-select:none}
+.qs-head.qs-grab{cursor:grabbing}
+.qs-head .qs-logo{width:22px;height:22px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;
+  color:var(--accent,#ff9900);font-size:15px;filter:drop-shadow(0 0 5px rgba(var(--accent-rgb,255,153,0),.5))}
+.qs-head .qs-ttl{font-size:12.5px;font-weight:800;letter-spacing:.02em;flex:1;min-width:0}
+.qs-head .qs-ttl small{display:block;font-size:9.5px;font-weight:600;color:var(--muted,#8593a8);letter-spacing:.03em}
+.qs-head .qs-hbtn{width:26px;height:26px;border-radius:7px;border:1px solid transparent;background:transparent;
+  color:var(--muted,#8593a8);cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;
+  transition:background .15s,color .15s,border-color .15s;padding:0}
+.qs-head .qs-hbtn:hover{background:rgba(255,255,255,.06);color:var(--ink,#eaf1f9);border-color:var(--line,rgba(255,255,255,.12))}
+.qs-inputwrap{position:relative;padding:12px 12px 8px}
+.qs-input{width:100%;background:var(--card,#0b1220);border:1px solid var(--line,rgba(255,255,255,.14));
+  border-radius:11px;color:var(--ink,#eaf1f9);font-size:14px;padding:11px 38px 11px 38px;outline:none;
+  transition:border-color .18s,box-shadow .18s}
+.qs-input:focus{border-color:var(--accent,#ff9900);box-shadow:0 0 0 3px rgba(var(--accent-rgb,255,153,0),.14)}
+.qs-inputwrap .qs-mag{position:absolute;left:24px;top:50%;transform:translateY(-40%);width:15px;height:15px;
+  color:var(--muted,#8593a8);pointer-events:none}
+.qs-inputwrap .qs-x{position:absolute;right:22px;top:50%;transform:translateY(-40%);width:20px;height:20px;border:none;
+  background:transparent;color:var(--muted,#8593a8);cursor:pointer;font-size:14px;line-height:1;display:none;padding:0}
+.qs-inputwrap .qs-x.on{display:block}
+.qs-body{max-height:min(58vh,430px);overflow-y:auto;padding:2px 8px 10px}
+.qs-scope{display:flex;gap:6px;padding:0 4px 8px;flex-wrap:wrap}
+.qs-scope button{font:700 10px -apple-system,sans-serif;letter-spacing:.02em;color:var(--muted,#8593a8);
+  background:rgba(255,255,255,.04);border:1px solid var(--line,rgba(255,255,255,.1));border-radius:20px;
+  padding:4px 10px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.qs-scope button:hover{color:var(--ink,#eaf1f9);border-color:rgba(var(--accent-rgb,255,153,0),.5)}
+.qs-scope button.on{background:rgba(var(--accent-rgb,255,153,0),.16);border-color:var(--accent,#ff9900);color:var(--accent,#ff9900)}
+.qs-res{list-style:none;margin:0;padding:0}
+.qs-item{display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:10px;cursor:pointer;
+  border:1px solid transparent;transition:background .12s,border-color .12s;opacity:0;transform:translateY(6px);
+  animation:qsItemIn .32s ease forwards}
+.qs-item:hover,.qs-item.qs-active{background:rgba(var(--accent-rgb,255,153,0),.1);border-color:rgba(var(--accent-rgb,255,153,0),.32)}
+.qs-item .qs-thumb{width:44px;height:34px;flex:0 0 auto;border-radius:7px;overflow:hidden;position:relative;
+  background:var(--card,#0b1220);border:1px solid var(--line,rgba(255,255,255,.1));
+  display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--muted,#8593a8)}
+.qs-item .qs-tx{min-width:0;flex:1}
+.qs-item .qs-nm{font-size:12.5px;font-weight:700;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qs-item .qs-nm mark{background:rgba(var(--accent-rgb,255,153,0),.32);color:inherit;border-radius:3px;padding:0 1px}
+.qs-item .qs-sub{font-size:10px;color:var(--muted,#8593a8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.qs-item .qs-go{flex:0 0 auto;color:var(--muted,#8593a8);opacity:0;transition:opacity .15s,transform .15s;font-size:13px}
+.qs-item:hover .qs-go,.qs-item.qs-active .qs-go{opacity:1;transform:translateX(2px)}
+@keyframes qsItemIn{to{opacity:1;transform:translateY(0)}}
+.qs-foot{display:flex;align-items:center;gap:8px;padding:9px 12px;border-top:1px solid var(--line,rgba(255,255,255,.08));
+  font-size:11px;color:var(--muted,#8593a8);background:rgba(255,255,255,.02)}
+.qs-foot .qs-count b{color:var(--ink,#eaf1f9)}
+.qs-foot .qs-all{margin-left:auto;font:800 11px -apple-system,sans-serif;color:var(--accent,#ff9900);cursor:pointer;
+  background:transparent;border:none;padding:4px 6px;border-radius:7px;transition:background .15s}
+.qs-foot .qs-all:hover{background:rgba(var(--accent-rgb,255,153,0),.14)}
+.qs-hint{padding:14px 12px 16px;text-align:center;color:var(--muted,#8593a8)}
+.qs-hint .qs-htitle{font-size:12.5px;font-weight:700;color:var(--ink,#eaf1f9);margin-bottom:4px}
+.qs-hint .qs-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:10px}
+.qs-hint .qs-chips button{font:700 10.5px -apple-system,sans-serif;background:rgba(255,255,255,.05);
+  border:1px solid var(--line,rgba(255,255,255,.12));border-radius:20px;padding:5px 11px;color:var(--ink,#eaf1f9);
+  cursor:pointer;transition:all .15s}
+.qs-hint .qs-chips button:hover{border-color:var(--accent,#ff9900);color:var(--accent,#ff9900);transform:translateY(-1px)}
+.qs-empty{padding:22px 12px;text-align:center;color:var(--muted,#8593a8);font-size:12px}
+.qs-empty .qs-ez{font-size:26px;display:block;margin-bottom:8px;animation:qsShrug 2.4s ease-in-out infinite}
+@keyframes qsShrug{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+/* fun: confetti/emoji burst layer over the panel */
+.qs-fx{position:fixed;z-index:199;pointer-events:none;left:0;top:0;width:100%;height:100%;overflow:hidden;display:none}
+.qs-fx.on{display:block}
+.qs-confetti{position:absolute;width:9px;height:14px;border-radius:2px;will-change:transform,opacity;animation:qsFall linear forwards}
+@keyframes qsFall{0%{opacity:1;transform:translateY(-10px) rotate(0)}100%{opacity:0;transform:translateY(105vh) rotate(720deg)}}
+.qs-emoji{position:absolute;font-size:26px;will-change:transform,opacity;animation:qsFloatUp 1.4s ease-out forwards}
+@keyframes qsFloatUp{0%{opacity:0;transform:translateY(0) scale(.4)}20%{opacity:1}100%{opacity:0;transform:translateY(-130px) scale(1.3)}}
+/* rainbow shimmer easter-egg on the panel header */
+.qs-panel.qs-rainbow .qs-head{background:linear-gradient(90deg,#ff4d4d,#ffb84d,#ffff4d,#4dff88,#4dc3ff,#b84dff,#ff4dcb);
+  background-size:400% 100%;animation:qsRainbow 3s linear infinite}
+@keyframes qsRainbow{0%{background-position:0 0}100%{background-position:400% 0}}
+@media(max-width:520px){
+  .qs-panel{width:calc(100vw - 24px)}
+  .qs-fab{right:16px;bottom:76px}
+}
+@media(prefers-reduced-motion:reduce){
+  .qs-fab,.qs-item,.qs-empty .qs-ez,.qs-panel.qs-rainbow .qs-head{animation:none!important}
+  .qs-item{opacity:1;transform:none}
+  .qs-confetti,.qs-emoji{display:none}
+  .qs-panel{transition:opacity .12s}
+}
 </style>
 </head>
 <body>
@@ -69233,6 +69346,35 @@ body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,rgba(255,153,0
     </div>
   </div>
 </div>
+
+<!-- ===== Floating quick-search widget (available on every gallery) ===== -->
+<button class="qs-fab" id="qsFab" type="button" aria-label="Open quick search (Ctrl/Cmd+K)" title="Quick search — Ctrl/⌘ K">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  <span class="qs-kbd" id="qsKbd">⌘K</span>
+</button>
+<div class="qs-panel" id="qsPanel" role="dialog" aria-label="Quick search" aria-modal="false">
+  <div class="qs-head" id="qsHead">
+    <span class="qs-logo">✦</span>
+    <span class="qs-ttl">Quick Search<small id="qsSubtitle">Find any facet — drag me anywhere</small></span>
+    <button class="qs-hbtn" id="qsMin" type="button" aria-label="Minimize" title="Minimize">–</button>
+    <button class="qs-hbtn" id="qsClose" type="button" aria-label="Close" title="Close (Esc)">✕</button>
+  </div>
+  <div class="qs-inputwrap">
+    <svg class="qs-mag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" class="qs-input" id="qsInput" placeholder="Search facets & galleries…" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="qsRes" aria-autocomplete="list">
+    <button class="qs-x" id="qsClear" type="button" aria-label="Clear">✕</button>
+  </div>
+  <div class="qs-body" id="qsBody">
+    <div class="qs-scope" id="qsScope"></div>
+    <ul class="qs-res" id="qsRes" role="listbox" aria-label="Quick search results"></ul>
+    <div class="qs-hint" id="qsHint"></div>
+  </div>
+  <div class="qs-foot">
+    <span class="qs-count" id="qsCount"></span>
+    <button class="qs-all" id="qsAll" type="button">Open full Search →</button>
+  </div>
+</div>
+<div class="qs-fx" id="qsFx" aria-hidden="true"></div>
 
 <div class="sweep" id="sweep"></div>
 <main class="stage"><div class="frame-wrap" id="fw"><iframe id="gv" title="gallery" allow="clipboard-read; clipboard-write"></iframe></div></main>
@@ -98735,6 +98877,21 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
     if(a){ e.preventDefault(); go(a.getAttribute('data-page'), true); if(window.innerWidth<=860) document.body.classList.remove('sr-open'); }
   });
 
+  // Tiny navigation API for the floating quick-search widget (defined in a separate
+  // parent-level script). Lets it route to a gallery or open the full Search page
+  // pre-seeded with a query, reusing this router + the shareable #search?q= deep link.
+  window.PrismShell = {
+    pages: PAGES,
+    go: function(id){ go(id, true); },
+    openSearch: function(query){
+      try{
+        history.replaceState(null,'','#search'+(query?('?q='+encodeURIComponent(query)):''));
+      }catch(e){}
+      if(current==='search') current=null; // force the frame to reload with the new query
+      go('search', true);
+    }
+  };
+
   // ---- per-section item counts ----
   // Count the gallery/grid items that belong to a section header. Items are the
   // direct element children of the first .gallery/.grid container after the header
@@ -99310,6 +99467,342 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
       go(start, true);
     }, 650);
   });
+})();
+</script>
+
+<script>
+/* ===================== FLOATING QUICK-SEARCH WIDGET ===================== */
+/* A fun, draggable, dismissible search launcher over every gallery. Reads the
+   #prism-catalog island directly, ranks live, and routes via window.PrismShell
+   (go / openSearch). Cmd/Ctrl+K opens it; Esc closes; ↑/↓/Enter navigate. */
+(function(){
+  'use strict';
+  var fab=document.getElementById('qsFab'), panel=document.getElementById('qsPanel'),
+      head=document.getElementById('qsHead'), input=document.getElementById('qsInput'),
+      resList=document.getElementById('qsRes'), scopeBar=document.getElementById('qsScope'),
+      hint=document.getElementById('qsHint'), countEl=document.getElementById('qsCount'),
+      clearBtn=document.getElementById('qsClear'), fx=document.getElementById('qsFx'),
+      kbdHint=document.getElementById('qsKbd');
+  if(!fab||!panel) return;
+
+  var GALLERY_LABELS={charts:'Charts & Metrics',fx:'FX Store',lab:'Animation Lab',ai:'AI Working',
+    objects:'Animated Objects',input:'Input Methods',text:'Text Effects',shapes:'Text Shapes',
+    maps:'Maps & Geo',notify:'Notifications & Status',arch:'Architecture Diagrams',callouts:'Callouts & Annotations',
+    obsidian:'Obsidian Facets',menus:'Menus & Actions',spectrums:'Spectrums',idea:'Idea Gallery',
+    mobile:'Mobile Gallery',desktop:'Desktop Gallery',facets:'New Facets'};
+  var GALLERY_EMOJI={charts:'📊',fx:'🎇',lab:'🧪',ai:'🤖',objects:'⌬',input:'✏️',text:'🔤',shapes:'🌈',
+    maps:'🌍',notify:'🔔',arch:'🗺',callouts:'⭐',obsidian:'◈',menus:'🧭',spectrums:'◆',idea:'🎨',
+    mobile:'📱',desktop:'🖱️',facets:'✦'};
+  var MAX_RESULTS=7;
+  var isMac=/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent);
+  kbdHint.textContent=isMac?'⌘K':'^K';
+
+  var ALL=[], loaded=false, activeScope='all', activeIdx=-1, matches=[];
+
+  function esc(s){ return (s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+  function loadCatalog(){
+    if(loaded) return ALL;
+    try{
+      var el=document.getElementById('prism-catalog');
+      if(el){ var data=JSON.parse(el.textContent); ALL=data.effects||[]; }
+    }catch(e){ ALL=[]; }
+    ALL.forEach(function(e){
+      e._q=((e.name||'')+' '+(e.description||'')+' '+(e.gallery||'')+' '+(e.componentType||'')+' '+
+        (e.spectrum||'')+' '+((e.tags||[]).join(' '))).toLowerCase();
+      e._nm=(e.name||e.id||'').toLowerCase();
+    });
+    loaded=true;
+    return ALL;
+  }
+
+  // scope chips: All + galleries that actually have content
+  function buildScopes(){
+    var galleries=[]; var seen={};
+    ALL.forEach(function(e){ if(e.gallery && !seen[e.gallery]){ seen[e.gallery]=1; galleries.push(e.gallery); } });
+    galleries.sort(function(a,b){ return (GALLERY_LABELS[a]||a).localeCompare(GALLERY_LABELS[b]||b); });
+    var chips=[{k:'all',label:'All'}].concat(galleries.map(function(g){ return {k:g,label:GALLERY_LABELS[g]||g}; }));
+    scopeBar.innerHTML='';
+    chips.forEach(function(c){
+      var b=document.createElement('button'); b.type='button'; b.textContent=c.label;
+      b.className=(c.k===activeScope?'on':''); b.setAttribute('data-scope',c.k);
+      b.addEventListener('click', function(){ activeScope=c.k; buildScopes(); run(); input.focus(); });
+      scopeBar.appendChild(b);
+    });
+  }
+
+  function score(eff, terms, phrase){
+    var s=0, all=true;
+    for(var i=0;i<terms.length;i++){
+      var t=terms[i], hit=false;
+      if(eff._nm.indexOf(t)!==-1){ s+=3; hit=true; }
+      if((eff.componentType||'').toLowerCase().indexOf(t)!==-1){ s+=1.5; hit=true; }
+      if((eff.tags||[]).join(' ').toLowerCase().indexOf(t)!==-1){ s+=1.5; hit=true; }
+      if(!hit && eff._q.indexOf(t)!==-1){ s+=1; hit=true; }
+      if(!hit) all=false;
+    }
+    if(!all) return 0;
+    if(eff._nm===phrase) s+=10; else if(eff._nm.indexOf(phrase)===0) s+=5;
+    return s;
+  }
+
+  function compute(){
+    var phrase=input.value.trim().toLowerCase();
+    var terms=phrase.split(/\s+/).filter(Boolean);
+    var pool = activeScope==='all' ? ALL : ALL.filter(function(e){ return e.gallery===activeScope; });
+    if(!terms.length) return [];
+    var out=[];
+    for(var i=0;i<pool.length;i++){
+      var sc=score(pool[i],terms,phrase);
+      if(sc>0){ pool[i]._sc=sc; out.push(pool[i]); }
+    }
+    out.sort(function(a,b){ return (b._sc-a._sc)||a._nm.localeCompare(b._nm); });
+    return out;
+  }
+
+  function highlight(name, phrase){
+    if(!phrase) return esc(name);
+    var lo=name.toLowerCase(), pos=lo.indexOf(phrase);
+    if(pos===-1) return esc(name);
+    return esc(name.slice(0,pos))+'<mark>'+esc(name.slice(pos,pos+phrase.length))+'</mark>'+esc(name.slice(pos+phrase.length));
+  }
+
+  function run(){
+    var phrase=input.value.trim().toLowerCase();
+    clearBtn.classList.toggle('on', !!input.value);
+    matches=compute();
+    activeIdx=-1;
+    input.setAttribute('aria-expanded', matches.length?'true':'false');
+
+    if(!input.value.trim()){
+      resList.innerHTML=''; resList.style.display='none';
+      hint.style.display='block';
+      renderHint();
+      countEl.innerHTML='<b>'+ALL.length.toLocaleString()+'</b> facets';
+      return;
+    }
+    hint.style.display='none'; resList.style.display='block';
+    if(!matches.length){
+      resList.innerHTML='<li class="qs-empty"><span class="qs-ez">🤷</span>No facets match “'+esc(input.value.trim())+'”'+
+        (activeScope!=='all'?(' in '+esc(GALLERY_LABELS[activeScope]||activeScope)):'')+'.</li>';
+      countEl.innerHTML='0 matches';
+      return;
+    }
+    var shown=matches.slice(0,MAX_RESULTS);
+    resList.innerHTML='';
+    shown.forEach(function(eff, i){
+      var li=document.createElement('li');
+      li.className='qs-item'; li.setAttribute('role','option'); li.id='qsItem-'+i;
+      li.style.animationDelay=(i*28)+'ms';
+      var gLabel=GALLERY_LABELS[eff.gallery]||eff.gallery;
+      var sub=[gLabel, eff.componentType].filter(Boolean).join(' · ');
+      li.innerHTML='<span class="qs-thumb">'+esc(GALLERY_EMOJI[eff.gallery]||'✦')+'</span>'+
+        '<span class="qs-tx"><span class="qs-nm">'+highlight(eff.name||eff.id, phrase)+'</span>'+
+        '<span class="qs-sub">'+esc(sub)+'</span></span>'+
+        '<span class="qs-go">↵</span>';
+      li.addEventListener('click', function(){ choose(eff); });
+      li.addEventListener('mouseenter', function(){ setActive(i); });
+      resList.appendChild(li);
+    });
+    countEl.innerHTML='<b>'+matches.length.toLocaleString()+'</b> match'+(matches.length===1?'':'es')+
+      (matches.length>MAX_RESULTS?(' · showing '+MAX_RESULTS):'');
+  }
+
+  var SUGGESTIONS=['material ui','3d chart','glassmorphism','neon','loader','kpi','gradient','radar','confetti'];
+  function renderHint(){
+    var picks=SUGGESTIONS.slice(0,6);
+    hint.innerHTML='<div class="qs-htitle">Search 1,600+ facets</div>'+
+      '<div>Type to find components, or jump to a gallery.</div>'+
+      '<div class="qs-chips"></div>';
+    var box=hint.querySelector('.qs-chips');
+    picks.forEach(function(q){
+      var b=document.createElement('button'); b.type='button'; b.textContent=q;
+      b.addEventListener('click', function(){ input.value=q; run(); input.focus(); });
+      box.appendChild(b);
+    });
+  }
+
+  function setActive(i){
+    activeIdx=i;
+    var items=resList.querySelectorAll('.qs-item');
+    items.forEach(function(el,idx){ el.classList.toggle('qs-active', idx===i); });
+    if(items[i]){ input.setAttribute('aria-activedescendant', items[i].id); items[i].scrollIntoView({block:'nearest'}); }
+  }
+  function move(delta){
+    var n=Math.min(matches.length, MAX_RESULTS); if(!n) return;
+    setActive((activeIdx+delta+n)%n);
+  }
+
+  function choose(eff){
+    // route to the effect's gallery, then celebrate
+    burst();
+    if(window.PrismShell && eff.gallery && window.PrismShell.go){ window.PrismShell.go(eff.gallery); }
+    close();
+  }
+  function openFull(){
+    if(window.PrismShell && window.PrismShell.openSearch){ window.PrismShell.openSearch(input.value.trim()); }
+    close();
+  }
+
+  // ---------- open / close / minimize ----------
+  var isOpen=false;
+  function open(){
+    loadCatalog(); buildScopes();
+    fab.classList.add('qs-hidden');
+    panel.classList.remove('qs-min');
+    panel.classList.add('qs-open');
+    placeDefault();
+    isOpen=true;
+    run();
+    setTimeout(function(){ input.focus(); input.select(); }, 60);
+  }
+  function close(){
+    panel.classList.remove('qs-open');
+    fab.classList.remove('qs-hidden');
+    isOpen=false;
+  }
+  function toggle(){ isOpen?close():open(); }
+
+  // place the panel anchored to the FAB unless the user has dragged it somewhere
+  var userMoved=false, pos={x:0,y:0};
+  function placeDefault(){
+    if(userMoved){ applyPos(); return; }
+    var pw=panel.offsetWidth||392, ph=panel.offsetHeight||420;
+    pos.x=Math.max(12, window.innerWidth - pw - 24);
+    pos.y=Math.max(12, window.innerHeight - ph - 84);
+    applyPos();
+  }
+  function applyPos(){
+    panel.style.left=pos.x+'px'; panel.style.top=pos.y+'px';
+    panel.style.right='auto'; panel.style.bottom='auto';
+  }
+
+  fab.addEventListener('click', function(e){ if(fab._dragged){ fab._dragged=false; return; } open(); });
+  document.getElementById('qsClose').addEventListener('click', close);
+  document.getElementById('qsMin').addEventListener('click', function(){ panel.classList.toggle('qs-min'); });
+  document.getElementById('qsAll').addEventListener('click', openFull);
+  clearBtn.addEventListener('click', function(){ input.value=''; run(); input.focus(); });
+
+  var deb=null;
+  input.addEventListener('input', function(){ clearTimeout(deb); deb=setTimeout(run, 90); });
+  input.addEventListener('keydown', function(e){
+    if(e.key==='ArrowDown'){ e.preventDefault(); move(1); }
+    else if(e.key==='ArrowUp'){ e.preventDefault(); move(-1); }
+    else if(e.key==='Enter'){
+      if(activeIdx>=0 && matches[activeIdx]) choose(matches[activeIdx]);
+      else if(matches.length) openFull();
+    }
+    else if(e.key==='Escape'){ e.preventDefault(); if(input.value){ input.value=''; run(); } else close(); }
+  });
+
+  // global hotkey: Cmd/Ctrl+K (and "/" when not already typing somewhere)
+  window.addEventListener('keydown', function(e){
+    if((e.metaKey||e.ctrlKey) && (e.key==='k'||e.key==='K')){ e.preventDefault(); toggle(); }
+    else if(e.key==='/' && !isOpen){
+      var t=e.target, tag=(t&&t.tagName||'').toLowerCase();
+      if(tag!=='input' && tag!=='textarea' && !(t&&t.isContentEditable)){ e.preventDefault(); open(); }
+    }
+  });
+  // close on outside click (but not while dragging)
+  document.addEventListener('mousedown', function(e){
+    if(!isOpen) return;
+    if(panel.contains(e.target) || fab.contains(e.target)) return;
+    close();
+  });
+
+  // ---------- dragging: FAB (small threshold) and panel header ----------
+  function makeDraggable(handle, onStart, onMove, opts){
+    handle.addEventListener('mousedown', function(e){
+      if(e.button!==0) return;
+      if(opts&&opts.ignore&&e.target.closest(opts.ignore)) return;
+      e.preventDefault();
+      var sx=e.clientX, sy=e.clientY, moved=false;
+      var base=onStart();
+      function mm(ev){
+        var dx=ev.clientX-sx, dy=ev.clientY-sy;
+        if(!moved && (Math.abs(dx)+Math.abs(dy))>4){ moved=true; if(opts&&opts.onDragStart) opts.onDragStart(); }
+        if(moved) onMove(base, dx, dy);
+      }
+      function mu(){ document.removeEventListener('mousemove',mm); document.removeEventListener('mouseup',mu);
+        if(opts&&opts.onDragEnd) opts.onDragEnd(moved); }
+      document.addEventListener('mousemove',mm); document.addEventListener('mouseup',mu);
+    });
+  }
+  // panel drag via header
+  makeDraggable(head,
+    function(){ var r=panel.getBoundingClientRect(); pos.x=r.left; pos.y=r.top; applyPos(); return {x:pos.x,y:pos.y}; },
+    function(base,dx,dy){
+      var pw=panel.offsetWidth, ph=panel.offsetHeight;
+      pos.x=Math.min(Math.max(6, base.x+dx), window.innerWidth-pw-6);
+      pos.y=Math.min(Math.max(6, base.y+dy), window.innerHeight-ph-6);
+      applyPos();
+    },
+    { ignore:'.qs-hbtn', onDragStart:function(){ head.classList.add('qs-grab'); userMoved=true; },
+      onDragEnd:function(){ head.classList.remove('qs-grab'); } }
+  );
+  // FAB drag to reposition it
+  makeDraggable(fab,
+    function(){ var r=fab.getBoundingClientRect(); return {x:r.left,y:r.top}; },
+    function(base,dx,dy){
+      var s=54; var x=Math.min(Math.max(6, base.x+dx), window.innerWidth-s-6);
+      var y=Math.min(Math.max(6, base.y+dy), window.innerHeight-s-6);
+      fab.style.left=x+'px'; fab.style.top=y+'px'; fab.style.right='auto'; fab.style.bottom='auto';
+    },
+    { onDragStart:function(){ fab.classList.add('qs-dragging'); },
+      onDragEnd:function(moved){ fab.classList.remove('qs-dragging'); if(moved) fab._dragged=true; } }
+  );
+
+  window.addEventListener('resize', function(){ if(isOpen && !userMoved) placeDefault(); });
+
+  // ---------- fun: celebration burst + idle sparkles ----------
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var EMOJI=['✨','🎉','⭐','💫','🌈','🔮','💜','🧡'];
+  function burst(){
+    if(prefersReduced) return;
+    var r=panel.getBoundingClientRect();
+    var cx=r.left+r.width/2, cy=r.top+40;
+    fx.classList.add('on'); fx.innerHTML='';
+    var colors=['#ff9900','#4493f8','#c879ff','#3fb950','#f85149','#ffd400'];
+    for(var i=0;i<26;i++){
+      var d=document.createElement('span'); d.className='qs-confetti';
+      d.style.left=(cx+(Math.random()*160-80))+'px'; d.style.top=(cy+(Math.random()*20-10))+'px';
+      d.style.background=colors[i%colors.length];
+      d.style.animationDuration=(0.9+Math.random()*0.8)+'s';
+      d.style.animationDelay=(Math.random()*0.12)+'s';
+      fx.appendChild(d);
+    }
+    for(var j=0;j<5;j++){
+      var em=document.createElement('span'); em.className='qs-emoji';
+      em.textContent=EMOJI[Math.floor(Math.random()*EMOJI.length)];
+      em.style.left=(cx+(Math.random()*120-60))+'px'; em.style.top=cy+'px';
+      em.style.animationDelay=(Math.random()*0.2)+'s';
+      fx.appendChild(em);
+    }
+    clearTimeout(fx._t); fx._t=setTimeout(function(){ fx.classList.remove('on'); fx.innerHTML=''; }, 1900);
+  }
+  // occasional sparkle off the FAB when idle & closed, to invite discovery
+  function sparkle(){
+    if(prefersReduced || isOpen || fab.classList.contains('qs-hidden')) return;
+    var s=document.createElement('span'); s.className='qs-spark';
+    var ang=Math.random()*Math.PI*2, dist=26+Math.random()*10;
+    s.style.left='50%'; s.style.top='50%';
+    fab.appendChild(s);
+    var kf=[{transform:'translate(-50%,-50%) scale(.5)',opacity:0},
+      {opacity:1,offset:.3},
+      {transform:'translate(calc(-50% + '+(Math.cos(ang)*dist)+'px),calc(-50% + '+(Math.sin(ang)*dist)+'px)) scale(1)',opacity:0}];
+    try{ s.animate(kf,{duration:900,easing:'ease-out'}); }catch(e){}
+    setTimeout(function(){ s.remove(); }, 950);
+  }
+  setInterval(function(){ if(Math.random()<0.5) sparkle(); }, 4200);
+
+  // easter egg: typing "prism" toggles a rainbow header shimmer + a burst
+  input.addEventListener('input', function(){
+    if(input.value.trim().toLowerCase()==='prism'){ panel.classList.add('qs-rainbow'); burst(); }
+    else panel.classList.remove('qs-rainbow');
+  });
+
+  // seed the hint on first paint
+  renderHint();
 })();
 </script>
 </body>
