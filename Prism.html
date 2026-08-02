@@ -97711,6 +97711,10 @@ function mountTile(stage){
   var eff=stage._eff;
   var f=document.createElement('iframe');
   f.setAttribute('scrolling','no'); f.setAttribute('tabindex','-1'); f.setAttribute('aria-label',eff.name+' preview');
+  // srcdoc bakes currentTheme, but parses async: if setTheme() runs before the
+  // doc is ready, its reskin no-ops (no #vm-theme yet) and the frame would keep
+  // the stale theme. Re-apply the live theme once parsed so it can't desync.
+  f.addEventListener('load',function(){ reskin(f,currentTheme); });
   f.srcdoc=previewDoc(eff,currentTheme);
   stage._frame=f;
   var ph=stage.querySelector('.vm-ph'); if(ph) ph.style.display='none';
@@ -97753,6 +97757,10 @@ function cardHtml(eff){
 function render(){
   var res=results();
   var grid=document.getElementById('vmGrid'), empty=document.getElementById('vmEmpty'), more=document.getElementById('vmMore');
+  // grid.innerHTML=... below detaches every current .vm-stage; the singleton io
+  // still holds observations on the ones that never intersected, leaking detached
+  // nodes across each keystroke/filter. Drop them before rebuilding.
+  if(io) io.disconnect();
   document.getElementById('vmCount').innerHTML='<b>'+res.length+'</b> component'+(res.length===1?'':'s')+' · <b>'+THEMES.length+'</b> themes each · <b>'+(res.length*THEMES.length).toLocaleString()+'</b> live variants';
   if(!res.length){ grid.innerHTML=''; empty.style.display=''; more.style.display='none'; return; }
   empty.style.display='none';
@@ -97820,6 +97828,7 @@ function buildTokenDocs(eff){
   tabs.querySelectorAll('.vm-ttab').forEach(function(b){ b.addEventListener('click',function(){ showTokens(b.getAttribute('data-theme')); }); });
   // default to a non-base theme so overrides are visible
   var first=THEMES.filter(function(t){ return t.overrides && Object.keys(t.overrides).length; })[0]||THEMES[0];
+  if(!first) return; // no themes (themeMatrix() unavailable) — leave token panel empty rather than crash
   showTokens(first.id);
 }
 function showTokens(themeId){
@@ -97854,8 +97863,13 @@ function exportJson(){
     tokenMeta:TOKEN_META,
     themes:THEMES.map(function(t){ return {id:t.id,name:t.name,mode:t.mode,builtin:!!t.builtin,custom:!!t.custom,tokens:t.tokens,overrides:t.overrides}; }),
     effects:res.map(function(e){
-      var direct=[]; var surf=((e.html||'')+' '+(e.css||''));
-      TOKEN_META.forEach(function(m){ if(surf.indexOf('var('+m.k)!==-1) direct.push(m.k); });
+      // Match the offline generator: extract real var(--token) names with a
+      // boundary regex, then keep the ones that are actual base tokens. A plain
+      // indexOf('var('+key) would false-positive on prefixes (var(--accent-rgb)
+      // -> --accent, var(--panel2) -> --panel), reporting tokens not used.
+      var surf=((e.html||'')+' '+(e.css||'')), refs={}, re=/var\(\s*(--[a-z0-9-]+)/gi, m;
+      while((m=re.exec(surf))!==null) refs[m[1]]=1;
+      var direct=Object.keys(BASE).filter(function(k){ return refs[k]; });
       return {id:e.id,gallery:e.gallery,name:e.name,componentType:e.componentType||'',variantCount:THEMES.length,usesTokens:direct};
     })
   };
