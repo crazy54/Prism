@@ -241,6 +241,24 @@ test('update_facet on unknown id errors', () => {
   assert.equal(r.error.code, 'not_found');
 });
 
+test('update_facet on a base-catalog effect does not duplicate it in the gallery', () => {
+  const ctx = toolCtx();
+  // 'charts' has two base-catalog effects. Updating one used to layer a second
+  // copy into _byGallery (base push + runtime push), inflating list_galleries
+  // and export_collection(gallery). It must stay at exactly two, no dupes.
+  ctx.call('update_facet', { id: 'charts-kpi-delta', description: 'Updated description for delta tile.' });
+  const g = ctx.store.gallery('charts');
+  assert.equal(g.length, 2, 'gallery must not grow on update');
+  const ids = g.map((e) => e.id);
+  assert.equal(new Set(ids).size, ids.length, 'no duplicate ids in gallery index');
+  assert.equal(ctx.call('list_galleries', {}).items.find((x) => x.id === 'charts').liveCount, 2);
+  const exp = ctx.call('export_collection', { gallery: 'charts' });
+  assert.equal(exp.effects.length, 2, 'export_collection must not double-list the updated effect');
+  assert.equal(new Set(exp.effects).size, exp.effects.length);
+  // the update itself still took effect
+  assert.equal(ctx.call('get_effect', { id: 'charts-kpi-delta' }).description, 'Updated description for delta tile.');
+});
+
 // -------------------- Catalog management --------------------
 
 test('get_catalog_metadata returns meta', () => {

@@ -37,6 +37,13 @@ const GALLERIES = [
   { gallery: 'notify', title: 'Notifications & Status' },
   { gallery: 'arch', title: 'Architecture Diagrams' },
   { gallery: 'callouts', title: 'Callouts & Annotations' },
+  // These three are real content galleries with pg-* templates + nav links in
+  // Prism.html. Omitting them silently dropped 433 effects (obsidian 130,
+  // menus 37, spectrums 266), leaving a 1235-effect manifest vs the island's
+  // 1668 — the stale-manifest root cause. Titles match the #prism-catalog island.
+  { gallery: 'obsidian', title: 'Obsidian Facets' },
+  { gallery: 'menus', title: 'Menus & Actions' },
+  { gallery: 'spectrums', title: 'Spectrums' },
 ];
 
 // This function is serialized and evaluated INSIDE the gallery iframe. It is a
