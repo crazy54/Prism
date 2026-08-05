@@ -69034,6 +69034,8 @@ body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,rgba(255,153,0
 .prism-rail a.sr-new-facets:hover{background:rgba(63,185,80,.14)!important;color:#7eeaa0!important}
 .prism-rail a.sr-new-facets.active{background:rgba(63,185,80,.18)!important;border-left-color:#3fb950!important;color:#eaffee!important}
 .prism-rail a.sr-new-facets::after{content:" NEW";font-size:9px;font-weight:900;letter-spacing:.06em;background:rgba(63,185,80,.2);border:1px solid rgba(63,185,80,.5);color:#3fb950;padding:1px 6px;border-radius:8px;margin-left:auto;flex-shrink:0}
+.prism-rail a.sr-collections .sr-cc{margin-left:auto;flex-shrink:0;min-width:18px;height:16px;padding:0 5px;display:inline-flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800;font-variant-numeric:tabular-nums;color:#ffb34d;background:rgba(255,153,0,.16);border:1px solid rgba(255,153,0,.4);border-radius:8px;line-height:1}
+.prism-rail a.sr-collections .sr-cc:empty{display:none}
 @keyframes railIn{to{transform:none}}
 @keyframes linkIn{to{opacity:1;transform:none}}
 
@@ -69166,6 +69168,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,rgba(255,153,0
   <div class="sr-h">Galleries</div>
   <a class="sr-link sr-new-facets" href="#facets" data-page="facets">✦ New Facets</a>
   <a class="sr-link" href="#search" data-page="search">🔎 Search</a>
+  <a class="sr-link sr-collections" href="#collections" data-page="collections">🗂 Collections</a>
   <a class="sr-link active" href="#charts" data-page="charts">📊 Charts &amp; Metrics</a>
   <a class="sr-link" href="#fx" data-page="fx">🎇 FX Store</a>
   <a class="sr-link" href="#lab" data-page="lab">🧪 Animation Lab</a>
@@ -96490,6 +96493,25 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
   color:var(--ink);border-radius:8px;padding:7px;font-size:11.5px;cursor:pointer;transition:.15s;font-family:inherit}
 .srch-card .srch-copy:hover{border-color:var(--accent);color:var(--accent)}
 .srch-card .srch-copy.ok{border-color:var(--pos);color:var(--pos)}
+.srch-card .srch-actrow{display:flex;gap:7px;margin-top:10px;position:relative}
+.srch-card .srch-actrow .srch-copy{margin-top:0;flex:1}
+.srch-card .srch-save{width:auto;flex-shrink:0;padding:7px 11px;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:8px;font-size:11.5px;font-weight:700;cursor:pointer;transition:.15s;font-family:inherit;white-space:nowrap}
+.srch-card .srch-save:hover{border-color:var(--accent);color:var(--accent)}
+.srch-card .srch-save.ok{border-color:var(--pos);color:var(--pos)}
+.srch-savemenu{position:absolute;z-index:50;top:calc(100% + 6px);right:0;min-width:220px;max-width:280px;background:linear-gradient(180deg,#141b2b,#0f1420);border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 44px rgba(0,0,0,.55);padding:6px}
+.srch-savemenu .cap{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:800;padding:6px 10px 4px}
+.srch-savemenu .list{max-height:220px;overflow:auto;display:flex;flex-direction:column;gap:3px}
+.srch-savemenu button.opt{display:flex;width:100%;align-items:center;gap:8px;background:none;border:none;color:#dbe4f0;font:inherit;font-size:12px;font-weight:600;text-align:left;padding:8px 10px;border-radius:8px;cursor:pointer}
+.srch-savemenu button.opt:hover{background:rgba(255,255,255,.08)}
+.srch-savemenu button.opt .n{margin-left:auto;font-size:10px;color:var(--dim);font-variant-numeric:tabular-nums}
+.srch-savemenu button.opt.has{color:var(--pos)}
+.srch-savemenu .sep{height:1px;background:rgba(255,255,255,.08);margin:5px 2px}
+.srch-savemenu .newrow{display:flex;gap:6px;padding:4px 4px 2px}
+.srch-savemenu .newrow input{flex:1;min-width:0;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:var(--ink);font:inherit;font-size:12px;padding:7px 9px}
+.srch-savemenu .newrow input:focus{outline:none;border-color:var(--accent)}
+.srch-savemenu .newrow button{background:var(--accent);border:none;color:#141005;font-weight:800;border-radius:8px;padding:0 11px;cursor:pointer;font-size:12px}
+.srch-savemenu .msg{font-size:10.5px;color:var(--muted);padding:5px 10px 3px}
+.srch-savemenu .msg.err{color:#ff9e97}
 
 .srch-loadmore{display:flex;justify-content:center;padding:22px 0 6px}
 .srch-loadmore button{background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:10px;
@@ -96671,13 +96693,17 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
     card.className='srch-card';
     var galLabel=GALLERY_LABELS[eff.gallery]||eff.gallery;
     var tags=[eff.componentType].concat(eff.interaction||[]).concat(eff.spectrum?[SPECTRUM_LABELS[eff.spectrum]||eff.spectrum]:[]).filter(Boolean);
+    var canSave=!!PC;
     card.innerHTML=
       '<div class="srch-stage">'+eff.html+'</div>'+
       '<div class="srch-meta">'+
         '<div class="srch-nm">'+esc(eff.name)+'<span class="srch-gal-badge">'+esc(galLabel)+'</span></div>'+
         '<div class="srch-desc">'+esc(eff.description)+'</div>'+
         (tags.length?'<div class="srch-tagrow">'+tags.map(function(t){return '<span class="srch-tag">'+esc(t)+'</span>';}).join('')+'</div>':'')+
-        '<button class="srch-copy" type="button">Copy</button>'+
+        '<div class="srch-actrow">'+
+          '<button class="srch-copy" type="button">Copy</button>'+
+          (canSave?'<button class="srch-save" type="button" title="Save to a collection">＋ Save</button>':'')+
+        '</div>'+
       '</div>';
     if(eff.css) ensureCss(eff.css);
     var copyBtn=card.querySelector('.srch-copy');
@@ -96688,8 +96714,63 @@ h3.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--
       var orig=copyBtn.textContent; copyBtn.textContent='✓ Copied'; copyBtn.classList.add('ok');
       setTimeout(function(){copyBtn.textContent=orig;copyBtn.classList.remove('ok');},1300);
     });
+    var saveBtn=card.querySelector('.srch-save');
+    if(saveBtn) saveBtn.addEventListener('click', function(e){ e.stopPropagation(); openSaveMenu(saveBtn, eff); });
     return card;
   }
+
+  // ---- "Save to collection" popover (writes real catalog ids to parent.PrismCollections) ----
+  var PC=null; try{ PC=parent.PrismCollections; }catch(e){}
+  var openSaveEl=null;
+  function closeSaveMenu(){ if(openSaveEl&&openSaveEl.parentNode) openSaveEl.parentNode.removeChild(openSaveEl); openSaveEl=null; }
+  document.addEventListener('click', function(e){
+    if(openSaveEl && !openSaveEl.contains(e.target) && !(e.target.closest&&e.target.closest('.srch-save'))) closeSaveMenu();
+  });
+  function openSaveMenu(anchor, eff){
+    if(openSaveEl){ closeSaveMenu(); return; }
+    if(!PC) return;
+    var comp={id:eff.id, name:eff.name, gallery:eff.gallery};
+    var menu=document.createElement('div'); menu.className='srch-savemenu';
+    function build(){
+      var list=PC.list();
+      var h='<div class="cap">Save “'+esc(eff.name)+'” to…</div>';
+      if(list.length){
+        h+='<div class="list">';
+        list.forEach(function(c){
+          var has=c.components.some(function(x){ return x.id===eff.id; });
+          h+='<button class="opt'+(has?' has':'')+'" data-id="'+esc(c.id)+'"'+(has?' disabled':'')+' type="button">'+
+              (has?'✓ ':'')+esc(c.name)+'<span class="n">'+c.components.length+'</span></button>';
+        });
+        h+='</div><div class="sep"></div>';
+      }
+      h+='<div class="cap">New collection</div>'+
+        '<div class="newrow"><input type="text" maxlength="50" placeholder="Collection name" autocomplete="off"><button class="mk" type="button">Add</button></div>'+
+        '<div class="msg" id="srchSaveMsg"></div>';
+      menu.innerHTML=h;
+      menu.querySelectorAll('.opt[data-id]').forEach(function(b){
+        b.addEventListener('click', function(ev){
+          ev.stopPropagation();
+          try{ var r=PC.addComponents(b.getAttribute('data-id'), [comp]); flashSaved(anchor); closeSaveMenu(); }
+          catch(err){ showMsg(err&&err.message?err.message:'Could not add.', true); }
+        });
+      });
+      var inp=menu.querySelector('.newrow input'), mk=menu.querySelector('.newrow .mk');
+      function doNew(){
+        var nm=inp.value;
+        try{ var c=PC.create({name:nm, components:[comp]}); flashSaved(anchor); closeSaveMenu(); }
+        catch(err){ showMsg(err&&err.message?err.message:'Could not create.', true); }
+      }
+      if(mk) mk.addEventListener('click', function(ev){ ev.stopPropagation(); doNew(); });
+      if(inp){ inp.addEventListener('keydown', function(ev){ if(ev.key==='Enter'){ ev.preventDefault(); doNew(); } }); setTimeout(function(){ inp.focus(); },30); }
+    }
+    function showMsg(t, isErr){ var m=menu.querySelector('#srchSaveMsg'); if(m){ m.textContent=t; m.className='msg'+(isErr?' err':''); } }
+    build();
+    var host=anchor.closest('.srch-actrow')||anchor.parentNode;
+    if(getComputedStyle(host).position==='static') host.style.position='relative';
+    host.appendChild(menu);
+    openSaveEl=menu;
+  }
+  function flashSaved(btn){ if(!btn) return; var o=btn.textContent; btn.textContent='✓ Saved'; btn.classList.add('ok'); setTimeout(function(){ btn.textContent=o; btn.classList.remove('ok'); },1300); }
 
   function render(){
     var results=filtered();
@@ -96787,6 +96868,660 @@ document.addEventListener('click',function(e){var b=e.target.closest('.copy[data
   (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t).catch(fb):Promise.resolve(fb()));
   var o=b.dataset.lbl||b.textContent;b.dataset.lbl=o;b.textContent='✓ Copied';b.classList.add('ok');setTimeout(function(){b.textContent=o;b.classList.remove('ok');},1300);
 });
+<\/script>
+</body>
+</html>
+</script>
+
+<script type="text/html" id="pg-collections"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗂 Collections · Prism</title>
+<style>
+:root{
+  --bg:#0b0e17; --panel:#121623; --panel2:#171d2e; --card:#141b2b; --line:#243049;
+  --ink:#eaf1f9; --muted:#8593a8; --dim:#5b6678;
+  --crit:#c879ff;  --crit-rgb:200,121,255;
+  --neg:#f85149;   --neg-rgb:248,81,73;
+  --warn:#e0a52b;  --warn-rgb:224,165,43;
+  --pos:#3fb950;   --pos-rgb:63,185,80;
+  --info:#4493f8;  --info-rgb:68,147,248;
+  --accent:#ff9900;--accent-rgb:255,153,0;
+  --cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%);
+}
+.c-crit{--c:var(--crit);--c-rgb:200,121,255}.c-neg{--c:var(--neg);--c-rgb:248,81,73}
+.c-warn{--c:var(--warn);--c-rgb:224,165,43}.c-pos{--c:var(--pos);--c-rgb:63,185,80}
+.c-info{--c:var(--info);--c-rgb:68,147,248}.c-accent{--c:var(--accent);--c-rgb:255,153,0}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,rgba(255,153,0,.05),transparent 60%),var(--bg);
+  color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;padding-bottom:96px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em}
+.head{padding:28px 32px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#232f3e,var(--panel));position:relative}
+.head h1{margin:0;font-size:25px;font-weight:800;letter-spacing:-.01em}
+.head p{margin:7px 0 0;color:var(--muted);font-size:13px;max-width:860px}
+.wrap{max-width:1240px;margin:0 auto;padding:22px 32px 0}
+
+/* buttons */
+.cl-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:#dbe4f0;font:inherit;font-size:12.5px;font-weight:700;padding:8px 14px;border-radius:9px;cursor:pointer;transition:background .15s,border-color .15s,color .15s;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.cl-btn:hover{background:rgba(255,255,255,.12)}
+.cl-btn.pri{background:var(--accent);border-color:var(--accent);color:#141005;text-shadow:0 1px 0 rgba(255,255,255,.25)}
+.cl-btn.pri:hover{filter:brightness(1.08);background:var(--accent)}
+.cl-btn.sm{padding:5px 10px;font-size:11px;border-radius:8px}
+.cl-btn.ghost{background:transparent}
+.cl-btn.danger:hover{background:rgba(248,81,73,.2);border-color:rgba(248,81,73,.5);color:#ff9e97}
+.cl-btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* top action bar */
+.cl-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.cl-bar .cl-count{color:var(--muted);font-size:12.5px;margin-right:auto}
+.cl-bar .cl-count b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* create form */
+.cl-form{background:var(--panel);background-image:var(--cardgrad);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:20px;display:none}
+.cl-form.open{display:block;animation:clIn .25s ease}
+@keyframes clIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.cl-form .cl-frow{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.cl-field{flex:1;min-width:200px}
+.cl-field label{display:block;font-size:11px;font-weight:700;color:#b6c2d4;margin-bottom:5px;letter-spacing:.02em}
+.cl-in{width:100%;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.15);border-radius:9px;color:var(--ink);font:inherit;font-size:13px;padding:9px 11px}
+.cl-in:focus{outline:none;border-color:var(--accent)}
+.cl-hint{font-size:10.5px;color:var(--dim);margin-top:4px}
+.cl-err{color:#ff9e97;font-size:11.5px;font-weight:700;margin-top:8px;min-height:1em}
+
+/* collection cards */
+.cl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.cl-card{background:var(--panel);background-image:var(--cardgrad);border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;display:flex;flex-direction:column;min-height:150px;transition:border-color .15s,transform .15s,box-shadow .15s}
+.cl-card:hover{border-color:rgba(255,153,0,.5);transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.32)}
+.cl-card .cl-top{display:flex;align-items:flex-start;gap:10px}
+.cl-card .cl-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:4px;background:var(--accent);box-shadow:0 0 0 1px rgba(0,0,0,.35) inset}
+.cl-card h3{margin:0;font-size:15.5px;font-weight:800;letter-spacing:-.01em;flex:1;min-width:0;word-break:break-word}
+.cl-card .cl-num{flex-shrink:0;font-size:11px;font-weight:800;color:var(--accent);background:rgba(255,153,0,.12);border:1px solid rgba(255,153,0,.4);border-radius:20px;padding:2px 9px;font-variant-numeric:tabular-nums}
+.cl-card .cl-desc{color:var(--muted);font-size:12.5px;margin:9px 0 0;line-height:1.45;flex:1}
+.cl-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.cl-tag{font-size:10px;font-weight:700;letter-spacing:.02em;color:#bcd8ff;background:rgba(68,147,248,.12);border:1px solid rgba(68,147,248,.35);border-radius:20px;padding:2px 9px}
+.cl-card .cl-namelist{margin-top:10px;font-size:11px;color:var(--dim);line-height:1.5;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.cl-card .cl-cardacts{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);position:relative}
+
+/* empty state */
+.cl-empty{border:1px dashed var(--line);border-radius:14px;padding:44px 24px;text-align:center;color:var(--muted)}
+.cl-empty .big{font-size:34px;margin-bottom:8px}
+.cl-empty h3{margin:0 0 6px;color:var(--ink);font-size:16px}
+.cl-empty p{margin:0 auto 16px;max-width:440px;font-size:13px}
+
+/* detail view */
+.cl-detail-head{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.cl-detail-head .cl-titlewrap{flex:1;min-width:240px}
+.cl-detail-head h2{margin:0;font-size:22px;font-weight:800;letter-spacing:-.01em;word-break:break-word}
+.cl-detail-head .cl-sub{color:var(--muted);font-size:12.5px;margin-top:4px}
+.cl-detail-acts{display:flex;gap:8px;flex-wrap:wrap;position:relative}
+.cl-detail-desc{color:var(--muted);font-size:13px;margin:12px 0 0;max-width:820px;white-space:pre-wrap}
+.cl-sec{margin:24px 0 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:800;display:flex;align-items:center;gap:10px}
+.cl-sec .n{color:var(--accent);font-variant-numeric:tabular-nums}
+.cl-sec .line{flex:1;height:1px;background:var(--line)}
+
+/* component grid (in detail + picker preview) */
+.cl-comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.cl-comp{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.cl-comp .cl-stage{position:relative;min-height:118px;display:flex;align-items:center;justify-content:center;padding:16px;background:radial-gradient(120% 120% at 50% 0%,rgba(255,255,255,.03),transparent 70%);overflow:hidden}
+.cl-comp .cl-cmeta{padding:10px 12px 12px;border-top:1px solid rgba(255,255,255,.07)}
+.cl-comp .cl-cnm{font-size:12.5px;font-weight:700;line-height:1.3;word-break:break-word}
+.cl-comp .cl-cref{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--muted);margin-top:2px;word-break:break-all}
+.cl-comp .cl-cgal{display:inline-block;margin-top:6px;font-size:9.5px;font-weight:700;letter-spacing:.03em;color:var(--muted);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:1px 7px}
+.cl-comp .cl-cacts{display:flex;gap:6px;margin-top:10px}
+.cl-comp .cl-missing{color:var(--dim);font-size:11.5px;font-style:italic;text-align:center}
+
+/* picker */
+.cl-picker{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:6px}
+.cl-picker .cl-psearch{display:flex;gap:9px;align-items:center;margin-bottom:12px}
+.cl-picker .cl-psearch input{flex:1}
+.cl-presults{display:flex;flex-direction:column;gap:7px;max-height:340px;overflow:auto;padding-right:4px}
+.cl-presult{display:flex;align-items:center;gap:11px;padding:8px 10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px}
+.cl-presult .cl-pnm{flex:1;min-width:0}
+.cl-presult .cl-pnm .t{font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cl-presult .cl-pnm .s{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cl-presult .cl-added{font-size:10.5px;font-weight:800;color:var(--pos);background:rgba(63,185,80,.14);border:1px solid rgba(63,185,80,.4);border-radius:8px;padding:3px 9px}
+.cl-pcount{font-size:11.5px;color:var(--muted);margin-bottom:9px}
+
+/* export dropdown menu */
+.cl-menu{position:absolute;z-index:40;top:calc(100% + 6px);right:0;min-width:216px;background:linear-gradient(180deg,#141b2b,#0f1420);border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 44px rgba(0,0,0,.55);padding:6px;display:none}
+.cl-menu.open{display:block;animation:clIn .16s ease}
+.cl-menu button{display:flex;width:100%;align-items:center;gap:9px;background:none;border:none;color:#dbe4f0;font:inherit;font-size:12.5px;font-weight:600;text-align:left;padding:9px 11px;border-radius:8px;cursor:pointer}
+.cl-menu button:hover{background:rgba(255,255,255,.08)}
+.cl-menu button .mi{width:16px;text-align:center;flex-shrink:0}
+.cl-menu .sep{height:1px;background:rgba(255,255,255,.08);margin:4px 2px}
+.cl-menu .cap{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:800;padding:6px 11px 3px}
+
+/* toast + undo */
+.cl-toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,16px);z-index:120;display:none;align-items:center;gap:14px;
+  background:linear-gradient(180deg,#1b2233,#141b2b);border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:12px;padding:12px 14px 12px 16px;box-shadow:0 14px 40px rgba(0,0,0,.5);max-width:min(460px,92vw)}
+.cl-toast.show{display:flex;animation:clToastIn .28s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes clToastIn{to{transform:translate(-50%,0)}}
+.cl-toast .msg{font-size:12.5px;color:var(--ink);font-weight:600}
+.cl-toast .msg b{color:var(--accent)}
+.cl-toast .act{background:rgba(255,153,0,.14);border:1px solid rgba(255,153,0,.45);color:var(--accent);font:inherit;font-size:12px;font-weight:800;padding:5px 12px;border-radius:8px;cursor:pointer;flex-shrink:0}
+.cl-toast .act:hover{background:rgba(255,153,0,.24)}
+.cl-toast .x{background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;line-height:1;padding:2px 4px;flex-shrink:0}
+.cl-toast .x:hover{color:var(--ink)}
+@media(prefers-reduced-motion:reduce){.cl-form.open,.cl-menu.open,.cl-toast.show{animation:none}}
+</style>
+</head>
+<body>
+  <div class="head">
+    <h1>🗂 Collections &amp; Favorites</h1>
+    <p>Save components into named collections that persist in this browser, then export them as portable
+       <code>prism-collection-1.0</code> JSON or a self-contained HTML bundle. The JSON round-trips with the
+       Prism MCP server (<code>export_collection · format:"schema"</code> ⇄ <b>Import</b> here).</p>
+  </div>
+  <div class="wrap">
+    <div id="clRoot"></div>
+  </div>
+
+  <div class="cl-toast" id="clToast" role="status" aria-live="polite">
+    <span class="msg" id="clToastMsg"></span>
+    <button class="act" id="clToastAct" type="button">Undo</button>
+    <button class="x" id="clToastX" type="button" aria-label="Dismiss">✕</button>
+  </div>
+
+  <input type="file" id="clFile" accept="application/json,.json" style="position:fixed;left:-9999px;top:-9999px" aria-hidden="true">
+  <style id="clDynamic"></style>
+
+<script>
+(function(){
+  var PC=null;
+  try{ PC=parent.PrismCollections; }catch(e){}
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+  // ---- catalog (same island the Search page reads) ----
+  var ALL=[], BYID={}, GAL={};
+  function loadCatalog(){
+    try{
+      var el=parent.document.getElementById('prism-catalog');
+      if(!el) return;
+      var data=JSON.parse(el.textContent);
+      ALL=data.effects||[];
+      ALL.forEach(function(e){ BYID[e.id]=e; if(e.gallery&&e.galleryTitle) GAL[e.gallery]=e.galleryTitle; });
+    }catch(e){ ALL=[]; }
+  }
+  function galLabel(g){ return g?(GAL[g]||g):''; }
+
+  // ---- preview css injection (mirrors the Search page) ----
+  var injectedCss={};
+  function ensureCss(css){
+    if(!css||injectedCss[css]) return;
+    injectedCss[css]=1;
+    var st=document.getElementById('clDynamic');
+    if(st) st.appendChild(document.createTextNode('\n'+css));
+  }
+
+  // ---- clipboard + download helpers ----
+  function copyText(txt){
+    function fb(){ var ta=document.createElement('textarea'); ta.value=txt; ta.style.cssText='position:fixed;opacity:0;top:0;left:0'; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(ta); }
+    try{ if(navigator.clipboard&&navigator.clipboard.writeText) return navigator.clipboard.writeText(txt).catch(fb); }catch(e){}
+    fb(); return Promise.resolve();
+  }
+  function fnSafe(s){ return String(s||'collection').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60)||'collection'; }
+  function download(filename, text, mime){
+    try{
+      var blob=new Blob([text],{type:mime||'text/plain'});
+      var url=URL.createObjectURL(blob);
+      var a=document.createElement('a'); a.href=url; a.download=filename; a.style.display='none';
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); },200);
+      return true;
+    }catch(e){ return false; }
+  }
+
+  // ---- build a copyable snippet for one component ----
+  function snippetFor(eff){
+    return '<!-- Prism: '+eff.name+' -->\n'+(eff.html||'')+(eff.css?'\n\n<style>\n'+eff.css+'\n</style>':'');
+  }
+
+  // ---- build a self-contained HTML bundle for a whole collection ----
+  var TOKENS=":root{--bg:#0b0e17;--panel:#121623;--panel2:#171d2e;--card:#141b2b;--line:#243049;"+
+    "--ink:#eaf1f9;--muted:#8593a8;--dim:#5b6678;--crit:#c879ff;--crit-rgb:200,121,255;"+
+    "--neg:#f85149;--neg-rgb:248,81,73;--warn:#e0a52b;--warn-rgb:224,165,43;--pos:#3fb950;--pos-rgb:63,185,80;"+
+    "--info:#4493f8;--info-rgb:68,147,248;--accent:#ff9900;--accent-rgb:255,153,0;"+
+    "--cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%)}"+
+    ".c-crit{--c:var(--crit);--c-rgb:200,121,255}.c-neg{--c:var(--neg);--c-rgb:248,81,73}"+
+    ".c-warn{--c:var(--warn);--c-rgb:224,165,43}.c-pos{--c:var(--pos);--c-rgb:63,185,80}"+
+    ".c-info{--c:var(--info);--c-rgb:68,147,248}.c-accent{--c:var(--accent);--c-rgb:255,153,0}";
+  function buildBundle(c){
+    var cssSeen={}, cssParts=[], body=[], missing=[];
+    c.components.forEach(function(rec){
+      var eff=BYID[rec.id];
+      if(!eff){ missing.push(rec); return; }
+      if(eff.css && !cssSeen[eff.css]){ cssSeen[eff.css]=1; cssParts.push('/* '+eff.name+' */\n'+eff.css); }
+      body.push('<section class="bundle-item"><h2>'+esc(eff.name)+
+        '<small>'+esc(galLabel(eff.gallery))+(eff.ref?' · '+esc(eff.ref):'')+'</small></h2>'+
+        '<div class="bundle-stage">'+(eff.html||'')+'</div></section>');
+    });
+    var head=[
+      '<!DOCTYPE html>','<html lang="en">','<head>','<meta charset="UTF-8">',
+      '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
+      '<title>'+esc(c.name)+' · Prism collection</title>','<style>',
+      TOKENS,
+      'body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;padding:32px}',
+      '.bundle-head{max-width:1100px;margin:0 auto 24px}',
+      '.bundle-head h1{margin:0;font-size:26px;font-weight:800}',
+      '.bundle-head p{color:var(--muted);margin:6px 0 0}',
+      '.bundle-item{max-width:1100px;margin:0 auto 22px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}',
+      '.bundle-item h2{margin:0 0 14px;font-size:14px;font-weight:800;display:flex;align-items:baseline;gap:10px}',
+      '.bundle-item h2 small{font-weight:600;color:var(--muted);font-size:11px}',
+      '.bundle-stage{display:flex;align-items:center;justify-content:center;min-height:120px;padding:12px}',
+      cssParts.join('\n'),
+      '</style>','</head>','<body>',
+      '<div class="bundle-head"><h1>'+esc(c.name)+'</h1>'+(c.description?'<p>'+esc(c.description)+'</p>':'')+'</div>'
+    ];
+    var foot=['</body>','</html>'];
+    return { doc:head.join('\n')+'\n'+body.join('\n')+'\n'+foot.join('\n'), missing:missing.length };
+  }
+
+  // ---- toast + undo ----
+  var toastTimer=null, undoFn=null;
+  var toast=document.getElementById('clToast');
+  var toastMsg=document.getElementById('clToastMsg');
+  var toastAct=document.getElementById('clToastAct');
+  function hideToast(){ if(toast) toast.classList.remove('show'); if(toastTimer){ clearTimeout(toastTimer); toastTimer=null; } undoFn=null; }
+  function showToast(msgHtml, onUndo, ms){
+    if(!toast) return;
+    toastMsg.innerHTML=msgHtml;
+    undoFn=onUndo||null;
+    toastAct.style.display=onUndo?'':'none';
+    toast.classList.add('show');
+    if(toastTimer) clearTimeout(toastTimer);
+    toastTimer=setTimeout(hideToast, ms||6000);
+  }
+  if(toastAct) toastAct.addEventListener('click', function(){ var f=undoFn; hideToast(); if(f) f(); });
+  var toastX=document.getElementById('clToastX'); if(toastX) toastX.addEventListener('click', hideToast);
+
+  // ---- view state ----
+  var root=document.getElementById('clRoot');
+  var view='list', curId=null, pickerQuery='', createOpen=false;
+
+  function render(){
+    if(!PC){
+      root.innerHTML='<div class="cl-empty"><div class="big">⚠️</div><h3>Collections unavailable</h3>'+
+        '<p>The collections store could not be reached. Open this page from the Prism shell (the sidebar link), not standalone.</p></div>';
+      return;
+    }
+    if(view==='detail' && curId && PC.has(curId)) renderDetail();
+    else { view='list'; curId=null; renderList(); }
+  }
+
+  // ---------- LIST ----------
+  function renderList(){
+    var items=PC.list();
+    var h='';
+    h+='<div class="cl-bar">'+
+        '<button class="cl-btn pri" id="clNew" type="button">＋ New collection</button>'+
+        '<button class="cl-btn" id="clImport" type="button">⬆ Import JSON</button>'+
+        '<span class="cl-count"><b>'+items.length+'</b> '+(items.length===1?'collection':'collections')+'</span>'+
+      '</div>';
+    // create form
+    h+='<div class="cl-form'+(createOpen?' open':'')+'" id="clForm">'+
+        '<div class="cl-frow">'+
+          '<div class="cl-field"><label for="clfName">Name</label>'+
+            '<input class="cl-in" id="clfName" type="text" maxlength="50" placeholder="Dashboard Kit" autocomplete="off" spellcheck="false"></div>'+
+          '<div class="cl-field"><label for="clfTags">Tags <span style="color:var(--dim);font-weight:600">(comma-separated, ≤5)</span></label>'+
+            '<input class="cl-in" id="clfTags" type="text" maxlength="120" placeholder="dashboards, kpi" autocomplete="off"></div>'+
+        '</div>'+
+        '<div class="cl-field" style="margin-bottom:12px"><label for="clfDesc">Description</label>'+
+          '<input class="cl-in" id="clfDesc" type="text" maxlength="200" placeholder="KPI tiles I reuse across dashboards" autocomplete="off"></div>'+
+        '<div class="cl-err" id="clfErr"></div>'+
+        '<div style="display:flex;gap:8px"><button class="cl-btn pri" id="clfCreate" type="button">Create collection</button>'+
+          '<button class="cl-btn ghost" id="clfCancel" type="button">Cancel</button></div>'+
+      '</div>';
+
+    if(!items.length){
+      h+='<div class="cl-empty"><div class="big">🗂</div><h3>No collections yet</h3>'+
+        '<p>Create a collection, then add components to it here or from the <b>🔎 Search</b> page. '+
+        'You can also import a <code>prism-collection-1.0</code> file exported by the MCP server.</p>'+
+        '<button class="cl-btn pri" id="clEmptyNew" type="button">＋ New collection</button></div>';
+    } else {
+      h+='<div class="cl-grid">';
+      items.forEach(function(c){
+        var names=c.components.map(function(x){ return esc(x.name||x.id); }).join(' · ');
+        h+='<div class="cl-card" data-id="'+esc(c.id)+'">'+
+            '<div class="cl-top">'+
+              '<span class="cl-dot"'+(c.color?' style="background:'+esc(c.color)+'"':'')+'></span>'+
+              '<h3>'+esc(c.name)+'</h3>'+
+              '<span class="cl-num">'+c.components.length+'</span>'+
+            '</div>'+
+            (c.description?'<div class="cl-desc">'+esc(c.description)+'</div>':'<div class="cl-desc" style="color:var(--dim);font-style:italic">No description</div>')+
+            (c.tags&&c.tags.length?'<div class="cl-tags">'+c.tags.map(function(t){return '<span class="cl-tag">'+esc(t)+'</span>';}).join('')+'</div>':'')+
+            (names?'<div class="cl-namelist">'+names+'</div>':'')+
+            '<div class="cl-cardacts">'+
+              '<button class="cl-btn sm pri" data-act="open" data-id="'+esc(c.id)+'" type="button">Open</button>'+
+              '<button class="cl-btn sm" data-act="export" data-id="'+esc(c.id)+'" type="button">Export ▾</button>'+
+              '<button class="cl-btn sm danger" data-act="delete" data-id="'+esc(c.id)+'" type="button" style="margin-left:auto">Delete</button>'+
+            '</div>'+
+          '</div>';
+      });
+      h+='</div>';
+    }
+    root.innerHTML=h;
+
+    var newBtn=document.getElementById('clNew'); if(newBtn) newBtn.addEventListener('click', openCreate);
+    var emptyNew=document.getElementById('clEmptyNew'); if(emptyNew) emptyNew.addEventListener('click', openCreate);
+    var imp=document.getElementById('clImport'); if(imp) imp.addEventListener('click', triggerImport);
+    var cancel=document.getElementById('clfCancel'); if(cancel) cancel.addEventListener('click', function(){ createOpen=false; renderList(); });
+    var create=document.getElementById('clfCreate'); if(create) create.addEventListener('click', submitCreate);
+    var nameInp=document.getElementById('clfName');
+    if(nameInp){ if(createOpen) nameInp.focus(); nameInp.addEventListener('keydown', function(e){ if(e.key==='Enter') submitCreate(); }); }
+
+    root.querySelectorAll('.cl-card [data-act]').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        var id=btn.getAttribute('data-id'), act=btn.getAttribute('data-act');
+        if(act==='open'){ curId=id; view='detail'; pickerQuery=''; render(); }
+        else if(act==='delete'){ deleteCollection(id); }
+        else if(act==='export'){ toggleExportMenu(btn, id); }
+      });
+    });
+    // click a card body (not a button) to open
+    root.querySelectorAll('.cl-card').forEach(function(card){
+      card.addEventListener('click', function(){ curId=card.getAttribute('data-id'); view='detail'; pickerQuery=''; render(); });
+    });
+  }
+
+  function openCreate(){ createOpen=true; renderList(); }
+  function submitCreate(){
+    var name=(document.getElementById('clfName')||{}).value||'';
+    var desc=(document.getElementById('clfDesc')||{}).value||'';
+    var tags=((document.getElementById('clfTags')||{}).value||'').split(',');
+    var errEl=document.getElementById('clfErr');
+    try{
+      var c=PC.create({name:name, description:desc, tags:tags});
+      createOpen=false;
+      curId=c.id; view='detail'; pickerQuery='';
+      render();
+      showToast('Created <b>'+esc(c.name)+'</b>', null, 3200);
+    }catch(err){ if(errEl) errEl.textContent=err&&err.message?err.message:'Could not create collection.'; }
+  }
+
+  // ---------- DETAIL ----------
+  function renderDetail(){
+    var c=PC.get(curId);
+    if(!c){ view='list'; renderList(); return; }
+    var h='';
+    h+='<div style="margin-bottom:16px"><button class="cl-btn ghost sm" id="clBack" type="button">‹ All collections</button></div>';
+    h+='<div class="cl-detail-head">'+
+        '<div class="cl-titlewrap">'+
+          '<h2>'+esc(c.name)+'</h2>'+
+          '<div class="cl-sub">'+c.components.length+' '+(c.components.length===1?'component':'components')+
+            ' · updated '+esc(fmtDate(c.updatedAt))+'</div>'+
+        '</div>'+
+        '<div class="cl-detail-acts">'+
+          '<button class="cl-btn sm" id="clEdit" type="button">✎ Edit details</button>'+
+          '<button class="cl-btn sm" id="clExport" type="button">Export ▾</button>'+
+          '<button class="cl-btn sm danger" id="clDelete" type="button">Delete</button>'+
+        '</div>'+
+      '</div>';
+    if(c.tags&&c.tags.length) h+='<div class="cl-tags" style="margin-top:10px">'+c.tags.map(function(t){return '<span class="cl-tag">'+esc(t)+'</span>';}).join('')+'</div>';
+    if(c.description) h+='<div class="cl-detail-desc">'+esc(c.description)+'</div>';
+
+    // edit form (hidden until Edit)
+    h+='<div class="cl-form" id="clEditForm">'+
+        '<div class="cl-frow">'+
+          '<div class="cl-field"><label for="cleName">Name</label>'+
+            '<input class="cl-in" id="cleName" type="text" maxlength="50" value="'+esc(c.name)+'" autocomplete="off" spellcheck="false"></div>'+
+          '<div class="cl-field"><label for="cleTags">Tags <span style="color:var(--dim);font-weight:600">(comma-separated, ≤5)</span></label>'+
+            '<input class="cl-in" id="cleTags" type="text" maxlength="120" value="'+esc((c.tags||[]).join(', '))+'" autocomplete="off"></div>'+
+        '</div>'+
+        '<div class="cl-field" style="margin-bottom:12px"><label for="cleDesc">Description</label>'+
+          '<input class="cl-in" id="cleDesc" type="text" maxlength="200" value="'+esc(c.description||'')+'" autocomplete="off"></div>'+
+        '<div class="cl-err" id="cleErr"></div>'+
+        '<div style="display:flex;gap:8px"><button class="cl-btn pri" id="cleSave" type="button">Save details</button>'+
+          '<button class="cl-btn ghost" id="cleCancel" type="button">Cancel</button></div>'+
+      '</div>';
+
+    // components
+    h+='<div class="cl-sec">Components <span class="n">'+c.components.length+'/'+PC.LIMITS.maxComponents+'</span><span class="line"></span></div>';
+    if(!c.components.length){
+      h+='<div class="cl-empty" style="padding:30px 20px"><h3>No components yet</h3><p>Use the picker below to add components from the catalog.</p></div>';
+    } else {
+      h+='<div class="cl-comp-grid">';
+      c.components.forEach(function(rec){
+        var eff=BYID[rec.id];
+        h+='<div class="cl-comp" data-id="'+esc(rec.id)+'">';
+        if(eff){
+          if(eff.css) ensureCss(eff.css);
+          h+='<div class="cl-stage">'+(eff.html||'')+'</div>'+
+            '<div class="cl-cmeta">'+
+              '<div class="cl-cnm">'+esc(eff.name)+'</div>'+
+              (eff.ref?'<div class="cl-cref">'+esc(eff.ref)+'</div>':'')+
+              '<div><span class="cl-cgal">'+esc(galLabel(eff.gallery))+'</span></div>'+
+              '<div class="cl-cacts">'+
+                '<button class="cl-btn sm" data-cact="copy" data-id="'+esc(rec.id)+'" type="button">Copy</button>'+
+                '<button class="cl-btn sm danger" data-cact="remove" data-id="'+esc(rec.id)+'" type="button">Remove</button>'+
+              '</div>'+
+            '</div>';
+        } else {
+          h+='<div class="cl-stage"><span class="cl-missing">Not in this catalog</span></div>'+
+            '<div class="cl-cmeta">'+
+              '<div class="cl-cnm">'+esc(rec.name||rec.id)+'</div>'+
+              '<div class="cl-cref">'+esc(rec.id)+'</div>'+
+              (rec.gallery?'<div><span class="cl-cgal">'+esc(galLabel(rec.gallery))+'</span></div>':'')+
+              '<div class="cl-cacts"><button class="cl-btn sm danger" data-cact="remove" data-id="'+esc(rec.id)+'" type="button">Remove</button></div>'+
+            '</div>';
+        }
+        h+='</div>';
+      });
+      h+='</div>';
+    }
+
+    // picker
+    var full=c.components.length>=PC.LIMITS.maxComponents;
+    h+='<div class="cl-sec">Add components<span class="line"></span></div>';
+    h+='<div class="cl-picker">'+
+        (full?'<div class="cl-pcount" style="color:#ff9e97">This collection is full ('+PC.LIMITS.maxComponents+' components). Remove some to add more.</div>':'')+
+        '<div class="cl-psearch"><input class="cl-in" id="clPick" type="text" placeholder="Search '+ALL.length.toLocaleString()+' components by name, gallery, ref…" autocomplete="off"'+(full?' disabled':'')+'>'+
+          '<button class="cl-btn ghost sm" id="clPickClear" type="button">Clear</button></div>'+
+        '<div class="cl-pcount" id="clPickCount"></div>'+
+        '<div class="cl-presults" id="clPickResults"></div>'+
+      '</div>';
+
+    root.innerHTML=h;
+
+    document.getElementById('clBack').addEventListener('click', function(){ view='list'; curId=null; render(); });
+    document.getElementById('clDelete').addEventListener('click', function(){ deleteCollection(curId); });
+    document.getElementById('clExport').addEventListener('click', function(){ toggleExportMenu(this, curId); });
+    // edit
+    var editForm=document.getElementById('clEditForm');
+    document.getElementById('clEdit').addEventListener('click', function(){ editForm.classList.toggle('open'); if(editForm.classList.contains('open')){ var n=document.getElementById('cleName'); if(n) n.focus(); } });
+    document.getElementById('cleCancel').addEventListener('click', function(){ editForm.classList.remove('open'); });
+    document.getElementById('cleSave').addEventListener('click', function(){
+      var errEl=document.getElementById('cleErr');
+      try{
+        PC.update(curId, {
+          name:(document.getElementById('cleName')||{}).value||'',
+          description:(document.getElementById('cleDesc')||{}).value||'',
+          tags:((document.getElementById('cleTags')||{}).value||'').split(',')
+        });
+        render(); showToast('Saved details', null, 2600);
+      }catch(err){ if(errEl) errEl.textContent=err&&err.message?err.message:'Could not save.'; }
+    });
+
+    // component actions
+    root.querySelectorAll('.cl-comp [data-cact]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var id=btn.getAttribute('data-id'), act=btn.getAttribute('data-cact');
+        if(act==='remove'){ removeComponent(curId, id); }
+        else if(act==='copy'){ var eff=BYID[id]; if(eff){ copyText(snippetFor(eff)); flash(btn,'✓ Copied'); } }
+      });
+    });
+
+    // picker wiring
+    var pick=document.getElementById('clPick');
+    if(pick){
+      pick.value=pickerQuery;
+      var deb=null;
+      pick.addEventListener('input', function(){ clearTimeout(deb); deb=setTimeout(function(){ pickerQuery=pick.value; renderPicker(); }, 110); });
+      if(pickerQuery) pick.focus();
+    }
+    var pclear=document.getElementById('clPickClear'); if(pclear) pclear.addEventListener('click', function(){ pickerQuery=''; if(pick){ pick.value=''; pick.focus(); } renderPicker(); });
+    renderPicker();
+  }
+
+  function renderPicker(){
+    var box=document.getElementById('clPickResults'); if(!box) return;
+    var countEl=document.getElementById('clPickCount');
+    var c=PC.get(curId); if(!c){ box.innerHTML=''; return; }
+    var inColl={}; c.components.forEach(function(x){ inColl[x.id]=1; });
+    var q=(pickerQuery||'').trim().toLowerCase();
+    if(!q){ if(countEl) countEl.textContent='Type to search the catalog.'; box.innerHTML=''; return; }
+    var terms=q.split(/\s+/).filter(Boolean);
+    var matched=ALL.filter(function(e){
+      var hay=(e.name+' '+e.gallery+' '+(e.galleryTitle||'')+' '+(e.ref||'')+' '+(e.componentType||'')+' '+(e.tags||[]).join(' ')).toLowerCase();
+      return terms.every(function(t){ return hay.indexOf(t)!==-1; });
+    });
+    var LIM=60, shown=matched.slice(0,LIM);
+    if(countEl) countEl.textContent=matched.length.toLocaleString()+' match'+(matched.length===1?'':'es')+(matched.length>LIM?' — showing first '+LIM:'');
+    if(!shown.length){ box.innerHTML='<div class="cl-pcount" style="color:var(--dim)">No components match “'+esc(pickerQuery)+'”.</div>'; return; }
+    var full=c.components.length>=PC.LIMITS.maxComponents;
+    var h='';
+    shown.forEach(function(e){
+      var already=inColl[e.id];
+      h+='<div class="cl-presult">'+
+          '<div class="cl-pnm"><div class="t">'+esc(e.name)+'</div><div class="s">'+esc(galLabel(e.gallery))+(e.ref?' · '+esc(e.ref):'')+'</div></div>'+
+          (already?'<span class="cl-added">✓ Added</span>'
+                  :'<button class="cl-btn sm pri" data-add="'+esc(e.id)+'" type="button"'+(full?' disabled':'')+'>＋ Add</button>')+
+        '</div>';
+    });
+    box.innerHTML=h;
+    box.querySelectorAll('[data-add]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var id=btn.getAttribute('data-add'), eff=BYID[id]; if(!eff) return;
+        try{
+          var res=PC.addComponents(curId, [{id:eff.id, name:eff.name, gallery:eff.gallery}]);
+          if(res.added){ renderDetailKeepScroll(); showToast('Added <b>'+esc(eff.name)+'</b>', null, 2400); }
+        }catch(err){ showToast(esc(err&&err.message?err.message:'Could not add.'), null, 4000); }
+      });
+    });
+  }
+
+  // Re-render detail but preserve scroll position (used after add/remove).
+  function renderDetailKeepScroll(){
+    var sy=window.scrollY;
+    renderDetail();
+    window.scrollTo(0, sy);
+  }
+
+  function removeComponent(cid, effId){
+    var c=PC.get(cid); if(!c) return;
+    var rec=null; c.components.forEach(function(x){ if(x.id===effId) rec=x; });
+    var res=PC.removeComponents(cid, [effId]);
+    if(res.removed){
+      renderDetailKeepScroll();
+      showToast('Removed <b>'+esc(rec?(rec.name||rec.id):effId)+'</b>', function(){
+        try{ PC.addComponents(cid, [rec]); }catch(e){}
+        render();
+      }, 6000);
+    }
+  }
+
+  function deleteCollection(id){
+    var c=PC.get(id); if(!c) return;
+    var snapshot=c;                       // full record for undo
+    var res=PC.remove(id);
+    if(res.deleted){
+      if(curId===id){ curId=null; view='list'; }
+      render();
+      showToast('Deleted <b>'+esc(snapshot.name)+'</b>', function(){
+        try{ PC.restore(snapshot); }catch(e){}
+        render();
+      }, 6500);
+    }
+  }
+
+  // ---------- export menu ----------
+  var openMenu=null;
+  function closeMenu(){ if(openMenu&&openMenu.parentNode){ openMenu.parentNode.removeChild(openMenu); } openMenu=null; }
+  document.addEventListener('click', function(e){
+    if(openMenu && !openMenu.contains(e.target) && !(e.target.closest&&e.target.closest('[data-act="export"],#clExport'))) closeMenu();
+  });
+  function toggleExportMenu(anchorBtn, id){
+    if(openMenu){ closeMenu(); return; }
+    var c=PC.get(id); if(!c) return;
+    var menu=document.createElement('div'); menu.className='cl-menu open';
+    menu.innerHTML=
+      '<div class="cap">Export “'+esc(c.name)+'”</div>'+
+      '<button data-x="json" type="button"><span class="mi">⬇</span> Download JSON <span style="color:var(--dim);margin-left:auto;font-size:10px">.json</span></button>'+
+      '<button data-x="copy" type="button"><span class="mi">⧉</span> Copy JSON (schema)</button>'+
+      '<div class="sep"></div>'+
+      '<button data-x="bundle" type="button"><span class="mi">⬇</span> Download HTML bundle <span style="color:var(--dim);margin-left:auto;font-size:10px">.html</span></button>';
+    // anchor within the button's positioned parent (.cl-cardacts / .cl-detail-acts)
+    var host=anchorBtn.closest('.cl-cardacts')||anchorBtn.closest('.cl-detail-acts')||anchorBtn.parentNode;
+    if(getComputedStyle(host).position==='static') host.style.position='relative';
+    host.appendChild(menu);
+    openMenu=menu;
+    menu.querySelectorAll('[data-x]').forEach(function(b){
+      b.addEventListener('click', function(e){
+        e.stopPropagation();
+        var kind=b.getAttribute('data-x');
+        doExport(id, kind);
+        closeMenu();
+      });
+    });
+  }
+  function doExport(id, kind){
+    var schema=PC.toSchema(id); if(!schema) return;
+    var base=fnSafe(schema.name);
+    if(kind==='json'){
+      var json=JSON.stringify(schema,null,2);
+      schema.totalSize=json.length;                     // best-effort size hint
+      download(base+'.prism-collection.json', JSON.stringify(schema,null,2), 'application/json');
+      showToast('Downloaded <b>'+esc(base)+'.prism-collection.json</b>', null, 3200);
+    } else if(kind==='copy'){
+      copyText(JSON.stringify(schema,null,2));
+      showToast('Copied <b>'+esc(schema.name)+'</b> as prism-collection-1.0 JSON', null, 3200);
+    } else if(kind==='bundle'){
+      var c=PC.get(id);
+      var built=buildBundle(c);
+      download(base+'.bundle.html', built.doc, 'text/html');
+      var extra=built.missing?(' — '+built.missing+' component'+(built.missing===1?'':'s')+' not in this catalog were skipped'):'';
+      showToast('Downloaded <b>'+esc(base)+'.bundle.html</b>'+extra, null, built.missing?5200:3200);
+    }
+  }
+
+  // ---------- import ----------
+  var fileInput=document.getElementById('clFile');
+  function triggerImport(){ if(fileInput){ fileInput.value=''; fileInput.click(); } }
+  if(fileInput) fileInput.addEventListener('change', function(){
+    var f=fileInput.files&&fileInput.files[0]; if(!f) return;
+    var reader=new FileReader();
+    reader.onload=function(){
+      try{
+        var obj=JSON.parse(String(reader.result));
+        var c=PC.importSchema(obj);
+        view='detail'; curId=c.id; pickerQuery='';
+        render();
+        showToast('Imported <b>'+esc(c.name)+'</b> ('+c.components.length+' component'+(c.components.length===1?'':'s')+')', null, 4200);
+      }catch(err){ showToast('Import failed: '+esc(err&&err.message?err.message:'invalid file'), null, 5000); }
+    };
+    reader.onerror=function(){ showToast('Could not read that file.', null, 4000); };
+    reader.readAsText(f);
+  });
+
+  // ---------- misc helpers ----------
+  function flash(btn, txt){ var o=btn.dataset.lbl||btn.textContent; btn.dataset.lbl=o; btn.textContent=txt; setTimeout(function(){ btn.textContent=o; btn.removeAttribute('data-lbl'); }, 1200); }
+  function fmtDate(iso){ try{ var d=new Date(iso); if(isNaN(d.getTime())) return 'recently'; return d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}); }catch(e){ return 'recently'; } }
+
+  // ---------- boot ----------
+  loadCatalog();
+  // Deep-link: #collections?open=<id> or ?new
+  try{
+    var hash=parent.location.hash||'';
+    if(/[?&]new(=|&|$)/.test(hash)) createOpen=true;
+    var om=hash.match(/[?&]open=([^&]+)/);
+    if(om){ var oid=decodeURIComponent(om[1]); if(PC&&PC.has(oid)){ curId=oid; view='detail'; } }
+  }catch(e){}
+  render();
+})();
 <\/script>
 </body>
 </html>
@@ -98032,6 +98767,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
   var PAGES=[
     {id:'facets',label:'New Facets',emoji:'✦',title:'New Facets',blurb:'Every component added in the latest release — collected in one place so you can see what\'s new at a glance.'},
     {id:'search',label:'Search',emoji:'🔎',title:'Search',blurb:'Search all facets by name, gallery, component type, interaction, or design Spectrum.'},
+    {id:'collections',label:'Collections',emoji:'🗂',title:'Collections & Favorites',blurb:'Save components into named collections, then export them as portable prism-collection-1.0 JSON or a self-contained HTML bundle. Round-trips with the Prism MCP server.'},
     {id:'charts',label:'Charts & Metrics',emoji:'📊',title:'Charts & Metrics',blurb:'KPIs, gauges, progress, trends, comparisons and status — hand-authored inline SVG + CSS.'},
     {id:'fx',label:'FX Store',emoji:'🎇',title:'FX Store',blurb:'Drop-in visual effects: glows, pulses, shimmers, particles and more.'},
     {id:'lab',label:'Animation Lab',emoji:'🧪',title:'Animation Lab',blurb:'Motion experiments — easing, transforms, loaders and keyframe studies.'},
@@ -98724,6 +99460,223 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
   registerCustomThemes();
   wireSettings();
   // ===================== /CUSTOM THEMES + SETTINGS =====================
+
+  // ===================== COLLECTIONS & FAVORITES (JFH-7) =====================
+  // Saved, named sets of components that persist across sessions (localStorage).
+  // The store lives in the SHELL so the sidebar badge and the (iframe) manager
+  // page share one source of truth via window.PrismCollections. The on-disk
+  // shape mirrors the MCP server's `prism-collection-1.0` export exactly, so a
+  // collection round-trips between this UI and the MCP CollectionStore.
+  var COLLECTIONS_KEY='prismCollections';
+  var COLLECTION_SCHEMA='prism-collection-1.0';
+  var COLL_LIMITS={maxComponents:50,maxNameLength:50,maxDescriptionLength:200,maxTags:5};
+  function collErr(msg,code){ var e=new Error(msg); e.code=code||'collection_error'; return e; }
+  function nameKey(s){ return String(s==null?'':s).toLowerCase().replace(/\s+/g,' ').trim(); }
+  function nowISO(){ try{ return new Date().toISOString(); }catch(e){ return ''; } }
+
+  // Coerce one component entry (string id or {id,name,gallery}) into a clean record.
+  function normComponent(c){
+    if(c==null) return null;
+    if(typeof c==='string'){ var id=c.trim(); return id?{id:id,name:id,gallery:null}:null; }
+    if(typeof c==='object'){
+      var cid=c.id!=null?String(c.id).trim():'';
+      if(!cid) return null;
+      return {id:cid, name:c.name!=null?String(c.name):cid, gallery:c.gallery!=null?String(c.gallery):null};
+    }
+    return null;
+  }
+  function normComponents(arr){
+    // Object.create(null): a bare {} inherits Object.prototype, so an id like
+    // "toString"/"constructor"/"__proto__" reads back truthy and would be silently
+    // dropped as a "dup". A null-proto map has no inherited keys.
+    var out=[], seen=Object.create(null);
+    (Array.isArray(arr)?arr:[]).forEach(function(c){
+      var rec=normComponent(c); if(!rec) return;
+      if(seen[rec.id]) return; seen[rec.id]=1;   // dedup by id
+      out.push(rec);
+    });
+    return out;
+  }
+  function normTags(arr){
+    var out=[], seen=Object.create(null);
+    (Array.isArray(arr)?arr:[]).forEach(function(t){
+      var v=String(t==null?'':t).replace(/\s+/g,' ').trim(); if(!v) return;
+      var k=v.toLowerCase(); if(seen[k]) return; seen[k]=1;
+      out.push(v);
+    });
+    return out.slice(0,COLL_LIMITS.maxTags);
+  }
+  // Rebuild a trusted internal record from untrusted stored/imported data.
+  function sanitizeCollection(raw){
+    if(!raw||typeof raw!=='object') return null;
+    var id=raw.id!=null?String(raw.id):('coll-'+Date.now());
+    var name=String(raw.name!=null?raw.name:'').replace(/\s+/g,' ').trim();
+    if(!name) return null;
+    return {
+      id:id,
+      name:name.slice(0,COLL_LIMITS.maxNameLength),
+      description:String(raw.description!=null?raw.description:'').slice(0,COLL_LIMITS.maxDescriptionLength),
+      color:(typeof raw.color==='string'&&raw.color)?raw.color:null,
+      icon:(typeof raw.icon==='string'&&raw.icon)?raw.icon:null,
+      tags:normTags(raw.tags),
+      components:normComponents(raw.components).slice(0,COLL_LIMITS.maxComponents),
+      createdAt:String(raw.createdAt||nowISO()),
+      updatedAt:String(raw.updatedAt||raw.createdAt||nowISO())
+    };
+  }
+  var collections=(function loadCollections(){
+    var out=[];
+    try{
+      var raw=localStorage.getItem(COLLECTIONS_KEY);
+      if(raw){
+        var arr=JSON.parse(raw);
+        if(Object.prototype.toString.call(arr)==='[object Array]'){
+          var seenId=Object.create(null);
+          arr.forEach(function(c){
+            var rec=sanitizeCollection(c);
+            if(rec && !seenId[rec.id]){ seenId[rec.id]=1; out.push(rec); }
+          });
+        }
+      }
+    }catch(e){}
+    return out;
+  })();
+  function persistCollections(){ try{ localStorage.setItem(COLLECTIONS_KEY, JSON.stringify(collections)); }catch(e){} }
+  function clone(o){ return JSON.parse(JSON.stringify(o)); }
+  function findCollection(id){ for(var i=0;i<collections.length;i++){ if(collections[i].id===id) return collections[i]; } return null; }
+  function sortedCollections(){
+    return collections.slice().sort(function(a,b){ return String(b.updatedAt).localeCompare(String(a.updatedAt)); });
+  }
+  function assertNameFree(name,exceptId){
+    var k=nameKey(name);
+    for(var i=0;i<collections.length;i++){
+      if(collections[i].id!==exceptId && nameKey(collections[i].name)===k){
+        throw collErr('A collection named "'+collections[i].name+'" already exists.','duplicate_name');
+      }
+    }
+  }
+  function validateName(name){
+    var n=String(name==null?'':name).replace(/\s+/g,' ').trim();
+    if(!n) throw collErr('Collection name is required.','invalid_name');
+    if(n.length>COLL_LIMITS.maxNameLength) throw collErr('Name must be ≤'+COLL_LIMITS.maxNameLength+' characters.','invalid_name');
+    return n;
+  }
+  // Given a desired name, return the closest free variant, appending " (n)" until
+  // unique (respecting the max length). Used by import and undo-restore so neither
+  // can create a second collection sharing an existing name.
+  function dedupeName(desired){
+    var base=String(desired==null?'':desired).replace(/\s+/g,' ').trim().slice(0,COLL_LIMITS.maxNameLength) || 'Untitled collection';
+    var name=base, n=2;
+    while(true){
+      try{ assertNameFree(name,null); return name; }
+      catch(e){ var suffix=' ('+(n++)+')'; name=base.slice(0,COLL_LIMITS.maxNameLength-suffix.length)+suffix; if(n>999) return name; }
+    }
+  }
+  function toSchema(c){
+    var comps=c.components.map(function(x){ return {id:x.id,name:x.name,gallery:x.gallery}; });
+    return {
+      __schema:COLLECTION_SCHEMA, name:c.name, description:c.description||'', version:'1.0',
+      exportedAt:nowISO(), color:c.color||null, icon:c.icon||null, tags:(c.tags||[]).slice(),
+      components:comps, componentCount:comps.length, totalSize:null
+    };
+  }
+
+  var collSubs=[];
+  function notifyColl(){ persistCollections(); updateCollBadge(); collSubs.forEach(function(fn){ try{ fn(); }catch(e){} }); }
+  function updateCollBadge(){
+    var link=document.querySelector('.sr-collections'); if(!link) return;
+    var b=link.querySelector('.sr-cc');
+    if(!b){ b=document.createElement('span'); b.className='sr-cc'; link.appendChild(b); }
+    b.textContent=collections.length?String(collections.length):'';
+  }
+
+  // Public bridge — same-origin iframes reach this via parent.PrismCollections.
+  window.PrismCollections={
+    SCHEMA:COLLECTION_SCHEMA,
+    LIMITS:clone(COLL_LIMITS),
+    list:function(){ return sortedCollections().map(clone); },
+    get:function(id){ var c=findCollection(id); return c?clone(c):null; },
+    has:function(id){ return !!findCollection(id); },
+    count:function(){ return collections.length; },
+    create:function(input){
+      input=input||{};
+      var name=validateName(input.name); assertNameFree(name,null);
+      var comps=normComponents(input.components);
+      // Surface an over-cap set rather than silently truncating it (matches the MCP
+      // store's limit_exceeded behaviour); the import handler shows the error to the user.
+      if(comps.length>COLL_LIMITS.maxComponents) throw collErr('A collection can hold at most '+COLL_LIMITS.maxComponents+' components (got '+comps.length+').','limit_exceeded');
+      var rec={
+        id:'coll-'+Date.now()+'-'+Math.floor(Math.random()*1e4),
+        name:name,
+        description:String(input.description!=null?input.description:'').slice(0,COLL_LIMITS.maxDescriptionLength),
+        color:(typeof input.color==='string'&&input.color)?input.color:null,
+        icon:(typeof input.icon==='string'&&input.icon)?input.icon:null,
+        tags:normTags(input.tags),
+        components:comps,
+        createdAt:nowISO(), updatedAt:nowISO()
+      };
+      collections.push(rec); notifyColl(); return clone(rec);
+    },
+    update:function(id,patch){
+      var c=findCollection(id); if(!c) throw collErr('Collection not found.','not_found');
+      patch=patch||{};
+      if(patch.name!=null){ var nm=validateName(patch.name); assertNameFree(nm,id); c.name=nm; }
+      if(patch.description!=null) c.description=String(patch.description).slice(0,COLL_LIMITS.maxDescriptionLength);
+      if(patch.color!==undefined) c.color=(typeof patch.color==='string'&&patch.color)?patch.color:null;
+      if(patch.icon!==undefined) c.icon=(typeof patch.icon==='string'&&patch.icon)?patch.icon:null;
+      if(patch.tags!=null) c.tags=normTags(patch.tags);
+      c.updatedAt=nowISO(); notifyColl(); return clone(c);
+    },
+    addComponents:function(id,comps){
+      var c=findCollection(id); if(!c) throw collErr('Collection not found.','not_found');
+      var have=Object.create(null); c.components.forEach(function(x){ have[x.id]=1; });
+      var incoming=normComponents(comps), added=0, skipped=0;
+      incoming.forEach(function(rec){
+        if(have[rec.id]){ skipped++; return; }
+        if(c.components.length>=COLL_LIMITS.maxComponents){ throw collErr('A collection can hold at most '+COLL_LIMITS.maxComponents+' components.','limit_exceeded'); }
+        c.components.push(rec); have[rec.id]=1; added++;
+      });
+      if(added){ c.updatedAt=nowISO(); notifyColl(); }
+      return {collection:clone(c), added:added, skipped:skipped};
+    },
+    removeComponents:function(id,ids){
+      var c=findCollection(id); if(!c) throw collErr('Collection not found.','not_found');
+      var drop=Object.create(null); (Array.isArray(ids)?ids:[ids]).forEach(function(x){ if(x!=null) drop[String(x)]=1; });
+      var before=c.components.length;
+      c.components=c.components.filter(function(x){ return !drop[x.id]; });
+      var removed=before-c.components.length;
+      if(removed){ c.updatedAt=nowISO(); notifyColl(); }
+      return {collection:clone(c), removed:removed};
+    },
+    remove:function(id){
+      var before=collections.length;
+      collections=collections.filter(function(c){ return c.id!==id; });
+      if(collections.length!==before){ notifyColl(); return {deleted:id}; }
+      return {deleted:null};
+    },
+    // Re-insert a full record verbatim (used by the manager's undo). Keeps the
+    // original id/timestamps; regenerates the id only on a collision, and dedupes
+    // the name so an undo after a same-name re-create can't produce two "Foo"s
+    // (which would violate the uniqueness invariant and wedge in-place renames).
+    restore:function(record){
+      var rec=sanitizeCollection(record); if(!rec) throw collErr('Nothing to restore.','invalid');
+      if(findCollection(rec.id)) rec.id='coll-'+Date.now()+'-'+Math.floor(Math.random()*1e4);
+      rec.name=dedupeName(rec.name);
+      collections.push(rec); notifyColl(); return clone(rec);
+    },
+    // Import a prism-collection-1.0 object (or a raw {name,components,…}) as a NEW
+    // collection. De-duplicates the name with a " (n)" suffix so imports never clobber.
+    importSchema:function(obj){
+      if(!obj||typeof obj!=='object') throw collErr('Not a collection file.','invalid_import');
+      if(obj.__schema && obj.__schema!==COLLECTION_SCHEMA) throw collErr('Unrecognized schema: '+obj.__schema,'invalid_import');
+      var name=dedupeName(String(obj.name!=null?obj.name:'Imported collection').replace(/\s+/g,' ').trim()||'Imported collection');
+      return this.create({name:name, description:obj.description, color:obj.color, icon:obj.icon, tags:obj.tags, components:obj.components});
+    },
+    toSchema:function(id){ var c=findCollection(id); if(!c) throw collErr('Collection not found.','not_found'); return toSchema(c); },
+    subscribe:function(fn){ if(typeof fn==='function'){ collSubs.push(fn); return function(){ collSubs=collSubs.filter(function(f){ return f!==fn; }); }; } return function(){}; }
+  };
+  updateCollBadge();
+  // ===================== /COLLECTIONS & FAVORITES =====================
 
   try{ var saved=localStorage.getItem('prismTheme'); if(saved&&THEMES.hasOwnProperty(saved)) curTheme=saved; }catch(e){}
 

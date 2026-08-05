@@ -12,6 +12,7 @@
 //     handleMessage() directly.
 
 import { CatalogStore } from './utils/catalog.js';
+import { CollectionStore } from './utils/collections.js';
 import { buildTools, ToolError } from './tools/index.js';
 import { createLogger } from './utils/logger.js';
 
@@ -28,6 +29,13 @@ export class PrismMCPServer {
     if (!catalogPath) throw new Error('PrismMCPServer requires a catalogPath');
     this.logger = opts.logger || createLogger(opts.logLevel);
     this.store = new CatalogStore(catalogPath, { watch: opts.watch !== false, logger: this.logger });
+    // Collections (JFH-7): disk-backed named sets of effect ids. Caller may inject a
+    // store (tests use inMemory) or point it at a specific file via opts.collectionsPath.
+    this.collections = opts.collections || new CollectionStore({
+      filePath: opts.collectionsPath,
+      inMemory: opts.collectionsInMemory === true,
+      logger: this.logger,
+    });
     this.tools = buildTools();
     this.toolMap = new Map(this.tools.map((t) => [t.name, t]));
     this.initialized = false;
@@ -114,7 +122,7 @@ export class PrismMCPServer {
     this.requestCount++;
     this.logger.debug(`tools/call ${params.name} args=${safeJson(args)}`);
     try {
-      const out = await tool.handler(args, { store: this.store, logger: this.logger });
+      const out = await tool.handler(args, { store: this.store, collections: this.collections, logger: this.logger });
       const ms = Date.now() - started;
       this.logger.info(`tool ${params.name} ok (${ms}ms)`);
       return {

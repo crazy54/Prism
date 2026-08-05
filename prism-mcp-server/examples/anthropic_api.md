@@ -115,4 +115,4 @@ node examples/bridge.mjs
 ```
 
 This keeps a single warm `CatalogStore` in memory (fast, hot-reloadable) while
-Claude iterates over the 15 tools.
+Claude iterates over the 21 tools.

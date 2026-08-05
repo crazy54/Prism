@@ -1,0 +1,6 @@
+# Runtime state written by the server (JFH-7 collections persistence).
+collections.json
+collections.json.tmp
+
+# Node
+node_modules/
