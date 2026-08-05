@@ -157,14 +157,16 @@ export class CatalogStore extends EventEmitter {
       this.catalog = this.catalog || { effects: [], galleries: [] };
       if (!Array.isArray(this.catalog.effects)) this.catalog.effects = [];
     }
-    for (const e of this.catalog.effects) {
-      this._byId.set(e.id, e);
-      if (!this._byGallery.has(e.gallery)) this._byGallery.set(e.gallery, []);
-      this._byGallery.get(e.gallery).push(e);
-    }
-    // Layer runtime facets on top so they are discoverable immediately.
-    for (const e of this.runtimeFacets.values()) {
-      this._byId.set(e.id, e);
+    for (const e of this.catalog.effects) this._byId.set(e.id, e);
+    // Layer runtime facets on top so they are discoverable immediately. Setting an
+    // existing id replaces its value but keeps its Map position, so a runtime
+    // UPDATE of a base-catalog effect stays in place and a brand-new facet is appended.
+    for (const e of this.runtimeFacets.values()) this._byId.set(e.id, e);
+    // Build the gallery index from the DEDUPED id map. Pushing from catalog.effects
+    // and runtimeFacets separately would list an updated base effect twice (once as
+    // its original, once as the runtime copy) and inflate list_galleries /
+    // export_collection(gallery). One entry per id, in _byId (insertion) order.
+    for (const e of this._byId.values()) {
       if (!this._byGallery.has(e.gallery)) this._byGallery.set(e.gallery, []);
       this._byGallery.get(e.gallery).push(e);
     }

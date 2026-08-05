@@ -152,7 +152,7 @@ prism-mcp-server/
 │   ├── validate.js   # facet + composition validation
 │   └── logger.js     # stderr logger (never pollutes the stdio JSON-RPC channel)
 ├── examples/         # one example request/response per tool + integration configs
-└── test/             # node:test integration + unit tests (80 tests)
+└── test/             # node:test integration + unit tests (89 tests)
 ```
 
 **Server model.** `new PrismMCPServer(catalogPath, opts)` builds the tool registry and a `CatalogStore`. `await server.load()` reads + indexes the catalog. `server.connect(transport)` wires a transport; `StdioTransport` implements newline-delimited JSON-RPC on stdin/stdout. The transport is pluggable — implement `onMessage(cb)` / `send(obj)` to add HTTP/SSE.
@@ -169,7 +169,7 @@ prism-mcp-server/
 node --test          # or: npm test
 ```
 
-80 tests cover every tool (incl. the 6 Collections tools + `export_collection` formats), the CSS/compose/validate utilities, the `CollectionStore`, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
+89 tests cover every tool (incl. the 6 Collections tools + `export_collection` formats), the CSS/compose/validate utilities, the `CollectionStore`, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
 
 ---
 
