@@ -24,7 +24,12 @@ export function parseIsland(html) {
   if (end === -1) throw new Error('prism-catalog island is not terminated');
   // The embedder neutralizes "</script" as "<\/script" so the island can't close early.
   const raw = html.slice(start, end).split('<\\/script').join('</script');
-  return JSON.parse(raw);
+  try {
+    return JSON.parse(raw);
+  } catch (err) {
+    // A malformed island must not crash the process — surface a clear, catchable error.
+    throw new Error(`Failed to parse prism-catalog JSON island: ${err.message}`);
+  }
 }
 
 /** Load + parse a catalog file (auto-detecting .html island vs .json manifest). */
@@ -33,7 +38,11 @@ export async function loadCatalogFile(filePath) {
   const ext = path.extname(filePath).toLowerCase();
   if (ext === '.html' || ext === '.htm') return parseIsland(text);
   // JSON manifest (or anything else we optimistically try as JSON)
-  return JSON.parse(text);
+  try {
+    return JSON.parse(text);
+  } catch (err) {
+    throw new Error(`Failed to parse catalog JSON from ${filePath}: ${err.message}`);
+  }
 }
 
 function toArray(v) {
@@ -141,14 +150,23 @@ export class CatalogStore extends EventEmitter {
   _reindex() {
     this._byId.clear();
     this._byGallery.clear();
-    for (const e of this.catalog.effects) {
-      this._byId.set(e.id, e);
-      if (!this._byGallery.has(e.gallery)) this._byGallery.set(e.gallery, []);
-      this._byGallery.get(e.gallery).push(e);
+    // Guard against a failed/incomplete load: a null catalog (or one missing its
+    // effects array) must not crash indexing. Runtime facets are still layered on below.
+    if (!this.catalog || !Array.isArray(this.catalog.effects)) {
+      this.log('warn', '_reindex called with no valid catalog; index left empty');
+      this.catalog = this.catalog || { effects: [], galleries: [] };
+      if (!Array.isArray(this.catalog.effects)) this.catalog.effects = [];
     }
-    // Layer runtime facets on top so they are discoverable immediately.
-    for (const e of this.runtimeFacets.values()) {
-      this._byId.set(e.id, e);
+    for (const e of this.catalog.effects) this._byId.set(e.id, e);
+    // Layer runtime facets on top so they are discoverable immediately. Setting an
+    // existing id replaces its value but keeps its Map position, so a runtime
+    // UPDATE of a base-catalog effect stays in place and a brand-new facet is appended.
+    for (const e of this.runtimeFacets.values()) this._byId.set(e.id, e);
+    // Build the gallery index from the DEDUPED id map. Pushing from catalog.effects
+    // and runtimeFacets separately would list an updated base effect twice (once as
+    // its original, once as the runtime copy) and inflate list_galleries /
+    // export_collection(gallery). One entry per id, in _byId (insertion) order.
+    for (const e of this._byId.values()) {
       if (!this._byGallery.has(e.gallery)) this._byGallery.set(e.gallery, []);
       this._byGallery.get(e.gallery).push(e);
     }

@@ -15,9 +15,18 @@ export function splitRules(css) {
   const rules = [];
   let depth = 0;
   let buf = '';
+  let quote = 0; // 0 = none, or the char code of the open quote (' or ")
   for (let i = 0; i < src.length; i++) {
     const ch = src[i];
     buf += ch;
+    if (quote) {
+      // Inside a string literal: braces are content, not block delimiters. A
+      // backslash escapes the next char (so \" doesn't close the string).
+      if (ch === '\\') { buf += src[++i] || ''; continue; }
+      if (ch === quote) quote = 0;
+      continue;
+    }
+    if (ch === '"' || ch === "'") { quote = ch; continue; }
     if (ch === '{') depth++;
     else if (ch === '}') {
       depth--;
@@ -119,17 +128,26 @@ export function validateCss(css) {
   const warnings = [];
   const src = stripComments(css || '');
   let depth = 0;
+  let quote = 0; // ignore braces inside string literals (e.g. content:"{")
+  let lastRealClose = -1;
   for (let i = 0; i < src.length; i++) {
-    if (src[i] === '{') depth++;
-    else if (src[i] === '}') {
+    const ch = src[i];
+    if (quote) {
+      if (ch === '\\') { i++; continue; }
+      if (ch === quote) quote = 0;
+      continue;
+    }
+    if (ch === '"' || ch === "'") { quote = ch; continue; }
+    if (ch === '{') depth++;
+    else if (ch === '}') {
       depth--;
+      lastRealClose = i;
       if (depth < 0) { errors.push('Unbalanced CSS: stray closing brace "}"'); depth = 0; }
     }
   }
   if (depth > 0) errors.push(`Unbalanced CSS: ${depth} unclosed "{" block(s)`);
-  // Content after the last "}" that contains a "{" implies an unterminated rule.
-  const lastClose = src.lastIndexOf('}');
-  const tail = (lastClose === -1 ? src : src.slice(lastClose + 1)).trim();
+  // Content after the last real "}" that contains a "{" implies an unterminated rule.
+  const tail = (lastRealClose === -1 ? src : src.slice(lastRealClose + 1)).trim();
   if (tail && tail.includes('{')) warnings.push('Trailing content after last rule looks unterminated');
   return { valid: errors.length === 0, errors, warnings };
 }

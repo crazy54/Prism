@@ -28,6 +28,23 @@ test('list_effects pagination offset/limit', () => {
   assert.equal(r.offset, 1);
 });
 
+// Regression (JFH-8 sweep): paginate() coerced offset/limit with `x | 0`, a 32-bit
+// signed conversion. Any value >= 2^31 wrapped negative and clamped to 0 — so a large
+// paging offset silently returned page 1 again (infinite re-paging) and a large limit
+// returned nothing. nonNegInt (Math.trunc(Number(x))) handles the full safe-integer range.
+test('list_effects pagination survives offsets/limits >= 2^31', () => {
+  const ctx = toolCtx();
+  const total = ctx.call('list_effects', {}).total;
+  // A huge offset must be treated as past-the-end (empty), NOT wrapped to page 1.
+  const past = ctx.call('list_effects', { offset: 2147483648, limit: 5 });
+  assert.equal(past.offset, 2147483648, 'offset preserved, not wrapped to 0');
+  assert.equal(past.returned, 0, 'past-the-end offset returns an empty page');
+  assert.equal(past.items.length, 0);
+  // A huge limit must return everything, NOT nothing.
+  const big = ctx.call('list_effects', { limit: 2147483648, offset: 0 });
+  assert.equal(big.returned, total, 'huge limit returns all items, not zero');
+});
+
 test('search_effects ranks by relevance', () => {
   const ctx = toolCtx();
   const r = ctx.call('search_effects', { query: 'pulsing kpi' });
@@ -239,6 +256,24 @@ test('update_facet on unknown id errors', () => {
   const r = ctx.callSafe('update_facet', { id: 'does-not-exist', name: 'x' });
   assert.equal(r.ok, false);
   assert.equal(r.error.code, 'not_found');
+});
+
+test('update_facet on a base-catalog effect does not duplicate it in the gallery', () => {
+  const ctx = toolCtx();
+  // 'charts' has two base-catalog effects. Updating one used to layer a second
+  // copy into _byGallery (base push + runtime push), inflating list_galleries
+  // and export_collection(gallery). It must stay at exactly two, no dupes.
+  ctx.call('update_facet', { id: 'charts-kpi-delta', description: 'Updated description for delta tile.' });
+  const g = ctx.store.gallery('charts');
+  assert.equal(g.length, 2, 'gallery must not grow on update');
+  const ids = g.map((e) => e.id);
+  assert.equal(new Set(ids).size, ids.length, 'no duplicate ids in gallery index');
+  assert.equal(ctx.call('list_galleries', {}).items.find((x) => x.id === 'charts').liveCount, 2);
+  const exp = ctx.call('export_collection', { gallery: 'charts' });
+  assert.equal(exp.effects.length, 2, 'export_collection must not double-list the updated effect');
+  assert.equal(new Set(exp.effects).size, exp.effects.length);
+  // the update itself still took effect
+  assert.equal(ctx.call('get_effect', { id: 'charts-kpi-delta' }).description, 'Updated description for delta tile.');
 });
 
 // -------------------- Catalog management --------------------
