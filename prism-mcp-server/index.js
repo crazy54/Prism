@@ -185,17 +185,29 @@ function safeJson(v) {
  * for local stdio MCP servers.
  */
 export class StdioTransport {
-  constructor({ input = process.stdin, output = process.stdout } = {}) {
+  // Cap the pending (un-newline-terminated) buffer. A client that streams bytes
+  // without ever sending a '\n' would otherwise grow this string without bound and
+  // exhaust memory (CWE-400). 16MB comfortably exceeds any legitimate single message.
+  static MAX_BUFFER_SIZE = 16 * 1024 * 1024;
+
+  constructor({ input = process.stdin, output = process.stdout, maxBufferSize } = {}) {
     this.input = input;
     this.output = output;
     this.buffer = '';
     this.cb = null;
+    this.maxBufferSize = maxBufferSize || StdioTransport.MAX_BUFFER_SIZE;
   }
   onMessage(cb) { this.cb = cb; }
   start() {
     this.input.setEncoding('utf8');
     this.input.on('data', (chunk) => {
       this.buffer += chunk;
+      // Reject a single oversized (newline-less) message before it exhausts memory.
+      if (this.buffer.length > this.maxBufferSize && this.buffer.indexOf('\n') === -1) {
+        this.send({ jsonrpc: '2.0', id: null, error: { code: -32600, message: 'Invalid Request', data: { detail: `Message exceeds ${this.maxBufferSize}-byte limit` } } });
+        this.buffer = '';
+        return;
+      }
       let idx;
       while ((idx = this.buffer.indexOf('\n')) !== -1) {
         const line = this.buffer.slice(0, idx).trim();
