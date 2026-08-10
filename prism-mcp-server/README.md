@@ -67,7 +67,7 @@ Add the server to your `claude_desktop_config.json` (see `examples/claude_deskto
 }
 ```
 
-Restart Claude Desktop; the 23 Prism tools appear in the tools menu.
+Restart Claude Desktop; the 29 Prism tools appear in the tools menu.
 
 ## Use with the Anthropic API
 
@@ -75,7 +75,7 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 
 ---
 
-## Tools (23)
+## Tools (29)
 
 ### Discovery & search (11)
 | Tool | Purpose |
@@ -121,8 +121,21 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 | Tool | Purpose |
 |------|---------|
 | `get_catalog_metadata` | Catalog name/version/source/counts, source path, hot-reload status. |
-| `export_collection` | Export a set of ids (or a whole gallery) as a self-contained bundle, optionally a full HTML document. |
+| `export_collection` | Export a self-contained bundle from a saved `collectionId`, an explicit set of `ids`, or a whole gallery. `format`: `bundle` (CSS+HTML, default), `document` (full `<html>`), or `schema` (portable `prism-collection-1.0` JSON, saved collections only). |
 | `get_token_reference` | Canonical CSS token reference (tokens.css + token purposes + recolor classes). |
+
+### Collections & favorites (6)
+Saved, named sets of effects that persist across sessions (disk-backed JSON). Constraints: name ≤50 chars & unique, description ≤200 chars, ≤5 tags, ≤50 components; duplicate ids are collapsed.
+| Tool | Purpose |
+|------|---------|
+| `list_collections` | List saved collections as lightweight summaries (most-recently-updated first). |
+| `get_collection` | Get one collection incl. its full component list (`{id, name, gallery}`). |
+| `create_collection` | Create a named collection; effect ids are validated against the catalog and stored with their name+gallery. |
+| `add_to_collection` | Add effects to a collection (dedup + 50-component cap); reports added/skipped. |
+| `remove_from_collection` | Remove effects from a collection by id; reports the count removed. |
+| `delete_collection` | Delete a collection entirely. |
+
+> Export a saved collection for the Prism.html UI with `export_collection { collectionId, format: "schema" }` — the resulting `prism-collection-1.0` JSON is the cross-surface bridge between the MCP server and the in-browser Collections panel.
 
 Full parameter schemas are returned by `tools/list`. Per-tool example calls live in [`examples/`](./examples).
 
@@ -146,16 +159,17 @@ prism-mcp-server/
 ├── index.js          # PrismMCPServer (JSON-RPC dispatch) + StdioTransport
 ├── cli.js            # prism-mcp CLI (start / info / tools / help)
 ├── tools/
-│   └── index.js      # the 23 tool definitions (name, description, schema, handler)
+│   └── index.js      # the 29 tool definitions (name, description, schema, handler)
 ├── utils/
 │   ├── catalog.js    # CatalogStore: load island/manifest, index, hot reload, runtime facets
+│   ├── collections.js# CollectionStore: disk-backed named sets + prism-collection-1.0 export
 │   ├── css.js        # split/dedupe/merge/validate CSS; token extraction
 │   ├── compose.js    # composition engine + layout templates
 │   ├── validate.js   # facet + composition validation
 │   ├── themes.js     # canonical theme token maps (variant matrix) — mirrors Prism.html THEMES
 │   └── logger.js     # stderr logger (never pollutes the stdio JSON-RPC channel)
 ├── examples/         # one example request/response per tool + integration configs
-└── test/             # node:test integration + unit tests (104 tests)
+└── test/             # node:test integration + unit tests (127 tests)
 ```
 
 **Server model.** `new PrismMCPServer(catalogPath, opts)` builds the tool registry and a `CatalogStore`. `await server.load()` reads + indexes the catalog. `server.connect(transport)` wires a transport; `StdioTransport` implements newline-delimited JSON-RPC on stdin/stdout. The transport is pluggable — implement `onMessage(cb)` / `send(obj)` to add HTTP/SSE.
@@ -172,7 +186,7 @@ prism-mcp-server/
 node --test          # or: npm test
 ```
 
-104 tests cover every tool (incl. the variant-matrix tools + `themeSensitive` facet), the CSS/compose/validate utilities, the canonical theme token maps, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
+127 tests cover every tool (incl. the advanced-search & variant-matrix tools, the `themeSensitive` facet, and the 6 Collections tools + `export_collection` formats), the CSS/compose/validate utilities, the canonical theme token maps, the `CollectionStore`, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
 
 ---
 

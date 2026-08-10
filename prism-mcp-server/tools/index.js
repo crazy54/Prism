@@ -7,6 +7,7 @@ import { lightEffect } from '../utils/catalog.js';
 import { compose, composeWithTemplate, availableTemplates } from '../utils/compose.js';
 import { validateFacet, validateComposition } from '../utils/validate.js';
 import { THEMES, THEME_IDS, TOKEN_META, BASE_TOKENS, getTheme, usesTokens, themeRootCss, isThemeSensitive } from '../utils/themes.js';
+import { CollectionError, toExportSchema } from '../utils/collections.js';
 
 export class ToolError extends Error {
   constructor(message, { code = 'tool_error', data = null } = {}) {
@@ -15,6 +16,42 @@ export class ToolError extends Error {
     this.code = code;
     this.data = data;
   }
+}
+
+/** Run a CollectionStore op, translating CollectionError into a structured ToolError. */
+function withCollections(collections, fn) {
+  if (!collections) throw new ToolError('Collections are not available in this server context', { code: 'unavailable' });
+  try {
+    return fn(collections);
+  } catch (err) {
+    if (err instanceof CollectionError) throw new ToolError(err.message, { code: err.code, data: err.data });
+    throw err;
+  }
+}
+
+/**
+ * Resolve component inputs (ids and/or {id} objects) against the catalog, enriching each
+ * with the catalog's name+gallery so the stored/exported record is self-describing.
+ * Throws a structured ToolError listing any ids not present in the catalog.
+ */
+function resolveComponents(effectIds, store) {
+  const ids = (Array.isArray(effectIds) ? effectIds : [effectIds])
+    .map((x) => (typeof x === 'string' ? x : x && x.id ? String(x.id) : null))
+    .filter(Boolean);
+  const missing = [];
+  const resolved = [];
+  const seen = new Set();
+  for (const id of ids) {
+    if (seen.has(id)) continue;
+    seen.add(id);
+    const e = store.get(id);
+    if (!e) { missing.push(id); continue; }
+    resolved.push({ id: e.id, name: e.name, gallery: e.gallery });
+  }
+  if (missing.length) {
+    throw new ToolError(`Unknown effect id(s): ${missing.join(', ')}`, { code: 'not_found', data: { missing } });
+  }
+  return resolved;
 }
 
 // --- shared schema fragments ---
@@ -867,26 +904,51 @@ export function buildTools() {
     },
     {
       name: 'export_collection',
-      description: 'Export a named collection of effects as a self-contained bundle. Given a set of ids (or a gallery), returns merged deduped CSS + each effect\'s html, ready to drop into a page. Optionally returns a full standalone HTML document.',
+      description: 'Export effects as a self-contained bundle. Three sources (in priority order): a saved collectionId, an explicit set of ids, or an entire gallery. format="bundle" (default) returns merged deduped CSS + each effect\'s html; format="document" adds a complete standalone <html> document; format="schema" returns the portable prism-collection-1.0 JSON (importable by the Prism.html UI). Only a saved collectionId can produce format="schema".',
       inputSchema: {
         type: 'object',
         properties: {
-          ids: { ...strArr, description: 'Effect ids to include (omit if using gallery)' },
+          collectionId: { type: 'string', description: 'Export a saved collection by id (takes priority over ids/gallery)' },
+          ids: { ...strArr, description: 'Effect ids to include (omit if using collectionId or gallery)' },
           gallery: { type: 'string', description: 'Export an entire gallery instead of explicit ids' },
+          format: { type: 'string', enum: ['bundle', 'document', 'schema'], default: 'bundle', description: 'bundle (CSS+HTML), document (full <html>), or schema (prism-collection-1.0 JSON)' },
           title: { type: 'string', default: 'Prism Collection' },
-          asDocument: { type: 'boolean', default: false, description: 'Return a complete <html> document' },
+          asDocument: { type: 'boolean', default: false, description: 'Deprecated alias for format="document"' },
           includeTokens: { type: 'boolean', default: true },
         },
         additionalProperties: false,
       },
-      handler: (a, { store }) => {
+      handler: (a, { store, collections }) => {
+        const format = a.format || (a.asDocument ? 'document' : 'bundle');
+        // --- Source resolution: saved collection > explicit ids > gallery ---
         let ids = a.ids;
-        if ((!ids || !ids.length) && a.gallery) ids = store.gallery(a.gallery).map((e) => e.id);
-        if (!ids || !ids.length) throw new ToolError('Provide ids[] or a gallery to export', { code: 'invalid_argument' });
+        let sourceCollection = null;
+        if (a.collectionId) {
+          sourceCollection = withCollections(collections, (c) => c.get(a.collectionId));
+          ids = sourceCollection.components.map((cmp) => cmp.id);
+        } else if ((!ids || !ids.length) && a.gallery) {
+          ids = store.gallery(a.gallery).map((e) => e.id);
+        }
+        if (!ids || !ids.length) {
+          if (a.collectionId) throw new ToolError('Collection is empty; nothing to export', { code: 'invalid_argument', data: { collectionId: a.collectionId } });
+          throw new ToolError('Provide collectionId, ids[], or a gallery to export', { code: 'invalid_argument' });
+        }
+
+        // --- format="schema": portable prism-collection-1.0 (saved collections only) ---
+        if (format === 'schema') {
+          if (!sourceCollection) throw new ToolError('format="schema" requires a saved collectionId', { code: 'invalid_argument' });
+          // totalSize = byte length of the composed CSS+HTML, a useful UI hint.
+          const composed = compose(ids, store, { includeTokens: a.includeTokens });
+          const totalSize = composed.ok ? Buffer.byteLength((composed.css || '') + (composed.html || '')) : null;
+          return toExportSchema(sourceCollection, { totalSize });
+        }
+
+        const title = a.title || (sourceCollection && sourceCollection.name) || 'Prism Collection';
         const res = compose(ids, store, { includeTokens: a.includeTokens });
         if (!res.ok) throw new ToolError('Export failed', { code: 'export_failed', data: { errors: res.errors, missing: res.missing } });
-        const bundle = { title: a.title || 'Prism Collection', effects: res.effects, css: res.css, html: res.html, initializers: res.initializers, metrics: res.metrics };
-        if (a.asDocument) {
+        const bundle = { title, effects: res.effects, css: res.css, html: res.html, initializers: res.initializers, metrics: res.metrics };
+        if (sourceCollection) bundle.collectionId = sourceCollection.id;
+        if (format === 'document') {
           // Defense-in-depth: even though the catalog is trusted by design, when we
           // inline CSS into a <style> block a stray "</style>" (or "</script>") would
           // close the tag early and let following bytes be parsed as markup/script.
@@ -932,6 +994,103 @@ export function buildTools() {
           recolorClasses: ['c-accent', 'c-info', 'c-pos', 'c-warn', 'c-neg', 'c-crit'],
         };
       },
+    },
+
+    // ============================== COLLECTIONS & FAVORITES (6) ==============================
+    // Saved, named sets of effects that persist across sessions (JFH-7). export_collection
+    // (above) is overloaded to export a saved collection by id, including as portable
+    // prism-collection-1.0 JSON for import into the Prism.html UI.
+    {
+      name: 'list_collections',
+      description: 'List all saved collections as lightweight summaries (id, name, description, componentCount, tags, timestamps), most-recently-updated first.',
+      inputSchema: { type: 'object', properties: {}, additionalProperties: false },
+      handler: (a, { collections }) => {
+        const items = withCollections(collections, (c) => c.list());
+        return { total: items.length, items };
+      },
+    },
+    {
+      name: 'get_collection',
+      description: 'Get a single saved collection by id, including its full component list ({id, name, gallery}).',
+      inputSchema: {
+        type: 'object',
+        properties: { collectionId: { type: 'string', description: 'The collection id' } },
+        required: ['collectionId'],
+        additionalProperties: false,
+      },
+      handler: (a, { collections }) => withCollections(collections, (c) => c.get(a.collectionId)),
+    },
+    {
+      name: 'create_collection',
+      description: 'Create a new named collection of effects. Effect ids are validated against the catalog and stored with their name+gallery. Constraints: name <=50 chars & unique, description <=200 chars, <=5 tags, <=50 components. Duplicate ids are collapsed.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          name: { type: 'string', description: 'Collection name (<=50 chars, must be unique)' },
+          effectIds: { ...strArr, description: 'Effect ids to seed the collection with (may be empty)' },
+          description: { type: 'string', description: 'Optional description (<=200 chars)' },
+          color: { type: 'string', description: 'Optional accent color for UI' },
+          icon: { type: 'string', description: 'Optional icon key/emoji for UI' },
+          tags: { ...strArr, description: 'Optional tags (<=5)' },
+        },
+        required: ['name'],
+        additionalProperties: false,
+      },
+      handler: (a, { store, collections }) => {
+        const components = resolveComponents(a.effectIds || [], store);
+        return withCollections(collections, (c) => c.create({
+          name: a.name,
+          description: a.description || '',
+          components,
+          color: a.color || null,
+          icon: a.icon || null,
+          tags: a.tags || [],
+        }));
+      },
+    },
+    {
+      name: 'add_to_collection',
+      description: 'Add one or more effects to a saved collection. Effect ids are validated against the catalog. Duplicates already in the collection are skipped; the 50-component limit is enforced. Returns the updated collection plus counts of added/skipped.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          collectionId: { type: 'string', description: 'Target collection id' },
+          effectIds: { ...strArr, description: 'Effect ids to add' },
+        },
+        required: ['collectionId', 'effectIds'],
+        additionalProperties: false,
+      },
+      handler: (a, { store, collections }) => {
+        const components = resolveComponents(a.effectIds || [], store);
+        if (!components.length) throw new ToolError('Provide at least one effectId to add', { code: 'invalid_argument' });
+        return withCollections(collections, (c) => c.addComponents(a.collectionId, components));
+      },
+    },
+    {
+      name: 'remove_from_collection',
+      description: 'Remove one or more effects from a saved collection by effect id. Returns the updated collection and the number removed. Ids not present are ignored.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          collectionId: { type: 'string', description: 'Target collection id' },
+          effectIds: { ...strArr, description: 'Effect ids to remove' },
+        },
+        required: ['collectionId', 'effectIds'],
+        additionalProperties: false,
+      },
+      handler: (a, { collections }) =>
+        withCollections(collections, (c) => c.removeComponents(a.collectionId, a.effectIds || [])),
+    },
+    {
+      name: 'delete_collection',
+      description: 'Delete a saved collection entirely. This cannot be undone via the MCP surface.',
+      inputSchema: {
+        type: 'object',
+        properties: { collectionId: { type: 'string', description: 'The collection id to delete' } },
+        required: ['collectionId'],
+        additionalProperties: false,
+      },
+      handler: (a, { collections }) => withCollections(collections, (c) => c.delete(a.collectionId)),
     },
   ];
 }
