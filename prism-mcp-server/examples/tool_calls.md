@@ -396,7 +396,7 @@ Request:
 ```json
 {
   "name": "export_collection",
-  "arguments": { "gallery": "charts", "title": "Charts Kit", "asDocument": true }
+  "arguments": { "gallery": "charts", "title": "Charts Kit", "format": "document" }
 }
 ```
 Result:
@@ -411,8 +411,10 @@ Result:
   "document": "<!DOCTYPE html>\n<html lang=\"en\">…</html>"
 }
 ```
-Provide `ids` **or** `gallery`; neither → tool error `invalid_argument`.
-Omit `asDocument` to get just the reusable `css` + `html` bundle.
+Source priority: `collectionId` (a saved collection) > explicit `ids` > `gallery`; none → tool error `invalid_argument`.
+`format` is `bundle` (default; `css` + `html` only), `document` (adds a full `<html>`), or `schema`
+(the portable `prism-collection-1.0` JSON — see below; requires a `collectionId`).
+`asDocument: true` is a deprecated alias for `format: "document"`.
 
 ### `get_token_reference`
 Request:
@@ -428,6 +430,122 @@ Result:
     { "token": "--accent", "purpose": "Brand / primary accent (also --accent-rgb)" }
   ],
   "recolorClasses": ["c-accent","c-info","c-pos","c-warn","c-neg","c-crit"]
+}
+```
+
+---
+
+## Collections & favorites
+
+Saved, named sets of effects that persist across sessions (disk-backed JSON).
+
+### `create_collection`
+Request:
+```json
+{
+  "name": "create_collection",
+  "arguments": {
+    "name": "Dashboard Kit",
+    "description": "KPI tiles I reuse across dashboards",
+    "effectIds": ["charts-kpi-pulse", "charts-kpi-delta"],
+    "tags": ["dashboards", "kpi"]
+  }
+}
+```
+Result:
+```json
+{
+  "id": "e5b1…-uuid",
+  "name": "Dashboard Kit",
+  "description": "KPI tiles I reuse across dashboards",
+  "version": "1.0",
+  "tags": ["dashboards","kpi"],
+  "components": [
+    { "id": "charts-kpi-pulse", "name": "Pulsing KPI Card", "gallery": "charts" },
+    { "id": "charts-kpi-delta", "name": "KPI Delta Tile", "gallery": "charts" }
+  ],
+  "createdAt": "2026-08-02T00:00:00.000Z",
+  "updatedAt": "2026-08-02T00:00:00.000Z"
+}
+```
+Effect ids are validated against the catalog (unknown ids → `not_found`). Constraints:
+name ≤50 chars & unique (`duplicate_name`), description ≤200 chars, ≤5 tags, ≤50 components.
+
+### `list_collections`
+Request:
+```json
+{ "name": "list_collections", "arguments": {} }
+```
+Result:
+```json
+{
+  "total": 1,
+  "items": [
+    { "id": "e5b1…-uuid", "name": "Dashboard Kit", "componentCount": 2,
+      "tags": ["dashboards","kpi"], "updatedAt": "2026-08-02T00:00:00.000Z" }
+  ]
+}
+```
+
+### `get_collection`
+Request:
+```json
+{ "name": "get_collection", "arguments": { "collectionId": "e5b1…-uuid" } }
+```
+Returns the full record incl. its `components` list (unknown id → `not_found`).
+
+### `add_to_collection`
+Request:
+```json
+{ "name": "add_to_collection", "arguments": { "collectionId": "e5b1…-uuid", "effectIds": ["fx-wind-bg"] } }
+```
+Result:
+```json
+{ "collection": { "…": "…", "components": ["…", "fx-wind-bg"] }, "added": 1, "skipped": 0 }
+```
+Ids already present are skipped; exceeding 50 components → `limit_exceeded`.
+
+### `remove_from_collection`
+Request:
+```json
+{ "name": "remove_from_collection", "arguments": { "collectionId": "e5b1…-uuid", "effectIds": ["fx-wind-bg"] } }
+```
+Result:
+```json
+{ "collection": { "…": "…" }, "removed": 1 }
+```
+
+### `delete_collection`
+Request:
+```json
+{ "name": "delete_collection", "arguments": { "collectionId": "e5b1…-uuid" } }
+```
+Result:
+```json
+{ "deleted": "e5b1…-uuid" }
+```
+
+### Export a saved collection for the Prism.html UI
+Request:
+```json
+{ "name": "export_collection", "arguments": { "collectionId": "e5b1…-uuid", "format": "schema" } }
+```
+Result — the portable `prism-collection-1.0` object the in-browser Collections panel imports:
+```json
+{
+  "__schema": "prism-collection-1.0",
+  "name": "Dashboard Kit",
+  "description": "KPI tiles I reuse across dashboards",
+  "version": "1.0",
+  "exportedAt": "2026-08-02T00:00:00.000Z",
+  "color": null, "icon": null,
+  "tags": ["dashboards","kpi"],
+  "components": [
+    { "id": "charts-kpi-pulse", "name": "Pulsing KPI Card", "gallery": "charts" },
+    { "id": "charts-kpi-delta", "name": "KPI Delta Tile", "gallery": "charts" }
+  ],
+  "componentCount": 2,
+  "totalSize": 812
 }
 ```
 
