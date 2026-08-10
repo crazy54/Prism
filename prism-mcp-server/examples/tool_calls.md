@@ -232,6 +232,70 @@ Result:
 
 ---
 
+## Component Variant Matrix
+
+Prism themes are pure `:root` token overrides applied over identical component
+HTML/CSS, so a "variant" is one component under a different token set. These
+tools return token maps + overrides — never N rendered copies.
+
+### `get_theme_palette`
+Request (one theme; omit `theme` for all five):
+```json
+{ "name": "get_theme_palette", "arguments": { "theme": "oled-dark" } }
+```
+Result:
+```json
+{
+  "id": "oled-dark", "name": "OLED", "mode": "dark", "builtin": true,
+  "tokens": { "--bg": "#000000", "--accent": "#ffb300", "…": "…" },
+  "overrides": { "--bg": "#000000", "--accent": "#ffb300", "…": "…" },
+  "overrideCount": 21,
+  "css": ":root{ /* OLED */\n  --bg: #000000;\n  --accent: #ffb300;\n  … }"
+}
+```
+
+### `get_component_variants`
+Request:
+```json
+{ "name": "get_component_variants", "arguments": { "id": "charts-big-metric-count-up", "themes": ["prism-dark","cyberpunk-dark"] } }
+```
+Result (one payload, one entry per theme):
+```json
+{
+  "id": "charts-big-metric-count-up", "name": "Big Metric + Count-Up",
+  "themeSensitive": true, "usesTokens": ["--muted","--accent"],
+  "note": "One payload, many variants: render = html + css + the chosen theme's token overrides on :root.",
+  "html": "<div …>$1,284,500</div>",
+  "variantCount": 2,
+  "variants": [
+    { "theme": "prism-dark", "name": "Prism", "mode": "dark", "overrides": {}, "relevantOverrides": {}, "rootCss": ":root{ /* Prism */ … }" },
+    { "theme": "cyberpunk-dark", "name": "Cyberpunk", "mode": "dark",
+      "relevantOverrides": { "--muted": "#b39ddb", "--accent": "#fee600" }, "rootCss": ":root{ /* Cyberpunk */ … }" }
+  ]
+}
+```
+
+### `get_variants_for_theme`
+Request:
+```json
+{ "name": "get_variants_for_theme", "arguments": { "theme": "cyberpunk-dark", "gallery": "charts", "themeSensitiveOnly": true, "limit": 2 } }
+```
+Result:
+```json
+{
+  "theme": { "id": "cyberpunk-dark", "name": "Cyberpunk", "mode": "dark" },
+  "overrides": { "--accent": "#fee600", "…": "…" },
+  "total": 190, "offset": 0, "limit": 2, "returned": 2,
+  "items": [
+    { "id": "charts-big-metric-count-up", "name": "Big Metric + Count-Up",
+      "themeSensitive": true, "usesTokens": ["--muted","--accent"],
+      "tokenValues": { "--muted": "#b39ddb", "--accent": "#fee600" } }
+  ]
+}
+```
+
+---
+
 ## Composition
 
 ### `compose`

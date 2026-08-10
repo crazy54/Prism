@@ -6,6 +6,7 @@
 import { lightEffect } from '../utils/catalog.js';
 import { compose, composeWithTemplate, availableTemplates } from '../utils/compose.js';
 import { validateFacet, validateComposition } from '../utils/validate.js';
+import { THEMES, THEME_IDS, TOKEN_META, BASE_TOKENS, getTheme, usesTokens, themeRootCss, isThemeSensitive } from '../utils/themes.js';
 import { CollectionError, toExportSchema } from '../utils/collections.js';
 
 export class ToolError extends Error {
@@ -197,6 +198,11 @@ function applyFilters(list, filters = {}) {
     if (filters[key] === true) out = out.filter((e) => BOOL_DIMS[key].get(e));
     else if (filters[key] === false) out = out.filter((e) => !BOOL_DIMS[key].get(e));
   }
+  // Theme-compat facet (JFH-9): themeSensitive selects components whose rendering
+  // changes under a theme (they consume theme tokens directly or via themed
+  // classes). It is a derived signal, not a stored field, so it lives here.
+  if (filters.themeSensitive === true) out = out.filter((e) => isThemeSensitive(e));
+  else if (filters.themeSensitive === false) out = out.filter((e) => !isThemeSensitive(e));
   return out;
 }
 
@@ -346,6 +352,7 @@ export function buildTools() {
               needsJs: { type: 'boolean' },
               isFixed: { type: 'boolean' },
               selfContained: { type: 'boolean' },
+              themeSensitive: { type: 'boolean', description: 'Theme-compat filter: true = only components whose look changes across themes (consume theme tokens); false = theme-neutral components.' },
             },
             additionalProperties: false,
           },
@@ -413,6 +420,125 @@ export function buildTools() {
           builtInThemes: ['prism', 'oled', 'cyberpunk'],
           customThemes: 'Users can define custom themes in the Prism UI (Settings gear); they compile to :root overrides using these same token names.',
         };
+      },
+    },
+    {
+      name: 'get_theme_palette',
+      description: 'Return the token palette for one theme (or all themes). Prism themes are pure :root token overrides applied over identical component HTML/CSS, so a palette fully defines how every component looks in that theme. Each theme returns its complete token map, the overrides vs the Prism base, mode (light/dark), and a ready-to-paste :root{…} CSS block. Themes: prism-dark, oled-dark, cyberpunk-dark, light, dark.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          theme: { type: 'string', enum: THEME_IDS, description: 'A theme id. Omit to return all themes.' },
+        },
+        additionalProperties: false,
+      },
+      handler: (a) => {
+        const shape = (t) => ({
+          id: t.id, name: t.name, mode: t.mode, builtin: t.builtin,
+          tokens: t.tokens, overrides: t.overrides,
+          overrideCount: Object.keys(t.overrides).length,
+          css: themeRootCss(t.id),
+        });
+        if (a.theme) {
+          const t = getTheme(a.theme);
+          if (!t) throw new ToolError(`No theme "${a.theme}"`, { code: 'not_found', data: { themes: THEME_IDS } });
+          return shape(t);
+        }
+        return { base: BASE_TOKENS, tokenMeta: TOKEN_META, themeCount: THEMES.length, themes: THEMES.map(shape) };
+      },
+    },
+    {
+      name: 'get_component_variants',
+      description: 'Return every theme variant of one component. Because a variant is the same html/css under a different :root token set, this returns the component payload ONCE plus, for each theme, the token overrides to apply (and optionally the full recolored css). Also reports which theme tokens the component consumes and whether it is theme-sensitive. Ideal for building a variant matrix or previewing a component across themes.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          id: { type: 'string', description: 'The effect id (e.g. "charts-big-metric-count-up")' },
+          includeCss: { type: 'boolean', default: false, description: 'Include the component css payload once (shared across all variants).' },
+          themes: { ...strArr, description: 'Restrict to these theme ids (default: all). Valid: ' + THEME_IDS.join(', ') },
+        },
+        required: ['id'],
+        additionalProperties: false,
+      },
+      handler: (a, { store }) => {
+        const e = store.get(a.id);
+        if (!e) {
+          const suggestions = store.all().map((x) => ({ id: x.id, score: matchScore(x, a.id) }))
+            .filter((x) => x.score > 0).sort((x, y) => y.score - x.score).slice(0, 5).map((x) => x.id);
+          throw new ToolError(`No effect with id "${a.id}"`, { code: 'not_found', data: { suggestions } });
+        }
+        let themes = THEMES;
+        if (a.themes && a.themes.length) {
+          const bad = a.themes.filter((id) => !getTheme(id));
+          if (bad.length) throw new ToolError(`Unknown theme(s): ${bad.join(', ')}`, { code: 'invalid_argument', data: { themes: THEME_IDS } });
+          themes = a.themes.map(getTheme);
+        }
+        const consumed = usesTokens(e);
+        return {
+          id: e.id,
+          name: e.name,
+          gallery: e.gallery,
+          componentType: e.componentType || '',
+          themeSensitive: isThemeSensitive(e),
+          usesTokens: consumed,
+          note: 'One payload, many variants: render = html + css + the chosen theme\'s token overrides on :root.',
+          html: e.html,
+          ...(a.includeCss ? { css: e.css } : {}),
+          variantCount: themes.length,
+          variants: themes.map((t) => ({
+            theme: t.id,
+            name: t.name,
+            mode: t.mode,
+            // the full override set, plus only the overrides this component actually
+            // reacts to (a consumed token the theme does NOT override is not "relevant").
+            overrides: t.overrides,
+            relevantOverrides: consumed.reduce((o, k) => { if (t.overrides[k] !== undefined) o[k] = t.overrides[k]; return o; }, {}),
+            rootCss: themeRootCss(t.id),
+          })),
+        };
+      },
+    },
+    {
+      name: 'get_variants_for_theme',
+      description: 'List components as they appear under a single theme, with each component\'s relevant token values for that theme. Supports the same facets as search_effects (gallery, componentType, spectrum, tag, flags) plus a themeSensitiveOnly filter, and paginates. Use this to render a whole gallery in one theme.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          theme: { type: 'string', enum: THEME_IDS, description: 'The theme id to render under.' },
+          gallery: { type: 'string', description: 'Restrict to one gallery.' },
+          componentType: { type: 'string', description: 'Restrict to one componentType.' },
+          spectrum: { type: 'string', description: 'Restrict to one spectrum (aesthetic).' },
+          tag: { type: 'string', description: 'Restrict to components carrying this tag.' },
+          themeSensitiveOnly: { type: 'boolean', default: false, description: 'Only components whose rendering changes by theme.' },
+          limit: { type: 'integer', minimum: 1, default: 50 },
+          offset: { type: 'integer', minimum: 0, default: 0 },
+        },
+        required: ['theme'],
+        additionalProperties: false,
+      },
+      handler: (a, { store }) => {
+        const t = getTheme(a.theme);
+        if (!t) throw new ToolError(`No theme "${a.theme}"`, { code: 'not_found', data: { themes: THEME_IDS } });
+        let list = store.all();
+        if (a.gallery) list = list.filter((e) => e.gallery === a.gallery);
+        if (a.componentType) list = list.filter((e) => e.componentType === a.componentType);
+        if (a.spectrum) list = list.filter((e) => e.spectrum === a.spectrum);
+        if (a.tag) list = list.filter((e) => (e.tags || []).includes(a.tag));
+        if (a.themeSensitiveOnly) list = list.filter((e) => isThemeSensitive(e));
+        const mapped = list.map((e) => {
+          const consumed = usesTokens(e);
+          return {
+            id: e.id,
+            name: e.name,
+            gallery: e.gallery,
+            componentType: e.componentType || '',
+            themeSensitive: isThemeSensitive(e),
+            usesTokens: consumed,
+            tokenValues: consumed.reduce((o, k) => { o[k] = t.tokens[k]; return o; }, {}),
+          };
+        });
+        const page = paginate(mapped, a.limit ?? 50, a.offset ?? 0);
+        return { theme: { id: t.id, name: t.name, mode: t.mode }, overrides: t.overrides, ...page };
       },
     },
     {
