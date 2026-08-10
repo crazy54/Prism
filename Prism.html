@@ -69161,7 +69161,9 @@ body{margin:0;background:radial-gradient(1100px 600px at 85% -10%,rgba(255,153,0
   <a class="sr-brand" href="#charts" data-page="charts"><span class="sr-title">✦ Prism</span><span class="sr-tag">One prism. Every facet of your report.</span></a>
   <div class="sr-h" style="display:flex;align-items:center">Theme<button class="sr-gear" id="srGear" type="button" aria-label="Theme settings" title="Custom themes &amp; settings">⚙</button></div>
   <div class="sr-themes" id="srThemes">
-    <button class="thmbtn on" data-theme="prism" title="Prism (default)"><span class="sw"><i style="background:#ff9900;color:#ff9900"></i><i style="background:#4493f8;color:#4493f8"></i><i style="background:#c879ff;color:#c879ff"></i></span>Prism</button>
+    <button class="thmbtn on" data-theme="cloudscape-dark" title="Cloudscape Dark (default)"><span class="sw"><i style="background:#539fe5"></i><i style="background:#37c26b"></i><i style="background:#232f3e;border:1px solid #354150"></i></span>Cloud</button>
+    <button class="thmbtn" data-theme="cloudscape-light" title="Cloudscape Light — AWS console"><span class="sw"><i style="background:#0972d3"></i><i style="background:#037f0c"></i><i style="background:#ffffff;border:1px solid #d5dbdb"></i></span>Light</button>
+    <button class="thmbtn" data-theme="prism" title="Prism"><span class="sw"><i style="background:#ff9900;color:#ff9900"></i><i style="background:#4493f8;color:#4493f8"></i><i style="background:#c879ff;color:#c879ff"></i></span>Prism</button>
     <button class="thmbtn" data-theme="oled" title="OLED — ink black"><span class="sw"><i style="background:#000;color:#000;border:1px solid #333"></i><i style="background:#00e5ff;color:#00e5ff"></i><i style="background:#ff2d78;color:#ff2d78"></i></span>OLED</button>
     <button class="thmbtn" data-theme="cyberpunk" title="Cyberpunk — neon"><span class="sw"><i style="background:#00f0ff;color:#00f0ff"></i><i style="background:#fee600;color:#fee600"></i><i style="background:#ff00a0;color:#ff00a0"></i></span>Cyber</button>
   </div>
@@ -99235,10 +99237,98 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
       '.prism-rail a.sr-sub.cur{color:#00f0ff!important;border-left-color:#00f0ff!important}'+
       '.prism-rail .sr-foot{color:#7a5fb0!important}'+
       '.thmbtn.on{border-color:#fee600!important;box-shadow:0 0 0 1px #fee600 inset!important}'+
-      '.sweep{background:linear-gradient(90deg,transparent,#00f0ff,#ff00a0,#fee600,transparent)!important}'
+      '.sweep{background:linear-gradient(90deg,transparent,#00f0ff,#ff00a0,#fee600,transparent)!important}',
+    // ---- Cloudscape (AWS design language, tokens-only — no React, no fonts, offline) ----
+    'cloudscape-dark':':root{'+
+      '--bg:#0f1621;--panel:#192534;--panel2:#232f3e;--card:#1a2633;--line:#354150;'+
+      '--ink:#e9ebed;--muted:#a4b0c0;--dim:#6b7887;'+
+      '--accent:#539fe5;--accent-rgb:83,159,229;--accent2:#539fe5;'+
+      '--info:#539fe5;--info-rgb:83,159,229;'+
+      '--pos:#37c26b;--pos-rgb:55,194,107;'+
+      '--warn:#f5b74e;--warn-rgb:245,183,78;'+
+      '--neg:#eb6f6f;--neg-rgb:235,111,111;'+
+      '--crit:#c471ff;--crit-rgb:196,113,255;'+
+      '--cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%);}'+
+      'body{background:#0f1621!important}'+
+      /* flat Cloudscape container chrome + thin divider */
+      '.prism-rail{background:#192534!important;border-right:1px solid #354150!important;box-shadow:none!important}'+
+      '.prism-rail .sr-brand{border-bottom-color:#2a3847!important}'+
+      '.prism-rail .sr-title{color:#e9ebed!important;text-shadow:none!important}'+
+      '.prism-rail .sr-tag{color:#539fe5!important}'+
+      '.prism-rail .sr-h{color:#8d99a8!important}'+
+      '.prism-rail a.sr-link{color:#b6c2d0!important}'+
+      '.prism-rail a.sr-link:hover{background:rgba(255,255,255,.06)!important;color:#fff!important}'+
+      '.prism-rail a.sr-link.active{background:rgba(83,159,229,.16)!important;color:#fff!important;border-left-color:#539fe5!important}'+
+      '.prism-rail a.sr-link.active::after{background:#539fe5!important;box-shadow:0 0 8px #539fe5!important}'+
+      '.prism-rail a.sr-sub{color:#a4b0c0!important}'+
+      '.prism-rail a.sr-sub:hover{color:#fff!important}'+
+      '.prism-rail a.sr-sub.cur{color:#539fe5!important;border-left-color:#539fe5!important}'+
+      '.prism-rail .sr-foot{color:#6b7887!important;border-top-color:#2a3847!important}'+
+      '.thmbtn.on{border-color:#539fe5!important;box-shadow:0 0 0 1px #539fe5 inset!important}'+
+      '.sweep{background:linear-gradient(90deg,transparent,#539fe5,#37c26b,transparent)!important}'+
+      /* Cloudscape focus ring */
+      'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #539fe5!important;outline-offset:2px!important}',
+    'cloudscape-light':':root{'+
+      '--bg:#f2f3f3;--panel:#ffffff;--panel2:#fafafa;--card:#ffffff;--line:#d5dbdb;'+
+      '--ink:#16191f;--muted:#5f6b7a;--dim:#8d99a8;'+
+      '--accent:#0972d3;--accent-rgb:9,114,211;--accent2:#0972d3;'+
+      '--info:#0972d3;--info-rgb:9,114,211;'+
+      '--pos:#037f0c;--pos-rgb:3,127,12;'+
+      '--warn:#e07400;--warn-rgb:224,116,0;'+
+      '--neg:#d91515;--neg-rgb:217,21,21;'+
+      '--crit:#8b5cf6;--crit-rgb:139,92,246;'+
+      '--cardgrad:linear-gradient(157deg,rgba(0,0,0,.02),rgba(0,0,0,0) 55%);}'+
+      'body{background:#f2f3f3!important}'+
+      /* light rail */
+      '.prism-rail{background:#ffffff!important;border-right:1px solid #d5dbdb!important;box-shadow:none!important}'+
+      '.prism-rail .sr-brand{border-bottom-color:#e9ebed!important}'+
+      '.prism-rail .sr-title{color:#0f141a!important;text-shadow:none!important}'+
+      '.prism-rail .sr-tag{color:#0972d3!important}'+
+      '.prism-rail .sr-h{color:#5f6b7a!important}'+
+      '.prism-rail a.sr-link{color:#414d5c!important}'+
+      '.prism-rail a.sr-link:hover{background:#f2f8fd!important;color:#0f141a!important}'+
+      '.prism-rail a.sr-link.active{background:#f0f7ff!important;color:#0972d3!important;border-left-color:#0972d3!important}'+
+      '.prism-rail a.sr-link.active::after{background:#0972d3!important;box-shadow:none!important}'+
+      '.prism-rail a.sr-sub{color:#5f6b7a!important}'+
+      '.prism-rail a.sr-sub:hover{color:#0f141a!important}'+
+      '.prism-rail a.sr-sub.cur{color:#0972d3!important;border-left-color:#0972d3!important}'+
+      '.prism-rail .sr-foot{color:#8d99a8!important;border-top-color:#e9ebed!important}'+
+      '.prism-rail a.sr-new-facets{color:#037f0c!important;background:rgba(3,127,12,.06)!important;border-left-color:rgba(3,127,12,.4)!important}'+
+      '.prism-rail a.sr-new-facets:hover{background:rgba(3,127,12,.12)!important;color:#025d09!important}'+
+      /* light picker + gear */
+      '.thmbtn{background:#fafafa!important;border-color:#d5dbdb!important;color:#414d5c!important}'+
+      '.thmbtn:hover{background:#eff1f1!important}'+
+      '.thmbtn.on{border-color:#0972d3!important;box-shadow:0 0 0 1px #0972d3 inset!important}'+
+      '.sr-gear{background:#fafafa!important;border-color:#d5dbdb!important;color:#414d5c!important}'+
+      '.sr-gear:hover{background:#f0f7ff!important;color:#0972d3!important}'+
+      /* light settings modal */
+      '.pr-modal{background:rgba(0,7,22,.35)!important}'+
+      '.pr-modal-card{background:#ffffff!important;color:#16191f!important;border-color:#d5dbdb!important}'+
+      '.pr-mhead{background:#fafafa!important;border-bottom-color:#e9ebed!important}'+
+      '.pr-mhead .sub{color:#5f6b7a!important}'+
+      '.pr-x{background:#f2f3f3!important;border-color:#d5dbdb!important;color:#414d5c!important}'+
+      '.pr-x:hover{background:rgba(217,21,21,.12)!important;color:#d91515!important}'+
+      '.pr-sec-h{color:#5f6b7a!important}'+
+      '.pr-throw{background:#fafafa!important;border-color:#e9ebed!important}'+
+      '.pr-empty{color:#8d99a8!important}'+
+      '.pr-btn{background:#ffffff!important;border-color:#d5dbdb!important;color:#16191f!important}'+
+      '.pr-btn:hover{background:#f2f3f3!important}'+
+      '.pr-btn.pri{background:#0972d3!important;border-color:#0972d3!important;color:#fff!important;text-shadow:none!important}'+
+      '.pr-name-in{background:#ffffff!important;border-color:#d5dbdb!important;color:#16191f!important}'+
+      '.pr-field>label{color:#414d5c!important}'+
+      '.pr-color{background:#fafafa!important;border-color:#e9ebed!important}'+
+      '.pr-color .cd{color:#5f6b7a!important}'+
+      '.pr-preview{border-color:#e9ebed!important}'+
+      '.pr-pv-head{color:#5f6b7a!important;background:#fafafa!important;border-bottom-color:#e9ebed!important}'+
+      '.sweep{background:linear-gradient(90deg,transparent,#0972d3,#037f0c,transparent)!important}'+
+      /* Cloudscape focus ring */
+      'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #0972d3!important;outline-offset:2px!important}'
   };
   var THEME_ID='prism-theme-vars';
-  var curTheme='prism';
+  // Cloudscape Dark is the out-of-the-box look (JFH-13). A returning visitor's
+  // stored choice still wins — see the localStorage read below.
+  var DEFAULT_THEME='cloudscape-dark';
+  var curTheme=DEFAULT_THEME;
 
   // ===================== CUSTOM THEMES + SETTINGS (JFH-5) =====================
   // Users author their own color scheme from a handful of palette tokens. We
