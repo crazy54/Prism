@@ -93,7 +93,7 @@ export class PrismMCPServer {
       protocolVersion: PROTOCOL_VERSION,
       capabilities: { tools: { listChanged: false } },
       serverInfo: { name: SERVER_NAME, version: SERVER_VERSION },
-      instructions: 'Prism catalog MCP. Use search_effects/list_effects to discover, get_effect for full html/css, compose/compose_with_template to build bundles, and create_facet/validate_facet to author new components.',
+      instructions: 'Prism catalog MCP. Use search_effects (with facet filters) / list_effects to discover, get_available_filters + list_filter_values to learn valid facet values, create_saved_search / execute_saved_search to reuse queries, get_effect for full html/css, compose/compose_with_template to build bundles, and create_facet/validate_facet to author new components.',
     };
   }
 

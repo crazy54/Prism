@@ -1,4 +1,4 @@
-// Integration tests for all 15 tools + tool-level behavior, using the fixture.
+// Integration tests for all 20 tools + tool-level behavior, using the fixture.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { toolCtx } from './helper.js';

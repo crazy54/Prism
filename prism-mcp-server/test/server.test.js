@@ -35,10 +35,10 @@ test('notification (no id) yields no response', async () => {
   assert.equal(s.initialized, true);
 });
 
-test('tools/list returns 21 tools with schemas', async () => {
+test('tools/list returns 26 tools with schemas', async () => {
   const s = fixtureServer();
   const res = await s.handleMessage({ jsonrpc: '2.0', id: 2, method: 'tools/list' });
-  assert.equal(res.result.tools.length, 21);
+  assert.equal(res.result.tools.length, 26);
   for (const t of res.result.tools) {
     assert.ok(t.name && t.description && t.inputSchema, `tool ${t.name} well-formed`);
     assert.equal(t.inputSchema.type, 'object');
@@ -71,7 +71,7 @@ test('unknown tool yields -32602 with available tools', async () => {
   const s = fixtureServer();
   const res = await s.handleMessage({ jsonrpc: '2.0', id: 6, method: 'tools/call', params: { name: 'nope' } });
   assert.equal(res.error.code, -32602);
-  assert.ok(res.error.data.availableTools.length === 21);
+  assert.ok(res.error.data.availableTools.length === 26);
 });
 
 test('ping responds', async () => {
