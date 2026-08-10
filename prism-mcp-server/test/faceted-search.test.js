@@ -205,6 +205,20 @@ test('create_saved_search generates unique ids for same name', () => {
   assert.equal(ctx.call('get_saved_searches', {}).total, 2);
 });
 
+test('create_saved_search caps id-collision attempts instead of looping forever', () => {
+  const ctx = toolCtx();
+  // Pre-seed the session store with the base slug + every numeric-suffix variant
+  // the loop would try, so the next create can never find a free id. Without the
+  // MAX_ID_ATTEMPTS bound this would spin indefinitely; with it, it throws.
+  const store = ctx.store._savedSearches = new Map();
+  const base = 'flood';
+  store.set(base, {});
+  for (let n = 2; n < 2 + 10000; n++) store.set(`${base}-${n}`, {});
+  const r = ctx.callSafe('create_saved_search', { name: 'Flood', filters: { galleries: ['charts'] } });
+  assert.equal(r.ok, false);
+  assert.equal(r.error.code, 'id_generation_failed');
+});
+
 test('create_saved_search requires a query or filter', () => {
   const ctx = toolCtx();
   const r = ctx.callSafe('create_saved_search', { name: 'Empty' });

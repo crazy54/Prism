@@ -259,6 +259,11 @@ function slugifyName(name) {
   return String(name).toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60) || 'search';
 }
 
+// Upper bound on numeric-suffix attempts when de-colliding a generated id.
+// Far above any realistic number of same-named saved searches, but finite so a
+// flood of colliding names can't spin the id loop forever.
+const MAX_ID_ATTEMPTS = 10000;
+
 /**
  * Core faceted search shared by search_effects and execute_saved_search.
  * query is optional; when absent, results are all effects matching the filters,
@@ -675,10 +680,19 @@ export function buildTools() {
         if (a.sort && !SORTS.includes(a.sort)) throw new ToolError(`Invalid sort "${a.sort}"`, { code: 'invalid_argument', data: { validSorts: SORTS } });
         const saved = savedSearchStore(store);
         // Stable, collision-resistant id: slug + short numeric suffix.
-        let base = slugifyName(name);
+        // Bound the collision search so pathological/malicious duplicate names
+        // (which all slugify to the same base) can't hang the server.
+        const base = slugifyName(name);
         let id = base;
-        let n = 2;
-        while (saved.has(id)) id = `${base}-${n++}`;
+        for (let n = 2; saved.has(id); n++) {
+          if (n - 2 >= MAX_ID_ATTEMPTS) {
+            throw new ToolError(
+              `Could not generate a unique id for a saved search named "${name}" after ${MAX_ID_ATTEMPTS} attempts`,
+              { code: 'id_generation_failed', data: { base } }
+            );
+          }
+          id = `${base}-${n}`;
+        }
         const record = {
           id,
           name,
