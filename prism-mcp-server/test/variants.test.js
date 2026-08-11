@@ -8,13 +8,32 @@ import { THEME_IDS, BASE_TOKENS, usesTokens, isThemeSensitive } from '../utils/t
 
 // -------------------- get_theme_palette --------------------
 
-test('get_theme_palette returns all five themes with token maps', () => {
+test('get_theme_palette returns all themes with token maps (Cloudscape default first)', () => {
   const ctx = toolCtx();
   const r = ctx.call('get_theme_palette', {});
-  assert.equal(r.themeCount, 5);
-  assert.deepEqual(r.themes.map((t) => t.id), ['prism-dark', 'oled-dark', 'cyberpunk-dark', 'light', 'dark']);
+  assert.equal(r.themeCount, 7);
+  assert.deepEqual(r.themes.map((t) => t.id), ['cloudscape-dark', 'cloudscape-light', 'prism-dark', 'oled-dark', 'cyberpunk-dark', 'light', 'dark']);
   assert.ok(r.base['--accent'], 'base token map present');
   assert.ok(r.tokenMeta.length >= 10);
+});
+
+test('get_theme_palette(cloudscape-dark) is the new default and matches the app THEMES values', () => {
+  const ctx = toolCtx();
+  const r = ctx.call('get_theme_palette', { theme: 'cloudscape-dark' });
+  assert.equal(r.mode, 'dark');
+  assert.equal(r.tokens['--bg'], '#0f1621');
+  assert.equal(r.tokens['--accent'], '#539fe5');
+  assert.equal(r.tokens['--accent-rgb'], '83,159,229');
+  assert.ok(r.overrideCount > 0);
+  assert.match(r.css, /:root\{/);
+});
+
+test('get_theme_palette(cloudscape-light) is a light theme with the AWS-console palette', () => {
+  const ctx = toolCtx();
+  const r = ctx.call('get_theme_palette', { theme: 'cloudscape-light' });
+  assert.equal(r.mode, 'light');
+  assert.equal(r.tokens['--bg'], '#f2f3f3');
+  assert.equal(r.tokens['--accent'], '#0972d3');
 });
 
 test('get_theme_palette(prism-dark) has zero overrides (it is the base)', () => {
@@ -55,8 +74,8 @@ test('get_component_variants returns one payload + one variant per theme', () =>
   const ctx = toolCtx();
   const r = ctx.call('get_component_variants', { id: 'charts-kpi-pulse' });
   assert.equal(r.id, 'charts-kpi-pulse');
-  assert.equal(r.variantCount, 5);
-  assert.equal(r.variants.length, 5);
+  assert.equal(r.variantCount, 7);
+  assert.equal(r.variants.length, 7);
   assert.ok(r.html, 'payload html present once');
   assert.ok(!('css' in r), 'css omitted by default');
   assert.equal(r.themeSensitive, true);

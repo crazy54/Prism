@@ -424,7 +424,7 @@ export function buildTools() {
     },
     {
       name: 'get_theme_palette',
-      description: 'Return the token palette for one theme (or all themes). Prism themes are pure :root token overrides applied over identical component HTML/CSS, so a palette fully defines how every component looks in that theme. Each theme returns its complete token map, the overrides vs the Prism base, mode (light/dark), and a ready-to-paste :root{…} CSS block. Themes: prism-dark, oled-dark, cyberpunk-dark, light, dark.',
+      description: 'Return the token palette for one theme (or all themes). Prism themes are pure :root token overrides applied over identical component HTML/CSS, so a palette fully defines how every component looks in that theme. Each theme returns its complete token map, the overrides vs the Prism base, mode (light/dark), and a ready-to-paste :root{…} CSS block. Themes: cloudscape-dark (default), cloudscape-light, prism-dark, oled-dark, cyberpunk-dark, light, dark.',
       inputSchema: {
         type: 'object',
         properties: {
