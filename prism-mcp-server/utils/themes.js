@@ -41,6 +41,32 @@ const CYBERPUNK_OVERRIDES = {
   '--info': '#00f0ff', '--info-rgb': '0,240,255',
   '--cardgrad': 'linear-gradient(157deg,rgba(255,0,160,.10),rgba(0,240,255,.04) 55%)',
 };
+// Cloudscape (JFH-13, AWS design language) — tokens-only, transcribed from the
+// `:root{…}` block of each theme in Prism.html THEMES. The bespoke shell-chrome
+// CSS each ships alongside the tokens is not part of the token map and is
+// intentionally omitted here (this mirror models `:root` tokens only).
+const CLOUDSCAPE_DARK_OVERRIDES = {
+  '--bg': '#0f1621', '--panel': '#192534', '--panel2': '#232f3e', '--card': '#1a2633', '--line': '#354150',
+  '--ink': '#e9ebed', '--muted': '#a4b0c0', '--dim': '#6b7887',
+  '--accent': '#539fe5', '--accent-rgb': '83,159,229', '--accent2': '#539fe5',
+  '--info': '#539fe5', '--info-rgb': '83,159,229',
+  '--pos': '#37c26b', '--pos-rgb': '55,194,107',
+  '--warn': '#f5b74e', '--warn-rgb': '245,183,78',
+  '--neg': '#eb6f6f', '--neg-rgb': '235,111,111',
+  '--crit': '#c471ff', '--crit-rgb': '196,113,255',
+  '--cardgrad': 'linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%)',
+};
+const CLOUDSCAPE_LIGHT_OVERRIDES = {
+  '--bg': '#f2f3f3', '--panel': '#ffffff', '--panel2': '#fafafa', '--card': '#ffffff', '--line': '#d5dbdb',
+  '--ink': '#16191f', '--muted': '#5f6b7a', '--dim': '#8d99a8',
+  '--accent': '#0972d3', '--accent-rgb': '9,114,211', '--accent2': '#0972d3',
+  '--info': '#0972d3', '--info-rgb': '9,114,211',
+  '--pos': '#037f0c', '--pos-rgb': '3,127,12',
+  '--warn': '#e07400', '--warn-rgb': '224,116,0',
+  '--neg': '#d91515', '--neg-rgb': '217,21,21',
+  '--crit': '#8b5cf6', '--crit-rgb': '139,92,246',
+  '--cardgrad': 'linear-gradient(157deg,rgba(0,0,0,.02),rgba(0,0,0,0) 55%)',
+};
 
 // --- colour math (mirrors compilePalette() in Prism.html) ---
 function hx(h) { h = String(h || '').replace('#', ''); if (h.length === 3) h = h.replace(/(.)/g, '$1$1'); const n = parseInt(h, 16) || 0; return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 }; }
@@ -73,12 +99,17 @@ function diff(tokens) { const d = {}; for (const k in tokens) if (tokens[k] !== 
 
 // The canonical theme list. Each: {id,name,mode,builtin,tokens,overrides}.
 export const THEMES = [
+  { id: 'cloudscape-dark', name: 'Cloudscape Dark', mode: 'dark', builtin: true, isDefault: true, tokens: merge(CLOUDSCAPE_DARK_OVERRIDES) },
+  { id: 'cloudscape-light', name: 'Cloudscape Light', mode: 'light', builtin: true, tokens: merge(CLOUDSCAPE_LIGHT_OVERRIDES) },
   { id: 'prism-dark', name: 'Prism', mode: 'dark', builtin: true, tokens: merge({}) },
   { id: 'oled-dark', name: 'OLED', mode: 'dark', builtin: true, tokens: merge(OLED_OVERRIDES) },
   { id: 'cyberpunk-dark', name: 'Cyberpunk', mode: 'dark', builtin: true, tokens: merge(CYBERPUNK_OVERRIDES) },
   { id: 'light', name: 'Light', mode: 'light', builtin: false, tokens: merge(compilePalette(LIGHT_PALETTE)) },
   { id: 'dark', name: 'Dark', mode: 'dark', builtin: false, tokens: merge(compilePalette(DARK_PALETTE)) },
 ].map((t) => ({ ...t, overrides: diff(t.tokens) }));
+
+// The out-of-the-box theme for a fresh visitor (mirrors DEFAULT_THEME in Prism.html).
+export const DEFAULT_THEME_ID = 'cloudscape-dark';
 
 export const THEME_IDS = THEMES.map((t) => t.id);
 const THEME_BY_ID = new Map(THEMES.map((t) => [t.id, t]));

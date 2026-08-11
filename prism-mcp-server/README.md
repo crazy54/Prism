@@ -97,7 +97,7 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 ### Component Variant Matrix (3)
 | Tool | Purpose |
 |------|---------|
-| `get_theme_palette` | Token palette for one theme (or all): complete token map, overrides vs the Prism base, mode (light/dark), and a paste-ready `:root{…}` block. Themes: `prism-dark`, `oled-dark`, `cyberpunk-dark`, `light`, `dark`. |
+| `get_theme_palette` | Token palette for one theme (or all): complete token map, overrides vs the Prism base, mode (light/dark), and a paste-ready `:root{…}` block. Themes: `cloudscape-dark` (default), `cloudscape-light`, `prism-dark`, `oled-dark`, `cyberpunk-dark`, `light`, `dark`. |
 | `get_component_variants` | Every theme variant of one component. Prism themes are pure `:root` token swaps over identical HTML/CSS, so this returns the payload **once** plus each theme's token overrides (and the subset the component actually consumes) — not N copies. |
 | `get_variants_for_theme` | Components rendered under a single theme, each with the token values it uses; supports gallery/componentType/spectrum/tag + `themeSensitiveOnly` filters + pagination. |
 
@@ -169,7 +169,7 @@ prism-mcp-server/
 │   ├── themes.js     # canonical theme token maps (variant matrix) — mirrors Prism.html THEMES
 │   └── logger.js     # stderr logger (never pollutes the stdio JSON-RPC channel)
 ├── examples/         # one example request/response per tool + integration configs
-└── test/             # node:test integration + unit tests (127 tests)
+└── test/             # node:test integration + unit tests (132 tests)
 ```
 
 **Server model.** `new PrismMCPServer(catalogPath, opts)` builds the tool registry and a `CatalogStore`. `await server.load()` reads + indexes the catalog. `server.connect(transport)` wires a transport; `StdioTransport` implements newline-delimited JSON-RPC on stdin/stdout. The transport is pluggable — implement `onMessage(cb)` / `send(obj)` to add HTTP/SSE.
@@ -186,7 +186,7 @@ prism-mcp-server/
 node --test          # or: npm test
 ```
 
-127 tests cover every tool (incl. the advanced-search & variant-matrix tools, the `themeSensitive` facet, and the 6 Collections tools + `export_collection` formats), the CSS/compose/validate utilities, the canonical theme token maps, the `CollectionStore`, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
+132 tests cover every tool (incl. the advanced-search & variant-matrix tools, the `themeSensitive` facet, and the 6 Collections tools + `export_collection` formats), the CSS/compose/validate utilities, the canonical theme token maps (incl. the Cloudscape default), the `CollectionStore`, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
 
 ---
 
