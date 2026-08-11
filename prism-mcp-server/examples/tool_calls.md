@@ -192,7 +192,8 @@ Result:
   "semanticTokens": ["--accent","--info","--pos","--neg","--warn","--crit"],
   "surfaceTokens": ["--bg","--panel","--panel2","--card","--line","--ink","--muted","--dim"],
   "recolor": "Set --c and --c-rgb (or add a c-* class like c-pos) on the effect element to recolor it.",
-  "builtInThemes": ["prism","oled","cyberpunk"]
+  "builtInThemes": ["cloudscape-dark","cloudscape-light"],
+  "note": "Prism ships in the AWS Cloudscape design language with two color modes: cloudscape-dark (default) and cloudscape-light."
 }
 ```
 
@@ -239,25 +240,25 @@ HTML/CSS, so a "variant" is one component under a different token set. These
 tools return token maps + overrides — never N rendered copies.
 
 ### `get_theme_palette`
-Request (one theme; omit `theme` for all five):
+Request (one theme; omit `theme` for both modes):
 ```json
-{ "name": "get_theme_palette", "arguments": { "theme": "oled-dark" } }
+{ "name": "get_theme_palette", "arguments": { "theme": "cloudscape-light" } }
 ```
 Result:
 ```json
 {
-  "id": "oled-dark", "name": "OLED", "mode": "dark", "builtin": true,
-  "tokens": { "--bg": "#000000", "--accent": "#ffb300", "…": "…" },
-  "overrides": { "--bg": "#000000", "--accent": "#ffb300", "…": "…" },
+  "id": "cloudscape-light", "name": "Cloudscape Light", "mode": "light", "builtin": true,
+  "tokens": { "--bg": "#f2f3f3", "--accent": "#0972d3", "…": "…" },
+  "overrides": { "--bg": "#f2f3f3", "--accent": "#0972d3", "…": "…" },
   "overrideCount": 21,
-  "css": ":root{ /* OLED */\n  --bg: #000000;\n  --accent: #ffb300;\n  … }"
+  "css": ":root{ /* Cloudscape Light */\n  --bg: #f2f3f3;\n  --accent: #0972d3;\n  … }"
 }
 ```
 
 ### `get_component_variants`
 Request:
 ```json
-{ "name": "get_component_variants", "arguments": { "id": "charts-big-metric-count-up", "themes": ["prism-dark","cyberpunk-dark"] } }
+{ "name": "get_component_variants", "arguments": { "id": "charts-big-metric-count-up", "themes": ["cloudscape-dark","cloudscape-light"] } }
 ```
 Result (one payload, one entry per theme):
 ```json
@@ -268,9 +269,9 @@ Result (one payload, one entry per theme):
   "html": "<div …>$1,284,500</div>",
   "variantCount": 2,
   "variants": [
-    { "theme": "prism-dark", "name": "Prism", "mode": "dark", "overrides": {}, "relevantOverrides": {}, "rootCss": ":root{ /* Prism */ … }" },
-    { "theme": "cyberpunk-dark", "name": "Cyberpunk", "mode": "dark",
-      "relevantOverrides": { "--muted": "#b39ddb", "--accent": "#fee600" }, "rootCss": ":root{ /* Cyberpunk */ … }" }
+    { "theme": "cloudscape-dark", "name": "Cloudscape Dark", "mode": "dark", "overrides": {}, "relevantOverrides": {}, "rootCss": ":root{ /* Cloudscape Dark */ … }" },
+    { "theme": "cloudscape-light", "name": "Cloudscape Light", "mode": "light",
+      "relevantOverrides": { "--muted": "#5f6b7a", "--accent": "#0972d3" }, "rootCss": ":root{ /* Cloudscape Light */ … }" }
   ]
 }
 ```
@@ -278,18 +279,18 @@ Result (one payload, one entry per theme):
 ### `get_variants_for_theme`
 Request:
 ```json
-{ "name": "get_variants_for_theme", "arguments": { "theme": "cyberpunk-dark", "gallery": "charts", "themeSensitiveOnly": true, "limit": 2 } }
+{ "name": "get_variants_for_theme", "arguments": { "theme": "cloudscape-light", "gallery": "charts", "themeSensitiveOnly": true, "limit": 2 } }
 ```
 Result:
 ```json
 {
-  "theme": { "id": "cyberpunk-dark", "name": "Cyberpunk", "mode": "dark" },
-  "overrides": { "--accent": "#fee600", "…": "…" },
+  "theme": { "id": "cloudscape-light", "name": "Cloudscape Light", "mode": "light" },
+  "overrides": { "--accent": "#0972d3", "…": "…" },
   "total": 190, "offset": 0, "limit": 2, "returned": 2,
   "items": [
     { "id": "charts-big-metric-count-up", "name": "Big Metric + Count-Up",
       "themeSensitive": true, "usesTokens": ["--muted","--accent"],
-      "tokenValues": { "--muted": "#b39ddb", "--accent": "#fee600" } }
+      "tokenValues": { "--muted": "#5f6b7a", "--accent": "#0972d3" } }
   ]
 }
 ```

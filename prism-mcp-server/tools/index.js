@@ -417,14 +417,14 @@ export function buildTools() {
           semanticTokens: ['--accent', '--info', '--pos', '--neg', '--warn', '--crit'],
           surfaceTokens: ['--bg', '--panel', '--panel2', '--card', '--line', '--ink', '--muted', '--dim'],
           recolor: 'Set --c and --c-rgb (or add a c-* class like c-pos) on the effect element to recolor it.',
-          builtInThemes: ['prism', 'oled', 'cyberpunk'],
-          customThemes: 'Users can define custom themes in the Prism UI (Settings gear); they compile to :root overrides using these same token names.',
+          builtInThemes: ['cloudscape-dark', 'cloudscape-light'],
+          note: 'Prism ships in the AWS Cloudscape design language with two color modes: cloudscape-dark (default) and cloudscape-light. Both override these same token names on :root.',
         };
       },
     },
     {
       name: 'get_theme_palette',
-      description: 'Return the token palette for one theme (or all themes). Prism themes are pure :root token overrides applied over identical component HTML/CSS, so a palette fully defines how every component looks in that theme. Each theme returns its complete token map, the overrides vs the Prism base, mode (light/dark), and a ready-to-paste :root{…} CSS block. Themes: cloudscape-dark (default), cloudscape-light, prism-dark, oled-dark, cyberpunk-dark, light, dark.',
+      description: 'Return the token palette for one theme (or all themes). Prism themes are pure :root token overrides applied over identical component HTML/CSS, so a palette fully defines how every component looks in that theme. Each theme returns its complete token map, the overrides vs the Cloudscape Dark base, mode (light/dark), and a ready-to-paste :root{…} CSS block. Themes: cloudscape-dark (default), cloudscape-light.',
       inputSchema: {
         type: 'object',
         properties: {

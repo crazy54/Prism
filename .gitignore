@@ -1,0 +1,3 @@
+# Screenshot output + temp headless-Chrome profiles from the catalog/*.mjs verification tools
+catalog/shots/
+catalog/.chrome-*/

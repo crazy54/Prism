@@ -8,23 +8,25 @@ import { THEME_IDS, BASE_TOKENS, usesTokens, isThemeSensitive } from '../utils/t
 
 // -------------------- get_theme_palette --------------------
 
-test('get_theme_palette returns all themes with token maps (Cloudscape default first)', () => {
+test('get_theme_palette returns both Cloudscape modes with token maps (dark default first)', () => {
   const ctx = toolCtx();
   const r = ctx.call('get_theme_palette', {});
-  assert.equal(r.themeCount, 7);
-  assert.deepEqual(r.themes.map((t) => t.id), ['cloudscape-dark', 'cloudscape-light', 'prism-dark', 'oled-dark', 'cyberpunk-dark', 'light', 'dark']);
+  assert.equal(r.themeCount, 2);
+  assert.deepEqual(r.themes.map((t) => t.id), ['cloudscape-dark', 'cloudscape-light']);
   assert.ok(r.base['--accent'], 'base token map present');
   assert.ok(r.tokenMeta.length >= 10);
 });
 
-test('get_theme_palette(cloudscape-dark) is the new default and matches the app THEMES values', () => {
+test('get_theme_palette(cloudscape-dark) is the default/base and matches the app THEMES values', () => {
   const ctx = toolCtx();
   const r = ctx.call('get_theme_palette', { theme: 'cloudscape-dark' });
   assert.equal(r.mode, 'dark');
   assert.equal(r.tokens['--bg'], '#0f1621');
   assert.equal(r.tokens['--accent'], '#539fe5');
   assert.equal(r.tokens['--accent-rgb'], '83,159,229');
-  assert.ok(r.overrideCount > 0);
+  // Cloudscape Dark IS the base, so it carries zero overrides.
+  assert.equal(r.overrideCount, 0);
+  assert.equal(r.tokens['--accent'], BASE_TOKENS['--accent']);
   assert.match(r.css, /:root\{/);
 });
 
@@ -34,30 +36,8 @@ test('get_theme_palette(cloudscape-light) is a light theme with the AWS-console 
   assert.equal(r.mode, 'light');
   assert.equal(r.tokens['--bg'], '#f2f3f3');
   assert.equal(r.tokens['--accent'], '#0972d3');
-});
-
-test('get_theme_palette(prism-dark) has zero overrides (it is the base)', () => {
-  const ctx = toolCtx();
-  const r = ctx.call('get_theme_palette', { theme: 'prism-dark' });
-  assert.equal(r.overrideCount, 0);
-  assert.equal(r.tokens['--accent'], BASE_TOKENS['--accent']);
-});
-
-test('get_theme_palette(oled-dark) matches the app THEMES override values', () => {
-  const ctx = toolCtx();
-  const r = ctx.call('get_theme_palette', { theme: 'oled-dark' });
-  assert.equal(r.mode, 'dark');
-  assert.equal(r.tokens['--accent'], '#ffb300');
-  assert.equal(r.tokens['--bg'], '#000000');
   assert.ok(r.overrideCount > 0);
   assert.match(r.css, /:root\{/);
-});
-
-test('get_theme_palette(light) is a light theme', () => {
-  const ctx = toolCtx();
-  const r = ctx.call('get_theme_palette', { theme: 'light' });
-  assert.equal(r.mode, 'light');
-  assert.equal(r.tokens['--bg'], '#f4f6fb');
 });
 
 test('get_theme_palette rejects an unknown theme', () => {
@@ -74,8 +54,8 @@ test('get_component_variants returns one payload + one variant per theme', () =>
   const ctx = toolCtx();
   const r = ctx.call('get_component_variants', { id: 'charts-kpi-pulse' });
   assert.equal(r.id, 'charts-kpi-pulse');
-  assert.equal(r.variantCount, 7);
-  assert.equal(r.variants.length, 7);
+  assert.equal(r.variantCount, 2);
+  assert.equal(r.variants.length, 2);
   assert.ok(r.html, 'payload html present once');
   assert.ok(!('css' in r), 'css omitted by default');
   assert.equal(r.themeSensitive, true);
@@ -91,12 +71,12 @@ test('get_component_variants includeCss returns the shared css once', () => {
 test('get_component_variants relevantOverrides is scoped to consumed tokens', () => {
   const ctx = toolCtx();
   const r = ctx.call('get_component_variants', { id: 'charts-kpi-delta' });
-  // charts-kpi-delta consumes --pos; oled changes --pos, so relevantOverrides carries it.
-  const oled = r.variants.find((v) => v.theme === 'oled-dark');
-  assert.ok('--pos' in oled.relevantOverrides, 'relevant override for consumed token');
-  assert.equal(oled.relevantOverrides['--pos'], oled.overrides['--pos'], 'carries the OVERRIDE value, not the resolved base value');
+  // charts-kpi-delta consumes --pos; Cloudscape Light changes --pos, so relevantOverrides carries it.
+  const light = r.variants.find((v) => v.theme === 'cloudscape-light');
+  assert.ok('--pos' in light.relevantOverrides, 'relevant override for consumed token');
+  assert.equal(light.relevantOverrides['--pos'], light.overrides['--pos'], 'carries the OVERRIDE value, not the resolved base value');
   // it does NOT consume --bg, so --bg should not appear in relevantOverrides.
-  assert.ok(!('--bg' in oled.relevantOverrides));
+  assert.ok(!('--bg' in light.relevantOverrides));
 });
 
 test('get_component_variants relevantOverrides is a subset of the theme overrides (base theme => empty)', () => {
@@ -109,17 +89,17 @@ test('get_component_variants relevantOverrides is a subset of the theme override
       assert.equal(v.relevantOverrides[k], v.overrides[k], `${v.theme}: relevantOverrides[${k}] must equal the override value`);
     }
   }
-  // prism-dark is the base (zero overrides) -> nothing is "relevant" even though the component consumes --ink
-  const prism = r.variants.find((v) => v.theme === 'prism-dark');
-  assert.deepEqual(prism.relevantOverrides, {}, 'base theme yields no relevant overrides');
+  // cloudscape-dark is the base (zero overrides) -> nothing is "relevant" even though the component consumes --ink
+  const dark = r.variants.find((v) => v.theme === 'cloudscape-dark');
+  assert.deepEqual(dark.relevantOverrides, {}, 'base theme yields no relevant overrides');
   assert.ok(r.usesTokens.includes('--ink'), 'sanity: it does consume a token');
 });
 
 test('get_component_variants can restrict to a subset of themes', () => {
   const ctx = toolCtx();
-  const r = ctx.call('get_component_variants', { id: 'charts-kpi-pulse', themes: ['prism-dark', 'light'] });
-  assert.equal(r.variantCount, 2);
-  assert.deepEqual(r.variants.map((v) => v.theme), ['prism-dark', 'light']);
+  const r = ctx.call('get_component_variants', { id: 'charts-kpi-pulse', themes: ['cloudscape-light'] });
+  assert.equal(r.variantCount, 1);
+  assert.deepEqual(r.variants.map((v) => v.theme), ['cloudscape-light']);
 });
 
 test('get_component_variants rejects unknown theme and unknown id', () => {
@@ -134,20 +114,20 @@ test('get_component_variants rejects unknown theme and unknown id', () => {
 
 test('get_variants_for_theme lists components under one theme with token values', () => {
   const ctx = toolCtx();
-  const r = ctx.call('get_variants_for_theme', { theme: 'cyberpunk-dark' });
-  assert.equal(r.theme.id, 'cyberpunk-dark');
+  const r = ctx.call('get_variants_for_theme', { theme: 'cloudscape-light' });
+  assert.equal(r.theme.id, 'cloudscape-light');
   assert.equal(r.total, 3);
   const pulse = r.items.find((i) => i.id === 'charts-kpi-pulse');
-  // --ink under cyberpunk is #f7f0ff — the tool resolves the value for the token it uses.
-  assert.equal(pulse.tokenValues['--ink'], '#f7f0ff');
+  // --ink under Cloudscape Light is #16191f — the tool resolves the value for the token it uses.
+  assert.equal(pulse.tokenValues['--ink'], '#16191f');
 });
 
 test('get_variants_for_theme filters by gallery + themeSensitiveOnly + paginates', () => {
   const ctx = toolCtx();
-  assert.equal(ctx.call('get_variants_for_theme', { theme: 'light', gallery: 'charts' }).total, 2);
-  const sens = ctx.call('get_variants_for_theme', { theme: 'light', themeSensitiveOnly: true });
+  assert.equal(ctx.call('get_variants_for_theme', { theme: 'cloudscape-light', gallery: 'charts' }).total, 2);
+  const sens = ctx.call('get_variants_for_theme', { theme: 'cloudscape-light', themeSensitiveOnly: true });
   assert.ok(sens.total >= 2);
-  const page = ctx.call('get_variants_for_theme', { theme: 'light', limit: 1, offset: 1 });
+  const page = ctx.call('get_variants_for_theme', { theme: 'cloudscape-light', limit: 1, offset: 1 });
   assert.equal(page.returned, 1);
   assert.equal(page.offset, 1);
 });
