@@ -69019,6 +69019,15 @@ html,body{height:100%}
 body{margin:0;background:var(--bg);
   color:var(--ink);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   padding-left:280px;padding-top:var(--cs-topnav-h,40px);overflow:hidden}
+/* Cloudscape-styled scrollbars — token-driven so they flip with light/dark. No
+   !important, so a component that intentionally hides its own scrollbar (e.g. the
+   .mnu-ts-track demo) still wins on specificity. Applies to the rail + search body. */
+*{scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px;border:3px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background:var(--dim)}
+::-webkit-scrollbar-corner{background:transparent}
 
 /* ===== rail (uniform nav) ===== */
 /* Cloudscape SideNavigation: flat surface, thin divider, blue active indicator,
@@ -100828,7 +100837,16 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
       '.tile .nm{font-weight:700!important;color:var(--ink)!important}'+
       '.tile .copy{background:var(--panel2)!important;border:1px solid var(--line)!important;color:var(--ink)!important;border-radius:8px!important;font-weight:700!important}'+
       '.tile .copy:hover{border-color:var(--accent)!important;color:var(--accent)!important;background:var(--panel2)!important}'+
-      '.tile .copy.ok{border-color:var(--pos)!important;color:var(--pos)!important}';
+      '.tile .copy.ok{border-color:var(--pos)!important;color:var(--pos)!important}'+
+      /* Cloudscape scrollbars inside the gallery frame — token-driven so they flip with
+         the mode. No !important: a component that hides its own scrollbar (e.g. the
+         .mnu-ts-track demo) keeps winning on specificity. */
+      'html{scrollbar-width:thin;scrollbar-color:var(--line) transparent}'+
+      '::-webkit-scrollbar{width:12px;height:12px}'+
+      '::-webkit-scrollbar-track{background:transparent}'+
+      '::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px;border:3px solid transparent;background-clip:padding-box}'+
+      '::-webkit-scrollbar-thumb:hover{background:var(--dim)}'+
+      '::-webkit-scrollbar-corner{background:transparent}';
   }
   function applyThemeToFrame(){
     try{ injectInto(gv.contentDocument, THEMES[curTheme]||''); ensureCloudscapeChrome(gv.contentDocument); }catch(e){}
