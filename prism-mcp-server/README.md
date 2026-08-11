@@ -97,7 +97,7 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 ### Component Variant Matrix (3)
 | Tool | Purpose |
 |------|---------|
-| `get_theme_palette` | Token palette for one theme (or all): complete token map, overrides vs the Prism base, mode (light/dark), and a paste-ready `:root{…}` block. Themes: `cloudscape-dark` (default), `cloudscape-light`, `prism-dark`, `oled-dark`, `cyberpunk-dark`, `light`, `dark`. |
+| `get_theme_palette` | Token palette for one theme (or both): complete token map, overrides vs the Cloudscape Dark base, mode (light/dark), and a paste-ready `:root{…}` block. Prism ships in the AWS Cloudscape design language with two color modes: `cloudscape-dark` (default) and `cloudscape-light`. |
 | `get_component_variants` | Every theme variant of one component. Prism themes are pure `:root` token swaps over identical HTML/CSS, so this returns the payload **once** plus each theme's token overrides (and the subset the component actually consumes) — not N copies. |
 | `get_variants_for_theme` | Components rendered under a single theme, each with the token values it uses; supports gallery/componentType/spectrum/tag + `themeSensitiveOnly` filters + pagination. |
 
@@ -186,7 +186,7 @@ prism-mcp-server/
 node --test          # or: npm test
 ```
 
-132 tests cover every tool (incl. the advanced-search & variant-matrix tools, the `themeSensitive` facet, and the 6 Collections tools + `export_collection` formats), the CSS/compose/validate utilities, the canonical theme token maps (incl. the Cloudscape default), the `CollectionStore`, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
+129 tests cover every tool (incl. the advanced-search & variant-matrix tools, the `themeSensitive` facet, and the 6 Collections tools + `export_collection` formats), the CSS/compose/validate utilities, the canonical theme token maps (the two Cloudscape modes), the `CollectionStore`, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
 
 ---
 

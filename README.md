@@ -229,7 +229,7 @@ cd prism-mcp-server
 # Drive search -> get -> compose end to end against the real catalog
 node examples/quickstart.mjs ../Prism.html
 
-# Run the bundled Node-native test suite (87 tests, zero deps)
+# Run the bundled Node-native test suite (129 tests, zero deps)
 node --test test/*.test.js
 ```
 
@@ -277,7 +277,7 @@ Fifteen authored galleries, plus special views. Every element carries a name, it
 
 ## Themes
 
-A theme picker in the sidebar reskins the entire tool — shell *and* every gallery — by overriding a shared set of CSS custom properties. Three ship: **Prism** (default dark, amber accent), **OLED** (true-black, cyan/magenta), and **Cyberpunk** (neon purple/pink/yellow). Because every element reads from the same `--accent`, `--info`, `--pos`, `--bg`, `--ink` … token set, one override reskins everything at once. Your choice persists across sessions.
+Prism is built in the **AWS Cloudscape** design language and ships in two color modes: **Cloudscape Dark** (the default) and **Cloudscape Light**. Toggle between them from the top navigation bar. The mode override reskins the entire tool — shell *and* every gallery — by swapping a shared set of CSS custom properties (`--accent`, `--info`, `--pos`, `--bg`, `--ink` …), so every element re-themes at once. Your choice persists across sessions.
 
 ---
 
@@ -349,7 +349,7 @@ The MCP server's `compose` / `compose_with_template` tools do all of this for yo
 │   ├── tools/index.js         the 21 tool definitions
 │   ├── utils/                 catalog store, collections, css/compose/validate, logger
 │   ├── examples/              per-tool example calls + Claude Desktop / Anthropic API configs
-│   ├── test/                  Node-native test suite (87 tests)
+│   ├── test/                  Node-native test suite (129 tests)
 │   └── README.md              server internals & architecture
 ├── catalog/                ← the catalog + the maintenance pipeline
 │   ├── manifest.json          full catalog (mirror of the island)
