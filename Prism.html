@@ -100862,18 +100862,20 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
   function revealSeen(){ try{ return localStorage.getItem(REVEAL_KEY)==='1'; }catch(e){ return false; } }
   function markRevealSeen(){ try{ localStorage.setItem(REVEAL_KEY,'1'); }catch(e){} }
   function openReveal(){ var m=document.getElementById('prReveal'); if(m) m.classList.add('open'); }
-  function closeReveal(persist){ var m=document.getElementById('prReveal'); if(m) m.classList.remove('open'); if(persist!==false) markRevealSeen(); }
+  // Any dismissal (button, backdrop, Escape) marks the reveal seen so it never
+  // re-nags; the only way back is the explicit "What's new" link.
+  function closeReveal(){ var m=document.getElementById('prReveal'); if(m) m.classList.remove('open'); markRevealSeen(); }
   function wireReveal(){
     var opener=document.getElementById('srWhatsNew');
     if(opener){
       opener.addEventListener('click', function(e){ e.preventDefault(); openReveal(); });
-      opener.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '||e.keyCode===13||e.keyCode===32){ e.preventDefault(); openReveal(); } });
+      opener.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openReveal(); } });
     }
-    var cb=document.getElementById('prRevealClose'); if(cb) cb.addEventListener('click', function(){ closeReveal(true); });
-    var ok=document.getElementById('prRevealOk'); if(ok) ok.addEventListener('click', function(){ closeReveal(true); });
-    var lt=document.getElementById('prRevealLight'); if(lt) lt.addEventListener('click', function(){ applyTheme('cloudscape-light', true); closeReveal(true); });
-    var modal=document.getElementById('prReveal'); if(modal) modal.addEventListener('click', function(e){ if(e.target===modal) closeReveal(true); });
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape'||e.keyCode===27){ var m=document.getElementById('prReveal'); if(m&&m.classList.contains('open')) closeReveal(true); } });
+    var cb=document.getElementById('prRevealClose'); if(cb) cb.addEventListener('click', function(){ closeReveal(); });
+    var ok=document.getElementById('prRevealOk'); if(ok) ok.addEventListener('click', function(){ closeReveal(); });
+    var lt=document.getElementById('prRevealLight'); if(lt) lt.addEventListener('click', function(){ applyTheme('cloudscape-light', true); closeReveal(); });
+    var modal=document.getElementById('prReveal'); if(modal) modal.addEventListener('click', function(e){ if(e.target===modal) closeReveal(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ var m=document.getElementById('prReveal'); if(m&&m.classList.contains('open')) closeReveal(); } });
   }
   // First run only: show once after the loader veil clears. Explicit opt-outs
   // — a returning visitor who already picked a theme, or one who's seen it.
