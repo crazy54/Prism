@@ -69013,7 +69013,13 @@
 :root{--bg:#0f1621;--panel:#192534;--panel2:#232f3e;--card:#1a2633;--line:#354150;--ink:#e9ebed;--muted:#a4b0c0;--dim:#6b7887;--accent:#539fe5;--accent-rgb:83,159,229;--pos:#37c26b;--pos-rgb:55,194,107;
   /* Cloudscape chrome tokens — the top navigation stays dark in both modes (as the
      real console does); rail hover/active flip with light mode via the theme string. */
-  --cs-topnav-bg:#000716;--cs-topnav-line:rgba(255,255,255,.14);--cs-topnav-ink:#e9ebed;--cs-topnav-dim:#c6cdd6;--cs-topnav-hover:rgba(255,255,255,.1);--cs-hover:rgba(255,255,255,.06);--cs-active-bg:rgba(83,159,229,.16)}
+  --cs-topnav-bg:#000716;--cs-topnav-line:rgba(255,255,255,.14);--cs-topnav-ink:#e9ebed;--cs-topnav-dim:#c6cdd6;--cs-topnav-hover:rgba(255,255,255,.1);--cs-hover:rgba(255,255,255,.06);--cs-active-bg:rgba(83,159,229,.16);
+  /* F2 (JFH-35) rail chrome tokens — dark defaults here, flipped under body.cs-light
+     by the mode class. A theme pack now supplies ONLY a :root token block; these
+     drive rail text/dividers/active states so the whole rail reskins per mode with
+     no bespoke per-theme chrome CSS. */
+  --cs-brand-line:#2a3847;--cs-nav-title:#e9ebed;--cs-nav-h:#8d99a8;--cs-nav-link:#b6c2d0;--cs-nav-ink:#ffffff;--cs-nav-active:#ffffff;
+  --cs-newfacet-bg:transparent;--cs-newfacet-border:transparent;--cs-newfacet-hover-bg:var(--cs-hover);--cs-newfacet-hover-ink:var(--pos)}
 *{box-sizing:border-box}
 html,body{height:100%}
 body{margin:0;background:var(--bg);
@@ -69032,22 +69038,28 @@ body{margin:0;background:var(--bg);
 /* ===== rail (uniform nav) ===== */
 /* Cloudscape SideNavigation: flat surface, thin divider, blue active indicator,
    no glow, no slide-in. Colors read from tokens so light mode flips them. */
-.prism-rail{position:fixed;left:0;top:var(--cs-topnav-h,40px);bottom:0;width:var(--cs-rail-w,280px);z-index:60;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;overflow-y:auto}
-.prism-rail .sr-brand{padding:18px 20px 14px;border-bottom:1px solid var(--line);text-decoration:none;display:block}
-.prism-rail .sr-title{color:var(--ink);font-weight:700;font-size:17px;letter-spacing:-.01em;display:block}
-.prism-rail .sr-tag{color:var(--muted);font-size:11px;margin-top:3px;line-height:1.35;display:block}
-.prism-rail .sr-h{padding:16px 20px 6px;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--dim);font-weight:700}
-.prism-rail a.sr-link{position:relative;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--muted);padding:8px 20px;font-size:13.5px;font-weight:400;border-left:2px solid transparent;transition:background .12s,color .12s}
-.prism-rail a.sr-link:hover{background:var(--cs-hover,rgba(255,255,255,.06));color:var(--ink)}
-.prism-rail a.sr-link.active{background:var(--cs-active-bg,rgba(83,159,229,.14));color:var(--ink);border-left-color:var(--accent);font-weight:700}
+.prism-rail{position:fixed;left:0;top:var(--cs-topnav-h,40px);bottom:0;width:var(--cs-rail-w,280px);z-index:60;background:var(--panel);border-right:1px solid var(--line);box-shadow:none;display:flex;flex-direction:column;overflow-y:auto}
+.prism-rail .sr-brand{padding:18px 20px 14px;border-bottom:1px solid var(--cs-brand-line,var(--line));text-decoration:none;display:block}
+.prism-rail .sr-title{color:var(--cs-nav-title,var(--ink));font-weight:700;font-size:17px;letter-spacing:-.01em;text-shadow:none;display:block}
+.prism-rail .sr-tag{color:var(--accent);font-size:11px;margin-top:3px;line-height:1.35;display:block}
+.prism-rail .sr-h{padding:16px 20px 6px;font-size:11px;letter-spacing:.02em;text-transform:none;color:var(--cs-nav-h,var(--dim));font-weight:700}
+.prism-rail a.sr-link{position:relative;display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--cs-nav-link,var(--muted));padding:8px 20px;font-size:13.5px;font-weight:400;border-left:2px solid transparent;transition:background .12s,color .12s}
+.prism-rail a.sr-link:hover{background:var(--cs-hover,rgba(255,255,255,.06));color:var(--cs-nav-ink,var(--ink))}
+.prism-rail a.sr-link.active{background:var(--cs-active-bg,rgba(83,159,229,.14));color:var(--cs-nav-active,var(--ink));border-left-color:var(--accent);font-weight:700}
 .prism-rail a.sr-sub{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--muted);padding:5px 20px 5px 34px;font-size:12.5px;border-left:2px solid transparent;white-space:nowrap;overflow:hidden;transition:color .12s,border-color .12s}
 .prism-rail a.sr-sub>span:first-child,.prism-rail a.sr-sub{min-width:0}
-.prism-rail a.sr-sub:hover{color:var(--ink)}
+.prism-rail a.sr-sub:hover{color:var(--cs-nav-ink,var(--ink))}
 .prism-rail a.sr-sub.cur{color:var(--accent);border-left-color:var(--accent)}
-.prism-rail .sr-foot{margin-top:auto;padding:14px 20px;font-size:11px;color:var(--dim);border-top:1px solid var(--line)}
-.prism-rail a.sr-new-facets{color:var(--pos)!important;border-left-color:transparent!important}
-.prism-rail a.sr-new-facets:hover{background:var(--cs-hover,rgba(255,255,255,.06))!important;color:var(--pos)!important}
-.prism-rail a.sr-new-facets.active{background:rgba(var(--pos-rgb,55,194,107),.14)!important;border-left-color:var(--pos)!important;color:var(--pos)!important}
+.prism-rail .sr-foot{margin-top:auto;padding:14px 20px;font-size:11px;color:var(--dim);border-top:1px solid var(--cs-brand-line,var(--line))}
+.prism-rail a.sr-new-facets{color:var(--pos)!important;background:var(--cs-newfacet-bg,transparent)!important;border-left-color:var(--cs-newfacet-border,transparent)!important}
+.prism-rail a.sr-new-facets:hover{background:var(--cs-newfacet-hover-bg,var(--cs-hover,rgba(255,255,255,.06)))!important;color:var(--cs-newfacet-hover-ink,var(--pos))!important}
+/* F2 (JFH-35): when New Facets IS the active page it takes the standard accent
+   active treatment (matching the shipped look). Previously the base rule here set a
+   GREEN active state, but the Cloudscape theme string's blanket .sr-link.active
+   (equal specificity, injected later) always beat it → the app actually shipped a
+   blue/accent active link. With the theme string now :root-only, that override is
+   gone, so this rule reproduces the shipped accent active state directly. */
+.prism-rail a.sr-new-facets.active{background:var(--cs-active-bg,rgba(83,159,229,.16))!important;border-left-color:var(--accent)!important;color:var(--cs-nav-active,var(--ink))!important}
 .prism-rail a.sr-new-facets::after{content:"New";font-size:10px;font-weight:700;letter-spacing:0;background:rgba(var(--pos-rgb,55,194,107),.16);border:1px solid rgba(var(--pos-rgb,55,194,107),.45);color:var(--pos);padding:0 7px;border-radius:4px;margin-left:auto;flex-shrink:0}
 .prism-rail a.sr-collections .sr-cc{margin-left:auto;flex-shrink:0;min-width:18px;height:16px;padding:0 5px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent);background:rgba(var(--accent-rgb),.16);border:1px solid rgba(var(--accent-rgb),.4);border-radius:4px;line-height:1}
 .prism-rail a.sr-collections .sr-cc:empty{display:none}
@@ -69080,9 +69092,17 @@ body{margin:0;background:var(--bg);
 
 /* ===== light mode chrome ===== */
 /* The top navigation stays dark in both modes, matching the real AWS console.
-   Only the rail hover/active tints (dark rgba defaults) need flipping to light. */
-body.cs-light{--cs-hover:#f2f8fd;--cs-active-bg:#f0f7ff}
+   The rail chrome tokens (hover/active tints + rail text/dividers) flip to their
+   light values here. F2 (JFH-35): these WERE per-theme !important overrides in the
+   Cloudscape-light theme string; folding them into the mode class lets a pack ship
+   a :root-only token block and still get a fully-reskinned rail. */
+body.cs-light{--cs-hover:#f2f8fd;--cs-active-bg:#f0f7ff;
+  --cs-brand-line:#e9ebed;--cs-nav-title:#0f141a;--cs-nav-h:#5f6b7a;--cs-nav-link:#414d5c;--cs-nav-ink:#0f141a;--cs-nav-active:#0972d3;
+  --cs-newfacet-bg:rgba(3,127,12,.06);--cs-newfacet-border:rgba(3,127,12,.4);--cs-newfacet-hover-bg:rgba(3,127,12,.12);--cs-newfacet-hover-ink:#025d09}
 body.cs-light .cs-topnav{--cs-topnav-bg:#000716}
+/* Cloudscape focus ring — token-driven so it flips with the accent per mode/pack
+   (F2: was duplicated as an !important rule in each theme string). */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 /* ===== stage / frame ===== */
 .stage{position:fixed;left:var(--cs-rail-w);right:0;top:calc(var(--cs-topnav-h) + var(--cs-crumb-h));bottom:0;overflow:hidden}
@@ -69092,7 +69112,7 @@ body.cs-light .cs-topnav{--cs-topnav-bg:#000716}
 .frame-wrap.out{opacity:0;transform:translateY(-6px);transition:opacity .14s ease,transform .14s ease}
 
 /* top sheen sweep on page change — restrained Cloudscape blue */
-.sweep{position:fixed;left:var(--cs-rail-w);right:0;top:calc(var(--cs-topnav-h) + var(--cs-crumb-h));height:2px;z-index:80;background:linear-gradient(90deg,transparent,var(--accent),transparent);transform:translateX(-100%);pointer-events:none}
+.sweep{position:fixed;left:var(--cs-rail-w);right:0;top:calc(var(--cs-topnav-h) + var(--cs-crumb-h));height:2px;z-index:80;background:linear-gradient(90deg,transparent,var(--accent),var(--pos),transparent);transform:translateX(-100%);pointer-events:none}
 .sweep.go{animation:sweepGo .5s ease-out}
 @keyframes sweepGo{0%{transform:translateX(-100%);opacity:0}15%{opacity:1}100%{transform:translateX(100%);opacity:0}}
 
@@ -100490,24 +100510,11 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
       '--warn:#f5b74e;--warn-rgb:245,183,78;'+
       '--neg:#eb6f6f;--neg-rgb:235,111,111;'+
       '--crit:#c471ff;--crit-rgb:196,113,255;'+
-      '--cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%);}'+
-      'body{background:#0f1621!important}'+
-      /* flat Cloudscape container chrome + thin divider */
-      '.prism-rail{background:#192534!important;border-right:1px solid #354150!important;box-shadow:none!important}'+
-      '.prism-rail .sr-brand{border-bottom-color:#2a3847!important}'+
-      '.prism-rail .sr-title{color:#e9ebed!important;text-shadow:none!important}'+
-      '.prism-rail .sr-tag{color:#539fe5!important}'+
-      '.prism-rail .sr-h{color:#8d99a8!important}'+
-      '.prism-rail a.sr-link{color:#b6c2d0!important}'+
-      '.prism-rail a.sr-link:hover{background:rgba(255,255,255,.06)!important;color:#fff!important}'+
-      '.prism-rail a.sr-link.active{background:rgba(83,159,229,.16)!important;color:#fff!important;border-left-color:#539fe5!important}'+
-      '.prism-rail a.sr-sub{color:#a4b0c0!important}'+
-      '.prism-rail a.sr-sub:hover{color:#fff!important}'+
-      '.prism-rail a.sr-sub.cur{color:#539fe5!important;border-left-color:#539fe5!important}'+
-      '.prism-rail .sr-foot{color:#6b7887!important;border-top-color:#2a3847!important}'+
-      '.sweep{background:linear-gradient(90deg,transparent,#539fe5,#37c26b,transparent)!important}'+
-      /* Cloudscape focus ring */
-      'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #539fe5!important;outline-offset:2px!important}';
+      '--cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%);}';
+  // F2 (JFH-35): the ~20 lines of bespoke !important chrome that used to live here
+  // (rail surfaces, sr-* text, sweep, focus ring) are gone — the base shell CSS now
+  // reads flip-able chrome tokens (--cs-nav-*, --cs-brand-line, …) driven by the
+  // body.cs-light mode class. A theme is now a PURE :root token block.
   var CS_LIGHT_CSS=':root{'+
       '--bg:#f2f3f3;--panel:#ffffff;--panel2:#fafafa;--card:#ffffff;--line:#d5dbdb;'+
       '--ink:#16191f;--muted:#5f6b7a;--dim:#8d99a8;'+
@@ -100517,27 +100524,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
       '--warn:#e07400;--warn-rgb:224,116,0;'+
       '--neg:#d91515;--neg-rgb:217,21,21;'+
       '--crit:#8b5cf6;--crit-rgb:139,92,246;'+
-      '--cardgrad:linear-gradient(157deg,rgba(0,0,0,.02),rgba(0,0,0,0) 55%);}'+
-      'body{background:#f2f3f3!important}'+
-      /* light rail */
-      '.prism-rail{background:#ffffff!important;border-right:1px solid #d5dbdb!important;box-shadow:none!important}'+
-      '.prism-rail .sr-brand{border-bottom-color:#e9ebed!important}'+
-      '.prism-rail .sr-title{color:#0f141a!important;text-shadow:none!important}'+
-      '.prism-rail .sr-tag{color:#0972d3!important}'+
-      '.prism-rail .sr-h{color:#5f6b7a!important}'+
-      '.prism-rail a.sr-link{color:#414d5c!important}'+
-      '.prism-rail a.sr-link:hover{background:#f2f8fd!important;color:#0f141a!important}'+
-      '.prism-rail a.sr-link.active{background:#f0f7ff!important;color:#0972d3!important;border-left-color:#0972d3!important}'+
-      '.prism-rail a.sr-sub{color:#5f6b7a!important}'+
-      '.prism-rail a.sr-sub:hover{color:#0f141a!important}'+
-      '.prism-rail a.sr-sub.cur{color:#0972d3!important;border-left-color:#0972d3!important}'+
-      '.prism-rail .sr-foot{color:#8d99a8!important;border-top-color:#e9ebed!important}'+
-      '.prism-rail a.sr-new-facets{color:#037f0c!important;background:rgba(3,127,12,.06)!important;border-left-color:rgba(3,127,12,.4)!important}'+
-      '.prism-rail a.sr-new-facets:hover{background:rgba(3,127,12,.12)!important;color:#025d09!important}'+
-      /* breadcrumb bar reads tokens; only the divider under the topnav needs no change */
-      '.sweep{background:linear-gradient(90deg,transparent,#0972d3,#037f0c,transparent)!important}'+
-      /* Cloudscape focus ring */
-      'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #0972d3!important;outline-offset:2px!important}';
+      '--cardgrad:linear-gradient(157deg,rgba(0,0,0,.02),rgba(0,0,0,0) 55%);}';
   // The registry. Each entry: {id, ds, name, mode, accent, builtin, css}.
   // ds = design-system family (data-spectrum axis); accent = the primary brand
   // color. Adding a theme pack = pushing entries here (F6 scaffolder automates it).
@@ -100864,7 +100851,11 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
       '::-webkit-scrollbar-track{background:transparent}'+
       '::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px;border:3px solid transparent;background-clip:padding-box}'+
       '::-webkit-scrollbar-thumb:hover{background:var(--dim)}'+
-      '::-webkit-scrollbar-corner{background:transparent}';
+      '::-webkit-scrollbar-corner{background:transparent}'+
+      /* Cloudscape focus ring inside the gallery frame — token-driven so it flips
+         with the accent. F2 (JFH-35): the theme string used to inject this into the
+         iframe; now the theme string is :root-only, so the chrome injector owns it. */
+      'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent)!important;outline-offset:2px!important}';
   }
   function applyThemeToFrame(){
     try{ injectInto(gv.contentDocument, THEMES[curTheme]||''); ensureCloudscapeChrome(gv.contentDocument); }catch(e){}
