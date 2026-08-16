@@ -26,6 +26,7 @@
    Usage:
      node catalog/_check_ds.mjs              # validate live Prism.html
      PRISM_HTML=/path/to/copy.html node catalog/_check_ds.mjs   # a staged temp copy
+     PRISM_SYSTEMS=/path/to/systems.json node catalog/_check_ds.mjs  # staged registry
      node catalog/_check_ds.mjs --only duolingo,monzo           # subset of families
    Zero deps, offline.
    ========================================================================== */
@@ -36,7 +37,9 @@ import { ID_RE } from '../prism-mcp-server/utils/validate.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const HTML = process.env.PRISM_HTML ? resolve(process.env.PRISM_HTML) : resolve(HERE, '../Prism.html');
-const REG = resolve(HERE, 'systems.json');
+// PRISM_SYSTEMS lets tooling (e.g. the F6 scaffolder's staged verification) point the
+// gate at an alternate registry alongside a staged PRISM_HTML; defaults to the repo's.
+const REG = process.env.PRISM_SYSTEMS ? resolve(process.env.PRISM_SYSTEMS) : resolve(HERE, 'systems.json');
 
 // --only <a,b,c> restricts which families are checked (still reports the rest).
 const onlyIdx = process.argv.indexOf('--only');

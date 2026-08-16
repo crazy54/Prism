@@ -46,16 +46,57 @@ const CLOUDSCAPE_LIGHT_OVERRIDES = {
 function merge(over) { return { ...BASE_TOKENS, ...over }; }
 function diff(tokens) { const d = {}; for (const k in tokens) if (tokens[k] !== BASE_TOKENS[k]) d[k] = tokens[k]; return d; }
 
-// The canonical theme list. Each: {id,name,mode,builtin,tokens,overrides}.
+// The complete Cloudscape token map for a given color mode. Theme-pack authoring
+// (catalog/_scaffold_ds.mjs, F6) uses this as the base a sparse profile layers its
+// brand overrides on, so even a profile that only sets --accent yields a full,
+// coherent :root for that mode. 'light' → the AWS-console light palette; anything
+// else → the dark base.
+export function baseTokensFor(mode) {
+  return mode === 'light' ? merge(CLOUDSCAPE_LIGHT_OVERRIDES) : { ...BASE_TOKENS };
+}
+
+// Full token map for a scaffolded pack's mode: the Cloudscape base for that mode
+// with the pack's (sparse) brand overrides layered on. A pack entry only needs to
+// declare the handful of tokens that differ (e.g. --accent), and this fills in a
+// complete, coherent :root. Used by scaffolded THEMES entries below (F6).
+export function packTokens(mode, over) { return { ...baseTokensFor(mode), ...(over || {}) }; }
+
+// The canonical theme list. Each: {id,ds,dsName,name,mode,builtin,tokens,overrides}.
+// ds = design-system family (mirrors THEME_REGISTRY[].ds in Prism.html); dsName =
+// its display label. Theme packs are appended here by catalog/_scaffold_ds.mjs
+// (F6) — the tool metadata below (id list, note, descriptions) derives from this
+// array, so a scaffolded pack surfaces through the MCP with no further edits.
 export const THEMES = [
-  { id: 'cloudscape-dark', name: 'Cloudscape Dark', mode: 'dark', builtin: true, isDefault: true, tokens: merge({}) },
-  { id: 'cloudscape-light', name: 'Cloudscape Light', mode: 'light', builtin: true, tokens: merge(CLOUDSCAPE_LIGHT_OVERRIDES) },
+  { id: 'cloudscape-dark', ds: 'cloudscape', dsName: 'Cloudscape', name: 'Cloudscape Dark', mode: 'dark', builtin: true, isDefault: true, tokens: merge({}) },
+  { id: 'cloudscape-light', ds: 'cloudscape', dsName: 'Cloudscape', name: 'Cloudscape Light', mode: 'light', builtin: true, tokens: merge(CLOUDSCAPE_LIGHT_OVERRIDES) },
+  // ▼ scaffolded theme packs (F6) — do not hand-edit; see catalog/_scaffold_ds.mjs
 ].map((t) => ({ ...t, overrides: diff(t.tokens) }));
 
 // The out-of-the-box theme for a fresh visitor (mirrors DEFAULT_THEME in Prism.html).
 export const DEFAULT_THEME_ID = 'cloudscape-dark';
 
 export const THEME_IDS = THEMES.map((t) => t.id);
+
+/** Comma-joined theme-id list, marking the default — for tool descriptions.
+ *  e.g. "cloudscape-dark (default), cloudscape-light". */
+export function themeIdList() {
+  return THEMES.map((t) => t.id + (t.isDefault ? ' (default)' : '')).join(', ');
+}
+
+/** One-line human summary of the shipped design systems + their color modes,
+ *  grouped by ds. Derived from THEMES so it self-updates as packs are scaffolded.
+ *  e.g. "Prism ships 1 design system as pure :root token overrides: Cloudscape
+ *  (cloudscape-dark [default], cloudscape-light)." */
+export function themesSummary() {
+  const bySystem = new Map();
+  for (const t of THEMES) {
+    if (!bySystem.has(t.ds)) bySystem.set(t.ds, { name: t.dsName || t.ds, modes: [] });
+    bySystem.get(t.ds).modes.push(t.id + (t.isDefault ? ' [default]' : ''));
+  }
+  const parts = [...bySystem.values()].map((s) => `${s.name} (${s.modes.join(', ')})`);
+  const n = bySystem.size;
+  return `Prism ships ${n} design system${n === 1 ? '' : 's'} as pure :root token overrides over identical component HTML/CSS: ${parts.join('; ')}.`;
+}
 const THEME_BY_ID = new Map(THEMES.map((t) => [t.id, t]));
 export function getTheme(id) { return THEME_BY_ID.get(id) || null; }
 

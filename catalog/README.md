@@ -59,6 +59,7 @@ It exits non-zero on any failure, so it can gate PRs / CI.
 ```bash
 node catalog/_check_ds.mjs                       # gate the live Prism.html
 PRISM_HTML=/abs/path/copy.html node catalog/_check_ds.mjs   # gate a staged temp copy
+PRISM_SYSTEMS=/abs/path/systems.json node catalog/_check_ds.mjs  # gate a staged registry
 node catalog/_check_ds.mjs --only duolingo,monzo  # restrict to some families
 ```
 
@@ -72,6 +73,49 @@ re-author the ~1,668 existing facets. Any family present in the island that is n
 as legacy is treated as a theme-pack and fully gated (so a freshly-staged system is checked
 even before it is added to the registry); a declared `themePack` entry that is absent from
 the island fails the parity check.
+
+## Theme-pack scaffolder (`_scaffold_ds.mjs`)
+
+Turns a design-system **profile** into all the theme wiring in one command, so each
+Phase-2 system is fill-in-the-blanks:
+
+```bash
+node catalog/_scaffold_ds.mjs catalog/profiles/<name>.mjs
+```
+
+A profile only needs `{ ds, dsShort, accent }` — from `accent` the scaffolder derives a
+coherent starter palette for **both** color modes (layered over the Cloudscape base). To
+hand-author instead, add `palette: { dark: {…}, light: {…} }`. `tokenProfile` (structural
+tokens like `radius`/`font`) flows into the emitted facet-gen stub; `homeUrl`/`ticket` are
+advisory. See `catalog/profiles/sample-scaffold.mjs`.
+
+It idempotently patches four things:
+
+1. **`Prism.html` `THEME_REGISTRY`** — adds `<dsShort>-dark` + `<dsShort>-light` entries
+   (plus their `:root` token CSS consts). This is the single source of truth the shell and
+   the Variant-Matrix picker read, so the pack becomes **selectable in both modes** with no
+   further edits.
+2. **`prism-mcp-server/utils/themes.js` `THEMES[]`** — adds the MCP mirror entries via
+   `packTokens(mode, overrides)`.
+3. **`catalog/systems.json` `themePack[]`** — registers the family so the F5 gate then
+   holds its facets to the 100-facet standard.
+4. **`catalog/profiles/<dsShort>.mjs`** — writes a facet-gen (F4) config stub.
+
+Everything else is **self-maintaining off the theme registry** — no per-pack edits:
+
+- the MCP tool metadata (`get_theme_variants.builtInThemes` / `note`, the `get_theme_palette`
+  description + `THEME_IDS` enum) derives from `THEMES` via `themeIdList()` / `themesSummary()`;
+- the `variants.test.js` theme-count assertions derive from `THEME_IDS`, so the suite passes
+  at the new count with zero edits ("theme count reflects the new system" for free).
+
+The scaffolded theme ships with **zero facets** (an "empty" pack): it is selectable and
+correctly colored immediately, and the run prints a checklist of the remaining steps —
+author the 100 facets with `_gen_system.mjs`, merge + re-embed the island, then gate with
+`_check_ds.mjs --only <dsShort>`. Until the facets exist the F5 gate correctly fails the
+pack (0 facets), which is the signal to run F4.
+
+Staged-verification overrides (never touch the repo copies): `PRISM_HTML`,
+`PRISM_MCP_THEMES`, `PRISM_SYSTEMS`, `PRISM_PROFILES_DIR`.
 
 ## Chrome resolution (cross-platform)
 

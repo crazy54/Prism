@@ -8,11 +8,15 @@ import { THEME_IDS, BASE_TOKENS, usesTokens, isThemeSensitive } from '../utils/t
 
 // -------------------- get_theme_palette --------------------
 
-test('get_theme_palette returns both Cloudscape modes with token maps (dark default first)', () => {
+test('get_theme_palette returns every registered theme, dark base first (Cloudscape always present)', () => {
   const ctx = toolCtx();
   const r = ctx.call('get_theme_palette', {});
-  assert.equal(r.themeCount, 2);
-  assert.deepEqual(r.themes.map((t) => t.id), ['cloudscape-dark', 'cloudscape-light']);
+  // Count is registry-driven so scaffolded packs (F6) flow through with no edit,
+  // but the Cloudscape base pair is a permanent floor and must lead the list.
+  assert.equal(r.themeCount, THEME_IDS.length);
+  assert.ok(THEME_IDS.length >= 2, 'at least the two Cloudscape modes ship');
+  assert.deepEqual(r.themes.map((t) => t.id), THEME_IDS, 'palette lists exactly the registered themes, in order');
+  assert.deepEqual(THEME_IDS.slice(0, 2), ['cloudscape-dark', 'cloudscape-light'], 'Cloudscape dark (default) leads, then light');
   assert.ok(r.base['--accent'], 'base token map present');
   assert.ok(r.tokenMeta.length >= 10);
 });
@@ -54,8 +58,10 @@ test('get_component_variants returns one payload + one variant per theme', () =>
   const ctx = toolCtx();
   const r = ctx.call('get_component_variants', { id: 'charts-kpi-pulse' });
   assert.equal(r.id, 'charts-kpi-pulse');
-  assert.equal(r.variantCount, 2);
-  assert.equal(r.variants.length, 2);
+  // One variant per registered theme — registry-driven so a scaffolded pack (F6)
+  // adds its modes here automatically.
+  assert.equal(r.variantCount, THEME_IDS.length);
+  assert.equal(r.variants.length, THEME_IDS.length);
   assert.ok(r.html, 'payload html present once');
   assert.ok(!('css' in r), 'css omitted by default');
   assert.equal(r.themeSensitive, true);
