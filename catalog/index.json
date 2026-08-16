@@ -1,5 +1,5 @@
 {
-  "count": 1768,
+  "count": 1868,
   "effects": [
     {
       "id": "charts-big-metric-count-up",
@@ -1694,9 +1694,9 @@
         "lv",
         "ok",
         "m",
-        "err",
-        "warn",
         "info",
+        "warn",
+        "err",
         "cursor"
       ],
       "params": [],
@@ -48124,6 +48124,2624 @@
       "componentType": "object",
       "interaction": "auto-play",
       "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "mailchimp-button-accent",
+      "name": "Pill Button · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-button",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "mailchimp-toggle-accent",
+      "name": "Switch Toggle · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-toggle",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "mailchimp-chip-accent",
+      "name": "Status Chip · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-chip",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "mailchimp-menu-accent",
+      "name": "Dropdown Menu · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-menu",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-menu",
+        "mailchimp-mi",
+        "mailchimp-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "mailchimp-notification-accent",
+      "name": "Toast Notification · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-notification",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "mailchimp-callout-accent",
+      "name": "Callout Banner · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-callout",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "mailchimp-chart-accent",
+      "name": "Mini Bar Chart · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-chart",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "mailchimp-input-accent",
+      "name": "Text Field · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-input",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-field",
+        "mailchimp-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "mailchimp-progress-accent",
+      "name": "Progress Bar · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-progress",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "mailchimp-avatar-accent",
+      "name": "Avatar Ring · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-avatar",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "mailchimp-badge-accent",
+      "name": "Count Badge · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-badge",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "mailchimp-tab-accent",
+      "name": "Segmented Tabs · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-tab",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "mailchimp-tooltip-accent",
+      "name": "Tooltip · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-tooltip",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "mailchimp-spinner-accent",
+      "name": "Loading Spinner · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-spinner",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "mailchimp-card-accent",
+      "name": "Feature Card · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-card",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "mailchimp-checkbox-accent",
+      "name": "Checkbox · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-checkbox",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "mailchimp-slider-accent",
+      "name": "Range Slider · Primary",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-slider",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "mailchimp-button-info",
+      "name": "Pill Button · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-button",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "mailchimp-toggle-info",
+      "name": "Switch Toggle · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-toggle",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "mailchimp-chip-info",
+      "name": "Status Chip · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-chip",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "mailchimp-menu-info",
+      "name": "Dropdown Menu · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-menu",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-menu",
+        "mailchimp-mi",
+        "mailchimp-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "mailchimp-notification-info",
+      "name": "Toast Notification · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-notification",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "mailchimp-callout-info",
+      "name": "Callout Banner · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-callout",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "mailchimp-chart-info",
+      "name": "Mini Bar Chart · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-chart",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "mailchimp-input-info",
+      "name": "Text Field · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-input",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-field",
+        "mailchimp-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "mailchimp-progress-info",
+      "name": "Progress Bar · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-progress",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "mailchimp-avatar-info",
+      "name": "Avatar Ring · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-avatar",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "mailchimp-badge-info",
+      "name": "Count Badge · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-badge",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "mailchimp-tab-info",
+      "name": "Segmented Tabs · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-tab",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "mailchimp-tooltip-info",
+      "name": "Tooltip · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-tooltip",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "mailchimp-spinner-info",
+      "name": "Loading Spinner · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-spinner",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "mailchimp-card-info",
+      "name": "Feature Card · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-card",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "mailchimp-checkbox-info",
+      "name": "Checkbox · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-checkbox",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "mailchimp-slider-info",
+      "name": "Range Slider · Info",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-slider",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "mailchimp-button-pos",
+      "name": "Pill Button · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-button",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "mailchimp-toggle-pos",
+      "name": "Switch Toggle · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-toggle",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "mailchimp-chip-pos",
+      "name": "Status Chip · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-chip",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "mailchimp-menu-pos",
+      "name": "Dropdown Menu · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-menu",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-menu",
+        "mailchimp-mi",
+        "mailchimp-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "mailchimp-notification-pos",
+      "name": "Toast Notification · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-notification",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "mailchimp-callout-pos",
+      "name": "Callout Banner · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-callout",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "mailchimp-chart-pos",
+      "name": "Mini Bar Chart · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-chart",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "mailchimp-input-pos",
+      "name": "Text Field · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-input",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-field",
+        "mailchimp-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "mailchimp-progress-pos",
+      "name": "Progress Bar · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-progress",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "mailchimp-avatar-pos",
+      "name": "Avatar Ring · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-avatar",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "mailchimp-badge-pos",
+      "name": "Count Badge · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-badge",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "mailchimp-tab-pos",
+      "name": "Segmented Tabs · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-tab",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "mailchimp-tooltip-pos",
+      "name": "Tooltip · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-tooltip",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "mailchimp-spinner-pos",
+      "name": "Loading Spinner · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-spinner",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "mailchimp-card-pos",
+      "name": "Feature Card · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-card",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "mailchimp-checkbox-pos",
+      "name": "Checkbox · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-checkbox",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "mailchimp-slider-pos",
+      "name": "Range Slider · Success",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-slider",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "mailchimp-button-warn",
+      "name": "Pill Button · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-button",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "mailchimp-toggle-warn",
+      "name": "Switch Toggle · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-toggle",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "mailchimp-chip-warn",
+      "name": "Status Chip · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-chip",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "mailchimp-menu-warn",
+      "name": "Dropdown Menu · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-menu",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-menu",
+        "mailchimp-mi",
+        "mailchimp-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "mailchimp-notification-warn",
+      "name": "Toast Notification · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-notification",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "mailchimp-callout-warn",
+      "name": "Callout Banner · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-callout",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "mailchimp-chart-warn",
+      "name": "Mini Bar Chart · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-chart",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "mailchimp-input-warn",
+      "name": "Text Field · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-input",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-field",
+        "mailchimp-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "mailchimp-progress-warn",
+      "name": "Progress Bar · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-progress",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "mailchimp-avatar-warn",
+      "name": "Avatar Ring · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-avatar",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "mailchimp-badge-warn",
+      "name": "Count Badge · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-badge",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "mailchimp-tab-warn",
+      "name": "Segmented Tabs · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-tab",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "mailchimp-tooltip-warn",
+      "name": "Tooltip · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-tooltip",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "mailchimp-spinner-warn",
+      "name": "Loading Spinner · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-spinner",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "mailchimp-card-warn",
+      "name": "Feature Card · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-card",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "mailchimp-checkbox-warn",
+      "name": "Checkbox · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-checkbox",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "mailchimp-slider-warn",
+      "name": "Range Slider · Warning",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-slider",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "mailchimp-button-neg",
+      "name": "Pill Button · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-button",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "mailchimp-toggle-neg",
+      "name": "Switch Toggle · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-toggle",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "mailchimp-chip-neg",
+      "name": "Status Chip · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-chip",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "mailchimp-menu-neg",
+      "name": "Dropdown Menu · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-menu",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-menu",
+        "mailchimp-mi",
+        "mailchimp-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "mailchimp-notification-neg",
+      "name": "Toast Notification · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-notification",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "mailchimp-callout-neg",
+      "name": "Callout Banner · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-callout",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "mailchimp-chart-neg",
+      "name": "Mini Bar Chart · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-chart",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "mailchimp-input-neg",
+      "name": "Text Field · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-input",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-field",
+        "mailchimp-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "mailchimp-progress-neg",
+      "name": "Progress Bar · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-progress",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "mailchimp-avatar-neg",
+      "name": "Avatar Ring · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-avatar",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "mailchimp-badge-neg",
+      "name": "Count Badge · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-badge",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "mailchimp-tab-neg",
+      "name": "Segmented Tabs · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-tab",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "mailchimp-tooltip-neg",
+      "name": "Tooltip · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-tooltip",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "mailchimp-spinner-neg",
+      "name": "Loading Spinner · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-spinner",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "mailchimp-card-neg",
+      "name": "Feature Card · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-card",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "mailchimp-checkbox-neg",
+      "name": "Checkbox · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-checkbox",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "mailchimp-slider-neg",
+      "name": "Range Slider · Danger",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-slider",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "mailchimp-button-crit",
+      "name": "Pill Button · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-button",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "mailchimp-toggle-crit",
+      "name": "Switch Toggle · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-toggle",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "mailchimp-chip-crit",
+      "name": "Status Chip · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-chip",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "mailchimp-menu-crit",
+      "name": "Dropdown Menu · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-menu",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-menu",
+        "mailchimp-mi",
+        "mailchimp-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "mailchimp-notification-crit",
+      "name": "Toast Notification · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-notification",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "mailchimp-callout-crit",
+      "name": "Callout Banner · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-callout",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "mailchimp-chart-crit",
+      "name": "Mini Bar Chart · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-chart",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "mailchimp-input-crit",
+      "name": "Text Field · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-input",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-field",
+        "mailchimp-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "mailchimp-progress-crit",
+      "name": "Progress Bar · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-progress",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "mailchimp-avatar-crit",
+      "name": "Avatar Ring · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-avatar",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "mailchimp-badge-crit",
+      "name": "Count Badge · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-badge",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "mailchimp-tab-crit",
+      "name": "Segmented Tabs · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-tab",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "mailchimp-tooltip-crit",
+      "name": "Tooltip · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-tooltip",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "mailchimp-spinner-crit",
+      "name": "Loading Spinner · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-spinner",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "mailchimp-card-crit",
+      "name": "Feature Card · Critical",
+      "gallery": "spectrums",
+      "category": "Mailchimp",
+      "ref": ".mailchimp-card",
+      "classes": [
+        "mailchimp-root",
+        "mailchimp-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "mailchimp",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "mailchimp",
       "usableAsBackground": false,
       "needsJs": null,
       "isNew": true,

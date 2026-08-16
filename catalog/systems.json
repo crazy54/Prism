@@ -47,6 +47,11 @@
       "dsShort": "duolingo",
       "name": "Duolingo",
       "ticket": "JFH-67"
+    },
+    {
+      "dsShort": "mailchimp",
+      "name": "Mailchimp",
+      "ticket": "JFH-68"
     }
   ],
   "_themePackNote": "Theme-pack systems are added here as they ship (JFH-67 Duolingo, JFH-68 Mailchimp, JFH-69 Stack Overflow, JFH-70 Monzo, JFH-71 Heroku, …). Each entry: { dsShort, name, ticket }. Once listed, _check_ds.mjs enforces exactly 100 facets + integrity for that dsShort. Until any ship, the gate validates whatever theme-pack families it is given (e.g. a staged temp copy) and treats legacy families as informational."
