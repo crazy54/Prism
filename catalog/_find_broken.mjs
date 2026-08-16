@@ -14,10 +14,11 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
+import { resolveChrome } from './_chrome.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const FILE = 'file://' + resolve(HERE, '../Prism.html');
-const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const CHROME = resolveChrome();
 const PAGES = process.argv.slice(2);
 if (!PAGES.length) PAGES.push('charts', 'fx', 'lab', 'ai', 'objects', 'input', 'text', 'shapes');
 const PORT = 9344;

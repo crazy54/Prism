@@ -16,11 +16,12 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
+import { resolveChrome } from './_chrome.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUT = HERE;
 const FILE = 'file://' + resolve(HERE, '../Prism.html');
-const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const CHROME = resolveChrome();
 const PORT = 9366;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -98,7 +99,13 @@ const EXTRACT_FN = `function extractInPage(gallery, d){
   var currentCat='General';
   var walker=root.querySelectorAll('h3.sec, .tile, .panel');
   walker.forEach(function(node){
-    if(node.matches('h3.sec')){ currentCat=node.textContent.replace(/^[^A-Za-z0-9]+/,'').split(/[—–-]/)[0].trim(); return; }
+    if(node.matches('h3.sec')){
+      // Read the header text WITHOUT the runtime-injected count badge (.sec-count),
+      // which the shell appends after mount; leaving it in poisons every category
+      // with a trailing digit ("Progress & Ratio" -> "Progress & Ratio7").
+      var hc=node.cloneNode(true); var badge=hc.querySelector('.sec-count'); if(badge)badge.remove();
+      currentCat=hc.textContent.replace(/^[^A-Za-z0-9]+/,'').split(/[—–-]/)[0].trim(); return;
+    }
     var nameEl=node.querySelector('.nm, .ptitle');
     var name=(nameEl?nameEl.textContent:'').replace(/\\s+/g,' ').trim() || 'effect';
     var refEl=node.querySelector('.ref'); var ref=refEl?refEl.textContent.trim():'';

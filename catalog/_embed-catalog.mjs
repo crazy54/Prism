@@ -41,8 +41,11 @@ const BREADCRUMB =
 let html = readFileSync(HTML, 'utf8');
 
 // Idempotent: strip any prior island + breadcrumb before re-inserting.
-html = html.replace(/<!-- ===== PRISM CATALOG · AI START HERE ===== -->[\s\S]*?<!-- ===== \/PRISM CATALOG ===== -->\n?/, '');
-html = html.replace(/<!-- ✦ AI-READABLE:[\s\S]*?-->\n?/, '');
+// Absorb ALL trailing newlines as [\r\n]* (not \n?) — Prism.html uses CRLF, so a
+// \n? / \n* can't consume the leading \r and left a \r\n to accumulate one blank
+// line every run. [\r\n]* eats the whole CRLF run; the re-insert re-adds one.
+html = html.replace(/<!-- ===== PRISM CATALOG · AI START HERE ===== -->[\s\S]*?<!-- ===== \/PRISM CATALOG ===== -->[\r\n]*/, '');
+html = html.replace(/<!-- ✦ AI-READABLE:[\s\S]*?-->[\r\n]*/, '');
 
 // Breadcrumb right after <html lang="en">, island right after </title>.
 // Use FUNCTION replacements: a string replacement expands $$, $`, $', $&, $n
