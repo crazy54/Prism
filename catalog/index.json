@@ -1,5 +1,5 @@
 {
-  "count": 1668,
+  "count": 1768,
   "effects": [
     {
       "id": "charts-big-metric-count-up",
@@ -1694,9 +1694,9 @@
         "lv",
         "ok",
         "m",
+        "err",
         "warn",
         "info",
-        "err",
         "cursor"
       ],
       "params": [],
@@ -45511,6 +45511,2624 @@
       "isNew": true,
       "isFixed": false,
       "description": "Three overlapping organic blobs in leaf-green and solar-gold that drift and bob independently — an abstract decorative motif for empty states."
+    },
+    {
+      "id": "duolingo-button-accent",
+      "name": "Pill Button · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-button",
+      "classes": [
+        "duolingo-root",
+        "duolingo-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "duolingo-toggle-accent",
+      "name": "Switch Toggle · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-toggle",
+      "classes": [
+        "duolingo-root",
+        "duolingo-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "duolingo-chip-accent",
+      "name": "Status Chip · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-chip",
+      "classes": [
+        "duolingo-root",
+        "duolingo-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "duolingo-menu-accent",
+      "name": "Dropdown Menu · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-menu",
+      "classes": [
+        "duolingo-root",
+        "duolingo-menu",
+        "duolingo-mi",
+        "duolingo-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "duolingo-notification-accent",
+      "name": "Toast Notification · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-notification",
+      "classes": [
+        "duolingo-root",
+        "duolingo-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "duolingo-callout-accent",
+      "name": "Callout Banner · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-callout",
+      "classes": [
+        "duolingo-root",
+        "duolingo-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "duolingo-chart-accent",
+      "name": "Mini Bar Chart · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-chart",
+      "classes": [
+        "duolingo-root",
+        "duolingo-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "duolingo-input-accent",
+      "name": "Text Field · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-input",
+      "classes": [
+        "duolingo-root",
+        "duolingo-field",
+        "duolingo-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "duolingo-progress-accent",
+      "name": "Progress Bar · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-progress",
+      "classes": [
+        "duolingo-root",
+        "duolingo-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "duolingo-avatar-accent",
+      "name": "Avatar Ring · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-avatar",
+      "classes": [
+        "duolingo-root",
+        "duolingo-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "duolingo-badge-accent",
+      "name": "Count Badge · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-badge",
+      "classes": [
+        "duolingo-root",
+        "duolingo-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "duolingo-tab-accent",
+      "name": "Segmented Tabs · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-tab",
+      "classes": [
+        "duolingo-root",
+        "duolingo-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "duolingo-tooltip-accent",
+      "name": "Tooltip · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-tooltip",
+      "classes": [
+        "duolingo-root",
+        "duolingo-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "duolingo-spinner-accent",
+      "name": "Loading Spinner · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-spinner",
+      "classes": [
+        "duolingo-root",
+        "duolingo-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "duolingo-card-accent",
+      "name": "Feature Card · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-card",
+      "classes": [
+        "duolingo-root",
+        "duolingo-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "duolingo-checkbox-accent",
+      "name": "Checkbox · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-checkbox",
+      "classes": [
+        "duolingo-root",
+        "duolingo-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "duolingo-slider-accent",
+      "name": "Range Slider · Primary",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-slider",
+      "classes": [
+        "duolingo-root",
+        "duolingo-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "duolingo-button-info",
+      "name": "Pill Button · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-button",
+      "classes": [
+        "duolingo-root",
+        "duolingo-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "duolingo-toggle-info",
+      "name": "Switch Toggle · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-toggle",
+      "classes": [
+        "duolingo-root",
+        "duolingo-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "duolingo-chip-info",
+      "name": "Status Chip · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-chip",
+      "classes": [
+        "duolingo-root",
+        "duolingo-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "duolingo-menu-info",
+      "name": "Dropdown Menu · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-menu",
+      "classes": [
+        "duolingo-root",
+        "duolingo-menu",
+        "duolingo-mi",
+        "duolingo-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "duolingo-notification-info",
+      "name": "Toast Notification · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-notification",
+      "classes": [
+        "duolingo-root",
+        "duolingo-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "duolingo-callout-info",
+      "name": "Callout Banner · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-callout",
+      "classes": [
+        "duolingo-root",
+        "duolingo-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "duolingo-chart-info",
+      "name": "Mini Bar Chart · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-chart",
+      "classes": [
+        "duolingo-root",
+        "duolingo-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "duolingo-input-info",
+      "name": "Text Field · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-input",
+      "classes": [
+        "duolingo-root",
+        "duolingo-field",
+        "duolingo-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "duolingo-progress-info",
+      "name": "Progress Bar · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-progress",
+      "classes": [
+        "duolingo-root",
+        "duolingo-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "duolingo-avatar-info",
+      "name": "Avatar Ring · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-avatar",
+      "classes": [
+        "duolingo-root",
+        "duolingo-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "duolingo-badge-info",
+      "name": "Count Badge · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-badge",
+      "classes": [
+        "duolingo-root",
+        "duolingo-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "duolingo-tab-info",
+      "name": "Segmented Tabs · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-tab",
+      "classes": [
+        "duolingo-root",
+        "duolingo-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "duolingo-tooltip-info",
+      "name": "Tooltip · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-tooltip",
+      "classes": [
+        "duolingo-root",
+        "duolingo-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "duolingo-spinner-info",
+      "name": "Loading Spinner · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-spinner",
+      "classes": [
+        "duolingo-root",
+        "duolingo-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "duolingo-card-info",
+      "name": "Feature Card · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-card",
+      "classes": [
+        "duolingo-root",
+        "duolingo-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "duolingo-checkbox-info",
+      "name": "Checkbox · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-checkbox",
+      "classes": [
+        "duolingo-root",
+        "duolingo-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "duolingo-slider-info",
+      "name": "Range Slider · Info",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-slider",
+      "classes": [
+        "duolingo-root",
+        "duolingo-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "duolingo-button-pos",
+      "name": "Pill Button · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-button",
+      "classes": [
+        "duolingo-root",
+        "duolingo-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "duolingo-toggle-pos",
+      "name": "Switch Toggle · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-toggle",
+      "classes": [
+        "duolingo-root",
+        "duolingo-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "duolingo-chip-pos",
+      "name": "Status Chip · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-chip",
+      "classes": [
+        "duolingo-root",
+        "duolingo-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "duolingo-menu-pos",
+      "name": "Dropdown Menu · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-menu",
+      "classes": [
+        "duolingo-root",
+        "duolingo-menu",
+        "duolingo-mi",
+        "duolingo-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "duolingo-notification-pos",
+      "name": "Toast Notification · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-notification",
+      "classes": [
+        "duolingo-root",
+        "duolingo-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "duolingo-callout-pos",
+      "name": "Callout Banner · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-callout",
+      "classes": [
+        "duolingo-root",
+        "duolingo-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "duolingo-chart-pos",
+      "name": "Mini Bar Chart · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-chart",
+      "classes": [
+        "duolingo-root",
+        "duolingo-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "duolingo-input-pos",
+      "name": "Text Field · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-input",
+      "classes": [
+        "duolingo-root",
+        "duolingo-field",
+        "duolingo-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "duolingo-progress-pos",
+      "name": "Progress Bar · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-progress",
+      "classes": [
+        "duolingo-root",
+        "duolingo-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "duolingo-avatar-pos",
+      "name": "Avatar Ring · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-avatar",
+      "classes": [
+        "duolingo-root",
+        "duolingo-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "duolingo-badge-pos",
+      "name": "Count Badge · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-badge",
+      "classes": [
+        "duolingo-root",
+        "duolingo-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "duolingo-tab-pos",
+      "name": "Segmented Tabs · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-tab",
+      "classes": [
+        "duolingo-root",
+        "duolingo-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "duolingo-tooltip-pos",
+      "name": "Tooltip · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-tooltip",
+      "classes": [
+        "duolingo-root",
+        "duolingo-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "duolingo-spinner-pos",
+      "name": "Loading Spinner · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-spinner",
+      "classes": [
+        "duolingo-root",
+        "duolingo-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "duolingo-card-pos",
+      "name": "Feature Card · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-card",
+      "classes": [
+        "duolingo-root",
+        "duolingo-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "duolingo-checkbox-pos",
+      "name": "Checkbox · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-checkbox",
+      "classes": [
+        "duolingo-root",
+        "duolingo-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "duolingo-slider-pos",
+      "name": "Range Slider · Success",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-slider",
+      "classes": [
+        "duolingo-root",
+        "duolingo-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "duolingo-button-warn",
+      "name": "Pill Button · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-button",
+      "classes": [
+        "duolingo-root",
+        "duolingo-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "duolingo-toggle-warn",
+      "name": "Switch Toggle · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-toggle",
+      "classes": [
+        "duolingo-root",
+        "duolingo-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "duolingo-chip-warn",
+      "name": "Status Chip · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-chip",
+      "classes": [
+        "duolingo-root",
+        "duolingo-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "duolingo-menu-warn",
+      "name": "Dropdown Menu · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-menu",
+      "classes": [
+        "duolingo-root",
+        "duolingo-menu",
+        "duolingo-mi",
+        "duolingo-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "duolingo-notification-warn",
+      "name": "Toast Notification · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-notification",
+      "classes": [
+        "duolingo-root",
+        "duolingo-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "duolingo-callout-warn",
+      "name": "Callout Banner · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-callout",
+      "classes": [
+        "duolingo-root",
+        "duolingo-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "duolingo-chart-warn",
+      "name": "Mini Bar Chart · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-chart",
+      "classes": [
+        "duolingo-root",
+        "duolingo-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "duolingo-input-warn",
+      "name": "Text Field · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-input",
+      "classes": [
+        "duolingo-root",
+        "duolingo-field",
+        "duolingo-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "duolingo-progress-warn",
+      "name": "Progress Bar · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-progress",
+      "classes": [
+        "duolingo-root",
+        "duolingo-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "duolingo-avatar-warn",
+      "name": "Avatar Ring · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-avatar",
+      "classes": [
+        "duolingo-root",
+        "duolingo-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "duolingo-badge-warn",
+      "name": "Count Badge · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-badge",
+      "classes": [
+        "duolingo-root",
+        "duolingo-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "duolingo-tab-warn",
+      "name": "Segmented Tabs · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-tab",
+      "classes": [
+        "duolingo-root",
+        "duolingo-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "duolingo-tooltip-warn",
+      "name": "Tooltip · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-tooltip",
+      "classes": [
+        "duolingo-root",
+        "duolingo-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "duolingo-spinner-warn",
+      "name": "Loading Spinner · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-spinner",
+      "classes": [
+        "duolingo-root",
+        "duolingo-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "duolingo-card-warn",
+      "name": "Feature Card · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-card",
+      "classes": [
+        "duolingo-root",
+        "duolingo-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "duolingo-checkbox-warn",
+      "name": "Checkbox · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-checkbox",
+      "classes": [
+        "duolingo-root",
+        "duolingo-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "duolingo-slider-warn",
+      "name": "Range Slider · Warning",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-slider",
+      "classes": [
+        "duolingo-root",
+        "duolingo-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "duolingo-button-neg",
+      "name": "Pill Button · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-button",
+      "classes": [
+        "duolingo-root",
+        "duolingo-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "duolingo-toggle-neg",
+      "name": "Switch Toggle · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-toggle",
+      "classes": [
+        "duolingo-root",
+        "duolingo-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "duolingo-chip-neg",
+      "name": "Status Chip · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-chip",
+      "classes": [
+        "duolingo-root",
+        "duolingo-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "duolingo-menu-neg",
+      "name": "Dropdown Menu · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-menu",
+      "classes": [
+        "duolingo-root",
+        "duolingo-menu",
+        "duolingo-mi",
+        "duolingo-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "duolingo-notification-neg",
+      "name": "Toast Notification · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-notification",
+      "classes": [
+        "duolingo-root",
+        "duolingo-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "duolingo-callout-neg",
+      "name": "Callout Banner · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-callout",
+      "classes": [
+        "duolingo-root",
+        "duolingo-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "duolingo-chart-neg",
+      "name": "Mini Bar Chart · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-chart",
+      "classes": [
+        "duolingo-root",
+        "duolingo-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "duolingo-input-neg",
+      "name": "Text Field · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-input",
+      "classes": [
+        "duolingo-root",
+        "duolingo-field",
+        "duolingo-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "duolingo-progress-neg",
+      "name": "Progress Bar · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-progress",
+      "classes": [
+        "duolingo-root",
+        "duolingo-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "duolingo-avatar-neg",
+      "name": "Avatar Ring · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-avatar",
+      "classes": [
+        "duolingo-root",
+        "duolingo-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "duolingo-badge-neg",
+      "name": "Count Badge · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-badge",
+      "classes": [
+        "duolingo-root",
+        "duolingo-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "duolingo-tab-neg",
+      "name": "Segmented Tabs · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-tab",
+      "classes": [
+        "duolingo-root",
+        "duolingo-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "duolingo-tooltip-neg",
+      "name": "Tooltip · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-tooltip",
+      "classes": [
+        "duolingo-root",
+        "duolingo-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "duolingo-spinner-neg",
+      "name": "Loading Spinner · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-spinner",
+      "classes": [
+        "duolingo-root",
+        "duolingo-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "duolingo-card-neg",
+      "name": "Feature Card · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-card",
+      "classes": [
+        "duolingo-root",
+        "duolingo-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "duolingo-checkbox-neg",
+      "name": "Checkbox · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-checkbox",
+      "classes": [
+        "duolingo-root",
+        "duolingo-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "duolingo-slider-neg",
+      "name": "Range Slider · Danger",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-slider",
+      "classes": [
+        "duolingo-root",
+        "duolingo-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "duolingo-button-crit",
+      "name": "Pill Button · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-button",
+      "classes": [
+        "duolingo-root",
+        "duolingo-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "duolingo-toggle-crit",
+      "name": "Switch Toggle · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-toggle",
+      "classes": [
+        "duolingo-root",
+        "duolingo-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "duolingo-chip-crit",
+      "name": "Status Chip · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-chip",
+      "classes": [
+        "duolingo-root",
+        "duolingo-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "duolingo-menu-crit",
+      "name": "Dropdown Menu · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-menu",
+      "classes": [
+        "duolingo-root",
+        "duolingo-menu",
+        "duolingo-mi",
+        "duolingo-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "duolingo-notification-crit",
+      "name": "Toast Notification · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-notification",
+      "classes": [
+        "duolingo-root",
+        "duolingo-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "duolingo-callout-crit",
+      "name": "Callout Banner · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-callout",
+      "classes": [
+        "duolingo-root",
+        "duolingo-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "duolingo-chart-crit",
+      "name": "Mini Bar Chart · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-chart",
+      "classes": [
+        "duolingo-root",
+        "duolingo-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "duolingo-input-crit",
+      "name": "Text Field · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-input",
+      "classes": [
+        "duolingo-root",
+        "duolingo-field",
+        "duolingo-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "duolingo-progress-crit",
+      "name": "Progress Bar · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-progress",
+      "classes": [
+        "duolingo-root",
+        "duolingo-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "duolingo-avatar-crit",
+      "name": "Avatar Ring · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-avatar",
+      "classes": [
+        "duolingo-root",
+        "duolingo-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "duolingo-badge-crit",
+      "name": "Count Badge · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-badge",
+      "classes": [
+        "duolingo-root",
+        "duolingo-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "duolingo-tab-crit",
+      "name": "Segmented Tabs · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-tab",
+      "classes": [
+        "duolingo-root",
+        "duolingo-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "duolingo-tooltip-crit",
+      "name": "Tooltip · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-tooltip",
+      "classes": [
+        "duolingo-root",
+        "duolingo-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "duolingo-spinner-crit",
+      "name": "Loading Spinner · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-spinner",
+      "classes": [
+        "duolingo-root",
+        "duolingo-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "duolingo-card-crit",
+      "name": "Feature Card · Critical",
+      "gallery": "spectrums",
+      "category": "Duolingo",
+      "ref": ".duolingo-card",
+      "classes": [
+        "duolingo-root",
+        "duolingo-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "duolingo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "duolingo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
     }
   ]
 }
