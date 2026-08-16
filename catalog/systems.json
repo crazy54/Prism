@@ -1,0 +1,17 @@
+{
+  "_doc": "Registry of design-system families in the Spectrums gallery. Consumed by catalog/_check_ds.mjs (F5 coverage gate), and reused by the F6 scaffolder + F7 Showcase. Two tiers: 'themePack' systems are held to the epic's 100-facet standard and the token-only/offline/reduced-motion rules; 'legacy' families predate the standard (the original 9 spectrums), intentionally hardcode their brand palette (the fixed palette IS the design language's identity), and carry ONE shared reduced-motion block in #spectrums-styles rather than per-facet — so they are grandfathered OUT of the strict gate. See design-system-epic (JFH-33): the ~1,668 existing facets are not re-authored.",
+  "standard": { "facetsPerSystem": 100, "spectrumAttr": "data-spectrum" },
+  "legacy": [
+    { "dsShort": "material-ui", "name": "Material UI" },
+    { "dsShort": "cyberpunk-os", "name": "Cyberpunk OS" },
+    { "dsShort": "neumorphism", "name": "Neumorphism" },
+    { "dsShort": "glassmorphism", "name": "Glassmorphism" },
+    { "dsShort": "brutalist-web", "name": "Brutalist Web" },
+    { "dsShort": "skeuo-hardware", "name": "Skeuomorphic Hardware" },
+    { "dsShort": "retro-terminal", "name": "Retro Terminal" },
+    { "dsShort": "art-deco", "name": "Art Deco" },
+    { "dsShort": "solarpunk", "name": "Solarpunk" }
+  ],
+  "themePack": [],
+  "_themePackNote": "Theme-pack systems are added here as they ship (JFH-67 Duolingo, JFH-68 Mailchimp, JFH-69 Stack Overflow, JFH-70 Monzo, JFH-71 Heroku, …). Each entry: { dsShort, name, ticket }. Once listed, _check_ds.mjs enforces exactly 100 facets + integrity for that dsShort. Until any ship, the gate validates whatever theme-pack families it is given (e.g. a staged temp copy) and treats legacy families as informational."
+}

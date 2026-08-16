@@ -11,7 +11,12 @@ The pipeline re-derives the island from the live gallery templates inside `Prism
 extract-from-prism.mjs   →  manifest.json + index.json   (headless Chrome / CDP)
 _embed-catalog.mjs       →  writes the island back into Prism.html   (idempotent)
 _smoke.mjs               →  validates the island parses + shell scripts syntax-check
+_check_ds.mjs            →  design-system coverage & integrity gate (exit non-zero on fail)
 ```
+
+All four pipeline scripts honor `PRISM_HTML` (an absolute path to an alternate copy),
+so a staged temp copy can be extracted / embedded / smoke-checked / gated without
+touching the repo's `Prism.html`.
 
 ## Requirements
 
@@ -36,6 +41,37 @@ A correct run reports **1668 effects across 15 galleries** (parity with the isla
 > parsed`. This is a long-standing **false positive** — the script-extraction regex
 > matches an HTML comment in `<head>`, not real JS. The actual shell logic block parses
 > fine. Treat "2/3 parsed" as the expected baseline.
+
+## Design-system coverage & integrity gate (`_check_ds.mjs`)
+
+Enforces the theme-packs epic standard on the **live catalog island**. For each
+design-system family it asserts:
+
+- **exactly 100 facets** tagged `data-spectrum=<dsShort>` (the epic coverage standard),
+- **id integrity** — kebab-case, no duplicates (reuses `prism-mcp-server/utils/validate.js`),
+- **offline / token-only CSS** — no `@import`, `@font-face`, `http(s)://`, or external/data
+  `url()` (internal `url(#svgFilter)` fragment refs are fine), and no raw *brand* hex
+  (chromatic `#rrggbb`; achromatic `#fff`/`#000`/greys are allowed for text/masks),
+- **reduced-motion** — a `prefers-reduced-motion` block covering the family where it animates.
+
+It exits non-zero on any failure, so it can gate PRs / CI.
+
+```bash
+node catalog/_check_ds.mjs                       # gate the live Prism.html
+PRISM_HTML=/abs/path/copy.html node catalog/_check_ds.mjs   # gate a staged temp copy
+node catalog/_check_ds.mjs --only duolingo,monzo  # restrict to some families
+```
+
+**Two tiers (`catalog/systems.json`).** The registry splits families into `themePack`
+(held to the full standard) and `legacy` — the original 9 spectrums (`material-ui`,
+`cyberpunk-os`, …) that predate the standard, intentionally hardcode their brand palette
+(the fixed palette *is* the design language's identity), use non-`dsShort` class prefixes
+(`.mat-*`), and ship one shared reduced-motion block. Legacy families are reported for
+information but only gated on the universal checks (id integrity, offline). We do **not**
+re-author the ~1,668 existing facets. Any family present in the island that is not listed
+as legacy is treated as a theme-pack and fully gated (so a freshly-staged system is checked
+even before it is added to the registry); a declared `themePack` entry that is absent from
+the island fails the parity check.
 
 ## Chrome resolution (cross-platform)
 

@@ -6,7 +6,9 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const HTML = resolve(HERE, '../Prism.html');
+// PRISM_HTML lets tooling embed into an alternate file (e.g. a temp copy with staged
+// additions) for verification; defaults to the repo's Prism.html.
+const HTML = process.env.PRISM_HTML ? resolve(process.env.PRISM_HTML) : resolve(HERE, '../Prism.html');
 const MANIFEST = resolve(HERE, 'manifest.json');
 
 const manifest = JSON.parse(readFileSync(MANIFEST, 'utf8'));
