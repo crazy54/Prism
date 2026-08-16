@@ -100184,19 +100184,22 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
           var k=d.slice(0,i).trim(), v=d.slice(i+1).trim(); if(k.slice(0,2)==='--'&&v) o[k]=v; });
         return o;
       }
-      // Cloudscape Dark is the base every gallery starts from; light is the override.
-      var BASE=parseRoot(THEMES['cloudscape-dark']);
+      // The default theme is the base every gallery starts from; other themes are
+      // expressed as overrides vs that base. (F1/JFH-34: derived from the registry
+      // so any pack's light/dark modes flow through with no per-id hardcoding.)
+      var BASE=parseRoot(THEMES[DEFAULT_THEME]);
       function merge(over){ var t={}; for(var k in BASE) t[k]=BASE[k]; for(var j in over) t[j]=over[j]; return t; }
       function diff(t){ var d={}; for(var k in t){ if(t[k]!==BASE[k]) d[k]=t[k]; } return d; }
-      var list=[
-        {id:'cloudscape-dark',name:'Cloudscape Dark',mode:'dark',builtin:true,tokens:merge({})},
-        {id:'cloudscape-light',name:'Cloudscape Light',mode:'light',builtin:true,tokens:merge(parseRoot(THEMES['cloudscape-light']))}
-      ];
+      // One entry per registry theme; tokens = base merged with that theme's :root
+      // override (the base theme yields tokens===base, i.e. no overrides).
+      var list=THEME_REGISTRY.map(function(t){
+        return {id:t.id,ds:t.ds,name:t.name,mode:t.mode,accent:t.accent,builtin:t.builtin,tokens:merge(parseRoot(t.css))};
+      });
       list.forEach(function(t){ t.overrides=diff(t.tokens); });
-      // The matrix keys themes by the same THEMES keys the shell uses, so the
-      // active theme maps 1:1. Fall back to dark if somehow unknown.
+      // The matrix keys themes by the same registry ids the shell uses, so the
+      // active theme maps 1:1. Fall back to the default if somehow unknown.
       var active=curTheme;
-      if(!list.some(function(t){ return t.id===active; })) active='cloudscape-dark';
+      if(!list.some(function(t){ return t.id===active; })) active=DEFAULT_THEME;
       return {
         base:BASE,
         tokenMeta:[
@@ -100475,8 +100478,10 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
   // fully offline). The ONLY two themes are the light and dark color modes; a future
   // Epic will add a design-system switcher. Each theme is a :root override plus a few
   // chrome overrides, injected into both the shell <head> and every gallery iframe.
-  var THEMES={
-    'cloudscape-dark':':root{'+
+  // ── F1 (JFH-34): single theme registry — the ONE source of truth for theme
+  // ids, modes, and accents. THEMES (id→css) + REG_BY_ID derive from it below,
+  // and themeMatrix()/applyTheme() read modes from here (no per-id hardcoding).
+  var CS_DARK_CSS=':root{'+
       '--bg:#0f1621;--panel:#192534;--panel2:#232f3e;--card:#1a2633;--line:#354150;'+
       '--ink:#e9ebed;--muted:#a4b0c0;--dim:#6b7887;'+
       '--accent:#539fe5;--accent-rgb:83,159,229;--accent2:#539fe5;'+
@@ -100502,8 +100507,8 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
       '.prism-rail .sr-foot{color:#6b7887!important;border-top-color:#2a3847!important}'+
       '.sweep{background:linear-gradient(90deg,transparent,#539fe5,#37c26b,transparent)!important}'+
       /* Cloudscape focus ring */
-      'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #539fe5!important;outline-offset:2px!important}',
-    'cloudscape-light':':root{'+
+      'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #539fe5!important;outline-offset:2px!important}';
+  var CS_LIGHT_CSS=':root{'+
       '--bg:#f2f3f3;--panel:#ffffff;--panel2:#fafafa;--card:#ffffff;--line:#d5dbdb;'+
       '--ink:#16191f;--muted:#5f6b7a;--dim:#8d99a8;'+
       '--accent:#0972d3;--accent-rgb:9,114,211;--accent2:#0972d3;'+
@@ -100532,8 +100537,18 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
       /* breadcrumb bar reads tokens; only the divider under the topnav needs no change */
       '.sweep{background:linear-gradient(90deg,transparent,#0972d3,#037f0c,transparent)!important}'+
       /* Cloudscape focus ring */
-      'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #0972d3!important;outline-offset:2px!important}'
-  };
+      'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #0972d3!important;outline-offset:2px!important}';
+  // The registry. Each entry: {id, ds, name, mode, accent, builtin, css}.
+  // ds = design-system family (data-spectrum axis); accent = the primary brand
+  // color. Adding a theme pack = pushing entries here (F6 scaffolder automates it).
+  var THEME_REGISTRY=[
+    {id:'cloudscape-dark', ds:'cloudscape', name:'Cloudscape Dark', mode:'dark', accent:'#539fe5', builtin:true, css:CS_DARK_CSS},
+    {id:'cloudscape-light',ds:'cloudscape', name:'Cloudscape Light',mode:'light',accent:'#0972d3', builtin:true, css:CS_LIGHT_CSS}
+  ];
+  // Derived lookups — THEMES (id→css string) preserves the old shape every caller
+  // (injectInto, applyThemeToFrame, themeMatrix parse) already expects.
+  var THEMES={}, REG_BY_ID={};
+  THEME_REGISTRY.forEach(function(t){ THEMES[t.id]=t.css; REG_BY_ID[t.id]=t; });
   var THEME_ID='prism-theme-vars';
   // Cloudscape Dark is the out-of-the-box look (JFH-13). A returning visitor's
   // stored choice still wins — see the localStorage read below.
@@ -100861,7 +100876,10 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
     applyThemeToFrame();                        // re-skin the current page
     // Light mode flips the topnav/breadcrumb chrome tokens the theme string can't
     // reach cleanly (they live on :root in the shell head, not behind !important).
-    var light=(name==='cloudscape-light');
+    // F1/JFH-34: keyed off the registry entry's mode, so ANY pack's light mode
+    // gets the light chrome — no per-id equality check to grow with each system.
+    var entry=REG_BY_ID[name];
+    var light=!!(entry && entry.mode==='light');
     document.body.classList.toggle('cs-light', light);
     // reflect state on the segmented mode toggle
     document.querySelectorAll('.cs-mode button').forEach(function(b){
