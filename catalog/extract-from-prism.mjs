@@ -20,7 +20,10 @@ import { resolveChrome } from './_chrome.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUT = HERE;
-const FILE = 'file://' + resolve(HERE, '../Prism.html');
+// PRISM_HTML lets tooling point the extractor at an alternate file (e.g. a temp copy
+// with staged additions) for verification; defaults to the repo's Prism.html.
+const TARGET = process.env.PRISM_HTML ? resolve(process.env.PRISM_HTML) : resolve(HERE, '../Prism.html');
+const FILE = 'file://' + TARGET.replace(/\\/g, '/');
 const CHROME = resolveChrome();
 const PORT = 9366;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -125,10 +128,19 @@ const EXTRACT_FN = `function extractInPage(gallery, d){
     var selfContained=!r.css.trim();
     var isNew=node.classList.contains('is-new');
     var isFixed=node.classList.contains('is-fixed');
+    // The MCP exposes first-class faceted search over spectrum (design-system/aesthetic
+    // family), componentType, and interaction (catalog.js normalizeEffect + tools facets).
+    // These come from data-* attributes on the tile; capture them here so they are not
+    // dropped (previously ALL null in the manifest, breaking family search).
+    var spectrum=node.getAttribute('data-spectrum')||null;
+    var componentType=node.getAttribute('data-ctype')||null;
+    var interaction=node.getAttribute('data-interact')||null;
     records.push({
       id:id, name:name, gallery:gallery, category:currentCat, ref:ref, description:description,
       classes:r.classes, keyframes:r.keyframes, params:paramsFor(html,r.css),
+      componentType:componentType, interaction:interaction, spectrum:spectrum,
       tags:[gallery]
+        .concat(spectrum?[spectrum]:[])
         .concat(isBackground?['background','ambient','behind-content']:[])
         .concat(needsJs?['needs-js']:[])
         .concat(selfContained?['self-contained']:[])
@@ -219,7 +231,7 @@ try {
   };
   mkdirSync(OUT, { recursive: true });
   writeFileSync(OUT + '/manifest.json', JSON.stringify(manifest, null, 2));
-  const index = all.map(r => ({ id: r.id, name: r.name, gallery: r.gallery, category: r.category, ref: r.ref, classes: r.classes, params: Object.keys(r.params), tags: r.tags, usableAsBackground: r.usableAsBackground, needsJs: r.needsJs, isNew: r.isNew, isFixed: r.isFixed, description: r.description }));
+  const index = all.map(r => ({ id: r.id, name: r.name, gallery: r.gallery, category: r.category, ref: r.ref, classes: r.classes, params: Object.keys(r.params), tags: r.tags, componentType: r.componentType, interaction: r.interaction, spectrum: r.spectrum, usableAsBackground: r.usableAsBackground, needsJs: r.needsJs, isNew: r.isNew, isFixed: r.isFixed, description: r.description }));
   writeFileSync(OUT + '/index.json', JSON.stringify({ count: index.length, effects: index }, null, 2));
   console.log(`\nTOTAL ${all.length} effects → manifest.json (+ index.json)`);
 } catch (e) {
