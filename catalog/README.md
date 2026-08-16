@@ -76,6 +76,13 @@ the island fails the parity check.
 
 ## Theme-pack scaffolder (`_scaffold_ds.mjs`)
 
+The scaffolder emits a structural copy of the **reference pack, Cloudscape** — same theme
+registry, same `:root`-token contract, same MCP mirror, different palette. Read
+[`REFERENCE-PACK.md`](REFERENCE-PACK.md) for the canonical shape a correct pack takes in all
+three files (`Prism.html` `THEME_REGISTRY`, `utils/themes.js` `THEMES[]`, `systems.json`),
+why a pack ships **only** a `:root` block (F1/F2 moved all chrome onto `body.cs-light` mode
+tokens), and how to verify a pack against the reference.
+
 Turns a design-system **profile** into all the theme wiring in one command, so each
 Phase-2 system is fill-in-the-blanks:
 
