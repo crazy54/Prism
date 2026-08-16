@@ -62764,6 +62764,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
   <a class="sr-link" href="#search" data-page="search">🔎 Search</a>
   <a class="sr-link" href="#variants" data-page="variants">🎭 Variant Matrix</a>
   <a class="sr-link sr-collections" href="#collections" data-page="collections">🗂 Collections</a>
+  <div class="sr-h">Design Systems</div>
+  <a class="sr-link" href="#showcase" data-page="showcase">🖼 Showcase</a>
+  <div class="sr-h">Galleries</div>
   <a class="sr-link active" href="#charts" data-page="charts">📊 Charts &amp; Metrics</a>
   <a class="sr-link" href="#fx" data-page="fx">🎇 FX Store</a>
   <a class="sr-link" href="#lab" data-page="lab">🧪 Animation Lab</a>
@@ -91061,6 +91064,650 @@ document.addEventListener('click',function(e){var b=e.target.closest('.copy[data
 </html>
 </script>
 
+<script type="text/html" id="pg-showcase"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System Showcase</title>
+<style>
+/* ============================================================================
+   F7 (JFH-40) — Design System Showcase. A complete sample website built PURELY
+   from Prism's :root design tokens, so it live-reskins whenever the active theme
+   changes (the shell injects a :root token block with id "prism-theme-vars" into
+   this frame's head on every theme switch — see applyThemeToFrame). Namespaced sc-*
+   to avoid the reserved gallery-chrome classes (.tile/.panel/.card/.stage/.head/
+   .bar/.wrap/.sec/.meta/.copy) that ensureCloudscapeChrome() restyles. No external
+   assets, fonts, or colors — 100% offline + token-driven. ==================== */
+/* Fallback base tokens (Cloudscape Dark) so the page is correct even before the
+   shell injects the active theme. The injected #prism-theme-vars block is appended
+   after this in <head>, so the live theme always wins on cascade order. */
+:root{
+  --bg:#0f1621;--panel:#192534;--panel2:#232f3e;--card:#1a2633;--line:#354150;
+  --ink:#e9ebed;--muted:#a4b0c0;--dim:#6b7887;
+  --accent:#539fe5;--accent-rgb:83,159,229;--accent2:#539fe5;
+  --info:#539fe5;--info-rgb:83,159,229;--pos:#37c26b;--pos-rgb:55,194,107;
+  --warn:#f5b74e;--warn-rgb:245,183,78;--neg:#eb6f6f;--neg-rgb:235,111,111;
+  --crit:#c471ff;--crit-rgb:196,113,255;
+  --cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--info);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+p{margin:0}
+.sc-shell{min-height:100%}
+.sc-wrapx{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ---- top nav ---- */
+.sc-nav{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:18px;padding:12px 24px;background:color-mix(in srgb,var(--panel) 88%,transparent);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.sc-brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:16px;color:var(--ink)}
+.sc-brand:hover{text-decoration:none}
+.sc-logo{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 0 1px rgba(var(--accent-rgb),.35),0 6px 16px rgba(var(--accent-rgb),.35);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px}
+.sc-navlinks{display:flex;gap:6px;margin-left:8px}
+.sc-navlink{padding:7px 12px;border-radius:8px;color:var(--muted);font-weight:600;font-size:13px}
+.sc-navlink:hover{background:rgba(var(--accent-rgb),.10);color:var(--ink);text-decoration:none}
+.sc-navlink.on{background:rgba(var(--accent-rgb),.14);color:var(--accent)}
+.sc-navspace{flex:1}
+.sc-navsearch{position:relative}
+.sc-navsearch input{width:190px;padding:8px 12px 8px 32px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font-size:13px;outline:none}
+.sc-navsearch input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.18)}
+.sc-navsearch svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--dim)}
+.sc-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--crit),var(--accent));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:12px;border:1px solid var(--line)}
+
+/* ---- theme toolbar ---- */
+.sc-themebar{position:sticky;top:57px;z-index:35;display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 24px;background:var(--panel2);border-bottom:1px solid var(--line)}
+.sc-tb-label{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-right:2px}
+.sc-tb-group{display:inline-flex;gap:6px;padding:0 4px;border-left:1px solid var(--line)}
+.sc-tb-group:first-of-type{border-left:0}
+.sc-tb-note{font-size:12px;color:var(--muted)}
+.sc-tchip{display:inline-flex;align-items:center;gap:7px;padding:5px 11px 5px 8px;border-radius:20px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+.sc-tchip:hover{border-color:var(--muted);color:var(--ink)}
+.sc-tchip.on{border-color:var(--accent);background:rgba(var(--accent-rgb),.12);color:var(--ink)}
+.sc-sw{width:13px;height:13px;border-radius:50%;flex:0 0 auto;box-shadow:0 0 0 1px rgba(0,0,0,.25) inset}
+.sc-tc-mode{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.05em}
+
+/* ---- hero ---- */
+.sc-hero{position:relative;overflow:hidden;padding:56px 0 44px}
+.sc-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(1000px 380px at 78% -10%,rgba(var(--accent-rgb),.22),transparent 60%),radial-gradient(700px 300px at 8% 120%,rgba(var(--crit-rgb),.14),transparent 60%);pointer-events:none}
+.sc-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:20px;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-size:12px;font-weight:700}
+.sc-eyebrow .sc-dot{width:7px;height:7px;border-radius:50%;background:var(--pos);box-shadow:0 0 8px var(--pos);animation:sc-pulse 1.8s ease-in-out infinite}
+.sc-hero h1{font-size:42px;line-height:1.08;margin:18px 0 0;max-width:15ch}
+.sc-hero h1 em{font-style:normal;color:var(--accent)}
+.sc-lead{margin-top:16px;max-width:56ch;font-size:16px;color:var(--muted)}
+.sc-hero-cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.sc-stats{display:flex;gap:36px;margin-top:38px;flex-wrap:wrap}
+.sc-stat .sc-stat-n{font-size:26px;font-weight:900;color:var(--ink)}
+.sc-stat .sc-stat-l{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+
+/* ---- generic section ---- */
+.sc-section{padding:34px 0}
+.sc-sechead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:18px}
+.sc-sechead h2{font-size:22px}
+.sc-sechead p{color:var(--muted);font-size:13px}
+
+/* ---- buttons ---- */
+.sc-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:9px;border:1px solid transparent;font-size:13.5px;font-weight:700;cursor:pointer;transition:transform .08s,box-shadow .15s,background .15s,border-color .15s;font-family:inherit}
+.sc-btn:active{transform:translateY(1px)}
+.sc-btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(var(--accent-rgb),.35)}
+.sc-btn-primary:hover{box-shadow:0 8px 22px rgba(var(--accent-rgb),.5)}
+.sc-btn-secondary{background:var(--panel2);color:var(--ink);border-color:var(--line)}
+.sc-btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.sc-btn-ghost{background:transparent;color:var(--muted);border-color:transparent}
+.sc-btn-ghost:hover{background:rgba(var(--accent-rgb),.10);color:var(--ink)}
+.sc-btn-danger{background:var(--neg);color:#fff}
+.sc-btn-danger:hover{filter:brightness(1.08)}
+.sc-btn-sm{padding:6px 11px;font-size:12px;border-radius:7px}
+.sc-btn-lg{padding:12px 22px;font-size:15px}
+.sc-btn[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none}
+.sc-btnrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* ---- card grid ---- */
+.sc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+.sc-crd{background:var(--panel);background-image:var(--cardgrad);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:14px}
+.sc-crd-h{display:flex;align-items:center;gap:9px}
+.sc-crd-h h3{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);font-weight:800}
+.sc-crd-ico{width:26px;height:26px;border-radius:8px;background:rgba(var(--accent-rgb),.14);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:14px}
+.sc-crd-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sc-crd-lbl{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+
+/* ---- form ---- */
+.sc-field{display:flex;flex-direction:column;gap:6px}
+.sc-field label{font-size:12px;font-weight:700;color:var(--muted)}
+.sc-input,.sc-select,.sc-textarea{width:100%;padding:9px 12px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font-size:13.5px;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s}
+.sc-input:focus,.sc-select:focus,.sc-textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.18)}
+.sc-textarea{resize:vertical;min-height:64px}
+.sc-check{display:flex;align-items:center;gap:9px;cursor:pointer;font-size:13px;color:var(--ink)}
+.sc-check input{position:absolute;opacity:0;width:0;height:0}
+.sc-box{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--line);background:var(--panel2);display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:border-color .12s,background .12s}
+.sc-box svg{width:11px;height:11px;stroke:#fff;stroke-width:3;opacity:0}
+.sc-check input:checked + .sc-box{background:var(--accent);border-color:var(--accent)}
+.sc-check input:checked + .sc-box svg{opacity:1}
+.sc-radio .sc-box{border-radius:50%}
+.sc-radio input:checked + .sc-box{background:radial-gradient(circle at center,#fff 0 30%,var(--accent) 34%);border-color:var(--accent)}
+.sc-check input:focus-visible + .sc-box{box-shadow:0 0 0 3px rgba(var(--accent-rgb),.3)}
+.sc-switch{position:relative;width:40px;height:22px;border-radius:12px;background:var(--line);flex:0 0 auto;transition:background .18s}
+.sc-switch::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .18s}
+.sc-switch-in{position:absolute;opacity:0;width:0;height:0}
+.sc-switch-in:checked + .sc-switch{background:var(--accent)}
+.sc-switch-in:checked + .sc-switch::after{transform:translateX(18px)}
+.sc-switch-in:focus-visible + .sc-switch{box-shadow:0 0 0 3px rgba(var(--accent-rgb),.3)}
+.sc-range{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:4px;background:var(--line);outline:none}
+.sc-range::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 4px rgba(var(--accent-rgb),.2)}
+.sc-range::-moz-range-thumb{width:18px;height:18px;border:0;border-radius:50%;background:var(--accent);cursor:pointer}
+
+/* ---- badges / chips / avatars ---- */
+.sc-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:700;border:1px solid transparent}
+.sc-badge .sc-bdot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.sc-badge-neutral{background:var(--panel2);color:var(--muted);border-color:var(--line)}
+.sc-badge-accent{background:rgba(var(--accent-rgb),.14);color:var(--accent)}
+.sc-badge-pos{background:rgba(var(--pos-rgb),.16);color:var(--pos)}
+.sc-badge-warn{background:rgba(var(--warn-rgb),.16);color:var(--warn)}
+.sc-badge-neg{background:rgba(var(--neg-rgb),.16);color:var(--neg)}
+.sc-badge-crit{background:rgba(var(--crit-rgb),.16);color:var(--crit)}
+.sc-chip{display:inline-flex;align-items:center;gap:7px;padding:5px 8px 5px 11px;border-radius:20px;background:var(--panel2);border:1px solid var(--line);font-size:12px;color:var(--ink)}
+.sc-chip-x{width:16px;height:16px;border-radius:50%;background:rgba(var(--ink),.08);color:var(--dim);display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer;border:0}
+.sc-chip-x:hover{color:var(--neg)}
+.sc-avatars{display:flex}
+.sc-avatars .sc-av{width:30px;height:30px;border-radius:50%;border:2px solid var(--panel);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800;margin-left:-8px}
+.sc-avatars .sc-av:first-child{margin-left:0}
+
+/* ---- alerts ---- */
+.sc-alert{display:flex;gap:11px;padding:12px 14px;border-radius:11px;border:1px solid var(--line);background:var(--panel2);align-items:flex-start}
+.sc-alert .sc-al-ico{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-size:13px;font-weight:900;color:#fff}
+.sc-alert .sc-al-t{font-weight:700;font-size:13px}
+.sc-alert .sc-al-b{font-size:12.5px;color:var(--muted)}
+.sc-alert-info{border-color:rgba(var(--info-rgb),.4)}.sc-alert-info .sc-al-ico{background:var(--info)}
+.sc-alert-pos{border-color:rgba(var(--pos-rgb),.4)}.sc-alert-pos .sc-al-ico{background:var(--pos)}
+.sc-alert-warn{border-color:rgba(var(--warn-rgb),.4)}.sc-alert-warn .sc-al-ico{background:var(--warn)}
+.sc-alert-neg{border-color:rgba(var(--neg-rgb),.4)}.sc-alert-neg .sc-al-ico{background:var(--neg)}
+
+/* ---- tabs ---- */
+.sc-tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.sc-tab{padding:8px 14px;border:0;background:transparent;color:var(--muted);font-size:13px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:inherit}
+.sc-tab:hover{color:var(--ink)}
+.sc-tab.on{color:var(--accent);border-bottom-color:var(--accent)}
+.sc-tabpanel{display:none;font-size:13px;color:var(--muted)}
+.sc-tabpanel.on{display:block}
+
+/* ---- list ---- */
+.sc-list{display:flex;flex-direction:column}
+.sc-li{display:flex;align-items:center;gap:12px;padding:11px 4px;border-bottom:1px solid var(--line)}
+.sc-li:last-child{border-bottom:0}
+.sc-li-ico{width:34px;height:34px;border-radius:9px;background:var(--panel2);display:flex;align-items:center;justify-content:center;font-size:16px;flex:0 0 auto}
+.sc-li-main{flex:1;min-width:0}
+.sc-li-t{font-size:13.5px;font-weight:700;color:var(--ink)}
+.sc-li-s{font-size:12px;color:var(--dim)}
+.sc-li-meta{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* ---- progress / meter ---- */
+.sc-meter{height:8px;border-radius:6px;background:var(--panel2);overflow:hidden}
+.sc-meter > span{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.sc-meter-pos > span{background:linear-gradient(90deg,var(--pos),var(--pos))}
+.sc-meter-warn > span{background:linear-gradient(90deg,var(--warn),var(--warn))}
+
+/* ---- data table ---- */
+.sc-tablecard{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.sc-tabletop{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.sc-tabletop h3{font-size:15px}
+.sc-tablewrap{overflow-x:auto}
+.sc-table{width:100%;border-collapse:collapse;font-size:13px}
+.sc-table th{text-align:left;padding:11px 16px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);border-bottom:1px solid var(--line);white-space:nowrap;font-weight:800}
+.sc-table th.sc-sortable{cursor:pointer}
+.sc-table th.sc-sortable:hover{color:var(--ink)}
+.sc-table th .sc-caret{opacity:.5}
+.sc-table td{padding:12px 16px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:middle}
+.sc-table tbody tr:last-child td{border-bottom:0}
+.sc-table tbody tr:hover{background:rgba(var(--accent-rgb),.06)}
+.sc-cell-user{display:flex;align-items:center;gap:10px}
+.sc-cell-user .sc-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800;flex:0 0 auto}
+.sc-cell-sub{font-size:11.5px;color:var(--dim)}
+.sc-rowact{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:7px;padding:4px 9px;font-size:12px;cursor:pointer;font-family:inherit}
+.sc-rowact:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ---- pagination ---- */
+.sc-pager{display:flex;align-items:center;gap:6px;padding:12px 16px}
+.sc-pg{min-width:32px;height:32px;padding:0 9px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--muted);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center}
+.sc-pg:hover{border-color:var(--accent);color:var(--ink)}
+.sc-pg.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.sc-pg-info{margin-left:auto;font-size:12px;color:var(--dim)}
+
+/* ---- CTA banner ---- */
+.sc-cta{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:var(--panel);background-image:var(--cardgrad);padding:30px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.sc-cta::after{content:"";position:absolute;inset:0;background:radial-gradient(600px 220px at 92% 0%,rgba(var(--accent-rgb),.2),transparent 60%);pointer-events:none}
+.sc-cta h2{font-size:20px}
+.sc-cta p{color:var(--muted);font-size:13.5px;margin-top:4px}
+
+/* ---- modal ---- */
+.sc-modal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,.5);backdrop-filter:blur(3px)}
+.sc-modal.open{display:flex;animation:sc-fade .18s ease}
+.sc-modal-box{width:min(460px,100%);background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.5);overflow:hidden;animation:sc-rise .22s ease}
+.sc-modal-h{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--line)}
+.sc-modal-h h3{font-size:16px}
+.sc-modal-x{width:28px;height:28px;border-radius:8px;border:0;background:var(--panel2);color:var(--muted);font-size:16px;cursor:pointer}
+.sc-modal-x:hover{color:var(--neg)}
+.sc-modal-b{padding:18px;display:flex;flex-direction:column;gap:14px}
+.sc-modal-f{display:flex;justify-content:flex-end;gap:10px;padding:14px 18px;border-top:1px solid var(--line);background:var(--panel2)}
+
+/* ---- toasts ---- */
+.sc-toasts{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;flex-direction:column;gap:10px;max-width:340px}
+.sc-toast{display:flex;align-items:flex-start;gap:10px;padding:12px 12px;border-radius:11px;background:var(--panel);border:1px solid var(--line);box-shadow:0 14px 34px rgba(0,0,0,.4);animation:sc-slidein .28s ease}
+.sc-toast.out{animation:sc-slideout .3s ease forwards}
+.sc-toast .sc-toast-ico{width:22px;height:22px;border-radius:6px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff}
+.sc-toast-info .sc-toast-ico{background:var(--info)}
+.sc-toast-pos .sc-toast-ico{background:var(--pos)}
+.sc-toast-warn .sc-toast-ico{background:var(--warn)}
+.sc-toast-neg .sc-toast-ico{background:var(--neg)}
+.sc-toast-t{font-size:13px;font-weight:700}
+.sc-toast-b{font-size:12px;color:var(--muted)}
+.sc-toast-x{margin-left:auto;background:transparent;border:0;color:var(--dim);font-size:16px;cursor:pointer;line-height:1}
+
+/* ---- footer ---- */
+.sc-foot{border-top:1px solid var(--line);background:var(--panel);margin-top:20px}
+.sc-foot-cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;padding:40px 0 26px}
+.sc-foot h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:12px}
+.sc-foot a{display:block;color:var(--muted);font-size:13px;padding:4px 0}
+.sc-foot a:hover{color:var(--accent)}
+.sc-foot-tag{color:var(--muted);font-size:13px;margin-top:10px;max-width:34ch}
+.sc-foot-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0;border-top:1px solid var(--line);color:var(--dim);font-size:12px;flex-wrap:wrap}
+
+/* ---- animations (all disabled under reduced-motion) ---- */
+@keyframes sc-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes sc-fade{from{opacity:0}to{opacity:1}}
+@keyframes sc-rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes sc-slidein{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes sc-slideout{to{opacity:0;transform:translateX(24px)}}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+@media (max-width:720px){
+  .sc-navlinks,.sc-navsearch{display:none}
+  .sc-hero h1{font-size:32px}
+  .sc-foot-cols{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="sc-shell">
+
+  <!-- ===== top nav ===== -->
+  <nav class="sc-nav">
+    <a class="sc-brand" href="#"><span class="sc-logo">◆</span> Northwind</a>
+    <div class="sc-navlinks">
+      <a class="sc-navlink on" href="#">Dashboard</a>
+      <a class="sc-navlink" href="#">Reports</a>
+      <a class="sc-navlink" href="#">Team</a>
+      <a class="sc-navlink" href="#">Settings</a>
+    </div>
+    <span class="sc-navspace"></span>
+    <span class="sc-navsearch">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Search…" aria-label="Search">
+    </span>
+    <button class="sc-btn sc-btn-primary sc-btn-sm">+ New report</button>
+    <span class="sc-avatar">JH</span>
+  </nav>
+
+  <!-- ===== live theme switcher ===== -->
+  <div class="sc-themebar" id="scThemeBar"><span class="sc-tb-note">Loading design systems…</span></div>
+
+  <!-- ===== hero ===== -->
+  <header class="sc-hero">
+    <div class="sc-wrapx">
+      <span class="sc-eyebrow"><span class="sc-dot"></span> Live design-system preview</span>
+      <h1>One sample site, <em>every</em> design system.</h1>
+      <p class="sc-lead">This entire page is built from Prism's design tokens — nothing is hard-coded. Pick a design system above and watch the whole product reskin instantly, with no reload.</p>
+      <div class="sc-hero-cta">
+        <button class="sc-btn sc-btn-primary sc-btn-lg">Get started</button>
+        <button class="sc-btn sc-btn-ghost sc-btn-lg" data-open-modal>Book a demo →</button>
+      </div>
+      <div class="sc-stats">
+        <div class="sc-stat"><div class="sc-stat-n">12.4k</div><div class="sc-stat-l">Active users</div></div>
+        <div class="sc-stat"><div class="sc-stat-n">99.98%</div><div class="sc-stat-l">Uptime</div></div>
+        <div class="sc-stat"><div class="sc-stat-n">4.9★</div><div class="sc-stat-l">Avg rating</div></div>
+        <div class="sc-stat"><div class="sc-stat-n">38ms</div><div class="sc-stat-l">P50 latency</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== components grid ===== -->
+  <section class="sc-section">
+    <div class="sc-wrapx">
+      <div class="sc-sechead"><h2>Components</h2><p>The building blocks, all token-driven.</p></div>
+      <div class="sc-grid">
+
+        <!-- buttons -->
+        <div class="sc-crd">
+          <div class="sc-crd-h"><span class="sc-crd-ico">⬢</span><h3>Buttons</h3></div>
+          <div class="sc-crd-row">
+            <button class="sc-btn sc-btn-primary">Primary</button>
+            <button class="sc-btn sc-btn-secondary">Secondary</button>
+            <button class="sc-btn sc-btn-ghost">Ghost</button>
+            <button class="sc-btn sc-btn-danger">Delete</button>
+          </div>
+          <div class="sc-crd-row">
+            <button class="sc-btn sc-btn-primary sc-btn-sm">Small</button>
+            <button class="sc-btn sc-btn-primary">Medium</button>
+            <button class="sc-btn sc-btn-primary sc-btn-lg">Large</button>
+            <button class="sc-btn sc-btn-secondary" disabled>Disabled</button>
+          </div>
+        </div>
+
+        <!-- form -->
+        <div class="sc-crd">
+          <div class="sc-crd-h"><span class="sc-crd-ico">✎</span><h3>Form controls</h3></div>
+          <div class="sc-field"><label for="scName">Full name</label><input class="sc-input" id="scName" type="text" placeholder="Ada Lovelace"></div>
+          <div class="sc-field"><label for="scRole">Role</label>
+            <select class="sc-select" id="scRole"><option>Engineering</option><option>Design</option><option>Product</option></select>
+          </div>
+          <div class="sc-field"><label for="scBio">Notes</label><textarea class="sc-textarea" id="scBio" placeholder="Anything we should know?"></textarea></div>
+          <div class="sc-crd-row" style="gap:16px">
+            <label class="sc-check"><input type="checkbox" checked><span class="sc-box"><svg viewBox="0 0 24 24" fill="none"><polyline points="4 12 10 18 20 6"/></svg></span> Email me updates</label>
+            <label class="sc-check sc-radio"><input type="radio" name="scPlan" checked><span class="sc-box"></span> Monthly</label>
+            <label class="sc-check sc-radio"><input type="radio" name="scPlan"><span class="sc-box"></span> Yearly</label>
+          </div>
+          <div class="sc-crd-row" style="justify-content:space-between">
+            <label class="sc-check"><input class="sc-switch-in" type="checkbox" checked><span class="sc-switch"></span> Notifications</label>
+            <input class="sc-range" type="range" min="0" max="100" value="68" style="max-width:150px" aria-label="Volume">
+          </div>
+        </div>
+
+        <!-- badges / chips / avatars -->
+        <div class="sc-crd">
+          <div class="sc-crd-h"><span class="sc-crd-ico">◷</span><h3>Badges &amp; chips</h3></div>
+          <div class="sc-crd-row">
+            <span class="sc-badge sc-badge-neutral"><span class="sc-bdot"></span>Draft</span>
+            <span class="sc-badge sc-badge-accent"><span class="sc-bdot"></span>New</span>
+            <span class="sc-badge sc-badge-pos"><span class="sc-bdot"></span>Active</span>
+            <span class="sc-badge sc-badge-warn"><span class="sc-bdot"></span>Pending</span>
+            <span class="sc-badge sc-badge-neg"><span class="sc-bdot"></span>Failed</span>
+            <span class="sc-badge sc-badge-crit"><span class="sc-bdot"></span>Peak</span>
+          </div>
+          <div class="sc-crd-row">
+            <span class="sc-chip">Design <button class="sc-chip-x" aria-label="remove">×</button></span>
+            <span class="sc-chip">Frontend <button class="sc-chip-x" aria-label="remove">×</button></span>
+            <span class="sc-chip">A11y <button class="sc-chip-x" aria-label="remove">×</button></span>
+          </div>
+          <div>
+            <div class="sc-crd-lbl">Team</div>
+            <div class="sc-avatars">
+              <span class="sc-av" style="background:linear-gradient(135deg,var(--accent),var(--info))">AL</span>
+              <span class="sc-av" style="background:linear-gradient(135deg,var(--crit),var(--accent))">RM</span>
+              <span class="sc-av" style="background:linear-gradient(135deg,var(--pos),var(--accent2))">JH</span>
+              <span class="sc-av" style="background:var(--panel2);color:var(--muted)">+6</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- alerts + toast -->
+        <div class="sc-crd">
+          <div class="sc-crd-h"><span class="sc-crd-ico">!</span><h3>Alerts</h3></div>
+          <div class="sc-alert sc-alert-info"><span class="sc-al-ico">i</span><div><div class="sc-al-t">Heads up</div><div class="sc-al-b">A new version of the report is available.</div></div></div>
+          <div class="sc-alert sc-alert-pos"><span class="sc-al-ico">✓</span><div><div class="sc-al-t">Saved</div><div class="sc-al-b">Your changes were published successfully.</div></div></div>
+          <div class="sc-alert sc-alert-warn"><span class="sc-al-ico">!</span><div><div class="sc-al-t">Quota at 82%</div><div class="sc-al-b">Consider upgrading before the reset.</div></div></div>
+          <div class="sc-crd-row">
+            <button class="sc-btn sc-btn-secondary sc-btn-sm" data-toast="pos">Success toast</button>
+            <button class="sc-btn sc-btn-secondary sc-btn-sm" data-toast="neg">Error toast</button>
+            <button class="sc-btn sc-btn-secondary sc-btn-sm" data-toast="info">Info toast</button>
+          </div>
+        </div>
+
+        <!-- tabs -->
+        <div class="sc-crd">
+          <div class="sc-crd-h"><span class="sc-crd-ico">▤</span><h3>Tabs</h3></div>
+          <div>
+            <div class="sc-tabs">
+              <button class="sc-tab on" data-tab="overview" aria-selected="true">Overview</button>
+              <button class="sc-tab" data-tab="activity" aria-selected="false">Activity</button>
+              <button class="sc-tab" data-tab="settings" aria-selected="false">Settings</button>
+            </div>
+            <div class="sc-tabpanel on" data-panel="overview">A quick summary of your workspace health, usage trends, and the components you touch most.</div>
+            <div class="sc-tabpanel" data-panel="activity">Recent activity streams here — commits, publishes, comments and shares from your team.</div>
+            <div class="sc-tabpanel" data-panel="settings">Configure notifications, integrations, and access. Every control here is token-driven too.</div>
+          </div>
+        </div>
+
+        <!-- list + progress -->
+        <div class="sc-crd">
+          <div class="sc-crd-h"><span class="sc-crd-ico">≣</span><h3>Activity &amp; progress</h3></div>
+          <div class="sc-list">
+            <div class="sc-li"><span class="sc-li-ico">📦</span><div class="sc-li-main"><div class="sc-li-t">Build published</div><div class="sc-li-s">web · v2.14.0</div></div><span class="sc-li-meta">2m</span></div>
+            <div class="sc-li"><span class="sc-li-ico">💬</span><div class="sc-li-main"><div class="sc-li-t">New comment</div><div class="sc-li-s">on “Q3 roadmap”</div></div><span class="sc-li-meta">18m</span></div>
+            <div class="sc-li"><span class="sc-li-ico">✅</span><div class="sc-li-main"><div class="sc-li-t">Task completed</div><div class="sc-li-s">Migrate tokens</div></div><span class="sc-li-meta">1h</span></div>
+          </div>
+          <div>
+            <div class="sc-crd-lbl">Storage · 68%</div>
+            <div class="sc-meter"><span style="width:68%"></span></div>
+          </div>
+          <div>
+            <div class="sc-crd-lbl">Coverage · 94%</div>
+            <div class="sc-meter sc-meter-pos"><span style="width:94%"></span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== data table ===== -->
+  <section class="sc-section">
+    <div class="sc-wrapx">
+      <div class="sc-sechead"><h2>Data table</h2><p>Sortable header, status badges, row actions and pagination.</p></div>
+      <div class="sc-tablecard">
+        <div class="sc-tabletop">
+          <h3>Team members</h3>
+          <div class="sc-crd-row">
+            <button class="sc-btn sc-btn-ghost sc-btn-sm">Filter</button>
+            <button class="sc-btn sc-btn-primary sc-btn-sm">+ Invite</button>
+          </div>
+        </div>
+        <div class="sc-tablewrap">
+          <table class="sc-table">
+            <thead><tr>
+              <th class="sc-sortable">Name <span class="sc-caret">▾</span></th>
+              <th>Role</th>
+              <th class="sc-sortable">Status <span class="sc-caret">▾</span></th>
+              <th class="sc-sortable">Last active <span class="sc-caret">▾</span></th>
+              <th style="text-align:right">Actions</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="sc-cell-user"><span class="sc-av" style="background:linear-gradient(135deg,var(--accent),var(--info))">AL</span><div><div>Ada Lovelace</div><div class="sc-cell-sub">ada@northwind.io</div></div></div></td>
+                <td>Engineering</td>
+                <td><span class="sc-badge sc-badge-pos"><span class="sc-bdot"></span>Active</span></td>
+                <td>2 min ago</td>
+                <td style="text-align:right"><button class="sc-rowact">Manage</button></td>
+              </tr>
+              <tr>
+                <td><div class="sc-cell-user"><span class="sc-av" style="background:linear-gradient(135deg,var(--crit),var(--accent))">RM</span><div><div>Rosa Marín</div><div class="sc-cell-sub">rosa@northwind.io</div></div></div></td>
+                <td>Design</td>
+                <td><span class="sc-badge sc-badge-warn"><span class="sc-bdot"></span>Away</span></td>
+                <td>3 h ago</td>
+                <td style="text-align:right"><button class="sc-rowact">Manage</button></td>
+              </tr>
+              <tr>
+                <td><div class="sc-cell-user"><span class="sc-av" style="background:linear-gradient(135deg,var(--pos),var(--accent2))">JH</span><div><div>Jun Hara</div><div class="sc-cell-sub">jun@northwind.io</div></div></div></td>
+                <td>Product</td>
+                <td><span class="sc-badge sc-badge-neutral"><span class="sc-bdot"></span>Invited</span></td>
+                <td>—</td>
+                <td style="text-align:right"><button class="sc-rowact">Manage</button></td>
+              </tr>
+              <tr>
+                <td><div class="sc-cell-user"><span class="sc-av" style="background:linear-gradient(135deg,var(--warn),var(--neg))">TS</span><div><div>Tomás Silva</div><div class="sc-cell-sub">tomas@northwind.io</div></div></div></td>
+                <td>Engineering</td>
+                <td><span class="sc-badge sc-badge-neg"><span class="sc-bdot"></span>Suspended</span></td>
+                <td>6 d ago</td>
+                <td style="text-align:right"><button class="sc-rowact">Manage</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="sc-pager">
+          <button class="sc-pg sc-pg-nav" aria-label="Previous">‹</button>
+          <button class="sc-pg on">1</button>
+          <button class="sc-pg">2</button>
+          <button class="sc-pg">3</button>
+          <button class="sc-pg">4</button>
+          <button class="sc-pg sc-pg-nav" aria-label="Next">›</button>
+          <span class="sc-pg-info">1–4 of 128</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="sc-section">
+    <div class="sc-wrapx">
+      <div class="sc-cta">
+        <div>
+          <h2>Ready to see it in your brand?</h2>
+          <p>Open the dialog to preview the sign-up flow under the active design system.</p>
+        </div>
+        <button class="sc-btn sc-btn-primary sc-btn-lg" data-open-modal>Open dialog</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== footer ===== -->
+  <footer class="sc-foot">
+    <div class="sc-wrapx">
+      <div class="sc-foot-cols">
+        <div>
+          <a class="sc-brand" href="#"><span class="sc-logo">◆</span> Northwind</a>
+          <p class="sc-foot-tag">A fictional product used to showcase Prism design systems. Everything you see is rendered from design tokens.</p>
+        </div>
+        <div><h4>Product</h4><a href="#">Features</a><a href="#">Pricing</a><a href="#">Changelog</a><a href="#">Roadmap</a></div>
+        <div><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Blog</a><a href="#">Press</a></div>
+        <div><h4>Support</h4><a href="#">Docs</a><a href="#">Status</a><a href="#">Contact</a><a href="#">Community</a></div>
+      </div>
+      <div class="sc-foot-bar">
+        <span>© 2026 Northwind, Inc. — a Prism showcase.</span>
+        <span class="sc-crd-row"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ===== modal ===== -->
+<div class="sc-modal" id="scModal" role="dialog" aria-modal="true" aria-label="Book a demo">
+  <div class="sc-modal-box">
+    <div class="sc-modal-h">
+      <h3>Book a demo</h3>
+      <button class="sc-modal-x" data-close-modal aria-label="Close">×</button>
+    </div>
+    <div class="sc-modal-b">
+      <div class="sc-field"><label for="scmEmail">Work email</label><input class="sc-input" id="scmEmail" type="email" placeholder="you@company.com"></div>
+      <div class="sc-field"><label for="scmTeam">Team size</label>
+        <select class="sc-select" id="scmTeam"><option>1–10</option><option>11–50</option><option>51–200</option><option>200+</option></select>
+      </div>
+      <label class="sc-check"><input type="checkbox" checked><span class="sc-box"><svg viewBox="0 0 24 24" fill="none"><polyline points="4 12 10 18 20 6"/></svg></span> Send me onboarding tips</label>
+    </div>
+    <div class="sc-modal-f">
+      <button class="sc-btn sc-btn-ghost" data-close-modal>Cancel</button>
+      <button class="sc-btn sc-btn-primary" data-close-modal>Request demo</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== toast host ===== -->
+<div class="sc-toasts" id="scToasts" aria-live="polite"></div>
+
+<script>
+(function(){
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  var api=null; try{ api=parent.PrismShell; }catch(e){ api=null; }
+
+  /* ---- live design-system switcher (mirrors pg-variants' theme bar) ---- */
+  var bar=document.getElementById('scThemeBar');
+  function activeId(){ try{ return api.getTheme(); }catch(e){} try{ return api.themeMatrix().activeTheme; }catch(e){} return null; }
+  function renderBar(){
+    var list=[]; try{ list=(api.themeMatrix().themes)||[]; }catch(e){ list=[]; }
+    if(!list.length){ bar.innerHTML='<span class="sc-tb-note">Open this page inside Prism to switch design systems live.</span>'; return; }
+    var cur=activeId();
+    var groups={}, order=[];
+    list.forEach(function(t){ var k=t.ds||'other'; if(!groups[k]){ groups[k]=[]; order.push(k); } groups[k].push(t); });
+    var html='<span class="sc-tb-label">Design system</span>';
+    order.forEach(function(ds){
+      html+='<span class="sc-tb-group">';
+      groups[ds].forEach(function(t){
+        html+='<button class="sc-tchip'+(t.id===cur?' on':'')+'" data-id="'+esc(t.id)+'" title="'+esc(t.name)+'">'+
+          '<span class="sc-sw" style="background:'+esc(t.accent||'#888')+'"></span>'+
+          '<span class="sc-tc-name">'+esc(t.name)+'</span>'+
+          '<span class="sc-tc-mode">'+esc(t.mode)+'</span>'+
+        '</button>';
+      });
+      html+='</span>';
+    });
+    bar.innerHTML=html;
+    bar.querySelectorAll('.sc-tchip').forEach(function(b){
+      b.addEventListener('click',function(){
+        var id=b.getAttribute('data-id'), now=id;
+        try{ now=api.setTheme(id); }catch(e){}
+        syncBar(now);
+      });
+    });
+  }
+  function syncBar(id){
+    if(id==null) id=activeId();
+    bar.querySelectorAll('.sc-tchip').forEach(function(x){ x.classList.toggle('on', x.getAttribute('data-id')===id); });
+  }
+  renderBar();
+  // Re-sync if the theme is changed from the shell's own light/dark toggle
+  // (applyTheme writes localStorage 'prismTheme'; storage events reach this
+  // same-origin srcdoc frame). Also re-sync on focus as a cheap fallback.
+  try{ window.addEventListener('storage', function(e){ if(e.key==='prismTheme') syncBar(e.newValue); }); }catch(e){}
+  try{ window.addEventListener('focus', function(){ syncBar(); }); }catch(e){}
+
+  /* ---- tabs ---- */
+  document.querySelectorAll('.sc-tabs').forEach(function(tabs){
+    var host=tabs.parentNode;
+    var btns=tabs.querySelectorAll('.sc-tab');
+    var panels=host.querySelectorAll('.sc-tabpanel');
+    btns.forEach(function(b){ b.addEventListener('click',function(){
+      btns.forEach(function(x){ x.classList.remove('on'); x.setAttribute('aria-selected','false'); });
+      b.classList.add('on'); b.setAttribute('aria-selected','true');
+      var t=b.getAttribute('data-tab');
+      panels.forEach(function(p){ p.classList.toggle('on', p.getAttribute('data-panel')===t); });
+    }); });
+  });
+
+  /* ---- modal ---- */
+  var modal=document.getElementById('scModal');
+  document.querySelectorAll('[data-open-modal]').forEach(function(b){ b.addEventListener('click',function(){ modal.classList.add('open'); }); });
+  modal.querySelectorAll('[data-close-modal]').forEach(function(b){ b.addEventListener('click',function(){ modal.classList.remove('open'); }); });
+  modal.addEventListener('click',function(e){ if(e.target===modal) modal.classList.remove('open'); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') modal.classList.remove('open'); });
+
+  /* ---- toasts ---- */
+  var host=document.getElementById('scToasts');
+  var TMETA={pos:{ico:'✓',t:'Published',b:'Your report is now live.'},neg:{ico:'!',t:'Something went wrong',b:'We couldn’t save your changes.'},info:{ico:'i',t:'Heads up',b:'A teammate shared a report with you.'},warn:{ico:'!',t:'Quota warning',b:'You’re at 82% of your plan.'}};
+  document.querySelectorAll('[data-toast]').forEach(function(b){ b.addEventListener('click',function(){
+    var kind=b.getAttribute('data-toast')||'info'; var m=TMETA[kind]||TMETA.info;
+    var el=document.createElement('div'); el.className='sc-toast sc-toast-'+kind;
+    el.innerHTML='<span class="sc-toast-ico">'+esc(m.ico)+'</span><div><div class="sc-toast-t">'+esc(m.t)+'</div><div class="sc-toast-b">'+esc(m.b)+'</div></div><button class="sc-toast-x" aria-label="Dismiss">×</button>';
+    host.appendChild(el);
+    var kill=function(){ el.classList.add('out'); setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); },320); };
+    el.querySelector('.sc-toast-x').addEventListener('click',kill);
+    setTimeout(kill, 4000);
+  }); });
+
+  /* ---- pagination (demo) ---- */
+  document.querySelectorAll('.sc-pager').forEach(function(p){
+    p.querySelectorAll('.sc-pg').forEach(function(b){ b.addEventListener('click',function(){
+      if(b.classList.contains('sc-pg-nav')) return;
+      p.querySelectorAll('.sc-pg').forEach(function(x){ if(!x.classList.contains('sc-pg-nav')) x.classList.remove('on'); });
+      b.classList.add('on');
+    }); });
+  });
+})();
+<\/script>
+</body>
+</html>
+</script>
+
 <script type="text/html" id="pg-variants"><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93413,6 +94060,7 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
     {id:'facets',label:'New Facets',emoji:'✦',title:'New Facets',blurb:'Every component added in the latest release — collected in one place so you can see what\'s new at a glance.'},
     {id:'search',label:'Search',emoji:'🔎',title:'Search',blurb:'Search all facets by name, gallery, component type, interaction, or design Spectrum.'},
     {id:'variants',label:'Variant Matrix',emoji:'🎭',title:'Component Variant Matrix',blurb:'Every component rendered live in both Cloudscape color modes — light and dark. Compare them side-by-side with no reload, and export the token overrides.'},
+    {id:'showcase',label:'Showcase',emoji:'🖼',title:'Design System Showcase',blurb:'A complete sample website — nav, hero, forms, data table, tabs, alerts, modal and more — built entirely from design tokens. Switch design systems from the in-page toolbar and watch the whole product reskin live, with no reload.'},
     {id:'collections',label:'Collections',emoji:'🗂',title:'Collections & Favorites',blurb:'Save components into named collections, then export them as portable prism-collection-1.0 JSON or a self-contained HTML bundle. Round-trips with the Prism MCP server.'},
     {id:'charts',label:'Charts & Metrics',emoji:'📊',title:'Charts & Metrics',blurb:'KPIs, gauges, progress, trends, comparisons and status — hand-authored inline SVG + CSS.'},
     {id:'fx',label:'FX Store',emoji:'🎇',title:'FX Store',blurb:'Drop-in visual effects: glows, pulses, shimmers, particles and more.'},
@@ -93664,7 +94312,14 @@ body{margin:0;background:radial-gradient(1100px 600px at 80% -10%,rgba(255,153,0
         activeTheme:active,
         themes:list
       };
-    }
+    },
+    // Design System Showcase (F7/JFH-40): let the in-frame showcase page drive a
+    // full-app theme switch (shell chrome + the current gallery frame) with no
+    // reload — exactly what the light/dark toggle does. Mirrors applyTheme so ANY
+    // registry pack (light or dark) is selectable from inside the sample site.
+    // Returns the id that ended up active (unchanged if the id was unknown).
+    setTheme:function(id){ try{ applyTheme(id, true); }catch(e){} return curTheme; },
+    getTheme:function(){ return curTheme; }
   };
 
   // ---- per-section item counts ----
