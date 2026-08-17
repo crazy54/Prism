@@ -1,5 +1,5 @@
 {
-  "count": 2368,
+  "count": 2468,
   "effects": [
     {
       "id": "charts-big-metric-count-up",
@@ -1692,10 +1692,10 @@
         "sl",
         "ts",
         "lv",
-        "info",
+        "ok",
         "m",
         "warn",
-        "ok",
+        "info",
         "cursor"
       ],
       "params": [],
@@ -63831,6 +63831,2624 @@
       "componentType": "object",
       "interaction": "auto-play",
       "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "antd-button-accent",
+      "name": "Pill Button · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-button",
+      "classes": [
+        "antd-root",
+        "antd-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "antd-toggle-accent",
+      "name": "Switch Toggle · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-toggle",
+      "classes": [
+        "antd-root",
+        "antd-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "antd-chip-accent",
+      "name": "Status Chip · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-chip",
+      "classes": [
+        "antd-root",
+        "antd-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "antd-menu-accent",
+      "name": "Dropdown Menu · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-menu",
+      "classes": [
+        "antd-root",
+        "antd-menu",
+        "antd-mi",
+        "antd-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "antd-notification-accent",
+      "name": "Toast Notification · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-notification",
+      "classes": [
+        "antd-root",
+        "antd-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "antd-callout-accent",
+      "name": "Callout Banner · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-callout",
+      "classes": [
+        "antd-root",
+        "antd-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "antd-chart-accent",
+      "name": "Mini Bar Chart · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-chart",
+      "classes": [
+        "antd-root",
+        "antd-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "antd-input-accent",
+      "name": "Text Field · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-input",
+      "classes": [
+        "antd-root",
+        "antd-field",
+        "antd-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "antd-progress-accent",
+      "name": "Progress Bar · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-progress",
+      "classes": [
+        "antd-root",
+        "antd-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "antd-avatar-accent",
+      "name": "Avatar Ring · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-avatar",
+      "classes": [
+        "antd-root",
+        "antd-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "antd-badge-accent",
+      "name": "Count Badge · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-badge",
+      "classes": [
+        "antd-root",
+        "antd-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "antd-tab-accent",
+      "name": "Segmented Tabs · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-tab",
+      "classes": [
+        "antd-root",
+        "antd-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "antd-tooltip-accent",
+      "name": "Tooltip · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-tooltip",
+      "classes": [
+        "antd-root",
+        "antd-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "antd-spinner-accent",
+      "name": "Loading Spinner · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-spinner",
+      "classes": [
+        "antd-root",
+        "antd-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "antd-card-accent",
+      "name": "Feature Card · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-card",
+      "classes": [
+        "antd-root",
+        "antd-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "antd-checkbox-accent",
+      "name": "Checkbox · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-checkbox",
+      "classes": [
+        "antd-root",
+        "antd-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "antd-slider-accent",
+      "name": "Range Slider · Primary",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-slider",
+      "classes": [
+        "antd-root",
+        "antd-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "antd-button-info",
+      "name": "Pill Button · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-button",
+      "classes": [
+        "antd-root",
+        "antd-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "antd-toggle-info",
+      "name": "Switch Toggle · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-toggle",
+      "classes": [
+        "antd-root",
+        "antd-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "antd-chip-info",
+      "name": "Status Chip · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-chip",
+      "classes": [
+        "antd-root",
+        "antd-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "antd-menu-info",
+      "name": "Dropdown Menu · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-menu",
+      "classes": [
+        "antd-root",
+        "antd-menu",
+        "antd-mi",
+        "antd-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "antd-notification-info",
+      "name": "Toast Notification · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-notification",
+      "classes": [
+        "antd-root",
+        "antd-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "antd-callout-info",
+      "name": "Callout Banner · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-callout",
+      "classes": [
+        "antd-root",
+        "antd-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "antd-chart-info",
+      "name": "Mini Bar Chart · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-chart",
+      "classes": [
+        "antd-root",
+        "antd-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "antd-input-info",
+      "name": "Text Field · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-input",
+      "classes": [
+        "antd-root",
+        "antd-field",
+        "antd-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "antd-progress-info",
+      "name": "Progress Bar · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-progress",
+      "classes": [
+        "antd-root",
+        "antd-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "antd-avatar-info",
+      "name": "Avatar Ring · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-avatar",
+      "classes": [
+        "antd-root",
+        "antd-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "antd-badge-info",
+      "name": "Count Badge · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-badge",
+      "classes": [
+        "antd-root",
+        "antd-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "antd-tab-info",
+      "name": "Segmented Tabs · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-tab",
+      "classes": [
+        "antd-root",
+        "antd-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "antd-tooltip-info",
+      "name": "Tooltip · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-tooltip",
+      "classes": [
+        "antd-root",
+        "antd-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "antd-spinner-info",
+      "name": "Loading Spinner · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-spinner",
+      "classes": [
+        "antd-root",
+        "antd-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "antd-card-info",
+      "name": "Feature Card · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-card",
+      "classes": [
+        "antd-root",
+        "antd-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "antd-checkbox-info",
+      "name": "Checkbox · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-checkbox",
+      "classes": [
+        "antd-root",
+        "antd-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "antd-slider-info",
+      "name": "Range Slider · Info",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-slider",
+      "classes": [
+        "antd-root",
+        "antd-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "antd-button-pos",
+      "name": "Pill Button · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-button",
+      "classes": [
+        "antd-root",
+        "antd-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "antd-toggle-pos",
+      "name": "Switch Toggle · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-toggle",
+      "classes": [
+        "antd-root",
+        "antd-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "antd-chip-pos",
+      "name": "Status Chip · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-chip",
+      "classes": [
+        "antd-root",
+        "antd-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "antd-menu-pos",
+      "name": "Dropdown Menu · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-menu",
+      "classes": [
+        "antd-root",
+        "antd-menu",
+        "antd-mi",
+        "antd-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "antd-notification-pos",
+      "name": "Toast Notification · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-notification",
+      "classes": [
+        "antd-root",
+        "antd-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "antd-callout-pos",
+      "name": "Callout Banner · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-callout",
+      "classes": [
+        "antd-root",
+        "antd-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "antd-chart-pos",
+      "name": "Mini Bar Chart · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-chart",
+      "classes": [
+        "antd-root",
+        "antd-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "antd-input-pos",
+      "name": "Text Field · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-input",
+      "classes": [
+        "antd-root",
+        "antd-field",
+        "antd-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "antd-progress-pos",
+      "name": "Progress Bar · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-progress",
+      "classes": [
+        "antd-root",
+        "antd-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "antd-avatar-pos",
+      "name": "Avatar Ring · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-avatar",
+      "classes": [
+        "antd-root",
+        "antd-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "antd-badge-pos",
+      "name": "Count Badge · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-badge",
+      "classes": [
+        "antd-root",
+        "antd-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "antd-tab-pos",
+      "name": "Segmented Tabs · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-tab",
+      "classes": [
+        "antd-root",
+        "antd-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "antd-tooltip-pos",
+      "name": "Tooltip · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-tooltip",
+      "classes": [
+        "antd-root",
+        "antd-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "antd-spinner-pos",
+      "name": "Loading Spinner · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-spinner",
+      "classes": [
+        "antd-root",
+        "antd-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "antd-card-pos",
+      "name": "Feature Card · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-card",
+      "classes": [
+        "antd-root",
+        "antd-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "antd-checkbox-pos",
+      "name": "Checkbox · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-checkbox",
+      "classes": [
+        "antd-root",
+        "antd-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "antd-slider-pos",
+      "name": "Range Slider · Success",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-slider",
+      "classes": [
+        "antd-root",
+        "antd-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "antd-button-warn",
+      "name": "Pill Button · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-button",
+      "classes": [
+        "antd-root",
+        "antd-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "antd-toggle-warn",
+      "name": "Switch Toggle · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-toggle",
+      "classes": [
+        "antd-root",
+        "antd-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "antd-chip-warn",
+      "name": "Status Chip · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-chip",
+      "classes": [
+        "antd-root",
+        "antd-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "antd-menu-warn",
+      "name": "Dropdown Menu · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-menu",
+      "classes": [
+        "antd-root",
+        "antd-menu",
+        "antd-mi",
+        "antd-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "antd-notification-warn",
+      "name": "Toast Notification · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-notification",
+      "classes": [
+        "antd-root",
+        "antd-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "antd-callout-warn",
+      "name": "Callout Banner · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-callout",
+      "classes": [
+        "antd-root",
+        "antd-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "antd-chart-warn",
+      "name": "Mini Bar Chart · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-chart",
+      "classes": [
+        "antd-root",
+        "antd-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "antd-input-warn",
+      "name": "Text Field · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-input",
+      "classes": [
+        "antd-root",
+        "antd-field",
+        "antd-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "antd-progress-warn",
+      "name": "Progress Bar · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-progress",
+      "classes": [
+        "antd-root",
+        "antd-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "antd-avatar-warn",
+      "name": "Avatar Ring · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-avatar",
+      "classes": [
+        "antd-root",
+        "antd-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "antd-badge-warn",
+      "name": "Count Badge · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-badge",
+      "classes": [
+        "antd-root",
+        "antd-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "antd-tab-warn",
+      "name": "Segmented Tabs · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-tab",
+      "classes": [
+        "antd-root",
+        "antd-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "antd-tooltip-warn",
+      "name": "Tooltip · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-tooltip",
+      "classes": [
+        "antd-root",
+        "antd-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "antd-spinner-warn",
+      "name": "Loading Spinner · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-spinner",
+      "classes": [
+        "antd-root",
+        "antd-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "antd-card-warn",
+      "name": "Feature Card · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-card",
+      "classes": [
+        "antd-root",
+        "antd-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "antd-checkbox-warn",
+      "name": "Checkbox · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-checkbox",
+      "classes": [
+        "antd-root",
+        "antd-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "antd-slider-warn",
+      "name": "Range Slider · Warning",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-slider",
+      "classes": [
+        "antd-root",
+        "antd-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "antd-button-neg",
+      "name": "Pill Button · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-button",
+      "classes": [
+        "antd-root",
+        "antd-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "antd-toggle-neg",
+      "name": "Switch Toggle · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-toggle",
+      "classes": [
+        "antd-root",
+        "antd-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "antd-chip-neg",
+      "name": "Status Chip · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-chip",
+      "classes": [
+        "antd-root",
+        "antd-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "antd-menu-neg",
+      "name": "Dropdown Menu · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-menu",
+      "classes": [
+        "antd-root",
+        "antd-menu",
+        "antd-mi",
+        "antd-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "antd-notification-neg",
+      "name": "Toast Notification · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-notification",
+      "classes": [
+        "antd-root",
+        "antd-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "antd-callout-neg",
+      "name": "Callout Banner · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-callout",
+      "classes": [
+        "antd-root",
+        "antd-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "antd-chart-neg",
+      "name": "Mini Bar Chart · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-chart",
+      "classes": [
+        "antd-root",
+        "antd-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "antd-input-neg",
+      "name": "Text Field · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-input",
+      "classes": [
+        "antd-root",
+        "antd-field",
+        "antd-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "antd-progress-neg",
+      "name": "Progress Bar · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-progress",
+      "classes": [
+        "antd-root",
+        "antd-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "antd-avatar-neg",
+      "name": "Avatar Ring · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-avatar",
+      "classes": [
+        "antd-root",
+        "antd-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "antd-badge-neg",
+      "name": "Count Badge · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-badge",
+      "classes": [
+        "antd-root",
+        "antd-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "antd-tab-neg",
+      "name": "Segmented Tabs · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-tab",
+      "classes": [
+        "antd-root",
+        "antd-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "antd-tooltip-neg",
+      "name": "Tooltip · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-tooltip",
+      "classes": [
+        "antd-root",
+        "antd-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "antd-spinner-neg",
+      "name": "Loading Spinner · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-spinner",
+      "classes": [
+        "antd-root",
+        "antd-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "antd-card-neg",
+      "name": "Feature Card · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-card",
+      "classes": [
+        "antd-root",
+        "antd-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "antd-checkbox-neg",
+      "name": "Checkbox · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-checkbox",
+      "classes": [
+        "antd-root",
+        "antd-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "antd-slider-neg",
+      "name": "Range Slider · Danger",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-slider",
+      "classes": [
+        "antd-root",
+        "antd-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "antd-button-crit",
+      "name": "Pill Button · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-button",
+      "classes": [
+        "antd-root",
+        "antd-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "antd-toggle-crit",
+      "name": "Switch Toggle · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-toggle",
+      "classes": [
+        "antd-root",
+        "antd-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "antd-chip-crit",
+      "name": "Status Chip · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-chip",
+      "classes": [
+        "antd-root",
+        "antd-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "antd-menu-crit",
+      "name": "Dropdown Menu · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-menu",
+      "classes": [
+        "antd-root",
+        "antd-menu",
+        "antd-mi",
+        "antd-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "antd-notification-crit",
+      "name": "Toast Notification · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-notification",
+      "classes": [
+        "antd-root",
+        "antd-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "antd-callout-crit",
+      "name": "Callout Banner · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-callout",
+      "classes": [
+        "antd-root",
+        "antd-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "antd-chart-crit",
+      "name": "Mini Bar Chart · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-chart",
+      "classes": [
+        "antd-root",
+        "antd-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "antd-input-crit",
+      "name": "Text Field · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-input",
+      "classes": [
+        "antd-root",
+        "antd-field",
+        "antd-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "antd-progress-crit",
+      "name": "Progress Bar · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-progress",
+      "classes": [
+        "antd-root",
+        "antd-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "antd-avatar-crit",
+      "name": "Avatar Ring · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-avatar",
+      "classes": [
+        "antd-root",
+        "antd-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "antd-badge-crit",
+      "name": "Count Badge · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-badge",
+      "classes": [
+        "antd-root",
+        "antd-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "antd-tab-crit",
+      "name": "Segmented Tabs · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-tab",
+      "classes": [
+        "antd-root",
+        "antd-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "antd-tooltip-crit",
+      "name": "Tooltip · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-tooltip",
+      "classes": [
+        "antd-root",
+        "antd-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "antd-spinner-crit",
+      "name": "Loading Spinner · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-spinner",
+      "classes": [
+        "antd-root",
+        "antd-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "antd-card-crit",
+      "name": "Feature Card · Critical",
+      "gallery": "spectrums",
+      "category": "Ant Design",
+      "ref": ".antd-card",
+      "classes": [
+        "antd-root",
+        "antd-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "antd",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "antd",
       "usableAsBackground": false,
       "needsJs": null,
       "isNew": true,
