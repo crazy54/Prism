@@ -1,5 +1,5 @@
 {
-  "count": 1968,
+  "count": 2068,
   "effects": [
     {
       "id": "charts-big-metric-count-up",
@@ -1692,10 +1692,10 @@
         "sl",
         "ts",
         "lv",
-        "ok",
-        "m",
         "info",
+        "m",
         "warn",
+        "ok",
         "err",
         "cursor"
       ],
@@ -16017,9 +16017,9 @@
         "gate",
         "experts",
         "expert",
+        "on",
         "ed",
         "ew",
-        "on",
         "cap",
         "pr-playbtn"
       ],
@@ -53360,6 +53360,2624 @@
       "componentType": "object",
       "interaction": "auto-play",
       "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "monzo-button-accent",
+      "name": "Pill Button · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-button",
+      "classes": [
+        "monzo-root",
+        "monzo-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "monzo-toggle-accent",
+      "name": "Switch Toggle · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-toggle",
+      "classes": [
+        "monzo-root",
+        "monzo-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "monzo-chip-accent",
+      "name": "Status Chip · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-chip",
+      "classes": [
+        "monzo-root",
+        "monzo-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "monzo-menu-accent",
+      "name": "Dropdown Menu · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-menu",
+      "classes": [
+        "monzo-root",
+        "monzo-menu",
+        "monzo-mi",
+        "monzo-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "monzo-notification-accent",
+      "name": "Toast Notification · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-notification",
+      "classes": [
+        "monzo-root",
+        "monzo-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "monzo-callout-accent",
+      "name": "Callout Banner · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-callout",
+      "classes": [
+        "monzo-root",
+        "monzo-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "monzo-chart-accent",
+      "name": "Mini Bar Chart · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-chart",
+      "classes": [
+        "monzo-root",
+        "monzo-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "monzo-input-accent",
+      "name": "Text Field · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-input",
+      "classes": [
+        "monzo-root",
+        "monzo-field",
+        "monzo-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "monzo-progress-accent",
+      "name": "Progress Bar · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-progress",
+      "classes": [
+        "monzo-root",
+        "monzo-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "monzo-avatar-accent",
+      "name": "Avatar Ring · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-avatar",
+      "classes": [
+        "monzo-root",
+        "monzo-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "monzo-badge-accent",
+      "name": "Count Badge · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-badge",
+      "classes": [
+        "monzo-root",
+        "monzo-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "monzo-tab-accent",
+      "name": "Segmented Tabs · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-tab",
+      "classes": [
+        "monzo-root",
+        "monzo-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "monzo-tooltip-accent",
+      "name": "Tooltip · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-tooltip",
+      "classes": [
+        "monzo-root",
+        "monzo-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "monzo-spinner-accent",
+      "name": "Loading Spinner · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-spinner",
+      "classes": [
+        "monzo-root",
+        "monzo-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "monzo-card-accent",
+      "name": "Feature Card · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-card",
+      "classes": [
+        "monzo-root",
+        "monzo-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "monzo-checkbox-accent",
+      "name": "Checkbox · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-checkbox",
+      "classes": [
+        "monzo-root",
+        "monzo-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "monzo-slider-accent",
+      "name": "Range Slider · Primary",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-slider",
+      "classes": [
+        "monzo-root",
+        "monzo-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "monzo-button-info",
+      "name": "Pill Button · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-button",
+      "classes": [
+        "monzo-root",
+        "monzo-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "monzo-toggle-info",
+      "name": "Switch Toggle · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-toggle",
+      "classes": [
+        "monzo-root",
+        "monzo-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "monzo-chip-info",
+      "name": "Status Chip · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-chip",
+      "classes": [
+        "monzo-root",
+        "monzo-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "monzo-menu-info",
+      "name": "Dropdown Menu · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-menu",
+      "classes": [
+        "monzo-root",
+        "monzo-menu",
+        "monzo-mi",
+        "monzo-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "monzo-notification-info",
+      "name": "Toast Notification · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-notification",
+      "classes": [
+        "monzo-root",
+        "monzo-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "monzo-callout-info",
+      "name": "Callout Banner · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-callout",
+      "classes": [
+        "monzo-root",
+        "monzo-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "monzo-chart-info",
+      "name": "Mini Bar Chart · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-chart",
+      "classes": [
+        "monzo-root",
+        "monzo-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "monzo-input-info",
+      "name": "Text Field · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-input",
+      "classes": [
+        "monzo-root",
+        "monzo-field",
+        "monzo-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "monzo-progress-info",
+      "name": "Progress Bar · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-progress",
+      "classes": [
+        "monzo-root",
+        "monzo-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "monzo-avatar-info",
+      "name": "Avatar Ring · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-avatar",
+      "classes": [
+        "monzo-root",
+        "monzo-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "monzo-badge-info",
+      "name": "Count Badge · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-badge",
+      "classes": [
+        "monzo-root",
+        "monzo-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "monzo-tab-info",
+      "name": "Segmented Tabs · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-tab",
+      "classes": [
+        "monzo-root",
+        "monzo-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "monzo-tooltip-info",
+      "name": "Tooltip · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-tooltip",
+      "classes": [
+        "monzo-root",
+        "monzo-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "monzo-spinner-info",
+      "name": "Loading Spinner · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-spinner",
+      "classes": [
+        "monzo-root",
+        "monzo-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "monzo-card-info",
+      "name": "Feature Card · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-card",
+      "classes": [
+        "monzo-root",
+        "monzo-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "monzo-checkbox-info",
+      "name": "Checkbox · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-checkbox",
+      "classes": [
+        "monzo-root",
+        "monzo-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "monzo-slider-info",
+      "name": "Range Slider · Info",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-slider",
+      "classes": [
+        "monzo-root",
+        "monzo-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "monzo-button-pos",
+      "name": "Pill Button · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-button",
+      "classes": [
+        "monzo-root",
+        "monzo-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "monzo-toggle-pos",
+      "name": "Switch Toggle · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-toggle",
+      "classes": [
+        "monzo-root",
+        "monzo-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "monzo-chip-pos",
+      "name": "Status Chip · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-chip",
+      "classes": [
+        "monzo-root",
+        "monzo-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "monzo-menu-pos",
+      "name": "Dropdown Menu · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-menu",
+      "classes": [
+        "monzo-root",
+        "monzo-menu",
+        "monzo-mi",
+        "monzo-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "monzo-notification-pos",
+      "name": "Toast Notification · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-notification",
+      "classes": [
+        "monzo-root",
+        "monzo-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "monzo-callout-pos",
+      "name": "Callout Banner · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-callout",
+      "classes": [
+        "monzo-root",
+        "monzo-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "monzo-chart-pos",
+      "name": "Mini Bar Chart · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-chart",
+      "classes": [
+        "monzo-root",
+        "monzo-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "monzo-input-pos",
+      "name": "Text Field · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-input",
+      "classes": [
+        "monzo-root",
+        "monzo-field",
+        "monzo-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "monzo-progress-pos",
+      "name": "Progress Bar · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-progress",
+      "classes": [
+        "monzo-root",
+        "monzo-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "monzo-avatar-pos",
+      "name": "Avatar Ring · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-avatar",
+      "classes": [
+        "monzo-root",
+        "monzo-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "monzo-badge-pos",
+      "name": "Count Badge · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-badge",
+      "classes": [
+        "monzo-root",
+        "monzo-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "monzo-tab-pos",
+      "name": "Segmented Tabs · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-tab",
+      "classes": [
+        "monzo-root",
+        "monzo-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "monzo-tooltip-pos",
+      "name": "Tooltip · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-tooltip",
+      "classes": [
+        "monzo-root",
+        "monzo-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "monzo-spinner-pos",
+      "name": "Loading Spinner · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-spinner",
+      "classes": [
+        "monzo-root",
+        "monzo-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "monzo-card-pos",
+      "name": "Feature Card · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-card",
+      "classes": [
+        "monzo-root",
+        "monzo-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "monzo-checkbox-pos",
+      "name": "Checkbox · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-checkbox",
+      "classes": [
+        "monzo-root",
+        "monzo-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "monzo-slider-pos",
+      "name": "Range Slider · Success",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-slider",
+      "classes": [
+        "monzo-root",
+        "monzo-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "monzo-button-warn",
+      "name": "Pill Button · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-button",
+      "classes": [
+        "monzo-root",
+        "monzo-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "monzo-toggle-warn",
+      "name": "Switch Toggle · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-toggle",
+      "classes": [
+        "monzo-root",
+        "monzo-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "monzo-chip-warn",
+      "name": "Status Chip · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-chip",
+      "classes": [
+        "monzo-root",
+        "monzo-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "monzo-menu-warn",
+      "name": "Dropdown Menu · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-menu",
+      "classes": [
+        "monzo-root",
+        "monzo-menu",
+        "monzo-mi",
+        "monzo-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "monzo-notification-warn",
+      "name": "Toast Notification · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-notification",
+      "classes": [
+        "monzo-root",
+        "monzo-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "monzo-callout-warn",
+      "name": "Callout Banner · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-callout",
+      "classes": [
+        "monzo-root",
+        "monzo-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "monzo-chart-warn",
+      "name": "Mini Bar Chart · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-chart",
+      "classes": [
+        "monzo-root",
+        "monzo-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "monzo-input-warn",
+      "name": "Text Field · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-input",
+      "classes": [
+        "monzo-root",
+        "monzo-field",
+        "monzo-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "monzo-progress-warn",
+      "name": "Progress Bar · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-progress",
+      "classes": [
+        "monzo-root",
+        "monzo-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "monzo-avatar-warn",
+      "name": "Avatar Ring · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-avatar",
+      "classes": [
+        "monzo-root",
+        "monzo-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "monzo-badge-warn",
+      "name": "Count Badge · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-badge",
+      "classes": [
+        "monzo-root",
+        "monzo-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "monzo-tab-warn",
+      "name": "Segmented Tabs · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-tab",
+      "classes": [
+        "monzo-root",
+        "monzo-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "monzo-tooltip-warn",
+      "name": "Tooltip · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-tooltip",
+      "classes": [
+        "monzo-root",
+        "monzo-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "monzo-spinner-warn",
+      "name": "Loading Spinner · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-spinner",
+      "classes": [
+        "monzo-root",
+        "monzo-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "monzo-card-warn",
+      "name": "Feature Card · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-card",
+      "classes": [
+        "monzo-root",
+        "monzo-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "monzo-checkbox-warn",
+      "name": "Checkbox · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-checkbox",
+      "classes": [
+        "monzo-root",
+        "monzo-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "monzo-slider-warn",
+      "name": "Range Slider · Warning",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-slider",
+      "classes": [
+        "monzo-root",
+        "monzo-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "monzo-button-neg",
+      "name": "Pill Button · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-button",
+      "classes": [
+        "monzo-root",
+        "monzo-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "monzo-toggle-neg",
+      "name": "Switch Toggle · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-toggle",
+      "classes": [
+        "monzo-root",
+        "monzo-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "monzo-chip-neg",
+      "name": "Status Chip · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-chip",
+      "classes": [
+        "monzo-root",
+        "monzo-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "monzo-menu-neg",
+      "name": "Dropdown Menu · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-menu",
+      "classes": [
+        "monzo-root",
+        "monzo-menu",
+        "monzo-mi",
+        "monzo-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "monzo-notification-neg",
+      "name": "Toast Notification · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-notification",
+      "classes": [
+        "monzo-root",
+        "monzo-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "monzo-callout-neg",
+      "name": "Callout Banner · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-callout",
+      "classes": [
+        "monzo-root",
+        "monzo-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "monzo-chart-neg",
+      "name": "Mini Bar Chart · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-chart",
+      "classes": [
+        "monzo-root",
+        "monzo-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "monzo-input-neg",
+      "name": "Text Field · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-input",
+      "classes": [
+        "monzo-root",
+        "monzo-field",
+        "monzo-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "monzo-progress-neg",
+      "name": "Progress Bar · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-progress",
+      "classes": [
+        "monzo-root",
+        "monzo-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "monzo-avatar-neg",
+      "name": "Avatar Ring · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-avatar",
+      "classes": [
+        "monzo-root",
+        "monzo-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "monzo-badge-neg",
+      "name": "Count Badge · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-badge",
+      "classes": [
+        "monzo-root",
+        "monzo-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "monzo-tab-neg",
+      "name": "Segmented Tabs · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-tab",
+      "classes": [
+        "monzo-root",
+        "monzo-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "monzo-tooltip-neg",
+      "name": "Tooltip · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-tooltip",
+      "classes": [
+        "monzo-root",
+        "monzo-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "monzo-spinner-neg",
+      "name": "Loading Spinner · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-spinner",
+      "classes": [
+        "monzo-root",
+        "monzo-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "monzo-card-neg",
+      "name": "Feature Card · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-card",
+      "classes": [
+        "monzo-root",
+        "monzo-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "monzo-checkbox-neg",
+      "name": "Checkbox · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-checkbox",
+      "classes": [
+        "monzo-root",
+        "monzo-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "monzo-slider-neg",
+      "name": "Range Slider · Danger",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-slider",
+      "classes": [
+        "monzo-root",
+        "monzo-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "monzo-button-crit",
+      "name": "Pill Button · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-button",
+      "classes": [
+        "monzo-root",
+        "monzo-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "monzo-toggle-crit",
+      "name": "Switch Toggle · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-toggle",
+      "classes": [
+        "monzo-root",
+        "monzo-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "monzo-chip-crit",
+      "name": "Status Chip · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-chip",
+      "classes": [
+        "monzo-root",
+        "monzo-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "monzo-menu-crit",
+      "name": "Dropdown Menu · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-menu",
+      "classes": [
+        "monzo-root",
+        "monzo-menu",
+        "monzo-mi",
+        "monzo-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "monzo-notification-crit",
+      "name": "Toast Notification · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-notification",
+      "classes": [
+        "monzo-root",
+        "monzo-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "monzo-callout-crit",
+      "name": "Callout Banner · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-callout",
+      "classes": [
+        "monzo-root",
+        "monzo-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "monzo-chart-crit",
+      "name": "Mini Bar Chart · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-chart",
+      "classes": [
+        "monzo-root",
+        "monzo-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "monzo-input-crit",
+      "name": "Text Field · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-input",
+      "classes": [
+        "monzo-root",
+        "monzo-field",
+        "monzo-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "monzo-progress-crit",
+      "name": "Progress Bar · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-progress",
+      "classes": [
+        "monzo-root",
+        "monzo-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "monzo-avatar-crit",
+      "name": "Avatar Ring · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-avatar",
+      "classes": [
+        "monzo-root",
+        "monzo-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "monzo-badge-crit",
+      "name": "Count Badge · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-badge",
+      "classes": [
+        "monzo-root",
+        "monzo-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "monzo-tab-crit",
+      "name": "Segmented Tabs · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-tab",
+      "classes": [
+        "monzo-root",
+        "monzo-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "monzo-tooltip-crit",
+      "name": "Tooltip · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-tooltip",
+      "classes": [
+        "monzo-root",
+        "monzo-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "monzo-spinner-crit",
+      "name": "Loading Spinner · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-spinner",
+      "classes": [
+        "monzo-root",
+        "monzo-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "monzo-card-crit",
+      "name": "Feature Card · Critical",
+      "gallery": "spectrums",
+      "category": "Monzo",
+      "ref": ".monzo-card",
+      "classes": [
+        "monzo-root",
+        "monzo-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "monzo",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "monzo",
       "usableAsBackground": false,
       "needsJs": null,
       "isNew": true,
