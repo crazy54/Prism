@@ -1,5 +1,5 @@
 {
-  "count": 1868,
+  "count": 1968,
   "effects": [
     {
       "id": "charts-big-metric-count-up",
@@ -50742,6 +50742,2624 @@
       "componentType": "object",
       "interaction": "auto-play",
       "spectrum": "mailchimp",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "stackoverflow-button-accent",
+      "name": "Pill Button · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-button",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "stackoverflow-toggle-accent",
+      "name": "Switch Toggle · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-toggle",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "stackoverflow-chip-accent",
+      "name": "Status Chip · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-chip",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "stackoverflow-menu-accent",
+      "name": "Dropdown Menu · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-menu",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-menu",
+        "stackoverflow-mi",
+        "stackoverflow-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "stackoverflow-notification-accent",
+      "name": "Toast Notification · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-notification",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "stackoverflow-callout-accent",
+      "name": "Callout Banner · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-callout",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "stackoverflow-chart-accent",
+      "name": "Mini Bar Chart · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-chart",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "stackoverflow-input-accent",
+      "name": "Text Field · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-input",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-field",
+        "stackoverflow-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "stackoverflow-progress-accent",
+      "name": "Progress Bar · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-progress",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "stackoverflow-avatar-accent",
+      "name": "Avatar Ring · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-avatar",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "stackoverflow-badge-accent",
+      "name": "Count Badge · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-badge",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "stackoverflow-tab-accent",
+      "name": "Segmented Tabs · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-tab",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "stackoverflow-tooltip-accent",
+      "name": "Tooltip · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-tooltip",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "stackoverflow-spinner-accent",
+      "name": "Loading Spinner · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-spinner",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "stackoverflow-card-accent",
+      "name": "Feature Card · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-card",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "stackoverflow-checkbox-accent",
+      "name": "Checkbox · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-checkbox",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "stackoverflow-slider-accent",
+      "name": "Range Slider · Primary",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-slider",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "stackoverflow-button-info",
+      "name": "Pill Button · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-button",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "stackoverflow-toggle-info",
+      "name": "Switch Toggle · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-toggle",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "stackoverflow-chip-info",
+      "name": "Status Chip · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-chip",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "stackoverflow-menu-info",
+      "name": "Dropdown Menu · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-menu",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-menu",
+        "stackoverflow-mi",
+        "stackoverflow-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "stackoverflow-notification-info",
+      "name": "Toast Notification · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-notification",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "stackoverflow-callout-info",
+      "name": "Callout Banner · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-callout",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "stackoverflow-chart-info",
+      "name": "Mini Bar Chart · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-chart",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "stackoverflow-input-info",
+      "name": "Text Field · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-input",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-field",
+        "stackoverflow-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "stackoverflow-progress-info",
+      "name": "Progress Bar · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-progress",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "stackoverflow-avatar-info",
+      "name": "Avatar Ring · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-avatar",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "stackoverflow-badge-info",
+      "name": "Count Badge · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-badge",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "stackoverflow-tab-info",
+      "name": "Segmented Tabs · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-tab",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "stackoverflow-tooltip-info",
+      "name": "Tooltip · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-tooltip",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "stackoverflow-spinner-info",
+      "name": "Loading Spinner · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-spinner",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "stackoverflow-card-info",
+      "name": "Feature Card · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-card",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "stackoverflow-checkbox-info",
+      "name": "Checkbox · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-checkbox",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "stackoverflow-slider-info",
+      "name": "Range Slider · Info",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-slider",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "stackoverflow-button-pos",
+      "name": "Pill Button · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-button",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "stackoverflow-toggle-pos",
+      "name": "Switch Toggle · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-toggle",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "stackoverflow-chip-pos",
+      "name": "Status Chip · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-chip",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "stackoverflow-menu-pos",
+      "name": "Dropdown Menu · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-menu",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-menu",
+        "stackoverflow-mi",
+        "stackoverflow-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "stackoverflow-notification-pos",
+      "name": "Toast Notification · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-notification",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "stackoverflow-callout-pos",
+      "name": "Callout Banner · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-callout",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "stackoverflow-chart-pos",
+      "name": "Mini Bar Chart · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-chart",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "stackoverflow-input-pos",
+      "name": "Text Field · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-input",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-field",
+        "stackoverflow-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "stackoverflow-progress-pos",
+      "name": "Progress Bar · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-progress",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "stackoverflow-avatar-pos",
+      "name": "Avatar Ring · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-avatar",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "stackoverflow-badge-pos",
+      "name": "Count Badge · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-badge",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "stackoverflow-tab-pos",
+      "name": "Segmented Tabs · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-tab",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "stackoverflow-tooltip-pos",
+      "name": "Tooltip · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-tooltip",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "stackoverflow-spinner-pos",
+      "name": "Loading Spinner · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-spinner",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "stackoverflow-card-pos",
+      "name": "Feature Card · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-card",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "stackoverflow-checkbox-pos",
+      "name": "Checkbox · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-checkbox",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "stackoverflow-slider-pos",
+      "name": "Range Slider · Success",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-slider",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "stackoverflow-button-warn",
+      "name": "Pill Button · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-button",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "stackoverflow-toggle-warn",
+      "name": "Switch Toggle · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-toggle",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "stackoverflow-chip-warn",
+      "name": "Status Chip · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-chip",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "stackoverflow-menu-warn",
+      "name": "Dropdown Menu · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-menu",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-menu",
+        "stackoverflow-mi",
+        "stackoverflow-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "stackoverflow-notification-warn",
+      "name": "Toast Notification · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-notification",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "stackoverflow-callout-warn",
+      "name": "Callout Banner · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-callout",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "stackoverflow-chart-warn",
+      "name": "Mini Bar Chart · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-chart",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "stackoverflow-input-warn",
+      "name": "Text Field · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-input",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-field",
+        "stackoverflow-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "stackoverflow-progress-warn",
+      "name": "Progress Bar · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-progress",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "stackoverflow-avatar-warn",
+      "name": "Avatar Ring · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-avatar",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "stackoverflow-badge-warn",
+      "name": "Count Badge · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-badge",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "stackoverflow-tab-warn",
+      "name": "Segmented Tabs · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-tab",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "stackoverflow-tooltip-warn",
+      "name": "Tooltip · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-tooltip",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "stackoverflow-spinner-warn",
+      "name": "Loading Spinner · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-spinner",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "stackoverflow-card-warn",
+      "name": "Feature Card · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-card",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "stackoverflow-checkbox-warn",
+      "name": "Checkbox · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-checkbox",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "stackoverflow-slider-warn",
+      "name": "Range Slider · Warning",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-slider",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "stackoverflow-button-neg",
+      "name": "Pill Button · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-button",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "stackoverflow-toggle-neg",
+      "name": "Switch Toggle · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-toggle",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "stackoverflow-chip-neg",
+      "name": "Status Chip · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-chip",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "stackoverflow-menu-neg",
+      "name": "Dropdown Menu · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-menu",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-menu",
+        "stackoverflow-mi",
+        "stackoverflow-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "stackoverflow-notification-neg",
+      "name": "Toast Notification · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-notification",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "stackoverflow-callout-neg",
+      "name": "Callout Banner · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-callout",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "stackoverflow-chart-neg",
+      "name": "Mini Bar Chart · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-chart",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "stackoverflow-input-neg",
+      "name": "Text Field · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-input",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-field",
+        "stackoverflow-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "stackoverflow-progress-neg",
+      "name": "Progress Bar · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-progress",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "stackoverflow-avatar-neg",
+      "name": "Avatar Ring · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-avatar",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "stackoverflow-badge-neg",
+      "name": "Count Badge · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-badge",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "stackoverflow-tab-neg",
+      "name": "Segmented Tabs · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-tab",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "stackoverflow-tooltip-neg",
+      "name": "Tooltip · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-tooltip",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "stackoverflow-spinner-neg",
+      "name": "Loading Spinner · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-spinner",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "stackoverflow-card-neg",
+      "name": "Feature Card · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-card",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "stackoverflow-checkbox-neg",
+      "name": "Checkbox · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-checkbox",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "stackoverflow-slider-neg",
+      "name": "Range Slider · Danger",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-slider",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "stackoverflow-button-crit",
+      "name": "Pill Button · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-button",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "stackoverflow-toggle-crit",
+      "name": "Switch Toggle · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-toggle",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "stackoverflow-chip-crit",
+      "name": "Status Chip · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-chip",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "stackoverflow-menu-crit",
+      "name": "Dropdown Menu · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-menu",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-menu",
+        "stackoverflow-mi",
+        "stackoverflow-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "stackoverflow-notification-crit",
+      "name": "Toast Notification · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-notification",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "stackoverflow-callout-crit",
+      "name": "Callout Banner · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-callout",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "stackoverflow-chart-crit",
+      "name": "Mini Bar Chart · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-chart",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "stackoverflow-input-crit",
+      "name": "Text Field · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-input",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-field",
+        "stackoverflow-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "stackoverflow-progress-crit",
+      "name": "Progress Bar · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-progress",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "stackoverflow-avatar-crit",
+      "name": "Avatar Ring · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-avatar",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "stackoverflow-badge-crit",
+      "name": "Count Badge · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-badge",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "stackoverflow-tab-crit",
+      "name": "Segmented Tabs · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-tab",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "stackoverflow-tooltip-crit",
+      "name": "Tooltip · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-tooltip",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "stackoverflow-spinner-crit",
+      "name": "Loading Spinner · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-spinner",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "stackoverflow-card-crit",
+      "name": "Feature Card · Critical",
+      "gallery": "spectrums",
+      "category": "Stack Overflow",
+      "ref": ".stackoverflow-card",
+      "classes": [
+        "stackoverflow-root",
+        "stackoverflow-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "stackoverflow",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "stackoverflow",
       "usableAsBackground": false,
       "needsJs": null,
       "isNew": true,
