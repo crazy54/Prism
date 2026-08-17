@@ -1,5 +1,5 @@
 {
-  "count": 2068,
+  "count": 2168,
   "effects": [
     {
       "id": "charts-big-metric-count-up",
@@ -1692,10 +1692,10 @@
         "sl",
         "ts",
         "lv",
-        "info",
-        "m",
-        "warn",
         "ok",
+        "m",
+        "info",
+        "warn",
         "err",
         "cursor"
       ],
@@ -55978,6 +55978,2624 @@
       "componentType": "object",
       "interaction": "auto-play",
       "spectrum": "monzo",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "heroku-button-accent",
+      "name": "Pill Button · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-button",
+      "classes": [
+        "heroku-root",
+        "heroku-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "heroku-toggle-accent",
+      "name": "Switch Toggle · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-toggle",
+      "classes": [
+        "heroku-root",
+        "heroku-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "heroku-chip-accent",
+      "name": "Status Chip · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-chip",
+      "classes": [
+        "heroku-root",
+        "heroku-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "heroku-menu-accent",
+      "name": "Dropdown Menu · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-menu",
+      "classes": [
+        "heroku-root",
+        "heroku-menu",
+        "heroku-mi",
+        "heroku-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "heroku-notification-accent",
+      "name": "Toast Notification · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-notification",
+      "classes": [
+        "heroku-root",
+        "heroku-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "heroku-callout-accent",
+      "name": "Callout Banner · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-callout",
+      "classes": [
+        "heroku-root",
+        "heroku-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "heroku-chart-accent",
+      "name": "Mini Bar Chart · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-chart",
+      "classes": [
+        "heroku-root",
+        "heroku-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "heroku-input-accent",
+      "name": "Text Field · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-input",
+      "classes": [
+        "heroku-root",
+        "heroku-field",
+        "heroku-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "heroku-progress-accent",
+      "name": "Progress Bar · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-progress",
+      "classes": [
+        "heroku-root",
+        "heroku-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "heroku-avatar-accent",
+      "name": "Avatar Ring · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-avatar",
+      "classes": [
+        "heroku-root",
+        "heroku-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "heroku-badge-accent",
+      "name": "Count Badge · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-badge",
+      "classes": [
+        "heroku-root",
+        "heroku-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "heroku-tab-accent",
+      "name": "Segmented Tabs · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-tab",
+      "classes": [
+        "heroku-root",
+        "heroku-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "heroku-tooltip-accent",
+      "name": "Tooltip · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-tooltip",
+      "classes": [
+        "heroku-root",
+        "heroku-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "heroku-spinner-accent",
+      "name": "Loading Spinner · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-spinner",
+      "classes": [
+        "heroku-root",
+        "heroku-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "heroku-card-accent",
+      "name": "Feature Card · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-card",
+      "classes": [
+        "heroku-root",
+        "heroku-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "heroku-checkbox-accent",
+      "name": "Checkbox · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-checkbox",
+      "classes": [
+        "heroku-root",
+        "heroku-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "heroku-slider-accent",
+      "name": "Range Slider · Primary",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-slider",
+      "classes": [
+        "heroku-root",
+        "heroku-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "heroku-button-info",
+      "name": "Pill Button · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-button",
+      "classes": [
+        "heroku-root",
+        "heroku-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "heroku-toggle-info",
+      "name": "Switch Toggle · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-toggle",
+      "classes": [
+        "heroku-root",
+        "heroku-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "heroku-chip-info",
+      "name": "Status Chip · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-chip",
+      "classes": [
+        "heroku-root",
+        "heroku-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "heroku-menu-info",
+      "name": "Dropdown Menu · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-menu",
+      "classes": [
+        "heroku-root",
+        "heroku-menu",
+        "heroku-mi",
+        "heroku-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "heroku-notification-info",
+      "name": "Toast Notification · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-notification",
+      "classes": [
+        "heroku-root",
+        "heroku-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "heroku-callout-info",
+      "name": "Callout Banner · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-callout",
+      "classes": [
+        "heroku-root",
+        "heroku-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "heroku-chart-info",
+      "name": "Mini Bar Chart · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-chart",
+      "classes": [
+        "heroku-root",
+        "heroku-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "heroku-input-info",
+      "name": "Text Field · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-input",
+      "classes": [
+        "heroku-root",
+        "heroku-field",
+        "heroku-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "heroku-progress-info",
+      "name": "Progress Bar · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-progress",
+      "classes": [
+        "heroku-root",
+        "heroku-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "heroku-avatar-info",
+      "name": "Avatar Ring · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-avatar",
+      "classes": [
+        "heroku-root",
+        "heroku-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "heroku-badge-info",
+      "name": "Count Badge · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-badge",
+      "classes": [
+        "heroku-root",
+        "heroku-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "heroku-tab-info",
+      "name": "Segmented Tabs · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-tab",
+      "classes": [
+        "heroku-root",
+        "heroku-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "heroku-tooltip-info",
+      "name": "Tooltip · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-tooltip",
+      "classes": [
+        "heroku-root",
+        "heroku-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "heroku-spinner-info",
+      "name": "Loading Spinner · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-spinner",
+      "classes": [
+        "heroku-root",
+        "heroku-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "heroku-card-info",
+      "name": "Feature Card · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-card",
+      "classes": [
+        "heroku-root",
+        "heroku-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "heroku-checkbox-info",
+      "name": "Checkbox · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-checkbox",
+      "classes": [
+        "heroku-root",
+        "heroku-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "heroku-slider-info",
+      "name": "Range Slider · Info",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-slider",
+      "classes": [
+        "heroku-root",
+        "heroku-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "heroku-button-pos",
+      "name": "Pill Button · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-button",
+      "classes": [
+        "heroku-root",
+        "heroku-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "heroku-toggle-pos",
+      "name": "Switch Toggle · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-toggle",
+      "classes": [
+        "heroku-root",
+        "heroku-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "heroku-chip-pos",
+      "name": "Status Chip · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-chip",
+      "classes": [
+        "heroku-root",
+        "heroku-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "heroku-menu-pos",
+      "name": "Dropdown Menu · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-menu",
+      "classes": [
+        "heroku-root",
+        "heroku-menu",
+        "heroku-mi",
+        "heroku-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "heroku-notification-pos",
+      "name": "Toast Notification · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-notification",
+      "classes": [
+        "heroku-root",
+        "heroku-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "heroku-callout-pos",
+      "name": "Callout Banner · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-callout",
+      "classes": [
+        "heroku-root",
+        "heroku-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "heroku-chart-pos",
+      "name": "Mini Bar Chart · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-chart",
+      "classes": [
+        "heroku-root",
+        "heroku-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "heroku-input-pos",
+      "name": "Text Field · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-input",
+      "classes": [
+        "heroku-root",
+        "heroku-field",
+        "heroku-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "heroku-progress-pos",
+      "name": "Progress Bar · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-progress",
+      "classes": [
+        "heroku-root",
+        "heroku-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "heroku-avatar-pos",
+      "name": "Avatar Ring · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-avatar",
+      "classes": [
+        "heroku-root",
+        "heroku-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "heroku-badge-pos",
+      "name": "Count Badge · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-badge",
+      "classes": [
+        "heroku-root",
+        "heroku-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "heroku-tab-pos",
+      "name": "Segmented Tabs · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-tab",
+      "classes": [
+        "heroku-root",
+        "heroku-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "heroku-tooltip-pos",
+      "name": "Tooltip · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-tooltip",
+      "classes": [
+        "heroku-root",
+        "heroku-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "heroku-spinner-pos",
+      "name": "Loading Spinner · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-spinner",
+      "classes": [
+        "heroku-root",
+        "heroku-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "heroku-card-pos",
+      "name": "Feature Card · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-card",
+      "classes": [
+        "heroku-root",
+        "heroku-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "heroku-checkbox-pos",
+      "name": "Checkbox · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-checkbox",
+      "classes": [
+        "heroku-root",
+        "heroku-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "heroku-slider-pos",
+      "name": "Range Slider · Success",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-slider",
+      "classes": [
+        "heroku-root",
+        "heroku-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "heroku-button-warn",
+      "name": "Pill Button · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-button",
+      "classes": [
+        "heroku-root",
+        "heroku-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "heroku-toggle-warn",
+      "name": "Switch Toggle · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-toggle",
+      "classes": [
+        "heroku-root",
+        "heroku-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "heroku-chip-warn",
+      "name": "Status Chip · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-chip",
+      "classes": [
+        "heroku-root",
+        "heroku-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "heroku-menu-warn",
+      "name": "Dropdown Menu · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-menu",
+      "classes": [
+        "heroku-root",
+        "heroku-menu",
+        "heroku-mi",
+        "heroku-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "heroku-notification-warn",
+      "name": "Toast Notification · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-notification",
+      "classes": [
+        "heroku-root",
+        "heroku-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "heroku-callout-warn",
+      "name": "Callout Banner · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-callout",
+      "classes": [
+        "heroku-root",
+        "heroku-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "heroku-chart-warn",
+      "name": "Mini Bar Chart · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-chart",
+      "classes": [
+        "heroku-root",
+        "heroku-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "heroku-input-warn",
+      "name": "Text Field · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-input",
+      "classes": [
+        "heroku-root",
+        "heroku-field",
+        "heroku-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "heroku-progress-warn",
+      "name": "Progress Bar · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-progress",
+      "classes": [
+        "heroku-root",
+        "heroku-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "heroku-avatar-warn",
+      "name": "Avatar Ring · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-avatar",
+      "classes": [
+        "heroku-root",
+        "heroku-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "heroku-badge-warn",
+      "name": "Count Badge · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-badge",
+      "classes": [
+        "heroku-root",
+        "heroku-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "heroku-tab-warn",
+      "name": "Segmented Tabs · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-tab",
+      "classes": [
+        "heroku-root",
+        "heroku-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "heroku-tooltip-warn",
+      "name": "Tooltip · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-tooltip",
+      "classes": [
+        "heroku-root",
+        "heroku-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "heroku-spinner-warn",
+      "name": "Loading Spinner · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-spinner",
+      "classes": [
+        "heroku-root",
+        "heroku-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "heroku-card-warn",
+      "name": "Feature Card · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-card",
+      "classes": [
+        "heroku-root",
+        "heroku-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "heroku-checkbox-warn",
+      "name": "Checkbox · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-checkbox",
+      "classes": [
+        "heroku-root",
+        "heroku-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "heroku-slider-warn",
+      "name": "Range Slider · Warning",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-slider",
+      "classes": [
+        "heroku-root",
+        "heroku-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "heroku-button-neg",
+      "name": "Pill Button · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-button",
+      "classes": [
+        "heroku-root",
+        "heroku-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "heroku-toggle-neg",
+      "name": "Switch Toggle · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-toggle",
+      "classes": [
+        "heroku-root",
+        "heroku-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "heroku-chip-neg",
+      "name": "Status Chip · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-chip",
+      "classes": [
+        "heroku-root",
+        "heroku-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "heroku-menu-neg",
+      "name": "Dropdown Menu · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-menu",
+      "classes": [
+        "heroku-root",
+        "heroku-menu",
+        "heroku-mi",
+        "heroku-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "heroku-notification-neg",
+      "name": "Toast Notification · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-notification",
+      "classes": [
+        "heroku-root",
+        "heroku-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "heroku-callout-neg",
+      "name": "Callout Banner · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-callout",
+      "classes": [
+        "heroku-root",
+        "heroku-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "heroku-chart-neg",
+      "name": "Mini Bar Chart · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-chart",
+      "classes": [
+        "heroku-root",
+        "heroku-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "heroku-input-neg",
+      "name": "Text Field · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-input",
+      "classes": [
+        "heroku-root",
+        "heroku-field",
+        "heroku-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "heroku-progress-neg",
+      "name": "Progress Bar · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-progress",
+      "classes": [
+        "heroku-root",
+        "heroku-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "heroku-avatar-neg",
+      "name": "Avatar Ring · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-avatar",
+      "classes": [
+        "heroku-root",
+        "heroku-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "heroku-badge-neg",
+      "name": "Count Badge · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-badge",
+      "classes": [
+        "heroku-root",
+        "heroku-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "heroku-tab-neg",
+      "name": "Segmented Tabs · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-tab",
+      "classes": [
+        "heroku-root",
+        "heroku-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "heroku-tooltip-neg",
+      "name": "Tooltip · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-tooltip",
+      "classes": [
+        "heroku-root",
+        "heroku-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "heroku-spinner-neg",
+      "name": "Loading Spinner · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-spinner",
+      "classes": [
+        "heroku-root",
+        "heroku-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "heroku-card-neg",
+      "name": "Feature Card · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-card",
+      "classes": [
+        "heroku-root",
+        "heroku-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "heroku-checkbox-neg",
+      "name": "Checkbox · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-checkbox",
+      "classes": [
+        "heroku-root",
+        "heroku-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "heroku-slider-neg",
+      "name": "Range Slider · Danger",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-slider",
+      "classes": [
+        "heroku-root",
+        "heroku-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "heroku-button-crit",
+      "name": "Pill Button · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-button",
+      "classes": [
+        "heroku-root",
+        "heroku-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "heroku-toggle-crit",
+      "name": "Switch Toggle · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-toggle",
+      "classes": [
+        "heroku-root",
+        "heroku-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "heroku-chip-crit",
+      "name": "Status Chip · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-chip",
+      "classes": [
+        "heroku-root",
+        "heroku-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "heroku-menu-crit",
+      "name": "Dropdown Menu · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-menu",
+      "classes": [
+        "heroku-root",
+        "heroku-menu",
+        "heroku-mi",
+        "heroku-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "heroku-notification-crit",
+      "name": "Toast Notification · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-notification",
+      "classes": [
+        "heroku-root",
+        "heroku-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "heroku-callout-crit",
+      "name": "Callout Banner · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-callout",
+      "classes": [
+        "heroku-root",
+        "heroku-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "heroku-chart-crit",
+      "name": "Mini Bar Chart · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-chart",
+      "classes": [
+        "heroku-root",
+        "heroku-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "heroku-input-crit",
+      "name": "Text Field · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-input",
+      "classes": [
+        "heroku-root",
+        "heroku-field",
+        "heroku-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "heroku-progress-crit",
+      "name": "Progress Bar · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-progress",
+      "classes": [
+        "heroku-root",
+        "heroku-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "heroku-avatar-crit",
+      "name": "Avatar Ring · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-avatar",
+      "classes": [
+        "heroku-root",
+        "heroku-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "heroku-badge-crit",
+      "name": "Count Badge · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-badge",
+      "classes": [
+        "heroku-root",
+        "heroku-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "heroku-tab-crit",
+      "name": "Segmented Tabs · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-tab",
+      "classes": [
+        "heroku-root",
+        "heroku-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "heroku-tooltip-crit",
+      "name": "Tooltip · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-tooltip",
+      "classes": [
+        "heroku-root",
+        "heroku-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "heroku-spinner-crit",
+      "name": "Loading Spinner · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-spinner",
+      "classes": [
+        "heroku-root",
+        "heroku-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "heroku-card-crit",
+      "name": "Feature Card · Critical",
+      "gallery": "spectrums",
+      "category": "Heroku",
+      "ref": ".heroku-card",
+      "classes": [
+        "heroku-root",
+        "heroku-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "heroku",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "heroku",
       "usableAsBackground": false,
       "needsJs": null,
       "isNew": true,
