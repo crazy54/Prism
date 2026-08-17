@@ -1,5 +1,5 @@
 {
-  "count": 2268,
+  "count": 2368,
   "effects": [
     {
       "id": "charts-big-metric-count-up",
@@ -1692,9 +1692,9 @@
         "sl",
         "ts",
         "lv",
-        "warn",
-        "m",
         "info",
+        "m",
+        "warn",
         "ok",
         "cursor"
       ],
@@ -61213,6 +61213,2624 @@
       "componentType": "object",
       "interaction": "auto-play",
       "spectrum": "polaris",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "primer-button-accent",
+      "name": "Pill Button · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-button",
+      "classes": [
+        "primer-root",
+        "primer-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "primer-toggle-accent",
+      "name": "Switch Toggle · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-toggle",
+      "classes": [
+        "primer-root",
+        "primer-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "primer-chip-accent",
+      "name": "Status Chip · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-chip",
+      "classes": [
+        "primer-root",
+        "primer-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "primer-menu-accent",
+      "name": "Dropdown Menu · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-menu",
+      "classes": [
+        "primer-root",
+        "primer-menu",
+        "primer-mi",
+        "primer-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "primer-notification-accent",
+      "name": "Toast Notification · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-notification",
+      "classes": [
+        "primer-root",
+        "primer-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "primer-callout-accent",
+      "name": "Callout Banner · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-callout",
+      "classes": [
+        "primer-root",
+        "primer-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "primer-chart-accent",
+      "name": "Mini Bar Chart · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-chart",
+      "classes": [
+        "primer-root",
+        "primer-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "primer-input-accent",
+      "name": "Text Field · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-input",
+      "classes": [
+        "primer-root",
+        "primer-field",
+        "primer-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "primer-progress-accent",
+      "name": "Progress Bar · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-progress",
+      "classes": [
+        "primer-root",
+        "primer-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "primer-avatar-accent",
+      "name": "Avatar Ring · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-avatar",
+      "classes": [
+        "primer-root",
+        "primer-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "primer-badge-accent",
+      "name": "Count Badge · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-badge",
+      "classes": [
+        "primer-root",
+        "primer-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "primer-tab-accent",
+      "name": "Segmented Tabs · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-tab",
+      "classes": [
+        "primer-root",
+        "primer-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "primer-tooltip-accent",
+      "name": "Tooltip · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-tooltip",
+      "classes": [
+        "primer-root",
+        "primer-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "primer-spinner-accent",
+      "name": "Loading Spinner · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-spinner",
+      "classes": [
+        "primer-root",
+        "primer-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "primer-card-accent",
+      "name": "Feature Card · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-card",
+      "classes": [
+        "primer-root",
+        "primer-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "primer-checkbox-accent",
+      "name": "Checkbox · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-checkbox",
+      "classes": [
+        "primer-root",
+        "primer-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "primer-slider-accent",
+      "name": "Range Slider · Primary",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-slider",
+      "classes": [
+        "primer-root",
+        "primer-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "primer-button-info",
+      "name": "Pill Button · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-button",
+      "classes": [
+        "primer-root",
+        "primer-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "primer-toggle-info",
+      "name": "Switch Toggle · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-toggle",
+      "classes": [
+        "primer-root",
+        "primer-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "primer-chip-info",
+      "name": "Status Chip · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-chip",
+      "classes": [
+        "primer-root",
+        "primer-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "primer-menu-info",
+      "name": "Dropdown Menu · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-menu",
+      "classes": [
+        "primer-root",
+        "primer-menu",
+        "primer-mi",
+        "primer-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "primer-notification-info",
+      "name": "Toast Notification · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-notification",
+      "classes": [
+        "primer-root",
+        "primer-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "primer-callout-info",
+      "name": "Callout Banner · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-callout",
+      "classes": [
+        "primer-root",
+        "primer-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "primer-chart-info",
+      "name": "Mini Bar Chart · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-chart",
+      "classes": [
+        "primer-root",
+        "primer-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "primer-input-info",
+      "name": "Text Field · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-input",
+      "classes": [
+        "primer-root",
+        "primer-field",
+        "primer-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "primer-progress-info",
+      "name": "Progress Bar · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-progress",
+      "classes": [
+        "primer-root",
+        "primer-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "primer-avatar-info",
+      "name": "Avatar Ring · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-avatar",
+      "classes": [
+        "primer-root",
+        "primer-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "primer-badge-info",
+      "name": "Count Badge · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-badge",
+      "classes": [
+        "primer-root",
+        "primer-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "primer-tab-info",
+      "name": "Segmented Tabs · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-tab",
+      "classes": [
+        "primer-root",
+        "primer-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "primer-tooltip-info",
+      "name": "Tooltip · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-tooltip",
+      "classes": [
+        "primer-root",
+        "primer-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "primer-spinner-info",
+      "name": "Loading Spinner · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-spinner",
+      "classes": [
+        "primer-root",
+        "primer-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "primer-card-info",
+      "name": "Feature Card · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-card",
+      "classes": [
+        "primer-root",
+        "primer-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "primer-checkbox-info",
+      "name": "Checkbox · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-checkbox",
+      "classes": [
+        "primer-root",
+        "primer-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "primer-slider-info",
+      "name": "Range Slider · Info",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-slider",
+      "classes": [
+        "primer-root",
+        "primer-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "primer-button-pos",
+      "name": "Pill Button · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-button",
+      "classes": [
+        "primer-root",
+        "primer-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "primer-toggle-pos",
+      "name": "Switch Toggle · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-toggle",
+      "classes": [
+        "primer-root",
+        "primer-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "primer-chip-pos",
+      "name": "Status Chip · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-chip",
+      "classes": [
+        "primer-root",
+        "primer-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "primer-menu-pos",
+      "name": "Dropdown Menu · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-menu",
+      "classes": [
+        "primer-root",
+        "primer-menu",
+        "primer-mi",
+        "primer-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "primer-notification-pos",
+      "name": "Toast Notification · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-notification",
+      "classes": [
+        "primer-root",
+        "primer-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "primer-callout-pos",
+      "name": "Callout Banner · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-callout",
+      "classes": [
+        "primer-root",
+        "primer-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "primer-chart-pos",
+      "name": "Mini Bar Chart · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-chart",
+      "classes": [
+        "primer-root",
+        "primer-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "primer-input-pos",
+      "name": "Text Field · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-input",
+      "classes": [
+        "primer-root",
+        "primer-field",
+        "primer-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "primer-progress-pos",
+      "name": "Progress Bar · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-progress",
+      "classes": [
+        "primer-root",
+        "primer-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "primer-avatar-pos",
+      "name": "Avatar Ring · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-avatar",
+      "classes": [
+        "primer-root",
+        "primer-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "primer-badge-pos",
+      "name": "Count Badge · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-badge",
+      "classes": [
+        "primer-root",
+        "primer-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "primer-tab-pos",
+      "name": "Segmented Tabs · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-tab",
+      "classes": [
+        "primer-root",
+        "primer-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "primer-tooltip-pos",
+      "name": "Tooltip · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-tooltip",
+      "classes": [
+        "primer-root",
+        "primer-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "primer-spinner-pos",
+      "name": "Loading Spinner · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-spinner",
+      "classes": [
+        "primer-root",
+        "primer-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "primer-card-pos",
+      "name": "Feature Card · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-card",
+      "classes": [
+        "primer-root",
+        "primer-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "primer-checkbox-pos",
+      "name": "Checkbox · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-checkbox",
+      "classes": [
+        "primer-root",
+        "primer-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "primer-slider-pos",
+      "name": "Range Slider · Success",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-slider",
+      "classes": [
+        "primer-root",
+        "primer-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "primer-button-warn",
+      "name": "Pill Button · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-button",
+      "classes": [
+        "primer-root",
+        "primer-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "primer-toggle-warn",
+      "name": "Switch Toggle · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-toggle",
+      "classes": [
+        "primer-root",
+        "primer-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "primer-chip-warn",
+      "name": "Status Chip · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-chip",
+      "classes": [
+        "primer-root",
+        "primer-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "primer-menu-warn",
+      "name": "Dropdown Menu · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-menu",
+      "classes": [
+        "primer-root",
+        "primer-menu",
+        "primer-mi",
+        "primer-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "primer-notification-warn",
+      "name": "Toast Notification · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-notification",
+      "classes": [
+        "primer-root",
+        "primer-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "primer-callout-warn",
+      "name": "Callout Banner · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-callout",
+      "classes": [
+        "primer-root",
+        "primer-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "primer-chart-warn",
+      "name": "Mini Bar Chart · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-chart",
+      "classes": [
+        "primer-root",
+        "primer-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "primer-input-warn",
+      "name": "Text Field · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-input",
+      "classes": [
+        "primer-root",
+        "primer-field",
+        "primer-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "primer-progress-warn",
+      "name": "Progress Bar · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-progress",
+      "classes": [
+        "primer-root",
+        "primer-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "primer-avatar-warn",
+      "name": "Avatar Ring · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-avatar",
+      "classes": [
+        "primer-root",
+        "primer-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "primer-badge-warn",
+      "name": "Count Badge · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-badge",
+      "classes": [
+        "primer-root",
+        "primer-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "primer-tab-warn",
+      "name": "Segmented Tabs · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-tab",
+      "classes": [
+        "primer-root",
+        "primer-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "primer-tooltip-warn",
+      "name": "Tooltip · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-tooltip",
+      "classes": [
+        "primer-root",
+        "primer-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "primer-spinner-warn",
+      "name": "Loading Spinner · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-spinner",
+      "classes": [
+        "primer-root",
+        "primer-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "primer-card-warn",
+      "name": "Feature Card · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-card",
+      "classes": [
+        "primer-root",
+        "primer-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "primer-checkbox-warn",
+      "name": "Checkbox · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-checkbox",
+      "classes": [
+        "primer-root",
+        "primer-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "primer-slider-warn",
+      "name": "Range Slider · Warning",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-slider",
+      "classes": [
+        "primer-root",
+        "primer-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "primer-button-neg",
+      "name": "Pill Button · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-button",
+      "classes": [
+        "primer-root",
+        "primer-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "primer-toggle-neg",
+      "name": "Switch Toggle · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-toggle",
+      "classes": [
+        "primer-root",
+        "primer-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "primer-chip-neg",
+      "name": "Status Chip · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-chip",
+      "classes": [
+        "primer-root",
+        "primer-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "primer-menu-neg",
+      "name": "Dropdown Menu · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-menu",
+      "classes": [
+        "primer-root",
+        "primer-menu",
+        "primer-mi",
+        "primer-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "primer-notification-neg",
+      "name": "Toast Notification · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-notification",
+      "classes": [
+        "primer-root",
+        "primer-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "primer-callout-neg",
+      "name": "Callout Banner · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-callout",
+      "classes": [
+        "primer-root",
+        "primer-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "primer-chart-neg",
+      "name": "Mini Bar Chart · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-chart",
+      "classes": [
+        "primer-root",
+        "primer-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "primer-input-neg",
+      "name": "Text Field · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-input",
+      "classes": [
+        "primer-root",
+        "primer-field",
+        "primer-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "primer-progress-neg",
+      "name": "Progress Bar · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-progress",
+      "classes": [
+        "primer-root",
+        "primer-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "primer-avatar-neg",
+      "name": "Avatar Ring · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-avatar",
+      "classes": [
+        "primer-root",
+        "primer-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "primer-badge-neg",
+      "name": "Count Badge · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-badge",
+      "classes": [
+        "primer-root",
+        "primer-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "primer-tab-neg",
+      "name": "Segmented Tabs · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-tab",
+      "classes": [
+        "primer-root",
+        "primer-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "primer-tooltip-neg",
+      "name": "Tooltip · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-tooltip",
+      "classes": [
+        "primer-root",
+        "primer-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "primer-spinner-neg",
+      "name": "Loading Spinner · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-spinner",
+      "classes": [
+        "primer-root",
+        "primer-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "primer-card-neg",
+      "name": "Feature Card · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-card",
+      "classes": [
+        "primer-root",
+        "primer-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "primer-checkbox-neg",
+      "name": "Checkbox · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-checkbox",
+      "classes": [
+        "primer-root",
+        "primer-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "primer-slider-neg",
+      "name": "Range Slider · Danger",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-slider",
+      "classes": [
+        "primer-root",
+        "primer-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "primer-button-crit",
+      "name": "Pill Button · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-button",
+      "classes": [
+        "primer-root",
+        "primer-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "primer-toggle-crit",
+      "name": "Switch Toggle · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-toggle",
+      "classes": [
+        "primer-root",
+        "primer-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "primer-chip-crit",
+      "name": "Status Chip · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-chip",
+      "classes": [
+        "primer-root",
+        "primer-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "primer-menu-crit",
+      "name": "Dropdown Menu · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-menu",
+      "classes": [
+        "primer-root",
+        "primer-menu",
+        "primer-mi",
+        "primer-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "primer-notification-crit",
+      "name": "Toast Notification · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-notification",
+      "classes": [
+        "primer-root",
+        "primer-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "primer-callout-crit",
+      "name": "Callout Banner · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-callout",
+      "classes": [
+        "primer-root",
+        "primer-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "primer-chart-crit",
+      "name": "Mini Bar Chart · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-chart",
+      "classes": [
+        "primer-root",
+        "primer-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "primer-input-crit",
+      "name": "Text Field · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-input",
+      "classes": [
+        "primer-root",
+        "primer-field",
+        "primer-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "primer-progress-crit",
+      "name": "Progress Bar · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-progress",
+      "classes": [
+        "primer-root",
+        "primer-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "primer-avatar-crit",
+      "name": "Avatar Ring · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-avatar",
+      "classes": [
+        "primer-root",
+        "primer-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "primer-badge-crit",
+      "name": "Count Badge · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-badge",
+      "classes": [
+        "primer-root",
+        "primer-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "primer-tab-crit",
+      "name": "Segmented Tabs · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-tab",
+      "classes": [
+        "primer-root",
+        "primer-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "primer-tooltip-crit",
+      "name": "Tooltip · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-tooltip",
+      "classes": [
+        "primer-root",
+        "primer-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "primer-spinner-crit",
+      "name": "Loading Spinner · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-spinner",
+      "classes": [
+        "primer-root",
+        "primer-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "primer-card-crit",
+      "name": "Feature Card · Critical",
+      "gallery": "spectrums",
+      "category": "GitHub Primer",
+      "ref": ".primer-card",
+      "classes": [
+        "primer-root",
+        "primer-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "primer",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "primer",
       "usableAsBackground": false,
       "needsJs": null,
       "isNew": true,
