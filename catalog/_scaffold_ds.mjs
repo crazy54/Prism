@@ -69,19 +69,45 @@ function serializeRoot(tokens) {
   return ':root{' + Object.entries(tokens).map(([k, v]) => `${k}:${v}`).join(';') + ';}';
 }
 
+// Derive the JFH-33 chrome-identity tokens (shell font + the 4-step corner-radius
+// scale) from the profile's tokenProfile, so a scaffolded pack reskins the WHOLE
+// shell (scrollbars, buttons, type, corners) — not just its facet tiles. md = the
+// brand radius; sm/lg/xl = ×0.5 (min 2px) / ×1.5 / ×2 to keep the size hierarchy.
+// Circles/pills (50%/999px) stay hardcoded in the chrome CSS and are never tokenized.
+// Mode-invariant (font/radius don't flip light↔dark), so both modes get the same
+// values. Returns {} when the profile has no tokenProfile (base Cloudscape chrome wins).
+function chromeTokens(profile) {
+  const tp = profile.tokenProfile;
+  if (!tp) return {};
+  const out = {};
+  if (tp.font) out['--font'] = tp.font;
+  const px = parseInt(String(tp.radius), 10);
+  if (Number.isFinite(px)) {
+    out['--r-sm'] = Math.max(2, Math.round(px * 0.5)) + 'px';
+    out['--r-md'] = Math.round(px) + 'px';
+    out['--r-lg'] = Math.round(px * 1.5) + 'px';
+    out['--r-xl'] = Math.round(px * 2) + 'px';
+  }
+  return out;
+}
+
 // Build the sparse per-mode override map. If the profile declares palette.<mode>,
 // use it verbatim (author-controlled); otherwise derive a minimal, coherent brand
 // tint from `accent` (accent + its rgb sibling, mirrored onto accent2/info like the
-// Cloudscape base does). Enough for a correct, selectable starter theme.
+// Cloudscape base does). Enough for a correct, selectable starter theme. The chrome
+// identity tokens (font + radius scale) are folded in for both modes so the pack's
+// :root reskins the shell, not only the facets.
 function overridesFor(profile, mode) {
+  const chrome = chromeTokens(profile);
   const declared = profile.palette && profile.palette[mode];
-  if (declared && Object.keys(declared).length) return { ...declared };
+  if (declared && Object.keys(declared).length) return { ...declared, ...chrome };
   const accent = profile.accent;
   if (!accent) throw new Error('profile needs either palette.{light,dark} or an `accent` hex to derive one');
   const rgb = hexToRgb(accent);
   return {
     '--accent': accent, '--accent-rgb': rgb, '--accent2': accent,
     '--info': accent, '--info-rgb': rgb,
+    ...chrome,
   };
 }
 

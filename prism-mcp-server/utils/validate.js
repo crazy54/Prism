@@ -11,6 +11,9 @@ export const GLOBAL_TOKENS = new Set([
   '--crit', '--crit-rgb', '--neg', '--neg-rgb', '--warn', '--warn-rgb',
   '--pos', '--pos-rgb', '--info', '--info-rgb', '--accent', '--accent-rgb',
   '--cardgrad', '--c', '--c-rgb',
+  // JFH-33 chrome identity — shell font + 4-step corner-radius scale, defined globally
+  // in Prism's base :root and overridden per design system.
+  '--font', '--r-sm', '--r-md', '--r-lg', '--r-xl',
 ]);
 
 /**
