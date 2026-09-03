@@ -1,5 +1,5 @@
 {
-  "count": 2468,
+  "count": 2568,
   "effects": [
     {
       "id": "charts-big-metric-count-up",
@@ -66449,6 +66449,2624 @@
       "componentType": "object",
       "interaction": "auto-play",
       "spectrum": "antd",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "acorn-button-accent",
+      "name": "Pill Button · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-button",
+      "classes": [
+        "acorn-root",
+        "acorn-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "acorn-toggle-accent",
+      "name": "Switch Toggle · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-toggle",
+      "classes": [
+        "acorn-root",
+        "acorn-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "acorn-chip-accent",
+      "name": "Status Chip · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chip",
+      "classes": [
+        "acorn-root",
+        "acorn-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "acorn-menu-accent",
+      "name": "Dropdown Menu · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-menu",
+      "classes": [
+        "acorn-root",
+        "acorn-menu",
+        "acorn-mi",
+        "acorn-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "acorn-notification-accent",
+      "name": "Toast Notification · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-notification",
+      "classes": [
+        "acorn-root",
+        "acorn-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "acorn-callout-accent",
+      "name": "Callout Banner · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-callout",
+      "classes": [
+        "acorn-root",
+        "acorn-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "acorn-chart-accent",
+      "name": "Mini Bar Chart · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chart",
+      "classes": [
+        "acorn-root",
+        "acorn-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "acorn-input-accent",
+      "name": "Text Field · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-input",
+      "classes": [
+        "acorn-root",
+        "acorn-field",
+        "acorn-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "acorn-progress-accent",
+      "name": "Progress Bar · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-progress",
+      "classes": [
+        "acorn-root",
+        "acorn-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "acorn-avatar-accent",
+      "name": "Avatar Ring · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-avatar",
+      "classes": [
+        "acorn-root",
+        "acorn-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "acorn-badge-accent",
+      "name": "Count Badge · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-badge",
+      "classes": [
+        "acorn-root",
+        "acorn-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "acorn-tab-accent",
+      "name": "Segmented Tabs · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tab",
+      "classes": [
+        "acorn-root",
+        "acorn-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "acorn-tooltip-accent",
+      "name": "Tooltip · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tooltip",
+      "classes": [
+        "acorn-root",
+        "acorn-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "acorn-spinner-accent",
+      "name": "Loading Spinner · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-spinner",
+      "classes": [
+        "acorn-root",
+        "acorn-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "acorn-card-accent",
+      "name": "Feature Card · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-card",
+      "classes": [
+        "acorn-root",
+        "acorn-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "acorn-checkbox-accent",
+      "name": "Checkbox · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-checkbox",
+      "classes": [
+        "acorn-root",
+        "acorn-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "acorn-slider-accent",
+      "name": "Range Slider · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-slider",
+      "classes": [
+        "acorn-root",
+        "acorn-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "acorn-button-info",
+      "name": "Pill Button · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-button",
+      "classes": [
+        "acorn-root",
+        "acorn-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "acorn-toggle-info",
+      "name": "Switch Toggle · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-toggle",
+      "classes": [
+        "acorn-root",
+        "acorn-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "acorn-chip-info",
+      "name": "Status Chip · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chip",
+      "classes": [
+        "acorn-root",
+        "acorn-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "acorn-menu-info",
+      "name": "Dropdown Menu · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-menu",
+      "classes": [
+        "acorn-root",
+        "acorn-menu",
+        "acorn-mi",
+        "acorn-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "acorn-notification-info",
+      "name": "Toast Notification · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-notification",
+      "classes": [
+        "acorn-root",
+        "acorn-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "acorn-callout-info",
+      "name": "Callout Banner · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-callout",
+      "classes": [
+        "acorn-root",
+        "acorn-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "acorn-chart-info",
+      "name": "Mini Bar Chart · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chart",
+      "classes": [
+        "acorn-root",
+        "acorn-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "acorn-input-info",
+      "name": "Text Field · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-input",
+      "classes": [
+        "acorn-root",
+        "acorn-field",
+        "acorn-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "acorn-progress-info",
+      "name": "Progress Bar · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-progress",
+      "classes": [
+        "acorn-root",
+        "acorn-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "acorn-avatar-info",
+      "name": "Avatar Ring · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-avatar",
+      "classes": [
+        "acorn-root",
+        "acorn-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "acorn-badge-info",
+      "name": "Count Badge · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-badge",
+      "classes": [
+        "acorn-root",
+        "acorn-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "acorn-tab-info",
+      "name": "Segmented Tabs · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tab",
+      "classes": [
+        "acorn-root",
+        "acorn-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "acorn-tooltip-info",
+      "name": "Tooltip · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tooltip",
+      "classes": [
+        "acorn-root",
+        "acorn-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "acorn-spinner-info",
+      "name": "Loading Spinner · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-spinner",
+      "classes": [
+        "acorn-root",
+        "acorn-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "acorn-card-info",
+      "name": "Feature Card · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-card",
+      "classes": [
+        "acorn-root",
+        "acorn-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "acorn-checkbox-info",
+      "name": "Checkbox · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-checkbox",
+      "classes": [
+        "acorn-root",
+        "acorn-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "acorn-slider-info",
+      "name": "Range Slider · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-slider",
+      "classes": [
+        "acorn-root",
+        "acorn-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "acorn-button-pos",
+      "name": "Pill Button · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-button",
+      "classes": [
+        "acorn-root",
+        "acorn-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "acorn-toggle-pos",
+      "name": "Switch Toggle · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-toggle",
+      "classes": [
+        "acorn-root",
+        "acorn-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "acorn-chip-pos",
+      "name": "Status Chip · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chip",
+      "classes": [
+        "acorn-root",
+        "acorn-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "acorn-menu-pos",
+      "name": "Dropdown Menu · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-menu",
+      "classes": [
+        "acorn-root",
+        "acorn-menu",
+        "acorn-mi",
+        "acorn-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "acorn-notification-pos",
+      "name": "Toast Notification · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-notification",
+      "classes": [
+        "acorn-root",
+        "acorn-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "acorn-callout-pos",
+      "name": "Callout Banner · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-callout",
+      "classes": [
+        "acorn-root",
+        "acorn-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "acorn-chart-pos",
+      "name": "Mini Bar Chart · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chart",
+      "classes": [
+        "acorn-root",
+        "acorn-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "acorn-input-pos",
+      "name": "Text Field · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-input",
+      "classes": [
+        "acorn-root",
+        "acorn-field",
+        "acorn-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "acorn-progress-pos",
+      "name": "Progress Bar · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-progress",
+      "classes": [
+        "acorn-root",
+        "acorn-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "acorn-avatar-pos",
+      "name": "Avatar Ring · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-avatar",
+      "classes": [
+        "acorn-root",
+        "acorn-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "acorn-badge-pos",
+      "name": "Count Badge · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-badge",
+      "classes": [
+        "acorn-root",
+        "acorn-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "acorn-tab-pos",
+      "name": "Segmented Tabs · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tab",
+      "classes": [
+        "acorn-root",
+        "acorn-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "acorn-tooltip-pos",
+      "name": "Tooltip · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tooltip",
+      "classes": [
+        "acorn-root",
+        "acorn-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "acorn-spinner-pos",
+      "name": "Loading Spinner · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-spinner",
+      "classes": [
+        "acorn-root",
+        "acorn-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "acorn-card-pos",
+      "name": "Feature Card · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-card",
+      "classes": [
+        "acorn-root",
+        "acorn-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "acorn-checkbox-pos",
+      "name": "Checkbox · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-checkbox",
+      "classes": [
+        "acorn-root",
+        "acorn-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "acorn-slider-pos",
+      "name": "Range Slider · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-slider",
+      "classes": [
+        "acorn-root",
+        "acorn-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "acorn-button-warn",
+      "name": "Pill Button · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-button",
+      "classes": [
+        "acorn-root",
+        "acorn-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "acorn-toggle-warn",
+      "name": "Switch Toggle · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-toggle",
+      "classes": [
+        "acorn-root",
+        "acorn-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "acorn-chip-warn",
+      "name": "Status Chip · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chip",
+      "classes": [
+        "acorn-root",
+        "acorn-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "acorn-menu-warn",
+      "name": "Dropdown Menu · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-menu",
+      "classes": [
+        "acorn-root",
+        "acorn-menu",
+        "acorn-mi",
+        "acorn-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "acorn-notification-warn",
+      "name": "Toast Notification · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-notification",
+      "classes": [
+        "acorn-root",
+        "acorn-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "acorn-callout-warn",
+      "name": "Callout Banner · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-callout",
+      "classes": [
+        "acorn-root",
+        "acorn-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "acorn-chart-warn",
+      "name": "Mini Bar Chart · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chart",
+      "classes": [
+        "acorn-root",
+        "acorn-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "acorn-input-warn",
+      "name": "Text Field · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-input",
+      "classes": [
+        "acorn-root",
+        "acorn-field",
+        "acorn-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "acorn-progress-warn",
+      "name": "Progress Bar · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-progress",
+      "classes": [
+        "acorn-root",
+        "acorn-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "acorn-avatar-warn",
+      "name": "Avatar Ring · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-avatar",
+      "classes": [
+        "acorn-root",
+        "acorn-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "acorn-badge-warn",
+      "name": "Count Badge · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-badge",
+      "classes": [
+        "acorn-root",
+        "acorn-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "acorn-tab-warn",
+      "name": "Segmented Tabs · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tab",
+      "classes": [
+        "acorn-root",
+        "acorn-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "acorn-tooltip-warn",
+      "name": "Tooltip · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tooltip",
+      "classes": [
+        "acorn-root",
+        "acorn-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "acorn-spinner-warn",
+      "name": "Loading Spinner · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-spinner",
+      "classes": [
+        "acorn-root",
+        "acorn-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "acorn-card-warn",
+      "name": "Feature Card · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-card",
+      "classes": [
+        "acorn-root",
+        "acorn-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "acorn-checkbox-warn",
+      "name": "Checkbox · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-checkbox",
+      "classes": [
+        "acorn-root",
+        "acorn-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "acorn-slider-warn",
+      "name": "Range Slider · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-slider",
+      "classes": [
+        "acorn-root",
+        "acorn-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "acorn-button-neg",
+      "name": "Pill Button · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-button",
+      "classes": [
+        "acorn-root",
+        "acorn-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "acorn-toggle-neg",
+      "name": "Switch Toggle · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-toggle",
+      "classes": [
+        "acorn-root",
+        "acorn-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "acorn-chip-neg",
+      "name": "Status Chip · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chip",
+      "classes": [
+        "acorn-root",
+        "acorn-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "acorn-menu-neg",
+      "name": "Dropdown Menu · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-menu",
+      "classes": [
+        "acorn-root",
+        "acorn-menu",
+        "acorn-mi",
+        "acorn-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "acorn-notification-neg",
+      "name": "Toast Notification · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-notification",
+      "classes": [
+        "acorn-root",
+        "acorn-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "acorn-callout-neg",
+      "name": "Callout Banner · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-callout",
+      "classes": [
+        "acorn-root",
+        "acorn-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "acorn-chart-neg",
+      "name": "Mini Bar Chart · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chart",
+      "classes": [
+        "acorn-root",
+        "acorn-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "acorn-input-neg",
+      "name": "Text Field · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-input",
+      "classes": [
+        "acorn-root",
+        "acorn-field",
+        "acorn-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "acorn-progress-neg",
+      "name": "Progress Bar · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-progress",
+      "classes": [
+        "acorn-root",
+        "acorn-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "acorn-avatar-neg",
+      "name": "Avatar Ring · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-avatar",
+      "classes": [
+        "acorn-root",
+        "acorn-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "acorn-badge-neg",
+      "name": "Count Badge · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-badge",
+      "classes": [
+        "acorn-root",
+        "acorn-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "acorn-tab-neg",
+      "name": "Segmented Tabs · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tab",
+      "classes": [
+        "acorn-root",
+        "acorn-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "acorn-tooltip-neg",
+      "name": "Tooltip · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tooltip",
+      "classes": [
+        "acorn-root",
+        "acorn-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "acorn-spinner-neg",
+      "name": "Loading Spinner · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-spinner",
+      "classes": [
+        "acorn-root",
+        "acorn-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "acorn-card-neg",
+      "name": "Feature Card · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-card",
+      "classes": [
+        "acorn-root",
+        "acorn-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container."
+    },
+    {
+      "id": "acorn-checkbox-neg",
+      "name": "Checkbox · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-checkbox",
+      "classes": [
+        "acorn-root",
+        "acorn-check"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input."
+    },
+    {
+      "id": "acorn-slider-neg",
+      "name": "Range Slider · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-slider",
+      "classes": [
+        "acorn-root",
+        "acorn-slider"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token thumb that travels along it. The system's range input."
+    },
+    {
+      "id": "acorn-button-crit",
+      "name": "Pill Button · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-button",
+      "classes": [
+        "acorn-root",
+        "acorn-btn"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action."
+    },
+    {
+      "id": "acorn-toggle-crit",
+      "name": "Switch Toggle · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-toggle",
+      "classes": [
+        "acorn-root",
+        "acorn-toggle"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control."
+    },
+    {
+      "id": "acorn-chip-crit",
+      "name": "Status Chip · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chip",
+      "classes": [
+        "acorn-root",
+        "acorn-chip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists."
+    },
+    {
+      "id": "acorn-menu-crit",
+      "name": "Dropdown Menu · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-menu",
+      "classes": [
+        "acorn-root",
+        "acorn-menu",
+        "acorn-mi",
+        "acorn-sel"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu."
+    },
+    {
+      "id": "acorn-notification-crit",
+      "name": "Toast Notification · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-notification",
+      "classes": [
+        "acorn-root",
+        "acorn-toast"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert."
+    },
+    {
+      "id": "acorn-callout-crit",
+      "name": "Callout Banner · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-callout",
+      "classes": [
+        "acorn-root",
+        "acorn-callout"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline."
+    },
+    {
+      "id": "acorn-chart-crit",
+      "name": "Mini Bar Chart · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chart",
+      "classes": [
+        "acorn-root",
+        "acorn-chart"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system."
+    },
+    {
+      "id": "acorn-input-crit",
+      "name": "Text Field · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-input",
+      "classes": [
+        "acorn-root",
+        "acorn-field",
+        "acorn-caret"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field."
+    },
+    {
+      "id": "acorn-progress-crit",
+      "name": "Progress Bar · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-progress",
+      "classes": [
+        "acorn-root",
+        "acorn-prog"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system."
+    },
+    {
+      "id": "acorn-avatar-crit",
+      "name": "Avatar Ring · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-avatar",
+      "classes": [
+        "acorn-root",
+        "acorn-avatar"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object."
+    },
+    {
+      "id": "acorn-badge-crit",
+      "name": "Count Badge · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-badge",
+      "classes": [
+        "acorn-root",
+        "acorn-badge"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object."
+    },
+    {
+      "id": "acorn-tab-crit",
+      "name": "Segmented Tabs · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tab",
+      "classes": [
+        "acorn-root",
+        "acorn-tabs"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A pill-track segmented control with a token active indicator that slides between segments."
+    },
+    {
+      "id": "acorn-tooltip-crit",
+      "name": "Tooltip · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tooltip",
+      "classes": [
+        "acorn-root",
+        "acorn-tip"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system."
+    },
+    {
+      "id": "acorn-spinner-crit",
+      "name": "Loading Spinner · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-spinner",
+      "classes": [
+        "acorn-root",
+        "acorn-spinner"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "usableAsBackground": false,
+      "needsJs": null,
+      "isNew": true,
+      "isFixed": false,
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator."
+    },
+    {
+      "id": "acorn-card-crit",
+      "name": "Feature Card · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-card",
+      "classes": [
+        "acorn-root",
+        "acorn-card"
+      ],
+      "params": [],
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
       "usableAsBackground": false,
       "needsJs": null,
       "isNew": true,

@@ -14,6 +14,9 @@ export const GLOBAL_TOKENS = new Set([
   // JFH-33 chrome identity — shell font + 4-step corner-radius scale, defined globally
   // in Prism's base :root and overridden per design system.
   '--font', '--r-sm', '--r-md', '--r-lg', '--r-xl',
+  // JFH-33 feel layer — elevation/motion/border/heading/density, also defined globally
+  // in the base :root and overridden per design system.
+  '--elev-1', '--elev-2', '--dur', '--ease', '--bd', '--head-w', '--dens',
 ]);
 
 /**

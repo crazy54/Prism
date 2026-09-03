@@ -1,7 +1,7 @@
 {
   "name": "prism-effects",
   "version": "1.0.0",
-  "generated": "EXTRACTOR_RUN",
+  "generated": "ISLAND_SYNC_JFH25",
   "description": "Catalog of offline, self-contained CSS/SVG animations, effects, components and backdrops, structured for programmatic composition (e.g. an MCP server).",
   "galleries": [
     {
@@ -77,7 +77,7 @@
     {
       "id": "spectrums",
       "title": "Spectrums",
-      "count": 1066
+      "count": 1166
     }
   ],
   "categories": [
@@ -265,7 +265,9 @@
     "spectrums / Heroku",
     "spectrums / Shopify Polaris",
     "spectrums / GitHub Primer",
-    "spectrums / Ant Design"
+    "spectrums / Ant Design",
+    "spectrums / Spectrums",
+    "spectrums / Firefox Acorn"
   ],
   "tokens": {
     "css": ":root{--bg:#0b0e17;--panel:#121623;--panel2:#171d2e;--card:#141b2b;--line:#243049;--ink:#eaf1f9;--muted:#8593a8;--dim:#5b6678;--crit:#c879ff;--crit-rgb:200,121,255;--neg:#f85149;--neg-rgb:248,81,73;--warn:#e0a52b;--warn-rgb:224,165,43;--pos:#3fb950;--pos-rgb:63,185,80;--info:#4493f8;--info-rgb:68,147,248;--accent:#ff9900;--accent-rgb:255,153,0;--cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%)}.c-crit{--c:var(--crit);--c-rgb:200,121,255}.c-neg{--c:var(--neg);--c-rgb:248,81,73}.c-warn{--c:var(--warn);--c-rgb:224,165,43}.c-pos{--c:var(--pos);--c-rgb:63,185,80}.c-info{--c:var(--info);--c-rgb:68,147,248}.c-accent{--c:var(--accent);--c-rgb:255,153,0}",
@@ -276,7 +278,7 @@
     "recolor": "If params.color is present, set --c and --c-rgb (or add a c-* class) on the effect element to recolor it.",
     "markers": "tags include \"new\" for latest-release facets and \"updated\"/\"fixed\" for repaired/refreshed facets (blue UPDATED badge in the UI)."
   },
-  "count": 2468,
+  "count": 2568,
   "effects": [
     {
       "id": "charts-big-metric-count-up",
@@ -89814,6 +89816,3430 @@
       "html": "<div class=\"antd-root\"><div class=\"antd-card\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"><b>Critical</b><p>Design-system card surface.</p></div></div>",
       "dataSnip": "<div class=\"antd-card\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"><b>Critical</b><p>Design-system card surface.</p></div>",
       "css": ".antd-root { --antd-radius: 6px; --antd-font: -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--antd-font,inherit); }\n.antd-card { width: 150px; padding: 12px; border-radius: var(--antd-radius,12px); background: var(--card); color: var(--ink); animation: 3.4s ease-in-out 0s infinite normal none running antdCardGlow; }\n.antd-card b { color: var(--_c); font-size: 12px; }\n.antd-card p { margin: 4px 0px 0px; font-size: 11px; color: var(--muted); }\n@keyframes antdCardGlow { \n  0%, 100% { box-shadow: 0 0 0 1px var(--line); }\n  50% { box-shadow: 0 0 16px rgba(var(--_rgb),.4); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-button-accent",
+      "name": "Pill Button · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-button",
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action.",
+      "classes": [
+        "acorn-root",
+        "acorn-btn"
+      ],
+      "keyframes": [
+        "acornBtnPulse"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><button class=\"acorn-btn\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\">Primary</button></div>",
+      "dataSnip": "<button class=\"acorn-btn\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\">Primary</button>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: var(--acorn-radius,999px); background: var(--_c); color: rgb(255, 255, 255); font-weight: 700; border: 0px; animation: 2.4s ease-in-out 0s infinite normal none running acornBtnPulse; }\n@keyframes acornBtnPulse { \n  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--_rgb),.5); }\n  50% { box-shadow: 0 0 0 6px rgba(var(--_rgb),0); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-toggle-accent",
+      "name": "Switch Toggle · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-toggle",
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control.",
+      "classes": [
+        "acorn-root",
+        "acorn-toggle"
+      ],
+      "keyframes": [
+        "acornTgKnob"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-toggle\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-toggle\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-toggle { position: relative; width: 44px; height: 24px; border-radius: 999px; background: rgba(var(--_rgb),.28); border: 1px solid rgba(var(--_rgb),.5); }\n.acorn-toggle::after { content: \"\"; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.7); animation: 2.6s ease-in-out 0s infinite normal none running acornTgKnob; }\n@keyframes acornTgKnob { \n  0%, 100% { left: 2px; }\n  50% { left: 20px; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-chip-accent",
+      "name": "Status Chip · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chip",
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists.",
+      "classes": [
+        "acorn-root",
+        "acorn-chip"
+      ],
+      "keyframes": [
+        "acornChipShine"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-chip\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\">Primary</span></div>",
+      "dataSnip": "<span class=\"acorn-chip\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\">Primary</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-chip { position: relative; overflow: hidden; display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 999px; background: rgba(var(--_rgb),.16); border: 1px solid rgba(var(--_rgb),.4); color: var(--_c); font-size: 12px; font-weight: 700; }\n.acorn-chip::after { content: \"\"; position: absolute; inset: 0px; background-image: ; background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-size: 250% 100%; animation: 3s linear 0s infinite normal none running acornChipShine; pointer-events: none; }\n@keyframes acornChipShine { \n  0% { background-position: -160% 0px; }\n  60%, 100% { background-position: 260% 0px; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-menu-accent",
+      "name": "Dropdown Menu · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-menu",
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu.",
+      "classes": [
+        "acorn-root",
+        "acorn-menu",
+        "acorn-mi",
+        "acorn-sel"
+      ],
+      "keyframes": [
+        "acornMenuSel"
+      ],
+      "params": {},
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-menu\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"><div class=\"acorn-mi acorn-sel\">Primary</div><div class=\"acorn-mi\">Duplicate</div><div class=\"acorn-mi\">Share…</div></div></div>",
+      "dataSnip": "<div class=\"acorn-menu\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"><div class=\"acorn-mi acorn-sel\">Primary</div><div class=\"acorn-mi\">Duplicate</div><div class=\"acorn-mi\">Share…</div></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-menu { min-width: 150px; padding: 6px; border-radius: var(--acorn-radius,12px); background: var(--panel2); border: 1px solid var(--line); }\n.acorn-menu .acorn-mi { padding: 7px 10px; border-radius: 8px; color: var(--ink); font-size: 12px; }\n.acorn-menu .acorn-sel { color: var(--_c); animation: 2.8s ease-in-out 0s infinite normal none running acornMenuSel; }\n@keyframes acornMenuSel { \n  0%, 100% { background: rgba(var(--_rgb),.12); }\n  50% { background: rgba(var(--_rgb),.26); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-notification-accent",
+      "name": "Toast Notification · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-notification",
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert.",
+      "classes": [
+        "acorn-root",
+        "acorn-toast"
+      ],
+      "keyframes": [
+        "acornNotifIn"
+      ],
+      "params": {},
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-toast\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\">Primary — saved</div></div>",
+      "dataSnip": "<div class=\"acorn-toast\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\">Primary — saved</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-toast { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; background: var(--panel2); border-top-color: ; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-left: 3px solid var(--_c); color: var(--ink); font-size: 12px; animation: 3s ease-in-out 0s infinite normal none running acornNotifIn; }\n.acorn-toast::before { content: \"\"; width: 8px; height: 8px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.8); }\n@keyframes acornNotifIn { \n  0%, 100% { transform: translateX(-6px); opacity: 0.75; }\n  50% { transform: translateX(0px); opacity: 1; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-callout-accent",
+      "name": "Callout Banner · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-callout",
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline.",
+      "classes": [
+        "acorn-root",
+        "acorn-callout"
+      ],
+      "keyframes": [
+        "acornCalloutEdge"
+      ],
+      "params": {},
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-callout\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"><b>Primary:</b> review the changes</div></div>",
+      "dataSnip": "<div class=\"acorn-callout\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"><b>Primary:</b> review the changes</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-callout { position: relative; overflow: hidden; padding: 10px 14px; border-radius: 10px; background: rgba(var(--_rgb),.1); border: 1px solid rgba(var(--_rgb),.35); color: var(--ink); font-size: 12px; }\n.acorn-callout::after { content: \"\"; position: absolute; top: 0px; left: 0px; height: 2px; width: 60%; background: linear-gradient(90deg,transparent,var(--_c),transparent); animation: 2.6s linear 0s infinite normal none running acornCalloutEdge; pointer-events: none; }\n@keyframes acornCalloutEdge { \n  0% { transform: translateX(-120%); }\n  100% { transform: translateX(120%); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-chart-accent",
+      "name": "Mini Bar Chart · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chart",
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-chart"
+      ],
+      "keyframes": [
+        "acornBarGrow"
+      ],
+      "params": {},
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-chart\" style=\"--_c:var(--accent)\"><i></i><i></i><i></i><i></i></div></div>",
+      "dataSnip": "<div class=\"acorn-chart\" style=\"--_c:var(--accent)\"><i></i><i></i><i></i><i></i></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-chart { display: flex; align-items: flex-end; gap: 5px; height: 44px; padding: 6px 8px; border-radius: 10px; background: var(--panel2); border: 1px solid var(--line); }\n.acorn-chart i { flex: 1 1 0%; background: var(--_c); border-radius: 3px 3px 0px 0px; transform-origin: center bottom; animation: 2.4s ease-in-out 0s infinite normal none running acornBarGrow; }\n.acorn-chart i:nth-child(2) { animation-delay: 0.2s; }\n.acorn-chart i:nth-child(3) { animation-delay: 0.4s; }\n.acorn-chart i:nth-child(4) { animation-delay: 0.6s; }\n@keyframes acornBarGrow { \n  0% { transform: scaleY(0.25); }\n  50% { transform: scaleY(1); }\n  100% { transform: scaleY(0.25); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-input-accent",
+      "name": "Text Field · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-input",
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field.",
+      "classes": [
+        "acorn-root",
+        "acorn-field",
+        "acorn-caret"
+      ],
+      "keyframes": [
+        "step-end",
+        "acornInputCaret"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-field\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\">Primary<span class=\"acorn-caret\"></span></div></div>",
+      "dataSnip": "<div class=\"acorn-field\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\">Primary<span class=\"acorn-caret\"></span></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-field { display: inline-flex; align-items: center; gap: 2px; min-width: 150px; padding: 8px 11px; border-radius: 10px; background: var(--panel); border: 1px solid var(--_c); box-shadow: 0 0 0 3px rgba(var(--_rgb),.18); color: var(--ink); font-size: 12px; }\n.acorn-field .acorn-caret { width: 1.5px; height: 14px; background: var(--_c); animation: 1.1s step-end 0s infinite normal none running acornInputCaret; }\n@keyframes acornInputCaret { \n  0%, 49% { opacity: 1; }\n  50%, 100% { opacity: 0; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-progress-accent",
+      "name": "Progress Bar · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-progress",
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-prog"
+      ],
+      "keyframes": [
+        "acornProg"
+      ],
+      "params": {},
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-prog\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"><i></i></div></div>",
+      "dataSnip": "<div class=\"acorn-prog\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"><i></i></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-prog { width: 150px; height: 8px; border-radius: 999px; background: rgba(var(--_rgb),.18); overflow: hidden; }\n.acorn-prog i { display: block; height: 100%; border-radius: inherit; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.6); animation: 3s ease-in-out 0s infinite normal none running acornProg; }\n@keyframes acornProg { \n  0% { width: 8%; }\n  80%, 100% { width: 96%; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-avatar-accent",
+      "name": "Avatar Ring · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-avatar",
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object.",
+      "classes": [
+        "acorn-root",
+        "acorn-avatar"
+      ],
+      "keyframes": [
+        "acornAvRing"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-avatar\" style=\"--_c:var(--accent)\">P</div></div>",
+      "dataSnip": "<div class=\"acorn-avatar\" style=\"--_c:var(--accent)\">P</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-avatar { position: relative; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--panel2); color: var(--ink); font-weight: 800; }\n.acorn-avatar::before { content: \"\"; position: absolute; inset: -3px; border-radius: 50%; background: conic-gradient(from 0deg,var(--_c),transparent 55%,var(--_c)); mask: radial-gradient(farthest-side, transparent calc(100% - 3px), rgb(0, 0, 0) calc(100% - 3px)); animation: 3.4s linear 0s infinite normal none running acornAvRing; }\n@keyframes acornAvRing { \n  100% { transform: rotate(1turn); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-badge-accent",
+      "name": "Count Badge · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-badge",
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object.",
+      "classes": [
+        "acorn-root",
+        "acorn-badge"
+      ],
+      "keyframes": [
+        "acornBadgePop"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-badge\" style=\"--_c:var(--accent)\">9</span></div>",
+      "dataSnip": "<span class=\"acorn-badge\" style=\"--_c:var(--accent)\">9</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0px 6px; border-radius: 999px; background: var(--_c); color: rgb(255, 255, 255); font-size: 11px; font-weight: 800; animation: 2s ease-in-out 0s infinite normal none running acornBadgePop; }\n@keyframes acornBadgePop { \n  0%, 100% { transform: scale(1); }\n  30% { transform: scale(1.25); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-tab-accent",
+      "name": "Segmented Tabs · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tab",
+      "description": "A pill-track segmented control with a token active indicator that slides between segments.",
+      "classes": [
+        "acorn-root",
+        "acorn-tabs"
+      ],
+      "keyframes": [
+        "acornTabSlide"
+      ],
+      "params": {},
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-tabs\" style=\"--_rgb:var(--accent-rgb)\"><span>On</span><span>Off</span></div></div>",
+      "dataSnip": "<div class=\"acorn-tabs\" style=\"--_rgb:var(--accent-rgb)\"><span>On</span><span>Off</span></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-tabs { position: relative; display: inline-flex; padding: 3px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--line); }\n.acorn-tabs span { position: relative; z-index: 1; padding: 5px 14px; font-size: 12px; color: var(--ink); }\n.acorn-tabs::before { content: \"\"; position: absolute; top: 3px; bottom: 3px; width: calc(50% - 3px); left: 2px; border-radius: 999px; background: rgba(var(--_rgb),.9); animation: 3.2s ease-in-out 0s infinite normal none running acornTabSlide; }\n@keyframes acornTabSlide { \n  0%, 100% { left: 2px; }\n  50% { left: calc(50% + 1px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-tooltip-accent",
+      "name": "Tooltip · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tooltip",
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-tip"
+      ],
+      "keyframes": [
+        "acornTipFloat"
+      ],
+      "params": {},
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-tip\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\">Primary</span></div>",
+      "dataSnip": "<span class=\"acorn-tip\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\">Primary</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-tip { display: inline-block; padding: 6px 10px; border-radius: 8px; background: var(--panel2); border: 1px solid var(--_c); color: var(--ink); font-size: 11px; box-shadow: 0 4px 14px rgba(var(--_rgb),.3); animation: 2.6s ease-in-out 0s infinite normal none running acornTipFloat; }\n@keyframes acornTipFloat { \n  0%, 100% { transform: translateY(0px); }\n  50% { transform: translateY(-4px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-spinner-accent",
+      "name": "Loading Spinner · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-spinner",
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator.",
+      "classes": [
+        "acorn-root",
+        "acorn-spinner"
+      ],
+      "keyframes": [
+        "acornSpin"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-spinner\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-spinner\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-spinner { width: 26px; height: 26px; border-radius: 50%; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-left-color: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-top-color: var(--_c); animation: 1s linear 0s infinite normal none running acornSpin; }\n@keyframes acornSpin { \n  100% { transform: rotate(1turn); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-card-accent",
+      "name": "Feature Card · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-card",
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container.",
+      "classes": [
+        "acorn-root",
+        "acorn-card"
+      ],
+      "keyframes": [
+        "acornCardGlow"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-card\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"><b>Primary</b><p>Design-system card surface.</p></div></div>",
+      "dataSnip": "<div class=\"acorn-card\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"><b>Primary</b><p>Design-system card surface.</p></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-card { width: 150px; padding: 12px; border-radius: var(--acorn-radius,12px); background: var(--card); color: var(--ink); animation: 3.4s ease-in-out 0s infinite normal none running acornCardGlow; }\n.acorn-card b { color: var(--_c); font-size: 12px; }\n.acorn-card p { margin: 4px 0px 0px; font-size: 11px; color: var(--muted); }\n@keyframes acornCardGlow { \n  0%, 100% { box-shadow: 0 0 0 1px var(--line); }\n  50% { box-shadow: 0 0 16px rgba(var(--_rgb),.4); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-checkbox-accent",
+      "name": "Checkbox · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-checkbox",
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input.",
+      "classes": [
+        "acorn-root",
+        "acorn-check"
+      ],
+      "keyframes": [
+        "acornCheckIn"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-check\" style=\"--_c:var(--accent)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-check\" style=\"--_c:var(--accent)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-check { position: relative; width: 22px; height: 22px; border-radius: 6px; background: var(--_c); display: grid; place-items: center; }\n.acorn-check::after { content: \"✓\"; color: rgb(255, 255, 255); font-size: 14px; font-weight: 900; animation: 2.4s ease-in-out 0s infinite normal none running acornCheckIn; }\n@keyframes acornCheckIn { \n  0%, 20% { clip-path: inset(0px 100% 0px 0px); }\n  60%, 100% { clip-path: inset(0px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-slider-accent",
+      "name": "Range Slider · Primary",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-slider",
+      "description": "A track with a token thumb that travels along it. The system's range input.",
+      "classes": [
+        "acorn-root",
+        "acorn-slider"
+      ],
+      "keyframes": [
+        "acornSliderThumb"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-slider\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-slider\" style=\"--_c:var(--accent);--_rgb:var(--accent-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-slider { position: relative; width: 150px; height: 6px; border-radius: 999px; background: rgba(var(--_rgb),.2); }\n.acorn-slider::before { content: \"\"; position: absolute; top: -5px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.6); animation: 3s ease-in-out 0s infinite normal none running acornSliderThumb; }\n@keyframes acornSliderThumb { \n  0%, 100% { left: 2px; }\n  50% { left: calc(100% - 16px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-button-info",
+      "name": "Pill Button · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-button",
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action.",
+      "classes": [
+        "acorn-root",
+        "acorn-btn"
+      ],
+      "keyframes": [
+        "acornBtnPulse"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><button class=\"acorn-btn\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\">Info</button></div>",
+      "dataSnip": "<button class=\"acorn-btn\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\">Info</button>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: var(--acorn-radius,999px); background: var(--_c); color: rgb(255, 255, 255); font-weight: 700; border: 0px; animation: 2.4s ease-in-out 0s infinite normal none running acornBtnPulse; }\n@keyframes acornBtnPulse { \n  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--_rgb),.5); }\n  50% { box-shadow: 0 0 0 6px rgba(var(--_rgb),0); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-toggle-info",
+      "name": "Switch Toggle · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-toggle",
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control.",
+      "classes": [
+        "acorn-root",
+        "acorn-toggle"
+      ],
+      "keyframes": [
+        "acornTgKnob"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-toggle\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-toggle\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-toggle { position: relative; width: 44px; height: 24px; border-radius: 999px; background: rgba(var(--_rgb),.28); border: 1px solid rgba(var(--_rgb),.5); }\n.acorn-toggle::after { content: \"\"; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.7); animation: 2.6s ease-in-out 0s infinite normal none running acornTgKnob; }\n@keyframes acornTgKnob { \n  0%, 100% { left: 2px; }\n  50% { left: 20px; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-chip-info",
+      "name": "Status Chip · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chip",
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists.",
+      "classes": [
+        "acorn-root",
+        "acorn-chip"
+      ],
+      "keyframes": [
+        "acornChipShine"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-chip\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\">Info</span></div>",
+      "dataSnip": "<span class=\"acorn-chip\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\">Info</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-chip { position: relative; overflow: hidden; display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 999px; background: rgba(var(--_rgb),.16); border: 1px solid rgba(var(--_rgb),.4); color: var(--_c); font-size: 12px; font-weight: 700; }\n.acorn-chip::after { content: \"\"; position: absolute; inset: 0px; background-image: ; background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-size: 250% 100%; animation: 3s linear 0s infinite normal none running acornChipShine; pointer-events: none; }\n@keyframes acornChipShine { \n  0% { background-position: -160% 0px; }\n  60%, 100% { background-position: 260% 0px; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-menu-info",
+      "name": "Dropdown Menu · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-menu",
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu.",
+      "classes": [
+        "acorn-root",
+        "acorn-menu",
+        "acorn-mi",
+        "acorn-sel"
+      ],
+      "keyframes": [
+        "acornMenuSel"
+      ],
+      "params": {},
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-menu\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"><div class=\"acorn-mi acorn-sel\">Info</div><div class=\"acorn-mi\">Duplicate</div><div class=\"acorn-mi\">Share…</div></div></div>",
+      "dataSnip": "<div class=\"acorn-menu\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"><div class=\"acorn-mi acorn-sel\">Info</div><div class=\"acorn-mi\">Duplicate</div><div class=\"acorn-mi\">Share…</div></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-menu { min-width: 150px; padding: 6px; border-radius: var(--acorn-radius,12px); background: var(--panel2); border: 1px solid var(--line); }\n.acorn-menu .acorn-mi { padding: 7px 10px; border-radius: 8px; color: var(--ink); font-size: 12px; }\n.acorn-menu .acorn-sel { color: var(--_c); animation: 2.8s ease-in-out 0s infinite normal none running acornMenuSel; }\n@keyframes acornMenuSel { \n  0%, 100% { background: rgba(var(--_rgb),.12); }\n  50% { background: rgba(var(--_rgb),.26); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-notification-info",
+      "name": "Toast Notification · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-notification",
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert.",
+      "classes": [
+        "acorn-root",
+        "acorn-toast"
+      ],
+      "keyframes": [
+        "acornNotifIn"
+      ],
+      "params": {},
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-toast\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\">Info — saved</div></div>",
+      "dataSnip": "<div class=\"acorn-toast\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\">Info — saved</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-toast { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; background: var(--panel2); border-top-color: ; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-left: 3px solid var(--_c); color: var(--ink); font-size: 12px; animation: 3s ease-in-out 0s infinite normal none running acornNotifIn; }\n.acorn-toast::before { content: \"\"; width: 8px; height: 8px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.8); }\n@keyframes acornNotifIn { \n  0%, 100% { transform: translateX(-6px); opacity: 0.75; }\n  50% { transform: translateX(0px); opacity: 1; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-callout-info",
+      "name": "Callout Banner · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-callout",
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline.",
+      "classes": [
+        "acorn-root",
+        "acorn-callout"
+      ],
+      "keyframes": [
+        "acornCalloutEdge"
+      ],
+      "params": {},
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-callout\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"><b>Info:</b> review the changes</div></div>",
+      "dataSnip": "<div class=\"acorn-callout\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"><b>Info:</b> review the changes</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-callout { position: relative; overflow: hidden; padding: 10px 14px; border-radius: 10px; background: rgba(var(--_rgb),.1); border: 1px solid rgba(var(--_rgb),.35); color: var(--ink); font-size: 12px; }\n.acorn-callout::after { content: \"\"; position: absolute; top: 0px; left: 0px; height: 2px; width: 60%; background: linear-gradient(90deg,transparent,var(--_c),transparent); animation: 2.6s linear 0s infinite normal none running acornCalloutEdge; pointer-events: none; }\n@keyframes acornCalloutEdge { \n  0% { transform: translateX(-120%); }\n  100% { transform: translateX(120%); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-chart-info",
+      "name": "Mini Bar Chart · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chart",
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-chart"
+      ],
+      "keyframes": [
+        "acornBarGrow"
+      ],
+      "params": {},
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-chart\" style=\"--_c:var(--info)\"><i></i><i></i><i></i><i></i></div></div>",
+      "dataSnip": "<div class=\"acorn-chart\" style=\"--_c:var(--info)\"><i></i><i></i><i></i><i></i></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-chart { display: flex; align-items: flex-end; gap: 5px; height: 44px; padding: 6px 8px; border-radius: 10px; background: var(--panel2); border: 1px solid var(--line); }\n.acorn-chart i { flex: 1 1 0%; background: var(--_c); border-radius: 3px 3px 0px 0px; transform-origin: center bottom; animation: 2.4s ease-in-out 0s infinite normal none running acornBarGrow; }\n.acorn-chart i:nth-child(2) { animation-delay: 0.2s; }\n.acorn-chart i:nth-child(3) { animation-delay: 0.4s; }\n.acorn-chart i:nth-child(4) { animation-delay: 0.6s; }\n@keyframes acornBarGrow { \n  0% { transform: scaleY(0.25); }\n  50% { transform: scaleY(1); }\n  100% { transform: scaleY(0.25); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-input-info",
+      "name": "Text Field · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-input",
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field.",
+      "classes": [
+        "acorn-root",
+        "acorn-field",
+        "acorn-caret"
+      ],
+      "keyframes": [
+        "step-end",
+        "acornInputCaret"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-field\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\">Info<span class=\"acorn-caret\"></span></div></div>",
+      "dataSnip": "<div class=\"acorn-field\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\">Info<span class=\"acorn-caret\"></span></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-field { display: inline-flex; align-items: center; gap: 2px; min-width: 150px; padding: 8px 11px; border-radius: 10px; background: var(--panel); border: 1px solid var(--_c); box-shadow: 0 0 0 3px rgba(var(--_rgb),.18); color: var(--ink); font-size: 12px; }\n.acorn-field .acorn-caret { width: 1.5px; height: 14px; background: var(--_c); animation: 1.1s step-end 0s infinite normal none running acornInputCaret; }\n@keyframes acornInputCaret { \n  0%, 49% { opacity: 1; }\n  50%, 100% { opacity: 0; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-progress-info",
+      "name": "Progress Bar · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-progress",
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-prog"
+      ],
+      "keyframes": [
+        "acornProg"
+      ],
+      "params": {},
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-prog\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"><i></i></div></div>",
+      "dataSnip": "<div class=\"acorn-prog\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"><i></i></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-prog { width: 150px; height: 8px; border-radius: 999px; background: rgba(var(--_rgb),.18); overflow: hidden; }\n.acorn-prog i { display: block; height: 100%; border-radius: inherit; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.6); animation: 3s ease-in-out 0s infinite normal none running acornProg; }\n@keyframes acornProg { \n  0% { width: 8%; }\n  80%, 100% { width: 96%; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-avatar-info",
+      "name": "Avatar Ring · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-avatar",
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object.",
+      "classes": [
+        "acorn-root",
+        "acorn-avatar"
+      ],
+      "keyframes": [
+        "acornAvRing"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-avatar\" style=\"--_c:var(--info)\">I</div></div>",
+      "dataSnip": "<div class=\"acorn-avatar\" style=\"--_c:var(--info)\">I</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-avatar { position: relative; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--panel2); color: var(--ink); font-weight: 800; }\n.acorn-avatar::before { content: \"\"; position: absolute; inset: -3px; border-radius: 50%; background: conic-gradient(from 0deg,var(--_c),transparent 55%,var(--_c)); mask: radial-gradient(farthest-side, transparent calc(100% - 3px), rgb(0, 0, 0) calc(100% - 3px)); animation: 3.4s linear 0s infinite normal none running acornAvRing; }\n@keyframes acornAvRing { \n  100% { transform: rotate(1turn); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-badge-info",
+      "name": "Count Badge · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-badge",
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object.",
+      "classes": [
+        "acorn-root",
+        "acorn-badge"
+      ],
+      "keyframes": [
+        "acornBadgePop"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-badge\" style=\"--_c:var(--info)\">9</span></div>",
+      "dataSnip": "<span class=\"acorn-badge\" style=\"--_c:var(--info)\">9</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0px 6px; border-radius: 999px; background: var(--_c); color: rgb(255, 255, 255); font-size: 11px; font-weight: 800; animation: 2s ease-in-out 0s infinite normal none running acornBadgePop; }\n@keyframes acornBadgePop { \n  0%, 100% { transform: scale(1); }\n  30% { transform: scale(1.25); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-tab-info",
+      "name": "Segmented Tabs · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tab",
+      "description": "A pill-track segmented control with a token active indicator that slides between segments.",
+      "classes": [
+        "acorn-root",
+        "acorn-tabs"
+      ],
+      "keyframes": [
+        "acornTabSlide"
+      ],
+      "params": {},
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-tabs\" style=\"--_rgb:var(--info-rgb)\"><span>On</span><span>Off</span></div></div>",
+      "dataSnip": "<div class=\"acorn-tabs\" style=\"--_rgb:var(--info-rgb)\"><span>On</span><span>Off</span></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-tabs { position: relative; display: inline-flex; padding: 3px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--line); }\n.acorn-tabs span { position: relative; z-index: 1; padding: 5px 14px; font-size: 12px; color: var(--ink); }\n.acorn-tabs::before { content: \"\"; position: absolute; top: 3px; bottom: 3px; width: calc(50% - 3px); left: 2px; border-radius: 999px; background: rgba(var(--_rgb),.9); animation: 3.2s ease-in-out 0s infinite normal none running acornTabSlide; }\n@keyframes acornTabSlide { \n  0%, 100% { left: 2px; }\n  50% { left: calc(50% + 1px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-tooltip-info",
+      "name": "Tooltip · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tooltip",
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-tip"
+      ],
+      "keyframes": [
+        "acornTipFloat"
+      ],
+      "params": {},
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-tip\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\">Info</span></div>",
+      "dataSnip": "<span class=\"acorn-tip\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\">Info</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-tip { display: inline-block; padding: 6px 10px; border-radius: 8px; background: var(--panel2); border: 1px solid var(--_c); color: var(--ink); font-size: 11px; box-shadow: 0 4px 14px rgba(var(--_rgb),.3); animation: 2.6s ease-in-out 0s infinite normal none running acornTipFloat; }\n@keyframes acornTipFloat { \n  0%, 100% { transform: translateY(0px); }\n  50% { transform: translateY(-4px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-spinner-info",
+      "name": "Loading Spinner · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-spinner",
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator.",
+      "classes": [
+        "acorn-root",
+        "acorn-spinner"
+      ],
+      "keyframes": [
+        "acornSpin"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-spinner\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-spinner\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-spinner { width: 26px; height: 26px; border-radius: 50%; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-left-color: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-top-color: var(--_c); animation: 1s linear 0s infinite normal none running acornSpin; }\n@keyframes acornSpin { \n  100% { transform: rotate(1turn); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-card-info",
+      "name": "Feature Card · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-card",
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container.",
+      "classes": [
+        "acorn-root",
+        "acorn-card"
+      ],
+      "keyframes": [
+        "acornCardGlow"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-card\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"><b>Info</b><p>Design-system card surface.</p></div></div>",
+      "dataSnip": "<div class=\"acorn-card\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"><b>Info</b><p>Design-system card surface.</p></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-card { width: 150px; padding: 12px; border-radius: var(--acorn-radius,12px); background: var(--card); color: var(--ink); animation: 3.4s ease-in-out 0s infinite normal none running acornCardGlow; }\n.acorn-card b { color: var(--_c); font-size: 12px; }\n.acorn-card p { margin: 4px 0px 0px; font-size: 11px; color: var(--muted); }\n@keyframes acornCardGlow { \n  0%, 100% { box-shadow: 0 0 0 1px var(--line); }\n  50% { box-shadow: 0 0 16px rgba(var(--_rgb),.4); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-checkbox-info",
+      "name": "Checkbox · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-checkbox",
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input.",
+      "classes": [
+        "acorn-root",
+        "acorn-check"
+      ],
+      "keyframes": [
+        "acornCheckIn"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-check\" style=\"--_c:var(--info)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-check\" style=\"--_c:var(--info)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-check { position: relative; width: 22px; height: 22px; border-radius: 6px; background: var(--_c); display: grid; place-items: center; }\n.acorn-check::after { content: \"✓\"; color: rgb(255, 255, 255); font-size: 14px; font-weight: 900; animation: 2.4s ease-in-out 0s infinite normal none running acornCheckIn; }\n@keyframes acornCheckIn { \n  0%, 20% { clip-path: inset(0px 100% 0px 0px); }\n  60%, 100% { clip-path: inset(0px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-slider-info",
+      "name": "Range Slider · Info",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-slider",
+      "description": "A track with a token thumb that travels along it. The system's range input.",
+      "classes": [
+        "acorn-root",
+        "acorn-slider"
+      ],
+      "keyframes": [
+        "acornSliderThumb"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-slider\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-slider\" style=\"--_c:var(--info);--_rgb:var(--info-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-slider { position: relative; width: 150px; height: 6px; border-radius: 999px; background: rgba(var(--_rgb),.2); }\n.acorn-slider::before { content: \"\"; position: absolute; top: -5px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.6); animation: 3s ease-in-out 0s infinite normal none running acornSliderThumb; }\n@keyframes acornSliderThumb { \n  0%, 100% { left: 2px; }\n  50% { left: calc(100% - 16px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-button-pos",
+      "name": "Pill Button · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-button",
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action.",
+      "classes": [
+        "acorn-root",
+        "acorn-btn"
+      ],
+      "keyframes": [
+        "acornBtnPulse"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><button class=\"acorn-btn\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\">Success</button></div>",
+      "dataSnip": "<button class=\"acorn-btn\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\">Success</button>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: var(--acorn-radius,999px); background: var(--_c); color: rgb(255, 255, 255); font-weight: 700; border: 0px; animation: 2.4s ease-in-out 0s infinite normal none running acornBtnPulse; }\n@keyframes acornBtnPulse { \n  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--_rgb),.5); }\n  50% { box-shadow: 0 0 0 6px rgba(var(--_rgb),0); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-toggle-pos",
+      "name": "Switch Toggle · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-toggle",
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control.",
+      "classes": [
+        "acorn-root",
+        "acorn-toggle"
+      ],
+      "keyframes": [
+        "acornTgKnob"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-toggle\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-toggle\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-toggle { position: relative; width: 44px; height: 24px; border-radius: 999px; background: rgba(var(--_rgb),.28); border: 1px solid rgba(var(--_rgb),.5); }\n.acorn-toggle::after { content: \"\"; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.7); animation: 2.6s ease-in-out 0s infinite normal none running acornTgKnob; }\n@keyframes acornTgKnob { \n  0%, 100% { left: 2px; }\n  50% { left: 20px; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-chip-pos",
+      "name": "Status Chip · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chip",
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists.",
+      "classes": [
+        "acorn-root",
+        "acorn-chip"
+      ],
+      "keyframes": [
+        "acornChipShine"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-chip\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\">Success</span></div>",
+      "dataSnip": "<span class=\"acorn-chip\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\">Success</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-chip { position: relative; overflow: hidden; display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 999px; background: rgba(var(--_rgb),.16); border: 1px solid rgba(var(--_rgb),.4); color: var(--_c); font-size: 12px; font-weight: 700; }\n.acorn-chip::after { content: \"\"; position: absolute; inset: 0px; background-image: ; background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-size: 250% 100%; animation: 3s linear 0s infinite normal none running acornChipShine; pointer-events: none; }\n@keyframes acornChipShine { \n  0% { background-position: -160% 0px; }\n  60%, 100% { background-position: 260% 0px; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-menu-pos",
+      "name": "Dropdown Menu · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-menu",
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu.",
+      "classes": [
+        "acorn-root",
+        "acorn-menu",
+        "acorn-mi",
+        "acorn-sel"
+      ],
+      "keyframes": [
+        "acornMenuSel"
+      ],
+      "params": {},
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-menu\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"><div class=\"acorn-mi acorn-sel\">Success</div><div class=\"acorn-mi\">Duplicate</div><div class=\"acorn-mi\">Share…</div></div></div>",
+      "dataSnip": "<div class=\"acorn-menu\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"><div class=\"acorn-mi acorn-sel\">Success</div><div class=\"acorn-mi\">Duplicate</div><div class=\"acorn-mi\">Share…</div></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-menu { min-width: 150px; padding: 6px; border-radius: var(--acorn-radius,12px); background: var(--panel2); border: 1px solid var(--line); }\n.acorn-menu .acorn-mi { padding: 7px 10px; border-radius: 8px; color: var(--ink); font-size: 12px; }\n.acorn-menu .acorn-sel { color: var(--_c); animation: 2.8s ease-in-out 0s infinite normal none running acornMenuSel; }\n@keyframes acornMenuSel { \n  0%, 100% { background: rgba(var(--_rgb),.12); }\n  50% { background: rgba(var(--_rgb),.26); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-notification-pos",
+      "name": "Toast Notification · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-notification",
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert.",
+      "classes": [
+        "acorn-root",
+        "acorn-toast"
+      ],
+      "keyframes": [
+        "acornNotifIn"
+      ],
+      "params": {},
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-toast\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\">Success — saved</div></div>",
+      "dataSnip": "<div class=\"acorn-toast\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\">Success — saved</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-toast { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; background: var(--panel2); border-top-color: ; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-left: 3px solid var(--_c); color: var(--ink); font-size: 12px; animation: 3s ease-in-out 0s infinite normal none running acornNotifIn; }\n.acorn-toast::before { content: \"\"; width: 8px; height: 8px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.8); }\n@keyframes acornNotifIn { \n  0%, 100% { transform: translateX(-6px); opacity: 0.75; }\n  50% { transform: translateX(0px); opacity: 1; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-callout-pos",
+      "name": "Callout Banner · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-callout",
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline.",
+      "classes": [
+        "acorn-root",
+        "acorn-callout"
+      ],
+      "keyframes": [
+        "acornCalloutEdge"
+      ],
+      "params": {},
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-callout\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"><b>Success:</b> review the changes</div></div>",
+      "dataSnip": "<div class=\"acorn-callout\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"><b>Success:</b> review the changes</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-callout { position: relative; overflow: hidden; padding: 10px 14px; border-radius: 10px; background: rgba(var(--_rgb),.1); border: 1px solid rgba(var(--_rgb),.35); color: var(--ink); font-size: 12px; }\n.acorn-callout::after { content: \"\"; position: absolute; top: 0px; left: 0px; height: 2px; width: 60%; background: linear-gradient(90deg,transparent,var(--_c),transparent); animation: 2.6s linear 0s infinite normal none running acornCalloutEdge; pointer-events: none; }\n@keyframes acornCalloutEdge { \n  0% { transform: translateX(-120%); }\n  100% { transform: translateX(120%); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-chart-pos",
+      "name": "Mini Bar Chart · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chart",
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-chart"
+      ],
+      "keyframes": [
+        "acornBarGrow"
+      ],
+      "params": {},
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-chart\" style=\"--_c:var(--pos)\"><i></i><i></i><i></i><i></i></div></div>",
+      "dataSnip": "<div class=\"acorn-chart\" style=\"--_c:var(--pos)\"><i></i><i></i><i></i><i></i></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-chart { display: flex; align-items: flex-end; gap: 5px; height: 44px; padding: 6px 8px; border-radius: 10px; background: var(--panel2); border: 1px solid var(--line); }\n.acorn-chart i { flex: 1 1 0%; background: var(--_c); border-radius: 3px 3px 0px 0px; transform-origin: center bottom; animation: 2.4s ease-in-out 0s infinite normal none running acornBarGrow; }\n.acorn-chart i:nth-child(2) { animation-delay: 0.2s; }\n.acorn-chart i:nth-child(3) { animation-delay: 0.4s; }\n.acorn-chart i:nth-child(4) { animation-delay: 0.6s; }\n@keyframes acornBarGrow { \n  0% { transform: scaleY(0.25); }\n  50% { transform: scaleY(1); }\n  100% { transform: scaleY(0.25); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-input-pos",
+      "name": "Text Field · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-input",
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field.",
+      "classes": [
+        "acorn-root",
+        "acorn-field",
+        "acorn-caret"
+      ],
+      "keyframes": [
+        "step-end",
+        "acornInputCaret"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-field\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\">Success<span class=\"acorn-caret\"></span></div></div>",
+      "dataSnip": "<div class=\"acorn-field\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\">Success<span class=\"acorn-caret\"></span></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-field { display: inline-flex; align-items: center; gap: 2px; min-width: 150px; padding: 8px 11px; border-radius: 10px; background: var(--panel); border: 1px solid var(--_c); box-shadow: 0 0 0 3px rgba(var(--_rgb),.18); color: var(--ink); font-size: 12px; }\n.acorn-field .acorn-caret { width: 1.5px; height: 14px; background: var(--_c); animation: 1.1s step-end 0s infinite normal none running acornInputCaret; }\n@keyframes acornInputCaret { \n  0%, 49% { opacity: 1; }\n  50%, 100% { opacity: 0; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-progress-pos",
+      "name": "Progress Bar · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-progress",
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-prog"
+      ],
+      "keyframes": [
+        "acornProg"
+      ],
+      "params": {},
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-prog\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"><i></i></div></div>",
+      "dataSnip": "<div class=\"acorn-prog\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"><i></i></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-prog { width: 150px; height: 8px; border-radius: 999px; background: rgba(var(--_rgb),.18); overflow: hidden; }\n.acorn-prog i { display: block; height: 100%; border-radius: inherit; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.6); animation: 3s ease-in-out 0s infinite normal none running acornProg; }\n@keyframes acornProg { \n  0% { width: 8%; }\n  80%, 100% { width: 96%; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-avatar-pos",
+      "name": "Avatar Ring · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-avatar",
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object.",
+      "classes": [
+        "acorn-root",
+        "acorn-avatar"
+      ],
+      "keyframes": [
+        "acornAvRing"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-avatar\" style=\"--_c:var(--pos)\">S</div></div>",
+      "dataSnip": "<div class=\"acorn-avatar\" style=\"--_c:var(--pos)\">S</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-avatar { position: relative; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--panel2); color: var(--ink); font-weight: 800; }\n.acorn-avatar::before { content: \"\"; position: absolute; inset: -3px; border-radius: 50%; background: conic-gradient(from 0deg,var(--_c),transparent 55%,var(--_c)); mask: radial-gradient(farthest-side, transparent calc(100% - 3px), rgb(0, 0, 0) calc(100% - 3px)); animation: 3.4s linear 0s infinite normal none running acornAvRing; }\n@keyframes acornAvRing { \n  100% { transform: rotate(1turn); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-badge-pos",
+      "name": "Count Badge · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-badge",
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object.",
+      "classes": [
+        "acorn-root",
+        "acorn-badge"
+      ],
+      "keyframes": [
+        "acornBadgePop"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-badge\" style=\"--_c:var(--pos)\">9</span></div>",
+      "dataSnip": "<span class=\"acorn-badge\" style=\"--_c:var(--pos)\">9</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0px 6px; border-radius: 999px; background: var(--_c); color: rgb(255, 255, 255); font-size: 11px; font-weight: 800; animation: 2s ease-in-out 0s infinite normal none running acornBadgePop; }\n@keyframes acornBadgePop { \n  0%, 100% { transform: scale(1); }\n  30% { transform: scale(1.25); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-tab-pos",
+      "name": "Segmented Tabs · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tab",
+      "description": "A pill-track segmented control with a token active indicator that slides between segments.",
+      "classes": [
+        "acorn-root",
+        "acorn-tabs"
+      ],
+      "keyframes": [
+        "acornTabSlide"
+      ],
+      "params": {},
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-tabs\" style=\"--_rgb:var(--pos-rgb)\"><span>On</span><span>Off</span></div></div>",
+      "dataSnip": "<div class=\"acorn-tabs\" style=\"--_rgb:var(--pos-rgb)\"><span>On</span><span>Off</span></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-tabs { position: relative; display: inline-flex; padding: 3px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--line); }\n.acorn-tabs span { position: relative; z-index: 1; padding: 5px 14px; font-size: 12px; color: var(--ink); }\n.acorn-tabs::before { content: \"\"; position: absolute; top: 3px; bottom: 3px; width: calc(50% - 3px); left: 2px; border-radius: 999px; background: rgba(var(--_rgb),.9); animation: 3.2s ease-in-out 0s infinite normal none running acornTabSlide; }\n@keyframes acornTabSlide { \n  0%, 100% { left: 2px; }\n  50% { left: calc(50% + 1px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-tooltip-pos",
+      "name": "Tooltip · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tooltip",
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-tip"
+      ],
+      "keyframes": [
+        "acornTipFloat"
+      ],
+      "params": {},
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-tip\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\">Success</span></div>",
+      "dataSnip": "<span class=\"acorn-tip\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\">Success</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-tip { display: inline-block; padding: 6px 10px; border-radius: 8px; background: var(--panel2); border: 1px solid var(--_c); color: var(--ink); font-size: 11px; box-shadow: 0 4px 14px rgba(var(--_rgb),.3); animation: 2.6s ease-in-out 0s infinite normal none running acornTipFloat; }\n@keyframes acornTipFloat { \n  0%, 100% { transform: translateY(0px); }\n  50% { transform: translateY(-4px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-spinner-pos",
+      "name": "Loading Spinner · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-spinner",
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator.",
+      "classes": [
+        "acorn-root",
+        "acorn-spinner"
+      ],
+      "keyframes": [
+        "acornSpin"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-spinner\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-spinner\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-spinner { width: 26px; height: 26px; border-radius: 50%; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-left-color: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-top-color: var(--_c); animation: 1s linear 0s infinite normal none running acornSpin; }\n@keyframes acornSpin { \n  100% { transform: rotate(1turn); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-card-pos",
+      "name": "Feature Card · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-card",
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container.",
+      "classes": [
+        "acorn-root",
+        "acorn-card"
+      ],
+      "keyframes": [
+        "acornCardGlow"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-card\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"><b>Success</b><p>Design-system card surface.</p></div></div>",
+      "dataSnip": "<div class=\"acorn-card\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"><b>Success</b><p>Design-system card surface.</p></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-card { width: 150px; padding: 12px; border-radius: var(--acorn-radius,12px); background: var(--card); color: var(--ink); animation: 3.4s ease-in-out 0s infinite normal none running acornCardGlow; }\n.acorn-card b { color: var(--_c); font-size: 12px; }\n.acorn-card p { margin: 4px 0px 0px; font-size: 11px; color: var(--muted); }\n@keyframes acornCardGlow { \n  0%, 100% { box-shadow: 0 0 0 1px var(--line); }\n  50% { box-shadow: 0 0 16px rgba(var(--_rgb),.4); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-checkbox-pos",
+      "name": "Checkbox · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-checkbox",
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input.",
+      "classes": [
+        "acorn-root",
+        "acorn-check"
+      ],
+      "keyframes": [
+        "acornCheckIn"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-check\" style=\"--_c:var(--pos)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-check\" style=\"--_c:var(--pos)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-check { position: relative; width: 22px; height: 22px; border-radius: 6px; background: var(--_c); display: grid; place-items: center; }\n.acorn-check::after { content: \"✓\"; color: rgb(255, 255, 255); font-size: 14px; font-weight: 900; animation: 2.4s ease-in-out 0s infinite normal none running acornCheckIn; }\n@keyframes acornCheckIn { \n  0%, 20% { clip-path: inset(0px 100% 0px 0px); }\n  60%, 100% { clip-path: inset(0px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-slider-pos",
+      "name": "Range Slider · Success",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-slider",
+      "description": "A track with a token thumb that travels along it. The system's range input.",
+      "classes": [
+        "acorn-root",
+        "acorn-slider"
+      ],
+      "keyframes": [
+        "acornSliderThumb"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-slider\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-slider\" style=\"--_c:var(--pos);--_rgb:var(--pos-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-slider { position: relative; width: 150px; height: 6px; border-radius: 999px; background: rgba(var(--_rgb),.2); }\n.acorn-slider::before { content: \"\"; position: absolute; top: -5px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.6); animation: 3s ease-in-out 0s infinite normal none running acornSliderThumb; }\n@keyframes acornSliderThumb { \n  0%, 100% { left: 2px; }\n  50% { left: calc(100% - 16px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-button-warn",
+      "name": "Pill Button · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-button",
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action.",
+      "classes": [
+        "acorn-root",
+        "acorn-btn"
+      ],
+      "keyframes": [
+        "acornBtnPulse"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><button class=\"acorn-btn\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\">Warning</button></div>",
+      "dataSnip": "<button class=\"acorn-btn\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\">Warning</button>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: var(--acorn-radius,999px); background: var(--_c); color: rgb(255, 255, 255); font-weight: 700; border: 0px; animation: 2.4s ease-in-out 0s infinite normal none running acornBtnPulse; }\n@keyframes acornBtnPulse { \n  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--_rgb),.5); }\n  50% { box-shadow: 0 0 0 6px rgba(var(--_rgb),0); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-toggle-warn",
+      "name": "Switch Toggle · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-toggle",
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control.",
+      "classes": [
+        "acorn-root",
+        "acorn-toggle"
+      ],
+      "keyframes": [
+        "acornTgKnob"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-toggle\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-toggle\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-toggle { position: relative; width: 44px; height: 24px; border-radius: 999px; background: rgba(var(--_rgb),.28); border: 1px solid rgba(var(--_rgb),.5); }\n.acorn-toggle::after { content: \"\"; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.7); animation: 2.6s ease-in-out 0s infinite normal none running acornTgKnob; }\n@keyframes acornTgKnob { \n  0%, 100% { left: 2px; }\n  50% { left: 20px; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-chip-warn",
+      "name": "Status Chip · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chip",
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists.",
+      "classes": [
+        "acorn-root",
+        "acorn-chip"
+      ],
+      "keyframes": [
+        "acornChipShine"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-chip\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\">Warning</span></div>",
+      "dataSnip": "<span class=\"acorn-chip\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\">Warning</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-chip { position: relative; overflow: hidden; display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 999px; background: rgba(var(--_rgb),.16); border: 1px solid rgba(var(--_rgb),.4); color: var(--_c); font-size: 12px; font-weight: 700; }\n.acorn-chip::after { content: \"\"; position: absolute; inset: 0px; background-image: ; background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-size: 250% 100%; animation: 3s linear 0s infinite normal none running acornChipShine; pointer-events: none; }\n@keyframes acornChipShine { \n  0% { background-position: -160% 0px; }\n  60%, 100% { background-position: 260% 0px; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-menu-warn",
+      "name": "Dropdown Menu · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-menu",
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu.",
+      "classes": [
+        "acorn-root",
+        "acorn-menu",
+        "acorn-mi",
+        "acorn-sel"
+      ],
+      "keyframes": [
+        "acornMenuSel"
+      ],
+      "params": {},
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-menu\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"><div class=\"acorn-mi acorn-sel\">Warning</div><div class=\"acorn-mi\">Duplicate</div><div class=\"acorn-mi\">Share…</div></div></div>",
+      "dataSnip": "<div class=\"acorn-menu\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"><div class=\"acorn-mi acorn-sel\">Warning</div><div class=\"acorn-mi\">Duplicate</div><div class=\"acorn-mi\">Share…</div></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-menu { min-width: 150px; padding: 6px; border-radius: var(--acorn-radius,12px); background: var(--panel2); border: 1px solid var(--line); }\n.acorn-menu .acorn-mi { padding: 7px 10px; border-radius: 8px; color: var(--ink); font-size: 12px; }\n.acorn-menu .acorn-sel { color: var(--_c); animation: 2.8s ease-in-out 0s infinite normal none running acornMenuSel; }\n@keyframes acornMenuSel { \n  0%, 100% { background: rgba(var(--_rgb),.12); }\n  50% { background: rgba(var(--_rgb),.26); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-notification-warn",
+      "name": "Toast Notification · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-notification",
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert.",
+      "classes": [
+        "acorn-root",
+        "acorn-toast"
+      ],
+      "keyframes": [
+        "acornNotifIn"
+      ],
+      "params": {},
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-toast\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\">Warning — saved</div></div>",
+      "dataSnip": "<div class=\"acorn-toast\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\">Warning — saved</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-toast { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; background: var(--panel2); border-top-color: ; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-left: 3px solid var(--_c); color: var(--ink); font-size: 12px; animation: 3s ease-in-out 0s infinite normal none running acornNotifIn; }\n.acorn-toast::before { content: \"\"; width: 8px; height: 8px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.8); }\n@keyframes acornNotifIn { \n  0%, 100% { transform: translateX(-6px); opacity: 0.75; }\n  50% { transform: translateX(0px); opacity: 1; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-callout-warn",
+      "name": "Callout Banner · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-callout",
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline.",
+      "classes": [
+        "acorn-root",
+        "acorn-callout"
+      ],
+      "keyframes": [
+        "acornCalloutEdge"
+      ],
+      "params": {},
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-callout\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"><b>Warning:</b> review the changes</div></div>",
+      "dataSnip": "<div class=\"acorn-callout\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"><b>Warning:</b> review the changes</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-callout { position: relative; overflow: hidden; padding: 10px 14px; border-radius: 10px; background: rgba(var(--_rgb),.1); border: 1px solid rgba(var(--_rgb),.35); color: var(--ink); font-size: 12px; }\n.acorn-callout::after { content: \"\"; position: absolute; top: 0px; left: 0px; height: 2px; width: 60%; background: linear-gradient(90deg,transparent,var(--_c),transparent); animation: 2.6s linear 0s infinite normal none running acornCalloutEdge; pointer-events: none; }\n@keyframes acornCalloutEdge { \n  0% { transform: translateX(-120%); }\n  100% { transform: translateX(120%); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-chart-warn",
+      "name": "Mini Bar Chart · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chart",
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-chart"
+      ],
+      "keyframes": [
+        "acornBarGrow"
+      ],
+      "params": {},
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-chart\" style=\"--_c:var(--warn)\"><i></i><i></i><i></i><i></i></div></div>",
+      "dataSnip": "<div class=\"acorn-chart\" style=\"--_c:var(--warn)\"><i></i><i></i><i></i><i></i></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-chart { display: flex; align-items: flex-end; gap: 5px; height: 44px; padding: 6px 8px; border-radius: 10px; background: var(--panel2); border: 1px solid var(--line); }\n.acorn-chart i { flex: 1 1 0%; background: var(--_c); border-radius: 3px 3px 0px 0px; transform-origin: center bottom; animation: 2.4s ease-in-out 0s infinite normal none running acornBarGrow; }\n.acorn-chart i:nth-child(2) { animation-delay: 0.2s; }\n.acorn-chart i:nth-child(3) { animation-delay: 0.4s; }\n.acorn-chart i:nth-child(4) { animation-delay: 0.6s; }\n@keyframes acornBarGrow { \n  0% { transform: scaleY(0.25); }\n  50% { transform: scaleY(1); }\n  100% { transform: scaleY(0.25); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-input-warn",
+      "name": "Text Field · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-input",
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field.",
+      "classes": [
+        "acorn-root",
+        "acorn-field",
+        "acorn-caret"
+      ],
+      "keyframes": [
+        "step-end",
+        "acornInputCaret"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-field\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\">Warning<span class=\"acorn-caret\"></span></div></div>",
+      "dataSnip": "<div class=\"acorn-field\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\">Warning<span class=\"acorn-caret\"></span></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-field { display: inline-flex; align-items: center; gap: 2px; min-width: 150px; padding: 8px 11px; border-radius: 10px; background: var(--panel); border: 1px solid var(--_c); box-shadow: 0 0 0 3px rgba(var(--_rgb),.18); color: var(--ink); font-size: 12px; }\n.acorn-field .acorn-caret { width: 1.5px; height: 14px; background: var(--_c); animation: 1.1s step-end 0s infinite normal none running acornInputCaret; }\n@keyframes acornInputCaret { \n  0%, 49% { opacity: 1; }\n  50%, 100% { opacity: 0; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-progress-warn",
+      "name": "Progress Bar · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-progress",
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-prog"
+      ],
+      "keyframes": [
+        "acornProg"
+      ],
+      "params": {},
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-prog\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"><i></i></div></div>",
+      "dataSnip": "<div class=\"acorn-prog\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"><i></i></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-prog { width: 150px; height: 8px; border-radius: 999px; background: rgba(var(--_rgb),.18); overflow: hidden; }\n.acorn-prog i { display: block; height: 100%; border-radius: inherit; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.6); animation: 3s ease-in-out 0s infinite normal none running acornProg; }\n@keyframes acornProg { \n  0% { width: 8%; }\n  80%, 100% { width: 96%; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-avatar-warn",
+      "name": "Avatar Ring · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-avatar",
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object.",
+      "classes": [
+        "acorn-root",
+        "acorn-avatar"
+      ],
+      "keyframes": [
+        "acornAvRing"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-avatar\" style=\"--_c:var(--warn)\">W</div></div>",
+      "dataSnip": "<div class=\"acorn-avatar\" style=\"--_c:var(--warn)\">W</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-avatar { position: relative; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--panel2); color: var(--ink); font-weight: 800; }\n.acorn-avatar::before { content: \"\"; position: absolute; inset: -3px; border-radius: 50%; background: conic-gradient(from 0deg,var(--_c),transparent 55%,var(--_c)); mask: radial-gradient(farthest-side, transparent calc(100% - 3px), rgb(0, 0, 0) calc(100% - 3px)); animation: 3.4s linear 0s infinite normal none running acornAvRing; }\n@keyframes acornAvRing { \n  100% { transform: rotate(1turn); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-badge-warn",
+      "name": "Count Badge · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-badge",
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object.",
+      "classes": [
+        "acorn-root",
+        "acorn-badge"
+      ],
+      "keyframes": [
+        "acornBadgePop"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-badge\" style=\"--_c:var(--warn)\">9</span></div>",
+      "dataSnip": "<span class=\"acorn-badge\" style=\"--_c:var(--warn)\">9</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0px 6px; border-radius: 999px; background: var(--_c); color: rgb(255, 255, 255); font-size: 11px; font-weight: 800; animation: 2s ease-in-out 0s infinite normal none running acornBadgePop; }\n@keyframes acornBadgePop { \n  0%, 100% { transform: scale(1); }\n  30% { transform: scale(1.25); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-tab-warn",
+      "name": "Segmented Tabs · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tab",
+      "description": "A pill-track segmented control with a token active indicator that slides between segments.",
+      "classes": [
+        "acorn-root",
+        "acorn-tabs"
+      ],
+      "keyframes": [
+        "acornTabSlide"
+      ],
+      "params": {},
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-tabs\" style=\"--_rgb:var(--warn-rgb)\"><span>On</span><span>Off</span></div></div>",
+      "dataSnip": "<div class=\"acorn-tabs\" style=\"--_rgb:var(--warn-rgb)\"><span>On</span><span>Off</span></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-tabs { position: relative; display: inline-flex; padding: 3px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--line); }\n.acorn-tabs span { position: relative; z-index: 1; padding: 5px 14px; font-size: 12px; color: var(--ink); }\n.acorn-tabs::before { content: \"\"; position: absolute; top: 3px; bottom: 3px; width: calc(50% - 3px); left: 2px; border-radius: 999px; background: rgba(var(--_rgb),.9); animation: 3.2s ease-in-out 0s infinite normal none running acornTabSlide; }\n@keyframes acornTabSlide { \n  0%, 100% { left: 2px; }\n  50% { left: calc(50% + 1px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-tooltip-warn",
+      "name": "Tooltip · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tooltip",
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-tip"
+      ],
+      "keyframes": [
+        "acornTipFloat"
+      ],
+      "params": {},
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-tip\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\">Warning</span></div>",
+      "dataSnip": "<span class=\"acorn-tip\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\">Warning</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-tip { display: inline-block; padding: 6px 10px; border-radius: 8px; background: var(--panel2); border: 1px solid var(--_c); color: var(--ink); font-size: 11px; box-shadow: 0 4px 14px rgba(var(--_rgb),.3); animation: 2.6s ease-in-out 0s infinite normal none running acornTipFloat; }\n@keyframes acornTipFloat { \n  0%, 100% { transform: translateY(0px); }\n  50% { transform: translateY(-4px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-spinner-warn",
+      "name": "Loading Spinner · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-spinner",
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator.",
+      "classes": [
+        "acorn-root",
+        "acorn-spinner"
+      ],
+      "keyframes": [
+        "acornSpin"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-spinner\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-spinner\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-spinner { width: 26px; height: 26px; border-radius: 50%; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-left-color: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-top-color: var(--_c); animation: 1s linear 0s infinite normal none running acornSpin; }\n@keyframes acornSpin { \n  100% { transform: rotate(1turn); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-card-warn",
+      "name": "Feature Card · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-card",
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container.",
+      "classes": [
+        "acorn-root",
+        "acorn-card"
+      ],
+      "keyframes": [
+        "acornCardGlow"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-card\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"><b>Warning</b><p>Design-system card surface.</p></div></div>",
+      "dataSnip": "<div class=\"acorn-card\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"><b>Warning</b><p>Design-system card surface.</p></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-card { width: 150px; padding: 12px; border-radius: var(--acorn-radius,12px); background: var(--card); color: var(--ink); animation: 3.4s ease-in-out 0s infinite normal none running acornCardGlow; }\n.acorn-card b { color: var(--_c); font-size: 12px; }\n.acorn-card p { margin: 4px 0px 0px; font-size: 11px; color: var(--muted); }\n@keyframes acornCardGlow { \n  0%, 100% { box-shadow: 0 0 0 1px var(--line); }\n  50% { box-shadow: 0 0 16px rgba(var(--_rgb),.4); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-checkbox-warn",
+      "name": "Checkbox · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-checkbox",
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input.",
+      "classes": [
+        "acorn-root",
+        "acorn-check"
+      ],
+      "keyframes": [
+        "acornCheckIn"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-check\" style=\"--_c:var(--warn)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-check\" style=\"--_c:var(--warn)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-check { position: relative; width: 22px; height: 22px; border-radius: 6px; background: var(--_c); display: grid; place-items: center; }\n.acorn-check::after { content: \"✓\"; color: rgb(255, 255, 255); font-size: 14px; font-weight: 900; animation: 2.4s ease-in-out 0s infinite normal none running acornCheckIn; }\n@keyframes acornCheckIn { \n  0%, 20% { clip-path: inset(0px 100% 0px 0px); }\n  60%, 100% { clip-path: inset(0px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-slider-warn",
+      "name": "Range Slider · Warning",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-slider",
+      "description": "A track with a token thumb that travels along it. The system's range input.",
+      "classes": [
+        "acorn-root",
+        "acorn-slider"
+      ],
+      "keyframes": [
+        "acornSliderThumb"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-slider\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-slider\" style=\"--_c:var(--warn);--_rgb:var(--warn-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-slider { position: relative; width: 150px; height: 6px; border-radius: 999px; background: rgba(var(--_rgb),.2); }\n.acorn-slider::before { content: \"\"; position: absolute; top: -5px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.6); animation: 3s ease-in-out 0s infinite normal none running acornSliderThumb; }\n@keyframes acornSliderThumb { \n  0%, 100% { left: 2px; }\n  50% { left: calc(100% - 16px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-button-neg",
+      "name": "Pill Button · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-button",
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action.",
+      "classes": [
+        "acorn-root",
+        "acorn-btn"
+      ],
+      "keyframes": [
+        "acornBtnPulse"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><button class=\"acorn-btn\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\">Danger</button></div>",
+      "dataSnip": "<button class=\"acorn-btn\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\">Danger</button>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: var(--acorn-radius,999px); background: var(--_c); color: rgb(255, 255, 255); font-weight: 700; border: 0px; animation: 2.4s ease-in-out 0s infinite normal none running acornBtnPulse; }\n@keyframes acornBtnPulse { \n  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--_rgb),.5); }\n  50% { box-shadow: 0 0 0 6px rgba(var(--_rgb),0); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-toggle-neg",
+      "name": "Switch Toggle · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-toggle",
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control.",
+      "classes": [
+        "acorn-root",
+        "acorn-toggle"
+      ],
+      "keyframes": [
+        "acornTgKnob"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-toggle\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-toggle\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-toggle { position: relative; width: 44px; height: 24px; border-radius: 999px; background: rgba(var(--_rgb),.28); border: 1px solid rgba(var(--_rgb),.5); }\n.acorn-toggle::after { content: \"\"; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.7); animation: 2.6s ease-in-out 0s infinite normal none running acornTgKnob; }\n@keyframes acornTgKnob { \n  0%, 100% { left: 2px; }\n  50% { left: 20px; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-chip-neg",
+      "name": "Status Chip · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chip",
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists.",
+      "classes": [
+        "acorn-root",
+        "acorn-chip"
+      ],
+      "keyframes": [
+        "acornChipShine"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-chip\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\">Danger</span></div>",
+      "dataSnip": "<span class=\"acorn-chip\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\">Danger</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-chip { position: relative; overflow: hidden; display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 999px; background: rgba(var(--_rgb),.16); border: 1px solid rgba(var(--_rgb),.4); color: var(--_c); font-size: 12px; font-weight: 700; }\n.acorn-chip::after { content: \"\"; position: absolute; inset: 0px; background-image: ; background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-size: 250% 100%; animation: 3s linear 0s infinite normal none running acornChipShine; pointer-events: none; }\n@keyframes acornChipShine { \n  0% { background-position: -160% 0px; }\n  60%, 100% { background-position: 260% 0px; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-menu-neg",
+      "name": "Dropdown Menu · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-menu",
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu.",
+      "classes": [
+        "acorn-root",
+        "acorn-menu",
+        "acorn-mi",
+        "acorn-sel"
+      ],
+      "keyframes": [
+        "acornMenuSel"
+      ],
+      "params": {},
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-menu\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"><div class=\"acorn-mi acorn-sel\">Danger</div><div class=\"acorn-mi\">Duplicate</div><div class=\"acorn-mi\">Share…</div></div></div>",
+      "dataSnip": "<div class=\"acorn-menu\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"><div class=\"acorn-mi acorn-sel\">Danger</div><div class=\"acorn-mi\">Duplicate</div><div class=\"acorn-mi\">Share…</div></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-menu { min-width: 150px; padding: 6px; border-radius: var(--acorn-radius,12px); background: var(--panel2); border: 1px solid var(--line); }\n.acorn-menu .acorn-mi { padding: 7px 10px; border-radius: 8px; color: var(--ink); font-size: 12px; }\n.acorn-menu .acorn-sel { color: var(--_c); animation: 2.8s ease-in-out 0s infinite normal none running acornMenuSel; }\n@keyframes acornMenuSel { \n  0%, 100% { background: rgba(var(--_rgb),.12); }\n  50% { background: rgba(var(--_rgb),.26); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-notification-neg",
+      "name": "Toast Notification · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-notification",
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert.",
+      "classes": [
+        "acorn-root",
+        "acorn-toast"
+      ],
+      "keyframes": [
+        "acornNotifIn"
+      ],
+      "params": {},
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-toast\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\">Danger — saved</div></div>",
+      "dataSnip": "<div class=\"acorn-toast\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\">Danger — saved</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-toast { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; background: var(--panel2); border-top-color: ; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-left: 3px solid var(--_c); color: var(--ink); font-size: 12px; animation: 3s ease-in-out 0s infinite normal none running acornNotifIn; }\n.acorn-toast::before { content: \"\"; width: 8px; height: 8px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.8); }\n@keyframes acornNotifIn { \n  0%, 100% { transform: translateX(-6px); opacity: 0.75; }\n  50% { transform: translateX(0px); opacity: 1; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-callout-neg",
+      "name": "Callout Banner · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-callout",
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline.",
+      "classes": [
+        "acorn-root",
+        "acorn-callout"
+      ],
+      "keyframes": [
+        "acornCalloutEdge"
+      ],
+      "params": {},
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-callout\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"><b>Danger:</b> review the changes</div></div>",
+      "dataSnip": "<div class=\"acorn-callout\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"><b>Danger:</b> review the changes</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-callout { position: relative; overflow: hidden; padding: 10px 14px; border-radius: 10px; background: rgba(var(--_rgb),.1); border: 1px solid rgba(var(--_rgb),.35); color: var(--ink); font-size: 12px; }\n.acorn-callout::after { content: \"\"; position: absolute; top: 0px; left: 0px; height: 2px; width: 60%; background: linear-gradient(90deg,transparent,var(--_c),transparent); animation: 2.6s linear 0s infinite normal none running acornCalloutEdge; pointer-events: none; }\n@keyframes acornCalloutEdge { \n  0% { transform: translateX(-120%); }\n  100% { transform: translateX(120%); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-chart-neg",
+      "name": "Mini Bar Chart · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chart",
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-chart"
+      ],
+      "keyframes": [
+        "acornBarGrow"
+      ],
+      "params": {},
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-chart\" style=\"--_c:var(--neg)\"><i></i><i></i><i></i><i></i></div></div>",
+      "dataSnip": "<div class=\"acorn-chart\" style=\"--_c:var(--neg)\"><i></i><i></i><i></i><i></i></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-chart { display: flex; align-items: flex-end; gap: 5px; height: 44px; padding: 6px 8px; border-radius: 10px; background: var(--panel2); border: 1px solid var(--line); }\n.acorn-chart i { flex: 1 1 0%; background: var(--_c); border-radius: 3px 3px 0px 0px; transform-origin: center bottom; animation: 2.4s ease-in-out 0s infinite normal none running acornBarGrow; }\n.acorn-chart i:nth-child(2) { animation-delay: 0.2s; }\n.acorn-chart i:nth-child(3) { animation-delay: 0.4s; }\n.acorn-chart i:nth-child(4) { animation-delay: 0.6s; }\n@keyframes acornBarGrow { \n  0% { transform: scaleY(0.25); }\n  50% { transform: scaleY(1); }\n  100% { transform: scaleY(0.25); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-input-neg",
+      "name": "Text Field · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-input",
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field.",
+      "classes": [
+        "acorn-root",
+        "acorn-field",
+        "acorn-caret"
+      ],
+      "keyframes": [
+        "step-end",
+        "acornInputCaret"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-field\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\">Danger<span class=\"acorn-caret\"></span></div></div>",
+      "dataSnip": "<div class=\"acorn-field\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\">Danger<span class=\"acorn-caret\"></span></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-field { display: inline-flex; align-items: center; gap: 2px; min-width: 150px; padding: 8px 11px; border-radius: 10px; background: var(--panel); border: 1px solid var(--_c); box-shadow: 0 0 0 3px rgba(var(--_rgb),.18); color: var(--ink); font-size: 12px; }\n.acorn-field .acorn-caret { width: 1.5px; height: 14px; background: var(--_c); animation: 1.1s step-end 0s infinite normal none running acornInputCaret; }\n@keyframes acornInputCaret { \n  0%, 49% { opacity: 1; }\n  50%, 100% { opacity: 0; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-progress-neg",
+      "name": "Progress Bar · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-progress",
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-prog"
+      ],
+      "keyframes": [
+        "acornProg"
+      ],
+      "params": {},
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-prog\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"><i></i></div></div>",
+      "dataSnip": "<div class=\"acorn-prog\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"><i></i></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-prog { width: 150px; height: 8px; border-radius: 999px; background: rgba(var(--_rgb),.18); overflow: hidden; }\n.acorn-prog i { display: block; height: 100%; border-radius: inherit; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.6); animation: 3s ease-in-out 0s infinite normal none running acornProg; }\n@keyframes acornProg { \n  0% { width: 8%; }\n  80%, 100% { width: 96%; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-avatar-neg",
+      "name": "Avatar Ring · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-avatar",
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object.",
+      "classes": [
+        "acorn-root",
+        "acorn-avatar"
+      ],
+      "keyframes": [
+        "acornAvRing"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-avatar\" style=\"--_c:var(--neg)\">D</div></div>",
+      "dataSnip": "<div class=\"acorn-avatar\" style=\"--_c:var(--neg)\">D</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-avatar { position: relative; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--panel2); color: var(--ink); font-weight: 800; }\n.acorn-avatar::before { content: \"\"; position: absolute; inset: -3px; border-radius: 50%; background: conic-gradient(from 0deg,var(--_c),transparent 55%,var(--_c)); mask: radial-gradient(farthest-side, transparent calc(100% - 3px), rgb(0, 0, 0) calc(100% - 3px)); animation: 3.4s linear 0s infinite normal none running acornAvRing; }\n@keyframes acornAvRing { \n  100% { transform: rotate(1turn); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-badge-neg",
+      "name": "Count Badge · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-badge",
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object.",
+      "classes": [
+        "acorn-root",
+        "acorn-badge"
+      ],
+      "keyframes": [
+        "acornBadgePop"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-badge\" style=\"--_c:var(--neg)\">9</span></div>",
+      "dataSnip": "<span class=\"acorn-badge\" style=\"--_c:var(--neg)\">9</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0px 6px; border-radius: 999px; background: var(--_c); color: rgb(255, 255, 255); font-size: 11px; font-weight: 800; animation: 2s ease-in-out 0s infinite normal none running acornBadgePop; }\n@keyframes acornBadgePop { \n  0%, 100% { transform: scale(1); }\n  30% { transform: scale(1.25); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-tab-neg",
+      "name": "Segmented Tabs · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tab",
+      "description": "A pill-track segmented control with a token active indicator that slides between segments.",
+      "classes": [
+        "acorn-root",
+        "acorn-tabs"
+      ],
+      "keyframes": [
+        "acornTabSlide"
+      ],
+      "params": {},
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-tabs\" style=\"--_rgb:var(--neg-rgb)\"><span>On</span><span>Off</span></div></div>",
+      "dataSnip": "<div class=\"acorn-tabs\" style=\"--_rgb:var(--neg-rgb)\"><span>On</span><span>Off</span></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-tabs { position: relative; display: inline-flex; padding: 3px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--line); }\n.acorn-tabs span { position: relative; z-index: 1; padding: 5px 14px; font-size: 12px; color: var(--ink); }\n.acorn-tabs::before { content: \"\"; position: absolute; top: 3px; bottom: 3px; width: calc(50% - 3px); left: 2px; border-radius: 999px; background: rgba(var(--_rgb),.9); animation: 3.2s ease-in-out 0s infinite normal none running acornTabSlide; }\n@keyframes acornTabSlide { \n  0%, 100% { left: 2px; }\n  50% { left: calc(50% + 1px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-tooltip-neg",
+      "name": "Tooltip · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tooltip",
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-tip"
+      ],
+      "keyframes": [
+        "acornTipFloat"
+      ],
+      "params": {},
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-tip\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\">Danger</span></div>",
+      "dataSnip": "<span class=\"acorn-tip\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\">Danger</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-tip { display: inline-block; padding: 6px 10px; border-radius: 8px; background: var(--panel2); border: 1px solid var(--_c); color: var(--ink); font-size: 11px; box-shadow: 0 4px 14px rgba(var(--_rgb),.3); animation: 2.6s ease-in-out 0s infinite normal none running acornTipFloat; }\n@keyframes acornTipFloat { \n  0%, 100% { transform: translateY(0px); }\n  50% { transform: translateY(-4px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-spinner-neg",
+      "name": "Loading Spinner · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-spinner",
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator.",
+      "classes": [
+        "acorn-root",
+        "acorn-spinner"
+      ],
+      "keyframes": [
+        "acornSpin"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-spinner\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-spinner\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-spinner { width: 26px; height: 26px; border-radius: 50%; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-left-color: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-top-color: var(--_c); animation: 1s linear 0s infinite normal none running acornSpin; }\n@keyframes acornSpin { \n  100% { transform: rotate(1turn); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-card-neg",
+      "name": "Feature Card · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-card",
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container.",
+      "classes": [
+        "acorn-root",
+        "acorn-card"
+      ],
+      "keyframes": [
+        "acornCardGlow"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-card\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"><b>Danger</b><p>Design-system card surface.</p></div></div>",
+      "dataSnip": "<div class=\"acorn-card\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"><b>Danger</b><p>Design-system card surface.</p></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-card { width: 150px; padding: 12px; border-radius: var(--acorn-radius,12px); background: var(--card); color: var(--ink); animation: 3.4s ease-in-out 0s infinite normal none running acornCardGlow; }\n.acorn-card b { color: var(--_c); font-size: 12px; }\n.acorn-card p { margin: 4px 0px 0px; font-size: 11px; color: var(--muted); }\n@keyframes acornCardGlow { \n  0%, 100% { box-shadow: 0 0 0 1px var(--line); }\n  50% { box-shadow: 0 0 16px rgba(var(--_rgb),.4); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-checkbox-neg",
+      "name": "Checkbox · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-checkbox",
+      "description": "A token-filled checkbox whose tick draws in on a loop. The system's boolean input.",
+      "classes": [
+        "acorn-root",
+        "acorn-check"
+      ],
+      "keyframes": [
+        "acornCheckIn"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-check\" style=\"--_c:var(--neg)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-check\" style=\"--_c:var(--neg)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-check { position: relative; width: 22px; height: 22px; border-radius: 6px; background: var(--_c); display: grid; place-items: center; }\n.acorn-check::after { content: \"✓\"; color: rgb(255, 255, 255); font-size: 14px; font-weight: 900; animation: 2.4s ease-in-out 0s infinite normal none running acornCheckIn; }\n@keyframes acornCheckIn { \n  0%, 20% { clip-path: inset(0px 100% 0px 0px); }\n  60%, 100% { clip-path: inset(0px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-slider-neg",
+      "name": "Range Slider · Danger",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-slider",
+      "description": "A track with a token thumb that travels along it. The system's range input.",
+      "classes": [
+        "acorn-root",
+        "acorn-slider"
+      ],
+      "keyframes": [
+        "acornSliderThumb"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-slider\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-slider\" style=\"--_c:var(--neg);--_rgb:var(--neg-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-slider { position: relative; width: 150px; height: 6px; border-radius: 999px; background: rgba(var(--_rgb),.2); }\n.acorn-slider::before { content: \"\"; position: absolute; top: -5px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.6); animation: 3s ease-in-out 0s infinite normal none running acornSliderThumb; }\n@keyframes acornSliderThumb { \n  0%, 100% { left: 2px; }\n  50% { left: calc(100% - 16px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-button-crit",
+      "name": "Pill Button · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-button",
+      "description": "A rounded token-filled button with a soft pulsing glow — the system's primary call-to-action.",
+      "classes": [
+        "acorn-root",
+        "acorn-btn"
+      ],
+      "keyframes": [
+        "acornBtnPulse"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "click auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><button class=\"acorn-btn\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\">Critical</button></div>",
+      "dataSnip": "<button class=\"acorn-btn\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\">Critical</button>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px; border-radius: var(--acorn-radius,999px); background: var(--_c); color: rgb(255, 255, 255); font-weight: 700; border: 0px; animation: 2.4s ease-in-out 0s infinite normal none running acornBtnPulse; }\n@keyframes acornBtnPulse { \n  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--_rgb),.5); }\n  50% { box-shadow: 0 0 0 6px rgba(var(--_rgb),0); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-toggle-crit",
+      "name": "Switch Toggle · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-toggle",
+      "description": "An on/off switch whose knob glides and glows in the token color; a settings-row control.",
+      "classes": [
+        "acorn-root",
+        "acorn-toggle"
+      ],
+      "keyframes": [
+        "acornTgKnob"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-toggle\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-toggle\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-toggle { position: relative; width: 44px; height: 24px; border-radius: 999px; background: rgba(var(--_rgb),.28); border: 1px solid rgba(var(--_rgb),.5); }\n.acorn-toggle::after { content: \"\"; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.7); animation: 2.6s ease-in-out 0s infinite normal none running acornTgKnob; }\n@keyframes acornTgKnob { \n  0%, 100% { left: 2px; }\n  50% { left: 20px; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-chip-crit",
+      "name": "Status Chip · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chip",
+      "description": "A compact filter/label chip with a token tint and a sliding sheen. Used in toolbars and lists.",
+      "classes": [
+        "acorn-root",
+        "acorn-chip"
+      ],
+      "keyframes": [
+        "acornChipShine"
+      ],
+      "params": {},
+      "componentType": "button",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-chip\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\">Critical</span></div>",
+      "dataSnip": "<span class=\"acorn-chip\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\">Critical</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-chip { position: relative; overflow: hidden; display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 999px; background: rgba(var(--_rgb),.16); border: 1px solid rgba(var(--_rgb),.4); color: var(--_c); font-size: 12px; font-weight: 700; }\n.acorn-chip::after { content: \"\"; position: absolute; inset: 0px; background-image: ; background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-size: 250% 100%; animation: 3s linear 0s infinite normal none running acornChipShine; pointer-events: none; }\n@keyframes acornChipShine { \n  0% { background-position: -160% 0px; }\n  60%, 100% { background-position: 260% 0px; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-menu-crit",
+      "name": "Dropdown Menu · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-menu",
+      "description": "A surface menu with a highlighted selected row that breathes in the token tint. The system's standard menu.",
+      "classes": [
+        "acorn-root",
+        "acorn-menu",
+        "acorn-mi",
+        "acorn-sel"
+      ],
+      "keyframes": [
+        "acornMenuSel"
+      ],
+      "params": {},
+      "componentType": "menu",
+      "interaction": "hover click",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-menu\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"><div class=\"acorn-mi acorn-sel\">Critical</div><div class=\"acorn-mi\">Duplicate</div><div class=\"acorn-mi\">Share…</div></div></div>",
+      "dataSnip": "<div class=\"acorn-menu\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"><div class=\"acorn-mi acorn-sel\">Critical</div><div class=\"acorn-mi\">Duplicate</div><div class=\"acorn-mi\">Share…</div></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-menu { min-width: 150px; padding: 6px; border-radius: var(--acorn-radius,12px); background: var(--panel2); border: 1px solid var(--line); }\n.acorn-menu .acorn-mi { padding: 7px 10px; border-radius: 8px; color: var(--ink); font-size: 12px; }\n.acorn-menu .acorn-sel { color: var(--_c); animation: 2.8s ease-in-out 0s infinite normal none running acornMenuSel; }\n@keyframes acornMenuSel { \n  0%, 100% { background: rgba(var(--_rgb),.12); }\n  50% { background: rgba(var(--_rgb),.26); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-notification-crit",
+      "name": "Toast Notification · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-notification",
+      "description": "A dismissible toast with a token accent bar that slides in on a loop. The system's inline alert.",
+      "classes": [
+        "acorn-root",
+        "acorn-toast"
+      ],
+      "keyframes": [
+        "acornNotifIn"
+      ],
+      "params": {},
+      "componentType": "notification",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-toast\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\">Critical — saved</div></div>",
+      "dataSnip": "<div class=\"acorn-toast\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\">Critical — saved</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-toast { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; background: var(--panel2); border-top-color: ; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-left: 3px solid var(--_c); color: var(--ink); font-size: 12px; animation: 3s ease-in-out 0s infinite normal none running acornNotifIn; }\n.acorn-toast::before { content: \"\"; width: 8px; height: 8px; border-radius: 50%; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.8); }\n@keyframes acornNotifIn { \n  0%, 100% { transform: translateX(-6px); opacity: 0.75; }\n  50% { transform: translateX(0px); opacity: 1; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-callout-crit",
+      "name": "Callout Banner · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-callout",
+      "description": "An emphasis banner with a token-tinted fill and a scanning edge highlight. Draws attention inline.",
+      "classes": [
+        "acorn-root",
+        "acorn-callout"
+      ],
+      "keyframes": [
+        "acornCalloutEdge"
+      ],
+      "params": {},
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-callout\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"><b>Critical:</b> review the changes</div></div>",
+      "dataSnip": "<div class=\"acorn-callout\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"><b>Critical:</b> review the changes</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-callout { position: relative; overflow: hidden; padding: 10px 14px; border-radius: 10px; background: rgba(var(--_rgb),.1); border: 1px solid rgba(var(--_rgb),.35); color: var(--ink); font-size: 12px; }\n.acorn-callout::after { content: \"\"; position: absolute; top: 0px; left: 0px; height: 2px; width: 60%; background: linear-gradient(90deg,transparent,var(--_c),transparent); animation: 2.6s linear 0s infinite normal none running acornCalloutEdge; pointer-events: none; }\n@keyframes acornCalloutEdge { \n  0% { transform: translateX(-120%); }\n  100% { transform: translateX(120%); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-chart-crit",
+      "name": "Mini Bar Chart · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-chart",
+      "description": "A tiny token-colored bar chart whose bars rise on a loop. A KPI/trend glance for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-chart"
+      ],
+      "keyframes": [
+        "acornBarGrow"
+      ],
+      "params": {},
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-chart\" style=\"--_c:var(--crit)\"><i></i><i></i><i></i><i></i></div></div>",
+      "dataSnip": "<div class=\"acorn-chart\" style=\"--_c:var(--crit)\"><i></i><i></i><i></i><i></i></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-chart { display: flex; align-items: flex-end; gap: 5px; height: 44px; padding: 6px 8px; border-radius: 10px; background: var(--panel2); border: 1px solid var(--line); }\n.acorn-chart i { flex: 1 1 0%; background: var(--_c); border-radius: 3px 3px 0px 0px; transform-origin: center bottom; animation: 2.4s ease-in-out 0s infinite normal none running acornBarGrow; }\n.acorn-chart i:nth-child(2) { animation-delay: 0.2s; }\n.acorn-chart i:nth-child(3) { animation-delay: 0.4s; }\n.acorn-chart i:nth-child(4) { animation-delay: 0.6s; }\n@keyframes acornBarGrow { \n  0% { transform: scaleY(0.25); }\n  50% { transform: scaleY(1); }\n  100% { transform: scaleY(0.25); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-input-crit",
+      "name": "Text Field · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-input",
+      "description": "A labeled input with a token focus ring and a blinking caret. The system's form field.",
+      "classes": [
+        "acorn-root",
+        "acorn-field",
+        "acorn-caret"
+      ],
+      "keyframes": [
+        "step-end",
+        "acornInputCaret"
+      ],
+      "params": {},
+      "componentType": "input",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-field\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\">Critical<span class=\"acorn-caret\"></span></div></div>",
+      "dataSnip": "<div class=\"acorn-field\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\">Critical<span class=\"acorn-caret\"></span></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-field { display: inline-flex; align-items: center; gap: 2px; min-width: 150px; padding: 8px 11px; border-radius: 10px; background: var(--panel); border: 1px solid var(--_c); box-shadow: 0 0 0 3px rgba(var(--_rgb),.18); color: var(--ink); font-size: 12px; }\n.acorn-field .acorn-caret { width: 1.5px; height: 14px; background: var(--_c); animation: 1.1s step-end 0s infinite normal none running acornInputCaret; }\n@keyframes acornInputCaret { \n  0%, 49% { opacity: 1; }\n  50%, 100% { opacity: 0; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-progress-crit",
+      "name": "Progress Bar · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-progress",
+      "description": "A track with a token fill that advances on a loop. Determinate-style progress for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-prog"
+      ],
+      "keyframes": [
+        "acornProg"
+      ],
+      "params": {},
+      "componentType": "chart",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-prog\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"><i></i></div></div>",
+      "dataSnip": "<div class=\"acorn-prog\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"><i></i></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-prog { width: 150px; height: 8px; border-radius: 999px; background: rgba(var(--_rgb),.18); overflow: hidden; }\n.acorn-prog i { display: block; height: 100%; border-radius: inherit; background: var(--_c); box-shadow: 0 0 8px rgba(var(--_rgb),.6); animation: 3s ease-in-out 0s infinite normal none running acornProg; }\n@keyframes acornProg { \n  0% { width: 8%; }\n  80%, 100% { width: 96%; }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-avatar-crit",
+      "name": "Avatar Ring · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-avatar",
+      "description": "A circular avatar wrapped by a rotating token gradient ring — presence/status object.",
+      "classes": [
+        "acorn-root",
+        "acorn-avatar"
+      ],
+      "keyframes": [
+        "acornAvRing"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-avatar\" style=\"--_c:var(--crit)\">C</div></div>",
+      "dataSnip": "<div class=\"acorn-avatar\" style=\"--_c:var(--crit)\">C</div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-avatar { position: relative; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--panel2); color: var(--ink); font-weight: 800; }\n.acorn-avatar::before { content: \"\"; position: absolute; inset: -3px; border-radius: 50%; background: conic-gradient(from 0deg,var(--_c),transparent 55%,var(--_c)); mask: radial-gradient(farthest-side, transparent calc(100% - 3px), rgb(0, 0, 0) calc(100% - 3px)); animation: 3.4s linear 0s infinite normal none running acornAvRing; }\n@keyframes acornAvRing { \n  100% { transform: rotate(1turn); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-badge-crit",
+      "name": "Count Badge · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-badge",
+      "description": "A number badge that pops on a heartbeat, tinted by the token color. Notification counter object.",
+      "classes": [
+        "acorn-root",
+        "acorn-badge"
+      ],
+      "keyframes": [
+        "acornBadgePop"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-badge\" style=\"--_c:var(--crit)\">9</span></div>",
+      "dataSnip": "<span class=\"acorn-badge\" style=\"--_c:var(--crit)\">9</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0px 6px; border-radius: 999px; background: var(--_c); color: rgb(255, 255, 255); font-size: 11px; font-weight: 800; animation: 2s ease-in-out 0s infinite normal none running acornBadgePop; }\n@keyframes acornBadgePop { \n  0%, 100% { transform: scale(1); }\n  30% { transform: scale(1.25); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-tab-crit",
+      "name": "Segmented Tabs · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tab",
+      "description": "A pill-track segmented control with a token active indicator that slides between segments.",
+      "classes": [
+        "acorn-root",
+        "acorn-tabs"
+      ],
+      "keyframes": [
+        "acornTabSlide"
+      ],
+      "params": {},
+      "componentType": "segmented-control",
+      "interaction": "toggle auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-tabs\" style=\"--_rgb:var(--crit-rgb)\"><span>On</span><span>Off</span></div></div>",
+      "dataSnip": "<div class=\"acorn-tabs\" style=\"--_rgb:var(--crit-rgb)\"><span>On</span><span>Off</span></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-tabs { position: relative; display: inline-flex; padding: 3px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--line); }\n.acorn-tabs span { position: relative; z-index: 1; padding: 5px 14px; font-size: 12px; color: var(--ink); }\n.acorn-tabs::before { content: \"\"; position: absolute; top: 3px; bottom: 3px; width: calc(50% - 3px); left: 2px; border-radius: 999px; background: rgba(var(--_rgb),.9); animation: 3.2s ease-in-out 0s infinite normal none running acornTabSlide; }\n@keyframes acornTabSlide { \n  0%, 100% { left: 2px; }\n  50% { left: calc(50% + 1px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-tooltip-crit",
+      "name": "Tooltip · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-tooltip",
+      "description": "A small floating tooltip with a token border that bobs gently. Contextual hint for the system.",
+      "classes": [
+        "acorn-root",
+        "acorn-tip"
+      ],
+      "keyframes": [
+        "acornTipFloat"
+      ],
+      "params": {},
+      "componentType": "callout",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><span class=\"acorn-tip\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\">Critical</span></div>",
+      "dataSnip": "<span class=\"acorn-tip\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\">Critical</span>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-tip { display: inline-block; padding: 6px 10px; border-radius: 8px; background: var(--panel2); border: 1px solid var(--_c); color: var(--ink); font-size: 11px; box-shadow: 0 4px 14px rgba(var(--_rgb),.3); animation: 2.6s ease-in-out 0s infinite normal none running acornTipFloat; }\n@keyframes acornTipFloat { \n  0%, 100% { transform: translateY(0px); }\n  50% { transform: translateY(-4px); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-spinner-crit",
+      "name": "Loading Spinner · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-spinner",
+      "description": "A token-colored arc spinner. The system's indeterminate loading indicator.",
+      "classes": [
+        "acorn-root",
+        "acorn-spinner"
+      ],
+      "keyframes": [
+        "acornSpin"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-spinner\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"></div></div>",
+      "dataSnip": "<div class=\"acorn-spinner\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-spinner { width: 26px; height: 26px; border-radius: 50%; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-left-color: ; border-left-style: ; border-left-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-top-color: var(--_c); animation: 1s linear 0s infinite normal none running acornSpin; }\n@keyframes acornSpin { \n  100% { transform: rotate(1turn); }\n}",
+      "galleryTitle": "Spectrums"
+    },
+    {
+      "id": "acorn-card-crit",
+      "name": "Feature Card · Critical",
+      "gallery": "spectrums",
+      "category": "Firefox Acorn",
+      "ref": ".acorn-card",
+      "description": "A surface card with a token accent header and a slow edge glow. The system's content container.",
+      "classes": [
+        "acorn-root",
+        "acorn-card"
+      ],
+      "keyframes": [
+        "acornCardGlow"
+      ],
+      "params": {},
+      "componentType": "object",
+      "interaction": "auto-play",
+      "spectrum": "acorn",
+      "tags": [
+        "spectrums",
+        "acorn",
+        "animated",
+        "new"
+      ],
+      "usableAsBackground": false,
+      "needsJs": null,
+      "selfContained": false,
+      "isNew": true,
+      "isFixed": false,
+      "html": "<div class=\"acorn-root\"><div class=\"acorn-card\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"><b>Critical</b><p>Design-system card surface.</p></div></div>",
+      "dataSnip": "<div class=\"acorn-card\" style=\"--_c:var(--crit);--_rgb:var(--crit-rgb)\"><b>Critical</b><p>Design-system card surface.</p></div>",
+      "css": ".acorn-root { --acorn-radius: 8px; --acorn-font: Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif; font-family: var(--acorn-font,inherit); }\n.acorn-card { width: 150px; padding: 12px; border-radius: var(--acorn-radius,12px); background: var(--card); color: var(--ink); animation: 3.4s ease-in-out 0s infinite normal none running acornCardGlow; }\n.acorn-card b { color: var(--_c); font-size: 12px; }\n.acorn-card p { margin: 4px 0px 0px; font-size: 11px; color: var(--muted); }\n@keyframes acornCardGlow { \n  0%, 100% { box-shadow: 0 0 0 1px var(--line); }\n  50% { box-shadow: 0 0 16px rgba(var(--_rgb),.4); }\n}",
       "galleryTitle": "Spectrums"
     }
   ]
