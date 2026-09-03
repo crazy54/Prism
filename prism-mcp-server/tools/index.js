@@ -6,7 +6,7 @@
 import { lightEffect } from '../utils/catalog.js';
 import { compose, composeWithTemplate, availableTemplates } from '../utils/compose.js';
 import { validateFacet, validateComposition } from '../utils/validate.js';
-import { THEMES, THEME_IDS, TOKEN_META, BASE_TOKENS, getTheme, usesTokens, themeRootCss, isThemeSensitive } from '../utils/themes.js';
+import { THEMES, THEME_IDS, TOKEN_META, BASE_TOKENS, getTheme, usesTokens, themeRootCss, isThemeSensitive, themeIdList, themesSummary } from '../utils/themes.js';
 import { CollectionError, toExportSchema } from '../utils/collections.js';
 
 export class ToolError extends Error {
@@ -413,18 +413,20 @@ export function buildTools() {
         const tokens = store.tokens();
         return {
           tokensCss: tokens ? tokens.css : null,
-          note: tokens ? tokens.note : null,
+          tokensNote: tokens ? tokens.note : null,
           semanticTokens: ['--accent', '--info', '--pos', '--neg', '--warn', '--crit'],
           surfaceTokens: ['--bg', '--panel', '--panel2', '--card', '--line', '--ink', '--muted', '--dim'],
           recolor: 'Set --c and --c-rgb (or add a c-* class like c-pos) on the effect element to recolor it.',
-          builtInThemes: ['cloudscape-dark', 'cloudscape-light'],
-          note: 'Prism ships in the AWS Cloudscape design language with two color modes: cloudscape-dark (default) and cloudscape-light. Both override these same token names on :root.',
+          // Derived from the theme registry (utils/themes.js) so scaffolded packs
+          // (F6) surface here automatically — no hand-editing this list.
+          builtInThemes: THEME_IDS,
+          note: themesSummary(),
         };
       },
     },
     {
       name: 'get_theme_palette',
-      description: 'Return the token palette for one theme (or all themes). Prism themes are pure :root token overrides applied over identical component HTML/CSS, so a palette fully defines how every component looks in that theme. Each theme returns its complete token map, the overrides vs the Cloudscape Dark base, mode (light/dark), and a ready-to-paste :root{…} CSS block. Themes: cloudscape-dark (default), cloudscape-light.',
+      description: 'Return the token palette for one theme (or all themes). Prism themes are pure :root token overrides applied over identical component HTML/CSS, so a palette fully defines how every component looks in that theme. Each theme returns its complete token map, the overrides vs the Cloudscape Dark base, mode (light/dark), and a ready-to-paste :root{…} CSS block. Themes: ' + themeIdList() + '.',
       inputSchema: {
         type: 'object',
         properties: {

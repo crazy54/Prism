@@ -8,13 +8,14 @@ import { spawn } from 'node:child_process';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mkdirSync } from 'node:fs';
+import { resolveChrome } from './_chrome.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const FILE = 'file://' + resolve(HERE, '../Prism.html').replace(/\\/g, '/');
 const SHOTS = resolve(HERE, 'shots');
 mkdirSync(SHOTS, { recursive: true });
 
-const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const CHROME = resolveChrome();
 const THEME = process.argv[2] || 'cloudscape-dark';
 const PAGE = process.argv[3] || 'charts';
 const W = parseInt(process.argv[4] || '1440', 10);

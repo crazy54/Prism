@@ -6,7 +6,9 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const HTML = resolve(HERE, '../Prism.html');
+// PRISM_HTML lets tooling embed into an alternate file (e.g. a temp copy with staged
+// additions) for verification; defaults to the repo's Prism.html.
+const HTML = process.env.PRISM_HTML ? resolve(process.env.PRISM_HTML) : resolve(HERE, '../Prism.html');
 const MANIFEST = resolve(HERE, 'manifest.json');
 
 const manifest = JSON.parse(readFileSync(MANIFEST, 'utf8'));
@@ -41,8 +43,11 @@ const BREADCRUMB =
 let html = readFileSync(HTML, 'utf8');
 
 // Idempotent: strip any prior island + breadcrumb before re-inserting.
-html = html.replace(/<!-- ===== PRISM CATALOG · AI START HERE ===== -->[\s\S]*?<!-- ===== \/PRISM CATALOG ===== -->\n?/, '');
-html = html.replace(/<!-- ✦ AI-READABLE:[\s\S]*?-->\n?/, '');
+// Absorb ALL trailing newlines as [\r\n]* (not \n?) — Prism.html uses CRLF, so a
+// \n? / \n* can't consume the leading \r and left a \r\n to accumulate one blank
+// line every run. [\r\n]* eats the whole CRLF run; the re-insert re-adds one.
+html = html.replace(/<!-- ===== PRISM CATALOG · AI START HERE ===== -->[\s\S]*?<!-- ===== \/PRISM CATALOG ===== -->[\r\n]*/, '');
+html = html.replace(/<!-- ✦ AI-READABLE:[\s\S]*?-->[\r\n]*/, '');
 
 // Breadcrumb right after <html lang="en">, island right after </title>.
 // Use FUNCTION replacements: a string replacement expands $$, $`, $', $&, $n
