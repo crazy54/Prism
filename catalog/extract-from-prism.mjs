@@ -11,7 +11,7 @@
    Then: node catalog/_embed-catalog.mjs   (embeds manifest into the #prism-catalog island)
    ========================================================================== */
 import { spawn } from 'node:child_process';
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { mkdtempSync } from 'node:fs';
@@ -179,11 +179,46 @@ try {
   await send('Page.navigate', { url: FILE });
   await sleep(2600);
 
-  const all = []; const byGallery = {};
+  const all = []; const byGallery = {}; const failures = [];
+  // Signature of the previously-extracted gallery. If a navigation silently fails the
+  // iframe still holds the PREVIOUS gallery, and extractInPage happily relabels those
+  // tiles with the requested gallery's id prefix. That is exactly how one run wrote 37
+  // "menus" tiles out as spectrums-* ids and dropped 1129 real spectrum facets, with a
+  // clean exit code. Comparing consecutive signatures turns that into a hard failure.
+  let prevSig = null, prevGallery = null;
+  const sigOf = recs => recs.map(r => r.ref + '|' + r.name).join('\n');
+
   for (const g of GALLERIES) {
-    await send('Runtime.evaluate', { expression:
-      `(function(){var a=document.querySelector('a[data-page="${g.gallery}"]');if(a)a.click();})()` });
-    await sleep(3200);
+    // Navigate via the shell's own router. The old path clicked a[data-page="<gallery>"],
+    // but Spectrums has no rail link at all (it is in PAGES; it is not in the rail), so
+    // querySelector returned null and `if(a)a.click()` no-opped in silence.
+    // window.PrismShell.go() is the supported entry point and routes every PAGES id.
+    const nav = await send('Runtime.evaluate', { returnByValue: true, expression:
+      `(function(){
+         try{ if(window.PrismShell&&window.PrismShell.go){ window.PrismShell.go(${JSON.stringify(g.gallery)}); return 'api'; } }catch(e){}
+         var a=document.querySelector('a[data-page=${JSON.stringify(g.gallery)}]');
+         if(a){ a.click(); return 'click'; }
+         return 'none';
+       })()` });
+    if (nav.result.value === 'none') {
+      console.log(g.gallery.padEnd(9), 'ERROR: unroutable (no PrismShell.go, no rail link)');
+      failures.push(g.gallery); continue;
+    }
+
+    // Wait for the frame to settle rather than trusting a flat 3.2s. Spectrums alone is
+    // ~1.2k tiles and keeps rendering well past any fixed sleep, so poll until the tile
+    // count stops growing (two identical non-zero samples) — big galleries can't truncate.
+    const countExpr = `(function(){var f=document.getElementById('gv'),d=f&&f.contentDocument;
+      if(!d||d.readyState==='loading')return -1;return d.querySelectorAll('.tile,.panel').length;})()`;
+    let last = -1, stable = 0;
+    for (let i = 0; i < 100; i++) {          // 100 x 300ms = 30s ceiling
+      await sleep(300);
+      const c = await send('Runtime.evaluate', { expression: countExpr, returnByValue: true });
+      const n = c.result.value;
+      if (n > 0 && n === last) { if (++stable >= 2) break; } else stable = 0;
+      last = n;
+    }
+
     // Run extraction inside the top frame, resolving the iframe document, passing it to the ported fn.
     const expr = `(function(){
       ${EXTRACT_FN}
@@ -194,11 +229,24 @@ try {
     })()`;
     const r = await send('Runtime.evaluate', { expression: expr, returnByValue: true });
     let recs; try { recs = JSON.parse(r.result.value); } catch { recs = { err: 'parse ' + r.result.value?.slice(0, 120) }; }
-    if (recs.err) { console.log(g.gallery.padEnd(9), 'ERROR:', recs.err); continue; }
+    if (recs.err) { console.log(g.gallery.padEnd(9), 'ERROR:', recs.err); failures.push(g.gallery); continue; }
+    if (!recs.length) { console.log(g.gallery.padEnd(9), 'ERROR: 0 effects extracted'); failures.push(g.gallery); continue; }
+    const sig = sigOf(recs);
+    if (sig === prevSig) {
+      console.log(g.gallery.padEnd(9), `ERROR: stale frame — byte-identical to "${prevGallery}" (navigation did not take)`);
+      failures.push(g.gallery); prevSig = sig; prevGallery = g.gallery; continue;
+    }
+    prevSig = sig; prevGallery = g.gallery;
     recs.forEach(x => { x.galleryTitle = g.title; });
     byGallery[g.gallery] = { title: g.title, count: recs.length, effects: recs };
     all.push(...recs);
     console.log(g.gallery.padEnd(9), String(recs.length).padStart(4), 'effects');
+  }
+
+  if (failures.length) {
+    // Throw rather than process.exit() so the finally block still kills Chrome.
+    console.error('\nRefusing to write a partial catalog. manifest.json / index.json are unchanged.');
+    throw new Error(`${failures.length} of ${GALLERIES.length} galleries did not extract: ${failures.join(', ')}`);
   }
 
   // Reuse the same tokens + usage blocks as the original manifest (kept identical).
@@ -229,13 +277,40 @@ try {
     count: all.length,
     effects: all,
   };
+  // Last line of defence before overwriting the catalog. The #prism-catalog island in
+  // Prism.html is the source of truth, so a healthy extraction can only ever match or
+  // exceed its effect count (new facets get spliced into Prism.html first, then
+  // extracted). A drop means a gallery came back short — set PRISM_ALLOW_SHRINK=1 to
+  // write anyway when facets were genuinely deleted on purpose.
+  const islandCount = (() => {
+    try {
+      const html = readFileSync(TARGET, 'utf8');
+      const open = '<script type="application/json" id="prism-catalog">';
+      const s = html.indexOf(open); if (s < 0) return null;
+      const raw = html.slice(s + open.length, html.indexOf('</script', s + open.length))
+        .split('<\\/script').join('</script');
+      const c = JSON.parse(raw);
+      return Array.isArray(c.effects) ? c.effects.length : (c.count ?? null);
+    } catch { return null; }
+  })();
+  if (islandCount != null && all.length < islandCount && !process.env.PRISM_ALLOW_SHRINK) {
+    console.error('\nRefusing to write. manifest.json / index.json are unchanged.');
+    console.error('Per-gallery counts above show which one came back short.'
+      + ' Set PRISM_ALLOW_SHRINK=1 only if facets were deliberately removed.');
+    throw new Error(`extracted ${all.length} effects but the Prism.html island has ${islandCount}`
+      + ` — ${islandCount - all.length} would be lost`);
+  }
+
   mkdirSync(OUT, { recursive: true });
   writeFileSync(OUT + '/manifest.json', JSON.stringify(manifest, null, 2));
   const index = all.map(r => ({ id: r.id, name: r.name, gallery: r.gallery, category: r.category, ref: r.ref, classes: r.classes, params: Object.keys(r.params), tags: r.tags, componentType: r.componentType, interaction: r.interaction, spectrum: r.spectrum, usableAsBackground: r.usableAsBackground, needsJs: r.needsJs, isNew: r.isNew, isFixed: r.isFixed, description: r.description }));
   writeFileSync(OUT + '/index.json', JSON.stringify({ count: index.length, effects: index }, null, 2));
   console.log(`\nTOTAL ${all.length} effects → manifest.json (+ index.json)`);
 } catch (e) {
+  // Exit non-zero: this used to fall through to a 0 status, so a crashed extraction
+  // looked like a success to anything chaining `&& node catalog/_embed-catalog.mjs`.
   console.error('EXTRACT FAILED:', e.message);
+  process.exitCode = 1;
 } finally {
   try { ws && ws.close(); } catch {}
   proc.kill('SIGKILL');
