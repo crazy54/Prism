@@ -78,9 +78,21 @@ function paginate(items, limit, offset) {
   };
 }
 
+const matchScoreCache = new Map();
+
 function matchScore(effect, q) {
   // Simple weighted relevance over id/name/description/tags/category.
   const ql = q.toLowerCase();
+  const cacheKey = [
+    effect.id || '',
+    effect.name || '',
+    effect.description || '',
+    (effect.tags || []).join('\u0000'),
+    effect.category || '',
+    ql,
+  ].join('\u0000');
+  if (matchScoreCache.has(cacheKey)) return matchScoreCache.get(cacheKey);
+
   const terms = ql.split(/\s+/).filter(Boolean);
   let score = 0;
   const hay = {
@@ -100,6 +112,7 @@ function matchScore(effect, q) {
   // exact-phrase bonuses
   if (hay.name === ql) score += 10;
   if (hay.name.includes(ql)) score += 3;
+  matchScoreCache.set(cacheKey, score);
   return score;
 }
 
@@ -113,6 +126,7 @@ function matchScore(effect, q) {
 //   2. There is NO performance/themeCompat field in the catalog, so those spec
 //      facets are intentionally absent rather than faked.
 const INTERACTION_FIX = { tatic: 'static', focu: 'focus', croll: 'scroll' };
+const interactionCache = new Map();
 
 /**
  * Normalize a raw `interaction` value into canonical tokens (may be several).
@@ -122,6 +136,9 @@ const INTERACTION_FIX = { tatic: 'static', focu: 'focus', croll: 'scroll' };
  */
 export function normalizeInteractions(raw) {
   if (raw == null) return [];
+  const key = Array.isArray(raw) ? raw.join('\u0000') : String(raw);
+  if (interactionCache.has(key)) return interactionCache.get(key);
+
   const parts = Array.isArray(raw) ? raw : [raw];
   const seen = new Set();
   for (const part of parts) {
@@ -131,7 +148,9 @@ export function normalizeInteractions(raw) {
       seen.add(INTERACTION_FIX[t] || t);
     }
   }
-  return Array.from(seen);
+  const normalized = Array.from(seen);
+  interactionCache.set(key, normalized);
+  return normalized;
 }
 
 // Multi-value facet dimensions: value(s) extracted per effect. `multi` means an
