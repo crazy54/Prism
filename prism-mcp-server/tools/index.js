@@ -125,6 +125,7 @@ function matchScore(effect, q) {
 //   2. There is NO performance/themeCompat field in the catalog, so those spec
 //      facets are intentionally absent rather than faked.
 const INTERACTION_FIX = { tatic: 'static', focu: 'focus', croll: 'scroll' };
+const interactionCache = new Map();
 
 /**
  * Normalize a raw `interaction` value into canonical tokens (may be several).
