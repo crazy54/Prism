@@ -31,4 +31,7 @@
 @keyframes prism-light-breathe{0%,100%{opacity:.25}50%{opacity:.4}}
 @keyframes prism-flare-breathe{0%,100%{opacity:.72}50%{opacity:1}}
 @keyframes prism-label-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition:none!important}.hero-art *{animation:none!important}.hero-art .input-beam,.hero-art .light-rays,.hero-art .prism-glass,.hero-art .art-label,.hero-art .art-coordinate{opacity:1;transform:none}}
+.site-header .brand img{animation:brand-prism-spin 5s linear infinite;transform-origin:50% 50%}
+[data-motion=paused] .site-header .brand img{animation-play-state:paused}
+@keyframes brand-prism-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;transition:none!important}.hero-art *,.site-header .brand img{animation:none!important}.hero-art .input-beam,.hero-art .light-rays,.hero-art .prism-glass,.hero-art .art-label,.hero-art .art-coordinate{opacity:1;transform:none}}
