@@ -11,7 +11,7 @@ if (output === repo || output === site || repo.startsWith(output + path.sep)) th
 const catalog = await loadCatalogFile(path.join(repo, 'Prism.html'));
 const ids = ['ai-processing-orb', 'charts-kpi-sparkline', 'fx-aurora', 'objects-atom', 'text-gradient-flow-staple', 'lab-scale-in-bounce'];
 const legacy = ':root{--gray:#72869f;--orange:var(--accent);--red:#f85149;--blue:var(--info);--green:var(--pos);--purple:var(--crit)}';
-const base = '*{box-sizing:border-box}body{margin:0;min-height:220px;display:flex;align-items:center;justify-content:center;padding:22px;font-family:system-ui,sans-serif;color:var(--ink);background:transparent}.panel{min-width:215px}.ptitle{padding-left:0!important}.atom{width:145px;height:145px}';
+const base = ':root{color-scheme:dark;--preview-bg:#0a0c12}*{box-sizing:border-box}html,body{background:var(--preview-bg)}body{margin:0;min-height:220px;display:flex;align-items:center;justify-content:center;padding:22px;font-family:system-ui,sans-serif;color:var(--ink)}.panel{min-width:215px}.ptitle{padding-left:0!important}.atom{width:145px;height:145px}';
 const motion = '@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition:none!important}}';
 await mkdir(path.join(site, 'assets', 'previews'), { recursive: true });
 const showcase = [];

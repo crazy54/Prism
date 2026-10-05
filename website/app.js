@@ -19,6 +19,10 @@
   function updateFrame(frame) {
     const doc = frame.contentDocument;
     if (!doc || !doc.body) return;
+    // An iframe has its own canvas and color scheme; transparency can show white.
+    // Paint the same background as the outer page, including after theme changes.
+    doc.documentElement.style.colorScheme = root.dataset.theme;
+    doc.documentElement.style.setProperty('--preview-bg', getComputedStyle(root).getPropertyValue('--bg').trim());
     let overrides = doc.getElementById('preview-theme');
     if (!overrides) {
       overrides = doc.createElement('style');
