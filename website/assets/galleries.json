@@ -1,0 +1,77 @@
+[
+  {
+    "id": "charts",
+    "title": "Charts & Metrics",
+    "count": 209
+  },
+  {
+    "id": "fx",
+    "title": "FX Store",
+    "count": 146
+  },
+  {
+    "id": "lab",
+    "title": "Animation Lab",
+    "count": 217
+  },
+  {
+    "id": "ai",
+    "title": "AI Working",
+    "count": 118
+  },
+  {
+    "id": "objects",
+    "title": "Animated Objects",
+    "count": 91
+  },
+  {
+    "id": "input",
+    "title": "Input Methods",
+    "count": 101
+  },
+  {
+    "id": "text",
+    "title": "Text Effects",
+    "count": 100
+  },
+  {
+    "id": "shapes",
+    "title": "Text Shapes",
+    "count": 53
+  },
+  {
+    "id": "maps",
+    "title": "Maps & Geo",
+    "count": 50
+  },
+  {
+    "id": "notify",
+    "title": "Notifications & Status",
+    "count": 50
+  },
+  {
+    "id": "arch",
+    "title": "Architecture Diagrams",
+    "count": 50
+  },
+  {
+    "id": "callouts",
+    "title": "Callouts & Annotations",
+    "count": 50
+  },
+  {
+    "id": "obsidian",
+    "title": "Obsidian Facets",
+    "count": 130
+  },
+  {
+    "id": "menus",
+    "title": "Menus & Actions",
+    "count": 37
+  },
+  {
+    "id": "spectrums",
+    "title": "Spectrums",
+    "count": 1266
+  }
+]
