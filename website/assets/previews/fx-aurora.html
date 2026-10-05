@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aurora</title><style>:root{--bg:#0b0e17;--panel:#121623;--panel2:#171d2e;--card:#141b2b;--line:#243049;--ink:#eaf1f9;--muted:#8593a8;--dim:#5b6678;--crit:#c879ff;--crit-rgb:200,121,255;--neg:#f85149;--neg-rgb:248,81,73;--warn:#e0a52b;--warn-rgb:224,165,43;--pos:#3fb950;--pos-rgb:63,185,80;--info:#4493f8;--info-rgb:68,147,248;--accent:#ff9900;--accent-rgb:255,153,0;--cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%)}.c-crit{--c:var(--crit);--c-rgb:200,121,255}.c-neg{--c:var(--neg);--c-rgb:248,81,73}.c-warn{--c:var(--warn);--c-rgb:224,165,43}.c-pos{--c:var(--pos);--c-rgb:63,185,80}.c-info{--c:var(--info);--c-rgb:68,147,248}.c-accent{--c:var(--accent);--c-rgb:255,153,0}:root{--gray:#72869f;--orange:var(--accent);--red:#f85149;--blue:var(--info);--green:var(--pos);--purple:var(--crit)}*{box-sizing:border-box}body{margin:0;min-height:220px;display:flex;align-items:center;justify-content:center;padding:22px;font-family:system-ui,sans-serif;color:var(--ink);background:transparent}.panel{min-width:215px}.ptitle{padding-left:0!important}.atom{width:145px;height:145px}.c-accent { --c: var(--accent); --c-rgb: 255,153,0; }
+.el-card { background-position-x: ; background-position-y: ; background-size: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-image: var(--cardgrad); border-top-color: ; border-top-style: ; border-top-width: ; border-right-color: ; border-right-style: ; border-right-width: ; border-bottom-color: ; border-bottom-style: ; border-bottom-width: ; border-image-source: ; border-image-slice: ; border-image-width: ; border-image-outset: ; border-image-repeat: ; border-left: 4px solid var(--c); border-radius: 13px; padding: 18px; min-width: 200px; }
+.el-card .n { font-size: 34px; font-weight: 800; color: var(--c); line-height: 1; }
+.el-card .l { color: var(--muted); font-size: 12.5px; margin-top: 4px; }
+.el-kpi .n { font-size: 28px; font-weight: 800; color: var(--c); }
+.el-kpi .l { color: var(--muted); font-size: 11px; margin-top: 3px; }
+.fx-aurora { border-radius: 12px; background-image: linear-gradient(120deg,rgba(var(--c-rgb),.06),rgba(var(--c-rgb),.24),rgba(var(--c-rgb),.06)); background-size: 200% 200%; animation: 5s ease 0s infinite normal none running fxAurora; }
+@keyframes fxAurora { 
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.fx-bnf .n, .fx-bnf .l { background-image: ; background-position-x: ; background-position-y: ; background-repeat: ; background-attachment: ; background-origin: ; background-color: ; background-size: 250% 100%; background-clip: text; -webkit-text-fill-color: transparent; animation: 1.8s ease-in-out 0s infinite alternate none running fxBnf; }
+@keyframes fxBnf { 
+  0% { background-position: 0% 0px; }
+  100% { background-position: 100% 0px; }
+}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition:none!important}}</style></head><body><div class="el-card c-accent fx-aurora"><div class="n">$2.4M</div><div class="l">Pipeline</div></div></body></html>

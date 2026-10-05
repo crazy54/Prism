@@ -1,0 +1,42 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Processing Orb</title><style>:root{--bg:#0b0e17;--panel:#121623;--panel2:#171d2e;--card:#141b2b;--line:#243049;--ink:#eaf1f9;--muted:#8593a8;--dim:#5b6678;--crit:#c879ff;--crit-rgb:200,121,255;--neg:#f85149;--neg-rgb:248,81,73;--warn:#e0a52b;--warn-rgb:224,165,43;--pos:#3fb950;--pos-rgb:63,185,80;--info:#4493f8;--info-rgb:68,147,248;--accent:#ff9900;--accent-rgb:255,153,0;--cardgrad:linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%)}.c-crit{--c:var(--crit);--c-rgb:200,121,255}.c-neg{--c:var(--neg);--c-rgb:248,81,73}.c-warn{--c:var(--warn);--c-rgb:224,165,43}.c-pos{--c:var(--pos);--c-rgb:63,185,80}.c-info{--c:var(--info);--c-rgb:68,147,248}.c-accent{--c:var(--accent);--c-rgb:255,153,0}:root{--gray:#72869f;--orange:var(--accent);--red:#f85149;--blue:var(--info);--green:var(--pos);--purple:var(--crit)}*{box-sizing:border-box}body{margin:0;min-height:220px;display:flex;align-items:center;justify-content:center;padding:22px;font-family:system-ui,sans-serif;color:var(--ink);background:transparent}.panel{min-width:215px}.ptitle{padding-left:0!important}.atom{width:145px;height:145px}.panel { background-position-x: ; background-position-y: ; background-size: ; background-repeat: ; background-attachment: ; background-origin: ; background-clip: ; background-color: ; background-image: var(--cardgrad); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; min-height: 170px; position: relative; overflow: hidden; }
+.panel.w2 { grid-column: span 2; }
+.ptitle { display: flex; align-items: center; gap: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dim); margin-bottom: 12px; }
+.ptitle .tdot { width: 7px; height: 7px; border-radius: 50%; background: var(--c,var(--accent)); box-shadow: 0 0 7px var(--c,var(--accent)); animation: 1.4s ease-in-out 0s infinite normal none running tblink; }
+.pbody { flex: 1 1 0%; display: flex; align-items: center; justify-content: center; position: relative; }
+.panel:hover .fx-copy { opacity: 1; }
+.grad-orb { width: 90px; height: 90px; border-radius: 50%; background: conic-gradient(from 0deg,var(--crit),var(--accent),var(--pos),var(--info),var(--crit)); animation: 3s linear 0s infinite normal none running orbspin; filter: blur(1px); position: relative; }
+.grad-orb::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: var(--panel); }
+.panel.hero { grid-column: 1 / -1; min-height: 0px; }
+@keyframes tblink { 
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes orbspin { 
+  100% { transform: rotate(360deg); }
+}
+.tile.is-new, .panel.is-new { border-color: rgb(63, 185, 80); box-shadow: rgba(63, 185, 80, 0.55) 0px 0px 0px 0px; animation: 2.4s ease-out 0s infinite normal none running pr-new-pulse; }
+.tile.is-new, .panel.is-new { position: relative; }
+.tile.is-new::after, .panel.is-new::after { content: "NEW"; position: absolute; top: 9px; right: 9px; z-index: 10; background: rgb(63, 185, 80); color: rgb(6, 20, 10); font-size: 9px; font-weight: 900; letter-spacing: 0.08em; padding: 2px 7px; border-radius: 10px; pointer-events: none; box-shadow: rgba(63, 185, 80, 0.5) 0px 0px 10px; }
+.tile.is-fixed, .panel.is-fixed { box-shadow: rgba(68, 147, 248, 0.55) 0px 0px 0px 0px; animation: 2.4s ease-out 0s infinite normal none running pr-fix-pulse; position: relative; border-color: rgb(68, 147, 248) !important; }
+.tile.is-fixed::after, .panel.is-fixed::after { content: "UPDATED"; position: absolute; top: 9px; right: 9px; z-index: 10; background: rgb(68, 147, 248); color: rgb(3, 18, 31); font-size: 9px; font-weight: 900; letter-spacing: 0.06em; padding: 2px 7px; border-radius: 10px; pointer-events: none; box-shadow: rgba(68, 147, 248, 0.5) 0px 0px 10px; }
+@keyframes pr-new-pulse { 
+  0% { box-shadow: rgba(63, 185, 80, 0.55) 0px 0px 0px 0px; }
+  60% { box-shadow: rgba(63, 185, 80, 0) 0px 0px 0px 7px; }
+  100% { box-shadow: rgba(63, 185, 80, 0) 0px 0px 0px 0px; }
+}
+@keyframes pr-fix-pulse { 
+  0% { box-shadow: rgba(68, 147, 248, 0.55) 0px 0px 0px 0px; }
+  60% { box-shadow: rgba(68, 147, 248, 0) 0px 0px 0px 7px; }
+  100% { box-shadow: rgba(68, 147, 248, 0) 0px 0px 0px 0px; }
+}
+.pr-playbtn { position: absolute; top: 9px; left: 9px; z-index: 11; width: 26px; height: 26px; border-radius: 50%; background: rgba(18, 22, 35, 0.72); border: 1px solid rgba(255, 255, 255, 0.18); color: var(--ink,#eaf1f9); display: flex; align-items: center; justify-content: center; font-size: 11px; cursor: pointer; opacity: 0.45; transition: opacity 0.15s, transform 0.15s, background 0.15s, border-color 0.15s; padding: 0px; }
+.panel:has(> .pr-playbtn) > .ptitle { padding-left: 32px; }
+.pr-playbtn:hover, .pr-playbtn:focus-visible { opacity: 1; background: rgba(var(--accent-rgb,83,159,229),.16); border-color: var(--accent,#539fe5); transform: scale(1.08); }
+.pr-playbtn:active { transform: scale(0.94); }
+.pr-playbtn svg { width: 11px; height: 11px; fill: currentcolor; pointer-events: none; }@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition:none!important}}</style></head><body><div class="panel" data-ctype="ai-state" data-interact="auto-play" style="--c:var(--crit)" data-fx-id="ai-processing-orb" data-fx-name="Processing Orb">
+      <div class="ptitle"><span class="tdot"></span>Processing Orb</div>
+      <div class="pbody" style="flex-direction:column;gap:12px">
+        <div class="grad-orb"></div>
+        <div style="font-size:11px;color:var(--muted);text-align:center">Model inference active</div>
+      </div>
+    </div></body></html>
