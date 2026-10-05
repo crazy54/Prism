@@ -29,10 +29,44 @@
       <div class="hero-art" aria-label="A beam of light passes through a prism and separates into a spectrum">
         <div class="art-grid"></div><div class="art-halo"></div>
         <svg class="prism-art" viewBox="0 0 580 400" role="img" aria-labelledby="prism-art-title"><title id="prism-art-title">One prism, many possibilities</title>
-          <defs><linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c6c7ff" stop-opacity=".35"/><stop offset=".5" stop-color="#8487dc" stop-opacity=".06"/><stop offset="1" stop-color="#91a1ff" stop-opacity=".3"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e4e2ff"/><stop offset="1" stop-color="#6573b6"/></linearGradient><filter id="beam-glow"><feGaussianBlur stdDeviation="3"/></filter></defs>
-          <g class="beams" fill="none" stroke-width="2"><path d="M327 190 575 64" stroke="#ae83ff"/><path d="M327 195 580 117" stroke="#688dff"/><path d="M327 200 580 168" stroke="#6bd2ff"/><path d="M327 205 580 222" stroke="#7ae5c3"/><path d="M327 210 580 279" stroke="#ead17b"/><path d="M327 215 580 338" stroke="#f39e9a"/></g>
-          <g class="beam-ghost" fill="none" stroke-width="8" filter="url(#beam-glow)" opacity=".25"><path d="M327 190 575 64" stroke="#ae83ff"/><path d="M327 200 580 168" stroke="#6bd2ff"/><path d="M327 210 580 279" stroke="#ead17b"/></g>
-          <path class="input-beam" d="M0 202 232 202" stroke="#e7e5ff" stroke-width="2"/><path class="input-beam" d="M0 202 232 202" stroke="#e7e5ff" stroke-width="8" opacity=".2" filter="url(#beam-glow)"/>
+          <defs>
+            <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e6e0ff" stop-opacity=".38"/><stop offset=".48" stop-color="#91a7d9" stop-opacity=".035"/><stop offset="1" stop-color="#9ec5ea" stop-opacity=".23"/></linearGradient>
+            <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e4e2ff"/><stop offset="1" stop-color="#6573b6"/></linearGradient>
+            <linearGradient id="white-light"><stop stop-color="#e8eaf5" stop-opacity="0"/><stop offset=".42" stop-color="#edf0ff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity=".95"/></linearGradient>
+            <linearGradient id="spectrum" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#aa86ff"/><stop offset=".18" stop-color="#7298ff"/><stop offset=".34" stop-color="#60c9f0"/><stop offset=".51" stop-color="#78dbc3"/><stop offset=".68" stop-color="#cde59a"/><stop offset=".83" stop-color="#eed197"/><stop offset="1" stop-color="#e797a5"/></linearGradient>
+            <linearGradient id="light-falloff"><stop stop-color="white" stop-opacity=".9"/><stop offset=".28" stop-color="white" stop-opacity=".8"/><stop offset=".65" stop-color="white" stop-opacity=".38"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
+            <radialGradient id="refraction-flare"><stop stop-color="#fff" stop-opacity=".95"/><stop offset=".2" stop-color="#dce9ff" stop-opacity=".65"/><stop offset=".6" stop-color="#aac5fa" stop-opacity=".1"/><stop offset="1" stop-color="#8eacdf" stop-opacity="0"/></radialGradient>
+            <filter id="light-soft" x="-30%" y="-40%" width="170%" height="180%"><feGaussianBlur stdDeviation="3"/></filter>
+            <filter id="light-bloom" x="-40%" y="-60%" width="190%" height="220%"><feGaussianBlur stdDeviation="12"/></filter>
+            <mask id="spectrum-fade" maskUnits="userSpaceOnUse" x="315" y="45" width="270" height="315"><rect x="315" y="45" width="270" height="315" fill="url(#light-falloff)"/></mask>
+            <linearGradient id="ray-0"><stop stop-color="#f7f4ff" stop-opacity=".65"/><stop offset=".12" stop-color="#ad88ff" stop-opacity=".75"/><stop offset=".48" stop-color="#ad88ff" stop-opacity=".42"/><stop offset="1" stop-color="#ad88ff" stop-opacity="0"/></linearGradient>
+            <linearGradient id="ray-1"><stop stop-color="#f7f4ff" stop-opacity=".65"/><stop offset=".12" stop-color="#7399ff" stop-opacity=".75"/><stop offset=".48" stop-color="#7399ff" stop-opacity=".42"/><stop offset="1" stop-color="#7399ff" stop-opacity="0"/></linearGradient>
+            <linearGradient id="ray-2"><stop stop-color="#f7f4ff" stop-opacity=".65"/><stop offset=".12" stop-color="#64caff" stop-opacity=".75"/><stop offset=".48" stop-color="#64caff" stop-opacity=".42"/><stop offset="1" stop-color="#64caff" stop-opacity="0"/></linearGradient>
+            <linearGradient id="ray-3"><stop stop-color="#f7f4ff" stop-opacity=".65"/><stop offset=".12" stop-color="#74e0cc" stop-opacity=".75"/><stop offset=".48" stop-color="#74e0cc" stop-opacity=".42"/><stop offset="1" stop-color="#74e0cc" stop-opacity="0"/></linearGradient>
+            <linearGradient id="ray-4"><stop stop-color="#f7f4ff" stop-opacity=".65"/><stop offset=".12" stop-color="#c7e99d" stop-opacity=".75"/><stop offset=".48" stop-color="#c7e99d" stop-opacity=".42"/><stop offset="1" stop-color="#c7e99d" stop-opacity="0"/></linearGradient>
+            <linearGradient id="ray-5"><stop stop-color="#f7f4ff" stop-opacity=".65"/><stop offset=".12" stop-color="#f1d092" stop-opacity=".75"/><stop offset=".48" stop-color="#f1d092" stop-opacity=".42"/><stop offset="1" stop-color="#f1d092" stop-opacity="0"/></linearGradient>
+            <linearGradient id="ray-6"><stop stop-color="#f7f4ff" stop-opacity=".65"/><stop offset=".12" stop-color="#f1a09c" stop-opacity=".75"/><stop offset=".48" stop-color="#f1a09c" stop-opacity=".42"/><stop offset="1" stop-color="#f1a09c" stop-opacity="0"/></linearGradient>
+          </defs>
+          <g class="light-rays">
+            <g mask="url(#spectrum-fade)">
+              <path class="spectrum-haze" d="M324 190 580 52 580 352 324 214Z" fill="url(#spectrum)" filter="url(#light-bloom)" opacity=".3"/>
+              <path d="M324 195 580 83 580 326 324 210Z" fill="url(#spectrum)" filter="url(#light-soft)" opacity=".24"/>
+            </g>
+            <g filter="url(#light-soft)">
+              <path d="M323 193 580 67 580 111 325 198Z" fill="url(#ray-0)"/>
+              <path d="M323 195 580 102 580 146 325 200Z" fill="url(#ray-1)"/>
+              <path d="M323 197 580 137 580 181 325 202Z" fill="url(#ray-2)"/>
+              <path d="M323 199 580 172 580 216 325 204Z" fill="url(#ray-3)"/>
+              <path d="M323 201 580 207 580 251 325 206Z" fill="url(#ray-4)"/>
+              <path d="M323 203 580 242 580 286 325 208Z" fill="url(#ray-5)"/>
+              <path d="M323 205 580 277 580 321 325 210Z" fill="url(#ray-6)"/>
+            </g>
+            <ellipse class="refraction-flare" cx="325" cy="203" rx="26" ry="15" fill="url(#refraction-flare)"/>
+          </g>
+          <g class="input-beam">
+            <path d="M0 197 232 199 232 205 0 207Z" fill="url(#white-light)" filter="url(#light-bloom)" opacity=".75"/>
+            <path d="M0 201 232 201 232 204 0 204Z" fill="url(#white-light)" filter="url(#light-soft)"/>
+          </g>
           <path class="prism-glass" d="m268 93 103 214-204 0Z" fill="url(#glass)" stroke="url(#edge)" stroke-width="1.4"/><path d="m268 93 43 220 60-6M167 307l144 6" fill="none" stroke="#a4a1e0" stroke-opacity=".5"/><path d="m268 93 43 220-144-6Z" fill="#c2bcff" opacity=".06"/><path d="M232 202 327 202" stroke="#e7e5ff" stroke-opacity=".4" stroke-width="1.4"/>
           <g fill="#b9b4f2"><circle cx="268" cy="93" r="3"/><circle cx="167" cy="307" r="2"/><circle cx="371" cy="307" r="2"/></g>
         </svg>
