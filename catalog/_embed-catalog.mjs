@@ -38,7 +38,10 @@ const ISLAND =
 const BREADCRUMB =
   '<!-- ✦ AI-READABLE: a machine catalog of all effects (full html+css) is in ' +
   '<script id="prism-catalog"> at the top of <head>. Jump to id="prism-catalog"; ' +
-  'JSON.parse its text; read the "_ai" key first. -->';
+  'JSON.parse its text; read the "_ai" key first.' +
+  // Keep in sync with CRUMB_NOTE in prism-term/scripts/embed-island.mjs, which
+  // embeds the terminal island right after this one.
+  ' Terminal facets (prism-term) are in <script id="prism-terminal-catalog"> right after it — same "_ai" convention. -->';
 
 let html = readFileSync(HTML, 'utf8');
 
