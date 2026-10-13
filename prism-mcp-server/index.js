@@ -12,6 +12,7 @@
 //     handleMessage() directly.
 
 import { CatalogStore } from './utils/catalog.js';
+import { TerminalCatalogStore, resolveTerminalPaths } from './utils/terminal-catalog.js';
 import { CollectionStore } from './utils/collections.js';
 import { buildTools, ToolError } from './tools/index.js';
 import { createLogger } from './utils/logger.js';
@@ -23,7 +24,12 @@ export const SERVER_VERSION = '1.0.0';
 export class PrismMCPServer {
   /**
    * @param {string} catalogPath  path to Prism.html (island) or catalog/manifest.json
-   * @param {object} opts { watch, logger }
+   * @param {object} opts { watch, logger, terminal, terminalCatalogPath }
+   *   terminal              inject a TerminalCatalogStore (tests)
+   *   terminalCatalogPath   explicit .html/.json for the terminal catalog; by default it
+   *                         is found next to catalogPath (Prism.html's
+   *                         #prism-terminal-catalog island, else
+   *                         prism-term/catalog/terminal-catalog.json)
    */
   constructor(catalogPath, opts = {}) {
     if (!catalogPath) throw new Error('PrismMCPServer requires a catalogPath');
@@ -36,15 +42,25 @@ export class PrismMCPServer {
       inMemory: opts.collectionsInMemory === true,
       logger: this.logger,
     });
+    // Terminal catalog (prism-term facets): optional — tools report `unavailable`
+    // when neither the island nor the JSON fallback exists.
+    this.terminal = opts.terminal || new TerminalCatalogStore({
+      ...resolveTerminalPaths(catalogPath, opts.terminalCatalogPath),
+      watch: opts.watch !== false,
+      logger: this.logger,
+    });
     this.tools = buildTools();
     this.toolMap = new Map(this.tools.map((t) => [t.name, t]));
     this.initialized = false;
     this.requestCount = 0;
     this.store.on('reload', (stats) => this.logger.info(`Catalog reloaded: ${stats.effects} effects`));
+    this.terminal.on('reload', (stats) => this.logger.info(`Terminal catalog reloaded: ${stats.facets} facets`));
+    this.terminal.on('error', () => { /* logged by the store; keep serving the last good copy */ });
   }
 
   async load() {
     await this.store.load();
+    await this.terminal.load(); // never throws: an absent terminal catalog is fine
     return this;
   }
 
@@ -93,7 +109,7 @@ export class PrismMCPServer {
       protocolVersion: PROTOCOL_VERSION,
       capabilities: { tools: { listChanged: false } },
       serverInfo: { name: SERVER_NAME, version: SERVER_VERSION },
-      instructions: 'Prism catalog MCP. Use search_effects (with facet filters) / list_effects to discover, get_available_filters + list_filter_values to learn valid facet values, create_saved_search / execute_saved_search to reuse queries, get_effect for full html/css, compose/compose_with_template to build bundles, and create_facet/validate_facet to author new components. For theming: Prism themes are pure :root token swaps over identical HTML/CSS, so use get_theme_palette, get_component_variants (one payload → every theme variant), and get_variants_for_theme to explore the component variant matrix.',
+      instructions: 'Prism catalog MCP. Use search_effects (with facet filters) / list_effects to discover, get_available_filters + list_filter_values to learn valid facet values, create_saved_search / execute_saved_search to reuse queries, get_effect for full html/css, compose/compose_with_template to build bundles, and create_facet/validate_facet to author new components. For theming: Prism themes are pure :root token swaps over identical HTML/CSS, so use get_theme_palette, get_component_variants (one payload → every theme variant), and get_variants_for_theme to explore the component variant matrix. For the TERMINAL (CLI/TUI) catalog — spinners, progress bars and counters, charts, TUI controls, ops views, scenes — use list_terminal_galleries, search_terminal_facets / list_terminal_facets (filter by what the target terminal supports with maxGlyphs/maxColor), and get_terminal_facet; run a facet with its usage.cli or usage.npx command.',
     };
   }
 
@@ -122,7 +138,7 @@ export class PrismMCPServer {
     this.requestCount++;
     this.logger.debug(`tools/call ${params.name} args=${safeJson(args)}`);
     try {
-      const out = await tool.handler(args, { store: this.store, collections: this.collections, logger: this.logger });
+      const out = await tool.handler(args, { store: this.store, collections: this.collections, terminal: this.terminal, logger: this.logger });
       const ms = Date.now() - started;
       this.logger.info(`tool ${params.name} ok (${ms}ms)`);
       return {
@@ -170,6 +186,7 @@ export class PrismMCPServer {
 
   close() {
     this.store.close();
+    this.terminal.close();
     this.transport && this.transport.stop && this.transport.stop();
   }
 }

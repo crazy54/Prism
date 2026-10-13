@@ -1,13 +1,15 @@
-// The 20 Prism MCP tools. Each entry: { name, description, inputSchema, handler }.
-// Handlers receive (args, ctx) where ctx = { store, logger } and return a plain
-// JS object (serialized to JSON text by the server). Handlers throw ToolError for
-// structured, actionable failures.
+// The 34 Prism MCP tools. Each entry: { name, description, inputSchema, handler }.
+// Handlers receive (args, ctx) where ctx = { store, collections, terminal, logger }
+// and return a plain JS object (or a promise of one), serialized to JSON text by
+// the server. Handlers throw ToolError for structured, actionable failures.
+// The 5 terminal-catalog tools live in ./terminal.js.
 
 import { lightEffect } from '../utils/catalog.js';
 import { compose, composeWithTemplate, availableTemplates } from '../utils/compose.js';
 import { validateFacet, validateComposition } from '../utils/validate.js';
 import { THEMES, THEME_IDS, TOKEN_META, BASE_TOKENS, getTheme, usesTokens, themeRootCss, isThemeSensitive, themeIdList, themesSummary } from '../utils/themes.js';
 import { CollectionError, toExportSchema } from '../utils/collections.js';
+import { terminalTools } from './terminal.js';
 
 export class ToolError extends Error {
   constructor(message, { code = 'tool_error', data = null } = {}) {
@@ -1126,6 +1128,9 @@ export function buildTools() {
       },
       handler: (a, { collections }) => withCollections(collections, (c) => c.delete(a.collectionId)),
     },
+
+    // ============================== TERMINAL CATALOG (5) ==============================
+    ...terminalTools({ ToolError, paginate }),
   ];
 }
 

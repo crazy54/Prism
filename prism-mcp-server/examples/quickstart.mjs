@@ -9,6 +9,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CatalogStore } from '../utils/catalog.js';
+import { TerminalCatalogStore, resolveTerminalPaths } from '../utils/terminal-catalog.js';
 import { buildTools } from '../tools/index.js';
 import { createLogger } from '../utils/logger.js';
 
@@ -20,7 +21,10 @@ await store.load();
 
 // Build a name -> tool map and a tiny caller (mirrors what tools/call does).
 const tools = new Map(buildTools().map((t) => [t.name, t]));
-const ctx = { store, logger: createLogger('silent') };
+// The terminal catalog (prism-term facets) is optional: island in Prism.html, else prism-term/catalog/.
+const terminal = new TerminalCatalogStore({ ...resolveTerminalPaths(catalogPath), logger: createLogger('silent') });
+await terminal.load();
+const ctx = { store, terminal, logger: createLogger('silent') };
 const call = (name, args = {}) => tools.get(name).handler(args, ctx);
 
 // 1. What's in the catalog?
@@ -44,3 +48,10 @@ console.log(`  initializers needed: ${bundle.initializers.length ? bundle.initia
 console.log(`  html starts: ${bundle.html.slice(0, 60).replace(/\n/g, ' ')}…`);
 
 store.close();
+
+// 4. The terminal catalog: find an ASCII-safe spinner and print how to run it.
+if (terminal.available) {
+  const term = await call('search_terminal_facets', { query: 'spinner', maxGlyphs: 'ascii', limit: 3 });
+  const pick = term.items[0] || (await call('list_terminal_facets', { limit: 1 })).items[0];
+  console.log(`\nterminal facets: ${terminal.meta().facetCount} (${terminal.source}) -> ${pick.id}: ${pick.usage.cli}`);
+}
