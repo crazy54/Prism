@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Retro & Demoscene > BBS & ANSI Art
+BBS Login  bbs-login
+A 1993 BBS login: block-letter board logo, caller stats in a double frame and a
+login that types itself.
+art - 80x24 (min 40x12) - 12 s loop - unicode - 16 colors
+tags: bbs, ansi, login, dial-up, 1993, sysop
+
+  PRISM BBS . Node 3 of 8 . 2400 bps . ANSI                              23:41
+
+       ####""""##__  ####""""##__  ""####"". __##"""""""". ####__  __####
+       ####____##"". ####____##"".   ####.   ""##______    ####""##""####
+       ####.......   ####..""##__    ####.      .....####. ####.  .. ####
+       """".         """".   """". """""""". """"""""""... """".     """"
+
+                    THE TERMINAL ART UNDERGROUND . EST. 1991
+
+                 +==+ SYSTEM +================================+
+                 | Last caller ..... CRASH OVERRIDE           |
+                 | Calls today ..... 42                       |
+                 | Your node ....... 3 of 8                   |
+                 +============================================+
+
+                 Enter your handle (NEW to apply): LIGHTMAN
+                 Password: ********
+                 Checking credentials... |
+
+                 [ESC] hang up   [?] help   SysOp is AVAILABLE
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+Params  (--set key=value)
+  colors=vga            Colors  (vga|theme)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play bbs-login
+Snapshot  prism-term snapshot bbs-login --size 80x24
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('bbs-login'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/checker-floor
+next >    curl -sL prism.jeremyfhall.com/f/bbs-menu
+gallery   curl -sL prism.jeremyfhall.com/t/retro
+home      curl -sL prism.jeremyfhall.com/tty

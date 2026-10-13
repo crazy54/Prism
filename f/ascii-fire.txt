@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Pure ASCII > ASCII Animations
+ASCII Fire  ascii-fire
+Old-school text-mode fire: heat averages upward and cools through the " .:*sS#$"
+ramp, with gusting flicker.
+art - 80x24 (min 32x10) - 6 s loop - ascii - 16 colors
+tags: fire, aalib, flames, classic
+
+      .......                                   ..:::.....
+    ....:::....                                ...:::::.....
+   ..::::::.......                             ..::::::::....
+  ..:::::::::......                            ..:::**:::::....   .....       .
+..:::******:::......                          ..:::*****:::::... ..........
+:::*********::::::...    ......               ..:::*********::..  .........
+****sssssss***::::....  ..::::::.           ...::**********::...    ...........
+ssssssssssss****::::.....::****::..     .....:::*******s****:..      ...........
+SsssssssSssss***::::::::::***s**::.....::::::::***sssss*s***::.     ........::::
+SsssssssSssssss**:::::::::*****:::...:************sssss******:.    .. .......:::
+sss**sssSSSSSss**::**:::::****:::...::**sssss**sssSSSs*****s**:.   .   ........:
+***ssssssSSSSss**:****::::******::..:::*sssssssssSSSSs****sss*:.......  . .   ..
+*sssssSSSSSSSsss*****:::::***sss**:::::**sssssssSS##SSs***sss**::**::...........
+sSSSSS###SSSsssssss**:::::::**ssss*::::**sss**sSS####Ss****ssss*sss*:::::::..:::
+######$$$#SSs***ssss***:::::.::*ss****:*ssss**sS##$$##SssssssssSSSss*:**sss*::*:
+##$$$$$$##Ssss***sSsssss*ss*::**SSSSSsssSss**ssS##$$$#SSssss*ssSSSSs***sS#Ssss**
+*s#$$$$$$####Ss**sSSssSssSSSs**sS$$$#SsSSS**sS####$$$$#####SsSsssSSs*sssS##SS#SS
+*:*#$$$$$#$$$$Sss#$#s*s**S##SSSS###Ss**sSS*:*#$#$$$$$$##$$$#Ssssssss*S#Sss#$$#Ss
+#ss#$$$$$##$$$ss#$#s:ssss#S##$$#$#Ss*  sSS*.sS#ss$$$$###$S$#*SS#s*s.sS##sS#SS#:
+$$$$$$$$$$$$$$::#$* :$$$$#: :##s#$$$#::$$$#s$$$::$$$$$$$#s##s#$#::ss#$$$$$#::s:
+  still at 80x20 - t=3s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ascii-fire
+Snapshot  prism-term snapshot ascii-fire --size 80x24
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-fire'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-donut
+next >    curl -sL prism.jeremyfhall.com/f/ascii-rain
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

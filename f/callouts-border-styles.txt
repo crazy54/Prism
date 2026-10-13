@@ -1,0 +1,40 @@
+* PRISM TERMINAL > Callouts & Layout > Panels & Borders
+Border Styles  callouts-border-styles
+All six border styles -- round, single, double, heavy, dashed and ASCII -- with
+a focus ring stepping through them.
+widget - 72x18 (min 34x9) - 7.2 s loop - unicode - 16 colors
+tags: border, box, panel, box-drawing, frame
+
+    +------- round -------+ +------ single -------+ +------ double -------+
+    |                     | |                     | |                     |
+    |                     | |                     | |                     |
+    |     the default     | |   classic square    | |    for emphasis     |
+    |                     | |                     | |                     |
+    |                     | |                     | |                     |
+    |                     | |                     | |                     |
+    +---------------------+ +---------------------+ +---------------------+
+
+    +------- heavy -------+ +------ dashed -------+ +------- ascii -------+
+    |                     | |                     | |                     |
+    |                     | |                     | |                     |
+    |      for focus      | |   secondary panes   | |   7-bit, anywhere   |
+    |                     | |                     | |                     |
+    |                     | |                     | |                     |
+    |                     | |                     | |                     |
+    +---------------------+ +---------------------+ +---------------------+
+
+  still at t=3.6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play callouts-border-styles
+Snapshot  prism-term snapshot callouts-border-styles --size 72x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('callouts-border-styles'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/callouts-key-value
+next >    curl -sL prism.jeremyfhall.com/f/callouts-titled-panels
+gallery   curl -sL prism.jeremyfhall.com/t/callouts
+home      curl -sL prism.jeremyfhall.com/tty

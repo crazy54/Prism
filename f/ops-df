@@ -1,0 +1,34 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mDisk & Storage[0m
+[0;1;39;49mdf -h[0;2;39;49m  ops-df[0m
+df -h with Size/Used/Avail/Use% columns and a usage bar per mount; /var/log
+creeps toward full and turns red past 90%.
+[0;2;39;49mtui · 80×12 (min 48×5) · 30 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: df, disk, filesystem, storage, usage[0m
+
+[0;1;38;5;255;48;5;234mFilesystem                    Size  Used Avail Use% Mounted on   Usage[0;39;48;5;234m          [0m
+[38;5;255;48;5;234m/dev/mapper/vg0-root           98G   61G   37G [38;5;71m 62%[38;5;74m /           [39m [38;5;249m[[38;5;71m███████[38;5;66m░░░░░[38;5;249m][39m [0m
+[38;5;255;48;5;234m/dev/nvme0n1p1                1.0G  215M  809M [38;5;71m 21%[38;5;74m /boot/efi   [39m [38;5;249m[[38;5;71m███[38;5;66m░░░░░░░░░[38;5;249m][39m [0m
+[38;5;255;48;5;234m/dev/mapper/vg0-var            40G   23G   17G [38;5;71m 56%[38;5;74m /var        [39m [38;5;249m[[38;5;71m███████[38;5;66m░░░░░[38;5;249m][39m [0m
+[38;5;255;48;5;234m/dev/mapper/vg0-varlog         20G   16G  3.5G [38;5;215m 82%[38;5;74m /var/log    [39m [38;5;249m[[38;5;215m██████████[38;5;66m░░[38;5;249m][39m [0m
+[38;5;255;48;5;234m/dev/mapper/vg0-home          200G   42G  158G [38;5;71m 21%[38;5;74m /home       [39m [38;5;249m[[38;5;71m███[38;5;66m░░░░░░░░░[38;5;249m][39m [0m
+[38;5;255;48;5;234m/dev/sdb1                     7.1T  6.7T  455G [0;1;38;5;167;48;5;234m 94%[0;38;5;74;48;5;234m /srv/backup [39m [38;5;249m[[38;5;167m███████████[38;5;66m░[38;5;249m][39m [0m
+[38;5;249;48;5;234mtmpfs                       [38;5;255m  7.8G    2M  7.8G [38;5;71m  0%[38;5;74m /dev/shm    [39m [38;5;249m[[38;5;66m░░░░░░░░░░░░[38;5;249m][39m [0m
+[38;5;249;48;5;234mtmpfs                       [38;5;255m  1.6G    3M  1.6G [38;5;71m  0%[38;5;74m /run        [39m [38;5;249m[[38;5;66m░░░░░░░░░░░░[38;5;249m][39m [0m
+[38;5;255;48;5;234mnfs01.example:/export/share   2.0T  908G  1.1T [38;5;71m 45%[38;5;74m /mnt/share  [39m [38;5;249m[[38;5;71m█████[38;5;66m░░░░░░░[38;5;249m][39m [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ops-df[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ops-df --size 80x12[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ops-df'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-vmstat[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-iostat[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

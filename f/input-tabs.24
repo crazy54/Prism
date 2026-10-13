@@ -1,0 +1,32 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mInput & Menus[0;2;39;49m › [0;1;39;49mTabs & Bars[0m
+[0;1;39;49mTabs[0;2;39;49m  input-tabs[0m
+A tab strip with a count badge whose underline glides between tabs as the user
+switches; each tab swaps in its own overview, logs, trace or metrics view.
+[0;2;39;49mtui · 60×10 (min 40×7) · 7 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: tabs, tab bar, navigation, switcher, underline[0m
+
+          [48;2;15;22;33m  [38;2;164;176;192mOverview[39m   [38;2;164;176;192mLogs[39m [0;1;38;2;245;183;78;48;2;73;62;44m12[0;39;48;2;15;22;33m   [0;1;38;2;233;235;237;48;2;15;22;33mTraces[0;39;48;2;15;22;33m   [38;2;164;176;192mMetrics[39m   [38;2;164;176;192mConfig[39m            [0m
+          [38;2;53;65;80;48;2;15;22;33m──────────────────────[0;1;38;2;83;159;229;48;2;15;22;33m━━━━━━━━[0;38;2;53;65;80;48;2;15;22;33m──────────────────────────────[0m
+          [48;2;15;22;33m [38;2;233;235;237mGET /checkout[39m [38;2;83;159;229m█████████████████████████████████████[39m  [38;2;107;120;135m2.40s[39m [0m
+          [48;2;15;22;33m  [38;2;164;176;192mauth.verify  [39m [38;2;83;159;229m█[39m                                     [38;2;107;120;135m0.10s[39m [0m
+          [48;2;15;22;33m  [38;2;164;176;192mdb.acquire   [39m   [38;2;235;111;111m██████████████████████████[39m          [38;2;107;120;135m1.68s[39m [0m
+          [48;2;15;22;33m  [38;2;164;176;192mdb.query     [39m                              [38;2;83;159;229m███[39m      [38;2;107;120;135m0.24s[39m [0m
+          [48;2;15;22;33m  [38;2;164;176;192mrender       [39m                                  [38;2;83;159;229m███[39m  [38;2;107;120;135m0.17s[39m [0m
+          [48;2;15;22;33m                                                            [0m
+          [48;2;15;22;33m                                                            [0m
+          [48;2;15;22;33m                                                 [38;2;107;120;135m←/→ or 1-5[39m [0m
+[0;2;39;49m  still at t=3.5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play input-tabs[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot input-tabs --size 60x10[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('input-tabs'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/input-wizard[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/input-menu-bar[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/input[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

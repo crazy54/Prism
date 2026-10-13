@@ -1,0 +1,36 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mCallouts & Layout[0;2;39;49m › [0;1;39;49mPanels & Borders[0m
+[0;1;39;49mShadow Card[0;2;39;49m  callouts-shadow-card[0m
+A card with a shaded drop shadow that lifts on hover and settles, with a glint
+sweeping its title — depth with nothing but shade blocks.
+[0;2;39;49mwidget · 52×14 (min 34×9) · 6 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: card, shadow, elevation, depth, hover[0m
+
+              [48;5;234m                                                    [0m
+              [48;5;234m   [38;5;74;48;5;235m╭──────────────────────────────────────────╮[39;48;5;234m     [0m
+              [48;5;234m   [38;5;74;48;5;235m│[39m                                          [38;5;74m│[39;48;5;234m     [0m
+              [48;5;234m   [38;5;74;48;5;235m│[39m  [0;1;38;5;255;48;5;235mDeploy complete[0;38;5;235;48;5;235m [38;5;71m✔[38;5;235m                       [38;5;74m│[38;5;235;48;5;232m▒▒▒▒[39;48;5;234m [0m
+              [48;5;234m   [38;5;74;48;5;235m│[39m   [38;5;235m                                       [38;5;74m│[38;5;235;48;5;232m▒▒▒▒[39;48;5;234m [0m
+              [48;5;234m   [38;5;74;48;5;235m│[39m  [38;5;249mcheckout v2.14.1 is live on 12/12 hosts[38;5;235m [38;5;74m│[38;5;235;48;5;232m▒▒▒▒[39;48;5;234m [0m
+              [48;5;234m   [38;5;74;48;5;235m│[39m  [38;5;66mMTTR 0s · 0 errors during rollout[38;5;235m       [38;5;74m│[38;5;235;48;5;232m▒▒▒▒[39;48;5;234m [0m
+              [48;5;234m   [38;5;74;48;5;235m│[39m   [38;5;235m                                       [38;5;74m│[38;5;235;48;5;232m▒▒▒▒[39;48;5;234m [0m
+              [48;5;234m   [38;5;74;48;5;235m│[39m   [38;5;235m                 [38;5;255;48;5;236m View logs [38;5;235;48;5;235m [0;1;38;5;234;48;5;74m Done [0;38;5;235;48;5;235m    [38;5;74m│[38;5;235;48;5;232m▒▒▒▒[39;48;5;234m [0m
+              [48;5;234m   [38;5;74;48;5;235m╰──────────────────────────────────────────╯[38;5;235;48;5;232m▒▒▒▒[39;48;5;234m [0m
+              [48;5;234m       [38;5;235;48;5;232m▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒[39;48;5;234m [0m
+              [48;5;234m       [38;5;235;48;5;232m▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒[39;48;5;234m [0m
+              [48;5;234m                                                    [0m
+              [48;5;234m                                                    [0m
+[0;2;39;49m  still at t=3s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play callouts-shadow-card[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot callouts-shadow-card --size 52x14[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('callouts-shadow-card'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/callouts-focus-panels[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/callouts-code-block[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/callouts[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

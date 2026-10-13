@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Maps & Geo > Routes & Arcs
+Transit Map  maps-subway
+A schematic metro map with four colored lines, interchanges and trains running
+end to end; the status board reports a delay.
+scene - 80x22 (min 44x12) - 24 s loop - unicode - truecolor
+tags: subway, metro, transit, schematic, trains
+
+
+                             o Northgate                         o Stadium
+  University    Library      |                                   |
+       o-----------o---------o-----------#---------o Parkside    |
+                             |                     |             |
+                             +-#---+               |             |
+West Docks                 Central |               |             |     East Gate
+   o-------------o-----------------@--#------------@-------------@-----------o
+              Harbour              |               |Museum       |Mill Lane
+                                   |               |             |
+           +-------o---------------@-------#-------o-------------+
+           |    Market    Quayside |               |
+           |                       +-----o--#+     +-----------------------o
+           |                         Riverside                          Airport
+           o Old Town                        o Docklands
+
+ Red    Good service
+ Blue   Good service
+ Green  Good service
+ Amber  Good service
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play maps-subway
+Snapshot  prism-term snapshot maps-subway --size 80x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('maps-subway'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/maps-traceroute
+next >    curl -sL prism.jeremyfhall.com/f/maps-topo-trail
+gallery   curl -sL prism.jeremyfhall.com/t/maps
+home      curl -sL prism.jeremyfhall.com/tty

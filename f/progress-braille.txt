@@ -1,0 +1,27 @@
+* PRISM TERMINAL > Progress & Counters > Progress Bars
+Braille Bars  progress-braille
+Hairline progress drawn in braille dots at twice the horizontal resolution -- a
+thin rule, a dotted track and a glowing head.
+progress - 60x5 (min 20x1) - 8 s loop - braille - 256 colors
+tags: braille, thin, hairline
+
+           [#########################################---------]   82%
+
+           [#################################-----------------]   66%
+
+           [##############################--------------------]   59%
+  still at t=4s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play progress-braille
+Snapshot  prism-term snapshot progress-braille --size 60x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-braille'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-smooth
+next >    curl -sL prism.jeremyfhall.com/f/progress-gradient
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

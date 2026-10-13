@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Spinners & Loaders > Classic Spinners
+Triangle  loaders-triangle
+Right triangles spinning through four corners at speed -- a sharp, energetic
+loader.
+spinner - 44x5 (min 24x2) - 8 s loop - unicode - 16 colors
+tags: spinner, loader, triangle, fast
+
+                   | Building search index...            4.0s
+
+                   - \ | /
+
+                   triangle (ASCII fallback) - 4 frames - 13.
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play loaders-triangle
+Snapshot  prism-term snapshot loaders-triangle --size 44x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-triangle'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-square-corners
+next >    curl -sL prism.jeremyfhall.com/f/loaders-arrows
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

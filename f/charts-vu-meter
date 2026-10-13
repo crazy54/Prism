@@ -1,0 +1,28 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mCharts & Metrics[0;2;39;49m › [0;1;39;49mGauges & Meters[0m
+[0;1;39;49mStereo VU Meter[0;2;39;49m  charts-vu-meter[0m
+Left and right LED ladders with fast attack, slow release, peak-hold markers and
+a dB scale — straight off a mixing desk.
+[0;2;39;49mchart · 60×6 (min 20×2) · 8 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: vu meter, led, audio, peak hold, db[0m
+
+          [48;5;234m                                                            [0m
+          [0;1;38;5;249;48;5;234mL[0;39;48;5;234m [38;5;71m▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮[38;5;236m▯▯▯▯[38;5;237m▯▯▯▯▯[38;5;231m▮[38;5;237m▯▯▯[38;5;237m▯▯▯▯▯▯[39m  [38;5;71m-1.0[0m
+          [48;5;234m                                                            [0m
+          [0;1;38;5;249;48;5;234mR[0;39;48;5;234m [38;5;71m▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮▮[38;5;236m▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯[38;5;231m▮[38;5;236m▯▯[38;5;237m▯▯▯▯▯▯▯▯▯[38;5;237m▯▯▯▯▯▯[39m  [38;5;71m-6.7[0m
+          [48;5;234m                                                            [0m
+          [48;5;234m       [38;5;66m-20[39m        [38;5;66m-10[39m          [38;5;66m-5[39m     [38;5;66m-3[39m       [38;5;167m0[39m    [38;5;167m3[39m       [0m
+[0;2;39;49m  still at t=4s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play charts-vu-meter[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot charts-vu-meter --size 60x6[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('charts-vu-meter'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/charts-gauge-ring[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/charts-bullet[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/charts[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

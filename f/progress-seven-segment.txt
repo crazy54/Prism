@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Progress & Counters > Counters & Odometers
+Seven-Segment Counter  progress-seven-segment
+A big LED counter with unlit ghost segments, ticking up in bursts and blinking
+when the batch completes. Classic _|_ in ASCII.
+progress - 44x8 (min 20x3) - 10 s loop - unicode - 256 colors
+tags: seven segment, led, counter, retro
+
+                   BATCH 7                                RUN
+                                 _   _   _
+                                 _| |_|  _| |_|
+                                |_  |_| |_    |
+
+
+
+                   2,824 of 4,096 - 949/s - eta 00:01
+  still at t=5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play progress-seven-segment
+Snapshot  prism-term snapshot progress-seven-segment --size 44x8
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-seven-segment'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-odometer
+next >    curl -sL prism.jeremyfhall.com/f/progress-big-percent
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

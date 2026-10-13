@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Spinners & Loaders > Bars & Pulses
+Pulse  loaders-pulse
+A dot swelling to a disc and back -- a gentle pulse for "still alive, nothing to
+report".
+spinner - 44x5 (min 24x2) - 8 s loop - unicode - 16 colors
+tags: spinner, loader, pulse, dot, breathe
+
+                   | Keepalive...                        4.0s
+
+                   - \ | /
+
+                   pulse (ASCII fallback) - 4 frames - 130 ms
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play loaders-pulse
+Snapshot  prism-term snapshot loaders-pulse --size 44x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-pulse'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-spiral
+next >    curl -sL prism.jeremyfhall.com/f/loaders-pulse-ring
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

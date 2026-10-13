@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Spinners & Loaders > Bars & Pulses
+Morse Lamp  loaders-morse
+A signal lamp flashing PRISM in real Morse timing while the code scrolls past on
+a tape.
+spinner - 44x5 (min 24x2) - 8 s loop - unicode - 256 colors
+tags: spinner, loader, morse, signal, lamp, original
+
+                   | Signalling peers...                 4.0s
+
+                   - \ | /
+
+                   morse (ASCII fallback) - 4 frames - 130 ms
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play loaders-morse
+Snapshot  prism-term snapshot loaders-morse --size 44x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-morse'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-ripple
+next >    curl -sL prism.jeremyfhall.com/f/loaders-moon
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

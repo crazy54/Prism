@@ -1,0 +1,29 @@
+* PRISM TERMINAL > Progress & Counters > Counters & Odometers
+Rolling Odometer  progress-odometer
+A mechanical counter: each drum rolls to its next digit only while the drum to
+its right passes 9, shaded like a cylinder.
+progress - 48x7 (min 24x3) - 10 s loop - unicode - 256 colors
+tags: odometer, counter, rolling, mechanical
+
+                 requests served                           20/s
+                               0   1 7 3   9 2 7
+                               1,  2 8 4,  0 3 8
+                               2   3 9 5   1 4 9
+
+
+                 +90 this run  -  avg 18.1/s
+  still at t=5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play progress-odometer
+Snapshot  prism-term snapshot progress-odometer --size 48x7
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-odometer'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-npm-install
+next >    curl -sL prism.jeremyfhall.com/f/progress-seven-segment
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

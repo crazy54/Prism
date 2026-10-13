@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Spinners & Loaders > Classic Spinners
+dqpb  loaders-dqpb
+The letters d q p b rotating into each other -- an ASCII-only spinner with a
+sense of humour.
+spinner - 44x5 (min 24x2) - 8 s loop - ascii - 16 colors
+tags: spinner, loader, ascii, letters, playful
+
+                   d Rotating letters...                 4.0s
+
+                   d q p b
+
+                   dqpb - 4 frames - 100 ms
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play loaders-dqpb
+Snapshot  prism-term snapshot loaders-dqpb --size 44x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-dqpb'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-toggle
+next >    curl -sL prism.jeremyfhall.com/f/loaders-flip
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

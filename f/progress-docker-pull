@@ -1,0 +1,33 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mProgress & Counters[0;2;39;49m › [0;1;39;49mSteps & Pipelines[0m
+[0;1;39;49mdocker pull[0;2;39;49m  progress-docker-pull[0m
+Layers going Waiting → Downloading → Extracting → Pull complete, three at a
+time; like docker, bars only show past 110 columns.
+[0;2;39;49mprogress · 112×11 (min 44×4) · 14 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: docker, container, layers, pull[0m
+
+[38;5;255;48;5;234m1.4.2: Pulling from prism/demo[39m                                                  [0m
+[38;5;255;48;5;234m00fb86738b42: [38;5;215mExtracting  12.46MB/29.13MB[39m                                       [0m
+[38;5;255;48;5;234mc835484f3e32: [38;5;249mAlready exists[39m                                                    [0m
+[38;5;255;48;5;234m248c1e89af9e: [38;5;74mDownloading  37.89MB/41.02MB[39m                                      [0m
+[38;5;255;48;5;234md025601c567f: [38;5;249mDownload complete[39m                                                 [0m
+[38;5;255;48;5;234mbb5522e53a50: [38;5;249mDownload complete[39m                                                 [0m
+[38;5;255;48;5;234mae8dae18aefd: [38;5;249mDownload complete[39m                                                 [0m
+[38;5;255;48;5;234m9ff8d085b8cf: [38;5;249mDownload complete[39m                                                 [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[0;2;39;49m  still at 80×11 · t=6s — run it live for full size and motion[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play progress-docker-pull[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot progress-docker-pull --size 112x11[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('progress-docker-pull'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-multi-bar[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-cargo-build[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/progress[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

@@ -1,0 +1,27 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mProgress & Counters[0;2;39;49m › [0;1;39;49mProgress Bars[0m
+[0;1;39;49mThin Line[0;2;39;49m  progress-thin-line[0m
+The heavy-line bar modern Python and Rust tools use — a bright run, a half-cap
+head and a dim remainder, with elapsed time.
+[0;2;39;49mprogress · 64×5 (min 24×1) · 8 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: line, rich, pip, minimal[0m
+
+        [48;5;234m [38;5;255mDownloading[39m [38;5;171m━━━━━━━━━━━━━━━━━━━━━━━━━━━━[38;5;238m━━━━━━━━━[39m [38;5;255m 76%[39m [38;5;66m0:00:04[39m [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m [38;5;255mBuilding[39m    [38;5;74m━━━━━━━━━━━━━━━━━━━━━━━╸[38;5;238m━━━━━━━━━━━━━[39m [38;5;255m 64%[39m [38;5;66m0:00:04[39m [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m [38;5;255mPublishing[39m  [38;5;71m━━━━━━━━━━━━━━━━━━━━╸[38;5;238m━━━━━━━━━━━━━━━━[39m [38;5;255m 55%[39m [38;5;66m0:00:04[39m [0m
+[0;2;39;49m  still at t=4s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play progress-thin-line[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot progress-thin-line --size 64x5[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('progress-thin-line'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-ascii-classic[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-vertical[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/progress[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

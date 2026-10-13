@@ -1,0 +1,37 @@
+* PRISM TERMINAL > Callouts & Layout > Key-Value
+System Summary (neofetch)  callouts-neofetch
+A neofetch-style summary: gradient logo art beside aligned key/value system
+facts and the ANSI color swatch row, with uptime ticking.
+widget - 64x15 (min 38x10) - 12 s loop - unicode - 256 colors
+tags: neofetch, fastfetch, system info, key value, motd
+
+
+                 /\           ops@prism-edge-01
+                /  \          -----------------
+               / /\ \         OS: Debian GNU/Linux 12 x86_64
+              / /  \ \        Host: c6i.2xlarge
+             / /    \ \       Kernel: 6.1.0-26-cloud-amd64
+            / /  /\  \ \      Uptime: 6 days, 4 hours, 17 mins
+           / /  /  \  \ \     Packages: 612 (dpkg)
+          /_/__/____\__\_\    Shell: bash 5.2.15
+                              Terminal: tmux 3.3a
+                              CPU: Intel Xeon 8375C (8) @ 2.90GHz
+                              Memory: 6,058MiB / 15,733MiB
+
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play callouts-neofetch
+Snapshot  prism-term snapshot callouts-neofetch --size 64x15
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('callouts-neofetch'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/callouts-section-headers
+next >    curl -sL prism.jeremyfhall.com/f/callouts-key-value
+gallery   curl -sL prism.jeremyfhall.com/t/callouts
+home      curl -sL prism.jeremyfhall.com/tty

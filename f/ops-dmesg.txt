@@ -1,0 +1,40 @@
+* PRISM TERMINAL > Linux & Ops > Logs & Journals
+dmesg -wH  ops-dmesg
+dmesg -wH following the kernel ring buffer with relative timestamps: a USB disk
+attaches, a segfault, then an oom-kill sequence in red.
+tui - 80x18 (min 56x6) - 26 s loop - ascii - 16 colors
+tags: dmesg, kernel, oom-killer, segfault, ring-buffer, logs
+
+ops@node03:~$ sudo dmesg -wH
+[Oct13 14:01] EXT4-fs (dm-0): mounted filesystem 3f1c9a2e-77b0-4d1e-9c55-0a8e2f6
+1b7d4 r/w with ordered data mode. Quota mode: none.
+[  +0.500000] virtio_net virtio0 eth0: link up
+[  +0.400000] IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+[  +0.800000] perf: interrupt took too long (2503 > 2500), lowering kernel.perf_
+event_max_sample_rate to 79750
+[  +0.800000] br-6f1d0c: port 2(veth3a91c2e) entered forwarding state
+[Oct13 14:02] usb 1-2: new high-speed USB device number 7 using xhci_hcd
+[  +0.400000] usb-storage 1-2:1.0: USB Mass Storage device detected
+[  +1.300000] sd 6:0:0:0: [sdc] 62914560 512-byte logical blocks: (32.2 GB/30.0
+GiB)
+[  +0.100000] sd 6:0:0:0: [sdc] Attached SCSI removable disk
+
+
+
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-dmesg
+Snapshot  prism-term snapshot ops-dmesg --size 80x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-dmesg'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-nginx-access
+next >    curl -sL prism.jeremyfhall.com/f/ops-log-histogram
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,37 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mInput & Menus[0;2;39;49m › [0;1;39;49mDialogs & Prompts[0m
+[0;1;39;49mConfirm Dialog[0;2;39;49m  input-confirm-dialog[0m
+A destructive-action modal with a shadow: Cancel is focused by default and
+Delete unlocks only after the namespace is typed, then it runs and closes.
+[0;2;39;49mtui · 64×15 (min 42×10) · 7 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: dialog, modal, confirm, destructive, buttons[0m
+
+        [38;5;238;48;5;234m12:04:33[39m [38;5;239mWARN [39m [38;5;238mcheckout-api   [39m [38;5;238mdb pool wait 840ms (20/20 in use)[0m
+        [38;5;238;48;5;234m12:04:34[39m [38;5;238mINFO [39m [38;5;238msearch-api     [39m [38;5;238mGET /search?q=tent 200 22ms[39m      [0m
+        [38;5;238;48;5;234m12:04:3[38;5;167;48;5;235m╭[0;1;38;5;167;48;5;235m ▲ Delete pods [0;38;5;167;48;5;235m─────────────────────────────────╮[39;48;5;234m       [0m
+        [38;5;238;48;5;234m12:04:3[38;5;167;48;5;235m│[39m [0;1;38;5;255;48;5;235mTerminate 3 pods in checkout?                 [0;38;5;238;48;5;235m [38;5;167m│[38;5;235;48;5;233mon[38;5;238;48;5;234m afte[0m
+        [38;5;238;48;5;234m12:04:3[38;5;167;48;5;235m│[39m [38;5;249mThey'll be rescheduled; local logs are lost.  [38;5;238m [38;5;167m│[38;5;235;48;5;233mk[38;5;238m [39;48;5;234m     [0m
+        [38;5;238;48;5;234m12:04:3[38;5;167;48;5;235m│[39m [38;5;238m     [39m [38;5;238m               [39m [38;5;238m                     [39m    [38;5;167m│[38;5;238;48;5;233m  [39;48;5;234m     [0m
+        [38;5;238;48;5;234m12:04:3[38;5;167;48;5;235m│[39m [38;5;249mType [0;1;38;5;255;48;5;235mcheckout[0;38;5;249;48;5;235m to confirm                      [38;5;238m [38;5;167m│[38;5;235;48;5;233m5 [38;5;238;48;5;234mattem[0m
+        [38;5;238;48;5;234m12:04:4[38;5;167;48;5;235m│[39m [38;5;238;48;5;234m [38;5;71mcheckout[38;5;238m            [39m [38;5;238m      [0;1;38;5;71;48;5;234m✔[0;38;5;238;48;5;234m [48;5;235m              [39m   [38;5;167m│[38;5;238;48;5;233m  [39;48;5;234m     [0m
+        [38;5;238;48;5;234m12:04:4[38;5;167;48;5;235m│[39m [38;5;238m     [39m [38;5;238m               [39m [38;5;238m                  [39m       [38;5;167m│[38;5;238;48;5;233m  [39;48;5;234m     [0m
+        [38;5;238;48;5;234m12:04:4[38;5;167;48;5;235m│[39m [0;1;38;5;215;48;5;235m⠹ Deleting 1/3 …                              [0;38;5;238;48;5;235m [38;5;167m│[38;5;235;48;5;233ms[38;5;238m [39;48;5;234m     [0m
+        [38;5;238;48;5;234m12:04:4[38;5;167;48;5;235m╰────────────────────────────────────────────────╯[38;5;235;48;5;233min[38;5;238;48;5;234m use)[0m
+        [38;5;238;48;5;234m12:04:44[39m [38;5;234;48;5;233mINFO [38;5;238m [38;5;235msearch-api     [38;5;238m [38;5;235mGET /search?q=tent 200 22ms[38;5;238m [39;48;5;234m     [0m
+        [38;5;238;48;5;234m12:04:45[39m [38;5;238mINFO [39m [38;5;238mgateway        [39m [38;5;238mPOST /checkout 201 212ms[39m         [0m
+        [38;5;238;48;5;234m12:04:46[39m [38;5;239mERROR[39m [38;5;238mcheckout-api   [39m [38;5;238mtimeout acquiring connection afte[0m
+        [38;5;238;48;5;236m [38;5;249mk9s · checkout · pods                                         [39m [0m
+[0;2;39;49m  still at t=3.5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play input-confirm-dialog[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot input-confirm-dialog --size 64x15[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('input-confirm-dialog'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/input-slash-commands[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/input-prompt-flow[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/input[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

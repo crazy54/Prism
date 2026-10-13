@@ -1,0 +1,40 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mPure ASCII[0;2;39;49m › [0;1;39;49mASCII Spinners & Bars[0m
+[0;1;39;49mClassic Tool Progress Bars[0;2;39;49m  ascii-progress-bars[0m
+The progress lines everyone recognizes — wget, curl, apt, tqdm, rsync, docker
+pull, pip and make — in pure ASCII.
+[0;2;39;49mprogress · 80×18 (min 40×8) · 10 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: progress, wget, curl, apt, tqdm, rsync, docker[0m
+
+[38;5;66;48;5;234m$ wget[39m                                                                          [0m
+[38;5;71;48;5;234mprism-term.tgz   100%[============================] 18.40M  822KB/s  in 4.4s [39m   [0m
+[38;5;66;48;5;234m$ curl[39m                                                                          [0m
+[38;5;74;48;5;234m####################################################################[38;5;255m      94.4%[39m [0m
+[38;5;66;48;5;234m$ apt[39m                                                                           [0m
+[38;5;255;48;5;234mProgress: [ 82%] [[38;5;74m############################################[38;5;255m..........][39m       [0m
+[38;5;66;48;5;234m$ tqdm[39m                                                                          [0m
+[38;5;255;48;5;234m 10%|[38;5;74m##[38;5;255m9                           | 10/100 [00:00<00:05, 18.20it/s][39m            [0m
+[38;5;66;48;5;234m$ rsync[39m                                                                         [0m
+[38;5;255;48;5;234m      1,035,717   86%    1.21MB/s    0:00:01[39m                                    [0m
+[38;5;66;48;5;234m$ docker[39m                                                                        [0m
+[38;5;255;48;5;234ma3ed95caeb02: Downloading [[38;5;74m===========>[38;5;255m                    ]  15.0MB/40.3MB[39m     [0m
+[38;5;66;48;5;234m$ pip[39m                                                                           [0m
+[38;5;71;48;5;234m   ---------------------------------------- 9.6/9.6 MB [39m                         [0m
+[38;5;66;48;5;234m$ make[39m                                                                          [0m
+[38;5;71;48;5;234m[100%] Building C object src/CMakeFiles/prism.dir/render.c.o[39m                    [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[0;2;39;49m  still at t=5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ascii-progress-bars[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ascii-progress-bars --size 80x18[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ascii-progress-bars'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ascii-spinners[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ascii-hourglass[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ascii[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

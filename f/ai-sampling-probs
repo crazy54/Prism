@@ -1,0 +1,33 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mAI Working[0;2;39;49m › [0;1;39;49mModel Internals[0m
+[0;1;39;49mNext-Token Sampling[0;2;39;49m  ai-sampling-probs[0m
+Next-token sampling: top-k candidates as probability bars that sharpen or
+flatten as temperature slides, then the sampled token flashes and joins the
+text.
+[0;2;39;49mchart · 60×10 (min 40×9) · 7.800000000000001 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: sampling, temperature, probabilities, top-k, logits[0m
+
+          [38;5;255;48;5;234mThe p99 spike is caused by DB pool[38;5;74m▍[39m                         [0m
+          [48;5;234m                                                            [0m
+          [38;5;249;48;5;234mtemperature[39m [38;5;238m─────────────[0;1;38;5;215;48;5;234m●[0;38;5;238;48;5;234m──────[39m [0;1;38;5;215;48;5;234m1.19[0;39;48;5;234m                       [0m
+          [48;5;234m                                                            [0m
+          [38;5;255;48;5;234m·exhaustion [39m [38;5;74m██████████████▎[38;5;237m░░░░░░░░░░░░░░░░░░░[39m [38;5;249m 42.0%[39m      [0m
+          [38;5;255;48;5;234m·starvation [39m [38;5;74m██████████▎[38;5;237m░░░░░░░░░░░░░░░░░░░░░░░[39m [38;5;249m 30.0%[39m      [0m
+          [38;5;255;48;5;234m·limits     [39m [38;5;74m███▍[38;5;237m░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░[39m [38;5;249m 10.1%[39m      [0m
+          [38;5;255;48;5;234m·size       [39m [38;5;74m██▉[38;5;237m░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░[39m [38;5;249m  8.5%[39m      [0m
+          [38;5;255;48;5;234m·wait       [39m [38;5;74m██▎[38;5;237m░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░[39m [38;5;249m  6.6%[39m      [0m
+          [38;5;255;48;5;234m·churn      [39m [38;5;74m█[38;5;237m░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░[39m [38;5;249m  2.8%[39m      [0m
+[0;2;39;49m  still at t=3.9000000000000004s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ai-sampling-probs[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ai-sampling-probs --size 60x10[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ai-sampling-probs'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ai-context-window[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ai-attention-heatmap[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ai[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

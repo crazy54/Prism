@@ -1,0 +1,32 @@
+* PRISM TERMINAL > AI Working > Tool Calls
+Approval Prompt  ai-approval-prompt
+A human-in-the-loop approval prompt: the agent proposes a production command
+with its reason, the user weighs the options and approves, then it runs.
+tui - 70x10 (min 50x10) - 7 s loop - unicode - 256 colors
+tags: approval, human in the loop, permission, confirm, agent
+
+     | Bash(kubectl -n checkout set env deploy/checkout-api DB_POOL_SIZE...
+       \_ Running...
+
+     + approved by you . 12:05:41 . logged to the audit trail
+
+
+
+
+
+
+  still at t=3.5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ai-approval-prompt
+Snapshot  prism-term snapshot ai-approval-prompt --size 70x10
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ai-approval-prompt'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ai-parallel-tools
+next >    curl -sL prism.jeremyfhall.com/f/ai-diff-apply
+gallery   curl -sL prism.jeremyfhall.com/t/ai
+home      curl -sL prism.jeremyfhall.com/tty

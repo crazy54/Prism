@@ -1,0 +1,31 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mAI Working[0;2;39;49m › [0;1;39;49mToken Streams[0m
+[0;1;39;49mToken Stream[0;2;39;49m  ai-token-stream[0m
+A response streaming token by token with each new token flashing, a live tok/s
+sparkline and TTFT, then a tokenizer view that tints every token boundary.
+[0;2;39;49mtext · 64×9 (min 36×6) · 9 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: tokens, streaming, llm, tokenizer, tok/s[0m
+
+        [38;2;233;235;237;48;2;15;22;33mCheckout latency is up because the DB pool is exhausted. Since[39m  [0m
+        [38;2;233;235;237;48;2;15;22;33mv2.14.1 the service runs 32 workers but still opens only 20[39m     [0m
+        [38;2;233;235;237;48;2;15;22;33mconnections, so about a third of requests wait in the pool[39m      [0m
+        [38;2;233;235;237;48;2;15;22;33mqueue. Raising the[38;2;188;212;235;48;2;25;43;62m pool[48;2;32;56;82m to[0;1;38;2;188;212;235;48;2;39;70;102m 40[0;38;2;83;159;229;48;2;15;22;33m▍[39m                                  [0m
+        [48;2;15;22;33m                                                                [0m
+        [48;2;15;22;33m                                                                [0m
+        [48;2;15;22;33m                                                                [0m
+        [38;2;53;65;80;48;2;15;22;33m────────────────────────────────────────────────────────────────[0m
+        [38;2;164;176;192;48;2;15;22;33mTTFT 380ms · 18 tok/s · 56/65 tokens[39m                [38;2;83;159;229m▇▄▄▄▁▄▅▄▆▂▂▅[0m
+[0;2;39;49m  still at t=4.5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play ai-token-stream[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot ai-token-stream --size 64x9[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('ai-token-stream'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ai-status-orb[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ai-markdown-stream[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ai[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

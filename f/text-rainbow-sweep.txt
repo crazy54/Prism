@@ -1,0 +1,36 @@
+* PRISM TERMINAL > Text Effects > Color & Light
+Rainbow Sweep  text-rainbow-sweep
+A bright leading edge sweeps over gray type and leaves a flowing spectrum behind
+it -- then sweeps back and drains it out.
+text - 72x14 (min 36x8) - 6 s loop - unicode - truecolor
+tags: rainbow, sweep, spectrum, wipe, prism
+
+
+
+
+             ##### #####  ######  ##### ###### #####  ##  ## ##   ##
+            ##     ##  ## ##     ##       ##   ##  ## ##  ## ### ###
+            ##     ##  ## ##     ##       ##   ##  ## ##  ## #######
+             ####  #####  #####  ##       ##   #####  ##  ## ## # ##
+                ## ##     ##     ##       ##   ## ##  ##  ## ##   ##
+                ## ##     ##     ##       ##   ##  ## ##  ## ##   ##
+            #####  ##     ######  #####   ##   ##  ##  ####  ##   ##
+
+            ========================================================
+
+
+  still at t=3s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play text-rainbow-sweep
+Snapshot  prism-term snapshot text-rainbow-sweep --size 72x14
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('text-rainbow-sweep'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/text-fire
+next >    curl -sL prism.jeremyfhall.com/f/text-lolcat
+gallery   curl -sL prism.jeremyfhall.com/t/text
+home      curl -sL prism.jeremyfhall.com/tty

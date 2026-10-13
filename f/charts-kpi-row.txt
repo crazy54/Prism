@@ -1,0 +1,27 @@
+* PRISM TERMINAL > Charts & Metrics > KPI Tiles
+KPI Tile Row  charts-kpi-row
+Four boxed KPI tiles -- throughput, latency, errors, saturation -- each with a
+value, a colored delta and a trend sparkline.
+chart - 80x5 (min 22x4) - 12 s loop - unicode - truecolor
+tags: kpi, tiles, dashboard, delta, sparkline
+
++ throughput -----+ + p95 latency ----+ + error rate -----+ + saturation ------+
+| 2305 rps        | | 205 ms  v 14.7% | | 0.29 %    v 58% | | 69 %     ^ 15.7% |
+|  .  .. .......: | | .......         | | .....:.....     | |  .::   :. .....: |
+| ....: .    .    | |        :..:.... | |           ..... | | .: ..:: ..  ..   |
++-----------------+ +-----------------+ +-----------------+ +------------------+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-kpi-row
+Snapshot  prism-term snapshot charts-kpi-row --size 80x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-kpi-row'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-corr-matrix
+next >    curl -sL prism.jeremyfhall.com/f/charts-big-number
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

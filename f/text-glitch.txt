@@ -1,0 +1,38 @@
+* PRISM TERMINAL > Text Effects > Glitch & Distort
+RGB Split Glitch  text-glitch
+Big type torn into horizontal slices, red and cyan channels pulled apart, blocks
+displaced -- in bursts, like a failing signal.
+text - 72x16 (min 36x8) - 6 s loop - unicode - truecolor
+tags: glitch, rgb split, tearing, datamosh, corruption
+
+
+
+
+
+                  ######## ##  ########### ##### ##  ### ##
+                 ## ##  ##### #### #############  ######### ##
+                 ## ## ### ## #### ## ## ####### ### ###### ##
+                 ## ###### ## #### ## ## ####### ########## ##
+                 ## ######### #### ## ## ####### ####  #######
+                 ######### ####### ## ## ############  ########
+                    ####### #### ######### ########### ### ###
+                          ##### ###### ####   ##    ##### ##  ##
+
+                             EER=R0x5+FF*AMEEDR$@P
+
+
+  still at t=3s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play text-glitch
+Snapshot  prism-term snapshot text-glitch --size 72x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('text-glitch'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/text-scramble
+next >    curl -sL prism.jeremyfhall.com/f/text-vhs
+gallery   curl -sL prism.jeremyfhall.com/t/text
+home      curl -sL prism.jeremyfhall.com/tty

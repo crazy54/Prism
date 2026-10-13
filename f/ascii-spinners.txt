@@ -1,0 +1,40 @@
+* PRISM TERMINAL > Pure ASCII > ASCII Spinners & Bars
+ASCII Spinner Sampler  ascii-spinners
+Sixteen pure-ASCII spinners -- |/-\, bouncing brackets, scanners, meters and
+more -- each at its own classic cadence.
+spinner - 64x18 (min 24x6) - 4 s loop - ascii - 16 colors
+tags: spinner, loader, busy, classic, cli
+
+         |        line                   +        toggle
+         .        dots                   :        pulse
+         O        grow                   -        flip
+         >        arrows                 [##   ]  meter
+         [=   ]   bounce                 |  o  |  ping
+         ( *   )  scanner                \        clock
+         [|]      pipe                     >>>    beam
+         [    ]   fill                   d        dqpb
+
+
+
+
+
+
+
+
+
+
+  still at t=2s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ascii-spinners
+Snapshot  prism-term snapshot ascii-spinners --size 64x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-spinners'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-coffee
+next >    curl -sL prism.jeremyfhall.com/f/ascii-progress-bars
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

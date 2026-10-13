@@ -1,0 +1,23 @@
+  .--. .--. ---  .--. .   .    TERMINAL  434 facets - 17 galleries
+  |__' |__'  |   '--. |\ /|    Animated terminal art, widgets and TUI parts.
+  |    |  \ ---  .__' | v |    help /t/help - plain .txt - catalog /terminal/
+
+  curl -sL prism.jeremyfhall.com/t/fx        FX Store                  24
+  curl -sL prism.jeremyfhall.com/t/objects   Animated Objects          18
+  curl -sL prism.jeremyfhall.com/t/sim       Particles & Simulations   18
+  curl -sL prism.jeremyfhall.com/t/retro     Retro & Demoscene         24
+  curl -sL prism.jeremyfhall.com/t/text      Text Effects              29
+  curl -sL prism.jeremyfhall.com/t/loaders   Spinners & Loaders        64
+  curl -sL prism.jeremyfhall.com/t/progress  Progress & Counters       41
+  curl -sL prism.jeremyfhall.com/t/charts    Charts & Metrics          30
+  curl -sL prism.jeremyfhall.com/t/ai        AI Working                18
+  curl -sL prism.jeremyfhall.com/t/status    Notifications & Status    18
+  curl -sL prism.jeremyfhall.com/t/ops       Linux & Ops               39
+  curl -sL prism.jeremyfhall.com/t/diagrams  Architecture Diagrams     16
+  curl -sL prism.jeremyfhall.com/t/callouts  Callouts & Layout         15
+  curl -sL prism.jeremyfhall.com/t/input     Input & Menus             23
+  curl -sL prism.jeremyfhall.com/t/maps      Maps & Geo                11
+  curl -sL prism.jeremyfhall.com/t/lab       Animation Lab             17
+  curl -sL prism.jeremyfhall.com/t/ascii     Pure ASCII                29
+  The live player, animated in your terminal (Node 18+):
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term

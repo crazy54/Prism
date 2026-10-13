@@ -1,0 +1,33 @@
+* PRISM TERMINAL > AI Working > Model Internals
+Next-Token Sampling  ai-sampling-probs
+Next-token sampling: top-k candidates as probability bars that sharpen or
+flatten as temperature slides, then the sampled token flashes and joins the
+text.
+chart - 60x10 (min 40x9) - 7.800000000000001 s loop - unicode - 256 colors
+tags: sampling, temperature, probabilities, top-k, logits
+
+          The p99 spike is caused by DB pool_
+
+          temperature -------------O------ 1.19
+
+          _exhaustion  ##############....................  42.0%
+          _starvation  ##########........................  30.0%
+          _limits      ###...............................  10.1%
+          _size        ##................................   8.5%
+          _wait        ##................................   6.6%
+          _churn       ..................................   2.8%
+  still at t=3.9000000000000004s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ai-sampling-probs
+Snapshot  prism-term snapshot ai-sampling-probs --size 60x10
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ai-sampling-probs'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ai-context-window
+next >    curl -sL prism.jeremyfhall.com/f/ai-attention-heatmap
+gallery   curl -sL prism.jeremyfhall.com/t/ai
+home      curl -sL prism.jeremyfhall.com/tty

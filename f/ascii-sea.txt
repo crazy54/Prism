@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Pure ASCII > ASCII Art
+Sailboat at Sea  ascii-sea
+A sailboat rides rolling ~ and ^ swells under a low sun while gulls flap
+overhead between v and V.
+art - 80x24 (min 36x12) - 12 s loop - ascii - 16 colors
+tags: boat, sea, waves, seagulls, sunset
+
+
+
+               V
+                                                         \    |    /
+                v                                            ___
+                                            v           -  /     \ -
+                                   |\                      \_____/
+                                   | \
+                                   |  \                                  V
+                                   |___\
+                               ____|_____
+^^^^^^^^^^~~~~-----          --\--o-o-o-/------            =     ----~~~~~~~~~~~
+^^^^^~~~~-------   ----------~~~\______/--                = =----~~~~~~~~~~~----
+~~~-----------------~~~~~~~~~~~~-----                  -------~~~=---------
+------------~~~~~~^^^^^~~~~~----                 ---------=-------            --
+------~~~~^^^^^^^^^~~~~-----              ----------------                ----~~
+~~~~^^^^^^^^^^^~~~~-----          ------------------        =         ----~~~~~~
+^^^^^^^^^^~~~~-------   ----------~~~~~~------                 = =----~~~~~~~~~~
+^^^~~~~~-----------------~~~~~~~~~~~~-----                = =-=---=~~~~---------
+~----------------~~~~~~^^^^^~~~~~----                 -----=-----------
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ascii-sea
+Snapshot  prism-term snapshot ascii-sea --size 80x24
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-sea'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-matrix
+next >    curl -sL prism.jeremyfhall.com/f/ascii-mountains
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

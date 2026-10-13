@@ -1,0 +1,40 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mLogin & MOTD[0m
+[0;1;39;49mfail2ban Jail[0;2;39;49m  ops-fail2ban[0m
+fail2ban-client status for the sshd jail (failed and banned counts, the banned
+IP list), an unban, and the status again as attempts keep coming.
+[0;2;39;49mtui · 80×18 (min 64×8) · 24 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: fail2ban, ssh, brute-force, ban, security, jail[0m
+
+[0;1;38;5;71;48;5;234mops@node03[0;38;5;255;48;5;234m:[0;1;38;5;74;48;5;234m~[0;38;5;255;48;5;234m$ sudo fail2ban-client status sshd[39m                                  [0m
+[38;5;255;48;5;234mStatus for the jail: sshd[39m                                                       [0m
+[38;5;255;48;5;234m|- Filter[39m                                                                       [0m
+[38;5;255;48;5;234m|  |- Currently failed: [0;1;38;5;255;48;5;234m3[0;39;48;5;234m                                                       [0m
+[38;5;255;48;5;234m|  |- Total failed:     [0;1;38;5;255;48;5;234m1287[0;39;48;5;234m                                                    [0m
+[38;5;255;48;5;234m|  `- Journal matches:  _SYSTEMD_UNIT=sshd.service + _COMM=sshd[39m                 [0m
+[38;5;255;48;5;234m`- Actions[39m                                                                      [0m
+[38;5;255;48;5;234m   |- Currently banned: [0;1;38;5;255;48;5;234m4[0;39;48;5;234m                                                       [0m
+[38;5;255;48;5;234m   |- Total banned:     [0;1;38;5;255;48;5;234m212[0;39;48;5;234m                                                     [0m
+[38;5;255;48;5;234m   `- Banned IP list:   203.0.113.77 198.51.100.23 192.0.2.140 203.0.113.9[39m      [0m
+[0;1;38;5;71;48;5;234mops@node03[0;38;5;255;48;5;234m:[0;1;38;5;74;48;5;234m~[0;38;5;255;48;5;234m$ [38;5;234;48;5;255m [39;48;5;234m                                                                 [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ops-fail2ban[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ops-fail2ban --size 80x18[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ops-fail2ban'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-getty-login[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-prompt-bash[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

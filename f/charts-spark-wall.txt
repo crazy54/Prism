@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Charts & Metrics > Sparklines
+Sparkline Wall  charts-spark-wall
+A NOC wall of a dozen services: name, a mini sparkline and the current rate,
+each tinted by health.
+chart - 80x8 (min 26x3) - 12 s loop - unicode - 256 colors
+tags: sparkline, wallboard, noc, services, grid
+
+o api-gw   =#%*=:-*@  306 o rx-orders#%@%##*=:  986
+o auth     +===-:=%@  383 o loyalty  :-==+#@%* 1147
+o cart     @#+-:-+#*  476 o notify   @*-:=++-:  344
+o checkout #=*@*-:-:  599 o inventory:-=#@%=:=  473
+o search   :++=-:-#@  684
+o catalog  #=:=#@@*-  675
+o payments -*@%%@@+:  866
+o orders   ===-::=#@ 1079
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-spark-wall
+Snapshot  prism-term snapshot charts-spark-wall --size 80x8
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-spark-wall'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-spark-dots
+next >    curl -sL prism.jeremyfhall.com/f/charts-line-multi
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

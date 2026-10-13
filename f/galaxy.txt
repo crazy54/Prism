@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Particles & Simulations > Particles
+Spiral Galaxy  galaxy
+Density-wave spiral galaxy -- thousands of stars on tilted elliptical orbits
+with differential rotation, glowing core and dust.
+scene - 80x24 (min 20x6) - 8 s loop - unicode - truecolor
+tags: galaxy, spiral, stars, space
+
+
+                                       .          :
+                                .
+                                : :::    .                 -
+                          : .    .+-   .   .        -
+                      . .  .     .    -   .:**:.=%@#@::. . .+.
+                    ..:  :.  -   -  ...%%#=@:::-....#@*-:@..
+                  -.*@:        : =..+@@+.::::...:-* = +..*==@.  .    -
+                 +-..    :    ..:..@@@:+#:*-+:.*.-.=      .:#..
+                ..@+.:.   .  :-..+:@@#@@@@#@@@.*...#. :   -..=.
+                 :#*:..      .%.:-:*@@@@@@@+@:@..:.  *  :  .:%:
+                 ..@:-    # ..-....-.::*:@-@@.::. .*   :   .-:.
+                . ::@%:.@=  ......-=..=.+@%=:..  .  .: ..=....
+                   ..:@-:==+..:+#%:@@-*+@#. .. .  ==   .=.:..
+                    :-  ..#:*%+@@=.@.% - #.             .=
+                    +    -    =      -+    : #. :  .-. +
+                     +     +    *  +   .      .  -
+                      .  =      .     .   -
+                                                                 :
+                                                                          =
+  still at 80x20 - t=4s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play galaxy
+Snapshot  prism-term snapshot galaxy --size 80x24
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('galaxy'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/fireworks
+next >    curl -sL prism.jeremyfhall.com/f/flowfield
+gallery   curl -sL prism.jeremyfhall.com/t/sim
+home      curl -sL prism.jeremyfhall.com/tty

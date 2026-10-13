@@ -1,0 +1,42 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mContainers & Clusters[0m
+[0;1;39;49mk9s-style Pod Console[0;2;39;49m  ops-k9s[0m
+A k9s-style cluster console: context/cluster header with CPU/MEM, key hints, a
+titled pod table colored by status, a moving selection and a crumb bar.
+[0;2;39;49mtui · 80×20 (min 60×10) · 24 s loop · ascii · 256 colors[0m
+[0;2;39;49mtags: k9s, kubernetes, pods, console, tui, k8s[0m
+
+[48;5;234m [0;1;38;5;209;48;5;234mContext: [38;5;255mprod-east[0;39;48;5;234m               [0;1;38;5;74;48;5;234m<0>  [0;38;5;249;48;5;234mall[39m                                      [0m
+[48;5;234m [0;1;38;5;209;48;5;234mCluster: [38;5;255mprod-east[0;39;48;5;234m               [0;1;38;5;74;48;5;234m<1>  [0;38;5;249;48;5;234mshop[39m                                     [0m
+[48;5;234m [0;1;38;5;209;48;5;234mUser:    [38;5;255mops[0;39;48;5;234m                     [0;1;38;5;74;48;5;234m<2>  [0;38;5;249;48;5;234mdefault[39m                                  [0m
+[48;5;234m [0;1;38;5;209;48;5;234mK9s Rev: [38;5;255mv0.32.5[0;39;48;5;234m                 [0;1;38;5;74;48;5;234m<a>  [0;38;5;249;48;5;234mAttach[39m                                   [0m
+[48;5;234m [0;1;38;5;209;48;5;234mK8s Rev: [38;5;255mv1.31.2[0;39;48;5;234m                 [0;1;38;5;74;48;5;234m<d>  [0;38;5;249;48;5;234mDescribe[39m                                 [0m
+[48;5;234m [0;1;38;5;209;48;5;234mCPU:     [38;5;255m31%[0;39;48;5;234m                     [0;1;38;5;74;48;5;234m<l>  [0;38;5;249;48;5;234mLogs[39m                                     [0m
+[48;5;234m [0;1;38;5;209;48;5;234mMEM:     [38;5;255m62%[0;39;48;5;234m                     [0;1;38;5;74;48;5;234m<s>  [0;38;5;249;48;5;234mShell[39m                                    [0m
+[38;5;73;48;5;234m┌───────────────────────────────[0;1;38;5;73;48;5;234m Pods(shop)[9] [0;38;5;73;48;5;234m────────────────────────────────┐[0m
+[38;5;73;48;5;234m│[0;1;38;5;255;48;5;234m NAME↑                     READY STATUS            RESTARTS IP         NODE[0;39;48;5;234m   [38;5;73m│[0m
+[38;5;73;48;5;234m│ api-7d9c6b5f8d-2xk4p      1/1   Running           0        10.42.1.18 node-a[39m [38;5;73m│[0m
+[38;5;73;48;5;234m│ api-7d9c6b5f8d-9qwlz      1/1   Running           0        10.42.2.7  node-b[39m [38;5;73m│[0m
+[38;5;73;48;5;234m│[38;5;234;48;5;73m api-7d9c6b5f8d-hv6s1      1/1   Running           0        10.42.3.22 node-c [38;5;73;48;5;234m│[0m
+[38;5;73;48;5;234m│ worker-5f4b9c7d6f-q8l2c   1/1   Running           0        10.42.1.31 node-a[39m [38;5;73m│[0m
+[38;5;73;48;5;234m│[38;5;167m worker-5f4b9c7d6f-x7d9p   0/1   CrashLoopBackOff  7        10.42.2.12 node-b[39m [38;5;73m│[0m
+[38;5;73;48;5;234m│[38;5;249m reindex-28817640-k2j4f    0/1   Completed         0        10.42.3.9  node-c[39m [38;5;73m│[0m
+[38;5;73;48;5;234m│ redis-0                   1/1   Running           0        10.42.1.4  node-a[39m [38;5;73m│[0m
+[38;5;73;48;5;234m│ postgres-0                1/1   Running           0        10.42.2.3  node-b[39m [38;5;73m│[0m
+[38;5;73;48;5;234m│[38;5;215m migrate-2-14-1-vb7hs      0/1   ContainerCreating 0        <none>     node-c[39m [38;5;73m│[0m
+[38;5;73;48;5;234m└──────────────────────────────────────────────────────────────────────────────┘[0m
+[0;1;38;5;234;48;5;209m <pod> [0;38;5;234;48;5;73m shop [39;48;5;234m                                                                   [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ops-k9s[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ops-k9s --size 80x20[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ops-k9s'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-kubectl-rollout[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-journalctl-follow[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

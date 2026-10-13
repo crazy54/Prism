@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Particles & Simulations > Cellular Automata
+Wireworld  wireworld
+Wireworld on a generated circuit board: clock loops fire electrons down routed
+traces that fan out across it.
+scene - 60x22 (min 20x7) - 12 s loop - unicode - truecolor
+tags: wireworld, cellular automata, circuit, electrons, pcb, clock
+
+
+                                     +
+                                     -             --------
+                                     -            -        -
+                                     -       ------        -
+                                     -      -     %        -
+                                     -      -      +-------
+                                     -      -
+                                      -------      ----
+                                            -     --   -
+                                      * *   -     - -  -
+                                      --    -     + +  -      +%--
+                                       -----      % %   --%+--    -
+                                                  - -        -    -
+                                                  * -         ----
+                                                    -
+                                                 ---
+                                                -
+                                                *
+
+  still at 60x20 - t=6s -- run it live for full size and motion
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play wireworld
+Snapshot  prism-term snapshot wireworld --size 60x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('wireworld'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/langtons-ant
+next >    curl -sL prism.jeremyfhall.com/f/brians-brain
+gallery   curl -sL prism.jeremyfhall.com/t/sim
+home      curl -sL prism.jeremyfhall.com/tty

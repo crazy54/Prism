@@ -1,0 +1,45 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mNotifications & Status (18)[0m
+Toasts, status lines, badges, health indicators and log lines.
+
+[38;5;215;48;5;235m▌[39m [0;1;38;5;215;48;5;235m▲[0;39;48;5;235m [0;1;38;5;255;48;5;235mHigh latency[0;39;48;5;235m                     [38;5;66m×[39m [49m  [38;5;66;48;5;234m▐[0;1;38;5;234;48;5;66mDEBUG[0;38;5;66;48;5;234m▌[39m [38;5;249m41,256[39m  [38;5;74m▐[0;1;38;5;234;48;5;74mINFO[0;38;5;74;48;5;234m▌[39m [38;5;249m120,595[39m         [0m
+[38;5;215;48;5;235m▌[39m   [38;5;249msearch p95 at 812 ms (SLO 500 ms)[39m  [49m  [0;1;38;5;74;48;5;237m ⠋ running [0;39;48;5;234m [0;1;38;5;215;48;5;238m ◌ pending [0;39;48;5;234m [0;1;38;5;71;48;5;236m ✔ passed [0;39;48;5;234m     [0m
+[38;5;215;48;5;235m▌[38;5;179m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[38;5;236m━━━━━━━━━[39;49m  [0;1;38;5;74;48;5;234m[v2.14.2][0;39;48;5;234m [0;1;38;5;167;48;5;234m[prod][0;39;48;5;234m [0;1;38;5;74;48;5;234m[us-east-1][0;39;48;5;234m           [0m
+[48;5;234m                                       [49m  [38;5;66;48;5;234menv [38;5;71;48;5;235m DEV [39;48;5;234m [38;5;74;48;5;236m STAGING [39;48;5;234m [38;5;215m▐[0;1;38;5;234;48;5;215mCANARY[0;38;5;215;48;5;234m▌[39m [38;5;167;48;5;235m PROD [39;48;5;234m    [0m
+[38;5;74;48;5;235m▌[39m [0;1;38;5;74;48;5;235mℹ[0;39;48;5;235m [0;1;38;5;255;48;5;235mBackup complete[0;39;48;5;235m                  [38;5;66m×[39m [49m  [38;5;255;48;5;234mInbox[39m [38;5;74m▐[0;1;38;5;234;48;5;74m4[0;38;5;74;48;5;234m▌[39m  [38;5;255mPRs[39m [38;5;74m▐[0;1;38;5;234;48;5;74m12[0;38;5;74;48;5;234m▌[39m  [38;5;255mAlerts[39m [38;5;167m▐[0;1;38;5;234;48;5;167m4[0;38;5;167;48;5;234m▌[39m        [0m
+[38;5;74;48;5;235m▌[39m   [38;5;249mpg-orders snapshot 41.2 GB in 3m…[39m  [49m  [48;5;234m                                       [0m
+[38;5;74;48;5;235m▌[38;5;67m━━━━━━━━━━━━━━━[38;5;236m━━━━━━━━━━━━━━━━━━━━━━━[39;49m  [48;5;234m                                       [0m
+[48;5;234m                                       [49m  [48;5;234m                                       [0m
+[0;2;39;49mstatus-toast-stack                       status-badges[0m
+
+[0;1;38;5;68;49mTOASTS & ALERTS[0;2;39;49m  5[0m
+  [38;5;73mstatus-toast-stack      [39mNotifications slide in from the right, stack, push ol…[0m
+  [38;5;73mstatus-alert-banners    [39mInfo, success, warning and error banners with accent …[0m
+  [38;5;73mstatus-incident-banner  [39mA pulsing SEV1 banner with a live elapsed timer, affe…[0m
+  [38;5;73mstatus-oncall-pager     [39mAn incoming page: the alert, its context, ringing ind…[0m
+  [38;5;73mstatus-deploy-success   [39mThe good-news moment: rollout dots fill host by host,…[0m
+
+[0;1;38;5;68;49mSTATUS LINES[0;2;39;49m  3[0m
+  [38;5;73mstatus-vim-line         [39mA lightline-style vim statusline over a live buffer: …[0m
+  [38;5;73mstatus-tmux-bar         [39mA tmux session: split panes with a shell and a live l…[0m
+  [38;5;73mstatus-powerline        [39mA two-line powerline shell prompt — user, path, git a…[0m
+
+[0;1;38;5;68;49mBADGES & PILLS[0;2;39;49m  3[0m
+  [38;5;73mstatus-badges           [39mLog-level badges with ticking counts, state chips, ou…[0m
+  [38;5;73mstatus-shields          [39mTwo-tone README shields — build, tests, coverage, ver…[0m
+  [38;5;73mstatus-ci-pipeline      [39mA CI pipeline graph: stages of jobs going pending → r…[0m
+
+[0;1;38;5;68;49mHEALTH & UPTIME[0;2;39;49m  4[0m
+  [38;5;73mstatus-health-checks    [39mService health checks re-running in a sweep: live sta…[0m
+  [38;5;73mstatus-uptime-slo       [39mA status-page uptime history: 90 daily bars per servi…[0m
+  [38;5;73mstatus-service-matrix   [39mServices by region as a status grid: an incident star…[0m
+  [38;5;73mstatus-heartbeat        [39mA cron and worker heartbeat monitor drawn as an ECG t…[0m
+
+[0;1;38;5;68;49mLOG LINES[0;2;39;49m  3[0m
+  [38;5;73mstatus-log-syslog       [39mA journal follow in syslog format with journald prior…[0m
+  [38;5;73mstatus-log-json         [39mStructured JSON logs piped through jq -c: keys, strin…[0m
+  [38;5;73mstatus-log-logfmt       [39mlogfmt key=value lines under a level filter bar with …[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-toast-stack[0m
+[0;2;39;49mpaged     [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/status | less -R[0m
+[0;2;39;49mgalleries [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

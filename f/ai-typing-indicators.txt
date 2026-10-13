@@ -1,0 +1,26 @@
+* PRISM TERMINAL > AI Working > Thinking States
+Typing Indicators  ai-typing-indicators
+Six labeled "model is working" indicators side by side: a chat bubble of
+bouncing dots, a braille wave, a pulse, an orbit, a scanner and an equalizer.
+spinner - 66x4 (min 33x4) - 2.4 s loop - unicode - 256 colors
+tags: typing indicator, dots, wave, loading, chat
+
+       +-------+                            .
+       | . . . |  -.  :+##*  .   O   .    . * O    ---=#=---   :.#=#.:
+       +-+-----+                            .
+       bounce     wave       pulse      orbit      scan       meter
+  still at t=1.2s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ai-typing-indicators
+Snapshot  prism-term snapshot ai-typing-indicators --size 66x4
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ai-typing-indicators'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ai-thinking-shimmer
+next >    curl -sL prism.jeremyfhall.com/f/ai-reasoning-summary
+gallery   curl -sL prism.jeremyfhall.com/t/ai
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Pure ASCII > Classics
+ASCII Wall Clock  ascii-clock
+A round wall clock in dots and digits; hour, minute and sweeping second hands
+drawn with slope-matched - | / \ glyphs.
+art - 44x22 (min 24x12) - 60 s loop - ascii - 16 colors
+tags: clock, analog, time, hands
+
+
+                                  .............
+                              .....    12     .....
+                            .. 11               1  ..
+                          ..                         ..
+                        ..                             ..
+                        . 10                      -- 2  .
+                       .         --            --/       .
+                      ..           \-        -/          ..
+                      .              \-   --/             .
+                      .  9             \O/              3 .
+                      .               /-                  .
+                      ..             /                   ..
+                       .           /-                    .
+                        .  8      /                  4  .
+                        ..      /-                     ..
+                          ..   /                     ..
+                            ..  7               5  ..
+                              .....     6     .....
+                                  .............
+  still at 44x20 - t=6s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ascii-clock
+Snapshot  prism-term snapshot ascii-clock --size 44x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-clock'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-figlet-clock
+next >    curl -sL prism.jeremyfhall.com/f/ascii-life
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

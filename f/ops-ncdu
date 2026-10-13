@@ -1,0 +1,38 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mDisk & Storage[0m
+[0;1;39;49mncdu[0;2;39;49m  ops-ncdu[0m
+ncdu browsing /var: sizes and [##########] bars sorted largest first, a
+selection that walks the list, and the total disk usage footer.
+[0;2;39;49mtui · 72×16 (min 44×6) · 20 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: ncdu, du, disk usage, storage, cleanup[0m
+
+    [38;5;234;48;5;255mncdu 1.19 ~ Use the arrow keys to navigate, press ? for help[39m            [0m
+    [0;1;38;5;255;48;5;234m--- /var ---------------------------------------------------------------[0m
+    [0;1;38;5;255;48;5;234m  18.4 GiB[0;38;5;255;48;5;234m [##########] /lib[39m                                            [0m
+    [0;1;38;5;255;48;5;234m   9.2 GiB[0;38;5;255;48;5;234m [#####     ] /log[39m                                            [0m
+    [0;1;38;5;255;48;5;234m   2.3 GiB[0;38;5;255;48;5;234m [#         ] /cache[39m                                          [0m
+    [38;5;234;48;5;255m 905.2 MiB [          ] /www                                            [0m
+    [0;1;38;5;255;48;5;234m 524.3 MiB[0;38;5;255;48;5;234m [          ] /backups[39m                                        [0m
+    [0;1;38;5;255;48;5;234m  42.2 MiB[0;38;5;255;48;5;234m [          ] /spool[39m                                          [0m
+    [0;1;38;5;255;48;5;234m  19.3 MiB[0;38;5;255;48;5;234m [          ] /tmp[39m                                            [0m
+    [0;1;38;5;255;48;5;234m   1.2 MiB[0;38;5;255;48;5;234m [          ] /mail[39m                                           [0m
+    [0;1;38;5;255;48;5;234m 429.9 KiB[0;38;5;255;48;5;234m [          ] /opt[39m                                            [0m
+    [0;1;38;5;255;48;5;234m  21.0 KiB[0;38;5;255;48;5;234m [          ] /local[39m                                          [0m
+    [48;5;234m                                                                        [0m
+    [48;5;234m                                                                        [0m
+    [48;5;234m                                                                        [0m
+    [38;5;234;48;5;255m Total disk usage:  31.4 GiB  Apparent size:  30.9 GiB  Items: 214388[39m   [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ops-ncdu[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ops-ncdu --size 72x16[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ops-ncdu'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-iostat[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-zpool-status[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

@@ -1,0 +1,41 @@
+* PRISM TERMINAL > Architecture Diagrams > Boxes & Flows
+Service Architecture  diagrams-architecture
+Clients, load balancer, three app servers and the data tier, with request
+packets flowing along routed edges; app-2 fails health checks and traffic
+reroutes.
+diagram - 76x18 (min 58x14) - 8 s loop - unicode - 256 colors
+tags: architecture, load balancer, traffic, topology, failover
+
+  checkout . prod-us-east-2
+
+                                              +-------+           +----------+
+                                        +---o>| app-1 |----oo---->| postgres |
+                                        |     +-------+     |     +----------+
+                                        o      620 rps      |       v repl
+                                        |                   |
+  +---------+           +---------+     |     +-------+     |     +----------+
+  | clients |-o--o-o--o>| edge-lb |--oo-+---->|app-2 x|-----+o--->| replica  |
+  +---------+           +---------+     |     +-------+     |     +----------+
+                                        |       0 rps       |
+                                        |                   |
+                                        |     +-------+     |     +----------+
+                                        +o--o>| app-3 |-----+---o>|  redis   |
+                                              +-------+           +----------+
+                                               620 rps
+
+  x app-2 failing health checks . traffic on app-1, app-3
+  still at t=4s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play diagrams-architecture
+Snapshot  prism-term snapshot diagrams-architecture --size 76x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('diagrams-architecture'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/diagrams-git-rebase
+next >    curl -sL prism.jeremyfhall.com/f/diagrams-flowchart
+gallery   curl -sL prism.jeremyfhall.com/t/diagrams
+home      curl -sL prism.jeremyfhall.com/tty

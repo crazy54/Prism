@@ -1,0 +1,32 @@
+* PRISM TERMINAL > Progress & Counters > Counters & Odometers
+Live Counter Tiles  progress-counter-tiles
+Four running totals ticking at their own rates; digits that just changed flash,
+with a rate sparkline under each.
+progress - 64x10 (min 36x2) - 10 s loop - unicode - 256 colors
+tags: counters, kpi, tiles, sparkline, live
+
+        +-----------------------------+ +------------------------------+
+        | requests            +2.2k/s | | rows written          +365/s |
+        | 48,223,895                  | | 914,557                      |
+        | ..:=##+++++#*+-.:---:..:-++ | |    -===*#=:--.:-*+=**-. -=-- |
+        +-----------------------------+ +------------------------------+
+        +-----------------------------+ +------------------------------+
+        | jobs done            +8.9/s | | errors 5xx            +1.2/s |
+        | 18,474                      | | 1,208                        |
+        | ::#+=++. :=#**+#*=..:+#**** | |    .:-==-*#*==++:.-::.-**+=# |
+        +-----------------------------+ +------------------------------+
+  still at t=5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play progress-counter-tiles
+Snapshot  prism-term snapshot progress-counter-tiles --size 64x10
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-counter-tiles'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-big-percent
+next >    curl -sL prism.jeremyfhall.com/f/progress-ring
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,33 @@
+* PRISM TERMINAL > Charts & Metrics > Bars & Histograms
+Box Plots  charts-boxplot
+Response-time box plots per service: whiskers, interquartile box, median tick
+and outlier dots on a shared scale.
+chart - 60x11 (min 28x3) - 14 s loop - unicode - truecolor
+tags: box plot, quartiles, statistics, outliers, distribution
+
+          search      |-----###|##-------|  o     o
+
+          checkout      |-----###|###--------|   o     o
+
+          catalog        |-------###|####----------|      o    o
+
+          auth                |-------###|###----------|   o    o
+
+          cart               |--------####|####-----------|   o     o
+
+                    +0--------------+200-------------+400----------600
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-boxplot
+Snapshot  prism-term snapshot charts-boxplot --size 60x11
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-boxplot'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-candles
+next >    curl -sL prism.jeremyfhall.com/f/charts-gauge-arc
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

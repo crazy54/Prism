@@ -1,0 +1,40 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mLogs & Journals[0m
+[0;1;39;49mdmesg -wH[0;2;39;49m  ops-dmesg[0m
+dmesg -wH following the kernel ring buffer with relative timestamps: a USB disk
+attaches, a segfault, then an oom-kill sequence in red.
+[0;2;39;49mtui · 80×18 (min 56×6) · 26 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: dmesg, kernel, oom-killer, segfault, ring-buffer, logs[0m
+
+[0;1;38;5;71;48;5;234mops@node03[0;38;5;255;48;5;234m:[0;1;38;5;74;48;5;234m~[0;38;5;255;48;5;234m$ sudo dmesg -wH[39m                                                    [0m
+[38;5;71;48;5;234m[Oct13 14:01][38;5;255m [38;5;209mEXT4-fs (dm-0): [38;5;255mmounted filesystem 3f1c9a2e-77b0-4d1e-9c55-0a8e2f6[0m
+[38;5;255;48;5;234m1b7d4 r/w with ordered data mode. Quota mode: none.[39m                             [0m
+[38;5;71;48;5;234m[  +0.500000][38;5;255m [38;5;209mvirtio_net virtio0 eth0: [38;5;255mlink up[39m                                  [0m
+[38;5;71;48;5;234m[  +0.400000][38;5;255m [38;5;209mIPv6: [38;5;255mADDRCONF(NETDEV_CHANGE): eth0: link becomes ready[39m           [0m
+[38;5;71;48;5;234m[  +0.800000][38;5;255m [38;5;209mperf: [0;1;38;5;215;48;5;234minterrupt took too long (2503 > 2500), lowering kernel.perf_[0m
+[0;1;38;5;215;48;5;234mevent_max_sample_rate to 79750[0;39;48;5;234m                                                  [0m
+[38;5;71;48;5;234m[  +0.800000][38;5;255m [38;5;209mbr-6f1d0c: [38;5;255mport 2(veth3a91c2e) entered forwarding state[39m           [0m
+[38;5;71;48;5;234m[Oct13 14:02][38;5;255m [38;5;209musb 1-2: [38;5;255mnew high-speed USB device number 7 using xhci_hcd[39m        [0m
+[38;5;71;48;5;234m[  +0.400000][38;5;255m [38;5;209musb-storage 1-2:1.0: [38;5;255mUSB Mass Storage device detected[39m             [0m
+[38;5;71;48;5;234m[  +1.300000][38;5;255m [38;5;209msd 6:0:0:0: [38;5;255m[sdc] 62914560 512-byte logical blocks: (32.2 GB/30.0 [0m
+[38;5;255;48;5;234mGiB)[39m                                                                            [0m
+[38;5;71;48;5;234m[  +0.100000][38;5;255m [38;5;209msd 6:0:0:0: [38;5;255m[sdc] Attached SCSI removable disk[39m                    [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ops-dmesg[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ops-dmesg --size 80x18[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ops-dmesg'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-nginx-access[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-log-histogram[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

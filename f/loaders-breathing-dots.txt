@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Spinners & Loaders > Truecolor Spinners
+Breathing Dots  loaders-breathing-dots
+Three dots swelling in sequence while their color drifts between accent and
+violet -- a chat-style wait.
+spinner - 44x5 (min 24x2) - 8 s loop - unicode - 256 colors
+tags: spinner, loader, dots, typing, chat, original
+
+                   | Composing reply...                  4.0s
+
+                   - \ | /
+
+                   breathing-dots (ASCII fallback) - 4 frame.
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play loaders-breathing-dots
+Snapshot  prism-term snapshot loaders-breathing-dots --size 44x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-breathing-dots'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-ecg
+next >    curl -sL prism.jeremyfhall.com/f/loaders-ember
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

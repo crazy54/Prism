@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Maps & Geo > Radar & Sonar
+Active Sonar  maps-sonar
+An active sonar: pings ripple out, contacts light up and echo as the wavefront
+reaches them, and a bearing-time waterfall scrolls beside.
+scene - 80x22 (min 30x10) - 12 s loop - braille - truecolor
+tags: sonar, ping, waterfall, contacts, echo
+
+PING 001                                       BRG 000        180            359
+               --------.--------               -----+:.:::#--:::::::--=:--+:::::
+            ---        .        ---            :-::-#-:---*-::---::---=:::=-----
+          --     *==-------==*     --          :--::#:.:-=+:::---:.:-=-:::-:-::-
+        --    *-----:::.:::-----=    --        :----@----:-:.:--:::--+-:-:----:-
+       -    *--::      .     :::--=    -       --:::%...:--------:..:#----::::--
+      -    =-::        .        ::-- S1 -      :::--@-::-=-=:-:--::--@::::-=::::
+     -    =-::::   ::::.::::      --=    -     :.:--@::--::*::-----::@:::-=+----
+    --   =-: :::S4::   .   ::      :-=   --    -----@:::.::#:::..::::@--...-::-:
+    -    --:     :     .     :     :--    -    ::::.@-=----#--::----:@:---:*--::
+    ....*-...........................-*....    :::::@:--:::*=-::::-::@::-::#:--:
+    -    --:     :     .     ==    :--    -    -::::@--::::-.:::-----*:::--#:--:
+    --   =-:      ::   .   ::==S2  :-=   --    ::--:#:::-------::-:::+-::--#---:
+     - :: =-:      ::::.::::      :-=    -     :--:-#:.:-::-=::::--:-=:.:--@-::-
+      -::  =-::        .        ::-=    -      -----+:.:::::=-----::-:::---@--::
+       -    *--::      .     :::--=    -       :::.:=::-----*:::----+---:::@:---
+        --    *-----:::.:::-----=    --        ---:-=::-:.:-#:-::---#--.::-@::-:
+          --     *==-------==*     --          ::::----:::--#---:::-@---::-@:::-
+            ---        .        ---            ::::=---:::.:+-:--:::@:.:-==@::::
+2.0s           --------.--------               S1 058  S2 120  S3 247  S4 299
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play maps-sonar
+Snapshot  prism-term snapshot maps-sonar --size 80x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('maps-sonar'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/maps-radar
+next >    curl -sL prism.jeremyfhall.com/f/maps-flights
+gallery   curl -sL prism.jeremyfhall.com/t/maps
+home      curl -sL prism.jeremyfhall.com/tty

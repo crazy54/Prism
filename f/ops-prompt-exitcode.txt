@@ -1,0 +1,36 @@
+* PRISM TERMINAL > Linux & Ops > Shell Prompts
+Exit-Code Prompt  ops-prompt-exitcode
+A prompt that shows the last exit status: a typo gives x 127, Ctrl-C gives x
+130, curl -f gives x 22, and a clean run gives a green v.
+tui - 80x14 (min 60x5) - 24 s loop - ascii - 16 colors
+tags: prompt, exit-code, ps1, bash, troubleshooting, curl
+
+[0] [ops@node03 ~]$ kubeclt get pods -n shop
+bash: kubeclt: command not found
+[127] [ops@node03 ~]$ kubectl get pods -n shop | grep -c Running
+5
+[0] [ops@node03 ~]$
+
+
+
+
+
+
+
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-prompt-exitcode
+Snapshot  prism-term snapshot ops-prompt-exitcode --size 80x14
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-prompt-exitcode'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-prompt-powerline
+next >    curl -sL prism.jeremyfhall.com/f/ops-tmux-status
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

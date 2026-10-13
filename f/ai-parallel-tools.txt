@@ -1,0 +1,28 @@
+* PRISM TERMINAL > AI Working > Tool Calls
+Parallel Tool Calls  ai-parallel-tools
+Four tool calls fanned out in parallel as a live waterfall: bars grow while each
+runs, finish at different times with their results, then fan back in.
+tui - 70x6 (min 48x6) - 7 s loop - unicode - 256 colors
+tags: parallel, tool calls, waterfall, fan out, agent
+
+     | Running 4 tools in parallel . 3.0s
+
+     | logs.search      ===========...................... + 214 matches
+     | metrics.query    ======================........... + 840ms
+     | traces.find      =============================|... 3.0s
+     ` deploys.list     =======.......................... + v2.14.1 @ 12:02
+  still at t=3.5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ai-parallel-tools
+Snapshot  prism-term snapshot ai-parallel-tools --size 70x6
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ai-parallel-tools'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ai-tool-call-card
+next >    curl -sL prism.jeremyfhall.com/f/ai-approval-prompt
+gallery   curl -sL prism.jeremyfhall.com/t/ai
+home      curl -sL prism.jeremyfhall.com/tty

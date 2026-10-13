@@ -1,0 +1,38 @@
+* PRISM TERMINAL > Linux & Ops > Logs & Journals
+journalctl -f  ops-journalctl-follow
+journalctl -f following the system journal with priority colors: crit/err red,
+warning yellow, notice bold, info plain and debug dim.
+tui - 80x16 (min 50x5) - 40 s loop - ascii - 16 colors
+tags: journalctl, systemd, journal, logs, follow, syslog
+
+Oct 13 14:02:07 node03 shop-api[2210]: pool: waited 412ms for a connection (limi
+t 250ms)
+Oct 13 14:02:08 node03 shop-worker[3118]: heartbeat ok (lag 3ms)
+Oct 13 14:02:08 node03 shop-worker[3118]: heartbeat ok (lag 3ms)
+Oct 13 14:02:09 node03 sshd[7811]: Invalid user admin from 203.0.113.77 port 401
+12
+Oct 13 14:02:10 node03 shop-api[2210]: GET /api/v1/cart 200 18ms
+Oct 13 14:02:11 node03 shop-api[2210]: GET /api/v1/cart 200 18ms
+Oct 13 14:02:11 node03 shop-api[2210]: pool: waited 412ms for a connection (limi
+t 250ms)
+Oct 13 14:02:12 node03 CRON[9001]: (root) CMD (/usr/local/bin/backup.sh --quiet)
+Oct 13 14:02:13 node03 shop-api[2210]: POST /api/v1/checkout 201 142ms
+Oct 13 14:02:13 node03 shop-api[2210]: GET /api/v1/cart 200 18ms
+Oct 13 14:02:15 node03 shop-worker[3118]: heartbeat ok (lag 3ms)
+Oct 13 14:02:15 node03 systemd[1]: logrotate.service: Deactivated successfully.
+Oct 13 14:02:16 node03 shop-api[2210]: GET /api/v1/cart 200 18ms
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-journalctl-follow
+Snapshot  prism-term snapshot ops-journalctl-follow --size 80x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-journalctl-follow'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-k9s
+next >    curl -sL prism.jeremyfhall.com/f/ops-nginx-access
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Particles & Simulations > Physics
+Bouncing Balls  bouncing-balls
+Balls of different masses colliding elastically under gravity at a fixed 240 Hz
+step, with shadows and impact flashes.
+scene - 60x22 (min 20x7) - 18 s loop - unicode - truecolor
+tags: physics, collision, elastic, balls, gravity, billiards
+
+
+
+
+
+
+
+                                           ##*=            =*-:
+                                 +=-      ***+--            :.:
+                                =--:       --:-
+                    +
+                  ==-:
+                   -:
+
+
+                *#*+        ##+                      ##*         **=-
+                ++=--      ++==-    *##+=-          **+=-       ===--:
+                 --=         -      ===-:-            --        :::::
+
+               .........   .......................  ..................
+          ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  still at 60x20 - t=6s -- run it live for full size and motion
+
+Params  (--set key=value)
+  balls=9               Balls  (2-24)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play bouncing-balls
+Snapshot  prism-term snapshot bouncing-balls --size 60x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('bouncing-balls'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/brians-brain
+next >    curl -sL prism.jeremyfhall.com/f/double-pendulum
+gallery   curl -sL prism.jeremyfhall.com/t/sim
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,26 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mMaps & Geo (11)[0m
+World maps, radar sweeps, routes, arcs and floorplans in braille and blocks.
+
+[0;1;38;2;95;135;215;49mWORLD MAPS[0;2;39;49m  3[0m
+  [38;2;95;175;175mmaps-world-cities      [39mA dotted braille world map with pulsing data-center ma…[0m
+  [38;2;95;175;175mmaps-world-choropleth  [39mActive users by region as a choropleth of pseudo-regio…[0m
+  [38;2;95;175;175mmaps-world-daynight    [39mThe sun sweeps west over a half-block world: a soft te…[0m
+
+[0;1;38;2;95;135;215;49mRADAR & SONAR[0;2;39;49m  2[0m
+  [38;2;95;175;175mmaps-radar             [39mA phosphor PPI radar: the sweep paints moving tracks t…[0m
+  [38;2;95;175;175mmaps-sonar             [39mAn active sonar: pings ripple out, contacts light up a…[0m
+
+[0;1;38;2;95;135;215;49mROUTES & ARCS[0;2;39;49m  4[0m
+  [38;2;95;175;175mmaps-flights           [39mFlights trace great-circle arcs between hubs on a dott…[0m
+  [38;2;95;175;175mmaps-traceroute        [39mtraceroute from Frankfurt to Singapore, hop by hop: ea…[0m
+  [38;2;95;175;175mmaps-subway            [39mA schematic metro map with four colored lines, interch…[0m
+  [38;2;95;175;175mmaps-topo-trail        [39mA GPS track climbing a contoured mountain: index conto…[0m
+
+[0;1;38;2;95;135;215;49mGRIDS & FLOORPLANS[0;2;39;49m  2[0m
+  [38;2;95;175;175mmaps-datacenter        [39mA data-hall floorplan: rack rows with inlet temperatur…[0m
+  [38;2;95;175;175mmaps-warehouse-bots    [39mA goods-to-person warehouse floor: robots loop the ais…[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/maps-world-cities[0m
+[0;2;39;49mpaged     [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/maps | less -R[0m
+[0;2;39;49mgalleries [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

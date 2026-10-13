@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Animation Lab > Loops & Cycles
+Pendulum Wave  lab-pendulum-wave
+Fifteen pendulums tuned to 20-34 swings per 30 s: snakes, interleaved rows,
+chaos, then perfect realignment.
+scene - 60x20 (min 20x7) - 30 s loop - unicode - truecolor
+tags: pendulum wave, harmonics, phase, beats, realignment, loop
+
+
+
+
+                   +=--*+              *+--+=              =---=-
+                    -   -               -   -               -   -
+                   -     -             -     -             -     -
+                   -     -             -     -             -     -
+                  -       -           -       -           -       -
+                  -       -           -       -           -       -
+          : : : :-: : : : :-: : : : :-: : : : :-: : : : :-: : : : :-:
+                 -         -         -         -         -         -
+               ++          %#      %#          **      +=          ==
+               --          +=      +=          =-      -:          -:
+               -             -     -             -     -
+              -               -   -               -   -
+              -               -   -               -   -
+             -                 - -                 - -
+           --                  #*                  ==
+
+           pendulum k swings 20+k times per 30 s . t =  6.0 s
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play lab-pendulum-wave
+Snapshot  prism-term snapshot lab-pendulum-wave --size 60x20
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('lab-pendulum-wave'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/lab-lissajous
+next >    curl -sL prism.jeremyfhall.com/f/lab-wipe
+gallery   curl -sL prism.jeremyfhall.com/t/lab
+home      curl -sL prism.jeremyfhall.com/tty

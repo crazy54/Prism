@@ -1,0 +1,38 @@
+* PRISM TERMINAL > Linux & Ops > Processes & Services
+Failed Units  ops-systemctl-failed
+systemctl --failed shows two red * failed units; a restart fixes the backup job
+and the follow-up listing drops to one.
+tui - 80x16 (min 60x6) - 22 s loop - ascii - 16 colors
+tags: systemd, failed, units, troubleshooting, restart
+
+ops@node03:~$ systemctl --failed
+  UNIT                   LOAD   ACTIVE SUB    DESCRIPTION
+* certbot-renew.service  loaded failed failed Renew TLS certificates
+* backup-db.service      loaded failed failed Nightly database backup
+
+2 loaded units listed.
+ops@node03:~$
+
+
+
+
+
+
+
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-systemctl-failed
+Snapshot  prism-term snapshot ops-systemctl-failed --size 80x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-systemctl-failed'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-systemctl-status
+next >    curl -sL prism.jeremyfhall.com/f/ops-pstree
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

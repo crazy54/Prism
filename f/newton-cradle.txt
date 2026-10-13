@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Animated Objects > Mechanical
+Newton's Cradle  newton-cradle
+Five chrome balls on strings trading momentum on pendulum arcs, with strike
+glints and motion ghosts.
+scene - 64x20 (min 36x10) - 8 s loop - unicode - truecolor
+tags: newton, cradle, pendulum, momentum, chrome, desk toy
+
+
+
+
+           =====+++====+++====+++====+++===++++===++++===++++===++++-=
+           =               +     +      +      +     +              -
+           =               +     +      +      +     +              -
+           =               +     +      +      +     +              -
+           =               +     +      +      +     +              -
+           =               +     +      +      +     +              -
+           =               +     +      +      +     +              -
+           =               +     +      +      +     +              -
+           =              -+     =     ::     =+     -  .           -
+           =            *###*=-####* +###*+ *###*+*####+::.         -
+           =            :----::-----.:----:.----=++=---:::.         -
+           =            .-==:...=+=...-==-...=+=...:==-:            -
+           ==--====---====---====---====---====---====---====---====--
+           =----------------------------------------------------------
+
+
+
+  still at t=4s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play newton-cradle
+Snapshot  prism-term snapshot newton-cradle --size 64x20
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('newton-cradle'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/hourglass
+next >    curl -sL prism.jeremyfhall.com/f/prism-logo
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

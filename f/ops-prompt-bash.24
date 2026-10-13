@@ -1,0 +1,38 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mShell Prompts[0m
+[0;1;39;49mbash Prompt[0;2;39;49m  ops-prompt-bash[0m
+The classic user@host:dir$ bash prompt in green and blue: cd into a repo, a
+colored ls -la, cat a file, then a deploy script dry run.
+[0;2;39;49mtui · 80×16 (min 50×5) · 20 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: bash, ps1, prompt, shell, ls, session[0m
+
+[0;1;38;2;55;194;107;48;2;15;22;33mops@node03[0;38;2;233;235;237;48;2;15;22;33m:[0;1;38;2;83;159;229;48;2;15;22;33m~[0;38;2;233;235;237;48;2;15;22;33m$ cd ~/src/shop-api[39m                                                 [0m
+[0;1;38;2;55;194;107;48;2;15;22;33mops@node03[0;38;2;233;235;237;48;2;15;22;33m:[0;1;38;2;83;159;229;48;2;15;22;33m~/src/shop-api[0;38;2;233;235;237;48;2;15;22;33m$ ls -la[39m                                               [0m
+[38;2;233;235;237;48;2;15;22;33mtotal 64[39m                                                                        [0m
+[38;2;233;235;237;48;2;15;22;33mdrwxr-xr-x  7 ops ops 4096 Oct 13 13:58 [0;1;38;2;83;159;229;48;2;15;22;33m.[0;39;48;2;15;22;33m                                       [0m
+[38;2;233;235;237;48;2;15;22;33mdrwxr-xr-x  5 ops ops 4096 Oct  9 11:20 [0;1;38;2;83;159;229;48;2;15;22;33m..[0;39;48;2;15;22;33m                                      [0m
+[38;2;233;235;237;48;2;15;22;33mdrwxr-xr-x  8 ops ops 4096 Oct 13 13:58 [0;1;38;2;83;159;229;48;2;15;22;33m.git[0;39;48;2;15;22;33m                                    [0m
+[38;2;233;235;237;48;2;15;22;33m-rw-r--r--  1 ops ops  412 Oct  2 16:44 .gitignore[39m                              [0m
+[38;2;233;235;237;48;2;15;22;33m-rw-r--r--  1 ops ops 1931 Oct 13 13:41 Makefile[39m                                [0m
+[38;2;233;235;237;48;2;15;22;33m-rw-r--r--  1 ops ops    7 Oct 13 13:41 VERSION[39m                                 [0m
+[38;2;233;235;237;48;2;15;22;33mdrwxr-xr-x  4 ops ops 4096 Oct 12 18:03 [0;1;38;2;83;159;229;48;2;15;22;33mcmd[0;39;48;2;15;22;33m                                     [0m
+[38;2;233;235;237;48;2;15;22;33m-rwxr-xr-x  1 ops ops 1288 Oct  6 09:12 [0;1;38;2;55;194;107;48;2;15;22;33mdeploy.sh[0;39;48;2;15;22;33m                               [0m
+[38;2;233;235;237;48;2;15;22;33mdrwxr-xr-x  2 ops ops 4096 Oct 13 13:41 [0;1;38;2;83;159;229;48;2;15;22;33minternal[0;39;48;2;15;22;33m                                [0m
+[38;2;233;235;237;48;2;15;22;33mlrwxrwxrwx  1 ops ops   17 Oct  6 09:12 [0;1;38;2;70;175;174;48;2;15;22;33mlogs[0;38;2;233;235;237;48;2;15;22;33m -> /var/log/shop[39m                   [0m
+[0;1;38;2;55;194;107;48;2;15;22;33mops@node03[0;38;2;233;235;237;48;2;15;22;33m:[0;1;38;2;83;159;229;48;2;15;22;33m~/src/shop-api[0;38;2;233;235;237;48;2;15;22;33m$ cat VERSION[38;2;15;22;33;48;2;233;235;237m [39;48;2;15;22;33m                                         [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play ops-prompt-bash[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot ops-prompt-bash --size 80x16[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('ops-prompt-bash'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-fail2ban[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-prompt-git[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

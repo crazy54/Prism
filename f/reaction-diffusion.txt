@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Particles & Simulations > Life & Flocking
+Reaction-Diffusion  reaction-diffusion
+Gray-Scott reaction-diffusion drifting from dividing spots to coral to mazes,
+shaded as a lit living relief.
+scene - 60x22 (min 20x7) - 42 s loop - unicode - truecolor
+tags: gray-scott, reaction diffusion, turing, morphogenesis, pattern
+
+            =**=:..   -##=.   =*+-:...  .#*==+=...            -#**++.
+            +**-...  -#**=:   :+:....    ==:::...             ***+=:.
+            -+-...  .#**=:..   .....     .:......     ..     .#*+=-..
+            .:....  :#*+=...               ....     -*##*:    *+=-...
+              ..    :#*=-...        .              -#****+.   :+:....
+                    .*=....       :=*+:            ***+++:.    .....
+                     .:...       .#***+.           **===-..
+                       ..        -**+=:.   .-=-.   :=::....
+          =*+.                   =**+=... .+**+*.   ::....           :
+          ***+.          :=+=.   -++=...  -***+-.     ...      .::::-#
+          **=..         -#**++.  .+-....  +**+=..             :#*####*
+          ++:..        .#**+=:.   .....   =*+=:..            .#**+++++
+          -:...        :#*+=-..           :*-....     .::.   .#*=-::--
+          ....         .#*=-...            .:...     :*###-  .*=.....:
+          ...           +-.....              .      .#***+=.  .:......
+              .::.      ......                      :**++=:.   ...
+             .=#*#.            .:++-                :**==-..
+             -***-.           .=#**+:     :=++=:    .*-:....
+            .#**-..           :#**+-..   :#*****:    .:....      .
+            -#*+:..     .     =**+=...   ***+**-.      ...     :*#+:
+  still at 60x20 - t=6s -- run it live for full size and motion
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-3)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play reaction-diffusion
+Snapshot  prism-term snapshot reaction-diffusion --size 60x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('reaction-diffusion'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/string-waves
+next >    curl -sL prism.jeremyfhall.com/f/boids
+gallery   curl -sL prism.jeremyfhall.com/t/sim
+home      curl -sL prism.jeremyfhall.com/tty

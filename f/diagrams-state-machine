@@ -1,0 +1,36 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mArchitecture Diagrams[0;2;39;49m › [0;1;39;49mBoxes & Flows[0m
+[0;1;39;49mState Machine[0;2;39;49m  diagrams-state-machine[0m
+A job lifecycle state machine with labeled transitions: the active state lights
+up and a token rides each edge through a failure, a backoff retry and success.
+[0;2;39;49mdiagram · 70×14 (min 68×14) · 10 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: state machine, fsm, lifecycle, transitions, retry[0m
+
+     [48;5;234m                                                                      [0m
+     [48;5;234m    [38;5;238m╭──────────╮[39m [0;1;38;5;74;48;5;234mschedule[0;39;48;5;234m [38;5;238m╭─────────╮[39m   [38;5;249mexit 0[39m   [38;5;238m╭───────────╮[39m        [0m
+     [48;5;234m [0;1;38;5;255;48;5;234m●[0;38;5;238;48;5;234m─▶│[39m [38;5;249mPENDING[39m  [38;5;238m│[38;5;74m──[0;1;38;5;74;48;5;234m●[0;38;5;74;48;5;234m──────▶[38;5;238m│[39m [38;5;249mRUNNING[39m [38;5;238m│───────────▶│[39m [38;5;249mSUCCEEDED[39m [38;5;238m│───▶[0;1;38;5;249;48;5;234m◉[0;39;48;5;234m   [0m
+     [48;5;234m    [38;5;238m╰──────────╯[39m          [38;5;238m╰─────────╯[39m            [38;5;238m╰───────────╯[39m        [0m
+     [48;5;234m          [38;5;238m▲[39m                    [38;5;238m│[39m                                      [0m
+     [48;5;234m          [38;5;238m│[39m                    [38;5;238m│[39m                                      [0m
+     [48;5;234m          [38;5;238m│[39m [38;5;249mbackoff 4s[39m         [38;5;238m│[39m [38;5;249mexit 1[39m                               [0m
+     [48;5;234m          [38;5;238m│[39m                    [38;5;238m│[39m                                      [0m
+     [48;5;234m          [38;5;238m│[39m                    [38;5;238m▼[39m                                      [0m
+     [48;5;234m    [38;5;238m╭──────────╮[39m [38;5;249mretry ≤3[39m [38;5;238m╭─────────╮[39m   [38;5;249mexhausted[39m   [38;5;238m╭──────╮[39m          [0m
+     [48;5;234m    [38;5;238m│[39m [38;5;249mRETRYING[39m [38;5;238m│◀─────────│[39m [38;5;249mFAILED[39m  [38;5;238m│──────────────▶│[39m [38;5;66mDEAD[39m [38;5;238m│[39m          [0m
+     [48;5;234m    [38;5;238m╰──────────╯[39m          [38;5;238m╰─────────╯[39m               [38;5;238m╰──────╯[39m          [0m
+     [48;5;234m                                                                      [0m
+     [38;5;66;48;5;234m12:04:41[39m [38;5;249mjob/reindex-8812 attempt 2/3[39m  [38;5;255mPENDING → RUNNING (schedule)   [0m
+[0;2;39;49m  still at t=5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play diagrams-state-machine[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot diagrams-state-machine --size 70x14[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('diagrams-state-machine'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/diagrams-pipeline[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/diagrams-file-tree[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/diagrams[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

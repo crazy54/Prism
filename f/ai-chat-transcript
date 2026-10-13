@@ -1,0 +1,39 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mAI Working[0;2;39;49m › [0;1;39;49mAgents & Pipelines[0m
+[0;1;39;49mChat Transcript[0;2;39;49m  ai-chat-transcript[0m
+A chat transcript: user questions sit right-aligned in tinted bubbles, the
+assistant streams replies on the left with a tool-use chip, and the view
+scrolls.
+[0;2;39;49mtui · 64×16 (min 40×10) · 9.5 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: chat, transcript, assistant, conversation, streaming[0m
+
+        [48;5;234m                                                             [0;1;38;5;249;48;5;234myou[0m
+        [48;5;234m                           [48;5;237m  [38;5;255mWhy is checkout slow since lunch?[39m  [0m
+        [48;5;234m                                                                [0m
+        [0;3;38;5;249;48;5;236m ✦ searched traces, metrics, deploys[0;39;48;5;234m                            [0m
+        [48;5;234m                                                                [0m
+        [0;1;38;5;74;48;5;234mmainbrain[0;39;48;5;234m                                                       [0m
+        [38;5;255;48;5;234mp99 went from 180ms to 2.4s at 12:02,[39m                           [0m
+        [38;5;255;48;5;234mright when v2.14.1 shipped. That[39m                                [0m
+        [38;5;255;48;5;234mrelease runs 32 workers against a[39m                               [0m
+        [38;5;255;48;5;234m20-connection pool, so requests queue[39m                           [0m
+        [38;5;255;48;5;234mfor a connection.[39m                                               [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+[0;2;39;49m  still at t=4.75s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ai-chat-transcript[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ai-chat-transcript --size 64x16[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ai-chat-transcript'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ai-task-plan[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ai-multi-agent-log[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ai[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

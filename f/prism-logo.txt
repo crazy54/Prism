@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Animated Objects > Icons & Logos
+Prism  prism-logo
+Prism's mark: a glass prism turning in 3D, splitting a white beam into a
+smoothly blended, pulsing spectrum.
+art - 72x24 (min 24x8) - 14 s loop - unicode - truecolor
+tags: prism, logo, spectrum, light, refraction, glass
+
+
+
+
+                                ---
+    :.                         -#-#--
+    @%#*=-::.                 -#--=##--
+    :-+*%@@@@@#+=:.          -#---==-:-:                               :::::
+        .::=*%@@@@@@#=-:.   -#----=-:-#-::                    :::-----------
+               :-+#%@@@@%#+##------:---##-:         ::-------===============
+                     .:-=+####---::-----:#-::-=++++++++++++++++++++++++++++=
+                         #:--=++:+++++++++#+:-+**########************+++++++
+                        #::----:--------:::##::==+*****************#********
+                       #:::---::--------:::::#:: -===+++++++++**************
+                      --------::::::::::::::::###   =====++++++++++++*******
+                                                      --=-===+++++++++++++++
+                                                        -----====+++++++++++
+                                                          :------====+++++++
+                                                             -------=====+++
+
+                             P  R  I  S  M
+  still at 72x20 - t=6s -- run it live for full size and motion
+
+Params  (--set key=value)
+  label=on              Wordmark  (on|off)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play prism-logo
+Snapshot  prism-term snapshot prism-logo --size 72x24
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('prism-logo'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/newton-cradle
+next >    curl -sL prism.jeremyfhall.com/f/atom
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

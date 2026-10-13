@@ -1,0 +1,40 @@
+* PRISM TERMINAL > Callouts & Layout > Dividers & Headers
+Section Headers  callouts-section-headers
+Five header styles -- numbered eyebrow, underlined, boxed, inverse bar and
+setext -- that type in one after another, for reports and CLIs.
+text - 60x18 (min 30x8) - 9 s loop - unicode - 16 colors
+tags: header, heading, section, title, typography
+
+          01 / OVERVIEW
+          System health at a glance
+
+          Incidents
+          ------------------------------
+
+          +-------------+
+          | Deployments |
+          +-------------+
+
+          | CAPACITY                                         3 alerts
+
+
+
+
+
+
+
+  still at t=4.5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play callouts-section-headers
+Snapshot  prism-term snapshot callouts-section-headers --size 60x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('callouts-section-headers'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/callouts-dividers
+next >    curl -sL prism.jeremyfhall.com/f/callouts-neofetch
+gallery   curl -sL prism.jeremyfhall.com/t/callouts
+home      curl -sL prism.jeremyfhall.com/tty

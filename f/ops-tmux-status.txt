@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Linux & Ops > Shell Prompts
+tmux Session  ops-tmux-status
+A tmux window split in two: a log tail above, a shell below, a green active-pane
+border, and the status line with windows, flags and a clock.
+tui - 80x20 (min 50x8) - 30 s loop - ascii - 16 colors
+tags: tmux, status-line, panes, multiplexer, session, windows
+
+14:02:12 INFO  GET /api/v1/cart 200 18ms
+14:02:12 INFO  GET /api/v1/cart 200 18ms
+14:02:13 ERROR payments.internal.example: context deadline exceeded
+14:02:14 INFO  POST /api/v1/checkout 201 142ms
+14:02:14 INFO  GET /api/v1/cart 200 18ms
+14:02:15 WARN  pool: waited 412ms for a connection
+14:02:15 INFO  GET /api/v1/cart 200 18ms
+14:02:16 INFO  GET /api/v1/cart 200 18ms
+14:02:17 INFO  GET /api/v1/cart 200 18ms
+--------------------------------------------------------------------------------
+ops@node03:~$ kubectl -n shop get deploy api
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+api    5/5     5            5           41d
+ops@node03:~$ kubectl -n
+
+
+
+
+
+[prod] 0:logs- 1:shell* 2:deploy                        "node03" 14:02 13-Oct-26
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-tmux-status
+Snapshot  prism-term snapshot ops-tmux-status --size 80x20
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-tmux-status'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-prompt-exitcode
+next >    curl -sL prism.jeremyfhall.com/f/ops-prompt-starship
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

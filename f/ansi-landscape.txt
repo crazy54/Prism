@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Retro & Demoscene > BBS & ANSI Art
+ANSI Moonlit Lake  ansi-landscape
+A moonlit lake in true ANSI shading -- VGA colors and .:% dithers -- with
+twinkling stars and a rippling reflection.
+art - 80x22 (min 30x8) - 10 s loop - unicode - 16 colors
+tags: ansi, landscape, moon, lake, bbs, shading, night
+
+                        *               - *          ......_.....    *
+               +      +                 *           ...:"__ _""....          *
+......................*.......*..........+............: ##_###_"................
+.*....*...............................................: "###"_#"..:......*......
+......................+....................+.......::..""####"":..:.............
+"_:::::*:::::::::::::+::::::::::::::::::::::::::::::::....""":...:::::::::::::::
+.._::::.:::::::::::::::::::::::::::+::::::::::::".#_"".."#_...##::+:::::::*:::::
+...#_##.######+#########################*######............""_##################
+...."#_        + "     "_        +           "................"_"       ""_"
+.."  "."#_" "_.." ".""..""  ..............""...."."..........."  "___""..." "_..
+"      """   ""    "...."    ____"""."#" ".""."     ......."       """"""     ""
+                              """"""""
+::::::::::::::::::::::::::::::::_::::::::::::::::::::::::::-::::::::::::::::::::
+::::::::::::::_::::::::::::::""""""":_.":::::::::::::::::::~~:::::::::::::::::__
+:::::::_."":""..":".""::__::..............""::::::::::::::::~::::_""""":::::_"..
+:::::_."          "     ""                    "::::::::::::~:::_""       """"
+::."                                          ::::::::::::_-"-~
+:#"#############################################:_""#::_-""   ##################
+"__##################################################### -..__~"""##############
+::::::::::::::::::::::::::::::::::::::::::::::::::::###~"":::::..##:::::::::::::
+  still at 80x20 - t=5s -- run it live for full size and motion
+
+Params  (--set key=value)
+  colors=vga            Colors  (vga|theme)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ansi-landscape
+Snapshot  prism-term snapshot ansi-landscape --size 80x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ansi-landscape'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ansi-logo
+next >    curl -sL prism.jeremyfhall.com/f/modem-connect
+gallery   curl -sL prism.jeremyfhall.com/t/retro
+home      curl -sL prism.jeremyfhall.com/tty

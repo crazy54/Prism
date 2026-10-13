@@ -1,0 +1,38 @@
+* PRISM TERMINAL > Charts & Metrics > Line & Area
+Latency Percentiles  charts-line-multi
+p50, p95 and p99 as a braille multi-series line chart with y-axis ticks,
+gridlines, time labels and a legend.
+chart - 72x16 (min 24x6) - 12 s loop - braille - truecolor
+tags: line chart, latency, percentiles, braille, legend
+
+    Latency (ms) - last 60 s
+        o p50  o p95  o p99
+    627+-----------.:.--------.:-----------..--------.----:..:--------------
+       |         :.: : .:...::: : :.........:.   :.:.... :   :...      :::
+       |    . .::..   :: ...    .:.    ..    :....    . :     :.:   .:..  :.
+    456+::.:.:.------------------------------..-.---------------.:...------.
+       |                                                         ..
+       |                        ...
+    285+:..---......-...........--............-....-......-----------.------
+       |  .....     .                .        ..   .     ............ ...:..
+    171+--------------------------------------------------------------------
+       |...................... .....    .............  ................. ...
+       |                      .    ..... .. .       ...                ..
+      0+--------------------------------------------------------------------
+       +--------------------------------------------------------------------
+        -60s                            -30s                             now
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-line-multi
+Snapshot  prism-term snapshot charts-line-multi --size 72x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-line-multi'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-spark-wall
+next >    curl -sL prism.jeremyfhall.com/f/charts-area-dither
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

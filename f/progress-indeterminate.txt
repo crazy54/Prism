@@ -1,0 +1,27 @@
+* PRISM TERMINAL > Progress & Counters > Progress Bars
+Indeterminate  progress-indeterminate
+For work with no known end: a gliding block, a barber-pole stripe and a
+stretching Material-style band.
+progress - 60x5 (min 20x1) - 6 s loop - unicode - 256 colors
+tags: indeterminate, barber pole, busy
+
+           waiting for server #######
+
+           negotiating        ///////////////////////////////////////
+
+           resolving host                      ======================
+  still at t=3s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play progress-indeterminate
+Snapshot  prism-term snapshot progress-indeterminate --size 60x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-indeterminate'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-segmented
+next >    curl -sL prism.jeremyfhall.com/f/progress-ascii-classic
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

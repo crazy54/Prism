@@ -1,0 +1,42 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mLogin & MOTD[0m
+[0;1;39;49mSSH Login MOTD[0;2;39;49m  ops-motd[0m
+ssh into a server and get the landscape-style MOTD: system load, disk, memory,
+processes, the IPv4 address, pending updates and a restart notice.
+[0;2;39;49mtui · 80×24 (min 60×8) · 18 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: motd, ssh, login, sysinfo, banner, updates[0m
+
+[38;2;233;235;237;48;2;15;22;33m * Documentation:  https://docs.sable.example[39m                                   [0m
+[38;2;233;235;237;48;2;15;22;33m * Management:     https://manage.sable.example[39m                                 [0m
+[38;2;233;235;237;48;2;15;22;33m * Support:        https://help.sable.example[39m                                   [0m
+[48;2;15;22;33m                                                                                [0m
+[38;2;233;235;237;48;2;15;22;33m System information as of Tue Oct 13 14:02:13 UTC 2026[39m                          [0m
+[48;2;15;22;33m                                                                                [0m
+[38;2;233;235;237;48;2;15;22;33m  System load:  0.40               Processes:             213[39m                   [0m
+[38;2;233;235;237;48;2;15;22;33m  Usage of /:   61.3% of 96.73GB   Users logged in:       1[39m                     [0m
+[38;2;233;235;237;48;2;15;22;33m  Memory usage: 38%                IPv4 address for eth0: 10.20.2.31[39m            [0m
+[38;2;233;235;237;48;2;15;22;33m  Swap usage:   0%[39m                                                              [0m
+[48;2;15;22;33m                                                                                [0m
+[38;2;233;235;237;48;2;15;22;33m12 updates can be applied immediately.[39m                                          [0m
+[38;2;233;235;237;48;2;15;22;33m4 of these updates are standard security updates.[39m                               [0m
+[38;2;233;235;237;48;2;15;22;33mTo see these additional updates run: apt list --upgradable[39m                      [0m
+[48;2;15;22;33m                                                                                [0m
+[0;1;38;2;245;183;78;48;2;15;22;33m*** System restart required ***[0;39;48;2;15;22;33m                                                 [0m
+[38;2;233;235;237;48;2;15;22;33mLast login: Tue Oct 13 09:41:57 2026 from 10.20.2.15[39m                            [0m
+[0;1;38;2;55;194;107;48;2;15;22;33mops@node03[0;38;2;233;235;237;48;2;15;22;33m:[0;1;38;2;83;159;229;48;2;15;22;33m~[0;38;2;233;235;237;48;2;15;22;33m$ uptime[39m                                                            [0m
+[38;2;233;235;237;48;2;15;22;33m 14:02:17 up  4:48,  1 user,  load average: 0.40, 0.37, 0.31[39m                    [0m
+[0;1;38;2;55;194;107;48;2;15;22;33mops@node03[0;38;2;233;235;237;48;2;15;22;33m:[0;1;38;2;83;159;229;48;2;15;22;33m~[0;38;2;233;235;237;48;2;15;22;33m$ [39m                                                                  [0m
+[0;2;39;49m  still at 80×20 · t=6s — run it live for full size and motion[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play ops-motd[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot ops-motd --size 80x24[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('ops-motd'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-log-histogram[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-sysinfo-card[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

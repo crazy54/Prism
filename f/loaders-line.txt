@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Spinners & Loaders > Classic Spinners
+Line  loaders-line
+The original |/-\ twirl. Pure ASCII, so it works on a serial console, in LANG=C,
+and on every terminal ever made.
+spinner - 44x5 (min 24x2) - 8 s loop - ascii - 16 colors
+tags: spinner, loader, ascii, classic, twirl
+
+                   | Linking vmlinux...                  4.0s
+
+                   - \ | /
+
+                   line - 4 frames - 130 ms
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play loaders-line
+Snapshot  prism-term snapshot loaders-line --size 44x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-line'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-ember
+next >    curl -sL prism.jeremyfhall.com/f/loaders-pipe
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

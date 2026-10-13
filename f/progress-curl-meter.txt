@@ -1,0 +1,29 @@
+* PRISM TERMINAL > Progress & Counters > Transfers & ETA
+curl progress meter  progress-curl-meter
+curl's default meter -- % Total, % Received, Average Speed, Time
+Total/Spent/Left, Current Speed -- updating once a second as curl does.
+progress - 80x7 (min 80x3) - 12 s loop - ascii - mono colors
+tags: curl, download, meter, table
+
+$ curl -o prism-db-01.dump https://dl.example.com/backups/prism-db-01.dump
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+ 77 64.0M   77 49.6M    0     0   9.9M      0  0:00:06  0:00:05  0:00:01  9.9M
+
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play progress-curl-meter
+Snapshot  prism-term snapshot progress-curl-meter --size 80x7
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-curl-meter'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-curl-hash
+next >    curl -sL prism.jeremyfhall.com/f/progress-pv
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

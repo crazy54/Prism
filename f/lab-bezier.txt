@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Animation Lab > Easing & Timing
+Cubic-Bezier Timing  lab-bezier
+A devtools-style cubic-bezier editor: handles glide between CSS presets while a
+dot and a swatch run the timing.
+chart - 64x20 (min 24x8) - 18 s loop - unicode - truecolor
+tags: bezier, cubic-bezier, css, timing function, easing, devtools
+
+
+                                                 ease-out
+                                                 cubic-bezier(
+                                                  0.00, 0.00,
+                                                  0.58, 1.00)
+          - - - - - - - - - - -++ - - - - - - --
+                               ++++++%%%%%%%%%%% t 0.00 > 0.00
+          -                     %%%%%%         -
+                           %%%%%
+          -            %%%%                    -
+                    %%%%
+          -     %%%%                           -
+             %%%                                  ++++
+         +-+% - - - - - - - - - - - - - - - - -   - - - - - - - - - - -
+          +
+
+
+
+
+         time >
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play lab-bezier
+Snapshot  prism-term snapshot lab-bezier --size 64x20
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('lab-bezier'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/lab-easing-race
+next >    curl -sL prism.jeremyfhall.com/f/lab-keyframes
+gallery   curl -sL prism.jeremyfhall.com/t/lab
+home      curl -sL prism.jeremyfhall.com/tty

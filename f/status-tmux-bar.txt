@@ -1,0 +1,34 @@
+* PRISM TERMINAL > Notifications & Status > Status Lines
+tmux Session  status-tmux-bar
+A tmux session: split panes with a shell and a live log tail, the active-pane
+border, and the classic green status bar with a ticking clock.
+widget - 80x12 (min 40x4) - 12 s loop - unicode - truecolor
+tags: tmux, status bar, panes, multiplexer, session
+
+~/src/checkout $ make test              |14:02:06 auth     session issued user=.
+ok   checkout/pool     0.412s           |14:02:06 checkout order ord-887686 pla.
+ok   checkout/cart     0.208s           |14:02:07 envoy    upstream checkout ->
+--- FAIL: TestRefund (0.03s)            |14:02:08 systemd  Started Daily apt do.
+FAIL checkout/refund   0.031s           |14:02:08 sshd     Accepted publickey f.
+~/src/checkout $ git sta                |14:02:09 checkout pool at 85% (18/20 c.
+                                        |14:02:10 postgres checkpoint complete:.
+                                        |14:02:10 envoy    upstream checkout ->
+                                        |14:02:11 payments TLS handshake with p.
+                                        |14:02:11 envoy    upstream checkout ->
+                                        |14:02:12 orders   kafka produce topic=
+[ops] 0:zsh  1:vim- 2:logs* 3:k9s  4:psql               "web-01" 14:02 13-Oct-26
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play status-tmux-bar
+Snapshot  prism-term snapshot status-tmux-bar --size 80x12
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('status-tmux-bar'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/status-vim-line
+next >    curl -sL prism.jeremyfhall.com/f/status-powerline
+gallery   curl -sL prism.jeremyfhall.com/t/status
+home      curl -sL prism.jeremyfhall.com/tty

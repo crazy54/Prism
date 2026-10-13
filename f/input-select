@@ -1,0 +1,32 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mInput & Menus[0;2;39;49m › [0;1;39;49mSelects & Lists[0m
+[0;1;39;49mSelect Prompt[0;2;39;49m  input-select[0m
+An inquirer/gum-style single select: the pointer moves through regions with a
+hint line, Enter confirms and the answer collapses inline.
+[0;2;39;49mtui · 56×10 (min 32×7) · 6 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: select, prompt, list, choose, inquirer[0m
+
+            [0;1;38;5;74;48;5;234m?[0;39;48;5;234m [0;1;38;5;255;48;5;234mDeploy region[0;39;48;5;234m                                         [0m
+            [48;5;234m [0;1;38;5;74;48;5;234m [0;39;48;5;234m [38;5;255mus-east-1[39m       [38;5;66mN. Virginia[39m                          [0m
+            [48;5;234m [0;1;38;5;74;48;5;234m [0;39;48;5;234m [38;5;255mus-east-2[39m       [38;5;66mOhio[39m                                 [0m
+            [48;5;235m [0;1;38;5;74;48;5;235m❯[0;39;48;5;235m [0;1;38;5;74;48;5;235mus-west-2[0;39;48;5;235m       [38;5;249mOregon[39m                               [0m
+            [48;5;234m [0;1;38;5;74;48;5;234m [0;39;48;5;234m [38;5;255meu-west-1[39m       [38;5;66mIreland[39m                              [0m
+            [48;5;234m [0;1;38;5;74;48;5;234m [0;39;48;5;234m [38;5;255map-southeast-2[39m  [38;5;66mSydney[39m                               [0m
+            [48;5;234m                                                        [0m
+            [38;5;66;48;5;234m↑/↓ move · enter select · esc cancel[39m                    [0m
+            [48;5;234m                                                        [0m
+            [48;5;234m                                                        [0m
+[0;2;39;49m  still at t=3s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play input-select[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot input-select --size 56x10[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('input-select'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/input-modeline[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/input-fuzzy-finder[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/input[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

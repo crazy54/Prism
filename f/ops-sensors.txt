@@ -1,0 +1,40 @@
+* PRISM TERMINAL > Linux & Ops > System Monitors
+sensors  ops-sensors
+lm-sensors output: coretemp package and cores with high/crit limits, an NVMe
+composite and fan speeds, readings warming with load.
+tui - 64x18 (min 50x8) - 20 s loop - ascii - 16 colors
+tags: sensors, lm-sensors, temperature, fan, hardware
+
+        coretemp-isa-0000
+        Adapter: ISA adapter
+        Package id 0:    +60.5 C  (high = +80.0 C, crit = +100.0 C)
+        Core 0:          +58.5 C  (high = +80.0 C, crit = +100.0 C)
+        Core 1:          +58.2 C  (high = +80.0 C, crit = +100.0 C)
+        Core 2:          +59.7 C  (high = +80.0 C, crit = +100.0 C)
+        Core 3:          +60.2 C  (high = +80.0 C, crit = +100.0 C)
+
+        nvme-pci-0100
+        Adapter: PCI adapter
+        Composite:       +43.5 C  (low  = -273.1 C, high = +84.8 C)
+                                  (crit = +84.8 C)
+
+        it8628-isa-0a40
+        Adapter: ISA adapter
+        fan1:           1630 RPM  (min =    0 RPM)
+        fan2:           1310 RPM  (min =    0 RPM)
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-sensors
+Snapshot  prism-term snapshot ops-sensors --size 64x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-sensors'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-nmon
+next >    curl -sL prism.jeremyfhall.com/f/ops-top
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

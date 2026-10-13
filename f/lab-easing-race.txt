@@ -1,0 +1,41 @@
+* PRISM TERMINAL > Animation Lab > Easing & Timing
+Easing Race  lab-easing-race
+Balls racing the same distance in the same time with different easings, over an
+animator-style spacing chart.
+chart - 64x18 (min 24x6) - 5.2 s loop - unicode - truecolor
+tags: easing, spacing chart, timing, race, ease in, ease out,
+      animation principles
+
+
+        linear      + : + : + : + : + : :+: :+: :+: :+: :+: : + : + : ==
+
+        inQuad                                                        **
+                    + : : : + : : :+: : : + : : + : :+: :+: :+: + :+:++
+        outQuad
+                    ++:+:+: + : + : :+: : + : : + : : :+: : : + : : : ##
+        inOutCubic
+                    + :+: :+: : : + : : : : :+: : : : :+: : : :+: :+:+##
+
+        outBack    ++ + : : :+: : : : :+: : : : : : + : : : : : : : : **
+
+        outBounce                                                     ++
+                    ++:+: +++ :++ : : : : : : + : : : : : :+: : : :+: +
+        outElastic
+                   ++ :++ : : : : : : : : : : : : : : : : : : : : : : ==
+        inOutExpo
+                    + + : :+: : : : : : : : :+: : : : : : : : + : :+:+==
+  still at t=2.6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play lab-easing-race
+Snapshot  prism-term snapshot lab-easing-race --size 64x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('lab-easing-race'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/lab-easing-gallery
+next >    curl -sL prism.jeremyfhall.com/f/lab-bezier
+gallery   curl -sL prism.jeremyfhall.com/t/lab
+home      curl -sL prism.jeremyfhall.com/tty

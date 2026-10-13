@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Animated Objects > Icons & Logos
+Atom  atom
+A lit nucleus of protons and neutrons inside three tilted orbits, with glowing
+electrons trailing light.
+art - 56x22 (min 18x7) - 12 s loop - unicode - truecolor
+tags: atom, science, orbit, electron, nucleus, physics
+
+
+                                .--==--:.
+                               :-:...:-==-....:::::.
+                              .-.       .-+=::...::-:.
+                              :: ......::::-=:     .::
+                          .::-==-----===----=*+:..  .-
+                       .:--:::::. ..:.    ...:++----:=
+                      .-:.    .: .:..    +     -=..:-+-:.
+                      :.       :::. *#=.==:     -=..-:.-=:
+                      .:.      :-. =::.==:.+-   .=-:-   :+
+                       .::...-#*-:  +*=:..--.    .*=. .-#@-.
+                        ..:::+@+::: -..:--:.    .:+= ..-++:.
+                           ..+-::::-............-=-@=-:.
+                            :-   ..:-:.......:-=-:+@%:.
+                            ::      .::.    :--.  .#-
+                            ::       .:::.:--:    .#.
+                            .-.       .:=+=:.    :+-
+                             .:-:::::---:.:-----==:
+                               .:::::..      ..:.
+
+  still at 56x20 - t=6s -- run it live for full size and motion
+
+Params  (--set key=value)
+  electrons=3           Electrons  (1-6)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play atom
+Snapshot  prism-term snapshot atom --size 56x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('atom'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/prism-logo
+next >    curl -sL prism.jeremyfhall.com/f/spinning-coin
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

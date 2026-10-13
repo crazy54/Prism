@@ -1,0 +1,34 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mCharts & Metrics[0;2;39;49m › [0;1;39;49mLine & Area[0m
+[0;1;39;49mStacked Area[0;2;39;49m  charts-stacked-area[0m
+Traffic by region as stacked half-block areas — each layer keeps its color, the
+stack keeps its total.
+[0;2;39;49mchart · 64×12 (min 20×4) · 14 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: stacked area, regions, traffic, half blocks, composition[0m
+
+        [38;5;74;48;5;234m■[39m [38;5;249mus-east[39m  [38;5;71m■[39m [38;5;249meu-west[39m  [38;5;171m■[39m [38;5;249map-south[39m                        [0;1;38;5;255;48;5;234m86 k rps[0m
+        [48;5;234m                                                                [0m
+        [48;5;234m   [38;5;177m▄▄▄▄▄[48;5;97m▀▀▀[48;5;234m▄[39m                  [38;5;177m▄[39m          [38;5;177m▄▄▄▄▄▄[39m                 [0m
+        [38;5;177;48;5;234m▄[48;5;97m▀▀[39m         [38;5;177m▀[48;5;234m▄▄▄[48;5;97m▀▀[48;5;234m▄[39m  [38;5;177m▄[48;5;97m▀▀[48;5;234m▄▄▄[48;5;97m▀▀▀[39m [38;5;177m▀▀▀▀▀▀▀▀▀▀[39m      [38;5;177m▀▀[48;5;234m▄[39m   [38;5;177m▄[48;5;97m▀[48;5;234m▄[39m [38;5;177m▄[48;5;97m▀[48;5;234m▄▄▄[48;5;97m▀▀[0m
+        [48;5;97m        [38;5;97;48;5;29m▀▀[39;48;5;97m         [38;5;177m▀▀[39m                             [38;5;177m▀▀▀[39m   [38;5;177m▀[39m       [0m
+        [48;5;29m            [38;5;97m▀[39;48;5;97m [38;5;97;48;5;29m▀▀▀[39;48;5;97m    [38;5;97;48;5;29m▀[39m [38;5;97m▀▀▀▀▀▀[39m  [38;5;97m▀▀▀▀▀▀▀▀▀▀▀[39m  [38;5;97m▀▀▀[39;48;5;97m           [38;5;97;48;5;29m▀▀[39;48;5;97m [38;5;97;48;5;29m▀▀▀[0m
+        [48;5;29m                   [38;5;97m▀[39m                             [38;5;97m▀[39;48;5;97m  [38;5;97;48;5;29m▀[39m   [38;5;97m▀[39m       [0m
+        [48;5;29m  [38;5;29;48;5;61m▀[39;48;5;29m     [38;5;29;48;5;61m▀▀[39;48;5;29m                                                      [0m
+        [48;5;61m           [38;5;29m▀▀▀▀[39m  [38;5;29m▀▀[39;48;5;29m [38;5;29;48;5;61m▀▀[39m  [38;5;29m▀[39m       [38;5;29m▀▀▀▀▀▀▀[39;48;5;29m  [38;5;29;48;5;61m▀▀[39m [38;5;29m▀[39m    [38;5;29m▀[39;48;5;29m  [38;5;29;48;5;61m▀▀▀▀▀▀[39m [38;5;29m▀▀[39m   [0m
+        [48;5;61m                                                                [0m
+        [48;5;61m                                                                [0m
+        [48;5;61m                                                                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play charts-stacked-area[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot charts-stacked-area --size 64x12[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('charts-stacked-area'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/charts-btop-cpu[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/charts-scatter[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/charts[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

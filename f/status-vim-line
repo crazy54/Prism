@@ -1,0 +1,31 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mNotifications & Status[0;2;39;49m › [0;1;39;49mStatus Lines[0m
+[0;1;39;49mVim Statusline[0;2;39;49m  status-vim-line[0m
+A lightline-style vim statusline over a live buffer: modes change, text is typed
+in, :w writes and the ruler follows the cursor.
+[0;2;39;49mwidget · 80×9 (min 40×3) · 13 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: vim, statusline, lightline, editor, modes[0m
+
+[38;5;66;48;5;234m  39[39m [38;5;255m  [0;1;38;5;74;48;5;234mconst[0;38;5;255;48;5;234m started [38;5;249m=[38;5;255m performance[38;5;249m.[38;5;74mnow[38;5;249m();[39m                                       [0m
+[38;5;66;48;5;234m  40[39m [38;5;255m  [0;1;38;5;74;48;5;234mwhile[0;38;5;255;48;5;234m [38;5;249m([38;5;255mpool[38;5;249m.[38;5;255minUse [38;5;249m>=[38;5;255m pool[38;5;249m.[38;5;255msize[38;5;249m)[38;5;255m [38;5;249m{[39m                                        [0m
+[38;5;66;48;5;234m  41[38;5;215m▲[38;5;255m    [0;1;38;5;74;48;5;234mif[0;38;5;255;48;5;234m [38;5;249m([38;5;255mperformance[38;5;249m.[38;5;74mnow[38;5;249m()[38;5;255m [38;5;249m-[38;5;255m started [38;5;249m>[38;5;255m ms[38;5;249m)[38;5;255m [0;1;38;5;74;48;5;234mthrow[0;38;5;255;48;5;234m [0;1;38;5;74;48;5;234mnew[0;38;5;255;48;5;234m [38;5;74mPoolTimeout[38;5;249m([38;5;255mpool[38;5;249m.[38;5;255mname[38;5;249m);[0m
+[0;1;38;5;215;48;5;235m  42[0;39;48;5;235m [38;5;255m    metrics[38;5;249m.[38;5;255mwaiting[38;5;249m.[38;5;74minc[38;5;249m([38;5;255mpool[38;5;249m.[38;5;255mnam▏[39m                                          [0m
+[38;5;66;48;5;234m  43[39m [38;5;255m    [0;1;38;5;74;48;5;234mawait[0;38;5;255;48;5;234m [38;5;74msleep[38;5;249m([38;5;215m5[38;5;249m);[39m                                                        [0m
+[38;5;66;48;5;234m  44[39m [38;5;255m  [38;5;249m}[39m                                                                        [0m
+[38;5;66;48;5;234m  45[39m [38;5;255m  pool[38;5;249m.[38;5;255minUse[38;5;249m++;[39m                                                            [0m
+[0;1;38;5;234;48;5;71m INSERT [0;38;5;255;48;5;237m ⎇ main [0;1;38;5;255;48;5;236m src/pool.js [+] [0;38;5;66;48;5;236m ✖ 0 [38;5;215m▲ 1 [39m                        [38;5;255;48;5;237m  44% [0;1;38;5;234;48;5;71m  42:33 [0m
+[0;1;38;5;255;48;5;234m-- INSERT --[0;39;48;5;234m                                                                    [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play status-vim-line[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot status-vim-line --size 80x9[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('status-vim-line'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-deploy-success[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-tmux-bar[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/status[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

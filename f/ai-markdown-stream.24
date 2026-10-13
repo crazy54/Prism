@@ -1,0 +1,39 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mAI Working[0;2;39;49m › [0;1;39;49mToken Streams[0m
+[0;1;39;49mMarkdown Stream[0;2;39;49m  ai-markdown-stream[0m
+Markdown rendered live as it streams: headings, bold and inline code spans,
+bullets, and a fenced code block that is syntax-colored line by line.
+[0;2;39;49mtext · 64×17 (min 44×10) · 10 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: markdown, streaming, render, code block, llm[0m
+
+        [0;1;38;2;83;159;229;48;2;15;22;33mRoot cause[0;39;48;2;15;22;33m                                                      [0m
+        [38;2;233;235;237;48;2;15;22;33mThe [0;1;38;2;233;235;237;48;2;15;22;33mconnection pool[0;38;2;233;235;237;48;2;15;22;33m is too small for the new worker count.[39m      [0m
+        [48;2;15;22;33m                                                                [0m
+        [48;2;15;22;33m [38;2;83;159;229m• [38;2;233;235;237mworkers: [38;2;245;183;78;48;2;50;46;40m8 → 32[38;2;233;235;237;48;2;15;22;33m in v2.14.1[39m                                   [0m
+        [48;2;15;22;33m [38;2;83;159;229m• [38;2;233;235;237mpool: [38;2;245;183;78;48;2;50;46;40m20[38;2;233;235;237;48;2;15;22;33m, unchanged[39m                                          [0m
+        [48;2;15;22;33m                                                                [0m
+        [0;1;38;2;83;159;229;48;2;15;22;33mFix[0;39;48;2;15;22;33m                                                             [0m
+        [38;2;53;65;80;48;2;32;43;58m▏[39m                                                            [38;2;107;120;135mjs[39m [0m
+        [38;2;83;159;229;48;2;32;43;58m▏[39m [38;2;196;113;255mconst[38;2;233;235;237m pool = [38;2;83;159;229mcreatePool[38;2;233;235;237m({[39m                                     [0m
+        [38;2;83;159;229;48;2;32;43;58m▏[39m [38;2;233;235;237m  max: [38;2;83;159;229mNumber[38;2;233;235;237m(process.env.DB_POOL_SIZE ?? [38;2;245;183;78m40[38;2;233;235;237m),[39m                [0m
+        [38;2;83;159;229;48;2;32;43;58m▏[39m [38;2;233;235;237m  acquireTimeoutMillis: [38;2;245;183;78m2000[38;2;233;235;237m,[39m                                 [0m
+        [38;2;83;159;229;48;2;32;43;58m▏[39m [38;2;233;235;237m});[39m                                                           [0m
+        [38;2;53;65;80;48;2;32;43;58m▏[39m                                                               [0m
+        [38;2;233;235;237;48;2;15;22;33mThen alert when[38;2;83;159;229m▍[39m                                                [0m
+        [48;2;15;22;33m                                                                [0m
+        [48;2;15;22;33m                                                                [0m
+        [48;2;15;22;33m                                                                [0m
+[0;2;39;49m  still at t=5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play ai-markdown-stream[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot ai-markdown-stream --size 64x17[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('ai-markdown-stream'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ai-token-stream[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ai-throughput-meter[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ai[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

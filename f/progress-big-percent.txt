@@ -1,0 +1,31 @@
+* PRISM TERMINAL > Progress & Counters > Counters & Odometers
+Big Percentage  progress-big-percent
+A banner-sized percentage with an extruded shadow over a slim bar -- the number
+you can read from across the room.
+progress - 48x9 (min 20x2) - 10 s loop - unicode - 256 colors
+tags: percent, banner, big, figlet
+
+
+                            ######    ##    ##  ##
+                             :::##: ####:    :: ##:
+                                ##:  :##:     ## ::
+                              ## ::   ##:   ## ::
+                              ##:   ######  ##: ##
+                               ::    ::::::  ::  ::
+                  [##############################------------]
+                 Reindexing - 17,822/24,960 docs - eta 00:01
+  still at t=5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play progress-big-percent
+Snapshot  prism-term snapshot progress-big-percent --size 48x9
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-big-percent'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-seven-segment
+next >    curl -sL prism.jeremyfhall.com/f/progress-counter-tiles
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

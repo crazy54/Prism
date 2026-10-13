@@ -1,0 +1,34 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mProgress & Counters[0;2;39;49m › [0;1;39;49mTransfers & ETA[0m
+[0;1;39;49mETA Convergence[0;2;39;49m  progress-eta-converge[0m
+Why ETAs jump: the instant-rate estimate (dots) against an EWMA-smoothed one
+(solid) and the true time left (dashed) across stalls.
+[0;2;39;49mchart · 72×12 (min 36×4) · 11 s loop · braille · 256 colors[0m
+[0;2;39;49mtags: eta, ewma, smoothing, chart, estimate[0m
+
+    [48;5;234m [38;5;215m···[38;5;249m instant  [38;5;74m━━[38;5;249m EWMA τ 1.3s  [38;5;255m╌╌[38;5;249m actual[39m                                 [0m
+    [48;5;234m [38;5;66m18s[39m  [38;5;74m⠛⠛⠛⠛⠛⢧[39m            [38;5;215m⠄[39m                                               [0m
+    [48;5;234m           [38;5;74m⠸⡄[39m                                                           [0m
+    [48;5;234m            [38;5;74m⣇[39m                    [38;5;215m⡀[39m                                      [0m
+    [48;5;234m            [38;5;74m⢸⡀[39m                                                          [0m
+    [48;5;234m         [38;5;215m⠁[39m   [38;5;74m⠳⡄[39m        [38;5;215m⡀[39m       [38;5;215m⠁⠁[39m                                       [0m
+    [48;5;234m      [38;5;255m⠉⠉[39m [38;5;255m⠑⠒[39m [38;5;255m⠒⠤[38;5;74m⠙⢦⣀[39m [38;5;255m⣀⡀[39m     [38;5;215m⠂[39m    [38;5;215m⡀[39m   [38;5;215m⠂[39m  [38;5;74m⢀⣀[39m [38;5;74m⣀⡴⠳⡄[39m                            [0m
+    [48;5;234m          [38;5;215m⡀[39m     [38;5;74m⠉⠳⣤[38;5;152m⡈[39m [38;5;255m⠉⠉[39m [38;5;255m⠒⠒[38;5;215m⠂[38;5;255m⠤[38;5;223m⡤[39m [38;5;255m⣀⣀[38;5;74m⢀⣠⣤⣤⠞⠋⠉⠛⠉[39m  [38;5;74m⠹⣄[39m                           [0m
+    [48;5;234m           [38;5;215m⠄⠄⠂⠂⠁⠂⠄[39m [38;5;109m⡙[38;5;74m⠳[38;5;74m⡶⣥[38;5;74m⡴⠶⠞⠛⠛⠳[38;5;74m⠷[38;5;74m⠶⠛⠋[38;5;152m⠉[38;5;255m⠉[39m [38;5;255m⠒⠒[39m [38;5;223m⠦[38;5;255m⠤[39m [38;5;255m⢄⣀[38;5;74m⠘[38;5;110m⡆[39m                          [0m
+    [48;5;234m                  [38;5;215m⠁[39m [38;5;215m⠁[39m                      [38;5;215m⠁⡀⡀[39m                          [0m
+    [48;5;234m [38;5;66m0s[39m   [38;5;238m⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀[39m [0m
+    [48;5;234m [38;5;255mleft: instant 00:02  ewma 00:04  actual 00:04[39m                          [0m
+[0;2;39;49m  still at t=5.5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play progress-eta-converge[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot progress-eta-converge --size 72x12[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('progress-eta-converge'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-speed-graph[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-queue-drain[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/progress[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

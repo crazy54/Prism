@@ -1,0 +1,42 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mPure ASCII[0;2;39;49m › [0;1;39;49mASCII Animations[0m
+[0;1;39;49mEvening Walk[0;2;39;49m  ascii-walker[0m
+A stick figure strolls past lamp posts and drifting clouds — a four-frame walk
+cycle over three layers of parallax.
+[0;2;39;49mart · 80×24 (min 30×8) · 12 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: stick figure, walk cycle, parallax, street[0m
+
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                            [38;5;66m.--.[0m
+[38;5;66;48;5;234m__)[39m                 [38;5;66m.--.[39m                                                  [38;5;66m(_____[0m
+[48;5;234m                  [38;5;66m(_________)[39m                       [38;5;66m.--.[39m                        [0m
+[48;5;234m                                                  [38;5;66m(___________)[39m                 [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m     [38;5;215m_O_[39m                   [38;5;215m_O_[39m                   [38;5;215m_O_[39m                   [38;5;215m_O_[39m      [0m
+[48;5;234m      [38;5;249m|[39m                     [38;5;249m|[39m                     [38;5;249m|[39m                     [38;5;249m|[39m       [0m
+[48;5;234m      [38;5;249m|[39m                     [38;5;249m|[39m                     [38;5;249m|[39m                     [38;5;249m|[39m       [0m
+[48;5;234m      [38;5;249m|[39m                     [38;5;249m|[39m    [38;5;255m o [39m              [38;5;249m|[39m                     [38;5;249m|[39m       [0m
+[48;5;234m      [38;5;249m|[39m                     [38;5;249m|[39m    [38;5;255m/|\[39m              [38;5;249m|[39m                     [38;5;249m|[39m       [0m
+[48;5;234m      [38;5;249m|[39m                     [38;5;249m|[39m    [38;5;255m/ \[39m              [38;5;249m|[39m                     [38;5;249m|[39m       [0m
+[38;5;66;48;5;234m________________________________________________________________________________[0m
+[48;5;234m    [38;5;66m.[39m    [38;5;66m.[39m    [38;5;66m.[39m    [38;5;66m.[39m    [38;5;66m.[39m    [38;5;66m.[39m    [38;5;66m,[39m    [38;5;66m,[39m    [38;5;66m.[39m    [38;5;66m,[39m    [38;5;66m.[39m    [38;5;66m,[39m    [38;5;66m,[39m    [38;5;66m,[39m    [38;5;66m,[39m    [38;5;66m.[0m
+[0;2;39;49m  still at 80×20 · t=6s — run it live for full size and motion[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ascii-walker[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ascii-walker --size 80x24[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ascii-walker'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ascii-train[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ascii-matrix[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ascii[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

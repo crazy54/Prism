@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Animated Objects > 3D Solids
+Studio Sphere  studio-sphere
+Per-pixel lit sphere with an orbiting key light, cool rim light, soft banding
+and a moving floor shadow.
+scene - 56x22 (min 16x7) - 10 s loop - unicode - truecolor
+tags: sphere, lighting, phong, rim light, 3d
+
+
+
+                      ::
+                    :=**=::           ====
+                    :=***=:      ++======---::-
+                     :::::     ++++++====---:::::
+                              ++++****+==---:::..:
+                             ++++*#@%#+==---::....:
+                             ====+*#*+=---:::......
+                             +++=======---:::.....:
+                             =====------:::.......:
+                              =-------::::.......:
+                               ---:::::.........:
+                                 -:::........:-
+                                      -::-...........
+                                .............................
+                                     ....................
+
+
+
+  still at 56x20 - t=5s -- run it live for full size and motion
+
+Params  (--set key=value)
+  speed=1               Speed  (0.1-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play studio-sphere
+Snapshot  prism-term snapshot studio-sphere --size 56x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('studio-sphere'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/donut
+next >    curl -sL prism.jeremyfhall.com/f/twisty-cube
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

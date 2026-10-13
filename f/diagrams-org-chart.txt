@@ -1,0 +1,38 @@
+* PRISM TERMINAL > Architecture Diagrams > Trees & Hierarchies
+Agent Hierarchy  diagrams-org-chart
+An org-chart style tree with elbow connectors: mainbrain sends instructions down
+to its agents and their findings travel back up, each hop lighting the path.
+diagram - 76x16 (min 70x16) - 7 s loop - unicode - 256 colors
+tags: org chart, hierarchy, tree, agents, elbow connectors
+
+                             +-------------+
+                             |  mainbrain  |
+                             +------+------+
+                                    |
+             +----------------------+--o-----------------------+
+             |                      |                          |
+       +-----+-----+           +----+----+                 +---+---+
+       | collector |           | analyst |                 | fixer |
+       +-----+-----+           +----+----+                 +---+---+
+             |                      |                          |
+        +----+-----+          +-----+------+             +-----+------+
+        |          |          |            |             |            |
+   +----+---+  +---+--+  +----+---+  +-----+-----+  +----+----+  +----+----+
+   | ingest |  | logs |  | detect |  | correlate |  | planner |  | approve |
+   +--------+  +------+  +--------+  +-----------+  +---------+  +---------+
+  mainbrain -> planner  plan: pool 20 -> 40
+  still at t=3.5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play diagrams-org-chart
+Snapshot  prism-term snapshot diagrams-org-chart --size 76x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('diagrams-org-chart'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/diagrams-file-tree
+next >    curl -sL prism.jeremyfhall.com/f/diagrams-dependency-tree
+gallery   curl -sL prism.jeremyfhall.com/t/diagrams
+home      curl -sL prism.jeremyfhall.com/tty

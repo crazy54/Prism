@@ -1,0 +1,59 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mCharts & Metrics (30)[0m
+Sparklines, line and bar charts, gauges, heatmaps and KPI tiles.
+
+[38;5;249;48;5;234mcpu [39m [38;5;23m▄[38;5;23m▃[38;5;23m▃[38;5;29m▄[38;5;29m▄[38;5;29m▃[38;5;29m▃[38;5;29m▂[38;5;29m▂[38;5;29m▃[38;5;29m▅[38;5;29m▆[38;5;29m▆[38;5;29m▇[38;5;35m▇[38;5;35m▇[38;5;35m▆[38;5;35m▅[38;5;71m▄[38;5;71m▄[38;5;71m▅[38;5;71m▄[38;5;71m▂[38;5;71m▁[38;5;115m▁[39m      [0;1;38;5;71;48;5;234m41%[0;39;49m  [0;1;38;5;255;48;5;234mLatency[0;39;48;5;234m [38;5;66m(ms) · last 60 s[39m               [0m
+[38;5;249;48;5;234mmem [39m [38;5;23m▅[38;5;23m▆[38;5;23m▅[38;5;29m▄[38;5;29m▃[38;5;29m▃[38;5;29m▃[38;5;29m▂[38;5;29m▁[38;5;29m▂[38;5;29m▂[38;5;29m▂[38;5;29m▃[38;5;29m▃[38;5;35m▄[38;5;35m▅[38;5;35m▆[38;5;35m▇[38;5;71m▆[38;5;71m▅[38;5;71m▆[38;5;71m▅[38;5;71m▅[38;5;71m▆[38;5;115m▇[39m      [0;1;38;5;71;48;5;234m67%[0;39;49m  [48;5;234m    [38;5;71;49m●[39;48;5;234m [38;5;249;49mp50[39;48;5;234m  [38;5;215;49m●[39;48;5;234m [38;5;249;49mp95[39;48;5;234m  [38;5;167;49m●[39;48;5;234m [38;5;249;49mp99[39;48;5;234m                [0m
+[38;5;249;48;5;234mnet [39m [38;5;23m▇[38;5;23m▇[38;5;23m▆[38;5;29m▅[38;5;29m▄[38;5;29m▅[38;5;29m▅[38;5;29m▆[38;5;29m▇[38;5;29m▆[38;5;29m▅[38;5;29m▅[38;5;29m▆[38;5;29m▇[38;5;35m▆[38;5;35m▅[38;5;35m▄[38;5;35m▄[38;5;71m▄[38;5;71m▃[38;5;71m▂[38;5;71m▁[38;5;71m▂[38;5;71m▄[38;5;115m▄[39m  [0;1;38;5;71;48;5;234m24 MB/s[0;39;49m  [38;5;249m619[38;5;238m┤[38;5;167m⠒⠒⢄[39;48;5;234m   [38;5;167;49m⢀⠤⢄⡠⠒⠒⢄⣀⣀⡠⠔⠉⠊⠱⣀⢀⢄[39;48;5;234m     [38;5;167;49m⣀⣀⠤⠤⠤⡀[39;48;5;234m [0m
+[38;5;249;48;5;234merr [39m [38;5;23m▃[38;5;23m▃[38;5;23m▂[38;5;29m▁[38;5;29m▁[38;5;29m▂[38;5;29m▃[38;5;29m▄[38;5;29m▄[38;5;29m▄[38;5;29m▄[38;5;29m▄[38;5;29m▅[38;5;29m▆[38;5;35m▇[38;5;35m▆[38;5;35m▅[38;5;35m▄[38;5;71m▄[38;5;71m▅[38;5;71m▄[38;5;71m▄[38;5;71m▄[38;5;71m▄[38;5;115m▅[39m     [0;1;38;5;71;48;5;234m0.5%[0;39;49m  [48;5;234m   [38;5;238;49m│[39;48;5;234m   [38;5;167;49m⠑⠊⠑⠁[39;48;5;234m              [38;5;167;49m⠁[39;48;5;234m [38;5;167;49m⠱⡠⠤⠒⠊[39;48;5;234m     [38;5;167;49m⠈⠑[0m
+[48;5;234m                                       [49m  [38;5;249m310[38;5;238m┤[38;5;215m⢄⣀⡠⣀⣀⣀⣀⣀⣀⣀⣀⢄⣀⡠⠤⢄⣀⡀[39;48;5;234m  [38;5;215;49m⣀[39;48;5;234m [38;5;215;49m⢀⣀[39;48;5;234m   [38;5;215;49m⣀⣀⡀⢀⣀⡀[39;48;5;234m [38;5;215;49m⣀[0m
+                                         [48;5;234m   [38;5;238;49m│[38;5;71m⡀[39;48;5;234m    [38;5;71;49m⢀⡀[39;48;5;234m         [38;5;71;49m⢀[38;5;107m⣈[38;5;107m⣉[38;5;143m⡉[38;5;71m⣀[38;5;107m⣉[38;5;107m⣁[38;5;71m⣀[38;5;107m⣉[38;5;143m⡉[38;5;107m⣉[38;5;71m⡀[39;48;5;234m [38;5;215;49m⠈⠁[39;48;5;234m [38;5;215;49m⠈⠉[39;48;5;234m [0m
+                                         [48;5;234m  [38;5;249;49m0[38;5;238m┤[38;5;71m⠉⠉⠉⠉⠉⠁⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠁[39;48;5;234m  [38;5;71;49m⠈[39;48;5;234m     [38;5;71;49m⠈[39;48;5;234m [38;5;71;49m⠈⠉⠉⠉⠉⠉⠉⠉[0m
+                                         [48;5;234m   [38;5;238;49m└───────────────────────────────────[0m
+[0;2;39;49mcharts-spark-bars                        charts-line-multi[0m
+
+[0;1;38;5;68;49mSPARKLINES[0;2;39;49m  4[0m
+  [38;5;73mcharts-spark-bars        [39mFour live metrics as eighth-block sparklines with la…[0m
+  [38;5;73mcharts-spark-braille     [39mHigh-resolution braille sparklines (2×4 dots per cel…[0m
+  [38;5;73mcharts-spark-dots        [39mA dot-plot sparkline against a dashed SLO threshold:…[0m
+  [38;5;73mcharts-spark-wall        [39mA NOC wall of a dozen services: name, a mini sparkli…[0m
+
+[0;1;38;5;68;49mLINE & AREA[0;2;39;49m  7[0m
+  [38;5;73mcharts-line-multi        [39mp50, p95 and p99 as a braille multi-series line char…[0m
+  [38;5;73mcharts-area-dither       [39mAn area chart whose fill fades toward the baseline w…[0m
+  [38;5;73mcharts-stream-scroll     [39mA live line that scrolls a sub-sample at a time with…[0m
+  [38;5;73mcharts-btop-cpu          [39mA btop-inspired CPU panel: filled braille history co…[0m
+  [38;5;73mcharts-stacked-area      [39mTraffic by region as stacked half-block areas — each…[0m
+  [38;5;73mcharts-scatter           [39mLatency against payload size for three services as d…[0m
+  [38;5;73mcharts-bubble            [39mServices plotted by request rate and error rate, bub…[0m
+
+[0;1;38;5;68;49mBARS & HISTOGRAMS[0;2;39;49m  6[0m
+  [38;5;73mcharts-bars-vertical     [39mColumns that glide to new values with eighth-block p…[0m
+  [38;5;73mcharts-bars-leaderboard  [39mHorizontal bars ranked by throughput that re-sort as…[0m
+  [38;5;73mcharts-bars-stacked      [39mPer-region request mix as stacked horizontal segment…[0m
+  [38;5;73mcharts-histogram-live    [39mA latency distribution that reshapes every second, w…[0m
+  [38;5;73mcharts-candles           [39mOHLC candlesticks at half-cell precision with wicks,…[0m
+  [38;5;73mcharts-boxplot           [39mResponse-time box plots per service: whiskers, inter…[0m
+
+[0;1;38;5;68;49mGAUGES & METERS[0;2;39;49m  6[0m
+  [38;5;73mcharts-gauge-arc         [39mCPU, memory and disk as braille arc gauges with warn…[0m
+  [38;5;73mcharts-gauge-ring        [39mFour full-circle ring gauges — availability, cache h…[0m
+  [38;5;73mcharts-vu-meter          [39mLeft and right LED ladders with fast attack, slow re…[0m
+  [38;5;73mcharts-bullet            [39mStephen Few-style bullet charts: qualitative bands, …[0m
+  [38;5;73mcharts-pie               [39mA cost-by-service donut that sweeps in segment by se…[0m
+  [38;5;73mcharts-radar             [39mA six-axis spider chart comparing a service to its b…[0m
+
+[0;1;38;5;68;49mHEATMAPS & MATRICES[0;2;39;49m  4[0m
+  [38;5;73mcharts-heatmap-latency   [39mRequest latency as a scrolling heatmap — log-spaced …[0m
+  [38;5;73mcharts-heatmap-week      [39mRequests by hour of day and weekday: a weekly traffi…[0m
+  [38;5;73mcharts-calendar          [39mA GitHub-style contributions calendar — weeks by wee…[0m
+  [38;5;73mcharts-corr-matrix       [39mPairwise correlations between six service metrics on…[0m
+
+[0;1;38;5;68;49mKPI TILES[0;2;39;49m  3[0m
+  [38;5;73mcharts-kpi-row           [39mFour boxed KPI tiles — throughput, latency, errors, …[0m
+  [38;5;73mcharts-big-number        [39mThe wallboard hero tile: one metric in a bold bitmap…[0m
+  [38;5;73mcharts-noc-wallboard     [39mA compact operations wallboard: headline KPIs, a lat…[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/charts-spark-bars[0m
+[0;2;39;49mpaged     [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/charts | less -R[0m
+[0;2;39;49mgalleries [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

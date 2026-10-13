@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Particles & Simulations > Physics
+Plucked Strings  string-waves
+A six-string harp plucked in an arpeggio: real wave-equation strings that split,
+reflect and ring down.
+scene - 60x20 (min 20x7) - 6 s loop - unicode - truecolor
+tags: wave equation, strings, harp, standing waves, pluck, braille
+
+
+           %%                                                     %
+              +++++++++++++++++++++++++++++++++++++++++++++++++++++
+                         - - - - - - - - - - - - - - -
+
+           %% *********=*=*******************            *********%
+                   = =   - = = = = = = = = = ************
+                            ########         =
+           %% ##############        #########                   ##%
+                   =                   = = = ###################
+                     = = = = = = = = =
+           %%                                                     %
+              ***************=            *************************
+                             *************
+
+           %% ++++++++++++++++++++++++++++++++++++++++++++++++++++%
+
+
+           %% ++++++++++++++++++++++++++++++++++++++++++++++++++++%
+
+  still at t=3s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play string-waves
+Snapshot  prism-term snapshot string-waves --size 60x20
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('string-waves'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/n-body
+next >    curl -sL prism.jeremyfhall.com/f/reaction-diffusion
+gallery   curl -sL prism.jeremyfhall.com/t/sim
+home      curl -sL prism.jeremyfhall.com/tty

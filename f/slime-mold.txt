@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Particles & Simulations > Life & Flocking
+Slime Mold  slime-mold
+Physarum agents sensing and laying scent trails self-organize into a transport
+network linking food sources.
+scene - 60x22 (min 20x7) - 20 s loop - unicode - truecolor
+tags: physarum, slime mold, agents, network, emergence, trails
+
+
+
+
+
+                                                  ====
+                                                =+###+=         =
+                                               =+#%@%#++==    ===
+                =====                        ==+*%%%%%*++========
+                ==++====             ==========+*%%%%%#**++++++===
+                ==++++++==============++++=+=++++#%%%%****+****+++=
+                =+**++++++++++++====+++**+++=+++++*##******##%%%%*=
+                +***+++++***###*++++++++++++=+=+=+++*+++***##%@@%#=
+               =+*#**+++++*%%%%#*+=+=+==================++**#%@@@%+
+               =+****+++++*%@@%%*+====              = ====+*#%@%%#+=
+              ==++++++++=+*%###%+=                        =++#%%%*+=
+              ============+#%%%#=                           =+***++==
+              =======     =+*#*+=                            =====++==
+                            ===                                 ======
+          ===                                                    =====
+          ==                                                         =
+  still at 60x20 - t=6s -- run it live for full size and motion
+
+Params  (--set key=value)
+  agents=1              Agent density  (0.2-3)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play slime-mold
+Snapshot  prism-term snapshot slime-mold --size 60x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('slime-mold'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/boids
+next >    curl -sL prism.jeremyfhall.com/f/snow
+gallery   curl -sL prism.jeremyfhall.com/t/sim
+home      curl -sL prism.jeremyfhall.com/tty

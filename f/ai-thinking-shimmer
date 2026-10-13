@@ -1,0 +1,28 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mAI Working[0;2;39;49m › [0;1;39;49mThinking States[0m
+[0;1;39;49mThinking Shimmer[0;2;39;49m  ai-thinking-shimmer[0m
+An agent working indicator: a breathing glyph and a status verb with a shimmer
+sweeping across it, elapsed time and tokens, finished steps ticking off above.
+[0;2;39;49mspinner · 64×6 (min 36×3) · 9.5 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: thinking, shimmer, working, spinner, agent[0m
+
+        [0;1;38;5;71;48;5;234m✔[0;39;48;5;234m [38;5;249mRead trace 4bf92f35 (31 spans)                                [0m
+        [0;1;38;5;71;48;5;234m✔[0;39;48;5;234m [38;5;249mCorrelated p99 with pool wait (r=0.94)                        [0m
+        [0;1;38;5;74;48;5;234m✳[0;39;48;5;234m [0;1;38;5;67;48;5;234mChecking the d[38;5;67me[38;5;110mp[38;5;152ml[38;5;255mo[38;5;152my[38;5;110m [38;5;67md[38;5;67mi[38;5;67mff…[0;39;48;5;234m                                     [0m
+        [48;5;234m  [38;5;66m(10s · ↓ 1.9k tokens · esc to interrupt)                      [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+[0;2;39;49m  still at t=4.75s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ai-thinking-shimmer[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ai-thinking-shimmer --size 64x6[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ai-thinking-shimmer'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ai-attention-heatmap[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ai-typing-indicators[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ai[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

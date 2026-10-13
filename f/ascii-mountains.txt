@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Pure ASCII > ASCII Art
+Mountain Range  ascii-mountains
+Three ridgelines of /\ peaks drift past at different speeds, snow on the
+summits, a moon overhead and birds in flight.
+art - 80x24 (min 36x12) - 20 s loop - ascii - 16 colors
+tags: mountains, landscape, parallax, snow, birds
+
+                                .
+          .      _.._     *                          .
+                ( (  `   .                           .               .
+                 `-.'       vv                                            .    .
+              .                                               *
+   .     .*    .                           .       .                 \/
+                          vv            .
+                               *    .    *                  .
+
+                                                           ^_^
+                                                   ^______/***\^
+^        ^_^                    ^_^     ^_^       /********   **
+ \^    ^/   ^_^               ^/***\  ^/   \^    /              \          ^____
+   \__/   ^/***\^    ^_______/**  :*\^       \__/                \        /*****
+         /  :    \__/ :    :    :    :\ ^___^                     \     ^/   :
+       ^/ :    :    :    :    : ^______/*****\^       ^__^  ^_____^\^ ^/   :
+  ^___/ :    :    ^________^:^_/********:#:#:**\_^  ^/    \/   ^_^ \__/  :    :
+___^  :    ^_____/#:#:#:#:#:/:#:#:#:#:#:#:#:#:#:#:\___________/:#:\__^ :^_______
+:#:#\_^  ^/#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#\/:#:#:#:#
+#:#:#:#\/:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ascii-mountains
+Snapshot  prism-term snapshot ascii-mountains --size 80x24
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-mountains'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-sea
+next >    curl -sL prism.jeremyfhall.com/f/ascii-skyline
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Animated Objects > Mechanical
+Hourglass  hourglass
+Sand drains through the neck into a growing heap, volume conserved; when the top
+runs dry the glass flips over.
+scene - 30x22 (min 12x9) - 9.4 s loop - unicode - truecolor
+tags: hourglass, sand, timer, waiting, time
+
+                            :-::::::-::-::::-::-::--
+                             -  +..............+  -
+                             -+..................+-
+                             -:=..::............=:-
+                             - :-..::..........-: -
+                             -  .****......*++*.  -
+                             -    **+#+*+*++**    -
+                             -     :*+*+*+**:     -
+                             -       ****+*       -
+                             -        -++-        -
+                             -        -*--        -
+                             -       =:**:=       -
+                             -     :=..*...=:     -
+                             -    =:.:.##...:=    -
+                             -  .=..:..##.....=.  -
+                             - :-..::.++*+.....-: -
+                             -:=.#*#+++***++***.=:-
+                             -*****++**+*++**+++**-
+                             -  ***++++*+*++++**  -
+                            ::::-:::-:::-::--::-:::-
+  still at 30x20 - t=4.7s -- run it live for full size and motion
+
+Params  (--set key=value)
+  duration=8            Seconds per run  (2-60)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play hourglass
+Snapshot  prism-term snapshot hourglass --size 30x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('hourglass'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/analog-clock
+next >    curl -sL prism.jeremyfhall.com/f/newton-cradle
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

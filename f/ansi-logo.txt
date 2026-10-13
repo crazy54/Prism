@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Retro & Demoscene > BBS & ANSI Art
+ANSI Group Logo  ansi-logo
+A 1994-style ANSI group logo: bevelled block letters in .:% shading with a light
+sweep and sparkles.
+art - 78x16 (min 36x8) - 8 s loop - unicode - 16 colors
+tags: ansi, logo, bbs, acid, ice, scene, shading
+
+
+
+
+       ###""."##__   ###""""##__   ".###""#_   #""""""""#_ ###__.    ####
+       ####:"""####_ ####:"""####_  "####:"" ####:"""""""" #####__ ######
+       #""_:   #""#: #""_:   #""#:   #""#:   """_:         #""""""""####"
+       #__""""""::"" #__""____::""   #__:: .  """"""____   #__::""_:"#"#"
+       #""#:""""""   #""#:""""":     #""#:      """"""""__ #""#:  "".#"""
+       #"".:         #""::  """""_   #""_:           #"":: #""::     #___
+       _"".:       . _"".:   _.".: _"""""""_ _"""""""".:"" _"".:     _"""
+
+                       -[ PRiSM ANSi & ASCii DiViSiON ]-
+                  ans by ckr/prism . 10/94 . 80x25 . iCE-free
+
+
+
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  text=PRISM            Logo
+  colors=vga            Colors  (vga|theme)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ansi-logo
+Snapshot  prism-term snapshot ansi-logo --size 78x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ansi-logo'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/bbs-menu
+next >    curl -sL prism.jeremyfhall.com/f/ansi-landscape
+gallery   curl -sL prism.jeremyfhall.com/t/retro
+home      curl -sL prism.jeremyfhall.com/tty

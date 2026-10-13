@@ -123,9 +123,22 @@
     byId('gallery-status').textContent = `${count} ${count === 1 ? 'gallery' : 'galleries'} found.`;
   });
 
-  const commands = {
-    browser: 'git clone https://github.com/crazy54/Prism.git\ncd Prism\n\n# Open Prism.html in your browser.\n# Or double-click the downloaded file.',
-    mcp: 'git clone https://github.com/crazy54/Prism.git\ncd Prism/prism-mcp-server\n\n# Verify your catalog\nnode cli.js info --catalog ../Prism.html\n\n# Start the local MCP server\nnode cli.js start --catalog ../Prism.html'
+  const quickstarts = {
+    'browser-tab': {
+      label: 'GET THE LIBRARY',
+      footer: 'Your browser is the only dependency.',
+      code: 'git clone https://github.com/crazy54/Prism.git\ncd Prism\n\n# Open Prism.html in your browser.\n# Or double-click the downloaded file.',
+    },
+    'mcp-tab': {
+      label: 'CONNECT THE CATALOG',
+      footer: 'Node.js 18+. No npm install needed.',
+      code: 'git clone https://github.com/crazy54/Prism.git\ncd Prism/prism-mcp-server\n\n# Verify both catalogs (web + terminal)\nnode cli.js info --catalog ../Prism.html\n\n# Start the local MCP server\nnode cli.js start --catalog ../Prism.html',
+    },
+    'terminal-tab': {
+      label: 'BROWSE FROM YOUR TERMINAL',
+      footer: 'Windows PowerShell: use curl.exe instead of curl.',
+      code: '# Browse the terminal site. Nothing to install.\ncurl -sL https://prism.jeremyfhall.com/tty\n\n# Run the live player (Node.js 18+)\nnpx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term',
+    },
   };
   const tabs = [...document.querySelectorAll('[role="tab"]')];
   function selectTab(tab) {
@@ -135,10 +148,10 @@
       item.tabIndex = selected ? 0 : -1;
       byId(item.getAttribute('aria-controls')).hidden = !selected;
     });
-    const agent = tab.id === 'mcp-tab';
-    byId('quickstart-code').textContent = commands[agent ? 'mcp' : 'browser'];
-    byId('code-label').textContent = agent ? 'CONNECT THE CATALOG' : 'GET THE LIBRARY';
-    byId('code-footer').textContent = agent ? 'Node.js 18+. No npm install needed.' : 'Your browser is the only dependency.';
+    const quickstart = quickstarts[tab.id] || quickstarts['browser-tab'];
+    byId('quickstart-code').textContent = quickstart.code;
+    byId('code-label').textContent = quickstart.label;
+    byId('code-footer').textContent = quickstart.footer;
   }
   tabs.forEach((tab, index) => {
     tab.addEventListener('click', () => selectTab(tab));
@@ -151,6 +164,41 @@
     });
   });
   byId('copy-command').addEventListener('click', (event) => copy(byId('quickstart-code').textContent, event.currentTarget));
+  document.querySelectorAll('[data-copy-text]').forEach((button) => {
+    button.addEventListener('click', () => copy(button.dataset.copyText, button));
+  });
+
+  // The terminal window's status line: a braille spinner and an eighth-block
+  // progress meter, the way prism-term draws them. Holds still when motion is paused.
+  const demo = document.querySelector('.term-demo');
+  if (demo) {
+    const spin = demo.querySelector('.term-spin');
+    const facetName = demo.querySelector('.term-demo-facet');
+    const meter = demo.querySelector('.term-meter');
+    const percent = demo.querySelector('.term-pct');
+    const spinFrames = '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏';
+    const eighths = ['', '▏', '▎', '▍', '▌', '▋', '▊', '▉'];
+    const names = ['plasma', 'donut', 'matrix', 'globe', 'fire', 'synthwave', 'life', 'starfield'];
+    const width = 16;
+    const steps = 34;
+    let tick = 0;
+    const draw = (progress, nameIndex, frame) => {
+      const cells = progress * width;
+      const full = Math.floor(cells);
+      const part = eighths[Math.floor((cells - full) * 8)] || '';
+      meter.textContent = `▕${'█'.repeat(full)}${part}${' '.repeat(Math.max(0, width - full - (part ? 1 : 0)))}▏`;
+      percent.textContent = `${Math.round(progress * 100)}%`;
+      facetName.textContent = names[nameIndex];
+      spin.textContent = progress >= 1 ? '✓' : spinFrames[frame % spinFrames.length];
+    };
+    draw(0.62, 0, 0);
+    setInterval(() => {
+      if (paused || document.hidden) return;
+      tick++;
+      const step = tick % (steps + 8);
+      draw(Math.min(1, step / steps), Math.floor(tick / (steps + 8)) % names.length, tick);
+    }, 80);
+  }
   byId('close-copy-dialog').addEventListener('click', () => byId('copy-dialog').close());
   byId('theme-toggle').addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
   byId('motion-toggle').addEventListener('click', () => setMotion(!paused));

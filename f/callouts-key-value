@@ -1,0 +1,38 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mCallouts & Layout[0;2;39;49m › [0;1;39;49mKey-Value[0m
+[0;1;39;49mKey-Value Details[0;2;39;49m  callouts-key-value[0m
+Grouped key/value details with dotted leaders to right-aligned values,
+live-updating numbers and status pills — the "describe" view of every CLI.
+[0;2;39;49mwidget · 56×16 (min 32×8) · 10 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: key value, details, describe, leaders, properties[0m
+
+            [0;1;38;5;249;48;5;234mSERVICE[0;39;48;5;234m                                                 [0m
+            [48;5;234m  [38;5;255mName[39m [38;5;238m········································[39m [38;5;255mcheckout[0m
+            [48;5;234m  [38;5;255mVersion[39m [38;5;238m······································[39m [38;5;255mv2.14.1[0m
+            [48;5;234m  [38;5;255mReplicas[39m [38;5;238m·······································[39m [0;1;38;5;71;48;5;234m2 / 2[0m
+            [48;5;234m  [38;5;255mStatus[39m [38;5;238m·····································[39m [0;1;38;5;234;48;5;71m Running [0m
+            [48;5;234m                                                        [0m
+            [0;1;38;5;249;48;5;234mTRAFFIC[0;39;48;5;234m                                                 [0m
+            [48;5;234m  [38;5;255mRequests[39m [38;5;238m·····································[39m [38;5;255m595 rps[0m
+            [48;5;234m  [38;5;255mp95 latency[39m [38;5;238m···································[39m [38;5;255m203 ms[0m
+            [48;5;234m  [38;5;255mError rate[39m [38;5;238m····································[39m [38;5;255m0.15 %[0m
+            [48;5;234m                                                        [0m
+            [0;1;38;5;249;48;5;234mNETWORK[0;39;48;5;234m                                                 [0m
+            [48;5;234m  [38;5;255mAddress[39m [38;5;238m······························[39m [38;5;255m10.20.2.31:8085[0m
+            [48;5;234m  [38;5;255mUpstream[39m [38;5;238m························[39m [38;5;255mpg-orders-primary-01[0m
+            [48;5;234m                                                        [0m
+            [48;5;234m                                                        [0m
+[0;2;39;49m  still at t=5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play callouts-key-value[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot callouts-key-value --size 56x16[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('callouts-key-value'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/callouts-neofetch[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/callouts-border-styles[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/callouts[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

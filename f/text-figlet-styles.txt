@@ -1,0 +1,36 @@
+* PRISM TERMINAL > Text Effects > Banners & Fonts
+figlet: Standard, Small, Block  text-figlet-styles
+A shell session running figlet three ways: the outlined standard face, the
+compact small face and solid block letters with a shadow.
+text - 72x14 (min 36x9) - 18 s loop - unicode - truecolor
+tags: figlet, banner, shell, standard, small, block
+
+    $ figlet -f small PRISM
+     ___     ___     _____     ___   _       _
+    | __|_  | __|_  |__ __|  _|___| | |_   _| |
+    | |_|_| | |_|_|   | |   |_|_    | __|_|__ |
+    | __|   | __|_    | |     |_|_  | | |_| | |
+    | |     | | | |  _| |_   ___|_| | |     | |
+    |_|     |_| |_| |_____| |___|   |_|     |_|
+    $ _
+
+
+
+
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play text-figlet-styles
+Snapshot  prism-term snapshot text-figlet-styles --size 72x14
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('text-figlet-styles'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/text-font-cyber
+next >    curl -sL prism.jeremyfhall.com/f/text-banner-gradient
+gallery   curl -sL prism.jeremyfhall.com/t/text
+home      curl -sL prism.jeremyfhall.com/tty

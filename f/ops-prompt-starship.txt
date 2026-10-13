@@ -1,0 +1,38 @@
+* PRISM TERMINAL > Linux & Ops > Shell Prompts
+Starship-Style Prompt  ops-prompt-starship
+A two-line starship-style prompt: kube context (red for prod), repo, git branch
+and status, toolchain versions, command duration, then >.
+tui - 80x16 (min 60x6) - 26 s loop - ascii - 256 colors
+tags: starship, prompt, kubernetes, git, two-line, zsh
+
+kube prod-east (shop) in shop-api on git:main [!?^1] via go v1.23.2
+> go test ./...
+ok    shop/api/internal/cart       0.412s
+ok    shop/api/internal/checkout   1.208s
+
+kube prod-east (shop) in shop-api on git:main [!?^1] via go v1.23.2 took 4s
+> kubectl
+
+
+
+
+
+
+
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-prompt-starship
+Snapshot  prism-term snapshot ops-prompt-starship --size 80x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-prompt-starship'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-tmux-status
+next >    curl -sL prism.jeremyfhall.com/f/ops-htop
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,31 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mNotifications & Status[0;2;39;49m › [0;1;39;49mToasts & Alerts[0m
+[0;1;39;49mOn-call Page[0;2;39;49m  status-oncall-pager[0m
+An incoming page: the alert, its context, ringing indicator and an acknowledge
+countdown that escalates when it runs out.
+[0;2;39;49mwidget · 56×9 (min 34×6) · 12 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: pager, on-call, alert, acknowledge, escalation[0m
+
+            [48;5;234m [48;5;235m [0;1;38;5;167;48;5;235m◉[0;39;48;5;235m [0;1;38;5;167;48;5;235mPAGE · high urgency[0;39;48;5;235m                       [38;5;66m14:02:11[39m [48;5;234m [0m
+            [48;5;234m [48;5;235m                                                      [48;5;234m [0m
+            [48;5;234m [48;5;235m [0;1;38;5;255;48;5;235mcheckout p95 > 1s for 5 minutes[0;39;48;5;235m                      [48;5;234m [0m
+            [48;5;234m [48;5;235m [38;5;249mservice checkout · env prod · region us-east-1[39m       [48;5;234m [0m
+            [48;5;234m [48;5;235m [38;5;74mrunbook: wiki.example/runbooks/checkout-latency[39m      [48;5;234m [0m
+            [48;5;234m [48;5;235m                                                      [48;5;234m [0m
+            [48;5;234m [48;5;235m [38;5;249mack in  4s[39m [38;5;209m████████████████[38;5;238m░░░░░░░░░░░░░░░░░░░░░░░░[39m  [48;5;234m [0m
+            [48;5;234m [48;5;235m [0;1;38;5;234;48;5;71m [a] Acknowledge [0;39;48;5;235m  [38;5;255;48;5;237m [e] Escalate [39;48;5;235m                    [48;5;234m [0m
+            [48;5;234m                                                        [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play status-oncall-pager[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot status-oncall-pager --size 56x9[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('status-oncall-pager'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-incident-banner[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-deploy-success[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/status[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

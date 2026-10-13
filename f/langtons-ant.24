@@ -1,0 +1,45 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mParticles & Simulations[0;2;39;49m › [0;1;39;49mCellular Automata[0m
+[0;1;39;49mLangton's Ant[0;2;39;49m  langtons-ant[0m
+Two Langton's ants at braille resolution, accelerating through ten thousand
+steps of chaos into the highway.
+[0;2;39;49mscene · 60×22 (min 20×7) · 30 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: langton, ant, turmite, cellular automata, emergence, braille[0m
+
+          [48;2;15;22;33m                                                            [0m
+          [48;2;15;22;33m                                                            [0m
+          [48;2;15;22;33m                                                            [0m
+          [48;2;15;22;33m                                                            [0m
+          [48;2;15;22;33m                 [38;2;44;202;238m⢀⣀⣤⣀⡄⠄⣹⠢[39m                                   [0m
+          [48;2;15;22;33m              [38;2;44;202;238m⡴⣍⣂⣕⡏⡻⣤⠏⠈⢃⣢[38;2;107;213;237m⠚[39m                                  [0m
+          [48;2;15;22;33m               [38;2;44;202;238m⠲⣶⠏⡡⢲⠐⣪⢁⢆⠉⠁[39m                                  [0m
+          [48;2;15;22;33m               [38;2;44;202;238m⢰⡡⢵⠿⠿⠙⡂⣔⠝[39m                                    [0m
+          [48;2;15;22;33m               [38;2;44;202;238m⠈⠺⠖⠁⠢⠝⠁[39m                                      [0m
+          [48;2;15;22;33m                                            [38;2;221;78;224m⢀⡀[39m              [0m
+          [48;2;15;22;33m                                       [38;2;221;78;224m⢀⢤⠤⣀⣴⢰⢋⠆[39m             [0m
+          [48;2;15;22;33m                                       [38;2;221;78;224m⠻⡡⣧⣊⠛⣾⣢⣢[39m             [0m
+          [48;2;15;22;33m                                       [38;2;221;78;224m⡔⡀⠿⡧⠵⢐⡴⢿⠆[39m            [0m
+          [48;2;15;22;33m                                       [38;2;221;78;224m⠈⢓⡘⠱⠜⡌⠓⠞⡂[39m            [0m
+          [48;2;15;22;33m                                        [38;2;221;78;224m⠈⠪⠮⠒⣠⢐⠳⢤⠆[39m           [0m
+          [48;2;15;22;33m                                            [38;2;221;78;224m⠋[38;2;225;130;228m⠱[38;2;221;78;224m⠄⠁[39m            [0m
+          [48;2;15;22;33m                                                            [0m
+          [48;2;15;22;33m                                                            [0m
+          [48;2;15;22;33m                                                            [0m
+          [48;2;15;22;33m [38;2;164;176;192mstep 1,399[39m                                                 [0m
+[0;2;39;49m  still at 60×20 · t=6s — run it live for full size and motion[0m
+
+[0;1;39;49mParams[0;2;39;49m  (--set key=value)[0m
+  [38;2;95;175;175mants=2                [0;2;39;49mAnts  (1–4)[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play langtons-ant[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot langtons-ant --size 60x22[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('langtons-ant'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/life[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/wireworld[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/sim[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

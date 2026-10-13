@@ -1,0 +1,38 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mInput & Menus[0;2;39;49m › [0;1;39;49mDialogs & Prompts[0m
+[0;1;39;49mPrompt Flow[0;2;39;49m  input-prompt-flow[0m
+A clack-style CLI wizard: text, select, yes/no and multiselect prompts chain
+down one gutter, each collapsing to its answer before a deploy spinner.
+[0;2;39;49mtui · 56×16 (min 36×8) · 10 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: prompts, clack, cli wizard, confirm, yes no[0m
+
+            [38;2;107;120;135;48;2;15;22;33m┌  [0;1;38;2;15;22;33;48;2;83;159;229m deploy [0;38;2;164;176;192;48;2;15;22;33m  checkout-api[39m                               [0m
+            [38;2;107;120;135;48;2;15;22;33m│  [39m                                                     [0m
+            [38;2;55;194;107;48;2;15;22;33m◇  [38;2;233;235;237mRelease tag[39m                                          [0m
+            [38;2;107;120;135;48;2;15;22;33m│  v2.14.1[39m                                              [0m
+            [38;2;107;120;135;48;2;15;22;33m│  [39m                                                     [0m
+            [38;2;55;194;107;48;2;15;22;33m◇  [38;2;233;235;237mEnvironment[39m                                          [0m
+            [38;2;107;120;135;48;2;15;22;33m│  production[39m                                           [0m
+            [38;2;107;120;135;48;2;15;22;33m│  [39m                                                     [0m
+            [38;2;55;194;107;48;2;15;22;33m◇  [38;2;233;235;237mRun database migrations?[39m                             [0m
+            [38;2;107;120;135;48;2;15;22;33m│  No[39m                                                   [0m
+            [38;2;107;120;135;48;2;15;22;33m│  [39m                                                     [0m
+            [0;1;38;2;83;159;229;48;2;15;22;33m◆  [38;2;233;235;237mNotify[0;39;48;2;15;22;33m                                               [0m
+            [38;2;83;159;229;48;2;15;22;33m│   [39m [38;2;55;194;107m◼[38;2;164;176;192m #checkout-oncall[39m                                 [0m
+            [38;2;83;159;229;48;2;15;22;33m│   [39m [38;2;107;120;135m◻[38;2;164;176;192m #releases[39m                                        [0m
+            [38;2;83;159;229;48;2;15;22;33m│  ❯[39m [38;2;55;194;107m◼[38;2;233;235;237m release-notes email[39m                              [0m
+            [38;2;83;159;229;48;2;15;22;33m└[38;2;107;120;135m  space select · enter confirm[39m                         [0m
+[0;2;39;49m  still at t=5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play input-prompt-flow[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot input-prompt-flow --size 56x16[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('input-prompt-flow'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/input-confirm-dialog[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/input-progress-dialog[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/input[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

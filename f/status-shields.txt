@@ -1,0 +1,28 @@
+* PRISM TERMINAL > Notifications & Status > Badges & Pills
+README Shields  status-shields
+Two-tone README shields -- build, tests, coverage, version, licence, downloads
+-- with the build badge running, passing and failing.
+widget - 72x6 (min 30x3) - 12 s loop - unicode - truecolor
+tags: shields, badges, readme, build status, coverage
+
+     build  passing   tests  1,204 passed   coverage  86.9%
+
+     release  v2.14.2   license  MIT   downloads  12.4k/week
+
+     uptime  99.98%   vulns  1 moderate   docs  passing   chat  412 online
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play status-shields
+Snapshot  prism-term snapshot status-shields --size 72x6
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('status-shields'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/status-badges
+next >    curl -sL prism.jeremyfhall.com/f/status-ci-pipeline
+gallery   curl -sL prism.jeremyfhall.com/t/status
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,35 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mCallouts & Layout[0;2;39;49m › [0;1;39;49mTables[0m
+[0;1;39;49mResult Grid[0;2;39;49m  callouts-table-grid[0m
+A psql-style result grid with box-drawing junctions, a double rule under the
+header, a "(5 rows)" footer and a moving cell cursor.
+[0;2;39;49mwidget · 60×13 (min 52×8) · 10 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: table, grid, sql, psql, spreadsheet[0m
+
+          [48;5;234m    [38;5;238m┌──────┬───────────┬──────────┬────────┬───────────┐[39m    [0m
+          [48;5;234m    [38;5;238m│[0;1;38;5;249;48;5;234m   id [0;38;5;238;48;5;234m│[0;1;38;5;249;48;5;234m order     [0;38;5;238;48;5;234m│[0;1;38;5;249;48;5;234m status   [0;38;5;238;48;5;234m│[0;1;38;5;249;48;5;234m  total [0;38;5;238;48;5;234m│[0;1;38;5;249;48;5;234m placed_at [0;38;5;238;48;5;234m│[39m    [0m
+          [48;5;234m    [38;5;238m╞══════╪═══════════╪══════════╪════════╪═══════════╡[39m    [0m
+          [48;5;234m    [38;5;238m│[38;5;255m 1041 [38;5;238m│[38;5;255m ord-80211 [38;5;238m│[38;5;71m shipped  [38;5;238m│[38;5;255m  84.20 [38;5;238m│[38;5;255m 14:02:11  [38;5;238m│[39m    [0m
+          [48;5;234m    [38;5;238m│[38;5;255m 1042 [38;5;238m│[38;5;255m ord-80212 [38;5;238m│[38;5;74m paid     [38;5;238m│[38;5;255m  12.99 [38;5;238m│[38;5;255m 14:02:13  [38;5;238m│[39m    [0m
+          [48;5;234m    [38;5;238m│[38;5;255m 1043 [38;5;238m│[38;5;255m ord-80213 [38;5;238m│[0;1;38;5;234;48;5;74m pending  [0;38;5;238;48;5;234m│[38;5;255m 231.00 [38;5;238m│[38;5;255m 14:02:19  [38;5;238m│[39m    [0m
+          [48;5;234m    [38;5;238m│[38;5;255m 1044 [38;5;238m│[38;5;255m ord-80214 [38;5;238m│[38;5;66m refunded [38;5;238m│[38;5;255m   9.49 [38;5;238m│[38;5;255m 14:02:24  [38;5;238m│[39m    [0m
+          [48;5;234m    [38;5;238m│[38;5;255m 1045 [38;5;238m│[38;5;255m ord-80215 [38;5;238m│[38;5;74m paid     [38;5;238m│[38;5;255m  61.75 [38;5;238m│[38;5;255m 14:02:31  [38;5;238m│[39m    [0m
+          [48;5;234m    [38;5;238m└──────┴───────────┴──────────┴────────┴───────────┘[39m    [0m
+          [48;5;234m    [38;5;66m(5 rows)[39m                                [38;5;68mC3 = pending[39m    [0m
+          [48;5;234m                                                            [0m
+          [48;5;234m                                                            [0m
+          [48;5;234m                                                            [0m
+[0;2;39;49m  still at t=5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play callouts-table-grid[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot callouts-table-grid --size 60x13[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('callouts-table-grid'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/callouts-table-sorted[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/callouts-dividers[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/callouts[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

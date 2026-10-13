@@ -1,0 +1,29 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mProgress & Counters[0;2;39;49m › [0;1;39;49mSteps & Pipelines[0m
+[0;1;39;49mnpm install[0;2;39;49m  progress-npm-install[0m
+npm's gauge — a bracketed fill, a spinner and the current reify step — ending in
+the added, funding and audit summary.
+[0;2;39;49mprogress · 80×7 (min 40×2) · 9 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: npm, node, gauge, javascript[0m
+
+[38;5;74;48;5;234m~/prism-web[38;5;66m $ [38;5;255mnpm install[39m                                                       [0m
+[38;5;66;48;5;234m([38;5;255m#############[38;5;66m⠂⠂⠂⠂⠂) [38;5;255m⠼[38;5;249m reify:picocolors: timing reifyNode:node_modules/picocolo…[0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[0;2;39;49m  still at t=4.5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play progress-npm-install[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot progress-npm-install --size 80x7[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('progress-npm-install'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-git-clone[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-odometer[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/progress[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

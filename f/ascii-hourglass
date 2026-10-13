@@ -1,0 +1,36 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mPure ASCII[0;2;39;49m › [0;1;39;49mASCII Spinners & Bars[0m
+[0;1;39;49mASCII Hourglass[0;2;39;49m  ascii-hourglass[0m
+Sand drains grain by grain through the neck of a 7-bit hourglass, piles up
+below, then the glass flips and starts again.
+[0;2;39;49mspinner · 30×14 (min 14×12) · 10 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: hourglass, timer, sand, waiting[0m
+
+                         [48;5;234m                              [0m
+                         [48;5;234m         [38;5;249m_____________[39m        [0m
+                         [48;5;234m         [38;5;249m\[38;5;215m           [38;5;249m/[39m        [0m
+                         [48;5;234m          [38;5;249m\[38;5;215m         [38;5;249m/[39m         [0m
+                         [48;5;234m           [38;5;249m\[38;5;215m       [38;5;249m/[39m          [0m
+                         [48;5;234m            [38;5;249m\[38;5;215m.::..[38;5;249m/[39m           [0m
+                         [48;5;234m             [38;5;249m\[38;5;215m::.[38;5;249m/[39m            [0m
+                         [48;5;234m             [38;5;249m/[39m [38;5;215m.[39m [38;5;249m\[39m            [0m
+                         [48;5;234m            [38;5;249m/[39m     [38;5;249m\[39m           [0m
+                         [48;5;234m           [38;5;249m/[38;5;215m..:...:[38;5;249m\[39m          [0m
+                         [48;5;234m          [38;5;249m/[38;5;215m.::::....[38;5;249m\[39m         [0m
+                         [48;5;234m         [38;5;249m/[38;5;215m.:...:::...[38;5;249m\[39m        [0m
+                         [48;5;234m         [38;5;249m-------------[39m        [0m
+                         [48;5;234m                              [0m
+[0;2;39;49m  still at t=5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ascii-hourglass[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ascii-hourglass --size 30x14[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ascii-hourglass'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ascii-progress-bars[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ascii-vu-meter[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ascii[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

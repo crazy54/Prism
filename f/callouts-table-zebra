@@ -1,0 +1,35 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mCallouts & Layout[0;2;39;49m › [0;1;39;49mTables[0m
+[0;1;39;49mZebra Table with Totals[0;2;39;49m  callouts-table-zebra[0m
+A zebra-striped table with right-aligned numeric columns, rows arriving one by
+one and a bold totals row under a rule.
+[0;2;39;49mwidget · 64×13 (min 36×6) · 8 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: table, zebra, totals, columns, aligned[0m
+
+        [48;5;234m      [0;1;38;5;249;48;5;236mSERVICE       [0;39;48;5;236m [0;1;38;5;249;48;5;236mREGION     [0;39;48;5;236m [0;1;38;5;249;48;5;236m    RPS[0;39;48;5;236m [0;1;38;5;249;48;5;236m  P95 MS[0;39;48;5;236m [0;1;38;5;249;48;5;236m  ERRORS[0;39;48;5;234m      [0m
+        [48;5;234m      [38;5;255medge-lb       [39m [38;5;255mus-east-1  [39m [38;5;255m  4,210[39m [38;5;255m     3.1[39m [38;5;255m   0.03%[39m      [0m
+        [48;5;234m      [38;5;255;48;5;235mapi-gateway   [39m [38;5;255mus-east-1  [39m [38;5;255m  4,198[39m [38;5;255m     8.4[39m [38;5;255m   0.04%[39;48;5;234m      [0m
+        [48;5;234m      [38;5;255mcheckout      [39m [38;5;255mus-east-1  [39m [38;5;255m    612[39m [38;5;215m   212.0[39m [38;5;255m   0.15%[39m      [0m
+        [48;5;234m      [38;5;255;48;5;235mpayments      [39m [38;5;255mus-east-1  [39m [38;5;255m    598[39m [38;5;255m   131.5[39m [38;5;255m   0.11%[39;48;5;234m      [0m
+        [48;5;234m      [38;5;255mcatalog       [39m [38;5;255mus-west-2  [39m [38;5;255m  2,214[39m [38;5;255m    41.2[39m [38;5;255m   0.09%[39m      [0m
+        [48;5;234m      [38;5;255;48;5;235msearch        [39m [38;5;255mus-west-2  [39m [38;5;255m  1,630[39m [38;5;255m    22.7[39m [38;5;255m   0.08%[39;48;5;234m      [0m
+        [48;5;234m      [38;5;255mrx-orders     [39m [38;5;255mus-east-1  [39m [38;5;255m    188[39m [38;5;215m   309.4[39m [38;5;255m   0.21%[39m      [0m
+        [48;5;234m      [38;5;255;48;5;235mloyalty       [39m [38;5;255meu-west-1  [39m [38;5;255m    402[39m [38;5;255m    37.9[39m [38;5;255m   0.07%[39;48;5;234m      [0m
+        [48;5;234m      [38;5;238m────────────────────────────────────────────────────[39m      [0m
+        [48;5;234m      [0;1;38;5;255;48;5;234mtotal         [0;39;48;5;234m [0;1;38;5;255;48;5;234m8 services [0;39;48;5;234m [0;1;38;5;255;48;5;234m 14,052[0;39;48;5;234m [0;1;38;5;255;48;5;234m   309.4[0;39;48;5;234m [0;1;38;5;255;48;5;234m   0.06%[0;39;48;5;234m      [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+[0;2;39;49m  still at t=4s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play callouts-table-zebra[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot callouts-table-zebra --size 64x13[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('callouts-table-zebra'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/callouts-block-quote[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/callouts-table-sorted[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/callouts[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

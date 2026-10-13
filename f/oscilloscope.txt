@@ -1,0 +1,44 @@
+* PRISM TERMINAL > Retro & Demoscene > Chiptune Visuals
+Oscilloscope  oscilloscope
+A phosphor oscilloscope on the chiptune: graticule, a bass-triggered trace with
+persistence, and an XY Lissajous mode.
+scene - 64x18 (min 20x6) - 7.68 s loop - unicode - truecolor
+tags: oscilloscope, scope, waveform, phosphor, lissajous, audio, chiptune
+
+        :CH1 0.5V/div: :  :: :  : ::  :---  : ::  :  :  :  :TRIG ^ BASS:
+                                       - -
+        :  :  :  :  :  :  :  :  :  :  :- -  :  :  :  :  :  :  :  :  :  :
+        :     :    ####    :      :    ---    :      :     :      :    :
+              #####    #               - -
+        :  ###:  :  :  :# :  :  :  :  :- ######:  :  :  :  :  :  :  :  :
+        : #   :   ::::  #  :      :    --#    :####:::     :      :    :
+        :#:: ::==== :: : #:  :  :  :  :-#:: :::====###  :  :  :  :  :  :
+        :# :-:-=-:-=-:-::##-- --- ---- -#- :-:-=-:-=--#-:---- --- ---- -
+        #======:::::==== :=#############=======::::====#-:===::: -:::===
+        :- ---- --- ----=-=::=--: :-=-:::- ---- --- ----#=-::=--: :-=-::
+        :  :  :  :  :  : =: ::======  :: -  :  :  :  :  #: :::======: ::
+        :     :      :    ::     ::::: ---    :      :   #::     ::::: :
+                                       - -               #
+        :  :  :  :  :  :  :  :  :  :  :- -  :  :  :  :  : ##  :  :  :  #
+        :     :      :     :      :    ---    :      :     :###########:
+        :  :  :  :  :  :  :  :  :  :  :- -  :  :  :  :  :  :  :  :  :  :
+        :130.8 Hz:  :  :  :  :  :  :  :- -  :  :  :  :  :  : 1.53ms/div:
+  still at t=3.84s -- run it live to see it move
+
+Params  (--set key=value)
+  mode=yt               Mode  (yt|xy)
+  phosphor=green        Phosphor  (green|amber|blue|theme)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play oscilloscope
+Snapshot  prism-term snapshot oscilloscope --size 64x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('oscilloscope'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/spectrum-analyzer
+next >    curl -sL prism.jeremyfhall.com/f/tracker-pattern
+gallery   curl -sL prism.jeremyfhall.com/t/retro
+home      curl -sL prism.jeremyfhall.com/tty

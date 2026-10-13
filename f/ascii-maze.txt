@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Pure ASCII > Classics
+Maze Builder  ascii-maze
+A depth-first backtracker carves a +--+ maze cell by cell, then breadth-first
+search lights the solution path.
+art - 61x21 (min 25x11) - 20 s loop - ascii - 16 colors
+tags: maze, backtracker, bfs, pathfinding, algorithm
+
+         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+                  |::|::|           |           |::|::|        |::|::|
+         +--+--+  +--+--+  +--+--+  +--+  +--+  +--+--+  +--+  +--+--+
+         |     |  |        |     |        |     |::|::|     |  |::|::|
+         +  +  +  +  +--+--+  +  +--+--+--+  +--+--+--+--+  +  +--+--+
+         |  |  |     |     |  |              |        |     |  |::|::|
+         +  +  +--+--+  +  +  +--+--+--+--+--+  +--+  +  +--+  +--+--+
+         |  |  |        |  |     |              |  |     |  |  |::|::|
+         +  +--+  +--+  +--+--+  +--+--+--+  +--+  +--+--+  +  +--+--+
+         |        |  |        |  |        |  |              |  |::|::|
+         +  +--+--+  +--+  +  +  +  +--+  +  +  +--+--+--+  +  +--+--+
+         |        |     |  |  |  |     |  |  |  |     |@@   |        |
+         +--+--+  +  +  +  +  +  +--+  +  +  +  +--+  +  +--+--+--+  +
+         |  |        |  |  |  |     |  |  |  |        |        |::|  |
+         +  +  +--+--+--+  +  +--+  +  +  +  +--+--+  +--+--+  +--+  +
+         |  |  |           |     |  |  |     |     |        |     |  |
+         +  +  +  +--+--+--+--+--+  +  +--+--+  +--+--+--+  +--+  +  +
+         |     |                       |                       |
+         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+
+  still at 61x20 - t=6s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ascii-maze
+Snapshot  prism-term snapshot ascii-maze --size 61x21
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-maze'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-life
+next >    curl -sL prism.jeremyfhall.com/f/ascii-snake
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

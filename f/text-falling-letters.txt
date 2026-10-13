@@ -1,0 +1,40 @@
+* PRISM TERMINAL > Text Effects > Reveal & Type
+Falling Letters  text-falling-letters
+Big letters rain down one after another, bounce to rest under gravity, hold,
+then drop away through the floor for the next word.
+text - 72x18 (min 36x10) - 20 s loop - unicode - truecolor
+tags: falling, gravity, bounce, rain, physics
+
+    v                d                                    ####
+                                                          ##
+                                                   n      ######
+    s                    z                          ####
+                ####      ##    ##  ##            ##     g
+                ##  ##  ##  ##  ##  ##  ##    ##  ##
+         q      ####    ##  ##  ##  ##  ####  ##  ## v
+             i  ##  ##  ##  ##  ##  ##  ##  ####    ####
+                ####      ##    ######  ##    ##        z
+                 b                      ##    ##  v
+                                                    x
+
+               t                                      j
+                                              o
+                                  t        e
+
+                                                               j
+                                                              i
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play text-falling-letters
+Snapshot  prism-term snapshot text-falling-letters --size 72x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('text-falling-letters'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/text-matrix-reveal
+next >    curl -sL prism.jeremyfhall.com/f/text-split-flap
+gallery   curl -sL prism.jeremyfhall.com/t/text
+home      curl -sL prism.jeremyfhall.com/tty

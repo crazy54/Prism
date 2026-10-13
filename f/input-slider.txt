@@ -1,0 +1,32 @@
+* PRISM TERMINAL > Input & Menus > Toggles & Checkboxes
+Sliders  input-slider
+Range sliders for replicas, CPU and timeout: handles glide along ticked tracks,
+filled to the value, with the reading following the handle.
+tui - 60x10 (min 34x7) - 6 s loop - unicode - 256 colors
+tags: slider, range, control, drag, form
+
+          Replicas                                                   9
+           ========================================O---------------
+           '    '    '    '    '    '    '    '    '    '    '    '
+          CPU limit                                         3.20 cores
+           ===========================================O------------
+           '    '    '    '    '    '    '    '    '    '    '    '
+          Timeout                                              1550 ms
+           ================O---------------------------------------
+           '    '    '    '    '    '    '    '    '    '    '    '
+
+  still at t=3s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play input-slider
+Snapshot  prism-term snapshot input-slider --size 60x10
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-slider'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-radio-group
+next >    curl -sL prism.jeremyfhall.com/f/input-text-field
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

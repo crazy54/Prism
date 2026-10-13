@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Spinners & Loaders > Classic Spinners
+Bit Counter  loaders-bit-counter
+An eight-bit register counting up in real binary, one increment per tick -- low
+bits flicker, high bits creep. Pure ASCII.
+spinner - 44x5 (min 24x2) - 8 s loop - ascii - 16 colors
+tags: spinner, loader, ascii, binary, counter, original
+
+                   11010001 Walking the bitmap...        4.0s
+
+                   11001111 11010000 11010001 11010010     ..
+
+                   bit-counter - 64 frames - 120 ms
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play loaders-bit-counter
+Snapshot  prism-term snapshot loaders-bit-counter --size 44x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-bit-counter'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-flip
+next >    curl -sL prism.jeremyfhall.com/f/loaders-dots
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

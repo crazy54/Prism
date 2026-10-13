@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Callouts & Layout > Admonitions
+Admonitions  callouts-admonitions
+NOTE, TIP, IMPORTANT, WARNING and CAUTION blocks in the GitHub alert style --
+colored gutter bar, icon, title and wrapped body.
+widget - 72x22 (min 34x6) - 10 s loop - unicode - 16 colors
+tags: admonition, alert, note, warning, callout, github
+
+    | i Note
+    | The agent runs read-only diagnostics without asking. Changes always
+    | wait for a human.
+
+    | * Tip
+    | Pipe any page of the terminal site through less -R to scroll it
+    | with color.
+
+    | * Important
+    | Facets must be deterministic: derive everything from t, ctx.rng and
+    | ctx.noise.
+
+    | ! Warning
+    | tmux without Tc quantizes truecolor to 256 colors. Test both.
+
+    | x Caution
+    | Rolling back the schema migration drops the orders.v2 column and its
+    | data.
+
+
+  still at 72x20 - t=5s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play callouts-admonitions
+Snapshot  prism-term snapshot callouts-admonitions --size 72x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('callouts-admonitions'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/callouts-code-block
+next >    curl -sL prism.jeremyfhall.com/f/callouts-alert-banners
+gallery   curl -sL prism.jeremyfhall.com/t/callouts
+home      curl -sL prism.jeremyfhall.com/tty

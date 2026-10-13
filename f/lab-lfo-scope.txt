@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Animation Lab > Loops & Cycles
+LFO Scope  lab-lfo-scope
+A four-channel oscilloscope sweeping sine, triangle, saw and square LFOs over a
+graticule with phosphor persistence.
+chart - 64x20 (min 24x8) - 4 s loop - unicode - truecolor
+tags: lfo, oscilloscope, sine, saw, square, triangle, waveform, phosphor
+
+         SIN 0.50 Hz    :       :       :       :       :       :
+              ---------------------
+        %-----  :   :   :   :   :  ------   :   :   :   :   :   :   :
+        %       :       :       :       :-----  :       :       :  -----
+                                              ---------------------
+         TRI 1.00 Hz
+             :::::::    :       :       :    :::::::    :       :
+        %::::   :   :::::   :   :   :   :::::   :   :::::   :   :   :
+        %               :::::       :::::               :::::       ::::
+                :       :    :::::::    :       :       :    :::::::
+         SAW 1.50 Hz
+                         :::::                :::::                :::::
+        :   :   :  ::::::   ::  :   :   ::::::  : : :   :   : ::::: :
+              :::::           :    ::::::          :    ::::::
+        %%::::                :::::                :::::
+        %SQR 2.00 Hz    :       :       :       :       :       :
+        %%::::::        ::::::::        ::::::::        ::::::::
+        :   :  ::   :   :   :  ::   :   :   :  ::   :   :   :  ::   :
+                :      ::       :      ::       :      ::       :
+                ::::::::        ::::::::        ::::::::        ::::::::
+  still at t=2s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play lab-lfo-scope
+Snapshot  prism-term snapshot lab-lfo-scope --size 64x20
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('lab-lfo-scope'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/lab-bounce
+next >    curl -sL prism.jeremyfhall.com/f/lab-loading-choreo
+gallery   curl -sL prism.jeremyfhall.com/t/lab
+home      curl -sL prism.jeremyfhall.com/tty

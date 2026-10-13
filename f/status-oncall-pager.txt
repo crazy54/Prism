@@ -1,0 +1,31 @@
+* PRISM TERMINAL > Notifications & Status > Toasts & Alerts
+On-call Page  status-oncall-pager
+An incoming page: the alert, its context, ringing indicator and an acknowledge
+countdown that escalates when it runs out.
+widget - 56x9 (min 34x6) - 12 s loop - unicode - truecolor
+tags: pager, on-call, alert, acknowledge, escalation
+
+              * PAGE - high urgency                       14:02:11
+
+              checkout p95 > 1s for 5 minutes
+              service checkout - env prod - region us-east-1
+              runbook: wiki.example/runbooks/checkout-latency
+
+              ack in  4s ################........................
+               [a] Acknowledge    [e] Escalate
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play status-oncall-pager
+Snapshot  prism-term snapshot status-oncall-pager --size 56x9
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('status-oncall-pager'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/status-incident-banner
+next >    curl -sL prism.jeremyfhall.com/f/status-deploy-success
+gallery   curl -sL prism.jeremyfhall.com/t/status
+home      curl -sL prism.jeremyfhall.com/tty

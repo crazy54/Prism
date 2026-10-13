@@ -1,0 +1,36 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mNetwork[0m
+[0;1;39;49mping[0;2;39;49m  ops-ping[0m
+ping streaming replies (with the odd late or lost packet), a latency sparkline
+of recent RTTs and the running rtt min/avg/max/mdev line.
+[0;2;39;49mtui · 78×14 (min 46×5) · 30 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: ping, icmp, latency, rtt, network, sparkline[0m
+
+ [0;1;38;2;233;235;237;48;2;15;22;33mPING api.example (192.0.2.80) 56(84) bytes of data.[0;39;48;2;15;22;33m                           [0m
+ [48;2;15;22;33m                                                                              [0m
+ [48;2;15;22;33m                                                                              [0m
+ [48;2;15;22;33m                                                                              [0m
+ [38;2;233;235;237;48;2;15;22;33m64 bytes from [38;2;70;175;174mapi.example (192.0.2.80)[38;2;233;235;237m: icmp_seq=1 ttl=56 time=[38;2;55;194;107m24.7 ms[39m        [0m
+ [38;2;235;111;111;48;2;15;22;33mno answer yet for icmp_seq=2[39m                                                  [0m
+ [38;2;233;235;237;48;2;15;22;33m64 bytes from [38;2;70;175;174mapi.example (192.0.2.80)[38;2;233;235;237m: icmp_seq=3 ttl=56 time=[38;2;55;194;107m25.6 ms[39m        [0m
+ [38;2;233;235;237;48;2;15;22;33m64 bytes from [38;2;70;175;174mapi.example (192.0.2.80)[38;2;233;235;237m: icmp_seq=4 ttl=56 time=[38;2;55;194;107m25.3 ms[39m        [0m
+ [38;2;233;235;237;48;2;15;22;33m64 bytes from [38;2;70;175;174mapi.example (192.0.2.80)[38;2;233;235;237m: icmp_seq=5 ttl=56 time=[38;2;55;194;107m25.6 ms[39m        [0m
+ [38;2;233;235;237;48;2;15;22;33m64 bytes from [38;2;70;175;174mapi.example (192.0.2.80)[38;2;233;235;237m: icmp_seq=6 ttl=56 time=[38;2;55;194;107m25.7 ms[39m        [0m
+ [38;2;233;235;237;48;2;15;22;33m64 bytes from [38;2;70;175;174mapi.example (192.0.2.80)[38;2;233;235;237m: icmp_seq=7 ttl=56 time=[38;2;55;194;107m24.7 ms[39m        [0m
+ [38;2;164;176;192;48;2;15;22;33mrtt [38;2;70;175;174m▂[0;1;38;2;235;111;111;48;2;15;22;33m![0;38;2;70;175;174;48;2;15;22;33m▂▂▂▂▂[39m                                                                   [0m
+ [38;2;233;235;237;48;2;15;22;33m7 packets transmitted, 6 received, 14% packet loss, time 7007ms[39m               [0m
+ [0;1;38;2;233;235;237;48;2;15;22;33mrtt min/avg/max/mdev = 24.665/25.246/25.662/0.413 ms[0;39;48;2;15;22;33m                          [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play ops-ping[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot ops-ping --size 78x14[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('ops-ping'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-nload[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-ss-listen[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

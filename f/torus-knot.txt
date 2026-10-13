@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Animated Objects > Wireframes
+Torus Knot  torus-knot
+A braille wire tube with true hidden-line removal, morphing through the (2,3),
+(2,5), (3,4) and (3,5) torus knots.
+scene - 48x22 (min 16x7) - 18 s loop - unicode - truecolor
+tags: knot, torus, wireframe, braille, hidden-line, morph
+
+
+                            * *           ========
+                           **## ##      -==  = ==  =
+                           **  #####   --  ==== =====
+                           ++*##### ##-- --    == =  =
+                            =+==# ## ##---      =  = =
+                              ====#### #-   *****=====
+                            =====-==# ######*****= = = *
+                       ============ --##### ****==== =****
+                      =====   ========  ###*   =======*** *
+                      ======-----== =----= ----===  = * * *
+                        ===-----====--==== -========  ******
+                            --- = =----+ +=--= =-:    * *
+                              -====   =++ +  : :::   +*****
+                              -= --   + +++::::::: ++ ** **
+                              -------::++++++++++  ***  *
+                                ------::::+ ++++++++ ++
+                                  --:-::::: ++++++++
+
+
+  still at 48x20 - t=6s -- run it live for full size and motion
+
+Params  (--set key=value)
+  rings=4               Ring spacing (segments)  (1-8)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play torus-knot
+Snapshot  prism-term snapshot torus-knot --size 48x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('torus-knot'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/dna
+next >    curl -sL prism.jeremyfhall.com/f/wireframe
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

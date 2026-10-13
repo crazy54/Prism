@@ -1,0 +1,34 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mInput & Menus[0;2;39;49m › [0;1;39;49mCommand Palettes[0m
+[0;1;39;49mShell Autocomplete[0;2;39;49m  input-autocomplete[0m
+A shell prompt with a fish-style ghost suggestion from history, a zsh-style
+completion menu that Tab cycles, then → accepts and the command runs.
+[0;2;39;49mtui · 64×12 (min 40×8) · 8 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: autocomplete, completion, shell, zsh, fish[0m
+
+        [38;5;66;48;5;234m~/infra $ kubectl get deploy -n checkout                        [0m
+        [38;5;249;48;5;234mNAME           READY   UP-TO-DATE   AVAILABLE                   [0m
+        [38;5;249;48;5;234mcheckout-api   2/3     3            2                           [0m
+        [48;5;234m                                                                [0m
+        [0;1;38;5;74;48;5;234m~/infra[0;39;48;5;234m [0;1;38;5;71;48;5;234m$[0;39;48;5;234m [0;1;38;5;71;48;5;234mkubectl[0;38;5;255;48;5;234m rollout restart d▏[39m                            [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+[0;2;39;49m  still at t=4s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play input-autocomplete[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot input-autocomplete --size 64x12[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('input-autocomplete'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/input-command-palette[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/input-slash-commands[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/input[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

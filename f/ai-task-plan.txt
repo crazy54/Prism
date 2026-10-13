@@ -1,0 +1,30 @@
+* PRISM TERMINAL > AI Working > Agents & Pipelines
+Task Plan  ai-task-plan
+An agent's plan as a live checklist: each task moves from pending to in progress
+with a spinner to done and dimmed, with timings and a waiting-on-human step.
+tui - 60x8 (min 40x7) - 9 s loop - unicode - 16 colors
+tags: plan, todo, checklist, agent, progress
+
+          * Plan 3/5 done
+            \_ + Reproduce the p99 spike from traces              1.1s
+               + Correlate p99 with deploys and pool metrics      1.5s
+               + Draft a fix: DB_POOL_SIZE 20 -> 40               1.1s
+               = Get approval from on-call              waiting on you
+               [ ] Apply and verify p99 < 300ms
+
+          . ctrl+t to hide plan
+  still at t=4.5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ai-task-plan
+Snapshot  prism-term snapshot ai-task-plan --size 60x8
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ai-task-plan'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ai-diff-apply
+next >    curl -sL prism.jeremyfhall.com/f/ai-chat-transcript
+gallery   curl -sL prism.jeremyfhall.com/t/ai
+home      curl -sL prism.jeremyfhall.com/tty

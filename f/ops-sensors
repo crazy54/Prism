@@ -1,0 +1,40 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mSystem Monitors[0m
+[0;1;39;49msensors[0;2;39;49m  ops-sensors[0m
+lm-sensors output: coretemp package and cores with high/crit limits, an NVMe
+composite and fan speeds, readings warming with load.
+[0;2;39;49mtui · 64×18 (min 50×8) · 20 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: sensors, lm-sensors, temperature, fan, hardware[0m
+
+        [0;1;38;5;255;48;5;234mcoretemp-isa-0000[0;39;48;5;234m                                               [0m
+        [38;5;249;48;5;234mAdapter: ISA adapter[39m                                            [0m
+        [38;5;255;48;5;234mPackage id 0:  [0;1;38;5;71;48;5;234m  +60.5°C[0;38;5;249;48;5;234m  (high = +80.0°C, crit = +100.0°C)[39m     [0m
+        [38;5;255;48;5;234mCore 0:        [0;1;38;5;71;48;5;234m  +58.5°C[0;38;5;249;48;5;234m  (high = +80.0°C, crit = +100.0°C)[39m     [0m
+        [38;5;255;48;5;234mCore 1:        [0;1;38;5;71;48;5;234m  +58.2°C[0;38;5;249;48;5;234m  (high = +80.0°C, crit = +100.0°C)[39m     [0m
+        [38;5;255;48;5;234mCore 2:        [0;1;38;5;71;48;5;234m  +59.7°C[0;38;5;249;48;5;234m  (high = +80.0°C, crit = +100.0°C)[39m     [0m
+        [38;5;255;48;5;234mCore 3:        [0;1;38;5;71;48;5;234m  +60.2°C[0;38;5;249;48;5;234m  (high = +80.0°C, crit = +100.0°C)[39m     [0m
+        [48;5;234m                                                                [0m
+        [0;1;38;5;255;48;5;234mnvme-pci-0100[0;39;48;5;234m                                                   [0m
+        [38;5;249;48;5;234mAdapter: PCI adapter[39m                                            [0m
+        [38;5;255;48;5;234mComposite:     [0;1;38;5;71;48;5;234m  +43.5°C[0;38;5;249;48;5;234m  (low  = -273.1°C, high = +84.8°C)[39m     [0m
+        [38;5;249;48;5;234m                          (crit = +84.8°C)[39m                      [0m
+        [48;5;234m                                                                [0m
+        [0;1;38;5;255;48;5;234mit8628-isa-0a40[0;39;48;5;234m                                                 [0m
+        [38;5;249;48;5;234mAdapter: ISA adapter[39m                                            [0m
+        [38;5;255;48;5;234mfan1:          [0;1;38;5;73;48;5;234m 1630 RPM[0;38;5;249;48;5;234m  (min =    0 RPM)[39m                      [0m
+        [38;5;255;48;5;234mfan2:          [0;1;38;5;73;48;5;234m 1310 RPM[0;38;5;249;48;5;234m  (min =    0 RPM)[39m                      [0m
+        [48;5;234m                                                                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ops-sensors[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ops-sensors --size 64x18[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ops-sensors'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-nmon[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-top[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

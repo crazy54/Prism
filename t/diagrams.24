@@ -1,0 +1,33 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mArchitecture Diagrams (16)[0m
+Box-drawing flows, trees, topologies, sequences and git graphs.
+
+[0;1;38;2;95;135;215;49mBOXES & FLOWS[0;2;39;49m  4[0m
+  [38;2;95;175;175mdiagrams-architecture     [39mClients, load balancer, three app servers and the d…[0m
+  [38;2;95;175;175mdiagrams-flowchart        [39mA delivery flowchart with decisions, labeled yes/no…[0m
+  [38;2;95;175;175mdiagrams-pipeline         [39mA pipeline graph: build fans out to parallel test j…[0m
+  [38;2;95;175;175mdiagrams-state-machine    [39mA job lifecycle state machine with labeled transiti…[0m
+
+[0;1;38;2;95;135;215;49mTREES & HIERARCHIES[0;2;39;49m  3[0m
+  [38;2;95;175;175mdiagrams-file-tree        [39mA tree(1)-style explorer with guide lines: folders …[0m
+  [38;2;95;175;175mdiagrams-org-chart        [39mAn org-chart style tree with elbow connectors: main…[0m
+  [38;2;95;175;175mdiagrams-dependency-tree  [39mAn npm ls --all tree printing line by line with ded…[0m
+
+[0;1;38;2;95;135;215;49mNETWORKS & TOPOLOGIES[0;2;39;49m  3[0m
+  [38;2;95;175;175mdiagrams-network-topology [39mA network map that builds itself passively from tel…[0m
+  [38;2;95;175;175mdiagrams-cluster-map      [39mThree cluster nodes with pods colored by service pl…[0m
+  [38;2;95;175;175mdiagrams-service-mesh     [39mA service mesh on a braille canvas: services ring t…[0m
+
+[0;1;38;2;95;135;215;49mSEQUENCE & TIMELINES[0;2;39;49m  3[0m
+  [38;2;95;175;175mdiagrams-sequence         [39mA sequence diagram of one checkout request: call ar…[0m
+  [38;2;95;175;175mdiagrams-gantt            [39mA rollout Gantt chart for a maintenance window: the…[0m
+  [38;2;95;175;175mdiagrams-timeline         [39mAn incident timeline: a playhead sweeps from deploy…[0m
+
+[0;1;38;2;95;135;215;49mGIT GRAPHS[0;2;39;49m  3[0m
+  [38;2;95;175;175mdiagrams-git-graph        [39mgit log --graph, live: a feature branch forks off m…[0m
+  [38;2;95;175;175mdiagrams-git-branches     [39mA left-to-right branch diagram: a feature branch an…[0m
+  [38;2;95;175;175mdiagrams-git-rebase       [39mA git rebase, visualized: feature commits lift off …[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/diagrams-architecture[0m
+[0;2;39;49mpaged     [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/diagrams | less -R[0m
+[0;2;39;49mgalleries [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

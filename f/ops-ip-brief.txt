@@ -1,0 +1,35 @@
+* PRISM TERMINAL > Linux & Ops > Network
+ip -br -c addr  ops-ip-brief
+Typing `ip -br -c addr` then `ip -br -c link`: interfaces in color, UP green,
+DOWN red, IPv4 and IPv6 addresses and MACs.
+tui - 76x13 (min 56x5) - 14 s loop - ascii - 16 colors
+tags: ip, iproute2, interfaces, addresses, network
+
+  ops@node03:~$ ip -br -c addr
+  lo               UNKNOWN        127.0.0.1/8 ::1/128
+  eth0             UP             10.20.2.31/24 fe80::5054:ff:fe3a:21c4/64
+  eth1             DOWN
+  docker0          DOWN           172.17.0.1/16
+  wg0              UNKNOWN        10.99.0.3/24
+  ops@node03:~$ ip -br -c link
+  lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP>
+  eth0             UP             52:54:00:3a:21:c4 <BROADCAST,MULTICAST,UP,LO
+  eth1             DOWN           52:54:00:9b:07:11 <NO-CARRIER,BROADCAST,MULT
+  docker0          DOWN           02:42:6c:1e:8f:2a <NO-CARRIER,BROADCAST,MULT
+  wg0              UNKNOWN        none              <POINTOPOINT,NOARP,UP,LOWE
+  ops@node03:~$
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-ip-brief
+Snapshot  prism-term snapshot ops-ip-brief --size 76x13
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-ip-brief'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-ss-listen
+next >    curl -sL prism.jeremyfhall.com/f/ops-traceroute
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

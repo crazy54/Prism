@@ -1,0 +1,33 @@
+* PRISM TERMINAL > Charts & Metrics > Gauges & Meters
+Ring Gauges  charts-gauge-ring
+Four full-circle ring gauges -- availability, cache hits, error budget,
+saturation -- filling and draining in real time.
+chart - 72x11 (min 18x6) - 14 s loop - braille - truecolor
+tags: gauge, ring, donut, percent, slo
+
+
+       .+#######+.       .+#######+.       .+#######+.       .+#######+.
+     .##+:.   .:+##.   .##+:.   .:+##.   .##+:. : .:+##.   .##+:.   .:+##.
+    .##.         .##. .##.         .##. .##.    .    .##. .##.      .  .##.
+    :#:    98%    :#: :#:    84%    :#: :#:    48%    :#: :#:    60%    :#:
+    :#:           :#: :#:         ..+#: :#:           :#: :#:           :#:
+    .##.       ...##. .##.         .##. .##.         .##. .##.         .##.
+     .#+         +#.   .#+         +#.   .#+         +#.   .#+         +#.
+      Availability       Cache hits       Error budget       Saturation
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-gauge-ring
+Snapshot  prism-term snapshot charts-gauge-ring --size 72x11
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-gauge-ring'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-gauge-arc
+next >    curl -sL prism.jeremyfhall.com/f/charts-vu-meter
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

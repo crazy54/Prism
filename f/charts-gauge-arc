@@ -1,0 +1,34 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mCharts & Metrics[0;2;39;49m › [0;1;39;49mGauges & Meters[0m
+[0;1;39;49mArc Gauges[0;2;39;49m  charts-gauge-arc[0m
+CPU, memory and disk as braille arc gauges with warning and critical zones,
+sweeping needles and centered readouts.
+[0;2;39;49mchart · 72×12 (min 20×6) · 12 s loop · braille · truecolor[0m
+[0;2;39;49mtags: gauge, arc, needle, speedometer, zones[0m
+
+    [48;5;234m                                                                        [0m
+    [48;5;234m                                                                        [0m
+    [48;5;234m         [38;5;71m⣀⣀⣀[38;5;238m⣀⣀[39m                   [38;5;71m⣀⣀⣀⣀[38;5;65m⣀[39m                   [38;5;71m⣀⣀⣀⣀⣀[39m          [0m
+    [48;5;234m    [38;5;71m⢀⣠⣴⣾⣿⣿⣿⣿[38;5;238m⣿⣿⣿⣷⣦⣄⡀[39m         [38;5;71m⢀⣠⣴⣾⣿⣿⣿⣿⣿[38;5;238m⣿[38;5;238m⣿⣷⣦⣄⡀[39m         [38;5;71m⢀⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄[38;5;215m⡀[39m     [0m
+    [48;5;234m  [38;5;71m⢀⣴⣿⣿⣿⠿⠛⠉⠉[38;5;151m⢹[38;5;238m⠉⠉⠛⠿⣿⣿⣿⣦⡀[39m     [38;5;71m⢀⣴⣿⣿⣿⠿⠛⠉⠉⠉[38;5;115m⢩[38;5;238m⠉⠛⠿⣿⣿⣿⣦⡀[39m     [38;5;71m⢀⣴⣿⣿⣿⠿⠛⠉⠉⠉⠉⠉⠛⠿[38;5;71m⣿[38;5;179m⣿[38;5;215m⣿⣦⡀[39m   [0m
+    [48;5;234m [38;5;71m⢠⣾⣿⣿⠋[39m     [38;5;255m⢸[39m     [38;5;238m⠙⣿⣿⣷⡄[39m   [38;5;71m⢠⣾⣿⣿⠋[39m      [38;5;255m⡎[39m    [38;5;238m⠙⣿⣿⣷⡄[39m   [38;5;71m⢠⣾⣿⣿⠋[39m           [38;5;215m⠙⣿[38;5;137m⣿[38;5;59m⣷[38;5;238m⡄[39m  [0m
+    [38;5;71;48;5;234m⢀⣿⣿⡿⠁[39m             [38;5;238m⠈⢿⣿⣿⡀[39m [38;5;71m⢀⣿⣿⡿⠁[39m             [38;5;238m⠈⢿⣿⣿⡀[39m [38;5;71m⢀⣿⣿⡿⠁[39m           [38;5;255m⡠⠔[38;5;246m⠉[38;5;238m⢿⣿⣿⡀[39m [0m
+    [38;5;71;48;5;234m⢸⣿⣿⠇[39m               [38;5;238m⠸⣿⣿⡇[39m [38;5;71m⢸⣿⣿⠇[39m               [38;5;238m⠸⣿⣿⡇[39m [38;5;71m⢸⣿⣿⠇[39m           [38;5;255m⠈[39m   [38;5;238m⠸⣿⣿⡇[39m [0m
+    [38;5;71;48;5;234m⠚⠛⠛[39m       [0;1;38;5;71;48;5;234m51%[0;39;48;5;234m       [38;5;238m⠛⠛⠓[39m [38;5;71m⠚⠛⠛[39m       [0;1;38;5;71;48;5;234m55%[0;39;48;5;234m       [38;5;238m⠛⠛⠓[39m [38;5;71m⠚⠛⠛[39m       [0;1;38;5;215;48;5;234m81%[0;39;48;5;234m       [38;5;238m⠛⠛⠓[39m [0m
+    [48;5;234m          [38;5;249mCPU[39m                   [38;5;249mMemory[39m                   [38;5;249mDisk[39m           [0m
+    [48;5;234m                                                                        [0m
+    [48;5;234m                                                                        [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play charts-gauge-arc[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot charts-gauge-arc --size 72x12[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('charts-gauge-arc'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/charts-boxplot[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/charts-gauge-ring[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/charts[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

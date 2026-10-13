@@ -1,0 +1,42 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mDisk & Storage[0m
+[0;1;39;49mzpool status[0;2;39;49m  ops-zpool-status[0m
+zpool status for a mirrored pool mid-scrub: scanned/issued throughput and % done
+ticking, the vdev tree, and clean error counters.
+[0;2;39;49mtui · 76×20 (min 60×8) · 30 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: zfs, zpool, scrub, raid, mirror, storage[0m
+
+  [0;1;38;2;233;235;237;48;2;15;22;33m  pool: [0;38;2;233;235;237;48;2;15;22;33mtank[39m                                                                [0m
+  [0;1;38;2;233;235;237;48;2;15;22;33m state: [38;2;55;194;107mONLINE[0;39;48;2;15;22;33m                                                              [0m
+  [0;1;38;2;233;235;237;48;2;15;22;33m  scan: [0;38;2;233;235;237;48;2;15;22;33mscrub in progress since Tue Oct 13 13:41:02 2026[39m                    [0m
+  [38;2;233;235;237;48;2;15;22;33m        1.15T / 3.62T scanned at 1.01G/s, 1.03T / 3.62T issued at 830M/s[39m    [0m
+  [38;2;233;235;237;48;2;15;22;33m        0B repaired, [0;1;38;2;245;183;78;48;2;15;22;33m28.34% done[0;38;2;233;235;237;48;2;15;22;33m, 00:57:58 to go[39m                            [0m
+  [0;1;38;2;233;235;237;48;2;15;22;33mconfig:[0;39;48;2;15;22;33m                                                                     [0m
+  [48;2;15;22;33m                                                                            [0m
+  [0;1;38;2;233;235;237;48;2;15;22;33m        NAME                            STATE     READ WRITE CKSUM[0;39;48;2;15;22;33m          [0m
+  [38;2;70;175;174;48;2;15;22;33m        tank                            [38;2;55;194;107mONLINE   [38;2;233;235;237m    0     0     0[39m          [0m
+  [38;2;70;175;174;48;2;15;22;33m          mirror-0                      [38;2;55;194;107mONLINE   [38;2;233;235;237m    0     0     0[39m          [0m
+  [38;2;233;235;237;48;2;15;22;33m            ata-HDD-8TB-ZA1B2C3D        [38;2;55;194;107mONLINE   [38;2;233;235;237m    0     0     0[39m          [0m
+  [38;2;233;235;237;48;2;15;22;33m            ata-HDD-8TB-ZA1B4E5F        [38;2;55;194;107mONLINE   [38;2;233;235;237m    0     0     0[39m          [0m
+  [38;2;70;175;174;48;2;15;22;33m          mirror-1                      [38;2;55;194;107mONLINE   [38;2;233;235;237m    0     0     0[39m          [0m
+  [38;2;233;235;237;48;2;15;22;33m            ata-HDD-8TB-ZA1C7G8H        [38;2;55;194;107mONLINE   [38;2;233;235;237m    0     0     0[39m          [0m
+  [38;2;233;235;237;48;2;15;22;33m            ata-HDD-8TB-ZA1C9J0K        [38;2;55;194;107mONLINE   [38;2;233;235;237m    0     0     0[39m          [0m
+  [38;2;70;175;174;48;2;15;22;33m        logs[39m                                                                [0m
+  [38;2;70;175;174;48;2;15;22;33m          nvme-SSD-1TB-S5H2NX0R1        [38;2;55;194;107mONLINE   [38;2;233;235;237m    0     0     0[39m          [0m
+  [48;2;15;22;33m                                                                            [0m
+  [0;1;38;2;233;235;237;48;2;15;22;33merrors: [0;38;2;233;235;237;48;2;15;22;33mNo known data errors[39m                                                [0m
+  [48;2;15;22;33m                                                                            [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play ops-zpool-status[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot ops-zpool-status --size 76x20[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('ops-zpool-status'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-ncdu[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-mtr[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Maps & Geo > World Maps
+Follow-the-Sun Choropleth  maps-world-choropleth
+Active users by region as a choropleth of pseudo-regions: demand rolls west with
+the daylight while a legend and UTC clock keep score.
+scene - 80x22 (min 40x10) - 12 s loop - unicode - truecolor
+tags: choropleth, world map, regions, diurnal, half blocks
+
+                          :.........                        ....
+   ####--------       -::   ......          ....   .............::....=========
+   ####---------+++    :::               .......................::-...========
+           ----:+++:---::::           .. ........................:--..    =
+            ---:++::----::              ......  ... ..........:..::--.=
+             --:++::---               ..      ..... ........:::..:: -
+              -:+:::--                ......... ............:::..-:
+                +:                  .................  .....::::.-
+                   :--              ...............     ..    ::
+                       -:..          ..............
+                      --.....             .......             : ::
+                      -::.......           ......                      :=
+                        :......            ...... .                :::::
+                        ::....             .....  .              ::::::::=
+                        ::...               ...                  ::::::::=
+                        :::                                             :     =
+                       ::
+                        :
+users ####################################                             UTC 02:00
+      <5k   5k    20k   50k   100k  200k+                           4.17M active
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play maps-world-choropleth
+Snapshot  prism-term snapshot maps-world-choropleth --size 80x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('maps-world-choropleth'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/maps-world-cities
+next >    curl -sL prism.jeremyfhall.com/f/maps-world-daynight
+gallery   curl -sL prism.jeremyfhall.com/t/maps
+home      curl -sL prism.jeremyfhall.com/tty

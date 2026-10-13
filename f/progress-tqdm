@@ -1,0 +1,28 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mProgress & Counters[0;2;39;49m › [0;1;39;49mTransfers & ETA[0m
+[0;1;39;49mtqdm[0;2;39;49m  progress-tqdm[0m
+Nested tqdm bars from a training run: epochs outside, batches inside, with
+elapsed<remaining, it/s and a live loss postfix.
+[0;2;39;49mprogress · 80×6 (min 44×1) · 13 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: tqdm, python, training, ml, nested[0m
+
+[38;5;249;48;5;234mepoch 1: train_loss=0.512 val_loss=0.448 val_acc=0.861[39m                          [0m
+[38;5;249;48;5;234mepoch 2: train_loss=0.371 val_loss=0.352 val_acc=0.894[39m                          [0m
+[38;5;249;48;5;234mepoch 3: train_loss=0.241 val_loss=0.263 val_acc=0.907[39m                          [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[38;5;255;48;5;234mtraining:  60%|[38;5;249m████████████████████▍             [38;5;255m| 3/5 [00:52<00:34, 17.40s/it][39m [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play progress-tqdm[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot progress-tqdm --size 80x6[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('progress-tqdm'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-systemd-timers[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-wget[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/progress[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

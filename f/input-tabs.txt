@@ -1,0 +1,32 @@
+* PRISM TERMINAL > Input & Menus > Tabs & Bars
+Tabs  input-tabs
+A tab strip with a count badge whose underline glides between tabs as the user
+switches; each tab swaps in its own overview, logs, trace or metrics view.
+tui - 60x10 (min 40x7) - 7 s loop - unicode - 256 colors
+tags: tabs, tab bar, navigation, switcher, underline
+
+            Overview   Logs 12   Traces   Metrics   Config
+          ----------------------========------------------------------
+           GET /checkout #####################################  2.40s
+            auth.verify   #                                     0.10s
+            db.acquire      ##########################          1.68s
+            db.query                                   ###      0.24s
+            render                                         ###  0.17s
+
+
+                                                         <-/-> or 1-5
+  still at t=3.5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play input-tabs
+Snapshot  prism-term snapshot input-tabs --size 60x10
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-tabs'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-wizard
+next >    curl -sL prism.jeremyfhall.com/f/input-menu-bar
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Animation Lab > Easing & Timing
+Easing Curves  lab-easing-gallery
+Twelve standard easings plotted in braille, each with a dot running its curve
+and a bar showing the eased value.
+chart - 80x24 (min 20x6) - 2.3 s loop - unicode - truecolor
+tags: easing, curves, tween, timing, ease in out, overshoot, braille
+
+linear              inQuad              outQuad             inOutCubic
+
+- - - - - - - -# -  - - - - - - - -# -  - - - - - - - ## +  - - - - - - -### +
+           %#### +               ### -          +++%%#   +           ++%%#   +
+        ++++     +             %%#   +       +++         +          ++       +
+    +++++        +          +++      +    +++            +        +++        +
++++++ - - - - -  +  - +++++++ - - -  +  +++ - - - - - -  -  - +++++ - - - -  -
++                   ++                  +                   +++
+
+
+inOutSine           inExpo              outExpo             outCirc
+
+- - - - - - - ## -  - - - - - - - -# -  - - - - -++%#### +  - - - - - - -### +
+          +%%##  +                 # -     +++++++       +       ++++++%#    +
+        +++      +                #  -    ++             +    ++++           +
+     ++++        +              ##   +   +               +   ++              +
+-+++++- - - - -  +  - - - +++++%% -  -  + - - - - - - -  +  + - - - - - - -  -
+++                  +++++++             +                   +
+
+
+  still at 80x20 - t=1.2s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play lab-easing-gallery
+Snapshot  prism-term snapshot lab-easing-gallery --size 80x24
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('lab-easing-gallery'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/lab-blinds
+next >    curl -sL prism.jeremyfhall.com/f/lab-easing-race
+gallery   curl -sL prism.jeremyfhall.com/t/lab
+home      curl -sL prism.jeremyfhall.com/tty

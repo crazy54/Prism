@@ -1,0 +1,40 @@
+* PRISM TERMINAL > Retro & Demoscene > Chiptune Visuals
+VU Meters  vu-meters
+Twin analog VU meters on a backlit face -- needles with real ballistics, a red
+zone, peak lamps and LED ladders.
+scene - 64x18 (min 24x8) - 7.68 s loop - unicode - truecolor
+tags: vu, meter, audio, needle, led, chiptune, hifi
+
+                       -5           PK                 -5            PK
+                -10        -3     0             -10        -3     0
+
+        -20          .  .  ..        +3 -20          .  .  ..        +3
+               .................=.=            .................=.=
+           ...... .   . .  .. .=.=====     ...... .   . .  .. .=.=====
+            ..     .      ..   . ====       ..     .      ..   . ====
+              .           ..      =           .           ..      =
+                          ..                              ..
+                          ..                              ..
+                       VU..                            VU..
+                         ..                              ..
+                         ..                              ..
+                         ..                              ..
+                      .....                           .....
+         L           .......             R           .......
+        L ||||||||||||||||||||||||||||||||||||||||||||||||||||||||   +2
+        R ||||||||||||||||||||||||||||||||||||||||||||||||||||||||   +1
+  still at t=3.84s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play vu-meters
+Snapshot  prism-term snapshot vu-meters --size 64x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('vu-meters'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/modem-connect
+next >    curl -sL prism.jeremyfhall.com/f/spectrum-analyzer
+gallery   curl -sL prism.jeremyfhall.com/t/retro
+home      curl -sL prism.jeremyfhall.com/tty

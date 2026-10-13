@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Animated Objects > Wireframes
+Geodesic Sphere  geodesic
+A subdivided icosahedron in braille wire: far edges dotted, near edges
+depth-cued, pentagon vertices lit, a scan sweeping by.
+scene - 44x22 (min 14x7) - 12 s loop - unicode - truecolor
+tags: geodesic, icosahedron, dome, wireframe, braille, buckminster
+
+                                       ==
+                                ================
+                            ====: +++:  :  +++ :====
+                            =  ++++++++++++++*+++  =
+                          ==+++ +: * :  ::  *  + +++==
+                        =+++:  *: : **  : **:  :*  :+++=
+                       =+     *   :  :****  :    *     +=
+                       =++   ** :     *+++     : **   ++=
+                       +  *:#    ##### +++#####    #:*  +
+                      :*:  #%%%%% :     %   :  %%%%%#  :*
+                      %  #%%%%%%: :  :  % :  : :%%%%%%#  %
+                      ++*   * : ##:     #    :## : *   *++
+                     ++++  :*     *** : *: ***     *:   ++++
+                       =++  + : :    ******    : : +  ++=
+                        = +++:     :********:     :+++ =
+                         ===+  +++** :  * : **+++  +===
+                            :++++ :     +    : ++++:
+                              +==+++++  + +++++==+
+                                 =====++++=====
+                                       +++
+  still at 44x20 - t=6s -- run it live for full size and motion
+
+Params  (--set key=value)
+  frequency=2           Subdivision frequency  (1-6)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play geodesic
+Snapshot  prism-term snapshot geodesic --size 44x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('geodesic'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/wireframe
+next >    curl -sL prism.jeremyfhall.com/f/ringed-planet
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

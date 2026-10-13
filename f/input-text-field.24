@@ -1,0 +1,30 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mInput & Menus[0;2;39;49m › [0;1;39;49mText Fields[0m
+[0;1;39;49mText Field with Validation[0;2;39;49m  input-text-field[0m
+A labeled input with placeholder, blinking caret and inline validation: the user
+types an invalid hostname, sees the error, fixes it and gets a ✔.
+[0;2;39;49mtui · 56×8 (min 34×5) · 9 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: input, text field, validation, form, caret[0m
+
+            [0;1;38;2;233;235;237;48;2;15;22;33mHostname[0;39;48;2;15;22;33m [38;2;235;111;111m*[39m                                              [0m
+            [48;2;20;33;49m [38;2;233;235;237mpayments-0[39m                                 [48;2;15;22;33m            [0m
+            [38;2;83;159;229;48;2;15;22;33m▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔[39m            [0m
+            [38;2;107;120;135;48;2;15;22;33mLowercase letters, digits, dots and hyphens             [0m
+            [48;2;15;22;33m                                                        [0m
+            [48;2;15;22;33m                                                        [0m
+            [48;2;15;22;33m                                                        [0m
+            [38;2;107;120;135;48;2;15;22;33menter submit · esc cancel · ctrl-u clear[39m                [0m
+[0;2;39;49m  still at t=4.5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play input-text-field[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot input-text-field --size 56x8[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('input-text-field'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/input-slider[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/input-password[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/input[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

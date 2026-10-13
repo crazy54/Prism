@@ -1,0 +1,38 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mLogs & Journals[0m
+[0;1;39;49mjournalctl -f[0;2;39;49m  ops-journalctl-follow[0m
+journalctl -f following the system journal with priority colors: crit/err red,
+warning yellow, notice bold, info plain and debug dim.
+[0;2;39;49mtui · 80×16 (min 50×5) · 40 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: journalctl, systemd, journal, logs, follow, syslog[0m
+
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:07 node03 shop-api[2210]: [0;1;38;2;245;183;78;48;2;15;22;33mpool: waited 412ms for a connection (limi[0m
+[0;1;38;2;245;183;78;48;2;15;22;33mt 250ms)[0;39;48;2;15;22;33m                                                                        [0m
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:08 node03 shop-worker[3118]: [38;2;107;120;135mheartbeat ok (lag 3ms)[39m                [0m
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:08 node03 shop-worker[3118]: [38;2;107;120;135mheartbeat ok (lag 3ms)[39m                [0m
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:09 node03 sshd[7811]: Invalid user admin from 203.0.113.77 port 401[0m
+[38;2;233;235;237;48;2;15;22;33m12[39m                                                                              [0m
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:10 node03 shop-api[2210]: GET /api/v1/cart 200 18ms[39m                [0m
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:11 node03 shop-api[2210]: GET /api/v1/cart 200 18ms[39m                [0m
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:11 node03 shop-api[2210]: [0;1;38;2;245;183;78;48;2;15;22;33mpool: waited 412ms for a connection (limi[0m
+[0;1;38;2;245;183;78;48;2;15;22;33mt 250ms)[0;39;48;2;15;22;33m                                                                        [0m
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:12 node03 CRON[9001]: (root) CMD (/usr/local/bin/backup.sh --quiet)[0m
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:13 node03 shop-api[2210]: POST /api/v1/checkout 201 142ms[39m          [0m
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:13 node03 shop-api[2210]: GET /api/v1/cart 200 18ms[39m                [0m
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:15 node03 shop-worker[3118]: [38;2;107;120;135mheartbeat ok (lag 3ms)[39m                [0m
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:15 node03 systemd[1]: logrotate.service: Deactivated successfully.[39m [0m
+[38;2;233;235;237;48;2;15;22;33mOct 13 14:02:16 node03 shop-api[2210]: GET /api/v1/cart 200 18ms[39m                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play ops-journalctl-follow[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot ops-journalctl-follow --size 80x16[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('ops-journalctl-follow'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-k9s[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-nginx-access[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

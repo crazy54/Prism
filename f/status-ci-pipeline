@@ -1,0 +1,32 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mNotifications & Status[0;2;39;49m › [0;1;39;49mBadges & Pills[0m
+[0;1;39;49mCI Pipeline[0;2;39;49m  status-ci-pipeline[0m
+A CI pipeline graph: stages of jobs going pending → running → passed, one flaky
+test failing and retrying, and the overall badge.
+[0;2;39;49mwidget · 80×10 (min 44×6) · 18 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: ci, pipeline, build, jobs, deploy[0m
+
+[0;1;38;5;234;48;5;74m ⠹ running [0;39;48;5;234m [38;5;255mPipeline #48213 · main · 4c1e9a2 "await sleep in pool"[39m        [38;5;249m2m 00s[0m
+[48;5;234m                                                                                [0m
+[0;1;38;5;71;48;5;234mbuild[0;39;48;5;234m           [0;1;38;5;74;48;5;234mtest[0;39;48;5;234m            [0;1;38;5;66;48;5;234msecurity[0;39;48;5;234m        [0;1;38;5;66;48;5;234mstaging[0;39;48;5;234m         [0;1;38;5;66;48;5;234mproduction[0;39;48;5;234m      [0m
+[48;5;234m                                                                                [0m
+[0;1;38;5;71;48;5;234m✔[0;39;48;5;234m [38;5;255mcompile[39m    [38;5;71m───[0;1;38;5;71;48;5;234m✔[0;39;48;5;234m [38;5;255munit[39m       [38;5;238m───[0;1;38;5;66;48;5;234m○[0;39;48;5;234m [38;5;66msast[39m       [38;5;238m───[0;1;38;5;66;48;5;234m○[0;39;48;5;234m [38;5;66mdeploy[39m     [38;5;238m───[0;1;38;5;66;48;5;234m○[0;39;48;5;234m [38;5;66mcanary 10%[39m    [0m
+[0;1;38;5;71;48;5;234m✔[0;39;48;5;234m [38;5;255mdocker-ima…[39m   [0;1;38;5;215;48;5;236m⠴[0;39;48;5;234m [38;5;255;48;5;236mintegratio…[39;48;5;234m   [0;1;38;5;66;48;5;234m○[0;39;48;5;234m [38;5;66mdeps-audit[39m    [0;1;38;5;66;48;5;234m○[0;39;48;5;234m [38;5;66msmoke[39m         [0;1;38;5;66;48;5;234m○[0;39;48;5;234m [38;5;66mpromote[39m       [0m
+[48;5;234m                [0;1;38;5;71;48;5;234m✔[0;39;48;5;234m [38;5;255mlint[39m                                                          [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[38;5;249;48;5;234m4/11 jobs passed · 1 retried · artifacts 3 · coverage 87.4%[39m                     [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play status-ci-pipeline[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot status-ci-pipeline --size 80x10[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('status-ci-pipeline'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-shields[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-health-checks[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/status[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

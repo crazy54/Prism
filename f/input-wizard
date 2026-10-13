@@ -1,0 +1,34 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mInput & Menus[0;2;39;49m › [0;1;39;49mDialogs & Prompts[0m
+[0;1;39;49mSetup Wizard[0;2;39;49m  input-wizard[0m
+A four-step restore wizard: the stepper header fills as the user picks a
+snapshot, names the target, schedules it and reviews before pressing Restore.
+[0;2;39;49mtui · 64×12 (min 44×11) · 10 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: wizard, stepper, multi-step, form, onboarding[0m
+
+        [38;5;238;48;5;234m╭[0;1;38;5;255;48;5;234m Restore database [0;38;5;238;48;5;234m────────────────────────────────────────────╮[0m
+        [38;5;238;48;5;234m│[39m    [0;1;38;5;71;48;5;234m✔[0;38;5;71;48;5;234m━━━━━━━━━━━━━━━━━[0;1;38;5;71;48;5;234m✔[0;38;5;71;48;5;234m━━━━━━━━━━━━━━━━━[0;1;38;5;74;48;5;234m●[0;38;5;238;48;5;234m─────────────────[0;1;38;5;66;48;5;234m○[0;39;48;5;234m   [38;5;238m│[0m
+        [38;5;238;48;5;234m│[39m [38;5;71mSource[39m            [38;5;71mTarget[39m           [0;1;38;5;255;48;5;234mSchedule[0;39;48;5;234m           [38;5;66mReview[39m [38;5;238m│[0m
+        [38;5;238;48;5;234m│[39m                                                              [38;5;238m│[0m
+        [38;5;238;48;5;234m│[39m  [0;1;38;5;255;48;5;234mWhen should it run?[0;39;48;5;234m                                         [38;5;238m│[0m
+        [38;5;238;48;5;234m│[39m  [0;1;38;5;74;48;5;234m◉[0;38;5;255;48;5;234m Now[39m                                                       [38;5;238m│[0m
+        [38;5;238;48;5;234m│[39m  [0;1;38;5;66;48;5;234m○[0;38;5;249;48;5;234m Next maintenance window[39m                                   [38;5;238m│[0m
+        [38;5;238;48;5;234m│[39m  [38;5;66m   Sat 17 Oct 02:00 (in 3 days)[39m                             [38;5;238m│[0m
+        [38;5;238;48;5;234m│[39m                                                              [38;5;238m│[0m
+        [38;5;238;48;5;234m│[39m                                                              [38;5;238m│[0m
+        [38;5;238;48;5;234m│[39m  [38;5;66mStep 3 of 4[39m                                  [38;5;255;48;5;236m Back [39;48;5;234m  [0;1;38;5;234;48;5;74m Next [0;39;48;5;234m [38;5;238m│[0m
+        [38;5;238;48;5;234m╰──────────────────────────────────────────────────────────────╯[0m
+[0;2;39;49m  still at t=5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play input-wizard[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot input-wizard --size 64x12[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('input-wizard'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/input-date-picker[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/input-tabs[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/input[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

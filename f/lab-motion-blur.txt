@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Animation Lab > Easing & Timing
+Frame Rate vs Motion Blur  lab-motion-blur
+One scene sampled four ways -- 60 fps, 12 fps, 12 fps with a 180o shutter and 6
+fps blurred -- to compare strobe and blur.
+scene - 72x22 (min 30x10) - 4 s loop - unicode - truecolor
+tags: motion blur, frame rate, shutter angle, strobing, temporal aliasing, fps
+
+
+                  +                                    +
+                   ++    +                              ++    +
+                     +                                    +
+                    +                                    +
+                    +                                    +
+
+
+    60 fps                               12 fps
+
+
+                  -+:                                  .::-:.
+                    +    :                               :-.
+                     + :--                            ::--+--::
+                   -+                                 ::-:  :::
+                    :
+
+
+    12 fps . 180o shutter                6 fps . 360o shutter
+
+  still at 72x20 - t=2s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play lab-motion-blur
+Snapshot  prism-term snapshot lab-motion-blur --size 72x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('lab-motion-blur'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/lab-stagger
+next >    curl -sL prism.jeremyfhall.com/f/lab-spring
+gallery   curl -sL prism.jeremyfhall.com/t/lab
+home      curl -sL prism.jeremyfhall.com/tty

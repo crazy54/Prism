@@ -1,0 +1,39 @@
+* PRISM TERMINAL > Architecture Diagrams > Boxes & Flows
+Flowchart  diagrams-flowchart
+A delivery flowchart with decisions, labeled yes/no branches and a fix loop; a
+run token walks it, fails tests once, loops back, then ships via a canary.
+diagram - 64x17 (min 62x17) - 9 s loop - unicode - 16 colors
+tags: flowchart, decision, process, ci, graph
+
+                             +--------------- fix ---------------+
+                             v                                   |
+        +---------+      +-------+      +----------+  no    +--------+
+        | commit  |----->| build |----->| x tests? |------->| notify |
+        +---------+      +-------+      +----------+        +--------+
+                                              |
+                                              |yes
+                                              v
+        +-------+ yes +-----------+     +-----------+
+        | ship  |<----| healthy?  |<----| canary 5% |
+        +-------+     +-----------+     +-----------+
+                            |no
+                            v
+                      +-----------+
+                      | roll back |
+                      +-----------+
+        x unit tests failed . author notified
+  still at t=4.5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play diagrams-flowchart
+Snapshot  prism-term snapshot diagrams-flowchart --size 64x17
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('diagrams-flowchart'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/diagrams-architecture
+next >    curl -sL prism.jeremyfhall.com/f/diagrams-pipeline
+gallery   curl -sL prism.jeremyfhall.com/t/diagrams
+home      curl -sL prism.jeremyfhall.com/tty

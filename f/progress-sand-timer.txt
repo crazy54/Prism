@@ -1,0 +1,32 @@
+* PRISM TERMINAL > Progress & Counters > Timers & Countdowns
+netplan try  progress-sand-timer
+netplan try's revert countdown beside a braille hourglass that really drains;
+some runs are confirmed in time, others revert.
+progress - 80x10 (min 40x2) - 14 s loop - braille - 256 colors
+tags: hourglass, netplan, revert, confirm, countdown
+
+
+  +-----+
+   \  :/     $ sudo netplan try --timeout 10
+    \:/      Do you want to keep these settings?
+     .
+    / \      Press ENTER before the timeout to accept the new configuration
+   /:: \
+  +-----+    Changes will revert in   4 seconds
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play progress-sand-timer
+Snapshot  prism-term snapshot progress-sand-timer --size 80x10
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-sand-timer'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-flip-clock
+next >    curl -sL prism.jeremyfhall.com/f/progress-systemd-timers
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

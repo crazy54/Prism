@@ -1,0 +1,31 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mNotifications & Status[0;2;39;49m › [0;1;39;49mHealth & Uptime[0m
+[0;1;39;49mHeartbeat Monitor[0;2;39;49m  status-heartbeat[0m
+A cron and worker heartbeat monitor drawn as an ECG trace: each check-in is a
+beat, missed beats flatline red and raise the alarm.
+[0;2;39;49mwidget · 72×9 (min 30×4) · 24 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: heartbeat, ecg, monitor, dead man switch, braille[0m
+
+    [0;1;38;5;255;48;5;234mbilling-worker[0;39;48;5;234m [0;1;38;5;234;48;5;71m ALIVE [0;39;48;5;234m                   [38;5;249mevery 0.8s · last beat 0.1s ago[0m
+    [48;5;234m                       [38;5;29m⡀[39m                                               [38;5;71m⡀[0m
+    [48;5;234m             [38;5;29m⢸[39m         [38;5;29m⡇[39m                                     [38;5;71m⢸[39m         [38;5;71m⡇[0m
+    [48;5;234m             [38;5;29m⢸[39m        [38;5;29m⢀[38;5;29m⡇[39m        [38;5;29m⢠[39m                            [38;5;71m⢸[39m        [38;5;71m⢀[38;5;71m⡇[0m
+    [48;5;234m    [38;5;23m⣇[39m [38;5;23m⢠[38;5;23m⡀[39m     [38;5;29m⡎[38;5;29m⡇[39m [38;5;29m⣄[39m     [38;5;29m⢸[38;5;29m⢸[39m [38;5;29m⢠[38;5;29m⡀[39m     [38;5;29m⣼[39m  [38;5;29m⡠[38;5;29m⡀[39m       [38;5;35m⢀⢄[39m      [38;5;71m⣇[39m [38;5;71m⢠[38;5;71m⡀[39m     [38;5;71m⡎[38;5;71m⡇[39m [38;5;71m⣄[39m     [38;5;71m⢸[38;5;71m⢸[0m
+    [38;5;23;48;5;234m⠒[38;5;23m⠊[38;5;23m⠑[38;5;23m⢶[38;5;23m⠹[38;5;23m⠒[38;5;23m⠁[38;5;23m⠑[38;5;23m⠒[38;5;23m⠒[38;5;23m⠒[38;5;23m⠉[38;5;29m⠲[38;5;29m⡇[38;5;29m⡷[38;5;29m⠊[39m [38;5;29m⠓[38;5;29m⠒[38;5;29m⠒[38;5;29m⠒[38;5;29m⠑[38;5;29m⠺[38;5;29m⢸[38;5;29m⡖[38;5;29m⠃[38;5;29m⠘[38;5;29m⠒[38;5;29m⠒[38;5;29m⠒[38;5;29m⠊[38;5;29m⠒[38;5;29m⠃[38;5;29m⣷[38;5;29m⠒⠁[38;5;29m⠑[38;5;29m⠒[38;5;29m⠒[38;5;29m⠒[38;5;29m⠑[38;5;29m⠒[38;5;29m⢣[38;5;35m⠖[38;5;35m⠊[38;5;35m⠈[38;5;35m⠒[38;5;71m⠒[38;5;71m⠒[38;5;71m⠊[38;5;71m⠑[38;5;71m⢶[38;5;71m⠹[38;5;71m⠒[38;5;71m⠁[38;5;71m⠑[38;5;71m⠒[38;5;71m⠒[38;5;71m⠒[38;5;71m⠉[38;5;71m⠲[38;5;71m⡇[38;5;71m⡷[38;5;71m⠊[39m [38;5;71m⠓[38;5;71m⠒[38;5;71m⠒[38;5;71m⠒[38;5;71m⠑[38;5;71m⠺[38;5;71m⢸[0m
+    [48;5;234m   [38;5;23m⠈[39m         [38;5;29m⠁[39m         [38;5;29m⠘[39m         [38;5;29m⠇[39m                 [38;5;71m⠈[39m         [38;5;71m⠁[39m         [38;5;115m⠘[0m
+    [48;5;234m                                                                        [0m
+    [38;5;66;48;5;234m15/15 check-ins in the last 12 s · 0 missed · alert after 2[39m             [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play status-heartbeat[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot status-heartbeat --size 72x9[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('status-heartbeat'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-service-matrix[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-log-syslog[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/status[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

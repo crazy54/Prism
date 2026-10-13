@@ -1,0 +1,43 @@
+* PRISM TERMINAL > Animation Lab > Springs & Physics
+Spring & Damper  lab-spring
+Four springs differing only in damping ratio chase a stepping target, each
+plotting its response against it.
+chart - 72x20 (min 30x8) - 5 s loop - unicode - truecolor
+tags: spring, damping, damping ratio, critical damping, overshoot,
+      physics animation
+
+                      -
+    ? 0.15     *                                 -------------------------
+    ringing    *# # # - ## # # #===                ==   ======   ======= ===
+               # # # # ## # # # ===              ===                      --
+
+                      -
+    ? 0.40     *                                 -------------------------
+    light      *# # # - # # # # ###                ##   ####################
+               # # # # # # # # # ##              ###                      --
+
+                      -
+    ? 1.00     *                                 -------------------------
+    critical   *# # # - # # # # # **                ************************
+               # # # # # # # # # #**             ***                      --
+
+                      -
+    ? 2.00     *                                 -------------------------
+    overdamped *# # # - ## # # # #===                =======================
+               # # # # #  # # # # ===            =====                    --
+
+  still at t=2.5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play lab-spring
+Snapshot  prism-term snapshot lab-spring --size 72x20
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('lab-spring'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/lab-motion-blur
+next >    curl -sL prism.jeremyfhall.com/f/lab-bounce
+gallery   curl -sL prism.jeremyfhall.com/t/lab
+home      curl -sL prism.jeremyfhall.com/tty

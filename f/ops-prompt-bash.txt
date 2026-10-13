@@ -1,0 +1,38 @@
+* PRISM TERMINAL > Linux & Ops > Shell Prompts
+bash Prompt  ops-prompt-bash
+The classic user@host:dir$ bash prompt in green and blue: cd into a repo, a
+colored ls -la, cat a file, then a deploy script dry run.
+tui - 80x16 (min 50x5) - 20 s loop - ascii - 16 colors
+tags: bash, ps1, prompt, shell, ls, session
+
+ops@node03:~$ cd ~/src/shop-api
+ops@node03:~/src/shop-api$ ls -la
+total 64
+drwxr-xr-x  7 ops ops 4096 Oct 13 13:58 .
+drwxr-xr-x  5 ops ops 4096 Oct  9 11:20 ..
+drwxr-xr-x  8 ops ops 4096 Oct 13 13:58 .git
+-rw-r--r--  1 ops ops  412 Oct  2 16:44 .gitignore
+-rw-r--r--  1 ops ops 1931 Oct 13 13:41 Makefile
+-rw-r--r--  1 ops ops    7 Oct 13 13:41 VERSION
+drwxr-xr-x  4 ops ops 4096 Oct 12 18:03 cmd
+-rwxr-xr-x  1 ops ops 1288 Oct  6 09:12 deploy.sh
+drwxr-xr-x  2 ops ops 4096 Oct 13 13:41 internal
+lrwxrwxrwx  1 ops ops   17 Oct  6 09:12 logs -> /var/log/shop
+ops@node03:~/src/shop-api$ cat VERSION
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-prompt-bash
+Snapshot  prism-term snapshot ops-prompt-bash --size 80x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-prompt-bash'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-fail2ban
+next >    curl -sL prism.jeremyfhall.com/f/ops-prompt-git
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,38 @@
+* PRISM TERMINAL > Linux & Ops > Disk & Storage
+ncdu  ops-ncdu
+ncdu browsing /var: sizes and [##########] bars sorted largest first, a
+selection that walks the list, and the total disk usage footer.
+tui - 72x16 (min 44x6) - 20 s loop - ascii - 16 colors
+tags: ncdu, du, disk usage, storage, cleanup
+
+    ncdu 1.19 ~ Use the arrow keys to navigate, press ? for help
+    --- /var ---------------------------------------------------------------
+      18.4 GiB [##########] /lib
+       9.2 GiB [#####     ] /log
+       2.3 GiB [#         ] /cache
+     905.2 MiB [          ] /www
+     524.3 MiB [          ] /backups
+      42.2 MiB [          ] /spool
+      19.3 MiB [          ] /tmp
+       1.2 MiB [          ] /mail
+     429.9 KiB [          ] /opt
+      21.0 KiB [          ] /local
+
+
+
+     Total disk usage:  31.4 GiB  Apparent size:  30.9 GiB  Items: 214388
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-ncdu
+Snapshot  prism-term snapshot ops-ncdu --size 72x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-ncdu'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-iostat
+next >    curl -sL prism.jeremyfhall.com/f/ops-zpool-status
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

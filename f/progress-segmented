@@ -1,0 +1,27 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mProgress & Counters[0;2;39;49m › [0;1;39;49mProgress Bars[0m
+[0;1;39;49mSegmented LEDs[0;2;39;49m  progress-segmented[0m
+Discrete segment bars — parallelograms, squares and LED ticks — that light one
+by one and shift color by zone.
+[0;2;39;49mprogress · 50×5 (min 22×1) · 8 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: segments, led, zones, battery[0m
+
+               [48;5;234m [38;5;249mcharge[39m   [38;5;167m▰▰▰▰▰▰[38;5;215m▰▰▰▰▰▰▰▰[38;5;71m▰▰▰▰[38;5;238m▱▱▱▱▱▱[39m [38;5;255m 76%[39m           [0m
+               [48;5;234m                                                  [0m
+               [48;5;234m [38;5;249msync[39m     [38;5;74m■■■■■■■■■■■■■■■■[38;5;238m□□□□□□□□[39m [38;5;255m 65%[39m           [0m
+               [48;5;234m                                                  [0m
+               [48;5;234m [38;5;249mrebuild[39m  [38;5;74m┃┃┃┃┃┃┃┃┃┃┃┃┃┃[38;5;238m╎╎╎╎╎╎╎╎╎╎[39m [38;5;255m 59%[39m           [0m
+[0;2;39;49m  still at t=4s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play progress-segmented[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot progress-segmented --size 50x5[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('progress-segmented'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-gradient[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-indeterminate[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/progress[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

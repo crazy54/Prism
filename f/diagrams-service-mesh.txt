@@ -1,0 +1,40 @@
+* PRISM TERMINAL > Architecture Diagrams > Networks & Topologies
+Service Mesh  diagrams-service-mesh
+A service mesh on a braille canvas: services ring the frame, diagonal call edges
+carry traffic comets, and one edge runs hot red during a latency spike.
+diagram - 64x18 (min 44x12) - 8 s loop - unicode - 256 colors
+tags: service mesh, graph, traffic, braille, latency
+
+
+                                        * payments
+                               p99 2.4s ========
+                     * checkout ====            ===::-
+                        ::  ================::-+    ====
+                       =        =::-=+      ============ * notify
+                    ===             ====                ======
+                    ::                  ====
+                   =                        ====
+             * gateway                          ===::-
+                   =====                            ==+=
+                    ::= ==::-=                          ====
+                      =     ====                       * inventory
+                       =::      ====                    =::=
+                      * users       ====::        ======
+                          =             =--=    =::=
+                                         * search
+        x checkout -> payments p99 2.4s . retries 3.1%
+  still at t=4s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play diagrams-service-mesh
+Snapshot  prism-term snapshot diagrams-service-mesh --size 64x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('diagrams-service-mesh'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/diagrams-cluster-map
+next >    curl -sL prism.jeremyfhall.com/f/diagrams-sequence
+gallery   curl -sL prism.jeremyfhall.com/t/diagrams
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,32 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mAI Working[0;2;39;49m › [0;1;39;49mAgents & Pipelines[0m
+[0;1;39;49mMulti-Agent Log[0;2;39;49m  ai-multi-agent-log[0m
+A multi-agent message log: color-tagged agents post findings and hand work to
+one another, handoffs marked with arrows and the newest line flashing.
+[0;2;39;49mtui · 72×10 (min 48×6) · 9 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: multi-agent, log, handoff, agents, orchestration[0m
+
+    [38;5;66;48;5;234m12:04:31[39m [0;1;38;5;74;48;5;234mcollector[0;39;48;5;234m [38;5;249mingesting checkout spans, 1.2k/s[39m                     [0m
+    [38;5;66;48;5;234m12:04:33[39m [0;1;38;5;74;48;5;234mcollector[0;38;5;66;48;5;234m▸ [0;1;38;5;215;48;5;234manalyst[0;39;48;5;234m  [38;5;249mp99 2.4s on POST /checkout since 12:02[39m     [0m
+    [38;5;66;48;5;234m12:04:34[39m [0;1;38;5;215;48;5;234manalyst  [0;39;48;5;234m [38;5;249mpool_wait_ms tracks p99 (r=0.94)[39m                     [0m
+    [38;5;66;48;5;234m12:04:36[39m [0;1;38;5;215;48;5;234manalyst  [0;39;48;5;234m [38;5;249mdeploy v2.14.1 at 12:02 raised workers 8 → 32[39m        [0m
+    [38;5;66;48;5;234m12:04:37[39m [0;1;38;5;215;48;5;234manalyst  [0;38;5;66;48;5;234m▸ [0;1;38;5;74;48;5;234mmainbrain[0;39;48;5;234m  [38;5;249mcause: db pool starvation (confidence 0.…[0m
+    [38;5;66;48;5;234m12:04:39[39m [0;1;38;5;74;48;5;234mmainbrain[0;38;5;66;48;5;234m▸ [0;1;38;5;71;48;5;234mfixer[0;39;48;5;234m  [38;5;249mdraft the smallest safe fix[39m                  [0m
+    [48;5;234m                                                                        [0m
+    [48;5;234m                                                                        [0m
+    [48;5;234m                                                                        [0m
+    [48;5;234m                                                                        [0m
+[0;2;39;49m  still at t=4.5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ai-multi-agent-log[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ai-multi-agent-log --size 72x10[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ai-multi-agent-log'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ai-chat-transcript[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ai-context-window[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ai[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

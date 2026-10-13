@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Linux & Ops > Disk & Storage
+zpool status  ops-zpool-status
+zpool status for a mirrored pool mid-scrub: scanned/issued throughput and % done
+ticking, the vdev tree, and clean error counters.
+tui - 76x20 (min 60x8) - 30 s loop - ascii - 16 colors
+tags: zfs, zpool, scrub, raid, mirror, storage
+
+    pool: tank
+   state: ONLINE
+    scan: scrub in progress since Tue Oct 13 13:41:02 2026
+          1.15T / 3.62T scanned at 1.01G/s, 1.03T / 3.62T issued at 830M/s
+          0B repaired, 28.34% done, 00:57:58 to go
+  config:
+
+          NAME                            STATE     READ WRITE CKSUM
+          tank                            ONLINE       0     0     0
+            mirror-0                      ONLINE       0     0     0
+              ata-HDD-8TB-ZA1B2C3D        ONLINE       0     0     0
+              ata-HDD-8TB-ZA1B4E5F        ONLINE       0     0     0
+            mirror-1                      ONLINE       0     0     0
+              ata-HDD-8TB-ZA1C7G8H        ONLINE       0     0     0
+              ata-HDD-8TB-ZA1C9J0K        ONLINE       0     0     0
+          logs
+            nvme-SSD-1TB-S5H2NX0R1        ONLINE       0     0     0
+
+  errors: No known data errors
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-zpool-status
+Snapshot  prism-term snapshot ops-zpool-status --size 76x20
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-zpool-status'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-ncdu
+next >    curl -sL prism.jeremyfhall.com/f/ops-mtr
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

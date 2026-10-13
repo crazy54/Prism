@@ -1,0 +1,32 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mContainers & Clusters[0m
+[0;1;39;49mdocker stats[0;2;39;49m  ops-docker-stats[0m
+docker stats refreshing every half second per container: name, CPU %, memory
+usage against its limit, MEM %, network I/O and PIDs.
+[0;2;39;49mtui · 80×10 (min 64×4) · 20 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: docker, stats, containers, cpu, memory, monitor[0m
+
+[0;1;38;2;233;235;237;48;2;15;22;33mNAME            CPU %    MEM USAGE / LIMIT    MEM %   NET I/O            PIDS[0;39;48;2;15;22;33m   [0m
+[38;2;70;175;174;48;2;15;22;33mshop-api-1      [38;2;233;235;237m39.97%   379.8MiB / 2.00GiB   18.55%  373.2MB / 302.3MB  4[39m      [0m
+[38;2;70;175;174;48;2;15;22;33mshop-api-2      [38;2;233;235;237m20.53%   375.2MiB / 2.00GiB   18.32%  732.1MB / 593.0MB  11[39m     [0m
+[38;2;70;175;174;48;2;15;22;33mshop-worker-1   [38;2;233;235;237m68.35%   787.2MiB / 1023.3MiB [38;2;245;183;78m76.93%  [38;2;233;235;237m1.10GB / 893.2MB   18[39m     [0m
+[38;2;70;175;174;48;2;15;22;33mshop-db-1       [38;2;233;235;237m29.39%   1.23GiB / 4.00GiB    30.65%  1.45GB / 1.17GB    25[39m     [0m
+[38;2;70;175;174;48;2;15;22;33mshop-redis-1    [38;2;233;235;237m5.23%    57.9MiB / 488.3MiB   11.87%  1.80GB / 1.46GB    32[39m     [0m
+[38;2;70;175;174;48;2;15;22;33mshop-nginx-1    [38;2;233;235;237m3.15%    13.5MiB / 244.1MiB   5.53%   2.16GB / 1.75GB    9[39m      [0m
+[38;2;70;175;174;48;2;15;22;33motel-collector  [38;2;233;235;237m5.54%    82.7MiB / 488.3MiB   16.94%  2.52GB / 2.04GB    16[39m     [0m
+[38;2;70;175;174;48;2;15;22;33mnode-exporter   [38;2;233;235;237m0.96%    17.0MiB / 122.1MiB   13.93%  2.88GB / 2.33GB    23[39m     [0m
+[48;2;15;22;33m                                                                                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play ops-docker-stats[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot ops-docker-stats --size 80x10[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('ops-docker-stats'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-docker-pull[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-kubectl-pods[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

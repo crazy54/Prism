@@ -1,0 +1,31 @@
+* PRISM TERMINAL > Charts & Metrics > Bars & Histograms
+Stacked Status Codes  charts-bars-stacked
+Per-region request mix as stacked horizontal segments -- 2xx, 3xx, 4xx, 5xx --
+with a legend and live totals.
+chart - 60x9 (min 24x3) - 12 s loop - unicode - truecolor
+tags: stacked bars, http status, segments, regions, composition
+
+          # 2xx  # 3xx  # 4xx  # 5xx
+          us-east-1  #########################################    1.5%
+          us-west-2  #########################################    1.8%
+          eu-west-1  #########################################    2.1%
+          ap-south-1 #########################################    2.0%
+          sa-east-1  #########################################    2.0%
+          ca-central #########################################    2.4%
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-bars-stacked
+Snapshot  prism-term snapshot charts-bars-stacked --size 60x9
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-bars-stacked'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-bars-leaderboard
+next >    curl -sL prism.jeremyfhall.com/f/charts-histogram-live
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

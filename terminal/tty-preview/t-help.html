@@ -1,0 +1,58 @@
+<!doctype html><html><head><meta charset="utf-8"><title>curl prism.jeremyfhall.com/t/help</title><style>html,body{margin:0;background:#0f1621}
+.pt{display:inline-block;margin:0;padding:12px 14px;font:14px/1.0 "Cascadia Mono","Cascadia Code","JetBrains Mono","DejaVu Sans Mono",Menlo,Consolas,monospace;color:#e9ebed;background:#0f1621;white-space:pre;letter-spacing:0;font-variant-ligatures:none}
+.pt span{display:inline}
+@keyframes pt-blink{50%{opacity:.2}}@media (prefers-reduced-motion:reduce){.pt span{animation:none!important}}</style></head>
+<body><pre class="pt"><span style="color:#5f87d7;font-weight:700">◆ PRISM TERMINAL</span><span style="color:#e9ebed;opacity:.6"> › </span><span style="color:#e9ebed;font-weight:700">help</span><span style="color:#e9ebed">                                                         </span>
+<span style="color:#e9ebed">                                                                                </span>
+<span style="color:#e9ebed">  This is Prism's terminal site: 434 animated and static terminal facets —      </span>
+<span style="color:#e9ebed">  scenes, spinners, progress meters, charts, text art, TUI controls, diagrams   </span>
+<span style="color:#e9ebed">  and ops views — in 17 galleries, drawn by prism-term 0.2.0, a zero-dependency </span>
+<span style="color:#e9ebed">  Node engine.                                                                  </span>
+<span style="color:#e9ebed">                                                                                </span>
+<span style="color:#5f87d7;font-weight:700">BROWSE WITH CURL</span><span style="color:#e9ebed">                                                                </span>
+<span style="color:#e9ebed">  </span><span style="color:#5fafaf">curl -sL prism.jeremyfhall.com/tty          </span><span style="color:#e9ebed;opacity:.6">the terminal site's home</span><span style="color:#e9ebed">          </span>
+<span style="color:#e9ebed">  </span><span style="color:#5fafaf">curl -sL prism.jeremyfhall.com/t/&lt;gallery&gt;  </span><span style="color:#e9ebed;opacity:.6">one gallery, by category</span><span style="color:#e9ebed">          </span>
+<span style="color:#e9ebed">  </span><span style="color:#5fafaf">curl -sL prism.jeremyfhall.com/f/&lt;facet&gt;    </span><span style="color:#e9ebed;opacity:.6">one facet: still and commands</span><span style="color:#e9ebed">     </span>
+<span style="color:#e9ebed">  </span><span style="color:#5fafaf">curl -sL prism.jeremyfhall.com/t/all        </span><span style="color:#e9ebed;opacity:.6">every facet on one line each</span><span style="color:#e9ebed">      </span>
+<span style="color:#e9ebed">  </span><span style="color:#5fafaf">curl -sL prism.jeremyfhall.com/t/help       </span><span style="color:#e9ebed;opacity:.6">this page</span><span style="color:#e9ebed">                         </span>
+<span style="color:#e9ebed">                                                                                </span>
+<span style="color:#e9ebed">  Pages are stills that fit 80 columns. Long pages: pipe to less -R. Every page </span>
+<span style="color:#e9ebed">  also comes as:                                                                </span>
+<span style="color:#e9ebed">  </span><span style="color:#5fafaf">&lt;page&gt;.txt  </span><span style="color:#e9ebed;opacity:.6">plain ASCII, no escape codes — for grep, NO_COLOR, screen readers</span><span style="color:#e9ebed"> </span>
+<span style="color:#e9ebed">  </span><span style="color:#5fafaf">&lt;page&gt;.24   </span><span style="color:#e9ebed;opacity:.6">truecolor instead of the default 256 colors</span><span style="color:#e9ebed">                       </span>
+<span style="color:#e9ebed">  </span><span style="color:#e9ebed;opacity:.6">Search:   </span><span style="color:#5fafaf">curl -sL prism.jeremyfhall.com/t/all.txt | grep -i spinner</span><span style="color:#e9ebed">          </span>
+<span style="color:#e9ebed">  </span><span style="color:#e9ebed;opacity:.6">Paging:   </span><span style="color:#5fafaf">curl -sL prism.jeremyfhall.com/t/ops | less -R</span><span style="color:#e9ebed">                      </span>
+<span style="color:#e9ebed">  </span><span style="color:#e9ebed;opacity:.6">Windows PowerShell 5: type </span><span style="color:#5fafaf">curl.exe</span><span style="color:#e9ebed;opacity:.6"> (plain "curl" is an alias there).</span><span style="color:#e9ebed">         </span>
+<span style="color:#e9ebed">  </span><span style="color:#e9ebed;opacity:.6">PowerShell and cmd don't continue lines with \: join a command that ends</span><span style="color:#e9ebed">      </span>
+<span style="color:#e9ebed">  </span><span style="color:#e9ebed;opacity:.6">in \ with the next line (drop the \) before you run it.</span><span style="color:#e9ebed">                       </span>
+<span style="color:#e9ebed">                                                                                </span>
+<span style="color:#5f87d7;font-weight:700">THE LIVE PLAYER</span><span style="color:#e9ebed">                                                                 </span>
+<span style="color:#e9ebed">  The live player renders facets in real time and detects your terminal         </span>
+<span style="color:#e9ebed">  (truecolor, 256, 16, mono; braille and block glyphs, or plain ASCII). It needs</span>
+<span style="color:#e9ebed">  Node 18+ and no network after the download.                                   </span>
+<span style="color:#5fafaf">  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term</span><span style="color:#e9ebed">   </span>
+<span style="color:#e9ebed;opacity:.6">  …then add a command:</span><span style="color:#e9ebed">                                                          </span>
+<span style="color:#e9ebed">    </span><span style="color:#5fafaf">(none)            </span><span style="color:#e9ebed;opacity:.6">browse the catalog: arrows move, / searches, Enter plays</span><span style="color:#e9ebed">  </span>
+<span style="color:#e9ebed">    </span><span style="color:#5fafaf">play &lt;facet&gt;      </span><span style="color:#e9ebed;opacity:.6">one facet fullscreen (--size 80x24, --depth 256, --ascii)</span><span style="color:#e9ebed"> </span>
+<span style="color:#e9ebed">    </span><span style="color:#5fafaf">list              </span><span style="color:#e9ebed;opacity:.6">every facet, grouped by gallery</span><span style="color:#e9ebed">                           </span>
+<span style="color:#e9ebed">    </span><span style="color:#5fafaf">snapshot &lt;facet&gt;  </span><span style="color:#e9ebed;opacity:.6">print one still frame to stdout</span><span style="color:#e9ebed">                           </span>
+<span style="color:#e9ebed;opacity:.6">  Prefer a permanent install? Run this once, then just type prism-term:</span><span style="color:#e9ebed">         </span>
+<span style="color:#e9ebed">  </span><span style="color:#5fafaf">npm i -g https://prism.jeremyfhall.com/dl/prism-term.tgz</span><span style="color:#e9ebed">                      </span>
+<span style="color:#e9ebed">                                                                                </span>
+<span style="color:#5f87d7;font-weight:700">GALLERIES</span><span style="color:#e9ebed">                                                                       </span>
+<span style="color:#e9ebed">  </span><span style="color:#5fafaf">fx         objects    sim        retro      text       loaders    </span><span style="color:#e9ebed">            </span>
+<span style="color:#e9ebed">  </span><span style="color:#5fafaf">progress   charts     ai         status     ops        diagrams   </span><span style="color:#e9ebed">            </span>
+<span style="color:#e9ebed">  </span><span style="color:#5fafaf">callouts   input      maps       lab        ascii      </span><span style="color:#e9ebed">                       </span>
+<span style="color:#e9ebed">                                                                                </span>
+<span style="color:#5f87d7;font-weight:700">FOR AGENTS AND TOOLS</span><span style="color:#e9ebed">                                                            </span>
+<span style="color:#e9ebed">  Machine-readable: the JSON island &lt;script id="prism-terminal-catalog"&gt; in the </span>
+<span style="color:#e9ebed">  web catalog, prism.jeremyfhall.com/Prism.html, and the same catalog at        </span>
+<span style="color:#e9ebed">  prism.jeremyfhall.com/terminal/engine/catalog/terminal-catalog.json. Each     </span>
+<span style="color:#e9ebed">  facet record has id, gallery, category, tags, size, glyphs, color depth,      </span>
+<span style="color:#e9ebed">  params, a plain-text preview and its module path; the module's code, and the  </span>
+<span style="color:#e9ebed">  "_" helpers it imports, are in the catalog's top-level "sources".             </span>
+<span style="color:#e9ebed">                                                                                </span>
+<span style="color:#e9ebed;opacity:.6">────────────────────────────────────────────────────────────────────────────────</span>
+<span style="color:#e9ebed;opacity:.6">home      </span><span style="color:#5fafaf">curl -sL prism.jeremyfhall.com/tty</span><span style="color:#e9ebed">                                    </span>
+<span style="color:#e9ebed;opacity:.6">catalog   </span><span style="color:#5fafaf">https://prism.jeremyfhall.com/terminal/</span><span style="color:#e9ebed">                               </span>
+<span style="color:#e9ebed;opacity:.6">source    </span><span style="color:#5fafaf">https://github.com/crazy54/Prism (prism-term/, MIT)</span><span style="color:#e9ebed">                   </span></pre></body></html>

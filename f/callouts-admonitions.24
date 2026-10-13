@@ -1,0 +1,42 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mCallouts & Layout[0;2;39;49m › [0;1;39;49mAdmonitions[0m
+[0;1;39;49mAdmonitions[0;2;39;49m  callouts-admonitions[0m
+NOTE, TIP, IMPORTANT, WARNING and CAUTION blocks in the GitHub alert style —
+colored gutter bar, icon, title and wrapped body.
+[0;2;39;49mwidget · 72×22 (min 34×6) · 10 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: admonition, alert, note, warning, callout, github[0m
+
+    [38;2;83;159;229;48;2;15;22;33m▌[39m [0;1;38;2;83;159;229;48;2;15;22;33mℹ Note[0;39;48;2;15;22;33m                                                                [0m
+    [38;2;83;159;229;48;2;15;22;33m▌[39m [38;2;233;235;237mThe agent runs read-only diagnostics without asking. Changes always[39m   [0m
+    [38;2;83;159;229;48;2;15;22;33m▌[39m [38;2;233;235;237mwait for a human.[39m                                                     [0m
+    [48;2;15;22;33m                                                                        [0m
+    [38;2;55;194;107;48;2;15;22;33m▌[39m [0;1;38;2;55;194;107;48;2;15;22;33m✦ Tip[0;39;48;2;15;22;33m                                                                 [0m
+    [38;2;55;194;107;48;2;15;22;33m▌[39m [38;2;233;235;237mPipe any page of the terminal site through [38;2;83;159;229;48;2;25;41;60mless -R[38;2;233;235;237;48;2;15;22;33m to scroll it[39m       [0m
+    [38;2;55;194;107;48;2;15;22;33m▌[39m [38;2;233;235;237mwith color.[39m                                                           [0m
+    [48;2;15;22;33m                                                                        [0m
+    [38;2;196;113;255;48;2;15;22;33m▌[39m [0;1;38;2;196;113;255;48;2;15;22;33m◆ Important[0;39;48;2;15;22;33m                                                           [0m
+    [38;2;196;113;255;48;2;15;22;33m▌[39m [38;2;233;235;237mFacets must be deterministic: derive everything from t, ctx.rng and[39m   [0m
+    [38;2;196;113;255;48;2;15;22;33m▌[39m [38;2;233;235;237mctx.noise.[39m                                                            [0m
+    [48;2;15;22;33m                                                                        [0m
+    [38;2;245;183;78;48;2;15;22;33m▌[39m [0;1;38;2;245;183;78;48;2;15;22;33m▲ Warning[0;39;48;2;15;22;33m                                                             [0m
+    [38;2;245;183;78;48;2;15;22;33m▌[39m [38;2;233;235;237mtmux without Tc quantizes truecolor to 256 colors. Test both.[39m         [0m
+    [48;2;15;22;33m                                                                        [0m
+    [38;2;235;111;111;48;2;15;22;33m▌[39m [0;1;38;2;235;111;111;48;2;15;22;33m✖ Caution[0;39;48;2;15;22;33m                                                             [0m
+    [38;2;235;111;111;48;2;15;22;33m▌[39m [38;2;233;235;237mRolling back the schema migration drops the orders.v2 column and its[39m  [0m
+    [38;2;235;111;111;48;2;15;22;33m▌[39m [38;2;233;235;237mdata.[39m                                                                 [0m
+    [48;2;15;22;33m                                                                        [0m
+    [48;2;15;22;33m                                                                        [0m
+[0;2;39;49m  still at 72×20 · t=5s — run it live for full size and motion[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play callouts-admonitions[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot callouts-admonitions --size 72x22[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('callouts-admonitions'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/callouts-code-block[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/callouts-alert-banners[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/callouts[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

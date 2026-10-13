@@ -1,0 +1,34 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mInput & Menus[0;2;39;49m › [0;1;39;49mToggles & Checkboxes[0m
+[0;1;39;49mMulti-select Checkboxes[0;2;39;49m  input-multiselect[0m
+A checkbox list where a scripted user moves and toggles items with space, with a
+live "4 of 7 selected" counter and select-all hint.
+[0;2;39;49mtui · 50×12 (min 32×7) · 6 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: checkbox, multiselect, list, toggle, prompt[0m
+
+               [0;1;38;5;74;48;5;234m?[0;39;48;5;234m [0;1;38;5;255;48;5;234mServices to restart[0;39;48;5;234m                             [0m
+               [48;5;234m [38;5;74m [39m [0;1;38;5;71;48;5;234m[✓][0;39;48;5;234m [38;5;255mcheckout                                  [39m [0m
+               [48;5;234m [38;5;74m [39m [0;1;38;5;71;48;5;234m[✓][0;39;48;5;234m [38;5;255mpayments                                  [39m [0m
+               [48;5;234m [38;5;74m [39m [38;5;66m[ ][39m [38;5;249minventory                                 [39m [0m
+               [48;5;234m [38;5;74m [39m [0;1;38;5;71;48;5;234m[✓][0;39;48;5;234m [38;5;255mcatalog                                   [39m [0m
+               [48;5;234m [38;5;74m [39m [38;5;66m[ ][39m [38;5;249msearch                                    [39m [0m
+               [48;5;235m [38;5;74m❯[39m [0;1;38;5;71;48;5;235m[✓][0;39;48;5;235m [0;1;38;5;255;48;5;235mrx-orders                                 [0;39;48;5;235m [0m
+               [48;5;234m [38;5;74m [39m [38;5;66m[ ][39m [38;5;249mloyalty                                   [39m [0m
+               [48;5;234m                                                  [0m
+               [48;5;234m                                                  [0m
+               [48;5;234m                                                  [0m
+               [38;5;66;48;5;234m4 of 7 selected · space toggle · a all · enter[39m    [0m
+[0;2;39;49m  still at t=3s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play input-multiselect[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot input-multiselect --size 50x12[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('input-multiselect'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/input-scroll-list[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/input-toggles[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/input[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

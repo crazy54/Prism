@@ -1,0 +1,38 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mCharts & Metrics[0;2;39;49m › [0;1;39;49mLine & Area[0m
+[0;1;39;49mBubble Chart[0;2;39;49m  charts-bubble[0m
+Services plotted by request rate and error rate, bubble area showing cost —
+bubbles breathe as traffic shifts.
+[0;2;39;49mchart · 64×16 (min 24×6) · 14 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: bubble chart, cost, services, blocks, x y[0m
+
+        [38;5;66;48;5;234m↑ errors[39m                                                        [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                [38;5;167m▗▄[48;5;238m▛▀[38;5;131;48;5;234m▙[38;5;167m▄▖[39m          [38;5;215m▗▄▖[39m            [0m
+        [48;5;234m                               [38;5;131m▟[38;5;167;48;5;238m▘[39m     [38;5;238;48;5;167m▙[38;5;167;48;5;234m▄[39m       [0;1;38;5;231;48;5;234mno[48;5;239mti[48;5;215mf[48;5;234my[0;39;48;5;234m           [0m
+        [48;5;234m                              [38;5;167m▐[0;1;38;5;231;48;5;238mcheckout[0;38;5;238;48;5;167m▌[39;48;5;234m        [38;5;215m▝▜[38;5;239;48;5;215m▀[38;5;215;48;5;234m▀▘[39m           [0m
+        [48;5;234m                              [38;5;167m▝[48;5;238m▙[39m       [38;5;131;48;5;234m▛[39m                        [0m
+        [48;5;234m                       [38;5;171m▗▄▖[39m     [38;5;167m▝[38;5;131m▜[38;5;238;48;5;167m▀▀▀▀▀[38;5;167;48;5;234m▀[39m                         [0m
+        [48;5;234m                      [38;5;171m▐[48;5;239m▘[39m [38;5;239;48;5;171m▙[38;5;171;48;5;234m▙[39m                [38;5;71m▗▄▄[39m                  [0m
+        [48;5;234m                      [0;1;38;5;231;48;5;234ma[48;5;171muth[0;38;5;171;48;5;234m▌[39m              [38;5;71m▗[48;5;237m▀▘[39m  [38;5;71m▀▜[48;5;234m▖[39m               [0m
+        [48;5;234m               [38;5;67m▟[38;5;74;48;5;238m▀▀▀[48;5;234m▄[39m                     [38;5;71;48;5;237m▌[39m      [38;5;71m▜[39;48;5;234m               [0m
+        [48;5;234m              [0;1;38;5;231;48;5;234ms[48;5;238mearc[48;5;74mh[0;39;48;5;234m                     [38;5;71;48;5;237m▙[0;1;38;5;231;48;5;237mcatal[48;5;71mo[48;5;234mg[0;39;48;5;234m               [0m
+        [48;5;234m               [38;5;74m▀[38;5;238;48;5;74m▀▀▀[38;5;74;48;5;234m▀[39m                      [38;5;71m▀[48;5;237m▙[38;5;237;48;5;71m▀▀[38;5;35;48;5;234m▛[38;5;71m▀[39m                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [38;5;66;48;5;234mrequests →[39m                                                      [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play charts-bubble[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot charts-bubble --size 64x16[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('charts-bubble'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/charts-scatter[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/charts-bars-vertical[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/charts[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

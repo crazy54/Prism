@@ -1,0 +1,32 @@
+* PRISM TERMINAL > Charts & Metrics > KPI Tiles
+Big Number Tile  charts-big-number
+The wallboard hero tile: one metric in a bold bitmap font, its trend arrow and
+delta, and a sparkline underneath.
+chart - 56x10 (min 24x5) - 12 s loop - unicode - truecolor
+tags: big number, hero metric, bitmap font, kpi, wallboard
+
+            ORDERS / MIN
+              ##    ######        ######  ######  ######
+            ####        ##        ##          ##  ##  ##
+              ##    ######        ######  ######  ######
+              ##    ##        ##  ##  ##  ##      ##  ##
+            ######  ######  ##    ######  ######  ######
+            v 3.1% vs 15 s ago
+            --==:.:=+*++**+=====+++*****#####@#++*@@####@#*++*+-::-+
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-big-number
+Snapshot  prism-term snapshot charts-big-number --size 56x10
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-big-number'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-kpi-row
+next >    curl -sL prism.jeremyfhall.com/f/charts-noc-wallboard
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

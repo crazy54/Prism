@@ -1,0 +1,27 @@
+* PRISM TERMINAL > Charts & Metrics > Sparklines
+Sparkline Rows  charts-spark-bars
+Four live metrics as eighth-block sparklines with labels, window min/max,
+current values and threshold coloring -- the classic `spark` look.
+chart - 66x5 (min 22x2) - 10 s loop - unicode - 256 colors
+tags: sparkline, trend, metrics, eighth blocks, cpu
+
+       cpu  .-==---===--==--==--__-+**###*+==+=_.. v41 ^63            41%
+       mem  -__..___-=+++**+====-_----=++*#******# v52 ^68            67%
+       net  #+=-____=+=-+##*+=++*#*++*#*+===-_._== v10 ^35        24 MB/s
+       err  #####***+===-___..._------=+=-----__-- v0.1 ^1.2         0.5%
+
+  still at t=5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-spark-bars
+Snapshot  prism-term snapshot charts-spark-bars --size 66x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-spark-bars'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-noc-wallboard
+next >    curl -sL prism.jeremyfhall.com/f/charts-spark-braille
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

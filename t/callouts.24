@@ -1,0 +1,42 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mCallouts & Layout (15)[0m
+Panels, borders, admonitions, tables, dividers and key-value blocks.
+
+[38;2;53;65;80;48;2;15;22;33m╭[0;1;38;2;233;235;237;48;2;15;22;33m Overview [0;38;2;53;65;80;48;2;15;22;33m───────╮[39m [38;2;53;65;80m╭──[0;1;38;2;233;235;237;48;2;15;22;33m Deployments [0;38;2;53;65;80;48;2;15;22;33m──╮[39;49m  [38;2;196;113;255;48;2;15;22;33m▌[39;48;2;29;29;51m [0;1;38;2;196;113;255;48;2;29;29;51m◆ Important[0;39;48;2;29;29;51m                          [0m
+[38;2;53;65;80;48;2;15;22;33m│[39m                 [38;2;53;65;80m│[39m [38;2;53;65;80m│[39m                 [38;2;53;65;80m│[39;49m  [38;2;196;113;255;48;2;15;22;33m▌[39;48;2;29;29;51m [38;2;233;235;237mFacets must be deterministic:[39m        [0m
+[38;2;53;65;80;48;2;15;22;33m│[39m [38;2;164;176;192mreque…[39m  [0;1;38;2;233;235;237;48;2;15;22;33m1,782/s[0;39;48;2;15;22;33m [38;2;53;65;80m│[39m [38;2;53;65;80m│[39m [38;2;164;176;192mcheck…[39m  [0;1;38;2;233;235;237;48;2;15;22;33mv2.14.0[0;39;48;2;15;22;33m [38;2;53;65;80m│[39;49m  [38;2;196;113;255;48;2;15;22;33m▌[39;48;2;29;29;51m [38;2;233;235;237mderive everything from t, ctx.rng[39m    [0m
+[38;2;53;65;80;48;2;15;22;33m│[39m                 [38;2;53;65;80m│[39m [38;2;53;65;80m│[39m                 [38;2;53;65;80m│[39;49m  [38;2;196;113;255;48;2;15;22;33m▌[39;48;2;29;29;51m [38;2;233;235;237mand ctx.noise.[39m                       [0m
+[38;2;53;65;80;48;2;15;22;33m│[39m [38;2;164;176;192mp95    [39m  [0;1;38;2;233;235;237;48;2;15;22;33m206 ms[0;39;48;2;15;22;33m [38;2;53;65;80m│[39m [38;2;53;65;80m│[39m [38;2;164;176;192mpaymen…[39m  [0;1;38;2;233;235;237;48;2;15;22;33mv4.2.7[0;39;48;2;15;22;33m [38;2;53;65;80m│[39;49m  [48;2;15;22;33m                                       [0m
+[38;2;53;65;80;48;2;15;22;33m│[39m                 [38;2;53;65;80m│[39m [38;2;53;65;80m│[39m                 [38;2;53;65;80m│[39;49m  [48;2;15;22;33m                                       [0m
+[38;2;53;65;80;48;2;15;22;33m│[39m [38;2;164;176;192merrors [39m  [0;1;38;2;233;235;237;48;2;15;22;33m0.28 %[0;39;48;2;15;22;33m [38;2;53;65;80m│[39m [38;2;53;65;80m│[39m [38;2;164;176;192msearch [39m  [0;1;38;2;233;235;237;48;2;15;22;33mv2.3.1[0;39;48;2;15;22;33m [38;2;53;65;80m│[39;49m  [48;2;15;22;33m                                       [0m
+[38;2;53;65;80;48;2;15;22;33m╰──────[38;2;164;176;192m 14:03:05 [38;2;53;65;80m─╯[39m [38;2;53;65;80m╰───────────[38;2;164;176;192m 3/5 [38;2;53;65;80m─╯[39;49m  [48;2;15;22;33m                                       [0m
+[0;2;39;49mcallouts-titled-panels                   callouts-admonitions[0m
+
+[0;1;38;2;95;135;215;49mPANELS & BORDERS[0;2;39;49m  5[0m
+  [38;2;95;175;175mcallouts-border-styles    [39mAll six border styles — round, single, double, heav…[0m
+  [38;2;95;175;175mcallouts-titled-panels    [39mPanels with left, centered and right titles and liv…[0m
+  [38;2;95;175;175mcallouts-focus-panels     [39mA four-pane dashboard where keyboard focus cycles w…[0m
+  [38;2;95;175;175mcallouts-shadow-card      [39mA card with a shaded drop shadow that lifts on hove…[0m
+  [38;2;95;175;175mcallouts-code-block       [39mA titled code panel with line numbers, syntax color…[0m
+
+[0;1;38;2;95;135;215;49mADMONITIONS[0;2;39;49m  3[0m
+  [38;2;95;175;175mcallouts-admonitions      [39mNOTE, TIP, IMPORTANT, WARNING and CAUTION blocks in…[0m
+  [38;2;95;175;175mcallouts-alert-banners    [39mFull-width info, success, warning and error banners…[0m
+  [38;2;95;175;175mcallouts-block-quote      [39mA pull quote with an accent gutter that types itsel…[0m
+
+[0;1;38;2;95;135;215;49mTABLES[0;2;39;49m  3[0m
+  [38;2;95;175;175mcallouts-table-zebra      [39mA zebra-striped table with right-aligned numeric co…[0m
+  [38;2;95;175;175mcallouts-table-sorted     [39mA table whose sort column changes with ▲/▼ markers …[0m
+  [38;2;95;175;175mcallouts-table-grid       [39mA psql-style result grid with box-drawing junctions…[0m
+
+[0;1;38;2;95;135;215;49mDIVIDERS & HEADERS[0;2;39;49m  2[0m
+  [38;2;95;175;175mcallouts-dividers         [39mHorizontal rules in light, heavy, double, dotted, d…[0m
+  [38;2;95;175;175mcallouts-section-headers  [39mFive header styles — numbered eyebrow, underlined, …[0m
+
+[0;1;38;2;95;135;215;49mKEY-VALUE[0;2;39;49m  2[0m
+  [38;2;95;175;175mcallouts-neofetch         [39mA neofetch-style summary: gradient logo art beside …[0m
+  [38;2;95;175;175mcallouts-key-value        [39mGrouped key/value details with dotted leaders to ri…[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/callouts-border-styles[0m
+[0;2;39;49mpaged     [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/callouts | less -R[0m
+[0;2;39;49mgalleries [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

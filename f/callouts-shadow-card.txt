@@ -1,0 +1,36 @@
+* PRISM TERMINAL > Callouts & Layout > Panels & Borders
+Shadow Card  callouts-shadow-card
+A card with a shaded drop shadow that lifts on hover and settles, with a glint
+sweeping its title -- depth with nothing but shade blocks.
+widget - 52x14 (min 34x9) - 6 s loop - unicode - 256 colors
+tags: card, shadow, elevation, depth, hover
+
+
+                 +------------------------------------------+
+                 |                                          |
+                 |  Deploy complete +                       |::::
+                 |                                          |::::
+                 |  checkout v2.14.1 is live on 12/12 hosts |::::
+                 |  MTTR 0s . 0 errors during rollout       |::::
+                 |                                          |::::
+                 |                    [ View logs ] [ Done ]|::::
+                 +------------------------------------------+::::
+                     ::::::::::::::::::::::::::::::::::::::::::::
+                     ::::::::::::::::::::::::::::::::::::::::::::
+
+
+  still at t=3s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play callouts-shadow-card
+Snapshot  prism-term snapshot callouts-shadow-card --size 52x14
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('callouts-shadow-card'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/callouts-focus-panels
+next >    curl -sL prism.jeremyfhall.com/f/callouts-code-block
+gallery   curl -sL prism.jeremyfhall.com/t/callouts
+home      curl -sL prism.jeremyfhall.com/tty

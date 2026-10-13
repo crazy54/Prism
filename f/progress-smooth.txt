@@ -1,0 +1,27 @@
+* PRISM TERMINAL > Progress & Counters > Progress Bars
+Smooth Eighths  progress-smooth
+Eighth-block bars that move in 1/8-cell steps, so even a 20-column bar creeps
+forward smoothly. Three jobs at different speeds.
+progress - 60x5 (min 24x1) - 9 s loop - unicode - 256 colors
+tags: eighth blocks, smooth, multi
+
+           assets     [####################################----]  89%
+
+           chunks     [##########################--------------]  65%
+
+           sourcemaps [#########################---------------]  61%
+  still at t=4.5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play progress-smooth
+Snapshot  prism-term snapshot progress-smooth --size 60x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-smooth'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-throughput
+next >    curl -sL prism.jeremyfhall.com/f/progress-braille
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

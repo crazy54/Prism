@@ -1,0 +1,28 @@
+* PRISM TERMINAL > Charts & Metrics > Sparklines
+Dot Sparkline & Threshold  charts-spark-dots
+A dot-plot sparkline against a dashed SLO threshold: points that breach glow red
+and are counted live.
+chart - 60x6 (min 24x3) - 10 s loop - unicode - truecolor
+tags: sparkline, dots, threshold, slo, breach
+
+          checkout p95                           -- SLO  0 over 290 ms
+
+          ++ + +++ + +++ + +++ + +++ + +++ + +++ + +++ + +++ + +++ + +
+           = + = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+             =
+
+  still at t=5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-spark-dots
+Snapshot  prism-term snapshot charts-spark-dots --size 60x6
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-spark-dots'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-spark-braille
+next >    curl -sL prism.jeremyfhall.com/f/charts-spark-wall
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

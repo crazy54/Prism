@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Spinners & Loaders > Truecolor Spinners
+Binary  loaders-binary
+A six-digit register of bits flickering in matrix green -- for encodes, hashes
+and checksums.
+spinner - 44x5 (min 24x2) - 8 s loop - ascii - 256 colors
+tags: spinner, loader, binary, bits, ascii digits
+
+                   100111 Verifying checksum...          4.0s
+
+                   101101 011001 100111 001010 000110 01010..
+
+                   binary - 12 frames - 80 ms
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play loaders-binary
+Snapshot  prism-term snapshot loaders-binary --size 44x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-binary'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-prism
+next >    curl -sL prism.jeremyfhall.com/f/loaders-katakana
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

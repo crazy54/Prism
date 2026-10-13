@@ -1,0 +1,37 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mNotifications & Status[0;2;39;49m › [0;1;39;49mToasts & Alerts[0m
+[0;1;39;49mToast Stack[0;2;39;49m  status-toast-stack[0m
+Notifications slide in from the right, stack, push older ones down and dismiss
+themselves with a draining timer line.
+[0;2;39;49mwidget · 50×15 (min 30×5) · 13.2 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: toast, notification, snackbar, stack, slide in[0m
+
+               [48;5;234m      [38;5;215;48;5;235m▌[39m [0;1;38;5;215;48;5;235m▲[0;39;48;5;235m [0;1;38;5;255;48;5;235mHigh latency[0;39;48;5;235m                          [38;5;66m×[39m [0m
+               [48;5;234m      [38;5;215;48;5;235m▌[39m   [38;5;249msearch p95 at 812 ms (SLO 500 ms)[39m       [0m
+               [48;5;234m      [38;5;215;48;5;235m▌[38;5;179m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[38;5;236m━━━━━━━━━━━[0m
+               [48;5;234m                                                  [0m
+               [48;5;234m      [38;5;74;48;5;235m▌[39m [0;1;38;5;74;48;5;235mℹ[0;39;48;5;235m [0;1;38;5;255;48;5;235mBackup complete[0;39;48;5;235m                       [38;5;66m×[39m [0m
+               [48;5;234m      [38;5;74;48;5;235m▌[39m   [38;5;249mpg-orders snapshot 41.2 GB in 3m 12s[39m    [0m
+               [48;5;234m      [38;5;74;48;5;235m▌[38;5;67m━━━━━━━━━━━━━━━━━[38;5;236m━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+               [48;5;234m                                                  [0m
+               [48;5;234m        [38;5;71;48;5;235m▌[39m [0;1;38;5;71;48;5;235m✔[0;39;48;5;235m [0;1;38;5;255;48;5;235mDeploy finished[0;39;48;5;235m                       [0m
+               [48;5;234m        [38;5;71;48;5;235m▌[39m   [38;5;249mcheckout v2.14.2 is live on 12/12 hos…[0m
+               [48;5;234m        [38;5;71;48;5;235m▌[38;5;35m━━━[38;5;236m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+               [48;5;234m                                                  [0m
+               [48;5;234m                                                  [0m
+               [48;5;234m                                                  [0m
+               [48;5;234m                                                  [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play status-toast-stack[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot status-toast-stack --size 50x15[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('status-toast-stack'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-log-logfmt[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-alert-banners[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/status[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

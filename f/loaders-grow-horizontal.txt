@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Spinners & Loaders > Bars & Pulses
+Grow Sideways  loaders-grow-horizontal
+A left-anchored block widening to full and shrinking back in eighths -- smooth
+at any font size.
+spinner - 44x5 (min 24x2) - 8 s loop - unicode - 16 colors
+tags: spinner, loader, blocks, grow, horizontal
+
+                   | Resizing filesystem...              4.0s
+
+                   - \ | /
+
+                   growH (ASCII fallback) - 4 frames - 130 ms
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play loaders-grow-horizontal
+Snapshot  prism-term snapshot loaders-grow-horizontal --size 44x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-grow-horizontal'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-grow
+next >    curl -sL prism.jeremyfhall.com/f/loaders-bars
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

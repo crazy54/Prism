@@ -1,0 +1,37 @@
+* PRISM TERMINAL > Callouts & Layout > Dividers & Headers
+Dividers & Rules  callouts-dividers
+Horizontal rules in light, heavy, double, dotted, dashed and dotted-bullet
+weights with left, centered and right labels and a sweep of light.
+widget - 64x15 (min 24x6) - 4 s loop - unicode - 256 colors
+tags: divider, rule, separator, hr, section
+
+        --- Section ----------------------------------------------------
+
+        ============================ Heavy =============================
+
+        ===================================================== Double ===
+
+        ... Dotted .....................................................
+
+        ---------------------------- Dashed ----------------------------
+
+        ......................... Middle dots ..........................
+
+        * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+        --- Overline ---------------------------------------------------
+  still at t=2s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play callouts-dividers
+Snapshot  prism-term snapshot callouts-dividers --size 64x15
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('callouts-dividers'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/callouts-table-grid
+next >    curl -sL prism.jeremyfhall.com/f/callouts-section-headers
+gallery   curl -sL prism.jeremyfhall.com/t/callouts
+home      curl -sL prism.jeremyfhall.com/tty

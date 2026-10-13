@@ -1,0 +1,36 @@
+* PRISM TERMINAL > Input & Menus > Command Palettes
+Slash Command Menu  input-slash-commands
+A chat composer where typing "/" opens a command menu that filters as you type;
+Tab completes, an argument hint appears, and Enter posts it for approval.
+tui - 64x14 (min 40x9) - 8 s loop - unicode - 256 colors
+tags: slash command, chat, composer, menu, chatops
+
+        mainbrain checkout-api p99 is 2.4s since v2.14.1 (11 min).
+        mainbrain Likely cause: DB pool 20/20 in use. Suggest rollback.
+
+
+
+
+
+
+
+
+
+        +--------------------------------------------------------------+
+        | /rollback checkout-api                                       |
+        +------------------------------------------------- enter send -+
+  still at t=4s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play input-slash-commands
+Snapshot  prism-term snapshot input-slash-commands --size 64x14
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-slash-commands'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-autocomplete
+next >    curl -sL prism.jeremyfhall.com/f/input-confirm-dialog
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

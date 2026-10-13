@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Animated Objects > Icons & Logos
+Spinning Coin  spinning-coin
+A ray-cast gold coin spinning on edge: embossed faces, a reeded rim, studio
+reflections and a soft shadow.
+scene - 40x20 (min 12x6) - 6 s loop - unicode - truecolor
+tags: coin, gold, money, spin, metal, raycast
+
+
+                                 :--=++++++=--:
+                              -=++*+++++++++++++-:
+                            -++++==+++++++++===++++-
+                          :++++=++++++++++++++++=+++=:
+                         :++*=++++++++**+==========++=:
+                        :+++=+++++===++++++=======+=++=:
+                        =++=++======*+++=+++========++=-
+                        +++========*+++++=+++=======+++=
+                        ==++======+++======+++======+++=
+                        -=++========================+==-
+                        :==++======================*===:
+                         :===+====================+===:
+                          :===+==================+===:
+                            :===++============+====:
+                              :-=====++==++=====-:
+                                 :::========:::
+                     ......................................
+                    ........................................
+                       ..................................
+  still at t=3s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Spin speed  (0.2-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play spinning-coin
+Snapshot  prism-term snapshot spinning-coin --size 40x20
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('spinning-coin'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/atom
+next >    curl -sL prism.jeremyfhall.com/f/shaded-cube
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,38 @@
+* PRISM TERMINAL > Input & Menus > Dialogs & Prompts
+Prompt Flow  input-prompt-flow
+A clack-style CLI wizard: text, select, yes/no and multiselect prompts chain
+down one gutter, each collapsing to its answer before a deploy spinner.
+tui - 56x16 (min 36x8) - 10 s loop - unicode - 16 colors
+tags: prompts, clack, cli wizard, confirm, yes no
+
+            +   deploy   checkout-api
+            |
+            o  Release tag
+            |  v2.14.1
+            |
+            o  Environment
+            |  production
+            |
+            o  Run database migrations?
+            |  No
+            |
+            *  Notify
+            |    [x] #checkout-oncall
+            |    [ ] #releases
+            |  > [x] release-notes email
+            +  space select . enter confirm
+  still at t=5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play input-prompt-flow
+Snapshot  prism-term snapshot input-prompt-flow --size 56x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-prompt-flow'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-confirm-dialog
+next >    curl -sL prism.jeremyfhall.com/f/input-progress-dialog
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

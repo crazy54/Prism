@@ -1,0 +1,23 @@
+[38;5;168m  █▀▀[38;5;173m█ █[38;5;179m▀▀█[38;5;107m ▀█[38;5;73m▀ █[38;5;68m▀▀▀[38;5;98m █▀[38;5;133m▄▀█[39m  [0;1;38;5;68;49mTERMINAL[0;2;39;49m  434 facets · 17 galleries[0m
+[38;5;168m  █▄▄[38;5;173m█ █[38;5;179m▄▄▀[38;5;107m  █[38;5;73m  ▀[38;5;68m▀▀█[38;5;98m █ [38;5;133m▀ █[39m  Animated terminal art, widgets and TUI parts.[0m
+[38;5;168m  █  [38;5;173m  █[38;5;179m  █[38;5;107m ▄█[38;5;73m▄ ▄[38;5;68m▄▄█[38;5;98m █ [38;5;133m  █[39m  [0;2;39;49mhelp [0;38;5;73;49m/t/help[0;2;39;49m · plain [0;38;5;73;49m.txt[0;2;39;49m · catalog [0;38;5;73;49m/terminal/[0m
+
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/fx        [38;5;168m✺   [39mFX Store                [0;2;39;49m  24[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/objects   [38;5;173m◈   [39mAnimated Objects        [0;2;39;49m  18[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/sim       [38;5;179m✦   [39mParticles & Simulations [0;2;39;49m  18[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/retro     [38;5;107m▚   [39mRetro & Demoscene       [0;2;39;49m  24[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/text      Aa  [39mText Effects            [0;2;39;49m  29[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/loaders   [38;5;68m⠿   [39mSpinners & Loaders      [0;2;39;49m  64[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/progress  [38;5;98m▰   [39mProgress & Counters     [0;2;39;49m  41[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/charts    [38;5;133m▁▃▆ [39mCharts & Metrics        [0;2;39;49m  30[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/ai        [38;5;168m✳   [39mAI Working              [0;2;39;49m  18[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/status    [38;5;173m●   [39mNotifications & Status  [0;2;39;49m  18[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/ops       [38;5;179m$_  [39mLinux & Ops             [0;2;39;49m  39[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/diagrams  [38;5;107m┌┐  [39mArchitecture Diagrams   [0;2;39;49m  16[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/callouts  ▌   [39mCallouts & Layout       [0;2;39;49m  15[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/input     [38;5;68m❯   [39mInput & Menus           [0;2;39;49m  23[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/maps      [38;5;98m◍   [39mMaps & Geo              [0;2;39;49m  11[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/lab       [38;5;133m∿   [39mAnimation Lab           [0;2;39;49m  17[0m
+  [38;5;73mcurl -sL prism.jeremyfhall.com/t/ascii     [38;5;168m#   [39mPure ASCII              [0;2;39;49m  29[0m
+[0;1;39;49m  The live player, animated in your terminal (Node 18+):[0m
+  [38;5;73mnpx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term[0m[0m

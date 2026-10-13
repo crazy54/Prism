@@ -1,0 +1,40 @@
+* PRISM TERMINAL > Text Effects > Color & Light
+Neon Sign  text-neon-sign
+Thin glass tubes bent along the letters stutter on one by one with a soft halo;
+one tired letter keeps buzzing out, like every real sign.
+text - 64x18 (min 34x10) - 8 s loop - unicode - truecolor
+tags: neon, sign, flicker, glow, night
+
+
+
+
+
+                          ---   -----   ------- ---   ---
+                         --#--  -###--  -#####- -#-   -#-
+                        --#-#-- -#--#-- -#----- -#--- -#-
+                        -#---#- -#---#- -#-     -###---#-
+                        -#- -#- -#--#-- -#---   -#--#--#-
+                        -#- -#- -###--  -###-   -#---###-
+                        -#- -#- -#---   -#---   -#- ---#-
+                        -#---#- -#-     -#-     -#-   -#-
+                        --#-#-- -#-     -#----- -#-   -#-
+                         --#--  -#-     -#####- -#-   -#-
+                          ---   ---     ------- ---   ---
+
+
+
+  still at t=4s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play text-neon-sign
+Snapshot  prism-term snapshot text-neon-sign --size 64x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('text-neon-sign'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/text-melt
+next >    curl -sL prism.jeremyfhall.com/f/text-fire
+gallery   curl -sL prism.jeremyfhall.com/t/text
+home      curl -sL prism.jeremyfhall.com/tty

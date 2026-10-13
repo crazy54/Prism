@@ -1,0 +1,32 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mProcesses & Services[0m
+[0;1;39;49msystemctl list-timers[0;2;39;49m  ops-list-timers[0m
+systemd timers with NEXT, LEFT counting down live, LAST and PASSED; when a timer
+fires its LAST/PASSED reset and NEXT rolls forward.
+[0;2;39;49mtui · 80×10 (min 64×4) · 60 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: systemd, timers, cron, schedule, countdown[0m
+
+[0;1;38;2;233;235;237;48;2;15;22;33mNEXT     LEFT        LAST     PASSED         UNIT                          [0;39;48;2;15;22;33m     [0m
+[38;2;233;235;237;48;2;15;22;33m14:03:37 1min 20s    14:02:07 10s ago        [38;2;70;175;174mbackup-db.timer               [39m     [0m
+[38;2;233;235;237;48;2;15;22;33m14:07:00 4min 43s    14:02:00 17s ago        [38;2;70;175;174mlogrotate.timer               [39m     [0m
+[38;2;233;235;237;48;2;15;22;33m14:30:00 27min 43s   02:30:00 11h 32min ago  [38;2;70;175;174mcertbot-renew.timer           [39m     [0m
+[38;2;233;235;237;48;2;15;22;33m19:08:20 5h 6min     13:08:20 53min 57s ago  [38;2;70;175;174mapt-daily.timer               [39m     [0m
+[38;2;233;235;237;48;2;15;22;33m08:36:40 18h 34min   08:36:40 5h 25min ago   [38;2;70;175;174msystemd-tmpfiles-clean.timer  [39m     [0m
+[38;2;233;235;237;48;2;15;22;33m07:33:20 3 days      07:33:20 3 days ago     [38;2;70;175;174mfstrim.timer                  [39m     [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[38;2;233;235;237;48;2;15;22;33m6 timers listed.[39m                                                                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play ops-list-timers[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot ops-list-timers --size 80x10[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('ops-list-timers'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-pstree[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-docker-pull[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

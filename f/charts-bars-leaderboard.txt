@@ -1,0 +1,32 @@
+* PRISM TERMINAL > Charts & Metrics > Bars & Histograms
+Live Leaderboard  charts-bars-leaderboard
+Horizontal bars ranked by throughput that re-sort as values change, with rank
+numbers and movement arrows.
+chart - 56x10 (min 24x3) - 16 s loop - unicode - 256 colors
+tags: leaderboard, ranking, horizontal bars, sorting, top n
+
+             1  payments  ###################################    591
+             2^ checkout  ###############################-       532
+             3v search    ############################-          482
+             4  catalog   ######################-                378
+             5^ cart      #####################-                 356
+             6^ orders    ###################-                   327
+             7v notify    ##################                     302
+             8v auth      ################                       265
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-bars-leaderboard
+Snapshot  prism-term snapshot charts-bars-leaderboard --size 56x10
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-bars-leaderboard'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-bars-vertical
+next >    curl -sL prism.jeremyfhall.com/f/charts-bars-stacked
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

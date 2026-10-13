@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Spinners & Loaders > Classic Spinners
+Arrows  loaders-arrows
+An arrow pointing round all eight compass directions -- reads as "rotating" even
+in a tiny font.
+spinner - 44x5 (min 24x2) - 8 s loop - unicode - 16 colors
+tags: spinner, loader, arrows, compass, rotate
+
+                   | Rotating logs...                    4.0s
+
+                   - \ | /
+
+                   arrows (ASCII fallback) - 4 frames - 130 .
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play loaders-arrows
+Snapshot  prism-term snapshot loaders-arrows --size 44x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-arrows'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-triangle
+next >    curl -sL prism.jeremyfhall.com/f/loaders-arrows-chase
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

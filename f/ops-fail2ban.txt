@@ -1,0 +1,40 @@
+* PRISM TERMINAL > Linux & Ops > Login & MOTD
+fail2ban Jail  ops-fail2ban
+fail2ban-client status for the sshd jail (failed and banned counts, the banned
+IP list), an unban, and the status again as attempts keep coming.
+tui - 80x18 (min 64x8) - 24 s loop - ascii - 16 colors
+tags: fail2ban, ssh, brute-force, ban, security, jail
+
+ops@node03:~$ sudo fail2ban-client status sshd
+Status for the jail: sshd
+|- Filter
+|  |- Currently failed: 3
+|  |- Total failed:     1287
+|  `- Journal matches:  _SYSTEMD_UNIT=sshd.service + _COMM=sshd
+`- Actions
+   |- Currently banned: 4
+   |- Total banned:     212
+   `- Banned IP list:   203.0.113.77 198.51.100.23 192.0.2.140 203.0.113.9
+ops@node03:~$
+
+
+
+
+
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-fail2ban
+Snapshot  prism-term snapshot ops-fail2ban --size 80x18
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-fail2ban'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-getty-login
+next >    curl -sL prism.jeremyfhall.com/f/ops-prompt-bash
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

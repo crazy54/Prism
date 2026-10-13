@@ -1,0 +1,38 @@
+* PRISM TERMINAL > Charts & Metrics > Gauges & Meters
+Radar Profile  charts-radar
+A six-axis spider chart comparing a service to its baseline: the live profile
+morphs as the service degrades and heals.
+chart - 56x16 (min 26x8) - 16 s loop - braille - truecolor
+tags: radar, spider chart, profile, comparison, braille
+
+
+                                     latency
+                                       :::
+                                   ::::+@@:::
+                                :::  ++:::++ ::::
+                      availability=++:: : ::++ @@errors
+                              :==@@======:   :++: :
+                              :  =+ ::: :=:::  +  :
+                              :  :=+ : :::==   :+ :
+                              :  :@@+:: : ::== :+ :
+                              : :::: ++::: ==+++@@:
+                          cost::   ::::+@@+++: saturation
+                                ::::   :=:    :::
+                                    ::: : ::::
+                                       :::
+                                     traffic
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-radar
+Snapshot  prism-term snapshot charts-radar --size 56x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-radar'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-pie
+next >    curl -sL prism.jeremyfhall.com/f/charts-heatmap-latency
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

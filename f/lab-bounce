@@ -1,0 +1,43 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mAnimation Lab[0;2;39;49m › [0;1;39;49mSprings & Physics[0m
+[0;1;39;49mBounce, Squash & Stretch[0;2;39;49m  lab-bounce[0m
+The bouncing-ball exercise: decaying bounces, stretch in flight, squash on
+impact and an onion skin of its spacing.
+[0;2;39;49mscene · 64×20 (min 24×8) · 4.2 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: bounce, squash and stretch, onion skin, arcs, spacing,[0m
+[0;2;39;49m      animation principles[0m
+
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                                                                [0m
+        [48;5;234m                    [38;5;59m▄[39m                                           [0m
+        [48;5;234m                   [38;5;240m▄[38;5;59m▀[39m  [48;5;242m [48;5;234m                                        [0m
+        [48;5;234m                 [38;5;240m▄[39m      [38;5;242m▄[39m                                       [0m
+        [48;5;234m                 [38;5;240m▀[39m                                              [0m
+        [48;5;234m                          [38;5;243m▀[39m    [38;5;245m▄▄[39;48;5;246m [38;5;210;48;5;234m▄[38;5;210m▄[38;5;204m▄[38;5;167m▄[39m                          [0m
+        [48;5;234m                              [38;5;102m▀[39m  [38;5;210;48;5;204m▀[38;5;210m▀[38;5;204;48;5;203m▀[38;5;203;48;5;167m▀[38;5;167;48;5;131m▀[39;48;5;234m                          [0m
+        [48;5;234m                           [38;5;243m▄[39m [38;5;244m▄[39m   [38;5;167m▀[38;5;167;48;5;167m▀[38;5;167;48;5;131m▀[38;5;131;48;5;131m▀[38;5;131;48;5;89m▀[39;48;5;234m                          [0m
+        [48;5;234m                                   [38;5;89m▀[38;5;238m▀[39m                           [0m
+        [48;5;234m                                                                [0m
+        [38;5;237;48;5;234m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[38;5;233;48;5;237m▀[38;5;233m▀[38;5;233m▀[38;5;233m▀[38;5;233m▀[38;5;233m▀[38;5;237;48;5;234m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[0m
+        [48;5;234m [38;5;249msquash & stretch · restitution 0.7 · onion skin every 0.1 s[39m    [0m
+[0;2;39;49m  still at t=2.1s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play lab-bounce[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot lab-bounce --size 64x20[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('lab-bounce'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/lab-spring[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/lab-lfo-scope[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/lab[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

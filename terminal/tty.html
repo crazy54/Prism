@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Browse Prism's terminal facets from your terminal: plain ANSI pages you read with curl, plus one npx command that plays any facet live.">
+  <meta name="theme-color" content="#0a0c12">
+  <meta name="prism-engine" content="./engine/">
+  <title>Browse from your terminal — Prism</title>
+  <link rel="canonical" href="https://prism.jeremyfhall.com/terminal/tty.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prism">
+  <meta property="og:title" content="Browse Prism from your terminal">
+  <meta property="og:description" content="curl -sL https://prism.jeremyfhall.com/tty — every gallery and facet as a plain ANSI page. npx plays them live.">
+  <meta property="og:url" content="https://prism.jeremyfhall.com/terminal/tty.html">
+  <meta property="og:image" content="https://prism.jeremyfhall.com/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <script>try{if(localStorage.getItem('prism-site-theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+  <link rel="icon" href="../assets/prism.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="terminal.css">
+  <script type="module" src="tty.js"></script>
+  <script src="../assets/vendor/traceway-1.2.1.js" defer></script>
+  <script src="../assets/vendor/web-vitals-6.2.3.js" defer></script>
+  <script src="../assets/telemetry.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="../" aria-label="Prism home"><span class="brand-prism" aria-hidden="true"><span class="brand-prism-rotor"><svg class="brand-prism-face" viewBox="0 0 40 40"><path d="M20 4 36 33H4Z"/></svg><svg class="brand-prism-face" viewBox="0 0 40 40"><path d="M20 4 36 33H4Z"/></svg><svg class="brand-prism-face" viewBox="0 0 40 40"><path d="M20 4 36 33H4Z"/></svg><svg class="brand-prism-face" viewBox="0 0 40 40"><path d="M20 4 36 33H4Z"/></svg></span></span><span>prism<span class="brand-dot">.</span></span><span class="brand-sub">terminal</span></a>
+    <nav aria-label="Main navigation"><a class="hide-sm" href="../Prism.html">Web catalog</a><a href="./">Catalog</a><a href="tty.html" aria-current="page">From your terminal</a><a class="hide-sm" href="./#for-agents">For agents</a></nav>
+    <div class="header-actions"><button class="icon-button" id="theme-toggle" type="button" aria-label="Switch to light theme"><span aria-hidden="true">◐</span></button><a class="github-link" href="https://github.com/crazy54/Prism/tree/main/prism-term" aria-label="prism-term on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.76-.24.76-.54v-2.1c-3.12.68-3.78-1.33-3.78-1.33-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 1.73 2.62 1.23 3.26.94.1-.73.39-1.23.71-1.51-2.49-.28-5.1-1.24-5.1-5.54 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .94-.3 3.08 1.15a10.74 10.74 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.31-2.62 5.26-5.12 5.54.4.35.76 1.03.76 2.08v3.09c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z"/></svg><span>GitHub</span><span aria-hidden="true">↗</span></a></div>
+  </header>
+
+  <main id="main">
+    <section class="tty-hero wrap" aria-labelledby="tty-title">
+      <div>
+        <p class="eyebrow"><span class="status-dot"></span> BROWSE FROM YOUR TERMINAL</p>
+        <h1 id="tty-title">The catalog, in<br>your <span class="spectrum-text">terminal.</span></h1>
+        <p class="hero-description">Every gallery and every facet is a plain ANSI page you read with <code>curl</code> — no install, no account, no JavaScript. When you want it moving, one <code>npx</code> command plays any facet live, at your terminal's real size and color depth.</p>
+        <div class="cmd"><div class="cmd-head"><span>Start here</span><button type="button" data-copy="curl -sL https://prism.jeremyfhall.com/tty" aria-label="Copy the curl command">Copy ⧉</button></div><pre><span class="c">$ </span>curl -sL https://prism.jeremyfhall.com/tty</pre><p class="cmd-note">Windows PowerShell 5: type <code>curl.exe</code> — plain <code>curl</code> is an alias there.</p></div>
+        <div class="hero-actions"><a class="button secondary" href="./">Back to the terminal catalog <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <figure class="term-window" style="margin:0" aria-labelledby="preview-caption">
+        <div class="term-bar"><span class="term-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="term-title" id="preview-cmd">$ curl -sL prism.jeremyfhall.com/<b>tty</b></span><span class="live-dot" aria-hidden="true">80 COL</span></div>
+        <div class="term-screen tty-screen" id="preview-screen" tabindex="0" aria-describedby="preview-caption"><p class="ph">Loading the terminal site…</p></div>
+        <figcaption class="tty-controls">
+          <span id="preview-caption" class="sr-only">Live preview of the terminal site page, rendered from the exact bytes curl receives.</span>
+          <label class="field"><span class="sr-only">Page</span><select class="select" id="preview-page" aria-label="Page to preview"></select></label>
+          <div class="seg" role="group" aria-label="Variant" id="preview-variant"><button type="button" data-v="" aria-pressed="true">256 colors</button><button type="button" data-v=".24">truecolor <small>.24</small></button><button type="button" data-v=".txt">plain <small>.txt</small></button></div>
+          <div class="seg" role="group" aria-label="Terminal background" id="preview-bg"><button type="button" data-v="dark" aria-pressed="true">dark</button><button type="button" data-v="light">light</button></div>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="section wrap" id="steps" aria-labelledby="steps-title">
+      <div class="section-head"><div><p class="eyebrow">01 / FOUR COMMANDS</p><h2 id="steps-title">From home page to live player.</h2><p>Pages are stills that fit 80 columns and use only color and text — no cursor tricks — so they work over SSH, in tmux, in a CI log, anywhere.</p></div></div>
+      <div class="steps">
+        <div class="step"><span class="step-n">01</span><h3>Open the terminal home</h3><p>Every gallery with its facet count, and the commands to go deeper.</p><div class="cmd"><div class="cmd-head"><span>Home</span><span class="cmd-actions"><button type="button" data-preview="tty">Preview ↑</button><button type="button" data-copy="curl -sL https://prism.jeremyfhall.com/tty">Copy ⧉</button></span></div><pre><span class="c">$ </span>curl -sL https://prism.jeremyfhall.com/tty</pre></div></div>
+        <div class="step"><span class="step-n">02</span><h3>Open a gallery</h3><p>One page per gallery, sorted by category. <code>/t/help</code> explains everything; <code>/t/all</code> lists every facet on one line each.</p><div class="cmd"><div class="cmd-head"><span>Gallery</span><span class="cmd-actions"><button type="button" data-preview="t/loaders">Preview ↑</button><button type="button" data-copy="curl -sL https://prism.jeremyfhall.com/t/loaders">Copy ⧉</button></span></div><pre><span class="c">$ </span>curl -sL https://prism.jeremyfhall.com/t/loaders</pre></div></div>
+        <div class="step"><span class="step-n">03</span><h3>Open one facet</h3><p>A still frame, what it needs (glyphs, colors, size), its parameters, and the exact command that plays it.</p><div class="cmd"><div class="cmd-head"><span>Facet</span><span class="cmd-actions"><button type="button" data-preview="f/plasma">Preview ↑</button><button type="button" data-copy="curl -sL https://prism.jeremyfhall.com/f/plasma">Copy ⧉</button></span></div><pre><span class="c">$ </span>curl -sL https://prism.jeremyfhall.com/f/plasma</pre></div></div>
+        <div class="step"><span class="step-n">04</span><h3>Play it live</h3><p>The live player animates in real time and detects your terminal: truecolor to mono, braille and blocks or plain ASCII. Node.js 18+, nothing installed globally.</p><div class="cmd"><div class="cmd-head"><span>Live · Node 18+</span><button type="button" data-copy="npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term play plasma">Copy ⧉</button></div><pre><span class="c">$ </span>npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term play plasma</pre><p class="cmd-note">Drop <code>play plasma</code> to open the catalog browser: arrows to move, <code>/</code> to search, Enter to play, <code>q</code> to quit.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="galleries" aria-labelledby="galleries-title">
+      <div class="section-head"><div><p class="eyebrow">02 / EVERY GALLERY</p><h2 id="galleries-title">One page per gallery.</h2><p>Copy a command, or preview the page above exactly as your terminal will show it.</p></div></div>
+      <div class="gal-table" id="gallery-table" role="list"><p class="empty-state" style="border:0">Loading galleries…</p></div>
+    </section>
+
+    <section class="section wrap" id="tips" aria-labelledby="tips-title">
+      <div class="section-head"><div><p class="eyebrow">03 / GOOD TO KNOW</p><h2 id="tips-title">Made for real terminals.</h2></div></div>
+      <div class="tips">
+        <div><span class="step-n">VARIANTS</span><h3>Plain text and truecolor</h3><p>Every page also comes as <code>.txt</code> — 7-bit ASCII with no escape codes, for <code>grep</code>, <code>NO_COLOR</code>, <code>LANG=C</code>, serial consoles and screen readers — and as <code>.24</code> for 24-bit color instead of the default 256.</p></div>
+        <div><span class="step-n">LONG PAGES</span><h3>Page, search, save</h3><p class="mini-cmds"><code>curl -sL prism.jeremyfhall.com/t/all | less -R</code><code>curl -sL prism.jeremyfhall.com/t/all.txt | grep -i spinner</code><code>curl -sL prism.jeremyfhall.com/f/plasma -o plasma.ans</code></p></div>
+        <div><span class="step-n">REQUIREMENTS</span><h3>What you need</h3><ul><li>Any <code>curl</code> — macOS, Windows 10+ and most Linux distributions ship one.</li><li>Color pages: any 256-color terminal. <code>.txt</code>: anything at all.</li><li>Live player: Node.js 18+. Prefer a permanent install? <code>npm i -g https://prism.jeremyfhall.com/dl/prism-term.tgz</code></li></ul></div>
+      </div>
+    </section>
+
+    <section class="closing wrap" aria-label="Back to the terminal catalog"><span class="closing-star" aria-hidden="true">✦</span><p>Rather click than type? Every facet is <span class="spectrum-text">live in the browser.</span></p><a class="button secondary" href="./">Open the terminal catalog <span aria-hidden="true">↗</span></a></section>
+  </main>
+
+  <footer class="site-footer wrap"><a class="brand" href="../"><img src="../assets/prism.svg" width="24" height="24" alt=""><span>prism<span class="brand-dot">.</span></span></a><p>Built by <a href="https://github.com/crazy54">Jeremy Hall</a>. Made for making.</p><div><a href="./">Terminal catalog</a><a href="https://github.com/crazy54/Prism/tree/main/prism-term">Source ↗</a><a href="https://github.com/crazy54/Prism/blob/main/LICENSE">MIT license ↗</a></div></footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog class="copy-dialog" id="copy-dialog"><h2>Copy it</h2><p>Clipboard access is unavailable. Select and copy the text below.</p><textarea id="copy-fallback" readonly aria-label="Text to copy"></textarea><button type="button" class="button primary" id="close-copy-dialog">Done</button></dialog>
+</body>
+</html>

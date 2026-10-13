@@ -1,0 +1,36 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mNotifications & Status[0;2;39;49m › [0;1;39;49mLog Lines[0m
+[0;1;39;49mjournalctl -f[0;2;39;49m  status-log-syslog[0m
+A journal follow in syslog format with journald priority colors — red errors,
+yellow warnings, dim debug — scrolling as lines arrive.
+[0;2;39;49mwidget · 80×14 (min 40×4) · 20 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: journalctl, syslog, logs, tail -f, priority[0m
+
+[38;5;66;48;5;234m-- Journal begins at Mon 2026-10-12 00:00:01 UTC. --[39m                            [0m
+[38;5;249;48;5;234mOct 13 14:02:06[39m [38;5;249mpg-orders-01[39m [38;5;74mpostgres[1518]:[39m [38;5;255mcheckpoint complete: wrote 1458 bu…[0m
+[38;5;249;48;5;234mOct 13 14:02:06[39m [38;5;249mpayments-01[39m [38;5;74mnginx[1555]:[39m [38;5;255mGET /api/v2/catalog?page=17 200 81ms[39m   [0m
+[38;5;249;48;5;234mOct 13 14:02:07[39m [38;5;249mpg-orders-01[39m [38;5;74msshd[1592]:[39m [38;5;255mAccepted publickey for deploy from 192…[0m
+[38;5;249;48;5;234mOct 13 14:02:07[39m [38;5;249mweb-01[39m [38;5;74msshd[1629]:[39m [38;5;255mAccepted publickey for deploy from 192.0.2.1…[0m
+[38;5;249;48;5;234mOct 13 14:02:08[39m [38;5;249mweb-02[39m [38;5;74mcron[1666]:[39m [38;5;255m(root) CMD (/usr/local/bin/backup --incremen…[0m
+[38;5;249;48;5;234mOct 13 14:02:08[39m [38;5;249mauth-01[39m [38;5;74msshd[1703]:[39m [38;5;255mAccepted publickey for deploy from 192.0.2.…[0m
+[38;5;249;48;5;234mOct 13 14:02:09[39m [38;5;249mauth-01[39m [38;5;74menvoy[1740]:[39m [38;5;255mupstream checkout → 10.20.2.31:8085 ok rtt…[0m
+[38;5;249;48;5;234mOct 13 14:02:09[39m [38;5;249mpayments-01[39m [38;5;74msshd[1777]:[39m [38;5;255mAccepted publickey for deploy from 192.…[0m
+[38;5;249;48;5;234mOct 13 14:02:10[39m [38;5;249mauth-01[39m [38;5;74mauth[1814]:[39m [38;5;255msession issued user=u1251 mfa=webauthn[39m      [0m
+[38;5;249;48;5;234mOct 13 14:02:10[39m [38;5;249mpg-orders-01[39m [38;5;74mpostgres[1851]:[39m [38;5;255mcheckpoint complete: wrote 3846 bu…[0m
+[38;5;249;48;5;234mOct 13 14:02:10[39m [38;5;249mapi-gw-01[39m [38;5;74menvoy[1888]:[39m [38;5;255mupstream checkout → 10.20.2.32:8085 ok r…[0m
+[38;5;249;48;5;234mOct 13 14:02:11[39m [38;5;249mauth-01[39m [38;5;74mcheckout[1925]:[39m [38;5;255morder ord-897712 placed total=$155.78[39m   [0m
+[38;5;249;48;5;235mOct 13 14:02:11[39m [38;5;249mpayments-01[39m [38;5;74mcron[1962]:[39m [38;5;255m(root) CMD (/usr/local/bin/backup --inc…[0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play status-log-syslog[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot status-log-syslog --size 80x14[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('status-log-syslog'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-heartbeat[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-log-json[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/status[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

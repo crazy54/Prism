@@ -1,0 +1,38 @@
+* PRISM TERMINAL > Linux & Ops > Logs & Journals
+Log Histogram  ops-log-histogram
+An lnav-style histogram of log volume in 10-second buckets: bars split into
+errors, warnings and normal, with the current bucket filling live.
+chart - 80x16 (min 50x6) - 60 s loop - ascii - 16 colors
+tags: lnav, histogram, logs, errors, volume, timeline
+
+ 2026-10-13 14:02:17  HIST > syslog > 10s buckets
+14:00:00 ##############################                      275 msg  11 w   2 e
+14:00:10 #############################                       267 msg  10 w   2 e
+14:00:20 ###############################                     286 msg  15 w   1 e
+14:00:30 ###############################                     285 msg  11 w   1 e
+14:00:40 #################################                   296 msg  17 w   2 e
+14:00:50 ####################################                329 msg  13 w   3 e
+14:01:00 ##################################                  306 msg  13 w   2 e
+14:01:10 #######################################             351 msg  26 w  29 e
+14:01:20 ##########################################          384 msg  33 w  58 e
+14:01:30 ################################################    436 msg  51 w 100 e
+14:01:40 #########################################           374 msg  38 w  57 e
+14:01:50 #######################################             357 msg  31 w  28 e
+14:02:00 ###############################                     283 msg  16 w   3 e
+14:02:10 ######################                              197 msg   8 w   1 e
+ Errors #  Warnings #  Normal #                       289 err  293 warn  q:Back
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-log-histogram
+Snapshot  prism-term snapshot ops-log-histogram --size 80x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-log-histogram'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-dmesg
+next >    curl -sL prism.jeremyfhall.com/f/ops-motd
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

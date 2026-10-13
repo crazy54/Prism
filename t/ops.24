@@ -1,0 +1,73 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops (39)[0m
+What you see on a real box: monitors, disks, network, services, containers and
+logins.
+
+[38;2;233;235;237;48;2;15;22;33mEvery 2.0s: uptime[39m                      [38;2;233;235;237mnode03: Tue Oct 13 14:02:17 2026[0m
+[38;2;233;235;237;48;2;15;22;33m 14:02:17 up 41 days,  3:12,  2 users,  load average: [0;1;38;2;55;194;107;48;2;15;22;33m2.32[0;38;2;233;235;237;48;2;15;22;33m, 4.74, 3.99[39m  [0m
+[48;2;15;22;33m                                                                        [0m
+[38;2;164;176;192;48;2;15;22;33m  10[39m [38;2;53;65;80m⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀[39m [0m
+[38;2;164;176;192;48;2;15;22;33m  8c[39m     [38;2;55;194;107m⢀[39m                             [38;2;150;188;92m⣀[38;2;135;165;106m⣠[38;2;55;194;107m⡀[39m            [38;2;55;194;107m⢀⣀⣀⢀⣀[39m             [0m
+[48;2;15;22;33m     [38;2;55;194;107m⣀[38;2;81;157;121m⣤⠞⠛[38;2;94;138;128m⢋[38;2;81;157;121m⠛⠛⢦⣤[38;2;72;169;116m⣠[38;2;81;157;121m⣤⣤⣤⠶⠛⠛⠶⠞⢦⣤[38;2;72;169;116m⣄[38;2;55;194;107m⣀⣀[38;2;81;157;121m⣤⣤[38;2;55;194;107m⣀⣀[38;2;72;169;116m⣠[38;2;81;157;121m⡴⠳⠛⠛⠛⠛[38;2;107;120;135m⣉⡡[38;2;94;138;128m⡙[38;2;81;157;121m⠛⠶⠶⣤[38;2;55;194;107m⣀[39m [38;2;55;194;107m⢀⢀[38;2;72;169;116m⣠[38;2;81;157;121m⣤⠶⠳[38;2;94;138;128m⢋[38;2;107;120;135m⣉⣉[38;2;94;138;128m⢋[38;2;107;120;135m⣉[38;2;81;157;121m⠳⠳⣤⣤⣤⣤⣤⣤[38;2;55;194;107m⣀[38;2;81;157;121m⣤⣤[38;2;72;169;116m⣄[39m [0m
+[38;2;164;176;192;48;2;15;22;33m   0[39m [38;2;107;120;135m⣉⠤⢊⣉⡡⣉⣉⠢⠤⡡⠤⠤⠤⠒⣉⣉⠒⢊⠢⠤⢌⣉⣉⠤⠤⣉⣉⡡⠔⡑⣉⣉⣉⣉⠤⠔⢌⣉⠒⠒⠤⣉[38;2;81;157;121m⠛[38;2;94;138;128m⢋⢋[38;2;107;120;135m⡡⠤⠒⡑⡡⠤⠤⡡⠤⡑⡑⠤⠤⠤⠤⠤⠤⣉⠤⠤[38;2;89;144;125m⠜[39m [0m
+[48;2;15;22;33m     [38;2;164;176;192m-264s[39m                                                           [38;2;164;176;192mnow[0m
+[0;2;39;49mops-load-watch[0m
+
+[0;1;38;2;95;135;215;49mSYSTEM MONITORS[0;2;39;49m  6[0m
+  [38;2;95;175;175mops-htop               [39mhtop as you know it: per-core CPU meters, Mem/Swp bars…[0m
+  [38;2;95;175;175mops-load-watch         [39mwatch -n2 uptime with a braille history of the 1/5/15-…[0m
+  [38;2;95;175;175mops-nmon               [39mnmon's CPU Utilization panel: the boxed nmon frame and…[0m
+  [38;2;95;175;175mops-sensors            [39mlm-sensors output: coretemp package and cores with hig…[0m
+  [38;2;95;175;175mops-top                [39mprocps top: the uptime/Tasks/%Cpu(s)/MiB Mem/MiB Swap …[0m
+  [38;2;95;175;175mops-vmstat             [39mvmstat 1 streaming one line a second under its two-lin…[0m
+
+[0;1;38;2;95;135;215;49mDISK & STORAGE[0;2;39;49m  4[0m
+  [38;2;95;175;175mops-df                 [39mdf -h with Size/Used/Avail/Use% columns and a usage ba…[0m
+  [38;2;95;175;175mops-iostat             [39miostat -dx 2 refreshing: avg-cpu, then per-device read…[0m
+  [38;2;95;175;175mops-ncdu               [39mncdu browsing /var: sizes and [##########] bars sorted…[0m
+  [38;2;95;175;175mops-zpool-status       [39mzpool status for a mirrored pool mid-scrub: scanned/is…[0m
+
+[0;1;38;2;95;135;215;49mNETWORK[0;2;39;49m  6[0m
+  [38;2;95;175;175mops-mtr                [39mmtr's curses view: header and key help, then each hop'…[0m
+  [38;2;95;175;175mops-nload              [39mnload watching eth0: scrolling Incoming and Outgoing b…[0m
+  [38;2;95;175;175mops-ping               [39mping streaming replies (with the odd late or lost pack…[0m
+  [38;2;95;175;175mops-ss-listen          [39mTyping `sudo ss -tulpn` and getting the listening sock…[0m
+  [38;2;95;175;175mops-ip-brief           [39mTyping `ip -br -c addr` then `ip -br -c link`: interfa…[0m
+  [38;2;95;175;175mops-traceroute         [39mtraceroute revealing the path hop by hop: three probe …[0m
+
+[0;1;38;2;95;135;215;49mPROCESSES & SERVICES[0;2;39;49m  4[0m
+  [38;2;95;175;175mops-systemctl-status   [39msystemctl status nginx.service: the green ● active (ru…[0m
+  [38;2;95;175;175mops-systemctl-failed   [39msystemctl --failed shows two red ● failed units; a res…[0m
+  [38;2;95;175;175mops-pstree             [39mpstree -p under watch: systemd and its children as a t…[0m
+  [38;2;95;175;175mops-list-timers        [39msystemd timers with NEXT, LEFT counting down live, LAS…[0m
+
+[0;1;38;2;95;135;215;49mCONTAINERS & CLUSTERS[0;2;39;49m  5[0m
+  [38;2;95;175;175mops-docker-pull        [39mdocker pull with parallel layers going Waiting, Downlo…[0m
+  [38;2;95;175;175mops-docker-stats       [39mdocker stats refreshing every half second per containe…[0m
+  [38;2;95;175;175mops-kubectl-pods       [39mkubectl get pods -w during a rolling update: new pods …[0m
+  [38;2;95;175;175mops-kubectl-rollout    [39mkubectl rollout status counting up "N out of 5 new rep…[0m
+  [38;2;95;175;175mops-k9s                [39mA k9s-style cluster console: context/cluster header wi…[0m
+
+[0;1;38;2;95;135;215;49mLOGS & JOURNALS[0;2;39;49m  4[0m
+  [38;2;95;175;175mops-journalctl-follow  [39mjournalctl -f following the system journal with priori…[0m
+  [38;2;95;175;175mops-nginx-access       [39mAn lnav-style view following the nginx access log: lin…[0m
+  [38;2;95;175;175mops-dmesg              [39mdmesg -wH following the kernel ring buffer with relati…[0m
+  [38;2;95;175;175mops-log-histogram      [39mAn lnav-style histogram of log volume in 10-second buc…[0m
+
+[0;1;38;2;95;135;215;49mLOGIN & MOTD[0;2;39;49m  4[0m
+  [38;2;95;175;175mops-motd               [39mssh into a server and get the landscape-style MOTD: sy…[0m
+  [38;2;95;175;175mops-sysinfo-card       [39mA fastfetch-style system card: an original ASCII prism…[0m
+  [38;2;95;175;175mops-getty-login        [39mA tty1 console: the /etc/issue banner with hostname an…[0m
+  [38;2;95;175;175mops-fail2ban           [39mfail2ban-client status for the sshd jail (failed and b…[0m
+
+[0;1;38;2;95;135;215;49mSHELL PROMPTS[0;2;39;49m  6[0m
+  [38;2;95;175;175mops-prompt-bash        [39mThe classic user@host:dir$ bash prompt in green and bl…[0m
+  [38;2;95;175;175mops-prompt-git         [39mA __git_ps1 prompt tracking the repo: dirty *, staged …[0m
+  [38;2;95;175;175mops-prompt-powerline   [39mA powerline prompt of colored segments (user@host, pat…[0m
+  [38;2;95;175;175mops-prompt-exitcode    [39mA prompt that shows the last exit status: a typo gives…[0m
+  [38;2;95;175;175mops-tmux-status        [39mA tmux window split in two: a log tail above, a shell …[0m
+  [38;2;95;175;175mops-prompt-starship    [39mA two-line starship-style prompt: kube context (red fo…[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-htop[0m
+[0;2;39;49mpaged     [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ops | less -R[0m
+[0;2;39;49mgalleries [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

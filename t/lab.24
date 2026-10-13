@@ -1,0 +1,43 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mAnimation Lab (17)[0m
+Motion studies: easing curves, springs, timing and the building blocks of
+animation.
+
+[38;2;233;235;237;48;2;15;22;33mlinear[39m              [38;2;233;235;237minQuad[39m             [49m  [48;2;15;22;33m           [38;2;164;176;192m⡀[39m  [38;2;82;91;105m⠠[39m             [38;2;255;59;107m⣠⣄[39m         [0m
+[48;2;15;22;33m                                       [49m  [48;2;15;22;33m           [38;2;176;186;200m⣷[38;2;185;194;206m⡆⣶[38;2;133;142;155m⢸[38;2;185;194;206m⡆⣶[38;2;231;104;140m⢰[38;2;255;59;107m⣶⣶⡄[39m     [38;2;82;91;105m⠐[38;2;168;75;106m⢲[38;2;139;80;105m⠓⠚[38;2;185;71;106m⣖⣲[38;2;168;75;106m⠛⠛⠶⠶[38;2;82;91;105m⠒[38;2;168;75;106m⠒[38;2;255;59;107m⡄[0m
+[38;2;82;91;105;48;2;15;22;33m⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂[38;2;148;157;170m⣂⠦[39m [38;2;82;91;105m⢰[39m  [38;2;82;91;105m⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂[38;2;131;141;154m⢂[38;2;148;157;170m⡢[39m [38;2;82;91;105m⢰[39m [49m  [38;2;233;235;237;48;2;15;22;33mζ 0.15[39m     [38;2;169;180;195m⡇[38;2;185;194;206m⣿⢹[38;2;150;159;172m⡯[38;2;185;194;206m⣿⢹[38;2;215;136;163m⡿[38;2;255;59;107m⣿⣿⠏[39m      [38;2;255;59;107m⡞[39m         [38;2;82;91;105m⠠⠄[0m
+[48;2;15;22;33m          [38;2;83;159;229m⣀[38;2;233;235;237m⢶[38;2;215;220;225m⠖[38;2;181;191;203m⠉[39m   [38;2;82;142;198m⢸[39m              [38;2;181;191;203m⢀⡴⠋[39m  [38;2;82;91;105m⢸[39m [49m  [48;2;15;22;33m           [38;2;164;176;192m⠁[39m  [38;2;82;91;105m⠈[39m                        [0m
+[48;2;15;22;33m      [38;2;83;159;229m⣀⠤⠖⠉[39m       [38;2;83;159;229m⢸[39m           [38;2;83;159;229m⢀⡠[38;2;203;219;235m⠟[38;2;233;235;237m⠃[39m    [38;2;83;159;229m⢸[39m [49m  [48;2;15;22;33m           [38;2;164;176;192m⡀[39m  [38;2;82;91;105m⠠[39m                        [0m
+[48;2;15;22;33m  [38;2;83;159;229m⣀⠤⠒⠉[39m           [38;2;83;159;229m⢸[39m       [38;2;83;159;229m⢀⣀⠤⠚⠉[39m       [38;2;83;159;229m⢸[39m [49m  [48;2;15;22;33m           [38;2;176;186;200m⣷[38;2;185;194;206m⡆⣶[38;2;133;142;155m⢸[38;2;185;194;206m⢰⡆[38;2;162;196;205m⣶[38;2;47;210;200m⣴⣶⣄[39m     [38;2;82;91;105m⠐[38;2;70;130;136m⢒[38;2;64;150;152m⠞⠛[38;2;70;130;136m⠲[38;2;64;150;152m⠶[38;2;82;91;105m⠒⠒⠒⠒⠒[38;2;64;150;152m⠒[38;2;47;210;200m⠄[0m
+[38;2;83;159;229;48;2;15;22;33m⠒[38;2;82;136;187m⠋[38;2;82;91;105m⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂[39m [38;2;83;159;229m⠈[39m  [38;2;83;159;229m⠒⠒⠒⠒[38;2;82;136;187m⠋⠋[38;2;82;91;105m⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂[39m [38;2;83;159;229m⠈[39m [49m  [38;2;233;235;237;48;2;15;22;33mζ 0.40[39m     [38;2;169;180;195m⡇[38;2;185;194;206m⣿⢹[38;2;150;159;172m⡯[38;2;185;194;206m⣿⢹[38;2;129;200;203m⢹[38;2;47;210;200m⢿⣿⠟[39m      [38;2;47;210;200m⡞[39m         [38;2;82;91;105m⠠⠄[0m
+[48;2;15;22;33m                                       [49m  [48;2;15;22;33m           [38;2;164;176;192m⠁[39m  [38;2;82;91;105m⠈[39m                        [0m
+[0;2;39;49mlab-easing-gallery                       lab-spring[0m
+
+[0;1;38;2;95;135;215;49mEASING & TIMING[0;2;39;49m  6[0m
+  [38;2;95;175;175mlab-easing-gallery  [39mTwelve standard easings plotted in braille, each with a d…[0m
+  [38;2;95;175;175mlab-easing-race     [39mBalls racing the same distance in the same time with diff…[0m
+  [38;2;95;175;175mlab-bezier          [39mA devtools-style cubic-bézier editor: handles glide betwe…[0m
+  [38;2;95;175;175mlab-keyframes       [39mA keyframe timeline driving a sprite: per-property tracks…[0m
+  [38;2;95;175;175mlab-stagger         [39mA grid of tiles staggering in and out four ways — from th…[0m
+  [38;2;95;175;175mlab-motion-blur     [39mOne scene sampled four ways — 60 fps, 12 fps, 12 fps with…[0m
+
+[0;1;38;2;95;135;215;49mSPRINGS & PHYSICS[0;2;39;49m  2[0m
+  [38;2;95;175;175mlab-spring          [39mFour springs differing only in damping ratio chase a step…[0m
+  [38;2;95;175;175mlab-bounce          [39mThe bouncing-ball exercise: decaying bounces, stretch in …[0m
+
+[0;1;38;2;95;135;215;49mLOOPS & CYCLES[0;2;39;49m  4[0m
+  [38;2;95;175;175mlab-lfo-scope       [39mA four-channel oscilloscope sweeping sine, triangle, saw …[0m
+  [38;2;95;175;175mlab-loading-choreo  [39mA card loading in stages: shimmering skeleton, spinner an…[0m
+  [38;2;95;175;175mlab-lissajous       [39mA Lissajous table — x frequency across, y frequency down …[0m
+  [38;2;95;175;175mlab-pendulum-wave   [39mFifteen pendulums tuned to 20–34 swings per 30 s: snakes,…[0m
+
+[0;1;38;2;95;135;215;49mTRANSITIONS[0;2;39;49m  5[0m
+  [38;2;95;175;175mlab-wipe            [39mFour wipes between a daybreak and a night skyline: soft l…[0m
+  [38;2;95;175;175mlab-dissolve        [39mFour dissolves between two scenes: cross-fade, ordered Ba…[0m
+  [38;2;95;175;175mlab-iris            [39mCinema irises between two scenes: circle, diamond, five-p…[0m
+  [38;2;95;175;175mlab-slide           [39mSlide transitions between two scenes: push, cover, reveal…[0m
+  [38;2;95;175;175mlab-blinds          [39mMany small transitions at once: venetian blinds, swept ve…[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/lab-easing-gallery[0m
+[0;2;39;49mpaged     [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/lab | less -R[0m
+[0;2;39;49mgalleries [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

@@ -1,0 +1,29 @@
+* PRISM TERMINAL > Progress & Counters > Steps & Pipelines
+CI Pipeline  progress-ci-pipeline
+lint -> build -> test -> deploy as connected stages with timings; on alternate
+runs a test fails, is retried, then passes.
+progress - 78x7 (min 40x3) - 14 s loop - unicode - 16 colors
+tags: ci, pipeline, stages, deploy, failure, retry
+
+ +---------------+   +---------------+   +---------------+   +---------------+
+ | OK lint       |-->| OK build      |-->| - test        |-->| o deploy      |
+ | 1.2s          |   | 2.6s          |   | 309/580       |   | pending       |
+ +---------------+   +---------------+   +---------------+   +---------------+
+
+ - test  running
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play progress-ci-pipeline
+Snapshot  prism-term snapshot progress-ci-pipeline --size 78x7
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-ci-pipeline'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-cargo-build
+next >    curl -sL prism.jeremyfhall.com/f/progress-step-wizard
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

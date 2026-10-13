@@ -1,0 +1,33 @@
+* PRISM TERMINAL > Input & Menus > Dialogs & Prompts
+Date Range Picker  input-date-picker
+A calendar range picker for a change freeze: arrows walk the month grid, Enter
+sets the start, the range previews as the cursor moves, Enter sets the end.
+tui - 52x11 (min 27x11) - 7 s loop - unicode - 256 colors
+tags: date picker, calendar, range, schedule, form
+
+              + Change freeze --------+
+              |<    October 2026     >|  From
+              | Mo Tu We Th Fr Sa Su  |  Mon 19 Oct 2026
+              |           1  2  3  4  |
+              |  5  6  7  8  9 10 11  |  To
+              | 12 13 14 15 16 17 18  |  Fri 23 Oct 2026
+              | 19 20 21 22 23 24 25  |
+              | 26 27 28 29 30 31     |  5 days . no deploys
+              |                       |
+              |                       |
+              +-----------------------+  <-^v-> move . enter pick
+  still at t=3.5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play input-date-picker
+Snapshot  prism-term snapshot input-date-picker --size 52x11
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-date-picker'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-progress-dialog
+next >    curl -sL prism.jeremyfhall.com/f/input-wizard
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

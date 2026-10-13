@@ -1,0 +1,34 @@
+* PRISM TERMINAL > Pure ASCII > Classics
+banner(1) Sign  ascii-banner
+Huge letters built from # like the Unix banner command, scrolling past as a
+marquee with a dotted rule above and below.
+art - 80x12 (min 30x9) - 12 s loop - ascii - 16 colors
+tags: banner, big letters, hash, unix, marquee
+
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+##      ##  ######  ##      ##    ######    ##                          ########
+####  ####    ##    ##      ##  ##      ##  ##                          ##
+##  ##  ##    ##    ####    ##  ##      ##  ##                          ##
+##  ##  ##    ##    ##  ##  ##  ##########  ##                          ########
+##      ##    ##    ##    ####  ##      ##  ##                          ##
+##      ##    ##    ##      ##  ##      ##  ##                          ##
+##      ##  ######  ##      ##  ##      ##  ##########                  ##
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ascii-banner
+Snapshot  prism-term snapshot ascii-banner --size 80x12
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-banner'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-cowsay
+next >    curl -sL prism.jeremyfhall.com/f/ascii-figlet
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

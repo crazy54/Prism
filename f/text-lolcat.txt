@@ -1,0 +1,36 @@
+* PRISM TERMINAL > Text Effects > Color & Light
+lolcat Output  text-lolcat
+A directory listing piped through lolcat: the classic diagonal rainbow of
+phase-shifted sines, flowing as with lolcat -a.
+text - 64x14 (min 36x8) - 12 s loop - unicode - truecolor
+tags: lolcat, rainbow, terminal, pipe, ls
+
+        $ ls -la ~/projects | lolcat -a
+        total 48
+        drwxr-xr-x  8 ops ops 4096 Oct 13 09:41 .
+        drwxr-xr-x 24 ops ops 4096 Oct 12 18:02 ..
+        -rw-r--r--  1 ops ops  220 Oct  2 11:15 .editorconfig
+        drwxr-xr-x  8 ops ops 4096 Oct 13 09:40 .git
+        -rw-r--r--  1 ops ops 1532 Oct 11 16:27 README.md
+        drwxr-xr-x  4 ops ops 4096 Oct  9 10:03 docs
+        -rwxr-xr-x  1 ops ops 8721 Oct 13 08:55 deploy.sh
+        drwxr-xr-x  6 ops ops 4096 Oct 12 22:48 src
+        drwxr-xr-x  3 ops ops 4096 Oct 10 14:30 test
+        $
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play text-lolcat
+Snapshot  prism-term snapshot text-lolcat --size 64x14
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('text-lolcat'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/text-rainbow-sweep
+next >    curl -sL prism.jeremyfhall.com/f/text-chrome
+gallery   curl -sL prism.jeremyfhall.com/t/text
+home      curl -sL prism.jeremyfhall.com/tty

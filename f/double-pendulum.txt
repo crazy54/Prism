@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Particles & Simulations > Physics
+Double Pendulum  double-pendulum
+Three double pendulums started a thousandth of a radian apart -- together at
+first, then chaos splits their trails.
+scene - 48x24 (min 16x8) - 20 s loop - unicode - truecolor
+tags: pendulum, chaos, rk4, butterfly effect, trails, braille
+
+
+
+
+
+
+
+
+
+
+                              :::::::--   --==++++++++++#
+                          ::::       ==%%%==      ----  +++=
+                       :::      =====  -* -:::::      --  ++
+                      ::     ====     -**  -   ::::    =+++
+                      :   ===         -*   -      :::+++ -
+                       =============+ **  ::-::::::+++:::-
+                          ::::::::::==%%****----+++------
+                                      =-   ****++
+                                       -   :-
+                                       :-  --
+                                        ----
+  still at 48x20 - t=6s -- run it live for full size and motion
+
+Params  (--set key=value)
+  pendulums=3           Pendulums  (1-6)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play double-pendulum
+Snapshot  prism-term snapshot double-pendulum --size 48x24
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('double-pendulum'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/bouncing-balls
+next >    curl -sL prism.jeremyfhall.com/f/harmonograph
+gallery   curl -sL prism.jeremyfhall.com/t/sim
+home      curl -sL prism.jeremyfhall.com/tty

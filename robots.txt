@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://prism.jeremyfhall.com/sitemap.xml

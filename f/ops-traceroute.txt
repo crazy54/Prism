@@ -1,0 +1,35 @@
+* PRISM TERMINAL > Linux & Ops > Network
+traceroute  ops-traceroute
+traceroute revealing the path hop by hop: three probe times per hop as they
+return, with * * * for a router that won't answer.
+tui - 78x13 (min 56x5) - 16 s loop - ascii - 16 colors
+tags: traceroute, hops, routing, latency, network
+
+ ops@node03:~$ traceroute api.example
+ traceroute to api.example (192.0.2.80), 30 hops max, 60 byte packets
+  1  _gateway (10.20.2.1)  0.386 ms 0.435 ms 0.426 ms
+  2  10.20.0.1 (10.20.0.1)  0.949 ms 0.863 ms 0.995 ms
+  3  100.64.12.1 (100.64.12.1)  3.108 ms 2.961 ms 3.179 ms
+  4  * *
+
+
+
+
+
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ops-traceroute
+Snapshot  prism-term snapshot ops-traceroute --size 78x13
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-traceroute'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-ip-brief
+next >    curl -sL prism.jeremyfhall.com/f/ops-systemctl-status
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

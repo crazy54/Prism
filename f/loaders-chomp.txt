@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Spinners & Loaders > Orbits & Shapes
+Chomp  loaders-chomp
+A round braille mouth chomping its way through a row of pellets -- a cheerful
+queue-drain loader.
+spinner - 44x5 (min 24x2) - 8 s loop - braille - 256 colors
+tags: spinner, loader, braille, chomp, game, original
+
+                   | Processing 1,204 items...           4.0s
+
+                   - \ | /
+
+                   chomp (ASCII fallback) - 4 frames - 130 ms
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play loaders-chomp
+Snapshot  prism-term snapshot loaders-chomp --size 44x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-chomp'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-pong
+next >    curl -sL prism.jeremyfhall.com/f/loaders-orbit
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

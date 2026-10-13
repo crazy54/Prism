@@ -1,0 +1,36 @@
+* PRISM TERMINAL > Input & Menus > Tabs & Bars
+Shortcut Bar  input-shortcut-bar
+A nano-style editor whose two-row shortcut bar flashes on each keypress and
+swaps to prompt keys for Where Is and Write Out while a deploy.yaml is edited.
+tui - 72x14 (min 40x9) - 9 s loop - unicode - 16 colors
+tags: shortcuts, key bar, nano, editor, hotkeys
+
+     nano                         deploy.yaml                      Modified
+    kind: Deployment
+    metadata:
+      name: checkout-api
+      namespace: checkout
+    spec:
+      replicas: 4
+      selector:
+        matchLabels:
+          app: checkout-api
+      template:
+    File Name to Write: deploy.yaml
+    ^G Help           M-D DOS Format    M-A Append        M-B Backup File
+    ^C Cancel         M-M Mac Format    M-P Prepend       ^T Browse
+  still at t=4.5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play input-shortcut-bar
+Snapshot  prism-term snapshot input-shortcut-bar --size 72x14
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-shortcut-bar'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-menu-bar
+next >    curl -sL prism.jeremyfhall.com/f/input-modeline
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

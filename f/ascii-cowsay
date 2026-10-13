@@ -1,0 +1,38 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mPure ASCII[0;2;39;49m › [0;1;39;49mClassics[0m
+[0;1;39;49mCow Says[0;2;39;49m  ascii-cowsay[0m
+A cowsay-style speech bubble over an original ASCII cow that blinks — cycling
+through operator wisdom one fortune at a time.
+[0;2;39;49mart · 60×16 (min 48×14) · 21 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: cowsay, fortune, speech bubble, cow, classic[0m
+
+          [48;5;234m                                                            [0m
+          [48;5;234m                                                            [0m
+          [48;5;234m                                                            [0m
+          [48;5;234m [38;5;255m __[39m                                                        [0m
+          [48;5;234m [38;5;255m<  >[39m                                                       [0m
+          [48;5;234m [38;5;255m --[39m                                                        [0m
+          [48;5;234m         [38;5;249m\[39m                                                  [0m
+          [48;5;234m          [38;5;249m\[39m   [38;5;255m__[39m     [38;5;255m__[39m                                     [0m
+          [48;5;234m           [38;5;249m\[39m  [38;5;255m\[39m [38;5;255m\___/[39m [38;5;255m/[39m                                     [0m
+          [48;5;234m              [38;5;255m|[39m  [38;5;74mo[39m [38;5;74mo[39m  [38;5;255m|[39m                                     [0m
+          [48;5;234m              [38;5;255m|[39m       [38;5;255m|____________________[39m                 [0m
+          [48;5;234m               [38;5;255m\[39m     [38;5;255m/[39m     [38;5;249m.-.[39m       [38;5;255m_[39m      [38;5;255m\[39m               [0m
+          [48;5;234m                [38;5;255m(o_o)|[39m    [38;5;249m([39m   [38;5;249m)[39m     [38;5;249m([39m [38;5;249m)[39m      [38;5;255m|\[39m             [0m
+          [48;5;234m                 [38;5;255m`-'[39m [38;5;255m|____[38;5;249m`-'[38;5;255m_______[38;5;249m'-'[38;5;255m______|[39m [38;5;255m~[39m            [0m
+          [48;5;234m                      [38;5;255m||[39m  [38;5;255m||[39m           [38;5;255m||[39m  [38;5;255m||[39m               [0m
+          [48;5;234m                      [38;5;249m^^[39m  [38;5;249m^^[39m           [38;5;249m^^[39m  [38;5;249m^^[39m               [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ascii-cowsay[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ascii-cowsay --size 60x16[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ascii-cowsay'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ascii-vu-meter[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ascii-banner[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ascii[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

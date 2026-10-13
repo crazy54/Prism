@@ -1,0 +1,36 @@
+* PRISM TERMINAL > Charts & Metrics > Line & Area
+Smooth Streaming Line  charts-stream-scroll
+A live line that scrolls a sub-sample at a time with dotted gridlines, axis
+labels and a pinned current-value tag.
+chart - 70x14 (min 24x5) - 10 s loop - braille - truecolor
+tags: streaming, line chart, realtime, scroll, grid
+
+     100%
+
+
+             :   :   :   :   :   :   :   :   :   :   :   :   :   :   :   :
+                                                                   ****
+                                   +++ +                    **   **    **
+          ==                  +++++   + +++    ++++++    ***  ***    53.1%
+      50%   =========:   :  ++   :   :   : ++++  :   +++*:   :   :   :   :
+                     ==    +
+                       ===+
+             :   :   :   :   :   :   :   :   :   :   :   :   :   :   :   :
+
+
+       0%
+  still at t=5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-stream-scroll
+Snapshot  prism-term snapshot charts-stream-scroll --size 70x14
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-stream-scroll'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-area-dither
+next >    curl -sL prism.jeremyfhall.com/f/charts-btop-cpu
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

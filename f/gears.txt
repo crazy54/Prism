@@ -1,0 +1,45 @@
+* PRISM TERMINAL > Animated Objects > Mechanical
+Gear Train  gears
+Three spur gears (16, 10 and 8 teeth) meshing at true ratios, anti-aliased, with
+spun-metal shading and drop shadows.
+scene - 64x22 (min 20x7) - 6 s loop - unicode - truecolor
+tags: gears, mechanical, machine, ratio, clockwork
+
+
+                                             :+*    =+
+                                              #++  +=-.  --:
+                      .-+   .+=    -:    .*#   *..==-==----..
+                       ===  +--.  --=.    *+++**-:=::.......
+                 :###  .===++--==---.. --:...*=--*#*=---.----:.
+                  .++++*++=.....=--------+==-..:-+.:.::.........
+               +   :*+++===-.  :-::...-:.==:.-==::--=+=..:=.
+              :*====-...-+=:::::::.....:----:---....:::-::==:.
+               ...+=-.  -=++*++=-::.. .:-..----..-::.:==.--:...
+             -++------==:=*+.*+.--::--:.----.... --=*+:=:---.
+             -=-----::.::-+=.-:.::--:.:.-----.......*==:---..::::.
+              ....=-....::---::-==-............. ... =+=----:::....
+               =----:.  :-:::---=--..  -----.   -=------**-::...
+              .=:...-----::.....---=--=:...:..   ...:----:----:::..
+               ... -----::.... .-.:::===:.  ..     --:::::--=.......
+                 :---...---:.::..--=...=-:       .:-:..:::..-==
+                  .... ---...--...--:.  ...       .... ::... ::.
+                      .::.. .--.   ...                 ....   ...
+                       ...   ...    ..                  ..
+  still at 64x20 - t=3s -- run it live for full size and motion
+
+Params  (--set key=value)
+  speed=1               Speed  (0.1-5)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play gears
+Snapshot  prism-term snapshot gears --size 64x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('gears'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/globe
+next >    curl -sL prism.jeremyfhall.com/f/analog-clock
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

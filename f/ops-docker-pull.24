@@ -1,0 +1,35 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mContainers & Clusters[0m
+[0;1;39;49mdocker pull[0;2;39;49m  ops-docker-pull[0m
+docker pull with parallel layers going Waiting, Downloading (byte counters, ETA;
+bars past 110 cols), Verifying, Extracting, Pull complete, then the digest.
+[0;2;39;49mprogress · 80×13 (min 60×6) · 22 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: docker, pull, layers, image, progress, registry[0m
+
+[0;1;38;2;55;194;107;48;2;15;22;33mops@node03[0;38;2;233;235;237;48;2;15;22;33m:[0;1;38;2;83;159;229;48;2;15;22;33m~[0;38;2;233;235;237;48;2;15;22;33m$ docker pull registry.example/shop/api:2.14.1[39m                      [0m
+[38;2;233;235;237;48;2;15;22;33m2.14.1: Pulling from shop/api[39m                                                   [0m
+[38;2;233;235;237;48;2;15;22;33ma2318d6c47ec: [38;2;55;194;107mPull complete[39m                                                     [0m
+[38;2;233;235;237;48;2;15;22;33m3f1a2b0c9d88: [38;2;245;183;78mDownloading [38;2;233;235;237m 37.77MB/43.7MB 1s[39m                                    [0m
+[38;2;233;235;237;48;2;15;22;33m7c0e5d4b2a19: [38;2;55;194;107mPull complete[39m                                                     [0m
+[38;2;233;235;237;48;2;15;22;33me81f9a0b3c47: [38;2;245;183;78mDownloading [38;2;233;235;237m 26.01MB/118.6MB 8s[39m                                   [0m
+[38;2;233;235;237;48;2;15;22;33m0bd4c8e7f611: [38;2;83;159;229mExtracting [38;2;233;235;237m 841.1kB/1.3MB 1s[39m                                      [0m
+[38;2;233;235;237;48;2;15;22;33m52a9e0d1c3f8: [38;2;83;159;229mExtracting [38;2;233;235;237m 1.909kB/310kB 1s[39m                                      [0m
+[38;2;233;235;237;48;2;15;22;33mc6e2b7a40d95: [38;2;245;183;78mDownloading [38;2;233;235;237m 812.3kB/12.9MB 2s[39m                                    [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play ops-docker-pull[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot ops-docker-pull --size 80x13[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('ops-docker-pull'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-list-timers[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-docker-stats[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

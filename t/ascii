@@ -1,0 +1,55 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mPure ASCII (29)[0m
+7-bit only — no Unicode, no color required. Runs on a VT100, a serial console,
+anything.
+
+[48;5;234m                                       [49m  [48;5;234m [0;1;38;5;74;48;5;234m|[0;39;48;5;234m        [38;5;249mline[39m                         [0m
+[48;5;234m          [38;5;74m ___  ___  ___  ___  __  __ [39m [49m  [48;5;234m [0;1;38;5;71;48;5;234m.  [0;39;48;5;234m      [38;5;249mdots[39m                         [0m
+[48;5;234m          [38;5;74m| _ \| _ \|_ _|/ __||  \/  |[39m [49m  [48;5;234m [0;1;38;5;215;48;5;234mO[0;39;48;5;234m        [38;5;249mgrow[39m                         [0m
+[48;5;234m          [38;5;74m|  _/|   / | | \__ \| |\/| |[39m [49m  [48;5;234m [0;1;38;5;74;48;5;234m>[0;39;48;5;234m        [38;5;249marrows[39m                       [0m
+[48;5;234m          [38;5;74m|_|  |_|_\|___||___/|_|  |_|[39m [49m  [48;5;234m [0;1;38;5;171;48;5;234m[=   ][0;39;48;5;234m   [38;5;249mbounce[39m                       [0m
+[48;5;234m          [38;5;74m    ~~~ screensaver ~~~     [39m [49m  [48;5;234m [0;1;38;5;74;48;5;234m( *   )[0;39;48;5;234m  [38;5;249mscanner[39m                      [0m
+[48;5;234m                                       [49m  [48;5;234m [0;1;38;5;71;48;5;234m[|][0;39;48;5;234m      [38;5;249mpipe[39m                         [0m
+[48;5;234m                                       [49m  [48;5;234m [0;1;38;5;215;48;5;234m[    ][0;39;48;5;234m   [38;5;249mfill[39m                         [0m
+[0;2;39;49mascii-bounce-logo                        ascii-spinners[0m
+
+[0;1;38;5;68;49mASCII ANIMATIONS[0;2;39;49m  11[0m
+  [38;5;73mascii-donut          [39mThe canonical spinning ASCII torus: z-buffered, lit with…[0m
+  [38;5;73mascii-fire           [39mOld-school text-mode fire: heat averages upward and cool…[0m
+  [38;5;73mascii-rain           [39mSlanting rain in three depths, splashing on a street lin…[0m
+  [38;5;73mascii-starfield      [39mStars fly out of the center of the screen, growing from …[0m
+  [38;5;73mascii-plasma         [39mFour interfering sine fields mapped onto the " .:-=+*#%@…[0m
+  [38;5;73mascii-cube           [39mA tumbling wireframe cube in perspective, edges drawn wi…[0m
+  [38;5;73mascii-bounce-logo    [39mThe screensaver everyone waited on: a logo drifts, chang…[0m
+  [38;5;73mascii-aquarium       [39mFish of five shapes cruise both ways past swaying seawee…[0m
+  [38;5;73mascii-train          [39mAn original take on the sl gag: a steam express thunders…[0m
+  [38;5;73mascii-walker         [39mA stick figure strolls past lamp posts and drifting clou…[0m
+  [38;5;73mascii-matrix         [39mColumns of falling ASCII code with bright heads and deca…[0m
+
+[0;1;38;5;68;49mASCII ART[0;2;39;49m  5[0m
+  [38;5;73mascii-sea            [39mA sailboat rides rolling ~ and ^ swells under a low sun …[0m
+  [38;5;73mascii-mountains      [39mThree ridgelines of /\ peaks drift past at different spe…[0m
+  [38;5;73mascii-skyline        [39mA night skyline whose windows switch on and off, an ante…[0m
+  [38;5;73mascii-rocket         [39mCountdown from T-5, ignition, a flickering exhaust plume…[0m
+  [38;5;73mascii-coffee         [39mA cup on its saucer with three wisps of steam curling up…[0m
+
+[0;1;38;5;68;49mASCII SPINNERS & BARS[0;2;39;49m  4[0m
+  [38;5;73mascii-spinners       [39mSixteen pure-ASCII spinners — |/-\, bouncing brackets, s…[0m
+  [38;5;73mascii-progress-bars  [39mThe progress lines everyone recognizes — wget, curl, apt…[0m
+  [38;5;73mascii-hourglass      [39mSand drains grain by grain through the neck of a 7-bit h…[0m
+  [38;5;73mascii-vu-meter       [39mA hi-fi spectrum analyzer in #: bars bounce to a synthet…[0m
+
+[0;1;38;5;68;49mCLASSICS[0;2;39;49m  9[0m
+  [38;5;73mascii-cowsay         [39mA cowsay-style speech bubble over an original ASCII cow …[0m
+  [38;5;73mascii-banner         [39mHuge letters built from # like the Unix banner command, …[0m
+  [38;5;73mascii-figlet         [39mOutlined big letters traced from Prism's bitmap fonts wi…[0m
+  [38;5;73mascii-figlet-clock   [39mHH:MM:SS in outlined figlet digits with a blinking colon…[0m
+  [38;5;73mascii-clock          [39mA round wall clock in dots and digits; hour, minute and …[0m
+  [38;5;73mascii-life           [39mConway's Game of Life the way it first ran on terminals …[0m
+  [38;5;73mascii-maze           [39mA depth-first backtracker carves a +--+ maze cell by cel…[0m
+  [38;5;73mascii-snake          [39mSnake plays itself: breadth-first search steers @ to the…[0m
+  [38;5;73mascii-pong           [39mTwo imperfect AI paddles rally an o across a dotted net;…[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ascii-donut[0m
+[0;2;39;49mpaged     [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ascii | less -R[0m
+[0;2;39;49mgalleries [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

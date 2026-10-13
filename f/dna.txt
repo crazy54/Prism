@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Animated Objects > 3D Solids
+DNA Helix  dna
+Rotating double helix in perspective -- depth-sorted, shaded backbones, A-T/G-C
+base-pair rungs and drifting motes.
+scene - 80x24 (min 20x6) - 8 s loop - unicode - truecolor
+tags: dna, helix, biology, 3d
+
+
+
+
+          -
+        --::       --
+        -::      ==:-        -         ++
+       -  :      =--:       --  :     -=+         :--
+       =---:     =---      :--        - +*       :=::-       ====++
+       -- :------++----: ::-:-       ---=*     -:= - ==    ---=--==++    ::+----
+        - :--:  -:-- : ==:- --===: --- - +    -: = -  -   -  =  =  =***::::+:::-
+        ---   :-:.-= ==  -  :---  -: - - ##+--- = -  +-----  =  =   +*- :  +   =
+       :  --::-:  --+  ::-  : ----- -  - +* :-  - -  + -= - =  =   + +**  +    =
+        ::: ---::::-==: -   :  --  -  -   +* -  - -  --== = -  =  +===++* +   =
+                    --===---:----  -  -:::-+-  -  - --  --= - = --     ** =  =
+                                :---::-    +*  - - --    -  - =-:      ++ = +===
+                                 :::        =++==--      --- = :        + ==+
+                                             ==--=       :-- ::         +* +
+                                                          ---:          *++
+                                                     -     ::           +++
+                                                                    -    =-
+  still at 80x20 - t=4s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play dna
+Snapshot  prism-term snapshot dna --size 80x24
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('dna'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/twisty-cube
+next >    curl -sL prism.jeremyfhall.com/f/torus-knot
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

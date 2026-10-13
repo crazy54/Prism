@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Animation Lab > Easing & Timing
+Keyframe Timeline  lab-keyframes
+A keyframe timeline driving a sprite: per-property tracks with eased keys, value
+curves, a playhead and timecode.
+tui - 72x22 (min 30x10) - 4 s loop - unicode - truecolor
+tags: keyframes, timeline, playhead, interpolation, tracks, motion design
+
+
+
+
+
+
+                                                                        ***
+                                                                      ******
+                                                                      ******
+                                                                        ***
+    :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :
+
+    2.00s  +0s-------------+1s-------------|2s-------------+3s------------+4
+                                +++++++++++|++++++++++++++++
+    x      o++++++++++++++++++*+           |     *          +++++*+++++++++*
+           ++                ++++++++++++++|++                      ++++++++
+    y      o +++++++++++*++++        *     |  ++++++++++*+++++++++++       *
+            +++++++++++++++++++++++++++++++|++++++++++
+    scale  o                  *            |         *+++++++++++++++++++++o
+                                           |       +++++++++++++++++++++++++
+    hue    o+++++++++++++++++++++++++++++++|+++++++                        o
+  still at 72x20 - t=2s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play lab-keyframes
+Snapshot  prism-term snapshot lab-keyframes --size 72x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('lab-keyframes'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/lab-bezier
+next >    curl -sL prism.jeremyfhall.com/f/lab-stagger
+gallery   curl -sL prism.jeremyfhall.com/t/lab
+home      curl -sL prism.jeremyfhall.com/tty

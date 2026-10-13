@@ -1,0 +1,38 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mShell Prompts[0m
+[0;1;39;49mgit Prompt[0;2;39;49m  ops-prompt-git[0m
+A __git_ps1 prompt tracking the repo: dirty *, staged +, untracked %, and
+upstream u+1 / u+2-1 / u= as files are staged, committed, rebased and pushed.
+[0;2;39;49mtui · 80×16 (min 60×5) · 26 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: git, prompt, ps1, branch, ahead-behind, bash[0m
+
+[0;1;38;5;71;48;5;234mops@node03[0;38;5;255;48;5;234m:[0;1;38;5;74;48;5;234m~/src/shop-api[0;38;5;255;48;5;234m ([38;5;71mmain[38;5;255m [38;5;167m*%[38;5;255m u+1)$ git status -sb[39m                         [0m
+[38;5;255;48;5;234m## [38;5;71mmain[38;5;255m...[38;5;167morigin/main[38;5;255m [ahead 1][39m                                                 [0m
+[38;5;167;48;5;234m M[38;5;255m internal/cart/retry.go[39m                                                       [0m
+[38;5;167;48;5;234m M[38;5;255m internal/cart/retry_test.go[39m                                                  [0m
+[38;5;167;48;5;234m??[38;5;255m notes.txt[39m                                                                    [0m
+[0;1;38;5;71;48;5;234mops@node03[0;38;5;255;48;5;234m:[0;1;38;5;74;48;5;234m~/src/shop-api[0;38;5;255;48;5;234m ([38;5;71mmain[38;5;255m [38;5;167m*%[38;5;255m u+1)$ git add internal/[39m                      [0m
+[0;1;38;5;71;48;5;234mops@node03[0;38;5;255;48;5;234m:[0;1;38;5;74;48;5;234m~/src/shop-api[0;38;5;255;48;5;234m ([38;5;71mmain[38;5;255m [38;5;71m+[38;5;167m%[38;5;255m u+1)$ git [38;5;234;48;5;255m [39;48;5;234m                                  [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[48;5;234m                                                                                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play ops-prompt-git[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot ops-prompt-git --size 80x16[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('ops-prompt-git'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-prompt-bash[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/ops-prompt-powerline[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

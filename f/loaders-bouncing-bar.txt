@@ -1,0 +1,30 @@
+* PRISM TERMINAL > Spinners & Loaders > Bars & Pulses
+Bouncing Bar  loaders-bouncing-bar
+Three equals signs bouncing inside brackets -- the indeterminate bar of
+countless installers, pure ASCII.
+spinner - 44x5 (min 24x2) - 8 s loop - ascii - 16 colors
+tags: spinner, loader, ascii, indeterminate, brackets
+
+                   [  === ] Configuring packages...      4.0s
+
+                   [===   ] [ ===  ] [  === ] [   ===]     ..
+
+                   bouncingBar - 6 frames - 80 ms
+  still at t=4s -- run it live to see it move
+
+Params  (--set key=value)
+  speed=1               Speed  (0.25-4)
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play loaders-bouncing-bar
+Snapshot  prism-term snapshot loaders-bouncing-bar --size 44x5
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-bouncing-bar'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-half-walk
+next >    curl -sL prism.jeremyfhall.com/f/loaders-aesthetic
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

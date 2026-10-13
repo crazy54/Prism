@@ -1,0 +1,32 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mNotifications & Status[0;2;39;49m › [0;1;39;49mHealth & Uptime[0m
+[0;1;39;49mHealth Checks[0;2;39;49m  status-health-checks[0m
+Service health checks re-running in a sweep: live status dots and words,
+latency, last-checked age and a latency trail per row.
+[0;2;39;49mwidget · 76×10 (min 36×4) · 16 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: health check, status dot, monitoring, latency, probe[0m
+
+  [48;5;234m  [0;1;38;5;66;48;5;234mSERVICE[0;39;48;5;234m     [0;1;38;5;66;48;5;234mCHECK[0;39;48;5;234m                  [0;1;38;5;66;48;5;234mSTATUS[0;39;48;5;234m      [0;1;38;5;66;48;5;234mLATENCY[0;39;48;5;234m  [0;1;38;5;66;48;5;234mAGE[0;39;48;5;234m               [0m
+  [0;1;38;5;29;48;5;234m●[0;39;48;5;234m [38;5;255mapi-gateway[39m [38;5;249mGET /healthz[39m           [0;1;38;5;71;48;5;234mOK[0;39;48;5;234m          [38;5;255m  19 ms[39m  [38;5;66m2s ago[39m [38;5;72m▂▁▁▁▃▄▄▃▃▆█[0m
+  [0;1;38;5;71;48;5;234m●[0;39;48;5;234m [38;5;255mauth[39m        [38;5;249mGET /v1/ping[39m           [0;1;38;5;71;48;5;234mOK[0;39;48;5;234m          [38;5;255m  24 ms[39m  [38;5;66m1s ago[39m [38;5;72m█▇▇███▇▇▆▃▁[0m
+  [0;1;38;5;71;48;5;234m●[0;39;48;5;234m [38;5;255mcheckout[39m    [38;5;249mGET /ready[39m             [0;1;38;5;71;48;5;234mOK[0;39;48;5;234m          [38;5;255m  49 ms[39m  [38;5;66m1s ago[39m [38;5;72m▁▂▃▃▄▆▇▇███[0m
+  [0;1;38;5;71;48;5;234m●[0;39;48;5;234m [38;5;255mpayments[39m    [38;5;249mTCP 10.20.4.12:8443[39m    [0;1;38;5;71;48;5;234mOK[0;39;48;5;234m          [38;5;255m  30 ms[39m  [38;5;66m0s ago[39m [38;5;72m▆▅▃▁▃▆▇▇██▆[0m
+  [0;1;38;5;66;48;5;234m◌[0;39;48;5;234m [38;5;255msearch[39m      [38;5;249mGET /_cluster/health[39m   [38;5;66mchecking[39m    [38;5;215m 520 ms[39m  [38;5;66m  now[39m  [38;5;72m▆▅▆██▆▅▂▁▁▁[0m
+  [0;1;38;5;29;48;5;234m●[0;39;48;5;234m [38;5;255mpostgres[39m    [38;5;249mSELECT 1[39m               [0;1;38;5;71;48;5;234mOK[0;39;48;5;234m          [38;5;255m 3.1 ms[39m  [38;5;66m3s ago[39m [38;5;72m█▆▅▄▃▂▂▃▃▃▁[0m
+  [0;1;38;5;29;48;5;234m●[0;39;48;5;234m [38;5;255mredis[39m       [38;5;249mPING[39m                   [0;1;38;5;71;48;5;234mOK[0;39;48;5;234m          [38;5;255m 1.2 ms[39m  [38;5;66m3s ago[39m [38;5;72m▆██▆▃▃▂▁▃▅▆[0m
+  [0;1;38;5;71;48;5;234m●[0;39;48;5;234m [38;5;255mkafka[39m       [38;5;249mmetadata[39m               [0;1;38;5;71;48;5;234mOK[0;39;48;5;234m          [38;5;255m 8.0 ms[39m  [38;5;66m2s ago[39m [38;5;72m▅█▇▆▅▂▂▄▄▂▁[0m
+  [48;5;234m                                                                            [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play status-health-checks[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot status-health-checks --size 76x10[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('status-health-checks'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-ci-pipeline[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/status-uptime-slo[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/status[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

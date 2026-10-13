@@ -1,0 +1,32 @@
+* PRISM TERMINAL > Callouts & Layout > Tables
+Sortable Table  callouts-table-sorted
+A table whose sort column changes with ^/v markers in the header while the rows
+glide to their new positions.
+tui - 56x10 (min 44x6) - 12 s loop - unicode - 16 colors
+tags: table, sort, columns, reorder, hosts
+
+               HOST                    CPU%  MEM%v   CONNS  UP(d)
+               checkout-01               64     48      20      6
+               checkout-02               58     47      20      6
+               catalog-01                41     77      30     12
+               payments-01               33     52      12     19
+               search-01                 27     69       8     33
+               pg-orders-primary-01      18     61     136     41
+               redis-sessions-01          9     38     412     88
+
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play callouts-table-sorted
+Snapshot  prism-term snapshot callouts-table-sorted --size 56x10
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('callouts-table-sorted'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/callouts-table-zebra
+next >    curl -sL prism.jeremyfhall.com/f/callouts-table-grid
+gallery   curl -sL prism.jeremyfhall.com/t/callouts
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,35 @@
+* PRISM TERMINAL > Input & Menus > Tabs & Bars
+Modal Statusline  input-modeline
+A vim-style editor whose statusline recolors per mode: NORMAL motions, an INSERT
+edit, a VISUAL LINE indent and :w, with showcmd key echo and relative numbers.
+tui - 66x13 (min 40x8) - 9 s loop - unicode - 256 colors
+tags: statusline, vim, modal, editor, modeline
+
+         6 import { createPool } from './db.js';
+         5
+         4 const POOL_SIZE = 40;
+         3 const TIMEOUT_MS = 5000;
+         2
+         1 export function pool() {
+       7     return createPool({
+         1     max: POOL_SIZE,
+         2     acquireTimeoutMillis: TIMEOUT_MS,
+         3   });
+         4 }
+        NORMAL  main  src/db/pool.js [+]     utf-8  javascript  Top  7:3
+                                                                      >
+  still at t=4.5s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play input-modeline
+Snapshot  prism-term snapshot input-modeline --size 66x13
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-modeline'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-shortcut-bar
+next >    curl -sL prism.jeremyfhall.com/f/input-select
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

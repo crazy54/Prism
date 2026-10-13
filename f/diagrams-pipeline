@@ -1,0 +1,36 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mArchitecture Diagrams[0;2;39;49m › [0;1;39;49mBoxes & Flows[0m
+[0;1;39;49mCI/CD Pipeline[0;2;39;49m  diagrams-pipeline[0m
+A pipeline graph: build fans out to parallel test jobs with spinners and
+timings, fans in to staging, waits at a human approval gate, then deploys to
+prod.
+[0;2;39;49mdiagram · 76×13 (min 70×13) · 10 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: pipeline, ci, cd, dag, approval[0m
+
+  [48;5;234m               [38;5;71m╭─────────╮[39m                                                  [0m
+  [48;5;234m             [38;5;71m╭▶│[39m [38;5;255m✔ unit[39m  [38;5;71m│──╮[39m                                               [0m
+  [48;5;234m             [38;5;71m│[39m [38;5;71m╰─────────╯[39m  [38;5;71m│[39m                                               [0m
+  [48;5;234m             [38;5;71m│[39m    [38;5;66m1m11s[39m     [38;5;71m│[39m                                               [0m
+  [38;5;71;48;5;234m╭─────────╮[39m  [38;5;71m│[39m [38;5;71m╭─────────╮[39m  [38;5;71m│[39m [38;5;71m╭───────────╮[39m    [38;5;238m╭───────────╮[39m    [38;5;238m╭────────╮[39m  [0m
+  [38;5;71;48;5;234m│[39m [38;5;255m✔ build[39m [38;5;71m│──┼▶│[39m [38;5;255m✔ integ[39m [38;5;71m│──┼▶│[39m [38;5;255m✔ staging[39m [38;5;71m│───▶[38;5;238m│[39m [0;1;38;5;255;48;5;234m‖ approve[0;39;48;5;234m [38;5;238m│───▶│[39m [38;5;249m○ prod[39m [38;5;238m│[39m  [0m
+  [38;5;71;48;5;234m╰─────────╯[39m  [38;5;71m│[39m [38;5;71m╰─────────╯[39m  [38;5;71m│[39m [38;5;71m╰───────────╯[39m    [38;5;238m╰───────────╯[39m    [38;5;238m╰────────╯[39m  [0m
+  [48;5;234m   [38;5;66m1m11s[39m     [38;5;71m│[39m    [38;5;66m1m50s[39m     [38;5;71m│[39m     [38;5;66m1m06s[39m          [0;1;38;5;215;48;5;234mneeds you[0;39;48;5;234m                  [0m
+  [48;5;234m             [38;5;71m│[39m [38;5;71m╭─────────╮[39m  [38;5;71m│[39m                                               [0m
+  [48;5;234m             [38;5;71m╰▶│[39m [38;5;255m✔ lint[39m  [38;5;71m│──╯[39m                                               [0m
+  [48;5;234m               [38;5;71m╰─────────╯[39m                                                  [0m
+  [48;5;234m                  [38;5;66m0m38s[39m                                                     [0m
+  [38;5;215;48;5;234m‖ waiting for approval · deploy v2.14.1 to prod?                            [0m
+[0;2;39;49m  still at t=5s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play diagrams-pipeline[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot diagrams-pipeline --size 76x13[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('diagrams-pipeline'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/diagrams-flowchart[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/diagrams-state-machine[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/diagrams[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

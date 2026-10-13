@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Maps & Geo > World Maps
+Data Center Map  maps-world-cities
+A dotted braille world map with pulsing data-center markers, health-colored
+ripples, region codes and a live traffic footer.
+scene - 80x22 (min 40x10) - 12 s loop - braille - truecolor
+tags: world map, braille, data centers, pulse, regions
+
+                          ++++++++++    ::::::              ++++
+   ++++++++++++       +++   ++++++  ::::=== ++::   +++++++++    +++++++++++++++
+   ++++++++ ===++++    +=+         ::==  ++== = ::+ = = = = = = = ...........+
+          ==  =::::::::   +        := +@@@@ ==++ : +            ...  +    + ...
+         =  @:: === = @::+        :=LHR@@@@FRA  +:+ + = = = = =.. =+=++       ..
+         PDX:@  =@@  *@@IAD        := ++   == ++ :+ +          .  + + @@       .
+          ==: DFW@@++****:         ::=======+++ : =+=+***** = =.= +   @@NRT    .
+            :=  ++       :          +::::    :::   ++* @@ +**+-.-+             .
+            :::    +++ :::          + = =:::: = = + BOM@@+ ---++.---          .
+              ::::::::::+++          +++++       ++  **   -** @@ ...-      ...
+                      + = =++             + = = +      **--SIN@@++  .......
+                      ++     +++          :::::::::       -         -- ++
+                        + = =+++         : += = + +::     --       --+++
+                        +   +@@++       :  + @@+  + ::      -------     +++++
+                      *@@**++@@GRU      :   +@@JNB   :           +++++++=@@ ++
+                    SCL@@+*  +++        ::          :                 + +@@SYD+
+                       +**               ::       ::                  ++    ++
+                        +                  :::::::                      +++++
+o 11 healthy   o BOM degraded                       edge 1.09M req/s - p50 33 ms
+12 regions - 36 zones - anycast 192.0.2.0/24
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play maps-world-cities
+Snapshot  prism-term snapshot maps-world-cities --size 80x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('maps-world-cities'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/maps-warehouse-bots
+next >    curl -sL prism.jeremyfhall.com/f/maps-world-choropleth
+gallery   curl -sL prism.jeremyfhall.com/t/maps
+home      curl -sL prism.jeremyfhall.com/tty

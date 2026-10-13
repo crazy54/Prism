@@ -1,0 +1,31 @@
+[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mProgress & Counters[0;2;39;49m › [0;1;39;49mTimers & Countdowns[0m
+[0;1;39;49mHealth-Check Wait[0;2;39;49m  progress-health-wait[0m
+Waiting for a service to report healthy within a 12 s budget: probes back off
+1-2-4 s, and every other run it times out and rolls back.
+[0;2;39;49mprogress · 72×9 (min 36×2) · 15 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: timeout, health check, backoff, deploy, failure[0m
+
+    [38;5;255;48;5;234mWaiting for [0;1;38;5;255;48;5;234mprism-api[0;38;5;255;48;5;234m (10.20.0.14:8080/healthz) to become healthy[39m       [0m
+    [38;5;66;48;5;234m  probe 1  [38;5;167m✖[38;5;249m connect: connection refused[38;5;66m  4ms[39m                           [0m
+    [38;5;66;48;5;234m  probe 2  [38;5;167m✖[38;5;249m HTTP 503 Service Unavailable (starting)[38;5;66m  6ms[39m               [0m
+    [38;5;66;48;5;234m  probe 3  [38;5;167m✖[38;5;249m HTTP 503 Service Unavailable (migrations pending)[38;5;66m  33ms[39m    [0m
+    [48;5;234m                                                                        [0m
+    [48;5;234m                                                                        [0m
+    [48;5;234m                                                                        [0m
+    [48;5;234m                                                                        [0m
+    [38;5;74;48;5;234m⠹ next probe in 1.5s[39m      [38;5;74m█████████████████[38;5;238m░░░░░░░░░░░░░░░░░[39m [38;5;249m6.0s left[39m  [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;73m    prism-term play progress-health-wait[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot progress-health-wait --size 72x9[0m
+[0;1;39;49mIn code[0m
+  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;73mawait play(findFacet('progress-health-wait'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-stopwatch[0m
+[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-flip-clock[0m
+[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/progress[0m
+[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

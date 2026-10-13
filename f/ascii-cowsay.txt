@@ -1,0 +1,38 @@
+* PRISM TERMINAL > Pure ASCII > Classics
+Cow Says  ascii-cowsay
+A cowsay-style speech bubble over an original ASCII cow that blinks -- cycling
+through operator wisdom one fortune at a time.
+art - 60x16 (min 48x14) - 21 s loop - ascii - 16 colors
+tags: cowsay, fortune, speech bubble, cow, classic
+
+
+
+
+            __
+           <  >
+            --
+                   \
+                    \   __     __
+                     \  \ \___/ /
+                        |  o o  |
+                        |       |____________________
+                         \     /     .-.       _      \
+                          (o_o)|    (   )     ( )      |\
+                           `-' |____`-'_______'-'______| ~
+                                ||  ||           ||  ||
+                                ^^  ^^           ^^  ^^
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ascii-cowsay
+Snapshot  prism-term snapshot ascii-cowsay --size 60x16
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-cowsay'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-vu-meter
+next >    curl -sL prism.jeremyfhall.com/f/ascii-banner
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

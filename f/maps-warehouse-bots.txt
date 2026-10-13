@@ -1,0 +1,42 @@
+* PRISM TERMINAL > Maps & Geo > Grids & Floorplans
+Warehouse Robots  maps-warehouse-bots
+A goods-to-person warehouse floor: robots loop the aisles carrying shelf pods to
+pick stations, with a fleet list of tasks and battery.
+scene - 80x22 (min 44x12) - 24 s loop - unicode - truecolor
+tags: warehouse, robots, fleet, grid, logistics
+
+                                                         FLEET          8 active
+       :::::: :::::: :::::: :::::: :::::: ::::::         o R-01 P-015>PS-1   94%
+      ^:::::: :::::: :::::: :::::: :::::: ::::::         o R-02 to P-032     60%
+PS-1 |...                  ...>                          o R-03 to P-024     69%
+       :::::: :::::: :::::: :::::: :::::: ::::::         o R-04 to P-038     46%
+       :::::: :::::: :::::: :::::: :::::: ::::::         o R-05 to P-026     48%
+PS-2 |      ...>   ...>                                  o R-06 to P-018     68%
+       :::::: :::::: :::::: :::::: :::::: ::::::         o R-07 P-032>PS-3   51%
+       :::::: :::::: :::::: :::::: :::::: ::::::         o R-08 P-024>PS-4   45%
+PS-3 |  <... ...>
+       :::::: :::::: :::::: :::::: :::::: ::::::
+       :::::: :::::: :::::: :::::: :::::: ::::::
+PS-4 |
+       :::::: :::::: :::::: :::::: :::::: ::::::
+       :::::: :::::: :::::: :::::: :::::: ::::::
+                       <...
+
+
+                                                         picks today 1,850
+Zone B - 30 pod blocks - 4 pick stations
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play maps-warehouse-bots
+Snapshot  prism-term snapshot maps-warehouse-bots --size 80x22
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('maps-warehouse-bots'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/maps-datacenter
+next >    curl -sL prism.jeremyfhall.com/f/maps-world-cities
+gallery   curl -sL prism.jeremyfhall.com/t/maps
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,38 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mLinux & Ops[0;2;39;49m › [0;1;39;49mShell Prompts[0m
+[0;1;39;49mStarship-Style Prompt[0;2;39;49m  ops-prompt-starship[0m
+A two-line starship-style prompt: kube context (red for prod), repo, git branch
+and status, toolchain versions, command duration, then ❯.
+[0;2;39;49mtui · 80×16 (min 60×6) · 26 s loop · ascii · 256 colors[0m
+[0;2;39;49mtags: starship, prompt, kubernetes, git, two-line, zsh[0m
+
+[0;1;38;2;235;111;111;48;2;15;22;33mkube prod-east[38;2;83;159;229m (shop)[0;38;2;233;235;237;48;2;15;22;33m in [0;1;38;2;70;175;174;48;2;15;22;33mshop-api[0;38;2;233;235;237;48;2;15;22;33m on [0;1;38;2;196;113;255;48;2;15;22;33mgit:main[38;2;235;111;111m [!?⇡1][0;38;2;233;235;237;48;2;15;22;33m via [0;1;38;2;70;175;174;48;2;15;22;33mgo v1.23.2[0;39;48;2;15;22;33m             [0m
+[0;1;38;2;55;194;107;48;2;15;22;33m❯[0;38;2;233;235;237;48;2;15;22;33m go test ./...[39m                                                                 [0m
+[0;1;38;2;55;194;107;48;2;15;22;33mok[0;38;2;233;235;237;48;2;15;22;33m    shop/api/internal/cart       0.412s[39m                                       [0m
+[0;1;38;2;55;194;107;48;2;15;22;33mok[0;38;2;233;235;237;48;2;15;22;33m    shop/api/internal/checkout   1.208s[39m                                       [0m
+[48;2;15;22;33m                                                                                [0m
+[0;1;38;2;235;111;111;48;2;15;22;33mkube prod-east[38;2;83;159;229m (shop)[0;38;2;233;235;237;48;2;15;22;33m in [0;1;38;2;70;175;174;48;2;15;22;33mshop-api[0;38;2;233;235;237;48;2;15;22;33m on [0;1;38;2;196;113;255;48;2;15;22;33mgit:main[38;2;235;111;111m [!?⇡1][0;38;2;233;235;237;48;2;15;22;33m via [0;1;38;2;70;175;174;48;2;15;22;33mgo v1.23.2[0;38;2;233;235;237;48;2;15;22;33m took [0;1;38;2;245;183;78;48;2;15;22;33m4s[0;39;48;2;15;22;33m     [0m
+[0;1;38;2;55;194;107;48;2;15;22;33m❯[0;38;2;233;235;237;48;2;15;22;33m kubectl[38;2;15;22;33;48;2;233;235;237m [39;48;2;15;22;33m                                                                      [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[48;2;15;22;33m                                                                                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play ops-prompt-starship[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot ops-prompt-starship --size 80x16[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('ops-prompt-starship'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-tmux-status[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ops-htop[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

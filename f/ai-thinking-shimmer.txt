@@ -1,0 +1,28 @@
+* PRISM TERMINAL > AI Working > Thinking States
+Thinking Shimmer  ai-thinking-shimmer
+An agent working indicator: a breathing glyph and a status verb with a shimmer
+sweeping across it, elapsed time and tokens, finished steps ticking off above.
+spinner - 64x6 (min 36x3) - 9.5 s loop - unicode - 256 colors
+tags: thinking, shimmer, working, spinner, agent
+
+        + Read trace 4bf92f35 (31 spans)
+        + Correlated p99 with pool wait (r=0.94)
+        * Checking the deploy diff...
+          (10s . v 1.9k tokens . esc to interrupt)
+
+
+  still at t=4.75s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play ai-thinking-shimmer
+Snapshot  prism-term snapshot ai-thinking-shimmer --size 64x6
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ai-thinking-shimmer'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ai-attention-heatmap
+next >    curl -sL prism.jeremyfhall.com/f/ai-typing-indicators
+gallery   curl -sL prism.jeremyfhall.com/t/ai
+home      curl -sL prism.jeremyfhall.com/tty

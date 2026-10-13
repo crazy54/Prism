@@ -1,0 +1,26 @@
+[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mAI Working[0;2;39;49m › [0;1;39;49mThinking States[0m
+[0;1;39;49mTyping Indicators[0;2;39;49m  ai-typing-indicators[0m
+Six labeled "model is working" indicators side by side: a chat bubble of
+bouncing dots, a braille wave, a pulse, an orbit, a scanner and an equalizer.
+[0;2;39;49mspinner · 66×4 (min 33×4) · 2.4 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: typing indicator, dots, wave, loading, chat[0m
+
+       [38;2;53;65;80;48;2;15;22;33m╭───────╮[39m                            [0;1;38;2;46;84;121;48;2;15;22;33m∙[0;39;48;2;15;22;33m                            [0m
+       [38;2;53;65;80;48;2;15;22;33m│ [0;1;38;2;164;176;192;48;2;15;22;33m∙[0;38;2;53;65;80;48;2;15;22;33m [0;1;38;2;164;176;192;48;2;15;22;33m∙[0;38;2;53;65;80;48;2;15;22;33m [0;1;38;2;164;176;192;48;2;15;22;33m∙[0;38;2;53;65;80;48;2;15;22;33m │[39m  [38;2;83;159;229m⡇⡄⡀⡀⡆⡟⣿⣿⡿[39m  [38;2;35;63;92m·  [39m [0;1;38;2;95;139;182;48;2;15;22;33m●[0;39;48;2;15;22;33m [38;2;35;63;92m  ·[39m    [0;1;38;2;35;63;92;48;2;15;22;33m∙[0;39;48;2;15;22;33m [38;2;164;176;192m✳[39m [0;1;38;2;83;159;229;48;2;15;22;33m●[0;39;48;2;15;22;33m    [38;2;53;65;80m░░[38;2;42;77;111m▒[38;2;63;118;170m▓[38;2;83;159;229m█[38;2;63;118;170m▓[38;2;42;77;111m▒[38;2;53;65;80m░░[39m   [38;2;150;189;93m▄[38;2;70;193;105m▂[38;2;236;183;79m█[38;2;163;188;90m▅[38;2;222;184;82m▇[38;2;59;194;106m▁[38;2;123;190;97m▄[39m   [0m
+       [38;2;53;65;80;48;2;15;22;33m╰─┬─────╯[39m                            [0;1;38;2;25;43;62;48;2;15;22;33m∙[0;39;48;2;15;22;33m                            [0m
+       [38;2;107;120;135;48;2;15;22;33mbounce[39m     [38;2;107;120;135mwave[39m       [38;2;107;120;135mpulse[39m      [38;2;107;120;135morbit[39m      [38;2;107;120;135mscan[39m       [38;2;107;120;135mmeter[39m      [0m
+[0;2;39;49m  still at t=1.2s — run it live to see it move[0m
+
+[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
+[38;2;95;175;175m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;2;95;175;175m    prism-term play ai-typing-indicators[0m
+[0;1;39;49mSnapshot[0;2;39;49m  [0;38;2;95;175;175;49mprism-term snapshot ai-typing-indicators --size 66x4[0m
+[0;1;39;49mIn code[0m
+  [38;2;95;175;175mimport { play, findFacet } from 'prism-term';[0m
+  [38;2;95;175;175mawait play(findFacet('ai-typing-indicators'));[0m
+
+[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ai-thinking-shimmer[0m
+[0;2;39;49mnext ›    [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ai-reasoning-summary[0m
+[0;2;39;49mgallery   [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ai[0m
+[0;2;39;49mhome      [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

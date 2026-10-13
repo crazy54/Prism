@@ -1,0 +1,32 @@
+* PRISM TERMINAL > Charts & Metrics > Heatmaps & Matrices
+Hour x Weekday Heatmap  charts-heatmap-week
+Requests by hour of day and weekday: a weekly traffic heatmap with the current
+hour filling in live and a cursor reading cells.
+chart - 80x10 (min 30x8) - 14 s loop - unicode - truecolor
+tags: heatmap, weekday, hourly, traffic, punch card
+
+    00       03       06       09       12       15       18       21
+Mon ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+Tue ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+Wed ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+Thu ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+Fri ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+Sat ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+Sun ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## .. .. .. .. .. .. .. ..
+    Mon 13:00  53.6k req/h                                        peak Mon 14:00
+
+  still at t=6s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play charts-heatmap-week
+Snapshot  prism-term snapshot charts-heatmap-week --size 80x10
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-heatmap-week'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-heatmap-latency
+next >    curl -sL prism.jeremyfhall.com/f/charts-calendar
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,31 @@
+* PRISM TERMINAL > Input & Menus > Text Fields
+Number Steppers  input-number-stepper
+Numeric steppers with * and + controls: presses flash, values step, and the
+field refuses to go past its min/max with a clamped hint.
+tui - 48x9 (min 32x5) - 6 s loop - unicode - 16 colors
+tags: number, stepper, spinner, increment, form
+
+                Workers                        -    11  +
+                                              1-32
+
+                Pool size                      -    40  +
+                                              ! max 40
+
+                Retries                        -     2  +
+                                              0-5
+
+  still at t=3s -- run it live to see it move
+
+Run it live  (Node 18+, no install)
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+    prism-term play input-number-stepper
+Snapshot  prism-term snapshot input-number-stepper --size 48x9
+In code
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-number-stepper'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-password
+next >    curl -sL prism.jeremyfhall.com/f/input-textarea
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty
