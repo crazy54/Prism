@@ -20,7 +20,7 @@
       Traceway.init(config.connectionString, {
         recordAllSessions: true, sessionRecording: true, captureNavigation: true,
         captureNetwork: true, captureLogs: false, captureHttpServerErrors: true,
-        version: 'atlas-site-2026-10-11'
+        version: 'prism-site-2026-10-13'
       });
       Traceway.setAttribute('site', HOST);
       var report = function (metric) { Traceway.recordAction('performance', metric.name, { value: metric.value, rating: metric.rating }); };

@@ -115,7 +115,19 @@ function withStats(html, name) {
 await rm(output, { recursive: true, force: true });
 await mkdir(output, { recursive: true });
 for (const file of ['index.html', 'styles.css', 'app.js', 'assets']) await cp(path.join(site, file), path.join(output, file), { recursive: true });
-const builtPrism = embedIsland(prismHtml, terminal).html;
+// Site monitoring (Traceway + web-vitals, loaded by assets/telemetry.js) runs on every HTML page.
+// The landing and terminal pages carry the tags in source; the hosted Prism.html gets a loader
+// that only fires on the site's own host, so a downloaded copy stays offline and silent.
+const MONITORING = ['assets/vendor/traceway-1.2.1.js', 'assets/vendor/web-vitals-6.2.3.js', 'assets/telemetry.js'];
+const HOST = new URL(SITE_URL).hostname;
+const prismLoader = `<script>/* Site monitoring, hosted copy only: offline or on any other host this does nothing. */(function(){if(location.hostname!==${JSON.stringify(HOST)})return;${JSON.stringify(MONITORING)}.forEach(function(s){var e=document.createElement('script');e.src=s;e.async=false;document.head.appendChild(e);});})();</script>`;
+function withMonitoring(html) {
+  const charset = /<meta charset="[^"]*">(\r?\n)/i.exec(html);
+  if (!charset) throw new Error('Prism.html: no <meta charset> to anchor the monitoring loader after');
+  const at = charset.index + charset[0].length;
+  return html.slice(0, at) + prismLoader + charset[1] + html.slice(at);
+}
+const builtPrism = withMonitoring(embedIsland(prismHtml, terminal).html);
 await writeFile(path.join(output, 'Prism.html'), builtPrism);
 stats['data-prism-size'] = `${(Buffer.byteLength(builtPrism) / 1048576).toFixed(1)} MB`;
 const landing = withStats(await readFile(path.join(output, 'index.html'), 'utf8'), 'index.html');
@@ -188,6 +200,16 @@ for (const file of [path.join(output, 'index.html'), ...(await walk(termOut)).fi
   }
 }
 if (broken.length) fail(`broken links:\n  ${[...new Set(broken)].join('\n  ')}`, flag('--allow-incomplete'));
+
+// Every HTML page ships with site monitoring, and its scripts are in the build. Not relaxable.
+const unmonitored = [];
+for (const s of MONITORING) if (!existsSync(path.join(output, s))) unmonitored.push(`missing ${s}`);
+for (const page of ['index.html', 'Prism.html', ...termPages.map((p) => `terminal/${p}`)]) {
+  const html = await readFile(path.join(output, page), 'utf8');
+  const lacking = MONITORING.filter((s) => !html.includes(s));
+  if (lacking.length) unmonitored.push(`${page} doesn't load ${lacking.join(', ')}`);
+}
+if (unmonitored.length) throw new Error(`site monitoring incomplete:\n  ${unmonitored.join('\n  ')}`);
 
 console.log(`Built ${catalog.effects.length} facets, ${catalog.galleries.length} gallery links, and ${showcase.length} previews into ${output}`);
 console.log(`Terminal: ${terminal.facets.length} facets in ${terminal.galleries.length} galleries · web pages: ${termPages.length ? termPages.join(', ') : 'none'} · curl site: ${tty.pages.size} pages / ${tty.files} files (${(tty.bytes / 1048576).toFixed(1)} MB)${packed ? ` · dl/prism-term.tgz ${packed.version}` : ''}`);
