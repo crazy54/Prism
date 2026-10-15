@@ -1,4 +1,5 @@
-* PRISM TERMINAL > AI Working > Model Internals
+--/\=== PRISM TERMINAL > AI WORKING > MODEL INTERNALS            538nm - 18 / 18
+------------------------------------------------------/\========================
 Attention Heatmap  ai-attention-heatmap
 An attention heatmap over one sentence with a causal mask: the query row walks
 down showing its strongest link, flipping between a previous-token and a
@@ -21,11 +22,11 @@ tags: attention, heatmap, transformer, heads, interpretability
        head 7 (coreference) . "The" attends to "The" 100%
   still at t=5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ai-attention-heatmap
-Snapshot  prism-term snapshot ai-attention-heatmap --size 66x13
-In code
+SNAPSHOT  prism-term snapshot ai-attention-heatmap --size 66x13
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ai-attention-heatmap'));
 

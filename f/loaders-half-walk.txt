@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Spinners & Loaders > Bars & Pulses
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > BARS & PULSES      488nm - 34 / 64
+------------------------------------------------------/\========================
 Half-Block Walk  loaders-half-walk
 Half blocks turning left, top, right, bottom -- a chunky square spinner that
 reads from across the room.
@@ -12,14 +13,14 @@ tags: spinner, loader, half block, chunky
                    boxBounce2 (ASCII fallback) - 4 frames - .
   still at t=4s -- run it live to see it move
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play loaders-half-walk
-Snapshot  prism-term snapshot loaders-half-walk --size 44x5
-In code
+SNAPSHOT  prism-term snapshot loaders-half-walk --size 44x5
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('loaders-half-walk'));
 

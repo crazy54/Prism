@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Callouts & Layout > Tables
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > TABLES              580nm - 10 / 15
+------------------------------------------------------/\========================
 Sortable Table  callouts-table-sorted
 A table whose sort column changes with ^/v markers in the header while the rows
 glide to their new positions.
@@ -17,11 +18,11 @@ tags: table, sort, columns, reorder, hosts
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play callouts-table-sorted
-Snapshot  prism-term snapshot callouts-table-sorted --size 56x10
-In code
+SNAPSHOT  prism-term snapshot callouts-table-sorted --size 56x10
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('callouts-table-sorted'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animation Lab > Loops & Cycles
+--/\=== PRISM TERMINAL > ANIMATION LAB > LOOPS & CYCLES          604nm - 10 / 17
+------------------------------------------------------/\========================
 Loading Choreography  lab-loading-choreo
 A card loading in stages: shimmering skeleton, spinner and eased progress,
 staggered content, then a popping success mark.
@@ -21,11 +22,11 @@ tags: loading, skeleton, shimmer, spinner, progress, stagger, choreography
             +------------------------------------------------------+
   still at t=4s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play lab-loading-choreo
-Snapshot  prism-term snapshot lab-loading-choreo --size 56x14
-In code
+SNAPSHOT  prism-term snapshot lab-loading-choreo --size 56x14
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('lab-loading-choreo'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Notifications & Status > Toasts & Alerts
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > TOASTS & ALERTS
+------------------------------------------------------/\========================
 On-call Page  status-oncall-pager
 An incoming page: the alert, its context, ringing indicator and an acknowledge
 countdown that escalates when it runs out.
@@ -16,11 +17,11 @@ tags: pager, on-call, alert, acknowledge, escalation
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play status-oncall-pager
-Snapshot  prism-term snapshot status-oncall-pager --size 56x9
-In code
+SNAPSHOT  prism-term snapshot status-oncall-pager --size 56x9
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('status-oncall-pager'));
 

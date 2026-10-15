@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Retro & Demoscene > BBS & ANSI Art
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > BBS & ANSI ART      480nm - 13 / 24
+------------------------------------------------------/\========================
 BBS Login  bbs-login
 A 1993 BBS login: block-letter board logo, caller stats in a double frame and a
 login that types itself.
@@ -27,14 +28,14 @@ tags: bbs, ansi, login, dial-up, 1993, sysop
                  [ESC] hang up   [?] help   SysOp is AVAILABLE
   still at 80x20 - t=6s -- run it live for full size and motion
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   colors=vga            Colors  (vga|theme)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play bbs-login
-Snapshot  prism-term snapshot bbs-login --size 80x24
-In code
+SNAPSHOT  prism-term snapshot bbs-login --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('bbs-login'));
 

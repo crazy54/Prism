@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animation Lab > Springs & Physics
+--/\=== PRISM TERMINAL > ANIMATION LAB > SPRINGS & PHYSICS        604nm - 8 / 17
+------------------------------------------------------/\========================
 Bounce, Squash & Stretch  lab-bounce
 The bouncing-ball exercise: decaying bounces, stretch in flight, squash on
 impact and an onion skin of its spacing.
@@ -16,23 +17,23 @@ tags: bounce, squash and stretch, onion skin, arcs, spacing,
 
 
 
-                            -  =
+                            -  -
 
                          -
-                                  =      + *+
-                                      +  +++=-
-                                         -=--:
+                                  =      + #*
+                                      =  ***+=
+                                         ++==-
 
 
                                          ......
          squash & stretch . restitution 0.7 . onion skin every 0.1 s
   still at t=2.1s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play lab-bounce
-Snapshot  prism-term snapshot lab-bounce --size 64x20
-In code
+SNAPSHOT  prism-term snapshot lab-bounce --size 64x20
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('lab-bounce'));
 

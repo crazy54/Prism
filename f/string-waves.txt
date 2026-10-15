@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Particles & Simulations > Physics
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PHYSICS       475nm - 13 / 18
+------------------------------------------------------/\========================
 Plucked Strings  string-waves
 A six-string harp plucked in an arpeggio: real wave-equation strings that split,
 reflect and ring down.
@@ -10,12 +11,12 @@ tags: wave equation, strings, harp, standing waves, pluck, braille
               +++++++++++++++++++++++++++++++++++++++++++++++++++++
                          - - - - - - - - - - - - - - -
 
-           %% *********=*=*******************            *********%
-                   = =   - = = = = = = = = = ************
-                            ########         =
-           %% ##############        #########                   ##%
-                   =                   = = = ###################
-                     = = = = = = = = =
+           %% +++++++++-+-+++++++++++++++++++            +++++++++%
+                   - -   - - - - - - - - - - ++++++++++++
+                            ++++++++         -
+           %% ++++++++++++++        +++++++++                   ++%
+                   -                   - - - +++++++++++++++++++
+                     - - - = = - - - -
            %%                                                     %
               ***************=            *************************
                              *************
@@ -27,11 +28,11 @@ tags: wave equation, strings, harp, standing waves, pluck, braille
 
   still at t=3s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play string-waves
-Snapshot  prism-term snapshot string-waves --size 60x20
-In code
+SNAPSHOT  prism-term snapshot string-waves --size 60x20
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('string-waves'));
 

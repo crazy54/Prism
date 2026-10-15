@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Retro & Demoscene > BBS & ANSI Art
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > BBS & ANSI ART      480nm - 17 / 24
+------------------------------------------------------/\========================
 Modem Connect  modem-connect
 Dialing a BBS: ATZ, ATDT, RINGING, CONNECT 2400 -- then the welcome screen
 paints in at line speed.
@@ -27,14 +28,14 @@ tags: modem, dial-up, bbs, ansi, connect, hayes, 2400 baud
  PRiSMTERM 3.51 | Alt-Z Help | ANSI-BBS | 2400 N81 | FDX | Online 00:01
   still at 80x20 - t=6s -- run it live for full size and motion
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   colors=vga            Colors  (vga|theme)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play modem-connect
-Snapshot  prism-term snapshot modem-connect --size 80x22
-In code
+SNAPSHOT  prism-term snapshot modem-connect --size 80x22
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('modem-connect'));
 

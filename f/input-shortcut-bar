@@ -1,36 +1,37 @@
-[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mInput & Menus[0;2;39;49m › [0;1;39;49mTabs & Bars[0m
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;130;49mINPUT & MENUS[0;2;39;49m › [0;1;38;5;130;49mTABS & BARS[0;39;49m             [38;5;130mλ 585 · 22 / 23[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;130;49m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;101m━[38;5;101m━[0m
 [0;1;39;49mShortcut Bar[0;2;39;49m  input-shortcut-bar[0m
 A nano-style editor whose two-row shortcut bar flashes on each keypress and
 swaps to prompt keys for Where Is and Write Out while a deploy.yaml is edited.
 [0;2;39;49mtui · 72×14 (min 40×9) · 9 s loop · unicode · 16 colors[0m
 [0;2;39;49mtags: shortcuts, key bar, nano, editor, hotkeys[0m
 
-    [38;5;234;48;5;255m [0;1;38;5;234;48;5;255mnano[0;38;5;234;48;5;255m                         [0;1;38;5;234;48;5;255mdeploy.yaml[0;38;5;234;48;5;255m                      Modified [0m
-    [38;5;74;48;5;234mkind[38;5;66m:[38;5;255m Deployment[39m                                                        [0m
-    [38;5;74;48;5;234mmetadata[38;5;66m:[39m                                                               [0m
-    [38;5;66;48;5;234m  [38;5;74mname[38;5;66m:[38;5;255m checkout-api[39m                                                    [0m
-    [38;5;66;48;5;234m  [38;5;74mnamespace[38;5;66m:[38;5;255m checkout[39m                                                   [0m
-    [38;5;74;48;5;234mspec[38;5;66m:[39m                                                                   [0m
-    [38;5;66;48;5;234m  [38;5;74mreplicas[38;5;66m:[38;5;215m 4[39m                                                           [0m
-    [38;5;66;48;5;234m  [38;5;74mselector[38;5;66m:[39m                                                             [0m
-    [38;5;66;48;5;234m    [38;5;74mmatchLabels[38;5;66m:[39m                                                        [0m
-    [38;5;66;48;5;234m      [38;5;74mapp[38;5;66m:[38;5;255m checkout-api[39m                                                 [0m
-    [38;5;66;48;5;234m  [38;5;74mtemplate[38;5;66m:[39m                                                             [0m
-    [0;1;38;5;255;48;5;236mFile Name to Write: [0;38;5;255;48;5;236mdeploy.yaml[0;7;39;48;5;236m [0;39;48;5;236m                                        [0m
-    [0;1;38;5;234;48;5;255m^G[0;39;48;5;234m [38;5;255mHelp[39m           [0;1;38;5;234;48;5;255mM-D[0;39;48;5;234m [38;5;255mDOS Format[39m    [0;1;38;5;234;48;5;255mM-A[0;39;48;5;234m [38;5;255mAppend[39m        [0;1;38;5;234;48;5;255mM-B[0;39;48;5;234m [38;5;255mBackup File[39m   [0m
-    [0;1;38;5;234;48;5;255m^C[0;39;48;5;234m [38;5;255mCancel[39m         [0;1;38;5;234;48;5;255mM-M[0;39;48;5;234m [38;5;255mMac Format[39m    [0;1;38;5;234;48;5;255mM-P[0;39;48;5;234m [38;5;255mPrepend[39m       [0;1;38;5;234;48;5;255m^T[0;39;48;5;234m [38;5;255mBrowse[39m         [0m
+    [38;5;232;48;5;255m [0;1;38;5;232;48;5;255mnano[0;38;5;232;48;5;255m                         [0;1;38;5;232;48;5;255mdeploy.yaml[0;38;5;232;48;5;255m                      Modified [0m
+    [38;5;147;48;5;232mkind[38;5;245m:[38;5;255m Deployment[39m                                                        [0m
+    [38;5;147;48;5;232mmetadata[38;5;245m:[39m                                                               [0m
+    [38;5;245;48;5;232m  [38;5;147mname[38;5;245m:[38;5;255m checkout-api[39m                                                    [0m
+    [38;5;245;48;5;232m  [38;5;147mnamespace[38;5;245m:[38;5;255m checkout[39m                                                   [0m
+    [38;5;147;48;5;232mspec[38;5;245m:[39m                                                                   [0m
+    [38;5;245;48;5;232m  [38;5;147mreplicas[38;5;245m:[38;5;215m 4[39m                                                           [0m
+    [38;5;245;48;5;232m  [38;5;147mselector[38;5;245m:[39m                                                             [0m
+    [38;5;245;48;5;232m    [38;5;147mmatchLabels[38;5;245m:[39m                                                        [0m
+    [38;5;245;48;5;232m      [38;5;147mapp[38;5;245m:[38;5;255m checkout-api[39m                                                 [0m
+    [38;5;245;48;5;232m  [38;5;147mtemplate[38;5;245m:[39m                                                             [0m
+    [0;1;38;5;255;48;5;234mFile Name to Write: [0;38;5;255;48;5;234mdeploy.yaml[0;7;39;48;5;234m [0;39;48;5;234m                                        [0m
+    [0;1;38;5;232;48;5;255m^G[0;39;48;5;232m [38;5;255mHelp[39m           [0;1;38;5;232;48;5;255mM-D[0;39;48;5;232m [38;5;255mDOS Format[39m    [0;1;38;5;232;48;5;255mM-A[0;39;48;5;232m [38;5;255mAppend[39m        [0;1;38;5;232;48;5;255mM-B[0;39;48;5;232m [38;5;255mBackup File[39m   [0m
+    [0;1;38;5;232;48;5;255m^C[0;39;48;5;232m [38;5;255mCancel[39m         [0;1;38;5;232;48;5;255mM-M[0;39;48;5;232m [38;5;255mMac Format[39m    [0;1;38;5;232;48;5;255mM-P[0;39;48;5;232m [38;5;255mPrepend[39m       [0;1;38;5;232;48;5;255m^T[0;39;48;5;232m [38;5;255mBrowse[39m         [0m
 [0;2;39;49m  still at t=4.5s — run it live to see it move[0m
 
-[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
-[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
-[38;5;73m    prism-term play input-shortcut-bar[0m
-[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot input-shortcut-bar --size 72x14[0m
-[0;1;39;49mIn code[0m
-  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
-  [38;5;73mawait play(findFacet('input-shortcut-bar'));[0m
+[0;1;38;5;130;49mRUN IT LIVE · NODE 18+, NO INSTALL[0;39;49m [38;5;243m──────────────[0m
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;31m    prism-term play input-shortcut-bar[0m
+[0;1;38;5;130;49mSNAPSHOT[0;2;39;49m  [0;38;5;31;49mprism-term snapshot input-shortcut-bar --size 72x14[0m
+[0;1;38;5;130;49mIN CODE[0m
+  [38;5;31mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;31mawait play(findFacet('input-shortcut-bar'));[0m
 
-[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
-[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/input-menu-bar[0m
-[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/input-modeline[0m
-[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/input[0m
-[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/input-menu-bar[0m
+[0;2;39;49mnext ›    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/input-modeline[0m
+[0;2;39;49mgallery   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/input[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

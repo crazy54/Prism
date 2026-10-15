@@ -1,7 +1,7 @@
 // Badges & Pills: level and state badges with live counts, README-style
 // shields, and a CI pipeline whose jobs pass, fail and retry.
 import { mix } from '../../color.js';
-import { glyphs, put, putR, safe, clamp, ATTR } from '../charts/_data.js';
+import { glyphs, put, putR, safe, clamp, lift, onFill, ATTR } from '../charts/_data.js';
 import { LEVEL_KEYS, levelColor } from './_logs.js';
 
 /** A rounded pill: half-block caps on Unicode terminals, a padded chip otherwise. */
@@ -42,7 +42,7 @@ const badges = {
         const bump = (rates[l] * t) % 1 < 0.12 && rates[l] < 3;
         const lab = l.toUpperCase();
         if (x + lab.length + 10 > W) break;
-        x = pill(b, g, x, y, lab, th.bg, bump ? mix(c, 0xffffff, 0.35) : c);
+        x = pill(b, g, x, y, lab, th.bg, bump ? lift(th, c, 0.35) : c);
         x = b.text(x + 1, y, n.toLocaleString('en-US'), bump ? th.ink : th.muted, undefined, bump ? ATTR.BOLD : 0) + 2;
       }
       y += step;
@@ -131,7 +131,7 @@ const shields = {
         if (x + w > W) { x = 0; y += H >= 6 ? 2 : 1; }
         if (y >= H) break;
         x = b.text(x, y, ` ${k} `, th.ink, label);
-        x = b.text(x, y, ` ${v} `, 0xffffff, mix(c, th.bg, 0.15), ATTR.BOLD) + 1;
+        x = b.text(x, y, ` ${v} `, onFill(th, mix(c, th.bg, 0.15)), mix(c, th.bg, 0.15), ATTR.BOLD) + 1;
       }
     };
   },

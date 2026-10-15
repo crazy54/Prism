@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animated Objects > Icons & Logos
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > ICONS & LOGOS        467nm - 17 / 18
+------------------------------------------------------/\========================
 Atom  atom
 A lit nucleus of protons and neutrons inside three tilted orbits, with glowing
 electrons trailing light.
@@ -6,35 +7,35 @@ art - 56x22 (min 18x7) - 12 s loop - unicode - truecolor
 tags: atom, science, orbit, electron, nucleus, physics
 
 
-                                .--==--:.
-                               :-:...:-==-....:::::.
-                              .-.       .-+=::...::-:.
-                              :: ......::::-=:     .::
-                          .::-==-----===----=*+:..  .-
-                       .:--:::::. ..:.    ...:++----:=
-                      .-:.    .: .:..    +     -=..:-+-:.
-                      :.       :::. *#=.==:     -=..-:.-=:
-                      .:.      :-. =::.==:.+-   .=-:-   :+
-                       .::...-#*-:  +*=:..--.    .*=. .-#@-.
-                        ..:::+@+::: -..:--:.    .:+= ..-++:.
-                           ..+-::::-............-=-@=-:.
-                            :-   ..:-:.......:-=-:+@%:.
-                            ::      .::.    :--.  .#-
-                            ::       .:::.:--:    .#.
-                            .-.       .:=+=:.    :+-
-                             .:-:::::---:.:-----==:
-                               .:::::..      ..:.
+                                .:----:..
+                               :-:....:--:....:::::.
+                              .:.       .-+=::...::-:.
+                              :. ......:::.-=:     .-:
+                          .::-=======++====-=*+:..  .=
+                       .:---:.::. ..:.    ...:=+-==-:+
+                      .-:.    .: .:..    +     :-..:=*=:.
+                      :.       :::. *#=.==:     :-..=:.-=.
+                      .:.      :-. =::.==-.+-   .-:--   :+
+                       .::...-%*-:  +*=:..--.    .*=. .:#@-.
+                        ..:::+@+:.. -..:--:.    .-+- ..-*+:.
+                           ..+-:::::............==-%=-:.
+                            .=   ..::.........-+-:+@%:.
+                            ::      .:..    :=-.  .*:
+                            ::       ..:..:==:    .*.
+                            .-.       .:=*=:.    .=-
+                             .--::::--=-:..:::::-=:
+                               .:::::..      ....
 
   still at 56x20 - t=6s -- run it live for full size and motion
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   electrons=3           Electrons  (1-6)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play atom
-Snapshot  prism-term snapshot atom --size 56x22
-In code
+SNAPSHOT  prism-term snapshot atom --size 56x22
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('atom'));
 

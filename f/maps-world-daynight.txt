@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Maps & Geo > World Maps
+--/\=== PRISM TERMINAL > MAPS & GEO > WORLD MAPS                  592nm - 3 / 11
+------------------------------------------------------/\========================
 Day / Night Terminator  maps-world-daynight
 The sun sweeps west over a half-block world: a soft terminator with twilight,
 city lights on the night side and world clocks below.
@@ -27,11 +28,11 @@ PDX 18:00  IAD 21:00  LHR 02:00  BOM 07:00  SIN 09:00  NRT 11:00  SYD 12:00
 night      night      night      day        day        day        day
   still at 80x20 - t=6s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play maps-world-daynight
-Snapshot  prism-term snapshot maps-world-daynight --size 80x22
-In code
+SNAPSHOT  prism-term snapshot maps-world-daynight --size 80x22
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('maps-world-daynight'));
 

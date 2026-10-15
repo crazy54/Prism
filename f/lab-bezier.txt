@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animation Lab > Easing & Timing
+--/\=== PRISM TERMINAL > ANIMATION LAB > EASING & TIMING          604nm - 3 / 17
+------------------------------------------------------/\========================
 Cubic-Bezier Timing  lab-bezier
 A devtools-style cubic-bezier editor: handles glide between CSS presets while a
 dot and a swatch run the timing.
@@ -10,16 +11,16 @@ tags: bezier, cubic-bezier, css, timing function, easing, devtools
                                                  cubic-bezier(
                                                   0.00, 0.00,
                                                   0.58, 1.00)
-          - - - - - - - - - - -++ - - - - - - --
-                               ++++++%%%%%%%%%%% t 0.00 > 0.00
+          - - - - - - - - - - -** - - - - - - --
+                               ******%%%%%%%%%%% t 0.00 > 0.00
           -                     %%%%%%         -
                            %%%%%
           -            %%%%                    -
                     %%%%
           -     %%%%                           -
-             %%%                                  ++++
-         +-+% - - - - - - - - - - - - - - - - -   - - - - - - - - - - -
-          +
+             %%%                                  ****
+         *-*% - - - - - - - - - - - - - - - - -   - - - - - - - - - - -
+          *
 
 
 
@@ -27,11 +28,11 @@ tags: bezier, cubic-bezier, css, timing function, easing, devtools
          time >
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play lab-bezier
-Snapshot  prism-term snapshot lab-bezier --size 64x20
-In code
+SNAPSHOT  prism-term snapshot lab-bezier --size 64x20
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('lab-bezier'));
 

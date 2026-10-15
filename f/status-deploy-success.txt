@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Notifications & Status > Toasts & Alerts
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > TOASTS & ALERTS
+------------------------------------------------------/\========================
 Deploy Succeeded  status-deploy-success
 The good-news moment: rollout dots fill host by host, the check lands, confetti
 falls and the summary -- version, hosts, duration -- settles in.
@@ -19,11 +20,11 @@ tags: deploy, success, celebration, confetti, release
             +   *            `      . o o  o *  +   .  o.     o
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play status-deploy-success
-Snapshot  prism-term snapshot status-deploy-success --size 60x12
-In code
+SNAPSHOT  prism-term snapshot status-deploy-success --size 60x12
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('status-deploy-success'));
 

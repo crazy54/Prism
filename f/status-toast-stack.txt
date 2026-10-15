@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Notifications & Status > Toasts & Alerts
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > TOASTS & ALERTS
+------------------------------------------------------/\========================
 Toast Stack  status-toast-stack
 Notifications slide in from the right, stack, push older ones down and dismiss
 themselves with a draining timer line.
@@ -22,11 +23,11 @@ tags: toast, notification, snackbar, stack, slide in
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play status-toast-stack
-Snapshot  prism-term snapshot status-toast-stack --size 50x15
-In code
+SNAPSHOT  prism-term snapshot status-toast-stack --size 50x15
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('status-toast-stack'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > AI Working > Agents & Pipelines
+--/\=== PRISM TERMINAL > AI WORKING > AGENTS & PIPELINES         538nm - 14 / 18
+------------------------------------------------------/\========================
 Chat Transcript  ai-chat-transcript
 A chat transcript: user questions sit right-aligned in tinted bubbles, the
 assistant streams replies on the left with a tool-use chip, and the view
@@ -24,11 +25,11 @@ tags: chat, transcript, assistant, conversation, streaming
 
   still at t=4.75s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ai-chat-transcript
-Snapshot  prism-term snapshot ai-chat-transcript --size 64x16
-In code
+SNAPSHOT  prism-term snapshot ai-chat-transcript --size 64x16
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ai-chat-transcript'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Transfers & ETA
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   494nm - 36 / 41
+------------------------------------------------------/\========================
 pv  progress-pv
 pv -pterab on a restore stream: bytes, timer, current and average rate, a
 full-width bar and ETA, with a stall when the far end pushes back.
@@ -11,11 +12,11 @@ $ pv -pterab backup.tar.zst | ssh restore@10.20.0.31 'zstd -d | tar x -C /srv/r.
 
   still at 80x4 - t=6s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-pv
-Snapshot  prism-term snapshot progress-pv --size 96x4
-In code
+SNAPSHOT  prism-term snapshot progress-pv --size 96x4
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-pv'));
 

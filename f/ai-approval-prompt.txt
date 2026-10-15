@@ -1,4 +1,5 @@
-* PRISM TERMINAL > AI Working > Tool Calls
+--/\=== PRISM TERMINAL > AI WORKING > TOOL CALLS                 538nm - 11 / 18
+------------------------------------------------------/\========================
 Approval Prompt  ai-approval-prompt
 A human-in-the-loop approval prompt: the agent proposes a production command
 with its reason, the user weighs the options and approves, then it runs.
@@ -17,11 +18,11 @@ tags: approval, human in the loop, permission, confirm, agent
 
   still at t=3.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ai-approval-prompt
-Snapshot  prism-term snapshot ai-approval-prompt --size 70x10
-In code
+SNAPSHOT  prism-term snapshot ai-approval-prompt --size 70x10
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ai-approval-prompt'));
 

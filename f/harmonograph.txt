@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Particles & Simulations > Physics
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PHYSICS       475nm - 11 / 18
+------------------------------------------------------/\========================
 Harmonograph  harmonograph
 Damped rotary harmonograph -- a pen traces evolving Lissajous figures in
 braille, re-tuning its pendulums every cycle.
@@ -6,32 +7,32 @@ scene - 80x24 (min 20x6) - 8 s loop - unicode - truecolor
 tags: harmonograph, lissajous, pendulum, curves
 
 
-                                                         =
-                         ====     ===                   ==
-                        ======= ++++ ==               ++ ==
-                        = = ++++++  +  ==           + ++ ==
-                        ===+ +++++++ ++  =      **++++++ ==
-                       = = ++**+++++***** = *******+++++ ==
-                       = =++****=*+**************+*+++++ ==
-                       == ++******+*+*+*************++ + ==
-                       == ++********+**+************++ + ==
-                       == ++*********+****+**********+ + ==
-                       == ++******%*****+****=*******+ += =
-                       == +++** ********+**+*+*+*****+ +==
-                       == +++*+****************=+**** + ==
-                       ==++++******* =  =*****+++++++ + ==
-                       ==+++++****    =  =  +++++++++ += =
-                       ===++ +         =  == ++++++ ++ ===
-                       ===+             ==  ====+ +++ ===
-                       ===                =====     == =
-                                                     ===
+                                                         *
+                         ****     +++                   +*
+                        **+++++ ++++ ++               ++ +*
+                        * + ++++++  +  ++           + ++ +*
+                        *+++ +++++++ ++  +      ++++++++ +*
+                       * + ++++++++++++++ + ++++++++++++ +*
+                       * +++++++*+++++++=====+++++++++++ +*
+                       *+ ++++++++++++++=+=====+++++++ + +*
+                       *+ ++++++++++++++=++++===++++++ + +*
+                       *+ +++++++++++++==+++++===+++++ + +*
+                       *+ ++++++++#=+++=++++++++==++++ ++ *
+                       *+ +++++ +++==++=+++++++++=++++ ++*
+                       ++ +++++++++++===+++++++++++++ + +*
+                       +++++++++++++ *  +++++++++++++ + +*
+                       +++++++++++    *  +  +++++++++ ++ *
+                       +++++ +         *  ++ ++++++ ++ +**
+                       ++++             **  +++++ +++ ++*
+                       +++                *****     ++ *
+                                                     ***
   still at 80x20 - t=4s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play harmonograph
-Snapshot  prism-term snapshot harmonograph --size 80x24
-In code
+SNAPSHOT  prism-term snapshot harmonograph --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('harmonograph'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Particles & Simulations > Life & Flocking
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > LIFE & FLOCKING
+------------------------------------------------------/\========================
 Slime Mold  slime-mold
 Physarum agents sensing and laying scent trails self-organize into a transport
 network linking food sources.
@@ -27,14 +28,14 @@ tags: physarum, slime mold, agents, network, emergence, trails
           ==                                                         =
   still at 60x20 - t=6s -- run it live for full size and motion
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   agents=1              Agent density  (0.2-3)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play slime-mold
-Snapshot  prism-term snapshot slime-mold --size 60x22
-In code
+SNAPSHOT  prism-term snapshot slime-mold --size 60x22
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('slime-mold'));
 

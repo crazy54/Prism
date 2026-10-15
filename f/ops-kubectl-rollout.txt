@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Containers & Clusters
+--/\=== PRISM TERMINAL > LINUX & OPS > CONTAINERS & CLUSTERS     568nm - 24 / 39
+------------------------------------------------------/\========================
 kubectl rollout status  ops-kubectl-rollout
 kubectl rollout status counting up "N out of 5 new replicas have been
 updated..." to "successfully rolled out", with a replica strip below.
@@ -19,11 +20,11 @@ n updated...
 replicas ## ## ## ## ##  3/5 updated . revision 42
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-kubectl-rollout
-Snapshot  prism-term snapshot ops-kubectl-rollout --size 80x12
-In code
+SNAPSHOT  prism-term snapshot ops-kubectl-rollout --size 80x12
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-kubectl-rollout'));
 

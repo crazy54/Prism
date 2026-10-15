@@ -1,4 +1,5 @@
-* PRISM TERMINAL > FX Store > Fractals
+--/\=== PRISM TERMINAL > FX STORE > FRACTALS                      436nm - 8 / 24
+------------------------------------------------------/\========================
 Mandelbrot Dive  mandelbrot
 Continuous zoom into Seahorse Valley with smooth iteration coloring; --set
 set=julia for a morphing Julia set.
@@ -27,11 +28,11 @@ tags: mandelbrot, julia, fractal, zoom
 %%%@@%%+*#%%%%%%#+#%%%%%%%%#*=*##%@@@%%%%%%%%###################################
   still at 80x20 - t=4s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play mandelbrot
-Snapshot  prism-term snapshot mandelbrot --size 80x24
-In code
+SNAPSHOT  prism-term snapshot mandelbrot --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('mandelbrot'));
 

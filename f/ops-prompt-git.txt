@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Shell Prompts
+--/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             568nm - 35 / 39
+------------------------------------------------------/\========================
 git Prompt  ops-prompt-git
 A __git_ps1 prompt tracking the repo: dirty *, staged +, untracked %, and
 upstream u+1 / u+2-1 / u= as files are staged, committed, rebased and pushed.
@@ -23,11 +24,11 @@ ops@node03:~/src/shop-api (main +% u+1)$ git
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-prompt-git
-Snapshot  prism-term snapshot ops-prompt-git --size 80x16
-In code
+SNAPSHOT  prism-term snapshot ops-prompt-git --size 80x16
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-prompt-git'));
 

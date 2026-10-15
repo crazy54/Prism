@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Architecture Diagrams > Trees & Hierarchies
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > TREES & HIERARCHIES
+------------------------------------------------------/\========================
 Dependency Tree  diagrams-dependency-tree
 An npm ls --all tree printing line by line with deduped markers, then npm audit
 lights the path from the root to a vulnerable transitive dependency.
@@ -27,11 +28,11 @@ tags: dependencies, npm ls, tree, supply chain, vulnerability
 
   still at t=4s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play diagrams-dependency-tree
-Snapshot  prism-term snapshot diagrams-dependency-tree --size 60x20
-In code
+SNAPSHOT  prism-term snapshot diagrams-dependency-tree --size 60x20
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('diagrams-dependency-tree'));
 

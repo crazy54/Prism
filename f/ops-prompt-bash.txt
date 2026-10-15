@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Shell Prompts
+--/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             568nm - 34 / 39
+------------------------------------------------------/\========================
 bash Prompt  ops-prompt-bash
 The classic user@host:dir$ bash prompt in green and blue: cd into a repo, a
 colored ls -la, cat a file, then a deploy script dry run.
@@ -23,11 +24,11 @@ ops@node03:~/src/shop-api$ cat VERSION
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-prompt-bash
-Snapshot  prism-term snapshot ops-prompt-bash --size 80x16
-In code
+SNAPSHOT  prism-term snapshot ops-prompt-bash --size 80x16
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-prompt-bash'));
 

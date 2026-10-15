@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Spinners & Loaders > Truecolor Spinners
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > TRUECOLOR SPINNERS
+------------------------------------------------------/\========================
 Prism Facets  loaders-prism
 Faceted diamonds catching a rainbow as they turn -- Prism's own loader.
 spinner - 44x5 (min 24x2) - 8 s loop - unicode - 256 colors
@@ -11,14 +12,14 @@ tags: spinner, loader, diamond, rainbow, prism
                    prism (ASCII fallback) - 4 frames - 130 ms
   still at t=4s -- run it live to see it move
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play loaders-prism
-Snapshot  prism-term snapshot loaders-prism --size 44x5
-In code
+SNAPSHOT  prism-term snapshot loaders-prism --size 44x5
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('loaders-prism'));
 

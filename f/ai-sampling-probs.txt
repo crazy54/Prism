@@ -1,4 +1,5 @@
-* PRISM TERMINAL > AI Working > Model Internals
+--/\=== PRISM TERMINAL > AI WORKING > MODEL INTERNALS            538nm - 17 / 18
+------------------------------------------------------/\========================
 Next-Token Sampling  ai-sampling-probs
 Next-token sampling: top-k candidates as probability bars that sharpen or
 flatten as temperature slides, then the sampled token flashes and joins the
@@ -18,11 +19,11 @@ tags: sampling, temperature, probabilities, top-k, logits
           _churn       ..................................   2.8%
   still at t=3.9000000000000004s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ai-sampling-probs
-Snapshot  prism-term snapshot ai-sampling-probs --size 60x10
-In code
+SNAPSHOT  prism-term snapshot ai-sampling-probs --size 60x10
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ai-sampling-probs'));
 

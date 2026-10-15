@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > System Monitors
+--/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            568nm - 5 / 39
+------------------------------------------------------/\========================
 top  ops-top
 procps top: the uptime/Tasks/%Cpu(s)/MiB Mem/MiB Swap summary and a CPU-sorted
 process table that refreshes every few seconds.
@@ -27,11 +28,11 @@ MiB Swap:   2048.0 total,   1936.0 free,    112.0 used.   9829.1 avail Mem
       1 root     20   0  166.2m  12.1m   8.4m S   0.0   0.1  1:01.00 systemd
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-top
-Snapshot  prism-term snapshot ops-top --size 80x20
-In code
+SNAPSHOT  prism-term snapshot ops-top --size 80x20
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-top'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Pure ASCII > ASCII Animations
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ANIMATIONS             494c - 1 / 29
+------------------------------------------------------/\========================
 donut.c  ascii-donut
 The canonical spinning ASCII torus: z-buffered, lit with the twelve-step
 .,-~:;=!*#$@ ramp, scaled to any window.
@@ -27,11 +28,11 @@ tags: donut, donut.c, torus, classic, 3d
 
   still at 80x20 - t=5s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ascii-donut
-Snapshot  prism-term snapshot ascii-donut --size 80x24
-In code
+SNAPSHOT  prism-term snapshot ascii-donut --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ascii-donut'));
 

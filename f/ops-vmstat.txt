@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > System Monitors
+--/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            568nm - 6 / 39
+------------------------------------------------------/\========================
 vmstat 1  ops-vmstat
 vmstat 1 streaming one line a second under its two-line header: run queue,
 memory, swap, block I/O, interrupts, context switches, CPU split.
@@ -21,11 +22,11 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
  4  0 114688 1965769 430112 8339537    0    0   446   188 4352 8556 25  6 66  3
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-vmstat
-Snapshot  prism-term snapshot ops-vmstat --size 80x14
-In code
+SNAPSHOT  prism-term snapshot ops-vmstat --size 80x14
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-vmstat'));
 

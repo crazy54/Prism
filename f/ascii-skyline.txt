@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Pure ASCII > ASCII Art
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ART                   494c - 14 / 29
+------------------------------------------------------/\========================
 City at Night  ascii-skyline
 A night skyline whose windows switch on and off, an antenna beacon blinks, stars
 twinkle and a plane crosses the moon.
@@ -27,11 +28,11 @@ ____|     ||    | |  [] ||[]  | |    ||  [][]||[][][]  []|_______|  [] ||    ||
 |  ||     ||[]  | |     ||    | |    ||      ||          ||     ||     ||[][]||
   still at 80x20 - t=6s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ascii-skyline
-Snapshot  prism-term snapshot ascii-skyline --size 80x24
-In code
+SNAPSHOT  prism-term snapshot ascii-skyline --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ascii-skyline'));
 

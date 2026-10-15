@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Network
+--/\=== PRISM TERMINAL > LINUX & OPS > NETWORK                   568nm - 14 / 39
+------------------------------------------------------/\========================
 ss -tulpn  ops-ss-listen
 Typing `sudo ss -tulpn` and getting the listening sockets: Netid, State, queues,
 local/peer addresses and the owning processes.
@@ -20,11 +21,11 @@ ops@node03:~$
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-ss-listen
-Snapshot  prism-term snapshot ops-ss-listen --size 80x13
-In code
+SNAPSHOT  prism-term snapshot ops-ss-listen --size 80x13
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-ss-listen'));
 

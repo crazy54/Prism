@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Architecture Diagrams > Git Graphs
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > GIT GRAPHS      574nm - 16 / 16
+------------------------------------------------------/\========================
 Rebase, Visualized  diagrams-git-rebase
 A git rebase, visualized: feature commits lift off their old base and replay
 onto main with new hashes, leaving ghosts, then main fast-forwards to a line.
@@ -19,11 +20,11 @@ tags: git, rebase, fast-forward, history, branches
     $ git swit
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play diagrams-git-rebase
-Snapshot  prism-term snapshot diagrams-git-rebase --size 72x12
-In code
+SNAPSHOT  prism-term snapshot diagrams-git-rebase --size 72x12
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('diagrams-git-rebase'));
 

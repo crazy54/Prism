@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Spinners & Loaders > Orbits & Shapes
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > ORBITS & SHAPES    488nm - 49 / 64
+------------------------------------------------------/\========================
 Clock Hand  loaders-clock-hand
 A braille clock hand sweeping a two-cell dial round a fixed hub -- Unicode-only,
 no emoji needed.
@@ -12,14 +13,14 @@ tags: spinner, loader, braille, clock, time, original
                    clock-hand (ASCII fallback) - 4 frames - .
   still at t=4s -- run it live to see it move
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play loaders-clock-hand
-Snapshot  prism-term snapshot loaders-clock-hand --size 44x5
-In code
+SNAPSHOT  prism-term snapshot loaders-clock-hand --size 44x5
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('loaders-clock-hand'));
 

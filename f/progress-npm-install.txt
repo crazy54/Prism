@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Steps & Pipelines
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > STEPS & PIPELINES
+------------------------------------------------------/\========================
 npm install  progress-npm-install
 npm's gauge -- a bracketed fill, a spinner and the current reify step -- ending
 in the added, funding and audit summary.
@@ -14,11 +15,11 @@ tags: npm, node, gauge, javascript
 
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-npm-install
-Snapshot  prism-term snapshot progress-npm-install --size 80x7
-In code
+SNAPSHOT  prism-term snapshot progress-npm-install --size 80x7
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-npm-install'));
 

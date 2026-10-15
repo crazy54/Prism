@@ -1,4 +1,5 @@
-* PRISM TERMINAL > FX Store > Fractals
+--/\=== PRISM TERMINAL > FX STORE > FRACTALS                     436nm - 11 / 24
+------------------------------------------------------/\========================
 Blossom Tree  fractal-tree
 A recursive blossom tree swaying in the wind -- ten generations of branches,
 blooming tips and drifting petals.
@@ -23,18 +24,18 @@ tags: tree, fractal, recursive, l-system, blossom, sakura, wind
                                        ===
              *             *           ===
                                        ===        %
-        ::::: : :  :   :     :  :: :%  ===:::       :  : : ::       :: :
-        ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        ----- - -  -   -     -  -- -%  ===---       -  - - --       -- -
+        ----------------------------------------------------------------
   still at 64x20 - t=6s -- run it live for full size and motion
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   depth=10              Generations  (5-12)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play fractal-tree
-Snapshot  prism-term snapshot fractal-tree --size 64x24
-In code
+SNAPSHOT  prism-term snapshot fractal-tree --size 64x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('fractal-tree'));
 

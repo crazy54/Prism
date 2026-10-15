@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Notifications & Status > Health & Uptime
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > HEALTH & UPTIME
+------------------------------------------------------/\========================
 Heartbeat Monitor  status-heartbeat
 A cron and worker heartbeat monitor drawn as an ECG trace: each check-in is a
 beat, missed beats flatline red and raise the alarm.
@@ -7,20 +8,20 @@ tags: heartbeat, ecg, monitor, dead man switch, braille
 
     billing-worker  ALIVE                    every 0.8s - last beat 0.1s ago
                                                                            @
-                           =                                               *
-                           =                                               *
-        -                 = =                           +                 *
-    ---- --------  ======== ========= ========++++++++++ ++++++++  +++++++*
-                 --                  =                           ++
+                           +                                               #
+                           +                                               #
+        =                 + +                           *                 #
+    --== ========  =======+ +++++++++ ++++++++********** ********  ########
+                 ==                  +                           *#
 
     15/15 check-ins in the last 12 s - 0 missed - alert after 2
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play status-heartbeat
-Snapshot  prism-term snapshot status-heartbeat --size 72x9
-In code
+SNAPSHOT  prism-term snapshot status-heartbeat --size 72x9
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('status-heartbeat'));
 

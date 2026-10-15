@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Spinners & Loaders > Truecolor Spinners
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > TRUECOLOR SPINNERS
+------------------------------------------------------/\========================
 ECG  loaders-ecg
 An ECG trace scrolling across eight braille cells -- P wave, QRS spike, T wave.
 A heartbeat for health checks.
@@ -12,14 +13,14 @@ tags: spinner, loader, braille, ecg, heartbeat, health, original
                    ecg (ASCII fallback) - 4 frames - 130 ms
   still at t=4s -- run it live to see it move
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play loaders-ecg
-Snapshot  prism-term snapshot loaders-ecg --size 44x5
-In code
+SNAPSHOT  prism-term snapshot loaders-ecg --size 44x5
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('loaders-ecg'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Particles & Simulations > Particles
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PARTICLES      475nm - 3 / 18
+------------------------------------------------------/\========================
 Spiral Galaxy  galaxy
 Density-wave spiral galaxy -- thousands of stars on tilted elliptical orbits
 with differential rotation, glowing core and dust.
@@ -10,28 +11,28 @@ tags: galaxy, spiral, stars, space
                                 .
                                 : :::    .                 -
                           : .    .+-   .   .        -
-                      . .  .     .    -   .:**:.=%@#@::. . .+.
-                    ..:  :.  -   -  ...%%#=@:::-....#@*-:@..
-                  -.*@:        : =..+@@+.::::...:-* = +..*==@.  .    -
-                 +-..    :    ..:..@@@:+#:*-+:.*.-.=      .:#..
-                ..@+.:.   .  :-..+:@@#@@@@#@@@.*...#. :   -..=.
-                 :#*:..      .%.:-:*@@@@@@@+@:@..:.  *  :  .:%:
-                 ..@:-    # ..-....-.::*:@-@@.::. .*   :   .-:.
-                . ::@%:.@=  ......-=..=.+@%=:..  .  .: ..=....
-                   ..:@-:==+..:+#%:@@-*+@#. .. .  ==   .=.:..
-                    :-  ..#:*%+@@=.@.% - #.             .=
+                      . .  .     .    -   .:++:.=%@*%::. . .+.
+                    ...  :.  -   -  ...###-@:..-....#@*-:@..
+                  -.*@:        : -..+@@=.::::....:* = +..*==@.  .    -
+                 +-..    :    .....@@@.+*.*-+:.+.-.=      ..#..
+                ..@+.:.   .  :-..+:@@*@@@@#@%@.*...#. :   -..=.
+                 .#*...      .%..:.*@@@@@@@+@.@....  *  :  .:%.
+                 ..@:-    # ..:....:..:+.@-@@.::. .*   :   .-..
+                . .:@%..@=  ......-=..=.+@#=:..  .  .: ..=....
+                   ...@-.=-+...+#%:@@-+=@#. .. .  ==   .=....
+                    :-  ..*:+%+@%=.@.% - #.             .=
                     +    -    =      -+    : #. :  .-. +
                      +     +    *  +   .      .  -
-                      .  =      .     .   -
+                      .  -      .     .   -
                                                                  :
-                                                                          =
+                                                                          -
   still at 80x20 - t=4s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play galaxy
-Snapshot  prism-term snapshot galaxy --size 80x24
-In code
+SNAPSHOT  prism-term snapshot galaxy --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('galaxy'));
 

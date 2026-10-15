@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Processes & Services
+--/\=== PRISM TERMINAL > LINUX & OPS > PROCESSES & SERVICES      568nm - 19 / 39
+------------------------------------------------------/\========================
 pstree -p  ops-pstree
 pstree -p under watch: systemd and its children as a tree with PIDs, while a
 cron job forks a backup script that runs and exits.
@@ -23,11 +24,11 @@ systemd(1)-+-agetty(902)
            `-systemd-logind(733)
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-pstree
-Snapshot  prism-term snapshot ops-pstree --size 80x16
-In code
+SNAPSHOT  prism-term snapshot ops-pstree --size 80x16
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-pstree'));
 

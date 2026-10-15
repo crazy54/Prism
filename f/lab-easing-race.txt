@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animation Lab > Easing & Timing
+--/\=== PRISM TERMINAL > ANIMATION LAB > EASING & TIMING          604nm - 2 / 17
+------------------------------------------------------/\========================
 Easing Race  lab-easing-race
 Balls racing the same distance in the same time with different easings, over an
 animator-style spacing chart.
@@ -7,30 +8,30 @@ tags: easing, spacing chart, timing, race, ease in, ease out,
       animation principles
 
 
-        linear      + : + : + : + : + : :+: :+: :+: :+: :+: : + : + : ==
+        linear      + . + . + . + . + . .+. .+. .+. .+. .+. . + . + . **
 
         inQuad                                                        **
-                    + : : : + : : :+: : : + : : + : :+: :+: :+: + :+:++
+                    + . . . + . . .+. . . + . . + . .+. .+. .+. + .+.++
         outQuad
-                    ++:+:+: + : + : :+: : + : : + : : :+: : : + : : : ##
+                    ++.+.+. + . + . .+. . + . . + . . .+. . . + . . . ++
         inOutCubic
-                    + :+: :+: : : + : : : : :+: : : : :+: : : :+: :+:+##
+                    + .+. .+. . . + . . . . .+. . . . .+. . . .+. .+.+**
 
-        outBack    ++ + : : :+: : : : :+: : : : : : + : : : : : : : : **
+        outBack    ++ + . . .+. . . . .+. . . . . . + . . . . . . . . ##
 
-        outBounce                                                     ++
-                    ++:+: +++ :++ : : : : : : + : : : : : :+: : : :+: +
+        outBounce                                                     ##
+                    ++.+. +++ .++ . . . . . . + . . . . . .+. . . .+. +
         outElastic
-                   ++ :++ : : : : : : : : : : : : : : : : : : : : : : ==
+                   ++ .++ . . . . . . . . . . . . . . . . . . . . . . **
         inOutExpo
-                    + + : :+: : : : : : : : :+: : : : : : : : + : :+:+==
+                    + + . .+. . . . . . . . .+. . . . . . . . + . .+.+**
   still at t=2.6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play lab-easing-race
-Snapshot  prism-term snapshot lab-easing-race --size 64x18
-In code
+SNAPSHOT  prism-term snapshot lab-easing-race --size 64x18
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('lab-easing-race'));
 

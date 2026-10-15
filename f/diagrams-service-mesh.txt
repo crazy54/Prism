@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Architecture Diagrams > Networks & Topologies
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > NETWORKS & TOPOLOGIES
+------------------------------------------------------/\========================
 Service Mesh  diagrams-service-mesh
 A service mesh on a braille canvas: services ring the frame, diagonal call edges
 carry traffic comets, and one edge runs hot red during a latency spike.
@@ -7,29 +8,29 @@ tags: service mesh, graph, traffic, braille, latency
 
 
                                         * payments
-                               p99 2.4s ========
-                     * checkout ====            ===::-
-                        ::  ================::-+    ====
-                       =        =::-=+      ============ * notify
-                    ===             ====                ======
-                    ::                  ====
-                   =                        ====
-             * gateway                          ===::-
-                   =====                            ==+=
-                    ::= ==::-=                          ====
-                      =     ====                       * inventory
-                       =::      ====                    =::=
-                      * users       ====::        ======
-                          =             =--=    =::=
+                               p99 2.4s ======--
+                     * checkout ====            ---::=
+                        ::  ----------------::=*    ----
+                       -        -::=+*      ------------ * notify
+                    ++-             ----                ------
+                    ::                  ----
+                   -                        ----
+             * gateway                          ---::=
+                   -----                            ++*-
+                    ::+ --::=+                          ----
+                      -     ----                       * inventory
+                       -::      ----                    -::-
+                      * users       ----::        ++----
+                          -             -==+    -::-
                                          * search
         x checkout -> payments p99 2.4s . retries 3.1%
   still at t=4s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play diagrams-service-mesh
-Snapshot  prism-term snapshot diagrams-service-mesh --size 64x18
-In code
+SNAPSHOT  prism-term snapshot diagrams-service-mesh --size 64x18
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('diagrams-service-mesh'));
 

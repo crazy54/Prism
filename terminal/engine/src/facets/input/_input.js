@@ -71,7 +71,8 @@ export function modal(ctx, s, x, y, w, h, opts = {}) {
   const th = ctx.theme;
   const { enter = 1, ...rest } = opts;
   const yy = y - Math.round((1 - enter) * 2);
-  const shade = mix(th.bg, 0x000000, 0.45);
+  // Depth from light: a soft scrim behind dialogs, barely there by Day.
+  const shade = mix(th.bg, 0x000000, th.mode === 'light' ? 0.06 : 0.35);
   for (let r = 1; r <= h; r++) {
     for (let c = 2; c <= w + 1; c++) {
       if (r < h && c < w) continue;

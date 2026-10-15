@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Logs & Journals
+--/\=== PRISM TERMINAL > LINUX & OPS > LOGS & JOURNALS           568nm - 27 / 39
+------------------------------------------------------/\========================
 nginx access log  ops-nginx-access
 An lnav-style view following the nginx access log: lines chopped at the edge,
 status codes by class, a 5xx burst tinting lines red, and a status bar.
@@ -23,11 +24,11 @@ tags: nginx, access-log, http, status-codes, lnav, logs
  L48,235  100%  0 errors  9 warnings                                ?:View Help
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-nginx-access
-Snapshot  prism-term snapshot ops-nginx-access --size 80x16
-In code
+SNAPSHOT  prism-term snapshot ops-nginx-access --size 80x16
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-nginx-access'));
 

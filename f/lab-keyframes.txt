@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animation Lab > Easing & Timing
+--/\=== PRISM TERMINAL > ANIMATION LAB > EASING & TIMING          604nm - 4 / 17
+------------------------------------------------------/\========================
 Keyframe Timeline  lab-keyframes
 A keyframe timeline driving a sprite: per-property tracks with eased keys, value
 curves, a playhead and timecode.
@@ -10,28 +11,28 @@ tags: keyframes, timeline, playhead, interpolation, tracks, motion design
 
 
 
-                                                                        ***
-                                                                      ******
-                                                                      ******
-                                                                        ***
-    :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :  :
+                                                                        ###
+                                                                      ######
+                                                                      ######
+                                                                        ###
+    .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
 
     2.00s  +0s-------------+1s-------------|2s-------------+3s------------+4
-                                +++++++++++|++++++++++++++++
-    x      o++++++++++++++++++*+           |     *          +++++*+++++++++*
-           ++                ++++++++++++++|++                      ++++++++
-    y      o +++++++++++*++++        *     |  ++++++++++*+++++++++++       *
-            +++++++++++++++++++++++++++++++|++++++++++
-    scale  o                  *            |         *+++++++++++++++++++++o
-                                           |       +++++++++++++++++++++++++
-    hue    o+++++++++++++++++++++++++++++++|+++++++                        o
+                                ===========|================
+    x      o==================*=           |     *          =====*=========*
+           ==                ==============|==                      ========
+    y      o ===========*====        *     |  ==========*===========       *
+            ===============================|==========
+    scale  o                  *            |         *=====================o
+                                           |       =========================
+    hue    o===============================|=======                        o
   still at 72x20 - t=2s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play lab-keyframes
-Snapshot  prism-term snapshot lab-keyframes --size 72x22
-In code
+SNAPSHOT  prism-term snapshot lab-keyframes --size 72x22
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('lab-keyframes'));
 

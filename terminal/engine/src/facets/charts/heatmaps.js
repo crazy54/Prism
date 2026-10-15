@@ -2,7 +2,18 @@
 // and a live correlation matrix.
 import { mix, gradient } from '../../color.js';
 import { palette as makePalette } from '../../palettes.js';
-import { signal, glyphs, safe, put, putR, clamp, smooth, memo, ATTR } from './_data.js';
+import { signal, glyphs, safe, put, putR, clamp, smooth, memo, lift, onFill, ATTR } from './_data.js';
+
+/**
+ * The heat ramp. Magma's near-black floor reads as "nothing" on Night glass;
+ * on Day pearl it would be a black slab, so Day climbs from the pearl itself
+ * through the brand violet to the warm end. --set palette=… always wins.
+ */
+const heatRamp = (ctx) => {
+  const th = ctx.theme;
+  if (th.mode !== 'light' || ctx.params.palette) return ctx.palette('magma');
+  return gradient([th.bg, mix(th.bg, th.accent, 0.35), th.accent, th.crit, th.warn]);
+};
 
 const heatLatency = {
   id: 'charts-heatmap-latency',
@@ -18,7 +29,7 @@ const heatLatency = {
   order: 10,
   setup(ctx) {
     const th = ctx.theme, W = ctx.width, H = ctx.height, b = safe(ctx.buffer, glyphs(ctx));
-    const pal = ctx.palette('magma');
+    const pal = heatRamp(ctx);
     const p50 = signal(ctx, { seed: 91, base: 0.32, amp: 0.06, rate: 2, min: 0.1, max: 0.8 });
     const tail = signal(ctx, { seed: 92, base: 0.1, amp: 0.25, rate: 0.5, min: 0, max: 1 });
     const axisW = W >= 32 ? 7 : 0, foot = H >= 7 ? 1 : 0;
@@ -87,7 +98,7 @@ const calendar = {
         let lv = days[i];
         if (i === today) lv = clamp(grow, 0, 4);
         const ch = g.u ? (cw === 2 ? '■' : '▪') : '#';
-        b.set(labW + w * cw, top + d, ch, i === today && Math.floor(t * 2) % 2 ? mix(levels[lv], 0xffffff, 0.4) : levels[lv]);
+        b.set(labW + w * cw, top + d, ch, i === today && Math.floor(t * 2) % 2 ? lift(th, levels[lv], 0.4) : levels[lv]);
       }
       if (H >= 9) {
         const y = top + 7;
@@ -136,7 +147,7 @@ const corr = {
           const bg = div((v + 1) / 2);
           const txt = (v >= 0 ? ' ' : '') + v.toFixed(2).replace(/^(-?)0/, '$1');
           for (let k = 0; k < cw - 1; k++) b.set(labW + j * cw + k, i + 1, ' ', undefined, bg);
-          if (cw >= 5) b.text(labW + j * cw + Math.floor((cw - 1 - txt.length) / 2), i + 1, txt, Math.abs(v) > 0.6 ? 0xffffff : th.ink, bg, Math.abs(v) > 0.6 ? ATTR.BOLD : 0);
+          if (cw >= 5) b.text(labW + j * cw + Math.floor((cw - 1 - txt.length) / 2), i + 1, txt, Math.abs(v) > 0.6 ? onFill(th, bg) : th.ink, bg, Math.abs(v) > 0.6 ? ATTR.BOLD : 0);
         }
       }
     };
@@ -159,7 +170,7 @@ const heatWeek = {
   order: 15,
   setup(ctx) {
     const th = ctx.theme, g = glyphs(ctx), W = ctx.width, H = ctx.height, b = safe(ctx.buffer, g);
-    const pal = ctx.palette('magma');
+    const pal = heatRamp(ctx);
     const labW = 4, cw = clamp(Math.floor((W - labW) / 24), 1, 3);
     const top = H >= 9 ? 1 : 0;
     // Weekday office-hours hump, an evening shoulder, quieter weekends, plus noise.
@@ -188,7 +199,7 @@ const heatWeek = {
           const v = i === NOW ? val[i] * fill : val[i];
           const c = pal(0.08 + 0.9 * v);
           const hot = i === cur;
-          for (let k = 0; k < cw - (cw > 1 ? 1 : 0); k++) b.set(labW + h * cw + k, y, g.u ? '█' : '#', hot ? mix(c, 0xffffff, 0.45) : c);
+          for (let k = 0; k < cw - (cw > 1 ? 1 : 0); k++) b.set(labW + h * cw + k, y, g.u ? '█' : '#', hot ? lift(th, c, 0.45) : c);
           if (i === NOW && Math.floor(t * 3) % 2 && cw > 1) b.set(labW + h * cw + cw - 1, y, g.u ? '◂' : '<', th.ink);
         }
       }

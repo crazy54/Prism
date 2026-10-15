@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Input & Menus > Command Palettes
+--/\=== PRISM TERMINAL > INPUT & MENUS > COMMAND PALETTES        585nm - 13 / 23
+------------------------------------------------------/\========================
 Shell Autocomplete  input-autocomplete
 A shell prompt with a fish-style ghost suggestion from history, a zsh-style
 completion menu that Tab cycles, then -> accepts and the command runs.
@@ -19,11 +20,11 @@ tags: autocomplete, completion, shell, zsh, fish
 
   still at t=4s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play input-autocomplete
-Snapshot  prism-term snapshot input-autocomplete --size 64x12
-In code
+SNAPSHOT  prism-term snapshot input-autocomplete --size 64x12
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('input-autocomplete'));
 

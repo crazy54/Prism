@@ -126,6 +126,24 @@ export function num(v, d = 1) {
 /** Health → theme color. */
 export const healthColor = (th, h) => (h >= 0.8 ? th.pos : h >= 0.5 ? th.warn : th.neg);
 
+/**
+ * The theme's "white light" for highlights — peaks, markers, needles, the newest
+ * sample. White on Night glass; ink on Day pearl, where a white mark would vanish.
+ */
+export const light = (th) => (th.mode === 'light' ? th.ink : 0xffffff);
+
+/** Brighten a color toward the light at Night, deepen it toward ink by Day. */
+export const lift = (th, c, k) => mix(c, light(th), k);
+
+/** WCAG relative luminance (0 black … 1 white). */
+export function relLum(c) {
+  const f = (v) => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
+  return 0.2126 * f((c >> 16) & 255) + 0.7152 * f((c >> 8) & 255) + 0.0722 * f(c & 255);
+}
+
+/** Text that reads on a fill: white on dark fills, the theme's darkest on light ones. */
+export const onFill = (th, fill) => (relLum(fill) > 0.18 ? (th.mode === 'light' ? th.ink : th.bg) : 0xffffff);
+
 /** Soft tint of color c over the background. */
 export const tint = (th, c, k = 0.18) => mix(th.bg, c, k);
 

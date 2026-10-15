@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Charts & Metrics > Gauges & Meters
+--/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      505nm - 23 / 30
+------------------------------------------------------/\========================
 Radar Profile  charts-radar
 A six-axis spider chart comparing a service to its baseline: the live profile
 morphs as the service degrades and heals.
@@ -7,27 +8,27 @@ tags: radar, spider chart, profile, comparison, braille
 
 
                                      latency
-                                       :::
-                                   ::::+@@:::
-                                :::  ++:::++ ::::
-                      availability=++:: : ::++ @@errors
-                              :==@@======:   :++: :
-                              :  =+ ::: :=:::  +  :
-                              :  :=+ : :::==   :+ :
-                              :  :@@+:: : ::== :+ :
-                              : :::: ++::: ==+++@@:
-                          cost::   ::::+@@+++: saturation
-                                ::::   :=:    :::
-                                    ::: : ::::
-                                       :::
+                                       ...
+                                   ....*@@...
+                                ...  **...** ....
+                      availability+**.. . ..** @@errors
+                              .++@@++++++.   .**. .
+                              .  +* ... .+...  *  .
+                              .  .+* . ...++   .* .
+                              .  .@@*.. . ..++ .* .
+                              . .... **... ++***@@.
+                          cost..   ....*@@***. saturation
+                                ....   .+.    ...
+                                    ... . ....
+                                       ...
                                      traffic
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play charts-radar
-Snapshot  prism-term snapshot charts-radar --size 56x16
-In code
+SNAPSHOT  prism-term snapshot charts-radar --size 56x16
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('charts-radar'));
 

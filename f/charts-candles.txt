@@ -1,33 +1,34 @@
-* PRISM TERMINAL > Charts & Metrics > Bars & Histograms
+--/\=== PRISM TERMINAL > CHARTS & METRICS > BARS & HISTOGRAMS    505nm - 16 / 30
+------------------------------------------------------/\========================
 Candlesticks  charts-candles
 OHLC candlesticks at half-cell precision with wicks, green and red bodies, a
 volume strip and a right-hand price scale.
 chart - 72x16 (min 28x7) - 20 s loop - unicode - truecolor
 tags: candlestick, ohlc, finance, trading, volume
 
-                                   =  =  =     =           =         152.71
-                                  ** ++  =     = ** ++     = ** **   149.61
-     =                            **  = ++     = ** ++  = **  =  =
-    ++  =              =     =    **    ++  = **  = ++ ++ **     =
-    ++  =             ** ** ++    **    ++ ++ **     = ++ **
-    ++  =             ** ** ++ ** **     = ++ **       ++ **
-     = ++             **  = ++ **  =     = ++ **        =  =
-     = ++           = **  =  =  =  =        =  =        =  =         138.95
-       ++       ++ **  =     =                          =  =
-       ++    **  =     =                                   =
-        = **  =        =
-        =  =
+                                   +  =  =     +           +         152.71
+                                  ## **  =     + ## **     + ## ##   149.61
+     =                            ##  = **     + ## **  = ##  +  +
+    **  =              +     =    ##    **  = ##  + ** ** ##     +
+    **  =             ## ## **    ##    ** ** ##     = ** ##
+    **  =             ## ## ** ## ##     = ** ##       ** ##
+     = **             ##  + ** ##  +     = ** ##        =  +
+     = **           + ##  +  =  +  +        =  +        =  +         138.95
+       **       ** ##  +     =                          =  +
+       **    ##  =     +                                   +
+        = ##  +        +
+        =  +
         =
         =                                                            125.19
     __ __             __    __    ##    __ __ __       __ __
     ## ## __ __ __ __ ## __ ## __ ## __ ## ## ## __ __ ## ## __ __
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play charts-candles
-Snapshot  prism-term snapshot charts-candles --size 72x16
-In code
+SNAPSHOT  prism-term snapshot charts-candles --size 72x16
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('charts-candles'));
 

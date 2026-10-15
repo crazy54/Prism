@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Pure ASCII > ASCII Art
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ART                   494c - 12 / 29
+------------------------------------------------------/\========================
 Sailboat at Sea  ascii-sea
 A sailboat rides rolling ~ and ^ swells under a low sun while gulls flap
 overhead between v and V.
@@ -27,11 +28,11 @@ tags: boat, sea, waves, seagulls, sunset
 ~----------------~~~~~~^^^^^~~~~~----                 -----=-----------
   still at 80x20 - t=6s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ascii-sea
-Snapshot  prism-term snapshot ascii-sea --size 80x24
-In code
+SNAPSHOT  prism-term snapshot ascii-sea --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ascii-sea'));
 

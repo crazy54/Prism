@@ -1,20 +1,21 @@
-* PRISM TERMINAL > Particles & Simulations > Weather
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > WEATHER       475nm - 18 / 18
+------------------------------------------------------/\========================
 Night Rain  rain
 Parallax rain over a city skyline -- street and rooftop splashes, flickering
 windows, and lightning that silhouettes the city.
 scene - 80x24 (min 20x6) - 8 s loop - unicode - truecolor
 tags: rain, city, lightning, night
 
-       *     +  -   +  %  - *     *        * -*-  *                   -+      -
-        *     +      + -% -  *   +**            -  +        -+         -+    + -
-+       * -           + %      - + *+           --  +       - +       * +     +
-+        * -             %     -  +**+      + +  -+ +*         +       *     -+
-        *   +     --     %  +     +   +     +++    + +*      + +        *     -+
-  -      *  +-     -- - ++%                  + +  - +  *     +  +       *
- +-    + +*  +-        -  %+-             -   ++   -   *      + +-       *
-  -     + *  +          -  %-      -       ++  -        *     +
-   -    +- **       *** -     *-   -       --   -     *
-          -         * **-      .-           -                             .
+       #     *  -   *  %  - #     #        # -#-  #                   -*      -
+        #     *      * -% -  #   *##            -  *        -*         -*    * -
+*       # -           * %      - * #*           --  *       - *       # *     *
+*        # -             %     -  *##*      * *  -* *#         *       #     -*
+        #   *     --     %  *     *   *     ***    * *#      * *        #     -*
+  -      #  *-     -- - **%                  * *  - *  #     *  *       #
+ *-    * *#  *-        -  %*-             -   **   -   #      * *-       #
+  -     * #  *          -  %-      -       **  -        #     *
+   -    *- ##       ### -     #-   -       --   -     #
+          -         # ##-      .-           -                             .
               ....             .                    ......                .
               ....          .......                 ......       ............
               ....          .......                 ......       ............
@@ -27,11 +28,11 @@ tags: rain, city, lightning, night
 ......... ........ ................................ ............................
   still at 80x20 - t=4s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play rain
-Snapshot  prism-term snapshot rain --size 80x24
-In code
+SNAPSHOT  prism-term snapshot rain --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('rain'));
 

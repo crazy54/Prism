@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animation Lab > Transitions
+--/\=== PRISM TERMINAL > ANIMATION LAB > TRANSITIONS             604nm - 16 / 17
+------------------------------------------------------/\========================
 Slides & Pushes  lab-slide
 Slide transitions between two scenes: push, cover, reveal and a vertical push,
 each eased out to land softly.
@@ -27,11 +28,11 @@ tags: transition, slide, push, cover, reveal, ui motion
            2/4  slide . cover from the right                     100%
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play lab-slide
-Snapshot  prism-term snapshot lab-slide --size 60x20
-In code
+SNAPSHOT  prism-term snapshot lab-slide --size 60x20
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('lab-slide'));
 

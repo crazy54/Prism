@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Retro & Demoscene > Outrun
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > OUTRUN              480nm - 24 / 24
+------------------------------------------------------/\========================
 Synthwave  synthwave
 Outrun flyover -- striped gradient sun, neon-rimmed mountains and an
 anti-aliased perspective grid.
@@ -27,11 +28,11 @@ tags: synthwave, outrun, retrowave, grid, sun
 ..-......:.......-......:.......-......:.......-......:.......-......:.......-..
   still at 80x20 - t=4s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play synthwave
-Snapshot  prism-term snapshot synthwave --size 80x24
-In code
+SNAPSHOT  prism-term snapshot synthwave --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('synthwave'));
 

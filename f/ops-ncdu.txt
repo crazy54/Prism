@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Disk & Storage
+--/\=== PRISM TERMINAL > LINUX & OPS > DISK & STORAGE             568nm - 9 / 39
+------------------------------------------------------/\========================
 ncdu  ops-ncdu
 ncdu browsing /var: sizes and [##########] bars sorted largest first, a
 selection that walks the list, and the total disk usage footer.
@@ -23,11 +24,11 @@ tags: ncdu, du, disk usage, storage, cleanup
      Total disk usage:  31.4 GiB  Apparent size:  30.9 GiB  Items: 214388
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-ncdu
-Snapshot  prism-term snapshot ops-ncdu --size 72x16
-In code
+SNAPSHOT  prism-term snapshot ops-ncdu --size 72x16
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-ncdu'));
 

@@ -1,33 +1,34 @@
-[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mArchitecture Diagrams (16)[0m
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;100;49mARCHITECTURE DIAGRAMS[0;39;49m                   [38;5;100mλ 574 · 12 / 17[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;130;49m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;100m━[38;5;100m━[38;5;100m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;100m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[0m
 Box-drawing flows, trees, topologies, sequences and git graphs.
 
-[0;1;38;5;68;49mBOXES & FLOWS[0;2;39;49m  4[0m
-  [38;5;73mdiagrams-architecture     [39mClients, load balancer, three app servers and the d…[0m
-  [38;5;73mdiagrams-flowchart        [39mA delivery flowchart with decisions, labeled yes/no…[0m
-  [38;5;73mdiagrams-pipeline         [39mA pipeline graph: build fans out to parallel test j…[0m
-  [38;5;73mdiagrams-state-machine    [39mA job lifecycle state machine with labeled transiti…[0m
+[0;1;38;5;100;49m01 / BOXES & FLOWS · 4[0;39;49m [38;5;243m──────────────────────────[0m
+  [38;5;31mdiagrams-architecture     [39mClients, load balancer, three app servers and the d…[0m
+  [38;5;31mdiagrams-flowchart        [39mA delivery flowchart with decisions, labeled yes/no…[0m
+  [38;5;31mdiagrams-pipeline         [39mA pipeline graph: build fans out to parallel test j…[0m
+  [38;5;31mdiagrams-state-machine    [39mA job lifecycle state machine with labeled transiti…[0m
 
-[0;1;38;5;68;49mTREES & HIERARCHIES[0;2;39;49m  3[0m
-  [38;5;73mdiagrams-file-tree        [39mA tree(1)-style explorer with guide lines: folders …[0m
-  [38;5;73mdiagrams-org-chart        [39mAn org-chart style tree with elbow connectors: main…[0m
-  [38;5;73mdiagrams-dependency-tree  [39mAn npm ls --all tree printing line by line with ded…[0m
+[0;1;38;5;100;49m02 / TREES & HIERARCHIES · 3[0;39;49m [38;5;243m────────────────────[0m
+  [38;5;31mdiagrams-file-tree        [39mA tree(1)-style explorer with guide lines: folders …[0m
+  [38;5;31mdiagrams-org-chart        [39mAn org-chart style tree with elbow connectors: main…[0m
+  [38;5;31mdiagrams-dependency-tree  [39mAn npm ls --all tree printing line by line with ded…[0m
 
-[0;1;38;5;68;49mNETWORKS & TOPOLOGIES[0;2;39;49m  3[0m
-  [38;5;73mdiagrams-network-topology [39mA network map that builds itself passively from tel…[0m
-  [38;5;73mdiagrams-cluster-map      [39mThree cluster nodes with pods colored by service pl…[0m
-  [38;5;73mdiagrams-service-mesh     [39mA service mesh on a braille canvas: services ring t…[0m
+[0;1;38;5;100;49m03 / NETWORKS & TOPOLOGIES · 3[0;39;49m [38;5;243m──────────────────[0m
+  [38;5;31mdiagrams-network-topology [39mA network map that builds itself passively from tel…[0m
+  [38;5;31mdiagrams-cluster-map      [39mThree cluster nodes with pods colored by service pl…[0m
+  [38;5;31mdiagrams-service-mesh     [39mA service mesh on a braille canvas: services ring t…[0m
 
-[0;1;38;5;68;49mSEQUENCE & TIMELINES[0;2;39;49m  3[0m
-  [38;5;73mdiagrams-sequence         [39mA sequence diagram of one checkout request: call ar…[0m
-  [38;5;73mdiagrams-gantt            [39mA rollout Gantt chart for a maintenance window: the…[0m
-  [38;5;73mdiagrams-timeline         [39mAn incident timeline: a playhead sweeps from deploy…[0m
+[0;1;38;5;100;49m04 / SEQUENCE & TIMELINES · 3[0;39;49m [38;5;243m───────────────────[0m
+  [38;5;31mdiagrams-sequence         [39mA sequence diagram of one checkout request: call ar…[0m
+  [38;5;31mdiagrams-gantt            [39mA rollout Gantt chart for a maintenance window: the…[0m
+  [38;5;31mdiagrams-timeline         [39mAn incident timeline: a playhead sweeps from deploy…[0m
 
-[0;1;38;5;68;49mGIT GRAPHS[0;2;39;49m  3[0m
-  [38;5;73mdiagrams-git-graph        [39mgit log --graph, live: a feature branch forks off m…[0m
-  [38;5;73mdiagrams-git-branches     [39mA left-to-right branch diagram: a feature branch an…[0m
-  [38;5;73mdiagrams-git-rebase       [39mA git rebase, visualized: feature commits lift off …[0m
+[0;1;38;5;100;49m05 / GIT GRAPHS · 3[0;39;49m [38;5;243m─────────────────────────────[0m
+  [38;5;31mdiagrams-git-graph        [39mgit log --graph, live: a feature branch forks off m…[0m
+  [38;5;31mdiagrams-git-branches     [39mA left-to-right branch diagram: a feature branch an…[0m
+  [38;5;31mdiagrams-git-rebase       [39mA git rebase, visualized: feature commits lift off …[0m
 
-[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
-[0;2;39;49mone facet [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/diagrams-architecture[0m
-[0;2;39;49mpaged     [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/diagrams | less -R[0m
-[0;2;39;49mgalleries [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/diagrams-architecture[0m
+[0;2;39;49mpaged     [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/diagrams | less -R[0m
+[0;2;39;49mgalleries [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

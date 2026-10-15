@@ -1,40 +1,41 @@
-* PRISM TERMINAL > Animated Objects > Globes & Planets
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > GLOBES & PLANETS      467nm - 9 / 18
+------------------------------------------------------/\========================
 Ringed Planet  ringed-planet
 A banded gas giant turning under a tilted ring system, with the planet shadowing
 its own rings.
 scene - 72x24 (min 20x7) - 20 s loop - unicode - truecolor
 tags: planet, saturn, rings, space, 3d
 
-                                  -
-    +
+                                  :
+    =
                                                                       +
                       -    -
                           .          =-:.:.
                               =  +==-=----:....
                            .-=+*+--+++++=::......+=-.
-                    :+*=::=##+==+*%++**++=--:......::.......
-                :+*-:=#+-==. ***+---:===-::........ .....:.....:
-              .=*-.+#=-=:    +######**+==--::......    ....:...*=.
+                    :+*=.:=##+==+*%++**++=--:......:........
+                :=*-.=#+-==. ***+---:===-::........ .....:.....:
+              .=*-.+#=-=.    +######**+==--::......    ....:...*=.
               .=*-.+#=-=:    *++=++***+==-::.......    .+-=#+.-*=.
-                :+*-:=#+-==. -=-+****+++=--::...... .==-+#=:-*+:
-                    :+*=::=##+***+++=------====--=+##=::=*+:    .
+                :=*-.=#+-==. -=-+****+++=--::...... .==-+#=.-*=:
+                    :+*=.:=##+***+++=------====--=+##=:.=*+:    .
                            .-=+**+=+=====----=+**+=-.
                                  -===--::......
                                      ......
                                            .                          .  .
-                     -
+                     :
                                                      :
-                                                       -
+                                                       :
   still at 72x20 - t=6s -- run it live for full size and motion
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   tilt=0.32             Ring tilt  (0.08-0.7)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ringed-planet
-Snapshot  prism-term snapshot ringed-planet --size 72x24
-In code
+SNAPSHOT  prism-term snapshot ringed-planet --size 72x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ringed-planet'));
 

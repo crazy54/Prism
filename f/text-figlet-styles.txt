@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Text Effects > Banners & Fonts
+--/\=== PRISM TERMINAL > TEXT EFFECTS > BANNERS & FONTS           484nm - 6 / 29
+------------------------------------------------------/\========================
 figlet: Standard, Small, Block  text-figlet-styles
 A shell session running figlet three ways: the outlined standard face, the
 compact small face and solid block letters with a shadow.
@@ -21,11 +22,11 @@ tags: figlet, banner, shell, standard, small, block
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play text-figlet-styles
-Snapshot  prism-term snapshot text-figlet-styles --size 72x14
-In code
+SNAPSHOT  prism-term snapshot text-figlet-styles --size 72x14
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('text-figlet-styles'));
 

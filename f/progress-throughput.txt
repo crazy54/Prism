@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Transfers & ETA
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   494nm - 41 / 41
+------------------------------------------------------/\========================
 Throughput Gauge  progress-throughput
 A needle gauge of link use during a backup stream, beside the running total,
 average and peak and a rolling rate sparkline.
@@ -17,11 +18,11 @@ tags: throughput, gauge, bandwidth, network, backup
                                     .....-==**+++=++*++=-----==:.:--=++
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-throughput
-Snapshot  prism-term snapshot progress-throughput --size 64x10
-In code
+SNAPSHOT  prism-term snapshot progress-throughput --size 64x10
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-throughput'));
 

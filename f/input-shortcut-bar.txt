@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Input & Menus > Tabs & Bars
+--/\=== PRISM TERMINAL > INPUT & MENUS > TABS & BARS             585nm - 22 / 23
+------------------------------------------------------/\========================
 Shortcut Bar  input-shortcut-bar
 A nano-style editor whose two-row shortcut bar flashes on each keypress and
 swaps to prompt keys for Where Is and Write Out while a deploy.yaml is edited.
@@ -21,11 +22,11 @@ tags: shortcuts, key bar, nano, editor, hotkeys
     ^C Cancel         M-M Mac Format    M-P Prepend       ^T Browse
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play input-shortcut-bar
-Snapshot  prism-term snapshot input-shortcut-bar --size 72x14
-In code
+SNAPSHOT  prism-term snapshot input-shortcut-bar --size 72x14
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('input-shortcut-bar'));
 

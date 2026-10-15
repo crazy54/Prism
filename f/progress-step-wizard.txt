@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Steps & Pipelines
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > STEPS & PIPELINES
+------------------------------------------------------/\========================
 Step Wizard  progress-step-wizard
 A setup wizard's step indicator -- finished steps filled, the current one
 ringed, the rest hollow -- with a caption.
@@ -12,11 +13,11 @@ tags: steps, wizard, onboarding, stepper
       Step 4 of 5  -  Check the plan
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-step-wizard
-Snapshot  prism-term snapshot progress-step-wizard --size 70x5
-In code
+SNAPSHOT  prism-term snapshot progress-step-wizard --size 70x5
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-step-wizard'));
 

@@ -1,4 +1,5 @@
-[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mRetro & Demoscene[0;2;39;49m › [0;1;39;49mBBS & ANSI Art[0m
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;31;49mRETRO & DEMOSCENE[0;2;39;49m › [0;1;38;5;31;49mBBS & ANSI ART[0;39;49m      [38;5;31mλ 480 · 13 / 24[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;31;49m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;67m━[38;5;67m━[38;5;67m━[38;5;67m━[38;5;67m━[38;5;67m━[0m
 [0;1;39;49mBBS Login[0;2;39;49m  bbs-login[0m
 A 1993 BBS login: block-letter board logo, caller stats in a double frame and a
 login that types itself.
@@ -27,19 +28,19 @@ login that types itself.
 [38;5;248;48;5;16m                 [38;5;240m[ESC] hang up   [?] help   SysOp is AVAILABLE[38;5;248m                  [0m
 [0;2;39;49m  still at 80×20 · t=6s — run it live for full size and motion[0m
 
-[0;1;39;49mParams[0;2;39;49m  (--set key=value)[0m
-  [38;5;73mcolors=vga            [0;2;39;49mColors  (vga|theme)[0m
+[0;1;38;5;31;49mPARAMS · --SET KEY=VALUE[0;39;49m [38;5;243m────────────────────────[0m
+  [38;5;31mcolors=vga            [0;2;39;49mColors  (vga|theme)[0m
 
-[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
-[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
-[38;5;73m    prism-term play bbs-login[0m
-[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot bbs-login --size 80x24[0m
-[0;1;39;49mIn code[0m
-  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
-  [38;5;73mawait play(findFacet('bbs-login'));[0m
+[0;1;38;5;31;49mRUN IT LIVE · NODE 18+, NO INSTALL[0;39;49m [38;5;243m──────────────[0m
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;31m    prism-term play bbs-login[0m
+[0;1;38;5;31;49mSNAPSHOT[0;2;39;49m  [0;38;5;31;49mprism-term snapshot bbs-login --size 80x24[0m
+[0;1;38;5;31;49mIN CODE[0m
+  [38;5;31mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;31mawait play(findFacet('bbs-login'));[0m
 
-[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
-[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/checker-floor[0m
-[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/bbs-menu[0m
-[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/retro[0m
-[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/checker-floor[0m
+[0;2;39;49mnext ›    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/bbs-menu[0m
+[0;2;39;49mgallery   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/retro[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

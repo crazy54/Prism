@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Input & Menus > Text Fields
+--/\=== PRISM TERMINAL > INPUT & MENUS > TEXT FIELDS             585nm - 11 / 23
+------------------------------------------------------/\========================
 Commit Message Editor  input-textarea
 A multi-line textarea where a commit message is typed: line numbers, a 50/72
 column guide, subject-length warning and a live character count.
@@ -19,11 +20,11 @@ tags: textarea, editor, multiline, commit, git
         +-------------------------------------------------- 146 chars -+
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play input-textarea
-Snapshot  prism-term snapshot input-textarea --size 64x12
-In code
+SNAPSHOT  prism-term snapshot input-textarea --size 64x12
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('input-textarea'));
 

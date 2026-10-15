@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Pure ASCII > ASCII Animations
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ANIMATIONS             494c - 5 / 29
+------------------------------------------------------/\========================
 ASCII Plasma  ascii-plasma
 Four interfering sine fields mapped onto the " .:-=+*#%@" density ramp and
 cycled through the theme colors.
@@ -27,11 +28,11 @@ tags: plasma, demoscene, ramp, sine
 =++**########**+==--::---==+*##%%%@@%%%###**++++======++++++++++++++*******#####
   still at 80x20 - t=5s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ascii-plasma
-Snapshot  prism-term snapshot ascii-plasma --size 80x24
-In code
+SNAPSHOT  prism-term snapshot ascii-plasma --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ascii-plasma'));
 

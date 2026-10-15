@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Callouts & Layout > Panels & Borders
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > PANELS & BORDERS     580nm - 5 / 15
+------------------------------------------------------/\========================
 Code Block  callouts-code-block
 A titled code panel with line numbers, syntax coloring, a breakpoint, diff
 markers and a debugger-style current line stepping through.
@@ -21,11 +22,11 @@ tags: code, syntax, line numbers, debugger, snippet
        +------------------------------------- Ln 6, Col 3 - JavaScript -+
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play callouts-code-block
-Snapshot  prism-term snapshot callouts-code-block --size 66x14
-In code
+SNAPSHOT  prism-term snapshot callouts-code-block --size 66x14
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('callouts-code-block'));
 

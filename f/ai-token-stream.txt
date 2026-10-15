@@ -1,4 +1,5 @@
-* PRISM TERMINAL > AI Working > Token Streams
+--/\=== PRISM TERMINAL > AI WORKING > TOKEN STREAMS               538nm - 5 / 18
+------------------------------------------------------/\========================
 Token Stream  ai-token-stream
 A response streaming token by token with each new token flashing, a live tok/s
 sparkline and TTFT, then a tokenizer view that tints every token boundary.
@@ -16,11 +17,11 @@ tags: tokens, streaming, llm, tokenizer, tok/s
         TTFT 380ms . 18 tok/s . 56/65 tokens                #===.=+=*::+
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ai-token-stream
-Snapshot  prism-term snapshot ai-token-stream --size 64x9
-In code
+SNAPSHOT  prism-term snapshot ai-token-stream --size 64x9
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ai-token-stream'));
 

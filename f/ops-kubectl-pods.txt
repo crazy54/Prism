@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Containers & Clusters
+--/\=== PRISM TERMINAL > LINUX & OPS > CONTAINERS & CLUSTERS     568nm - 23 / 39
+------------------------------------------------------/\========================
 kubectl get pods -w  ops-kubectl-pods
 kubectl get pods -w during a rolling update: new pods go Pending ->
 ContainerCreating -> Running while old ones go Terminating, appended live.
@@ -23,11 +24,11 @@ api-7d9c6b5f8d-2xk4p        1/1     Running             0          3s
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-kubectl-pods
-Snapshot  prism-term snapshot ops-kubectl-pods --size 80x16
-In code
+SNAPSHOT  prism-term snapshot ops-kubectl-pods --size 80x16
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-kubectl-pods'));
 

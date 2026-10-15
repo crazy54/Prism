@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Transfers & ETA
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   494nm - 33 / 41
+------------------------------------------------------/\========================
 wget  progress-wget
 wget with its scrolling filename, =====> bar, size, rate and eta; every other
 run the connection resets and it resumes with +++ for the bytes it had.
@@ -20,11 +21,11 @@ prism-0.9.2.tgz       70%[===============>       ]   45.86M  12.5MB/s    eta 2s
 
   still at t=5.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-wget
-Snapshot  prism-term snapshot progress-wget --size 80x13
-In code
+SNAPSHOT  prism-term snapshot progress-wget --size 80x13
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-wget'));
 

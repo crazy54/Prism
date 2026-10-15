@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Callouts & Layout > Panels & Borders
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > PANELS & BORDERS     580nm - 2 / 15
+------------------------------------------------------/\========================
 Titled Panels  callouts-titled-panels
 Panels with left, centered and right titles and live footers -- a clock, a pager
 and a status -- the bread and butter of TUI layout.
@@ -21,11 +22,11 @@ tags: panel, title, footer, layout, box
     +---------- 14:03:05 -+ +--------------- 3/5 -+ + | syncing ----------+
   still at t=5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play callouts-titled-panels
-Snapshot  prism-term snapshot callouts-titled-panels --size 72x14
-In code
+SNAPSHOT  prism-term snapshot callouts-titled-panels --size 72x14
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('callouts-titled-panels'));
 

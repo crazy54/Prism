@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Spinners & Loaders > Braille Spinners
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > BRAILLE SPINNERS   488nm - 20 / 64
+------------------------------------------------------/\========================
 Dot Stack  loaders-dot-stack
 Braille rows filling the cell from the bottom and draining again -- a tiny level
 meter.
@@ -12,14 +13,14 @@ tags: spinner, loader, braille, fill, level
                    loadingBlocks (ASCII fallback) - 4 frames.
   still at t=4s -- run it live to see it move
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play loaders-dot-stack
-Snapshot  prism-term snapshot loaders-dot-stack --size 44x5
-In code
+SNAPSHOT  prism-term snapshot loaders-dot-stack --size 44x5
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('loaders-dot-stack'));
 

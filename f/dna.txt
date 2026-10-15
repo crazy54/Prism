@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animated Objects > 3D Solids
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > 3D SOLIDS             467nm - 5 / 18
+------------------------------------------------------/\========================
 DNA Helix  dna
 Rotating double helix in perspective -- depth-sorted, shaded backbones, A-T/G-C
 base-pair rungs and drifting motes.
@@ -9,29 +10,29 @@ tags: dna, helix, biology, 3d
 
 
           -
-        --::       --
-        -::      ==:-        -         ++
-       -  :      =--:       --  :     -=+         :--
-       =---:     =---      :--        - +*       :=::-       ====++
-       -- :------++----: ::-:-       ---=*     -:= - ==    ---=--==++    ::+----
-        - :--:  -:-- : ==:- --===: --- - +    -: = -  -   -  =  =  =***::::+:::-
-        ---   :-:.-= ==  -  :---  -: - - ##+--- = -  +-----  =  =   +*- :  +   =
-       :  --::-:  --+  ::-  : ----- -  - +* :-  - -  + -= - =  =   + +**  +    =
-        ::: ---::::-==: -   :  --  -  -   +* -  - -  --== = -  =  +===++* +   =
-                    --===---:----  -  -:::-+-  -  - --  --= - = --     ** =  =
-                                :---::-    +*  - - --    -  - =-:      ++ = +===
-                                 :::        =++==--      --- = :        + ==+
-                                             ==--=       :-- ::         +* +
-                                                          ---:          *++
-                                                     -     ::           +++
-                                                                    -    =-
+        --:-       -:
+        =-:      =---        =         =-
+       =  -      ---:       =+  :     ::-         -==
+       +----     ----      -=-        - ==       -=--=       ====++
+       -= -------======: ----=       ----=     -:= = ++    ---=--==+*    --+====
+        - ----  -:-- - ==:- ++===- --- - -    -: = =  +   =  =  =  =###----+---=
+        -=-   --:.-- ==  -  --=-  =- - - +++--- = =  +=+:-=  =  =   **- -  +   +
+       :  --::--  --=  -:-  - -===: -  - -= :=  = =  + =+ = =  =   * +**  +    +
+        ::- --=-------: -   -  --  -  -   -= =  = =  -:++ = =  =  *==+++* +   +
+                    ------::-::-=  -  -:::--=  =  = -:  =+= = = ==     ## +  +
+                                -=-----    -+  = = --    =  = ==-      *+ + +===
+                                 ---        -==--=-      === = -        + +=+
+                                             -----       :== --         +* +
+                                                          -=--          #++
+                                                     -     --           *+*
+                                                                    :    +=
   still at 80x20 - t=4s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play dna
-Snapshot  prism-term snapshot dna --size 80x24
-In code
+SNAPSHOT  prism-term snapshot dna --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('dna'));
 

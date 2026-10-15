@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Charts & Metrics > Line & Area
+--/\=== PRISM TERMINAL > CHARTS & METRICS > LINE & AREA           505nm - 7 / 30
+------------------------------------------------------/\========================
 Smooth Streaming Line  charts-stream-scroll
 A live line that scrolls a sub-sample at a time with dotted gridlines, axis
 labels and a pinned current-value tag.
@@ -8,24 +9,24 @@ tags: streaming, line chart, realtime, scroll, grid
      100%
 
 
-             :   :   :   :   :   :   :   :   :   :   :   :   :   :   :   :
-                                                                   ****
-                                   +++ +                    **   **    **
-          ==                  +++++   + +++    ++++++    ***  ***    53.1%
-      50%   =========:   :  ++   :   :   : ++++  :   +++*:   :   :   :   :
-                     ==    +
-                       ===+
-             :   :   :   :   :   :   :   :   :   :   :   :   :   :   :   :
+             .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .
+                                                                   ####
+                                   +** *                    **   *#    ##
+          ++                  +++++   * ***    ******    ***  ***    53.1%
+      50%   +++++++++.   .  ++   .   .   . ****  .   ****.   .   .   .   .
+                     ++    +
+                       ++++
+             .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .
 
 
        0%
   still at t=5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play charts-stream-scroll
-Snapshot  prism-term snapshot charts-stream-scroll --size 70x14
-In code
+SNAPSHOT  prism-term snapshot charts-stream-scroll --size 70x14
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('charts-stream-scroll'));
 

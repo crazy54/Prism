@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animation Lab > Transitions
+--/\=== PRISM TERMINAL > ANIMATION LAB > TRANSITIONS             604nm - 13 / 17
+------------------------------------------------------/\========================
 Wipes  lab-wipe
 Four wipes between a daybreak and a night skyline: soft linear, diagonal, clock
 sweep and barn doors.
@@ -27,11 +28,11 @@ tags: transition, wipe, clock wipe, barn doors, soft edge, scene change
            2/4  wipe . diagonal                                  100%
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play lab-wipe
-Snapshot  prism-term snapshot lab-wipe --size 60x20
-In code
+SNAPSHOT  prism-term snapshot lab-wipe --size 60x20
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('lab-wipe'));
 

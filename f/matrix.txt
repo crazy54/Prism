@@ -1,4 +1,5 @@
-* PRISM TERMINAL > FX Store > Glitch & Noise
+--/\=== PRISM TERMINAL > FX STORE > GLITCH & NOISE               436nm - 21 / 24
+------------------------------------------------------/\========================
 Digital Rain  matrix
 Matrix digital rain in real halfwidth katakana -- white-hot heads, per-column
 speeds and trail lengths, mutating glyphs.
@@ -27,11 +28,11 @@ YM J 6Y4 E< >C- I  F15 0  +      3  -Y S     JZ<I     S 3U ?  ZR 6       8 KCM@
 LA $ -3> I6 2 2 H  SU2    U      A9 FZ 7      9 6     W -C &  6W 9       D T8=G
   still at 80x20 - t=4s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play matrix
-Snapshot  prism-term snapshot matrix --size 80x24
-In code
+SNAPSHOT  prism-term snapshot matrix --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('matrix'));
 

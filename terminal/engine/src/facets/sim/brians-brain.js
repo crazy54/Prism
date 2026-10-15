@@ -4,6 +4,7 @@
 // refractory cells glow in the accent, and a short afterglow traces where the
 // ships have been. Re-seeds itself if activity ever dies down.
 import { NONE, mix } from '../../color.js';
+import { fadeMark } from '../../palettes.js';
 
 export default {
   title: "Brian's Brain",
@@ -39,7 +40,9 @@ export default {
       }
     };
     seed();
-    const fire = mix(0xffffff, th.info, 0.15), refr = mix(th.bg, th.accent, 0.75), trail = th.info;
+    // Firing cells are the hottest ink: white light at Night, deep ink by Day.
+    const fire = th.mode === 'light' ? mix(th.ink, th.info, 0.3) : mix(0xffffff, th.info, 0.15);
+    const refr = mix(th.bg, th.accent, 0.75), trail = th.info;
     let acc = 0;
     const step = () => {
       let live = 0;
@@ -67,7 +70,7 @@ export default {
         const s = cur[i];
         if (s === 1) px[i] = fire;
         else if (s === 2) px[i] = refr;
-        else px[i] = glow[i] > 0.06 ? mix(th.bg, trail, glow[i] * 0.45) : NONE;
+        else px[i] = glow[i] > 0.06 ? fadeMark(th, trail, glow[i] * 0.45) : NONE;
       }
       cv.paint(ctx.buffer);
     };

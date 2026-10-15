@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Logs & Journals
+--/\=== PRISM TERMINAL > LINUX & OPS > LOGS & JOURNALS           568nm - 29 / 39
+------------------------------------------------------/\========================
 Log Histogram  ops-log-histogram
 An lnav-style histogram of log volume in 10-second buckets: bars split into
 errors, warnings and normal, with the current bucket filling live.
@@ -23,11 +24,11 @@ tags: lnav, histogram, logs, errors, volume, timeline
  Errors #  Warnings #  Normal #                       289 err  293 warn  q:Back
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-log-histogram
-Snapshot  prism-term snapshot ops-log-histogram --size 80x16
-In code
+SNAPSHOT  prism-term snapshot ops-log-histogram --size 80x16
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-log-histogram'));
 

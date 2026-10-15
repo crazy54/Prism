@@ -14,6 +14,8 @@ import { palette as makePalette, PALETTES } from '../../palettes.js';
 import { stringWidth, truncate } from '../../width.js';
 import { mix } from '../../color.js';
 
+const lum = (c) => (0.2126 * ((c >> 16) & 255) + 0.7152 * ((c >> 8) & 255) + 0.0722 * (c & 255)) / 255;
+
 export const ASCII_LINE = { frames: ['-', '\\', '|', '/'], interval: 130 };
 const isAscii = (s) => /^[\x20-\x7e]*$/.test(s);
 export const asciiSpinner = (spin) => spin.frames.every(isAscii);
@@ -53,6 +55,9 @@ export function drawFrame(surface, x, y, spin, k, t, theme, color, cache) {
       const u = ((t * 0.45 + (i / Math.max(1, chars.length)) * 0.5) % 1 + 1) % 1;
       c = PALETTES[spin.palette]?.cyclic ? g(u) : g(0.45 + 0.55 * (u < 0.5 ? u * 2 : 2 - u * 2));
     }
+    // Spinner art colors (neon greens, embers, white sparks) are tuned for dark
+    // terminals; by Day, deepen any that would wash out against the pearl.
+    if (theme.mode === 'light' && (spin.colorAt || g) && c >= 0 && lum(c) > 0.3) c = mix(c, theme.ink, 0.45);
     cx = surface.text(cx, y, ch, c);
   });
   return cx;

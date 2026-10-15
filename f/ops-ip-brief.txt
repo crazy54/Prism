@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Network
+--/\=== PRISM TERMINAL > LINUX & OPS > NETWORK                   568nm - 15 / 39
+------------------------------------------------------/\========================
 ip -br -c addr  ops-ip-brief
 Typing `ip -br -c addr` then `ip -br -c link`: interfaces in color, UP green,
 DOWN red, IPv4 and IPv6 addresses and MACs.
@@ -20,11 +21,11 @@ tags: ip, iproute2, interfaces, addresses, network
   ops@node03:~$
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-ip-brief
-Snapshot  prism-term snapshot ops-ip-brief --size 76x13
-In code
+SNAPSHOT  prism-term snapshot ops-ip-brief --size 76x13
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-ip-brief'));
 

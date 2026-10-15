@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Timers & Countdowns
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TIMERS & COUNTDOWNS
+------------------------------------------------------/\========================
 Maintenance Countdown  progress-countdown
 Big T-minus digits to a maintenance window, going amber then red while sessions
 drain, then counting up once it opens.
@@ -17,11 +18,11 @@ tags: countdown, maintenance, window, t-minus
            draining sessions - 360 of 1,204 open
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-countdown
-Snapshot  prism-term snapshot progress-countdown --size 60x10
-In code
+SNAPSHOT  prism-term snapshot progress-countdown --size 60x10
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-countdown'));
 

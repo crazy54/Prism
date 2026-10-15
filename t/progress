@@ -1,68 +1,69 @@
-[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mProgress & Counters (41)[0m
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;30;49mPROGRESS & COUNTERS[0;39;49m                     [38;5;30mλ 494 · 07 / 17[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;29;49m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;30m━[38;5;29m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[0m
 Progress bars, multi-step pipelines, counters, timers and transfer meters.
 
-[48;5;234m [38;5;74;48;5;74m                            [48;5;236m▊[38;5;66m   [39;48;5;234m [38;5;255m 89%[39m [49m  [48;5;234m [38;5;255mbase-image…[39m [38;5;74m━━━━━━━━━━━━━[38;5;238m━━━━━━[39m [38;5;249m 69%[39m  [0m
-[48;5;234m                                       [49m  [48;5;234m [38;5;255mmodels/enc…[39m [38;5;74m━━━━━━━━━━━━━━━━╸[38;5;238m━━[39m [38;5;249m 87%[39m  [0m
-[48;5;234m [38;5;71;48;5;71m                     [38;5;66;48;5;236m           [39;48;5;234m [38;5;255m 65%[39m [49m  [48;5;234m [38;5;249massets.pak[39m  [38;5;71m━━━━━━━━━━━━━━━━━━━[39m [38;5;71m ✔[39m    [0m
-[48;5;234m                                       [49m  [48;5;234m [38;5;249mlocale-pac…[39m [38;5;71m━━━━━━━━━━━━━━━━━━━[39m [38;5;71m ✔[39m    [0m
-[48;5;234m [38;5;74;48;5;74m                   [48;5;236m▋[38;5;66m            [39;48;5;234m [38;5;255m 61%[39m [49m  [48;5;234m [38;5;249mdocs.zip[39m    [38;5;71m━━━━━━━━━━━━━━━━━━━[39m [38;5;71m ✔[39m    [0m
-                                         [48;5;234m [38;5;249mchecksums.…[39m [38;5;71m━━━━━━━━━━━━━━━━━━━[39m [38;5;71m ✔[39m    [0m
-                                         [48;5;234m                                       [0m
-                                         [48;5;234m [0;1;38;5;255;48;5;234mtotal [0;38;5;255;48;5;234m83.7/102.2 MiB[38;5;74m 81%[38;5;249m eta 00:01[39m    [0m
+[48;5;232m [38;5;147;48;5;147m                            [48;5;234m▊[38;5;245m   [39;48;5;232m [38;5;255m 89%[39m [49m  [48;5;232m [38;5;255mbase-image…[39m [38;5;147m━━━━━━━━━━━━━[38;5;235m━━━━━━[39m [38;5;248m 69%[39m  [0m
+[48;5;232m                                       [49m  [48;5;232m [38;5;255mmodels/enc…[39m [38;5;147m━━━━━━━━━━━━━━━━╸[38;5;235m━━[39m [38;5;248m 87%[39m  [0m
+[48;5;232m [38;5;115;48;5;115m                     [38;5;245;48;5;234m           [39;48;5;232m [38;5;255m 65%[39m [49m  [48;5;232m [38;5;248massets.pak[39m  [38;5;115m━━━━━━━━━━━━━━━━━━━[39m [38;5;115m ✔[39m    [0m
+[48;5;232m                                       [49m  [48;5;232m [38;5;248mlocale-pac…[39m [38;5;115m━━━━━━━━━━━━━━━━━━━[39m [38;5;115m ✔[39m    [0m
+[48;5;232m [38;5;111;48;5;111m                   [48;5;234m▋[38;5;245m            [39;48;5;232m [38;5;255m 61%[39m [49m  [48;5;232m [38;5;248mdocs.zip[39m    [38;5;115m━━━━━━━━━━━━━━━━━━━[39m [38;5;115m ✔[39m    [0m
+                                         [48;5;232m [38;5;248mchecksums.…[39m [38;5;115m━━━━━━━━━━━━━━━━━━━[39m [38;5;115m ✔[39m    [0m
+                                         [48;5;232m                                       [0m
+                                         [48;5;232m [0;1;38;5;255;48;5;232mtotal [0;38;5;255;48;5;232m83.7/102.2 MiB[38;5;147m 81%[38;5;248m eta 00:01[39m    [0m
 [0;2;39;49mprogress-smooth                          progress-multi-bar[0m
 
-[0;1;38;5;68;49mPROGRESS BARS[0;2;39;49m  9[0m
-  [38;5;73mprogress-smooth           [39mEighth-block bars that move in 1/8-cell steps, so e…[0m
-  [38;5;73mprogress-braille          [39mHairline progress drawn in braille dots at twice th…[0m
-  [38;5;73mprogress-gradient         [39mSolid gradient fills — prism, aurora, fire and ocea…[0m
-  [38;5;73mprogress-segmented        [39mDiscrete segment bars — parallelograms, squares and…[0m
-  [38;5;73mprogress-indeterminate    [39mFor work with no known end: a gliding block, a barb…[0m
-  [38;5;73mprogress-ascii-classic    [39mThe 7-bit bars everyone recognizes — hashes, an arr…[0m
-  [38;5;73mprogress-thin-line        [39mThe heavy-line bar modern Python and Rust tools use…[0m
-  [38;5;73mprogress-vertical         [39mOne column per worker filling bottom-up in eighth b…[0m
-  [38;5;73mprogress-shaded           [39mFull blocks with a ▓▒░ shaded leading edge over a l…[0m
+[0;1;38;5;30;49m01 / PROGRESS BARS · 9[0;39;49m [38;5;243m──────────────────────────[0m
+  [38;5;31mprogress-smooth           [39mEighth-block bars that move in 1/8-cell steps, so e…[0m
+  [38;5;31mprogress-braille          [39mHairline progress drawn in braille dots at twice th…[0m
+  [38;5;31mprogress-gradient         [39mSolid gradient fills — prism, aurora, fire and ocea…[0m
+  [38;5;31mprogress-segmented        [39mDiscrete segment bars — parallelograms, squares and…[0m
+  [38;5;31mprogress-indeterminate    [39mFor work with no known end: a gliding block, a barb…[0m
+  [38;5;31mprogress-ascii-classic    [39mThe 7-bit bars everyone recognizes — hashes, an arr…[0m
+  [38;5;31mprogress-thin-line        [39mThe heavy-line bar modern Python and Rust tools use…[0m
+  [38;5;31mprogress-vertical         [39mOne column per worker filling bottom-up in eighth b…[0m
+  [38;5;31mprogress-shaded           [39mFull blocks with a ▓▒░ shaded leading edge over a l…[0m
 
-[0;1;38;5;68;49mSTEPS & PIPELINES[0;2;39;49m  10[0m
-  [38;5;73mprogress-multi-bar        [39mSix downloads sharing one link, each with its own b…[0m
-  [38;5;73mprogress-docker-pull      [39mLayers going Waiting → Downloading → Extracting → P…[0m
-  [38;5;73mprogress-cargo-build      [39mGreen "Compiling" lines scrolling above cargo's pin…[0m
-  [38;5;73mprogress-ci-pipeline      [39mlint → build → test → deploy as connected stages wi…[0m
-  [38;5;73mprogress-step-wizard      [39mA setup wizard's step indicator — finished steps fi…[0m
-  [38;5;73mprogress-checklist        [39mA maintenance runbook ticking through its steps wit…[0m
-  [38;5;73mprogress-apt              [39mapt fetching then unpacking packages while dpkg's p…[0m
-  [38;5;73mprogress-pip-install      [39mpip collecting wheels with its rich bar — pink run,…[0m
-  [38;5;73mprogress-git-clone        [39mgit's counters in order — enumerating, counting, co…[0m
-  [38;5;73mprogress-npm-install      [39mnpm's gauge — a bracketed fill, a spinner and the c…[0m
+[0;1;38;5;30;49m02 / STEPS & PIPELINES · 10[0;39;49m [38;5;243m─────────────────────[0m
+  [38;5;31mprogress-multi-bar        [39mSix downloads sharing one link, each with its own b…[0m
+  [38;5;31mprogress-docker-pull      [39mLayers going Waiting → Downloading → Extracting → P…[0m
+  [38;5;31mprogress-cargo-build      [39mGreen "Compiling" lines scrolling above cargo's pin…[0m
+  [38;5;31mprogress-ci-pipeline      [39mlint → build → test → deploy as connected stages wi…[0m
+  [38;5;31mprogress-step-wizard      [39mA setup wizard's step indicator — finished steps fi…[0m
+  [38;5;31mprogress-checklist        [39mA maintenance runbook ticking through its steps wit…[0m
+  [38;5;31mprogress-apt              [39mapt fetching then unpacking packages while dpkg's p…[0m
+  [38;5;31mprogress-pip-install      [39mpip collecting wheels with its rich bar — pink run,…[0m
+  [38;5;31mprogress-git-clone        [39mgit's counters in order — enumerating, counting, co…[0m
+  [38;5;31mprogress-npm-install      [39mnpm's gauge — a bracketed fill, a spinner and the c…[0m
 
-[0;1;38;5;68;49mCOUNTERS & ODOMETERS[0;2;39;49m  6[0m
-  [38;5;73mprogress-odometer         [39mA mechanical counter: each drum rolls to its next d…[0m
-  [38;5;73mprogress-seven-segment    [39mA big LED counter with unlit ghost segments, tickin…[0m
-  [38;5;73mprogress-big-percent      [39mA banner-sized percentage with an extruded shadow o…[0m
-  [38;5;73mprogress-counter-tiles    [39mFour running totals ticking at their own rates; dig…[0m
-  [38;5;73mprogress-ring             [39mBraille rings filling clockwise around a centered p…[0m
-  [38;5;73mprogress-concentric-rings [39mThree nested rings for the three phases of a rollin…[0m
+[0;1;38;5;30;49m03 / COUNTERS & ODOMETERS · 6[0;39;49m [38;5;243m───────────────────[0m
+  [38;5;31mprogress-odometer         [39mA mechanical counter: each drum rolls to its next d…[0m
+  [38;5;31mprogress-seven-segment    [39mA big LED counter with unlit ghost segments, tickin…[0m
+  [38;5;31mprogress-big-percent      [39mA banner-sized percentage with an extruded shadow o…[0m
+  [38;5;31mprogress-counter-tiles    [39mFour running totals ticking at their own rates; dig…[0m
+  [38;5;31mprogress-ring             [39mBraille rings filling clockwise around a centered p…[0m
+  [38;5;31mprogress-concentric-rings [39mThree nested rings for the three phases of a rollin…[0m
 
-[0;1;38;5;68;49mTIMERS & COUNTDOWNS[0;2;39;49m  6[0m
-  [38;5;73mprogress-countdown        [39mBig T-minus digits to a maintenance window, going a…[0m
-  [38;5;73mprogress-stopwatch        [39mA centisecond stopwatch timing benchmark runs; each…[0m
-  [38;5;73mprogress-health-wait      [39mWaiting for a service to report healthy within a 12…[0m
-  [38;5;73mprogress-flip-clock       [39mA split-flap clock rolling over midnight on New Yea…[0m
-  [38;5;73mprogress-sand-timer       [39mnetplan try's revert countdown beside a braille hou…[0m
-  [38;5;73mprogress-systemd-timers   [39msystemctl list-timers with LEFT counting down live;…[0m
+[0;1;38;5;30;49m04 / TIMERS & COUNTDOWNS · 6[0;39;49m [38;5;243m────────────────────[0m
+  [38;5;31mprogress-countdown        [39mBig T-minus digits to a maintenance window, going a…[0m
+  [38;5;31mprogress-stopwatch        [39mA centisecond stopwatch timing benchmark runs; each…[0m
+  [38;5;31mprogress-health-wait      [39mWaiting for a service to report healthy within a 12…[0m
+  [38;5;31mprogress-flip-clock       [39mA split-flap clock rolling over midnight on New Yea…[0m
+  [38;5;31mprogress-sand-timer       [39mnetplan try's revert countdown beside a braille hou…[0m
+  [38;5;31mprogress-systemd-timers   [39msystemctl list-timers with LEFT counting down live;…[0m
 
-[0;1;38;5;68;49mTRANSFERS & ETA[0;2;39;49m  10[0m
-  [38;5;73mprogress-tqdm             [39mNested tqdm bars from a training run: epochs outsid…[0m
-  [38;5;73mprogress-wget             [39mwget with its scrolling filename, =====> bar, size,…[0m
-  [38;5;73mprogress-curl-hash        [39mcurl's hash-bar mode across the full width with a r…[0m
-  [38;5;73mprogress-curl-meter       [39mcurl's default meter — % Total, % Received, Average…[0m
-  [38;5;73mprogress-pv               [39mpv -pterab on a restore stream: bytes, timer, curre…[0m
-  [38;5;73mprogress-rsync            [39mrsync -av --progress pushing a tree: per-file bytes…[0m
-  [38;5;73mprogress-speed-graph      [39mA download drawing its own throughput history as a …[0m
-  [38;5;73mprogress-eta-converge     [39mWhy ETAs jump: the instant-rate estimate (dots) aga…[0m
-  [38;5;73mprogress-queue-drain      [39mA backlog draining while producers keep adding: con…[0m
-  [38;5;73mprogress-throughput       [39mA needle gauge of link use during a backup stream, …[0m
+[0;1;38;5;30;49m05 / TRANSFERS & ETA · 10[0;39;49m [38;5;243m───────────────────────[0m
+  [38;5;31mprogress-tqdm             [39mNested tqdm bars from a training run: epochs outsid…[0m
+  [38;5;31mprogress-wget             [39mwget with its scrolling filename, =====> bar, size,…[0m
+  [38;5;31mprogress-curl-hash        [39mcurl's hash-bar mode across the full width with a r…[0m
+  [38;5;31mprogress-curl-meter       [39mcurl's default meter — % Total, % Received, Average…[0m
+  [38;5;31mprogress-pv               [39mpv -pterab on a restore stream: bytes, timer, curre…[0m
+  [38;5;31mprogress-rsync            [39mrsync -av --progress pushing a tree: per-file bytes…[0m
+  [38;5;31mprogress-speed-graph      [39mA download drawing its own throughput history as a …[0m
+  [38;5;31mprogress-eta-converge     [39mWhy ETAs jump: the instant-rate estimate (dots) aga…[0m
+  [38;5;31mprogress-queue-drain      [39mA backlog draining while producers keep adding: con…[0m
+  [38;5;31mprogress-throughput       [39mA needle gauge of link use during a backup stream, …[0m
 
-[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
-[0;2;39;49mone facet [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-smooth[0m
-[0;2;39;49mpaged     [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/progress | less -R[0m
-[0;2;39;49mgalleries [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/progress-smooth[0m
+[0;2;39;49mpaged     [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/progress | less -R[0m
+[0;2;39;49mgalleries [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

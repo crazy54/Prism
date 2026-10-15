@@ -1,144 +1,130 @@
+// Prism website — the landing page. Shared chrome (Night/Day + relight, First Light, copy,
+// toast) lives in assets/site.js as window.PrismSite; this file wires the page itself.
 (() => {
   'use strict';
   const root = document.documentElement;
   const byId = (id) => document.getElementById(id);
+  const site = window.PrismSite;
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const frames = [...document.querySelectorAll('.facet iframe')];
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let paused = reducedMotion.matches;
-  let toastTimer;
   let showcasePromise;
+  const engines = { term: null, deck: null };
 
-  function notify(message) {
-    const toast = byId('toast');
-    toast.textContent = message;
-    toast.classList.add('visible');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('visible'), 3200);
+  // ── live previews take the page's own theme tokens ───────────────────────
+  // Facets read the theme contract (--bg, --ink, --accent …). The previews were generated with the
+  // catalog's default tokens; paint each frame with the Prism Night / Day values this page is using,
+  // exactly as the app's theme switch does (a pure :root token swap).
+  const CONTRACT = ['--bg', '--panel', '--panel2', '--card', '--line', '--ink', '--muted', '--dim', '--accent', '--accent-rgb', '--accent2', '--info', '--info-rgb', '--pos', '--pos-rgb', '--warn', '--warn-rgb', '--neg', '--neg-rgb', '--crit', '--crit-rgb', '--cardgrad', '--r-sm', '--r-md', '--r-lg', '--r-xl', '--elev-1', '--elev-2', '--dur', '--ease', '--bd', '--head-w', '--dens'];
+  let tokenCss = '';
+  function readTokens() {
+    const cs = getComputedStyle(root);
+    tokenCss = `:root{color-scheme:${site?.mode() === 'day' ? 'light' : 'dark'};${CONTRACT.map((k) => `${k}:${cs.getPropertyValue(k).trim()}`).join(';')};--preview-bg:${cs.getPropertyValue('--bg').trim()}}`;
   }
-
   function updateFrame(frame) {
-    const doc = frame.contentDocument;
-    if (!doc || !doc.body) return;
-    // An iframe has its own canvas and color scheme; transparency can show white.
-    // Paint the same background as the outer page, including after theme changes.
-    doc.documentElement.style.colorScheme = root.dataset.theme;
-    doc.documentElement.style.setProperty('--preview-bg', getComputedStyle(root).getPropertyValue('--bg').trim());
-    let overrides = doc.getElementById('preview-theme');
-    if (!overrides) {
-      overrides = doc.createElement('style');
-      overrides.id = 'preview-theme';
-      doc.head.append(overrides);
-    }
-    overrides.textContent = root.dataset.theme === 'light'
-      ? ':root{--bg:#f6f5f9;--panel:#fff;--panel2:#eeedf5;--card:#fff;--line:#dedce9;--ink:#20202e;--muted:#626274;--dim:#707081;--gray:#72869f;--cardgrad:linear-gradient(157deg,#7353bb08,transparent 55%)}'
-      : '';
-    for (const animation of doc.getAnimations()) {
-      if (paused) animation.pause();
-      else animation.play();
-    }
+    let doc;
+    try { doc = frame.contentDocument; } catch { return; }
+    if (!doc || !doc.head) return;
+    let style = doc.getElementById('preview-theme');
+    if (!style) { style = doc.createElement('style'); style.id = 'preview-theme'; doc.head.append(style); }
+    if (style.textContent !== tokenCss) style.textContent = tokenCss;
+    for (const a of doc.getAnimations()) { if (paused || frame.__offscreen) a.pause(); else a.play(); }
   }
+  const allFrames = () => [...frames, ...document.querySelectorAll('.mini-tile iframe[src]')];
+  const refreshFrames = () => allFrames().forEach(updateFrame);
 
-  function setTheme(theme) {
-    root.dataset.theme = theme;
-    byId('theme-toggle').setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`);
-    document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0a0c12' : '#f6f5f9';
-    try { localStorage.setItem('prism-site-theme', theme); } catch { /* Preferences remain usable without storage. */ }
-    frames.forEach(updateFrame);
+  // Previews hold still while they're off-screen.
+  const frameObserver = new IntersectionObserver((entries) => {
+    for (const e of entries) { e.target.__offscreen = !e.isIntersecting; updateFrame(e.target); }
+  }, { rootMargin: '80px' });
+  function watchFrame(frame) {
+    frame.addEventListener('load', () => updateFrame(frame));
+    frameObserver.observe(frame);
+    updateFrame(frame);
   }
+  readTokens();
+  frames.forEach(watchFrame);
 
+  // ── motion ───────────────────────────────────────────────────────────────
   function setMotion(value) {
     paused = value;
     root.dataset.motion = paused ? 'paused' : 'playing';
-    const button = byId('motion-toggle');
-    button.setAttribute('aria-pressed', String(paused));
-    button.textContent = paused ? '▶ Resume motion' : 'Ⅱ Pause motion';
+    const b = byId('motion-toggle');
+    b.setAttribute('aria-pressed', String(paused));
+    b.innerHTML = paused
+      ? '<svg class="ic" aria-hidden="true"><use href="#i-play"/></svg><span>Resume motion</span>'
+      : '<svg class="ic" aria-hidden="true"><use href="#i-pause"/></svg><span>Pause motion</span>';
     document.querySelectorAll('.live-dot').forEach((badge) => { badge.textContent = paused ? 'PAUSED' : 'LIVE'; });
-    frames.forEach(updateFrame);
+    refreshFrames();
+    engines.term?.web.setGlobalMotion(paused);
+    engines.deck?.setGlobalMotion(paused);
   }
+  byId('motion-toggle').addEventListener('click', () => setMotion(!paused));
+  reducedMotion.addEventListener('change', (e) => setMotion(e.matches));
 
-  async function copy(text, button) {
-    try {
-      if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
-      await navigator.clipboard.writeText(text);
-      notify('Copied. Go make something.');
-      if (button) {
-        const previous = button.textContent;
-        button.textContent = 'Copied ✓';
-        setTimeout(() => { button.textContent = previous; }, 2000);
-      }
-    } catch {
-      const field = byId('copy-fallback');
-      field.value = text;
-      const dialog = byId('copy-dialog');
-      if (!dialog.open) dialog.showModal();
-      field.focus();
-      field.select();
-    }
-  }
+  // The hero art (CSS) and the header mark rest while they're scrolled away.
+  const art = document.querySelector('.hero-art');
+  new IntersectionObserver(([e]) => art.classList.toggle('is-offscreen', !e.isIntersecting)).observe(art);
 
+  // ── copy + replay ────────────────────────────────────────────────────────
   function loadShowcase() {
-    if (!showcasePromise) {
-      showcasePromise = fetch('assets/showcase.json').then((response) => {
-        if (!response.ok) throw new Error('Could not load snippets');
-        return response.json();
-      }).catch((error) => { showcasePromise = null; throw error; });
-    }
+    showcasePromise ||= fetch('assets/showcase.json').then((r) => { if (!r.ok) throw new Error('snippets'); return r.json(); }).catch((err) => { showcasePromise = null; throw err; });
     return showcasePromise;
   }
-
   document.querySelectorAll('[data-copy-facet]').forEach((button) => {
     button.addEventListener('click', async () => {
       button.disabled = true;
       try {
-        const effects = await loadShowcase();
-        const effect = effects.find((item) => item.id === button.dataset.copyFacet);
+        const effect = (await loadShowcase()).find((item) => item.id === button.dataset.copyFacet);
         if (!effect) throw new Error('Facet unavailable');
-        await copy(effect.snippet, button);
-      } catch { notify('Could not load the snippet. Open the library to copy this facet.'); }
+        await site.copy(effect.snippet, button);
+      } catch { site.notify('Could not load the snippet. Open the library to copy this facet.'); }
       finally { button.disabled = false; }
     });
   });
   document.querySelectorAll('[data-replay]').forEach((button) => {
     button.addEventListener('click', () => {
-      setMotion(false);
+      if (paused) setMotion(false);
       const frame = frames.find((item) => item.getAttribute('src').includes(button.dataset.replay));
-      for (const animation of frame?.contentDocument?.getAnimations() || []) {
-        animation.currentTime = 0;
-        animation.play();
-      }
-      notify('Animation replayed.');
+      for (const a of frame?.contentDocument?.getAnimations() || []) { a.currentTime = 0; a.play(); }
+      site.notify('Animation replayed.');
     });
   });
 
+  // ── galleries: search + the spectral ruler ───────────────────────────────
   const galleries = [...document.querySelectorAll('[data-gallery]')];
+  const ruler = byId('gallery-ruler');
+  ruler.innerHTML = galleries.map((g, i) => `<i style="left:${(i / (galleries.length - 1)) * 100}%" data-rf-gallery="${g.dataset.rfGallery}"></i>`).join('');
+  const ticks = [...ruler.children];
+  galleries.forEach((g, i) => {
+    const on = () => ticks.forEach((t, j) => t.classList.toggle('is-on', j === i));
+    const off = () => ticks[i].classList.remove('is-on');
+    g.addEventListener('pointerenter', on); g.addEventListener('focus', on);
+    g.addEventListener('pointerleave', off); g.addEventListener('blur', off);
+  });
   byId('gallery-search').addEventListener('input', (event) => {
     const query = event.target.value.trim().toLowerCase();
     let count = 0;
-    galleries.forEach((gallery) => {
-      const visible = gallery.dataset.gallery.toLowerCase().includes(query);
-      gallery.hidden = !visible;
+    galleries.forEach((g, i) => {
+      const visible = g.dataset.gallery.toLowerCase().includes(query);
+      g.hidden = !visible;
+      ticks[i].classList.toggle('is-on', !!query && visible);
       if (visible) count++;
     });
     byId('empty-state').hidden = count !== 0;
     byId('gallery-status').textContent = `${count} ${count === 1 ? 'gallery' : 'galleries'} found.`;
   });
 
+  // ── quick starts ─────────────────────────────────────────────────────────
   const quickstarts = {
-    'browser-tab': {
-      label: 'GET THE LIBRARY',
-      footer: 'Your browser is the only dependency.',
-      code: 'git clone https://github.com/crazy54/Prism.git\ncd Prism\n\n# Open Prism.html in your browser.\n# Or double-click the downloaded file.',
-    },
-    'mcp-tab': {
-      label: 'CONNECT THE CATALOG',
-      footer: 'Node.js 18+. No npm install needed.',
-      code: 'git clone https://github.com/crazy54/Prism.git\ncd Prism/prism-mcp-server\n\n# Verify both catalogs (web + terminal)\nnode cli.js info --catalog ../Prism.html\n\n# Start the local MCP server\nnode cli.js start --catalog ../Prism.html',
-    },
-    'terminal-tab': {
-      label: 'BROWSE FROM YOUR TERMINAL',
-      footer: 'Windows PowerShell: use curl.exe instead of curl.',
-      code: '# Browse the terminal site. Nothing to install.\ncurl -sL https://prism.jeremyfhall.com/tty\n\n# Run the live player (Node.js 18+)\nnpx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term',
-    },
+    'browser-tab': { label: 'GET THE LIBRARY', footer: 'Your browser is the only dependency.',
+      code: 'git clone https://github.com/crazy54/Prism.git\ncd Prism\n\n# Open Prism.html in your browser.\n# Or double-click the downloaded file.' },
+    'mcp-tab': { label: 'CONNECT THE CATALOG', footer: 'Node.js 18+. No npm install needed.',
+      code: 'git clone https://github.com/crazy54/Prism.git\ncd Prism/prism-mcp-server\n\n# Verify the catalogs (web + terminal)\nnode cli.js info --catalog ../Prism.html\n\n# Start the local MCP server\nnode cli.js start --catalog ../Prism.html' },
+    'terminal-tab': { label: 'BROWSE FROM YOUR TERMINAL', footer: 'Windows PowerShell: use curl.exe instead of curl.',
+      code: '# Browse the terminal site. Nothing to install.\ncurl -sL https://prism.jeremyfhall.com/tty\n\n# Run the live player (Node.js 18+)\nnpx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term' },
+    'deck-tab': { label: 'PUT PRISM ON YOUR STREAM DECK', footer: 'Stream Deck 7.6+ on Windows and macOS · OpenDeck on Linux.',
+      code: '# 1. The plugin: live, animated keys, dials and strips\n#    Double-click com.jeremyfhall.prism.streamDeckPlugin\n\n# 2. Or an icon pack, for any action (11 themes)\n#    Double-click com.jeremyfhall.prism.icons.<theme>.streamDeckIconPack\n\n# 3. Or a ready-made profile for your device\n#    Double-click "Prism - <device>.streamDeckProfile"' },
   };
   const tabs = [...document.querySelectorAll('[role="tab"]')];
   function selectTab(tab) {
@@ -148,10 +134,10 @@
       item.tabIndex = selected ? 0 : -1;
       byId(item.getAttribute('aria-controls')).hidden = !selected;
     });
-    const quickstart = quickstarts[tab.id] || quickstarts['browser-tab'];
-    byId('quickstart-code').textContent = quickstart.code;
-    byId('code-label').textContent = quickstart.label;
-    byId('code-footer').textContent = quickstart.footer;
+    const q = quickstarts[tab.id] || quickstarts['browser-tab'];
+    byId('quickstart-code').textContent = q.code;
+    byId('code-label').textContent = q.label;
+    byId('code-footer').textContent = q.footer;
   }
   tabs.forEach((tab, index) => {
     tab.addEventListener('click', () => selectTab(tab));
@@ -163,49 +149,91 @@
       tabs[next].focus();
     });
   });
-  byId('copy-command').addEventListener('click', (event) => copy(byId('quickstart-code').textContent, event.currentTarget));
-  document.querySelectorAll('[data-copy-text]').forEach((button) => {
-    button.addEventListener('click', () => copy(button.dataset.copyText, button));
-  });
+  byId('copy-command').addEventListener('click', (e) => site.copy(byId('quickstart-code').textContent, e.currentTarget));
 
-  // The terminal window's status line: a braille spinner and an eighth-block
-  // progress meter, the way prism-term draws them. Holds still when motion is paused.
-  const demo = document.querySelector('.term-demo');
-  if (demo) {
-    const spin = demo.querySelector('.term-spin');
-    const facetName = demo.querySelector('.term-demo-facet');
-    const meter = demo.querySelector('.term-meter');
-    const percent = demo.querySelector('.term-pct');
-    const spinFrames = '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏';
-    const eighths = ['', '▏', '▎', '▍', '▌', '▋', '▊', '▉'];
-    const names = ['plasma', 'donut', 'matrix', 'globe', 'fire', 'synthwave', 'life', 'starfield'];
-    const width = 16;
-    const steps = 34;
+  // ── three surfaces ───────────────────────────────────────────────────────
+  // Web: a miniature of the app, its rail lit as a spectrum, with one live tile.
+  const rail = byId('mini-rail');
+  rail.innerHTML = galleries.map((g, i) => `<span data-rf-gallery="${g.dataset.rfGallery}"${i === 0 ? ' class="is-on"' : ''}><i></i><b style="max-width:${58 + ((i * 37) % 40)}%"></b></span>`).join('');
+  const surfaces = byId('surfaces');
+  let surfacesStarted = false;
+  new IntersectionObserver((entries, obs) => {
+    if (!entries.some((e) => e.isIntersecting) || surfacesStarted) return;
+    surfacesStarted = true;
+    obs.disconnect();
+    const mini = document.querySelector('.mini-tile iframe[data-src]');
+    if (mini) { mini.src = mini.dataset.src; mini.removeAttribute('data-src'); watchFrame(mini); }
+    startTerminal();
+    startDeck();
+  }, { rootMargin: '300px' }).observe(surfaces);
+  let railStep = 0;
+  setInterval(() => {
+    if (paused || document.hidden || !surfacesStarted) return;
+    const items = rail.children;
+    items[railStep % items.length].classList.remove('is-on');
+    railStep++;
+    items[railStep % items.length].classList.add('is-on');
+  }, 1600);
+
+  // Terminal: the real prism-term engine playing its own Prism mark. In the repository the engine
+  // sits at ../prism-term/; the built site serves it from terminal/engine/.
+  const termEngine = /\/website\/(?:index\.html)?$/.test(location.pathname) ? '../prism-term/' : 'terminal/engine/';
+  const termTheme = () => (site?.mode() === 'day' ? 'prism-light' : 'prism-dark');
+  async function startTerminal() {
+    const screen = byId('term-preview');
+    try {
+      const base = new URL(termEngine, location.href);
+      const [web, palettes, mod] = await Promise.all([
+        import(new URL('src/web/index.js', base).href),
+        import(new URL('src/palettes.js', base).href),
+        import(new URL('src/facets/objects/prism-logo.js', base).href),
+      ]);
+      const ids = new Set(palettes.listThemes().map((t) => t.id));
+      const theme = () => (ids.has(termTheme()) ? termTheme() : undefined);
+      const fit = () => ({ width: Math.max(160, screen.clientWidth - 20), height: Math.max(90, screen.clientHeight - 16) });
+      screen.replaceChildren();
+      const player = web.mountFacet(screen, { id: 'prism-logo', ...mod.default }, { cols: 96, rows: 30, params: { label: 'off' }, fit: fit(), fps: 20, theme: theme(), label: 'Prism’s mark, rendered live by prism-term' });
+      engines.term = { web, player };
+      web.setGlobalMotion(paused);
+      new ResizeObserver(() => player.set({ fit: fit() })).observe(screen);
+      site?.onMode(() => player.set({ theme: theme() }));
+    } catch (err) {
+      console.warn('[prism] terminal preview: engine unavailable, showing the braille stand-in.', err?.message || err);
+      brailleDemo(screen);
+    }
+  }
+  // Stand-in when the engine can't load: a braille spinner and an eighth-block meter, the way prism-term draws them.
+  function brailleDemo(screen) {
+    const demo = screen.querySelector('.term-demo');
+    if (!demo) return;
+    const spin = demo.querySelector('.term-spin'), name = demo.querySelector('.term-demo-facet'), meter = demo.querySelector('.term-meter'), pct = demo.querySelector('.term-pct');
+    const spinFrames = '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏', eighths = ['', '▏', '▎', '▍', '▌', '▋', '▊', '▉'], names = ['plasma', 'donut', 'matrix', 'globe', 'fire', 'synthwave'];
     let tick = 0;
-    const draw = (progress, nameIndex, frame) => {
-      const cells = progress * width;
-      const full = Math.floor(cells);
-      const part = eighths[Math.floor((cells - full) * 8)] || '';
-      meter.textContent = `▕${'█'.repeat(full)}${part}${' '.repeat(Math.max(0, width - full - (part ? 1 : 0)))}▏`;
-      percent.textContent = `${Math.round(progress * 100)}%`;
-      facetName.textContent = names[nameIndex];
-      spin.textContent = progress >= 1 ? '✓' : spinFrames[frame % spinFrames.length];
+    const draw = (p, n, f) => {
+      const cells = p * 16, full = Math.floor(cells), part = eighths[Math.floor((cells - full) * 8)] || '';
+      meter.textContent = `▕${'█'.repeat(full)}${part}${' '.repeat(Math.max(0, 16 - full - (part ? 1 : 0)))}▏`;
+      pct.textContent = `${Math.round(p * 100)}%`; name.textContent = names[n]; spin.textContent = p >= 1 ? '✓' : spinFrames[f % spinFrames.length];
     };
     draw(0.62, 0, 0);
-    setInterval(() => {
-      if (paused || document.hidden) return;
-      tick++;
-      const step = tick % (steps + 8);
-      draw(Math.min(1, step / steps), Math.floor(tick / (steps + 8)) % names.length, tick);
-    }, 80);
+    setInterval(() => { if (paused || document.hidden) return; tick++; const step = tick % 42; draw(Math.min(1, step / 34), Math.floor(tick / 42) % names.length, tick); }, 80);
   }
-  byId('close-copy-dialog').addEventListener('click', () => byId('copy-dialog').close());
-  byId('theme-toggle').addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
-  byId('motion-toggle').addEventListener('click', () => setMotion(!paused));
-  frames.forEach((frame) => frame.addEventListener('load', () => updateFrame(frame)));
-  reducedMotion.addEventListener('change', (event) => setMotion(event.matches));
-  let theme = 'dark';
-  try { if (localStorage.getItem('prism-site-theme') === 'light') theme = 'light'; } catch { /* Use the default theme. */ }
-  setTheme(theme);
+
+  // Stream Deck: prism-deck's own runtime dressing a virtual Stream Deck + in the Prism theme
+  // (../prism-deck/ in the repository, deck/engine/ in the built site).
+  const deckEngine = /\/website\/(?:index\.html)?$/.test(location.pathname) ? '../prism-deck/' : 'deck/engine/';
+  async function startDeck() {
+    const mount = byId('deck-preview');
+    try {
+      const { loadDeck } = await import('./assets/deck/adapter.js');
+      const deck = await loadDeck({ engine: deckEngine, catalog: { facets: [], galleries: [], devices: [] } });
+      engines.deck = deck;
+      if (deck.source === 'prism-deck') deck.mountDevice(mount, { model: 'plus', facet: 'theme-prism', interactive: false });
+      else deck.mountDevice(mount, { model: 'plus', interactive: false, keys: ['status-api-health', 'meter-cpu-ring', 'time-clock', 'toggle-mic', 'media-levels', 'devops-build', 'stream-on-air', 'prod-weather'], dials: ['dial-volume', 'dial-brightness', 'dial-temp', 'dial-scrub'] });
+      deck.setGlobalMotion(paused);
+      site?.onMode(() => deck.refreshMode());
+    } catch (err) { console.warn('[prism] deck preview unavailable', err?.message || err); }
+  }
+
+  site?.onMode(() => { readTokens(); refreshFrames(); });
   setMotion(paused);
 })();

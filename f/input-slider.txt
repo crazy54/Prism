@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Input & Menus > Toggles & Checkboxes
+--/\=== PRISM TERMINAL > INPUT & MENUS > TOGGLES & CHECKBOXES     585nm - 7 / 23
+------------------------------------------------------/\========================
 Sliders  input-slider
 Range sliders for replicas, CPU and timeout: handles glide along ticked tracks,
 filled to the value, with the reading following the handle.
@@ -17,11 +18,11 @@ tags: slider, range, control, drag, form
 
   still at t=3s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play input-slider
-Snapshot  prism-term snapshot input-slider --size 60x10
-In code
+SNAPSHOT  prism-term snapshot input-slider --size 60x10
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('input-slider'));
 

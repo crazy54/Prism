@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Counters & Odometers
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > COUNTERS & ODOMETERS
+------------------------------------------------------/\========================
 Progress Rings  progress-ring
 Braille rings filling clockwise around a centered percentage -- upload,
 transcode and verify, finishing one after another.
@@ -17,11 +18,11 @@ tags: ring, donut, circular, braille
            upload 3.6/4.2 GB       transcode         verify 186/312
   still at t=5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-ring
-Snapshot  prism-term snapshot progress-ring --size 60x10
-In code
+SNAPSHOT  prism-term snapshot progress-ring --size 60x10
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-ring'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Pure ASCII > ASCII Spinners & Bars
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII SPINNERS & BARS       494c - 18 / 29
+------------------------------------------------------/\========================
 Classic Tool Progress Bars  ascii-progress-bars
 The progress lines everyone recognizes -- wget, curl, apt, tqdm, rsync, docker
 pull, pip and make -- in pure ASCII.
@@ -25,11 +26,11 @@ $ make
 
   still at t=5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ascii-progress-bars
-Snapshot  prism-term snapshot ascii-progress-bars --size 80x18
-In code
+SNAPSHOT  prism-term snapshot ascii-progress-bars --size 80x18
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ascii-progress-bars'));
 

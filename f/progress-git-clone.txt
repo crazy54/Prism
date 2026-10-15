@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Steps & Pipelines
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > STEPS & PIPELINES
+------------------------------------------------------/\========================
 git clone  progress-git-clone
 git's counters in order -- enumerating, counting, compressing, receiving with
 size and rate, resolving deltas, updating files.
@@ -15,11 +16,11 @@ Receiving objects:  76% (3686/4821), 48.53 MiB | 17.34 MiB/s
 
   still at t=5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-git-clone
-Snapshot  prism-term snapshot progress-git-clone --size 80x8
-In code
+SNAPSHOT  prism-term snapshot progress-git-clone --size 80x8
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-git-clone'));
 

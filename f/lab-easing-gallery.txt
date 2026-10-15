@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animation Lab > Easing & Timing
+--/\=== PRISM TERMINAL > ANIMATION LAB > EASING & TIMING          604nm - 1 / 17
+------------------------------------------------------/\========================
 Easing Curves  lab-easing-gallery
 Twelve standard easings plotted in braille, each with a dot running its curve
 and a bar showing the eased value.
@@ -7,31 +8,31 @@ tags: easing, curves, tween, timing, ease in out, overshoot, braille
 
 linear              inQuad              outQuad             inOutCubic
 
-- - - - - - - -# -  - - - - - - - -# -  - - - - - - - ## +  - - - - - - -### +
-           %#### +               ### -          +++%%#   +           ++%%#   +
-        ++++     +             %%#   +       +++         +          ++       +
-    +++++        +          +++      +    +++            +        +++        +
-+++++ - - - - -  +  - +++++++ - - -  +  +++ - - - - - -  -  - +++++ - - - -  -
-+                   ++                  +                   +++
+- - - - - - - -* -  - - - - - - - -* -  - - - - - - - ** *  - - - - - - -*** *
+           %**** *               *** -          ***%%*   *           **%%*   *
+        ****     *             %%*   *       ***         *          **       *
+    *****        *          ***      *    ***            *        ***        *
+***** - - - - -  *  - ******* - - -  *  *** - - - - - -  -  - ***** - - - -  -
+*                   **                  *                   ***
 
 
 inOutSine           inExpo              outExpo             outCirc
 
-- - - - - - - ## -  - - - - - - - -# -  - - - - -++%#### +  - - - - - - -### +
-          +%%##  +                 # -     +++++++       +       ++++++%#    +
-        +++      +                #  -    ++             +    ++++           +
-     ++++        +              ##   +   +               +   ++              +
--+++++- - - - -  +  - - - +++++%% -  -  + - - - - - - -  +  + - - - - - - -  -
-++                  +++++++             +                   +
+- - - - - - - ** -  - - - - - - - -* -  - - - - -**%**** *  - - - - - - -*** *
+          *%%**  *                 * -     *******       *       ******%*    *
+        ***      *                *  -    **             *    ****           *
+     ****        *              **   *   *               *   **              *
+-*****- - - - -  *  - - - *****%% -  -  * - - - - - - -  *  * - - - - - - -  -
+**                  *******             *                   *
 
 
   still at 80x20 - t=1.2s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play lab-easing-gallery
-Snapshot  prism-term snapshot lab-easing-gallery --size 80x24
-In code
+SNAPSHOT  prism-term snapshot lab-easing-gallery --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('lab-easing-gallery'));
 

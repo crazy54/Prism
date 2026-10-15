@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Progress Bars
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      494nm - 8 / 41
+------------------------------------------------------/\========================
 Vertical Fill  progress-vertical
 One column per worker filling bottom-up in eighth blocks -- parallel shards,
 partitions or cores at a glance.
@@ -17,11 +18,11 @@ tags: vertical, columns, workers, parallel
                  w1   w2   w3   w4   w5   w6   w7   w8
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-vertical
-Snapshot  prism-term snapshot progress-vertical --size 48x10
-In code
+SNAPSHOT  prism-term snapshot progress-vertical --size 48x10
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-vertical'));
 

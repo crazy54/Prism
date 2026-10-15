@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Input & Menus > Selects & Lists
+--/\=== PRISM TERMINAL > INPUT & MENUS > SELECTS & LISTS          585nm - 3 / 23
+------------------------------------------------------/\========================
 Scrolling List  input-scroll-list
 A long pod list in a short framed window: the cursor runs down and back, the
 view scrolls with it and the scrollbar thumb tracks position.
@@ -19,11 +20,11 @@ tags: list, scroll, scrollbar, pods, cursor
               +------------------------------------------ 26/26 -+
   still at t=5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play input-scroll-list
-Snapshot  prism-term snapshot input-scroll-list --size 52x12
-In code
+SNAPSHOT  prism-term snapshot input-scroll-list --size 52x12
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('input-scroll-list'));
 

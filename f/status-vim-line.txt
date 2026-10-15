@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Notifications & Status > Status Lines
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > STATUS LINES    558nm - 6 / 18
+------------------------------------------------------/\========================
 Vim Statusline  status-vim-line
 A lightline-style vim statusline over a live buffer: modes change, text is typed
 in, :w writes and the ruler follows the cursor.
@@ -16,11 +17,11 @@ tags: vim, statusline, lightline, editor, modes
 -- INSERT --
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play status-vim-line
-Snapshot  prism-term snapshot status-vim-line --size 80x9
-In code
+SNAPSHOT  prism-term snapshot status-vim-line --size 80x9
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('status-vim-line'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Containers & Clusters
+--/\=== PRISM TERMINAL > LINUX & OPS > CONTAINERS & CLUSTERS     568nm - 22 / 39
+------------------------------------------------------/\========================
 docker stats  ops-docker-stats
 docker stats refreshing every half second per container: name, CPU %, memory
 usage against its limit, MEM %, network I/O and PIDs.
@@ -17,11 +18,11 @@ node-exporter   0.96%    17.0MiB / 122.1MiB   13.93%  2.88GB / 2.33GB    23
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-docker-stats
-Snapshot  prism-term snapshot ops-docker-stats --size 80x10
-In code
+SNAPSHOT  prism-term snapshot ops-docker-stats --size 80x10
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-docker-stats'));
 

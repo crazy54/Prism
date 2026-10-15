@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Counters & Odometers
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > COUNTERS & ODOMETERS
+------------------------------------------------------/\========================
 Live Counter Tiles  progress-counter-tiles
 Four running totals ticking at their own rates; digits that just changed flash,
 with a rate sparkline under each.
@@ -17,11 +18,11 @@ tags: counters, kpi, tiles, sparkline, live
         +-----------------------------+ +------------------------------+
   still at t=5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-counter-tiles
-Snapshot  prism-term snapshot progress-counter-tiles --size 64x10
-In code
+SNAPSHOT  prism-term snapshot progress-counter-tiles --size 64x10
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-counter-tiles'));
 

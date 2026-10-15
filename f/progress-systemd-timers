@@ -1,33 +1,34 @@
-[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mProgress & Counters[0;2;39;49m › [0;1;39;49mTimers & Countdowns[0m
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;30;49mPROGRESS & COUNTERS[0;2;39;49m › [0;1;38;5;30;49mTIMERS & COUNTDOWNS[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;29;49m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;30m━[38;5;29m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[0m
 [0;1;39;49msystemctl list-timers[0;2;39;49m  progress-systemd-timers[0m
 systemctl list-timers with LEFT counting down live; a timer that fires
 reschedules and re-sorts. Narrow terminals keep NEXT, LEFT, UNIT.
 [0;2;39;49mprogress · 146×11 (min 40×3) · 20 s loop · ascii · 16 colors[0m
 [0;2;39;49mtags: systemd, timers, cron, schedule, linux[0m
 
-[0;1;38;5;255;48;5;234mNEXT[0;39;48;5;234m                        [0;1;38;5;255;48;5;234mLEFT[0;39;48;5;234m          [0;1;38;5;255;48;5;234mUNIT[0;39;48;5;234m                                  [0m
-[38;5;255;48;5;234mTue 2026-10-13 14:00:04 UTC[39m [38;5;74m8s left[39m       [38;5;255mprism-metrics-flush.timer[39m             [0m
-[38;5;71;48;5;234mTue 2026-10-13 14:00:11 UTC[39m [38;5;71m15s left[39m      [38;5;71mprism-healthcheck.timer[39m               [0m
-[38;5;255;48;5;234mTue 2026-10-13 17:12:03 UTC[39m [38;5;255m3h 12min left[39m [38;5;255mapt-daily.timer[39m                       [0m
-[38;5;255;48;5;234mWed 2026-10-14 00:00:00 UTC[39m [38;5;255m10h left[39m      [38;5;255mlogrotate.timer[39m                       [0m
-[38;5;255;48;5;234mWed 2026-10-14 01:31:04 UTC[39m [38;5;255m11h left[39m      [38;5;255mman-db.timer[39m                          [0m
-[38;5;255;48;5;234mWed 2026-10-14 13:56:41 UTC[39m [38;5;255m23h left[39m      [38;5;255msystemd-tmpfiles-clean.timer[39m          [0m
-[38;5;255;48;5;234mMon 2026-10-19 00:52:03 UTC[39m [38;5;255m5 days left[39m   [38;5;255mfstrim.timer[39m                          [0m
-[48;5;234m                                                                                [0m
-[38;5;255;48;5;234m7 timers listed.[39m                                                                [0m
-[38;5;255;48;5;234mPass --all to see loaded but inactive timers, too.[39m                              [0m
+[0;1;38;5;255;48;5;232mNEXT[0;39;48;5;232m                        [0;1;38;5;255;48;5;232mLEFT[0;39;48;5;232m          [0;1;38;5;255;48;5;232mUNIT[0;39;48;5;232m                                  [0m
+[38;5;255;48;5;232mTue 2026-10-13 14:00:04 UTC[39m [38;5;147m8s left[39m       [38;5;255mprism-metrics-flush.timer[39m             [0m
+[38;5;115;48;5;232mTue 2026-10-13 14:00:11 UTC[39m [38;5;115m15s left[39m      [38;5;115mprism-healthcheck.timer[39m               [0m
+[38;5;255;48;5;232mTue 2026-10-13 17:12:03 UTC[39m [38;5;255m3h 12min left[39m [38;5;255mapt-daily.timer[39m                       [0m
+[38;5;255;48;5;232mWed 2026-10-14 00:00:00 UTC[39m [38;5;255m10h left[39m      [38;5;255mlogrotate.timer[39m                       [0m
+[38;5;255;48;5;232mWed 2026-10-14 01:31:04 UTC[39m [38;5;255m11h left[39m      [38;5;255mman-db.timer[39m                          [0m
+[38;5;255;48;5;232mWed 2026-10-14 13:56:41 UTC[39m [38;5;255m23h left[39m      [38;5;255msystemd-tmpfiles-clean.timer[39m          [0m
+[38;5;255;48;5;232mMon 2026-10-19 00:52:03 UTC[39m [38;5;255m5 days left[39m   [38;5;255mfstrim.timer[39m                          [0m
+[48;5;232m                                                                                [0m
+[38;5;255;48;5;232m7 timers listed.[39m                                                                [0m
+[38;5;255;48;5;232mPass --all to see loaded but inactive timers, too.[39m                              [0m
 [0;2;39;49m  still at 80×11 · t=6s — run it live for full size and motion[0m
 
-[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
-[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
-[38;5;73m    prism-term play progress-systemd-timers[0m
-[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot progress-systemd-timers --size 146x11[0m
-[0;1;39;49mIn code[0m
-  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
-  [38;5;73mawait play(findFacet('progress-systemd-timers'));[0m
+[0;1;38;5;30;49mRUN IT LIVE · NODE 18+, NO INSTALL[0;39;49m [38;5;243m──────────────[0m
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;31m    prism-term play progress-systemd-timers[0m
+[0;1;38;5;30;49mSNAPSHOT[0;2;39;49m  [0;38;5;31;49mprism-term snapshot progress-systemd-timers --size 146x11[0m
+[0;1;38;5;30;49mIN CODE[0m
+  [38;5;31mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;31mawait play(findFacet('progress-systemd-timers'));[0m
 
-[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
-[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-sand-timer[0m
-[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/progress-tqdm[0m
-[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/progress[0m
-[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/progress-sand-timer[0m
+[0;2;39;49mnext ›    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/progress-tqdm[0m
+[0;2;39;49mgallery   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/progress[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

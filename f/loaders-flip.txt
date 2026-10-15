@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Spinners & Loaders > Classic Spinners
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS   488nm - 14 / 64
+------------------------------------------------------/\========================
 Flip  loaders-flip
 A short line flipping up from the baseline and back down -- a coin toss in a
 single cell.
@@ -12,14 +13,14 @@ tags: spinner, loader, flip, coin
                    flip (ASCII fallback) - 4 frames - 130 ms
   still at t=4s -- run it live to see it move
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play loaders-flip
-Snapshot  prism-term snapshot loaders-flip --size 44x5
-In code
+SNAPSHOT  prism-term snapshot loaders-flip --size 44x5
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('loaders-flip'));
 

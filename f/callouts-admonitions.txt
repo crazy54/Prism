@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Callouts & Layout > Admonitions
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > ADMONITIONS          580nm - 6 / 15
+------------------------------------------------------/\========================
 Admonitions  callouts-admonitions
 NOTE, TIP, IMPORTANT, WARNING and CAUTION blocks in the GitHub alert style --
 colored gutter bar, icon, title and wrapped body.
@@ -27,11 +28,11 @@ tags: admonition, alert, note, warning, callout, github
 
   still at 72x20 - t=5s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play callouts-admonitions
-Snapshot  prism-term snapshot callouts-admonitions --size 72x22
-In code
+SNAPSHOT  prism-term snapshot callouts-admonitions --size 72x22
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('callouts-admonitions'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Callouts & Layout > Panels & Borders
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > PANELS & BORDERS     580nm - 3 / 15
+------------------------------------------------------/\========================
 Focus Ring Layout  callouts-focus-panels
 A four-pane dashboard where keyboard focus cycles with Tab -- heavy accent
 border on the active pane, dimmed borders on the rest.
@@ -27,11 +28,11 @@ tags: focus, layout, panes, tab, dashboard
                                            Tab next pane . Shift-Tab previous
   still at t=4s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play callouts-focus-panels
-Snapshot  prism-term snapshot callouts-focus-panels --size 76x20
-In code
+SNAPSHOT  prism-term snapshot callouts-focus-panels --size 76x20
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('callouts-focus-panels'));
 

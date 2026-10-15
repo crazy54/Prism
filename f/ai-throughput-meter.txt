@@ -1,4 +1,5 @@
-* PRISM TERMINAL > AI Working > Token Streams
+--/\=== PRISM TERMINAL > AI WORKING > TOKEN STREAMS               538nm - 7 / 18
+------------------------------------------------------/\========================
 Throughput Meter  ai-throughput-meter
 An inference panel with concurrent streams, per-stream progress and tok/s, an
 aggregate throughput sparkline, TTFT, cache hit rate and a running cost.
@@ -15,11 +16,11 @@ tags: throughput, tok/s, inference, dashboard, latency
      +---------------------------------------------------------- $0.0267 -+
   still at t=5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ai-throughput-meter
-Snapshot  prism-term snapshot ai-throughput-meter --size 70x8
-In code
+SNAPSHOT  prism-term snapshot ai-throughput-meter --size 70x8
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ai-throughput-meter'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Notifications & Status > Badges & Pills
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > BADGES & PILLS
+------------------------------------------------------/\========================
 README Shields  status-shields
 Two-tone README shields -- build, tests, coverage, version, licence, downloads
 -- with the build badge running, passing and failing.
@@ -13,11 +14,11 @@ tags: shields, badges, readme, build status, coverage
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play status-shields
-Snapshot  prism-term snapshot status-shields --size 72x6
-In code
+SNAPSHOT  prism-term snapshot status-shields --size 72x6
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('status-shields'));
 

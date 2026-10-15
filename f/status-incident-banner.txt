@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Notifications & Status > Toasts & Alerts
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > TOASTS & ALERTS
+------------------------------------------------------/\========================
 Incident Banner  status-incident-banner
 A pulsing SEV1 banner with a live elapsed timer, affected-service chips, the
 incident commander and the bridge link.
@@ -12,11 +13,11 @@ tags: incident, sev1, outage, banner, on-call
      * 14:09 mitigating: pool resized 20 -> 40, recovering
   still at t=5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play status-incident-banner
-Snapshot  prism-term snapshot status-incident-banner --size 72x5
-In code
+SNAPSHOT  prism-term snapshot status-incident-banner --size 72x5
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('status-incident-banner'));
 

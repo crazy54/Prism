@@ -1,34 +1,35 @@
-[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mText Effects[0;2;39;49m › [0;1;39;49mReveal & Type[0m
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;31;49mTEXT EFFECTS[0;2;39;49m › [0;1;38;5;31;49mREVEAL & TYPE[0;39;49m            [38;5;31mλ 484 · 17 / 29[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;30;49m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[0m
 [0;1;39;49mScramble Styles[0;2;39;49m  text-scramble[0m
 Four ways to scramble a line — glyph noise, binary, hex and shaded blocks — each
 morphing phrase to phrase, char by char.
 [0;2;39;49mtext · 60×12 (min 34×8) · 16 s loop · unicode · truecolor[0m
 [0;2;39;49mtags: scramble, decode, morph, binary, hex[0m
 
-          [48;5;234m                                                            [0m
-          [48;5;234m                                                            [0m
-          [48;5;234m [38;5;66mglyphs[39m   [38;5;255mretrying in 3 seconds     [39m                        [0m
-          [48;5;234m                                                            [0m
-          [48;5;234m [38;5;66mbinary[39m   [38;5;255msession key rotated[39m                               [0m
-          [48;5;234m                                                            [0m
-          [48;5;234m [38;5;66mhex[39m      [38;5;255mblock 4.2M sealed    [39m                             [0m
-          [48;5;234m                                                            [0m
-          [48;5;234m [38;5;66mblocks[39m   [38;5;215m▒[38;5;249mo[38;5;215m▓[38;5;255mn[38;5;215m▒[38;5;255me[38;5;249mg [38;5;215m▓▓█░░▓█[38;5;249mcy[39m                                 [0m
-          [48;5;234m                                                            [0m
-          [48;5;234m                                                            [0m
-          [48;5;234m                                                            [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m [38;5;245mglyphs[39m   [38;5;255mretrying in 3 seconds     [39m                        [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m [38;5;245mbinary[39m   [38;5;255msession key rotated[39m                               [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m [38;5;245mhex[39m      [38;5;255mblock 4.2M sealed    [39m                             [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m [38;5;245mblocks[39m   [38;5;215m▒[38;5;248mo[38;5;215m▓[38;5;255mn[38;5;215m▒[38;5;255me[38;5;248mg [38;5;215m▓▓█░░▓█[38;5;248mcy[39m                                 [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m                                                            [0m
 [0;2;39;49m  still at t=6s — run it live to see it move[0m
 
-[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
-[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
-[38;5;73m    prism-term play text-scramble[0m
-[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot text-scramble --size 60x12[0m
-[0;1;39;49mIn code[0m
-  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
-  [38;5;73mawait play(findFacet('text-scramble'));[0m
+[0;1;38;5;31;49mRUN IT LIVE · NODE 18+, NO INSTALL[0;39;49m [38;5;243m──────────────[0m
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;31m    prism-term play text-scramble[0m
+[0;1;38;5;31;49mSNAPSHOT[0;2;39;49m  [0;38;5;31;49mprism-term snapshot text-scramble --size 60x12[0m
+[0;1;38;5;31;49mIN CODE[0m
+  [38;5;31mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;31mawait play(findFacet('text-scramble'));[0m
 
-[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
-[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/text-split-flap[0m
-[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/text-glitch[0m
-[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/text[0m
-[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/text-split-flap[0m
+[0;2;39;49mnext ›    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/text-glitch[0m
+[0;2;39;49mgallery   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/text[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

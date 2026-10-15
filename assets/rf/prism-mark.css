@@ -1,0 +1,104 @@
+/* Vendored from design/brand/prism-mark.css by website/scripts/sync-refraction.mjs — edit the source, then re-run. */
+/* ════════════════════════════════════════════════════════════════════════
+   Prism mark — animated glass pyramid, CSS only.            design/brand/
+   A true square pyramid (base 0.62, height 0.76 of the box; face tilt 22.19°)
+   built from four 3D faces. A fixed key light sits up-left-front: each face's
+   sheen follows Lambert shading as it turns, each edge throws a specular
+   glint as it passes the light's half-vector, and the apex holds a point of
+   light that always faces the viewer. Compositor-only (transform + opacity).
+
+   Markup (copy as-is; the four faces are identical):
+     <span class="prism-mark" aria-hidden="true">
+       <span class="pm-rotor">
+         <span class="pm-face"><i class="pm-rim"></i><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 50 0M0 100h100"/></svg></span>
+         … ×4 …
+         <i class="pm-apex"></i>
+       </span>
+     </span>
+   Size:     style="--pm:24px"   (20–40px top bar · 120–320px hero/loading)
+   Variants: .is-hero (pool light, apex star, slower turn) · .is-still (no motion)
+             .is-day / [data-rf-mode="day"] / [data-theme="prism-light"] (Day palette)
+   Speed:    --pm-turn (default 16s per revolution)
+   Reduced motion: rests at a 3/4 view, fully lit, no animation.
+   ════════════════════════════════════════════════════════════════════════ */
+.prism-mark{
+  --pm:28px; --pm-turn:16s; --pm-tilt:-13deg;
+  --pm-edge:#d9ccff; --pm-edge-w:1.15px; --pm-rim-c:#ffffff;
+  --pm-glass-a:rgba(214,202,255,.13); --pm-glass-b:rgba(131,158,244,.015);
+  --pm-sheen:linear-gradient(172deg,rgba(255,255,255,.5),rgba(226,217,255,.16) 42%,rgba(130,200,230,.04) 80%,rgba(160,222,207,.1));
+  --pm-apex:#ffffff; --pm-pool:rgba(171,145,235,.45);
+  position:relative; display:inline-block; flex:none; vertical-align:middle;
+  width:var(--pm); height:var(--pm);
+  perspective:calc(var(--pm) * 3.4); perspective-origin:50% 30%;
+  contain:layout style; pointer-events:none;
+}
+.prism-mark.is-day,
+:is([data-rf-mode="day"],[data-theme="prism-light"]) .prism-mark:not(.is-night){
+  --pm-edge:#6f52bd; --pm-rim-c:#ffffff;
+  --pm-glass-a:rgba(152,118,227,.2); --pm-glass-b:rgba(0,144,222,.04);
+  --pm-sheen:linear-gradient(170deg,rgba(255,255,255,.95),rgba(255,255,255,.4) 50%,rgba(203,241,252,.2));
+  --pm-apex:#7353bb; --pm-pool:rgba(152,118,227,.35);
+  --pm-edge-2:#4f63c4; --pm-edge-3:#1f7f86; --pm-edge-4:#8a63cf;
+}
+.pm-rotor{
+  position:absolute; inset:0; transform-style:preserve-3d;
+  transform:rotateX(var(--pm-tilt)) rotateY(0deg);
+  animation:pm-turn var(--pm-turn) linear infinite;
+}
+.pm-face{
+  position:absolute; left:19%; bottom:12%; width:62%; height:82.08%;
+  transform-origin:50% 100%;
+  transform:rotateY(calc(var(--k) * 90deg)) translateZ(calc(var(--pm) * .31)) rotateX(22.19deg);
+  backface-visibility:visible;
+}
+.pm-face:nth-child(1){--k:0}.pm-face:nth-child(2){--k:1}.pm-face:nth-child(3){--k:2}.pm-face:nth-child(4){--k:3}
+/* a whisper of iridescence: each face's edges lean a different way along the website gradient */
+.pm-face:nth-child(2){--pm-edge-k:var(--pm-edge-2,#c3ccff)}.pm-face:nth-child(3){--pm-edge-k:var(--pm-edge-3,#b4e6dc)}.pm-face:nth-child(4){--pm-edge-k:var(--pm-edge-4,#d6c6ff)}
+/* glass + Lambert sheen, both clipped to the face triangle */
+.pm-face::before,.pm-face::after{content:"";position:absolute;inset:0;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.pm-face::before{background:linear-gradient(180deg,var(--pm-glass-a),var(--pm-glass-b))}
+.pm-face::after{background:var(--pm-sheen);opacity:.5;animation:pm-lambert var(--pm-turn) linear infinite;animation-delay:calc(var(--k) * var(--pm-turn) / -4)}
+/* edges: this face's left slant + its base (each edge drawn once across the four faces) */
+.pm-face svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;
+  animation:pm-depth var(--pm-turn) linear infinite;animation-delay:calc(var(--k) * var(--pm-turn) / -4)}
+.pm-face path{fill:none;stroke:var(--pm-edge-k,var(--pm-edge));stroke-width:var(--pm-edge-w);stroke-linecap:round;vector-effect:non-scaling-stroke}
+/* specular glint riding the left slant edge (apex → base corner) */
+.pm-rim{position:absolute;left:50%;top:0;width:calc(var(--pm) * .8774);height:max(1px,calc(var(--pm) * .045));margin-top:calc(var(--pm) * -.0225);
+  transform-origin:0 50%;transform:rotate(110.69deg);border-radius:9px;
+  background:linear-gradient(90deg,var(--pm-rim-c),rgba(255,255,255,.55) 35%,rgba(255,255,255,0) 85%);
+  opacity:0;animation:pm-glint var(--pm-turn) linear infinite;animation-delay:calc(var(--k) * var(--pm-turn) / -4)}
+/* point of light at the apex — counter-rotates so it always faces the viewer */
+.pm-apex{position:absolute;left:50%;top:12%;width:calc(var(--pm) * .2);height:calc(var(--pm) * .2);margin:calc(var(--pm) * -.1) 0 0 calc(var(--pm) * -.1);
+  border-radius:50%;background:radial-gradient(closest-side,var(--pm-apex),color-mix(in srgb,var(--pm-apex) 45%,transparent) 32%,transparent);
+  transform:rotateY(0deg) rotateX(calc(var(--pm-tilt) * -1));animation:pm-billboard var(--pm-turn) linear infinite}
+
+/* hero / loading scale: light pooling under the glass, a four-point star at the apex */
+.prism-mark.is-hero{--pm:220px;--pm-turn:22s;--pm-edge-w:1.25px;perspective:calc(var(--pm) * 4)}
+.prism-mark.is-hero::before{content:"";position:absolute;left:14%;right:14%;top:80%;height:16%;border-radius:50%;
+  background:radial-gradient(closest-side,var(--pm-pool),transparent);filter:blur(calc(var(--pm) * .05));opacity:.55}
+.prism-mark.is-hero .pm-apex{width:calc(var(--pm) * .16);height:calc(var(--pm) * .16);margin:calc(var(--pm) * -.08) 0 0 calc(var(--pm) * -.08);
+  background:
+    linear-gradient(90deg,transparent 0 47%,var(--pm-apex) 50%,transparent 53%) center/100% 6% no-repeat,
+    linear-gradient(0deg,transparent 0 47%,var(--pm-apex) 50%,transparent 53%) center/6% 100% no-repeat,
+    radial-gradient(closest-side,var(--pm-apex),color-mix(in srgb,var(--pm-apex) 30%,transparent) 26%,transparent 60%)}
+
+/* small sizes: no glint bar thinner than a pixel, crisper edges */
+.prism-mark.is-small{--pm-edge-w:1px}
+
+@keyframes pm-turn{from{transform:rotateX(var(--pm-tilt)) rotateY(0deg)}to{transform:rotateX(var(--pm-tilt)) rotateY(360deg)}}
+@keyframes pm-billboard{from{transform:rotateY(0deg) rotateX(calc(var(--pm-tilt) * -1))}to{transform:rotateY(-360deg) rotateX(calc(var(--pm-tilt) * -1))}}
+/* Lambert: key light up-left-front; peak when the face normal sits 44° left of the viewer */
+@keyframes pm-lambert{0%{opacity:.72}12.5%{opacity:.14}25%,50%{opacity:0}62.5%{opacity:.12}75%{opacity:.7}87.8%{opacity:1}100%{opacity:.72}}
+/* edges behind the glass read dimmer */
+@keyframes pm-depth{0%{opacity:1}25%{opacity:.55}50%{opacity:.32}75%{opacity:.55}100%{opacity:1}}
+/* specular: the left edge flashes as it crosses the light/view half-vector (≈23° into the turn) */
+@keyframes pm-glint{0%{opacity:.35}6.4%{opacity:1}13%{opacity:.08}20%,94%{opacity:0}100%{opacity:.35}}
+
+.prism-mark.is-still .pm-rotor,.prism-mark.is-still .pm-apex,.prism-mark.is-still .pm-face::after,.prism-mark.is-still .pm-face svg,.prism-mark.is-still .pm-rim{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){
+  .prism-mark .pm-rotor{animation:none;transform:rotateX(var(--pm-tilt)) rotateY(-28deg)}
+  .prism-mark .pm-apex{animation:none;transform:rotateY(28deg) rotateX(calc(var(--pm-tilt) * -1))}
+  .prism-mark .pm-face::after,.prism-mark .pm-face svg,.prism-mark .pm-rim{animation:none}
+  .prism-mark .pm-face:nth-child(1)::after{opacity:.9}.prism-mark .pm-face:nth-child(4)::after{opacity:.55}
+  .prism-mark .pm-face:nth-child(2) svg,.prism-mark .pm-face:nth-child(3) svg{opacity:.5}
+}

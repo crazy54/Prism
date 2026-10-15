@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Shell Prompts
+--/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             568nm - 38 / 39
+------------------------------------------------------/\========================
 tmux Session  ops-tmux-status
 A tmux window split in two: a log tail above, a shell below, a green active-pane
 border, and the status line with windows, flags and a clock.
@@ -27,11 +28,11 @@ ops@node03:~$ kubectl -n
 [prod] 0:logs- 1:shell* 2:deploy                        "node03" 14:02 13-Oct-26
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-tmux-status
-Snapshot  prism-term snapshot ops-tmux-status --size 80x20
-In code
+SNAPSHOT  prism-term snapshot ops-tmux-status --size 80x20
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-tmux-status'));
 

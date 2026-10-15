@@ -1,4 +1,5 @@
-* PRISM TERMINAL > AI Working > Thinking States
+--/\=== PRISM TERMINAL > AI WORKING > THINKING STATES             538nm - 4 / 18
+------------------------------------------------------/\========================
 Status Orb  ai-status-orb
 An assistant status orb on a hi-res canvas that breathes when idle, ripples
 while listening, swirls while thinking and pulses rings while speaking.
@@ -8,24 +9,24 @@ tags: orb, voice, status, assistant, canvas
 
 
 
-                                      +++==
-                                   ++++++++=--
-                                  +++++++++==--
-                                 =======++==----
-                                  -===+++=-----
-                                  --==+++===---
-                                   --=========
+                                      ***++
+                                   *******++=-
+                                  ++*******+=--
+                                 +++++++**+==---
+                                  ===++*+==----
+                                  -==++*++=====
+                                   -==++++++==
 
 
 
                                   Thinking...
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ai-status-orb
-Snapshot  prism-term snapshot ai-status-orb --size 36x14
-In code
+SNAPSHOT  prism-term snapshot ai-status-orb --size 36x14
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ai-status-orb'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Input & Menus > Text Fields
+--/\=== PRISM TERMINAL > INPUT & MENUS > TEXT FIELDS              585nm - 8 / 23
+------------------------------------------------------/\========================
 Text Field with Validation  input-text-field
 A labeled input with placeholder, blinking caret and inline validation: the user
 types an invalid hostname, sees the error, fixes it and gets a v.
@@ -15,11 +16,11 @@ tags: input, text field, validation, form, caret
             enter submit . esc cancel . ctrl-u clear
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play input-text-field
-Snapshot  prism-term snapshot input-text-field --size 56x8
-In code
+SNAPSHOT  prism-term snapshot input-text-field --size 56x8
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('input-text-field'));
 

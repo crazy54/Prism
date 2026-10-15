@@ -1,23 +1,23 @@
-  .--. .--. ---  .--. .   .    TERMINAL  434 facets - 17 galleries
-  |__' |__'  |   '--. |\ /|    Animated terminal art, widgets and TUI parts.
-  |    |  \ ---  .__' | v |    help /t/help - plain .txt - catalog /terminal/
+--/\=== PRISM TERMINAL                         434 FACETS - 17 GALLERIES - 0.2.0
+------------------------------------------------------/\========================
+Terminal art, widgets and TUI parts.  help /t/help - plain .txt - web /terminal/
 
-  curl -sL prism.jeremyfhall.com/t/fx        FX Store                  24
-  curl -sL prism.jeremyfhall.com/t/objects   Animated Objects          18
-  curl -sL prism.jeremyfhall.com/t/sim       Particles & Simulations   18
-  curl -sL prism.jeremyfhall.com/t/retro     Retro & Demoscene         24
-  curl -sL prism.jeremyfhall.com/t/text      Text Effects              29
-  curl -sL prism.jeremyfhall.com/t/loaders   Spinners & Loaders        64
-  curl -sL prism.jeremyfhall.com/t/progress  Progress & Counters       41
-  curl -sL prism.jeremyfhall.com/t/charts    Charts & Metrics          30
-  curl -sL prism.jeremyfhall.com/t/ai        AI Working                18
-  curl -sL prism.jeremyfhall.com/t/status    Notifications & Status    18
-  curl -sL prism.jeremyfhall.com/t/ops       Linux & Ops               39
-  curl -sL prism.jeremyfhall.com/t/diagrams  Architecture Diagrams     16
-  curl -sL prism.jeremyfhall.com/t/callouts  Callouts & Layout         15
-  curl -sL prism.jeremyfhall.com/t/input     Input & Menus             23
-  curl -sL prism.jeremyfhall.com/t/maps      Maps & Geo                11
-  curl -sL prism.jeremyfhall.com/t/lab       Animation Lab             17
-  curl -sL prism.jeremyfhall.com/t/ascii     Pure ASCII                29
-  The live player, animated in your terminal (Node 18+):
+  | FX Store                24 curl -sL prism.jeremyfhall.com/t/fx        436nm
+  | Animated Objects        18 curl -sL prism.jeremyfhall.com/t/objects   467nm
+  | Particles & Simulations 18 curl -sL prism.jeremyfhall.com/t/sim       475nm
+  | Retro & Demoscene       24 curl -sL prism.jeremyfhall.com/t/retro     480nm
+  | Text Effects            29 curl -sL prism.jeremyfhall.com/t/text      484nm
+  | Spinners & Loaders      64 curl -sL prism.jeremyfhall.com/t/loaders   488nm
+  | Progress & Counters     41 curl -sL prism.jeremyfhall.com/t/progress  494nm
+  | Charts & Metrics        30 curl -sL prism.jeremyfhall.com/t/charts    505nm
+  | AI Working              18 curl -sL prism.jeremyfhall.com/t/ai        538nm
+  | Notifications & Status  18 curl -sL prism.jeremyfhall.com/t/status    558nm
+  | Linux & Ops             39 curl -sL prism.jeremyfhall.com/t/ops       568nm
+  | Architecture Diagrams   16 curl -sL prism.jeremyfhall.com/t/diagrams  574nm
+  | Callouts & Layout       15 curl -sL prism.jeremyfhall.com/t/callouts  580nm
+  | Input & Menus           23 curl -sL prism.jeremyfhall.com/t/input     585nm
+  | Maps & Geo              11 curl -sL prism.jeremyfhall.com/t/maps      592nm
+  | Animation Lab           17 curl -sL prism.jeremyfhall.com/t/lab       604nm
+  | Pure ASCII              29 curl -sL prism.jeremyfhall.com/t/ascii     494c
+THE LIVE PLAYER - animated in your terminal - Node 18+
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term

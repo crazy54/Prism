@@ -1,30 +1,31 @@
-[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mSpinners & Loaders[0;2;39;49m › [0;1;39;49mTruecolor Spinners[0m
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;30;49mSPINNERS & LOADERS[0;2;39;49m › [0;1;38;5;30;49mTRUECOLOR SPINNERS[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;30;49m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;66m━[0m
 [0;1;39;49mDigital Rain[0;2;39;49m  loaders-katakana[0m
 Half-width katakana and digits flickering in green — a six-cell slice of digital
 rain.
 [0;2;39;49mspinner · 44×5 (min 24×2) · 8 s loop · unicode · 256 colors[0m
 [0;2;39;49mtags: spinner, loader, katakana, matrix, rain[0m
 
-                  [48;5;234m [38;5;77m2[38;5;41mﾀ[38;5;34mｶ[38;5;34mｼ[38;5;41mｹ[38;5;77mﾁ[39m [38;5;255mFollowing the white rabbit…[39m    [38;5;66m4.0s[39m [0m
-                  [48;5;234m                                            [0m
-                  [48;5;234m [38;5;66mｱｲ90ﾀｽ[39m [38;5;66mｾｸﾁ1ｸｵ[39m [38;5;77;48;5;236m2[38;5;41mﾀ[38;5;34mｶ[38;5;34mｼ[38;5;41mｹ[38;5;77mﾁ[39;48;5;234m [38;5;66mｹ9ｸ6ｶｵ[39m [38;5;66mｵｹﾁ2ｳ7[39m [38;5;66mﾁﾃ08ﾃ …[39m [0m
-                  [48;5;234m                                            [0m
-                  [48;5;234m [38;5;249mmatrix · 12 frames · 80 ms[39m                 [0m
+                  [48;5;232m [38;5;77m2[38;5;40mﾀ[38;5;34mｶ[38;5;34mｼ[38;5;40mｹ[38;5;77mﾁ[39m [38;5;255mFollowing the white rabbit…[39m    [38;5;245m4.0s[39m [0m
+                  [48;5;232m                                            [0m
+                  [48;5;232m [38;5;245mｱｲ90ﾀｽ[39m [38;5;245mｾｸﾁ1ｸｵ[39m [38;5;77;48;5;235m2[38;5;40mﾀ[38;5;34mｶ[38;5;34mｼ[38;5;40mｹ[38;5;77mﾁ[39;48;5;232m [38;5;245mｹ9ｸ6ｶｵ[39m [38;5;245mｵｹﾁ2ｳ7[39m [38;5;245mﾁﾃ08ﾃ …[39m [0m
+                  [48;5;232m                                            [0m
+                  [48;5;232m [38;5;248mmatrix · 12 frames · 80 ms[39m                 [0m
 [0;2;39;49m  still at t=4s — run it live to see it move[0m
 
-[0;1;39;49mParams[0;2;39;49m  (--set key=value)[0m
-  [38;5;73mspeed=1               [0;2;39;49mSpeed  (0.25–4)[0m
+[0;1;38;5;30;49mPARAMS · --SET KEY=VALUE[0;39;49m [38;5;243m────────────────────────[0m
+  [38;5;31mspeed=1               [0;2;39;49mSpeed  (0.25–4)[0m
 
-[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
-[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
-[38;5;73m    prism-term play loaders-katakana[0m
-[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot loaders-katakana --size 44x5[0m
-[0;1;39;49mIn code[0m
-  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
-  [38;5;73mawait play(findFacet('loaders-katakana'));[0m
+[0;1;38;5;30;49mRUN IT LIVE · NODE 18+, NO INSTALL[0;39;49m [38;5;243m──────────────[0m
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;31m    prism-term play loaders-katakana[0m
+[0;1;38;5;30;49mSNAPSHOT[0;2;39;49m  [0;38;5;31;49mprism-term snapshot loaders-katakana --size 44x5[0m
+[0;1;38;5;30;49mIN CODE[0m
+  [38;5;31mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;31mawait play(findFacet('loaders-katakana'));[0m
 
-[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
-[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/loaders-binary[0m
-[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/loaders-prism-sweep[0m
-[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/loaders[0m
-[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/loaders-binary[0m
+[0;2;39;49mnext ›    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/loaders-prism-sweep[0m
+[0;2;39;49mgallery   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/loaders[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > FX Store > Glitch & Noise
+--/\=== PRISM TERMINAL > FX STORE > GLITCH & NOISE               436nm - 22 / 24
+------------------------------------------------------/\========================
 VHS Tracking  vhs-glitch
 Worn VHS color bars: line jitter, chroma bleed, a rolling tracking band,
 head-switch noise and the deck OSD.
@@ -27,11 +28,11 @@ tags: vhs, glitch, tracking, analog, color bars, vcr, retro
 .-..-.-..:.:-::*#*#@@#%@@*@@*::::::......::.--=.:..:.-:..:.:..=.............::-.
   still at 80x20 - t=6s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play vhs-glitch
-Snapshot  prism-term snapshot vhs-glitch --size 80x24
-In code
+SNAPSHOT  prism-term snapshot vhs-glitch --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('vhs-glitch'));
 

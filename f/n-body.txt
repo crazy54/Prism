@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Particles & Simulations > Physics
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PHYSICS       475nm - 12 / 18
+------------------------------------------------------/\========================
 N-Body Orbits  n-body
 The figure-eight three-body choreography, with a ring of dust that the dancing
 trio flings about chaotically.
@@ -6,35 +7,35 @@ scene - 60x22 (min 20x7) - 30 s loop - unicode - truecolor
 tags: n-body, gravity, orbits, three-body, figure eight, chaos, braille
 
 
-                                                          :::
+                                                          .::
                                                              ::
-                                                              :--
+                                                              ::-
                                                                 --
           ==                                                      -
-            +#          ----::::                 #::::###          =
-                     ----       ::::         ****      ##:::       ==
-                    --              ::    ***              --       =
-                    :                 ::***                 -        =
-                    ==                ++*::         #+=:::::-       #+
-                   ===             ++++   ::+++    ---     ==:
-                     --==       ++++        +++++  - #  ==== :
-                        =======+                 +++=====     -
-                                                    -   ====  -
-                                                     :::::: ==-==
-                                                              - =-----
+            =#          =====---                 +::::***          -
+                     ====       ----         ++++      **---       -=
+                    ++              --    +++              -=       =
+                    :                 --=++                 =        =
+                    **                ===::         #==.::::+       #=
+                   ***             ====   ::###    ---     ++:
+                     :---       ====        #####  - #  *+++ :
+                        -------=                 ********     :
+                                                    :   ====  -
+                                                     :::::: ==-=-
+                                                              - ------
                                                               -      -
-                                                             =
+                                                             -
            figure-eight choreography . 3 equal masses
   still at 60x20 - t=6s -- run it live for full size and motion
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   dust=14               Dust particles  (0-40)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play n-body
-Snapshot  prism-term snapshot n-body --size 60x22
-In code
+SNAPSHOT  prism-term snapshot n-body --size 60x22
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('n-body'));
 

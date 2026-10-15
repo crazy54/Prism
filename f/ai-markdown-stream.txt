@@ -1,4 +1,5 @@
-* PRISM TERMINAL > AI Working > Token Streams
+--/\=== PRISM TERMINAL > AI WORKING > TOKEN STREAMS               538nm - 6 / 18
+------------------------------------------------------/\========================
 Markdown Stream  ai-markdown-stream
 Markdown rendered live as it streams: headings, bold and inline code spans,
 bullets, and a fenced code block that is syntax-colored line by line.
@@ -24,11 +25,11 @@ tags: markdown, streaming, render, code block, llm
 
   still at t=5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ai-markdown-stream
-Snapshot  prism-term snapshot ai-markdown-stream --size 64x17
-In code
+SNAPSHOT  prism-term snapshot ai-markdown-stream --size 64x17
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ai-markdown-stream'));
 

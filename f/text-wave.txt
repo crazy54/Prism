@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Text Effects > Motion
+--/\=== PRISM TERMINAL > TEXT EFFECTS > MOTION                   484nm - 26 / 29
+------------------------------------------------------/\========================
 Wave & Ripple  text-wave
 Letters ride a traveling sine wave while their reflection shimmers below in
 rippling water, rows sliding as the surface moves.
@@ -27,11 +28,11 @@ tags: wave, ripple, reflection, water, bounce
                     #####                            ##
   still at t=3.1415s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play text-wave
-Snapshot  prism-term snapshot text-wave --size 72x20
-In code
+SNAPSHOT  prism-term snapshot text-wave --size 72x20
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('text-wave'));
 

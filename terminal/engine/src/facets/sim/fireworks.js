@@ -89,7 +89,10 @@ export default {
       }
     };
 
+    // Fireworks need a night sky, even by Day.
+    const sky = ctx.theme.mode === 'light' ? 0x080a14 : NONE;
     return (t, dt) => {
+      if (sky !== NONE) ctx.buffer.fill(0, 0, ctx.width, ctx.height, ' ', ctx.theme.ink, sky);
       cv.fade(Math.exp(-dt * 11));
       // Clear the lake band; it is rebuilt from the sky every frame.
       if (reflect) px.fill(NONE, groundRow * W);

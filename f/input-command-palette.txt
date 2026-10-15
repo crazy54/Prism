@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Input & Menus > Command Palettes
+--/\=== PRISM TERMINAL > INPUT & MENUS > COMMAND PALETTES        585nm - 12 / 23
+------------------------------------------------------/\========================
 Command Palette  input-command-palette
 A ctrl+shift+p palette over a dimmed app: the query fuzzy-filters commands with
 highlighted matches and key hints, Enter runs one and the status line confirms.
@@ -23,11 +24,11 @@ tags: command palette, fuzzy, launcher, overlay, keyboard
         | Restarting checkout-api . 0/3 pods ready
   still at t=4s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play input-command-palette
-Snapshot  prism-term snapshot input-command-palette --size 66x16
-In code
+SNAPSHOT  prism-term snapshot input-command-palette --size 66x16
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('input-command-palette'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > FX Store > Light & Sky
+--/\=== PRISM TERMINAL > FX STORE > LIGHT & SKY                  436nm - 17 / 24
+------------------------------------------------------/\========================
 Aurora  aurora
 Northern-lights curtains with drifting rays over a twinkling sky, mountains and
 a mirrored lake.
@@ -27,11 +28,11 @@ tags: aurora, northern lights, sky, noise
 ........................:.::...:::::::...::.....................................
   still at 80x20 - t=4s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play aurora
-Snapshot  prism-term snapshot aurora --size 80x24
-In code
+SNAPSHOT  prism-term snapshot aurora --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('aurora'));
 

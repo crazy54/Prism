@@ -1,4 +1,5 @@
-* PRISM TERMINAL > AI Working > Model Internals
+--/\=== PRISM TERMINAL > AI WORKING > MODEL INTERNALS            538nm - 16 / 18
+------------------------------------------------------/\========================
 Context Window  ai-context-window
 A 200k context window filling turn by turn as a stacked bar of system, tools,
 files, history and output, until auto-compact squeezes history into a summary.
@@ -16,11 +17,11 @@ tags: context window, tokens, compaction, memory, budget
         turn 18 . history grows with every tool result
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ai-context-window
-Snapshot  prism-term snapshot ai-context-window --size 64x9
-In code
+SNAPSHOT  prism-term snapshot ai-context-window --size 64x9
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ai-context-window'));
 

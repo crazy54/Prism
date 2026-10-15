@@ -1,40 +1,41 @@
-* PRISM TERMINAL > Particles & Simulations > Life & Flocking
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > LIFE & FLOCKING
+------------------------------------------------------/\========================
 Reaction-Diffusion  reaction-diffusion
 Gray-Scott reaction-diffusion drifting from dividing spots to coral to mazes,
 shaded as a lit living relief.
 scene - 60x22 (min 20x7) - 42 s loop - unicode - truecolor
 tags: gray-scott, reaction diffusion, turing, morphogenesis, pattern
 
-            =**=:..   -##=.   =*+-:...  .#*==+=...            -#**++.
-            +**-...  -#**=:   :+:....    ==:::...             ***+=:.
+            =**=:..   -*#=.   =*+-:...  .#*==+=...            :#**++.
+            +**-...  -#**=:   .+:....    ==:::...             ***+=:.
             -+-...  .#**=:..   .....     .:......     ..     .#*+=-..
-            .:....  :#*+=...               ....     -*##*:    *+=-...
-              ..    :#*=-...        .              -#****+.   :+:....
-                    .*=....       :=*+:            ***+++:.    .....
+            .:....  .#*+=...               ....     :*##*:    *+=-...
+              ..    .#*=-...        .              :#****+.   :+:....
+                    .*=....       .=*+:            ***+++:.    .....
                      .:...       .#***+.           **===-..
-                       ..        -**+=:.   .-=-.   :=::....
-          =*+.                   =**+=... .+**+*.   ::....           :
-          ***+.          :=+=.   -++=...  -***+-.     ...      .::::-#
-          **=..         -#**++.  .+-....  +**+=..             :#*####*
+                       ..        -**+=:.   .:=-.   :=::....
+          =*+.                   =**+=... .+**+*.   .:....           .
+          ***+.          :=+-.   -++=...  -***+-.     ...      .::.:-#
+          **=..         :#**++.  .+-....  +**+=..             :#*####*
           ++:..        .#**+=:.   .....   =*+=:..            .#**+++++
-          -:...        :#*+=-..           :*-....     .::.   .#*=-::--
-          ....         .#*=-...            .:...     :*###-  .*=.....:
+          -:...        .#*+=-..           :*-....     ....   .#*=-::--
+          ....         .#*=-...            .:...     .*###:  .*=.....:
           ...           +-.....              .      .#***+=.  .:......
               .::.      ......                      :**++=:.   ...
-             .=#*#.            .:++-                :**==-..
-             -***-.           .=#**+:     :=++=:    .*-:....
-            .#**-..           :#**+-..   :#*****:    .:....      .
-            -#*+:..     .     =**+=...   ***+**-.      ...     :*#+:
+             .=#*#.            .:++:                :**==-..
+             -***-.           .=#**+:     .=++=:    .*-:....
+            .#**-..           :#**+-..   :#*****.    .:....      .
+            :#*+:..     .     =**+=...   ***+**-.      ...     :+#=.
   still at 60x20 - t=6s -- run it live for full size and motion
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-3)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play reaction-diffusion
-Snapshot  prism-term snapshot reaction-diffusion --size 60x22
-In code
+SNAPSHOT  prism-term snapshot reaction-diffusion --size 60x22
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('reaction-diffusion'));
 

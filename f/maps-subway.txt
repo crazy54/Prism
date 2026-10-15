@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Maps & Geo > Routes & Arcs
+--/\=== PRISM TERMINAL > MAPS & GEO > ROUTES & ARCS               592nm - 8 / 11
+------------------------------------------------------/\========================
 Transit Map  maps-subway
 A schematic metro map with four colored lines, interchanges and trains running
 end to end; the status board reports a delay.
@@ -27,11 +28,11 @@ West Docks                 Central |               |             |     East Gate
  Amber  Good service
   still at 80x20 - t=6s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play maps-subway
-Snapshot  prism-term snapshot maps-subway --size 80x22
-In code
+SNAPSHOT  prism-term snapshot maps-subway --size 80x22
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('maps-subway'));
 

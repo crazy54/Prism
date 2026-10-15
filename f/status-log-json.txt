@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Notifications & Status > Log Lines
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > LOG LINES      558nm - 17 / 18
+------------------------------------------------------/\========================
 JSON Log Lines  status-log-json
 Structured JSON logs piped through jq -c: keys, strings, numbers and level
 values each colored, with errors flagged in the gutter.
@@ -21,11 +22,11 @@ $ kubectl logs -f deploy/checkout | jq -c
   {"ts":"14:02:13.749Z","level":"debug","svc":"orders","msg":"kafka produce top.
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play status-log-json
-Snapshot  prism-term snapshot status-log-json --size 80x14
-In code
+SNAPSHOT  prism-term snapshot status-log-json --size 80x14
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('status-log-json'));
 

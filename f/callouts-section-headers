@@ -1,40 +1,41 @@
-[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mCallouts & Layout[0;2;39;49m › [0;1;39;49mDividers & Headers[0m
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;130;49mCALLOUTS & LAYOUT[0;2;39;49m › [0;1;38;5;130;49mDIVIDERS & HEADERS[0;39;49m  [38;5;130mλ 580 · 13 / 15[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;130;49m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;101m━[38;5;101m━[38;5;101m━[38;5;101m━[38;5;101m━[38;5;101m━[0m
 [0;1;39;49mSection Headers[0;2;39;49m  callouts-section-headers[0m
 Five header styles — numbered eyebrow, underlined, boxed, inverse bar and setext
 — that type in one after another, for reports and CLIs.
 [0;2;39;49mtext · 60×18 (min 30×8) · 9 s loop · unicode · 16 colors[0m
 [0;2;39;49mtags: header, heading, section, title, typography[0m
 
-          [0;1;38;5;74;48;5;234m01 / OVERVIEW[0;39;48;5;234m                                               [0m
-          [0;1;38;5;255;48;5;234mSystem health at a glance[0;39;48;5;234m                                   [0m
-          [48;5;234m                                                            [0m
-          [0;1;38;5;255;48;5;234mIncidents[0;39;48;5;234m                                                   [0m
-          [38;5;74;48;5;234m──────────────────────────────[39m                              [0m
-          [48;5;234m                                                            [0m
-          [38;5;238;48;5;234m┌─────────────┐[39m                                             [0m
-          [38;5;238;48;5;234m│ [0;1;38;5;255;48;5;234mDeployments[0;38;5;238;48;5;234m │[39m                                             [0m
-          [38;5;238;48;5;234m└─────────────┘[39m                                             [0m
-          [48;5;234m                                                            [0m
-          [38;5;74;48;5;237m▌[39m [0;1;38;5;255;48;5;237mCAPACITY[0;39;48;5;237m                                         [38;5;215m3 alerts[39m [0m
-          [48;5;234m                                                            [0m
-          [48;5;234m                                                            [0m
-          [48;5;234m                                                            [0m
-          [48;5;234m                                                            [0m
-          [48;5;234m                                                            [0m
-          [48;5;234m                                                            [0m
-          [48;5;234m                                                            [0m
+          [0;1;38;5;147;48;5;232m01 / OVERVIEW[0;39;48;5;232m                                               [0m
+          [0;1;38;5;255;48;5;232mSystem health at a glance[0;39;48;5;232m                                   [0m
+          [48;5;232m                                                            [0m
+          [0;1;38;5;255;48;5;232mIncidents[0;39;48;5;232m                                                   [0m
+          [38;5;147;48;5;232m──────────────────────────────[39m                              [0m
+          [48;5;232m                                                            [0m
+          [38;5;235;48;5;232m┌─────────────┐[39m                                             [0m
+          [38;5;235;48;5;232m│ [0;1;38;5;255;48;5;232mDeployments[0;38;5;235;48;5;232m │[39m                                             [0m
+          [38;5;235;48;5;232m└─────────────┘[39m                                             [0m
+          [48;5;232m                                                            [0m
+          [38;5;147;48;5;236m▌[39m [0;1;38;5;255;48;5;236mCAPACITY[0;39;48;5;236m                                         [38;5;215m3 alerts[39m [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m                                                            [0m
+          [48;5;232m                                                            [0m
 [0;2;39;49m  still at t=4.5s — run it live to see it move[0m
 
-[0;1;39;49mRun it live[0;2;39;49m  (Node 18+, no install)[0m
-[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
-[38;5;73m    prism-term play callouts-section-headers[0m
-[0;1;39;49mSnapshot[0;2;39;49m  [0;38;5;73;49mprism-term snapshot callouts-section-headers --size 60x18[0m
-[0;1;39;49mIn code[0m
-  [38;5;73mimport { play, findFacet } from 'prism-term';[0m
-  [38;5;73mawait play(findFacet('callouts-section-headers'));[0m
+[0;1;38;5;130;49mRUN IT LIVE · NODE 18+, NO INSTALL[0;39;49m [38;5;243m──────────────[0m
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \[0m
+[38;5;31m    prism-term play callouts-section-headers[0m
+[0;1;38;5;130;49mSNAPSHOT[0;2;39;49m  [0;38;5;31;49mprism-term snapshot callouts-section-headers --size 60x18[0m
+[0;1;38;5;130;49mIN CODE[0m
+  [38;5;31mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;31mawait play(findFacet('callouts-section-headers'));[0m
 
-[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
-[0;2;39;49m‹ prev    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/callouts-dividers[0m
-[0;2;39;49mnext ›    [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/f/callouts-neofetch[0m
-[0;2;39;49mgallery   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/callouts[0m
-[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/callouts-dividers[0m
+[0;2;39;49mnext ›    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/callouts-neofetch[0m
+[0;2;39;49mgallery   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/callouts[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

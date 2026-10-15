@@ -1,4 +1,5 @@
-* PRISM TERMINAL > AI Working > Thinking States
+--/\=== PRISM TERMINAL > AI WORKING > THINKING STATES             538nm - 3 / 18
+------------------------------------------------------/\========================
 Reasoning Summary  ai-reasoning-summary
 A collapsible reasoning block: thought summaries stream in dim italics while the
 model works, fold to "Thought for 14s", then the final answer streams below.
@@ -18,11 +19,11 @@ tags: reasoning, thinking, collapsible, summary, chain of thought
 
   still at t=5.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ai-reasoning-summary
-Snapshot  prism-term snapshot ai-reasoning-summary --size 64x11
-In code
+SNAPSHOT  prism-term snapshot ai-reasoning-summary --size 64x11
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ai-reasoning-summary'));
 

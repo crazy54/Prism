@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Input & Menus > Dialogs & Prompts
+--/\=== PRISM TERMINAL > INPUT & MENUS > DIALOGS & PROMPTS       585nm - 15 / 23
+------------------------------------------------------/\========================
 Confirm Dialog  input-confirm-dialog
 A destructive-action modal with a shadow: Cancel is focused by default and
 Delete unlocks only after the namespace is typed, then it runs and closes.
@@ -22,11 +23,11 @@ tags: dialog, modal, confirm, destructive, buttons
          k9s . checkout . pods
   still at t=3.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play input-confirm-dialog
-Snapshot  prism-term snapshot input-confirm-dialog --size 64x15
-In code
+SNAPSHOT  prism-term snapshot input-confirm-dialog --size 64x15
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('input-confirm-dialog'));
 

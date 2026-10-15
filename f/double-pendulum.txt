@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Particles & Simulations > Physics
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PHYSICS       475nm - 10 / 18
+------------------------------------------------------/\========================
 Double Pendulum  double-pendulum
 Three double pendulums started a thousandth of a radian apart -- together at
 first, then chaos splits their trails.
@@ -14,27 +15,27 @@ tags: pendulum, chaos, rk4, butterfly effect, trails, braille
 
 
 
-                              :::::::--   --==++++++++++#
-                          ::::       ==%%%==      ----  +++=
-                       :::      =====  -* -:::::      --  ++
-                      ::     ====     -**  -   ::::    =+++
-                      :   ===         -*   -      :::+++ -
-                       =============+ **  ::-::::::+++:::-
-                          ::::::::::==%%****----+++------
-                                      =-   ****++
-                                       -   :-
-                                       :-  --
+                              ---------   ==************+
+                          ----       **%%%**      ====  **#*
+                       ---      +++++  =* -:::::      ==  ##
+                      --     ++++     =**  -   ::::    *###
+                      -   +++         =*   -      :::### =
+                       +++++++++++++= **  ::-::::::###:::=
+                          :------:::++%%****====###======
+                                      --   ****##
+                                       -   --
+                                       --  --
                                         ----
   still at 48x20 - t=6s -- run it live for full size and motion
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   pendulums=3           Pendulums  (1-6)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play double-pendulum
-Snapshot  prism-term snapshot double-pendulum --size 48x24
-In code
+SNAPSHOT  prism-term snapshot double-pendulum --size 48x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('double-pendulum'));
 

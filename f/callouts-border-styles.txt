@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Callouts & Layout > Panels & Borders
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > PANELS & BORDERS     580nm - 1 / 15
+------------------------------------------------------/\========================
 Border Styles  callouts-border-styles
 All six border styles -- round, single, double, heavy, dashed and ASCII -- with
 a focus ring stepping through them.
@@ -25,11 +26,11 @@ tags: border, box, panel, box-drawing, frame
 
   still at t=3.6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play callouts-border-styles
-Snapshot  prism-term snapshot callouts-border-styles --size 72x18
-In code
+SNAPSHOT  prism-term snapshot callouts-border-styles --size 72x18
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('callouts-border-styles'));
 

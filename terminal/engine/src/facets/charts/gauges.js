@@ -2,7 +2,7 @@
 // bullet charts, a sweeping donut and a morphing radar plot.
 import { mix, scale, gradient } from '../../color.js';
 import { gauge } from '../../widgets/index.js';
-import { signal, glyphs, safe, put, putR, num, clamp, smooth, ATTR } from './_data.js';
+import { signal, glyphs, safe, put, putR, num, clamp, smooth, light, ATTR } from './_data.js';
 
 const gaugeArc = {
   id: 'charts-gauge-arc',
@@ -101,7 +101,7 @@ const vu = {
           const k = i / segs, on = i < lit;
           b.set(labelW + i, y, g.u ? (on ? '▮' : '▯') : on ? '#' : '.', on ? heat(k) : mix(th.bg, heat(k), 0.25));
         }
-        b.set(labelW + pk, y, g.u ? '▮' : '|', 0xffffff);
+        b.set(labelW + pk, y, g.u ? '▮' : '|', light(th));
         if (W >= 30) putR(b, W, y, `${(20 * Math.log10(Math.max(0.001, v)) + 3).toFixed(1)}`, heat(v));
       }
       if (H >= 5) {
@@ -154,7 +154,7 @@ const bullet = {
         const v = s.now(t);
         const len = X(v);
         for (let i = 0; i <= len; i++) b.set(nameW + i, y, g.u ? '▬' : '=', v >= target ? th.pos : th.warn, undefined, ATTR.BOLD);
-        b.set(nameW + X(target), y, g.u ? '┃' : '|', 0xffffff, undefined, ATTR.BOLD);
+        b.set(nameW + X(target), y, g.u ? '┃' : '|', light(th), undefined, ATTR.BOLD);
         putR(b, W, y, `${name === 'Uptime' ? v.toFixed(2) : num(v, 0)}${unit}`, v >= target ? th.pos : th.warn, undefined, ATTR.BOLD);
       }
     };
@@ -254,7 +254,7 @@ const radar = {
       cv.path(base.map((v, i) => pt(i, v)), th.dim, true);
       const poly = live.map((v, i) => pt(i, clamp(v, 0, 1)));
       cv.path(poly, mix(th.accent, th.neg, k), true);
-      for (const [x, y] of poly) { cv.set(x, y, 0xffffff); cv.set(x + 1, y, 0xffffff); }
+      for (const [x, y] of poly) { cv.set(x, y, light(th)); cv.set(x + 1, y, light(th)); }
       cv.paint(b);
       axes.forEach((name, i) => {
         const [x, y] = pt(i, 1.12);

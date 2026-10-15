@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Callouts & Layout > Dividers & Headers
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > DIVIDERS & HEADERS  580nm - 13 / 15
+------------------------------------------------------/\========================
 Section Headers  callouts-section-headers
 Five header styles -- numbered eyebrow, underlined, boxed, inverse bar and
 setext -- that type in one after another, for reports and CLIs.
@@ -25,11 +26,11 @@ tags: header, heading, section, title, typography
 
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play callouts-section-headers
-Snapshot  prism-term snapshot callouts-section-headers --size 60x18
-In code
+SNAPSHOT  prism-term snapshot callouts-section-headers --size 60x18
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('callouts-section-headers'));
 

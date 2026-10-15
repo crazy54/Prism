@@ -3,6 +3,7 @@
 // 480 Hz. For a few seconds they move as one; then the trails split and they
 // go their own chaotic ways. Each run restarts from the same three starts.
 import { mix } from '../../color.js';
+import { fadeMark } from '../../palettes.js';
 
 const RUN = 20, HZ = 480, G = 9.81;
 const TRAIL = 260; // trail samples kept per pendulum (recorded at 60 Hz)
@@ -65,7 +66,7 @@ export default {
         const tr = p.trail;
         for (let i = 1; i < tr.length; i++) {
           const f = i / tr.length;
-          cv.line(tr[i - 1][0], tr[i - 1][1] / asp, tr[i][0], tr[i][1] / asp, mix(th.bg, cols[k], 0.2 + 0.8 * Math.pow(f, 1.4)));
+          cv.line(tr[i - 1][0], tr[i - 1][1] / asp, tr[i][0], tr[i][1] / asp, fadeMark(th, cols[k], 0.2 + 0.8 * Math.pow(f, 1.4)));
         }
       });
       // Arms and bobs.

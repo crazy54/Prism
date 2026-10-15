@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Callouts & Layout > Dividers & Headers
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > DIVIDERS & HEADERS  580nm - 12 / 15
+------------------------------------------------------/\========================
 Dividers & Rules  callouts-dividers
 Horizontal rules in light, heavy, double, dotted, dashed and dotted-bullet
 weights with left, centered and right labels and a sweep of light.
@@ -22,11 +23,11 @@ tags: divider, rule, separator, hr, section
         --- Overline ---------------------------------------------------
   still at t=2s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play callouts-dividers
-Snapshot  prism-term snapshot callouts-dividers --size 64x15
-In code
+SNAPSHOT  prism-term snapshot callouts-dividers --size 64x15
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('callouts-dividers'));
 

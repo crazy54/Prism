@@ -1,45 +1,46 @@
-[0;1;38;2;95;135;215;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mAI Working (18)[0m
+[38;2;154;154;154m─[38;2;208;208;208m─[0;1;38;2;255;255;255;49m◢[38;2;131;100;199m◣[0;38;2;129;103;189;49m━[38;2;34;135;74m━[38;2;185;85;108m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;2;34;135;74;49mAI WORKING[0;39;49m                              [38;2;34;135;74mλ 538 · 09 / 17[0m
+[38;2;118;118;118m──────[38;2;119;119;119m───[38;2;120;120;120m──[38;2;121;121;121m──[38;2;122;122;122m─[38;2;123;123;123m─[38;2;124;124;124m──[38;2;125;125;125m─[38;2;126;126;126m─[38;2;127;127;127m─[38;2;129;129;129m─[38;2;130;130;130m─[38;2;131;131;131m─[38;2;132;132;132m─[38;2;134;134;134m─[38;2;135;135;135m─[38;2;137;137;137m─[38;2;138;138;138m─[38;2;140;140;140m─[38;2;142;142;142m─[38;2;144;144;144m─[38;2;146;146;146m─[38;2;148;148;148m─[38;2;150;150;150m─[38;2;152;152;152m─[38;2;154;154;154m─[38;2;156;156;156m─[38;2;159;159;159m─[38;2;161;161;161m─[38;2;164;164;164m─[38;2;166;166;166m─[38;2;169;169;169m─[38;2;172;172;172m─[38;2;175;175;175m─[38;2;178;178;178m─[38;2;181;181;181m─[38;2;184;184;184m─[38;2;187;187;187m─[38;2;190;190;190m─[38;2;194;194;194m─[38;2;197;197;197m─[38;2;201;201;201m─[38;2;204;204;204m─[38;2;208;208;208m─[0;1;38;2;255;255;255;49m◢[38;2;131;100;199m◣[0;38;2;81;131;43;49m━[38;2;78;130;45m━[38;2;75;131;50m━[38;2;72;132;52m━[38;2;70;132;57m━[38;2;67;132;60m━[38;2;64;132;63m━[38;2;62;132;67m━[38;2;59;132;70m━[38;2;56;132;73m━[38;2;53;132;77m━[38;2;51;131;81m━[38;2;48;132;83m━[38;2;44;130;86m━[38;2;39;131;89m━[38;2;33;130;92m━[38;2;52;129;97m━[38;2;49;129;99m━[38;2;44;129;102m━[38;2;63;128;105m━[38;2;63;126;107m━[38;2;63;126;109m━[38;2;62;125;110m━[38;2;79;125;112m━[0m
 Thinking states, token streams, tool calls and agent pipelines.
 
-[0;1;38;2;55;194;107;48;2;15;22;33m✔[0;39;48;2;15;22;33m [38;2;164;176;192mRead trace 4bf92f35 (31 spans)       [39;49m  [38;2;233;235;237;48;2;15;22;33mCheckout latency is up because the DB[39m  [0m
-[0;1;38;2;55;194;107;48;2;15;22;33m✔[0;39;48;2;15;22;33m [38;2;164;176;192mCorrelated p99 with pool wait (r=0.9…[39;49m  [38;2;233;235;237;48;2;15;22;33mpool is exhausted. Since v2.14.1 the[39m   [0m
-[0;1;38;2;83;159;229;48;2;15;22;33m✳[0;39;48;2;15;22;33m [0;1;38;2;66;125;180;48;2;15;22;33mChecking the d[38;2;104;150;193me[38;2;146;178;207mp[38;2;188;205;222ml[38;2;230;233;236mo[38;2;195;210;224my[38;2;153;182;210m [38;2;111;155;195md[38;2;69;127;181mi[38;2;66;125;180mff…[0;39;48;2;15;22;33m            [49m  [38;2;233;235;237;48;2;15;22;33mservice runs 32 workers but still opens[0m
-[48;2;15;22;33m  [38;2;107;120;135m(10s · ↓ 1.9k tokens · esc to interr…[39;49m  [38;2;233;235;237;48;2;15;22;33monly 20 connections, so about a third[39m  [0m
-[48;2;15;22;33m                                       [49m  [38;2;233;235;237;48;2;15;22;33mof requests wait in the pool queue.[39m    [0m
-[48;2;15;22;33m                                       [49m  [38;2;233;235;237;48;2;15;22;33mRaising the[38;2;188;212;235;48;2;25;43;62m pool[48;2;32;56;82m to[0;1;38;2;188;212;235;48;2;39;70;102m 40[0;38;2;83;159;229;48;2;15;22;33m▍[39m                [0m
-                                         [38;2;53;65;80;48;2;15;22;33m───────────────────────────────────────[0m
-                                         [38;2;164;176;192;48;2;15;22;33mTTFT 380ms · 18 tok/s · 56/65 tokens[39m   [0m
+[0;1;38;2;139;216;186;48;2;10;12;18m✔[0;39;48;2;10;12;18m [38;2;162;164;180mRead trace 4bf92f35 (31 spans)       [39;49m  [38;2;240;240;245;48;2;10;12;18mCheckout latency is up because the DB[39m  [0m
+[0;1;38;2;139;216;186;48;2;10;12;18m✔[0;39;48;2;10;12;18m [38;2;162;164;180mCorrelated p99 with pool wait (r=0.9…[39;49m  [38;2;240;240;245;48;2;10;12;18mpool is exhausted. Since v2.14.1 the[39m   [0m
+[0;1;38;2;184;162;242;48;2;10;12;18m✳[0;39;48;2;10;12;18m [0;1;38;2;141;125;186;48;2;10;12;18mChecking the d[38;2;164;151;200me[38;2;188;180;214mp[38;2;213;209;229ml[38;2;238;238;244mo[38;2;217;214;231my[38;2;193;185;217m [38;2;168;156;202md[38;2;143;127;187mi[38;2;141;125;186mff…[0;39;48;2;10;12;18m            [49m  [38;2;240;240;245;48;2;10;12;18mservice runs 32 workers but still opens[0m
+[48;2;10;12;18m  [38;2;138;140;157m(10s · ↓ 1.9k tokens · esc to interr…[39;49m  [38;2;240;240;245;48;2;10;12;18monly 20 connections, so about a third[39m  [0m
+[48;2;10;12;18m                                       [49m  [38;2;240;240;245;48;2;10;12;18mof requests wait in the pool queue.[39m    [0m
+[48;2;10;12;18m                                       [49m  [38;2;240;240;245;48;2;10;12;18mRaising the[38;2;223;217;244;48;2;36;35;52m pool[48;2;53;49;74m to[0;1;38;2;223;217;244;48;2;71;65;96m 40[0;38;2;184;162;242;48;2;10;12;18m▍[39m                [0m
+                                         [38;2;37;40;52;48;2;10;12;18m───────────────────────────────────────[0m
+                                         [38;2;162;164;180;48;2;10;12;18mTTFT 380ms · 18 tok/s · 56/65 tokens[39m   [0m
 [0;2;39;49mai-thinking-shimmer                      ai-token-stream[0m
 
-[0;1;38;2;95;135;215;49mTHINKING STATES[0;2;39;49m  4[0m
-  [38;2;95;175;175mai-thinking-shimmer   [39mAn agent working indicator: a breathing glyph and a sta…[0m
-  [38;2;95;175;175mai-typing-indicators  [39mSix labeled "model is working" indicators side by side:…[0m
-  [38;2;95;175;175mai-reasoning-summary  [39mA collapsible reasoning block: thought summaries stream…[0m
-  [38;2;95;175;175mai-status-orb         [39mAn assistant status orb on a hi-res canvas that breathe…[0m
+[0;1;38;2;34;135;74;49m01 / THINKING STATES · 4[0;39;49m [38;2;118;118;118m────────────────────────[0m
+  [38;2;65;121;180mai-thinking-shimmer   [39mAn agent working indicator: a breathing glyph and a sta…[0m
+  [38;2;65;121;180mai-typing-indicators  [39mSix labeled "model is working" indicators side by side:…[0m
+  [38;2;65;121;180mai-reasoning-summary  [39mA collapsible reasoning block: thought summaries stream…[0m
+  [38;2;65;121;180mai-status-orb         [39mAn assistant status orb on a hi-res canvas that breathe…[0m
 
-[0;1;38;2;95;135;215;49mTOKEN STREAMS[0;2;39;49m  4[0m
-  [38;2;95;175;175mai-token-stream       [39mA response streaming token by token with each new token…[0m
-  [38;2;95;175;175mai-markdown-stream    [39mMarkdown rendered live as it streams: headings, bold an…[0m
-  [38;2;95;175;175mai-throughput-meter   [39mAn inference panel with concurrent streams, per-stream …[0m
-  [38;2;95;175;175mai-structured-output  [39mStructured output streaming in: JSON arrives token by t…[0m
+[0;1;38;2;34;135;74;49m02 / TOKEN STREAMS · 4[0;39;49m [38;2;118;118;118m──────────────────────────[0m
+  [38;2;65;121;180mai-token-stream       [39mA response streaming token by token with each new token…[0m
+  [38;2;65;121;180mai-markdown-stream    [39mMarkdown rendered live as it streams: headings, bold an…[0m
+  [38;2;65;121;180mai-throughput-meter   [39mAn inference panel with concurrent streams, per-stream …[0m
+  [38;2;65;121;180mai-structured-output  [39mStructured output streaming in: JSON arrives token by t…[0m
 
-[0;1;38;2;95;135;215;49mTOOL CALLS[0;2;39;49m  4[0m
-  [38;2;95;175;175mai-tool-call-card     [39mAn agent's tool calls stacking up: each shows a spinner…[0m
-  [38;2;95;175;175mai-parallel-tools     [39mFour tool calls fanned out in parallel as a live waterf…[0m
-  [38;2;95;175;175mai-approval-prompt    [39mA human-in-the-loop approval prompt: the agent proposes…[0m
-  [38;2;95;175;175mai-diff-apply         [39mAn agent applying an edit: the unified diff streams in …[0m
+[0;1;38;2;34;135;74;49m03 / TOOL CALLS · 4[0;39;49m [38;2;118;118;118m─────────────────────────────[0m
+  [38;2;65;121;180mai-tool-call-card     [39mAn agent's tool calls stacking up: each shows a spinner…[0m
+  [38;2;65;121;180mai-parallel-tools     [39mFour tool calls fanned out in parallel as a live waterf…[0m
+  [38;2;65;121;180mai-approval-prompt    [39mA human-in-the-loop approval prompt: the agent proposes…[0m
+  [38;2;65;121;180mai-diff-apply         [39mAn agent applying an edit: the unified diff streams in …[0m
 
-[0;1;38;2;95;135;215;49mAGENTS & PIPELINES[0;2;39;49m  3[0m
-  [38;2;95;175;175mai-task-plan          [39mAn agent's plan as a live checklist: each task moves fr…[0m
-  [38;2;95;175;175mai-chat-transcript    [39mA chat transcript: user questions sit right-aligned in …[0m
-  [38;2;95;175;175mai-multi-agent-log    [39mA multi-agent message log: color-tagged agents post fin…[0m
+[0;1;38;2;34;135;74;49m04 / AGENTS & PIPELINES · 3[0;39;49m [38;2;118;118;118m─────────────────────[0m
+  [38;2;65;121;180mai-task-plan          [39mAn agent's plan as a live checklist: each task moves fr…[0m
+  [38;2;65;121;180mai-chat-transcript    [39mA chat transcript: user questions sit right-aligned in …[0m
+  [38;2;65;121;180mai-multi-agent-log    [39mA multi-agent message log: color-tagged agents post fin…[0m
 
-[0;1;38;2;95;135;215;49mMODEL INTERNALS[0;2;39;49m  3[0m
-  [38;2;95;175;175mai-context-window     [39mA 200k context window filling turn by turn as a stacked…[0m
-  [38;2;95;175;175mai-sampling-probs     [39mNext-token sampling: top-k candidates as probability ba…[0m
-  [38;2;95;175;175mai-attention-heatmap  [39mAn attention heatmap over one sentence with a causal ma…[0m
+[0;1;38;2;34;135;74;49m05 / MODEL INTERNALS · 3[0;39;49m [38;2;118;118;118m────────────────────────[0m
+  [38;2;65;121;180mai-context-window     [39mA 200k context window filling turn by turn as a stacked…[0m
+  [38;2;65;121;180mai-sampling-probs     [39mNext-token sampling: top-k candidates as probability ba…[0m
+  [38;2;65;121;180mai-attention-heatmap  [39mAn attention heatmap over one sentence with a causal ma…[0m
 
-[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
-[0;2;39;49mone facet [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/f/ai-thinking-shimmer[0m
-[0;2;39;49mpaged     [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/t/ai | less -R[0m
-[0;2;39;49mgalleries [0;38;2;95;175;175;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m
+[38;2;118;118;118m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;2;65;121;180;49mcurl -sL prism.jeremyfhall.com/f/ai-thinking-shimmer[0m
+[0;2;39;49mpaged     [0;38;2;65;121;180;49mcurl -sL prism.jeremyfhall.com/t/ai | less -R[0m
+[0;2;39;49mgalleries [0;38;2;65;121;180;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

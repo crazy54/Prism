@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Pure ASCII > Classics
+--/\=== PRISM TERMINAL > PURE ASCII > CLASSICS                    494c - 23 / 29
+------------------------------------------------------/\========================
 Figlet-Style Banner  ascii-figlet
 Outlined big letters traced from Prism's bitmap fonts with | and _ -- the figlet
 look -- typed in one letter at a time.
@@ -19,11 +20,11 @@ tags: figlet, banner, outline, big text, classic
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ascii-figlet
-Snapshot  prism-term snapshot ascii-figlet --size 72x12
-In code
+SNAPSHOT  prism-term snapshot ascii-figlet --size 72x12
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ascii-figlet'));
 

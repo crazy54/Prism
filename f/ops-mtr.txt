@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Network
+--/\=== PRISM TERMINAL > LINUX & OPS > NETWORK                   568nm - 11 / 39
+------------------------------------------------------/\========================
 mtr  ops-mtr
 mtr's curses view: header and key help, then each hop's Loss%, Snt, Last, Avg,
 Best, Wrst and StDev updating as probes return.
@@ -21,11 +22,11 @@ Keys:  Help   Display mode   Restart statistics   Order of fields   quit
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-mtr
-Snapshot  prism-term snapshot ops-mtr --size 80x14
-In code
+SNAPSHOT  prism-term snapshot ops-mtr --size 80x14
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-mtr'));
 

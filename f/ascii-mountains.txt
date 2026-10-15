@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Pure ASCII > ASCII Art
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ART                   494c - 13 / 29
+------------------------------------------------------/\========================
 Mountain Range  ascii-mountains
 Three ridgelines of /\ peaks drift past at different speeds, snow on the
 summits, a moon overhead and birds in flight.
@@ -27,11 +28,11 @@ ___^  :    ^_____/#:#:#:#:#:/:#:#:#:#:#:#:#:#:#:#:\___________/:#:\__^ :^_______
 #:#:#:#\/:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:#:
   still at 80x20 - t=6s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ascii-mountains
-Snapshot  prism-term snapshot ascii-mountains --size 80x24
-In code
+SNAPSHOT  prism-term snapshot ascii-mountains --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ascii-mountains'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Notifications & Status > Health & Uptime
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > HEALTH & UPTIME
+------------------------------------------------------/\========================
 Uptime & SLO  status-uptime-slo
 A status-page uptime history: 90 daily bars per service, uptime against its SLO,
 the error budget left and a cursor reading each day.
@@ -20,11 +21,11 @@ Webhooks  #################=#######=####=#####=#####=########### 99.91% 10% left
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play status-uptime-slo
-Snapshot  prism-term snapshot status-uptime-slo --size 80x13
-In code
+SNAPSHOT  prism-term snapshot status-uptime-slo --size 80x13
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('status-uptime-slo'));
 

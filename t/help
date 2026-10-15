@@ -1,46 +1,51 @@
-[0;1;38;5;68;49m◆ PRISM TERMINAL[0;2;39;49m › [0;1;39;49mhelp[0m
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;39;49mHELP[0;39;49m                                   [0;2;39;49mPRISM-TERM 0.2.0[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;61m━[38;5;61m━[38;5;32m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;65m━[38;5;64m━[38;5;100m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;130m━[38;5;131m━[38;5;131m━[38;5;131m━[38;5;95m━[0m
 
   This is Prism's terminal site: 434 animated and static terminal facets —
   scenes, spinners, progress meters, charts, text art, TUI controls, diagrams
   and ops views — in 17 galleries, drawn by prism-term 0.2.0, a zero-dependency
   Node engine.
 
-[0;1;38;5;68;49mBROWSE WITH CURL[0m
-  [38;5;73mcurl -sL prism.jeremyfhall.com/tty          [0;2;39;49mthe terminal site's home[0m
-  [38;5;73mcurl -sL prism.jeremyfhall.com/t/<gallery>  [0;2;39;49mone gallery, by category[0m
-  [38;5;73mcurl -sL prism.jeremyfhall.com/f/<facet>    [0;2;39;49mone facet: still and commands[0m
-  [38;5;73mcurl -sL prism.jeremyfhall.com/t/all        [0;2;39;49mevery facet on one line each[0m
-  [38;5;73mcurl -sL prism.jeremyfhall.com/t/help       [0;2;39;49mthis page[0m
+[0;1;38;5;98;49mBROWSE WITH CURL[0;39;49m [38;5;243m────────────────────────────────[0m
+  [38;5;31mcurl -sL prism.jeremyfhall.com/tty          [0;2;39;49mthe terminal site's home[0m
+  [38;5;31mcurl -sL prism.jeremyfhall.com/t/<gallery>  [0;2;39;49mone gallery, by category[0m
+  [38;5;31mcurl -sL prism.jeremyfhall.com/f/<facet>    [0;2;39;49mone facet: still and commands[0m
+  [38;5;31mcurl -sL prism.jeremyfhall.com/t/all        [0;2;39;49mevery facet on one line each[0m
+  [38;5;31mcurl -sL prism.jeremyfhall.com/t/help       [0;2;39;49mthis page[0m
 
   Pages are stills that fit 80 columns. Long pages: pipe to less -R. Every page
   also comes as:
-  [38;5;73m<page>.txt  [0;2;39;49mplain ASCII, no escape codes — for grep, NO_COLOR, screen readers[0m
-  [38;5;73m<page>.24   [0;2;39;49mtruecolor instead of the default 256 colors[0m
-  [0;2;39;49mSearch:   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/all.txt | grep -i spinner[0m
-  [0;2;39;49mPaging:   [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/t/ops | less -R[0m
-  [0;2;39;49mWindows PowerShell 5: type [0;38;5;73;49mcurl.exe[0;2;39;49m (plain "curl" is an alias there).[0m
+  [38;5;31m<page>.txt  [0;2;39;49mplain ASCII, no escape codes — for grep, NO_COLOR, screen readers[0m
+  [38;5;31m<page>.24   [0;2;39;49mtruecolor instead of the default 256 colors[0m
+  [0;2;39;49mSearch:   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/all.txt | grep -i spinner[0m
+  [0;2;39;49mPaging:   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/ops | less -R[0m
+  [0;2;39;49mWindows PowerShell 5: type [0;38;5;31;49mcurl.exe[0;2;39;49m (plain "curl" is an alias there).[0m
   [0;2;39;49mPowerShell and cmd don't continue lines with \: join a command that ends[0m
   [0;2;39;49min \ with the next line (drop the \) before you run it.[0m
 
-[0;1;38;5;68;49mTHE LIVE PLAYER[0m
+[0;1;38;5;98;49mTHE LIVE PLAYER[0;39;49m [38;5;243m─────────────────────────────────[0m
   The live player renders facets in real time and detects your terminal
-  (truecolor, 256, 16, mono; braille and block glyphs, or plain ASCII). It needs
-  Node 18+ and no network after the download.
-[38;5;73m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term[0m
+  (truecolor, 256, 16, mono; braille and block glyphs, or plain ASCII; Prism
+  Night or Prism Day for dark and light backgrounds). It needs Node 18+ and no
+  network after the download.
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term[0m
 [0;2;39;49m  …then add a command:[0m
-    [38;5;73m(none)            [0;2;39;49mbrowse the catalog: arrows move, / searches, Enter plays[0m
-    [38;5;73mplay <facet>      [0;2;39;49mone facet fullscreen (--size 80x24, --depth 256, --ascii)[0m
-    [38;5;73mlist              [0;2;39;49mevery facet, grouped by gallery[0m
-    [38;5;73msnapshot <facet>  [0;2;39;49mprint one still frame to stdout[0m
+    [38;5;31m(none)            [0;2;39;49mbrowse the catalog: arrows move, / searches, Enter plays[0m
+    [38;5;31mplay <facet>      [0;2;39;49mone facet fullscreen (--size 80x24, --depth 256, --ascii)[0m
+    [38;5;31mlist              [0;2;39;49mevery facet, grouped by gallery[0m
+    [38;5;31msnapshot <facet>  [0;2;39;49mprint one still frame to stdout[0m
+    [38;5;31mtheme <format>    [0;2;39;49mPrism Night / Day colors for your terminal emulator[0m
+[0;2;39;49m  Day or Night: --day, --night, or PRISM_TERM_THEME=day|night; --no-intro skips[0m
+[0;2;39;49m  the opening beam, and NO_COLOR / PRISM_REDUCED_MOTION=1 are honored.[0m
 [0;2;39;49m  Prefer a permanent install? Run this once, then just type prism-term:[0m
-  [38;5;73mnpm i -g https://prism.jeremyfhall.com/dl/prism-term.tgz[0m
+  [38;5;31mnpm i -g https://prism.jeremyfhall.com/dl/prism-term.tgz[0m
 
-[0;1;38;5;68;49mGALLERIES[0m
-  [38;5;73mfx         objects    sim        retro      text       loaders[0m
-  [38;5;73mprogress   charts     ai         status     ops        diagrams[0m
-  [38;5;73mcallouts   input      maps       lab        ascii[0m
+[0;1;38;5;98;49mGALLERIES[0;39;49m [38;5;243m───────────────────────────────────────[0m
+  [38;5;97m▌[38;5;31mfx        [38;5;61m▌[38;5;31mobjects   [38;5;32m▌[38;5;31msim       [38;5;31m▌[38;5;31mretro     [38;5;31m▌[38;5;31mtext      [38;5;30m▌[38;5;31mloaders[0m
+  [38;5;30m▌[38;5;31mprogress  [38;5;29m▌[38;5;31mcharts    [38;5;29m▌[38;5;31mai        [38;5;64m▌[38;5;31mstatus    [38;5;64m▌[38;5;31mops       [38;5;100m▌[38;5;31mdiagrams[0m
+  [38;5;130m▌[38;5;31mcallouts  [38;5;130m▌[38;5;31minput     [38;5;130m▌[38;5;31mmaps      [38;5;131m▌[38;5;31mlab       [38;5;131m▌[38;5;31mascii[0m
 
-[0;1;38;5;68;49mFOR AGENTS AND TOOLS[0m
+[0;1;38;5;98;49mFOR AGENTS AND TOOLS[0;39;49m [38;5;243m────────────────────────────[0m
   Machine-readable: the JSON island <script id="prism-terminal-catalog"> in the
   web catalog, prism.jeremyfhall.com/Prism.html, and the same catalog at
   prism.jeremyfhall.com/terminal/engine/catalog/terminal-catalog.json. Each
@@ -48,7 +53,7 @@
   params, a plain-text preview and its module path; the module's code, and the
   "_" helpers it imports, are in the catalog's top-level "sources".
 
-[0;2;39;49m────────────────────────────────────────────────────────────────────────────────[0m
-[0;2;39;49mhome      [0;38;5;73;49mcurl -sL prism.jeremyfhall.com/tty[0m
-[0;2;39;49mcatalog   [0;38;5;73;49mhttps://prism.jeremyfhall.com/terminal/[0m
-[0;2;39;49msource    [0;38;5;73;49mhttps://github.com/crazy54/Prism (prism-term/, MIT)[0m[0m
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m
+[0;2;39;49mcatalog   [0;38;5;31;49mhttps://prism.jeremyfhall.com/terminal/[0m
+[0;2;39;49msource    [0;38;5;31;49mhttps://github.com/crazy54/Prism (prism-term/, MIT)[0m[0m

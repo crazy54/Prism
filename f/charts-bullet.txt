@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Charts & Metrics > Gauges & Meters
+--/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      505nm - 21 / 30
+------------------------------------------------------/\========================
 Bullet Charts  charts-bullet
 Stephen Few-style bullet charts: qualitative bands, the actual value as a bar
 and a target tick, one KPI per row.
@@ -15,11 +16,11 @@ tags: bullet chart, kpi, target, bands, goals
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play charts-bullet
-Snapshot  prism-term snapshot charts-bullet --size 60x8
-In code
+SNAPSHOT  prism-term snapshot charts-bullet --size 60x8
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('charts-bullet'));
 

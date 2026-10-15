@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Steps & Pipelines
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > STEPS & PIPELINES
+------------------------------------------------------/\========================
 apt install  progress-apt
 apt fetching then unpacking packages while dpkg's progress line holds the bottom
 row: Progress: [ 64%] [####....].
@@ -19,11 +20,11 @@ Unpacking prism-data:all (0.9.2-1) ...
 Progress: [ 54%] [#################################............................]
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-apt
-Snapshot  prism-term snapshot progress-apt --size 80x12
-In code
+SNAPSHOT  prism-term snapshot progress-apt --size 80x12
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-apt'));
 

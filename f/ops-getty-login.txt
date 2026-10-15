@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Login & MOTD
+--/\=== PRISM TERMINAL > LINUX & OPS > LOGIN & MOTD              568nm - 32 / 39
+------------------------------------------------------/\========================
 Console Login  ops-getty-login
 A tty1 console: the /etc/issue banner with hostname and addresses, a mistyped
 password and "Login incorrect", then a successful login.
@@ -25,11 +26,11 @@ Password:
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-getty-login
-Snapshot  prism-term snapshot ops-getty-login --size 80x18
-In code
+SNAPSHOT  prism-term snapshot ops-getty-login --size 80x18
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-getty-login'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Callouts & Layout > Admonitions
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > ADMONITIONS          580nm - 7 / 15
+------------------------------------------------------/\========================
 Alert Banners  callouts-alert-banners
 Full-width info, success, warning and error banners that slide in from the edge,
 stack, pulse when critical and get dismissed.
@@ -19,11 +20,11 @@ tags: banner, alert, notification, status, slide
 
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play callouts-alert-banners
-Snapshot  prism-term snapshot callouts-alert-banners --size 76x12
-In code
+SNAPSHOT  prism-term snapshot callouts-alert-banners --size 76x12
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('callouts-alert-banners'));
 

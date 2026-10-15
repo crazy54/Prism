@@ -1,7 +1,7 @@
 // DYCP — "Different Y Character Position", the C64 scroller where every
 // letter bobs on its own sine phase. This one bounces off a mirrored water line
 // that ripples its reflection.
-import { textMask, maskAt, fontPx, lerpc, dim } from './_kit.js';
+import { textMask, maskAt, fontPx, lerpc, dim, shade } from './_kit.js';
 
 const MESSAGE = 'DIFFERENT Y CHARACTER POSITION   ';
 
@@ -36,11 +36,13 @@ export default {
     const ch = 7 * S.sy;
     const amp = Math.max(1, (water - ch) * 0.42);
     const bg = ctx.theme.bg;
-    const sky0 = lerpc(bg, 0x000000, 0.25), sky1 = lerpc(bg, pal(0.3), 0.18);
+    const day = ctx.theme.mode === 'light';
+    const sky0 = shade(ctx.theme, 0.25), sky1 = lerpc(bg, pal(0.3), 0.18);
+    const sea = day ? lerpc(bg, pal(0.55), 0.3) : dim(pal(0.55), 0.22);
     return (t) => {
       const tt = t * speed;
       for (let y = 0; y < H; y++) {
-        const c = y < water ? lerpc(sky0, sky1, y / water) : lerpc(dim(pal(0.55), 0.22), bg, (y - water) / (H - water));
+        const c = y < water ? lerpc(sky0, sky1, y / water) : lerpc(sea, bg, (y - water) / (H - water));
         px.fill(c, y * W, (y + 1) * W);
       }
       let x0 = W - ((tt * 24 * S.sx) % (total + W));
@@ -54,7 +56,8 @@ export default {
         const color = pal((k / chars.length + tt * 0.1) % 1);
         for (let y = 0; y < ch; y++) for (let x = 0; x < m.w * S.sx; x++) {
           if (!maskAt(m, x, y, S.sx, S.sy)) continue;
-          const c = y < S.sy ? lerpc(color, 0xffffff, 0.5) : color;
+          // The top row catches the light: white at Night; by Day it's the color itself over a deeper body.
+          const c = day ? (y < S.sy ? color : lerpc(color, ctx.theme.ink, 0.2)) : y < S.sy ? lerpc(color, 0xffffff, 0.5) : color;
           cv.set(gx + x, gy + y, c);
           // Reflection below the water line, rippled and darker.
           const ry = water + (water - (gy + y)) - 1;

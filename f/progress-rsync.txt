@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Transfers & ETA
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   494nm - 37 / 41
+------------------------------------------------------/\========================
 rsync --progress  progress-rsync
 rsync -av --progress pushing a tree: per-file bytes, percent, rate and time with
 xfr#/to-chk counters, then the sent/received summary.
@@ -19,11 +20,11 @@ bin/prism
         819,923   3%    3.31MB/s    0:00:05
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-rsync
-Snapshot  prism-term snapshot progress-rsync --size 80x12
-In code
+SNAPSHOT  prism-term snapshot progress-rsync --size 80x12
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-rsync'));
 

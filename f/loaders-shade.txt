@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Spinners & Loaders > Bars & Pulses
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > BARS & PULSES      488nm - 31 / 64
+------------------------------------------------------/\========================
 Shade  loaders-shade
 Dark, medium and light shade cycling -- a flickering block like an old CRT
 warming up.
@@ -12,14 +13,14 @@ tags: spinner, loader, shade, crt, flicker
                    noise (ASCII fallback) - 4 frames - 130 ms
   still at t=4s -- run it live to see it move
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play loaders-shade
-Snapshot  prism-term snapshot loaders-shade --size 44x5
-In code
+SNAPSHOT  prism-term snapshot loaders-shade --size 44x5
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('loaders-shade'));
 

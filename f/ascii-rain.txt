@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Pure ASCII > ASCII Animations
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ANIMATIONS             494c - 3 / 29
+------------------------------------------------------/\========================
 ASCII Rain  ascii-rain
 Slanting rain in three depths, splashing on a street line, with a lightning
 flash every few seconds.
@@ -27,11 +28,11 @@ ________________________________________________________________________________
           ~                                                ~  ~        ~    ~
   still at 80x20 - t=4s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ascii-rain
-Snapshot  prism-term snapshot ascii-rain --size 80x24
-In code
+SNAPSHOT  prism-term snapshot ascii-rain --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ascii-rain'));
 

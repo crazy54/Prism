@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Pure ASCII > ASCII Animations
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ANIMATIONS             494c - 2 / 29
+------------------------------------------------------/\========================
 ASCII Fire  ascii-fire
 Old-school text-mode fire: heat averages upward and cools through the " .:*sS#$"
 ramp, with gusting flicker.
@@ -27,11 +28,11 @@ sSSSSS###SSSsssssss**:::::::**ssss*::::**sss**sSS####Ss****ssss*sss*:::::::..:::
 $$$$$$$$$$$$$$::#$* :$$$$#: :##s#$$$#::$$$#s$$$::$$$$$$$#s##s#$#::ss#$$$$$#::s:
   still at 80x20 - t=3s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ascii-fire
-Snapshot  prism-term snapshot ascii-fire --size 80x24
-In code
+SNAPSHOT  prism-term snapshot ascii-fire --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ascii-fire'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Transfers & ETA
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   494nm - 32 / 41
+------------------------------------------------------/\========================
 tqdm  progress-tqdm
 Nested tqdm bars from a training run: epochs outside, batches inside, with
 elapsed<remaining, it/s and a live loss postfix.
@@ -13,11 +14,11 @@ epoch 3: train_loss=0.241 val_loss=0.263 val_acc=0.907
 training:  60%|####################3             | 3/5 [00:52<00:34, 17.40s/it]
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-tqdm
-Snapshot  prism-term snapshot progress-tqdm --size 80x6
-In code
+SNAPSHOT  prism-term snapshot progress-tqdm --size 80x6
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-tqdm'));
 

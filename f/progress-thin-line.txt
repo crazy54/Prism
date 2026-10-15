@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Progress Bars
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      494nm - 7 / 41
+------------------------------------------------------/\========================
 Thin Line  progress-thin-line
 The heavy-line bar modern Python and Rust tools use -- a bright run, a half-cap
 head and a dim remainder, with elapsed time.
@@ -12,11 +13,11 @@ tags: line, rich, pip, minimal
          Publishing  =====================----------------  55% 0:00:04
   still at t=4s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-thin-line
-Snapshot  prism-term snapshot progress-thin-line --size 64x5
-In code
+SNAPSHOT  prism-term snapshot progress-thin-line --size 64x5
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-thin-line'));
 

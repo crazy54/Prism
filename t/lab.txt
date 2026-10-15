@@ -1,18 +1,19 @@
-* PRISM TERMINAL > Animation Lab (17)
+--/\=== PRISM TERMINAL > ANIMATION LAB                           604nm - 16 / 17
+------------------------------------------------------/\========================
 Motion studies: easing curves, springs, timing and the building blocks of
 animation.
 
-linear              inQuad                          *  -              =
-                                                    #######        -----------==
-- - - - - - - ## -  - - - - - - - -# -   ? 0.15     ###-###===      == ==   = -=
-          +%%##  +              ###  +               ######         =
-      ++++       +           ++%%    +              *  -
--+++++- - - - -  +  - - ++++++- - -  -              ########       -----------**
-++                  +++++                ? 0.40     ###-###***      **        -*
-                                                     ######         *
+linear              inQuad                          *  -              *
+                                                    #######        -----------**
+- - - - - - - ** -  - - - - - - - -* -   ? 0.15     ###-###***      ** **   * -*
+          *%%**  *              ***  *               ######         *
+      ****       *           **%%    *              *  -
+-*****- - - - -  *  - - ******- - -  -              ########       -----------##
+**                  *****                ? 0.40     ###-######      ##        -#
+                                                     ######         #
 lab-easing-gallery                       lab-spring
 
-EASING & TIMING  6
+01 / EASING & TIMING - 6 ------------------------
   lab-easing-gallery  Twelve standard easings plotted in braille, each with a...
   lab-easing-race     Balls racing the same distance in the same time with di...
   lab-bezier          A devtools-style cubic-bezier editor: handles glide bet...
@@ -20,17 +21,17 @@ EASING & TIMING  6
   lab-stagger         A grid of tiles staggering in and out four ways -- from...
   lab-motion-blur     One scene sampled four ways -- 60 fps, 12 fps, 12 fps w...
 
-SPRINGS & PHYSICS  2
+02 / SPRINGS & PHYSICS - 2 ----------------------
   lab-spring          Four springs differing only in damping ratio chase a st...
   lab-bounce          The bouncing-ball exercise: decaying bounces, stretch i...
 
-LOOPS & CYCLES  4
+03 / LOOPS & CYCLES - 4 -------------------------
   lab-lfo-scope       A four-channel oscilloscope sweeping sine, triangle, sa...
   lab-loading-choreo  A card loading in stages: shimmering skeleton, spinner ...
   lab-lissajous       A Lissajous table -- x frequency across, y frequency do...
   lab-pendulum-wave   Fifteen pendulums tuned to 20-34 swings per 30 s: snake...
 
-TRANSITIONS  5
+04 / TRANSITIONS - 5 ----------------------------
   lab-wipe            Four wipes between a daybreak and a night skyline: soft...
   lab-dissolve        Four dissolves between two scenes: cross-fade, ordered ...
   lab-iris            Cinema irises between two scenes: circle, diamond, five...

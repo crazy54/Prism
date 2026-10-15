@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animated Objects > 3D Solids
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > 3D SOLIDS             467nm - 1 / 18
+------------------------------------------------------/\========================
 Shaded Cube  shaded-cube
 A z-buffered cube with Lambert and Blinn-Phong lighting, palette-tinted faces
 and a soft contact shadow.
@@ -8,33 +9,33 @@ tags: cube, 3d, lighting, z-buffer, phong
 
 
                                       +%@-
-                                   +%%***#%+
-                                ++%*********%+
-                             ++%**************%+
-                           +%#******************%+
-                          %#**********************%#
-                           +*******************%%*-+
-                            +#***************%#----+
-                             -#***********%**------*
-                              -#*******%%*---------#*
-                               -%***#%*+--------#+-
-                                -#%*+---------++
-                                 *+*-------**
-                                .....*++-+-.....
+                                   +%%%%%%%+
+                                ++%%%%%%%%%%@+
+                             ++%%%%%%%%%%%%%%%%+
+                           +%%%%%%%%%%%%%%%%%%%%@+
+                          %%%%%%%%%%%%%%%%%%%%%%%%@#
+                           +%%%%%%%%%%%%%%%%%%%%%*:+
+                            +%%%%%%%%%%%%%%%%%#::::+
+                             -%%%%%%%%%%%%%**::::::*
+                              -%%%%%%%%%%*:::::::::#*
+                               -%%%%%%*+::::::::#+-
+                                -%%*+:::::::::++
+                                 *+*:::::::**
+                                .....*++:+-.....
                                ..................
 
 
 
   still at 60x20 - t=6s -- run it live for full size and motion
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.1-4)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play shaded-cube
-Snapshot  prism-term snapshot shaded-cube --size 60x22
-In code
+SNAPSHOT  prism-term snapshot shaded-cube --size 60x22
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('shaded-cube'));
 

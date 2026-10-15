@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Transfers & ETA
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   494nm - 40 / 41
+------------------------------------------------------/\========================
 Queue Drain  progress-queue-drain
 A backlog draining while producers keep adding: consumers autoscale 4 -> 8, the
 net rate sets the ETA, and the depth is charted.
@@ -17,11 +18,11 @@ tags: queue, backlog, autoscale, workers, eta
          ^ scaled consumers 4 -> 8 (backlog > 10,000)
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-queue-drain
-Snapshot  prism-term snapshot progress-queue-drain --size 64x10
-In code
+SNAPSHOT  prism-term snapshot progress-queue-drain --size 64x10
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-queue-drain'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > FX Store > Fire & Water
+--/\=== PRISM TERMINAL > FX STORE > FIRE & WATER                 436nm - 13 / 24
+------------------------------------------------------/\========================
 Ripple Pond  ripple
 Rain on water -- damped wave-equation ripples refracting a pebbled bed, with
 specular glints.
@@ -27,11 +28,11 @@ tags: water, ripple, rain, wave equation
 ::-*+=:::::::...:::::::::::::..::---------::::::::::-:::---:--::::-::::::::::---
   still at 80x20 - t=4s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ripple
-Snapshot  prism-term snapshot ripple --size 80x24
-In code
+SNAPSHOT  prism-term snapshot ripple --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ripple'));
 

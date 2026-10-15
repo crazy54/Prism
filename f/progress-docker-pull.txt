@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Progress & Counters > Steps & Pipelines
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > STEPS & PIPELINES
+------------------------------------------------------/\========================
 docker pull  progress-docker-pull
 Layers going Waiting -> Downloading -> Extracting -> Pull complete, three at a
 time; like docker, bars only show past 110 columns.
@@ -18,11 +19,11 @@ ae8dae18aefd: Download complete
 
   still at 80x11 - t=6s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play progress-docker-pull
-Snapshot  prism-term snapshot progress-docker-pull --size 112x11
-In code
+SNAPSHOT  prism-term snapshot progress-docker-pull --size 112x11
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('progress-docker-pull'));
 

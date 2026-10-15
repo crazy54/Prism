@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Pure ASCII > ASCII Spinners & Bars
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII SPINNERS & BARS       494c - 20 / 29
+------------------------------------------------------/\========================
 ASCII Spectrum Analyzer  ascii-vu-meter
 A hi-fi spectrum analyzer in #: bars bounce to a synthetic beat, peak markers
 hang and fall, labels sit on the axis.
@@ -25,11 +26,11 @@ tags: spectrum, vu meter, equalizer, audio, bars
         -60--------150------400-------1k-------2.5k------6k-------15k---
   still at t=4s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ascii-vu-meter
-Snapshot  prism-term snapshot ascii-vu-meter --size 64x18
-In code
+SNAPSHOT  prism-term snapshot ascii-vu-meter --size 64x18
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ascii-vu-meter'));
 

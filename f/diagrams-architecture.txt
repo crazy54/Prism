@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Architecture Diagrams > Boxes & Flows
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > BOXES & FLOWS    574nm - 1 / 16
+------------------------------------------------------/\========================
 Service Architecture  diagrams-architecture
 Clients, load balancer, three app servers and the data tier, with request
 packets flowing along routed edges; app-2 fails health checks and traffic
@@ -26,11 +27,11 @@ tags: architecture, load balancer, traffic, topology, failover
   x app-2 failing health checks . traffic on app-1, app-3
   still at t=4s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play diagrams-architecture
-Snapshot  prism-term snapshot diagrams-architecture --size 76x18
-In code
+SNAPSHOT  prism-term snapshot diagrams-architecture --size 76x18
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('diagrams-architecture'));
 

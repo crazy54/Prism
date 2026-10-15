@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animated Objects > Mechanical
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > MECHANICAL           467nm - 14 / 18
+------------------------------------------------------/\========================
 Hourglass  hourglass
 Sand drains through the neck into a growing heap, volume conserved; when the top
 runs dry the glass flips over.
@@ -8,33 +9,33 @@ tags: hourglass, sand, timer, waiting, time
                             :-::::::-::-::::-::-::--
                              -  +..............+  -
                              -+..................+-
-                             -:=..::............=:-
+                             -:-..::............-:-
                              - :-..::..........-: -
                              -  .****......*++*.  -
                              -    **+#+*+*++**    -
                              -     :*+*+*+**:     -
                              -       ****+*       -
                              -        -++-        -
-                             -        -*--        -
-                             -       =:**:=       -
+                             -        -*:-        -
+                             -       =.**.=       -
                              -     :=..*...=:     -
-                             -    =:.:.##...:=    -
+                             -    =..:.##....=    -
                              -  .=..:..##.....=.  -
                              - :-..::.++*+.....-: -
-                             -:=.#*#+++***++***.=:-
+                             -:-.#*#+++***++***.-:-
                              -*****++**+*++**+++**-
                              -  ***++++*+*++++**  -
                             ::::-:::-:::-::--::-:::-
   still at 30x20 - t=4.7s -- run it live for full size and motion
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   duration=8            Seconds per run  (2-60)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play hourglass
-Snapshot  prism-term snapshot hourglass --size 30x22
-In code
+SNAPSHOT  prism-term snapshot hourglass --size 30x22
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('hourglass'));
 

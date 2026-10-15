@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Notifications & Status > Health & Uptime
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > HEALTH & UPTIME
+------------------------------------------------------/\========================
 Health Checks  status-health-checks
 Service health checks re-running in a sweep: live status dots and words,
 latency, last-checked age and a latency trail per row.
@@ -17,11 +18,11 @@ tags: health check, status dot, monitoring, latency, probe
 
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play status-health-checks
-Snapshot  prism-term snapshot status-health-checks --size 76x10
-In code
+SNAPSHOT  prism-term snapshot status-health-checks --size 76x10
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('status-health-checks'));
 

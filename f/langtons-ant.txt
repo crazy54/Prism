@@ -1,40 +1,41 @@
-* PRISM TERMINAL > Particles & Simulations > Cellular Automata
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > CELLULAR AUTOMATA
+------------------------------------------------------/\========================
 Langton's Ant  langtons-ant
 Two Langton's ants at braille resolution, accelerating through ten thousand
 steps of chaos into the highway.
 scene - 60x22 (min 20x7) - 30 s loop - unicode - truecolor
 tags: langton, ant, turmite, cellular automata, emergence, braille
 
-                     *  *  ** **  *   * * %*     == = = =     =
-                    ***   * *  ****      *       = ====       =
-                    * ******* * **     ***        ==      =  =
-                          ***      **   ***       == = == ===
-                      *****   ** **   *          =====  = ==
-                       ****  * *   *  *          = ==  ==== =
-                        **  *  *  ** * *        ===    = =  =
-                        * * ******    **       = =    == = =
-                       *   ***** **  * *      === =  === =
-                       * *******    * *       ==  = = ===== =
-                       **  *      * **         = ===    == = =
-                       * *  *   ***             = ====  ======
-                        ****  *  *                === =     ==
-                         **    **              =  ===  = = ====
-                                      **      =   ======  =====
-                                       **     = =  %=    ==  =
-                              **  * *  * *     ==  = = = ==  =
-                           ********   **        ==  == =  =====
-                      **  * ****  ** **    *        = = =   ===
+                     #  #  ## ##  #   # # %#     ** * * *     *
+                    ###   # #  ####      #       * ****       *
+                    # ####### # ##     ###        **      *  *
+                          ###      ##   ###       ** * ** ***
+                      #####   ## ##   #          *****  * **
+                       ####  # #   #  #          * **  **** *
+                        ##  #  #  ## # #        ***    * *  *
+                        # # ######    ##       * *    ** * *
+                       #   ##### ##  # #      *** *  *** *
+                       # #######    # #       **  * * ***** *
+                       ##  #      # ##         * ***    ** * *
+                       # #  #   ###             * ****  ******
+                        ####  #  #                *** *     **
+                         ##    ##              *  ***  * * ****
+                                      ##      *   ******  *****
+                                       ##     * *  %*    **  *
+                              ##  # #  # #     **  * * * **  *
+                           ########   ##        **  ** *  *****
+                      ##  # ####  ## ##    #        * * *   ***
            step 1,399
   still at 60x20 - t=6s -- run it live for full size and motion
 
-Params  (--set key=value)
+PARAMS - --SET KEY=VALUE ------------------------
   ants=2                Ants  (1-4)
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play langtons-ant
-Snapshot  prism-term snapshot langtons-ant --size 60x22
-In code
+SNAPSHOT  prism-term snapshot langtons-ant --size 60x22
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('langtons-ant'));
 

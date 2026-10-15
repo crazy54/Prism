@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Architecture Diagrams > Boxes & Flows
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > BOXES & FLOWS    574nm - 3 / 16
+------------------------------------------------------/\========================
 CI/CD Pipeline  diagrams-pipeline
 A pipeline graph: build fans out to parallel test jobs with spinners and
 timings, fans in to staging, waits at a human approval gate, then deploys to
@@ -21,11 +22,11 @@ tags: pipeline, ci, cd, dag, approval
   = waiting for approval . deploy v2.14.1 to prod?
   still at t=5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play diagrams-pipeline
-Snapshot  prism-term snapshot diagrams-pipeline --size 76x13
-In code
+SNAPSHOT  prism-term snapshot diagrams-pipeline --size 76x13
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('diagrams-pipeline'));
 

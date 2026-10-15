@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Animated Objects > Wireframes
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > WIREFRAMES            467nm - 7 / 18
+------------------------------------------------------/\========================
 Wireframe Solids  wireframe
 Braille wireframes morphing cube -> icosahedron -> torus -> octahedron with
 depth-cued edges and glowing vertices.
@@ -7,31 +8,31 @@ tags: wireframe, polyhedra, 3d, braille
 
 
                                                   #
-                                                +###
-                                         ---====+ #
-                                     :::-***       +
-                                ---::*:*            +
-                            .......*.......         +
-                       +:=.=**@@@       :  ......    +
-                     ::++      @#        :       ... +
-                   ::  + =       #        :          ::
-                   ::     =       #       :            +:
-                   -       -       ##     :::-----=====++:
-                    -       -        # :::            +++---
-                     --      --      :#             *+  +- -
-                       -- -    -  :::  %          **     --
-                           - -  :-      %       #*     - -
-                               - ---+    %    ##-  -- -
-                                     --*#-%-%--    -
-                                         #@@@
+                                                *###
+                                         -===+++* #
+                                     :::-###       *
+                                ----:#:#            *
+                            :......#.......         +
+                       +:=:-**@@@       :  ......    +
+                     -:++      @#        :       ... +
+                   --  + =       #        :          ..
+                   --     -       #       :            =:
+                   =       -       ##     ::::::-------=+:
+                    =       -        # :::            =++-:-
+                     ==      --      :*             ==  +- -
+                       == =    :  :::  *          ==     --
+                           = =  :-      *       ++     - -
+                               = =-=-    *    ++=  == =
+                                     ===+=*=+==    =
+                                         +@@@
                                            @
   still at 80x20 - t=4s -- run it live for full size and motion
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play wireframe
-Snapshot  prism-term snapshot wireframe --size 80x24
-In code
+SNAPSHOT  prism-term snapshot wireframe --size 80x24
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('wireframe'));
 

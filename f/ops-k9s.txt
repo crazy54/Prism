@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Linux & Ops > Containers & Clusters
+--/\=== PRISM TERMINAL > LINUX & OPS > CONTAINERS & CLUSTERS     568nm - 25 / 39
+------------------------------------------------------/\========================
 k9s-style Pod Console  ops-k9s
 A k9s-style cluster console: context/cluster header with CPU/MEM, key hints, a
 titled pod table colored by status, a moving selection and a crumb bar.
@@ -27,11 +28,11 @@ tags: k9s, kubernetes, pods, console, tui, k8s
  <pod>  shop
   still at t=6s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ops-k9s
-Snapshot  prism-term snapshot ops-k9s --size 80x20
-In code
+SNAPSHOT  prism-term snapshot ops-k9s --size 80x20
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ops-k9s'));
 

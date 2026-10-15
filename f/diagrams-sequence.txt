@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Architecture Diagrams > Sequence & Timelines
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > SEQUENCE & TIMELINES
+------------------------------------------------------/\========================
 Sequence Diagram  diagrams-sequence
 A sequence diagram of one checkout request: call arrows grow between lifelines,
 activation bars mark who is busy, a note flags pool wait, returns come back
@@ -27,11 +28,11 @@ tags: sequence diagram, uml, lifeline, request, trace
     trace 4bf92f35 . 7/7 spans
   still at t=4.5s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play diagrams-sequence
-Snapshot  prism-term snapshot diagrams-sequence --size 72x19
-In code
+SNAPSHOT  prism-term snapshot diagrams-sequence --size 72x19
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('diagrams-sequence'));
 

@@ -1,4 +1,5 @@
-* PRISM TERMINAL > Pure ASCII > ASCII Spinners & Bars
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII SPINNERS & BARS       494c - 17 / 29
+------------------------------------------------------/\========================
 ASCII Spinner Sampler  ascii-spinners
 Sixteen pure-ASCII spinners -- |/-\, bouncing brackets, scanners, meters and
 more -- each at its own classic cadence.
@@ -25,11 +26,11 @@ tags: spinner, loader, busy, classic, cli
 
   still at t=2s -- run it live to see it move
 
-Run it live  (Node 18+, no install)
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
   npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
     prism-term play ascii-spinners
-Snapshot  prism-term snapshot ascii-spinners --size 64x18
-In code
+SNAPSHOT  prism-term snapshot ascii-spinners --size 64x18
+IN CODE
   import { play, findFacet } from 'prism-term';
   await play(findFacet('ascii-spinners'));
 
