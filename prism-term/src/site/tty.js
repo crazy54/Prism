@@ -328,7 +328,7 @@ function helpPage(ctx, plain) {
   footer(p, site, [
     ['home', `curl -sL ${h}/tty`],
     ['catalog', `${site}/terminal/`],
-    ['source', 'https://github.com/crazy54/Prism (prism-term/, MIT)'],
+    ['source', 'https://github.com/crazy54/Prism (prism-term/, Apache-2.0)'],
   ]);
   return p;
 }
