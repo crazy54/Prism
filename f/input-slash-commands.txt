@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > COMMAND PALETTES        585nm - 14 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > COMMAND PALETTES        487nm - 14 / 23
 ------------------------------------------------------/\========================
 Slash Command Menu  input-slash-commands
 A chat composer where typing "/" opens a command menu that filters as you type;
@@ -23,7 +23,7 @@ tags: slash command, chat, composer, menu, chatops
   still at t=4s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-slash-commands
 SNAPSHOT  prism-term snapshot input-slash-commands --size 64x14
 IN CODE

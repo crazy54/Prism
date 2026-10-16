@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Conway's Game of Life on a toroidal grid at canvas-pixel resolution (8 cells
 // per terminal cell in braille). Cells are colored by age — newborns white-hot,
 // survivors cooling through the theme's accents — and recently dead cells leave
 // a ghost glow in block modes. A rolling state hash detects stagnation and
 // short cycles, which trigger fresh soup; gliders are fired in periodically.
 
-import { NONE } from '../../color.js';
+const { NONE } = __bm(0);
 
 const GLIDER = [[1, 0], [2, 1], [0, 2], [1, 2], [2, 2]];
 const LWSS = [[1, 0], [4, 0], [0, 1], [0, 2], [4, 2], [0, 3], [1, 3], [2, 3], [3, 3]];

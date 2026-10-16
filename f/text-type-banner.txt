@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            484nm - 12 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            492nm - 12 / 29
 ------------------------------------------------------/\========================
 Big Type & Delete  text-type-banner
 Big letters typed in one keystroke at a time behind a blinking block cursor,
@@ -23,7 +23,7 @@ tags: typewriter, banner, cursor, hero, loop
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-type-banner
 SNAPSHOT  prism-term snapshot text-type-banner --size 72x14
 IN CODE

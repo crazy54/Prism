@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > SELECTS & LISTS          585nm - 2 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > SELECTS & LISTS          487nm - 2 / 23
 ------------------------------------------------------/\========================
 Fuzzy Finder  input-fuzzy-finder
 An fzf-style finder: the query types itself, results re-rank live with matched
@@ -24,7 +24,7 @@ tags: fzf, fuzzy, finder, search, filter
   still at t=3.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-fuzzy-finder
 SNAPSHOT  prism-term snapshot input-fuzzy-finder --size 60x14
 IN CODE

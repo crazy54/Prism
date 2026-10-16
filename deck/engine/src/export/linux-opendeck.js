@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../facets.bundle.js';
 // OpenDeck export — Prism Deck on Linux through OpenDeck (Rust/Tauri; Flathub
 // me.amankhanna.opendeck, Arch extra/opendeck, .deb/.rpm/AppImage).
 //
@@ -25,8 +26,8 @@
 import { readZip, writeZip } from './plugin-zip.js';
 import { PLUGIN_UUID, ACTION_FACET, ACTION_INFOBAR } from './profile.js';
 import { normalizeSetup, renderPage, safeName, svgDataUrl } from './linux.js';
-import { render, stillTime } from '../render.js';
-import { findFacet } from '../facets/index.js';
+const { render, stillTime } = __bm(100);
+const { findFacet } = __bm(318);
 
 export const OD_FLATPAK_ID = 'me.amankhanna.opendeck';
 export const PLUGIN_DIR = `${PLUGIN_UUID}.sdPlugin`;
@@ -35,10 +36,16 @@ export const OD_DEVICES = ['original', 'original-v2', 'mini', 'mini-2022', 'mini
 /** Extra slots OpenDeck adds per model (DeviceInfo.touchpoints / infobars). */
 const OD_EXTRA = { neo: { touchpoints: 2, infobars: 1 } };
 
-/** Where OpenDeck keeps things (Tauri app_config_dir; Flatpak under ~/.var/app). */
-export function openDeckPaths({ home = '~', flatpak = false } = {}) {
-  const config = flatpak ? `${home}/.var/app/${OD_FLATPAK_ID}/config/opendeck` : `${home}/.config/opendeck`;
-  const logs = flatpak ? `${home}/.var/app/${OD_FLATPAK_ID}/data/opendeck/logs` : `${home}/.local/share/opendeck/logs`;
+/** XDG base dir: the variable when it is an absolute path (XDG spec: relative values are ignored), else the default. */
+export const xdgDir = (value, fallback) => (typeof value === 'string' && value.startsWith('/') ? value.replace(/\/+$/, '') || '/' : fallback);
+
+/**
+ * Where OpenDeck keeps things (Tauri app_config_dir / app_log_dir; Flatpak under ~/.var/app).
+ * Native installs follow XDG_CONFIG_HOME / XDG_DATA_HOME (pass `env`); the Flatpak sandbox sets its own.
+ */
+export function openDeckPaths({ home = '~', flatpak = false, env = {} } = {}) {
+  const config = flatpak ? `${home}/.var/app/${OD_FLATPAK_ID}/config/opendeck` : `${xdgDir(env.XDG_CONFIG_HOME, `${home}/.config`)}/opendeck`;
+  const logs = flatpak ? `${home}/.var/app/${OD_FLATPAK_ID}/data/opendeck/logs` : `${xdgDir(env.XDG_DATA_HOME, `${home}/.local/share`)}/opendeck/logs`;
   return { config, plugins: `${config}/plugins`, plugin: `${config}/plugins/${PLUGIN_DIR}`, profiles: `${config}/profiles`, images: `${config}/images`, logs, pluginLog: `${logs}/plugins/${PLUGIN_DIR}.log` };
 }
 
@@ -87,7 +94,7 @@ function storedAction(m, files) {
 
 /** Fallback action definitions when no built manifest is given (mirror plugin/com.jeremyfhall.prism.sdPlugin/manifest.json). */
 const DEFAULT_ACTIONS = [
-  { UUID: ACTION_FACET, Name: 'Prism Facet', Icon: 'imgs/actions/facet/icon', Controllers: ['Keypad', 'Encoder'], DisableAutomaticStates: true, SupportedInMultiActions: false, PropertyInspectorPath: 'ui/pi.html', States: [{ Name: 'Prism', Image: 'imgs/actions/facet/key', ShowTitle: false }] },
+  { UUID: ACTION_FACET, Name: 'Prism Display', Icon: 'imgs/actions/facet/icon', Controllers: ['Keypad', 'Encoder'], DisableAutomaticStates: true, SupportedInMultiActions: false, PropertyInspectorPath: 'ui/pi.html', States: [{ Name: 'Prism', Image: 'imgs/actions/facet/key', ShowTitle: false }] },
   { UUID: ACTION_INFOBAR, Name: 'Prism Info Bar', Icon: 'imgs/actions/infobar/icon', Controllers: ['Neo', 'Infobar'], SupportedInMultiActions: false, PropertyInspectorPath: 'ui/pi.html', States: [{ Name: 'Prism', Image: 'imgs/actions/infobar/key', ShowTitle: false }] },
 ];
 

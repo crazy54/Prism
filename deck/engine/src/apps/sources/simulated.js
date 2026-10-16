@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../core.bundle.js';
 // Simulated sources — deterministic fake data with the exact ctx.data shapes, computed by the
 // same functions the app facets fall back to (src/facets/apps/_sim.js), so a deck fed by these
 // looks identical to one with nothing wired. Browser-safe: the web catalog and tests use them.
 
 import { simulatedSource } from './_source.js';
-import { simAudio, simSpectrum, simSystem, simSeries, simMedia, simCalendar, NET_MAX } from '../../facets/apps/_sim.js';
+const { simAudio, simSpectrum, simSystem, simSeries, simMedia, simCalendar, NET_MAX } = __bm(115);
 
 export const SYSTEM_KEYS = ['cpu', 'mem', 'gpu', 'disk', 'net', 'temp', 'battery', 'uptime', 'sys', 'series'];
 export const AUDIO_KEYS = ['audio', 'spectrum'];

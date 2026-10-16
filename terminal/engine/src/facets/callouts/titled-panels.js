@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Panels with titles and footers in every alignment — the footers carry live state.
-import { panel, glyphs, ATTR, fit, spin } from './_kit.js';
+const { panel, glyphs, ATTR, fit, spin } = __bm(22);
 
 const pad2 = (n) => String(n).padStart(2, '0');
 

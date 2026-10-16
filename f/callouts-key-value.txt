@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > KEY-VALUE           580nm - 15 / 15
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > KEY-VALUE           570nm - 15 / 15
 ------------------------------------------------------/\========================
 Key-Value Details  callouts-key-value
 Grouped key/value details with dotted leaders to right-aligned values,
@@ -25,7 +25,7 @@ tags: key value, details, describe, leaders, properties
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play callouts-key-value
 SNAPSHOT  prism-term snapshot callouts-key-value --size 56x16
 IN CODE

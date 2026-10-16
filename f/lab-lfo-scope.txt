@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATION LAB > LOOPS & CYCLES           604nm - 9 / 17
+--/\=== PRISM TERMINAL > ANIMATION LAB > LOOPS & CYCLES           474nm - 9 / 17
 ------------------------------------------------------/\========================
 LFO Scope  lab-lfo-scope
 A four-channel oscilloscope sweeping sine, triangle, saw and square LFOs over a
@@ -29,7 +29,7 @@ tags: lfo, oscilloscope, sine, saw, square, triangle, waveform, phosphor
   still at t=2s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play lab-lfo-scope
 SNAPSHOT  prism-term snapshot lab-lfo-scope --size 64x20
 IN CODE

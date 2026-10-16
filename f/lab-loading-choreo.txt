@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATION LAB > LOOPS & CYCLES          604nm - 10 / 17
+--/\=== PRISM TERMINAL > ANIMATION LAB > LOOPS & CYCLES          474nm - 10 / 17
 ------------------------------------------------------/\========================
 Loading Choreography  lab-loading-choreo
 A card loading in stages: shimmering skeleton, spinner and eased progress,
@@ -23,7 +23,7 @@ tags: loading, skeleton, shimmer, spinner, progress, stagger, choreography
   still at t=4s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play lab-loading-choreo
 SNAPSHOT  prism-term snapshot lab-loading-choreo --size 56x14
 IN CODE

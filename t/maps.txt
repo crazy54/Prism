@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > MAPS & GEO                              592nm - 15 / 17
+--/\=== PRISM TERMINAL > MAPS & GEO                              519nm - 15 / 17
 ------------------------------------------------------/\========================
 World maps, radar sweeps, routes, arcs and floorplans in braille and blocks.
 

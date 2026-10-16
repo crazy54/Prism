@@ -1,12 +1,13 @@
+import { __m as __bm } from '../web.bundle.js';
 // Export cell buffers as self-contained HTML — the bridge back into Prism.
 //
 // A terminal frame becomes an offline <pre> (no fonts/scripts fetched, in the
 // spirit of Prism.html), and a frame sequence becomes a tiny self-playing
 // animation that can be dropped into a Prism gallery or a report.
 
-import { NONE, toHex } from './color.js';
-import { ATTR } from './buffer.js';
-import { getTheme } from './palettes.js';
+const { NONE, toHex } = __bm(0);
+const { ATTR } = __bm(6);
+const { getTheme } = __bm(3);
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > ORBITS & SHAPES    488nm - 41 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > ORBITS & SHAPES    506nm - 41 / 64
 ------------------------------------------------------/\========================
 Moon Phases  loaders-moon
 The moon waxing and waning through eight phases -- perfect for long-running,
@@ -17,7 +17,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-moon
 SNAPSHOT  prism-term snapshot loaders-moon --size 44x5
 IN CODE

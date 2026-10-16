@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > LOG LINES      558nm - 17 / 18
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > LOG LINES      550nm - 17 / 18
 ------------------------------------------------------/\========================
 JSON Log Lines  status-log-json
 Structured JSON logs piped through jq -c: keys, strings, numbers and level
@@ -23,7 +23,7 @@ $ kubectl logs -f deploy/checkout | jq -c
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play status-log-json
 SNAPSHOT  prism-term snapshot status-log-json --size 80x14
 IN CODE

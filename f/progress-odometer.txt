@@ -16,7 +16,7 @@ tags: odometer, counter, rolling, mechanical
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-odometer
 SNAPSHOT  prism-term snapshot progress-odometer --size 48x7
 IN CODE

@@ -1,3 +1,4 @@
+import { __m as __bm } from '../web.bundle.js';
 // Refraction — Prism's design language, translated to terminal cells.
 //
 // "White light in, every color out." The terminal chrome (catalog browser,
@@ -15,21 +16,23 @@
 //                   edges; a hue-washed lift for the selected row; focus is
 //                   the beam running along the focused pane's top edge
 //
-// Colors are data (TOKENS, synced from design/tokens.json) so a token change
-// is a data edit. Everything else derives from the active theme (bg, panel,
-// panel2, line, ink, muted, dim, accent), so Cloudscape or Primer get the same
-// grammar in their own colors; Prism Night / Day get it as designed.
+// Colors are data (TOKENS, synced from design/tokens.json; the gallery hues come
+// through src/themes.js) so a token change is a data edit. Everything else
+// derives from the active theme (bg, panel, panel2, line, ink, muted, dim,
+// accent), so Cloudscape or Primer get the same grammar in their own colors;
+// Prism Night / Day get it as designed.
 //
 // Pure module (no node:*): safe for the web catalog and the site builder.
 
-import { NONE, mix, fromOklab, luminance, parse } from './color.js';
-import { ATTR } from './buffer.js';
-import { Canvas } from './canvas.js';
+const { NONE, mix, fromOklab, luminance, parse } = __bm(0);
+const { TERMINAL_GALLERIES } = __bm(1);
+const { ATTR } = __bm(6);
+const { Canvas } = __bm(9);
 
 // ── tokens ──────────────────────────────────────────────────────────────────
 
 export const TOKENS = {
-  source: 'design/tokens.json 1.2.1',
+  source: 'design/tokens.json 1.2.2',
   // The spectrum: OKLCH, violet (296°) → rose (8°), decreasing hue. Tiers per
   // mode: ink = text-safe (≥ 4.5:1 on every surface), vivid = marks / beams /
   // glints (≥ 3:1). `site` is for curl pages, which land on a terminal
@@ -42,27 +45,12 @@ export const TOKENS = {
     // (hue, λ nm) of the 12 stops, for labelling hues without a token.
     lambda: [[296, 436], [269.8, 472], [243.6, 479], [217.5, 485], [191.3, 492], [165.1, 510], [138.9, 554], [112.7, 569], [86.5, 578], [60.4, 585], [34.2, 597]],
   },
-  // galleries.terminal: even steps along the spectrum in the terminal catalog's
-  // nav order (src/facets/galleries.js), so the index reads as one spectrum.
-  galleries: {
-    fx: { h: 296, lambda: 'λ 436', night: '#c2aef8', day: '#7555b8', nightVivid: '#ab91eb', dayVivid: '#9876e3' },
-    objects: { h: 278, lambda: 'λ 467', night: '#acb6ff', day: '#595dbf', nightVivid: '#919af3', dayVivid: '#787fec' },
-    sim: { h: 260, lambda: 'λ 475', night: '#95bdff', day: '#3065be', nightVivid: '#72a3f4', dayVivid: '#4e88eb' },
-    retro: { h: 242, lambda: 'λ 480', night: '#7dc5fa', day: '#006da6', nightVivid: '#4eacee', dayVivid: '#0090da' },
-    text: { h: 224, lambda: 'λ 484', night: '#69ccef', day: '#00708e', nightVivid: '#1fb5e1', dayVivid: '#0095bb' },
-    loaders: { h: 206, lambda: 'λ 488', night: '#5ed1df', day: '#00737d', nightVivid: '#00bdcd', dayVivid: '#0098a6' },
-    progress: { h: 188, lambda: 'λ 494', night: '#63d5cc', day: '#00746e', nightVivid: '#00c5ba', dayVivid: '#009a92' },
-    charts: { h: 170, lambda: 'λ 505', night: '#76d8b8', day: '#00765c', nightVivid: '#45cca5', dayVivid: '#009c7a' },
-    ai: { h: 152, lambda: 'λ 538', night: '#90d9a4', day: '#00783b', nightVivid: '#75d290', dayVivid: '#079e51' },
-    status: { h: 134, lambda: 'λ 558', night: '#add892', day: '#3e7500', nightVivid: '#9fd57d', dayVivid: '#5b9924' },
-    ops: { h: 116, lambda: 'λ 568', night: '#c8d483', day: '#636d00', nightVivid: '#c4d26b', dayVivid: '#849100' },
-    diagrams: { h: 98, lambda: 'λ 574', night: '#decd7b', day: '#786700', nightVivid: '#dfc95d', dayVivid: '#9e8900' },
-    callouts: { h: 80, lambda: 'λ 580', night: '#efc479', day: '#896000', nightVivid: '#f0ba59', dayVivid: '#b48000' },
-    input: { h: 62, lambda: 'λ 585', night: '#fab980', day: '#9a5700', nightVivid: '#f8a85e', dayVivid: '#cb7400' },
-    maps: { h: 44, lambda: 'λ 592', night: '#feaf8c', day: '#af470a', nightVivid: '#f8976d', dayVivid: '#db6830' },
-    lab: { h: 26, lambda: 'λ 604', night: '#fea79e', day: '#b3413c', nightVivid: '#f48a81', dayVivid: '#e0615a' },
-    ascii: { h: 8, lambda: 'λ 494c', night: '#faa2b2', day: '#b13f5d', nightVivid: '#ec8398', dayVivid: '#de5f7d' },
-  },
+  // galleries.terminal: one λ per gallery across surfaces (tokens 1.3.0) — a gallery with a
+  // web counterpart (charts, fx, text … status → notify, diagrams → arch) wears the web hue and λ;
+  // terminal-only galleries take free half-steps of the web ramp.
+  // Generated into src/themes.js (TERMINAL_GALLERIES) by scripts/sync-themes.mjs;
+  // each also carries its designed xterm-256 indexes (night256, day256, …Vivid256).
+  galleries: Object.fromEntries(TERMINAL_GALLERIES.map(({ id, ...g }) => [id, g])),
   // The terminal surface's own hue (galleries.surfaces: "phosphor mint").
   surface: { h: 163, lambda: 'λ 514' },
   // rf.night / rf.day beam-core: white light at Night, the brand violet by Day.

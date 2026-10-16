@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             568nm - 35 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             578nm - 35 / 39
 ------------------------------------------------------/\========================
 git Prompt  ops-prompt-git
 A __git_ps1 prompt tracking the repo: dirty *, staged +, untracked %, and
@@ -25,7 +25,7 @@ ops@node03:~/src/shop-api (main +% u+1)$ git
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-prompt-git
 SNAPSHOT  prism-term snapshot ops-prompt-git --size 80x16
 IN CODE

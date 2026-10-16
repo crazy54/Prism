@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   494nm - 38 / 41
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   558nm - 38 / 41
 ------------------------------------------------------/\========================
 Download Speed Graph  progress-speed-graph
 A download drawing its own throughput history as a braille area chart, with a
@@ -19,7 +19,7 @@ tags: speed, graph, throughput, braille, download
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-speed-graph
 SNAPSHOT  prism-term snapshot progress-speed-graph --size 72x10
 IN CODE

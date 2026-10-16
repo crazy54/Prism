@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > MAPS & GEO > ROUTES & ARCS               592nm - 8 / 11
+--/\=== PRISM TERMINAL > MAPS & GEO > ROUTES & ARCS               519nm - 8 / 11
 ------------------------------------------------------/\========================
 Transit Map  maps-subway
 A schematic metro map with four colored lines, interchanges and trains running
@@ -29,7 +29,7 @@ West Docks                 Central |               |             |     East Gate
   still at 80x20 - t=6s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play maps-subway
 SNAPSHOT  prism-term snapshot maps-subway --size 80x22
 IN CODE

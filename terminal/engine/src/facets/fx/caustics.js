@@ -1,8 +1,9 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // The bottom of a swimming pool on a sunny day: tiles and grout bent by the
 // moving surface, overlaid with the bright network of caustics — light focused
 // where the surface's wave crests act as lenses. Two noise layers drift
 // against each other; caustic lines live where their sum crosses zero.
-import { lerpc, clamp01 } from '../retro/_kit.js';
+const { lerpc, clamp01 } = __bm(29);
 
 export default {
   title: 'Pool Caustics',

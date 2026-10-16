@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Shell prompts: plain bash PS1, __git_ps1, powerline, exit-code prompts, a tmux status line and a two-line starship-style prompt.
-import { C, G, ATTR, writer, walk, hash, typed, blink, clock, bashPrompt, session, drawSession, wrapParts, pad, lpad, fixed, uni } from './_kit.js';
+const { C, G, ATTR, writer, walk, hash, typed, blink, clock, bashPrompt, session, drawSession, wrapParts, pad, lpad, fixed, uni } = __bm(27);
 
 const LS = [
   ['total 64'],

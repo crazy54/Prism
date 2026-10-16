@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A neofetch-style system summary: logo art on the left, key/value facts on the
 // right, the color swatch row underneath. The facts tick like a live box.
-import { ATTR, uni, mix } from './_kit.js';
-import { palette } from '../../palettes.js';
+const { ATTR, uni, mix } = __bm(22);
+const { palette } = __bm(3);
 
 const LOGO = [
   '        /\\        ',

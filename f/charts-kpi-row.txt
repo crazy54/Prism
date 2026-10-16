@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > KPI TILES            505nm - 28 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > KPI TILES            436nm - 28 / 30
 ------------------------------------------------------/\========================
 KPI Tile Row  charts-kpi-row
 Four boxed KPI tiles -- throughput, latency, errors, saturation -- each with a
@@ -14,7 +14,7 @@ tags: kpi, tiles, dashboard, delta, sparkline
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-kpi-row
 SNAPSHOT  prism-term snapshot charts-kpi-row --size 80x5
 IN CODE

@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A raised card with a drop shadow that lifts and settles, and a glint across its title.
-import { panel, glyphs, ATTR, uni, mix, ease, phase, button } from './_kit.js';
+const { panel, glyphs, ATTR, uni, mix, ease, phase, button } = __bm(22);
 
 export default {
   id: 'callouts-shadow-card',

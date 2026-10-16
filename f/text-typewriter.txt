@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            484nm - 11 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            492nm - 11 / 29
 ------------------------------------------------------/\========================
 Typewriter, Human Rhythm  text-typewriter
 A note typed at human speed -- quick bigrams, pauses between words, the odd typo
@@ -25,7 +25,7 @@ tags: typewriter, typing, cursor, blink, realistic
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-typewriter
 SNAPSHOT  prism-term snapshot text-typewriter --size 72x16
 IN CODE

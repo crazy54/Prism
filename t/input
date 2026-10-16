@@ -1,5 +1,5 @@
-[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;130;49mINPUT & MENUS[0;39;49m                           [38;5;130mλ 585 · 14 / 17[0m
-[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;130;49m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;101m━[38;5;101m━[0m
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;30;49mINPUT & MENUS[0;39;49m                           [38;5;30mλ 487 · 14 / 17[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;30;49m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;66m━[38;5;30m━[0m
 TUI controls: selects, checkboxes, text fields, palettes, dialogs and tab bars.
 
 [0;1;38;5;147;48;5;232m?[0;39;48;5;232m [0;1;38;5;255;48;5;232mDeploy region[0;39;48;5;232m                        [49m  [0;1;38;5;147;48;5;232m?[0;39;48;5;232m [0;1;38;5;255;48;5;232mServices to restart[0;39;48;5;232m                  [0m
@@ -12,36 +12,36 @@ TUI controls: selects, checkboxes, text fields, palettes, dialogs and tab bars.
 [38;5;245;48;5;232m↑/↓ move · enter select · esc cancel[39m   [49m  [38;5;245;48;5;232m4 of 7 selected · space toggle · a all [0m
 [0;2;39;49minput-select                             input-multiselect[0m
 
-[0;1;38;5;130;49m01 / SELECTS & LISTS · 3[0;39;49m [38;5;243m────────────────────────[0m
+[0;1;38;5;30;49m01 / SELECTS & LISTS · 3[0;39;49m [38;5;243m────────────────────────[0m
   [38;5;31minput-select           [39mAn inquirer/gum-style single select: the pointer moves…[0m
   [38;5;31minput-fuzzy-finder     [39mAn fzf-style finder: the query types itself, results r…[0m
   [38;5;31minput-scroll-list      [39mA long pod list in a short framed window: the cursor r…[0m
 
-[0;1;38;5;130;49m02 / TOGGLES & CHECKBOXES · 4[0;39;49m [38;5;243m───────────────────[0m
+[0;1;38;5;30;49m02 / TOGGLES & CHECKBOXES · 4[0;39;49m [38;5;243m───────────────────[0m
   [38;5;31minput-multiselect      [39mA checkbox list where a scripted user moves and toggle…[0m
   [38;5;31minput-toggles          [39mA settings pane of on/off switches whose knobs slide a…[0m
   [38;5;31minput-radio-group      [39mThree labeled radio groups — environment, rollout stra…[0m
   [38;5;31minput-slider           [39mRange sliders for replicas, CPU and timeout: handles g…[0m
 
-[0;1;38;5;130;49m03 / TEXT FIELDS · 4[0;39;49m [38;5;243m────────────────────────────[0m
+[0;1;38;5;30;49m03 / TEXT FIELDS · 4[0;39;49m [38;5;243m────────────────────────────[0m
   [38;5;31minput-text-field       [39mA labeled input with placeholder, blinking caret and i…[0m
   [38;5;31minput-password         [39mA masked password input whose strength meter climbs fr…[0m
   [38;5;31minput-number-stepper   [39mNumeric steppers with − and + controls: presses flash,…[0m
   [38;5;31minput-textarea         [39mA multi-line textarea where a commit message is typed:…[0m
 
-[0;1;38;5;130;49m04 / COMMAND PALETTES · 3[0;39;49m [38;5;243m───────────────────────[0m
+[0;1;38;5;30;49m04 / COMMAND PALETTES · 3[0;39;49m [38;5;243m───────────────────────[0m
   [38;5;31minput-command-palette  [39mA ctrl+shift+p palette over a dimmed app: the query fu…[0m
   [38;5;31minput-autocomplete     [39mA shell prompt with a fish-style ghost suggestion from…[0m
   [38;5;31minput-slash-commands   [39mA chat composer where typing "/" opens a command menu …[0m
 
-[0;1;38;5;130;49m05 / DIALOGS & PROMPTS · 5[0;39;49m [38;5;243m──────────────────────[0m
+[0;1;38;5;30;49m05 / DIALOGS & PROMPTS · 5[0;39;49m [38;5;243m──────────────────────[0m
   [38;5;31minput-confirm-dialog   [39mA destructive-action modal with a shadow: Cancel is fo…[0m
   [38;5;31minput-prompt-flow      [39mA clack-style CLI wizard: text, select, yes/no and mul…[0m
   [38;5;31minput-progress-dialog  [39mA modal that applies a human-approved fix: steps tick …[0m
   [38;5;31minput-date-picker      [39mA calendar range picker for a change freeze: arrows wa…[0m
   [38;5;31minput-wizard           [39mA four-step restore wizard: the stepper header fills a…[0m
 
-[0;1;38;5;130;49m06 / TABS & BARS · 4[0;39;49m [38;5;243m────────────────────────────[0m
+[0;1;38;5;30;49m06 / TABS & BARS · 4[0;39;49m [38;5;243m────────────────────────────[0m
   [38;5;31minput-tabs             [39mA tab strip with a count badge whose underline glides …[0m
   [38;5;31minput-menu-bar         [39mA Turbo Vision-style menu bar with hotkey letters: F10…[0m
   [38;5;31minput-shortcut-bar     [39mA nano-style editor whose two-row shortcut bar flashes…[0m

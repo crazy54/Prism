@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATION LAB > SPRINGS & PHYSICS        604nm - 8 / 17
+--/\=== PRISM TERMINAL > ANIMATION LAB > SPRINGS & PHYSICS        474nm - 8 / 17
 ------------------------------------------------------/\========================
 Bounce, Squash & Stretch  lab-bounce
 The bouncing-ball exercise: decaying bounces, stretch in flight, squash on
@@ -30,7 +30,7 @@ tags: bounce, squash and stretch, onion skin, arcs, spacing,
   still at t=2.1s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play lab-bounce
 SNAPSHOT  prism-term snapshot lab-bounce --size 64x20
 IN CODE

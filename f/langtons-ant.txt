@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   ants=2                Ants  (1-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play langtons-ant
 SNAPSHOT  prism-term snapshot langtons-ant --size 60x22
 IN CODE

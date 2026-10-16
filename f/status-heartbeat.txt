@@ -18,7 +18,7 @@ tags: heartbeat, ecg, monitor, dead man switch, braille
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play status-heartbeat
 SNAPSHOT  prism-term snapshot status-heartbeat --size 72x9
 IN CODE

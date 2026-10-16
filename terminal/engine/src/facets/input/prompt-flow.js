@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A clack-style prompt flow: text, select, confirm and multiselect prompts
 // chained down one gutter, each collapsing to its answer, then a spinner.
-import { ATTR, glyphs, uni, phase, typed, blink, spin, clip, stringWidth } from './_input.js';
+const { ATTR, glyphs, uni, phase, typed, blink, spin, clip, stringWidth } = __bm(25);
 
 const T = { tag: 0.3, tagDone: 1.5, envDown: 2.1, envDone: 2.7, migNo: 3.4, migDone: 3.9, n1: 4.5, n2: 4.9, nDone: 5.5, deployed: 7.6 };
 const ENVS = ['staging', 'production', 'canary'];

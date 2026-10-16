@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > BADGES & PILLS  558nm - 9 / 18
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > BADGES & PILLS  550nm - 9 / 18
 ------------------------------------------------------/\========================
 Badges & Pills  status-badges
 Log-level badges with ticking counts, state chips, outline tags, environment
@@ -18,7 +18,7 @@ tags: badge, pill, chip, tag, counter
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play status-badges
 SNAPSHOT  prism-term snapshot status-badges --size 72x9
 IN CODE

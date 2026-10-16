@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Zebra-striped service table: right-aligned numbers, rows arriving, a totals row.
-import { ATTR, glyphs, uni, fit, phase, mix } from './_kit.js';
+const { ATTR, glyphs, uni, fit, phase, mix } = __bm(22);
 
 const ROWS = [
   ['edge-lb', 'us-east-1', 4210, 3.1, 0.0003],

@@ -1,3 +1,4 @@
+import { __m as __bm } from '../web.bundle.js';
 // Spinner collection. Each entry is { frames, interval (ms) } and optionally
 // { palette } — a gradient that sweeps across the frame's characters over time
 // on color terminals (the glyphs still animate on their own in mono).
@@ -6,10 +7,10 @@
 // orbit, thinking, wave, dna, radar, …) are generated from small formulas.
 // Every spinner is width-stable: all of its frames occupy the same columns.
 
-import { stringWidth } from './width.js';
-import { getTheme, palette as makePalette, PALETTES } from './palettes.js';
-import { rng } from './easing.js';
-import { parse } from './color.js';
+const { stringWidth } = __bm(5);
+const { getTheme, palette: makePalette, PALETTES } = __bm(3);
+const { rng } = __bm(10);
+const { parse } = __bm(0);
 
 const BITS = [[0x01, 0x08], [0x02, 0x10], [0x04, 0x20], [0x40, 0x80]];
 

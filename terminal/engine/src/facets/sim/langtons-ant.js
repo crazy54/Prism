@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Langton's ant at braille resolution: on a white cell turn right, on a black
 // cell turn left, flip the cell, step. Two ants share the grid and the cells
 // they flip carry their color. The step rate ramps up through each run so
 // the famous transition — ten thousand steps of chaos, then the endless
 // diagonal "highway" — arrives inside the loop. A step counter ticks below.
-import { NONE } from '../../color.js';
+const { NONE } = __bm(0);
 
 const RUN = 30;
 const DIRS = [[0, -1], [1, 0], [0, 1], [-1, 0]];

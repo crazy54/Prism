@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > NETWORK                   568nm - 15 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > NETWORK                   578nm - 15 / 39
 ------------------------------------------------------/\========================
 ip -br -c addr  ops-ip-brief
 Typing `ip -br -c addr` then `ip -br -c link`: interfaces in color, UP green,
@@ -22,7 +22,7 @@ tags: ip, iproute2, interfaces, addresses, network
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-ip-brief
 SNAPSHOT  prism-term snapshot ops-ip-brief --size 76x13
 IN CODE

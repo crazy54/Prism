@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            484nm - 14 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            492nm - 14 / 29
 ------------------------------------------------------/\========================
 Digital Rain Reveal  text-matrix-reveal
 Green code rain pours down; wherever a falling head crosses the hidden message,
@@ -29,7 +29,7 @@ tags: matrix, digital rain, reveal, katakana, message
   still at 80x20 - t=6s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-matrix-reveal
 SNAPSHOT  prism-term snapshot text-matrix-reveal --size 80x24
 IN CODE

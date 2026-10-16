@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      505nm - 18 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      436nm - 18 / 30
 ------------------------------------------------------/\========================
 Arc Gauges  charts-gauge-arc
 CPU, memory and disk as braille arc gauges with warning and critical zones,
@@ -21,7 +21,7 @@ tags: gauge, arc, needle, speedometer, zones
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-gauge-arc
 SNAPSHOT  prism-term snapshot charts-gauge-arc --size 72x12
 IN CODE

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS   488nm - 10 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS   506nm - 10 / 64
 ------------------------------------------------------/\========================
 Star  loaders-star
 A star cycling through its point counts so it seems to twinkle -- friendly, for
@@ -17,7 +17,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-star
 SNAPSHOT  prism-term snapshot loaders-star --size 44x5
 IN CODE

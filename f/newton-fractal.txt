@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > FX STORE > FRACTALS                     436nm - 10 / 24
+--/\=== PRISM TERMINAL > FX STORE > FRACTALS                     467nm - 10 / 24
 ------------------------------------------------------/\========================
 Newton Basins  newton-fractal
 Newton's method basins for a polynomial whose roots orbit and breathe -- color
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   roots=3               Roots  (3-6)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play newton-fractal
 SNAPSHOT  prism-term snapshot newton-fractal --size 80x24
 IN CODE

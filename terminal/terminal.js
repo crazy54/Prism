@@ -7,7 +7,7 @@
 // Facet modules are imported on demand from <engine>/<record.module minus "prism-term/">, the first time a
 // tile scrolls near the viewport, and run by the engine's browser player (src/web/).
 
-import { esc, notify, initChrome, engineUrl, mode, onMode, pageTheme, copyButton } from './site.js';
+import { esc, notify, initChrome, engineUrl, mode, onMode, pageTheme, copyButton, curlHtml, shellToggle, applyShell } from './site.js';
 import { TERMINAL as POSITIONS } from '../assets/rf/positions.mjs';
 
 const root = document.documentElement;
@@ -24,7 +24,7 @@ const COLOR_LABEL = { mono: 'Mono', 16: '16 colors', 256: '256 colors', truecolo
 const MODES = ['braille', 'sextant', 'quad', 'half', 'ascii'];
 const DEPTHS = ['truecolor', '256', '16', 'mono'];
 const SIZE_PRESETS = [[60, 20], [80, 24], [100, 30], [120, 36]];
-const FEATURED = ['plasma', 'donut', 'cracktro', 'globe', 'ops-htop', 'charts-noc-wallboard', 'synthwave', 'fire'];
+const FEATURED = ['refraction', 'donut', 'cracktro', 'globe', 'ops-htop', 'charts-noc-wallboard', 'synthwave', 'fire'];
 const TILE_FPS = 15;
 const MAX_MOUNTED = 48;
 
@@ -94,7 +94,6 @@ let motionPaused = reducedMotion.matches;
 function renderMotion() {
   root.dataset.motion = motionPaused ? 'paused' : 'playing';
   const button = byId('motion-toggle');
-  button.setAttribute('aria-pressed', String(motionPaused));
   button.innerHTML = motionPaused ? '<svg class="ic" aria-hidden="true"><use href="#i-play"/></svg><span>Resume motion</span>' : '<svg class="ic" aria-hidden="true"><use href="#i-pause"/></svg><span>Pause motion</span>';
   document.querySelectorAll('.live-dot').forEach((badge) => { badge.textContent = motionPaused ? 'PAUSED' : 'LIVE'; });
 }
@@ -420,7 +419,9 @@ async function showHero(i, user = false) {
     if (featured[hero.i] !== rec.id) return;
     hero.player?.destroy();
     heroScreen.replaceChildren();
-    hero.player = web.mountFacet(heroScreen, facet, { fit: heroFit(), fps: 30, theme: tileTheme, label: `${rec.title} — live terminal render` });
+    // On a phone the prism's instrument labels would be ~5px type: show the art alone.
+    const params = rec.id === 'refraction' && heroScreen.clientWidth < 440 ? { labels: 'off' } : undefined;
+    hero.player = web.mountFacet(heroScreen, facet, { fit: heroFit(), fps: 30, theme: tileTheme, params, label: `${rec.title} — live terminal render` });
     heroWindow.dataset.rfGallery = hueId(rec.gallery);
     if (detail.open) hero.player.pause();
   } catch (err) { console.error('[prism-terminal] hero:', err); }
@@ -518,10 +519,13 @@ function renderUsage() {
   const rows = [
     ['Play it', withFlags(u.cli || `prism-term play ${rec.id}`), ''],
     ['Without installing · Node 18+', withFlags(u.npx || ''), ''],
-    ['Read it with curl', u.curl || '', `Add <code>.txt</code> for 7-bit terminals · Windows: <code>curl.exe</code>`],
+    ['Read it with curl', u.curl || '', 'shell'],
     ['In code', u.code || '', ''],
   ].filter(([, cmd]) => cmd);
-  byId('d-usage').innerHTML = rows.map(([label, cmd, note]) => `<div class="cmd"><div class="cmd-head"><span>${esc(label)}</span>${copyButton(cmd, `Copy: ${label}`)}</div><pre>${label === 'In code' ? '' : '<span class="c">$ </span>'}${esc(cmd)}</pre>${note ? `<p class="cmd-note">${note}</p>` : ''}</div>`).join('');
+  byId('d-usage').innerHTML = rows.map(([label, cmd, note]) => note === 'shell'
+    ? `<div class="cmd"><div class="cmd-head"><span>${esc(label)}</span><span class="cmd-actions">${shellToggle}${copyButton(cmd, `Copy: ${label}`)}</span></div><pre><span class="c">$ </span>${curlHtml(cmd)}</pre><p class="cmd-note">Add <code>.txt</code> for 7-bit terminals.</p><p class="cmd-note" data-shell-note></p></div>`
+    : `<div class="cmd"><div class="cmd-head"><span>${esc(label)}</span>${copyButton(cmd, `Copy: ${label}`)}</div><pre>${label === 'In code' ? '' : '<span class="c">$ </span>'}${esc(cmd)}</pre>${note ? `<p class="cmd-note">${note}</p>` : ''}</div>`).join('');
+  applyShell(byId('d-usage'));
   byId('d-cmd').innerHTML = `$ prism-term play <b>${esc(rec.id)}</b>${f ? ` ${esc(f)}` : ''}`;
   byId('d-cmd').title = `prism-term play ${rec.id}${f ? ` ${f}` : ''}`;
 }
@@ -529,7 +533,6 @@ function renderUsage() {
 function syncPlayButton() {
   const p = detail.player, b = byId('d-play');
   const playing = !!p && p.playing && !motionPaused && !p.still;
-  b.setAttribute('aria-pressed', String(!playing));
   b.innerHTML = playing ? '<svg class="ic" aria-hidden="true"><use href="#i-pause"/></svg><span>Pause</span>' : '<svg class="ic" aria-hidden="true"><use href="#i-play"/></svg><span>Play</span>';
   b.disabled = !p || !p.animated;
   byId('d-live').textContent = !p?.animated ? 'STILL' : playing ? 'LIVE' : 'PAUSED';

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > TABLES              580nm - 11 / 15
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > TABLES              570nm - 11 / 15
 ------------------------------------------------------/\========================
 Result Grid  callouts-table-grid
 A psql-style result grid with box-drawing junctions, a double rule under the
@@ -22,7 +22,7 @@ tags: table, grid, sql, psql, spreadsheet
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play callouts-table-grid
 SNAPSHOT  prism-term snapshot callouts-table-grid --size 60x13
 IN CODE

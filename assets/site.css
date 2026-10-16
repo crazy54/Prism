@@ -10,7 +10,7 @@
 @font-face{font-family:Inter;font-style:normal;font-weight:700;font-display:swap;src:url(fonts/inter-700-latin.woff2) format("woff2")}
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
-:root{--mono:var(--rf-mono);--site-max:1200px;--site-pad:32px;--header-h:60px;scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 12px)}
+:root{--mono:var(--rf-mono);--site-max:1424px;--site-pad:32px;--header-h:60px;scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 12px)}
 *{box-sizing:border-box}
 html{background:var(--bg)}
 body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font:var(--rf-fs-body)/var(--rf-lh-body) var(--font);letter-spacing:var(--rf-ls-body);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;font-synthesis:none;overflow-x:hidden}
@@ -45,9 +45,20 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 /* ── Header: a glass top bar ─────────────────────────────────────────────── */
 .site-header{position:sticky;top:0;z-index:60;height:var(--header-h);background:var(--cs-topnav-bg);-webkit-backdrop-filter:blur(var(--rf-glass-blur)) saturate(var(--rf-glass-sat));backdrop-filter:blur(var(--rf-glass-blur)) saturate(var(--rf-glass-sat));border-bottom:1px solid var(--cs-topnav-line);box-shadow:var(--cs-topnav-elev)}
 .site-header::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent 4%,rgba(var(--accent-rgb),.0) 20%,rgba(var(--accent-rgb),.55) 50%,rgba(var(--accent-rgb),0) 80%,transparent 96%);opacity:.5;pointer-events:none}
-.site-header-in{max-width:1320px;height:100%;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:24px}
+.site-header-in{max-width:var(--site-max);height:100%;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:24px}
 .brand{display:inline-flex;align-items:center;gap:10px;flex:none;font-weight:700;font-size:23px;line-height:1;letter-spacing:-.055em;color:var(--ink);border-radius:8px}
 .brand .prism-mark{--pm:26px}
+/* Perf (with Design): the top-bar mark rests at the library's 3/4 lit view — every one of its animations paused at
+   that point of the turn — and turns only when asked (site.js: First Light's dock; hover or keyboard focus on the
+   brand: two quick turns, then rest). Spinning without end inside the blurred sticky bar, it cost every frame of
+   every page (~33% CPU at 4× on /deck/). */
+.site-header .prism-mark{--pm-rest:.9222}
+.site-header .prism-mark .pm-rotor,.site-header .prism-mark .pm-apex{animation-delay:calc(var(--pm-turn) * var(--pm-rest) * -1);animation-play-state:paused}
+.site-header .prism-mark .pm-face::after,.site-header .prism-mark .pm-face svg,.site-header .prism-mark .pm-rim{animation-delay:calc(var(--k) * var(--pm-turn) / -4 - var(--pm-turn) * var(--pm-rest));animation-play-state:paused}
+/* The glass blur is redrawn whenever anything inside or under the bar changes: with transparency turned down, or on a
+   low-power device (html.rf-lowpower, site.js), the bar is a tint instead. */
+@media (prefers-reduced-transparency:reduce){.site-header{background:var(--bg);-webkit-backdrop-filter:none;backdrop-filter:none}}
+.rf-lowpower .site-header{background:color-mix(in srgb,var(--bg) 95%,transparent);-webkit-backdrop-filter:none;backdrop-filter:none}
 .brand-word{display:inline-flex;align-items:baseline}
 .brand-dot{color:var(--accent)}
 .brand-surface{display:inline-flex;align-items:center;gap:8px;margin-left:4px;padding-left:12px;border-left:1px solid var(--rf-line-strong);font:600 13px/1 var(--font);letter-spacing:-.005em;color:var(--muted)}
@@ -110,6 +121,16 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 /* Small action buttons (copy, replay, pause) */
 .chip-btn{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid var(--rf-line-soft);border-radius:var(--r-sm);background:transparent;color:var(--muted);font:600 10px/1 var(--rf-mono);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;transition:color var(--rf-dur-fast),border-color var(--rf-dur-fast),background var(--rf-dur-fast)}
 .chip-btn .ic{width:13px;height:13px}
+/* curl ↔ curl.exe switch next to curl commands (assets/site.js: [data-shell-toggle], [data-shell-note]) */
+.shell-btn::before{content:"";flex:none;width:9px;height:9px;border:1.5px solid currentColor;border-radius:50%;opacity:.8}
+.shell-btn[aria-pressed="true"]{color:var(--ink);border-color:rgba(var(--accent-rgb),.6);background:rgba(var(--accent-rgb),.14)}
+.shell-btn[aria-pressed="true"]::before{border-color:var(--accent);background:var(--accent);box-shadow:0 0 6px rgba(var(--accent-rgb),.8);opacity:1}
+.sc-cmd-actions{display:inline-flex;align-items:center;gap:6px;flex:none}
+.sc-cmd-note{display:flex;align-items:flex-start;gap:10px;margin-top:8px;font-size:12px;line-height:1.5;color:var(--muted)}
+.sc-cmd-note .shell-btn{flex:none}
+.sc-cmd-note p{margin:0;padding-top:5px}
+.sc-cmd-note code,[data-shell-note] code{white-space:nowrap;color:var(--rf-code-ink)}
+.sc-cmd-note b,[data-shell-note] b{color:var(--ink);font-weight:600}
 .chip-btn:hover{color:var(--ink);border-color:var(--rf-line-strong);background:var(--rf-hover)}
 .chip-btn.is-done{color:var(--pos);border-color:rgba(var(--pos-rgb),.45);position:relative;overflow:hidden}
 .chip-btn.is-done::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:linear-gradient(90deg,transparent,var(--pos),transparent);animation:site-sweep var(--rf-dur-slow) var(--rf-ease-in-out) both}
@@ -121,7 +142,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 /* ── Sections ────────────────────────────────────────────────────────────── */
 .section{padding-top:var(--rf-sp-22);scroll-margin-top:calc(var(--header-h) + 8px)}
 .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:32px}
-.section-head h2,.h2{margin:14px 0 10px;font-size:var(--rf-fs-h2);line-height:var(--rf-lh-h2);letter-spacing:var(--rf-ls-h2);font-weight:700}
+/* section-heading tier (tokens › type › section): 40px at 1280 → 48px at 1920 */
+.section-head h2,.h2{margin:14px 0 10px;font-size:var(--rf-fs-section,clamp(40px,1.25vw + 24px,48px));line-height:var(--rf-lh-section,1.08);letter-spacing:var(--rf-ls-section,-.045em);font-weight:700}
 .section-head p:not(.eyebrow){font-size:14px;color:var(--muted);max-width:62ch}
 .spectrum-text{background:var(--rf-spectrum-text);-webkit-background-clip:text;background-clip:text;color:transparent}
 :root[data-rf-mode="day"] .spectrum-text{background:linear-gradient(100deg,#6142aa 8%,#2461bf 52%,#007655 100%);-webkit-background-clip:text;background-clip:text}
@@ -168,10 +190,10 @@ dialog.copy-dialog{width:min(720px,calc(100vw - 32px));padding:26px;border:1px s
 dialog::backdrop{background:var(--rf-scrim)}
 dialog.copy-dialog h2{font-size:var(--rf-fs-h3);letter-spacing:var(--rf-ls-h3);font-weight:700}
 dialog.copy-dialog p{font-size:13px;color:var(--muted);margin:10px 0}
-dialog.copy-dialog textarea{display:block;resize:vertical;width:100%;min-height:260px;margin:14px 0 18px;padding:12px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--rf-code-bg);color:var(--rf-code-ink);font:11px/1.6 var(--rf-mono);box-shadow:inset 0 -1px 0 var(--rf-line-control)}
+dialog.copy-dialog textarea{display:block;resize:vertical;width:100%;min-height:260px;margin:14px 0 18px;padding:12px;border:1px solid var(--rf-line-control,var(--line));border-radius:var(--r-md);background:var(--rf-code-bg);color:var(--rf-code-ink);font:11px/1.6 var(--rf-mono);box-shadow:inset 0 -1px 0 var(--rf-line-control)}
 
 /* ── Search field (inputs sit on a 3:1 baseline) ─────────────────────────── */
-.search{display:flex;align-items:center;gap:9px;height:40px;padding:0 12px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--panel2);box-shadow:inset 0 -1px 0 var(--rf-line-control);transition:border-color var(--rf-dur-fast),box-shadow var(--rf-dur-fast)}
+.search{display:flex;align-items:center;gap:9px;height:40px;padding:0 12px;border:1px solid var(--rf-line-control,var(--line));border-radius:var(--r-md);background:var(--panel2);box-shadow:inset 0 -1px 0 var(--rf-line-control);transition:border-color var(--rf-dur-fast),box-shadow var(--rf-dur-fast)}
 .search .ic{color:var(--dim)}
 .search input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font-size:13px;padding:2px}
 .search input::placeholder{color:var(--dim)}
@@ -183,6 +205,7 @@ dialog.copy-dialog textarea{display:block;resize:vertical;width:100%;min-height:
 @media(max-width:1050px){.header-links{display:none}.surface-nav .surface-count{display:none}}
 @media(max-width:860px){
   :root{--site-pad:24px}
+  .section-head h2,.h2{font-size:34px}
   .site-header{position:relative;height:auto}
   .site-header-in{flex-wrap:wrap;gap:12px 14px;padding:12px 20px}
   .surface-nav{order:3;width:100%;margin:0;justify-content:stretch}
@@ -190,6 +213,13 @@ dialog.copy-dialog textarea{display:block;resize:vertical;width:100%;min-height:
   .header-actions{margin-left:auto}
   .theme-switch button span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
   .theme-switch button{padding:0 9px}
+  /* 44px touch targets on small screens: surface tabs, Night/Day, GitHub, Copy */
+  .surface-nav a{height:44px}
+  .theme-switch button{height:44px;min-width:44px;justify-content:center}
+  .icon-link{width:44px;height:44px}
+  .chip-btn{height:auto;min-height:44px;padding:0 14px}
+  /* mono eyebrows never drop below 10px */
+  .live-dot,.window-label{font-size:10px}
   .site-footer{flex-wrap:wrap}
 }
 @media(max-width:480px){

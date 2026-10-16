@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > LOGIN & MOTD              568nm - 33 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > LOGIN & MOTD              578nm - 33 / 39
 ------------------------------------------------------/\========================
 fail2ban Jail  ops-fail2ban
 fail2ban-client status for the sshd jail (failed and banned counts, the banned
@@ -27,7 +27,7 @@ ops@node03:~$
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-fail2ban
 SNAPSHOT  prism-term snapshot ops-fail2ban --size 80x18
 IN CODE

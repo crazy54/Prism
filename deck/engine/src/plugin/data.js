@@ -58,6 +58,8 @@ export function createDataHub({ intervalMs = 1000, setTimer = (fn, ms) => setInt
     /** Current values for a facet's data keys ({} entries are omitted until measured). */
     pick(keys = []) { const o = {}; for (const k of keys) if (values[k] !== undefined) o[k] = values[k]; return o; },
     register(key, fn) { sources.set(key, fn); retime(); },
+    /** 'live' (measured here) | 'custom' (a registered getter) | null (not measured: the facet simulates). */
+    sourceOf(keys = []) { const o = {}; for (const k of keys) o[k] = values[k] === undefined ? null : sources.has(k) ? 'custom' : 'live'; return o; },
     supported: () => [...new Set([...Object.keys(builtin), ...sources.keys()])],
     stop() { if (timer) clearTimer(timer); timer = null; refs.clear(); },
     get active() { return timer !== null; },

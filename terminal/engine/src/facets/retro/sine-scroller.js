@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // The classic sine scroller: a big bitmap-font message rides a sine wave from
 // right to left, each scanline tinted by a cycling copper gradient, over a
 // parallax starfield. Drop shadow included, as the law requires.
-import { textMask, maskAt, fontPx, makeStars, dim, lerpc } from './_kit.js';
+const { textMask, maskAt, fontPx, makeStars, dim, lerpc } = __bm(29);
 
 const MESSAGE = 'PRISM TERMINAL FACETS   *   SINE SCROLLERS NEVER DIE   *   GREETINGS TO EVERY SYSOP STILL RUNNING A NODE   *   ';
 

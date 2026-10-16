@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > RASTER & COPPER     480nm - 11 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > RASTER & COPPER     485nm - 11 / 24
 ------------------------------------------------------/\========================
 Twister  twister
 A square column twisting along its height, drawn per scanline from its visible
@@ -33,7 +33,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play twister
 SNAPSHOT  prism-term snapshot twister --size 60x24
 IN CODE

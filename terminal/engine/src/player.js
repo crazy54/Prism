@@ -1,3 +1,4 @@
+import { __m as __bm } from '../web.bundle.js';
 // Player — runs facets fullscreen with live controls, a HUD and transitions.
 //
 //   ← / →  or p / n   previous / next facet
@@ -21,16 +22,16 @@
 // gallery hue and wavelength, instrument labels, key hints on glass.
 
 import { Screen } from './screen.js';
-import { createContext } from './context.js';
-import { THEME_IDS, getTheme } from './palettes.js';
-import { MODE_NAMES } from './canvas.js';
+const { createContext } = __bm(13);
+const { THEME_IDS, getTheme } = __bm(3);
+const { MODE_NAMES } = __bm(9);
 import { detect, withOverrides } from './caps.js';
-import { NONE, mix } from './color.js';
-import { ATTR } from './buffer.js';
-import { easing } from './easing.js';
-import { truncate, stringWidth, charWidth } from './width.js';
-import { foldChar } from './ascii.js';
-import { getGallery } from './facets/galleries.js';
+const { NONE, mix } = __bm(0);
+const { ATTR } = __bm(6);
+const { easing } = __bm(10);
+const { truncate, stringWidth, charWidth } = __bm(5);
+const { foldChar } = __bm(12);
+const { getGallery } = __bm(17);
 import { chrome, glyphs, lambdaLabel, instrument, sweep, SWEEP_S, rampHue } from './refraction.js';
 
 const MODE_CYCLE = [null, ...MODE_NAMES];

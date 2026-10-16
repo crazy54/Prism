@@ -3,7 +3,7 @@
 // A setup is the same page shape the Elgato profile exporter takes (src/export/profile.js
 // SAMPLE_LAYOUTS / buildProfile), so one layout exports everywhere:
 //   { device, name, theme?, mode?, pages: [{ name, keys: [{ col, row, settings }], dials: [{ dial, layer, settings }], infobar? }] }
-//   settings = the Prism Facet action settings (src/plugin/settings.js): { facet, theme, mode, params, group, state, value }
+//   settings = the Prism Display action settings (src/plugin/settings.js): { facet, theme, mode, params, group, state, value }
 // MCP layout documents (schema "prism-deck-layout/0.1": look.facet / look.glyph / feedback.facet) are accepted too.
 //
 //   normalizeSetup(setup)                  → { device (model), name, theme, mode, pages }
@@ -37,7 +37,7 @@ export function resolveDevice(q) {
 
 const exactFacet = (id) => { const f = id ? findFacet(id) : null; return f && f.id === id ? f : null; };
 
-/** MCP look / feedback → Prism Facet action settings. */
+/** MCP look / feedback → Prism Display action settings. */
 function lookToSettings(look = {}, fallbackTheme) {
   let facet = look.facet;
   if (!facet && look.glyph) facet = `icon-${String(look.glyph).split('/').pop()}`;
@@ -194,5 +194,11 @@ export function renderPage(model, page, setup, opts = {}) {
   return { keys, dials, dropped };
 }
 
-/** File-system-safe name (pages, profiles). */
-export const safeName = (s, fallback = 'Prism') => String(s || fallback).replace(/[\\/:*?"<>|\x00-\x1f]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 64) || fallback;
+// Common typographic characters → ASCII; anything else outside 7-bit ASCII is dropped (accents are
+// stripped first via NFKD), so exported names survive any locale, shell, zip tool and file system.
+const ASCII_FOLD = { '·': '-', '•': '-', '‧': '-', '–': '-', '—': '-', '−': '-', '×': 'x', '→': '-', '←': '-', '‘': "'", '’': "'", '“': '', '”': '', '…': '...', 'λ': 'L', 'ß': 'ss', 'æ': 'ae', 'Æ': 'AE', 'ø': 'o', 'Ø': 'O' };
+
+/** File-system-safe, ASCII-only name (pages, profiles, bundles). */
+export const safeName = (s, fallback = 'Prism') => String(s || fallback).normalize('NFKD').replace(/[̀-ͯ]/g, '')
+  .replace(/[^\x20-\x7e]/g, (c) => ASCII_FOLD[c] ?? ' ')
+  .replace(/[\\/:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').replace(/^[\s.-]+|[\s.]+$/g, '').slice(0, 64).trim() || fallback;

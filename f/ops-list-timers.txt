@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > PROCESSES & SERVICES      568nm - 20 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > PROCESSES & SERVICES      578nm - 20 / 39
 ------------------------------------------------------/\========================
 systemctl list-timers  ops-list-timers
 systemd timers with NEXT, LEFT counting down live, LAST and PASSED; when a timer
@@ -19,7 +19,7 @@ NEXT     LEFT        LAST     PASSED         UNIT
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-list-timers
 SNAPSHOT  prism-term snapshot ops-list-timers --size 80x10
 IN CODE

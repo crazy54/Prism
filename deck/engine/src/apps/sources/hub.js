@@ -77,6 +77,35 @@ export function createHub({ sources = [], now = () => Date.now() } = {}) {
       }
       return out;
     },
+    /**
+     * Where each key's value comes from right now (the same choice pick() makes): 'live' | 'simulated' |
+     * 'custom', or null when no source has one (the facet then simulates its own). The plugin badges keys
+     * whose data is not live with DEMO.
+     */
+    sourceOf(keys = [], nowMs = now()) {
+      const out = {};
+      for (const k of new Set(keys)) {
+        if (custom.has(k)) { out[k] = 'custom'; continue; }
+        out[k] = null;
+        for (const s of providers(k)) {
+          let v = {};
+          try { v = (s.mode === 'live' && s.running === false ? null : s.snapshot(nowMs)) || {}; } catch { v = {}; }
+          if (v[k] === undefined) continue;
+          out[k] = s.mode === 'live' ? 'live' : 'simulated';
+          break;
+        }
+      }
+      return out;
+    },
+    /** Replace a source (e.g. a new .ics file): the old one stops, the new one starts if its keys are needed. */
+    replace(oldSrc, newSrc) {
+      if (oldSrc) hub.remove(oldSrc);
+      if (!newSrc) return null;
+      hub.add(newSrc);
+      const n = newSrc.provides.filter((k) => refs.has(k) && !custom.has(k)).length;
+      if (n) { using.set(newSrc, n); try { newSrc.start(); } catch { /* falls back to the next provider */ } }
+      return newSrc;
+    },
     /** Everything every source provides right now (diagnostics, MCP, web previews). */
     snapshot(nowMs = now()) { return hub.pick([...new Set([...list.flatMap((s) => s.provides), ...custom.keys()])], nowMs); },
     register(key, fn) { custom.set(key, fn); return hub; },

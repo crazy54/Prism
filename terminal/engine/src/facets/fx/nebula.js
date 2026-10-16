@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Deep field: a domain-warped emission nebula with dark dust lanes, painted
 // once into a texture larger than the screen, then slowly turned and breathed
 // through. Twinkling stars in front, a few bright ones with diffraction spikes.
-import { lerpc, clamp01, hash2 } from '../retro/_kit.js';
+const { lerpc, clamp01, hash2 } = __bm(29);
 
 const LOOP = 40;
 

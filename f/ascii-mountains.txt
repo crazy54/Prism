@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PURE ASCII > ASCII ART                   494c - 13 / 29
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ART                  597nm - 13 / 29
 ------------------------------------------------------/\========================
 Mountain Range  ascii-mountains
 Three ridgelines of /\ peaks drift past at different speeds, snow on the
@@ -29,7 +29,7 @@ ___^  :    ^_____/#:#:#:#:#:/:#:#:#:#:#:#:#:#:#:#:\___________/:#:\__^ :^_______
   still at 80x20 - t=6s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ascii-mountains
 SNAPSHOT  prism-term snapshot ascii-mountains --size 80x24
 IN CODE

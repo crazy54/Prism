@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // The infinite checkerboard floor: a perspective-mapped checker plane racing
 // toward the horizon and slowly banking, under a raster-gradient sunset sky.
 // Distance fog keeps the far squares from shimmering.
-import { lerpc } from './_kit.js';
+const { lerpc } = __bm(29);
 
 export default {
   title: 'Checker Floor',

@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // zpool status — pool tank mid-scrub: scan progress ticking, mirror vdev tree, READ/WRITE/CKSUM columns.
-import { C, ATTR, writer, pad, lpad, fixed, clock } from './_kit.js';
+const { C, ATTR, writer, pad, lpad, fixed, clock } = __bm(27);
 
 const VDEVS = [
   ['tank', 0, 'ONLINE'], ['mirror-0', 1, 'ONLINE'], ['ata-HDD-8TB-ZA1B2C3D', 2, 'ONLINE'], ['ata-HDD-8TB-ZA1B4E5F', 2, 'ONLINE'],

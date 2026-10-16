@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // The easing-curve wall chart, animated: a grid of the standard easings, each
 // plotted in braille against dotted 0 and 1 guides (with room for back and
 // elastic overshoot), a dot running the curve in lock-step across every panel,
 // and a value bar on the right of each that shows what the eased value does.
-import { easing } from '../../easing.js';
-import { mix } from '../../color.js';
-import { grid, put, pxRect } from './_lab.js';
+const { easing } = __bm(10);
+const { mix } = __bm(0);
+const { grid, put, pxRect } = __bm(26);
 
 const CURVES = ['linear', 'inQuad', 'outQuad', 'inOutCubic', 'inOutSine', 'inExpo', 'outExpo', 'outCirc', 'outBack', 'inOutBack', 'outElastic', 'outBounce'];
 const RUN = 1.6, HOLD = 0.7, VMIN = -0.35, VMAX = 1.35;

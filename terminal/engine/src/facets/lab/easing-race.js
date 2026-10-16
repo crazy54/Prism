@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // An easing race with an animator's spacing chart. Every lane covers the same
 // distance in the same time, but with a different easing; the tick marks are
 // where the ball is at equal time steps, so you can read ease-in (ticks
 // bunched at the start), ease-out (bunched at the end) and overshoot at a glance.
-import { easing } from '../../easing.js';
-import { mix } from '../../color.js';
-import { put } from './_lab.js';
+const { easing } = __bm(10);
+const { mix } = __bm(0);
+const { put } = __bm(26);
 
 const LANES = ['linear', 'inQuad', 'outQuad', 'inOutCubic', 'outBack', 'outBounce', 'outElastic', 'inOutExpo'];
 const RUN = 1.8, HOLD = 0.8, TICKS = 12;

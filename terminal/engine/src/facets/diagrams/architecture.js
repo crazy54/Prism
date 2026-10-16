@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A service architecture: clients → load balancer → three app servers →
 // postgres / replica / redis, with request packets flowing along the edges.
 // Mid-loop app-2 fails its health checks and traffic shifts to its peers.
-import { ATTR, glyphs, uni, phase, fit } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, fit } = __bm(22);
 import { LineGrid, nodeBox, box, polyline, along } from './_lines.js';
 
 const DOWN = [3.4, 5.8];

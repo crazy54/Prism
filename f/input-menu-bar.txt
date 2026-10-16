@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > TABS & BARS             585nm - 21 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > TABS & BARS             487nm - 21 / 23
 ------------------------------------------------------/\========================
 Menu Bar  input-menu-bar
 A Turbo Vision-style menu bar with hotkey letters: F10 drops a shadowed menu,
@@ -23,7 +23,7 @@ tags: menu bar, dropdown, turbo vision, submenu, hotkeys
   still at t=3s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-menu-bar
 SNAPSHOT  prism-term snapshot input-menu-bar --size 64x14
 IN CODE

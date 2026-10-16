@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > PANELS & BORDERS     580nm - 1 / 15
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > PANELS & BORDERS     570nm - 1 / 15
 ------------------------------------------------------/\========================
 Border Styles  callouts-border-styles
 All six border styles -- round, single, double, heavy, dashed and ASCII -- with
@@ -27,7 +27,7 @@ tags: border, box, panel, box-drawing, frame
   still at t=3.6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play callouts-border-styles
 SNAPSHOT  prism-term snapshot callouts-border-styles --size 72x18
 IN CODE

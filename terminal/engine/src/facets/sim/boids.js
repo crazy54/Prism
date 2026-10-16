@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Boids: Reynolds flocking — separation, alignment, cohesion — plus soft
 // walls and a wandering predator that hunts the flock's center while every
 // boid within sight scatters. Boids are little oriented arrowheads colored by
 // heading, dragging short fading wakes; the predator is larger and red.
-import { NONE } from '../../color.js';
-import { fadeMark } from '../../palettes.js';
+const { NONE } = __bm(0);
+const { fadeMark } = __bm(3);
 
 export default {
   title: 'Boids',

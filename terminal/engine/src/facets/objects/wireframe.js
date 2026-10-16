@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Rotating polyhedra in braille: cube → icosahedron → torus → octahedron, each
 // handing off with a shrink/spring crossfade. Edges are depth-cued along their
 // length, vertices glow, and a tilted orbit ring of dust circles the solid.
 import { meshes, rotate } from '../../math3d.js';
-import { easing } from '../../easing.js';
-import { fadeMark } from '../../palettes.js';
+const { easing } = __bm(10);
+const { fadeMark } = __bm(3);
 
 export default {
   title: 'Wireframe Solids',

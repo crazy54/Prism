@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      505nm - 20 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      436nm - 20 / 30
 ------------------------------------------------------/\========================
 Stereo VU Meter  charts-vu-meter
 Left and right LED ladders with fast attack, slow release, peak-hold markers and
@@ -15,7 +15,7 @@ tags: vu meter, led, audio, peak hold, db
   still at t=4s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-vu-meter
 SNAPSHOT  prism-term snapshot charts-vu-meter --size 60x6
 IN CODE

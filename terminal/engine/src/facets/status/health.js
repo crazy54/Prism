@@ -1,8 +1,9 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Health & Uptime: live health checks, a 90-day uptime history with SLO
 // budget, a services × regions status matrix and a heartbeat monitor.
-import { mix } from '../../color.js';
-import { rng } from '../../easing.js';
-import { signal, glyphs, put, putR, safe, clamp, light, VBLOCKS, ATTR } from '../charts/_data.js';
+const { mix } = __bm(0);
+const { rng } = __bm(10);
+const { signal, glyphs, put, putR, safe, clamp, light, VBLOCKS, ATTR } = __bm(24);
 
 const CHECKS = [
   ['api-gateway', 'GET /healthz', 18],

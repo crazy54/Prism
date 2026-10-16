@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > BRAILLE SPINNERS   488nm - 20 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > BRAILLE SPINNERS   506nm - 20 / 64
 ------------------------------------------------------/\========================
 Dot Stack  loaders-dot-stack
 Braille rows filling the cell from the bottom and draining again -- a tiny level
@@ -17,7 +17,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-dot-stack
 SNAPSHOT  prism-term snapshot loaders-dot-stack --size 44x5
 IN CODE

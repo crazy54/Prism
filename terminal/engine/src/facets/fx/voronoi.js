@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Living Voronoi: drifting seeds carve the plane into cells. Each cell is shaded
 // like a bevelled tile (bright at its seed, darker toward its edge) and the
 // borders — where the nearest and second-nearest seeds tie — glow.
-import { lerpc } from '../retro/_kit.js';
+const { lerpc } = __bm(29);
 
 export default {
   title: 'Voronoi Cells',

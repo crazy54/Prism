@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Hand-authored display faces for the Text Effects gallery, in the same
 // '#'/'.' source format as src/text/fonts.js. Pass the exported object as
 // `font:` to drawBanner / measureBanner / layoutText (getFont passes objects
@@ -6,7 +7,7 @@
 //   cyber  5×7 squared techno caps & digits — hard corners, chamfered B/D,
 //          square counters; reads like a 1980s console bezel
 
-import { defineFont } from '../../text/fonts.js';
+const { defineFont } = __bm(28);
 
 const g = (s) => s.trim().split(/\s+/);
 

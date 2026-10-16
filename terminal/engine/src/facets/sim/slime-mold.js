@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Physarum slime mold: thousands of agents each sense the trail ahead-left,
 // ahead and ahead-right, steer toward the strongest scent, step, and deposit.
 // The trail diffuses and evaporates. Food sources keep leaking scent, so the
 // swarm self-organizes into a transport network linking them — the same trick
 // the real organism uses to rebuild a railway map out of oat flakes.
-import { NONE, mix } from '../../color.js';
+const { NONE, mix } = __bm(0);
 
 const SA = Math.PI / 4, RA = Math.PI / 4, SO = 9; // sensor angle, rotation angle, sensor offset (px)
 

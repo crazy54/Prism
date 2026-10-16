@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PURE ASCII > CLASSICS                    494c - 28 / 29
+--/\=== PRISM TERMINAL > PURE ASCII > CLASSICS                   597nm - 28 / 29
 ------------------------------------------------------/\========================
 Self-Playing Snake  ascii-snake
 Snake plays itself: breadth-first search steers @ to the * while the o tail
@@ -29,7 +29,7 @@ tags: snake, game, arcade, ai, bfs
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ascii-snake
 SNAPSHOT  prism-term snapshot ascii-snake --size 48x20
 IN CODE

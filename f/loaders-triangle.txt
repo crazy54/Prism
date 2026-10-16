@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS    488nm - 7 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS    506nm - 7 / 64
 ------------------------------------------------------/\========================
 Triangle  loaders-triangle
 Right triangles spinning through four corners at speed -- a sharp, energetic
@@ -17,7 +17,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-triangle
 SNAPSHOT  prism-term snapshot loaders-triangle --size 44x5
 IN CODE

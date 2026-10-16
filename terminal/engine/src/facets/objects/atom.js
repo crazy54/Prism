@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // The atom symbol, built for real: a nucleus of lit, z-buffered protons and
 // neutrons, three tilted orbits drawn as anti-aliased (bilinear-splatted) rings
 // that pass behind and in front of it, and electrons with glowing heads and
 // fading trails. Everything loops exactly every twelve seconds.
-import { zbuffer, sphere, perspective, rotX, rotY, rotZ, mul, apply, norm, blend } from './_raster.js';
-import { NONE, luminance } from '../../color.js';
+const { zbuffer, sphere, perspective, rotX, rotY, rotZ, mul, apply, norm, blend } = __bm(18);
+const { NONE, luminance } = __bm(0);
 
 const LOOP = 12;
 

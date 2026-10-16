@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Bars & Histograms: eased vertical bars, a re-ranking leaderboard, stacked
 // segments, a live latency histogram, OHLC candlesticks and box plots.
-import { mix, scale } from '../../color.js';
-import { signal, glyphs, safe, vbar, hbar, put, putR, num, clamp, smooth, lift, onFill, ATTR } from './_data.js';
+const { mix, scale } = __bm(0);
+const { signal, glyphs, safe, vbar, hbar, put, putR, num, clamp, smooth, lift, onFill, ATTR } = __bm(24);
 
 /** Eased step between sample values: holds, then glides to the next target. */
 function stepped(s, t, period) {

@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../web.bundle.js';
 // Terminal facet registry.
 //
 // Facets live in src/facets/<gallery>/*.js. The list of modules is a generated,
@@ -6,7 +7,7 @@
 // packed CLI with no filesystem scanning at runtime.
 
 import { FACET_MODULES } from './manifest.js';
-import { GALLERIES, GALLERY_IDS, getGallery } from './galleries.js';
+const { GALLERIES, GALLERY_IDS, getGallery } = __bm(17);
 import { normalizeFacet, validateFacet } from './schema.js';
 
 let cache = null;

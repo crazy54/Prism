@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PURE ASCII > ASCII SPINNERS & BARS       494c - 18 / 29
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII SPINNERS & BARS      597nm - 18 / 29
 ------------------------------------------------------/\========================
 Classic Tool Progress Bars  ascii-progress-bars
 The progress lines everyone recognizes -- wget, curl, apt, tqdm, rsync, docker
@@ -27,7 +27,7 @@ $ make
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ascii-progress-bars
 SNAPSHOT  prism-term snapshot ascii-progress-bars --size 80x18
 IN CODE

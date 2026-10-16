@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > TABLES              580nm - 10 / 15
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > TABLES              570nm - 10 / 15
 ------------------------------------------------------/\========================
 Sortable Table  callouts-table-sorted
 A table whose sort column changes with ^/v markers in the header while the rows
@@ -19,7 +19,7 @@ tags: table, sort, columns, reorder, hosts
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play callouts-table-sorted
 SNAPSHOT  prism-term snapshot callouts-table-sorted --size 56x10
 IN CODE

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > SPARKLINES            505nm - 4 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > SPARKLINES            436nm - 4 / 30
 ------------------------------------------------------/\========================
 Sparkline Wall  charts-spark-wall
 A NOC wall of a dozen services: name, a mini sparkline and the current rate,
@@ -17,7 +17,7 @@ o orders   ===-::=#@ 1079
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-spark-wall
 SNAPSHOT  prism-term snapshot charts-spark-wall --size 80x8
 IN CODE

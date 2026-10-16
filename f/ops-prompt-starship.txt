@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             568nm - 39 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             578nm - 39 / 39
 ------------------------------------------------------/\========================
 Starship-Style Prompt  ops-prompt-starship
 A two-line starship-style prompt: kube context (red for prod), repo, git branch
@@ -25,7 +25,7 @@ kube prod-east (shop) in shop-api on git:main [!?^1] via go v1.23.2 took 4s
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-prompt-starship
 SNAPSHOT  prism-term snapshot ops-prompt-starship --size 80x16
 IN CODE

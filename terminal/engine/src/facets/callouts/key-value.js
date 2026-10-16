@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Grouped key/value blocks with dotted leaders, live values and status pills.
-import { ATTR, uni, phase } from './_kit.js';
+const { ATTR, uni, phase } = __bm(22);
 
 export default {
   id: 'callouts-key-value',

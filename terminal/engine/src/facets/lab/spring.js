@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Spring and damper tuning: four masses on identical springs, differing only
 // in damping ratio ζ — underdamped (rings), lightly damped, critically damped
 // (fastest with no overshoot) and overdamped (sluggish). The target steps back
 // and forth; each lane draws the coil and mass, and plots x(t) against the target.
-import { mix } from '../../color.js';
-import { put } from './_lab.js';
+const { mix } = __bm(0);
+const { put } = __bm(26);
 
 const LANES = [[0.15, 'ringing'], [0.4, 'light'], [1, 'critical'], [2, 'overdamped']];
 const STEP = 2.5, HZ = 240, W0 = Math.PI * 2 * 1.1, HIST = 180; // history samples (60 Hz → 3 s)

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > LOGS & JOURNALS           568nm - 29 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > LOGS & JOURNALS           578nm - 29 / 39
 ------------------------------------------------------/\========================
 Log Histogram  ops-log-histogram
 An lnav-style histogram of log volume in 10-second buckets: bars split into
@@ -25,7 +25,7 @@ tags: lnav, histogram, logs, errors, volume, timeline
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-log-histogram
 SNAPSHOT  prism-term snapshot ops-log-histogram --size 80x16
 IN CODE

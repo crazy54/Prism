@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A multi-step wizard: a stepper header fills in as the user moves through
 // Source → Target → Schedule → Review, content sliding in on each step.
-import { ATTR, glyphs, uni, phase, typed, blink, ease, tint, mix, fit, button, panel, spin } from './_input.js';
+const { ATTR, glyphs, uni, phase, typed, blink, ease, tint, mix, fit, button, panel, spin } = __bm(25);
 
 const STEPS = ['Source', 'Target', 'Schedule', 'Review'];
 const STARTS = [0, 2.2, 4.4, 6.4];

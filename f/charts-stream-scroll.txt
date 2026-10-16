@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > LINE & AREA           505nm - 7 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > LINE & AREA           436nm - 7 / 30
 ------------------------------------------------------/\========================
 Smooth Streaming Line  charts-stream-scroll
 A live line that scrolls a sub-sample at a time with dotted gridlines, axis
@@ -23,7 +23,7 @@ tags: streaming, line chart, realtime, scroll, grid
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-stream-scroll
 SNAPSHOT  prism-term snapshot charts-stream-scroll --size 70x14
 IN CODE

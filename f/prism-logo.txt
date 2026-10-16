@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > ICONS & LOGOS        467nm - 16 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > ICONS & LOGOS        483nm - 17 / 19
 ------------------------------------------------------/\========================
 Prism  prism-logo
 Prism's mark: a glass prism turning in 3D, splitting a white beam into a
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   label=on              Wordmark  (on|off)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play prism-logo
 SNAPSHOT  prism-term snapshot prism-logo --size 72x24
 IN CODE
@@ -40,7 +40,7 @@ IN CODE
   await play(findFacet('prism-logo'));
 
 --------------------------------------------------------------------------------
-< prev    curl -sL prism.jeremyfhall.com/f/newton-cradle
+< prev    curl -sL prism.jeremyfhall.com/f/refraction
 next >    curl -sL prism.jeremyfhall.com/f/atom
 gallery   curl -sL prism.jeremyfhall.com/t/objects
 home      curl -sL prism.jeremyfhall.com/tty

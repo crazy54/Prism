@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > AI WORKING > AGENTS & PIPELINES         538nm - 15 / 18
+--/\=== PRISM TERMINAL > AI WORKING > AGENTS & PIPELINES         479nm - 15 / 18
 ------------------------------------------------------/\========================
 Multi-Agent Log  ai-multi-agent-log
 A multi-agent message log: color-tagged agents post findings and hand work to
@@ -19,7 +19,7 @@ tags: multi-agent, log, handoff, agents, orchestration
   still at t=4.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ai-multi-agent-log
 SNAPSHOT  prism-term snapshot ai-multi-agent-log --size 72x10
 IN CODE

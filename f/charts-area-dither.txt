@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > LINE & AREA           505nm - 6 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > LINE & AREA           436nm - 6 / 30
 ------------------------------------------------------/\========================
 Dithered Area  charts-area-dither
 An area chart whose fill fades toward the baseline with ordered dithering -- a
@@ -21,7 +21,7 @@ tags: area chart, dither, halftone, braille, throughput
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-area-dither
 SNAPSHOT  prism-term snapshot charts-area-dither --size 64x12
 IN CODE

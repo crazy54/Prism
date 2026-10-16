@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Parallel tool calls as a live waterfall: four calls fan out at once, bars
 // grow while each runs, finish at different times, then fan back in.
-import { ATTR, glyphs, uni, phase, fit, spin, tint } from './_ai.js';
+const { ATTR, glyphs, uni, phase, fit, spin, tint } = __bm(23);
 
 // [tool, args, duration (s), result]
 const CALLS = [

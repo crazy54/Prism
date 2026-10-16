@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Shared presentation for spinner facets.
 //
 // A spinner tile shows the spinner the way you meet it — inline, in front of a
@@ -10,9 +11,9 @@
 // classic `-\|/` and every label uses plain ASCII.
 
 import { getSpinner } from '../../spinners.js';
-import { palette as makePalette, PALETTES } from '../../palettes.js';
-import { stringWidth, truncate } from '../../width.js';
-import { mix } from '../../color.js';
+const { palette: makePalette, PALETTES } = __bm(3);
+const { stringWidth, truncate } = __bm(5);
+const { mix } = __bm(0);
 
 const lum = (c) => (0.2126 * ((c >> 16) & 255) + 0.7152 * ((c >> 8) & 255) + 0.0722 * (c & 255)) / 255;
 

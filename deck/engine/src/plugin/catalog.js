@@ -1,12 +1,13 @@
+import { __m as __bm } from '../../facets.bundle.js';
 // The property inspector's catalog: facet metadata (params, states, surfaces),
 // galleries (with their λ labels), themes and glyphs, from the engine bundled
 // with the plugin. Written to ui/catalog.js at build time as a classic script
 // (window.PRISM_CATALOG), so the PI works offline with no module loading.
 
-import { allFacets } from '../facets/index.js';
-import { GALLERIES } from '../facets/galleries.js';
-import { allThemes, useTheme } from '../themes/_registry.js';
-import { allGlyphs } from '../glyphs/_registry.js';
+const { allFacets } = __bm(318);
+const { GALLERIES } = __bm(2);
+const { allThemes, useTheme } = __bm(97);
+const { allGlyphs } = __bm(78);
 import { API_VERSION } from '../../index.js';
 
 export function piCatalog() {
@@ -15,7 +16,7 @@ export function piCatalog() {
   for (const f of allFacets()) {
     facets[f.id] = {
       title: f.title, gallery: f.gallery, category: f.category, surface: f.surface, description: f.description, tags: f.tags,
-      params: f.params, states: f.states, animated: f.animated, fps: f.fps, ...(f.data ? { data: f.data } : {}),
+      params: f.params, states: f.states, animated: f.animated, fps: f.fps, ...(f.data ? { data: f.data } : {}), ...(f.game ? { game: true } : {}),
       ...(f.segments !== undefined ? { segments: f.segments } : {}), ...(f.screens ? { screens: f.screens } : {}), ...(f.devices ? { devices: f.devices } : {}), ...(f.span ? { span: f.span } : {}),
     };
   }

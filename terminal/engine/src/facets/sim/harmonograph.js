@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A rotary harmonograph: two damped pendulums per axis (near-integer frequency
 // ratios with a little detune) trace a decaying Lissajous figure. Each cycle a
 // pen draws the curve in, the figure breathes as its phases drift, then it
 // fades and a fresh set of pendulums takes over. Color flows along the path.
-import { mix, NONE } from '../../color.js';
-import { rng, easing, smoothstep } from '../../easing.js';
+const { mix, NONE } = __bm(0);
+const { rng, easing, smoothstep } = __bm(10);
 
 const RATIOS = [[2, 3], [3, 4], [1, 2], [3, 5], [4, 5], [2, 5], [1, 3], [5, 6], [1, 1], [3, 2]];
 

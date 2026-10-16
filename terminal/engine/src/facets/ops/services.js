@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // systemd and process views: systemctl status, failed units, pstree -p, and list-timers counting down.
-import { G, C, ATTR, writer, session, drawSession, clock, pad, lpad, fixed, uni } from './_kit.js';
+const { G, C, ATTR, writer, session, drawSession, clock, pad, lpad, fixed, uni } = __bm(27);
 
 const dur = (s) => (s >= 3600 ? `${Math.floor(s / 3600)}h ${Math.floor(s % 3600 / 60)}min` : s >= 60 ? `${Math.floor(s / 60)}min ${Math.floor(s % 60)}s` : `${Math.floor(s)}s`);
 

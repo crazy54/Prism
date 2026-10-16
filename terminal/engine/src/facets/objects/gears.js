@@ -1,11 +1,12 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A gear train: three spur gears of 16, 10 and 8 teeth meshing at their pitch
 // circles, each turning at the ratio it should (and in alternating directions).
 // Rendered per pixel from the analytic tooth profile, so every edge is
 // anti-aliased: spun-metal highlights that stay put while the gear turns,
 // bevelled rims, recessed webs with lightening holes, raised hubs, steel axles
 // and a soft drop shadow seen through the holes.
-import { blend } from './_raster.js';
-import { NONE } from '../../color.js';
+const { blend } = __bm(18);
+const { NONE } = __bm(0);
 
 const N = [16, 10, 8];
 const HOLES = [6, 5, 0];

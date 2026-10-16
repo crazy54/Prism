@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../web.bundle.js';
 // Big text. Text is laid out in font pixels, then rasterized onto a Canvas so
 // one banner renders in any resolution mode:
 //
@@ -11,12 +12,12 @@
 // Fills are a color, a palette name, stop list or gradient function, swept
 // horizontally / vertically / diagonally, and animated by passing `t`.
 
-import { Canvas, pickMode, MODES } from '../canvas.js';
-import { CellBuffer } from '../buffer.js';
-import { NONE, parse, mix, gradient, fgParam, normalizeDepth, luminance } from '../color.js';
-import { getTheme, palette as makePalette, PALETTES, legible } from '../palettes.js';
+const { Canvas, pickMode, MODES } = __bm(9);
+const { CellBuffer } = __bm(6);
+const { NONE, parse, mix, gradient, fgParam, normalizeDepth, luminance } = __bm(0);
+const { getTheme, palette: makePalette, PALETTES, legible } = __bm(3);
 import { detect } from '../caps.js';
-import { getFont, glyph } from './fonts.js';
+const { getFont, glyph } = __bm(28);
 
 export const BANNER_MODES = ['half', 'quad', 'sextant', 'braille', 'block', 'ascii'];
 

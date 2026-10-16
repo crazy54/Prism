@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Sensitive dependence, made visible: three double pendulums released from
 // starting angles a thousandth of a radian apart, integrated with RK4 at
 // 480 Hz. For a few seconds they move as one; then the trails split and they
 // go their own chaotic ways. Each run restarts from the same three starts.
-import { mix } from '../../color.js';
-import { fadeMark } from '../../palettes.js';
+const { mix } = __bm(0);
+const { fadeMark } = __bm(3);
 
 const RUN = 20, HZ = 480, G = 9.81;
 const TRAIL = 260; // trail samples kept per pendulum (recorded at 60 Hz)

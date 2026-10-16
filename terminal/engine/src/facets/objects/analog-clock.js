@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A wall clock in braille: a double bezel, minute and hour ticks, numerals,
 // tapered baton hands that pass over the numerals, a sweeping second hand with
 // a counterweight, and a date window. Time starts at 10:08:36 — the
 // watchmaker's favorite pose — and runs in real seconds.
-import { ATTR } from '../../buffer.js';
-import { blend } from './_raster.js';
+const { ATTR } = __bm(6);
+const { blend } = __bm(18);
 
 export default {
   title: 'Analog Clock',

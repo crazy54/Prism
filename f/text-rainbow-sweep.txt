@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > COLOR & LIGHT            484nm - 23 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > COLOR & LIGHT            492nm - 23 / 29
 ------------------------------------------------------/\========================
 Rainbow Sweep  text-rainbow-sweep
 A bright leading edge sweeps over gray type and leaves a flowing spectrum behind
@@ -23,7 +23,7 @@ tags: rainbow, sweep, spectrum, wipe, prism
   still at t=3s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-rainbow-sweep
 SNAPSHOT  prism-term snapshot text-rainbow-sweep --size 72x14
 IN CODE

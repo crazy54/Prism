@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Text effects showcase: every effect in src/text/effects.js, applied to big
 // banner text and to a plain line of log-style text, with captions.
-import { MODES } from '../../canvas.js';
+const { MODES } = __bm(9);
 import { measureBanner } from '../../text/banner.js';
 import { EFFECTS } from '../../text/effects.js';
 

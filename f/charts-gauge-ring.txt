@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      505nm - 19 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      436nm - 19 / 30
 ------------------------------------------------------/\========================
 Ring Gauges  charts-gauge-ring
 Four full-circle ring gauges -- availability, cache hits, error budget,
@@ -20,7 +20,7 @@ tags: gauge, ring, donut, percent, slo
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-gauge-ring
 SNAPSHOT  prism-term snapshot charts-gauge-ring --size 72x11
 IN CODE

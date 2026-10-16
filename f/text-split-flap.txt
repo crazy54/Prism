@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            484nm - 16 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            492nm - 16 / 29
 ------------------------------------------------------/\========================
 Split-Flap Board  text-split-flap
 A departures board whose tiles riffle through the alphabet one flap at a time
@@ -23,7 +23,7 @@ tags: split flap, solari, departures, board, airport
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-split-flap
 SNAPSHOT  prism-term snapshot text-split-flap --size 66x14
 IN CODE

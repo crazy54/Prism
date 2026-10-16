@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A calendar date-range picker: arrow keys walk the grid, Enter sets the start,
 // the range previews as the cursor moves, Enter again sets the end.
-import { ATTR, glyphs, uni, phase, tint, fit, panel } from './_input.js';
+const { ATTR, glyphs, uni, phase, tint, fit, panel } = __bm(25);
 
 const DOW = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > DIVIDERS & HEADERS  580nm - 13 / 15
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > DIVIDERS & HEADERS  570nm - 13 / 15
 ------------------------------------------------------/\========================
 Section Headers  callouts-section-headers
 Five header styles -- numbered eyebrow, underlined, boxed, inverse bar and
@@ -27,7 +27,7 @@ tags: header, heading, section, title, typography
   still at t=4.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play callouts-section-headers
 SNAPSHOT  prism-term snapshot callouts-section-headers --size 60x18
 IN CODE

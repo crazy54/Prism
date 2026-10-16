@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Stagger studies: a grid of tiles entering one after another, each popping in
 // with an overshoot (outBack) and leaving on the same order reversed. Four
 // orderings cycle — from the left, from the center out, a diagonal wave and a
 // seeded shuffle — to show how much the order alone changes the feel.
-import { easing } from '../../easing.js';
-import { mix } from '../../color.js';
-import { cycle, put } from './_lab.js';
+const { easing } = __bm(10);
+const { mix } = __bm(0);
+const { cycle, put } = __bm(26);
 
 const MODE = 3.4, SPREAD = 1.1, POP = 0.45;
 

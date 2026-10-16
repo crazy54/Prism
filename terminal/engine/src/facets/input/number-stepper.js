@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Number steppers: − value + with arrow presses, clamping at the limits.
-import { ATTR, glyphs, uni, phase, tint } from './_input.js';
+const { ATTR, glyphs, uni, phase, tint } = __bm(25);
 
 const FIELDS = [
   { label: 'Workers', min: 1, max: 32, start: 8, presses: [[0.5, 1], [0.8, 1], [1.1, 1], [3.6, -1], [3.9, -1], [4.2, -1]] },

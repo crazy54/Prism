@@ -1,3 +1,4 @@
+import { __m as __bm } from '../web.bundle.js';
 // Terminal emulator color schemes for Prism's themes.
 //
 //   exportTheme('alacritty', 'prism-light')  → the file's text
@@ -12,8 +13,8 @@
 //
 // Browser-safe (no node:*).
 
-import { getTheme, terminalScheme, THEME_IDS } from './palettes.js';
-import { toHex, mixOklab, toOklab, fromOklab } from './color.js';
+const { getTheme, terminalScheme, THEME_IDS } = __bm(3);
+const { toHex, mixOklab, toOklab, fromOklab } = __bm(0);
 
 const NAMES = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'];
 const hx = (c) => toHex(c);
@@ -85,7 +86,7 @@ const tomlStr = (v) => JSON.stringify(v);
 function alacritty(s) {
   const tbl = (name, pairs) => `[${name}]\n${pairs.map(([k, v]) => `${k} = ${tomlStr(v)}`).join('\n')}\n`;
   return [
-    header(s, '#', ['Alacritty ≥ 0.13: save as ~/.config/alacritty/themes/' + slugOf(s.name) + '.toml and add to alacritty.toml:', `  [general]`, `  import = ["~/.config/alacritty/themes/${slugOf(s.name)}.toml"]`, '(Alacritty 0.13 takes a top-level `import = [...]` instead of [general].)']) + '\n',
+    header(s, '#', ['Alacritty ≥ 0.14: save as ~/.config/alacritty/themes/' + slugOf(s.name) + '.toml and add to alacritty.toml:', `  [general]`, `  import = ["~/.config/alacritty/themes/${slugOf(s.name)}.toml"]`, 'Alacritty 0.13 takes the same line at the top level instead (import = [...], no [general]);', 'before 0.13 the config was YAML and does not read this file.']) + '\n',
     tbl('colors.primary', [['background', s.background], ['foreground', s.foreground]]),
     tbl('colors.cursor', [['text', s.cursorText], ['cursor', s.cursor]]),
     tbl('colors.vi_mode_cursor', [['text', s.cursorText], ['cursor', s.cursor]]),
@@ -166,14 +167,18 @@ ${header(s, '#', [
   'GNOME Terminal. This script only PRINTS dconf commands; it changes nothing.',
   'Review the output, then apply it to a profile yourself:',
   `  sh ${slugOf(s.name)}.sh [PROFILE-UUID] | sh`,
-  'Without a UUID it reads (never writes) your default profile id via gsettings.',
+  'Without a UUID it reads (never writes) your default profile id via gsettings,',
+  'and stops (exit 1) when it cannot find one.',
   'List profile ids: gsettings get org.gnome.Terminal.ProfilesList list',
 ])}
 PROFILE="\${1:-}"
 if [ -z "$PROFILE" ] && command -v gsettings >/dev/null 2>&1; then
   PROFILE=$(gsettings get org.gnome.Terminal.ProfilesList default 2>/dev/null | tr -d "'")
 fi
-[ -n "$PROFILE" ] || PROFILE="YOUR-PROFILE-UUID"
+if [ -z "$PROFILE" ]; then
+  echo "no GNOME Terminal profile found: pass its UUID (gsettings get org.gnome.Terminal.ProfilesList list)" >&2
+  exit 1
+fi
 P="/org/gnome/terminal/legacy/profiles:/:$PROFILE"
 cat <<EOF
 dconf write $P/use-theme-colors false
@@ -228,6 +233,107 @@ function vscode(s) {
   return JSON.stringify({ 'workbench.colorCustomizations': o }, null, 2) + '\n';
 }
 
+// Ptyxis (GNOME 47+): a keyfile palette. Both style groups carry this theme, so the
+// palette looks the same whatever the desktop style (pick Prism Day or Prism Night).
+function ptyxis(s) {
+  const group = (g) => [`[${g}]`, `Foreground=${s.foreground}`, `Background=${s.background}`, `Cursor=${s.cursor}`,
+    `TitlebarForeground=${s.foreground}`, `TitlebarBackground=${s.panel}`, ...s.ansi.map((c, i) => `Color${i}=${c}`), ''];
+  return [
+    header(s, '#', [`Ptyxis: save as ~/.local/share/org.gnome.Ptyxis/palettes/${slugOf(s.name)}.palette`,
+      '(Flatpak: ~/.var/app/app.devsuite.Ptyxis/data/org.gnome.Ptyxis/palettes/), restart Ptyxis,',
+      `then Preferences → Profile → Palette → "${s.name}".`]),
+    '', '[Palette]', `Name=${s.name}`, '', ...group('Light'), ...group('Dark'),
+  ].join('\n').replace(/\n+$/, '\n');
+}
+
+// xfce4-terminal: a colorscheme keyfile.
+function xfce4(s) {
+  return [
+    header(s, '#', [`xfce4-terminal: save as ~/.local/share/xfce4/terminal/colorschemes/${slugOf(s.name)}.theme,`, `then Preferences → Colors → Presets → "${s.name}".`]),
+    '', '[Scheme]', `Name=${s.name}`,
+    `ColorForeground=${s.foreground}`, `ColorBackground=${s.background}`,
+    `ColorCursor=${s.cursor}`, `ColorCursorForeground=${s.cursorText}`, 'ColorCursorUseDefault=FALSE',
+    `ColorSelection=${s.selectionForeground}`, `ColorSelectionBackground=${s.selectionBackground}`, 'ColorSelectionUseDefault=FALSE',
+    `ColorBold=${s.foreground}`, 'ColorBoldUseDefault=TRUE', `TabActivityColor=${s.accent}`,
+    `ColorPalette=${s.ansi.join(';')}`, '',
+  ].join('\n');
+}
+
+// macOS Terminal.app: a .terminal profile (XML plist) whose colors are NSKeyedArchiver
+// archives of NSColor (a tiny binary plist each, base64 in <data>), the way Terminal
+// itself exports them: calibrated RGB components in NSRGB.
+function bplist(top) {
+  const objs = [];
+  const add = (v) => {
+    const i = objs.length; objs.push(null);
+    if (v && v.uid !== undefined) objs[i] = { t: 'uid', v: v.uid };
+    else if (Array.isArray(v)) objs[i] = { t: 'arr', v: v.map(add) };
+    else if (v instanceof Uint8Array) objs[i] = { t: 'data', v };
+    else if (typeof v === 'number') objs[i] = { t: 'int', v };
+    else if (typeof v === 'string') objs[i] = { t: 'str', v };
+    else { const ks = Object.keys(v); objs[i] = { t: 'dict', k: ks.map(add), v: ks.map((k) => add(v[k])) }; }
+    return i;
+  };
+  add(top);
+  const out = [...'bplist00'].map((c) => c.charCodeAt(0));
+  const len = (marker, n) => (n < 15 ? [marker | n] : [marker | 15, 0x10, n]); // n < 256 here
+  const offsets = [];
+  for (const o of objs) {
+    offsets.push(out.length);
+    if (o.t === 'int') { if (o.v < 256) out.push(0x10, o.v); else out.push(0x12, (o.v >>> 24) & 255, (o.v >>> 16) & 255, (o.v >>> 8) & 255, o.v & 255); }
+    else if (o.t === 'uid') out.push(0x80, o.v);
+    else if (o.t === 'str') out.push(...len(0x50, o.v.length), ...[...o.v].map((c) => c.charCodeAt(0)));
+    else if (o.t === 'data') out.push(...len(0x40, o.v.length), ...o.v);
+    else if (o.t === 'arr') out.push(...len(0xa0, o.v.length), ...o.v);
+    else out.push(...len(0xd0, o.k.length), ...o.k, ...o.v);
+  }
+  const table = out.length;
+  out.push(...offsets.map((n) => [(n >> 8) & 255, n & 255]).flat());
+  const u64 = (n) => [0, 0, 0, 0, 0, 0, (n >> 8) & 255, n & 255];
+  out.push(0, 0, 0, 0, 0, 0, 2, 1, ...u64(objs.length), ...u64(0), ...u64(table));
+  return Uint8Array.from(out);
+}
+const base64 = (bytes) => { let s = ''; for (const b of bytes) s += String.fromCharCode(b); return btoa(s); };
+/** An NSColor archive for '#rrggbb' (NSColorSpace 1 = calibrated RGB, as Terminal writes). */
+export function nsColorArchive(hex) {
+  const rgbStr = rgb(hex).map((v) => String(Math.round((v / 255) * 1e10) / 1e10)).join(' ');
+  return bplist({
+    $version: 100000, $archiver: 'NSKeyedArchiver', $top: { root: { uid: 1 } },
+    $objects: ['$null', { NSRGB: Uint8Array.from([...rgbStr, '\0'].map((c) => c.charCodeAt(0))), NSColorSpace: 1, $class: { uid: 2 } }, { $classname: 'NSColor', $classes: ['NSColor', 'NSObject'] }],
+  });
+}
+
+function terminalApp(s) {
+  const ANSI = ['Black', 'Red', 'Green', 'Yellow', 'Blue', 'Magenta', 'Cyan', 'White'];
+  const colors = {
+    BackgroundColor: s.background, TextColor: s.foreground, TextBoldColor: s.foreground, CursorColor: s.cursor, SelectionColor: s.selectionBackground,
+    ...Object.fromEntries(s.ansi.map((c, i) => [`ANSI${i < 8 ? '' : 'Bright'}${ANSI[i % 8]}Color`, c])),
+  };
+  const data = (hex) => `\t<data>\n\t${base64(nsColorArchive(hex))}\n\t</data>`;
+  const body = Object.keys(colors).sort().map((k) => `\t<key>${k}</key>\n${data(colors[k])}`);
+  const note = header(s, '', ['Terminal.app: double-click the file (or Settings → Profiles → ⋯ → Import…),', `then select "${s.name}" and click Default.`]).replace(/--/g, '-');
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<!--\n${note}\n-->\n<plist version="1.0">\n<dict>\n${body.join('\n')}\n\t<key>ProfileCurrentVersion</key>\n\t<real>2.07</real>\n\t<key>name</key>\n\t<string>${s.name}</string>\n\t<key>type</key>\n\t<string>Window Settings</string>\n</dict>\n</plist>\n`;
+}
+
+// Any xterm-compatible terminal, also over SSH: OSC 4 (palette), 10 / 11 / 12 (fg, bg,
+// cursor), 17 (selection) in one printf. Lasts for the session; nothing is written to disk.
+const OSC_RESET = "printf '\\033]104\\007\\033]110\\007\\033]111\\007\\033]112\\007'";
+export function oscLine(s) {
+  const e = (body) => `\\033]${body}\\007`;
+  return `printf '${s.ansi.map((c, i) => e(`4;${i};${c}`)).join('')}${e(`10;${s.foreground}`)}${e(`11;${s.background}`)}${e(`12;${s.cursor}`)}${e(`17;${s.selectionBackground}`)}'`;
+}
+function osc(s) {
+  return [
+    '#!/bin/sh',
+    header(s, '#', ['Any xterm-compatible terminal (xterm, VTE / GNOME, kitty, WezTerm, foot, iTerm2, Windows Terminal, …),',
+      'also on a remote host over SSH: the escape codes travel to YOUR terminal. Run it, or paste the printf line;',
+      `it lasts for this terminal session. Over SSH: ssh host 'sh -s' < ${slugOf(s.name)}.sh`,
+      `Undo: ${OSC_RESET}`,
+      'In tmux, run it outside tmux (or set allow-passthrough on and wrap it in tmux passthrough).']),
+    oscLine(s), '',
+  ].join('\n');
+}
+
 /** Every supported format: id → { name, dir, file(slug), install, render(scheme) }. */
 export const FORMATS = {
   'windows-terminal': { name: 'Windows Terminal', dir: 'windows-terminal', file: (slug) => `${slug}.json`, install: 'paste the object into "schemes" in settings.json, then pick it under Profiles → Appearance → Color scheme', render: windowsTerminal },
@@ -241,9 +347,13 @@ export const FORMATS = {
   konsole: { name: 'Konsole', dir: 'konsole', file: (slug) => `${slug}.colorscheme`, install: 'copy to ~/.local/share/konsole/ and pick it in the profile', render: konsole },
   xresources: { name: 'Xresources', dir: 'xresources', file: (slug) => `${slug}.Xresources`, install: 'xrdb -merge the file (xterm, urxvt, …)', render: xresources },
   vscode: { name: 'VS Code terminal', dir: 'vscode', file: (slug) => `${slug}.json`, install: 'merge into settings.json (workbench.colorCustomizations)', render: vscode },
+  ptyxis: { name: 'Ptyxis', dir: 'ptyxis', file: (slug) => `${slug}.palette`, install: 'copy to ~/.local/share/org.gnome.Ptyxis/palettes/ and pick it under Preferences → Palette', render: ptyxis },
+  'terminal-app': { name: 'Terminal.app (macOS)', dir: 'terminal-app', file: (slug) => `${slug}.terminal`, install: 'double-click it (or Settings → Profiles → Import…), then make it the default', render: terminalApp },
+  'xfce4-terminal': { name: 'xfce4-terminal', dir: 'xfce4-terminal', file: (slug) => `${slug}.theme`, install: 'copy to ~/.local/share/xfce4/terminal/colorschemes/ and pick it under Preferences → Colors', render: xfce4 },
+  osc: { name: 'OSC escape codes (any terminal, SSH)', dir: 'osc', file: (slug) => `${slug}.sh`, install: 'run it (or paste its printf line) in the terminal to recolor: this session only, works over SSH', render: osc },
 };
 
-const ALIASES = { wt: 'windows-terminal', windows: 'windows-terminal', iterm: 'iterm2', gnome: 'gnome-terminal', x11: 'xresources', xterm: 'xresources', code: 'vscode', 'vs-code': 'vscode' };
+const ALIASES = { wt: 'windows-terminal', windows: 'windows-terminal', iterm: 'iterm2', gnome: 'gnome-terminal', x11: 'xresources', xterm: 'xresources', code: 'vscode', 'vs-code': 'vscode', 'terminal.app': 'terminal-app', 'apple-terminal': 'terminal-app', macos: 'terminal-app', xfce: 'xfce4-terminal', xfce4: 'xfce4-terminal', ssh: 'osc', escape: 'osc' };
 
 /** Normalize a format name ('wt', 'iTerm', 'gnome', …) to a FORMATS key, or null. */
 export function formatId(name) {

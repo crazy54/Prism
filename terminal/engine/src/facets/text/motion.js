@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Motion — type that moves: a bobbing wave over its rippling reflection, a
 // demoscene sine scroller, a dot-matrix LED board and a big 7-segment clock.
-import { NONE, mix, mixOklab } from '../../color.js';
+const { NONE, mix, mixOklab } = __bm(0);
 import { bannerCanvas, layoutText } from '../../text/banner.js';
 import { bannerMode, fitType, canvasLike } from './_text.js';
 

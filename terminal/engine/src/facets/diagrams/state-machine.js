@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A job lifecycle state machine: the current state lights up and a token
 // rides each labeled transition — one failure, a retry with backoff, success.
-import { ATTR, glyphs, uni, phase, tint, fit } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, tint, fit } = __bm(22);
 import { LineGrid, nodeBox, box, polyline, along } from './_lines.js';
 
 const S = {

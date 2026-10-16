@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A tab strip whose underline glides between tabs as the user switches,
 // each tab showing its own content.
-import { ATTR, glyphs, uni, phase, ease, mix, fit, hbar } from './_input.js';
+const { ATTR, glyphs, uni, phase, ease, mix, fit, hbar } = __bm(25);
 
 const TABS = [['Overview', ''], ['Logs', '12'], ['Traces', ''], ['Metrics', ''], ['Config', '']];
 // [time, tab] switches within the loop.

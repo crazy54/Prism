@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Next-token sampling: top-k candidates as probability bars that sharpen or
 // flatten as the temperature slides, the sampled token flashing and joining
 // the text above.
-import { ATTR, glyphs, uni, phase, fit, mix, hbar, ease } from './_ai.js';
+const { ATTR, glyphs, uni, phase, fit, mix, hbar, ease } = __bm(23);
 
 const PROMPT = 'The p99 spike is caused by DB';
 // Steps: [candidates with logits, chosen index]

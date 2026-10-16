@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > FX STORE > GLITCH & NOISE               436nm - 21 / 24
+--/\=== PRISM TERMINAL > FX STORE > GLITCH & NOISE               467nm - 21 / 24
 ------------------------------------------------------/\========================
 Digital Rain  matrix
 Matrix digital rain in real halfwidth katakana -- white-hot heads, per-column
@@ -29,7 +29,7 @@ LA $ -3> I6 2 2 H  SU2    U      A9 FZ 7      9 6     W -C &  6W 9       D T8=G
   still at 80x20 - t=4s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play matrix
 SNAPSHOT  prism-term snapshot matrix --size 80x24
 IN CODE

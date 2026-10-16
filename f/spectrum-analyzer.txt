@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > CHIPTUNE VISUALS    480nm - 19 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > CHIPTUNE VISUALS    485nm - 19 / 24
 ------------------------------------------------------/\========================
 Spectrum Analyzer  spectrum-analyzer
 A media-player spectrum analyser: log-spaced bars in eighth-blocks, falling peak
@@ -28,7 +28,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   style=classic         Colors  (classic|palette)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play spectrum-analyzer
 SNAPSHOT  prism-term snapshot spectrum-analyzer --size 64x16
 IN CODE

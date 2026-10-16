@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A collapsible reasoning block: "Thinking…" expands with summary lines
 // streaming in dim italics, collapses to "Thought for 14s", then the answer streams.
-import { ATTR, glyphs, uni, phase, fit, mix, reveal, wrapLines, thinkGlyph, shimmer } from './_ai.js';
+const { ATTR, glyphs, uni, phase, fit, mix, reveal, wrapLines, thinkGlyph, shimmer } = __bm(23);
 
 const THOUGHTS = [
   'p99 jumped at 12:02, same minute as the v2.14.1 deploy.',

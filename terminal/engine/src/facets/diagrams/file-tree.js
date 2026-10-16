@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A file tree explorer: tree(1) guide lines, folders that expand and collapse
 // as the cursor walks, git status markers and a running summary.
-import { ATTR, glyphs, uni, phase, tint, fit } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, tint, fit } = __bm(22);
 
 // [name, children | size, git status]
 const TREE = ['prism-term', [

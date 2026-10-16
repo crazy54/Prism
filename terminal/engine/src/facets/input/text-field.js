@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A labeled text field: placeholder, typing, a validation error, the fix, ✔.
-import { ATTR, glyphs, uni, phase, typed, blink, tint, mix, fit } from './_input.js';
+const { ATTR, glyphs, uni, phase, typed, blink, tint, mix, fit } = __bm(25);
 
 export default {
   id: 'input-text-field',

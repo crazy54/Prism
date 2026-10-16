@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../web.bundle.js';
 // Gauges: a braille arc (180°) or ring (270°) with colored zones, a needle
 // tick, and the value centered inside.
 
-import { ATTR } from '../buffer.js';
-import { Canvas } from '../canvas.js';
-import { stringWidth, truncate } from '../width.js';
-import { themeOf, col, clamp01, zoneColor, DEFAULT_ZONES } from './util.js';
+const { ATTR } = __bm(6);
+const { Canvas } = __bm(9);
+const { stringWidth, truncate } = __bm(5);
+const { themeOf, col, clamp01, zoneColor, DEFAULT_ZONES } = __bm(20);
 
 /**
  * @param {Surface} surface

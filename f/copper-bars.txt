@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > RASTER & COPPER      480nm - 9 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > RASTER & COPPER      485nm - 9 / 24
 ------------------------------------------------------/\========================
 Copper Bars  copper-bars
 Glossy raster bars swinging through each other in depth, each a gradient with a
@@ -33,7 +33,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play copper-bars
 SNAPSHOT  prism-term snapshot copper-bars --size 80x20
 IN CODE

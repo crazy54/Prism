@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > MOTION                   484nm - 28 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > MOTION                   492nm - 28 / 29
 ------------------------------------------------------/\========================
 LED Ticker Board  text-marquee
 An amber dot-matrix sign: every LED is a cell, unlit ones faintly visible, and
@@ -20,7 +20,7 @@ tags: marquee, ticker, led, dot matrix, sign
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-marquee
 SNAPSHOT  prism-term snapshot text-marquee --size 72x11
 IN CODE

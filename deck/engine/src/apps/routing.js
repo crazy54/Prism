@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../facets.bundle.js';
 // Galleon 100 SD per-widget routing — which facet (and which of its widgets) each dial layer shows,
 // which ctx.data keys that needs, and the frames. Browser-safe.
 //
@@ -10,15 +11,16 @@
 //                              '0,1': 'app-widget-audio', '1,1': { facet: 'app-galleon-mix', params: { dial1Bottom: 'spectrum' } } });
 //   const release = hub.need(planData(plan));
 //   const { widgets, screen } = renderGalleon(plan, { data: hub.pick(planData(plan)), theme: 'prism', t, now });
-//   // widgets: [{ dial, layer, svg (360 × 192) }] for encoder canvases · screen: one 720 × 384 SVG for hidraw
+//   // widgets: [{ dial, layer, svg (360 × 180, 2:1) }] for encoder canvases · screen: one 720 × 384 SVG for hidraw
 
-import { findFacet } from '../facets/index.js';
-import { render } from '../render.js';
-import { svgInner, suffixIds, svgDoc, n } from '../scene/svg.js';
+const { findFacet } = __bm(318);
+const { render } = __bm(100);
+const { svgInner, suffixIds, svgDoc, n } = __bm(5);
 
 /** The four slots, as the Stream Deck app reports Galleon coordinates ("dial,layer"). */
 export const GALLEON_SLOTS = [{ dial: 0, layer: 0 }, { dial: 1, layer: 0 }, { dial: 0, layer: 1 }, { dial: 1, layer: 1 }].map((s) => ({ ...s, key: `${s.dial},${s.layer}` }));
-const WIDGET = { w: 360, h: 192 };
+const WIDGET = { w: 360, h: 180 };   // one Galleon widget window (2:1, API 1.4)
+const QUAD_H = 192;                  // its quadrant on the 720 × 384 screen
 
 /** The default routing: the overview dashboard's own widgets. */
 export const DEFAULT_ROUTES = Object.freeze({ '0,0': 'app-widget-clock', '1,0': 'app-widget-volume', '0,1': 'app-widget-audio', '1,1': 'app-widget-spectrum' });
@@ -74,8 +76,10 @@ export function composeScreen(widgets) {
     if (d) { defs += d[1]; inner = inner.slice(d[0].length); }
     const sx = WIDGET.w / vw, sy = WIDGET.h / vh;
     const clip = `gc${w.dial}${w.layer}`;
-    defs += `<clipPath id="${clip}"><rect x="${n(w.dial * WIDGET.w)}" y="${n(w.layer * WIDGET.h)}" width="${WIDGET.w}" height="${WIDGET.h}"/></clipPath>`;
-    body += `<g clip-path="url(#${clip})"><g transform="translate(${n(w.dial * WIDGET.w - vx * sx)} ${n(w.layer * WIDGET.h - vy * sy)})${sx !== 1 || sy !== 1 ? ` scale(${n(sx, 4)} ${n(sy, 4)})` : ''}">${inner}</g></g>`;
+    // API 1.4: each 2:1 widget window sits centered in its 360 × 192 quadrant (6 px gutters above and below).
+    const x0 = w.dial * WIDGET.w, y0 = w.layer * QUAD_H + (QUAD_H - WIDGET.h) / 2;
+    defs += `<clipPath id="${clip}"><rect x="${n(x0)}" y="${n(y0)}" width="${WIDGET.w}" height="${WIDGET.h}"/></clipPath>`;
+    body += `<g clip-path="url(#${clip})"><g transform="translate(${n(x0 - vx * sx)} ${n(y0 - vy * sy)})${sx !== 1 || sy !== 1 ? ` scale(${n(sx, 4)} ${n(sy, 4)})` : ''}">${inner}</g></g>`;
   }
-  return svgDoc({ w: WIDGET.w * 2, h: WIDGET.h * 2, defs, body });
+  return svgDoc({ w: WIDGET.w * 2, h: QUAD_H * 2, defs, body });
 }

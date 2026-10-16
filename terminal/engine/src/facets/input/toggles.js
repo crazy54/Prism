@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A settings pane of switches that flip with a sliding knob.
-import { ATTR, uni, glyphs, phase, ease, panel, tint, mix, fit } from './_input.js';
+const { ATTR, uni, glyphs, phase, ease, panel, tint, mix, fit } = __bm(25);
 
 const SETTINGS = [
   ['Auto-approve diagnostics', true, 1.0, 'Read-only checks run unasked; fixes still ask.'],

@@ -1,14 +1,15 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Transfers & ETA — bytes on the move, printed the way the real tools print
 // them, plus a few views of rate and ETA themselves.
 //
 // Every line is built from a seeded transfer() so size, percent, rate, elapsed
 // and ETA agree; formats follow each tool's source (tqdm's format_meter, wget's
 // bar.c, curl's progress.c max5data/time2str, pv's -pterab, rsync --progress).
-import { ATTR } from '../../buffer.js';
-import { Canvas } from '../../canvas.js';
-import { mix, gradient } from '../../color.js';
+const { ATTR } = __bm(6);
+const { Canvas } = __bm(9);
+const { mix, gradient } = __bm(0);
 import { sparkline, gauge } from '../../widgets/index.js';
-import { truncate, stringWidth } from '../../width.js';
+const { truncate, stringWidth } = __bm(5);
 import { phase, transfer, glyphs, clamp01, commas, clock } from './_sim.js';
 import { segs, wrapRows } from './_log.js';
 

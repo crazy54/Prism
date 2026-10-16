@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            568nm - 2 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            578nm - 2 / 39
 ------------------------------------------------------/\========================
 Load Average Watch  ops-load-watch
 watch -n2 uptime with a braille history of the 1/5/15-minute load against the
@@ -23,7 +23,7 @@ tags: uptime, load average, watch, chart, cpu
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-load-watch
 SNAPSHOT  prism-term snapshot ops-load-watch --size 72x14
 IN CODE

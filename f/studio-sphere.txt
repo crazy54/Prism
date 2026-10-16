@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > 3D SOLIDS             467nm - 3 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > 3D SOLIDS             483nm - 3 / 19
 ------------------------------------------------------/\========================
 Studio Sphere  studio-sphere
 Per-pixel lit sphere with an orbiting key light, cool rim light, soft banding
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.1-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play studio-sphere
 SNAPSHOT  prism-term snapshot studio-sphere --size 56x22
 IN CODE

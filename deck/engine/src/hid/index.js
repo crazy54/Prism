@@ -4,7 +4,7 @@
 // See docs/linux.md.
 
 export { MODELS, MODEL_BY_USB, MODEL_BY_ID, USB_IDS, VENDOR, OUTPUT_COMMANDS, modelForUsb, modelForDevice, hidKey, usbKey } from './models.js';
-export { listDecks, selectDeck, parseUevent, parseHidId, interfaceOf, matchUevent } from './discover.js';
+export { listDecks, selectDeck, parseUevent, parseHidId, interfaceOf, parseInterfaceNumber, matchUevent } from './discover.js';
 export { packets, chunk, reportCount, REPORT, checkOutputReport } from './packets.js';
 export { features, checkFeature, ALLOWED_SET, ALLOWED_GET, GETTERS, decodeGet, galleonRingIndex, featureLen } from './features.js';
 export { createInputParser } from './input.js';

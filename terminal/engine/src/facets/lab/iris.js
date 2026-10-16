@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Irises: the old cinema in-camera trick. A circle opening on the scene
 // beneath, a diamond, a five-pointed star, and a circle that opens on — and
 // then closes back to — a point of interest instead of the center.
-import { transitionSetup } from './_lab.js';
+const { transitionSetup } = __bm(26);
 
 const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
 // Signed distance to a five-pointed star of radius r (iq), y up.

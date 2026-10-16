@@ -1,8 +1,9 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Gauges & Meters: arc and ring gauges, a stereo VU meter with peak hold,
 // bullet charts, a sweeping donut and a morphing radar plot.
-import { mix, scale, gradient } from '../../color.js';
+const { mix, scale, gradient } = __bm(0);
 import { gauge } from '../../widgets/index.js';
-import { signal, glyphs, safe, put, putR, num, clamp, smooth, light, ATTR } from './_data.js';
+const { signal, glyphs, safe, put, putR, num, clamp, smooth, light, ATTR } = __bm(24);
 
 const gaugeArc = {
   id: 'charts-gauge-arc',

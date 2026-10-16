@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // iostat -dx 2 — avg-cpu plus a device table (r/s, w/s, kB/s, await, aqu-sz, %util) with util bars.
-import { G, C, ATTR, writer, walk, pad, lpad, fixed } from './_kit.js';
+const { G, C, ATTR, writer, walk, pad, lpad, fixed } = __bm(27);
 
 const DEVS = [['nvme0n1', 1.0, 0.25], ['nvme1n1', 0.7, 0.2], ['sda', 0.3, 2.4], ['sdb', 0.15, 6.8], ['dm-0', 0.9, 0.3], ['dm-1', 0.4, 0.4]];
 

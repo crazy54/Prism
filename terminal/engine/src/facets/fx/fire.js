@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Old-school fire: each pixel averages the heat beneath it (drifting with a
 // gusting wind) minus a scrolling cooling map, which tears the rising heat into
 // tongues of flame; a flickering fuel bed feeds it and embers spiral off the top.
 // On light themes the flame burns in daylight: its cool edge melts into the page
 // instead of a soot-black band.
-import { mix } from '../../color.js';
+const { mix } = __bm(0);
 
 export default {
   title: 'Fire',

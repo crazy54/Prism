@@ -6,14 +6,17 @@
 //     icon.png/.svg   the pack icon
 //     license.txt
 //     icons/          every glyph × state × mode at 144×144:
-//                       still glyphs → .svg (vector, listed)
-//                       animated glyphs → .gif (listed, the idle loop) + .png twin with the same basename (unlisted;
-//                       every GIF pack installed on the owner's machine ships one — formats.md §4.4)
+//                       still glyphs, and states whose idle loop doesn't actually move → .svg (vector, listed)
+//                       glyph states that move → .gif (listed, the idle loop, ≥ 2 distinct frames) + a .png still
+//                       with the same basename (listed too, as "… · Still"; every GIF pack installed on the owner's
+//                       machine ships that twin — formats.md §4.4)
+//     license.txt     MIT (the art) + the SIL OFL 1.1 of Inter (the outlines labels are drawn from); OFL.txt too
 //     previews/       1280×720 PNG sheets (Night / Day)
 //
 // GIF/PNG come from src/raster (rasterize / encodePNG / encodeGIF). Without it the
 // pack is SVG-only (static) — pass { raster: null } to force that.
 
+import fs from 'node:fs';
 import { writeZip, readZip } from './plugin-zip.js';
 import { render, stillTime } from '../render.js';
 import { findFacet } from '../facets/index.js';
@@ -111,7 +114,7 @@ export async function buildIconPack({ theme: themeId, version = '0.3.0', author 
   const id = `${PACK_PREFIX}.${themeId}`;
   const folder = `${id}.sdIconPack`;
   const entries = [], icons = [];
-  const stats = { svg: 0, gif: 0, png: 0, bytes: 0, invalid: [] };
+  const stats = { svg: 0, gif: 0, png: 0, stillLoops: 0, bytes: 0, invalid: [] };
   const add = (name, data) => { entries.push({ name: `${folder}/${name}`, data }); stats.bytes += data.length; };
   const previews = { dark: [], light: [] };
   for (const it of list) {
@@ -119,14 +122,22 @@ export async function buildIconPack({ theme: themeId, version = '0.3.0', author 
     const problems = validateSvg(still, { maxBytes: 32768 });
     if (problems.length) stats.invalid.push(`${it.base}: ${problems[0]}`);
     previews[it.mode]?.push(still);
+    let imgs = null;
     if (it.animated && R) {
       const loop = it.facet.loop || 2;
       const fps = Math.min(GIF_FPS, GIF_MAX_FRAMES / loop);
       const count = Math.max(2, Math.round(loop * fps));
-      const imgs = frames(it, themeId, count, fps).map((svg) => ({ ...R.rasterize(svg, ICON_PX, ICON_PX), delay: 1000 / fps }));
+      imgs = frames(it, themeId, count, fps).map((svg) => ({ ...R.rasterize(svg, ICON_PX, ICON_PX), delay: 1000 / fps }));
+      // a state whose idle loop doesn't move (every frame identical) is a still, not a one-frame "animation"
+      const px = (im) => Buffer.from(im.data.buffer, im.data.byteOffset, im.data.byteLength);
+      const first = px(imgs[0]);
+      if (!imgs.some((im) => !px(im).equals(first))) { imgs = null; stats.stillLoops++; }
+    }
+    if (imgs) {
       add(`icons/${it.base}.gif`, Buffer.from(R.encodeGIF(imgs, { loop: 0 })));
       add(`icons/${it.base}.png`, Buffer.from(R.encodePNG(R.rasterize(still, ICON_PX, ICON_PX))));
       icons.push({ path: `${it.base}.gif`, name: it.name, tags: [...it.tags, 'animated'] });
+      icons.push({ path: `${it.base}.png`, name: `${it.name} · Still`, tags: [...it.tags, 'still'] });
       stats.gif++; stats.png++;
     } else {
       add(`icons/${it.base}.svg`, Buffer.from(still));
@@ -141,13 +152,15 @@ export async function buildIconPack({ theme: themeId, version = '0.3.0', author 
     const t = useTheme(themeId, mode);
     if (previews[mode].length) add(`previews/${MODE_NAME[mode] || mode}.png`, Buffer.from(R.encodePNG(R.rasterize(previewSheet(previews[mode], t.colors.bg), 1280, 720))));
   }
-  add('license.txt', Buffer.from(MIT(year, author)));
+  const ofl = interOfl();
+  add('license.txt', Buffer.from(`${MIT(year, author)}\n\nThird-party: Inter typeface\n---------------------------\nThe icon labels and numerals are drawn from Inter outlines, licensed under the SIL Open Font License 1.1 (also in OFL.txt):\n\n${ofl}`));
+  add('OFL.txt', Buffer.from(ofl));
   const glyphCount = new Set(list.map((x) => x.glyph)).size;
   const manifest = {
     Name: `Prism Deck · ${theme.title}`,
     Version: version,
     Author: author,
-    Description: `${icons.length} icons — ${glyphCount} Prism glyphs × their states × ${theme.modes.map((m) => (m === 'light' ? 'Day' : 'Night')).join(' / ')}, in the ${theme.title} material. ${R ? `${stats.gif} animated (GIF idle loops), ${stats.svg} static (SVG)` : 'Static (SVG)'}; 144 × 144.`.slice(0, 400),
+    Description: `${icons.length} icons: ${glyphCount} Prism glyphs × their states × ${theme.modes.map((m) => (m === 'light' ? 'Day' : 'Night')).join(' / ')}, in the ${theme.title} material. ${R ? `${stats.gif} animated GIF loops, each with its still PNG; ${stats.svg} static SVGs` : `${stats.svg} static SVGs`}; 144 × 144.`.slice(0, 400),
     Icon: R ? 'icon.png' : 'icon.svg',
     URL: url,
     License: 'license.txt',
@@ -155,6 +168,33 @@ export async function buildIconPack({ theme: themeId, version = '0.3.0', author 
   add('manifest.json', Buffer.from(JSON.stringify(manifest, null, 2)));
   add('icons.json', Buffer.from(JSON.stringify(icons, null, 2)));
   return { id, folder, manifest, icons, entries, stats, zip: writeZip(entries) };
+}
+
+/** Inter's SIL OFL 1.1 (src/scene/fonts/OFL.txt). */
+export function interOfl() {
+  try { return fs.readFileSync(new URL('../scene/fonts/OFL.txt', import.meta.url), 'utf8'); } catch { return 'Inter: Copyright (c) 2016 The Inter Project Authors (https://github.com/rsms/inter). SIL Open Font License 1.1: https://openfontlicense.org\n'; }
+}
+
+/** Frames in a GIF (image descriptors), or -1 when it doesn't parse. */
+export function gifFrameCount(d) {
+  try {
+    if (d.toString('latin1', 0, 3) !== 'GIF') return -1;
+    let p = 13;
+    if (d[10] & 0x80) p += 3 * (1 << ((d[10] & 7) + 1));
+    let n = 0;
+    const skipBlocks = () => { while (d[p]) p += d[p] + 1; p++; };
+    while (p < d.length) {
+      const b = d[p++];
+      if (b === 0x3b) return n;
+      if (b === 0x21) { p++; skipBlocks(); continue; }
+      if (b !== 0x2c) return -1;
+      n++;
+      const flags = d[p + 8]; p += 9;
+      if (flags & 0x80) p += 3 * (1 << ((flags & 7) + 1));
+      p++; skipBlocks();
+    }
+    return n;
+  } catch { return -1; }
 }
 
 /** Structural check of a .streamDeckIconPack (formats.md §4.2–4.5). → problems[] */
@@ -186,6 +226,9 @@ export function checkIconPack(buf) {
     const e = get(`icons/${ic.path}`);
     if (!e) { out.push(`${ic.path}: listed but missing`); continue; }
     if (/\.gif$/i.test(ic.path) && !get(`icons/${ic.path.replace(/\.gif$/i, '.png')}`)) out.push(`${ic.path}: no PNG twin`);
+    if (/\.gif$/i.test(ic.path) && gifFrameCount(e.data) < 2) out.push(`${ic.path}: an "animated" GIF needs at least 2 frames (${gifFrameCount(e.data)}): make it a still`);
+    if (/\.gif$/i.test(ic.path) && !ic.tags?.includes('animated')) out.push(`${ic.path}: GIFs are tagged animated`);
+    if (!/\.gif$/i.test(ic.path) && ic.tags?.includes('animated')) out.push(`${ic.path}: only GIFs are tagged animated`);
     if (/\.svg$/i.test(ic.path)) { const s = e.data.toString('utf8'); if (!/width="144"/.test(s) || !/height="144"/.test(s)) out.push(`${ic.path}: must be 144×144`); }
     if (/\.png$/i.test(ic.path) || /\.gif$/i.test(ic.path)) {
       const d = e.data;
@@ -193,6 +236,15 @@ export function checkIconPack(buf) {
       if (w !== 144 || h !== 144) out.push(`${ic.path}: must be 144×144 (is ${w}×${h})`);
       if (d.length > 1024 * 1024) out.push(`${ic.path}: larger than 1 MB`);
     }
+  }
+  // nothing ships unlisted (the PNG stills of the GIFs are listed too)
+  for (const e of entries) { const m = e.name.startsWith(`${root}/icons/`) && !e.name.endsWith('/') ? e.name.slice(root.length + 7) : null; if (m && !seen.has(m)) out.push(`icons/${m}: shipped but not listed in icons.json`); }
+  // the description's counts match the files
+  const nGif = (icons || []).filter((x) => /\.gif$/i.test(x.path)).length, nSvg = (icons || []).filter((x) => /\.svg$/i.test(x.path)).length;
+  if (typeof man.Description === 'string' && /^\d+ icons/.test(man.Description)) {
+    if (!man.Description.startsWith(`${(icons || []).length} icons`)) out.push('manifest: Description icon count does not match icons.json');
+    if (nGif && !man.Description.includes(`${nGif} animated`)) out.push('manifest: Description animated count does not match');
+    if (!man.Description.includes(`${nSvg} static`)) out.push('manifest: Description static count does not match');
   }
   return out;
 }

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS                  558nm - 10 / 17
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS                  550nm - 10 / 17
 ------------------------------------------------------/\========================
 Toasts, status lines, badges, health indicators and log lines.
 

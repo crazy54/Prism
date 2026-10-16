@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Night rain over a city: three parallax layers of slanted braille rain (far
 // drops slow, short and dim; near drops fast and long), splashes on the street
 // and rooftops, lit windows that come and go, and lightning — a branching bolt
 // whose double-flicker flash floods the sky and throws the skyline into
 // silhouette.
-import { mix, NONE } from '../../color.js';
+const { mix, NONE } = __bm(0);
 
 const FLASH = 0xdfe8ff, BOLT = 0xf4f7ff;
 const WINDOW = [0xffc46b, 0xffd99a, 0xffb347, 0x9fd3ff, 0xfff0c8];

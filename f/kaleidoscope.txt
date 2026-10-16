@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > FX STORE > FIELDS                        436nm - 7 / 24
+--/\=== PRISM TERMINAL > FX STORE > FIELDS                        467nm - 7 / 24
 ------------------------------------------------------/\========================
 Kaleidoscope  kaleidoscope
 A turning kaleidoscope: a flowing field folded through mirrored wedges into a
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   segments=6            Mirrors  (3-12)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play kaleidoscope
 SNAPSHOT  prism-term snapshot kaleidoscope --size 72x24
 IN CODE

@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // df -h — the familiar table plus usage bars (dfc-style), red at ≥ 90 %, with /var/log filling up.
-import { G, C, ATTR, writer, walk, pad, lpad } from './_kit.js';
+const { G, C, ATTR, writer, walk, pad, lpad } = __bm(27);
 
 const FS = [
   ['/dev/mapper/vg0-root', 98, 61.0, '/', 0],

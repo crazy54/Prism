@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > COLOR & LIGHT            484nm - 25 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > COLOR & LIGHT            492nm - 25 / 29
 ------------------------------------------------------/\========================
 80s Chrome  text-chrome
 Polished-chrome lettering -- sky above a hard horizon line, warm ground below --
@@ -25,7 +25,7 @@ tags: chrome, metal, 80s, glint, retro
   still at t=2.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-chrome
 SNAPSHOT  prism-term snapshot text-chrome --size 72x16
 IN CODE

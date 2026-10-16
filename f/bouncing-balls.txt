@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PHYSICS        475nm - 9 / 18
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PHYSICS        471nm - 9 / 18
 ------------------------------------------------------/\========================
 Bouncing Balls  bouncing-balls
 Balls of different masses colliding elastically under gravity at a fixed 240 Hz
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   balls=9               Balls  (2-24)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play bouncing-balls
 SNAPSHOT  prism-term snapshot bouncing-balls --size 60x22
 IN CODE

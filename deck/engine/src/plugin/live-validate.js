@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../facets.bundle.js';
 // Validation for the live control channel (DESIGN.md §6.3 / §8.0) — never trust
 // the caller: every look, feedback, behavior, op batch and layout document is
 // checked here against the real registries (facets, glyphs, themes) and the real
@@ -8,12 +9,12 @@
 // in exported profiles the user imports; FORBIDDEN (streamdeck:// deep links,
 // unknown kinds) is refused everywhere.
 
-import { findFacet } from '../facets/index.js';
-import { getGlyph } from '../glyphs/_registry.js';
-import { themeRegistry } from '../themes/_registry.js';
+const { findFacet } = __bm(318);
+const { getGlyph } = __bm(78);
+const { themeRegistry } = __bm(97);
 import { validateSvg } from '../scene/validate.js';
-import { hexToOklch } from '../scene/color.js';
-import { getDevice } from '../devices.js';
+const { hexToOklch } = __bm(4);
+const { getDevice } = __bm(0);
 import { decodeSvgDataUrl } from './system-facets.js';
 
 export const LAYOUT_SCHEMA = 'prism-deck-layout/0.1';
@@ -217,7 +218,7 @@ export function resolveFeedback(fb, path, errors, warnings, segment = { w: 200, 
 
 /** Geometry the live layer validates against: { cols, rows, dials, layers, segment }. */
 export function geometryOf(device) {
-  const d = device.model || getDevice(device);
+  const d = device && typeof device.model === 'object' ? device.model : getDevice(device);
   return { name: d.name, cols: d.cols, rows: d.rows, dials: d.dials?.count || 0, layers: d.dials?.layers || (d.dials?.count ? 1 : 0), segment: { w: 200, h: 100 } };
 }
 

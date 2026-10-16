@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A code panel stepping like a debugger: gutter line numbers, syntax color,
 // a breakpoint, diff markers and the current-line highlight walking down.
-import { ATTR, uni, panel, codeLine, phase, mix, fit } from './_kit.js';
+const { ATTR, uni, panel, codeLine, phase, mix, fit } = __bm(22);
 
 const CODE = [
   "import { connect } from './db.js';",

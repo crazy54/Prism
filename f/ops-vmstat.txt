@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            568nm - 6 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            578nm - 6 / 39
 ------------------------------------------------------/\========================
 vmstat 1  ops-vmstat
 vmstat 1 streaming one line a second under its two-line header: run queue,
@@ -23,7 +23,7 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-vmstat
 SNAPSHOT  prism-term snapshot ops-vmstat --size 80x14
 IN CODE

@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A recursive blossom tree: ten generations of branches, each a little shorter
 // and thinner, swaying more the further they are from the trunk. Blossoms at
 // the tips, petals drifting down on the wind.
-import { lerpc, hash2 } from '../retro/_kit.js';
+const { lerpc, hash2 } = __bm(29);
 
 const LOOP = 16;
 

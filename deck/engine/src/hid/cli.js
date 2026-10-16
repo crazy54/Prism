@@ -86,7 +86,7 @@ export async function main(argv = [], io = {}) {
   const err = (s) => (io.stderr || process.stderr).write(`prism-deck hid: ${s}\n`);
   const { pos, opt } = parseArgs(argv);
   const sub = pos[0];
-  const env = { sysfs: io.sysfs, dev: io.dev, proc: io.proc };
+  const env = { sysfs: io.sysfs, dev: io.dev, proc: io.proc, platform: io.platform, release: io.release, rulesDirs: io.rulesDirs };
   try {
     switch (sub) {
       case 'list': return cmdList(opt, out, env);
@@ -113,30 +113,47 @@ function cmdList(opt, out, env) {
   return 0;
 }
 
+/**
+ * Exit 0 when at least one deck can be driven, 1 when nothing can work (not Linux, no deck, no
+ * access). Warnings (no rule file, python3 missing, another app running) don't fail the run.
+ */
 async function cmdDoctor(opt, out, env) {
+  let usable = 0;
   const ok = (b, s) => out(`${b ? 'ok  ' : 'warn'}  ${s}`);
-  ok(process.platform === 'linux', `platform ${process.platform} ${os.release()} (hidraw is Linux-only)`);
-  const [maj, min] = os.release().split('.').map(Number);
-  ok(process.platform !== 'linux' || maj > 5 || (maj === 5 && min >= 6), 'kernel ≥ 5.6 (only the 2017 original Stream Deck needs it: 8191-byte reports)');
+  const bad = (s) => out(`FAIL  ${s}`);
+  const platform = env.platform || process.platform;
+  if (platform !== 'linux') {
+    bad(`platform ${platform}: not Linux. The hidraw driver only exists on Linux, so nothing here can work on this machine`);
+    out('      (Windows / macOS: use the Elgato Stream Deck app with the Prism plugin; see docs/plugin.md)');
+    return 1;
+  }
+  const release = env.release || os.release();
+  const [maj, min] = release.split('.').map(Number);
+  ok(maj > 5 || (maj === 5 && min >= 6), `kernel ${release} ≥ 5.6 (only the 2017 original Stream Deck needs it: 8191-byte reports)`);
   const [nmaj] = process.versions.node.split('.').map(Number);
   ok(nmaj >= 18, `node ${process.versions.node} (≥ 18)`);
   const decks = listDecks({ sysfs: env.sysfs, dev: env.dev });
-  ok(decks.length > 0, `${decks.length} supported deck(s) in /sys/class/hidraw`);
+  (decks.length ? ok.bind(null, true) : bad)(`${decks.length} supported deck(s) in /sys/class/hidraw`);
   for (const d of decks) {
     let rw = true;
     try { fs.accessSync(d.path, fs.constants.R_OK | fs.constants.W_OK); } catch { rw = false; }
+    if (rw) usable++;
     ok(rw, `${d.path} ${d.model.name}: ${rw ? 'read/write' : `no access — install ${UDEV_RULES_NAME} (prism-deck hid udev) and replug`}`);
     const holders = findHolders(d.path, { proc: env.proc });
     ok(!holders.length, holders.length ? `${d.path} is open in ${holders.map((h) => `${h.comm} (${h.pid})`).join(', ')}` : `${d.path} is free`);
   }
   const apps = findDeckApps({ proc: env.proc });
   ok(!apps.length, apps.length ? `deck apps running: ${apps.map((a) => `${a.app} (${a.pid})`).join(', ')} — quit them before \`hid run\`` : 'no other deck app running');
-  const rule = ['/etc/udev/rules.d', '/run/udev/rules.d', '/usr/lib/udev/rules.d', '/lib/udev/rules.d'].map((p) => `${p}/${UDEV_RULES_NAME}`).find((p) => fs.existsSync(p));
-  ok(!!rule, rule ? `udev rule ${rule}` : `udev rule ${UDEV_RULES_NAME} not installed (systemd ≥ 251 covers some models; see docs/linux.md)`);
+  const rule = (env.rulesDirs || ['/etc/udev/rules.d', '/run/udev/rules.d', '/usr/lib/udev/rules.d', '/lib/udev/rules.d']).map((p) => `${p}/${UDEV_RULES_NAME}`).find((p) => fs.existsSync(p));
+  let current = true;
+  if (rule) { try { current = fs.readFileSync(rule, 'utf8') === udevRules(); } catch { /* unreadable: report as installed */ } }
+  ok(!!rule && current, !rule ? `udev rule ${UDEV_RULES_NAME} not installed (systemd ≥ 251 covers some models; see docs/linux.md)`
+    : current ? `udev rule ${rule}` : `udev rule ${rule} differs from this version's rule; reinstall it (prism-deck hid udev). Older copies granted every Galleon interface, keyboard included`);
   const py = spawnSync('python3', ['-I', '-c', 'import fcntl'], { stdio: 'ignore', timeout: 5000 });
   ok(py.status === 0, py.status === 0 ? 'python3 + fcntl available (brightness, logo, Galleon keep-alive)' : 'python3 with fcntl not found — brightness falls back to software dimming; the Galleon cannot be driven');
   ok(fs.existsSync(HELPER_PATH), `feature helper ${HELPER_PATH}`);
-  return 0;
+  if (!usable) bad(decks.length ? 'no deck is accessible to this user' : 'no deck to drive');
+  return usable ? 0 : 1;
 }
 
 async function openSelected(opt, env, extra = {}) {

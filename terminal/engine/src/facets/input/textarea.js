@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A multi-line editor: a commit message gets typed with soft line numbers,
 // a 50/72 ruler and a character count.
-import { ATTR, uni, phase, typed, blink, panel, mix } from './_input.js';
+const { ATTR, uni, phase, typed, blink, panel, mix } = __bm(25);
 
 const MSG = 'Raise checkout DB pool to 40\n\nv2.14.1 raised worker concurrency to 32 but left\nthe pool at 20, so requests queued for a connection.\nSize the pool to the workers and alert on pool\nwait time.';
 

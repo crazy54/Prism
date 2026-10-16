@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Crepuscular rays through a forest: the low sun behind swaying canopy and
 // trunks, its light marched pixel by pixel back toward the sun through the
 // gaps, so shafts of light fan out through the haze. Dust motes drift in them.
-import { lerpc, clamp01, hash2 } from '../retro/_kit.js';
+const { lerpc, clamp01, hash2 } = __bm(29);
 
 const LOOP = 20, STEPS = 14;
 

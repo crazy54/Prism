@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > GLOBES & PLANETS     467nm - 11 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > GLOBES & PLANETS     483nm - 11 / 19
 ------------------------------------------------------/\========================
 Data Globe  globe
 Holographic dotted Earth in braille -- graticule, atmosphere, pulsing hubs and
@@ -29,7 +29,7 @@ tags: globe, earth, world, arcs, 3d
   still at 80x20 - t=4s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play globe
 SNAPSHOT  prism-term snapshot globe --size 80x24
 IN CODE

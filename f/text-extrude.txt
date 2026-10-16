@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > BANNERS & FONTS           484nm - 9 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > BANNERS & FONTS           492nm - 9 / 29
 ------------------------------------------------------/\========================
 3D Extruded Banner  text-extrude
 Solid 3D block letters: a stack of shaded offset copies forms the sides, and the
@@ -29,7 +29,7 @@ tags: 3d, extrude, depth, banner, retro
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-extrude
 SNAPSHOT  prism-term snapshot text-extrude --size 80x20
 IN CODE

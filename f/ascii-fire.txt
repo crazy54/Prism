@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PURE ASCII > ASCII ANIMATIONS             494c - 2 / 29
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ANIMATIONS            597nm - 2 / 29
 ------------------------------------------------------/\========================
 ASCII Fire  ascii-fire
 Old-school text-mode fire: heat averages upward and cools through the " .:*sS#$"
@@ -29,7 +29,7 @@ $$$$$$$$$$$$$$::#$* :$$$$#: :##s#$$$#::$$$#s$$$::$$$$$$$#s##s#$#::ss#$$$$$#::s:
   still at 80x20 - t=3s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ascii-fire
 SNAPSHOT  prism-term snapshot ascii-fire --size 80x24
 IN CODE

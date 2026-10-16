@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > BBS & ANSI ART      480nm - 17 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > BBS & ANSI ART      485nm - 17 / 24
 ------------------------------------------------------/\========================
 Modem Connect  modem-connect
 Dialing a BBS: ATZ, ATDT, RINGING, CONNECT 2400 -- then the welcome screen
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   colors=vga            Colors  (vga|theme)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play modem-connect
 SNAPSHOT  prism-term snapshot modem-connect --size 80x22
 IN CODE

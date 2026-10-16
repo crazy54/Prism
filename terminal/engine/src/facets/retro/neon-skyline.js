@@ -1,8 +1,9 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A neon city at night drifting past in three parallax layers: hazy far
 // towers, mid-rise blocks full of lit windows, near buildings trimmed in neon
 // with flickering signs — searchlights sweeping the clouds, traffic streaming
 // along the waterfront, and the whole thing mirrored in a rippling harbour.
-import { lerpc, hash2 } from './_kit.js';
+const { lerpc, hash2 } = __bm(29);
 
 const LOOP = 40;
 const add = (a, b, k) => {

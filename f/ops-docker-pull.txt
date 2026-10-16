@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > CONTAINERS & CLUSTERS     568nm - 21 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > CONTAINERS & CLUSTERS     578nm - 21 / 39
 ------------------------------------------------------/\========================
 docker pull  ops-docker-pull
 docker pull with parallel layers going Waiting, Downloading (byte counters, ETA;
@@ -22,7 +22,7 @@ c6e2b7a40d95: Downloading  812.3kB/12.9MB 2s
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-docker-pull
 SNAPSHOT  prism-term snapshot ops-docker-pull --size 80x13
 IN CODE

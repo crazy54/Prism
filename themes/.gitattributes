@@ -1,0 +1,2 @@
+# Terminal emulator schemes are consumed on Linux/macOS (and the .sh by sh): keep LF.
+* text eol=lf

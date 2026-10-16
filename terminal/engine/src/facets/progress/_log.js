@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Scrolling-log presentation for tool-output facets (apt, cargo, docker, git…).
 //
 // A facet builds a script of timed lines for one loop; at time t we show the
 // lines that have "printed" so far, scrolled so the newest sit above any pinned
 // live rows — the way a real terminal looks while the tool runs.
 
-import { stringWidth, truncate } from '../../width.js';
+const { stringWidth, truncate } = __bm(5);
 
 /**
  * Draw segmented text: segs = [[text, color, attr?], …]. Clips at `w` columns.

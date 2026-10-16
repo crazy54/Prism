@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../core.bundle.js';
 // Dial / screen canvases. Every Prism encoder draws into one full-canvas pixmap
 // ("canvas") of a custom layout, so a facet's art reaches the touch strip, the
 // Galleon screen and the Neo info bar exactly as rendered (formats.md §3.3).
@@ -11,7 +12,7 @@
 // preserveAspectRatio, so the fit is a plain transform. A non-2:1 window (older
 // engines) is letterboxed, never stretched.
 
-import { svgInner, n } from '../scene/svg.js';
+const { svgInner, n } = __bm(5);
 
 export const LAYOUT_SCHEMA_URL = 'https://schemas.elgato.com/streamdeck/plugins/layout.json';
 export const CANVAS_KEY = 'canvas';

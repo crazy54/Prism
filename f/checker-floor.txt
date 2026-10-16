@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > RASTER & COPPER     480nm - 12 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > RASTER & COPPER     485nm - 12 / 24
 ------------------------------------------------------/\========================
 Checker Floor  checker-floor
 A perspective checkerboard plane racing to the horizon and banking, under a
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play checker-floor
 SNAPSHOT  prism-term snapshot checker-floor --size 80x24
 IN CODE

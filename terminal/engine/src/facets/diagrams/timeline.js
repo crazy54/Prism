@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // An incident timeline: a playhead sweeps the axis, events pop in on
 // alternating label lanes, and MTTA / MTTR spans draw in once resolved.
-import { ATTR, glyphs, uni, phase, fit, stringWidth } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, fit, stringWidth } = __bm(22);
 
 // [minute after 12:00, label, tone]
 const EVENTS = [

@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../web.bundle.js';
 // Line charts (braille, 2×4 dots per cell) and half-block heatmaps.
 
-import { NONE, mix } from '../color.js';
-import { CellBuffer } from '../buffer.js';
-import { Canvas } from '../canvas.js';
-import { stringWidth, truncate } from '../width.js';
-import { themeOf, col, grad, fmt, clamp01, extent, seriesColors, bayer } from './util.js';
+const { NONE, mix } = __bm(0);
+const { CellBuffer } = __bm(6);
+const { Canvas } = __bm(9);
+const { stringWidth, truncate } = __bm(5);
+const { themeOf, col, grad, fmt, clamp01, extent, seriesColors, bayer } = __bm(20);
 
 function normalizeSeries(series, theme, colors) {
   if (!Array.isArray(series) || !series.length) return [];

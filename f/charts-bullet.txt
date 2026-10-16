@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      505nm - 21 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      436nm - 21 / 30
 ------------------------------------------------------/\========================
 Bullet Charts  charts-bullet
 Stephen Few-style bullet charts: qualitative bands, the actual value as a bar
@@ -17,7 +17,7 @@ tags: bullet chart, kpi, target, bands, goals
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-bullet
 SNAPSHOT  prism-term snapshot charts-bullet --size 60x8
 IN CODE

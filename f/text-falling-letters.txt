@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            484nm - 15 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            492nm - 15 / 29
 ------------------------------------------------------/\========================
 Falling Letters  text-falling-letters
 Big letters rain down one after another, bounce to rest under gravity, hold,
@@ -27,7 +27,7 @@ tags: falling, gravity, bounce, rain, physics
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-falling-letters
 SNAPSHOT  prism-term snapshot text-falling-letters --size 72x18
 IN CODE

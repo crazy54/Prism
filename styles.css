@@ -4,10 +4,52 @@
 /* ── Hero ────────────────────────────────────────────────────────────────── */
 .hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);align-items:center;gap:24px;padding-top:84px;padding-bottom:72px}
 .hero-copy{position:relative;z-index:1}
-.hero h1{margin:22px 0 22px;font-size:clamp(46px,5.1vw,var(--rf-fs-display));line-height:var(--rf-lh-display);letter-spacing:var(--rf-ls-display);font-weight:700}
+main{overflow-x:clip}   /* the hero art bleeds to the viewport edge; nothing scrolls sideways */
+/* Perf: sections past the first screen skip style, layout and paint until they near the viewport (sizes are remembered
+   once rendered), so loading and a Day/Night switch restyle about a third fewer elements. */
+main>section:not(.hero),.site-footer{content-visibility:auto;contain-intrinsic-size:auto 640px}
+/* fluid display tier (tokens › type › hero): ~88px at 1440, 112px at 1920 */
+.hero h1{margin:22px 0 22px;font-size:var(--rf-fs-hero,clamp(46px,5vw + 16px,112px));line-height:var(--rf-lh-hero,1.02);letter-spacing:var(--rf-ls-hero,var(--rf-ls-display));font-weight:700}
 .hero-description{max-width:460px;font-size:var(--rf-fs-lead);line-height:var(--rf-lh-lead);letter-spacing:var(--rf-ls-lead);color:var(--muted)}
 .hero-description em{font-style:normal;color:var(--ink)}
-.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-sub{max-width:460px;margin-top:12px;font-size:14px;line-height:1.55;color:var(--muted)}
+.hero-sub b{font-weight:600;color:var(--ink)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+/* Live text effects in the hero (the same recipes as text-neon-sign and text-datamosh-glitch).
+   The stage is lit ink in Night and Day alike: neon needs the dark to glow. */
+.hero-fx{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:470px;margin-top:22px}
+.fx-tile{display:flex;flex-direction:column;min-width:0;border:1px solid var(--line);border-radius:var(--r-md);background:var(--card);box-shadow:var(--elev-1);overflow:hidden;transition:border-color var(--rf-dur-fast),transform var(--rf-dur-base) var(--rf-ease-out-expo)}
+.fx-tile:hover{border-color:var(--rf-line-strong);transform:translateY(-1px)}
+.fx-stage{position:relative;display:flex;align-items:center;justify-content:center;height:64px;background:radial-gradient(80% 90% at 50% 40%,#171a2a,#08090e);contain:paint}
+.fx-cap{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:7px 10px;border-top:1px solid var(--line);font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap}
+.fx-tile.is-more .fx-cap{color:var(--accent)}
+.fx-neon{position:relative;z-index:0;font:700 23px/1 var(--font);letter-spacing:.04em;color:#fff;--c:236,131,152;animation:fx-neon 4.5s linear infinite}
+/* Perf: the glow is a static text-shadow on its own layer beneath the letters; the flicker animates opacity only, on the compositor (an animated text-shadow repainted the page every frame). */
+.fx-neon::before{content:attr(data-text);position:absolute;inset:0;z-index:-1;color:transparent;text-shadow:0 0 4px #fff,0 0 11px rgba(var(--c),.9),0 0 22px rgba(var(--c),.7),0 0 42px rgba(var(--c),.5);animation:fx-neon-glow 4.5s linear infinite;pointer-events:none}
+@keyframes fx-neon{0%,19%,21%,55%,57%,100%{opacity:1}20%,56%{opacity:.45}}
+@keyframes fx-neon-glow{0%,19%,21%,55%,57%,100%{opacity:1}20%,56%{opacity:0}}
+.fx-glitch{position:relative;font:700 21px/1 var(--font);letter-spacing:-.01em;color:#c9b6ff}
+.fx-glitch::before,.fx-glitch::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;pointer-events:none}
+.fx-glitch::before{left:2px;color:#33ddff;text-shadow:-1px 0 #33ddff;animation:fx-glitch-a 2.4s steps(2) infinite}
+.fx-glitch::after{left:-2px;color:#ff4fb0;text-shadow:1px 0 #ff4fb0;animation:fx-glitch-b 2.8s steps(2) infinite}
+@keyframes fx-glitch-a{0%,100%{clip-path:inset(0 0 85%);transform:translate(0)}20%{clip-path:inset(20% 0 55%);transform:translate(-3px)}40%{clip-path:inset(60% 0 10%);transform:translate(3px)}60%{clip-path:inset(10% 0 70%);transform:translate(-2px)}80%{clip-path:inset(45% 0 35%);transform:translate(2px)}}
+@keyframes fx-glitch-b{0%,100%{clip-path:inset(70% 0 5%);transform:translate(0)}25%{clip-path:inset(15% 0 60%);transform:translate(3px)}50%{clip-path:inset(55% 0 20%);transform:translate(-3px)}75%{clip-path:inset(30% 0 50%);transform:translate(2px)}}
+.fx-more{display:flex;flex-direction:column;align-items:center;gap:3px;font:400 10.5px/1 var(--rf-mono);letter-spacing:.12em;text-transform:uppercase;color:#a9aec4}
+.fx-more b{font:700 22px/1 var(--font);letter-spacing:-.03em;background:linear-gradient(90deg,#c1a8f8,#8fb0ff,#7fd6e6,#a0decf);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* Perf: pausing is a class on the animated regions (app.js setMotion), not a root-attribute rule ending in * — that invalidated every element on the page. */
+.hero-fx.is-paused *,.hero-fx.is-paused *::before,.hero-fx.is-paused *::after{animation-play-state:paused!important}
+/* Day: pearl glass, not black slabs. The stage is a lit pearl pane with an iridescent top edge; the neon tube is a
+   deep rose with a coloured halo (daylight neon); the glitch keeps its split in print-strength cyan/magenta. */
+:root[data-rf-mode="day"] .fx-tile{background:var(--panel);border-color:var(--rf-line-soft,var(--line))}
+:root[data-rf-mode="day"] .fx-stage{background:radial-gradient(120% 140% at 30% 0%,rgba(255,255,255,.98),rgba(255,255,255,0) 60%),linear-gradient(160deg,#f7f5fc,#eeeaf7 55%,#e8f1f3);box-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 rgba(115,83,187,.10)}
+:root[data-rf-mode="day"] .fx-stage::after{content:"";position:absolute;left:12%;right:12%;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(214,52,104,.35),rgba(36,104,222,.35),transparent);opacity:.8}
+:root[data-rf-mode="day"] .fx-neon{color:#b62a55;--c:222,95,125}
+:root[data-rf-mode="day"] .fx-neon::before{text-shadow:0 0 1px rgba(182,42,85,.55),0 0 9px rgba(var(--c),.55),0 0 20px rgba(var(--c),.35)}
+:root[data-rf-mode="day"] .fx-glitch{color:#4b2f99}
+:root[data-rf-mode="day"] .fx-glitch::before{color:#0079a8;text-shadow:-1px 0 #0079a8}
+:root[data-rf-mode="day"] .fx-glitch::after{color:#c21b78;text-shadow:1px 0 #c21b78}
+:root[data-rf-mode="day"] .fx-more{color:#5f6379}
+:root[data-rf-mode="day"] .fx-more b{background:linear-gradient(90deg,#7353bb,#4f63c4,#0f7d8c,#2f8f6a);-webkit-background-clip:text;background-clip:text}
 .hero-note{margin-top:18px;font:400 11px/1.4 var(--rf-mono);letter-spacing:.02em;color:var(--dim)}
 .hero-new{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:5px 12px 5px 5px;border:1px solid var(--line);border-radius:var(--rf-r-pill);background:var(--panel);font-size:12px;color:var(--muted);box-shadow:var(--elev-1);transition:border-color var(--rf-dur-fast),color var(--rf-dur-fast)}
 .hero-new:hover{border-color:rgba(var(--rf-surf-deck-rgb),.6);color:var(--ink)}
@@ -18,7 +60,9 @@
 /* The art: FIG. 001. A beam of white light, the glass pyramid (design/brand), the spectrum.
    Night is volumetric light on ink; Day is a printed optics diagram on pearl paper. */
 .hero-art{--hero-delay:0ms;position:relative;margin:0;width:100%;aspect-ratio:580/420;container-type:inline-size;isolation:isolate}
-:root[data-fl="full"] .hero-art{--hero-delay:1050ms}
+/* full First Light: the intro prism morphs into this one (PrismFirstLight hero mode) and hands it over already lit,
+   so the art skips its own entrance (a negative delay = already played) */
+:root[data-fl="full"] .hero-art{--hero-delay:-4s}
 :root[data-fl="echo"] .hero-art{--hero-delay:180ms}
 .art-grid{position:absolute;inset:4% -2%;z-index:-2;background-image:linear-gradient(var(--rf-grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--rf-grid-line) 1px,transparent 1px);background-size:var(--rf-grid-cell) var(--rf-grid-cell);background-position:center;-webkit-mask-image:radial-gradient(ellipse 52% 56% at 48% 47%,#000 12%,transparent 74%);mask-image:radial-gradient(ellipse 52% 56% at 48% 47%,#000 12%,transparent 74%)}
 .art-halo{position:absolute;z-index:-1;left:22%;top:8%;width:46%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,var(--rf-halo),transparent);filter:blur(30px)}
@@ -29,8 +73,9 @@
 /* spectrum stops — Night vivid (glow on ink), Day vivid (ink on paper) */
 .hero-art{--s0:var(--rf-s-violet-v);--s1:var(--rf-s-periwinkle-v);--s2:var(--rf-s-azure-v);--s3:var(--rf-s-cyan-v);--s4:var(--rf-s-jade-v);--s5:var(--rf-s-citrine-v);--s6:var(--rf-s-rose-v)}
 .art-light .s0{stop-color:var(--s0)}.art-light .s1{stop-color:var(--s1)}.art-light .s2{stop-color:var(--s2)}.art-light .s3{stop-color:var(--s3)}.art-light .s4{stop-color:var(--s4)}.art-light .s5{stop-color:var(--s5)}.art-light .s6{stop-color:var(--s6)}
-.art-wedges .w0{fill:var(--s0)}.art-wedges .w1{fill:var(--s1)}.art-wedges .w2{fill:var(--s2)}.art-wedges .w3{fill:var(--s3)}.art-wedges .w4{fill:var(--s4)}.art-wedges .w5{fill:var(--s5)}.art-wedges .w6{fill:var(--s6)}
-.art-cores .c0{stroke:var(--s0)}.art-cores .c1{stroke:var(--s1)}.art-cores .c2{stroke:var(--s2)}.art-cores .c3{stroke:var(--s3)}.art-cores .c4{stroke:var(--s4)}.art-cores .c5{stroke:var(--s5)}.art-cores .c6{stroke:var(--s6)}
+/* physically true dispersion: violet (s0) bends most → the bottom ray; rose (s6) bends least → the top */
+.art-wedges .w0{fill:var(--s6)}.art-wedges .w1{fill:var(--s5)}.art-wedges .w2{fill:var(--s4)}.art-wedges .w3{fill:var(--s3)}.art-wedges .w4{fill:var(--s2)}.art-wedges .w5{fill:var(--s1)}.art-wedges .w6{fill:var(--s0)}
+.art-cores .c0{stroke:var(--s6)}.art-cores .c1{stroke:var(--s5)}.art-cores .c2{stroke:var(--s4)}.art-cores .c3{stroke:var(--s3)}.art-cores .c4{stroke:var(--s2)}.art-cores .c5{stroke:var(--s1)}.art-cores .c6{stroke:var(--s0)}
 .art-wedges path{opacity:.3;filter:url(#art-soft)}
 .art-cores path{fill:none;stroke-width:1;opacity:.95}
 .art-haze{opacity:.28}.art-haze-inner{opacity:.2}
@@ -48,9 +93,9 @@
 :root[data-rf-mode="day"] .art-beam-bloom{opacity:.28}
 :root[data-rf-mode="day"] .art-inner{stroke:var(--accent);stroke-opacity:.55}
 :root[data-rf-mode="day"] .art-rays{mix-blend-mode:multiply}
-:root[data-rf-mode="day"] .art-wedges path{opacity:.22}
+:root[data-rf-mode="day"] .art-wedges path{opacity:.32}
 :root[data-rf-mode="day"] .art-cores path{opacity:.9}
-:root[data-rf-mode="day"] .art-haze{opacity:.16}
+:root[data-rf-mode="day"] .art-haze{opacity:.22}
 :root[data-rf-mode="day"] .art-haze-inner{opacity:.14}
 :root[data-rf-mode="day"] .art-day-only{display:inline}
 .art-floor{fill:none;stroke:var(--rf-line-strong);stroke-width:1}
@@ -68,16 +113,16 @@
 .art-label-out{right:0;top:79%;color:var(--accent)}
 .art-coordinate{left:0;right:0;bottom:1%;text-align:center;font-size:8.5px;font-weight:400}
 .lam{text-transform:none}
-/* arrival — waits for First Light to hand over (data-fl full/echo) */
-.art-beam{transform-box:view-box;transform-origin:0 192px;animation:art-beam-in 1.1s var(--rf-ease-out) calc(var(--hero-delay) + .1s) both}
-.hero-pyramid{animation:art-materialize .9s var(--rf-ease-out) var(--hero-delay) both}
-.art-rays{transform-box:view-box;transform-origin:326px 192px;animation:art-fan 1.4s var(--rf-ease-out-expo) calc(var(--hero-delay) + .75s) both}
-.art-haze{animation:art-breathe 7s ease-in-out calc(var(--hero-delay) + 2.4s) infinite}
-.art-flare{transform-box:fill-box;transform-origin:center;animation:art-flare 6s ease-in-out calc(var(--hero-delay) + 2.4s) infinite}
-.art-label-in{animation:art-label .6s var(--rf-ease-out) calc(var(--hero-delay) + .35s) both}
-.art-label-out{animation:art-label .6s var(--rf-ease-out) calc(var(--hero-delay) + 1.35s) both}
-.art-coordinate{animation:art-label .6s var(--rf-ease-out) calc(var(--hero-delay) + 1.7s) both}
-.art-day-only{animation:art-label .8s var(--rf-ease-out) calc(var(--hero-delay) + 1.2s) both}
+/* arrival — picks up as First Light hands over (data-fl full/echo); settled ~1.1s after it */
+.art-beam{transform-box:view-box;transform-origin:0 192px;animation:art-beam-in .7s var(--rf-ease-out) var(--hero-delay) both}
+.hero-pyramid{animation:art-materialize .6s var(--rf-ease-out) var(--hero-delay) both}
+.art-rays{transform-box:view-box;transform-origin:326px 192px;animation:art-fan .9s var(--rf-ease-out-expo) calc(var(--hero-delay) + .25s) both}
+.art-haze{animation:art-breathe 7s ease-in-out calc(var(--hero-delay) + 1.2s) infinite}
+.art-flare{transform-box:fill-box;transform-origin:center;animation:art-flare 6s ease-in-out calc(var(--hero-delay) + 1.2s) infinite}
+.art-label-in{animation:art-label .5s var(--rf-ease-out) calc(var(--hero-delay) + .2s) both}
+.art-label-out{animation:art-label .5s var(--rf-ease-out) calc(var(--hero-delay) + .7s) both}
+.art-coordinate{animation:art-label .5s var(--rf-ease-out) calc(var(--hero-delay) + .8s) both}
+.art-day-only{animation:art-label .6s var(--rf-ease-out) calc(var(--hero-delay) + .6s) both}
 @keyframes art-beam-in{from{opacity:0;transform:scaleX(.04)}to{opacity:1;transform:none}}
 @keyframes art-materialize{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
 @keyframes art-fan{from{opacity:0;transform:rotate(-6deg) scale(.08,.15)}to{opacity:1;transform:none}}
@@ -85,9 +130,9 @@
 @keyframes art-flare{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.12)}}
 @keyframes art-label{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 :root[data-rf-mode="day"] .art-haze{animation-name:art-breathe-day}
-@keyframes art-breathe-day{0%,100%{opacity:.12}50%{opacity:.2}}
+@keyframes art-breathe-day{0%,100%{opacity:.18}50%{opacity:.27}}
 /* motion off / off-screen: hold still (compositor work stops) */
-[data-motion="paused"] .hero-art *,.hero-art.is-offscreen *,[data-motion="paused"] .brand .prism-mark *{animation-play-state:paused!important}
+.hero-art.is-paused *,.hero-art.is-offscreen *,.brand .prism-mark.is-paused *{animation-play-state:paused!important}
 
 /* ── Stats ───────────────────────────────────────────────────────────────── */
 .stats{display:grid;grid-template-columns:repeat(4,1fr)}
@@ -211,9 +256,14 @@
 .term-meter{color:#b8a2f2;letter-spacing:0;white-space:pre}
 .term-pct{min-width:4ch;text-align:right}
 /* deck: a virtual Stream Deck + */
-.sc-deck{display:flex;justify-content:center;align-items:flex-start;background:radial-gradient(120% 90% at 50% 0%,rgba(var(--rf-hue-rgb),.12),transparent 60%),var(--rf-bg-deep)}
+.sc-deck{display:flex;justify-content:center;align-items:center;container-type:size;background:radial-gradient(120% 90% at 50% 0%,rgba(var(--rf-hue-rgb),.12),transparent 60%),var(--rf-bg-deep)}
 :root[data-rf-mode="day"] .sc-deck{background:radial-gradient(120% 90% at 50% 0%,rgba(var(--rf-hue-rgb),.14),transparent 60%),var(--panel2)}
-.deck-mount{width:126%;flex:none;margin-top:-30px;transform:perspective(1300px) rotateX(14deg);transform-origin:50% 0}
+/* the whole device fits the stage (aspect 1036:1010, design/devices); a static poster fills it until the engine mounts */
+.deck-mount{flex:none;width:min(calc(100cqw - 32px),calc((100cqh - 30px) * 1.0257));transform:perspective(1300px) rotateX(8deg);transform-origin:50% 50%}
+.deck-poster{display:block;width:100%;height:auto;filter:drop-shadow(0 18px 22px rgba(0,0,0,.45))}
+:root[data-rf-mode="day"] .deck-poster{filter:drop-shadow(0 16px 20px rgba(48,32,120,.28))}
+.sc-deck-note{position:absolute;left:0;right:0;bottom:10px;margin:0;text-align:center;font:400 10.5px/1.4 var(--rf-mono);color:var(--muted)}
+.sc-deck-note a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
 
 /* ── Principles ──────────────────────────────────────────────────────────── */
 .principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:var(--rf-sp-22)}
@@ -228,7 +278,7 @@
 .agent-panel{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:64px;padding:48px;border:1px solid var(--line);border-radius:var(--r-xl);background:linear-gradient(130deg,rgba(var(--accent-rgb),.07),transparent 60%),var(--card);box-shadow:var(--elev-1);overflow:hidden}
 .agent-panel::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--rf-grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--rf-grid-line) 1px,transparent 1px);background-size:34px 34px;-webkit-mask-image:radial-gradient(ellipse 50% 70% at 0% 0%,#000,transparent 70%);mask-image:radial-gradient(ellipse 50% 70% at 0% 0%,#000,transparent 70%);pointer-events:none}
 .agent-copy{position:relative}
-.agent-copy h2{margin:18px 0;font-size:38px;line-height:1.15;letter-spacing:-.042em;font-weight:700}
+.agent-copy h2{margin:18px 0;font-size:var(--rf-fs-section,clamp(40px,1.25vw + 24px,48px));line-height:var(--rf-lh-section,1.08);letter-spacing:var(--rf-ls-section,-.045em);font-weight:700}
 .agent-copy>p:not(.eyebrow):not(.agent-requirement){max-width:390px;font-size:14px;line-height:1.7;color:var(--muted)}
 .agent-copy code{font-size:.9em;color:var(--rf-syn-tag);white-space:nowrap}
 .agent-capabilities{display:grid;gap:12px;margin:24px 0;padding:0;list-style:none;font-size:13px;color:var(--muted)}
@@ -248,6 +298,7 @@
 
 /* ── Get started ─────────────────────────────────────────────────────────── */
 .start-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start}
+.start-layout>*{min-width:0} /* 1.4.10: the tab row scrolls inside its column instead of widening the page at 320px */
 .tab-list{display:flex;gap:26px;max-width:460px;margin-bottom:26px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
 .tab-list::-webkit-scrollbar{display:none}
 .tab-list button{flex:none;white-space:nowrap}
@@ -274,6 +325,16 @@
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 @media(min-width:1500px){.hero{padding-top:100px;padding-bottom:88px}}
+/* Large screens: the prism art takes ~46% of the viewport and bleeds off the right edge (the rays leave the
+   screen); the copy keeps the container. --hero-bleed = container content edge → viewport edge. */
+@media(min-width:1051px){
+  .hero{--hero-bleed:max(var(--site-pad),calc((100vw - var(--site-max)) / 2 + var(--site-pad)));grid-template-columns:minmax(0,1fr) minmax(0,.82fr);gap:24px}
+  /* the two display lines never break: at 1920 "Every possibility." runs into the art's empty left margin, above it */
+  .hero h1{white-space:nowrap}
+  .hero-art{width:46vw;max-width:none;justify-self:end;margin-right:calc(var(--hero-bleed) * -1)}
+  .hero-description,.hero-sub{max-width:500px}
+  .art-label-out{right:calc(var(--hero-bleed) * .35 + 3%)}
+}
 @media(max-width:1100px){.surfaces{grid-template-columns:1fr 1fr}.surface-card[data-rf-surface="deck"]{grid-column:1/-1}.surface-card[data-rf-surface="deck"] .sc-stage{height:290px}}
 @media(max-width:1050px){.hero{gap:0}.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.agent-panel{gap:32px;padding:36px}.start-layout{gap:36px}}
 @media(max-width:860px){
@@ -287,13 +348,29 @@
   .surface-card[data-rf-surface="deck"] .sc-stage{height:260px}
   .principles{gap:26px}
   .agent-panel{grid-template-columns:1fr;padding:30px}
-  .start-layout{grid-template-columns:1fr;gap:28px}
+  .start-layout{grid-template-columns:minmax(0,1fr);gap:28px}
   .section-foot{flex-direction:column;align-items:flex-start;gap:8px}
+  /* mono labels never drop below 10px on small screens */
+  .hero-new-tag,.art-label,.art-coordinate,.stat-label,.facet-coord,.sc-badge,.mini-bar,.principle-number,.step-status{font-size:10px}
 }
 @media(max-width:600px){
-  .hero h1{font-size:46px;letter-spacing:-.05em}
-  .hero-description{font-size:15px}
-  .art-label{font-size:7.5px}.art-coordinate{font-size:7.5px}
+  /* phone: say what Prism is, then show it — the prism and the live text effects sit above the
+     fold, ahead of the buttons (the copy column flattens so the art can slot in after the words) */
+  .hero{gap:0;padding-top:22px;padding-bottom:36px}
+  .hero-copy{display:contents}
+  .hero .eyebrow{order:1}
+  .hero h1{order:2;margin:14px 0 12px;font-size:42px;letter-spacing:-.05em}
+  .hero-description{order:3;font-size:15px}
+  .hero-sub{order:4;margin-top:8px;font-size:13px}
+  .hero-art{order:5;width:100%;max-width:310px;margin:8px auto 0}
+  .hero-fx{order:6;margin-top:4px;gap:8px;max-width:none}
+  .hero-actions{order:7;margin-top:18px}
+  .hero-note{order:8}
+  .hero-new{order:9;justify-self:start}
+  .fx-stage{height:58px}
+  .fx-neon{font-size:21px}.fx-glitch{font-size:19px}.fx-more b{font-size:20px}
+  .fx-cap{padding:6px 8px}
+  .art-label,.art-coordinate{font-size:10px;letter-spacing:.08em}
   .showcase{grid-template-columns:1fr}
   .gallery-grid{grid-template-columns:1fr}
   .principles{grid-template-columns:1fr;gap:22px;margin-top:64px}
@@ -304,7 +381,8 @@
   .closing p{font-size:19px;flex:1 0 70%}
   .stats strong{font-size:27px}
 }
-@media(max-width:400px){.hero-actions .button{flex:1 1 100%;justify-content:space-between}.hero-new{font-size:11px}.tab-list{gap:18px}}
+@media(max-width:480px){.hero .eyebrow .rf-sep,.hero .eyebrow .meta{display:none}}
+@media(max-width:400px){.hero-actions .button{flex:1 1 auto;justify-content:center}.hero-new{font-size:11px}.tab-list{gap:18px}}
 
 @media(prefers-reduced-motion:reduce){
   .hero-art *{animation:none!important}

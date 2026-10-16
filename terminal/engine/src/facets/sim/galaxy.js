@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A rotating barred-free spiral galaxy built on the density-wave trick: each
 // star orbits on an ellipse whose tilt grows with radius, and inner orbits run
 // faster (differential rotation). Where neighboring ellipses crowd together
 // two spiral arms emerge — and, unlike real winding, they never wrap up.
 // The glow is a pre-baked texture of that same star density plus a hot core,
 // sampled per pixel through the view transform; stars are added on top.
-import { mix, NONE } from '../../color.js';
+const { mix, NONE } = __bm(0);
 
 const EXT = 1.15; // texture half-extent in galaxy units
 

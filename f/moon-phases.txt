@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > GLOBES & PLANETS     467nm - 10 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > GLOBES & PLANETS     483nm - 10 / 19
 ------------------------------------------------------/\========================
 Moon Phases  moon-phases
 A cratered Moon cycling through its phases with earthshine on the dark side and
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   month=16              Seconds per lunar month  (4-60)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play moon-phases
 SNAPSHOT  prism-term snapshot moon-phases --size 48x22
 IN CODE

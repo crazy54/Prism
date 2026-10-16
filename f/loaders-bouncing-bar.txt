@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > BARS & PULSES      488nm - 35 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > BARS & PULSES      506nm - 35 / 64
 ------------------------------------------------------/\========================
 Bouncing Bar  loaders-bouncing-bar
 Three equals signs bouncing inside brackets -- the indeterminate bar of
@@ -17,7 +17,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-bouncing-bar
 SNAPSHOT  prism-term snapshot loaders-bouncing-bar --size 44x5
 IN CODE

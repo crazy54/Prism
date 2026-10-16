@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > LOG LINES      558nm - 16 / 18
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > LOG LINES      550nm - 16 / 18
 ------------------------------------------------------/\========================
 journalctl -f  status-log-syslog
 A journal follow in syslog format with journald priority colors -- red errors,
@@ -23,7 +23,7 @@ Oct 13 14:02:11 payments-01 cron[1962]: (root) CMD (/usr/local/bin/backup --inc.
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play status-log-syslog
 SNAPSHOT  prism-term snapshot status-log-syslog --size 80x14
 IN CODE

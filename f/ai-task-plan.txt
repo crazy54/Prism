@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > AI WORKING > AGENTS & PIPELINES         538nm - 13 / 18
+--/\=== PRISM TERMINAL > AI WORKING > AGENTS & PIPELINES         479nm - 13 / 18
 ------------------------------------------------------/\========================
 Task Plan  ai-task-plan
 An agent's plan as a live checklist: each task moves from pending to in progress
@@ -17,7 +17,7 @@ tags: plan, todo, checklist, agent, progress
   still at t=4.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ai-task-plan
 SNAPSHOT  prism-term snapshot ai-task-plan --size 60x8
 IN CODE

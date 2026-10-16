@@ -1,13 +1,14 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Progress bars — the shapes a bar can take, each driven by a seeded transfer
 // so fills move like real work (bursts, stalls, tail-off) and finish together
 // with their percentages.
 import { progressBar, meter } from '../../widgets/index.js';
-import { Canvas } from '../../canvas.js';
-import { mix, gradient, NONE } from '../../color.js';
-import { ATTR } from '../../buffer.js';
-import { truncate } from '../../width.js';
+const { Canvas } = __bm(9);
+const { mix, gradient, NONE } = __bm(0);
+const { ATTR } = __bm(6);
+const { truncate } = __bm(5);
 import { phase, transfer, glyphs, clamp01, clock } from './_sim.js';
-import { light, lift } from '../charts/_data.js';
+const { light, lift } = __bm(24);
 
 const C = 'Progress Bars';
 const EIGHTHS = ['', '▏', '▎', '▍', '▌', '▋', '▊', '▉', '█'];

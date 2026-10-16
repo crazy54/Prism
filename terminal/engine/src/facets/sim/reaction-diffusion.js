@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Gray-Scott reaction-diffusion: two chemicals, U fed in and V feeding on it
 // (U + 2V → 3V), diffusing at different rates. The feed and kill rates drift
 // slowly between the "mitosis", "coral" and "maze" regimes, so spots divide,
 // then grow into coral, then wind into labyrinths. V is shaded as a lit relief
 // so the patterns read like living tissue.
-import { NONE, mix } from '../../color.js';
+const { NONE, mix } = __bm(0);
 
 // [feed, kill] presets (Karl Sims' parameterisation: Du = 1, Dv = 0.5, dt = 1),
 // with diffusion scaled by DS so features stay a few cells wide at terminal size.

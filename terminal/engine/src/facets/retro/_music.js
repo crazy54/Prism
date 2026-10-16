@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A tiny deterministic chiptune for the music visualizers to dance to.
 // One 64-row pattern at 125 BPM / speed 6 (0.12 s a row, 7.68 s a loop):
 // drums, a square-wave bass, a pulse lead and hats over Am–F–C–G. Nothing is
 // synthesised to audio — the visualizers just read envelopes, frequencies,
 // band energies and a waveform, all pure functions of t.
-import { hash2 } from './_kit.js';
+const { hash2 } = __bm(29);
 
 export const BPM = 125;
 export const ROW = 60 / BPM / 4;

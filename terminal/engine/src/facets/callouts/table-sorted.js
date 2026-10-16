@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A sortable table: the sort column changes and rows glide to their new places.
-import { ATTR, glyphs, fit, phase, ease, mix } from './_kit.js';
+const { ATTR, glyphs, fit, phase, ease, mix } = __bm(22);
 
 const DATA = [
   { name: 'pg-orders-primary-01', cpu: 18, mem: 61, conns: 136, up: 41 },

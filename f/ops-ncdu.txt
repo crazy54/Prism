@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > DISK & STORAGE             568nm - 9 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > DISK & STORAGE             578nm - 9 / 39
 ------------------------------------------------------/\========================
 ncdu  ops-ncdu
 ncdu browsing /var: sizes and [##########] bars sorted largest first, a
@@ -25,7 +25,7 @@ tags: ncdu, du, disk usage, storage, cleanup
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-ncdu
 SNAPSHOT  prism-term snapshot ops-ncdu --size 72x16
 IN CODE

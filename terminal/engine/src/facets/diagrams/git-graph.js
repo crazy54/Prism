@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // `git log --graph --oneline --decorate`, live: a feature branch forks,
 // main moves on, then the pull request merges. Unicode gets tig-style lanes,
 // ASCII gets git's own * | / \ graph.
-import { ATTR, uni, phase, tint, fit, stringWidth } from '../callouts/_kit.js';
+const { ATTR, uni, phase, tint, fit, stringWidth } = __bm(22);
 
 // Rows: [unicode graph, ascii graph, hash, refs, message]
 const OLD = [

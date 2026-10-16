@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Markdown rendered as it streams: headings, bold, inline code, bullets and
 // a fenced code block that is syntax-colored line by line as it arrives.
-import { ATTR, glyphs, uni, phase, tint, fit, clip, codeLine, reveal, stringWidth } from './_ai.js';
+const { ATTR, glyphs, uni, phase, tint, fit, clip, codeLine, reveal, stringWidth } = __bm(23);
 
 const MD = [
   '## Root cause',
@@ -49,6 +50,7 @@ export default {
   order: 20,
   setup(ctx) {
     const th = ctx.theme;
+    const low = ctx.caps.depth === '16' || ctx.caps.depth === 'mono';
     return (t) => {
       const b = ctx.buffer, W = ctx.width, H = ctx.height, g = glyphs(ctx), u = uni(ctx);
       const p = phase(t, 10);
@@ -92,7 +94,7 @@ export default {
           const room = Math.max(0, W - x);
           const s = u ? text.replace(/->/g, '→') : text;
           const shown = stringWidth(s) <= room ? s : clip(ctx, s, room);
-          if (kind === 'code') x = b.text(x, y, shown, th.warn, tint(ctx, th.warn, 0.15));
+          if (kind === 'code') x = b.text(x, y, shown, th.warn, low ? undefined : tint(ctx, th.warn, 0.15)); // 16 colors: a wash would be a solid block (black on Night), so code keeps the default bg
           else x = b.text(x, y, shown, th.ink, undefined, kind === 'bold' ? ATTR.BOLD : 0);
         }
       });

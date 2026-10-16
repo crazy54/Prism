@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Wipes, four ways, between a daybreak and a night skyline: a soft-edged
 // linear wipe, a diagonal, a clock (radial sweep) and barn doors. Each runs
 // day → night and back on an eased hold-move-hold beat.
-import { transitionSetup } from './_lab.js';
+const { transitionSetup } = __bm(26);
 
 const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
 const VARIANTS = [

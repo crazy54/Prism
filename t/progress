@@ -1,5 +1,5 @@
-[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;30;49mPROGRESS & COUNTERS[0;39;49m                     [38;5;30mλ 494 · 07 / 17[0m
-[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;29;49m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;30m━[38;5;29m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[0m
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;64;49mPROGRESS & COUNTERS[0;39;49m                     [38;5;64mλ 558 · 07 / 17[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;64;49m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[0m
 Progress bars, multi-step pipelines, counters, timers and transfer meters.
 
 [48;5;232m [38;5;147;48;5;147m                            [48;5;234m▊[38;5;245m   [39;48;5;232m [38;5;255m 89%[39m [49m  [48;5;232m [38;5;255mbase-image…[39m [38;5;147m━━━━━━━━━━━━━[38;5;235m━━━━━━[39m [38;5;248m 69%[39m  [0m
@@ -12,7 +12,7 @@ Progress bars, multi-step pipelines, counters, timers and transfer meters.
                                          [48;5;232m [0;1;38;5;255;48;5;232mtotal [0;38;5;255;48;5;232m83.7/102.2 MiB[38;5;147m 81%[38;5;248m eta 00:01[39m    [0m
 [0;2;39;49mprogress-smooth                          progress-multi-bar[0m
 
-[0;1;38;5;30;49m01 / PROGRESS BARS · 9[0;39;49m [38;5;243m──────────────────────────[0m
+[0;1;38;5;64;49m01 / PROGRESS BARS · 9[0;39;49m [38;5;243m──────────────────────────[0m
   [38;5;31mprogress-smooth           [39mEighth-block bars that move in 1/8-cell steps, so e…[0m
   [38;5;31mprogress-braille          [39mHairline progress drawn in braille dots at twice th…[0m
   [38;5;31mprogress-gradient         [39mSolid gradient fills — prism, aurora, fire and ocea…[0m
@@ -23,7 +23,7 @@ Progress bars, multi-step pipelines, counters, timers and transfer meters.
   [38;5;31mprogress-vertical         [39mOne column per worker filling bottom-up in eighth b…[0m
   [38;5;31mprogress-shaded           [39mFull blocks with a ▓▒░ shaded leading edge over a l…[0m
 
-[0;1;38;5;30;49m02 / STEPS & PIPELINES · 10[0;39;49m [38;5;243m─────────────────────[0m
+[0;1;38;5;64;49m02 / STEPS & PIPELINES · 10[0;39;49m [38;5;243m─────────────────────[0m
   [38;5;31mprogress-multi-bar        [39mSix downloads sharing one link, each with its own b…[0m
   [38;5;31mprogress-docker-pull      [39mLayers going Waiting → Downloading → Extracting → P…[0m
   [38;5;31mprogress-cargo-build      [39mGreen "Compiling" lines scrolling above cargo's pin…[0m
@@ -35,7 +35,7 @@ Progress bars, multi-step pipelines, counters, timers and transfer meters.
   [38;5;31mprogress-git-clone        [39mgit's counters in order — enumerating, counting, co…[0m
   [38;5;31mprogress-npm-install      [39mnpm's gauge — a bracketed fill, a spinner and the c…[0m
 
-[0;1;38;5;30;49m03 / COUNTERS & ODOMETERS · 6[0;39;49m [38;5;243m───────────────────[0m
+[0;1;38;5;64;49m03 / COUNTERS & ODOMETERS · 6[0;39;49m [38;5;243m───────────────────[0m
   [38;5;31mprogress-odometer         [39mA mechanical counter: each drum rolls to its next d…[0m
   [38;5;31mprogress-seven-segment    [39mA big LED counter with unlit ghost segments, tickin…[0m
   [38;5;31mprogress-big-percent      [39mA banner-sized percentage with an extruded shadow o…[0m
@@ -43,7 +43,7 @@ Progress bars, multi-step pipelines, counters, timers and transfer meters.
   [38;5;31mprogress-ring             [39mBraille rings filling clockwise around a centered p…[0m
   [38;5;31mprogress-concentric-rings [39mThree nested rings for the three phases of a rollin…[0m
 
-[0;1;38;5;30;49m04 / TIMERS & COUNTDOWNS · 6[0;39;49m [38;5;243m────────────────────[0m
+[0;1;38;5;64;49m04 / TIMERS & COUNTDOWNS · 6[0;39;49m [38;5;243m────────────────────[0m
   [38;5;31mprogress-countdown        [39mBig T-minus digits to a maintenance window, going a…[0m
   [38;5;31mprogress-stopwatch        [39mA centisecond stopwatch timing benchmark runs; each…[0m
   [38;5;31mprogress-health-wait      [39mWaiting for a service to report healthy within a 12…[0m
@@ -51,7 +51,7 @@ Progress bars, multi-step pipelines, counters, timers and transfer meters.
   [38;5;31mprogress-sand-timer       [39mnetplan try's revert countdown beside a braille hou…[0m
   [38;5;31mprogress-systemd-timers   [39msystemctl list-timers with LEFT counting down live;…[0m
 
-[0;1;38;5;30;49m05 / TRANSFERS & ETA · 10[0;39;49m [38;5;243m───────────────────────[0m
+[0;1;38;5;64;49m05 / TRANSFERS & ETA · 10[0;39;49m [38;5;243m───────────────────────[0m
   [38;5;31mprogress-tqdm             [39mNested tqdm bars from a training run: epochs outsid…[0m
   [38;5;31mprogress-wget             [39mwget with its scrolling filename, =====> bar, size,…[0m
   [38;5;31mprogress-curl-hash        [39mcurl's hash-bar mode across the full width with a r…[0m

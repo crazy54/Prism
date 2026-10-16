@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A voice-assistant style status orb on a hi-res canvas: it breathes when
 // idle, ripples while listening, swirls while thinking, rings while speaking.
-import { ATTR, glyphs, phase, mix, span } from './_ai.js';
+const { ATTR, glyphs, phase, mix, span } = __bm(23);
 
 // [start, state, tone, caption]
 const STATES = [

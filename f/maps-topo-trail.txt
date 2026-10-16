@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > MAPS & GEO > ROUTES & ARCS               592nm - 9 / 11
+--/\=== PRISM TERMINAL > MAPS & GEO > ROUTES & ARCS               519nm - 9 / 11
 ------------------------------------------------------/\========================
 Topo Trail  maps-topo-trail
 A GPS track climbing a contoured mountain: index contours, a hiker drawing the
@@ -29,7 +29,7 @@ Ridge Loop :::    :  == :: :: ::: =: : : : ===:::::::::::::::==:::::::::: =::
   still at 80x20 - t=6s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play maps-topo-trail
 SNAPSHOT  prism-term snapshot maps-topo-trail --size 80x22
 IN CODE

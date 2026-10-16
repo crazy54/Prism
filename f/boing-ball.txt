@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > INTROS & SCROLLERS   480nm - 5 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > INTROS & SCROLLERS   485nm - 5 / 24
 ------------------------------------------------------/\========================
 Boing Ball  boing-ball
 The 1984 Amiga Boing Ball: a spinning checkered sphere bouncing across a grid
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play boing-ball
 SNAPSHOT  prism-term snapshot boing-ball --size 64x24
 IN CODE

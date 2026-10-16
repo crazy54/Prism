@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Glitch & Distort — pixel-level abuse of big type: tearing RGB splits, a
 // worn VHS tape with tracking noise, and letters that melt and drip.
-import { NONE, mix, mixOklab } from '../../color.js';
+const { NONE, mix, mixOklab } = __bm(0);
 import { bannerCanvas } from '../../text/banner.js';
 import { glitch as glitchSmall } from '../../text/effects.js';
 import { bannerMode, fitScale, fitType, hash, canvasLike } from './_text.js';

@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // An agent's task plan as a live checklist: items move from pending to
 // in progress (spinner, bold) to done (ticked, dimmed), with timings.
-import { ATTR, glyphs, uni, phase, fit, spin } from './_ai.js';
+const { ATTR, glyphs, uni, phase, fit, spin } = __bm(23);
 
 // [task, start, end] in seconds; the approval step waits on a human.
 const TASKS = [

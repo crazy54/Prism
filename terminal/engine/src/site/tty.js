@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../web.bundle.js';
 // The curl-able terminal site — static pages you read with `curl -sL`.
 //
 // Every page is composed as an 80-column CellBuffer, then serialized three ways:
@@ -16,12 +17,13 @@
 // chrome uses mid-tones (TOKENS.site, the spectrum's `site` tier) that read on
 // dark and light terminals; text that matters is the terminal's own foreground.
 
-import { CellBuffer, ATTR } from '../buffer.js';
-import { NONE, mix } from '../color.js';
+const { CellBuffer, ATTR } = __bm(6);
+const { NONE, mix } = __bm(0);
 import { renderScene } from '../render.js';
-import { stringWidth, truncate, wrap } from '../width.js';
-import { getTheme } from '../palettes.js';
+const { stringWidth, truncate, wrap } = __bm(5);
+const { getTheme } = __bm(3);
 import { TOKENS, spectral, siteTone, galleryHue, lambdaLabel, rampHue } from '../refraction.js';
+import { FORMATS, themeFileName } from '../theme-export.js';
 
 export const WIDTH = 80;
 const SNAP_MAX_H = 20;
@@ -253,13 +255,18 @@ function header(p, crumbs, right = '', { hue } = {}) {
   return p;
 }
 
-/** The npx live-player command: one line when it fits 80 columns, else split with a shell continuation. */
-function npxLines(p, site, args = '', indent = 2) {
+/**
+ * The npx live-player command, pinned to this release's tarball (prism-term-<version>.tgz,
+ * checked by /dl/SHA256SUMS): one line when it fits 80 columns, else split with a shell
+ * continuation. The home page keeps the shorter latest-release alias, /dl/prism-term.tgz.
+ */
+function npxLines(p, site, args = '', indent = 2, version = '') {
   const pad = ' '.repeat(indent);
   const run = `prism-term${args ? ' ' + args : ''}`;
-  const one = `${pad}npx -y --package=${site}/dl/prism-term.tgz ${run}`;
+  const tgz = `${site}/dl/prism-term${version ? `-${version}` : ''}.tgz`;
+  const one = `${pad}npx -y --package=${tgz} ${run}`;
   if (stringWidth(one) <= WIDTH) return p.line({ text: one, fg: C.cmd });
-  p.line({ text: `${pad}npx -y --package=${site}/dl/prism-term.tgz \\`, fg: C.cmd });
+  p.line({ text: `${pad}npx -y --package=${tgz} \\`, fg: C.cmd });
   p.line({ text: `${pad}  ${run}`, fg: C.cmd });
   return p;
 }
@@ -343,6 +350,7 @@ function helpPage(ctx, plain) {
     [`curl -sL ${h}/t/<gallery>`, 'one gallery, by category'],
     [`curl -sL ${h}/f/<facet>`, 'one facet: still and commands'],
     [`curl -sL ${h}/t/all`, 'every facet on one line each'],
+    [`curl -sL ${h}/t/themes`, 'color schemes for your terminal'],
     [`curl -sL ${h}/t/help`, 'this page'],
   ];
   const cw = Math.max(...rows.map((r) => r[0].length)) + 2;
@@ -358,7 +366,7 @@ function helpPage(ctx, plain) {
   p.line({ text: '  ' }, dim('in \\ with the next line (drop the \\) before you run it.'));
   sect('The live player');
   p.para('The live player renders facets in real time and detects your terminal (truecolor, 256, 16, mono; braille and block glyphs, or plain ASCII; Prism Night or Prism Day for dark and light backgrounds). It needs Node 18+ and no network after the download.');
-  npxLines(p, site, '', 2);
+  npxLines(p, site, '', 2, version);
   p.line(dim('  …then add a command:'));
   const cli = [
     ['(none)', 'browse the catalog: arrows move, / searches, Enter plays'],
@@ -371,7 +379,12 @@ function helpPage(ctx, plain) {
   p.line(dim('  Day or Night: --day, --night, or PRISM_TERM_THEME=day|night; --no-intro skips'));
   p.line(dim('  the opening beam, and NO_COLOR / PRISM_REDUCED_MOTION=1 are honored.'));
   p.line(dim('  Prefer a permanent install? Run this once, then just type prism-term:'));
-  p.line({ text: '  ' }, cmd(`npm i -g ${site}/dl/prism-term.tgz`));
+  p.line({ text: '  ' }, cmd(`npm i -g ${site}/dl/prism-term-${version}.tgz`));
+  p.line(dim('  /dl/prism-term.tgz is an alias for the newest release. To pin one and verify'));
+  p.line(dim('  it, download it and check it against SHA256SUMS first:'));
+  p.line({ text: '  ' }, cmd(`curl -sLO ${site}/dl/prism-term-${version}.tgz`));
+  p.line({ text: '  ' }, cmd(`curl -sL ${h}/dl/SHA256SUMS | sha256sum -c --ignore-missing`));
+  p.line({ text: '  ' }, cmd(`npx -y --package=./prism-term-${version}.tgz prism-term`));
   sect('Galleries');
   const ids = galleries.map((g) => g.id);
   for (let i = 0; i < ids.length; i += 6) {
@@ -385,6 +398,36 @@ function helpPage(ctx, plain) {
     ['home', `curl -sL ${h}/tty`],
     ['catalog', `${site}/terminal/`],
     ['source', 'https://github.com/crazy54/Prism (prism-term/, MIT)'],
+  ]);
+  return p;
+}
+
+/** Color schemes: the OSC one-liner, then every format's Night / Day file URL. */
+function themesPage(ctx, plain) {
+  const { site } = ctx;
+  const h = host(site);
+  const p = header(new Page(plain), ['themes'], `${Object.keys(FORMATS).length} FORMATS`);
+  beamRule(p);
+  p.blank();
+  p.para('Prism Night and Prism Day as color schemes for your terminal. Each file is plain text with its install notes at the top: read it, then install it yourself. Nothing here changes your settings.');
+  p.blank();
+  section(p, 'Any terminal, this session · also over SSH');
+  p.line({ text: '  ' }, cmd(`curl -sL ${h}/themes/osc/prism-night.sh | sh`));
+  p.line({ text: '  ' }, cmd(`curl -sL ${h}/themes/osc/prism-day.sh | sh`));
+  p.para('One printf of OSC 4 / 10 / 11 codes: on a remote host the codes travel back to your own terminal. It lasts until the terminal closes.', { attr: ATTR.DIM });
+  p.blank();
+  section(p, 'Files');
+  for (const [id, f] of Object.entries(FORMATS)) {
+    if (id === 'osc') continue;
+    p.line({ text: '▌', fg: C.accent }, { text: ` ${f.name}`, attr: ATTR.BOLD });
+    for (const t of ['prism-dark', 'prism-light']) p.line({ text: '   ' }, cmd(`curl -sLO ${h}/themes/${f.dir}/${themeFileName(id, t)}`));
+    p.para(f.install, { indent: 3, attr: ATTR.DIM });
+  }
+  p.blank();
+  p.para('With the live player installed the same files come from prism-term theme <format> [--day] [-o file]; any other Prism theme works too (--theme primer).', { attr: ATTR.DIM });
+  footer(p, site, [
+    ['home', `curl -sL ${h}/tty`],
+    ['help', `curl -sL ${h}/t/help`],
   ]);
   return p;
 }
@@ -491,7 +534,7 @@ function facetPage(ctx, f, plain) {
   }
   p.blank();
   section(p, 'Run it live', hue, 'Node 18+, no install');
-  npxLines(p, site, `play ${f.id}`, 2);
+  npxLines(p, site, `play ${f.id}`, 2, ctx.version);
   p.line(label('Snapshot', hue), dim('  '), cmd(`prism-term snapshot ${f.id} --size ${f.size.w}x${f.size.h}`));
   p.line(label('In code', hue));
   p.line({ text: '  ' }, cmd("import { play, findFacet } from 'prism-term';"));
@@ -523,6 +566,7 @@ export function buildTtyPages(ctx) {
   add('tty', (plain) => homePage(ctx, plain));
   add('t/help', (plain) => helpPage(ctx, plain));
   add('t/all', (plain) => allPage(ctx, plain));
+  add('t/themes', (plain) => themesPage(ctx, plain));
   for (const g of ctx.galleries) add(`t/${g.id}`, (plain) => galleryPage(ctx, g, plain));
   for (const f of ctx.facets) add(`f/${f.id}`, (plain) => facetPage(ctx, f, plain));
   return pages;

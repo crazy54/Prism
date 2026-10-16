@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > BOXES & FLOWS    574nm - 3 / 16
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > BOXES & FLOWS    563nm - 3 / 16
 ------------------------------------------------------/\========================
 CI/CD Pipeline  diagrams-pipeline
 A pipeline graph: build fans out to parallel test jobs with spinners and
@@ -23,7 +23,7 @@ tags: pipeline, ci, cd, dag, approval
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play diagrams-pipeline
 SNAPSHOT  prism-term snapshot diagrams-pipeline --size 76x13
 IN CODE

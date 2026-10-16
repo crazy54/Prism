@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A ctrl+shift+p style command palette over the app: the query filters
 // commands live, the cursor moves, Enter runs one and a status line reports it.
-import { ATTR, glyphs, uni, phase, typed, blink, tint, mix, fit, spin, stringWidth, backdrop, panel, fuzzyMatch } from './_input.js';
+const { ATTR, glyphs, uni, phase, typed, blink, tint, mix, fit, spin, stringWidth, backdrop, panel, fuzzyMatch } = __bm(25);
 
 const COMMANDS = [
   ['Service', 'Restart checkout-api', 'ctrl+r'],

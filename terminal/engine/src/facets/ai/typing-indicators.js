@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A sampler of "the model is working" indicators, each labeled:
 // bouncing dots, a braille wave, a pulse, an orbit, a scanner and a meter.
-import { ATTR, uni, phase, mix, fit } from './_ai.js';
+const { ATTR, uni, phase, mix, fit } = __bm(23);
 
 const BRAILLE_LV = ['⡀', '⡄', '⡆', '⡇', '⡏', '⡟', '⡿', '⣿'];
 

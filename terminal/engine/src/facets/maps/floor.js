@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Grids & Floorplans: a data-hall rack floorplan with inlet temperatures and
 // airflow, and a warehouse floor of robots shuttling shelf pods.
-import { mix, gradient } from '../../color.js';
-import { glyphs, put, putR, safe, clamp, smooth, ATTR } from '../charts/_data.js';
+const { mix, gradient } = __bm(0);
+const { glyphs, put, putR, safe, clamp, smooth, ATTR } = __bm(24);
 
 const ROWS = ['A', 'B', 'C', 'D', 'E', 'F'];
 

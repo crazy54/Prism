@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A nano-style editor: the two-row shortcut bar flashes as keys are pressed,
 // switches to prompt-specific keys during Where Is / Write Out, and the
 // status line reports each action.
-import { ATTR, glyphs, phase, typed, fit, stringWidth } from './_input.js';
+const { ATTR, glyphs, phase, typed, fit, stringWidth } = __bm(25);
 
 const FILE = [
   'apiVersion: apps/v1', 'kind: Deployment', 'metadata:', '  name: checkout-api', '  namespace: checkout',

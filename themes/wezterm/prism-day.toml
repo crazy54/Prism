@@ -1,0 +1,22 @@
+# Prism Day — Prism's Day terminal colors (Refraction).
+# WezTerm: save in ~/.config/wezterm/colors/ and set  config.color_scheme = 'Prism Day'
+
+[colors]
+foreground = "#23222f"
+background = "#f8f7fb"
+cursor_bg = "#7353bb"
+cursor_fg = "#ffffff"
+cursor_border = "#7353bb"
+selection_bg = "#ddd5f3"
+selection_fg = "#20202e"
+split = "#dedce9"
+scrollbar_thumb = "#dedce9"
+compose_cursor = "#835c00"
+ansi = ["#23222f", "#b73232", "#007240", "#835c00", "#2a5ec5", "#7353bb", "#006d7d", "#e6e5ee"]
+brights = ["#55546a", "#cf354b", "#00823a", "#8d6c00", "#006fd8", "#a04ac2", "#007c87", "#ffffff"]
+
+[metadata]
+name = "Prism Day"
+author = "Prism"
+origin_url = "https://prism.jeremyfhall.com/terminal/"
+aliases = ["prism-day"]

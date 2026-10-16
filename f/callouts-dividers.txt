@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > DIVIDERS & HEADERS  580nm - 12 / 15
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > DIVIDERS & HEADERS  570nm - 12 / 15
 ------------------------------------------------------/\========================
 Dividers & Rules  callouts-dividers
 Horizontal rules in light, heavy, double, dotted, dashed and dotted-bullet
@@ -24,7 +24,7 @@ tags: divider, rule, separator, hr, section
   still at t=2s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play callouts-dividers
 SNAPSHOT  prism-term snapshot callouts-dividers --size 64x15
 IN CODE

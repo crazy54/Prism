@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > CONTAINERS & CLUSTERS     568nm - 25 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > CONTAINERS & CLUSTERS     578nm - 25 / 39
 ------------------------------------------------------/\========================
 k9s-style Pod Console  ops-k9s
 A k9s-style cluster console: context/cluster header with CPU/MEM, key hints, a
@@ -29,7 +29,7 @@ tags: k9s, kubernetes, pods, console, tui, k8s
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-k9s
 SNAPSHOT  prism-term snapshot ops-k9s --size 80x20
 IN CODE

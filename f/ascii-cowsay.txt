@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PURE ASCII > CLASSICS                    494c - 21 / 29
+--/\=== PRISM TERMINAL > PURE ASCII > CLASSICS                   597nm - 21 / 29
 ------------------------------------------------------/\========================
 Cow Says  ascii-cowsay
 A cowsay-style speech bubble over an original ASCII cow that blinks -- cycling
@@ -25,7 +25,7 @@ tags: cowsay, fortune, speech bubble, cow, classic
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ascii-cowsay
 SNAPSHOT  prism-term snapshot ascii-cowsay --size 60x16
 IN CODE

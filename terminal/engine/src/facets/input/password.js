@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A masked password field with a strength meter and a reveal toggle.
-import { ATTR, glyphs, uni, phase, typed, blink, tint, hbar } from './_input.js';
+const { ATTR, glyphs, uni, phase, typed, blink, tint, hbar } = __bm(25);
 
 const PW = 'c0rrect-h0rse-battery!';
 const RULES = [

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > TEXT FIELDS             585nm - 11 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > TEXT FIELDS             487nm - 11 / 23
 ------------------------------------------------------/\========================
 Commit Message Editor  input-textarea
 A multi-line textarea where a commit message is typed: line numbers, a 50/72
@@ -21,7 +21,7 @@ tags: textarea, editor, multiline, commit, git
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-textarea
 SNAPSHOT  prism-term snapshot input-textarea --size 64x12
 IN CODE

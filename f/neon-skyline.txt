@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > OUTRUN              480nm - 23 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > OUTRUN              485nm - 23 / 24
 ------------------------------------------------------/\========================
 Neon Skyline  neon-skyline
 A neon city drifting past in parallax: lit windows, neon trim, searchlights,
@@ -29,7 +29,7 @@ tags: city, skyline, neon, night, parallax, reflection, synthwave, cyberpunk
   still at 80x20 - t=6s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play neon-skyline
 SNAPSHOT  prism-term snapshot neon-skyline --size 80x22
 IN CODE

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PURE ASCII > ASCII ART                   494c - 16 / 29
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ART                  597nm - 16 / 29
 ------------------------------------------------------/\========================
 Fresh Coffee  ascii-coffee
 A cup on its saucer with three wisps of steam curling up and drifting -- the
@@ -29,7 +29,7 @@ tags: coffee, steam, cup, cozy, break
   still at 80x20 - t=4s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ascii-coffee
 SNAPSHOT  prism-term snapshot ascii-coffee --size 80x24
 IN CODE

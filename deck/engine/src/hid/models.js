@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../core.bundle.js';
 // HID model table — USB vendor/product id → wire protocol for every deck Prism
 // Deck can drive directly over Linux hidraw.
 //
@@ -14,7 +15,7 @@
 // lcd     the non-key display: strip (+, + XL), infobar (Neo), screen (Galleon)
 // feature feature-report flavour + byte lengths to try (ioctl via linux/prism-deck-hidfeature.py)
 
-import { getDevice } from '../devices.js';
+const { getDevice } = __bm(0);
 
 export const VENDOR = Object.freeze({ ELGATO: 0x0fd9, CORSAIR: 0x1b1c });
 

@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A gold coin spinning on its edge, ray-cast per pixel with 2×2 supersampling:
 // an exact cylinder (two faces and a reeded rim), embossed relief on both faces
 // (a prism mark on heads, a star on tails) bump-mapped from a height field, and
 // metal shading from a studio environment — so the faces flash as they sweep
 // past the softbox. A soft shadow below breathes with the coin's silhouette.
-import { NONE } from '../../color.js';
-import { blend, rotX, rotY, mul } from './_raster.js';
+const { NONE } = __bm(0);
+const { blend, rotX, rotY, mul } = __bm(18);
 
 const LOOP = 6;
 const THICK = 0.085;

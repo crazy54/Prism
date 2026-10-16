@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Full-width alert banners that slide in, stack, and get dismissed.
-import { glyphs, uni, ATTR, fit, tint, ease, phase } from './_kit.js';
+const { glyphs, uni, ATTR, fit, tint, ease, phase } = __bm(22);
 
 const BANNERS = [
   { tone: 'info', icon: ['ℹ', 'i'], title: 'Maintenance', text: 'pg-orders-replica-01 patch window starts at 02:00 UTC' },

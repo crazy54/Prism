@@ -146,8 +146,10 @@ export function validateSvg(svg, { w, h, maxBytes = 16384, idPrefix, profile = '
   const s = top[0];
   if (root.text.trim()) out.push('text outside <svg>');
   if (s.attrs.xmlns !== 'http://www.w3.org/2000/svg') out.push('root <svg> needs xmlns="http://www.w3.org/2000/svg"');
-  if (w !== undefined && +s.attrs.width !== w) out.push(`width ${s.attrs.width} ≠ ${w}`);
-  if (h !== undefined && +s.attrs.height !== h) out.push(`height ${s.attrs.height} ≠ ${h}`);
+  // sizes compare at the writer's precision (2 decimals: scene/svg.js n(), devices.js r2()), never on float noise
+  const same = (a, b) => Math.round(+a * 100) === Math.round(b * 100);
+  if (w !== undefined && !same(s.attrs.width, w)) out.push(`width ${s.attrs.width} ≠ ${w}`);
+  if (h !== undefined && !same(s.attrs.height, h)) out.push(`height ${s.attrs.height} ≠ ${h}`);
   if (!s.attrs.viewBox) out.push('root <svg> needs a viewBox');
   const ids = new Set();
   walk(s, (el) => {

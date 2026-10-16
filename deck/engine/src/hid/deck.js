@@ -35,6 +35,8 @@ export class HidDeck extends EventEmitter {
    */
   static async open(info, opts = {}) {
     const m = info.model;
+    // Composite devices: never open anything but the deck interface (the Galleon's other hidraw nodes are its keyboard).
+    if (m.iface !== undefined && !opts.transport && info.iface !== m.iface) throw new HidError('EINVAL', `${info.path} is USB interface ${info.iface ?? '?'} of the ${m.name}, not its deck interface ${m.iface}; refusing to open it`);
     let lock = null, transport = null, helper = null, deck = null;
     try {
       if (opts.claim !== false) lock = claimDeck(info, { force: opts.force, proc: opts.proc, fs: opts.claimFs, lockDir: opts.lockDir, isAlive: opts.isAlive });

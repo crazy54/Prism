@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Structured output streaming: JSON arrives token by token, pretty-printed
 // with syntax color, while a schema checklist ticks off completed fields.
-import { ATTR, glyphs, uni, phase, fit, reveal, stringWidth } from './_ai.js';
+const { ATTR, glyphs, uni, phase, fit, reveal, stringWidth } = __bm(23);
 
 const OBJ = {
   incident: 'INC-3127', severity: 'sev2', service: 'checkout-api', cause: 'db pool starvation', confidence: 0.87,

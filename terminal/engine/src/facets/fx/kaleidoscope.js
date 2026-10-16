@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A kaleidoscope: a slowly flowing field of interleaved waves and noise, folded
 // through mirrored wedges around the center and turning — the classic tube,
 // with a soft vignette like the eyepiece.
-import { lerpc } from '../retro/_kit.js';
+const { lerpc } = __bm(29);
 
 export default {
   title: 'Kaleidoscope',

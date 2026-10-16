@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > DISK & STORAGE             568nm - 8 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > DISK & STORAGE             578nm - 8 / 39
 ------------------------------------------------------/\========================
 iostat -dx  ops-iostat
 iostat -dx 2 refreshing: avg-cpu, then per-device reads/writes, throughput,
@@ -22,7 +22,7 @@ dm-1       150.68  268.28   9643.48   8316.77    0.47    0.88   0.55  16.54
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-iostat
 SNAPSHOT  prism-term snapshot ops-iostat --size 80x13
 IN CODE

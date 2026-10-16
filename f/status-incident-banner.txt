@@ -14,7 +14,7 @@ tags: incident, sev1, outage, banner, on-call
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play status-incident-banner
 SNAPSHOT  prism-term snapshot status-incident-banner --size 72x5
 IN CODE

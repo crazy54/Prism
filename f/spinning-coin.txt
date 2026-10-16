@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > ICONS & LOGOS        467nm - 18 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > ICONS & LOGOS        483nm - 19 / 19
 ------------------------------------------------------/\========================
 Spinning Coin  spinning-coin
 A ray-cast gold coin spinning on edge: embossed faces, a reeded rim, studio
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Spin speed  (0.2-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play spinning-coin
 SNAPSHOT  prism-term snapshot spinning-coin --size 40x20
 IN CODE

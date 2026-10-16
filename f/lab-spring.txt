@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATION LAB > SPRINGS & PHYSICS        604nm - 7 / 17
+--/\=== PRISM TERMINAL > ANIMATION LAB > SPRINGS & PHYSICS        474nm - 7 / 17
 ------------------------------------------------------/\========================
 Spring & Damper  lab-spring
 Four springs differing only in damping ratio chase a stepping target, each
@@ -30,7 +30,7 @@ tags: spring, damping, damping ratio, critical damping, overshoot,
   still at t=2.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play lab-spring
 SNAPSHOT  prism-term snapshot lab-spring --size 72x20
 IN CODE

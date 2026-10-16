@@ -27,7 +27,7 @@ tags: network, topology, discovery, subnet, passive
   still at t=4.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play diagrams-network-topology
 SNAPSHOT  prism-term snapshot diagrams-network-topology --size 76x18
 IN CODE

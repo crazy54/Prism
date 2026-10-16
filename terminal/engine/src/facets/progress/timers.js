@@ -1,14 +1,15 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Timers & countdowns — time that runs out, runs up, or flips over.
 //
 // Clocks here are internally consistent: "now" plus "time left" always equals
 // the target, laps sum to the elapsed time, and nothing reads the real clock —
 // every instant is derived from t so frames are reproducible.
-import { ATTR } from '../../buffer.js';
-import { Canvas } from '../../canvas.js';
-import { mix } from '../../color.js';
-import { truncate, stringWidth } from '../../width.js';
+const { ATTR } = __bm(6);
+const { Canvas } = __bm(9);
+const { mix } = __bm(0);
+const { truncate, stringWidth } = __bm(5);
 import { phase, glyphs, clamp01, commas } from './_sim.js';
-import { lift } from '../charts/_data.js';
+const { lift } = __bm(24);
 import { FONT47, FONT35, layout } from './_fonts.js';
 import { segs } from './_log.js';
 

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > NETWORK                   568nm - 13 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > NETWORK                   578nm - 13 / 39
 ------------------------------------------------------/\========================
 ping  ops-ping
 ping streaming replies (with the odd late or lost packet), a latency sparkline
@@ -23,7 +23,7 @@ tags: ping, icmp, latency, rtt, network, sparkline
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-ping
 SNAPSHOT  prism-term snapshot ops-ping --size 78x14
 IN CODE

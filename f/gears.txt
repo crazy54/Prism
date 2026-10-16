@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > MECHANICAL           467nm - 12 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > MECHANICAL           483nm - 12 / 19
 ------------------------------------------------------/\========================
 Gear Train  gears
 Three spur gears (16, 10 and 8 teeth) meshing at true ratios, anti-aliased, with
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.1-5)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play gears
 SNAPSHOT  prism-term snapshot gears --size 64x22
 IN CODE

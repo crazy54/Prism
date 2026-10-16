@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > AI WORKING > THINKING STATES             538nm - 4 / 18
+--/\=== PRISM TERMINAL > AI WORKING > THINKING STATES             479nm - 4 / 18
 ------------------------------------------------------/\========================
 Status Orb  ai-status-orb
 An assistant status orb on a hi-res canvas that breathes when idle, ripples
@@ -23,7 +23,7 @@ tags: orb, voice, status, assistant, canvas
   still at t=4.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ai-status-orb
 SNAPSHOT  prism-term snapshot ai-status-orb --size 36x14
 IN CODE

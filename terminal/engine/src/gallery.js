@@ -1,3 +1,4 @@
+import { __m as __bm } from '../web.bundle.js';
 // Gallery — the interactive catalog browser (`prism-term` with no arguments).
 //
 //    ──◢◣━━━ Prism  434 FACETS · 17 GALLERIES · TRUECOLOR        kind: all · Prism Night · auto
@@ -23,14 +24,14 @@
 // / search · g gallery picker · f kind filter · t theme · d Day/Night · m mode · ? help · q quit.
 
 import { Screen } from './screen.js';
-import { createContext } from './context.js';
+const { createContext } = __bm(13);
 import { createPlayer, resolveCaps, stageRect, growFor, cropMarks, facetPlace, asciify, holdTitle, dayNight } from './player.js';
-import { THEME_IDS, getTheme } from './palettes.js';
-import { MODE_NAMES } from './canvas.js';
-import { ATTR } from './buffer.js';
-import { mix } from './color.js';
-import { truncate, wrap, stringWidth } from './width.js';
-import { GALLERIES } from './facets/galleries.js';
+const { THEME_IDS, getTheme } = __bm(3);
+const { MODE_NAMES } = __bm(9);
+const { ATTR } = __bm(6);
+const { mix } = __bm(0);
+const { truncate, wrap, stringWidth } = __bm(5);
+const { GALLERIES } = __bm(17);
 import { KINDS } from './facets/schema.js';
 import { chrome, glyphs, beam, mark, instrument, coord, lambdaLabel, galleryHue, rampHue, firstLight, FIRST_LIGHT, sweep, SWEEP_S } from './refraction.js';
 
@@ -79,15 +80,15 @@ export function buildModel(facets, kind = null) {
 
 /**
  * Selection styling, per the grammar: a glass lift (panel2) with the hue on the
- * marker when the pane has focus; a solid hue bar at 16 colors (the lift would
- * quantize away); inverse video in mono.
+ * marker when the pane has focus; inverse video at 16 colors and in mono (a hue
+ * bar behind the label can't reach 4.5:1 in a 16-color scheme).
  */
 function selStyle(P, on, focused, hue) {
   if (!on) return null;
-  if (P.mono) return { fg: undefined, bg: undefined, attr: focused ? ATTR.BOLD | ATTR.INVERSE : ATTR.BOLD, mark: undefined, sub: undefined };
-  if (P.low) return focused ? { fg: P.bg, bg: hue, attr: ATTR.BOLD, mark: P.bg, sub: P.bg } : { fg: P.ink, bg: P.line, attr: ATTR.BOLD, mark: P.ink, sub: P.ink };
-  // Focused: glass faintly tinted with the gallery's hue, the title lit in it.
-  return focused ? { fg: hue, bg: mix(P.glass, hue, P.dark ? 0.12 : 0.1), attr: ATTR.BOLD, mark: hue, sub: P.muted } : { fg: P.ink, bg: P.glass, attr: 0, mark: P.dim, sub: P.dim };
+  if (P.mono || P.low) return { fg: undefined, bg: undefined, attr: focused ? ATTR.BOLD | ATTR.INVERSE : ATTR.BOLD, mark: undefined, sub: undefined };
+  // Focused: glass faintly tinted with the gallery's hue, the title lit in it
+  // (5% in Day keeps the hue-colored title at ≥ 4.5:1 on the tint).
+  return focused ? { fg: hue, bg: mix(P.glass, hue, P.dark ? 0.12 : 0.05), attr: ATTR.BOLD, mark: hue, sub: P.muted } : { fg: P.ink, bg: P.glass, attr: 0, mark: P.dim, sub: P.dim };
 }
 
 /**
@@ -378,7 +379,7 @@ export async function gallery(facets, opts = {}) {
       const count = showCount ? String(g.facets.length) : '';
       const lam = lambdaLabel(g.id, U);
       b.set(x + 1, yy, on ? G.sel : ' ', S ? S.mark : undefined, S?.bg, S?.attr);
-      b.set(x + 2, yy, G.swatch, P.mono ? undefined : S && P.low && focused ? S.fg : P.vivid(g.id), S?.bg, S?.attr ?? 0);
+      b.set(x + 2, yy, G.swatch, P.mono ? undefined : P.vivid(g.id), S?.bg, S?.attr ?? 0);
       const lx = x + iw - stringWidth(lam);
       const cx = lx - (count ? count.length + 1 : 0);
       const fg = S ? S.fg : g.facets.length ? P.ink : P.dim;

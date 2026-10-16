@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Pixel sorting, the glitch-art staple: a sunset scene whose rows are sorted
 // by brightness wherever they fall inside a moving threshold window — but only
 // within drifting bands, so the clean image and the smeared streaks alternate.
-import { lerpc, clamp01 } from '../retro/_kit.js';
+const { lerpc, clamp01 } = __bm(29);
 
 const LOOP = 16;
 const lum = (c) => ((c >> 16) & 255) * 0.3 + ((c >> 8) & 255) * 0.59 + (c & 255) * 0.11;

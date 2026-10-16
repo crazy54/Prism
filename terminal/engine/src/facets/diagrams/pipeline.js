@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A CI/CD pipeline graph: build fans out to parallel test jobs, fans back in
 // to staging, waits at a human approval gate, then deploys to production.
-import { ATTR, glyphs, uni, phase, fit, spin } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, fit, spin } = __bm(22);
 import { LineGrid, nodeBox, box } from './_lines.js';
 
 // [id, label, start, end] in seconds; the approval gate waits for a human.

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > TABLES               580nm - 9 / 15
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > TABLES               570nm - 9 / 15
 ------------------------------------------------------/\========================
 Zebra Table with Totals  callouts-table-zebra
 A zebra-striped table with right-aligned numeric columns, rows arriving one by
@@ -22,7 +22,7 @@ tags: table, zebra, totals, columns, aligned
   still at t=4s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play callouts-table-zebra
 SNAPSHOT  prism-term snapshot callouts-table-zebra --size 64x13
 IN CODE

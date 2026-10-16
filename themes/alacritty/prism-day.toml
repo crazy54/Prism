@@ -1,0 +1,42 @@
+# Prism Day — Prism's Day terminal colors (Refraction).
+# Alacritty ≥ 0.14: save as ~/.config/alacritty/themes/prism-day.toml and add to alacritty.toml:
+#   [general]
+#   import = ["~/.config/alacritty/themes/prism-day.toml"]
+# Alacritty 0.13 takes the same line at the top level instead (import = [...], no [general]);
+# before 0.13 the config was YAML and does not read this file.
+
+[colors.primary]
+background = "#f8f7fb"
+foreground = "#23222f"
+
+[colors.cursor]
+text = "#ffffff"
+cursor = "#7353bb"
+
+[colors.vi_mode_cursor]
+text = "#ffffff"
+cursor = "#7353bb"
+
+[colors.selection]
+text = "#20202e"
+background = "#ddd5f3"
+
+[colors.normal]
+black = "#23222f"
+red = "#b73232"
+green = "#007240"
+yellow = "#835c00"
+blue = "#2a5ec5"
+magenta = "#7353bb"
+cyan = "#006d7d"
+white = "#e6e5ee"
+
+[colors.bright]
+black = "#55546a"
+red = "#cf354b"
+green = "#00823a"
+yellow = "#8d6c00"
+blue = "#006fd8"
+magenta = "#a04ac2"
+cyan = "#007c87"
+white = "#ffffff"

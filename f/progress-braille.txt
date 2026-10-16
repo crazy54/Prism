@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      494nm - 2 / 41
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      558nm - 2 / 41
 ------------------------------------------------------/\========================
 Braille Bars  progress-braille
 Hairline progress drawn in braille dots at twice the horizontal resolution -- a
@@ -14,7 +14,7 @@ tags: braille, thin, hairline
   still at t=4s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-braille
 SNAPSHOT  prism-term snapshot progress-braille --size 60x5
 IN CODE

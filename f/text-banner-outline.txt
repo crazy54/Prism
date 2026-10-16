@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > BANNERS & FONTS           484nm - 8 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > BANNERS & FONTS           492nm - 8 / 29
 ------------------------------------------------------/\========================
 Outline & Shadow  text-banner-outline
 Hollow outline lettering, scanline-filled 80s type, outlined gradients and drop
@@ -21,7 +21,7 @@ tags: outline, hollow, shadow, banner, 80s
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-banner-outline
 SNAPSHOT  prism-term snapshot text-banner-outline --size 60x12
 IN CODE

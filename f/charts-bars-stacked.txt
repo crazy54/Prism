@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > BARS & HISTOGRAMS    505nm - 14 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > BARS & HISTOGRAMS    436nm - 14 / 30
 ------------------------------------------------------/\========================
 Stacked Status Codes  charts-bars-stacked
 Per-region request mix as stacked horizontal segments -- 2xx, 3xx, 4xx, 5xx --
@@ -18,7 +18,7 @@ tags: stacked bars, http status, segments, regions, composition
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-bars-stacked
 SNAPSHOT  prism-term snapshot charts-bars-stacked --size 60x9
 IN CODE

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > DIALOGS & PROMPTS       585nm - 15 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > DIALOGS & PROMPTS       487nm - 15 / 23
 ------------------------------------------------------/\========================
 Confirm Dialog  input-confirm-dialog
 A destructive-action modal with a shadow: Cancel is focused by default and
@@ -24,7 +24,7 @@ tags: dialog, modal, confirm, destructive, buttons
   still at t=3.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-confirm-dialog
 SNAPSHOT  prism-term snapshot input-confirm-dialog --size 64x15
 IN CODE

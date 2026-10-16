@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > WIREFRAMES            467nm - 8 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > WIREFRAMES            483nm - 8 / 19
 ------------------------------------------------------/\========================
 Geodesic Sphere  geodesic
 A subdivided icosahedron in braille wire: far edges dotted, near edges
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   frequency=2           Subdivision frequency  (1-6)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play geodesic
 SNAPSHOT  prism-term snapshot geodesic --size 44x22
 IN CODE

@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A human-in-the-loop approval prompt: the agent proposes a command, the
 // user reads it, moves to an option and approves; then it runs.
-import { ATTR, glyphs, uni, phase, fit, spin, tint, panel, stepAt } from './_ai.js';
+const { ATTR, glyphs, uni, phase, fit, spin, tint, panel, stepAt } = __bm(23);
 
 const CMD = 'kubectl -n checkout set env deploy/checkout-api DB_POOL_SIZE=40';
 const OPTIONS = ['Yes', 'Yes, and don\'t ask again for kubectl set env in checkout', 'No, and tell the agent what to do differently'];

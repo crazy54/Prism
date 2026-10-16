@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A modal progress dialog for an approved fix: steps tick off, a bar and ETA
 // advance, Cancel becomes Close, and the result is verified before it closes.
-import { ATTR, glyphs, uni, phase, span, ease, fit, spin, hbar, button, backdrop, modal } from './_input.js';
+const { ATTR, glyphs, uni, phase, span, ease, fit, spin, hbar, button, backdrop, modal } = __bm(25);
 
 // [label, start, end] in seconds into the loop.
 const STEPS = [

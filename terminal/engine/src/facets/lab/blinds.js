@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Blinds and tiles: venetian blinds (every slat opening at once), vertical
 // blinds swept left to right, a checkerboard in two passes, and square tiles
 // that close in a diagonal stagger — the "many small transitions" family.
-import { transitionSetup } from './_lab.js';
+const { transitionSetup } = __bm(26);
 
 const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
 const VARIANTS = [

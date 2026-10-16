@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Multi-select checkboxes: items get ticked one by one, the counter follows.
-import { ATTR, glyphs, phase, promptLine, tint, fit, listAnswer } from './_input.js';
+const { ATTR, glyphs, phase, promptLine, tint, fit, listAnswer } = __bm(25);
 
 const ITEMS = ['checkout', 'payments', 'inventory', 'catalog', 'search', 'rx-orders', 'loyalty'];
 const SCRIPT = [ // [time, cursor, toggle?]

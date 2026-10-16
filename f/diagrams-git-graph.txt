@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > GIT GRAPHS      574nm - 14 / 16
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > GIT GRAPHS      563nm - 14 / 16
 ------------------------------------------------------/\========================
 Git Log Graph  diagrams-git-graph
 git log --graph, live: a feature branch forks off main, main moves on, then the
@@ -21,7 +21,7 @@ tags: git, log, graph, branches, merge
   still at t=4s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play diagrams-git-graph
 SNAPSHOT  prism-term snapshot diagrams-git-graph --size 72x12
 IN CODE

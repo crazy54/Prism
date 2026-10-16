@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Lava lamps on a shelf: wax blobs warm at the bulb, rise, cool, stretch and
 // sink again — metaballs inside a tapered glass, lit from below, with the
 // metal cap and base. One lamp when narrow, a row of three when there's room.
-import { lerpc, clamp01 } from '../retro/_kit.js';
+const { lerpc, clamp01 } = __bm(29);
 
 const LOOP = 30;
 

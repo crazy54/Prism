@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Section header styles that type themselves in: numbered, underlined, boxed,
 // inverse bar and markdown-setext.
-import { ATTR, uni, phase, typed, blink, mix, fit } from './_kit.js';
+const { ATTR, uni, phase, typed, blink, mix, fit } = __bm(22);
 
 export default {
   id: 'callouts-section-headers',

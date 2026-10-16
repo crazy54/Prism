@@ -1,8 +1,9 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Arcade-racer pseudo-3D: a road built row by row from the horizon down, with
 // curvature integrated per scanline so it sweeps left and right, alternating
 // rumble strips and lane dashes, palm silhouettes scaling past, the sunset
 // sliding against the curves, a red convertible leaning in — and the HUD.
-import { lerpc, hash2 } from './_kit.js';
+const { lerpc, hash2 } = __bm(29);
 
 const CAR = [
   '......rrrrrrrrrrrrrrrr......',

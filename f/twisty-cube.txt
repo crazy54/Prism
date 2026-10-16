@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > 3D SOLIDS             467nm - 4 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > 3D SOLIDS             483nm - 4 / 19
 ------------------------------------------------------/\========================
 Twisty Cube  twisty-cube
 A 3x3x3 puzzle cube that scrambles itself with twelve eased quarter turns, then
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   moves=12              Scramble length  (4-30)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play twisty-cube
 SNAPSHOT  prism-term snapshot twisty-cube --size 56x24
 IN CODE

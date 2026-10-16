@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Typed network commands with authentic output: `ss -tulpn`, `ip -br -c addr`, and a hop-by-hop traceroute.
-import { C, ATTR, writer, session, drawSession, typed, hash, pad, lpad, fixed } from './_kit.js';
+const { C, ATTR, writer, session, drawSession, typed, hash, pad, lpad, fixed } = __bm(27);
 
 const looped = (t, len) => t % len;
 

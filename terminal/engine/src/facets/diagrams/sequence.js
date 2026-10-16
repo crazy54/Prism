@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A sequence diagram: lifelines for four participants, call arrows that grow
 // from caller to callee, dashed returns, activation bars and a note.
-import { ATTR, glyphs, uni, phase, ease, fit, clip, stringWidth } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, ease, fit, clip, stringWidth } = __bm(22);
 import { nodeBox } from './_lines.js';
 
 const WHO = ['client', 'gateway', 'checkout', 'postgres'];

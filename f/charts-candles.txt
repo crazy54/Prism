@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > BARS & HISTOGRAMS    505nm - 16 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > BARS & HISTOGRAMS    436nm - 16 / 30
 ------------------------------------------------------/\========================
 Candlesticks  charts-candles
 OHLC candlesticks at half-cell precision with wicks, green and red bodies, a
@@ -25,7 +25,7 @@ tags: candlestick, ohlc, finance, trading, volume
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-candles
 SNAPSHOT  prism-term snapshot charts-candles --size 72x16
 IN CODE

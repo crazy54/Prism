@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // An `npm ls --all` dependency tree that prints line by line, then `npm audit`
 // lights the path to a vulnerable transitive package (a fictional one).
-import { ATTR, glyphs, uni, phase, blink, clip, stringWidth } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, blink, clip, stringWidth } = __bm(22);
 
 // [name, version, children, flag] — flag: 'deduped' | 'vuln'
 const ROOT = ['@checkout/api', '2.14.1', [

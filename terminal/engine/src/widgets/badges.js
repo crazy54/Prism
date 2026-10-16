@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../web.bundle.js';
 // Small status widgets: badges, status dots, KPI tiles.
 
-import { ATTR } from '../buffer.js';
-import { mix } from '../color.js';
-import { stringWidth, truncate } from '../width.js';
-import { themeOf, col, contrast, tint, fmt } from './util.js';
-import { box } from './box.js';
+const { ATTR } = __bm(6);
+const { mix } = __bm(0);
+const { stringWidth, truncate } = __bm(5);
+const { themeOf, col, contrast, tint, fmt } = __bm(20);
+const { box } = __bm(21);
 import { sparkline } from './bars.js';
 
 /**

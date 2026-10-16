@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > LOGS & JOURNALS           568nm - 26 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > LOGS & JOURNALS           578nm - 26 / 39
 ------------------------------------------------------/\========================
 journalctl -f  ops-journalctl-follow
 journalctl -f following the system journal with priority colors: crit/err red,
@@ -25,7 +25,7 @@ Oct 13 14:02:16 node03 shop-api[2210]: GET /api/v1/cart 200 18ms
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-journalctl-follow
 SNAPSHOT  prism-term snapshot ops-journalctl-follow --size 80x16
 IN CODE

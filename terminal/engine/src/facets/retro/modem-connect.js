@@ -1,8 +1,9 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Dialing in, 1992: the modem init string, the dial, RINGING, CONNECT 2400,
 // then the board's welcome screen painting itself cell by cell at line speed —
 // cursor racing ahead of the paint — until NO CARRIER sends you back to start.
-import { CellBuffer } from '../../buffer.js';
-import { textMask, bbsPalette } from './_kit.js';
+const { CellBuffer } = __bm(6);
+const { textMask, bbsPalette } = __bm(29);
 import { blockLogo, frame } from './_bbs.js';
 
 const SCRIPT = [

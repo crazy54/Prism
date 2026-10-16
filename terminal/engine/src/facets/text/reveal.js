@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Reveal & Type — text that arrives: a human-paced typewriter, big-type
 // type/delete loops, decrypts, digital-rain reveals, letters that drop in
 // under gravity, a split-flap departures board and four scramble styles.
-import { mix, mixOklab } from '../../color.js';
+const { mix, mixOklab } = __bm(0);
 import { drawBanner, measureBanner } from '../../text/banner.js';
 import { bannerMode, fitFont, hash } from './_text.js';
 

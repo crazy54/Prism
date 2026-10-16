@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Wireworld on a generated circuit board. Clock loops (cut-corner rings, each
 // carrying one electron, period = ring length) fire pulses down tapped traces
 // that a router lays out PCB-style — straight runs, diagonal corners, fan-out
 // branches — keeping every trace clear of every other. Rules: head → tail,
 // tail → copper, copper → head when one or two neighbors are heads.
-import { NONE, mix } from '../../color.js';
+const { NONE, mix } = __bm(0);
 
 const EMPTY = 0, WIRE = 1, HEAD = 2, TAIL = 3;
 const D4 = [[1, 0], [0, 1], [-1, 0], [0, -1]];

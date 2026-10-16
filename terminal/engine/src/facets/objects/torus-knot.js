@@ -1,11 +1,12 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A torus knot as a braille wire tube with true hidden-line removal: the tube
 // surface is rasterized into a depth buffer first, then only the wire points
 // that survive the depth test are plotted — rings around the tube and strands
 // along it, rainbow along the knot and depth-cued. It morphs (eased) through
 // the (2,3) trefoil, (2,5), (3,4) and (3,5) knots while it turns.
-import { zbuffer, tri, perspective, rotX, rotY, rotZ, mul, apply, norm, cross } from './_raster.js';
-import { easing } from '../../easing.js';
-import { scale as dim } from '../../color.js';
+const { zbuffer, tri, perspective, rotX, rotY, rotZ, mul, apply, norm, cross } = __bm(18);
+const { easing } = __bm(10);
+const { scale: dim } = __bm(0);
 
 const KNOTS = [[2, 3], [2, 5], [3, 4], [3, 5]];
 const HOLD = 3, MORPH = 1.5;

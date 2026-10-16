@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A chat composer with a "/" command menu: the list filters as you type,
 // Tab completes, an argument hint appears, Enter sends a pending-approval card.
-import { ATTR, glyphs, uni, phase, typed, blink, tint, mix, fit, panel } from './_input.js';
+const { ATTR, glyphs, uni, phase, typed, blink, tint, mix, fit, panel } = __bm(25);
 
 const CMDS = [
   ['/status', 'service health and open incidents'],

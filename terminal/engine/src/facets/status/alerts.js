@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Toasts & Alerts: a sliding toast stack, alert banners, an incident banner,
 // an on-call page with an ack countdown, and a deploy-succeeded celebration.
-import { mix, scale } from '../../color.js';
-import { glyphs, put, putR, clamp, smooth, safe, onFill, ATTR } from '../charts/_data.js';
+const { mix, scale } = __bm(0);
+const { glyphs, put, putR, clamp, smooth, safe, onFill, ATTR } = __bm(24);
 
 const TOASTS = [
   ['pos', 'Deploy finished', 'checkout v2.14.2 is live on 12/12 hosts'],

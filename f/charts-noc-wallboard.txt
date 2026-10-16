@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > KPI TILES            505nm - 30 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > KPI TILES            436nm - 30 / 30
 ------------------------------------------------------/\========================
 NOC Wallboard  charts-noc-wallboard
 A compact operations wallboard: headline KPIs, a latency chart and the top error
@@ -29,7 +29,7 @@ tags: wallboard, noc, dashboard, kpi, errors
   still at 80x20 - t=6s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-noc-wallboard
 SNAPSHOT  prism-term snapshot charts-noc-wallboard --size 80x24
 IN CODE

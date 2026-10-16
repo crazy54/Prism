@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      494nm - 3 / 41
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      558nm - 3 / 41
 ------------------------------------------------------/\========================
 Gradient Shimmer  progress-gradient
 Solid gradient fills -- prism, aurora, fire and ocean -- with a highlight
@@ -16,7 +16,7 @@ tags: gradient, truecolor, shimmer
   still at t=4s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-gradient
 SNAPSHOT  prism-term snapshot progress-gradient --size 60x7
 IN CODE

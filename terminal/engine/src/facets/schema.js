@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../web.bundle.js';
 // Terminal facet contract — what every catalog entry must declare.
 //
 // A facet is a scene (src/context.js contract) plus catalog metadata:
@@ -30,7 +31,7 @@
 // text/*, spinners) — never node:*, process, Date.now or Math.random. Use t,
 // ctx.rng and ctx.noise so output is deterministic for a given seed.
 
-import { GALLERIES, getGallery } from './galleries.js';
+const { GALLERIES, getGallery } = __bm(17);
 
 export const KINDS = ['scene', 'widget', 'spinner', 'progress', 'text', 'chart', 'tui', 'diagram', 'art'];
 export const GLYPHS = ['ascii', 'unicode', 'braille', 'sextant'];

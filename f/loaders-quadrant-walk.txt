@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > BARS & PULSES      488nm - 33 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > BARS & PULSES      506nm - 33 / 64
 ------------------------------------------------------/\========================
 Quadrant Walk  loaders-quadrant-walk
 A quadrant block stepping round the four corners of its cell.
@@ -16,7 +16,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-quadrant-walk
 SNAPSHOT  prism-term snapshot loaders-quadrant-walk --size 44x5
 IN CODE

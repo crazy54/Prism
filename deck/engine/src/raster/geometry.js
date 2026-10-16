@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../core.bundle.js';
 // Raster geometry: affine matrices, the transform list grammar, curve flattening
 // with a device-space tolerance, the basic shapes as subpaths, and a stroker that
 // turns a stroke into fill polygons (joins, caps, dashes) for the scan converter.
@@ -10,7 +11,7 @@
 // Subpaths are { pts: [x0, y0, x1, y1, …], closed, segs } in user space
 // (`segs` = the subpath has a drawing command after its moveto).
 
-import { parsePath } from '../scene/geom.js';
+const { parsePath } = __bm(13);
 
 export class RasterError extends Error {
   constructor(msg) { super(`raster: ${msg}`); this.name = 'RasterError'; }

@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Containers & clusters: docker pull, docker stats, kubectl get pods -w, rollout status, and a k9s-style console.
-import { G, C, ATTR, writer, walk, hash, typed, bashPrompt, pad, lpad, fixed, uni } from './_kit.js';
+const { G, C, ATTR, writer, walk, hash, typed, bashPrompt, pad, lpad, fixed, uni } = __bm(27);
 
 /** docker's units.HumanSize: SI units, up to 4 significant digits. */
 const hs = (b) => { const u = ['B', 'kB', 'MB', 'GB']; let i = 0; while (b >= 1000 && i < 3) { b /= 1000; i++; } return `${Number(b.toPrecision(4))}${u[i]}`; };

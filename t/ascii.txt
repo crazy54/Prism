@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PURE ASCII                               494c - 17 / 17
+--/\=== PRISM TERMINAL > PURE ASCII                              597nm - 17 / 17
 ------------------------------------------------------/\========================
 7-bit only -- no Unicode, no color required. Runs on a VT100, a serial console,
 anything.

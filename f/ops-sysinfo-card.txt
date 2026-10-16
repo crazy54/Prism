@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > LOGIN & MOTD              568nm - 31 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > LOGIN & MOTD              578nm - 31 / 39
 ------------------------------------------------------/\========================
 System Info Card  ops-sysinfo-card
 A fastfetch-style system card: an original ASCII prism splitting a beam into a
@@ -27,7 +27,7 @@ _________/------   \            Uptime: 4 hours, 48 mins
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-sysinfo-card
 SNAPSHOT  prism-term snapshot ops-sysinfo-card --size 80x18
 IN CODE

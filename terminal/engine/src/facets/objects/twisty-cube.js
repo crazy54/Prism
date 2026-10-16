@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A 3×3×3 twisty cube that scrambles itself and then solves itself: twelve
 // random quarter turns, then the same turns undone in reverse — eased, with a
 // pause between moves, while the whole cube slowly orbits. 27 cubies with real
 // orientation matrices, black plastic bodies and inset stickers, z-buffered
 // and lit.
-import { zbuffer, tri, perspective, rotX, rotY, rotZ, mul, apply, norm, blend } from './_raster.js';
-import { easing } from '../../easing.js';
+const { zbuffer, tri, perspective, rotX, rotY, rotZ, mul, apply, norm, blend } = __bm(18);
+const { easing } = __bm(10);
 
 const FACE_COLORS = {
   '1,0,0': 0xd7263d, '-1,0,0': 0xf77f00, '0,-1,0': 0xf1f1ec, '0,1,0': 0xffd100, '0,0,-1': 0x1fa64a, '0,0,1': 0x1e5bd8,

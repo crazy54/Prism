@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Kefrens bars (a.k.a. Alcatraz bars): one short shaded bar is redrawn on every
 // scanline at a wandering x, and each line keeps what the line above drew —
 // so the bars stack into a twisting staircase of cylinders. Pure 1990 magic.
-import { lerpc } from './_kit.js';
+const { lerpc } = __bm(29);
 
 export default {
   title: 'Kefrens Bars',

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > HEATMAPS & MATRICES  505nm - 26 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > HEATMAPS & MATRICES  436nm - 26 / 30
 ------------------------------------------------------/\========================
 Contribution Calendar  charts-calendar
 A GitHub-style contributions calendar -- weeks by weekday, five intensity
@@ -19,7 +19,7 @@ Fri # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-calendar
 SNAPSHOT  prism-term snapshot charts-calendar --size 80x10
 IN CODE

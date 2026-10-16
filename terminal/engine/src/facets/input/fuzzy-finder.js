@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // An fzf-style fuzzy finder: the query types, the list filters live with
 // matched characters highlighted and the match count updating.
-import { ATTR, glyphs, phase, typed, blink, uni, tint, fit, fuzzyMatch as match } from './_input.js';
+const { ATTR, glyphs, phase, typed, blink, uni, tint, fit, fuzzyMatch: match } = __bm(25);
 
 const FILES = [
   'src/facets/input/fuzzy-finder.js', 'src/facets/charts/sparkline.js', 'src/screen.js', 'src/canvas.js',

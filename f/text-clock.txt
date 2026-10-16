@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > MOTION                   484nm - 29 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > MOTION                   492nm - 29 / 29
 ------------------------------------------------------/\========================
 Big Digital Clock  text-clock
 A big seven-segment clock -- HH:MM with a blinking colon, small seconds, faint
@@ -25,7 +25,7 @@ tags: clock, 7 segment, digital, time, lcd
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-clock
 SNAPSHOT  prism-term snapshot text-clock --size 72x16
 IN CODE

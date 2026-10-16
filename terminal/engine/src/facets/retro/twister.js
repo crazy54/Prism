@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // The Amiga twister: a square column whose rotation angle varies with height,
 // drawn scanline by scanline as the visible faces of a spinning prism. Each
 // face keeps its own color; brightness follows its apparent width.
-import { lerpc, makeStars } from './_kit.js';
+const { lerpc, makeStars } = __bm(29);
 
 export default {
   title: 'Twister',

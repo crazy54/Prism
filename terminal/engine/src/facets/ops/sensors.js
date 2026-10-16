@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // lm-sensors — chip blocks with per-core temperatures, high/crit limits, NVMe composite and fan RPM.
-import { G, C, ATTR, writer, walk, fixed, lpad } from './_kit.js';
+const { G, C, ATTR, writer, walk, fixed, lpad } = __bm(27);
 
 export default {
   id: 'ops-sensors',

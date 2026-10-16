@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > COLOR & LIGHT            484nm - 24 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > COLOR & LIGHT            492nm - 24 / 29
 ------------------------------------------------------/\========================
 lolcat Output  text-lolcat
 A directory listing piped through lolcat: the classic diagonal rainbow of
@@ -23,7 +23,7 @@ tags: lolcat, rainbow, terminal, pipe, ls
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-lolcat
 SNAPSHOT  prism-term snapshot text-lolcat --size 64x14
 IN CODE

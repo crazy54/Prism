@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS                             568nm - 11 / 17
+--/\=== PRISM TERMINAL > LINUX & OPS                             578nm - 11 / 17
 ------------------------------------------------------/\========================
 What you see on a real box: monitors, disks, network, services, containers and
 logins.

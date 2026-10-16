@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS                        505nm - 08 / 17
+--/\=== PRISM TERMINAL > CHARTS & METRICS                        436nm - 08 / 17
 ------------------------------------------------------/\========================
 Sparklines, line and bar charts, gauges, heatmaps and KPI tiles.
 

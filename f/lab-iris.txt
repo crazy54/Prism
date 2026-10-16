@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATION LAB > TRANSITIONS             604nm - 15 / 17
+--/\=== PRISM TERMINAL > ANIMATION LAB > TRANSITIONS             474nm - 15 / 17
 ------------------------------------------------------/\========================
 Irises  lab-iris
 Cinema irises between two scenes: circle, diamond, five-pointed star, and one
@@ -29,7 +29,7 @@ tags: transition, iris, iris in, iris out, cinema, mask
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play lab-iris
 SNAPSHOT  prism-term snapshot lab-iris --size 60x20
 IN CODE

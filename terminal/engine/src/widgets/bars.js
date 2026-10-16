@@ -1,14 +1,12 @@
+import { __m as __bm } from '../../web.bundle.js';
 // Bar-shaped widgets: progress bars, sparklines, bar charts, segmented meters.
 // All of them use eighth-block glyphs for 8× sub-cell precision along the bar.
 
-import { NONE } from '../color.js';
-import { ATTR } from '../buffer.js';
-import { Canvas } from '../canvas.js';
-import { stringWidth, truncate } from '../width.js';
-import {
-  themeOf, col, grad, fmt, clamp01, align, zoneColor, extent,
-  LEFT_EIGHTHS, LOWER_EIGHTHS, DEFAULT_ZONES,
-} from './util.js';
+const { NONE } = __bm(0);
+const { ATTR } = __bm(6);
+const { Canvas } = __bm(9);
+const { stringWidth, truncate } = __bm(5);
+const { themeOf, col, grad, fmt, clamp01, align, zoneColor, extent, LEFT_EIGHTHS, LOWER_EIGHTHS, DEFAULT_ZONES } = __bm(20);
 
 /**
  * Horizontal progress bar with 1/8-cell precision.

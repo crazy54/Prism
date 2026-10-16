@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > PANELS & BORDERS     580nm - 4 / 15
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > PANELS & BORDERS     570nm - 4 / 15
 ------------------------------------------------------/\========================
 Shadow Card  callouts-shadow-card
 A card with a shaded drop shadow that lifts on hover and settles, with a glint
@@ -23,7 +23,7 @@ tags: card, shadow, elevation, depth, hover
   still at t=3s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play callouts-shadow-card
 SNAPSHOT  prism-term snapshot callouts-shadow-card --size 52x14
 IN CODE

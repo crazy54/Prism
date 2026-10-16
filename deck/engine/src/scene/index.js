@@ -1,21 +1,4 @@
-// The scene API — one import for facet, theme and glyph authors:
-//
-//   import { surface, path, rect, P, url, linearGradient, textPath, lerp, phase } from '../../scene/index.js';
-//
-// Everything here is pure (no DOM, no Node built-ins), deterministic, and emits the
-// deck SVG subset (scene/validate.js), so frames look identical in the Stream Deck
-// app, browsers and the raster backend.
-
-export { surface, KeySurface, PanelSurface, metricsFor } from './surface.js';
-export { compose, keyInto } from './compose.js';
-export {
-  n, esc, attrs, el, g, defs, rect, circle, ellipse, line, path, polyline, polygon, points, url,
-  linearGradient, radialGradient, fill, stroke, translate, rotate, scale, P, roundRectPath,
-  svgDoc, SvgCanvas, svgInner, svgWindow, suffixIds, base64, svgDataUrl,
-} from './svg.js';
-export { textPath, textOutline, measureText, fitText, wrapText, ellipsize, capHeight, xHeight, compact, pad2, clockText, layout as textLayout } from './text.js';
-export { polar, arcPath, sectorPath, arc, ring, spectrumArc, ticks, needle, sparkPoints, sparkPath, sparkHead, sparkline, bars, segments, hairline, spectrumStops, glowStops } from './shapes.js';
-export { parseHex, toHex, hexToOklab, oklabToHex, hexToOklch, oklch, mix, shade, saturate, luminance, contrast, bestInk, lambdaOf, hueRamp } from './color.js';
-export * from './easing.js';
-export { rng, hash, noise1, noise2, fbm1, metric, series } from './noise.js';
-export { parsePath, flattenPath, pathBounds, insidePolys, distToPolys, transformPath } from './geom.js';
+// Bundled into core.bundle.js by website/build.mjs (the module itself is in the repository).
+import { __m } from '../../core.bundle.js';
+const __n = __m(113);
+export const KeySurface = __n.KeySurface, P = __n.P, PanelSurface = __n.PanelSurface, SvgCanvas = __n.SvgCanvas, arc = __n.arc, arcPath = __n.arcPath, arrive = __n.arrive, attrs = __n.attrs, bars = __n.bars, base64 = __n.base64, bestInk = __n.bestInk, capHeight = __n.capHeight, circle = __n.circle, clamp = __n.clamp, clockText = __n.clockText, compact = __n.compact, compose = __n.compose, contrast = __n.contrast, defs = __n.defs, distToPolys = __n.distToPolys, el = __n.el, ellipse = __n.ellipse, ellipsize = __n.ellipsize, esc = __n.esc, fbm1 = __n.fbm1, fill = __n.fill, fitText = __n.fitText, flattenPath = __n.flattenPath, g = __n.g, glowStops = __n.glowStops, hairline = __n.hairline, hash = __n.hash, hexToOklab = __n.hexToOklab, hexToOklch = __n.hexToOklch, hueRamp = __n.hueRamp, inCubic = __n.inCubic, inExpo = __n.inExpo, inOutCubic = __n.inOutCubic, inOutExpo = __n.inOutExpo, inOutQuad = __n.inOutQuad, inOutSine = __n.inOutSine, inQuad = __n.inQuad, insidePolys = __n.insidePolys, invLerp = __n.invLerp, keyInto = __n.keyInto, lambdaOf = __n.lambdaOf, lerp = __n.lerp, line = __n.line, linear = __n.linear, linearGradient = __n.linearGradient, luminance = __n.luminance, measureText = __n.measureText, metric = __n.metric, metricsFor = __n.metricsFor, mix = __n.mix, n = __n.n, needle = __n.needle, noise1 = __n.noise1, noise2 = __n.noise2, oklabToHex = __n.oklabToHex, oklch = __n.oklch, outBack = __n.outBack, outCubic = __n.outCubic, outElastic = __n.outElastic, outExpo = __n.outExpo, outQuad = __n.outQuad, outQuart = __n.outQuart, pad2 = __n.pad2, parseHex = __n.parseHex, parsePath = __n.parsePath, path = __n.path, pathBounds = __n.pathBounds, phase = __n.phase, pingpong = __n.pingpong, points = __n.points, polar = __n.polar, polygon = __n.polygon, polyline = __n.polyline, pulse = __n.pulse, radialGradient = __n.radialGradient, rect = __n.rect, remap = __n.remap, ring = __n.ring, rng = __n.rng, rotate = __n.rotate, roundRectPath = __n.roundRectPath, saturate = __n.saturate, scale = __n.scale, sectorPath = __n.sectorPath, segments = __n.segments, series = __n.series, shade = __n.shade, smoothstep = __n.smoothstep, sparkHead = __n.sparkHead, sparkPath = __n.sparkPath, sparkPoints = __n.sparkPoints, sparkline = __n.sparkline, spectrumArc = __n.spectrumArc, spectrumStops = __n.spectrumStops, spring = __n.spring, stroke = __n.stroke, suffixIds = __n.suffixIds, surface = __n.surface, svgDataUrl = __n.svgDataUrl, svgDoc = __n.svgDoc, svgInner = __n.svgInner, svgWindow = __n.svgWindow, textLayout = __n.textLayout, textOutline = __n.textOutline, textPath = __n.textPath, ticks = __n.ticks, toDeviceSvg = __n.toDeviceSvg, toHex = __n.toHex, transformPath = __n.transformPath, translate = __n.translate, url = __n.url, wrap360 = __n.wrap360, wrapText = __n.wrapText, xHeight = __n.xHeight;

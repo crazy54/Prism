@@ -29,3 +29,9 @@ export function pageTheme(themes) {
 
 /** Copy button markup with the icon family. */
 export const copyButton = (text, label) => `<button type="button" class="chip-btn" data-copy="${esc(text)}" aria-label="${esc(label)}"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span data-label>Copy</span></button>`;
+
+/** A command as HTML with every `curl` in a [data-curl] span, so the Windows switch (assets/site.js) can show curl.exe. */
+export const curlHtml = (cmd) => esc(cmd).replace(/(^|[\n;|(]\s*|&amp;\s*)curl(?= -)/g, '$1<span data-curl>curl</span>');
+/** The Windows (curl.exe) switch; put it next to a curl command's Copy button, then call applyShell(scope). */
+export const shellToggle = '<button type="button" class="chip-btn shell-btn" data-shell-toggle aria-pressed="false">Windows</button>';
+export const applyShell = (scope) => site?.applyShell?.(scope);

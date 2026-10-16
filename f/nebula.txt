@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > FX STORE > LIGHT & SKY                  436nm - 19 / 24
+--/\=== PRISM TERMINAL > FX STORE > LIGHT & SKY                  467nm - 19 / 24
 ------------------------------------------------------/\========================
 Nebula  nebula
 A domain-warped emission nebula with dust lanes, slowly turning, with twinkling
@@ -29,7 +29,7 @@ tags: nebula, space, stars, cosmos, galaxy, deep field, ambient
   still at 80x20 - t=6s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play nebula
 SNAPSHOT  prism-term snapshot nebula --size 80x24
 IN CODE

@@ -7,6 +7,11 @@
 //   HID_PHYS=usb-0000:00:14.0-3/input0   "/input<bInterfaceNumber>" — the Galleon must be interface 0
 //   HID_UNIQ=AL12K1A12345             the USB serial number (no feature report needed)
 //
+// Composite devices (the Galleon is a keyboard + a deck behind one USB id): the node
+// must be the deck interface by BOTH sources we can read — HID_PHYS "/inputN" and the
+// parent usb_interface's sysfs bInterfaceNumber (the attribute the udev rule checks).
+// Unknown or disagreeing → refused, so the keyboard's hidraw nodes are never opened.
+//
 // Everything takes { sysfs, dev, fs } so tests run against a fake tree.
 
 import nodeFs from 'node:fs';
@@ -34,17 +39,26 @@ export function parseHidId(s) {
 /** USB interface number from HID_PHYS ("…/input0" → 0), or -1. */
 export const interfaceOf = (phys) => Number(/\/input(\d+)$/.exec(String(phys || ''))?.[1] ?? -1);
 
+/** sysfs bInterfaceNumber text ("00\n", hex) → number, or -1. */
+export const parseInterfaceNumber = (s) => (/^\s*[0-9a-f]{1,2}\s*$/i.test(String(s ?? '')) ? parseInt(String(s).trim(), 16) : -1);
+
 /**
  * Match one uevent to a deck → { vid, pid, model, name, serial, iface, phys } or null
- * (not USB, unknown id, or the wrong interface of a composite device).
+ * (not USB, unknown id, or the wrong interface of a composite device). `sysIface` is the
+ * parent usb_interface's bInterfaceNumber when it could be read (-1 / undefined = unknown).
  */
-export function matchUevent(ev) {
+export function matchUevent(ev, sysIface) {
   const id = parseHidId(ev.HID_ID);
   if (!id || id.bus !== BUS_USB) return null;
   const model = modelForUsb(id.vid, id.pid);
   if (!model) return null;
-  const iface = interfaceOf(ev.HID_PHYS);
-  if (model.iface !== undefined && iface !== model.iface) return null; // Galleon: only the Stream Deck interface
+  const phys = interfaceOf(ev.HID_PHYS);
+  const sys = Number.isInteger(sysIface) ? sysIface : -1;
+  const iface = phys >= 0 ? phys : sys;
+  if (model.iface !== undefined) { // Galleon: only the Stream Deck interface, never the keyboard's
+    if (iface !== model.iface) return null;
+    if (sys >= 0 && sys !== model.iface) return null;
+  }
   return { vid: id.vid, pid: id.pid, model, name: ev.HID_NAME || model.name, serial: ev.HID_UNIQ || null, iface, phys: ev.HID_PHYS || null };
 }
 
@@ -61,10 +75,18 @@ export function listDecks({ sysfs = '/sys', dev = '/dev', fs = nodeFs } = {}) {
     if (!/^hidraw\d+$/.test(node)) continue;
     let text;
     try { text = fs.readFileSync(`${dir}/${node}/device/uevent`, 'utf8'); } catch { continue; }
-    const hit = matchUevent(parseUevent(text));
+    const hit = matchUevent(parseUevent(text), sysInterface(fs, `${dir}/${node}/device`));
     if (hit) out.push({ path: `${dev.replace(/\\/g, '/').replace(/\/$/, '')}/${node}`, node, id: hit.model.id, ...hit });
   }
   return out.sort((a, b) => Number(a.node.slice(6)) - Number(b.node.slice(6)));
+}
+
+/** bInterfaceNumber of the usb_interface above a hid device dir (sysfs symlink), or -1. */
+function sysInterface(fs, deviceDir) {
+  try {
+    const real = fs.realpathSync(deviceDir);
+    return parseInterfaceNumber(fs.readFileSync(path.join(path.dirname(real), 'bInterfaceNumber'), 'utf8'));
+  } catch { return -1; }
 }
 
 /**

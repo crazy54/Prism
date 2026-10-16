@@ -66,7 +66,8 @@ html.pfl-armed{background:var(--bg,#0a0c12)}
 .pfl-ray::before{height:1px;margin-top:-.5px;background:linear-gradient(90deg,color-mix(in srgb,var(--pfl-white) 80%,transparent),var(--c) 5%,color-mix(in srgb,var(--c) 55%,transparent) 34%,transparent 88%)}
 .pfl-ray::after{height:14px;margin-top:-7px;filter:blur(5px);opacity:.3;background:linear-gradient(90deg,transparent,var(--c) 8%,transparent 70%)}
 .pfl-haze{left:0;top:0;width:var(--pfl-len);height:var(--pfl-len);margin-top:calc(var(--pfl-len) / -2);transform-origin:0 50%;opacity:0;mix-blend-mode:var(--pfl-blend);
-  background:conic-gradient(from 90deg at 0 50%,transparent 0deg,var(--s0) 4deg,var(--s1) 10deg,var(--s2) 16deg,var(--s3) 22deg,var(--s4) 28deg,var(--s5) 34deg,var(--s6) 40deg,transparent 45deg,transparent 360deg);
+  /* physically true: rose (least bent) at the top of the wedge, violet (most bent) at the bottom; --pfl-fs = the ray step */
+  background:conic-gradient(from 90deg at 0 50%,transparent 0deg,var(--s6) 4deg,var(--s5) calc(4deg + var(--pfl-fs,6deg)),var(--s4) calc(4deg + 2 * var(--pfl-fs,6deg)),var(--s3) calc(4deg + 3 * var(--pfl-fs,6deg)),var(--s2) calc(4deg + 4 * var(--pfl-fs,6deg)),var(--s1) calc(4deg + 5 * var(--pfl-fs,6deg)),var(--s0) calc(4deg + 6 * var(--pfl-fs,6deg)),transparent calc(9deg + 6 * var(--pfl-fs,6deg)),transparent 360deg);
   -webkit-mask-image:radial-gradient(circle at 0 50%,#000,rgba(0,0,0,.35) 30%,transparent 62%);
           mask-image:radial-gradient(circle at 0 50%,#000,rgba(0,0,0,.35) 30%,transparent 62%)}
 .pfl-label{white-space:nowrap;letter-spacing:.15em;color:var(--rf-faint,#8a8c9d);transform:translateX(-50%);opacity:0}
@@ -85,13 +86,16 @@ html.pfl-armed{background:var(--bg,#0a0c12)}
    rides above both snapshots; the new snapshot is revealed behind it. ------- */
 .pfl-relight-beam{position:fixed;top:0;bottom:0;left:0;width:var(--pfl-rb-w,160px);z-index:2147483601;pointer-events:none;
   view-transition-name:pfl-relight-beam;contain:strict}
-.pfl-relight-beam::before{content:"";position:absolute;top:0;bottom:0;right:0;width:2px;
-  background:var(--rf-beam-v,linear-gradient(180deg,rgba(255,255,255,0),#fff 30%,#fff 70%,rgba(255,255,255,0)));
-  box-shadow:0 0 18px 3px rgba(var(--accent-rgb,184,162,242),.55),0 0 60px 10px rgba(var(--accent-rgb,184,162,242),.22)}
+/* the leading edge is a colour-split hairline: red fringe | white core | blue fringe (painted once into the
+   beam's own snapshot, then only translated — no per-frame paint) */
+.pfl-relight-beam::before{content:"";position:absolute;top:0;bottom:0;right:0;width:5px;
+  background:linear-gradient(90deg,var(--rf-split-b,rgba(92,170,255,.6)) 0 1px,transparent 1px 1.5px,var(--rf-beam-core,#fff) 1.5px 3.5px,transparent 3.5px 4px,var(--rf-split-a,rgba(255,92,130,.6)) 4px 5px);
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);
+  filter:drop-shadow(0 0 6px rgba(var(--accent-rgb,184,162,242),.7))}
 .pfl-relight-beam::after{content:"";position:absolute;top:0;bottom:0;left:0;right:2px;opacity:.55;
   background:linear-gradient(90deg,rgba(255,110,140,0),rgba(255,110,140,.10) 30%,rgba(255,214,120,.12) 52%,rgba(120,230,190,.14) 72%,rgba(110,170,255,.20) 90%,rgba(184,140,255,.30));
   -webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent)}
-.pfl-relight-beam.is-rtl::before{right:auto;left:0}
+.pfl-relight-beam.is-rtl::before{right:auto;left:0;transform:scaleX(-1)}
 .pfl-relight-beam.is-rtl::after{left:2px;right:0;transform:scaleX(-1)}
 /* where engines honor it, let input fall through the transition layer (Chromium currently hit-tests <html>; the JS skips the sweep on input) */
 html.pfl-relighting::view-transition{pointer-events:none}
@@ -103,8 +107,9 @@ html.pfl-relighting::view-transition-old(pfl-relight-beam){animation:pfl-beam-ou
 html.pfl-relighting::view-transition-new(pfl-relight-beam){animation:none;opacity:0}
 /* the lead's CSS-only recipe in prism.css uses rf-relight-beam; keep it dark while this one runs */
 html.pfl-relighting .rf-relight-beam{opacity:0!important}
-@keyframes pfl-reveal-ltr{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
-@keyframes pfl-reveal-rtl{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0 0 0 0)}}
+/* the new theme starts at the toggle (--pfl-rl-x = its center, set by relight()) and follows the beam */
+@keyframes pfl-reveal-ltr{from{clip-path:inset(0 var(--pfl-rl-xr,100%) 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes pfl-reveal-rtl{from{clip-path:inset(0 0 0 var(--pfl-rl-x,100%))}to{clip-path:inset(0 0 0 0)}}
 @keyframes pfl-beam-out{0%,84%{opacity:1}100%{opacity:0}}
 
 @media (prefers-reduced-motion:reduce){

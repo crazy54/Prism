@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      505nm - 23 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      436nm - 23 / 30
 ------------------------------------------------------/\========================
 Radar Profile  charts-radar
 A six-axis spider chart comparing a service to its baseline: the live profile
@@ -25,7 +25,7 @@ tags: radar, spider chart, profile, comparison, braille
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-radar
 SNAPSHOT  prism-term snapshot charts-radar --size 56x16
 IN CODE

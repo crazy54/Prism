@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CALLOUTS & LAYOUT                       580nm - 13 / 17
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT                       570nm - 13 / 17
 ------------------------------------------------------/\========================
 Panels, borders, admonitions, tables, dividers and key-value blocks.
 

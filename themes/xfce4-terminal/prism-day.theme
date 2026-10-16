@@ -1,0 +1,18 @@
+# Prism Day — Prism's Day terminal colors (Refraction).
+# xfce4-terminal: save as ~/.local/share/xfce4/terminal/colorschemes/prism-day.theme,
+# then Preferences → Colors → Presets → "Prism Day".
+
+[Scheme]
+Name=Prism Day
+ColorForeground=#23222f
+ColorBackground=#f8f7fb
+ColorCursor=#7353bb
+ColorCursorForeground=#ffffff
+ColorCursorUseDefault=FALSE
+ColorSelection=#20202e
+ColorSelectionBackground=#ddd5f3
+ColorSelectionUseDefault=FALSE
+ColorBold=#23222f
+ColorBoldUseDefault=TRUE
+TabActivityColor=#7353bb
+ColorPalette=#23222f;#b73232;#007240;#835c00;#2a5ec5;#7353bb;#006d7d;#e6e5ee;#55546a;#cf354b;#00823a;#8d6c00;#006fd8;#a04ac2;#007c87;#ffffff

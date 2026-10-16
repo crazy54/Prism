@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > ICONS & LOGOS        467nm - 17 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > ICONS & LOGOS        483nm - 18 / 19
 ------------------------------------------------------/\========================
 Atom  atom
 A lit nucleus of protons and neutrons inside three tilted orbits, with glowing
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   electrons=3           Electrons  (1-6)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play atom
 SNAPSHOT  prism-term snapshot atom --size 56x22
 IN CODE

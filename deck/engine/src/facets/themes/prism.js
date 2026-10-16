@@ -1,8 +1,4 @@
-import { themeFacet } from './_deck.js';
-
-export default themeFacet('prism', {
-  title: 'Prism',
-  category: 'Signature',
-  description: 'Refraction on hardware: ink-navy glass keys lit from inside, the spectral Beam on every key that is on, pressed keys refracting.',
-  tags: ['signature', 'glass', 'spectrum', 'refraction'],
-});
+// Bundled into core.bundle.js by website/build.mjs (the module itself is in the repository).
+import { __m } from '../../../core.bundle.js';
+const __n = __m(120);
+export default __n.default;

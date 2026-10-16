@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A single-select prompt: the cursor walks the options, Enter confirms.
-import { ATTR, glyphs, phase, stepAt, promptLine, tint } from './_input.js';
+const { ATTR, glyphs, phase, stepAt, promptLine, tint } = __bm(25);
 
 const OPTIONS = [
   ['us-east-1', 'N. Virginia'],

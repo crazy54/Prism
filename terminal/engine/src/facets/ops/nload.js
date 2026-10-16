@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // nload — Incoming and Outgoing traffic graphs drawn with # and |, and Curr/Avg/Min/Max/Ttl on the right.
-import { C, ATTR, writer, walk, hash, fixed } from './_kit.js';
+const { C, ATTR, writer, walk, hash, fixed } = __bm(27);
 
 const rate = (v) => (v >= 1000 ? `${fixed(v / 1000, 2)} GBit/s` : v >= 1 ? `${fixed(v, 2)} MBit/s` : `${fixed(v * 1000, 2)} kBit/s`);
 

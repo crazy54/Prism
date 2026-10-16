@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > BBS & ANSI ART      480nm - 15 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > BBS & ANSI ART      485nm - 15 / 24
 ------------------------------------------------------/\========================
 ANSI Group Logo  ansi-logo
 A 1994-style ANSI group logo: bevelled block letters in .:% shading with a light
@@ -29,7 +29,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   colors=vga            Colors  (vga|theme)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ansi-logo
 SNAPSHOT  prism-term snapshot ansi-logo --size 78x16
 IN CODE

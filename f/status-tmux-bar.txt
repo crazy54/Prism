@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > STATUS LINES    558nm - 7 / 18
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > STATUS LINES    550nm - 7 / 18
 ------------------------------------------------------/\========================
 tmux Session  status-tmux-bar
 A tmux session: split panes with a shell and a live log tail, the active-pane
@@ -21,7 +21,7 @@ FAIL checkout/refund   0.031s           |14:02:08 sshd     Accepted publickey f.
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play status-tmux-bar
 SNAPSHOT  prism-term snapshot status-tmux-bar --size 80x12
 IN CODE

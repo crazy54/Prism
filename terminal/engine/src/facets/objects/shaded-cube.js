@@ -1,8 +1,9 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // The first thing anyone writes in software 3D: a spinning cube — here done
 // with a z-buffer, Lambert + Blinn-Phong lighting, six palette-tinted faces,
 // a gentle bob, and a soft contact shadow that breathes with the height.
 import { meshes } from '../../math3d.js';
-import { zbuffer, drawMesh, perspective, shadow, rotX, rotY, mul, apply, norm, blend } from './_raster.js';
+const { zbuffer, drawMesh, perspective, shadow, rotX, rotY, mul, apply, norm, blend } = __bm(18);
 
 export default {
   title: 'Shaded Cube',

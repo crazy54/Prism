@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   494nm - 39 / 41
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   558nm - 39 / 41
 ------------------------------------------------------/\========================
 ETA Convergence  progress-eta-converge
 Why ETAs jump: the instant-rate estimate (dots) against an EWMA-smoothed one
@@ -21,7 +21,7 @@ tags: eta, ewma, smoothing, chart, estimate
   still at t=5.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-eta-converge
 SNAPSHOT  prism-term snapshot progress-eta-converge --size 72x12
 IN CODE

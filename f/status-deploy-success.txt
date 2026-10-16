@@ -21,7 +21,7 @@ tags: deploy, success, celebration, confetti, release
   still at t=4.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play status-deploy-success
 SNAPSHOT  prism-term snapshot status-deploy-success --size 60x12
 IN CODE

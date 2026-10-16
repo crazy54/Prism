@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Labeled rules in every weight, with a light sweeping along them.
-import { ATTR, uni, phase, mix } from './_kit.js';
+const { ATTR, uni, phase, mix } = __bm(22);
 
 const RULES = [
   { ch: ['─', '-'], label: 'Section', align: 'left' },

@@ -69,10 +69,13 @@ Methods: `set(opts)` (rebuilds), `setKeys`, `setFacet`, `setTheme(theme, mode)`,
 | dial: tap without travel · Enter / Space | push the dial |
 | dial: ← → ↑ ↓ (Shift: 5) · Page Up / Page Down (10) | turn |
 | touch strip: tap · hold ≥ 0.5 s · Enter / Space | touch (or long-touch) the segment under the pointer: presses that dial's facet and sets its `ctx.touch` |
+| touch strip focused: ← → · Home / End, then Enter / Space (Shift: long touch) | choose a segment (outlined; its label is announced), then touch it |
 
 Each slot feeds the render context what happened to it (deck API 1.3): `pressKey` (the device key index a span / deck facet was pressed on), `pressedFor` (seconds held), `turnAge` (seconds since its dial last turned) and, on the + / + XL strip, `touch: { x, y, hold, age }` (strip px for full-strip facets, px inside the segment for dial segments). Slices are per-key culled (API 1.2), and the runtime rewrites a key only when its SVG string changed.
 
 Dials are `role="slider"` with `aria-valuenow` / `aria-valuetext`; keys say their facet's title and state in `aria-label`. Pressed keys and dials get `.pdk-down`.
+
+Games are playable without sight. Every interactive device (and `mountKey` tile) has one polite live region (`.pdk-sr`, `role="status"`): after a game input changes the state it says `core.gameAnnouncement()` — the facet's optional `game.announce(state, prev, params)`, else the readout cards that changed ("Rolled: 7 (3 + 4). Rolls: 2") — once `game.animate` has played. A facet's optional `game.cell(state, k, params)` → `{ label?, pressed? }` describes the key on cell `k`: it is appended to the key's `aria-label`, and `pressed` becomes `aria-pressed` (Lights Out: lit / off; tic-tac-toe: "center, your cross"). Strip segment moves and dial-segment touches are announced in the same region.
 
 ## `mountKey(el, facet, opts)` → `KeyView`
 

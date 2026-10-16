@@ -1,4 +1,4 @@
-/* Prism Facet property inspector — Refraction "Prism Night" (design/tokens.json), offline. */
+/* Prism Display property inspector — Refraction "Prism Night" (design/tokens.json), offline. */
 @font-face { font-family: "Inter"; font-weight: 400; font-display: swap; src: url("fonts/inter-400-latin.woff2") format("woff2"); }
 @font-face { font-family: "Inter"; font-weight: 600; font-display: swap; src: url("fonts/inter-600-latin.woff2") format("woff2"); }
 @font-face { font-family: "Inter"; font-weight: 700; font-display: swap; src: url("fonts/inter-700-latin.woff2") format("woff2"); }
@@ -95,6 +95,7 @@ input[type="color"] { width: 44px; height: 28px; padding: 0 2px; border-radius: 
 
 .pi-btn { min-height: 30px; padding: 6px 12px; border-radius: var(--r-md); border: 1px solid var(--line-control); background: var(--panel2); color: var(--ink); font: 600 12px Inter, system-ui, sans-serif; cursor: pointer; }
 .pi-btn:hover { border-color: var(--accent-line); background: #1d2130; }
+.pi-help-inline { margin: 6px 0 0; }
 .pi-audio { margin: 0 0 6px; font-size: 12px; color: var(--muted); }
 .pi-audio strong { color: var(--ink); font-weight: 600; }
 .pi-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
@@ -115,3 +116,14 @@ input[type="color"] { width: 44px; height: 28px; padding: 0 2px; border-radius: 
 .pi-meta { margin: 14px 0 0; color: var(--faint); text-transform: none; letter-spacing: .02em; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+
+/* data sources + DEMO (Deck-Product fix pass) */
+.pi-sub { margin: 14px 0 6px; font: 600 10.5px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.pi-demo-tag { display: inline-block; padding: 0 6px; border: 1px solid var(--warn); border-radius: 999px; font: 700 10px/16px Inter, system-ui, sans-serif; letter-spacing: .08em; color: var(--warn); background: #0b0d14; }
+.pi-demo { color: var(--warn); }
+.pi-sources { display: grid; grid-template-columns: 104px 1fr; gap: 4px 10px; margin: 4px 0 10px; font-size: 12px; }
+.pi-sources dt { color: var(--muted); }
+.pi-sources dd { margin: 0; color: var(--dim); }
+.pi-sources .is-live { color: var(--pos); font-weight: 600; }
+.pi-sources .is-demo { color: var(--warn); font-weight: 600; }
+.pi-help code { font: 11.5px var(--mono); color: var(--muted); }

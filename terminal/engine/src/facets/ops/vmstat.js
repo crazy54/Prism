@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // vmstat 1 — the two-line header pinned on top, a new sample every second scrolling beneath it.
-import { C, ATTR, writer, walk, lpad } from './_kit.js';
+const { C, ATTR, writer, walk, lpad } = __bm(27);
 
 const H1 = 'procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----';
 const H2 = ' r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st';

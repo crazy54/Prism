@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > TOGGLES & CHECKBOXES     585nm - 6 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > TOGGLES & CHECKBOXES     487nm - 6 / 23
 ------------------------------------------------------/\========================
 Radio Groups  input-radio-group
 Three labeled radio groups -- environment, rollout strategy and notification --
@@ -18,7 +18,7 @@ tags: radio, options, choice, form, select
   still at t=2.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-radio-group
 SNAPSHOT  prism-term snapshot input-radio-group --size 60x9
 IN CODE

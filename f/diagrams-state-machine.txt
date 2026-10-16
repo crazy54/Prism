@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > BOXES & FLOWS    574nm - 4 / 16
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > BOXES & FLOWS    563nm - 4 / 16
 ------------------------------------------------------/\========================
 State Machine  diagrams-state-machine
 A job lifecycle state machine with labeled transitions: the active state lights
@@ -23,7 +23,7 @@ tags: state machine, fsm, lifecycle, transitions, retry
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play diagrams-state-machine
 SNAPSHOT  prism-term snapshot diagrams-state-machine --size 70x14
 IN CODE

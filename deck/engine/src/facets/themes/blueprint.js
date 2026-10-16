@@ -1,9 +1,4 @@
-import { themeFacet } from './_deck.js';
-
-export default themeFacet('blueprint', {
-  title: 'Blueprint',
-  category: 'Experimental',
-  description: 'White linework on a blue drafting grid: hatched sections, dashed hidden lines, every glyph dimensioned, a plotter that redraws on press. By day, a whiteprint.',
-  tags: ['blueprint', 'drafting', 'technical', 'grid', 'linework', 'cyanotype', 'whiteprint'],
-  order: 41,
-});
+// Bundled into facets.bundle.js by website/build.mjs (the module itself is in the repository).
+import { __m } from '../../../facets.bundle.js';
+const __n = __m(122);
+export default __n.default;

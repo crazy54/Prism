@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Color & Light — type that emits or reflects: a flickering neon sign, words
 // on fire, a rainbow sweep, lolcat'd output and 80s chrome.
-import { NONE, rgb, mix, mixOklab, luminance } from '../../color.js';
+const { NONE, rgb, mix, mixOklab, luminance } = __bm(0);
 import { drawBanner, bannerCanvas, measureBanner, layoutText } from '../../text/banner.js';
 import { bannerMode, fitType, hash } from './_text.js';
 

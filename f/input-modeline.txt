@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > TABS & BARS             585nm - 23 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > TABS & BARS             487nm - 23 / 23
 ------------------------------------------------------/\========================
 Modal Statusline  input-modeline
 A vim-style editor whose statusline recolors per mode: NORMAL motions, an INSERT
@@ -22,7 +22,7 @@ tags: statusline, vim, modal, editor, modeline
   still at t=4.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-modeline
 SNAPSHOT  prism-term snapshot input-modeline --size 66x13
 IN CODE

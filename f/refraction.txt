@@ -1,0 +1,47 @@
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > ICONS & LOGOS        483nm - 16 / 19
+------------------------------------------------------/\========================
+Refraction  refraction
+White light in, every color out: a beam strikes a glass prism and fans into a
+true-order spectrum (violet bends most) on a wavelength screen.
+art - 96x28 (min 32x10) - 12 s loop - unicode - truecolor
+tags: prism, refraction, spectrum, light, beam, dispersion, hero, glass,
+      wavelength
+
+
+
+                                .#-
+                               ==:.+
+                              #..:..*
+                             %...:...*
+                            %....:....*
+                           %.....:.....=
+                       .. #.....:::.....::               EVERY COLOR OUT
+          ............:-##:...:::::::....:+:.
+............:::=#@@*-::%*-:...:::::::....:-#:++*++====--:::.......          700
+...:=+=-:::...........%.........:::.........*  .-===*++*++++++====---====*
+.WHITE LIGHT IN      %.......................*    .:-===+=+*+++**++===+++#
+.                   %.........................+       .--==-=+==++++++++*%  600
+                   %...........................-.        .:=-===-=====+++#
+                 .*..............................-           .-=--==--===*
+                                                                .:----===*  500
+                                                                    :----*
+                                                                       .:*  400
+            FIG. 001 - THE PRISM PRINCIPLE - 380-700 NM
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+PARAMS - --SET KEY=VALUE ------------------------
+  labels=on             Instrument labels  (on|off)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play refraction
+SNAPSHOT  prism-term snapshot refraction --size 96x28
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('refraction'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/newton-cradle
+next >    curl -sL prism.jeremyfhall.com/f/prism-logo
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

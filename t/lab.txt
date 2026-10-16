@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATION LAB                           604nm - 16 / 17
+--/\=== PRISM TERMINAL > ANIMATION LAB                           474nm - 16 / 17
 ------------------------------------------------------/\========================
 Motion studies: easing curves, springs, timing and the building blocks of
 animation.

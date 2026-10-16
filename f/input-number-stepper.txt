@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > TEXT FIELDS             585nm - 10 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > TEXT FIELDS             487nm - 10 / 23
 ------------------------------------------------------/\========================
 Number Steppers  input-number-stepper
 Numeric steppers with * and + controls: presses flash, values step, and the
@@ -18,7 +18,7 @@ tags: number, stepper, spinner, increment, form
   still at t=3s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-number-stepper
 SNAPSHOT  prism-term snapshot input-number-stepper --size 48x9
 IN CODE

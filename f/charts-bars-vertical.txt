@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > BARS & HISTOGRAMS    505nm - 12 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > BARS & HISTOGRAMS    436nm - 12 / 30
 ------------------------------------------------------/\========================
 Eased Column Chart  charts-bars-vertical
 Columns that glide to new values with eighth-block precision, value labels
@@ -21,7 +21,7 @@ tags: bar chart, columns, eighth blocks, animated, hourly
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-bars-vertical
 SNAPSHOT  prism-term snapshot charts-bars-vertical --size 56x12
 IN CODE

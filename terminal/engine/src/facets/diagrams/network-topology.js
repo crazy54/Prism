@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A network map learned passively from telemetry: hosts, switches and the
 // gateway appear as they are first seen in incoming data (no scanning),
 // links draw in once both ends are known.
-import { ATTR, glyphs, uni, phase, tint, fit, stringWidth } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, tint, fit, stringWidth } = __bm(22);
 import { LineGrid, nodeBox, box, tap, DIR } from './_lines.js';
 
 // id: [label, ip, tier, column(0..5), seen at, source]

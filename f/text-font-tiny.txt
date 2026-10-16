@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > BANNERS & FONTS           484nm - 3 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > BANNERS & FONTS           492nm - 3 / 29
 ------------------------------------------------------/\========================
 Tiny 3x5 Specimen  text-font-tiny
 The compact 3x5 caps-and-digits face set as KPI read-outs, in a waterfall from
@@ -29,7 +29,7 @@ tags: font, specimen, bitmap font, waterfall, tiny, compact, kpi, numbers
   still at 80x20 - t=6s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-font-tiny
 SNAPSHOT  prism-term snapshot text-font-tiny --size 80x24
 IN CODE

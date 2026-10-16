@@ -6,6 +6,9 @@
   "bin": {
     "prism-term": "./cli.js"
   },
+  "man": [
+    "./man/prism-term.1"
+  ],
   "exports": {
     ".": "./index.js",
     "./facets": "./src/facets/index.js",
@@ -19,6 +22,8 @@
     "src/",
     "themes/",
     "examples/",
+    "man/",
+    "completions/",
     "README.md"
   ],
   "scripts": {

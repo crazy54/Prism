@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A multi-agent message log: agents post findings and hand work to each
 // other, color-tagged, with handoffs marked and the newest line flashing.
-import { ATTR, glyphs, uni, phase, fit, tint, stringWidth } from './_ai.js';
+const { ATTR, glyphs, uni, phase, fit, tint, stringWidth } = __bm(23);
 
 const AGENTS = { mainbrain: 'accent', collector: 'info', analyst: 'warn', fixer: 'pos' };
 // [time, from, to | '', text]

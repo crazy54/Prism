@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Shell completion: a fish-style ghost suggestion from history, then a
 // zsh-style completion menu that Tab cycles through, then the command runs.
-import { ATTR, glyphs, uni, phase, typed, blink, tint, mix, fit } from './_input.js';
+const { ATTR, glyphs, uni, phase, typed, blink, tint, mix, fit } = __bm(25);
 
 const PS1 = '~/infra $ ';
 const HISTORY = [

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATION LAB > TRANSITIONS             604nm - 17 / 17
+--/\=== PRISM TERMINAL > ANIMATION LAB > TRANSITIONS             474nm - 17 / 17
 ------------------------------------------------------/\========================
 Blinds & Tiles  lab-blinds
 Many small transitions at once: venetian blinds, swept vertical blinds, a
@@ -29,7 +29,7 @@ tags: transition, blinds, venetian, checkerboard, tiles, stagger
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play lab-blinds
 SNAPSHOT  prism-term snapshot lab-blinds --size 60x20
 IN CODE

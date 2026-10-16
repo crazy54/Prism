@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > COLOR & LIGHT            484nm - 22 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > COLOR & LIGHT            492nm - 22 / 29
 ------------------------------------------------------/\========================
 Text on Fire  text-fire
 The letters are the fuel: every ink pixel feeds a rising flame field, so fire
@@ -29,7 +29,7 @@ tags: fire, flames, burning, heat, doom fire
   still at t=3s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-fire
 SNAPSHOT  prism-term snapshot text-fire --size 72x20
 IN CODE

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > ORBITS & SHAPES    488nm - 49 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > ORBITS & SHAPES    506nm - 49 / 64
 ------------------------------------------------------/\========================
 Clock Hand  loaders-clock-hand
 A braille clock hand sweeping a two-cell dial round a fixed hub -- Unicode-only,
@@ -17,7 +17,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-clock-hand
 SNAPSHOT  prism-term snapshot loaders-clock-hand --size 44x5
 IN CODE

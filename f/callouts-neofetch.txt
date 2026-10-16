@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > KEY-VALUE           580nm - 14 / 15
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > KEY-VALUE           570nm - 14 / 15
 ------------------------------------------------------/\========================
 System Summary (neofetch)  callouts-neofetch
 A neofetch-style summary: gradient logo art beside aligned key/value system
@@ -24,7 +24,7 @@ tags: neofetch, fastfetch, system info, key value, motd
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play callouts-neofetch
 SNAPSHOT  prism-term snapshot callouts-neofetch --size 64x15
 IN CODE

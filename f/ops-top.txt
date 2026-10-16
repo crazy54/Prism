@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            568nm - 5 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            578nm - 5 / 39
 ------------------------------------------------------/\========================
 top  ops-top
 procps top: the uptime/Tasks/%Cpu(s)/MiB Mem/MiB Swap summary and a CPU-sorted
@@ -29,7 +29,7 @@ MiB Swap:   2048.0 total,   1936.0 free,    112.0 used.   9829.1 avail Mem
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-top
 SNAPSHOT  prism-term snapshot ops-top --size 80x20
 IN CODE

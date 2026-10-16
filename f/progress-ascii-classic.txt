@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      494nm - 6 / 41
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      558nm - 6 / 41
 ------------------------------------------------------/\========================
 ASCII Classics  progress-ascii-classic
 The 7-bit bars everyone recognizes -- hashes, an arrow head, pipes and stars --
@@ -16,7 +16,7 @@ tags: ascii, classic, hash, retro
   still at t=4s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-ascii-classic
 SNAPSHOT  prism-term snapshot progress-ascii-classic --size 56x7
 IN CODE

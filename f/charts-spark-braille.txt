@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > SPARKLINES            505nm - 2 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > SPARKLINES            436nm - 2 / 30
 ------------------------------------------------------/\========================
 Braille Sparklines  charts-spark-braille
 High-resolution braille sparklines (2x4 dots per cell) with min/max markers, a
@@ -18,7 +18,7 @@ tags: sparkline, braille, high resolution, min max, latency
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-spark-braille
 SNAPSHOT  prism-term snapshot charts-spark-braille --size 56x9
 IN CODE

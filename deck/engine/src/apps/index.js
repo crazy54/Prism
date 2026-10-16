@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../facets.bundle.js';
 // Prism Deck apps — live data for facets, routing, and the app catalog. Browser-safe entry
 // (Node-only live sources: ./sources/node.js → createNodeHub()).
 //
 //   import { createSimulatedHub, galleonPlan, planData, renderGalleon, APPS } from './src/apps/index.js';
 
-import { allFacets } from '../facets/index.js';
+const { allFacets } = __bm(318);
 
 export * from './sources/index.js';
 export { GALLEON_SLOTS, DEFAULT_ROUTES, galleonPlan, planData, renderGalleon, composeScreen } from './routing.js';

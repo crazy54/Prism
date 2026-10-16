@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // watch -n2 uptime — the watch header, the uptime line, and a braille chart of the 1-minute load.
-import { C, ATTR, writer, walk, clock, fixed } from './_kit.js';
+const { C, ATTR, writer, walk, clock, fixed } = __bm(27);
 
 export default {
   id: 'ops-load-watch',

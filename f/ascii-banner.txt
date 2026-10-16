@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PURE ASCII > CLASSICS                    494c - 22 / 29
+--/\=== PRISM TERMINAL > PURE ASCII > CLASSICS                   597nm - 22 / 29
 ------------------------------------------------------/\========================
 banner(1) Sign  ascii-banner
 Huge letters built from # like the Unix banner command, scrolling past as a
@@ -21,7 +21,7 @@ tags: banner, big letters, hash, unix, marquee
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ascii-banner
 SNAPSHOT  prism-term snapshot ascii-banner --size 80x12
 IN CODE

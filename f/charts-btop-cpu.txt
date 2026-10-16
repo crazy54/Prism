@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > LINE & AREA           505nm - 8 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > LINE & AREA           436nm - 8 / 30
 ------------------------------------------------------/\========================
 btop-style CPU  charts-btop-cpu
 A btop-inspired CPU panel: filled braille history colored by height, per-core
@@ -25,7 +25,7 @@ tags: btop, cpu, cores, system monitor, braille
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-btop-cpu
 SNAPSHOT  prism-term snapshot charts-btop-cpu --size 80x16
 IN CODE

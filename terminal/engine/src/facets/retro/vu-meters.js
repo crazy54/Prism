@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Twin analog VU meters on a backlit amber face, needles riding a little
 // chiptune with real VU ballistics (300 ms integration), a red zone past 0 dB,
 // peak lamps, and fast LED ladders with peak-hold underneath.
-import { lerpc } from './_kit.js';
+const { lerpc } = __bm(29);
 import { songAt } from './_music.js';
 
 const SCALE = [[-20, 0], [-10, 0.28], [-7, 0.4], [-5, 0.5], [-3, 0.62], [-2, 0.69], [-1, 0.76], [0, 0.83], [1, 0.89], [2, 0.95], [3, 1]];

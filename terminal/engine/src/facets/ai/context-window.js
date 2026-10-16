@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A context window filling up: a stacked bar of system, tools, files,
 // history and output grows turn by turn until auto-compact squeezes the
 // history into a summary and frees room.
-import { ATTR, glyphs, uni, phase, ease, fit, mix } from './_ai.js';
+const { ATTR, glyphs, uni, phase, ease, fit, mix } = __bm(23);
 
 const MAX = 200; // k tokens
 const SEGS = [['system', 'muted'], ['tools', 'info'], ['files', 'warn'], ['history', 'accent'], ['output', 'pos']];

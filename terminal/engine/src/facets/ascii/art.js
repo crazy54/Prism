@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Pure ASCII — art: little living pictures in 7-bit characters.
 import { sprite, spriteWidth, hash, center } from './_ascii.js';
-import { mix } from '../../color.js';
+const { mix } = __bm(0);
 
 const shared = { gallery: 'ascii', category: 'ASCII Art', glyphs: 'ascii', color: '16', kind: 'art', size: { w: 80, h: 24 }, minSize: { w: 36, h: 12 } };
 

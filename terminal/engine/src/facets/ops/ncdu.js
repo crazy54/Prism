@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // ncdu — the reverse-video title, a sorted directory listing with [#####] bars, a moving selection, and totals.
-import { C, ATTR, writer, pad, lpad, fixed } from './_kit.js';
+const { C, ATTR, writer, pad, lpad, fixed } = __bm(27);
 
 const DIRS = [
   ['/lib', 18.4], ['/log', 9.2], ['/cache', 2.31], ['/www', 0.884], ['/backups', 0.512], ['/spool', 0.0412],

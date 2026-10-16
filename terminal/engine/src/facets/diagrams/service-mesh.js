@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A service mesh on a braille canvas: services ring the frame, diagonal call
 // edges carry traffic comets, and one edge turns hot during a latency spike.
-import { ATTR, glyphs, uni, phase, mix, fit, stringWidth } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, mix, fit, stringWidth } = __bm(22);
 
 const SVCS = ['gateway', 'checkout', 'payments', 'notify', 'inventory', 'search', 'users'];
 // [from, to, relative rate]

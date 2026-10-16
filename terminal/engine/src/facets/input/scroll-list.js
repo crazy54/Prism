@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A long list in a short window: the cursor runs down, the view scrolls, the
 // scrollbar thumb tracks it.
-import { ATTR, glyphs, phase, panel, scrollbar, tint, fit } from './_input.js';
+const { ATTR, glyphs, phase, panel, scrollbar, tint, fit } = __bm(25);
 
 const PODS = Array.from({ length: 26 }, (_, i) => {
   const svc = ['checkout', 'payments', 'catalog', 'search', 'cart', 'auth', 'orders', 'notify'][i % 8];

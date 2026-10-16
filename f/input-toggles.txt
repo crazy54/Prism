@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > TOGGLES & CHECKBOXES     585nm - 5 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > TOGGLES & CHECKBOXES     487nm - 5 / 23
 ------------------------------------------------------/\========================
 Toggle Switches  input-toggles
 A settings pane of on/off switches whose knobs slide across with color easing as
@@ -22,7 +22,7 @@ tags: toggle, switch, settings, preferences, on off
   still at t=3s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-toggles
 SNAPSHOT  prism-term snapshot input-toggles --size 52x13
 IN CODE

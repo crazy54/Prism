@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Sliders: a handle dragged along a ticked track, value label riding along.
-import { ATTR, uni, phase, ease, mix } from './_input.js';
+const { ATTR, uni, phase, ease, mix } = __bm(25);
 
 const SLIDERS = [
   ['Replicas', 1, 12, 0, (p) => 2 + ease(p, 0.5, 2.0) * 7 - ease(p, 4.2, 5.0) * 7, (v) => `${Math.round(v)}`],

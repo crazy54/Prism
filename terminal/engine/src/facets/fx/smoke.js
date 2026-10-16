@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Incense smoke: a thin laminar ribbon leaves the glowing tip, wavers, then
 // breaks into curling turbulence as it climbs — the column is advected through
 // a noise flow that strengthens with height, widening and thinning to nothing.
-import { lerpc, clamp01 } from '../retro/_kit.js';
+const { lerpc, clamp01 } = __bm(29);
 
 export default {
   title: 'Incense Smoke',

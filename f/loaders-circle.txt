@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS    488nm - 4 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS    506nm - 4 / 64
 ------------------------------------------------------/\========================
 Half Circle  loaders-circle
 A half-filled circle turning in four beats -- calm enough for long waits.
@@ -16,7 +16,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-circle
 SNAPSHOT  prism-term snapshot loaders-circle --size 44x5
 IN CODE

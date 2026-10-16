@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A delivery flowchart with decisions and a loop: a run token walks the graph,
 // fails tests once, goes round the fix loop, then ships through a canary.
-import { ATTR, glyphs, uni, phase, fit } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, fit } = __bm(22);
 import { LineGrid, nodeBox, box, polyline, along } from './_lines.js';
 
 // Node layout on a 64-column grid; decisions are drawn double-bordered.

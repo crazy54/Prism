@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > ORBITS & SHAPES    488nm - 42 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > ORBITS & SHAPES    506nm - 42 / 64
 ------------------------------------------------------/\========================
 Clock  loaders-clock
 A clock face ticking through twelve hours -- time is passing, literally.
@@ -16,7 +16,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-clock
 SNAPSHOT  prism-term snapshot loaders-clock --size 44x5
 IN CODE

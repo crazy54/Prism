@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            568nm - 4 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            578nm - 4 / 39
 ------------------------------------------------------/\========================
 sensors  ops-sensors
 lm-sensors output: coretemp package and cores with high/crit limits, an NVMe
@@ -27,7 +27,7 @@ tags: sensors, lm-sensors, temperature, fan, hardware
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-sensors
 SNAPSHOT  prism-term snapshot ops-sensors --size 64x18
 IN CODE

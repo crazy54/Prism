@@ -1,11 +1,12 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Steps & pipelines — multi-part work as the real tools print it.
 //
 // Every number agrees with every other: bytes done never exceed totals, counts
 // match the lines on screen, percentages are floor(done/total), and finished
 // states hold until the loop restarts.
-import { ATTR } from '../../buffer.js';
-import { rgb } from '../../color.js';
-import { stringWidth, truncate } from '../../width.js';
+const { ATTR } = __bm(6);
+const { rgb } = __bm(0);
+const { stringWidth, truncate } = __bm(5);
 import { phase, transfer, glyphs, bytes, clock, commas, clamp01 } from './_sim.js';
 import { segs, visible } from './_log.js';
 

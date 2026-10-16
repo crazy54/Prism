@@ -16,7 +16,7 @@ export { PrismRuntime, createRuntime, PLUGIN_UUID } from './runtime.js';
 export { LiveController, API_VERSION as LIVE_API_VERSION } from './control.js';
 export { DeviceBudget, allocateFps, DEFAULT_LIMITS } from './budget.js';
 
-export const PLUGIN_VERSION = '0.4.0.0';
+export const PLUGIN_VERSION = '0.7.0.0';
 
 /**
  * Start the plugin. opts: { argv, env, connect, exit, log, controlFile, handleProcess,

@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Newton's cradle: five chrome balls on strings. The end ball swings in on a
 // pendulum arc, the momentum passes through the row, and the far ball swings
 // out — with a glint at each strike, faint motion ghosts on the moving balls,
 // chrome that reflects a studio sky and floor, and a brushed-steel frame.
-import { sphere, blend } from './_raster.js';
-import { NONE } from '../../color.js';
+const { sphere, blend } = __bm(18);
+const { NONE } = __bm(0);
 
 const BALLS = 5;
 const PERIOD = 1.6; // seconds for a full right → left exchange and back

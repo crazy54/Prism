@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > CHIPTUNE VISUALS    480nm - 18 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > CHIPTUNE VISUALS    485nm - 18 / 24
 ------------------------------------------------------/\========================
 VU Meters  vu-meters
 Twin analog VU meters on a backlit face -- needles with real ballistics, a red
@@ -27,7 +27,7 @@ tags: vu, meter, audio, needle, led, chiptune, hifi
   still at t=3.84s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play vu-meters
 SNAPSHOT  prism-term snapshot vu-meters --size 64x18
 IN CODE

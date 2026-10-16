@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A complete cracktro screen: chrome group logo with a shine sweep, raster bars
 // pumping in the middle, a greetings sine scroller along the bottom, and a
 // parallax starfield behind it all. Everything a 1989 floppy needed.
-import { textMask, maskAt, fontPx, makeStars, lerpc, dim } from './_kit.js';
+const { textMask, maskAt, fontPx, makeStars, lerpc, dim } = __bm(29);
 
 const GREETS = 'CRACKED AND TRAINED BY THE PRISM CREW   *   GREETINGS TO ALL TERMINAL SCENERS   *   CALL OUR BOARD AT 300-2400 BAUD   *   ';
 

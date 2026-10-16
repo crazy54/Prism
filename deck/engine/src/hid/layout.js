@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../facets.bundle.js';
 // Layouts — which facet drives which part of a physical deck.
 //
 //   {
@@ -14,8 +15,14 @@
 // Precedence: deck → spans → keys; strip | dials; screen | widgets. Conflicts are errors.
 // resolveLayout(model, spec) → { slots, keyOwner, segOwner, widgetOwner, infobarOwner, problems }
 
-import { findFacet, allFacets } from '../facets/index.js';
-import { getDevice } from '../devices.js';
+const { findFacet, allFacets } = __bm(318);
+const { getDevice } = __bm(0);
+const { SCREEN_TARGETS } = __bm(98);
+
+// API 1.4: Galleon widget art is a 2:1 window (360×180) centred in its 360×192 quadrant (6 px gutters);
+// the region write stays 360×192, the gutters are filled with the theme background.
+const GW = SCREEN_TARGETS.galleon.widgets;
+const widgetArt = (W) => ({ w: GW.w, h: GW.h, padTo: { w: W.w, h: W.h, x: Math.round((W.w - GW.w) / 2), y: GW.insetY ?? Math.round((W.h - GW.h) / 2), bg: 'theme' } });
 
 const DEFAULT_KEYS = ['icon-mic', 'icon-volume', 'icon-play-pause', 'icon-camera', 'icon-broadcast', 'app-cpu-ring', 'icon-clock', 'app-focus-timer',
   'icon-bulb', 'icon-lock', 'icon-wifi', 'icon-battery', 'icon-sync', 'icon-record', 'icon-timer', 'icon-power'];
@@ -160,7 +167,7 @@ export function resolveLayout(model, spec = {}, { find = findFacet } = {}) {
         const s = slot(f, screenEntry, { kind: 'screen', renderOpts: { screen: 'galleon' }, dials: [0, 1] });
         for (let l = 0; l < W.rows; l++) for (let d = 0; d < W.cols; d++) {
           widgetOwner.set(`${d},${l}`, s);
-          s.targets.push({ id: `widget:${d},${l}`, type: 'lcd', piece: 'widget', dial: d, layer: l, rect: { x: d * W.w, y: l * W.h, w: W.w, h: W.h }, w: W.w, h: W.h });
+          s.targets.push({ id: `widget:${d},${l}`, type: 'lcd', piece: 'widget', dial: d, layer: l, rect: { x: d * W.w, y: l * W.h, w: W.w, h: W.h }, ...widgetArt(W) });
         }
       }
     }
@@ -175,7 +182,7 @@ export function resolveLayout(model, spec = {}, { find = findFacet } = {}) {
       if (!f) continue;
       const s = slot(f, e, { kind: 'widget', renderOpts: { screen: 'galleon-widget' }, dials: [d], layer: l });
       widgetOwner.set(`${d},${l}`, s);
-      s.targets.push({ id: `widget:${d},${l}`, type: 'lcd', piece: 'screen', dial: d, layer: l, rect: { x: d * W.w, y: l * W.h, w: W.w, h: W.h }, w: W.w, h: W.h });
+      s.targets.push({ id: `widget:${d},${l}`, type: 'lcd', piece: 'screen', dial: d, layer: l, rect: { x: d * W.w, y: l * W.h, w: W.w, h: W.h }, ...widgetArt(W) });
     }
   }
 

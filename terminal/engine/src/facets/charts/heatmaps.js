@@ -1,8 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Heatmaps & Matrices: a scrolling latency heatmap, a contributions calendar
 // and a live correlation matrix.
-import { mix, gradient } from '../../color.js';
-import { palette as makePalette } from '../../palettes.js';
-import { signal, glyphs, safe, put, putR, clamp, smooth, memo, lift, onFill, ATTR } from './_data.js';
+const { mix, gradient } = __bm(0);
+const { palette: makePalette } = __bm(3);
+const { monoHint } = __bm(9);
+const { signal, glyphs, safe, put, putR, clamp, smooth, memo, lift, onFill, ATTR } = __bm(24);
 
 /**
  * The heat ramp. Magma's near-black floor reads as "nothing" on Night glass;
@@ -36,6 +38,8 @@ const heatLatency = {
     const cols = W - axisW, rowsPx = (H - foot) * 2;
     const labels = ['5s', '1s', '200ms', '50ms', '10ms'];
     const cached = memo();
+    // Mono depth: no color for the heat, so each cell is a luminance-ramp glyph of its value.
+    const mono = monoHint(ctx.buffer), ramp = mono?.ramp, last = ramp ? ramp.length - 1 : 0;
     return (t) => {
       const k0 = Math.floor(t * 2) - cols + 1;
       cached(b, 0, 0, W, H, k0, (buf) => draw(buf, k0));
@@ -45,12 +49,12 @@ const heatLatency = {
         const k = k0 + c;
         const m = p50.at(k), tl = tail.at(Math.floor(k / 4));
         for (let r = 0; r < rowsPx; r += 2) {
-          const cell = (rr) => {
+          const heat = (rr) => {
             const y = 1 - rr / (rowsPx - 1); // 0 fast (bottom) .. 1 slow (top)
-            const v = Math.exp(-(((y - m) / 0.11) ** 2)) + tl * 0.6 * Math.exp(-(((y - (m + 0.38)) / 0.14) ** 2)) + 0.06 * Math.abs(ctx.noise.noise2(k * 0.7, rr * 0.9));
-            return pal(clamp(v, 0, 1));
+            return clamp(Math.exp(-(((y - m) / 0.11) ** 2)) + tl * 0.6 * Math.exp(-(((y - (m + 0.38)) / 0.14) ** 2)) + 0.06 * Math.abs(ctx.noise.noise2(k * 0.7, rr * 0.9)), 0, 1);
           };
-          b.set(axisW + c, Math.floor(r / 2), '▀', cell(r), cell(r + 1));
+          if (mono) b.set(axisW + c, Math.floor(r / 2), ramp[Math.round(((heat(r) + heat(r + 1)) / 2) * last)], -1);
+          else b.set(axisW + c, Math.floor(r / 2), '▀', pal(heat(r)), pal(heat(r + 1)));
         }
       }
       if (axisW) labels.forEach((l, i) => { const y = Math.round((i / (labels.length - 1)) * (H - foot - 1)); b.text(0, y, l.padStart(axisW - 1), th.dim); });

@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../core.bundle.js';
 // Facets the plugin draws for itself — never in the catalog:
 //   sys-pair    the glowing approval key of the AI pairing prompt (code + client)
 //   sys-label   a text-only key (a live look with just a title)
@@ -5,14 +6,17 @@
 //   sys-layout  an inline live feedback layout ({ items: [text | bar | gbar | pixmap] }) composited into the canvas
 // Inputs arrive through ctx.data (opts.data), so params stay the engine's business.
 
-import { normalizeFacet } from '../facets/schema.js';
-import { surface } from '../scene/surface.js';
-import { textPath } from '../scene/text.js';
-import { n, esc, svgInner } from '../scene/svg.js';
+const { normalizeFacet } = __bm(104);
+const { surface } = __bm(110);
+const { textPath } = __bm(11);
+const { n, esc, svgInner } = __bm(5);
 import { validateSvg } from '../scene/validate.js';
-import { pulse } from '../scene/easing.js';
+const { pulse } = __bm(12);
 
 const sys = (raw) => normalizeFacet({ gallery: 'apps', category: 'Dashboards', tags: ['system'], description: 'Prism Deck plugin system surface (not in the catalog).', ...raw }, `apps/${raw.id}.js`);
+
+/** How long the approval key must be held (s). A tap never approves: an accidental or stray press can't pair. */
+export const PAIR_HOLD_S = 1.5;
 
 export const PAIR_FACET = sys({
   id: 'app-sys-pair', title: 'Pairing', surface: 'key', fps: 4, loop: 1, animated: true,
@@ -20,12 +24,21 @@ export const PAIR_FACET = sys({
     const k = surface(ctx);
     const d = ctx.data || {};
     const breathe = ctx.reduced ? 1 : 0.55 + 0.45 * pulse(ctx.t, 1);
-    k.background({ tone: 'alert' });
-    const ring = k.m.bold;
-    k.add(`<rect x="${n(ring / 2 + k.m.hair)}" y="${n(ring / 2 + k.m.hair)}" width="${n(k.w - ring - 2 * k.m.hair)}" height="${n(k.h - ring - 2 * k.m.hair)}" rx="${n(k.m.radius)}" fill="none" stroke="${k.color('warn')}" stroke-width="${n(ring * 0.6)}" stroke-opacity="${n(breathe, 3)}"/>`);
-    k.eyebrow('Allow AI?', { color: 'warn' });
+    // hold-to-approve: a progress ring fills while the key is held (ctx.pressedFor), from the top, clockwise
+    const held = ctx.pressed ? Math.min(1, Math.max(0, (ctx.pressedFor || 0) / PAIR_HOLD_S)) : 0;
+    k.background({ tone: held >= 1 ? 'ok' : 'alert' });
+    const ring = k.m.bold, inset = ring / 2 + k.m.hair, w = k.w - 2 * inset, h = k.h - 2 * inset, r = k.m.radius;
+    k.add(`<rect x="${n(inset)}" y="${n(inset)}" width="${n(w)}" height="${n(h)}" rx="${n(r)}" fill="none" stroke="${k.color('warn')}" stroke-width="${n(ring * 0.6)}" stroke-opacity="${n(held > 0 ? 0.35 : breathe, 3)}"/>`);
+    if (held > 0) {
+      const per = 2 * (w + h) - (8 - 2 * Math.PI) * r, len = per * held;
+      const x0 = inset, y0 = inset, x1 = inset + w, y1 = inset + h, cx = k.w / 2;
+      const d0 = `M${n(cx)} ${n(y0)}H${n(x1 - r)}A${n(r)} ${n(r)} 0 0 1 ${n(x1)} ${n(y0 + r)}V${n(y1 - r)}A${n(r)} ${n(r)} 0 0 1 ${n(x1 - r)} ${n(y1)}H${n(x0 + r)}A${n(r)} ${n(r)} 0 0 1 ${n(x0)} ${n(y1 - r)}V${n(y0 + r)}A${n(r)} ${n(r)} 0 0 1 ${n(x0 + r)} ${n(y0)}Z`;
+      k.add(`<path d="${d0}" fill="none" stroke="${k.color('pos')}" stroke-width="${n(ring)}" stroke-linecap="round" stroke-dasharray="${n(len)} ${n(per)}"/>`);
+    }
+    k.eyebrow(held >= 1 ? 'Allowed' : 'Allow AI?', { color: held >= 1 ? 'pos' : 'warn' });
     k.value(String(d.code || '----'), { cy: k.h * 0.5 });
-    k.label(String(d.client || 'Press to allow').slice(0, 18), { maxLines: 2 });
+    // the assistant names itself, so its name is never shown on the key (the property inspector quotes it)
+    k.label(held >= 1 ? 'Paired' : held > 0 ? 'Holding' : 'Hold', { maxLines: 1 });
     return k.svg();
   },
 });

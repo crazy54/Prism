@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Brian's Brain: a three-state automaton (ready → firing → refractory → ready)
 // where a ready cell fires when exactly two neighbors are firing. Almost any
 // seed boils into a sea of colliding "spaceships". Firing cells burn white-hot,
 // refractory cells glow in the accent, and a short afterglow traces where the
 // ships have been. Re-seeds itself if activity ever dies down.
-import { NONE, mix } from '../../color.js';
-import { fadeMark } from '../../palettes.js';
+const { NONE, mix } = __bm(0);
+const { fadeMark } = __bm(3);
 
 export default {
   title: "Brian's Brain",

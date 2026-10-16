@@ -19,7 +19,7 @@ tags: hourglass, netplan, revert, confirm, countdown
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-sand-timer
 SNAPSHOT  prism-term snapshot progress-sand-timer --size 80x10
 IN CODE

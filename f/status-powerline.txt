@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > STATUS LINES    558nm - 8 / 18
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > STATUS LINES    550nm - 8 / 18
 ------------------------------------------------------/\========================
 Powerline Prompt  status-powerline
 A two-line powerline shell prompt -- user, path, git and kube segments, exit
@@ -21,7 +21,7 @@ Switched to context "prod-us-east".
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play status-powerline
 SNAPSHOT  prism-term snapshot status-powerline --size 80x12
 IN CODE

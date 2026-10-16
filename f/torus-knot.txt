@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > WIREFRAMES            467nm - 6 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > WIREFRAMES            483nm - 6 / 19
 ------------------------------------------------------/\========================
 Torus Knot  torus-knot
 A braille wire tube with true hidden-line removal, morphing through the (2,3),
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   rings=4               Ring spacing (segments)  (1-8)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play torus-knot
 SNAPSHOT  prism-term snapshot torus-knot --size 48x22
 IN CODE

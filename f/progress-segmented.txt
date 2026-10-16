@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      494nm - 4 / 41
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      558nm - 4 / 41
 ------------------------------------------------------/\========================
 Segmented LEDs  progress-segmented
 Discrete segment bars -- parallelograms, squares and LED ticks -- that light one
@@ -14,7 +14,7 @@ tags: segments, led, zones, battery
   still at t=4s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-segmented
 SNAPSHOT  prism-term snapshot progress-segmented --size 50x5
 IN CODE

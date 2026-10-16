@@ -1,12 +1,13 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // An hourglass in a turned-wood stand. The sand is conserved: each frame the
 // top level and the bottom heap are solved (by bisection over the glass's real
 // profile) so the two always hold exactly the sand there is. The top drains
 // with a funnel dip, a flickering grain stream falls through the neck, the heap
 // below grows as a cone, and when the top runs dry the glass turns over — eased,
 // shrinking to fit as it turns — while the sand slides back against the neck.
-import { blend } from './_raster.js';
-import { easing, smoothstep } from '../../easing.js';
-import { NONE } from '../../color.js';
+const { blend } = __bm(18);
+const { easing, smoothstep } = __bm(10);
+const { NONE } = __bm(0);
 
 const FLIP = 1.4;
 const NS = 72; // integration rows per bulb

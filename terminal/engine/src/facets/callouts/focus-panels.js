@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A four-pane layout where focus moves like Tab in a real TUI: the focused
 // pane gets a heavy accent border, the rest recede.
-import { panel, glyphs, ATTR, fit, phase, uni } from './_kit.js';
+const { panel, glyphs, ATTR, fit, phase, uni } = __bm(22);
 
 const LOGS = ['GET /cart 200 41ms', 'POST /checkout 201 212ms', 'GET /search?q=tent 200 22ms', 'healthcheck ok', 'GET /account 200 34ms', 'POST /login 200 88ms'];
 

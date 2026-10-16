@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Orthogonal line routing for box-drawing diagrams.
 //
 // Segments are accumulated as N/E/S/W direction bits per cell, then painted
@@ -5,7 +6,7 @@
 // so crossing and branching edges merge into proper junctions instead of
 // overwriting each other. ASCII mode paints - | + instead.
 
-import { uni, panel, center, stringWidth } from '../callouts/_kit.js';
+const { uni, panel, center, stringWidth } = __bm(22);
 
 const N = 1, E = 2, S = 4, W = 8;
 const LIGHT = {

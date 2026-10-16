@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../facets.bundle.js';
 // The Prism Deck plugin runtime: action instances → render units → frames.
 //
 //   instance  one Prism action on the deck (a key, a dial / Galleon widget, a Neo info bar),
@@ -19,16 +20,19 @@
 // setPrompt(), and the 'pair-press' / 'behavior' / 'globals' events.
 
 import { EventEmitter } from 'node:events';
-import { render, stillTime, nextState } from '../render.js';
-import { createScheduler, quantize } from '../scene/scheduler.js';
-import { svgDataUrl, svgWindow } from '../scene/svg.js';
-import { findFacet } from '../facets/index.js';
-import { deviceFromInfo, deckLayout } from '../devices.js';
+const { render, stillTime, nextState } = __bm(100);
+const sched = __bm(102);
+const { svgDataUrl, svgWindow } = __bm(5);
+const { findFacet } = __bm(318);
+const { deviceFromInfo, deckLayout } = __bm(0);
 import { DeviceBudget, allocateFps, createUpdateBucket, elementCount, updateCost } from './budget.js';
 import { createTimer } from '../apps/sources/timer.js';
-import { facetMode, facetsFor, normalizeSettings, normalizeGlobals, compactSettings, GROUP_MODES, DEFAULT_GLOBALS } from './settings.js';
+const { createGameHost, GAME_RESET_HOLD_S, GAME_FPS } = __bm(106);
+const { createLinkBus, readoutOf, linksOf } = __bm(103);
+import { facetMode, facetsFor, normalizeSettings, normalizeGlobals, compactSettings, GROUP_MODES, DEFAULT_GLOBALS, bundledProfileFor } from './settings.js';
 import { CANVAS_LAYOUT_PATH, INFOBAR_LAYOUT_PATH, canvasPayload, widgetCanvas, fitCanvas, galleonWidgetRects } from './feedback.js';
-import { SYSTEM_FACETS } from './system-facets.js';
+import { SYSTEM_FACETS, PAIR_HOLD_S } from './system-facets.js';
+import { DEMO_KEYS, withDemoBadge, badgeTarget } from './demo-badge.js';
 import { createDataHub } from './data.js';
 
 export const PLUGIN_UUID = 'com.jeremyfhall.prism';
@@ -38,8 +42,14 @@ export const IDLE_PROBE_FPS = 2;      // a unit whose frames stopped changing is
 export const VIRTUAL_TYPES = new Set([3, 11, 14]); // Mobile, Virtual Stream Deck, MCP Deck: never approve pairing there
 export const AUDIO_KEYS = ['audio', 'spectrum'];   // fed per frame from the audio source (src/audio), not the 1 s data hub
 const PERSIST_MS = 400;
+const quantize = sched.quantize;
+const BOOT_FACET = 'span-power-on';
+const BOOT_DECIDE_MS = 600;       // wait this long for global settings (boot on/off, motion) before deciding
+const HOLD_BURST_MAX_MS = 30_000;   // a held key keeps animating (hold gestures), up to this long (a lost keyUp can't spin forever)
 const TIMER_RUN = new Set(['running', 'focus', 'break']); // states in which a key's timer runs
 const MAX_TIMERS = 256;
+const GAME_MODES = new Set(['key', 'span', 'deck']); // where games run (docs/game-runtime.md §1)
+const spanOf = (members) => { const cs = members.map((m) => m.col), rs = members.map((m) => m.row); const col = Math.min(...cs), row = Math.min(...rs); return { col, row, cols: Math.max(...cs) - col + 1, rows: Math.max(...rs) - row + 1 }; };
 const REALLOC_MS = 2000;
 const PREVIEW_MS = 250;
 
@@ -66,15 +76,19 @@ export class PrismRuntime extends EventEmitter {
     this.audio = audio;             // src/audio AudioSource (optional): retained while audio units are visible
     this.deviceSvg = deviceSvg;     // scene/qt.js toDeviceSvg: Qt ignores clipPath / preserveAspectRatio, so every payload goes through it
     this.timers = new Map();        // context → createTimer() for stopwatch / countdown keys (kept across page switches)
+    this.bootAt = now();            // the boot sequence's t = seconds since the plugin started
+    this.bootPending = false;       // set by start(): physical decks' keys wait (blank) until we know whether to play it
+    this.boot = null;               // { facet, devices: Set, endAt, timer }
     this.globals = normalizeGlobals(DEFAULT_GLOBALS);
     this.devices = new Map();
     this.instances = new Map();
     this.units = new Map();
+    this.links = new Map();        // deviceId → link bus (scene/link.js): the state keys, dials and screens of one device share
     this.overlays = new Map();     // deviceId → { keys: Map('c,r' → look config), dials: Map('d,l' → look config) }
     this.prompt = null;            // { code, client, contexts: Set, shownAt }
     this.pi = null;                // { context, action, timer, last }
     this.updates = createUpdateBucket(this.globals.limits, now); // ~200 updates/s shared by every device (hardware lab)
-    this.scheduler = createScheduler({ cap: 30, now, setTimer: (fn, ms) => { const h = setTimer(fn, ms); h?.unref?.(); return h; }, clearTimer });
+    this.scheduler = sched.createScheduler({ cap: 30, now, setTimer: (fn, ms) => { const h = setTimer(fn, ms); h?.unref?.(); return h; }, clearTimer });
     this.reallocTimer = null;
     this.started = false;
     this.handlers = {
@@ -108,6 +122,10 @@ export class PrismRuntime extends EventEmitter {
     if (this.conn.open) this.conn.getGlobalSettings?.();
     else this.conn.once?.('open', () => this.conn.getGlobalSettings?.());
     this.reallocTimer = setInterval(() => this.reallocate(), REALLOC_MS);
+    this.bootPending = true;
+    this.bootAt = this.now();
+    this.bootDecideTimer = this.setTimer(() => this.decideBoot(), BOOT_DECIDE_MS);
+    this.bootDecideTimer?.unref?.();
     this.reallocTimer.unref?.();
     return this;
   }
@@ -115,6 +133,8 @@ export class PrismRuntime extends EventEmitter {
   stop() {
     this.scheduler.stop();
     if (this.reallocTimer) clearInterval(this.reallocTimer);
+    if (this.bootDecideTimer) this.clearTimer(this.bootDecideTimer);
+    if (this.boot?.timer) this.clearTimer(this.boot.timer);
     this.reallocTimer = null;
     for (const u of this.units.values()) { u.release?.(); u.audioRelease?.(); u.audioRelease = null; }
     for (const d of this.devices.values()) d.budget.dispose();
@@ -148,6 +168,7 @@ export class PrismRuntime extends EventEmitter {
   onDeviceConnect(m, change = false) {
     const d = this.upsertDevice(m.device, m.deviceInfo);
     d.connected = true;
+    if (this.boot && this.isPhysical(d) && this.now() < this.boot.endAt) this.boot.devices.add(d.id);
     if (!change) d.budget.invalidate();
     this.regroup(d.id, { repaint: true });
     this.syncAudioFor(d.id);
@@ -207,6 +228,10 @@ export class PrismRuntime extends EventEmitter {
     if (this.prompt?.contexts.has(inst.context)) {
       return { facet: SYSTEM_FACETS.pair, mode: inst.controller === 'Keypad' ? 'key' : 'key-on-dial', theme: g.theme, themeMode: g.mode, params: {}, state: 0, data: { code: this.prompt.code, client: this.prompt.client }, motion: '', key: `pair|${inst.context}`, system: true };
     }
+    if (inst.controller === 'Keypad' && !inst.multi && this.isPhysical(dev)) {
+      if (this.boot?.devices.has(inst.device)) return { facet: this.boot.facet, mode: 'boot', theme: g.theme, themeMode: g.mode, params: { replay: false }, state: 0, data: null, motion: '', key: `boot|${inst.device}`, system: true };
+      if (this.bootPending && this.globals.boot !== false) return { blank: true, key: `bootwait|${inst.context}` };
+    }
     const ov = this.overlayFor(inst);
     if (ov) {
       if (ov.image) return { image: ov.image, key: `img|${inst.context}`, overlay: ov };
@@ -257,6 +282,9 @@ export class PrismRuntime extends EventEmitter {
       if (!u) {
         u = this.createUnit(key, deviceId, cfg, members);
         u.sig = sig; u.msig = msig;
+        this.syncGame(u);
+        this.adoptUnit(u);
+        this.setFps(u);
         this.paint(u, { priority: true });
         continue;
       }
@@ -271,6 +299,7 @@ export class PrismRuntime extends EventEmitter {
       if (u.cfg.state !== cfg.state) { u.stateChangedAt = this.now(); u.burstUntil = this.now() + BURST_S * 1000; }
       u.cfg = cfg; u.facet = cfg.facet; u.mode = cfg.mode; u.members = members; u.sig = sig; u.msig = msig;
       if (facetChanged) this.syncAudio(u);
+      this.syncGame(u);
       if (changed) { u.idle = false; u.stable = 0; if (repaint) for (const m of members) m.lastPayload = null; this.paint(u, { priority: true }); }
       this.setFps(u);
     }
@@ -284,6 +313,8 @@ export class PrismRuntime extends EventEmitter {
       startedAt: t, stateChangedAt: t, pressed: false, pressedAt: null, releasedAt: null, pressKey: null, turnedAt: null, touch: null,
       burstUntil: cfg.facet ? t + BURST_S * 1000 : 0, burstHot: false, idle: false, stable: 0, alloc: null, avgCost: null, elements: 0, lastFull: null,
       release: cfg.facet?.data?.length ? this.data.need(cfg.facet.data.filter((k) => !AUDIO_KEYS.includes(k))) : null, audioRelease: null,
+      // API 1.5.1: caps the unit's fps by how many keys its frames actually change
+      gov: typeof sched.createChangeGovernor === 'function' ? sched.createChangeGovernor({ budget: Math.max(20, this.globals.limits.updatesPerSec * 0.9) }) : null,
     };
     u.slot = { fps: 0, active: () => this.devices.get(u.device)?.connected !== false, tick: () => this.tick(u), onError: (e) => this.log('error', `${u.key}: ${e.stack || e.message}`) };
     this.units.set(key, u);
@@ -304,6 +335,7 @@ export class PrismRuntime extends EventEmitter {
   syncAudioFor(deviceId) { for (const u of this.units.values()) if (u.device === deviceId) this.syncAudio(u); }
 
   disposeUnit(u) {
+    if (u.resetTimer) { this.clearTimer(u.resetTimer); u.resetTimer = null; }
     this.scheduler.remove(u.slot);
     u.release?.();
     this.units.delete(u.key);
@@ -314,6 +346,7 @@ export class PrismRuntime extends EventEmitter {
 
   /** Steady fps the unit asks for (before the budget share): 0 for stills. */
   steadyFps(u) {
+    if (u.game) return this.gameFps(u);
     const f = u.facet;
     if (!f || u.cfg.image || u.cfg.blank || !f.animated) return 0;
     const motion = this.motionOf(u);
@@ -324,9 +357,16 @@ export class PrismRuntime extends EventEmitter {
 
   setFps(u) {
     if (!u.facet) { u.slot.fps = 0; return; }
-    const burst = this.now() < u.burstUntil && this.motionOf(u) !== 'still';
+    if (u.game) {
+      const want = this.gameFps(u), prev = u.slot.fps;
+      u.slot.fps = u.alloc != null ? Math.min(want, u.alloc || want) : want;
+      if (u.slot.fps !== prev) this.scheduler.wake(u.slot.fps > prev ? u.slot : undefined);
+      return;
+    }
+    const burst = this.inBurst(u) && this.motionOf(u) !== 'still';
     const steady = this.steadyFps(u);
-    const fps = burst ? (u.burstHot ? BURST_FPS : Math.min(BURST_FPS, Math.max(u.alloc ?? BURST_FPS, IDLE_PROBE_FPS))) : u.alloc != null ? Math.min(steady, u.alloc) : steady;
+    let fps = burst ? (u.burstHot ? BURST_FPS : Math.min(BURST_FPS, Math.max(u.alloc ?? BURST_FPS, IDLE_PROBE_FPS))) : u.alloc != null ? Math.min(steady, u.alloc) : steady;
+    if (!burst && u.gov && fps > 0) fps = u.gov.fps(fps);
     const prev = u.slot.fps;
     u.slot.fps = fps;
     if (fps !== prev) this.scheduler.wake(fps > prev ? u.slot : undefined);
@@ -342,14 +382,25 @@ export class PrismRuntime extends EventEmitter {
     const units = [...this.units.values()];
     if (!units.length) return;
     const L = this.globals.limits;
-    const alloc = allocateFps(L.updatesPerSec * 0.9, units.map((u) => ({ id: u.key, fps: this.steadyFps(u), images: u.members.length * (u.avgCost ?? 1) })), { perKeyPerSec: L.perKeyPerSec, minFps: L.minFps });
+    const changing = (u) => { const h = u.gov?.history; return h && h.length >= 3 ? Math.min(u.members.length, Math.max(0.5, h.reduce((a, b) => a + b, 0) / h.length)) : u.members.length; };
+    const alloc = allocateFps(L.updatesPerSec * 0.9, units.map((u) => ({ id: u.key, fps: this.steadyFps(u), images: (u.game ? u.members.length : changing(u)) * (u.avgCost ?? 1) })), { perKeyPerSec: L.perKeyPerSec, minFps: L.minFps });
     for (const u of units) { u.alloc = alloc.get(u.key) ?? null; this.setFps(u); }
   }
 
+  /** Is the unit in an interaction burst: just after a press / turn / state change, or while a key is held? */
+  inBurst(u) { const t = this.now(); return t < u.burstUntil || (u.pressed && u.pressedAt != null && t - u.pressedAt < HOLD_BURST_MAX_MS); }
+
   tick(u) {
-    const burst = this.now() < u.burstUntil;
-    // Press feedback / dial turns jump the queue; arrival and settings bursts take their fair turn.
-    const changed = this.paint(u, { priority: burst && u.burstHot });
+    if (u.game) {
+      const before = u.slot.fps;
+      this.paint(u);
+      this.setFps(u);
+      if (before > 0 && u.slot.fps === 0) this.reallocate();   // the transition settled: give its share back
+      return;
+    }
+    const burst = this.inBurst(u);
+    // Press feedback / dial turns jump the queue (for BURST_S); a long hold, arrival and settings bursts take their fair turn.
+    const changed = this.paint(u, { priority: u.burstHot && this.now() < u.burstUntil });
     if (!burst) {
       if (u.burstUntil) { u.burstUntil = 0; u.burstHot = false; this.setFps(u); }
       if (!changed) {
@@ -360,6 +411,7 @@ export class PrismRuntime extends EventEmitter {
         if (u.idle) { u.idle = false; this.setFps(u); this.reallocate(u.device); }
       }
     }
+    if (u.gov) this.setFps(u);
   }
 
   /** The render options for a unit at this instant. */
@@ -378,17 +430,35 @@ export class PrismRuntime extends EventEmitter {
       pressed: u.pressed,
       pressAge: u.pressed ? 0 : u.releasedAt != null ? quantize((now - u.releasedAt) / 1000, fps) : Infinity,
       pressedFor: u.pressed ? quantize((now - u.pressedAt) / 1000, fps) : 0,
+      heldFor: u.heldFor || 0,
       pressKey: u.pressKey,
       turnAge: u.turnedAt != null ? quantize((now - u.turnedAt) / 1000, fps) : Infinity,
       touch: u.touch ? { x: u.touch.x, y: u.touch.y, hold: u.touch.hold, segment: u.touch.segment, age: quantize((now - u.touch.at) / 1000, fps) } : null,
       value: u.cfg.value ?? anchor?.settings?.value ?? (typeof facetValue === 'number' ? facetValue : 0.5),
+      ticks: u.cfg.overlay ? u.cfg.overlay.ticks || 0 : (u.lastTurned && u.members.includes(u.lastTurned) ? u.lastTurned : anchor)?.settings?.ticks || 0,
+      values: this.dialValues(u, dev, facetValue),
       params: u.cfg.params || {},
       seed: u.seed,
-      data: { ...this.data.pick(u.facet?.data || []), ...this.audioData(u), ...this.timerData(u), ...(u.cfg.data || {}) },
+      data: this.withDemo(u, this.linkData(u, { ...this.data.pick(u.facet?.data || []), ...this.audioData(u), ...this.timerData(u), ...(u.cfg.data || {}) })),
       now: this.wallNow(),
       tzOffset: -new Date(this.wallNow()).getTimezoneOffset(),
       reduced: still,
     };
+  }
+
+  /**
+   * ctx.values: one value per dial for units that span dials (strip panoramas, Galleon screens, whole-deck
+   * facets) — each dial's own setting; on the Galleon the widget turned last stands for its dial.
+   */
+  dialValues(u, dev, facetValue) {
+    const dials = u.members.filter((m) => m.controller === 'Encoder');
+    if (dials.length < 2 && u.mode !== 'strip-all') return undefined;
+    const n = dev.model.strip?.segments || dev.model.dials?.count || Math.max(...dials.map((m) => m.col + 1), 1);
+    const dflt = typeof facetValue === 'number' ? facetValue : 0.5;
+    return Array.from({ length: n }, (_, i) => {
+      const on = dials.filter((m) => m.col === i).sort((a, b) => (b.turnedAt || 0) - (a.turnedAt || 0) || a.row - b.row)[0];
+      return on?.settings?.value ?? dflt;
+    });
   }
 
   /** ctx.data.audio / spectrum for this frame (the source caches per analysis hop; null → the facet simulates). */
@@ -400,6 +470,28 @@ export class PrismRuntime extends EventEmitter {
     for (const k of u.facet.data) if (AUDIO_KEYS.includes(k) && snap[k]) o[k] = snap[k];
     return o;
   }
+
+  /**
+   * The data keys of a unit that are simulated right now (no live source on this machine): DEMO_KEYS
+   * the data hub serves from a simulated source (or nobody serves: the facet simulates), audio / spectrum
+   * while sound capture isn't live. Re-checked once a second. null = everything it shows is real.
+   */
+  demoKeys(u) {
+    if (!u?.facet?.data?.length || u.cfg.system || u.cfg.overlay || u.cfg.image) return null;
+    const keys = u.facet.data.filter((k) => DEMO_KEYS.has(k));
+    if (!keys.length) return null;
+    const t = this.now();
+    if (u.demo && t - u.demo.at < 1000) return u.demo.keys;
+    const hubKeys = keys.filter((k) => !AUDIO_KEYS.includes(k));
+    const src = hubKeys.length && typeof this.data.sourceOf === 'function' ? this.data.sourceOf(hubKeys) : {};
+    const audioLive = !!this.audio && !!u.audioRelease && this.audio.mode === 'live';
+    const out = keys.filter((k) => (AUDIO_KEYS.includes(k) ? !audioLive : !(src[k] === 'live' || src[k] === 'custom')));
+    u.demo = { at: t, keys: out.length ? out : null };
+    return u.demo.keys;
+  }
+
+  /** ctx.data.demo = the simulated keys (the runtime's source flag; facets may read it, the badge does). */
+  withDemo(u, data) { const d = this.demoKeys(u); return d ? { ...data, demo: d } : data; }
 
   /** The audio source as the PI shows it. */
   audioStatus() {
@@ -417,9 +509,15 @@ export class PrismRuntime extends EventEmitter {
       return this.submitUrl(dev, inst, u.cfg.image, inst.controller === 'Keypad' ? 'image' : 'feedback', true);
     }
     const f = u.facet;
-    const o = this.frameOpts(u);
-    let changed = false, cost = 0, n = 0, elements = 0;
-    const send = (inst, svg, kind) => { if (!inst || !svg) return; const r = this.submitFrame(dev, inst, svg, kind, priority); n++; cost += r.cost; elements = Math.max(elements, r.elements); if (r.changed) changed = true; };
+    let o = this.frameOpts(u);
+    if (u.game) {
+      const t = this.now() / 1000;
+      if (u.game.pump(t)) this.persistGame(u);            // a due clock tick (ticking games only)
+      o = { ...o, ...u.game.renderOpts(t) };             // game, gamePrev, gameEvent (+ age)
+    }
+    let changed = false, cost = 0, n = 0, elements = 0, nChanged = 0;
+    const badged = o.data?.demo ? badgeTarget(u.members, u.mode) : null;   // DEMO: simulated data is never shown unlabeled
+    const send = (inst, svg, kind) => { if (!inst || !svg) return; if (inst === badged) svg = withDemoBadge(svg, { align: u.mode === 'strip-1' || u.mode === 'strip-all' ? 'center' : 'right' }); const r = this.submitFrame(dev, inst, svg, kind, priority); n++; cost += r.cost; elements = Math.max(elements, r.elements); if (r.changed) { changed = true; nChanged++; } };
     const key = (inst, svg) => send(inst, svg, 'image');
     const dial = (inst, svg) => send(inst, svg, 'feedback');
     const by = (ctrl) => new Map(u.members.filter((m) => m.controller === ctrl).map((m) => [coordKey(m.col, m.row), m]));
@@ -435,11 +533,18 @@ export class PrismRuntime extends EventEmitter {
         for (const k of r.keys) key(keys.get(coordKey(k.col, k.row)), k.svg);
         break;
       }
+      case 'boot': {
+        // the boot sequence: one span over the whole device, t from plugin start (played once, then held)
+        const sec = (this.now() - this.bootAt) / 1000;
+        r = render(f, { ...o, t: quantize(sec, u.slot.fps || 8), since: sec, span: { col: 0, row: 0, cols: dev.model.cols, rows: dev.model.rows } });
+        const keys = by('Keypad');
+        for (const k of r.keys) key(keys.get(coordKey(k.col, k.row)), k.svg);
+        break;
+      }
       case 'strip-1': r = render(f, { ...o, segments: 1 }); dial(u.members[0], r.segments?.[0] || r.svg); break;
       case 'strip-all': {
         const segs = dev.model.strip?.segments || dev.model.dials?.count || 4;
-        const values = Array.from({ length: segs }, (_, i) => u.members.find((m) => m.col === i)?.settings?.value ?? 0.5);
-        r = render(f, { ...o, segments: segs, values });
+        r = render(f, { ...o, segments: segs });
         for (const m of u.members) dial(m, r.segments?.[m.col]);
         break;
       }
@@ -457,7 +562,10 @@ export class PrismRuntime extends EventEmitter {
         for (const k of r.keys || []) key(keys.get(coordKey(k.col, k.row)), k.svg);
         if (r.segments) for (const m of dials.values()) dial(m, r.segments[m.col]);
         const L = deckLayout(dev.model);
-        if (L.screen && dev.model.screen?.kind === 'galleon') {
+        if (r.widgets?.length) {
+          // API 1.5.1: deck facets on the Galleon return the four 2:1 widget windows (whole-deck games keep score there)
+          for (const w of r.widgets) { const m = dials.get(coordKey(w.dial, w.layer)); if (m && w.svg) dial(m, widgetCanvas(w.svg)); }
+        } else if (L.screen && dev.model.screen?.kind === 'galleon') {
           for (const w of galleonWidgetRects(L.screen, dev.model.screen.widgets)) { const m = dials.get(coordKey(w.dial, w.layer)); if (m) dial(m, widgetCanvas(svgWindow(r.svg, w))); }
         } else if (L.screen && dev.model.screen?.kind === 'infobar') {
           const neo = u.members.find((m) => m.controller === 'Neo');
@@ -475,6 +583,7 @@ export class PrismRuntime extends EventEmitter {
       if (prev == null || Math.abs(u.avgCost - prev) / prev > 0.25) this.reallocate();
     }
     u.lastFull = r?.svg || null;
+    u.gov?.observe(nChanged);
     return changed;
   }
 
@@ -521,6 +630,118 @@ export class PrismRuntime extends EventEmitter {
     for (const d of this.devices.values()) { if (invalidate) d.budget.invalidate(); this.regroup(d.id, { repaint: true }); }
   }
 
+  // ── boot sequence (API 1.5.1, docs/game-runtime.md §7) ────────────────────────
+  /**
+   * Decide once, when the global settings arrive (or after BOOT_DECIDE_MS): play span-power-on on every
+   * physical deck (not the MCP Deck / Virtual / Mobile) unless the user turned it off or chose 'still'
+   * motion. It runs as a span over the whole device with t = seconds since the plugin started, sends only
+   * the keys whose slice changed, and hands the keys back at loop − 1.4 s (or at the first key press).
+   */
+  decideBoot() {
+    if (!this.bootPending) return;
+    this.bootPending = false;
+    if (this.bootDecideTimer) { this.clearTimer(this.bootDecideTimer); this.bootDecideTimer = null; }
+    const f = exactFacet(BOOT_FACET);
+    const devs = new Set([...this.devices.values()].filter((d) => this.isPhysical(d)).map((d) => d.id));
+    if (f && this.globals.boot !== false && this.globals.motion !== 'still' && devs.size) {
+      const pace = f.params?.pace?.default || 1;
+      const endAt = this.bootAt + Math.max(1, (f.loop - 1.4) / pace) * 1000;
+      if (endAt > this.now()) {
+        this.boot = { facet: f, devices: devs, endAt, timer: this.setTimer(() => this.endBoot(), endAt - this.now()) };
+        this.boot.timer?.unref?.();
+      }
+    }
+    for (const d of this.devices.values()) this.regroup(d.id, { repaint: true });
+  }
+
+  /** Hand a deck's keys (or every deck's) back to their own facets: repaint at once. */
+  endBoot(deviceId) {
+    if (!this.boot) return;
+    const ids = deviceId ? [deviceId] : [...this.boot.devices];
+    for (const id of ids) this.boot.devices.delete(id);
+    if (!this.boot.devices.size) { if (this.boot.timer) this.clearTimer(this.boot.timer); this.boot = null; }
+    for (const id of ids) this.regroup(id, { repaint: true });
+  }
+
+  // ── games (API 1.5, docs/game-runtime.md) ───────────────────────────────────────
+  /**
+   * One game host per key / span / deck unit, built when the unit is and rebuilt when its facet,
+   * block or params change (a params change deals a new game; a moved block keeps its state).
+   */
+  syncGame(u) {
+    const want = !!u.facet?.game && GAME_MODES.has(u.mode) && !u.cfg.overlay && !u.cfg.system;
+    if (!want) { u.game = null; u.gameSig = null; return; }
+    const dev = this.devices.get(u.device);
+    const anchor = u.members[0];
+    const span = u.mode === 'span' ? spanOf(u.members) : undefined;
+    const params = JSON.stringify(u.cfg.params || {});
+    const sig = JSON.stringify([u.facet.id, u.mode, span, dev.model.id, params]);
+    if (u.game && u.gameSig === sig) return;
+    let seed = anchor.settings.gameSeed;
+    if (!Number.isInteger(seed)) { seed = (hashStr(anchor.context) ^ this.wallNow()) >>> 0; this.persist(anchor, { gameSeed: seed }); }
+    // The anchor's settings always hold the latest snapshot (persist() updates them at once), so resume from
+    // there: on hardware a block's keys appear one by one, and the host is rebuilt as the span grows — the
+    // host ignores a snapshot whose grid doesn't match yet, and resumes once the whole block is back.
+    const newRules = !!u.game && (u.gameFacet !== u.facet.id || u.gameParams !== params);
+    const snapshot = newRules ? null : anchor.settings.game;
+    u.game = createGameHost(u.facet, { device: dev.model, span, params: u.cfg.params, seed, snapshot, clock: () => this.now() / 1000 });
+    u.gameSig = sig; u.gameFacet = u.facet.id; u.gameParams = params;
+    if (newRules) this.persistGame(u);   // a params change deals a new game: it replaces the old snapshot
+  }
+
+  /** The fps a game unit needs now: ≤ 12 during a transition, tickHz while ticking, else 0 (still: ticks only). */
+  gameFps(u) {
+    const motion = this.motionOf(u);
+    if (motion === 'still') return u.game.needsTick() ? u.game.tickHz : 0;
+    return u.game.fps(this.now() / 1000, motion === 'calm' ? 4 : GAME_FPS);
+  }
+
+  /** Feed the game one event; the first frame after it jumps the queue. → dispatch result */
+  gameDispatch(u, ev) {
+    const r = u.game.dispatch({ ...ev, t: this.now() / 1000 });
+    if (r.changed) { this.persistGame(u); this.publishGame(u); }
+    this.reallocate();
+    this.setFps(u);
+    this.paint(u, { priority: true });
+    return r;
+  }
+
+  gameReset(u) {
+    if (u.resetTimer) { this.clearTimer(u.resetTimer); u.resetTimer = null; }
+    u.game.reset(this.now() / 1000);
+    this.persistGame(u);
+    this.publishGame(u);
+    this.reallocate();
+    this.setFps(u);
+    this.paint(u, { priority: true });
+  }
+
+  /** Keys press / release with the device key index; dials with their column. Holding a key deals a new game (not on the Galleon). */
+  gamePress(u, inst, dev, down) {
+    if (inst.controller !== 'Keypad') return this.gameDispatch(u, { type: down ? 'press' : 'release', dial: inst.col });
+    const key = inst.row * (dev.model.cols || 1) + inst.col;
+    const t = this.now();
+    if (u.resetTimer) { this.clearTimer(u.resetTimer); u.resetTimer = null; }
+    if (down) {
+      u.pressed = true; u.pressedAt = t; u.pressKey = key; u.gameHeld = key;
+      // The Galleon app consumes long holds (hardware lab), so there the PI's "New game" is the way.
+      if (dev.model.family !== 'galleon') {
+        u.resetTimer = this.setTimer(() => { u.resetTimer = null; if (u.pressed && u.gameHeld === key && this.units.get(u.key) === u && u.game) this.gameReset(u); }, GAME_RESET_HOLD_S * 1000);
+        u.resetTimer?.unref?.();
+      }
+      return this.gameDispatch(u, { type: 'press', key });
+    }
+    const heldFor = u.pressed && u.pressedAt != null ? Math.max(0, (t - u.pressedAt) / 1000) : 0;
+    u.heldFor = heldFor;
+    u.pressed = false; u.releasedAt = t;
+    const held = u.gameHeld ?? key;
+    u.gameHeld = null;
+    return this.gameDispatch(u, { type: 'release', key: held, heldFor });
+  }
+
+  /** Persist the game on the unit's anchor (debounced like dial values; willDisappear flushes it). */
+  persistGame(u) { if (u.game) this.persist(u.members[0], { game: u.game.snapshot() }); }
+
   // ── stopwatch / countdown timers (src/apps/sources/timer.js) ───────────────
   /** Does this facet keep a per-key timer (declares data 'timer')? */
   usesTimer(facet) { return !!facet?.data?.includes('timer'); }
@@ -563,21 +784,73 @@ export class PrismRuntime extends EventEmitter {
     return this.timers.has(inst.context) ? this.timerOf(inst, u.facet).snapshot() : {};
   }
 
+  // ── linked state (scene/link.js) ──────────────────────────────────────────────
+  // One bus per device: a unit whose facet declares `link` publishes its state / dial value when it
+  // changes, and every other unit of the device that mirrors the channel follows (state persisted, repainted),
+  // so the mic key, the Galleon screen and a + dial agree. Games publish their readout on 'game'.
+  busOf(deviceId) { let b = this.links.get(deviceId); if (!b) { b = createLinkBus(); this.links.set(deviceId, b); } return b; }
+  linkable(u) { return !!u?.facet && !u.cfg.overlay && !u.cfg.system && !u.cfg.blank && !u.cfg.image; }
+  linkData(u, base) { return this.linkable(u) && this.links.has(u.device) ? this.busOf(u.device).data(u.facet, u.cfg.params, base) : base; }
+  /** A unit changed state or value: publish its links and bring the device's other units in line. */
+  relink(u) {
+    if (!this.linkable(u) || u.game) return;
+    const changed = this.busOf(u.device).publish(u.facet, u.cfg.params, { state: u.cfg.state || 0, value: u.cfg.value });
+    if (changed.length) this.follow(u.device, changed, u);
+  }
+  follow(deviceId, changed, src) {
+    const bus = this.busOf(deviceId), t = this.now();
+    for (const o of this.units.values()) {
+      if (o === src || o.device !== deviceId || o.game || !this.linkable(o) || !bus.listens(o.facet, o.cfg.params, changed)) continue;
+      const st = bus.stateOf(o.facet, o.cfg.params, o.cfg.state || 0);
+      if (st !== null && st !== (o.cfg.state || 0)) {
+        if (o.mode === 'key') this.syncTimer(o.members[0], o.facet.states[o.cfg.state || 0], o.facet.states[st]);
+        for (const mm of o.members) this.persist(mm, { state: st }, true);
+        o.cfg = { ...o.cfg, state: st }; o.stateChangedAt = t;
+      }
+      if (o.releasedAt == null) o.releasedAt = t - 10000;   // it follows the device now: no demo autoplay (motion keys)
+      const v = bus.valueOf(o.facet, o.cfg.params);
+      if (v !== null && v !== o.cfg.value && !GROUP_MODES.has(o.mode)) { for (const mm of o.members) this.persist(mm, { value: v }); o.cfg = { ...o.cfg, value: v }; o.turnedAt = t; }
+      o.gov?.reset(); o.burstUntil = t + BURST_S * 1000; o.idle = false; o.stable = 0;
+      this.setFps(o); this.paint(o, { priority: true });
+    }
+  }
+  /** A unit appears: it takes the device's shared values (or publishes its own when there are none yet). */
+  adoptUnit(u) {
+    if (!this.linkable(u)) return;
+    if (u.game) { this.publishGame(u); return; }
+    const bus = this.busOf(u.device);
+    const r = bus.adopt(u.facet, u.cfg.params, { state: u.cfg.state || 0, value: u.cfg.value });
+    if (r.state !== (u.cfg.state || 0)) { for (const mm of u.members) this.persist(mm, { state: r.state }, true); u.cfg = { ...u.cfg, state: r.state }; }
+    if (typeof r.value === 'number' && r.value !== u.cfg.value && !GROUP_MODES.has(u.mode)) { for (const mm of u.members) this.persist(mm, { value: r.value }); u.cfg = { ...u.cfg, value: r.value }; }
+    if (r.changed.length) this.follow(u.device, r.changed, u);
+    // units that mirror a channel another unit also shows follow the device, not a demo autoplay
+    const own = linksOf(u.facet, u.cfg.params).map((l) => l.channel);
+    if (own.length) {
+      const t = this.now();
+      const peers = [...this.units.values()].filter((o) => o !== u && o.device === u.device && this.linkable(o) && !o.game && bus.listens(o.facet, o.cfg.params, own));
+      if (peers.length) for (const o of [u, ...peers]) if (o.releasedAt == null && linksOf(o.facet, o.cfg.params).length) o.releasedAt = t - 10000;
+    }
+  }
+  /** A game unit's readout on the device's 'game' channel (the Game Scoreboard screen shows it). */
+  publishGame(u) {
+    if (!u.game || !this.linkable(u)) return;
+    if (this.busOf(u.device).set('game', readoutOf(u.facet, u.game.state, u.cfg.params))) this.follow(u.device, ['game'], u);
+  }
+
   // ── input ────────────────────────────────────────────────────────────────────
   onPress(m, down) {
     const inst = this.instances.get(m.context);
     if (!inst) return;
     const dev = this.devices.get(inst.device);
-    if (down && this.prompt?.contexts.has(inst.context)) {
-      // The approval press: only on a physical deck, and not a press that began before the prompt was drawn.
-      if (this.isPhysical(dev) && this.now() - this.prompt.shownAt >= 400) this.emit('pair-press', { context: inst.context, device: inst.device });
-      return;
-    }
+    if (this.prompt?.contexts.has(inst.context)) return this.onPromptPress(inst, dev, down);
+    if (this.boot?.devices.has(inst.device) && inst.controller === 'Keypad') { if (down) this.endBoot(inst.device); return; }
     const u = this.unitOf(inst);
     if (!u) return;
+    if (u.game) return this.gamePress(u, inst, dev, down);
     const t = this.now();
     if (down) { u.pressed = true; u.pressedAt = t; u.pressKey = inst.row * (dev.model.cols || 1) + inst.col; }
-    else { u.pressed = false; u.releasedAt = t; }
+    else { if (u.pressed && u.pressedAt != null) u.heldFor = Math.round(((t - u.pressedAt) / 1000) * 1000) / 1000; u.pressed = false; u.releasedAt = t; }
+    u.gov?.reset();
     u.burstUntil = t + BURST_S * 1000;
     u.burstHot = true;
     u.idle = false; u.stable = 0;
@@ -585,17 +858,65 @@ export class PrismRuntime extends EventEmitter {
       const ov = u.cfg.overlay;
       if (ov) this.emit('behavior', { device: inst.device, controller: inst.controller, col: inst.col, row: inst.row, overlay: ov });
       else {
+        this.runPress(inst, dev);
         const next = nextState(u.facet, u.cfg.state || 0);
         if (next !== (u.cfg.state || 0)) {
           if (u.mode === 'key') this.syncTimer(u.members[0], u.facet.states[u.cfg.state || 0], u.facet.states[next]);
           for (const mm of u.members) this.persist(mm, { state: next }, true);
           u.cfg = { ...u.cfg, state: next };
           u.stateChangedAt = t;
+          this.relink(u);
         }
       }
     }
     this.setFps(u);
     this.paint(u, { priority: true });
+  }
+
+  /**
+   * The AI pairing prompt: approval is a HOLD of PAIR_HOLD_S (1.5 s) on the glowing key of a physical deck (a progress
+   * ring fills while held; letting go early cancels). A tap, a press that began before the prompt was
+   * drawn, or any press on the MCP Deck / Virtual Stream Deck / Mobile never approves.
+   */
+  onPromptPress(inst, dev, down) {
+    const p = this.prompt, u = this.unitOf(inst), t = this.now();
+    if (down) {
+      if (!this.isPhysical(dev) || t - p.shownAt < 400) return;
+      if (p.holdTimer) this.clearTimer(p.holdTimer);
+      p.hold = inst.context;
+      p.holdTimer = this.setTimer(() => {
+        p.holdTimer = null;
+        if (this.prompt !== p || p.hold !== inst.context) return;
+        p.hold = null;
+        this.conn.showOk?.(inst.context);
+        this.emit('pair-press', { context: inst.context, device: inst.device, heldMs: Math.round(this.now() - t) });
+      }, PAIR_HOLD_S * 1000);
+      p.holdTimer?.unref?.();
+    } else if (p.hold === inst.context) {
+      if (p.holdTimer) this.clearTimer(p.holdTimer);
+      p.holdTimer = null; p.hold = null;
+    }
+    if (!u) return;
+    if (down) { u.pressed = true; u.pressedAt = t; } else { u.pressed = false; u.releasedAt = t; }
+    u.burstUntil = t + BURST_S * 1000; u.burstHot = true; u.idle = false; u.stable = 0;
+    this.setFps(u);
+    this.paint(u, { priority: true });
+  }
+
+  /**
+   * The instance's optional REAL press behavior (settings.press; Prism Display is visual by default):
+   * open an http(s) URL, switch this device to its Prism sample profile (optionally a page), or back to
+   * the previous profile. Hosts without profile switching (OpenDeck) get an alert on the key instead.
+   */
+  runPress(inst, dev) {
+    const b = inst.settings.press;
+    if (!b) return false;
+    let ok = false;
+    if (b.kind === 'url') ok = this.conn.openUrl(b.url) !== false;
+    else if (b.kind === 'profile') { const name = bundledProfileFor(dev?.type); ok = !!name && this.conn.switchToProfile(dev.id, name, b.page ? b.page - 1 : undefined) !== false; }
+    else if (b.kind === 'back') ok = this.conn.switchToProfile(dev.id) !== false;
+    if (!ok) this.conn.showAlert?.(inst.context);
+    return ok;
   }
 
   onDialRotate(m) {
@@ -604,12 +925,17 @@ export class PrismRuntime extends EventEmitter {
     const u = this.unitOf(inst);
     if (!u || !u.facet) return;
     const ticks = Math.max(-48, Math.min(48, Math.trunc(Number(m.payload?.ticks) || 0))); // fast spins aggregate (Galleon: up to ±12 per event)
+    if (u.game) { u.turnedAt = this.now(); this.gameDispatch(u, { type: 'rotate', dial: inst.col, ticks }); return; }
+    u.gov?.reset();
     const p = u.cfg.params || {};
     const step = (typeof p.step === 'number' && p.step > 0 ? p.step : u.facet.params?.step?.default > 0 ? u.facet.params.step.default : 0.02) * (m.payload?.pressed ? 5 : 1);
-    const cur = inst.settings.value ?? u.cfg.value ?? (typeof u.facet.params?.value?.default === 'number' ? u.facet.params.value.default : 0.5);
+    const own = GROUP_MODES.has(u.mode) ? inst.settings.value : inst.settings.value ?? u.cfg.value;   // a panorama's dials each keep their own value
+    const cur = own ?? (typeof u.facet.params?.value?.default === 'number' ? u.facet.params.value.default : 0.5);
     const value = Math.round(Math.min(1, Math.max(0, cur + ticks * step)) * 1e4) / 1e4;
-    if (u.cfg.overlay) { u.cfg.overlay.value = value; u.cfg = { ...u.cfg, value }; }
-    else { this.persist(inst, { value }); if (u.members[0] === inst || u.mode !== 'strip-all') u.cfg = { ...u.cfg, value }; }
+    if (u.cfg.overlay) { u.cfg.overlay.value = value; u.cfg.overlay.ticks = (u.cfg.overlay.ticks || 0) + ticks; u.cfg = { ...u.cfg, value }; }
+    else { this.persist(inst, { value, ticks: (inst.settings.ticks || 0) + ticks }); if (u.members[0] === inst || !GROUP_MODES.has(u.mode)) u.cfg = { ...u.cfg, value }; if (!GROUP_MODES.has(u.mode)) this.relink(u); }
+    inst.turnedAt = this.now();
+    u.lastTurned = inst;
     u.turnedAt = this.now();
     u.burstUntil = this.now() + BURST_S * 1000;
     u.burstHot = true;
@@ -622,6 +948,12 @@ export class PrismRuntime extends EventEmitter {
     const inst = this.instances.get(m.context);
     if (!inst) return;
     const tu = this.unitOf(inst);
+    if (tu?.game) {
+      // A game gets the tap as a touch event (a long touch too: it is not a reset). Deck units: strip-wide x.
+      const [tx = 0, ty = 0] = Array.isArray(m.payload?.tapPos) ? m.payload.tapPos.map(Number) : [];
+      this.gameDispatch(tu, { type: 'touch', x: tx + (tu.mode === 'deck' ? inst.col * 200 : 0), y: ty, hold: !!m.payload?.hold });
+      return;
+    }
     if (tu) {
       // tapPos is relative to the dial's 200×100 segment; whole-strip facets get strip x.
       const [x = 0, y = 0] = Array.isArray(m.payload?.tapPos) ? m.payload.tapPos.map(Number) : [];
@@ -655,6 +987,7 @@ export class PrismRuntime extends EventEmitter {
     if (!inst) return;
     const prev = inst.settings;
     inst.settings = normalizeSettings(m.payload?.settings, { controller: inst.controller, device: this.devices.get(inst.device).model });
+    if (prev.facet === inst.settings.facet) inst.settings = { ...inst.settings, game: prev.game ?? null, gameSeed: prev.gameSeed ?? inst.settings.gameSeed };
     // Keep a span group consistent: the look you set on one key applies to every key of its block.
     const s = inst.settings;
     if (GROUP_MODES.has(facetMode(exactFacet(s.facet), inst.controller, this.devices.get(inst.device).model)) && prev.facet === s.facet && prev.group === s.group) {
@@ -681,7 +1014,47 @@ export class PrismRuntime extends EventEmitter {
     if (JSON.stringify([prev.theme, prev.mode, prev.motion, prev.format]) !== JSON.stringify([this.globals.theme, this.globals.mode, this.globals.motion, this.globals.format])) this.repaintAll();
     else this.reallocate();
     this.emit('globals', this.globals, prev);
+    if (this.globals.calendarFile !== prev.calendarFile) this.applyCalendar();
+    this.decideBoot();
+    if (this.boot && (this.globals.boot === false || this.globals.motion === 'still')) this.endBoot();
     if (this.pi) this.sendPiState();
+  }
+
+  /**
+   * Point the data hub's calendar at the user's .ics file (Data sources in the PI), check it once so the
+   * PI can say whether it was found, and let every badge re-evaluate.
+   */
+  applyCalendar() {
+    const file = this.globals.calendarFile || '';
+    try { this.data.setCalendarFile?.(file); } catch (e) { this.log('warn', 'calendar: ' + e.message); }
+    for (const u of this.units.values()) u.demo = null;
+    this.calendarCheck = file ? { file, pending: true } : null;
+    if (file && typeof this.data.checkCalendarFile === 'function') {
+      Promise.resolve(this.data.checkCalendarFile(file)).then((r) => {
+        if ((this.globals.calendarFile || '') !== file) return;
+        this.calendarCheck = { file, ...(r || { ok: false }) };
+        for (const u of this.units.values()) u.demo = null;
+        if (this.pi) this.sendPiState();
+      }, () => {});
+    }
+    if (this.pi) this.sendPiState();
+  }
+
+  /** What feeds the data facets on this machine (the PI's Data sources section). live | demo | off. */
+  sourcesStatus() {
+    const st = typeof this.data.status === 'function' ? this.data.status() : null;
+    const live = (k) => (st ? String(st.keys?.[k] || '').split(' > ').some((p) => p.endsWith(':live') || p === 'custom') : (this.data.supported?.() || []).includes(k));
+    const cal = this.calendarCheck;
+    return {
+      system: live('cpu') ? 'live' : 'demo',
+      media: live('media') ? 'live' : 'demo',
+      weather: live('weather') ? 'live' : 'demo',
+      audio: !this.audio ? 'off' : this.audio.mode === 'live' ? 'live' : 'demo',
+      calendar: cal?.ok ? 'live' : 'demo',
+      calendarFile: this.globals.calendarFile || '',
+      calendarCheck: cal ? { ok: !!cal.ok, pending: !!cal.pending, events: cal.events ?? null, error: cal.error || null } : null,
+      platform: process.platform,
+    };
   }
 
   /** Write global settings (keeps unknown keys the PI may own). */
@@ -717,8 +1090,11 @@ export class PrismRuntime extends EventEmitter {
       coordinates: inst ? { column: inst.col, row: inst.row } : null,
       settings: inst ? compactSettings(inst.settings) : null,
       choices: inst && dev ? facetsFor(inst.controller, dev.model).map((f) => f.id) : [],
-      unit: u ? { mode: u.mode, members: u.members.length, fps: Math.round(u.slot.fps * 10) / 10, overlay: !!u.cfg.overlay, audio: this.usesAudio(u) } : null,
+      unit: u ? { mode: u.mode, members: u.members.length, fps: Math.round(u.slot.fps * 10) / 10, overlay: !!u.cfg.overlay, audio: this.usesAudio(u), game: u.game ? { n: u.game.n, holdReset: dev?.model?.family !== 'galleon' } : null } : null,
       audio: this.audioStatus(),
+      boot: { enabled: this.globals.boot === true, playing: !!this.boot },
+      sources: this.sourcesStatus(),
+      demo: u ? this.demoKeys(u) : null,
       globals: this.globals,
       live: this.liveStatus ? this.liveStatus() : { running: false },
     };
@@ -739,13 +1115,14 @@ export class PrismRuntime extends EventEmitter {
   onPiMessage(m) {
     const p = m.payload || {};
     const inst = this.instances.get(m.context);
-    switch (p.cmd) {
+    switch (p.cmd || (p.event === 'game-reset' ? 'game-reset' : undefined)) {
       case 'hello': if (!this.pi && m.context) this.onPiAppear(m); else this.sendPiState(); break;
       case 'reset':
         if (inst) { inst.settings = normalizeSettings({ facet: inst.settings.facet, group: inst.settings.group }, { controller: inst.controller, device: this.devices.get(inst.device).model }); this.flushPersist(inst); this.regroup(inst.device); this.sendPiState(); }
         break;
       case 'live': this.emit('pi-live', p); break;   // { action: 'deny' | 'revoke' }
       case 'stats': this.toPi({ type: 'stats', stats: this.stats() }); break;
+      case 'game-reset': { const gu = inst && this.unitOf(inst); if (gu?.game) this.gameReset(gu); this.sendPiState(); break; }
       case 'audio-bridge': {
         // Only when no native capture backend is live: the bridge page feeds levels from the browser.
         const i = this.audio?.info?.();
@@ -803,6 +1180,7 @@ export class PrismRuntime extends EventEmitter {
   /** Show (or with null, clear) the pairing prompt. Returns the number of keys showing it. */
   setPrompt(prompt) {
     const before = this.prompt ? [...this.prompt.contexts] : [];
+    if (this.prompt?.holdTimer) { this.clearTimer(this.prompt.holdTimer); this.prompt.holdTimer = null; }
     this.prompt = prompt ? { ...prompt, contexts: this.promptContexts(), shownAt: this.now() } : null;
     const devs = new Set([...before, ...(this.prompt ? this.prompt.contexts : [])].map((c) => this.instances.get(c)?.device).filter(Boolean));
     for (const id of devs) this.regroup(id);

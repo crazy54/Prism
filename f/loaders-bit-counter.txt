@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS   488nm - 15 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS   506nm - 15 / 64
 ------------------------------------------------------/\========================
 Bit Counter  loaders-bit-counter
 An eight-bit register counting up in real binary, one increment per tick -- low
@@ -17,7 +17,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-bit-counter
 SNAPSHOT  prism-term snapshot loaders-bit-counter --size 44x5
 IN CODE

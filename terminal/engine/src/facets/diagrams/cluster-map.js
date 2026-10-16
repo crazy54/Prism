@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A cluster map: three nodes with their pods, CPU and memory. node-b goes
 // NotReady, its pods are evicted and reschedule onto the healthy nodes one
 // by one (Pending → Running), then node-b comes back empty.
-import { ATTR, glyphs, uni, phase, fit, hbar, panel, mix } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, fit, hbar, panel, mix } = __bm(22);
 
 const SVC = { c: ['checkout', 'accent'], p: ['payments', 'pos'], s: ['search', 'info'], i: ['inventory', 'warn'] };
 const BASE = { a: 'ccpsic', b: 'cppsis', c: 'psicc' };

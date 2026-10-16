@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > WEATHER       475nm - 17 / 18
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > WEATHER       471nm - 17 / 18
 ------------------------------------------------------/\========================
 Snow over a Cabin  snow
 Parallax snowfall in a gusty wind that settles into drifts and a roof cap,
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   density=1             Snowfall  (0.2-3)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play snow
 SNAPSHOT  prism-term snapshot snow --size 64x22
 IN CODE

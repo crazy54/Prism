@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Radio groups: one choice per group, selection hopping between options.
-import { ATTR, glyphs, phase, stepAt, tint } from './_input.js';
+const { ATTR, glyphs, phase, stepAt, tint } = __bm(25);
 
 const GROUPS = [
   ['Environment', ['dev', 'staging', 'production']],

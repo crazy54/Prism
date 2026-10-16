@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   494nm - 35 / 41
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   558nm - 35 / 41
 ------------------------------------------------------/\========================
 curl progress meter  progress-curl-meter
 curl's default meter -- % Total, % Received, Average Speed, Time
@@ -16,7 +16,7 @@ $ curl -o prism-db-01.dump https://dl.example.com/backups/prism-db-01.dump
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-curl-meter
 SNAPSHOT  prism-term snapshot progress-curl-meter --size 80x7
 IN CODE

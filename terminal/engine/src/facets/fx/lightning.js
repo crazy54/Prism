@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A thunderstorm over the hills: rolling cloud decks, slanting rain, and every
 // few seconds a forked bolt built by midpoint displacement — it flickers two or
 // three times, lighting the clouds from inside and the land beneath.
-import { lerpc, clamp01, hash2 } from '../retro/_kit.js';
+const { lerpc, clamp01, hash2 } = __bm(29);
 
 const LOOP = 24, EVERY = 3;
 

@@ -1,11 +1,12 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Loading choreography for a terminal card: skeleton bars with a shimmer
 // sweep, then a spinner while a progress bar eases to full, then the real
 // content staggering in line by line, then a success mark that pops — and a
 // soft fade back to the skeleton. Each stage hands off to the next on cue.
-import { easing } from '../../easing.js';
-import { mix } from '../../color.js';
+const { easing } = __bm(10);
+const { mix } = __bm(0);
 import { box } from '../../widgets/index.js';
-import { put } from './_lab.js';
+const { put } = __bm(26);
 
 const LOOP = 8;
 const SPIN = '⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏';

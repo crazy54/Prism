@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > AI WORKING > TOKEN STREAMS               538nm - 5 / 18
+--/\=== PRISM TERMINAL > AI WORKING > TOKEN STREAMS               479nm - 5 / 18
 ------------------------------------------------------/\========================
 Token Stream  ai-token-stream
 A response streaming token by token with each new token flashing, a live tok/s
@@ -18,7 +18,7 @@ tags: tokens, streaming, llm, tokenizer, tok/s
   still at t=4.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ai-token-stream
 SNAPSHOT  prism-term snapshot ai-token-stream --size 64x9
 IN CODE

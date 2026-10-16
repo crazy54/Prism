@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Login & MOTD: an ssh login with a landscape-style MOTD, a fastfetch-style card, a getty console login and fail2ban.
-import { C, G, ATTR, writer, walk, typed, blink, clock, bashPrompt, session, drawSession, pad, fixed, uni } from './_kit.js';
+const { C, G, ATTR, writer, walk, typed, blink, clock, bashPrompt, session, drawSession, pad, fixed, uni } = __bm(27);
 
 /** Draw the last `H` of a list of rows ({ parts } or { prompt, cmd, cursor }) — a scrolling tty. */
 function screen(w, ctx, rows, promptFn = bashPrompt) {

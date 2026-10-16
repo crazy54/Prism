@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Snow over a cabin. Three parallax layers of flakes sway down through a gusty
 // wind; the near layer actually lands, building drifts on the ground and a
 // cap on the roof, and the drifts slump downwind once they get too steep.
 // The cabin's window glows (and spills warm light onto the snow), the chimney
 // smokes, and dark pines stand behind it all.
-import { NONE, mix as blend, luminance } from '../../color.js';
+const { NONE, mix: blend, luminance } = __bm(0);
 
 export default {
   title: 'Snow over a Cabin',

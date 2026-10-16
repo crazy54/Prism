@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PARTICLES      475nm - 4 / 18
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PARTICLES      471nm - 4 / 18
 ------------------------------------------------------/\========================
 Flow Field  flowfield
 Particles advected through an evolving curl-noise flow field, leaving fading
@@ -29,7 +29,7 @@ tags: flow field, particles, noise, trails
   still at 80x20 - t=4s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play flowfield
 SNAPSHOT  prism-term snapshot flowfield --size 80x24
 IN CODE

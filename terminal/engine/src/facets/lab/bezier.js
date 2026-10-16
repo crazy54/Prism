@@ -1,11 +1,12 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A cubic-bézier timing editor, the kind in every browser's devtools. The two
 // handles glide between the CSS presets (and a couple of custom curves); the
 // curve redraws, a dot runs it by *time* (x solved for the curve parameter by
 // Newton's method, as browsers do), and a swatch slides along a track with
 // exactly that timing beside the live cubic-bezier(…) readout.
-import { easing } from '../../easing.js';
-import { mix } from '../../color.js';
-import { put } from './_lab.js';
+const { easing } = __bm(10);
+const { mix } = __bm(0);
+const { put } = __bm(26);
 
 const PRESETS = [
   ['ease', [0.25, 0.1, 0.25, 1]],

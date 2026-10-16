@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > GLOBES & PLANETS      467nm - 9 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > GLOBES & PLANETS      483nm - 9 / 19
 ------------------------------------------------------/\========================
 Ringed Planet  ringed-planet
 A banded gas giant turning under a tilted ring system, with the planet shadowing
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   tilt=0.32             Ring tilt  (0.08-0.7)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ringed-planet
 SNAPSHOT  prism-term snapshot ringed-planet --size 72x24
 IN CODE

@@ -1,10 +1,11 @@
 /* Vendored from design/first-light/first-light.js by website/scripts/sync-refraction.mjs — edit the source, then re-run. */
 /* ════════════════════════════════════════════════════════════════════════
-   Prism · First Light — v1.0.0                       design/first-light/
+   Prism · First Light — v1.1.0                       design/first-light/
    White light in. Every color out.
 
    window.PrismFirstLight = {
-     play(opts)  → controller { mode, finished: Promise<info>, skip() }
+     play(opts)  → controller { mode, finished: Promise<info>, begun: Promise<t0>, skip() }
+                   (begun: the timeline holds on its first frame until frames are steady, ≤ 450ms)
      skip()      → fast-forwards whatever is playing (any key/click/scroll does this too)
      relight(applyFn, originEl?, opts?) → Promise   Day ↔ Night beam sweep (View Transitions + fallback)
      decide(opts) → 'full' | 'echo' | 'fade' | 'none'   what play() would do right now
@@ -26,6 +27,12 @@
      storageKey  sessionStorage key (default 'prismFirstLight')
      theme       'night' | 'day' (default: read data-rf-mode / data-theme / background luminance)
      center      [x, y] fractions of the viewport for the optical scene (default [.5, .46])
+     fan         [top, bottom] ray angles in degrees (default [-7, 26]). Physically true: violet bends most,
+                 so it leaves at the bottom of the fan and rose (red) at the top.
+     hero        { mark, reveal, entry: [fx, fy], exit: [fx, fy], fan } — land the scene in a hero prism that is
+                 already on the page instead of the top-bar mark: one continuous shot. mark = the hero .prism-mark,
+                 reveal = the hero art (held dark until the hand-off), entry/exit = where its beam ends and its fan
+                 pivots, as fractions of reveal's box. The top-bar mark then just fades up with the chrome.
      onStart(info), onDone(info)   info = { mode, skipped, ms }
      freezeAt    ms — pause the whole timeline at this moment (key frames / QA)
    Nothing here blocks input: the overlay is pointer-events:none, listeners are passive,
@@ -82,6 +89,14 @@
   function cssAnims(m) {                          // the mark's own CSS turn/sheen/glint animations only
     return m && m.getAnimations ? m.getAnimations({ subtree: true }).filter(function (a) { return a.animationName || (W.CSSAnimation && a instanceof W.CSSAnimation); }) : [];
   }
+  // cubic-bezier(x1,y1,x2,y2) at progress x (Newton + bisection), for sampled keyframes
+  function bez(x1, y1, x2, y2, x) {
+    if (x <= 0) return 0; if (x >= 1) return 1;
+    var cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx, cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by, t = x, i;
+    for (i = 0; i < 8; i++) { var fx = ((ax * t + bx) * t + cx) * t - x, d = (3 * ax * t + 2 * bx) * t + cx; if (Math.abs(fx) < 1e-5 || !d) break; t -= fx / d; }
+    if (t < 0 || t > 1) { var lo = 0, hi = 1; t = x; for (i = 0; i < 30; i++) { var v = ((ax * t + bx) * t + cx) * t; if (v < x) lo = t; else hi = t; t = (lo + hi) / 2; } }
+    return ((ay * t + by) * t + cy) * t;
+  }
   function visible(r, vw, vh) { return r.width > 0 && r.height > 0 && r.bottom > 0 && r.right > 0 && r.top < vh && r.left < vw; }
 
   function decide(o) {
@@ -102,6 +117,7 @@
     var EV = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
     var ctl = active = { mode: mode, skip: skip };
     ctl.finished = new Promise(function (res) { ctl._res = res; });
+    ctl.begun = new Promise(function (res) { ctl._beg = res; });   // resolves when the timeline actually starts (steady start)
     var vw = ROOT.clientWidth || W.innerWidth, vh = W.innerHeight;
     function A(node, kf, timing) {                 // every animation goes through here (freeze / skip / finish)
       if (!node || !node.animate) return null;
@@ -175,7 +191,19 @@
 
     if (mode === 'full') {
       var P = Math.round(clamp(Math.min(vw, vh) * 0.3, 132, 300));
-      var cen = o.center || [0.5, 0.46], cx = vw * cen[0], cy = vh * cen[1];
+      var H = null;                                // hero mode: the scene morphs into the page's own hero prism
+      if (o.hero) {
+        var hm = list(o.hero.mark)[0], hrv = list(o.hero.reveal || o.hero.mark);
+        var hmr = hm && rectOf(hm), hrr = hrv[0] && rectOf(hrv[0]);
+        if (hmr && hrr && hmr.width > 0 && visible(hmr, vw, vh)) {
+          var hen = o.hero.entry || [0.486, 0.457], hex = o.hero.exit || [0.562, 0.457];
+          H = { inPlace: !!o.hero.inPlace, mark: hm, reveal: hrv, x: hmr.left + hmr.width / 2, y: hmr.top + hmr.height / 2, s: hmr.width / P, fan: o.hero.fan,
+            left: Math.max(0, hrr.left), inX: hrr.left + hrr.width * hen[0], inY: hrr.top + hrr.height * hen[1],
+            outX: hrr.left + hrr.width * hex[0], outY: hrr.top + hrr.height * hex[1] };
+        }
+      }
+      if (H && H.inPlace) { P = Math.round(Math.max(48, H.s * P)); H.s = 1; }   // narrow screens: the scene plays where the hero is (no flight across the copy)
+      var cen = o.center || [0.5, 0.46], cx = H && H.inPlace ? H.x : vw * cen[0], cy = H && H.inPlace ? H.y : vh * cen[1];
       var yb = cy + P * 0.1, xin = cx - P * 0.19, xout = cx + P * 0.2, len = Math.hypot(vw, vh) * 1.15;
       overlay.style.setProperty('--pfl-p', P + 'px');
       overlay.style.setProperty('--pfl-len', len + 'px');
@@ -189,7 +217,8 @@
       var head = el('i', 'pfl-head', 'left:0;top:' + yb + 'px');
       var dock = el('div', 'pfl-dock', 'left:' + cx + 'px;top:' + cy + 'px');
       var FACE = '<span class="pm-face"><i class="pm-rim"></i><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 50 0M0 100h100"/></svg></span>';
-      dock.innerHTML = '<span class="prism-mark is-hero' + (day ? ' is-day' : ' is-night') + '" style="--pm:' + P + 'px"><span class="pm-rotor">' + FACE + FACE + FACE + FACE + '<i class="pm-apex"></i></span></span>' +
+      var turnSrc = H ? H.mark : markInner, turnCss = turnSrc ? getComputedStyle(turnSrc).getPropertyValue('--pm-turn').trim() : '';
+      dock.innerHTML = '<span class="prism-mark is-hero' + (day ? ' is-day' : ' is-night') + '" style="--pm:' + P + 'px' + (H && turnCss ? ';--pm-turn:' + turnCss : '') + '"><span class="pm-rotor">' + FACE + FACE + FACE + FACE + '<i class="pm-apex"></i></span></span>' +
         '<i class="pfl-glow"></i><i class="pfl-core" style="left:' + (P * 0.31) + 'px;top:' + (P * 0.6) + 'px;width:' + (P * 0.39) + 'px"></i>';
       var copy = dock.firstChild, glow = copy.nextSibling, core = dock.lastChild;
       var flash = el('i', 'pfl-flash', 'left:' + xin + 'px;top:' + yb + 'px');
@@ -203,12 +232,25 @@
 
       // the real mark and the flying copy turn in lock-step; the copy's front edge glints at impact
       var turn = 16000; phase = turn * 4 + (0.064 * turn - T.impact);
-      if (markInner) { var tv = parseFloat(getComputedStyle(markInner).getPropertyValue('--pm-turn')); if (tv) turn = tv * (/ms/.test(getComputedStyle(markInner).getPropertyValue('--pm-turn')) ? 1 : 1000); phase = turn * 4 + (0.064 * turn - T.impact); }
+      if (turnCss) { var tv = parseFloat(turnCss); if (tv) turn = tv * (/ms/.test(turnCss) ? 1 : 1000); phase = turn * 4 + (0.064 * turn - T.impact); }
 
       var F = T.end;
       A(veil, [{ opacity: 1 }, { opacity: 1, offset: T.veil0 / T.veil1, easing: E.out }, { opacity: 0 }], { duration: T.veil1 });
       A(grid, [{ opacity: 0 }, { opacity: 1, offset: 0.28 }, { opacity: 1, offset: 0.8 }, { opacity: 0 }], { duration: 1080, easing: E.lin });
-      A(beam, [
+      if (H) {
+        // the beam's tail leaves the copy column fast (out-expo, 120ms) while its head rides the prism (fly easing),
+        // so no light crosses the headline as the veil lifts; sampled into linear keyframes (transform only)
+        var bk = [{ transform: 'translate(0px,0px) scaleX(0)', opacity: 1 }, { transform: 'translate(0px,0px) scaleX(0)', opacity: 1, offset: T.beam0 / 1320, easing: E.beam },
+          { transform: 'translate(0px,0px) scaleX(1)', opacity: 1, offset: T.impact / 1320 }];
+        for (var k = 0; k <= 12; k++) {
+          var tt = T.dock0 + (T.dock1 - T.dock0) * k / 12, ef = bez(.72, 0, .18, 1, (tt - T.dock0) / (T.dock1 - T.dock0)), el0 = bez(.16, 1, .3, 1, clamp((tt - T.dock0) / 120, 0, 1));
+          var L = H.left * el0, R = xin + (H.inX - xin) * ef;
+          bk.push({ transform: 'translate(' + L.toFixed(1) + 'px,' + ((H.inY - yb) * ef).toFixed(1) + 'px) scaleX(' + Math.max(0.005, (R - L) / xin).toFixed(4) + ')', opacity: 1, offset: tt / 1320 });
+        }
+        bk.push({ transform: bk[bk.length - 1].transform, opacity: 0 });
+        A(beam, bk, { duration: 1320 });
+      }
+      else A(beam, [
         { transform: 'scaleX(0)', opacity: 1 }, { transform: 'scaleX(0)', opacity: 1, offset: T.beam0 / 980, easing: E.beam },
         { transform: 'scaleX(1)', opacity: 1, offset: T.impact / 980 }, { transform: 'scaleX(1)', opacity: 1, offset: T.dock0 / 980 },
         { transform: 'scaleX(1)', opacity: 0 }], { duration: 980 });
@@ -216,6 +258,7 @@
         { transform: 'translateX(0)', opacity: 0 }, { transform: 'translateX(0)', opacity: 0, offset: T.beam0 / 520, easing: E.beam },
         { transform: 'translateX(' + xin + 'px)', opacity: 1, offset: T.impact / 520 }, { transform: 'translateX(' + xin + 'px) scale(1.6)', opacity: 0 }], { duration: 520 });
       var fx = day ? ['saturate(1)', 'saturate(1.8)', 'saturate(1.35)', 'saturate(1.45)'] : ['brightness(1)', 'brightness(2.1)', 'brightness(1.55)', 'brightness(1.7)'];
+      if (H) fx[3] = fx[0];
       A(copy, [{ opacity: 0, filter: fx[0], easing: E.out }, { opacity: .11, filter: fx[0], offset: (T.impact - 20) / 1300, easing: E.out }, { opacity: 1, filter: fx[1], offset: (T.impact + 70) / 1300, easing: E.out },
         { opacity: 1, filter: fx[2], offset: 820 / 1300 }, { opacity: 1, filter: fx[3], offset: 1180 / 1300, easing: E.out }, { opacity: 0, filter: fx[0] }], { duration: 1300 });
       A(glow, [{ opacity: 0, transform: 'scale(.6)' }, { opacity: 0, transform: 'scale(.6)', offset: (T.impact - 10) / 1300, easing: E.out }, { opacity: 1, transform: 'scale(1)', offset: 560 / 1300 },
@@ -224,22 +267,32 @@
         { transform: 'rotate(4deg) scaleX(1)', opacity: 1, offset: 520 / 1000 }, { transform: 'rotate(4deg) scaleX(1)', opacity: .9, offset: T.dock0 / 1000 }, { transform: 'rotate(4deg) scaleX(1)', opacity: 0 }], { duration: 1000 });
       A(flash, [{ opacity: 0, transform: 'scale(.3)' }, { opacity: 0, transform: 'scale(.3)', offset: (T.impact - 10) / 820, easing: E.out },
         { opacity: 1, transform: 'scale(1)', offset: 500 / 820 }, { opacity: 0, transform: 'scale(1.35)' }], { duration: 820 });
+      // physically true dispersion: violet (stop 0) bends most and leaves at the BOTTOM of the fan, rose at the top
+      var fanA = (H && H.fan) || o.fan || [-7, 26], hzRot = fanA[0] - 6;
+      overlay.style.setProperty('--pfl-fs', ((fanA[1] - fanA[0]) / (rays.length - 1)).toFixed(2) + 'deg');
       rays.forEach(function (r, i) {
-        var ang = -7 + i * (33 / (rays.length - 1)), d = T.fan + i * 16;
+        var ang = fanA[1] - i * ((fanA[1] - fanA[0]) / (rays.length - 1)), d = T.fan + (rays.length - 1 - i) * 16;
         A(r, [{ transform: 'rotate(0deg) scaleX(0)', opacity: 0 }, { transform: 'rotate(' + ang * 0.25 + 'deg) scaleX(.35)', opacity: 1, offset: .25 },
           { transform: 'rotate(' + ang + 'deg) scaleX(1)', opacity: 1 }], { delay: d, duration: 470, easing: E.expo });
       });
-      A(haze, [{ transform: 'rotate(-9deg) scaleY(.06)', opacity: 0 }, { transform: 'rotate(-9deg) scaleY(1)', opacity: .5 }], { delay: T.fan + 20, duration: 520, easing: E.expo });
-      var dx = mx - cx, dy = my - cy, s = msz / P;
+      A(haze, [{ transform: 'rotate(' + hzRot + 'deg) scaleY(.06)', opacity: 0 }, { transform: 'rotate(' + hzRot + 'deg) scaleY(1)', opacity: .5 }], { delay: T.fan + 20, duration: 520, easing: E.expo });
+      var dx = H ? H.x - cx : mx - cx, dy = H ? H.y - cy : my - cy, s = H ? H.s : msz / P;
       A(dock, [{ transform: 'none' }, { transform: 'none', offset: T.dock0 / T.dock1, easing: E.fly },
         { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + s + ')' }], { duration: T.dock1 });
       var fdx = mx + msz * 0.2 - xout, fdy = my + msz * 0.1 - yb;
-      A(fan, [{ transform: 'none', opacity: 1 }, { transform: 'none', opacity: 1, offset: T.dock0 / 1400, easing: E.fly },
+      if (H) A(fan, [{ transform: 'translate(0px,0px) scale(1)', opacity: 1 }, { transform: 'translate(0px,0px) scale(1)', opacity: 1, offset: T.dock0 / 1320, easing: E.fly },
+        { transform: 'translate(' + (H.outX - xout) + 'px,' + (H.outY - yb) + 'px) scale(' + H.s + ')', opacity: 1, offset: T.dock1 / 1320 },
+        { transform: 'translate(' + (H.outX - xout) + 'px,' + (H.outY - yb) + 'px) scale(' + H.s + ')', opacity: 0 }], { duration: 1320 });
+      else A(fan, [{ transform: 'none', opacity: 1 }, { transform: 'none', opacity: 1, offset: T.dock0 / 1400, easing: E.fly },
         { transform: 'translate(' + fdx + 'px,' + fdy + 'px) rotate(30deg) scale(.72)', opacity: .38, offset: T.dock1 / 1400, easing: E.out },
         { transform: 'translate(' + fdx + 'px,' + fdy + 'px) rotate(36deg) scale(.66)', opacity: 0 }], { duration: 1400 });
       A(label, [{ opacity: 0, transform: 'translate(-50%,4px)' }, { opacity: 0, transform: 'translate(-50%,4px)', offset: 560 / 980, easing: E.out },
         { opacity: .9, transform: 'translate(-50%,0)', offset: 760 / 980 }, { opacity: .9, transform: 'translate(-50%,0)', offset: T.dock0 / 980 }, { opacity: 0, transform: 'translate(-50%,0)' }], { duration: 980 });
-      if (markEl) A(markEl, [{ opacity: 0 }, { opacity: 0, offset: 1180 / 1300 }, { opacity: 1 }], { duration: 1300, easing: E.lin });
+      if (H) {
+        // the hand-off: the page's hero (already turning in phase with the copy) comes up as the copy goes
+        H.reveal.forEach(function (it) { A(it, [{ opacity: 0 }, { opacity: 0, offset: 1160 / 1320 }, { opacity: 1 }], { duration: 1320, easing: E.lin }); });
+        if (markEl) A(markEl, [{ opacity: 0 }, { opacity: 1 }], { delay: T.surf, duration: 320, easing: E.out });
+      } else if (markEl) A(markEl, [{ opacity: 0 }, { opacity: 0, offset: 1180 / 1300 }, { opacity: 1 }], { duration: 1300, easing: E.lin });
 
       // paint-in — the spectrum arrives at the app
       groups.surface.forEach(function (it) { A(it, [{ opacity: 0 }, { opacity: 1 }], { delay: T.surf, duration: 320, easing: E.out }); });
@@ -277,8 +330,9 @@
         else refract(list(ts), at);
       });
       // sync the two marks (rotation, sheen, glints) once they're in the DOM
+      overlay._hero = H;
       overlay._sync = function () {
-        [copy, markInner].forEach(function (m) { cssAnims(m).forEach(function (a) { a.currentTime = phase; }); });
+        [copy, markInner, H && H.mark].forEach(function (m) { cssAnims(m).forEach(function (a) { a.currentTime = phase; }); });
       };
     }
 
@@ -297,8 +351,31 @@
       anims.forEach(function (a) { a.pause(); a.currentTime = o.freezeAt; });
       if (phase !== null) {
         if (overlay) overlay.querySelectorAll('.prism-mark').forEach(function (m) { cssAnims(m).forEach(function (a) { a.pause(); a.currentTime = phase + o.freezeAt; }); });
-        cssAnims(markInner).forEach(function (a) { a.pause(); a.currentTime = phase + o.freezeAt; });
+        [markInner, overlay && overlay._hero && overlay._hero.mark].forEach(function (m) { cssAnims(m).forEach(function (a) { a.pause(); a.currentTime = phase + o.freezeAt; }); });
       }
+    }
+    // Steady start: a busy page (a cold load still parsing scripts) can drop the first few hundred ms of
+    // frames, and the beam would be over before anyone saw it. Hold every animation on its first frame
+    // (targets stay dark, input is never blocked) until two consecutive frames land < 34ms apart, <= 450ms.
+    var started = typeof o.freezeAt === 'number' || mode === 'none' || mode === 'fade';
+    if (started) ctl._beg(0);
+    var copy0 = overlay && overlay.querySelector('.pfl-dock .prism-mark'), H0 = overlay && overlay._hero;
+    function start() {
+      if (started) return; started = true;
+      t0 = performance.now();
+      anims.forEach(function (a) { try { a.play(); } catch (e) {} });
+      ctl._beg(t0);
+      if (phase !== null) [copy0, markInner, H0 && H0.mark].forEach(function (m) { cssAnims(m).forEach(function (a) { a.currentTime = phase; }); });
+    }
+    if (!started) {
+      anims.forEach(function (a) { try { a.pause(); } catch (e) {} });
+      var last = 0, ok = 0, g0 = performance.now(), cap = setTimeout(start, 450);
+      var tick = function (ts) {
+        if (started) return;
+        ok = last && ts - last < 34 ? ok + 1 : 0; last = ts;
+        if (ok >= 2 || performance.now() - g0 > 450) { clearTimeout(cap); start(); } else W.requestAnimationFrame(tick);
+      };
+      W.requestAnimationFrame(tick);
     }
     Promise.all(anims.map(function (a) { return a.finished; })).then(finish, finish);
     return ctl;
@@ -306,6 +383,7 @@
     function skip(silent) {
       if (doneFired || skipped) return;
       skipped = true;
+      start();
       anims.forEach(function (a) { try { if (a.playState !== 'finished') { if (a.updatePlaybackRate) a.updatePlaybackRate(12); else a.playbackRate = 12; } } catch (e) {} });
       if (overlay && overlay.animate) overlay.animate([{ opacity: 1 }, { opacity: 0 }], { duration: silent ? 1 : 160, fill: 'forwards', easing: E.out });
     }
@@ -326,26 +404,42 @@
   }
 
   // ------------------------------------------------------------- relight ---
-  // relight(applyFn, originEl?, { duration = 600, direction = 'auto' | 'ltr' | 'rtl' })
-  // The new theme is revealed behind a vertical beam. Direction 'auto': the light leaves from the toggle
-  // you pressed (a top-right toggle sweeps right → left); with no origin it goes left → right.
+  // relight(applyFn, originEl?, { duration = 600, direction = 'auto' | 'ltr' | 'rtl', viewTransition = true | false | 'auto' })
+  // The new theme is revealed behind a vertical beam with a colour-split leading edge. It starts AT the toggle
+  // (the one pressed, else the page's own [data-theme-set] / .rf-mode / [data-relight-origin]) and travels away
+  // from it: a toggle in the right half sweeps right → left, in the left half left → right — site and library alike.
   // 600ms (not the tokens' 900) keeps Chromium's no-input window short; any input ends it at once.
+  // opts.viewTransition: true / undefined (default) = View Transition where supported; false = the fallback
+  // (veil dissolve + beam); 'auto' = View Transition only on capable devices (vtCapable below), else the fallback.
+  // The transition's snapshots and the re-raster when it ends are cheap on a GPU but cost a slow or software-rastered
+  // device ~1 s of delayed frames right after the switch.
+  function vtCapable() {
+    var n = W.navigator || {}, c = n.connection;
+    if (reduced() || (c && c.saveData)) return false;
+    if (typeof n.deviceMemory === 'number' && n.deviceMemory < 8) return false;
+    return (n.hardwareConcurrency || 0) >= 8;
+  }
   function relight(applyFn, originEl, opts) {
     var o = opts || {}, dur = Math.min(o.duration || 600, 600), dir = o.direction || 'auto', rm = reduced();
     var vw = ROOT.clientWidth || W.innerWidth;
-    if (dir === 'auto') {
-      dir = 'ltr';
-      if (originEl && originEl.getBoundingClientRect) { var r = originEl.getBoundingClientRect(); if (r.left + r.width / 2 > vw / 2) dir = 'rtl'; }
-    }
+    // The light always leaves from the theme toggle — the control pressed, or (keyboard shortcut, command
+    // palette, OS change) the page's own toggle — and travels away from it: one rule for the site and the library.
+    var at = function (n) { if (n && n.getBoundingClientRect) { var r = n.getBoundingClientRect(); if (r.width || r.height) return clamp(r.left + r.width / 2, 0, vw); } return null; };
+    var ox = at(originEl); if (ox === null) ox = at(toggleOf());
+    if (dir === 'auto') dir = ox !== null && ox > vw / 2 ? 'rtl' : 'ltr';
+    if (ox === null) ox = dir === 'rtl' ? vw : 0;
     var run = function () { return applyFn && applyFn(); };
-    if (D.startViewTransition) {
+    var useVt = o.viewTransition === false ? false : o.viewTransition === 'auto' ? vtCapable() : true;
+    if (D.startViewTransition && useVt) {
       ROOT.classList.add('pfl-relighting');
       if (rm) { var v0 = D.startViewTransition(run); return v0.finished.finally(function () { ROOT.classList.remove('pfl-relighting'); }); }
       var bw = 160, beam = el('div', 'pfl-relight-beam' + (dir === 'rtl' ? ' is-rtl' : ''));
       beam.setAttribute('aria-hidden', 'true');
-      var x0 = dir === 'ltr' ? -bw : vw, x1 = dir === 'ltr' ? vw - bw : 0;
+      var x0 = dir === 'ltr' ? ox - bw : ox, x1 = dir === 'ltr' ? vw - bw : 0;
       beam.style.transform = 'translateX(' + x0 + 'px)';
       ROOT.style.setProperty('--pfl-rl-dur', dur + 'ms');
+      ROOT.style.setProperty('--pfl-rl-x', Math.round(ox) + 'px');
+      ROOT.style.setProperty('--pfl-rl-xr', Math.round(vw - ox) + 'px');
       if (dir === 'rtl') ROOT.classList.add('pfl-rtl');
       D.body.appendChild(beam);
       var vt = D.startViewTransition(function () {
@@ -359,7 +453,7 @@
       vt.ready.then(function () { IN.forEach(function (t) { W.addEventListener(t, cut, { capture: true, passive: true }); }); }, function () {});
       return vt.finished.finally(function () {
         IN.forEach(function (t) { W.removeEventListener(t, cut, { capture: true }); });
-        beam.remove(); ROOT.classList.remove('pfl-relighting', 'pfl-rtl'); ROOT.style.removeProperty('--pfl-rl-dur');
+        beam.remove(); ROOT.classList.remove('pfl-relighting', 'pfl-rtl'); ['--pfl-rl-dur', '--pfl-rl-x', '--pfl-rl-xr'].forEach(function (p) { ROOT.style.removeProperty(p); });
       });
     }
     // Fallback: a 240ms dissolve from the old ground (tokens › theme-relight) with the beam passing over.
@@ -371,7 +465,7 @@
       if (!rm) {
         var b = el('div', 'pfl-relight-beam' + (dir === 'rtl' ? ' is-rtl' : ''), 'view-transition-name:none');
         D.body.appendChild(b);
-        var a = dir === 'ltr' ? [-160, vw] : [vw, -160];
+        var a = dir === 'ltr' ? [ox - 160, vw] : [ox, -160];
         jobs.push(b.animate([{ transform: 'translateX(' + a[0] + 'px)', opacity: 1 }, { transform: 'translateX(' + a[1] + 'px)', opacity: 1, offset: .9 }, { transform: 'translateX(' + a[1] + 'px)', opacity: 0 }],
           { duration: Math.round(dur * 0.7), easing: E.inout, fill: 'forwards' }).finished.then(function () { b.remove(); }));
       }
@@ -379,8 +473,15 @@
     });
   }
 
+  // the page's Day/Night toggle (first visible match): website [data-theme-set], library .rf-mode, or [data-relight-origin]
+  function toggleOf() {
+    var c = D.querySelectorAll('[data-relight-origin],[data-theme-set],.rf-mode');
+    for (var i = 0; i < c.length; i++) { var r = c[i].getBoundingClientRect(); if (r.width && r.height && r.bottom > 0 && r.top < W.innerHeight) return c[i]; }
+    return null;
+  }
+
   W.PrismFirstLight = {
-    version: '1.0.0', play: play, decide: decide, arm: arm, relight: relight,
+    version: '1.1.0', play: play, decide: decide, arm: arm, relight: relight,
     skip: function () { if (active) active.skip(); },
     timeline: T
   };

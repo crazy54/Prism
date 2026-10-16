@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A vim-style statusline that changes color with the mode: NORMAL motions,
 // an INSERT edit, a VISUAL LINE indent and a :w COMMAND, with showcmd echo.
-import { ATTR, uni, phase, mix, fit } from './_input.js';
+const { ATTR, uni, phase, mix, fit } = __bm(25);
 
 const SRC = [
   "import { createPool } from './db.js';",

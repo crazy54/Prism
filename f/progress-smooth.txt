@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      494nm - 1 / 41
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      558nm - 1 / 41
 ------------------------------------------------------/\========================
 Smooth Eighths  progress-smooth
 Eighth-block bars that move in 1/8-cell steps, so even a 20-column bar creeps
@@ -14,7 +14,7 @@ tags: eighth blocks, smooth, multi
   still at t=4.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-smooth
 SNAPSHOT  prism-term snapshot progress-smooth --size 60x5
 IN CODE

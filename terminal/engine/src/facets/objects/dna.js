@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A DNA double helix spinning about its axis while the whole molecule slowly
 // yaws and rolls in perspective. Backbones, base-pair rungs (A–T / G–C colored
 // halves) and nucleotide beads are depth-sorted and shaded front-to-back, so
 // the near strand reads in front of the far one even at braille resolution.
 import { rotate, projector } from '../../math3d.js';
-import { mix, NONE } from '../../color.js';
-import { fadeMark } from '../../palettes.js';
+const { mix, NONE } = __bm(0);
+const { fadeMark } = __bm(3);
 
 export default {
   title: 'DNA Helix',

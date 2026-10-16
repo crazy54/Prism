@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             568nm - 37 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             578nm - 37 / 39
 ------------------------------------------------------/\========================
 Exit-Code Prompt  ops-prompt-exitcode
 A prompt that shows the last exit status: a typo gives x 127, Ctrl-C gives x
@@ -23,7 +23,7 @@ bash: kubeclt: command not found
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-prompt-exitcode
 SNAPSHOT  prism-term snapshot ops-prompt-exitcode --size 80x14
 IN CODE

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > BRAILLE SPINNERS   488nm - 19 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > BRAILLE SPINNERS   506nm - 19 / 64
 ------------------------------------------------------/\========================
 Dot Bounce  loaders-dot-bounce
 A single dot bouncing up and down the left column of a braille cell.
@@ -16,7 +16,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-dot-bounce
 SNAPSHOT  prism-term snapshot loaders-dot-bounce --size 44x5
 IN CODE

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > LOGS & JOURNALS           568nm - 27 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > LOGS & JOURNALS           578nm - 27 / 39
 ------------------------------------------------------/\========================
 nginx access log  ops-nginx-access
 An lnav-style view following the nginx access log: lines chopped at the edge,
@@ -25,7 +25,7 @@ tags: nginx, access-log, http, status-codes, lnav, logs
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-nginx-access
 SNAPSHOT  prism-term snapshot ops-nginx-access --size 80x16
 IN CODE

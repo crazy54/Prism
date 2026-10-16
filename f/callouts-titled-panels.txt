@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > PANELS & BORDERS     580nm - 2 / 15
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > PANELS & BORDERS     570nm - 2 / 15
 ------------------------------------------------------/\========================
 Titled Panels  callouts-titled-panels
 Panels with left, centered and right titles and live footers -- a clock, a pager
@@ -23,7 +23,7 @@ tags: panel, title, footer, layout, box
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play callouts-titled-panels
 SNAPSHOT  prism-term snapshot callouts-titled-panels --size 72x14
 IN CODE

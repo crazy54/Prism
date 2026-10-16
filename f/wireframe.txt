@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > WIREFRAMES            467nm - 7 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > WIREFRAMES            483nm - 7 / 19
 ------------------------------------------------------/\========================
 Wireframe Solids  wireframe
 Braille wireframes morphing cube -> icosahedron -> torus -> octahedron with
@@ -29,7 +29,7 @@ tags: wireframe, polyhedra, 3d, braille
   still at 80x20 - t=4s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play wireframe
 SNAPSHOT  prism-term snapshot wireframe --size 80x24
 IN CODE

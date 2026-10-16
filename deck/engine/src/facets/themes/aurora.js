@@ -1,9 +1,4 @@
-import { themeFacet } from './_deck.js';
-
-export default themeFacet('aurora', {
-  title: 'Aurora',
-  category: 'Dark',
-  description: 'Frosted keys over the northern lights: curtains rise and flow in each key’s hue when it turns on, light shines through etched frost, a press fogs the glass. By day, opal.',
-  tags: ['aurora', 'frost', 'glass', 'gradient', 'soft', 'night', 'day', 'opal'],
-  order: 40,
-});
+// Bundled into facets.bundle.js by website/build.mjs (the module itself is in the repository).
+import { __m } from '../../../facets.bundle.js';
+const __n = __m(121);
+export default __n.default;

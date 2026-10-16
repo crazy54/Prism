@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // World Maps: a dotted world with pulsing data centers, a follow-the-sun
 // choropleth of pseudo-regions, and a day/night terminator with city lights.
-import { mix } from '../../color.js';
-import { glyphs, put, putR, safe, clamp, smooth, NONE, ATTR } from '../charts/_data.js';
+const { mix } = __bm(0);
+const { glyphs, put, putR, safe, clamp, smooth, NONE, ATTR } = __bm(24);
 import { project, landMask, coastOf, inLand, HUBS } from './_world.js';
 
 const RAD = Math.PI / 180;

@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A falling-sand automaton like the old sand-art toys: three spouts sweep back
 // and forth pouring grains whose hue drifts slowly, so the pile builds up in
 // colored strata over sloped ledges. Grains fall, then slide diagonally when
 // blocked (never squeezing between two diagonal walls). Every cycle a trapdoor
 // opens, the whole pile drains out through the floor, and pouring starts again.
-import { NONE, mix } from '../../color.js';
+const { NONE, mix } = __bm(0);
 
 const CYCLE = 24, DRAIN = 6;
 

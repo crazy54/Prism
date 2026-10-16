@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS                            484nm - 05 / 17
+--/\=== PRISM TERMINAL > TEXT EFFECTS                            492nm - 05 / 17
 ------------------------------------------------------/\========================
 Banners, bitmap fonts, reveals, glitches and color on type.
 

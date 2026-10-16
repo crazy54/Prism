@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PROGRESS & COUNTERS                     494nm - 07 / 17
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS                     558nm - 07 / 17
 ------------------------------------------------------/\========================
 Progress bars, multi-step pipelines, counters, timers and transfer meters.
 

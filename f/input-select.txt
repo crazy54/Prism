@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > SELECTS & LISTS          585nm - 1 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > SELECTS & LISTS          487nm - 1 / 23
 ------------------------------------------------------/\========================
 Select Prompt  input-select
 An inquirer/gum-style single select: the pointer moves through regions with a
@@ -19,7 +19,7 @@ tags: select, prompt, list, choose, inquirer
   still at t=3s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-select
 SNAPSHOT  prism-term snapshot input-select --size 56x10
 IN CODE

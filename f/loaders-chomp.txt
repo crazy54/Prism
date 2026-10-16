@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > ORBITS & SHAPES    488nm - 51 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > ORBITS & SHAPES    506nm - 51 / 64
 ------------------------------------------------------/\========================
 Chomp  loaders-chomp
 A round braille mouth chomping its way through a row of pellets -- a cheerful
@@ -17,7 +17,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-chomp
 SNAPSHOT  prism-term snapshot loaders-chomp --size 44x5
 IN CODE

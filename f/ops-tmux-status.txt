@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             568nm - 38 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             578nm - 38 / 39
 ------------------------------------------------------/\========================
 tmux Session  ops-tmux-status
 A tmux window split in two: a log tail above, a shell below, a green active-pane
@@ -29,7 +29,7 @@ ops@node03:~$ kubectl -n
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-tmux-status
 SNAPSHOT  prism-term snapshot ops-tmux-status --size 80x20
 IN CODE

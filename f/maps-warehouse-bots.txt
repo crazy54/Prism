@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > MAPS & GEO > GRIDS & FLOORPLANS         592nm - 11 / 11
+--/\=== PRISM TERMINAL > MAPS & GEO > GRIDS & FLOORPLANS         519nm - 11 / 11
 ------------------------------------------------------/\========================
 Warehouse Robots  maps-warehouse-bots
 A goods-to-person warehouse floor: robots loop the aisles carrying shelf pods to
@@ -29,7 +29,7 @@ Zone B - 30 pod blocks - 4 pick stations
   still at 80x20 - t=6s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play maps-warehouse-bots
 SNAPSHOT  prism-term snapshot maps-warehouse-bots --size 80x22
 IN CODE

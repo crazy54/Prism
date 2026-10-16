@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > DIALOGS & PROMPTS       585nm - 16 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > DIALOGS & PROMPTS       487nm - 16 / 23
 ------------------------------------------------------/\========================
 Prompt Flow  input-prompt-flow
 A clack-style CLI wizard: text, select, yes/no and multiselect prompts chain
@@ -25,7 +25,7 @@ tags: prompts, clack, cli wizard, confirm, yes no
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-prompt-flow
 SNAPSHOT  prism-term snapshot input-prompt-flow --size 56x16
 IN CODE

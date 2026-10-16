@@ -21,7 +21,7 @@ tags: kubernetes, cluster, pods, scheduling, nodes
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play diagrams-cluster-map
 SNAPSHOT  prism-term snapshot diagrams-cluster-map --size 72x12
 IN CODE

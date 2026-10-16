@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PURE ASCII > ASCII SPINNERS & BARS       494c - 19 / 29
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII SPINNERS & BARS      597nm - 19 / 29
 ------------------------------------------------------/\========================
 ASCII Hourglass  ascii-hourglass
 Sand drains grain by grain through the neck of a 7-bit hourglass, piles up
@@ -23,7 +23,7 @@ tags: hourglass, timer, sand, waiting
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ascii-hourglass
 SNAPSHOT  prism-term snapshot ascii-hourglass --size 30x14
 IN CODE

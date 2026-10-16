@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // An inference throughput panel: concurrent streams with progress and
 // per-stream rates, an aggregate tok/s sparkline, TTFT, cache hits and cost.
-import { ATTR, glyphs, uni, phase, fit, hbar, panel, mix } from './_ai.js';
+const { ATTR, glyphs, uni, phase, fit, hbar, panel, mix } = __bm(23);
 
 // [id, output tokens, start, tok/s, ttft ms]
 const REQS = [['7f3a', 900, 0.0, 54, 280], ['2c91', 700, 0.8, 61, 340], ['9be0', 480, -4.0, 48, 310], ['d41e', 620, 3.2, 66, 260]];

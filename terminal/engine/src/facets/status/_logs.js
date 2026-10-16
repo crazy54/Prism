@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Deterministic, plausible log traffic for the status gallery: line i is a pure
 // function of (seed, i), so a scrolling log is reproducible and seekable.
 
-import { rng } from '../../easing.js';
+const { rng } = __bm(10);
 
 const HOSTS = ['web-01', 'web-02', 'api-gw-01', 'auth-01', 'checkout-01', 'checkout-02', 'payments-01', 'pg-orders-01'];
 const SVCS = ['nginx', 'envoy', 'auth', 'checkout', 'payments', 'orders', 'postgres', 'systemd', 'kernel', 'sshd', 'cron'];

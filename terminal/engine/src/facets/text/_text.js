@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Shared helpers for the Text Effects gallery.
 import { measureBanner, layoutText } from '../../text/banner.js';
-import { Canvas } from '../../canvas.js';
+const { Canvas } = __bm(9);
 
 /** Banner mode: the user's forced mode, else `preferred` if the terminal can show it. */
 export function bannerMode(ctx, preferred = 'half') {

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > SELECTS & LISTS          585nm - 3 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > SELECTS & LISTS          487nm - 3 / 23
 ------------------------------------------------------/\========================
 Scrolling List  input-scroll-list
 A long pod list in a short framed window: the cursor runs down and back, the
@@ -21,7 +21,7 @@ tags: list, scroll, scrollbar, pods, cursor
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-scroll-list
 SNAPSHOT  prism-term snapshot input-scroll-list --size 52x12
 IN CODE

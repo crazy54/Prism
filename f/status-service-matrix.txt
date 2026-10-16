@@ -20,7 +20,7 @@ o 34 ok  o 12 degraded  o 1 down  # 1 maint          INC-2471 payments eu-west-1
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play status-service-matrix
 SNAPSHOT  prism-term snapshot status-service-matrix --size 80x11
 IN CODE

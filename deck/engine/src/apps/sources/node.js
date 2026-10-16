@@ -14,7 +14,7 @@ import { createHub } from './hub.js';
 import { createSystemSource } from './system.js';
 import { createAudioSource, autoAudioSource } from './audio.js';
 import { createLinuxMediaSource } from './media.js';
-import { createIcsCalendarSource } from './calendar.js';
+import { createIcsCalendarSource, parseIcs } from './calendar.js';
 import { simulatedAudio, simulatedMedia, simulatedCalendar } from './simulated.js';
 
 /** The real OS behind one object: { sys, os, fs } (sys = src/audio/system.js nodeSystem()). */
@@ -36,8 +36,24 @@ export async function createNodeHub(opts = {}) {
   if (audio && simulate) hub.add(simulatedAudio({ seed, now }));   // the fallback while no capture is live
   if (media === 'auto') { const m = createLinuxMediaSource(deps); if (m) hub.add(m); }
   if (media && simulate) hub.add(simulatedMedia({ seed, now }));
-  if (calendar && typeof calendar === 'object' && calendar.file) hub.add(createIcsCalendarSource({ file: expandHome(calendar.file, deps), fs: deps.fs, now, tzOffset: calendar.tzOffset ?? -new Date().getTimezoneOffset(), setTimer: deps.sys.setTimer, clearTimer: deps.sys.clearTimer }));
+  const ics = (file, tz) => createIcsCalendarSource({ file: expandHome(file, deps), fs: deps.fs, now, tzOffset: tz ?? -new Date().getTimezoneOffset(), setTimer: deps.sys.setTimer, clearTimer: deps.sys.clearTimer });
+  let icsSource = calendar && typeof calendar === 'object' && calendar.file ? hub.add(ics(calendar.file, calendar.tzOffset)) : null;
   if (calendar && simulate) hub.add(simulatedCalendar({ now, tzOffset: -new Date().getTimezoneOffset() }));
+  /**
+   * Point the calendar at a local .ics file (the plugin's "Data sources" setting), or '' for the demo day.
+   * Re-read every 60 s; until it parses, the simulated day stands in (and the plugin badges it DEMO).
+   */
+  hub.setCalendarFile = (file) => {
+    const want = typeof file === 'string' && file ? expandHome(file, deps) : '';
+    if ((icsSource?.status().file || '') === want) return icsSource;
+    icsSource = hub.replace(icsSource, want ? ics(file) : null);
+    return icsSource;
+  };
+  hub.calendarStatus = () => (icsSource ? icsSource.status() : null);
+  /** Read an .ics once (for the property inspector): { ok, events } or { ok: false, error }. Read-only. */
+  hub.checkCalendarFile = async (file) => {
+    try { return { ok: true, events: parseIcs(await deps.fs.readFile(expandHome(file, deps)), -new Date().getTimezoneOffset()).length }; } catch (e) { return { ok: false, error: e?.code === 'ENOENT' ? 'not found' : 'unreadable' }; }
+  };
   return hub;
 }
 

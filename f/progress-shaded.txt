@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      494nm - 9 / 41
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      558nm - 9 / 41
 ------------------------------------------------------/\========================
 Shaded Edge  progress-shaded
 Full blocks with a %:. shaded leading edge over a light-shade track -- the bar
@@ -12,7 +12,7 @@ tags: shade, dos, retro, installer
   still at t=4s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-shaded
 SNAPSHOT  prism-term snapshot progress-shaded --size 56x3
 IN CODE

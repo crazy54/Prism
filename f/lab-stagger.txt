@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATION LAB > EASING & TIMING          604nm - 5 / 17
+--/\=== PRISM TERMINAL > ANIMATION LAB > EASING & TIMING          474nm - 5 / 17
 ------------------------------------------------------/\========================
 Stagger  lab-stagger
 A grid of tiles staggering in and out four ways -- from the left, from the
@@ -29,7 +29,7 @@ tags: stagger, cascade, delay, outback, choreography, ui motion
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play lab-stagger
 SNAPSHOT  prism-term snapshot lab-stagger --size 60x20
 IN CODE

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > BARS & HISTOGRAMS    505nm - 15 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > BARS & HISTOGRAMS    436nm - 15 / 30
 ------------------------------------------------------/\========================
 Live Latency Histogram  charts-histogram-live
 A latency distribution that reshapes every second, with p50, p95 and p99 marker
@@ -23,7 +23,7 @@ tags: histogram, distribution, percentiles, latency, tail
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-histogram-live
 SNAPSHOT  prism-term snapshot charts-histogram-live --size 64x14
 IN CODE

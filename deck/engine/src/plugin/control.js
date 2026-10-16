@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../facets.bundle.js';
 // Prism Deck Live — the plugin's local control channel, API v1 (elgato-mcp DESIGN.md §6.3).
 //
 // It exists only while the user has switched "Allow AI editing" on in the property
@@ -9,7 +10,7 @@
 //     256-bit token) on every start
 //   - every request: exact Host 127.0.0.1:<port> (421), no Origin header (403), Bearer
 //     token compared in constant time (401), JSON bodies only (415), ≤ 2 MB (413)
-//   - writes also need a pairing the user approved by PRESSING the glowing Prism key
+//   - writes also need a pairing the user approved by HOLDING the glowing Prism key (1.5 s, runtime.js onPromptPress)
 //     on a physical deck (never the MCP Deck / Virtual Stream Deck / Mobile, which an
 //     AI could press); nothing over HTTP can approve a pairing
 //   - token buckets per token, per device, per key and per full-surface apply (429 + retryAfterMs)
@@ -20,8 +21,8 @@
 import http from 'node:http';
 import crypto from 'node:crypto';
 import path from 'node:path';
-import { nextState } from '../render.js';
-import { findFacet } from '../facets/index.js';
+const { nextState } = __bm(100);
+const { findFacet } = __bm(318);
 import { TokenBucket } from './budget.js';
 import { controlPath as defaultControlPath, writePrivateJson, removeFile, appendJsonl } from './paths.js';
 import { planOps, validateLayout, LIMITS } from './live-validate.js';
@@ -274,7 +275,7 @@ export class LiveController {
 
   requireWrite(res) {
     if (!this.runtime.globals.aiEditing) { this.fail(res, 403, 'ai_editing_off', 'AI editing is switched off in the Prism Deck plugin settings. Ask the user to enable it.'); return false; }
-    if (!this.paired) { this.fail(res, 403, 'not_paired', 'Not paired. Call POST /v1/pair, then the user approves by pressing the glowing Prism key on their deck.'); return false; }
+    if (!this.paired) { this.fail(res, 403, 'not_paired', 'Not paired. Call POST /v1/pair, then the user approves by pressing and holding the glowing Prism key on their deck for 1.5 s.'); return false; }
     return true;
   }
 
@@ -316,7 +317,7 @@ export class LiveController {
     const prev = this.pendingPairing();
     if (prev) { prev.status = 'expired'; clearTimeout(prev.timer); }
     const shown = this.runtime.setPrompt({ code, client });
-    if (!shown) return this.fail(res, 409, 'no_physical_key', 'No Prism key is visible on a physical deck. Ask the user to show a page with a Prism Facet key (the MCP Deck and Virtual Stream Deck cannot approve).');
+    if (!shown) return this.fail(res, 409, 'no_physical_key', 'No Prism key is visible on a physical deck. Ask the user to show a page with a Prism Display key (the MCP Deck and Virtual Stream Deck cannot approve).');
     this.buckets.pair.take(1);
     const p = { id: crypto.randomUUID(), code, client, status: 'pending', expiresAt: this.wallNow() + this.limits.pairingTtlMs };
     p.timer = setTimeout(() => this.expire(p), this.limits.pairingTtlMs);
@@ -325,7 +326,7 @@ export class LiveController {
     if (this.pairings.size > 32) this.pairings.delete(this.pairings.keys().next().value);
     this.record(null, 'pair', { status: 'pending', client, keys: shown });
     this.runtime.sendPiState?.();
-    this.send(res, 202, { pairingId: p.id, status: 'pending', code, expiresAt: new Date(p.expiresAt).toISOString(), instructions: `Ask the user to press the glowing Prism key that shows ${code} on their deck within ${Math.round(this.limits.pairingTtlMs / 1000)} s. Then poll with { pairingId }.` });
+    this.send(res, 202, { pairingId: p.id, status: 'pending', code, expiresAt: new Date(p.expiresAt).toISOString(), instructions: `Ask the user to press and hold (1.5 s, until its ring is full) the glowing Prism key that shows ${code} on their deck within ${Math.round(this.limits.pairingTtlMs / 1000)} s. Then poll with { pairingId }.` });
   }
 
   r_snapshot(res, body, url) {

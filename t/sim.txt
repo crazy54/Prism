@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS                 475nm - 03 / 17
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS                 471nm - 03 / 17
 ------------------------------------------------------/\========================
 Particles, cellular automata, physics, flocking and weather.
 

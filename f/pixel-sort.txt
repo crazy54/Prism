@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > FX STORE > GLITCH & NOISE               436nm - 24 / 24
+--/\=== PRISM TERMINAL > FX STORE > GLITCH & NOISE               467nm - 24 / 24
 ------------------------------------------------------/\========================
 Pixel Sort  pixel-sort
 Glitch-art pixel sorting: a sunset whose rows sort by brightness inside a moving
@@ -29,7 +29,7 @@ tags: pixel sort, glitch, databend, melt, sort, glitch art
   still at 80x20 - t=6s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play pixel-sort
 SNAPSHOT  prism-term snapshot pixel-sort --size 80x24
 IN CODE

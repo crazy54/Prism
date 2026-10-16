@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Logs & journals: journalctl -f, an lnav-style access log, dmesg -wH, and an lnav-style histogram.
-import { G, C, ATTR, writer, walk, hash, typed, clock, bashPrompt, wrapParts, pad, lpad, fixed, blink } from './_kit.js';
+const { G, C, ATTR, writer, walk, hash, typed, clock, bashPrompt, wrapParts, pad, lpad, fixed, blink } = __bm(27);
 
 /** Weighted, deterministic choice: items are [weight, ...]. */
 const choose = (items, n, salt) => {

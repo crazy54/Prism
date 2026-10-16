@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > TABS & BARS             585nm - 22 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > TABS & BARS             487nm - 22 / 23
 ------------------------------------------------------/\========================
 Shortcut Bar  input-shortcut-bar
 A nano-style editor whose two-row shortcut bar flashes on each keypress and
@@ -23,7 +23,7 @@ tags: shortcuts, key bar, nano, editor, hotkeys
   still at t=4.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-shortcut-bar
 SNAPSHOT  prism-term snapshot input-shortcut-bar --size 72x14
 IN CODE

@@ -16,7 +16,7 @@ tags: flip clock, split flap, clock, midnight
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-flip-clock
 SNAPSHOT  prism-term snapshot progress-flip-clock --size 52x7
 IN CODE

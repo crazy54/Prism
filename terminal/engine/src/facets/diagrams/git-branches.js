@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A branch diagram drawn left to right: main, a hotfix and a feature branch
 // fork and merge as a playhead reveals history, tags riding above main.
-import { ATTR, uni, phase, fit } from '../callouts/_kit.js';
+const { ATTR, uni, phase, fit } = __bm(22);
 import { LineGrid } from './_lines.js';
 
 // Lanes: [name, row, color key]

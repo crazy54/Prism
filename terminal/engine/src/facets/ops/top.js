@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // procps top — the five-line summary and the classic process table with its reverse-video header.
-import { C, ATTR, writer, walk, clock, lpad, pad, fixed } from './_kit.js';
+const { C, ATTR, writer, walk, clock, lpad, pad, fixed } = __bm(27);
 
 const PROCS = [
   ['3110', 'app', 'node', 24, 6.2, '10.6g', '935.2m', '41.2m'], ['2051', 'postgres', 'postgres', 18, 3.4, '4.4g', '540.1m', '512.0m'],

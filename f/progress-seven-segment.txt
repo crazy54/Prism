@@ -17,7 +17,7 @@ tags: seven segment, led, counter, retro
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-seven-segment
 SNAPSHOT  prism-term snapshot progress-seven-segment --size 44x8
 IN CODE

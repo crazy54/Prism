@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > BARS & HISTOGRAMS    505nm - 17 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > BARS & HISTOGRAMS    436nm - 17 / 30
 ------------------------------------------------------/\========================
 Box Plots  charts-boxplot
 Response-time box plots per service: whiskers, interquartile box, median tick
@@ -20,7 +20,7 @@ tags: box plot, quartiles, statistics, outliers, distribution
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-boxplot
 SNAPSHOT  prism-term snapshot charts-boxplot --size 60x11
 IN CODE

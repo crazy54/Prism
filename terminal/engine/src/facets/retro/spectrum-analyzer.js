@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A 1998 media-player spectrum analyser: log-spaced bars in eighth-block
 // resolution, green-to-red by height, falling bars and peak caps that drop
 // with gravity — dancing to the shared chiptune. A dim floor reflection when tall.
-import { lerpc } from './_kit.js';
+const { lerpc } = __bm(29);
 import { bands } from './_music.js';
 
 const EIGHTHS = ' ▁▂▃▄▅▆▇█';

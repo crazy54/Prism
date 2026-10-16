@@ -1,8 +1,9 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Open sea at sunset, looking toward the horizon. Every water pixel is a
 // point on a sum-of-waves height field seen in perspective: its normal
 // reflects the sky (more of it at grazing angles), and where it tilts toward
 // the low sun the glitter path flickers. Distant waves fade so nothing aliases.
-import { lerpc, clamp01 } from '../retro/_kit.js';
+const { lerpc, clamp01 } = __bm(29);
 
 const WAVES = [
   [0.9, 0.42, 0.55, 1.0], [-0.6, 0.8, 0.9, 0.55], [0.2, 1, 1.7, 0.3], [-0.95, 0.3, 2.9, 0.16], [0.7, -0.7, 4.3, 0.09],

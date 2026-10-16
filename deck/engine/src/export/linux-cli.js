@@ -41,12 +41,20 @@ export function loadSetup(opt = {}) {
   return { device: d.id, ...SAMPLE_LAYOUTS[key] };
 }
 
-export async function runLinuxExport(target, opt = {}, { log = console.log, err = (m) => process.stderr.write(`prism-deck: ${m}\n`) } = {}) {
+/** Exit codes: 0 ok, 1 runtime failure, 2 usage error (unknown target / subcommand). */
+export async function runLinuxExport(target, opt = {}, { log = console.log, err = (m) => process.stderr.write(`prism-deck: ${m}\n`), env = process.env } = {}) {
+  if (!['opendeck', 'streamcontroller', 'linux-paths'].includes(target)) {
+    err(`unknown export target "${target ?? ''}" (opendeck | streamcontroller | linux-paths)`);
+    return 2;
+  }
   try {
     const outDir = path.resolve(String(opt.out && opt.out !== true ? opt.out : 'prism-linux-export'));
     if (target === 'linux-paths') {
-      const home = opt.home && opt.home !== true ? String(opt.home) : '~';
-      const paths = { opendeck: openDeckPaths({ home }), opendeckFlatpak: openDeckPaths({ home, flatpak: true }), streamcontroller: streamControllerPaths({ home }) };
+      // --home describes another account, so this shell's XDG_* only apply without it
+      const own = !(opt.home && opt.home !== true);
+      const home = own ? '~' : String(opt.home);
+      const xdg = own ? { XDG_CONFIG_HOME: env.XDG_CONFIG_HOME, XDG_DATA_HOME: env.XDG_DATA_HOME } : {};
+      const paths = { opendeck: openDeckPaths({ home, env: xdg }), opendeckFlatpak: openDeckPaths({ home, flatpak: true }), streamcontroller: streamControllerPaths({ home }) };
       if (opt.json) log(JSON.stringify(paths, null, 2));
       else {
         log(`OpenDeck (native)   plugins ${paths.opendeck.plugins}\n                    profiles ${paths.opendeck.profiles}\n                    plugin log ${paths.opendeck.pluginLog}`);
@@ -74,7 +82,7 @@ export async function runLinuxExport(target, opt = {}, { log = console.log, err 
       }
       const p0 = profiles[0];
       log(`OpenDeck export for ${p0.device}: ${written.length} profile(s)${pluginOut ? ' + plugin' : ''} in ${path.join(outDir, 'opendeck')}`);
-      log(`Install (on the Linux machine):\n  1. OpenDeck → Plugins → Install from file → ${pluginOut ? path.basename(pluginOut) : `${PLUGIN_DIR.replace('.sdPlugin', '')}.streamDeckPlugin`}\n     (needs Node ≥ 20 on the host, also for the Flatpak)\n  2. Quit OpenDeck, find your device id: ls ~/.config/opendeck/profiles/   (e.g. sd-A1B2C3…)\n  3. cp -r ${(() => { const r = (path.relative(process.cwd(), outDir) || ".").split(path.sep).join("/"); return /s/.test(r) ? JSON.stringify(r) : r; })()}/opendeck/profiles/${p0.deviceId}/* ~/.config/opendeck/profiles/<your device id>/\n     (Flatpak: ~/.var/app/${OD_FLATPAK_ID}/config/opendeck/profiles/…)\n  4. Start OpenDeck and pick the "${p0.profile}" profile.`);
+      log(`Install (on the Linux machine):\n  1. OpenDeck → Plugins → Install from file → ${pluginOut ? path.basename(pluginOut) : `${PLUGIN_DIR.replace('.sdPlugin', '')}.streamDeckPlugin`}\n     (needs Node ≥ 20 on the host, also for the Flatpak)\n  2. Quit OpenDeck, find your device id: ls "\${XDG_CONFIG_HOME:-$HOME/.config}/opendeck/profiles/"   (e.g. sd-A1B2C3…)\n  3. cp -r ${(() => { const r = (path.relative(process.cwd(), outDir) || ".").split(path.sep).join("/"); return /\s/.test(r) ? JSON.stringify(r) : r; })()}/opendeck/profiles/${p0.deviceId}/* "\${XDG_CONFIG_HOME:-$HOME/.config}/opendeck/profiles/<your device id>/"\n     (Flatpak: ~/.var/app/${OD_FLATPAK_ID}/config/opendeck/profiles/…)\n  4. Start OpenDeck and pick the "${p0.profile}" profile.`);
       return 0;
     }
     if (target === 'streamcontroller') {
@@ -85,8 +93,7 @@ export async function runLinuxExport(target, opt = {}, { log = console.log, err 
       log('Install: StreamController → page menu → Import, and pick the file. Key art is static; live Prism apps need the OpenDeck route.');
       return 0;
     }
-    err(`unknown export target "${target}" (opendeck | streamcontroller | linux-paths)`);
-    return 1;
+    return 2;
   } catch (e) { err(e.message); return 1; }
 }
 
@@ -129,7 +136,7 @@ export async function runAudioCommand(sub, opt = {}, { log = console.log, err = 
       await src.stop();
       return 0;
     }
-    err(`unknown audio command "${sub}" (detect | meter)`);
-    return 1;
+    err(`unknown audio command "${sub ?? ''}" (detect | meter)`);
+    return 2;
   } catch (e) { err(e.message); return 1; }
 }

@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // nmon CPU panel — the bordered nmon frame with per-CPU User/Sys/Wait bars drawn as U s W letters.
-import { G, C, ATTR, writer, walk, clock, fixed, lpad } from './_kit.js';
+const { G, C, ATTR, writer, walk, clock, fixed, lpad } = __bm(27);
 
 export default {
   id: 'ops-nmon',

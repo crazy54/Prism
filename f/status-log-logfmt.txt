@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > LOG LINES      558nm - 18 / 18
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > LOG LINES      550nm - 18 / 18
 ------------------------------------------------------/\========================
 logfmt Viewer  status-log-logfmt
 logfmt key=value lines under a level filter bar with live counts; the filter
@@ -23,7 +23,7 @@ ts=14:02:10.333 level=warn svc=payments msg="retrying authorize (attempt 2/3): .
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play status-log-logfmt
 SNAPSHOT  prism-term snapshot status-log-logfmt --size 80x14
 IN CODE

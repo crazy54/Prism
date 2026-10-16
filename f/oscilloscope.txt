@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > CHIPTUNE VISUALS    480nm - 20 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > CHIPTUNE VISUALS    485nm - 20 / 24
 ------------------------------------------------------/\========================
 Oscilloscope  oscilloscope
 A phosphor oscilloscope on the chiptune: graticule, a bass-triggered trace with
@@ -31,7 +31,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   phosphor=green        Phosphor  (green|amber|blue|theme)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play oscilloscope
 SNAPSHOT  prism-term snapshot oscilloscope --size 64x18
 IN CODE

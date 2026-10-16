@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS    488nm - 1 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS    506nm - 1 / 64
 ------------------------------------------------------/\========================
 Line  loaders-line
 The original |/-\ twirl. Pure ASCII, so it works on a serial console, in LANG=C,
@@ -17,7 +17,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-line
 SNAPSHOT  prism-term snapshot loaders-line --size 44x5
 IN CODE

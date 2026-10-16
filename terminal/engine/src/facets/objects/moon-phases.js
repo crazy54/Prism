@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // The lunar month in a loop: a cratered Moon (maria from fBm, ray craters
 // with rims) lit by a Sun that swings around it — new, crescent, quarter,
 // gibbous, full and back — with faint earthshine on the night side and the
 // phase name and illumination underneath.
-import { sphere, starfield, blend } from './_raster.js';
-import { ATTR } from '../../buffer.js';
+const { sphere, starfield, blend } = __bm(18);
+const { ATTR } = __bm(6);
 
 const PHASES = ['New Moon', 'Waxing Crescent', 'First Quarter', 'Waxing Gibbous', 'Full Moon', 'Waning Gibbous', 'Last Quarter', 'Waning Crescent'];
 

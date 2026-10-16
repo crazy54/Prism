@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > HEATMAPS & MATRICES  505nm - 24 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > HEATMAPS & MATRICES  436nm - 24 / 30
 ------------------------------------------------------/\========================
 Latency Heatmap  charts-heatmap-latency
 Request latency as a scrolling heatmap -- log-spaced buckets over time in
@@ -23,7 +23,7 @@ tags: heatmap, latency, histogram over time, half blocks, magma
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-heatmap-latency
 SNAPSHOT  prism-term snapshot charts-heatmap-latency --size 72x14
 IN CODE

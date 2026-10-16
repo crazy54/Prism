@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Fireworks: rockets climb on sparkling trails and burst into one of four shell
 // types — peony (sphere), ring, willow, crackle — whose sparks fly under
 // gravity and drag, cool from white-hot to ember, and leave glowing trails
 // (additive plotting on a persistent, fading canvas). The lower band of the
 // sky is mirrored into a rippling lake.
-import { mix, NONE } from '../../color.js';
+const { mix, NONE } = __bm(0);
 
 const WHITE = 0xffffff, EMBER = 0x6a1606, GOLD = 0xffc35a;
 

@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Amiga copper bars: glossy horizontal bars swing past each other in depth,
 // each a vertical gradient with a white-hot center line — the copper chip's
 // party trick, now in a terminal.
-import { lerpc, shade, ground } from './_kit.js';
+const { lerpc, shade, ground } = __bm(29);
 
 export default {
   title: 'Copper Bars',

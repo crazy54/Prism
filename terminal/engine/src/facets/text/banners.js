@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Banner styles — a figlet session (standard / small / block), gradient swatch
 // book, outlined / hollow lettering, and a rotating 3D extrusion built from
 // stacked offset copies.
-import { NONE, mix, mixOklab } from '../../color.js';
+const { NONE, mix, mixOklab } = __bm(0);
 import { drawBanner, measureBanner } from '../../text/banner.js';
 import { bannerMode, fitScale, fitFont } from './_text.js';
 import { figlet, bitmap } from '../ascii/_ascii.js';

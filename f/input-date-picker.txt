@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > DIALOGS & PROMPTS       585nm - 18 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > DIALOGS & PROMPTS       487nm - 18 / 23
 ------------------------------------------------------/\========================
 Date Range Picker  input-date-picker
 A calendar range picker for a change freeze: arrows walk the month grid, Enter
@@ -20,7 +20,7 @@ tags: date picker, calendar, range, schedule, form
   still at t=3.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-date-picker
 SNAPSHOT  prism-term snapshot input-date-picker --size 52x11
 IN CODE

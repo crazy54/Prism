@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > BBS & ANSI ART      480nm - 16 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > BBS & ANSI ART      485nm - 16 / 24
 ------------------------------------------------------/\========================
 ANSI Moonlit Lake  ansi-landscape
 A moonlit lake in true ANSI shading -- VGA colors and .:% dithers -- with
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   colors=vga            Colors  (vga|theme)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ansi-landscape
 SNAPSHOT  prism-term snapshot ansi-landscape --size 80x22
 IN CODE

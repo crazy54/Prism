@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            484nm - 17 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            492nm - 17 / 29
 ------------------------------------------------------/\========================
 Scramble Styles  text-scramble
 Four ways to scramble a line -- glyph noise, binary, hex and shaded blocks --
@@ -21,7 +21,7 @@ tags: scramble, decode, morph, binary, hex
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-scramble
 SNAPSHOT  prism-term snapshot text-scramble --size 60x12
 IN CODE

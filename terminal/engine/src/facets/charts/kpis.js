@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // KPI Tiles: a tile row with sparklines and deltas, a big-number tile in a
 // bitmap font, and a compact NOC wallboard.
-import { mix } from '../../color.js';
+const { mix } = __bm(0);
 import { kpi, lineChart } from '../../widgets/index.js';
 import { drawBanner, measureBanner } from '../../text/index.js';
-import { signal, glyphs, safe, frame, put, putR, num, clamp, memo, ATTR } from './_data.js';
+const { signal, glyphs, safe, frame, put, putR, num, clamp, memo, ATTR } = __bm(24);
 
 const kpiRow = {
   id: 'charts-kpi-row',

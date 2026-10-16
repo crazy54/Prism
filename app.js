@@ -49,8 +49,9 @@
   function setMotion(value) {
     paused = value;
     root.dataset.motion = paused ? 'paused' : 'playing';
+    // the paused rules key on these regions (a root-level [data-motion] … * rule restyled the whole page)
+    document.querySelectorAll('.hero-fx, .hero-art, .brand .prism-mark').forEach((el) => el.classList.toggle('is-paused', paused));
     const b = byId('motion-toggle');
-    b.setAttribute('aria-pressed', String(paused));
     b.innerHTML = paused
       ? '<svg class="ic" aria-hidden="true"><use href="#i-play"/></svg><span>Resume motion</span>'
       : '<svg class="ic" aria-hidden="true"><use href="#i-pause"/></svg><span>Pause motion</span>';
@@ -71,15 +72,25 @@
     showcasePromise ||= fetch('assets/showcase.json').then((r) => { if (!r.ok) throw new Error('snippets'); return r.json(); }).catch((err) => { showcasePromise = null; throw err; });
     return showcasePromise;
   }
+  // F1 (Copy that works): the same shape as every Copy in the library — a "Prism · name" comment, one <style>
+  // (the theme tokens + the facet's CSS), the markup in a .prism-snippet wrapper that carries font and colour.
+  function asSnippet(effect) {
+    const s = effect.snippet, end = s.indexOf('</style>'), name = String(effect.name).replace(/--/g, '-');
+    if (end < 0 || s.includes('class="prism-snippet"')) return `<!-- Prism · ${name} -->\n${s}`;
+    const wrap = '.prism-snippet{font-family:var(--font);color:var(--ink);font-size:14px;line-height:1.5;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;min-height:160px;padding:16px;position:relative}:where(.prism-snippet) *,:where(.prism-snippet) ::before,:where(.prism-snippet) ::after{box-sizing:border-box}';
+    return `<!-- Prism · ${name} -->\n${s.slice(0, end).trimEnd()}\n${wrap}\n</style>\n<div class="prism-snippet">\n${s.slice(end + 8).trim()}\n</div>`;
+  }
   document.querySelectorAll('[data-copy-facet]').forEach((button) => {
+    // Busy, not disabled: disabling the focused button would drop keyboard focus to <body>.
     button.addEventListener('click', async () => {
-      button.disabled = true;
+      if (button.getAttribute('aria-busy') === 'true') return;
+      button.setAttribute('aria-busy', 'true');
       try {
         const effect = (await loadShowcase()).find((item) => item.id === button.dataset.copyFacet);
         if (!effect) throw new Error('Facet unavailable');
-        await site.copy(effect.snippet, button);
+        await site.copy(asSnippet(effect), button);
       } catch { site.notify('Could not load the snippet. Open the library to copy this facet.'); }
-      finally { button.disabled = false; }
+      finally { button.removeAttribute('aria-busy'); }
     });
   });
   document.querySelectorAll('[data-replay]').forEach((button) => {
@@ -121,7 +132,7 @@
       code: 'git clone https://github.com/crazy54/Prism.git\ncd Prism\n\n# Open Prism.html in your browser.\n# Or double-click the downloaded file.' },
     'mcp-tab': { label: 'CONNECT THE CATALOG', footer: 'Node.js 18+. No npm install needed.',
       code: 'git clone https://github.com/crazy54/Prism.git\ncd Prism/prism-mcp-server\n\n# Verify the catalogs (web + terminal)\nnode cli.js info --catalog ../Prism.html\n\n# Start the local MCP server\nnode cli.js start --catalog ../Prism.html' },
-    'terminal-tab': { label: 'BROWSE FROM YOUR TERMINAL', footer: 'Windows PowerShell: use curl.exe instead of curl.',
+    'terminal-tab': { label: 'BROWSE FROM YOUR TERMINAL', footer: () => (site?.shell() === 'windows' ? 'Windows: curl.exe works in PowerShell 5.1 and 7, Command Prompt and Git Bash.' : 'Windows PowerShell 5.1: turn on Windows above — plain curl is an alias there.'), shell: true,
       code: '# Browse the terminal site. Nothing to install.\ncurl -sL https://prism.jeremyfhall.com/tty\n\n# Run the live player (Node.js 18+)\nnpx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term' },
     'deck-tab': { label: 'PUT PRISM ON YOUR STREAM DECK', footer: 'Stream Deck 7.6+ on Windows and macOS · OpenDeck on Linux.',
       code: '# 1. The plugin: live, animated keys, dials and strips\n#    Double-click com.jeremyfhall.prism.streamDeckPlugin\n\n# 2. Or an icon pack, for any action (11 themes)\n#    Double-click com.jeremyfhall.prism.icons.<theme>.streamDeckIconPack\n\n# 3. Or a ready-made profile for your device\n#    Double-click "Prism - <device>.streamDeckProfile"' },
@@ -135,9 +146,10 @@
       byId(item.getAttribute('aria-controls')).hidden = !selected;
     });
     const q = quickstarts[tab.id] || quickstarts['browser-tab'];
-    byId('quickstart-code').textContent = q.code;
+    byId('quickstart-code').textContent = site ? site.curl(q.code) : q.code;
     byId('code-label').textContent = q.label;
-    byId('code-footer').textContent = q.footer;
+    byId('code-footer').textContent = typeof q.footer === 'function' ? q.footer() : q.footer;
+    byId('qs-shell').hidden = !q.shell;
   }
   tabs.forEach((tab, index) => {
     tab.addEventListener('click', () => selectTab(tab));
@@ -149,6 +161,7 @@
       tabs[next].focus();
     });
   });
+  site?.onShell?.(() => selectTab(tabs.find((t) => t.getAttribute('aria-selected') === 'true') || tabs[0]));
   byId('copy-command').addEventListener('click', (e) => site.copy(byId('quickstart-code').textContent, e.currentTarget));
 
   // ── three surfaces ───────────────────────────────────────────────────────
@@ -222,16 +235,26 @@
   // (../prism-deck/ in the repository, deck/engine/ in the built site).
   const deckEngine = /\/website\/(?:index\.html)?$/.test(location.pathname) ? '../prism-deck/' : 'deck/engine/';
   async function startDeck() {
-    const mount = byId('deck-preview');
+    // #deck-preview holds a static poster of the device (index.html) until the engine has
+    // mounted; CSS sizes the mount to fit the stage, and fit:true keeps the device at that width.
+    const mount = byId('deck-preview'), stage = mount.parentElement, poster = mount.innerHTML;
     try {
       const { loadDeck } = await import('./assets/deck/adapter.js');
-      const deck = await loadDeck({ engine: deckEngine, catalog: { facets: [], galleries: [], devices: [] } });
+      // only the facet this preview plays: the built site's deck/engine/core.bundle.js carries it (no facets bundle here)
+      const deck = await loadDeck({ engine: deckEngine, catalog: { facets: [], galleries: [], devices: [] }, only: ['src/facets/themes/prism.js'] });
       engines.deck = deck;
-      if (deck.source === 'prism-deck') deck.mountDevice(mount, { model: 'plus', facet: 'theme-prism', interactive: false });
+      if (deck.source === 'prism-deck') deck.mountDevice(mount, { model: 'plus', facet: 'theme-prism', interactive: false, fit: true });
       else deck.mountDevice(mount, { model: 'plus', interactive: false, keys: ['status-api-health', 'meter-cpu-ring', 'time-clock', 'toggle-mic', 'media-levels', 'devops-build', 'stream-on-air', 'prod-weather'], dials: ['dial-volume', 'dial-brightness', 'dial-temp', 'dial-scrub'] });
       deck.setGlobalMotion(paused);
       site?.onMode(() => deck.refreshMode());
-    } catch (err) { console.warn('[prism] deck preview unavailable', err?.message || err); }
+      stage.classList.add('is-live');
+    } catch (err) {
+      // the poster stays; say so, and point at the page that has the full catalog
+      console.warn('[prism] deck preview unavailable', err?.message || err);
+      if (!mount.querySelector('.deck-poster')) mount.innerHTML = poster;
+      stage.classList.add('is-poster');
+      stage.insertAdjacentHTML('beforeend', '<p class="sc-deck-note">Live preview unavailable · <a href="deck/">open the Stream Deck page</a></p>');
+    }
   }
 
   site?.onMode(() => { readTokens(); refreshFrames(); });

@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // The figure-eight three-body choreography (Chenciner & Montgomery, 2000):
 // three equal masses chasing each other round one figure-eight, integrated
 // with velocity Verlet. A ring of massless dust starts in orbit around the
 // trio and gets slung about chaotically by it — some captured, some flung
 // clear — so the stable dance and the chaos sit side by side.
-import { mix } from '../../color.js';
-import { fadeMark } from '../../palettes.js';
+const { mix } = __bm(0);
+const { fadeMark } = __bm(3);
 
 const H_STEP = 0.0025, RATE = 1; // integrator step (sim units), sim seconds per second
 const RUN = 30, DUST = 14;

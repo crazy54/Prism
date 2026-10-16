@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A six-string harp played in an arpeggio. Each string is a real 1-D wave
 // equation (finite differences, fixed ends, light damping and a touch of
 // stiffness) plucked into a triangle and left to ring, so you see the kink
@@ -5,8 +6,8 @@
 // the fundamental. Lower strings swing slower and wider; ringing strings glow,
 // and a dotted envelope traces each string's recent swing — the blur your eye
 // sees on a real vibrating string, which single frames would otherwise miss.
-import { mix } from '../../color.js';
-import { fadeMark } from '../../palettes.js';
+const { mix } = __bm(0);
+const { fadeMark } = __bm(3);
 
 const STRINGS = 6, N = 72, HZ = 900;
 const PLUCK = 0.5; // seconds between plucks

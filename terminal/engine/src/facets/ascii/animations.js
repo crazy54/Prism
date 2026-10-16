@@ -1,8 +1,9 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Pure ASCII — animations. Every glyph is 7-bit ASCII; color is optional
 // (each facet still reads in mono). Classics re-implemented from first
 // principles: donut.c, the aalib-era fire, a demo starfield, plasma, and more.
 import { RAMP, RAMP_DONUT, RAMP_FIRE, hash, line, bounce } from './_ascii.js';
-import { mix } from '../../color.js';
+const { mix } = __bm(0);
 
 const shared = { gallery: 'ascii', glyphs: 'ascii', color: '16', size: { w: 80, h: 24 }, minSize: { w: 32, h: 10 } };
 

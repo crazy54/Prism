@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A top-down hierarchy (org chart / agent tree): mainbrain dispatches
 // instructions down to its agents and findings travel back up the elbows.
-import { ATTR, glyphs, uni, phase, tint, fit, stringWidth } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, tint, fit, stringWidth } = __bm(22);
 import { LineGrid, nodeBox, box, polyline, along, tap } from './_lines.js';
 
 const ROOT = 'mainbrain';

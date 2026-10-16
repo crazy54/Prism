@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Billiard-ball physics under gravity: balls of different sizes (mass goes
 // with area) collide elastically with each other and the walls, integrated at
 // a fixed 240 Hz so it never tunnels or explodes. Every few seconds the floor
 // "pops" and throws whatever is resting on it back into the air. Lit spheres,
 // soft floor shadows that tighten as a ball lands, and a flash on hard hits.
-import { sphere, blend } from '../objects/_raster.js';
-import { NONE } from '../../color.js';
+const { sphere, blend } = __bm(18);
+const { NONE } = __bm(0);
 
 const HZ = 240, KICK = 4.5;
 

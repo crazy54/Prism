@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Every border style prism-term draws, side by side, with a focus ring walking the grid.
-import { panel, ATTR, center, phase } from './_kit.js';
+const { panel, ATTR, center, phase } = __bm(22);
 
 const STYLES = [
   ['round', 'the default'],

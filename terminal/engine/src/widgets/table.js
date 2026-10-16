@@ -1,8 +1,9 @@
+import { __m as __bm } from '../../web.bundle.js';
 // Tables and log tails.
 
-import { ATTR } from '../buffer.js';
-import { stringWidth, truncate } from '../width.js';
-import { themeOf, col, align } from './util.js';
+const { ATTR } = __bm(6);
+const { stringWidth, truncate } = __bm(5);
+const { themeOf, col, align } = __bm(20);
 
 function normalizeColumns(columns, rows) {
   if (!columns) columns = rows.length ? Object.keys(rows[0]) : [];

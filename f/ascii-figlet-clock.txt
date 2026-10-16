@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PURE ASCII > CLASSICS                    494c - 24 / 29
+--/\=== PRISM TERMINAL > PURE ASCII > CLASSICS                   597nm - 24 / 29
 ------------------------------------------------------/\========================
 Figlet Clock  ascii-figlet-clock
 HH:MM:SS in outlined figlet digits with a blinking colon -- the tmux clock-mode
@@ -19,7 +19,7 @@ tags: clock, figlet, time, digits, tmux
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ascii-figlet-clock
 SNAPSHOT  prism-term snapshot ascii-figlet-clock --size 72x10
 IN CODE

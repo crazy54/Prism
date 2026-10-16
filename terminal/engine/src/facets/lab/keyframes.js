@@ -1,11 +1,12 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A keyframe timeline, After-Effects style. Up top a stage where a sprite
 // moves, grows and changes color; below it one track per property with its
 // keyframes (◆ eased, ◇ linear), the value curve between them, and a playhead
 // sweeping across with a running timecode. Every property is interpolated
 // from its own keys, so you can watch the timeline drive the picture.
-import { easing } from '../../easing.js';
-import { mix } from '../../color.js';
-import { put } from './_lab.js';
+const { easing } = __bm(10);
+const { mix } = __bm(0);
+const { put } = __bm(26);
 
 const LEN = 4; // seconds
 // [time, value, easing-into-this-key]

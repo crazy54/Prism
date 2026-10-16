@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A Lissajous table: columns are the x frequency, rows the y frequency, and
 // each cell traces x = sin(a·s + δ), y = sin(b·s) in braille. The phase δ
 // drifts slowly, so every figure turns in 3D-looking rotation, and a bright
 // dot runs each curve at its own pace.
-import { fadeMark } from '../../palettes.js';
-import { grid, put, pxRect } from './_lab.js';
+const { fadeMark } = __bm(3);
+const { grid, put, pxRect } = __bm(26);
 
 export default {
   id: 'lab-lissajous',

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > GIT GRAPHS      574nm - 15 / 16
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > GIT GRAPHS      563nm - 15 / 16
 ------------------------------------------------------/\========================
 Branch Diagram  diagrams-git-branches
 A left-to-right branch diagram: a feature branch and a hotfix fork from main,
@@ -20,7 +20,7 @@ tags: git, branches, gitflow, merge, release
   still at t=4.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play diagrams-git-branches
 SNAPSHOT  prism-term snapshot diagrams-git-branches --size 76x11
 IN CODE

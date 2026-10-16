@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A chat transcript: the user's question sits right-aligned, the assistant
 // streams its reply on the left with a tool chip, then a follow-up arrives.
-import { ATTR, glyphs, uni, phase, fit, tint, reveal, wrapLines, stringWidth, thinkGlyph } from './_ai.js';
+const { ATTR, glyphs, uni, phase, fit, tint, reveal, wrapLines, stringWidth, thinkGlyph } = __bm(23);
 
 const MSGS = [
   ['user', 0, 'Why is checkout slow since lunch?'],

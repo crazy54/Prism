@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // mtr — "My traceroute": the header, key help line, and per-hop Loss%/Snt/Last/Avg/Best/Wrst/StDev updating.
-import { C, ATTR, writer, hash, walk, pad, lpad, fixed, clock } from './_kit.js';
+const { C, ATTR, writer, hash, walk, pad, lpad, fixed, clock } = __bm(27);
 
 const HOPS = [
   ['_gateway', 0.4, 0], ['10.20.0.1', 0.9, 0], ['100.64.12.1', 3.1, 0], ['198.51.100.17', 6.8, 0],

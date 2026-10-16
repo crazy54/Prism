@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A response streaming token by token: each new token flashes, the rate
 // wobbles like a real stream, then a tokenizer view tints token boundaries.
-import { ATTR, glyphs, uni, phase, mix, fit, tint, tokenize } from './_ai.js';
+const { ATTR, glyphs, uni, phase, mix, fit, tint, tokenize } = __bm(23);
 
 const TEXT = 'Checkout latency is up because the DB pool is exhausted. Since v2.14.1 the service runs 32 workers but still opens only 20 connections, so about a third of requests wait in the pool queue. Raising the pool to 40 should bring p99 back under 300ms.';
 const TOKS = tokenize(TEXT);

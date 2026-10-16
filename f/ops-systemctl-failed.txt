@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > PROCESSES & SERVICES      568nm - 18 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > PROCESSES & SERVICES      578nm - 18 / 39
 ------------------------------------------------------/\========================
 Failed Units  ops-systemctl-failed
 systemctl --failed shows two red * failed units; a restart fixes the backup job
@@ -25,7 +25,7 @@ ops@node03:~$
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-systemctl-failed
 SNAPSHOT  prism-term snapshot ops-systemctl-failed --size 80x16
 IN CODE

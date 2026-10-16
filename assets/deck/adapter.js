@@ -1,6 +1,6 @@
 // Stream Deck data adapter for the website.
 //
-//   const deck = await loadDeck({ engine, catalog })
+//   const deck = await loadDeck({ engine, catalog, only })   only: facet module paths to import instead of the registry
 //   deck.source           'prism-deck' (the real runtime + catalog) | 'placeholder' (sketches, only if the runtime can't load)
 //   deck.catalog          the deck catalog (lean is fine) or null
 //   deck.galleries        [{ id, title, icon, hue, blurb, count, categories }]
@@ -10,6 +10,7 @@
 //   deck.mountDevice(el, { model, keys | facet | strip | dials | screen, interactive, mode, theme, … })
 //   deck.mountKey(el, facet, { interactive, mode, theme, size, displaySize })
 //   deck.setGlobalMotion(paused) · deck.refreshMode()   (re-theme every deck that follows the page)
+//   deck.linkBus()        a shared link bus (API 1.6) for devices that should mirror each other (mute, live …), or null
 //
 // `engine` is the base URL of the prism-deck package: ../../prism-deck/ from website/deck/ in the
 // repository, ./engine/ once website/build.mjs has copied it (the same contract as /terminal/).
@@ -20,12 +21,25 @@
 const pageMode = () => (document.documentElement.dataset.rfMode === 'day' ? 'light' : 'dark');
 const deckMode = (m) => (m === 'day' || m === 'light' ? 'light' : m === 'night' || m === 'dark' ? 'dark' : null);
 
-async function realDeck(engine, catalog) {
+// only: facet module paths (e.g. ['src/facets/themes/prism.js']) — a page that shows a few known facets imports just
+// those instead of the whole registry (on the built site that keeps the facets bundle off the landing page).
+async function onlyRegistry(at, paths) {
+  const [schema, ...mods] = await Promise.all([import(at('src/facets/schema.js')), ...paths.map((p) => import(at(p)))]);
+  const byId = new Map();
+  mods.forEach((mod, k) => {
+    const exported = mod.default ?? mod.facets;
+    const list = Array.isArray(exported) ? exported : exported ? [exported] : [];
+    list.forEach((raw, i) => { const f = schema.normalizeFacet(raw, paths[k].replace(/^src\/facets\//, ''), i, list.length); byId.set(f.id, f); });
+  });
+  return { findFacet: (id) => byId.get(id) || null };
+}
+
+async function realDeck(engine, catalog, only) {
   const base = new URL(engine, location.href);
   const at = (rel) => new URL(rel, base).href;
   const [web, registry, cat, core] = await Promise.all([
     import(at('src/web/index.js')),
-    import(at('src/facets/index.js')),
+    only ? onlyRegistry(at, only) : import(at('src/facets/index.js')),
     catalog ? Promise.resolve(catalog) : import(at('catalog/deck-catalog.json'), { with: { type: 'json' } }).then((m) => m.default),
     import(at('src/web/core.js')).catch(() => null),
   ]);
@@ -52,6 +66,7 @@ async function realDeck(engine, catalog) {
     setGlobalMotion: web.setGlobalMotion,
     refreshMode: () => { for (const v of live) { if (!v.host?.isConnected) { live.delete(v); continue; } v.set({ mode: pageMode() }); } },
     stats: web.deckStats,
+    linkBus: () => (typeof web.createLinkBus === 'function' ? web.createLinkBus() : null),
   };
 }
 
@@ -74,12 +89,13 @@ async function placeholderDeck() {
     setGlobalMotion: rt.setGlobalMotion,
     refreshMode: rt.refreshMode,
     stats: rt.deckStats,
+    linkBus: () => null,
   };
 }
 
-export async function loadDeck({ engine = null, catalog = null } = {}) {
+export async function loadDeck({ engine = null, catalog = null, only = null } = {}) {
   if (engine) {
-    try { return await realDeck(engine, catalog); }
+    try { return await realDeck(engine, catalog, only); }
     catch (err) { console.warn('[prism-deck] runtime unavailable — showing sketches instead.', err?.message || err); }
   }
   return placeholderDeck();

@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A rollout Gantt chart: the "now" line sweeps the maintenance window, bars
 // fill as tasks complete, and when the schema migration overruns the
 // dependent tasks slide 15 minutes later.
-import { ATTR, glyphs, uni, phase, ease, fit, tint } from '../callouts/_kit.js';
+const { ATTR, glyphs, uni, phase, ease, fit, tint } = __bm(22);
 
 // [label, start, end] in minutes after midnight; index 1 overruns by SLIP.
 const TASKS = [

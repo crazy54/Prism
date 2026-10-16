@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATION LAB > EASING & TIMING          604nm - 3 / 17
+--/\=== PRISM TERMINAL > ANIMATION LAB > EASING & TIMING          474nm - 3 / 17
 ------------------------------------------------------/\========================
 Cubic-Bezier Timing  lab-bezier
 A devtools-style cubic-bezier editor: handles glide between CSS presets while a
@@ -29,7 +29,7 @@ tags: bezier, cubic-bezier, css, timing function, easing, devtools
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play lab-bezier
 SNAPSHOT  prism-term snapshot lab-bezier --size 64x20
 IN CODE

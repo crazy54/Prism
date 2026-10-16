@@ -1,8 +1,9 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Flow field: particles drift through a slowly evolving curl-noise field (the
 // curl of a Perlin potential is divergence-free, so streams swirl without
 // collapsing into sinks), painting silky braille trails on a persistent canvas
 // that fades toward the background. Hue follows heading, brightness speed.
-import { NONE } from '../../color.js';
+const { NONE } = __bm(0);
 export default {
   title: 'Flow Field',
   gallery: 'sim',

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      505nm - 22 / 30
+--/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      436nm - 22 / 30
 ------------------------------------------------------/\========================
 Sweeping Donut  charts-pie
 A cost-by-service donut that sweeps in segment by segment, then slowly turns,
@@ -23,7 +23,7 @@ tags: pie, donut, share, cost, legend
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play charts-pie
 SNAPSHOT  prism-term snapshot charts-pie --size 56x14
 IN CODE

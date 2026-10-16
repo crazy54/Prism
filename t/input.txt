@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS                           585nm - 14 / 17
+--/\=== PRISM TERMINAL > INPUT & MENUS                           487nm - 14 / 17
 ------------------------------------------------------/\========================
 TUI controls: selects, checkboxes, text fields, palettes, dialogs and tab bars.
 

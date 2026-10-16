@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A BBS login screen, 1993: block-letter board logo, caller stats in a double
 // frame, and a login that types itself — handle, password, credential check,
 // welcome — then hangs up and does it again. VGA colors (or --set colors=theme).
-import { textMask, bbsPalette } from './_kit.js';
+const { textMask, bbsPalette } = __bm(29);
 import { blockLogo, frame } from './_bbs.js';
 
 const HANDLE = 'LIGHTMAN';

@@ -18,7 +18,7 @@ Collecting numpy>=2.0 (from prism-sdk==2.4.0)
   still at t=5.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-pip-install
 SNAPSHOT  prism-term snapshot progress-pip-install --size 80x9
 IN CODE

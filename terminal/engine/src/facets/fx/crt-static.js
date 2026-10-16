@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Between channels on an old CRT: snow, a darker hum bar crawling up the
 // tube, scanlines and a vignette — then the set catches a station for a beat,
 // a test card rolls into lock with the channel number, and it's gone again.
-import { lerpc, clamp01, hash2 } from '../retro/_kit.js';
+const { lerpc, clamp01, hash2 } = __bm(29);
 
 const LOOP = 12;
 

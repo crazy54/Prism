@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             568nm - 36 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             578nm - 36 / 39
 ------------------------------------------------------/\========================
 Powerline Prompt  ops-prompt-powerline
 A powerline prompt of colored segments (user@host, path, git branch going dirty
@@ -26,7 +26,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   nerd=0                Powerline font glyphs  (0-1)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-prompt-powerline
 SNAPSHOT  prism-term snapshot ops-prompt-powerline --size 80x14
 IN CODE

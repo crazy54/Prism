@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // BBS main menu: a shaded header, two columns of hotkey commands with a
 // lightbar walking through them, a who's-online panel and the classic
 // time-left status line.
-import { bbsPalette } from './_kit.js';
+const { bbsPalette } = __bm(29);
 import { frame } from './_bbs.js';
 
 const ITEMS = [

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > INPUT & MENUS > TABS & BARS             585nm - 20 / 23
+--/\=== PRISM TERMINAL > INPUT & MENUS > TABS & BARS             487nm - 20 / 23
 ------------------------------------------------------/\========================
 Tabs  input-tabs
 A tab strip with a count badge whose underline glides between tabs as the user
@@ -19,7 +19,7 @@ tags: tabs, tab bar, navigation, switcher, underline
   still at t=3.5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play input-tabs
 SNAPSHOT  prism-term snapshot input-tabs --size 60x10
 IN CODE

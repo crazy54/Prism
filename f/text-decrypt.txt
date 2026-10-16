@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            484nm - 13 / 29
+--/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            492nm - 13 / 29
 ------------------------------------------------------/\========================
 Decrypt Reveal  text-decrypt
 Fixed-pitch big letters churn through random glyphs and lock in left to right,
@@ -25,7 +25,7 @@ tags: decrypt, scramble, hacker, reveal, cipher
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play text-decrypt
 SNAPSHOT  prism-term snapshot text-decrypt --size 80x16
 IN CODE

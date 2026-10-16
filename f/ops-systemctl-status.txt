@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > PROCESSES & SERVICES      568nm - 17 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > PROCESSES & SERVICES      578nm - 17 / 39
 ------------------------------------------------------/\========================
 systemctl status  ops-systemctl-status
 systemctl status nginx.service: the green * active (running) block, Main PID,
@@ -29,7 +29,7 @@ Oct 13 09:14:02 node03 systemd[1]: Started nginx.service - A high performance we
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-systemctl-status
 SNAPSHOT  prism-term snapshot ops-systemctl-status --size 80x20
 IN CODE

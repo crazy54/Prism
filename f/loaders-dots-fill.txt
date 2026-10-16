@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > BRAILLE SPINNERS   488nm - 17 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > BRAILLE SPINNERS   506nm - 17 / 64
 ------------------------------------------------------/\========================
 Dots Filled  loaders-dots-fill
 A full braille cell with one dot missing, the gap orbiting round -- bold enough
@@ -17,7 +17,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-dots-fill
 SNAPSHOT  prism-term snapshot loaders-dots-fill --size 44x5
 IN CODE

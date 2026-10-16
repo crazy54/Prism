@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > PROCESSES & SERVICES      568nm - 19 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > PROCESSES & SERVICES      578nm - 19 / 39
 ------------------------------------------------------/\========================
 pstree -p  ops-pstree
 pstree -p under watch: systemd and its children as a tree with PIDs, while a
@@ -25,7 +25,7 @@ systemd(1)-+-agetty(902)
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-pstree
 SNAPSHOT  prism-term snapshot ops-pstree --size 80x16
 IN CODE

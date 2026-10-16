@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A worn VHS tape of color bars: per-line jitter, chroma bleeding off the
 // luma, a tracking band rolling down the frame, head-switching noise along the
 // bottom, dropout specks, and the deck's on-screen display over it all.
-import { lerpc, clamp01, hash2 } from '../retro/_kit.js';
+const { lerpc, clamp01, hash2 } = __bm(29);
 
 const LOOP = 12;
 const BARS = [0xc0c0c0, 0xc0c000, 0x00c0c0, 0x00c000, 0xc000c0, 0xc00000, 0x0000c0];

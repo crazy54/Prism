@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   494nm - 34 / 41
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   558nm - 34 / 41
 ------------------------------------------------------/\========================
 curl -#  progress-curl-hash
 curl's hash-bar mode across the full width with a right-hand percentage; on
@@ -16,7 +16,7 @@ $ curl -# -O https://dl.example.com/prism/models-0.9.2.tar
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-curl-hash
 SNAPSHOT  prism-term snapshot progress-curl-hash --size 80x7
 IN CODE

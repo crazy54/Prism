@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > INTROS & SCROLLERS   480nm - 8 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > INTROS & SCROLLERS   485nm - 8 / 24
 ------------------------------------------------------/\========================
 Rotozoomer  rotozoomer
 One small emblem tile rotated and zoomed across the whole screen every frame --
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play rotozoomer
 SNAPSHOT  prism-term snapshot rotozoomer --size 70x22
 IN CODE

@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A pendulum wave seen from above: fifteen pendulums whose lengths are tuned
 // so pendulum k swings 20 + k times every 30 seconds. They start in a line,
 // drift into traveling snakes, split into two and three interleaved rows,
 // dissolve into apparent chaos — and all line up again at the end of the loop.
-import { mix } from '../../color.js';
-import { put } from './_lab.js';
+const { mix } = __bm(0);
+const { put } = __bm(26);
 
 const N = 15, T = 30, BASE = 20;
 

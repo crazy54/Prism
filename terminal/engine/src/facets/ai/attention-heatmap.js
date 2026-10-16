@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // An attention heatmap for one sentence: rows attend to earlier columns
 // (causal mask), the query row walks down, and the view flips between a
 // previous-token head and a coreference head.
-import { ATTR, uni, phase, mix, fit } from './_ai.js';
+const { ATTR, uni, phase, mix, fit } = __bm(23);
 
 const TOK = ['The', 'pool', 'is', 'too', 'small', 'for', '32', 'worker', 's'];
 const N = TOK.length;

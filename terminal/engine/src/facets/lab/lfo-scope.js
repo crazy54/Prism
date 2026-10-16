@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A four-channel LFO oscilloscope: sine, triangle, saw and square at musical
 // LFO rates, drawn by a sweeping beam over a dotted graticule. Ahead of the
 // beam the previous sweep lingers dimmer, like phosphor persistence; each
 // channel is labeled with its shape and rate.
-import { mix } from '../../color.js';
-import { fadeMark } from '../../palettes.js';
-import { put } from './_lab.js';
+const { mix } = __bm(0);
+const { fadeMark } = __bm(3);
+const { put } = __bm(26);
 
 const SWEEP = 2;
 const CHANNELS = [

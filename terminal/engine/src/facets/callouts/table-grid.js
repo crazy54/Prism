@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A psql-style result grid: full box-drawing junctions, double rule under the
 // header, and a spreadsheet cursor moving cell to cell.
-import { ATTR, uni, fit, phase, mix } from './_kit.js';
+const { ATTR, uni, fit, phase, mix } = __bm(22);
 
 const HEAD = ['id', 'order', 'status', 'total', 'placed_at'];
 const ROWS = [

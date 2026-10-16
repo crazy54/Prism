@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > INTROS & SCROLLERS   480nm - 2 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > INTROS & SCROLLERS   485nm - 2 / 24
 ------------------------------------------------------/\========================
 Sine Scroller  sine-scroller
 Big bitmap-font message riding a sine wave, copper-tinted per scanline, over a
@@ -33,7 +33,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   text=<text>           Message  default: PRISM TERMINAL FACETS   *   SINE SC...
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play sine-scroller
 SNAPSHOT  prism-term snapshot sine-scroller --size 80x20
 IN CODE

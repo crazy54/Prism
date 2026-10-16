@@ -1,7 +1,8 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A rebase, visualized: feature commits lift off their old base, replay onto
 // the tip of main with new hashes (the originals left behind as ghosts), then
 // main fast-forwards so history is a straight line.
-import { ATTR, uni, phase, ease, fit, typed } from '../callouts/_kit.js';
+const { ATTR, uni, phase, ease, fit, typed } = __bm(22);
 import { LineGrid } from './_lines.js';
 
 const MAIN = [['A', 0.06, '6c4f2d9'], ['B', 0.2, '9d02c55'], ['C', 0.34, 'e41d7f2']];

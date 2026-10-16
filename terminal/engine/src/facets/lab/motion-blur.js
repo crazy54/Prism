@@ -1,10 +1,11 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Frame rate versus motion blur, side by side. The same scene — a three-blade
 // propeller and a ball swinging past — sampled four ways: 60 fps sharp, 12 fps
 // sharp (it strobes), 12 fps with a 180° shutter (smooth again, at the same
 // frame rate) and 6 fps with a 360° shutter. Blur is real temporal
 // supersampling: each panel averages sub-frame samples across its shutter.
-import { mix } from '../../color.js';
-import { grid, put } from './_lab.js';
+const { mix } = __bm(0);
+const { grid, put } = __bm(26);
 
 const PANELS = [['60 fps', 60, 0], ['12 fps', 12, 0], ['12 fps · 180° shutter', 12, 0.5], ['6 fps · 360° shutter', 6, 1]];
 const SUBS = 10, SPIN = 1.15; // revolutions per second

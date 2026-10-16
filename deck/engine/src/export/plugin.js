@@ -1,7 +1,9 @@
+import { __m as __bm } from '../../facets.bundle.js';
 // The Prism Deck Stream Deck plugin package (formats.md §1):
 //
 //   com.jeremyfhall.prism.sdPlugin/
-//     manifest.json               SDKVersion 3, Node 20, Software 7.6 (7.1 without the Neo action)
+//     manifest.json               SDKVersion 3, Node 20, Software 7.6 (7.1 without the Neo action), SupportURL
+//     LICENSE.txt                 MIT, then the SIL OFL 1.1 of Inter (ui/fonts/OFL.txt too)
 //     bin/plugin.js               entry → bin/prism-deck/src/plugin/index.js (a copy of the engine; zero deps)
 //     bin/package.json            { "type": "module" }
 //     ui/pi.html|css|js           the property inspector + ui/catalog.js (generated) + ui/fonts/Inter
@@ -19,18 +21,21 @@ import { writeZip, readZip } from './plugin-zip.js';
 import { decodePng, encodePng, downscale } from './plugin-png.js';
 import { validate } from './plugin-schema.js';
 import { sampleProfiles, checkProfile, PLUGIN_UUID, PLUGIN_NAME, ACTION_FACET, ACTION_INFOBAR } from './profile.js';
-import { render } from '../render.js';
-import { findFacet } from '../facets/index.js';
-import { normalizeFacet } from '../facets/schema.js';
-import { surface } from '../scene/surface.js';
+const { render } = __bm(100);
+const { findFacet } = __bm(318);
+const { normalizeFacet } = __bm(104);
+const { surface } = __bm(110);
 import { validateSvg } from '../scene/validate.js';
 import { CANVAS_LAYOUT, INFOBAR_LAYOUT, CANVAS_LAYOUT_PATH, INFOBAR_LAYOUT_PATH } from '../plugin/feedback.js';
 import { PLUGIN_VERSION } from '../plugin/index.js';
+import { bundledProfileFor } from '../plugin/settings.js';
 import { piCatalogScript } from '../plugin/catalog.js';
 
 export { PLUGIN_UUID, PLUGIN_NAME, PLUGIN_VERSION };
 export const AUTHOR = 'Jeremy F Hall';
-export const URL = 'https://prism.jeremyfhall.com';
+export const URL = 'https://prism.jeremyfhall.com/deck/';
+export const SUPPORT_URL = 'https://github.com/crazy54/Prism/issues';
+export const ACTION_DISPLAY_NAME = 'Prism Display';
 
 /** What of prism-deck/ is copied into bin/prism-deck (the runtime needs the engine + src/audio + src/raster, not the tools). */
 export const ENGINE_EXCLUDE = [/^src\/export\//, /^src\/web\//, /^src\/plugin\/dev\//, /^src\/plugin\/ui\//, /^src\/hid\//, /\.test\.js$/, /(^|\/)\./];
@@ -42,7 +47,7 @@ const svgIcon = (size, view, body) => `<svg xmlns="http://www.w3.org/2000/svg" w
 
 // Default images the app shows before the plugin draws (and in its action list).
 const KEY_DEFAULT = normalizeFacet({
-  id: 'app-plugin-key', title: 'Plugin key', category: 'Dashboards', tags: ['system'], description: 'The Prism Facet action image shown before the plugin draws.', surface: 'key', animated: false,
+  id: 'app-plugin-key', title: 'Plugin key', category: 'Dashboards', tags: ['system'], description: 'The Prism Display action image shown before the plugin draws.', surface: 'key', animated: false,
   render(ctx) {
     const k = surface(ctx);
     k.background({ tone: 'active' });
@@ -58,8 +63,8 @@ export function pluginManifest({ version = PLUGIN_VERSION, minSoftware = '7.6', 
   const neo = Number(minSoftware) >= 7.6;
   const facetAction = {
     UUID: ACTION_FACET,
-    Name: 'Prism Facet',
-    Tooltip: 'Any Prism Deck facet on a key, a dial, the touch strip or the Galleon screen: animated, themed, live.',
+    Name: ACTION_DISPLAY_NAME,
+    Tooltip: 'Shows a Prism facet (art, motion, live readouts) on a key, a dial, the touch strip or the Galleon screen. Visual only, unless you give it an On press behavior: open a web page or switch profile.',
     Icon: 'imgs/actions/facet/icon',
     Controllers: ['Keypad', 'Encoder'],
     DisableAutomaticStates: true,
@@ -90,7 +95,7 @@ export function pluginManifest({ version = PLUGIN_VERSION, minSoftware = '7.6', 
     Name: PLUGIN_NAME,
     Version: version,
     Author: AUTHOR,
-    Description: 'Prism Deck: animated, themed keys, spans across keys, touch-strip panoramas and Galleon 100 SD screen widgets from the Prism catalog. Pick any facet, theme and parameters per key; optional AI live editing (off by default).',
+    Description: 'Prism Deck: animated, themed key art, spans across keys, touch-strip panoramas and Galleon 100 SD screen widgets from the Prism catalog. Prism Display is visual (it can also open a web page or switch profile on press); the sample profiles pair Stream Deck’s own actions with Prism art. Simulated data is tagged DEMO. Optional AI live editing (off by default).',
     Icon: 'imgs/plugin/icon',
     Category: PLUGIN_NAME,
     CategoryIcon: 'imgs/plugin/category',
@@ -101,6 +106,7 @@ export function pluginManifest({ version = PLUGIN_VERSION, minSoftware = '7.6', 
     Nodejs: { Version: '20' },
     OS: [{ Platform: 'windows', MinimumVersion: '10' }, { Platform: 'mac', MinimumVersion: '13' }],
     URL,
+    SupportURL: SUPPORT_URL,
     Actions: actions,
     ...(profiles.length ? { Profiles: profiles.map((p) => ({ Name: p.name, DeviceType: p.deviceType, AutoInstall: true, DontAutoSwitchWhenInstalled: true, Readonly: false })) } : {}),
   };
@@ -129,6 +135,25 @@ export function pluginImages({ brandPng } = {}) {
   return out;
 }
 
+/** LICENSE.txt of the plugin: the repo's MIT license, then Inter's OFL. */
+export function licenseText({ root, ofl }) {
+  const mit = [path.join(root, 'LICENSE'), path.join(root, '..', 'LICENSE')].find((p) => fs.existsSync(p));
+  const head = mit ? fs.readFileSync(mit, 'utf8').trim() : 'MIT License\n\nCopyright (c) 2026 Jeremy Hall';
+  return `Prism Deck plugin
+=================
+
+${head}
+
+
+Third-party: Inter typeface
+---------------------------
+Key and dial text is drawn from Inter outlines; the property inspector embeds Inter WOFF2 subsets.
+Inter is licensed under the SIL Open Font License 1.1 (also in ui/fonts/OFL.txt):
+
+${String(ofl).trim()}
+`;
+}
+
 const walk = (dir, base = dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => { const p = path.join(dir, e.name); return e.isDirectory() ? walk(p, base) : [path.relative(base, p).split(path.sep).join('/')]; });
 
 /**
@@ -149,13 +174,18 @@ export function buildPluginFolder({ root, design = path.resolve(root, '..', 'des
   for (const f of ['pi.html', 'pi.css', 'pi.js']) put(`ui/${f}`, fs.readFileSync(path.join(root, 'src', 'plugin', 'ui', f)));
   put('ui/catalog.js', piCatalogScript());
   for (const w of [400, 600, 700]) { const src = path.join(design, 'fonts', `inter-${w}-latin.woff2`); if (fs.existsSync(src)) put(`ui/fonts/inter-${w}-latin.woff2`, fs.readFileSync(src)); }
+  // licenses: the plugin (MIT) and Inter (SIL OFL 1.1: the PI fonts and the outlines every key's text is drawn from)
+  const ofl = fs.readFileSync(path.join(root, 'src', 'scene', 'fonts', 'OFL.txt'));
+  put('ui/fonts/OFL.txt', ofl);
+  put('LICENSE.txt', licenseText({ root, ofl }));
   // layouts + images
   put(CANVAS_LAYOUT_PATH, `${JSON.stringify(CANVAS_LAYOUT, null, '\t')}\n`);
   put(INFOBAR_LAYOUT_PATH, `${JSON.stringify(INFOBAR_LAYOUT, null, '\t')}\n`);
   const brand = path.join(design, 'brand', 'prism-icon-512.png');
   for (const im of pluginImages({ brandPng: fs.existsSync(brand) ? fs.readFileSync(brand) : null })) put(im.path, im.data);
   // profiles
-  const profiles = sampleProfiles({ pluginVersion: version }).filter((p) => minSoftware >= '7.6' || p.device !== 'neo').map((p) => ({ ...p, name: `profiles/prism-${p.device.replace(/-2022$/, '')}` }));
+  // bundled profile names come from settings.js BUNDLED_PROFILES (by DeviceType), the names switchToProfile uses
+  const profiles = sampleProfiles({ pluginVersion: version }).filter((p) => minSoftware >= '7.6' || p.device !== 'neo').map((p) => ({ ...p, name: bundledProfileFor(p.deviceType) || `profiles/prism-${p.device.replace(/-2022$/, '')}` }));
   for (const p of profiles) put(`${p.name}.streamDeckProfile`, p.zip);
   const manifest = pluginManifest({ version, minSoftware, profiles });
   put('manifest.json', `${JSON.stringify(manifest, null, '\t')}\n`);

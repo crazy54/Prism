@@ -1,3 +1,4 @@
-import { iconFacet } from './_icon.js';
-
-export default iconFacet('record', { label: 'Record' });
+// Bundled into facets.bundle.js by website/build.mjs (the module itself is in the repository).
+import { __m } from '../../../facets.bundle.js';
+const __n = __m(172);
+export default __n.default;

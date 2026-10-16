@@ -1,3 +1,4 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // BBS-era helpers: an ANSI-art encoder and block-letter logos.
 //
 // ansify() turns a 1×2-pixel-per-cell image into what an ANSI artist would
@@ -6,8 +7,8 @@
 // no bright backgrounds without iCE colors). Mid-tones come out as shade
 // dithers, sharp vertical detail as half blocks.
 
-import { VGA } from './_kit.js';
-import { distance2, mix } from '../../color.js';
+const { VGA } = __bm(29);
+const { distance2, mix } = __bm(0);
 
 const SHADES = [[' ', 0], ['░', 0.25], ['▒', 0.5], ['▓', 0.75]];
 const LUTS = new Map(); // palette signature → Map(color key → [ch, fg, bg])

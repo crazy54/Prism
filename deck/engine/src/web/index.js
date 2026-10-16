@@ -1,8 +1,4 @@
-// prism-deck/web — browser runtime: virtual devices and live tiles that play deck
-// facets, plus an offline loader that runs everything straight from the
-// #prism-deck-catalog JSON island (Prism.html). Browser-only, except core.js
-// (pure helpers: dial math, gestures, fitting, labels, showcase layouts).
-
-export { DeckView, KeyView, mountDevice, mountKey, setGlobalMotion, isGlobalMotionPaused, prefersReducedMotion, deckStats } from './player.js';
-export { loadIsland, createModuleLoader } from './island.js';
-export * from './core.js';
+// Bundled into core.bundle.js by website/build.mjs (the module itself is in the repository).
+import { __m } from '../../core.bundle.js';
+const __n = __m(109);
+export const DIAL_SWEEP = __n.DIAL_SWEEP, DRAG_PX = __n.DRAG_PX, DeckView = __n.DeckView, FAMILY = __n.FAMILY, HOLD_S = __n.HOLD_S, KEY_SIZE_DEVICES = __n.KEY_SIZE_DEVICES, KeyView = __n.KeyView, TAP_SLOP = __n.TAP_SLOP, WHEEL_PX = __n.WHEEL_PX, clamp01 = __n.clamp01, createLinkBus = __n.createLinkBus, createModuleLoader = __n.createModuleLoader, deckStats = __n.deckStats, devicesFor = __n.devicesFor, dialAngle = __n.dialAngle, dialStep = __n.dialStep, dragTicks = __n.dragTicks, fitWidth = __n.fitWidth, frameTime = __n.frameTime, gameAnnouncement = __n.gameAnnouncement, gameCell = __n.gameCell, inputState = __n.inputState, isGlobalMotionPaused = __n.isGlobalMotionPaused, isTap = __n.isTap, keyPool = __n.keyPool, loadIsland = __n.loadIsland, mountDevice = __n.mountDevice, mountKey = __n.mountKey, prefersReducedMotion = __n.prefersReducedMotion, segmentAt = __n.segmentAt, setGlobalMotion = __n.setGlobalMotion, showcaseLayout = __n.showcaseLayout, slotLabel = __n.slotLabel, stepValue = __n.stepValue, stripTouch = __n.stripTouch, wheelTicks = __n.wheelTicks;

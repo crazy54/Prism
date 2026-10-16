@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > RETRO & DEMOSCENE > INTROS & SCROLLERS   480nm - 3 / 24
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > INTROS & SCROLLERS   485nm - 3 / 24
 ------------------------------------------------------/\========================
 Starfield  starfield
 Warp-speed 3D starfield -- braille motion streaks, periodic warp surges,
@@ -29,7 +29,7 @@ tags: starfield, warp, space, demoscene
   still at 80x20 - t=4s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play starfield
 SNAPSHOT  prism-term snapshot starfield --size 80x24
 IN CODE

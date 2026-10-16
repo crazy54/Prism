@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > LINUX & OPS > DISK & STORAGE             568nm - 7 / 39
+--/\=== PRISM TERMINAL > LINUX & OPS > DISK & STORAGE             578nm - 7 / 39
 ------------------------------------------------------/\========================
 df -h  ops-df
 df -h with Size/Used/Avail/Use% columns and a usage bar per mount; /var/log
@@ -21,7 +21,7 @@ nfs01.example:/export/share   2.0T  908G  1.1T  45% /mnt/share   [#####.......]
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ops-df
 SNAPSHOT  prism-term snapshot ops-df --size 80x12
 IN CODE

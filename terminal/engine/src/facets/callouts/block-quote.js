@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A block quote that types itself out, then hands over to the next.
-import { uni, ATTR, phase, typed, blink, mix } from './_kit.js';
+const { uni, ATTR, phase, typed, blink, mix } = __bm(22);
 import { wrapText } from './_admon.js';
 
 const QUOTES = [

@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // Sparklines: word-sized trend lines — eighth-block bars, braille, dots, and a wall of them.
-import { mix, scale } from '../../color.js';
-import { signal, glyphs, safe, vbar, put, putR, num, clamp, light, lift, ATTR, VBLOCKS } from './_data.js';
+const { mix, scale } = __bm(0);
+const { signal, glyphs, safe, vbar, put, putR, num, clamp, light, lift, ATTR, VBLOCKS } = __bm(24);
 
 const METRICS = [
   { key: 'cpu', label: 'cpu', unit: '%', base: 46, amp: 22, max: 100, warn: 75, crit: 90, seed: 1 },

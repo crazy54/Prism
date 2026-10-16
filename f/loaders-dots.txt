@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > SPINNERS & LOADERS > BRAILLE SPINNERS   488nm - 16 / 64
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > BRAILLE SPINNERS   506nm - 16 / 64
 ------------------------------------------------------/\========================
 Dots  loaders-dots
 The braille dot rotation npm, ora and half of all modern CLIs use -- the default
@@ -17,7 +17,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.25-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play loaders-dots
 SNAPSHOT  prism-term snapshot loaders-dots --size 44x5
 IN CODE

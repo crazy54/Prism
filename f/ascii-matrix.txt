@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PURE ASCII > ASCII ANIMATIONS            494c - 11 / 29
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ANIMATIONS           597nm - 11 / 29
 ------------------------------------------------------/\========================
 ASCII Digital Rain  ascii-matrix
 Columns of falling ASCII code with bright heads and decaying trails -- the
@@ -29,7 +29,7 @@ E  Q " -    - K       I    8       6  ,      S      !N      ~     Y ~ .
   still at 80x20 - t=4s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play ascii-matrix
 SNAPSHOT  prism-term snapshot ascii-matrix --size 80x24
 IN CODE

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > FX STORE > GLITCH & NOISE               436nm - 23 / 24
+--/\=== PRISM TERMINAL > FX STORE > GLITCH & NOISE               467nm - 23 / 24
 ------------------------------------------------------/\========================
 CRT Static  crt-static
 Between channels on an old CRT: snow, a crawling hum bar and scanlines, until a
@@ -29,7 +29,7 @@ tags: static, snow, crt, tv, noise, analog, channel
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play crt-static
 SNAPSHOT  prism-term snapshot crt-static --size 64x20
 IN CODE

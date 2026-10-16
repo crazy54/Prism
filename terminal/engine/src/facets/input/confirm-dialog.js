@@ -1,6 +1,7 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A destructive-action confirm dialog: Cancel is the default, Delete stays
 // disabled until the resource name is typed, then it runs and closes.
-import { ATTR, glyphs, uni, phase, typed, blink, ease, mix, fit, spin, button, backdrop, modal } from './_input.js';
+const { ATTR, glyphs, uni, phase, typed, blink, ease, mix, fit, spin, button, backdrop, modal } = __bm(25);
 
 const NAME = 'checkout';
 const T = { open: 0.1, type: 0.9, tab: 2.6, enter: 3.2, close: 4.6 };

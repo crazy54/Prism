@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > 3D SOLIDS             467nm - 1 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > 3D SOLIDS             483nm - 1 / 19
 ------------------------------------------------------/\========================
 Shaded Cube  shaded-cube
 A z-buffered cube with Lambert and Blinn-Phong lighting, palette-tinted faces
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   speed=1               Speed  (0.1-4)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play shaded-cube
 SNAPSHOT  prism-term snapshot shaded-cube --size 60x22
 IN CODE

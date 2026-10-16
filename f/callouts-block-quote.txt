@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > ADMONITIONS          580nm - 8 / 15
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > ADMONITIONS          570nm - 8 / 15
 ------------------------------------------------------/\========================
 Block Quote  callouts-block-quote
 A pull quote with an accent gutter that types itself out, attributes its author,
@@ -18,7 +18,7 @@ tags: quote, blockquote, typewriter, motd, pull quote
   still at t=6s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play callouts-block-quote
 SNAPSHOT  prism-term snapshot callouts-block-quote --size 64x9
 IN CODE

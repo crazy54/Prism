@@ -1,9 +1,10 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // A gas giant with a tilted ring system: noise-warped cloud bands that
 // rotate, a soft terminator, the ring split by the planet (back half hidden,
 // front half crossing the disk), the planet's shadow falling across the ring,
 // and a twinkling starfield behind it all.
-import { sphere, starfield, blend } from './_raster.js';
-import { gradient, NONE } from '../../color.js';
+const { sphere, starfield, blend } = __bm(18);
+const { gradient, NONE } = __bm(0);
 
 export default {
   title: 'Ringed Planet',

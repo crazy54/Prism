@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PHYSICS       475nm - 10 / 18
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PHYSICS       471nm - 10 / 18
 ------------------------------------------------------/\========================
 Double Pendulum  double-pendulum
 Three double pendulums started a thousandth of a radian apart -- together at
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   pendulums=3           Pendulums  (1-6)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play double-pendulum
 SNAPSHOT  prism-term snapshot double-pendulum --size 48x24
 IN CODE

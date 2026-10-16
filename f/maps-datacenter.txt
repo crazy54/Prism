@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > MAPS & GEO > GRIDS & FLOORPLANS         592nm - 10 / 11
+--/\=== PRISM TERMINAL > MAPS & GEO > GRIDS & FLOORPLANS         519nm - 10 / 11
 ------------------------------------------------------/\========================
 Data Hall Floorplan  maps-datacenter
 A data-hall floorplan: rack rows with inlet temperatures, cold and hot aisles
@@ -29,7 +29,7 @@ tags: datacenter, floorplan, racks, temperature, airflow
   still at 80x20 - t=6s -- run it live for full size and motion
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play maps-datacenter
 SNAPSHOT  prism-term snapshot maps-datacenter --size 80x22
 IN CODE

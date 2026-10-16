@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > FX STORE > FIELDS                        436nm - 4 / 24
+--/\=== PRISM TERMINAL > FX STORE > FIELDS                        467nm - 4 / 24
 ------------------------------------------------------/\========================
 Interference  interference
 A ripple tank: three orbiting sources whose concentric waves reinforce and
@@ -33,7 +33,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   wavelength=1          Wavelength  (0.4-3)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play interference
 SNAPSHOT  prism-term snapshot interference --size 80x24
 IN CODE

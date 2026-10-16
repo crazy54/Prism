@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > MECHANICAL           467nm - 14 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > MECHANICAL           483nm - 14 / 19
 ------------------------------------------------------/\========================
 Hourglass  hourglass
 Sand drains through the neck into a growing heap, volume conserved; when the top
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   duration=8            Seconds per run  (2-60)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play hourglass
 SNAPSHOT  prism-term snapshot hourglass --size 30x22
 IN CODE

@@ -1,5 +1,6 @@
+import { __m as __bm } from '../../../web.bundle.js';
 // ping — replies streaming once a second, a latency sparkline, and the live rtt min/avg/max/mdev summary.
-import { C, ATTR, writer, walk, hash, spark, fixed } from './_kit.js';
+const { C, ATTR, writer, walk, hash, spark, fixed } = __bm(27);
 
 export default {
   id: 'ops-ping',

@@ -1,4 +1,4 @@
---/\=== PRISM TERMINAL > ANIMATED OBJECTS > MECHANICAL           467nm - 13 / 18
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > MECHANICAL           483nm - 13 / 19
 ------------------------------------------------------/\========================
 Analog Clock  analog-clock
 A braille wall clock with a bezel, ticks, numerals, tapered baton hands and a
@@ -32,7 +32,7 @@ PARAMS - --SET KEY=VALUE ------------------------
   rate=1                Time multiplier  (1-600)
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play analog-clock
 SNAPSHOT  prism-term snapshot analog-clock --size 40x20
 IN CODE

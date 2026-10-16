@@ -17,7 +17,7 @@ Receiving objects:  76% (3686/4821), 48.53 MiB | 17.34 MiB/s
   still at t=5s -- run it live to see it move
 
 RUN IT LIVE - NODE 18+, NO INSTALL --------------
-  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz \
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
     prism-term play progress-git-clone
 SNAPSHOT  prism-term snapshot progress-git-clone --size 80x8
 IN CODE
