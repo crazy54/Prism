@@ -52,7 +52,7 @@ export default {
 3. **Draw through the Surface API** — `set`, `get`, `text`, `fill`, `clear`, `view`, `Canvas.paint`. Never touch `buffer.ch/fg/bg/at` arrays; the buffer may be a View inside a bigger screen, and nothing may land outside it.
 4. **Any size.** Render sensibly from `minSize` up to 160×48; lay out from `ctx.width/height`, never hard-coded positions. Degrade (drop labels, fewer rows) instead of overflowing.
 5. **Every mode.** Canvas-based facets must read in braille, sextant, quad, half and ascii (`--mode`). If `glyphs: 'ascii'`, the facet must emit only printable 7-bit ASCII when caps.unicode is false.
-6. **Theme-aware.** Use `ctx.theme` tokens (and `ctx.palette()`) for color so `--theme` reskins it. Light themes must stay legible.
+6. **Theme-aware.** Use `ctx.theme` tokens (and `ctx.palette()`) for color so `--theme` reskins it. The default palette, `prism`, is Refraction's spectrum and already picks the right tier for Night or Day. Light themes must stay legible: light on glass reads at a whisper, ink on paper doesn't — fade trails with `fadeMark(theme, color, k)` instead of `mix(theme.bg, color, k)`, run pale art colors through `legible(theme, color, 3)` when they become ink, and shade toward `theme.line` rather than black by Day (`shade()` in `retro/_kit.js`). Night-sky subjects (galaxies, fireworks, starfields) may keep their own dark sky by Day; say so in a comment. Check both `--theme prism-dark` and `--theme prism-light` contact sheets.
 7. **Budget.** ≤ 8 ms per frame at 160×48 is the target; the test fails above 25 ms.
 8. **Honest data.** Sample numbers, hostnames and log lines are fictional and plausible; use `.example` domains and RFC 5737/1918 addresses.
 9. **ids are global.** In widget-style galleries (`loaders`, `progress`, `charts`, `ai`, `status`, `ops`, `diagrams`, `callouts`, `input`, `maps`, `lab`, `ascii`) prefix ids with the gallery (`progress-odometer`, `ops-htop`). Art galleries (`fx`, `objects`, `sim`, `retro`, `text`) may use bare names. The registry reports duplicates.
@@ -65,8 +65,20 @@ cd prism-term
 npm run facets:manifest                                     # after adding/removing a module
 node --test --test-name-pattern="facet progress/" test/facets.test.js   # conformance for one gallery
 node scripts/shoot.mjs --gallery progress --sheet --t 2 --out <dir>      # contact sheet PNG — LOOK at it
+node scripts/shoot.mjs --gallery progress --sheet --t 2 --theme prism-light --out <dir>   # the same sheet by Day
 node scripts/shoot.mjs --ids progress-odometer --t 0.5,2,4 --mode braille --out <dir>
 node cli.js play progress-odometer                          # in a real terminal
 ```
 
 Screenshots render through Chrome's fonts; braille/sextant glyphs can show faint hairlines that real terminals don't.
+
+### Day and Night in a real terminal
+
+Check every facet in both modes before you ship it (rule 6):
+
+- **`d`** flips Day ↔ Night while the facet plays, in the player and in the catalog browser. Inside another theme family it flips that family's dark and light members. **`t`** cycles every theme.
+- **`--day`** / **`--night`** start in one mode: `node cli.js play progress-odometer --day`.
+- **`PRISM_TERM_THEME=day`** (or `night`, `auto`, or any theme id) pins the theme for every command, snapshots included: `PRISM_TERM_THEME=day node cli.js snapshot progress-odometer`. Without it, interactive runs follow the terminal's background.
+- **`--no-intro`** (or `PRISM_TERM_INTRO=0`) skips First Light when you open the browser over and over.
+- **`PRISM_REDUCED_MOTION=1`** (or `--reduced-motion`) turns off the intro, the player's wipes and the relight sweep. Your facet still animates, so it must read well without any of them.
+- **`prism-term theme <format>`** gives your terminal emulator the Prism Night / Day colors (`--day` for Day), so the terminal around the facet matches it too.

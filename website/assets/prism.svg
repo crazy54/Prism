@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d5c7ff"/><stop offset=".5" stop-color="#ae9bee"/><stop offset="1" stop-color="#76cef0"/></linearGradient></defs><path d="M20 4 36 33H4Z" fill="none" stroke="url(#a)" stroke-width="2" stroke-linejoin="round"/><path d="m20 4 5 29H4m21 0 11 0" fill="none" stroke="url(#a)" stroke-opacity=".55" stroke-width="1.2"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+<style>
+.e{stroke:#c9b8fb}.f{stroke:#fff}.l{fill:#b8a2f2;fill-opacity:.42}.r{fill:#64ceea;fill-opacity:.16}.a{fill:#fff}
+@media (prefers-color-scheme:light){.e{stroke:#7353bb}.f{stroke:#3d2a7d}.l{fill:#7353bb;fill-opacity:.24}.r{fill:#006ca9;fill-opacity:.1}.a{fill:#7353bb}}
+</style>
+<path class="l" d="M16 2.6 20.1 28H2.9Z"/><path class="r" d="M16 2.6 29.1 28H20.1Z"/>
+<path class="e" d="M16 2.6 29.1 28H2.9Z" fill="none" stroke-width="2.3" stroke-linejoin="round"/>
+<path class="f" d="M16 2.6 20.1 28" fill="none" stroke-width="1.7" stroke-linecap="round"/>
+</svg>

@@ -3,19 +3,22 @@
 // from the site (../tty, ../t/<gallery>, ../f/<facet>, plus .24 / .txt), parsed
 // as ANSI and drawn by the engine's browser renderer at 80 columns.
 
-import { esc, initChrome, engineUrl } from './site.js';
+import { esc, initChrome, engineUrl, mode, onMode, copyButton, curlHtml, applyShell } from './site.js';
+import { TERMINAL as POSITIONS } from '../assets/rf/positions.mjs';
 
 const byId = (id) => document.getElementById(id);
 const siteRoot = new URL('../', location.href);
 const HOST = 'https://prism.jeremyfhall.com';
-const THEMES = { dark: { bg: 0x0f1621, ink: 0xd9dde4 }, light: { bg: 0xfbfbfd, ink: 0x1f2430 } };
+// The Prism terminal schemes (prism-term/src/themes.js › TERMINAL_SCHEMES): background + foreground.
+const THEMES = { dark: { id: 'prism-dark', bg: 0x0a0c12, ink: 0xe6e6ef }, light: { id: 'prism-light', bg: 0xf8f7fb, ink: 0x23222f } };
 
 initChrome();
 
 const [web, taxonomy] = await Promise.all([import(engineUrl('src/web/index.js')), import(engineUrl('src/facets/galleries.js'))]);
 
 const screen = byId('preview-screen');
-const state = { page: 'tty', variant: '', bg: 'dark' };
+const state = { page: 'tty', variant: '', bg: mode() === 'day' ? 'light' : 'dark' };
+for (const b of byId('preview-bg').children) b.setAttribute('aria-pressed', String(b.dataset.v === state.bg));
 const cache = new Map();
 let canvas = null, buffer = null, token = 0;
 
@@ -46,7 +49,7 @@ async function show(page = state.page) {
   state.page = page;
   const t = ++token;
   byId('preview-page').value = page;
-  byId('preview-cmd').innerHTML = `$ curl -sL prism.jeremyfhall.com/<b>${esc(page)}${esc(state.variant)}</b>`;
+  byId('preview-cmd').innerHTML = `$ <span data-curl>${window.PrismSite?.shell?.() === 'windows' ? 'curl.exe' : 'curl'}</span> -sL prism.jeremyfhall.com/<b>${esc(page)}${esc(state.variant)}</b>`;
   try {
     const text = await fetchPage(page + state.variant);
     if (t !== token) return;
@@ -84,8 +87,10 @@ select.addEventListener('change', () => show(select.value));
 
 byId('gallery-table').innerHTML = list.map((g) => {
   const cmd = `curl -sL ${HOST}/t/${g.id}`;
-  return `<div class="gal-row" role="listitem"><span class="t-gal-icon" aria-hidden="true">${esc(g.icon)}</span><div><strong>${esc(g.title)}</strong><small>${esc(g.blurb)}</small></div><span class="t-gal-count">${g.count == null ? '' : g.count}</span><code>${esc(cmd)}</code><span class="row-actions"><button type="button" data-preview="t/${esc(g.id)}" aria-label="Preview the ${esc(g.title)} page">Preview</button><button type="button" data-copy="${esc(cmd)}" aria-label="Copy: ${esc(cmd)}">Copy ⧉</button></span></div>`;
+  const hue = POSITIONS[g.id]?.sameAs || g.id;
+  return `<div class="gal-row" role="listitem" data-rf-gallery="${esc(hue)}"><i class="rf-index"></i><span class="t-gal-icon" aria-hidden="true"><svg class="ic s18 is-spectral" aria-hidden="true"><use href="#i-${esc(g.id)}"/></svg></span><div><strong>${esc(g.title)}</strong><small>${esc(g.blurb)}</small></div><span class="t-gal-count">${g.count == null ? '' : g.count}</span><code>${curlHtml(cmd)}</code><span class="row-actions"><button type="button" class="chip-btn" data-preview="t/${esc(g.id)}" aria-label="Preview the ${esc(g.title)} page"><svg class="ic" aria-hidden="true"><use href="#i-eye"/></svg><span>Preview</span></button>${copyButton(cmd, `Copy the ${g.title} command`)}</span></div>`;
 }).join('');
+applyShell(byId('gallery-table'));
 
 document.addEventListener('click', (e) => {
   const b = e.target.closest('[data-preview]');
@@ -110,3 +115,12 @@ let resizeTimer;
 new ResizeObserver(() => { clearTimeout(resizeTimer); resizeTimer = setTimeout(draw, 100); }).observe(screen);
 
 show('tty');
+// The preview's background follows the page until someone picks one.
+let bgChosen = false;
+byId('preview-bg').addEventListener('click', () => { bgChosen = true; });
+onMode((m) => {
+  if (bgChosen) return;
+  state.bg = m === 'day' ? 'light' : 'dark';
+  for (const b of byId('preview-bg').children) b.setAttribute('aria-pressed', String(b.dataset.v === state.bg));
+  draw();
+});

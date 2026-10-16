@@ -14,6 +14,11 @@ _smoke.mjs               →  validates the island parses + shell scripts syntax
 _check_ds.mjs            →  design-system coverage & integrity gate (exit non-zero on fail)
 ```
 
+The in-page extraction logic (`extractInPage`) lives in `extract-in-page.mjs`, so other tooling
+(the team's record-by-record island sync) runs byte-identical logic. `_embed-catalog.mjs` refuses
+to replace an island that has more effects, or more galleries, than `manifest.json`
+(`PRISM_ALLOW_SHRINK=1` overrides), so a stale manifest can no longer silently delete facets.
+
 All four pipeline scripts honor `PRISM_HTML` (an absolute path to an alternate copy),
 so a staged temp copy can be extracted / embedded / smoke-checked / gated without
 touching the repo's `Prism.html`.

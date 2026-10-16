@@ -1,14 +1,14 @@
 // Rotozoomer: one small tile — a checker with a prism emblem — rotated and
 // zoomed across the whole screen every frame. The texture-mapping trick that
 // showed what a 7 MHz CPU could do.
-import { lerpc } from './_kit.js';
+import { lerpc, shade } from './_kit.js';
 
 const T = 32;
 function makeTile(pal, theme) {
   const tile = new Int32Array(T * T);
   for (let y = 0; y < T; y++) for (let x = 0; x < T; x++) {
     const check = ((x >> 3) + (y >> 3)) & 1;
-    let c = check ? lerpc(theme.bg, theme.accent, 0.42) : lerpc(theme.bg, 0x000000, 0.25);
+    let c = check ? lerpc(theme.bg, theme.accent, 0.42) : shade(theme, 0.25);
     // Prism emblem: a triangle with a bright edge, centered in the tile.
     const u = (x - T / 2 + 0.5) / (T / 2), v = (y - T / 2 + 0.5) / (T / 2);
     const inTri = v > -0.62 && v < 0.55 && Math.abs(u) < (v + 0.62) * 0.62;

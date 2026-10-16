@@ -24,7 +24,8 @@ export default {
     const rand = ctx.rng;
     const th = ctx.theme;
     const gps = 14 * ctx.param('speed', 1);
-    const ageCol = ctx.palette(['#ffffff', th.accent, th.info, th.pos, th.crit]);
+    // Newborn cells flash the brightest ink the theme has: white light at Night, ink by Day.
+    const ageCol = ctx.palette([th.mode === 'light' ? th.ink : '#ffffff', th.accent, th.info, th.pos, th.crit]);
     const AGES = 90;
     const lut = new Int32Array(AGES);
     for (let a = 0; a < AGES; a++) lut[a] = ageCol(Math.pow(a / (AGES - 1), 0.6));

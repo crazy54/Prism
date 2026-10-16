@@ -6,6 +6,9 @@
   "bin": {
     "prism-term": "./cli.js"
   },
+  "man": [
+    "./man/prism-term.1"
+  ],
   "exports": {
     ".": "./index.js",
     "./facets": "./src/facets/index.js",
@@ -17,13 +20,18 @@
     "cli.js",
     "index.js",
     "src/",
+    "themes/",
     "examples/",
+    "man/",
+    "completions/",
     "README.md"
   ],
   "scripts": {
     "start": "node cli.js",
     "test": "node --test --test-timeout=120000 \"test/*.test.js\"",
     "sync-themes": "node scripts/sync-themes.mjs",
+    "export-themes": "node scripts/export-themes.mjs",
+    "themes:check": "node scripts/sync-themes.mjs --check && node scripts/export-themes.mjs --check",
     "facets:manifest": "node scripts/gen-manifest.mjs",
     "facets:check": "node scripts/gen-manifest.mjs --check",
     "catalog": "node scripts/build-catalog.mjs",

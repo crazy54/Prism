@@ -1,0 +1,551 @@
+{
+ "note": "Chrome-rendered references for test/raster.test.js — regenerate with node scripts/raster-goldens.mjs",
+ "chrome": "headless, <img> → canvas",
+ "cases": [
+  {
+   "name": "app-cpu-ring-144",
+   "w": 144,
+   "h": 144,
+   "source": {
+    "facet": "app-cpu-ring",
+    "size": 144,
+    "theme": "prism"
+   },
+   "stats": {
+    "mean": 0.436,
+    "p99": 12,
+    "max": 39
+   }
+  },
+  {
+   "name": "app-focus-timer-day-80",
+   "w": 80,
+   "h": 80,
+   "source": {
+    "facet": "app-focus-timer",
+    "size": 80,
+    "theme": "porcelain"
+   },
+   "stats": {
+    "mean": 0.809,
+    "p99": 16,
+    "max": 33
+   }
+  },
+  {
+   "name": "key-aurora-headphones-160",
+   "w": 160,
+   "h": 160,
+   "source": {
+    "facet": "icon-headphones",
+    "size": 160,
+    "theme": "aurora"
+   },
+   "stats": {
+    "mean": 0.924,
+    "p99": 12,
+    "max": 49
+   }
+  },
+  {
+   "name": "key-blueprint-git-branch-144",
+   "w": 144,
+   "h": 144,
+   "source": {
+    "facet": "icon-git-branch",
+    "size": 144,
+    "theme": "blueprint"
+   },
+   "stats": {
+    "mean": 0.513,
+    "p99": 12,
+    "max": 47
+   }
+  },
+  {
+   "name": "key-chrome-power-studio",
+   "w": 144,
+   "h": 112,
+   "source": {
+    "facet": "icon-power",
+    "device": "studio",
+    "theme": "chrome"
+   },
+   "stats": {
+    "mean": 0.329,
+    "p99": 5,
+    "max": 18
+   }
+  },
+  {
+   "name": "key-ember-bulb-96",
+   "w": 96,
+   "h": 96,
+   "source": {
+    "facet": "icon-bulb",
+    "size": 96,
+    "theme": "ember"
+   },
+   "stats": {
+    "mean": 0.412,
+    "p99": 9,
+    "max": 28
+   }
+  },
+  {
+   "name": "key-ember-day-alarm-112",
+   "w": 112,
+   "h": 112,
+   "source": {
+    "facet": "icon-alarm",
+    "size": 112,
+    "theme": "ember",
+    "mode": "light"
+   },
+   "stats": {
+    "mean": 0.427,
+    "p99": 8,
+    "max": 20
+   }
+  },
+  {
+   "name": "key-mono-search-72",
+   "w": 72,
+   "h": 72,
+   "source": {
+    "facet": "icon-search",
+    "size": 72,
+    "theme": "mono"
+   },
+   "stats": {
+    "mean": 0.85,
+    "p99": 28,
+    "max": 88
+   }
+  },
+  {
+   "name": "key-neon-record-on-144",
+   "w": 144,
+   "h": 144,
+   "source": {
+    "facet": "icon-record",
+    "size": 144,
+    "theme": "neon",
+    "state": 1
+   },
+   "stats": {
+    "mean": 0.753,
+    "p99": 13,
+    "max": 42
+   }
+  },
+  {
+   "name": "key-neon-rocket-120",
+   "w": 120,
+   "h": 120,
+   "source": {
+    "facet": "icon-rocket",
+    "size": 120,
+    "theme": "neon"
+   },
+   "stats": {
+    "mean": 0.87,
+    "p99": 16,
+    "max": 42
+   }
+  },
+  {
+   "name": "key-paper-mail-80",
+   "w": 80,
+   "h": 80,
+   "source": {
+    "facet": "icon-mail",
+    "size": 80,
+    "theme": "paper"
+   },
+   "stats": {
+    "mean": 0.594,
+    "p99": 13,
+    "max": 30
+   }
+  },
+  {
+   "name": "key-phosphor-cpu-144",
+   "w": 144,
+   "h": 144,
+   "source": {
+    "facet": "icon-cpu",
+    "size": 144,
+    "theme": "phosphor"
+   },
+   "stats": {
+    "mean": 0.509,
+    "p99": 4,
+    "max": 41
+   }
+  },
+  {
+   "name": "key-phosphor-terminal-96",
+   "w": 96,
+   "h": 96,
+   "source": {
+    "facet": "icon-terminal",
+    "size": 96,
+    "theme": "phosphor"
+   },
+   "stats": {
+    "mean": 0.594,
+    "p99": 9,
+    "max": 40
+   }
+  },
+  {
+   "name": "key-pixel-day-battery-72",
+   "w": 72,
+   "h": 72,
+   "source": {
+    "facet": "icon-battery",
+    "size": 72,
+    "theme": "pixel",
+    "mode": "light"
+   },
+   "stats": {
+    "mean": 0.033,
+    "p99": 1,
+    "max": 2
+   }
+  },
+  {
+   "name": "key-pixel-wifi-160",
+   "w": 160,
+   "h": 160,
+   "source": {
+    "facet": "icon-wifi",
+    "size": 160,
+    "theme": "pixel"
+   },
+   "stats": {
+    "mean": 0.148,
+    "p99": 1,
+    "max": 2
+   }
+  },
+  {
+   "name": "key-porcelain-calendar-144",
+   "w": 144,
+   "h": 144,
+   "source": {
+    "facet": "icon-calendar",
+    "size": 144,
+    "theme": "porcelain"
+   },
+   "stats": {
+    "mean": 0.64,
+    "p99": 14,
+    "max": 44
+   }
+  },
+  {
+   "name": "key-prism-day-volume-72",
+   "w": 72,
+   "h": 72,
+   "source": {
+    "facet": "icon-volume",
+    "size": 72,
+    "theme": "prism",
+    "mode": "light"
+   },
+   "stats": {
+    "mean": 0.663,
+    "p99": 19,
+    "max": 31
+   }
+  },
+  {
+   "name": "key-prism-mic-144",
+   "w": 144,
+   "h": 144,
+   "source": {
+    "facet": "icon-mic",
+    "size": 144,
+    "theme": "prism"
+   },
+   "stats": {
+    "mean": 0.554,
+    "p99": 13,
+    "max": 48
+   }
+  },
+  {
+   "name": "motion-alert-countdown-120",
+   "w": 120,
+   "h": 120,
+   "source": {
+    "facet": "alert-countdown",
+    "size": 120,
+    "theme": "neon"
+   },
+   "stats": {
+    "mean": 0.626,
+    "p99": 15,
+    "max": 47
+   }
+  },
+  {
+   "name": "motion-idle-orbit-160",
+   "w": 160,
+   "h": 160,
+   "source": {
+    "facet": "idle-orbit",
+    "size": 160,
+    "theme": "aurora"
+   },
+   "stats": {
+    "mean": 0.993,
+    "p99": 14,
+    "max": 53
+   }
+  },
+  {
+   "name": "motion-press-ripple-144",
+   "w": 144,
+   "h": 144,
+   "source": {
+    "facet": "press-ripple",
+    "size": 144,
+    "theme": "prism",
+    "pressAge": 0.12
+   },
+   "stats": {
+    "mean": 1.08,
+    "p99": 24,
+    "max": 50
+   }
+  },
+  {
+   "name": "scaled-cpu-72-to-200",
+   "w": 200,
+   "h": 200,
+   "source": {
+    "facet": "icon-cpu",
+    "size": 72,
+    "theme": "ember"
+   },
+   "stats": {
+    "mean": 0.509,
+    "p99": 10,
+    "max": 41
+   }
+  },
+  {
+   "name": "scaled-mic-144-to-72",
+   "w": 72,
+   "h": 72,
+   "source": {
+    "facet": "icon-mic",
+    "size": 144,
+    "theme": "prism"
+   },
+   "stats": {
+    "mean": 0.865,
+    "p99": 25,
+    "max": 54
+   }
+  },
+  {
+   "name": "screen-galleon-dashboard",
+   "w": 720,
+   "h": 384,
+   "source": {
+    "facet": "screen-galleon-dashboard",
+    "screen": "galleon",
+    "device": "galleon",
+    "theme": "prism"
+   },
+   "stats": {
+    "mean": 0.469,
+    "p99": 12,
+    "max": 88
+   }
+  },
+  {
+   "name": "screen-galleon-widget-day",
+   "w": 360,
+   "h": 192,
+   "source": {
+    "facet": "screen-galleon-dashboard",
+    "screen": "galleon",
+    "device": "galleon",
+    "theme": "paper",
+    "widget": 1
+   },
+   "stats": {
+    "mean": 0.672,
+    "p99": 20,
+    "max": 56
+   }
+  },
+  {
+   "name": "screen-neo-clock",
+   "w": 232,
+   "h": 50,
+   "source": {
+    "facet": "screen-neo-clock",
+    "screen": "infobar",
+    "device": "neo",
+    "theme": "phosphor"
+   },
+   "stats": {
+    "mean": 0.473,
+    "p99": 3,
+    "max": 10
+   }
+  },
+  {
+   "name": "span-first-light-mk2-k7",
+   "w": 72,
+   "h": 72,
+   "source": {
+    "facet": "span-first-light",
+    "device": "mk2",
+    "theme": "prism",
+    "key": 7
+   },
+   "stats": {
+    "mean": 0.899,
+    "p99": 14,
+    "max": 45
+   }
+  },
+  {
+   "name": "span-waveform-galleon-k1",
+   "w": 160,
+   "h": 160,
+   "source": {
+    "facet": "span-waveform",
+    "device": "galleon",
+    "theme": "neon",
+    "key": 1
+   },
+   "stats": {
+    "mean": 0.367,
+    "p99": 3,
+    "max": 15
+   }
+  },
+  {
+   "name": "strip-dial-volume-200",
+   "w": 200,
+   "h": 100,
+   "source": {
+    "facet": "dial-volume",
+    "device": "plus",
+    "segments": 1,
+    "theme": "ember",
+    "value": 0.62
+   },
+   "stats": {
+    "mean": 0.589,
+    "p99": 13,
+    "max": 42
+   }
+  },
+  {
+   "name": "strip-refraction-800",
+   "w": 800,
+   "h": 100,
+   "source": {
+    "facet": "strip-refraction",
+    "device": "plus",
+    "theme": "prism"
+   },
+   "stats": {
+    "mean": 0.598,
+    "p99": 9,
+    "max": 41
+   }
+  },
+  {
+   "name": "strip-refraction-seg2",
+   "w": 200,
+   "h": 100,
+   "source": {
+    "facet": "strip-refraction",
+    "device": "plus",
+    "theme": "blueprint",
+    "segment": 2
+   },
+   "stats": {
+    "mean": 0.693,
+    "p99": 11,
+    "max": 27
+   }
+  },
+  {
+   "name": "synth-clips",
+   "w": 160,
+   "h": 160,
+   "source": "synthetic",
+   "stats": {
+    "mean": 0.127,
+    "p99": 9,
+    "max": 35
+   }
+  },
+  {
+   "name": "synth-dashes",
+   "w": 160,
+   "h": 160,
+   "source": "synthetic",
+   "stats": {
+    "mean": 0.777,
+    "p99": 44,
+    "max": 119
+   }
+  },
+  {
+   "name": "synth-fill-rules",
+   "w": 160,
+   "h": 160,
+   "source": "synthetic",
+   "stats": {
+    "mean": 0.025,
+    "p99": 2,
+    "max": 7
+   }
+  },
+  {
+   "name": "synth-gradients",
+   "w": 200,
+   "h": 160,
+   "source": "synthetic",
+   "stats": {
+    "mean": 0.142,
+    "p99": 1,
+    "max": 8
+   }
+  },
+  {
+   "name": "synth-joins-caps",
+   "w": 160,
+   "h": 160,
+   "source": "synthetic",
+   "stats": {
+    "mean": 0.129,
+    "p99": 6,
+    "max": 50
+   }
+  },
+  {
+   "name": "synth-opacity-transforms",
+   "w": 160,
+   "h": 160,
+   "source": "synthetic",
+   "stats": {
+    "mean": 0.2,
+    "p99": 8,
+    "max": 35
+   }
+  }
+ ]
+}

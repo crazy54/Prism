@@ -2,7 +2,9 @@
 //
 //   node scripts/pack.mjs <out-dir> [--verify]
 //
-// Writes <out-dir>/prism-term.tgz (stable URL) and prism-term-<version>.tgz.
+// Writes <out-dir>/prism-term-<version>.tgz (pin this one), prism-term.tgz (the same
+// bytes: an alias that always points at the latest release) and SHA256SUMS for both,
+// in sha256sum format:  curl -sL <site>/dl/SHA256SUMS | sha256sum -c --ignore-missing
 // --verify installs the tarball through npx in a temp directory and runs
 // `prism-term list` and `prism-term snapshot plasma` from it.
 
@@ -10,6 +12,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -23,7 +26,7 @@ const run = (cmd, args, opts = {}) => (process.platform === 'win32'
   ? execFileSync([cmd, ...args].join(' '), { encoding: 'utf8', shell: true, stdio: ['ignore', 'pipe', 'pipe'], ...opts })
   : execFileSync(cmd, args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], ...opts }));
 
-/** npm pack into outDir; returns { stable, versioned, files, size }. */
+/** npm pack into outDir; returns { stable, versioned, sums, sha256, files, size }. */
 export function pack(outDir) {
   fs.mkdirSync(outDir, { recursive: true });
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'prism-term-pack-'));
@@ -34,7 +37,10 @@ export function pack(outDir) {
     const stable = path.join(outDir, 'prism-term.tgz');
     fs.copyFileSync(src, versioned);
     fs.copyFileSync(src, stable);
-    return { stable, versioned, version: info.version, files: info.files.map((f) => f.path), size: info.size };
+    const sha256 = createHash('sha256').update(fs.readFileSync(src)).digest('hex');
+    const sums = path.join(outDir, 'SHA256SUMS');
+    fs.writeFileSync(sums, `${sha256}  ${path.basename(versioned)}\n${sha256}  ${path.basename(stable)}\n`);
+    return { stable, versioned, sums, sha256, version: info.version, files: info.files.map((f) => f.path), size: info.size };
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
   }

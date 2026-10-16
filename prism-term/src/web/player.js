@@ -40,7 +40,12 @@ function pump(now) {
 }
 function wake() { if (!raf && players.size) raf = requestAnimationFrame(pump); }
 
-export const prefersReducedMotion = () => !!globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+// One MediaQueryList for the page (its .matches is live): every player asks on every frame.
+let reducedQuery;
+export const prefersReducedMotion = () => {
+  if (reducedQuery === undefined) reducedQuery = globalThis.matchMedia?.('(prefers-reduced-motion: reduce)') || null;
+  return !!reducedQuery?.matches;
+};
 
 /**
  * Pause or resume every player on the page (the site's motion toggle). Resuming
@@ -64,7 +69,7 @@ function observe(p) {
       pl.visible = e.isIntersecting;
       if (pl.visible) { pl._resync(); wake(); }
     }
-  }, { rootMargin: '120px' });
+  }, { rootMargin: '0px' });   // play only while on screen (a player painted its first frame at mount)
   p.canvas.__prismPlayer = p;
   observer.observe(p.canvas);
 }
@@ -123,7 +128,10 @@ export class FacetPlayer {
     this._layout();
     this.error = null;
     try {
-      this.ctx = createContext({ scene: this.facet, buffer: this.buffer, caps: this.caps, theme: this.opts.theme, mode: this.opts.mode || null, params: this.opts.params || {}, seed: this.opts.seed, transparent: !!this.opts.transparent });
+      const sheenKey = this._sheenKey();
+      this.sheen = !!sheenKey && this._sheenFor === sheenKey;
+      const params = this.sheen ? { ...this.opts.params, palette: 'prism-sheen' } : this.opts.params || {};
+      this.ctx = createContext({ scene: this.facet, buffer: this.buffer, caps: this.caps, theme: this.opts.theme, mode: this.opts.mode || null, params, seed: this.opts.seed, transparent: !!this.opts.transparent });
       this.frame = this.facet.setup(this.ctx);
     } catch (err) { this._fail(err); return; }
     this.t = 0;
@@ -131,8 +139,28 @@ export class FacetPlayer {
     const loop = this.facet.loop || 8;
     const target = this.still ? (this.animated ? Math.min(loop * 0.35, 6) : 0) : (this.opts.warmup ?? Math.min(1.2, loop * 0.15));
     this._advanceTo(target);
+    if (!this.sheen && !this.error && this._fullField()) { this._sheenFor = this._sheenKey(); this._build(); return; }
     this._paint();
     this._resync();
+  }
+
+  // Day sheen: a scene painting Refraction's spectrum ('prism') that fills (nearly) every
+  // cell re-runs once with 'prism-sheen' — the Day vivid tier is tuned for marks on pearl
+  // and reads as muddy olive across a whole field (design/tokens.json › day.sheen).
+  // Light themes only, and never over a palette someone chose.
+  _sheenKey() {
+    const p = this.opts.params || {};
+    if (p.palette || this.theme.mode !== 'light' || this.facet.canvas !== 'field' || (this.facet.palette || 'prism') !== 'prism') return '';
+    const { cols, rows } = this._size();
+    return `${this.theme.id}|${cols}x${rows}|${JSON.stringify(p)}`;
+  }
+
+  _fullField() {
+    if (!this._sheenKey()) return false;
+    const { bg, fg, ch } = this.buffer, base = this.theme.bg;
+    let n = 0;
+    for (let i = 0; i < bg.length; i++) if ((bg[i] !== -1 && bg[i] !== base) || (ch[i] !== ' ' && fg[i] !== base)) n++;
+    return n >= 0.9 * bg.length;
   }
 
   _layout() {

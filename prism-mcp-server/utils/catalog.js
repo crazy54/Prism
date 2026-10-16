@@ -12,8 +12,39 @@ import { readFile } from 'node:fs/promises';
 import fs from 'node:fs';
 import path from 'node:path';
 import { EventEmitter } from 'node:events';
+import { splitRules } from './css.js';
 
 const ISLAND_OPEN = '<script type="application/json" id="prism-catalog">';
+
+/**
+ * The custom properties each gallery template declares at its top-level `:root`
+ * (`<script type="text/html" id="pg-<gallery>">` → its <style> elements), e.g. the
+ * Spectrums gallery's `--glm-accent-rgb: var(--accent-rgb, 255,153,0)`. Island records
+ * carry only the facet's own rules, so these are what a pasted facet would otherwise lack.
+ * → { [galleryId]: { '--name': 'value' } }
+ */
+export function extractGalleryTokens(html) {
+  const out = {};
+  const tplRe = /<script type="text\/html" id="pg-([\w-]+)">([\s\S]*?)<\/script>/g;
+  let t;
+  while ((t = tplRe.exec(html)) !== null) {
+    const map = {};
+    for (const s of t[2].matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)) {
+      for (const { text } of splitRules(s[1])) {
+        const m = /^:root\s*\{([\s\S]*)\}$/.exec(text.trim());
+        if (!m) continue;
+        for (const decl of m[1].replace(/\/\*[\s\S]*?\*\//g, '').split(';')) {
+          const i = decl.indexOf(':');
+          const k = i > 0 ? decl.slice(0, i).trim() : '';
+          const v = i > 0 ? decl.slice(i + 1).trim() : '';
+          if (k.startsWith('--') && v) map[k] = v;
+        }
+      }
+    }
+    if (Object.keys(map).length) out[t[1]] = map;
+  }
+  return out;
+}
 
 /** Extract + parse the JSON island from Prism.html source. */
 export function parseIsland(html) {
@@ -36,7 +67,13 @@ export function parseIsland(html) {
 export async function loadCatalogFile(filePath) {
   const text = await readFile(filePath, 'utf8');
   const ext = path.extname(filePath).toLowerCase();
-  if (ext === '.html' || ext === '.htm') return parseIsland(text);
+  if (ext === '.html' || ext === '.htm') {
+    const raw = parseIsland(text);
+    // Gallery-level custom properties are not in the records; keep them so paste-ready
+    // snippets can define what the facet CSS reads (see extractGalleryTokens).
+    if (raw && !raw.galleryTokens) raw.galleryTokens = extractGalleryTokens(text);
+    return raw;
+  }
   // JSON manifest (or anything else we optimistically try as JSON)
   try {
     return JSON.parse(text);
@@ -64,6 +101,7 @@ export function normalizeCatalog(raw) {
     galleries,
     categories: toArray(raw.categories),
     tokens: raw.tokens || null,
+    galleryTokens: raw.galleryTokens && typeof raw.galleryTokens === 'object' ? raw.galleryTokens : {},
     usage: raw.usage || null,
     count: typeof raw.count === 'number' ? raw.count : effects.length,
     effects,
@@ -232,6 +270,8 @@ export class CatalogStore extends EventEmitter {
   gallery(id) { return this._byGallery.get(id) || []; }
   galleries() { return this.catalog ? this.catalog.galleries : []; }
   tokens() { return this.catalog ? this.catalog.tokens : null; }
+  /** A gallery template's own top-level `:root` custom properties ({} when unknown). */
+  galleryTokens(galleryId) { return (this.catalog && this.catalog.galleryTokens && this.catalog.galleryTokens[galleryId]) || {}; }
   meta() {
     const c = this.catalog || {};
     return {

@@ -1,7 +1,7 @@
 // Bars & Histograms: eased vertical bars, a re-ranking leaderboard, stacked
 // segments, a live latency histogram, OHLC candlesticks and box plots.
 import { mix, scale } from '../../color.js';
-import { signal, glyphs, safe, vbar, hbar, put, putR, num, clamp, smooth, ATTR } from './_data.js';
+import { signal, glyphs, safe, vbar, hbar, put, putR, num, clamp, smooth, lift, onFill, ATTR } from './_data.js';
 
 /** Eased step between sample values: holds, then glides to the next target. */
 function stepped(s, t, period) {
@@ -36,7 +36,7 @@ const barsVertical = {
         const x0 = i * (bw + gap) + Math.floor(gap / 2);
         const hgt = (v / 100) * Math.max(1, plotH - 1);
         const c = mix(th.accent, th.crit, v / 100);
-        for (let dx = 0; dx < bw; dx++) vbar(b, x0 + dx, base, hgt, dx === 0 && bw > 2 ? mix(c, 0xffffff, 0.2) : c, g);
+        for (let dx = 0; dx < bw; dx++) vbar(b, x0 + dx, base, hgt, dx === 0 && bw > 2 ? lift(th, c, 0.2) : c, g);
         const label = String(Math.round(v));
         const ly = Math.max(0, base - Math.ceil(hgt));
         if (bw >= label.length) b.text(x0 + Math.floor((bw - label.length) / 2), ly, label, th.ink, undefined, ATTR.BOLD);
@@ -257,7 +257,7 @@ const boxplot = {
         for (let x = X(lo); x <= X(hi); x++) b.set(x, y, g.h, th.muted);
         b.set(X(lo), y, g.u ? '├' : '|', th.muted); b.set(X(hi), y, g.u ? '┤' : '|', th.muted);
         for (let x = X(q1); x <= X(q3); x++) b.set(x, y, g.u ? '█' : '#', mix(th.bg, th.accent, 0.7));
-        b.set(X(m), y, g.u ? '┃' : '|', 0xffffff, mix(th.bg, th.accent, 0.7), ATTR.BOLD);
+        b.set(X(m), y, g.u ? '┃' : '|', onFill(th, mix(th.bg, th.accent, 0.7)), mix(th.bg, th.accent, 0.7), ATTR.BOLD);
         for (let o = 0; o < 2; o++) {
           const ov = hi + q * (0.6 + o * 0.9 + 0.3 * Math.sin(t + r + o));
           if (ov < MAX) b.set(X(ov), y, g.u ? '•' : 'o', th.warn);

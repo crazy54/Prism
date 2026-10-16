@@ -1,0 +1,42 @@
+# Prism Night — Prism's Night terminal colors (Refraction).
+# Alacritty ≥ 0.14: save as ~/.config/alacritty/themes/prism-night.toml and add to alacritty.toml:
+#   [general]
+#   import = ["~/.config/alacritty/themes/prism-night.toml"]
+# Alacritty 0.13 takes the same line at the top level instead (import = [...], no [general]);
+# before 0.13 the config was YAML and does not read this file.
+
+[colors.primary]
+background = "#0a0c12"
+foreground = "#e6e6ef"
+
+[colors.cursor]
+text = "#0a0c12"
+cursor = "#b8a2f2"
+
+[colors.vi_mode_cursor]
+text = "#0a0c12"
+cursor = "#b8a2f2"
+
+[colors.selection]
+text = "#f0f0f5"
+background = "#2e2748"
+
+[colors.normal]
+black = "#1d202b"
+red = "#f28885"
+green = "#7ad59c"
+yellow = "#ecca76"
+blue = "#81aaf7"
+magenta = "#b8a2f2"
+cyan = "#67cfe3"
+white = "#c6c7d3"
+
+[colors.bright]
+black = "#76798e"
+red = "#ffaaa7"
+green = "#a5eac1"
+yellow = "#f7e59f"
+blue = "#aac8ff"
+magenta = "#d9c6fe"
+cyan = "#9eeaf2"
+white = "#f6f6fb"

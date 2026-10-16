@@ -9,8 +9,9 @@
 // and into the web terminal catalog page) is done by the site build.
 //
 // Schema 2: module code lives once, in the top-level `sources` object (keyed by
-// `facet.module`), with the "_" gallery helpers those modules import; facet
-// records carry no source of their own.
+// `facet.module`), with the "_" gallery helpers those modules import and the
+// browser engine closure (collectEngineSources); facet records carry no source
+// of their own.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,7 +28,10 @@ const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'))
 export const SITE = 'https://prism.jeremyfhall.com';
 const MODULE_PREFIX = 'prism-term/src/facets/';
 
-const read = (rel) => fs.readFileSync(path.join(FACETS, ...rel.split('/')), 'utf8');
+// Normalize line endings: a Windows checkout (core.autocrlf=true) has CRLF facet
+// sources, and embedding them raw made the catalog — and the strict site build's
+// staleness check — depend on the machine that built it.
+const read = (rel) => fs.readFileSync(path.join(FACETS, ...rel.split('/')), 'utf8').replace(/\r\n/g, '\n');
 
 /** Engine modules a facet's source imports (relative to the facet file). */
 function importsOf(source) {
@@ -37,7 +41,7 @@ function importsOf(source) {
 /**
  * `sources`: every facet module plus the "_" helpers they import, directly or
  * through other helpers (helpers re-export with `export * from`), sorted by
- * path. Engine modules (src/*.js) are left out.
+ * path. Engine modules (src/*.js) are added by collectEngineSources below.
  */
 function collectSources(facets) {
   const files = new Set(facets.map((f) => f.file));
@@ -55,6 +59,46 @@ function collectSources(facets) {
   return Object.fromEntries([...files].sort().map((rel) => [MODULE_PREFIX + rel, read(rel)]));
 }
 
+// ── Browser engine closure ───────────────────────────────────────────────────
+// So the island alone can render facets in a browser (Prism.html's offline Terminal
+// page), `sources` also carries the engine modules reachable through STATIC imports
+// from the browser entry points and from every facet module / helper. Dynamic
+// `import()` is not followed: Node-only I/O (screen.js, loop.js) is only loaded that
+// way, under Node. Anything that statically imports a Node builtin is left out too.
+// Derived from the import graph on every build, so a rerun picks up engine changes.
+const SRC = path.join(ROOT, 'src');
+const ENGINE_PREFIX = 'prism-term/src/';
+const ENGINE_ROOTS = ['web/index.js', 'palettes.js'];
+const NODE_ONLY = new Set(['screen.js', 'loop.js']);
+const NODE_BUILTIN = /^(node:|(fs|path|os|tty|process|child_process|readline|url|util|events|stream|worker_threads|crypto|zlib|net|http|https)(\/|$))/;
+const STATIC_SPEC = /^\s*(?:import|export)\s(?:[^'"]*?\sfrom\s*)?['"]([^'"]+)['"]/gm;
+const readSrc = (rel) => fs.readFileSync(path.join(SRC, ...rel.split('/')), 'utf8').replace(/\r\n/g, '\n');
+
+/** { "prism-term/src/<rel>": code } for the browser engine closure (sorted by path). */
+function collectEngineSources(facetSources) {
+  const queue = [...ENGINE_ROOTS];
+  for (const [key, code] of Object.entries(facetSources)) {
+    const from = key.slice(ENGINE_PREFIX.length);                     // facets/<gallery>/<file>.js
+    for (const [, spec] of code.matchAll(STATIC_SPEC)) {
+      if (!spec.startsWith('.')) continue;
+      const dep = path.posix.normalize(path.posix.join(path.posix.dirname(from), spec));
+      if (!dep.startsWith('facets/') && !dep.startsWith('../')) queue.push(dep);
+    }
+  }
+  const out = new Map();
+  while (queue.length) {
+    const rel = queue.shift();
+    if (out.has(rel) || NODE_ONLY.has(rel) || rel.startsWith('facets/') || rel.startsWith('../')) continue;
+    if (!fs.existsSync(path.join(SRC, ...rel.split('/')))) continue;  // e.g. an import line inside a code sample
+    const code = readSrc(rel);
+    const specs = [...code.matchAll(STATIC_SPEC)].map((m) => m[1]);
+    if (specs.some((s) => NODE_BUILTIN.test(s))) continue;             // Node-only module
+    out.set(rel, code);
+    for (const s of specs) if (s.startsWith('.')) queue.push(path.posix.normalize(path.posix.join(path.posix.dirname(rel), s)));
+  }
+  return Object.fromEntries([...out.keys()].sort().map((rel) => [ENGINE_PREFIX + rel, out.get(rel)]));
+}
+
 /**
  * A small plain-text frame for search results and agents (no color codes).
  * Rendered in ASCII mode so pixel art becomes a luminance ramp (.:-=+*#%@)
@@ -69,7 +113,9 @@ function preview(f) {
 export function buildCatalog() {
   const facets = allFacets({ strict: true });
   const tree = catalogTree();
-  const sources = collectSources(facets);
+  const facetSources = collectSources(facets);
+  const sources = Object.fromEntries(Object.entries({ ...facetSources, ...collectEngineSources(facetSources) })
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
   const records = facets.map((f) => {
     const source = sources[MODULE_PREFIX + f.file];
     return {
@@ -108,17 +154,17 @@ export function buildCatalog() {
     _ai: {
       schema: 2,
       what: 'Prism terminal catalog: animated and static terminal facets (scenes, widgets, spinners, progress, charts, text, TUI, diagrams, ops) rendered with the zero-dependency prism-term engine.',
-      howToUse: 'Pick a facet by gallery/category/tags. Run it with `usage.cli` (or `usage.npx` without installing), or import `prism-term` and call play(findFacet(id)). To read or rebuild a facet, take its code from `sources[facet.module]`; the modules in its `imports` are relative to `module`, and the "_" gallery helpers among them are in `sources` too (same "prism-term/src/facets/…" keys). Engine modules (prism-term/src/*.js) are not in the island: get them from the package. Facets are deterministic for a seed and accept `params` via --set key=value.',
+      howToUse: 'Pick a facet by gallery/category/tags. Run it with `usage.cli` (or `usage.npx` without installing), or import `prism-term` and call play(findFacet(id)). To read or rebuild a facet, take its code from `sources[facet.module]`; the modules in its `imports` are relative to `module`, and the "_" gallery helpers among them are in `sources` too (same "prism-term/src/facets/…" keys). The browser engine is in `sources` too, under the same repo-path keys: prism-term/src/web/index.js (TermCanvas, mountFacet, FacetPlayer, parseAnsi), prism-term/src/palettes.js and every engine module they or any facet import statically (color.js, canvas.js, buffer.js, widgets/*, text/* …), so the island alone can render any facet in a browser; Node-only terminal I/O (screen.js, loop.js, loaded with dynamic import() under Node only) is not included — use the package for the CLI. Facets are deterministic for a seed and accept `params` via --set key=value.',
       fields: {
         id: 'stable unique id', gallery: 'gallery id (see galleries[])', category: 'category within the gallery', kind: 'scene|widget|spinner|progress|text|chart|tui|diagram|art',
         size: 'preferred size in terminal cells {w,h}', minSize: 'smallest size it reads at', animated: 'false = still frame', loop: 'seconds per cycle',
         glyphs: 'minimum glyph support: ascii|unicode|braille|sextant', color: 'minimum color depth: mono|16|256|truecolor',
         params: 'tunable parameters {key:{default,min,max,options,label}}',
         module: "repo path of the facet's ES module; also the key into top-level `sources` for its code",
-        imports: 'import specifiers in the module, relative to `module`: "_" gallery helpers (code in `sources`) and engine modules (not included)',
+        imports: 'import specifiers in the module, relative to `module`: "_" gallery helpers and browser engine modules, both with their code in `sources`',
         preview: 'plain-text frame (no color) at up to 60×16',
       },
-      sources: 'top-level `sources`: { "<repo path>": "<full ES module source>" } for every facet module (`facet.module`) and every "_" gallery helper they import (listed in `imports`, including helpers other helpers re-export, across galleries), sorted by path. Several facets can share one module. Engine modules (prism-term/src/*.js) are not included.',
+      sources: 'top-level `sources`: { "<repo path>": "<full ES module source>" } for every facet module (`facet.module`) and every "_" gallery helper they import (listed in `imports`, including helpers other helpers re-export, across galleries), plus the browser engine closure: every prism-term/src/*.js module reachable through static imports from prism-term/src/web/index.js, prism-term/src/palettes.js and the facet modules (Node-only screen.js / loop.js excluded); all sorted by path. Several facets can share one module.',
       count: records.length,
       island: '<script type="application/json" id="prism-terminal-catalog">',
     },

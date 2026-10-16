@@ -2,7 +2,7 @@
 // graphs, stacked areas, and x/y plots (scatter, bubble).
 import { mix, scale, gradient } from '../../color.js';
 import { lineChart } from '../../widgets/index.js';
-import { signal, glyphs, safe, put, putR, num, clamp, frame, memo, ATTR } from './_data.js';
+import { signal, glyphs, safe, put, putR, num, clamp, frame, memo, lift, onFill, ATTR } from './_data.js';
 
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map((v) => (v + 0.5) / 16);
 
@@ -71,7 +71,7 @@ const areaDither = {
     const ramp = gradient([th.info, th.accent, th.crit]);
     // Shade table per column (8 depth levels) so the inner loop is a lookup.
     const shades = Array.from({ length: cv.width }, (_, x) => Array.from({ length: 8 }, (_, d) => scale(ramp(x / cv.width), 0.55 + 0.45 * (1 - d / 7))));
-    const crest = Array.from({ length: cv.width }, (_, x) => mix(ramp(x / cv.width), 0xffffff, 0.35));
+    const crest = Array.from({ length: cv.width }, (_, x) => lift(th, ramp(x / cv.width), 0.35));
     return (t) => {
       const n = cv.width, data = s.window(t, n);
       const lo = 0, hi = Math.max(...data) * 1.15;
@@ -125,7 +125,7 @@ const streamScroll = {
       let prev = Y(val(0));
       for (let i = 1; i < px; i++) {
         const y = Y(val(i));
-        cv.line(i - 1, prev, i, y, mix(scale(th.accent, 0.75), mix(th.accent, 0xffffff, 0.25), i / px));
+        cv.line(i - 1, prev, i, y, mix(th.mode === 'light' ? mix(th.bg, th.accent, 0.6) : scale(th.accent, 0.75), lift(th, th.accent, 0.25), i / px));
         prev = y;
       }
       cv.paint(b, axisW, 0);
@@ -225,7 +225,7 @@ const stackedArea = {
           const y1 = cv.height * (1 - acc / hi);
           acc += series[k][x];
           const y0 = cv.height * (1 - acc / hi);
-          for (let y = Math.max(0, Math.floor(y0)); y < Math.min(cv.height, Math.ceil(y1)); y++) cv.set(x, y, y === Math.floor(y0) ? mix(l.c, 0xffffff, 0.25) : scale(l.c, 0.7));
+          for (let y = Math.max(0, Math.floor(y0)); y < Math.min(cv.height, Math.ceil(y1)); y++) cv.set(x, y, y === Math.floor(y0) ? lift(th, l.c, 0.25) : th.mode === 'light' ? mix(th.bg, l.c, 0.7) : scale(l.c, 0.7));
         });
       }
       cv.paint(b, 0, legend);
@@ -326,7 +326,7 @@ const bubble = {
       cv.paint(b);
       for (const p of pos) {
         const cx = Math.round(p.x / cv.sx), cy = Math.round(p.y / cv.sy);
-        if (W >= 30) b.text(Math.max(0, cx - Math.floor(p.it.name.length / 2)), Math.min(H - 1, cy), p.it.name, 0xffffff, undefined, ATTR.BOLD);
+        if (W >= 30) b.text(Math.max(0, cx - Math.floor(p.it.name.length / 2)), Math.min(H - 1, cy), p.it.name, onFill(th, mix(th.bg, p.it.c, 0.35)), undefined, ATTR.BOLD);
       }
       if (W >= 40) { b.text(0, H - 1, 'requests →', th.dim); b.text(0, 0, '↑ errors', th.dim); }
     };

@@ -4,18 +4,22 @@
 
 **Prism, in the terminal.** The terminal catalog — hundreds of animated facets you can browse with `curl` and play live — and the zero-dependency engine that draws them.
 
-![Terminal facets](https://img.shields.io/badge/terminal%20facets-434-ff5fa2) ![Galleries](https://img.shields.io/badge/galleries-17-4493f8) ![Dependencies](https://img.shields.io/badge/dependencies-0-3fb950) ![Node](https://img.shields.io/badge/node-%E2%89%A518-3fb950) ![Themes](https://img.shields.io/badge/Prism%20themes-22-c879ff)
+![Terminal facets](https://img.shields.io/badge/terminal%20facets-435-ff5fa2) ![Galleries](https://img.shields.io/badge/galleries-17-4493f8) ![Dependencies](https://img.shields.io/badge/dependencies-0-3fb950) ![Node](https://img.shields.io/badge/node-%E2%89%A518-3fb950) ![Themes](https://img.shields.io/badge/Prism%20themes-24-c879ff)
 
 </div>
 
 ---
 
-prism-term is the terminal half of [Prism](../README.md). It is two things in one package:
+prism-term is the terminal surface of [Prism](../README.md), next to the web catalog and the Stream Deck. It is two things in one package:
 
-- **The terminal catalog.** **434 facets** in **17 galleries** — spinners, progress bars and counters, charts, Linux and ops views, TUI controls, diagrams, text art and demoscene effects — sorted into galleries and categories exactly like [`Prism.html`](../Prism.html)'s web catalog. Every facet is a small ES module in [`src/facets/`](./src/facets), reads at 80×24, and adapts to the terminal it lands in: truecolor down to mono, braille and blocks down to 7-bit ASCII.
-- **The engine.** A sub-cell pixel canvas (braille, sextant, quadrant, half-block or ASCII), a flicker-free diff renderer, dashboard widgets, inline CLI feedback (spinners, progress bars, task lists), bitmap-font banners, Prism's 22 themes, and HTML export. Zero dependencies, Node.js 18+, and the same code runs the facets in the browser.
+- **The terminal catalog.** **435 facets** in **17 galleries** — spinners, progress bars and counters, charts, Linux and ops views, TUI controls, diagrams, text art and demoscene effects — sorted into galleries and categories exactly like [`Prism.html`](../Prism.html)'s web catalog. Every facet is a small ES module in [`src/facets/`](./src/facets), reads at 80×24, and adapts to the terminal it lands in: truecolor down to mono, braille and blocks down to 7-bit ASCII.
+- **The engine.** A sub-cell pixel canvas (braille, sextant, quadrant, half-block or ASCII), a flicker-free diff renderer, dashboard widgets, inline CLI feedback (spinners, progress bars, task lists), bitmap-font banners, Prism's 24 themes (Refraction's Prism Night / Prism Day by default, picked to match your terminal's background), and HTML export. Zero dependencies, Node.js 18+, and the same code runs the facets in the browser.
 
 There are four ways to see the catalog: with `curl` on the **terminal site**, live in your terminal with the **live player**, in the browser on the **terminal catalog** page, or as data in the **terminal JSON island**.
+
+The chrome speaks **Refraction**, Prism's design language, in cells: a hairline beam, a spectral index where every gallery owns a hue and a λ label, glass frames, and First Light when the browser opens. Press **d** to flip between Prism Night and Prism Day. The grammar is in [docs/refraction-terminal.md](./docs/refraction-terminal.md).
+
+![The catalog browser in Prism Night](docs/refraction/browser-night.png)
 
 ## Quick start
 
@@ -29,11 +33,19 @@ curl -sL https://prism.jeremyfhall.com/f/ops-htop       # one facet: a still fra
 **Play it live** — Node.js 18+, no global install:
 
 ```bash
-npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term                   # the catalog browser
-npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term play ops-htop     # one facet, fullscreen
+npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz prism-term                 # the catalog browser
+npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz prism-term play ops-htop   # one facet, fullscreen
 ```
 
-For a permanent `prism-term` command, run `npm i -g https://prism.jeremyfhall.com/dl/prism-term.tgz` once.
+Each release is published as `/dl/prism-term-<version>.tgz`, with `/dl/SHA256SUMS` beside it; `/dl/prism-term.tgz` is an alias for the latest release (same bytes). To pin and verify one before running it:
+
+```bash
+curl -sLO https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz
+curl -sL https://prism.jeremyfhall.com/dl/SHA256SUMS | sha256sum -c --ignore-missing   # macOS: shasum -a 256 -c
+npx -y --package=./prism-term-0.2.0.tgz prism-term
+```
+
+For a permanent `prism-term` command, run `npm i -g https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz` once. The package ships a man page (`man prism-term` after a global install) and bash / zsh / fish completions in `completions/`.
 
 **From a clone** — there is nothing to `npm install`:
 
@@ -88,10 +100,14 @@ objects    Animated Objects             18  3D solids, wireframes, globes and me
 
 `prism-term` with no arguments opens the catalog browser: the galleries, the facets in the current gallery, and a live preview of the selected one, with the exact command that plays it underneath. `prism-term --gallery ops` opens it at a gallery.
 
-- **Keys in the browser:** `↑↓` `jk` move · `←→` `hl` / `Tab` pane · `Enter` play · `s` showcase · `/` search · `g` gallery · `f` kind · `t` theme · `m` mode · `?` help · `q` quit
-- **Keys while playing:** `←/→` facet · `space` pause · `m` mode · `t` theme · `r` restart · `h` HUD · `q` back
+- **Keys in the browser:** `↑↓` `jk` move · `←→` `hl` / `Tab` pane · `Enter` play · `s` showcase · `/` search · `g` gallery · `f` kind · `t` theme · `d` day/night · `m` mode · `?` help · `q` quit
+- **Keys while playing:** `←/→` facet · `space` pause · `m` mode · `t` theme · `d` day/night · `r` restart · `h` HUD · `q` back
 
 In a window narrower than 110 columns the browser drops the gallery pane: `←→` / `hl` / `Tab` change gallery instead, and `g` opens a gallery picker. `PgUp` / `PgDn` / `Home` / `End` jump through long lists, `F` cycles the kind filter backwards, and `?` shows the keys inside the browser.
+
+**Day and Night.** `d` flips between Prism Night and Prism Day, and inside any other theme family it flips that family's dark and light members (`primer-dark` ↔ `primer-light`). `t` cycles through every theme. Either one relights the screen behind a vertical beam; any key ends the sweep. To start in one mode, pass `--day` or `--night`, or set `PRISM_TERM_THEME` (see [Themes and palettes](#themes-and-palettes)).
+
+**First Light.** The browser opens with First Light: a beam of white light crosses the screen, strikes a prism and paints the app in, in 1.5 s at most. Any key skips it and isn't acted on. It plays in full once per terminal session, then as a short echo. It never plays for pipes, files, CI, `NO_COLOR`, mono or 7-bit terminals. Skip it with `--no-intro` (or `PRISM_TERM_INTRO=0`); `--reduced-motion` (or `PRISM_REDUCED_MOTION=1`) also turns off the player's wipes and the relight sweep. The full Refraction grammar for the terminal is in [docs/refraction-terminal.md](./docs/refraction-terminal.md).
 
 ### Finding a facet
 
@@ -120,7 +136,7 @@ A mechanical counter: each drum rolls to its next digit only while the drum to i
 
   play      prism-term play progress-odometer
   snapshot  prism-term snapshot progress-odometer --size 48x7
-  npx       npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term play progress-odometer
+  npx       npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz prism-term play progress-odometer
   curl      curl -sL https://prism.jeremyfhall.com/f/progress-odometer
 ```
 
@@ -160,12 +176,14 @@ prism-term spinners                                    # preview every built-in 
 prism-term dashboard                                   # PROTEUS-style live metrics + AI triage demo (needs 100×34)
 prism-term demo                                        # inline helpers tour
 prism-term caps                                        # what prism-term detected, plus glyph test patterns
-prism-term themes                                      # Prism's 22 themes
+prism-term themes                                      # Prism's 24 themes
 prism-term palettes                                    # gradient palettes
+prism-term theme                                       # Prism Night / Day schemes for 11 terminal emulators
+prism-term theme kitty -o prism-night.conf             # one scheme, written to a file (--day for Prism Day)
 prism-term help                                        # every command and option
 ```
 
-Common options: `--theme <id>`, `--mode <braille|sextant|quad|half|ascii>`, `--palette <name>`, `--set key=value` (repeatable), `--fps <n>` (default 30), `--duration <s>`, `--size WxH`, `--seed <n>`, `--transparent`, `--no-hud`, `--depth <truecolor|256|16|mono>`, `--ascii`, `--sextant` / `--no-sextant`.
+Common options: `--theme <id>`, `--day` / `--night`, `--mode <braille|sextant|quad|half|ascii>`, `--palette <name>`, `--set key=value` (repeatable), `--fps <n>` (default 30), `--duration <s>`, `--size WxH`, `--seed <n>`, `--transparent`, `--no-hud`, `--depth <truecolor|256|16|mono>`, `--ascii`, `--sextant` / `--no-sextant`, `--no-intro`, `--reduced-motion`.
 
 ## Using facets in code
 
@@ -230,7 +248,9 @@ prism-term only emits widely supported CSI/DEC sequences and detects what your t
 - **Color depth:** truecolor, 256 or 16 colors, or none — quantized automatically. 256 colors is the safe default: tmux without `Tc`, screen and macOS Terminal.app all quantize truecolor, so facets are designed to survive it.
 - **Glyphs:** braille and block elements everywhere except the Linux console (`TERM=linux`), `TERM=dumb` and non-UTF-8 locales such as `LANG=C`, which get 7-bit ASCII. Sextants are assumed only where they are known to render (Windows Terminal, kitty, WezTerm, ghostty, foot, VS Code and a few others); force them with `--sextant`.
 - **Tear-free frames** wherever the terminal implements synchronized output (DEC mode 2026). Terminals and multiplexers without it ignore the sequence harmlessly, and frames are kept small enough to stay calm anyway.
+- **Background:** Prism Day on a light-background terminal, Prism Night otherwise (see [Themes and palettes](#themes-and-palettes)). Only interactive runs ask the terminal, so pipes, files and CI stay deterministic.
 - **Overrides:** `NO_COLOR`, `FORCE_COLOR=0..3`, `PRISM_TERM_DEPTH=truecolor|256|16|mono`, `PRISM_TERM_UNICODE=0|1`, `PRISM_TERM_SEXTANT=0|1`, or `--depth`, `--ascii` and `--sextant` on the command line.
+- **Theme and motion:** `PRISM_TERM_THEME=day|night|auto|<theme id>` (or `--theme`, `--day`, `--night`), `PRISM_TERM_INTRO=0` (or `--no-intro`) to skip First Light, and `PRISM_REDUCED_MOTION=1` (or `--reduced-motion`) for no intro, wipes or sweeps.
 
 The terminal is always restored — cursor, colors, line wrap, alternate screen and raw mode — on quit, on Ctrl-C/SIGTERM and on crashes.
 
@@ -336,7 +356,7 @@ await screen.run((t) => {
 ```js
 import { CellBuffer, getTheme, box, lineChart, kpi } from 'prism-term';
 
-const theme = getTheme('cloudscape-dark');
+const theme = getTheme('prism-dark');
 const b = new CellBuffer(90, 14);
 b.clear(theme.bg);
 const p50 = Array.from({ length: 60 }, (_, i) => 120 + 25 * Math.sin(i / 6));
@@ -369,7 +389,27 @@ KPI tiles, a p50/p95/p99 chart, an animated service map, a latency histogram, sa
 
 ## Themes and palettes
 
-Themes come from Prism's theme registry — `npm run sync-themes` regenerates [`src/themes.js`](./src/themes.js) from [`prism-mcp-server/utils/themes.js`](../prism-mcp-server/utils/themes.js), so the terminal stays in step with `Prism.html`. `prism-term themes` lists all 22 (Cloudscape, Primer, Material 3, Polaris, …). Palettes: `prism`, `fire`, `ocean`, `aurora`, `synthwave`, `matrix`, `ice`, `sunset`, `toxic`, `magma`, `viridis`, `candy`, `gold`, `mono`, plus `theme` and `theme-heat`, which are derived from the active theme.
+Themes come from Prism's theme registry — `npm run sync-themes` regenerates [`src/themes.js`](./src/themes.js) from [`prism-mcp-server/utils/themes.js`](../prism-mcp-server/utils/themes.js) and the terminal section of the Refraction design tokens (`../design/tokens.json`), so the terminal stays in step with `Prism.html`. `prism-term themes` lists all 24: **Prism Night** (`prism-dark`, the default) and **Prism Day** (`prism-light`), then Cloudscape, Primer, Material 3, Polaris, ….
+
+**Day or Night, automatically.** Without `--theme`, prism-term uses Prism Day on a light-background terminal: `PRISM_TERM_THEME` (a theme id, or `day` / `night` / `auto`) wins, then `COLORFGBG`, then — in interactive runs — an OSC 11 background query bounded by a 100 ms timeout (`PRISM_TERM_QUERY_MS`; `PRISM_TERM_NO_QUERY=1` turns it off). Pipes, files and CI are never probed, so output there is deterministic. A family name follows the detected mode (`--theme primer` → `primer-light` on a light terminal). See [`src/theme-detect.js`](./src/theme-detect.js).
+
+**Every depth looks intended.** At 256 colors each color takes its nearest xterm index by Oklab distance (theme tokens exactly, so Prism's land on their designed indexes); at 16 colors theme tokens use their designed ANSI slots — accent magenta, info blue, pos green, warn yellow, neg red, with the theme's background and ink as the terminal's own default colors — and everything else is classified by hue in OKLCH, so a pastel never collapses to gray. `NO_COLOR` / mono and 7-bit terminals stay readable.
+
+**Terminal color schemes.** `prism-term theme <format>` prints Prism Night (or, with `--day`, Prism Day) as a color scheme for your terminal emulator. It writes to stdout or to the file you name with `-o`, and never installs anything or touches your config. With no format it lists the 15 formats and where each file goes:
+
+```bash
+prism-term theme                                       # windows-terminal, iterm2, alacritty, kitty, wezterm, ghostty, foot,
+                                                       # gnome-terminal, konsole, xresources, vscode, ptyxis, terminal-app,
+                                                       # xfce4-terminal, osc
+prism-term theme osc | sh                              # any xterm-compatible terminal, this session only — also over SSH
+prism-term theme windows-terminal                      # Prism Night: paste the object into "schemes" in settings.json
+prism-term theme kitty --day -o prism-day.conf         # Prism Day for kitty, written to a file
+prism-term theme alacritty --theme primer              # a scheme derived from any other theme
+```
+
+The same files are checked in under [`themes/`](./themes) and published on the site at `/themes/<format>/<file>` (`curl -sL prism.jeremyfhall.com/themes/osc/prism-night.sh | sh`), with install notes in each: Windows Terminal, iTerm2, Alacritty, kitty, WezTerm, Ghostty, foot, GNOME Terminal (a script that only prints its dconf commands for your default profile, and stops if it can't find one), Konsole, Xresources, the VS Code terminal, Ptyxis, macOS Terminal.app, xfce4-terminal, and `osc`: one `printf` of OSC 4 / 10 / 11 / 12 / 17 codes that recolors any xterm-compatible terminal for the session, also on a remote host over SSH. In Prism Day, ANSI 7 and 15 (white, bright white) are light, as in Solarized and Tango light, so TUIs that put white text on colored status bars (htop, tmux, mc) stay readable; Prism's own 16-color output never puts them on the default background. They are generated by `node scripts/export-themes.mjs` from `exportTheme(format, themeId)` in [`src/theme-export.js`](./src/theme-export.js).
+
+Palettes: `prism` (Refraction's 12-stop OKLCH spectrum, violet → rose, in the tier made for the theme's mode), `prism-ink` (its text-safe tier), `neon` (the classic saturated rainbow), `fire`, `ocean`, `aurora`, `synthwave`, `matrix`, `ice`, `sunset`, `toxic`, `magma`, `viridis`, `candy`, `gold`, `mono`, plus `theme` and `theme-heat`, which are derived from the active theme.
 
 ## Development
 
@@ -383,7 +423,8 @@ Themes come from Prism's theme registry — `npm run sync-themes` regenerates [`
 | `npm run pack -- <dir>` | pack `prism-term.tgz` for the live player into `<dir>`; `--verify` installs it through `npx` and runs it |
 | `npm run site` | build the whole website (`../website/build.mjs`) into `../site-dist/` |
 | `npm run shoot -- …` | render facets to PNG with headless Chrome — one per facet, or a `--sheet` contact sheet |
-| `npm run sync-themes` | refresh themes from the Prism registry |
+| `npm run sync-themes` | refresh themes from the Prism registry and the Refraction terminal tokens (`--check` exits 1 if stale) |
+| `npm run export-themes` | regenerate the terminal emulator schemes in `themes/` (`themes:check` exits 1 if stale) |
 
 The renderer tests replay real escape output through a small VT emulator ([`test/vt.js`](./test/vt.js)) and assert that what a terminal would display equals the frame buffer. The facet conformance test ([`test/facets.test.js`](./test/facets.test.js)) renders every facet at its size and `minSize` in every mode, checks that it is deterministic and stays inside its view, holds it to the frame budget at 160×48, and checks that it emits only 7-bit glyphs on a terminal without Unicode.
 
@@ -403,8 +444,9 @@ prism-term/
 │   ├── web/                                   browser renderer for the terminal catalog page
 │   └── site/                                  terminal-site page generator
 ├── catalog/             terminal-catalog.json (derived — never hand-edit)
-├── scripts/             gen-manifest, build-catalog, embed-island, build-tty-site, pack, shoot, sync-themes
-├── docs/                authoring-facets.md, linux-sme-requirements.md
+├── scripts/             gen-manifest, build-catalog, embed-island, build-tty-site, pack, shoot, sync-themes, export-themes
+├── themes/              Prism Night / Prism Day for 11 terminal emulators (generated)
+├── docs/                authoring-facets.md, refraction-terminal.md, linux-sme-requirements.md
 ├── examples/            PROTEUS dashboard, simulator, inline demo
 └── test/
 ```

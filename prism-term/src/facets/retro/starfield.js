@@ -15,6 +15,8 @@ export default {
     const { width: W, height: H, aspect } = cv;
     const rand = ctx.rng;
     const temp = ctx.palette(['#ff5a2e', '#ffab5e', '#fff0d8', '#d6e4ff', '#8db4ff']);
+    // Deep space stays dark by Day: starlight is light, not ink.
+    const sky = ctx.theme.mode === 'light' ? 0x06070b : -1;
     const speedK = ctx.param('speed', 1);
     const Hv = H * aspect;
     const k = 0.5 * Math.max(W, Hv);
@@ -66,6 +68,7 @@ export default {
         // Close stars get a fat 2×2 head so they read as bodies, not just lines.
         if (z < 0.3) { cv.set(hx + 1, hy, col); cv.set(hx, hy + 1, col); cv.set(hx + 1, hy + 1, col); }
       }
+      if (sky >= 0) ctx.buffer.fill(0, 0, ctx.width, ctx.height, ' ', ctx.theme.ink, sky);
       cv.paint(ctx.buffer);
     };
   },

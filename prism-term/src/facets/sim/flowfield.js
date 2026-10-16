@@ -41,9 +41,11 @@ export default {
         px[i] = Math.abs(r - bgR) + Math.abs(g - bgG) + Math.abs(b - bgB) < 12 ? NONE : (r << 16) | (g << 8) | (b | 0);
       }
     };
+    // Ink on paper needs longer trails than light on glass to read.
+    const decay = ctx.theme.mode === 'light' ? 0.7 : 1.5;
     const e = 0.75; // finite-difference step, in noise space units ÷ sc
     return (t, dt) => {
-      fade(Math.exp(-dt * 1.5));
+      fade(Math.exp(-dt * decay));
       const z = t * 0.07;
       for (let i = 0; i < N; i++) {
         const x0 = X[i], y0 = Y[i];

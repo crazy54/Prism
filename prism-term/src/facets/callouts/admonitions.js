@@ -23,6 +23,8 @@ export default {
   order: 10,
   setup(ctx) {
     const th = ctx.theme;
+    // 16 colors / mono: inline code keeps the default background (a 14% wash would be a solid black block on Night)
+    const low = ctx.caps.depth === '16' || ctx.caps.depth === 'mono';
     return (t) => {
       const b = ctx.buffer, W = ctx.width, H = ctx.height;
       const u = uni(ctx);
@@ -47,7 +49,7 @@ export default {
           for (const ch of line) {
             if (ch === '`') { inCode = !inCode; continue; }
             if (n++ >= reveal) break;
-            x = b.text(x, y + 1 + j, ch, inCode ? th.accent : th.ink, inCode ? tint(ctx, th.accent, 0.14) : undefined);
+            x = b.text(x, y + 1 + j, ch, inCode ? th.accent : th.ink, inCode && !low ? tint(ctx, th.accent, 0.14) : undefined);
           }
         });
         if (list.length === 1) b.fill(1, y, W - 1, h, undefined, undefined, tint(ctx, c, 0.08));

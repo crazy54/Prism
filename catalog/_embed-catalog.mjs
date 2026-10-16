@@ -13,6 +13,28 @@ const MANIFEST = resolve(HERE, 'manifest.json');
 
 const manifest = JSON.parse(readFileSync(MANIFEST, 'utf8'));
 
+// Guard: the island is the source of truth and manifest.json is often stale (it once
+// held 1,439 effects against the island's 2,468 — embedding it would have deleted every
+// theme pack). Refuse to replace a bigger island, or one carrying galleries the manifest
+// lacks, unless PRISM_ALLOW_SHRINK=1. (Team workflow: aaa-prism-ds/tools/island-sync.mjs
+// updates the island from the templates record-by-record instead.)
+{
+  const src = readFileSync(HTML, 'utf8');
+  const open = '<script type="application/json" id="prism-catalog">';
+  const s = src.indexOf(open);
+  if (s >= 0 && !process.env.PRISM_ALLOW_SHRINK) {
+    let cur = null;
+    try { cur = JSON.parse(src.slice(s + open.length, src.indexOf('</script', s + open.length)).split('<\\/script').join('</script')); } catch {}
+    const have = cur && Array.isArray(cur.effects) ? cur.effects.length : 0;
+    const lost = cur ? (cur.galleries || []).map((g) => g.id).filter((id) => !(manifest.galleries || []).some((g) => g.id === id)) : [];
+    if (have > (manifest.effects || []).length || lost.length) {
+      console.error(`Refusing to embed: manifest.json has ${(manifest.effects || []).length} effects, the Prism.html island has ${have}` +
+        (lost.length ? `; galleries missing from the manifest: ${lost.join(', ')}` : '') + '. Nothing written (PRISM_ALLOW_SHRINK=1 to force).');
+      process.exit(1);
+    }
+  }
+}
+
 // Stamp real generation metadata and an AI usage header (non-breaking extra keys).
 manifest.generated = new Date().toISOString();
 manifest.source = 'Prism.html (seeded from catalog/manifest.json)';

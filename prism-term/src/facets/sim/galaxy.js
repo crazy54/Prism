@@ -65,7 +65,10 @@ export default {
       if (Math.hypot(gx, gy) > 0.3) ref = Math.max(ref, dens[y * G + x]);
     }
     const tex = new Int32Array(G * G);
-    const core = 0xffe6b8, disk = 0x8aa6ff, arm = 0xc9a7ff, bg = ctx.bg < 0 ? 0 : ctx.bg;
+    // A galaxy is a night-sky object: on light themes it keeps its own deep-space
+    // backdrop (additive starlight on pearl would wash out to white).
+    const sky = ctx.theme.mode === 'light' ? 0x06070b : NONE;
+    const core = 0xffe6b8, disk = 0x8aa6ff, arm = 0xc9a7ff, bg = sky !== NONE ? sky : ctx.bg < 0 ? 0 : ctx.bg;
     for (let y = 0; y < G; y++) for (let x = 0; x < G; x++) {
       const gx = ((x + 0.5) / G * 2 - 1) * EXT, gy = ((y + 0.5) / G * 2 - 1) * EXT, r = Math.hypot(gx, gy);
       const d = Math.min(1, dens[y * G + x] / (ref || 1));
@@ -75,7 +78,7 @@ export default {
       const R = ((bg >> 16) & 255) + ((core >> 16) & 255) * kc + ((mix(disk, arm, d) >> 16) & 255) * kd;
       const Gc = ((bg >> 8) & 255) + ((core >> 8) & 255) * kc + ((mix(disk, arm, d) >> 8) & 255) * kd;
       const B = (bg & 255) + (core & 255) * kc + (mix(disk, arm, d) & 255) * kd;
-      tex[y * G + x] = kc + kd < 0.012 ? NONE : (Math.min(255, R) << 16) | (Math.min(255, Gc) << 8) | Math.min(255, B);
+      tex[y * G + x] = kc + kd < 0.012 ? sky : (Math.min(255, R) << 16) | (Math.min(255, Gc) << 8) | Math.min(255, B);
     }
 
     // ── stars ──
@@ -105,7 +108,7 @@ export default {
           const x1 = x3 * ct + y3 * st, y1 = (-x3 * st + y3 * ct) / incl;
           const gx = x1 * cr + y1 * sr, gy = -x1 * sr + y1 * cr;
           const ix = Math.floor(((gx / EXT) * 0.5 + 0.5) * G), iy = Math.floor(((gy / EXT) * 0.5 + 0.5) * G);
-          px[i] = ix >= 0 && iy >= 0 && ix < G && iy < G ? tex[iy * G + ix] : NONE;
+          px[i] = ix >= 0 && iy >= 0 && ix < G && iy < G ? tex[iy * G + ix] : sky;
         }
       }
       for (const [x, y, c] of field) cv.add(x, y, c);

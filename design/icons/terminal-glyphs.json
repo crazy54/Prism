@@ -1,0 +1,1185 @@
+{
+ "$about": "Prism icon -> terminal fallback ladder: glyph (preferred Unicode) -> safe (Unicode stand-in verified in >=4 of the checked monospace fonts, or ASCII) -> ascii (7-bit). cells = columns per prism-term charWidth. fonts = checked monospace fonts whose cmap contains glyph (font-coverage.mjs). tier: mono (>=4 fonts) | partial (1-3; other fonts rely on fallback) | fallback (0 of the Windows-checked monos; terminals substitute a symbol font such as DejaVu Sans, Noto Sans Symbols 2, Segoe UI Symbol or Apple Symbols). ambiguous = East Asian Ambiguous width (2 cells in CJK locales; use safe/ascii there). emoji = text-default emoji code point that some terminals paint in color: append U+FE0E or use safe. DejaVu Sans Mono / Menlo / SF Mono were not installed on the build machine and are unverified.",
+ "$checkedFonts": [
+  "Consolas",
+  "Cascadia",
+  "Fira Mono",
+  "IBM Plex Mono",
+  "Lucida Console",
+  "Courier New"
+ ],
+ "icons": {
+  "charts": {
+   "glyph": "▅",
+   "safe": "▄",
+   "ascii": "%",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial",
+   "ambiguous": true
+  },
+  "fx": {
+   "glyph": "✺",
+   "safe": "☼",
+   "ascii": "*",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "lab": {
+   "glyph": "∿",
+   "safe": "≈",
+   "ascii": "~",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "ai": {
+   "glyph": "✳",
+   "safe": "•",
+   "ascii": "@",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback",
+   "emoji": "text-default emoji: append U+FE0E or use safe"
+  },
+  "objects": {
+   "glyph": "◈",
+   "safe": "◊",
+   "ascii": "<>",
+   "cells": 1,
+   "fonts": [
+    "Cascadia"
+   ],
+   "tier": "partial",
+   "ambiguous": true
+  },
+  "input": {
+   "glyph": "◉",
+   "safe": "●",
+   "ascii": "(o)",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial"
+  },
+  "text": {
+   "glyph": "Aa",
+   "safe": "Aa",
+   "ascii": "Aa",
+   "cells": 2,
+   "tier": "ascii"
+  },
+  "shapes": {
+   "glyph": "◎",
+   "safe": "@",
+   "ascii": "@",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial",
+   "ambiguous": true
+  },
+  "maps": {
+   "glyph": "◍",
+   "safe": "○",
+   "ascii": "+",
+   "cells": 1,
+   "fonts": [
+    "Cascadia"
+   ],
+   "tier": "partial"
+  },
+  "notify": {
+   "glyph": "●",
+   "safe": "●",
+   "ascii": "o",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "arch": {
+   "glyph": "┬",
+   "safe": "┬",
+   "ascii": "+-",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "callouts": {
+   "glyph": "▌",
+   "safe": "▌",
+   "ascii": ">",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "obsidian": {
+   "glyph": "◆",
+   "safe": "¶",
+   "ascii": "[[",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial",
+   "ambiguous": true
+  },
+  "menus": {
+   "glyph": "≡",
+   "safe": "≡",
+   "ascii": "=",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "spectrums": {
+   "glyph": "▒",
+   "safe": "▒",
+   "ascii": ":",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "idea": {
+   "glyph": "✎",
+   "safe": "¡",
+   "ascii": "/",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "mobile": {
+   "glyph": "▯",
+   "safe": "□",
+   "ascii": "[]",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial"
+  },
+  "desktop": {
+   "glyph": "▭",
+   "safe": "▬",
+   "ascii": "[_]",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial"
+  },
+  "facets": {
+   "glyph": "✦",
+   "safe": "♦",
+   "ascii": "*",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "search": {
+   "glyph": "⌕",
+   "safe": "/",
+   "ascii": "/",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "variants": {
+   "glyph": "▞",
+   "safe": "±",
+   "ascii": "::",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial"
+  },
+  "showcase": {
+   "glyph": "▣",
+   "safe": "■",
+   "ascii": "[=]",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial",
+   "ambiguous": true
+  },
+  "collections": {
+   "glyph": "❏",
+   "safe": "§",
+   "ascii": "{}",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "web": {
+   "glyph": "◫",
+   "safe": "◙",
+   "ascii": "www",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial"
+  },
+  "terminal": {
+   "glyph": "❯_",
+   "safe": "›_",
+   "ascii": ">_",
+   "cells": 2,
+   "fonts": [
+    "Cascadia"
+   ],
+   "tier": "partial"
+  },
+  "deck": {
+   "glyph": "▦",
+   "safe": "▪",
+   "ascii": "[#]",
+   "cells": 1,
+   "fonts": [
+    "Cascadia"
+   ],
+   "tier": "partial",
+   "ambiguous": true
+  },
+  "copy": {
+   "glyph": "❐",
+   "safe": "□",
+   "ascii": "cp",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "check": {
+   "glyph": "✓",
+   "safe": "√",
+   "ascii": "v",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "IBM Plex Mono"
+   ],
+   "tier": "partial"
+  },
+  "close": {
+   "glyph": "✕",
+   "safe": "×",
+   "ascii": "x",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "chevron-left": {
+   "glyph": "‹",
+   "safe": "‹",
+   "ascii": "<",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "IBM Plex Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono"
+  },
+  "chevron-right": {
+   "glyph": "›",
+   "safe": "›",
+   "ascii": ">",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "IBM Plex Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono"
+  },
+  "chevron-down": {
+   "glyph": "⌄",
+   "safe": "▼",
+   "ascii": "v",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "chevron-up": {
+   "glyph": "⌃",
+   "safe": "▲",
+   "ascii": "^",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "arrow-left": {
+   "glyph": "←",
+   "safe": "←",
+   "ascii": "<-",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "IBM Plex Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "arrow-right": {
+   "glyph": "→",
+   "safe": "→",
+   "ascii": "->",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "IBM Plex Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "arrow-up": {
+   "glyph": "↑",
+   "safe": "↑",
+   "ascii": "^",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "IBM Plex Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "arrow-down": {
+   "glyph": "↓",
+   "safe": "↓",
+   "ascii": "v",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "IBM Plex Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "play": {
+   "glyph": "▶",
+   "safe": "►",
+   "ascii": ">",
+   "cells": 1,
+   "fonts": [
+    "Cascadia"
+   ],
+   "tier": "partial",
+   "emoji": "text-default emoji: append U+FE0E or use safe",
+   "ambiguous": true
+  },
+  "pause": {
+   "glyph": "‖",
+   "safe": "||",
+   "ascii": "||",
+   "cells": 1,
+   "fonts": [
+    "Consolas"
+   ],
+   "tier": "partial",
+   "ambiguous": true
+  },
+  "replay": {
+   "glyph": "↺",
+   "safe": "«",
+   "ascii": "<<",
+   "cells": 1,
+   "fonts": [
+    "IBM Plex Mono"
+   ],
+   "tier": "partial"
+  },
+  "refresh": {
+   "glyph": "↻",
+   "safe": "↕",
+   "ascii": "(R)",
+   "cells": 1,
+   "fonts": [
+    "IBM Plex Mono"
+   ],
+   "tier": "partial"
+  },
+  "sun": {
+   "glyph": "☼",
+   "safe": "☼",
+   "ascii": "*",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono"
+  },
+  "moon": {
+   "glyph": "☾",
+   "safe": ")",
+   "ascii": ")",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "contrast": {
+   "glyph": "◐",
+   "safe": "◘",
+   "ascii": "A",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial",
+   "ambiguous": true
+  },
+  "github": {
+   "glyph": "gh",
+   "safe": "gh",
+   "ascii": "gh",
+   "cells": 2,
+   "tier": "ascii"
+  },
+  "download": {
+   "glyph": "↓",
+   "safe": "↓",
+   "ascii": "v",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "IBM Plex Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "upload": {
+   "glyph": "↑",
+   "safe": "↑",
+   "ascii": "^",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "IBM Plex Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "external": {
+   "glyph": "↗",
+   "safe": "→",
+   "ascii": "^>",
+   "cells": 1,
+   "fonts": [
+    "Fira Mono",
+    "IBM Plex Mono"
+   ],
+   "tier": "partial",
+   "emoji": "text-default emoji: append U+FE0E or use safe",
+   "ambiguous": true
+  },
+  "filter": {
+   "glyph": "∇",
+   "safe": "▼",
+   "ascii": "Y",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback",
+   "ambiguous": true
+  },
+  "grid": {
+   "glyph": "⊞",
+   "safe": "┼",
+   "ascii": "#",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "list": {
+   "glyph": "☰",
+   "safe": "≡",
+   "ascii": "-",
+   "cells": 1,
+   "fonts": [
+    "Cascadia"
+   ],
+   "tier": "partial"
+  },
+  "star": {
+   "glyph": "★",
+   "safe": "*",
+   "ascii": "*",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback",
+   "ambiguous": true
+  },
+  "heart": {
+   "glyph": "♥",
+   "safe": "♥",
+   "ascii": "<3",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "emoji": "text-default emoji: append U+FE0E or use safe",
+   "ambiguous": true
+  },
+  "plus": {
+   "glyph": "+",
+   "safe": "+",
+   "ascii": "+",
+   "cells": 1,
+   "tier": "ascii"
+  },
+  "minus": {
+   "glyph": "−",
+   "safe": "-",
+   "ascii": "-",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "IBM Plex Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono"
+  },
+  "settings": {
+   "glyph": "⚙",
+   "safe": "¤",
+   "ascii": "*",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback",
+   "emoji": "text-default emoji: append U+FE0E or use safe"
+  },
+  "info": {
+   "glyph": "ⓘ",
+   "safe": "i",
+   "ascii": "i",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback",
+   "ambiguous": true
+  },
+  "warning": {
+   "glyph": "⚠",
+   "safe": "▲",
+   "ascii": "!",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback",
+   "emoji": "text-default emoji: append U+FE0E or use safe"
+  },
+  "error": {
+   "glyph": "✗",
+   "safe": "×",
+   "ascii": "X",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "success": {
+   "glyph": "✔",
+   "safe": "√",
+   "ascii": "ok",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback",
+   "emoji": "text-default emoji: append U+FE0E or use safe"
+  },
+  "keyboard": {
+   "glyph": "⌨",
+   "safe": "kb",
+   "ascii": "kb",
+   "cells": 1,
+   "fonts": [
+    "Fira Mono"
+   ],
+   "tier": "partial",
+   "emoji": "text-default emoji: append U+FE0E or use safe"
+  },
+  "command": {
+   "glyph": "⌘",
+   "safe": "^",
+   "ascii": "^",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "menu": {
+   "glyph": "≡",
+   "safe": "≡",
+   "ascii": "=",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "sidebar": {
+   "glyph": "◧",
+   "safe": "▌",
+   "ascii": "|=",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial"
+  },
+  "code": {
+   "glyph": "‹›",
+   "safe": "‹›",
+   "ascii": "</>",
+   "cells": 2,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "IBM Plex Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono"
+  },
+  "eye": {
+   "glyph": "⊙",
+   "safe": "○",
+   "ascii": "(o)",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback",
+   "ambiguous": true
+  },
+  "link": {
+   "glyph": "∞",
+   "safe": "∞",
+   "ascii": "&",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "IBM Plex Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true
+  },
+  "sparkle": {
+   "glyph": "✧",
+   "safe": "*",
+   "ascii": "*",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "expand": {
+   "glyph": "⤢",
+   "safe": "↔",
+   "ascii": "<>",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "collapse": {
+   "glyph": "⤡",
+   "safe": "><",
+   "ascii": "><",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "drag": {
+   "glyph": "⋮",
+   "safe": "¦",
+   "ascii": ":",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "layers": {
+   "glyph": "⧉",
+   "safe": "≡",
+   "ascii": "=",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "palette": {
+   "glyph": "❖",
+   "safe": "%",
+   "ascii": "%",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "enter": {
+   "glyph": "↵",
+   "safe": "┘",
+   "ascii": "<",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback"
+  },
+  "trash": {
+   "glyph": "⌫",
+   "safe": "×",
+   "ascii": "rm",
+   "cells": 1,
+   "fonts": [
+    "Fira Mono"
+   ],
+   "tier": "partial"
+  },
+  "prism": {
+   "glyph": "△",
+   "safe": "▲",
+   "ascii": "/\\",
+   "cells": 1,
+   "fonts": [
+    "Cascadia"
+   ],
+   "tier": "partial",
+   "ambiguous": true
+  },
+  "sim": {
+   "glyph": "∴",
+   "safe": "°",
+   "ascii": ".:",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback",
+   "ambiguous": true
+  },
+  "retro": {
+   "glyph": "▚",
+   "safe": "▓",
+   "ascii": "%",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial"
+  },
+  "loaders": {
+   "glyph": "⠿",
+   "safe": "∙",
+   "ascii": "|",
+   "cells": 1,
+   "fonts": [
+    "Cascadia"
+   ],
+   "tier": "partial"
+  },
+  "progress": {
+   "glyph": "▰",
+   "safe": "▬",
+   "ascii": "[=-]",
+   "cells": 1,
+   "fonts": [
+    "Cascadia"
+   ],
+   "tier": "partial"
+  },
+  "ops": {
+   "glyph": "$_",
+   "safe": "$_",
+   "ascii": "$_",
+   "cells": 2,
+   "tier": "ascii"
+  },
+  "ascii": {
+   "glyph": "#",
+   "safe": "#",
+   "ascii": "#",
+   "cells": 1,
+   "tier": "ascii"
+  },
+  "auto": {
+   "glyph": "◐",
+   "safe": "◘",
+   "ascii": "A",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial",
+   "ambiguous": true,
+   "aliasOf": "contrast"
+  },
+  "new": {
+   "glyph": "✧",
+   "safe": "*",
+   "ascii": "*",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback",
+   "aliasOf": "sparkle"
+  },
+  "sidebar-toggle": {
+   "glyph": "◧",
+   "safe": "▌",
+   "ascii": "|=",
+   "cells": 1,
+   "fonts": [
+    "Cascadia",
+    "Fira Mono"
+   ],
+   "tier": "partial",
+   "aliasOf": "sidebar"
+  },
+  "status": {
+   "glyph": "●",
+   "safe": "●",
+   "ascii": "o",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true,
+   "aliasOf": "notify"
+  },
+  "diagrams": {
+   "glyph": "┬",
+   "safe": "┬",
+   "ascii": "+-",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "Lucida Console",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true,
+   "aliasOf": "arch"
+  },
+  "x": {
+   "glyph": "✕",
+   "safe": "×",
+   "ascii": "x",
+   "cells": 1,
+   "fonts": [],
+   "fallback": [
+    "Segoe UI Symbol"
+   ],
+   "tier": "fallback",
+   "aliasOf": "close"
+  },
+  "bell": {
+   "glyph": "●",
+   "safe": "●",
+   "ascii": "o",
+   "cells": 1,
+   "fonts": [
+    "Consolas",
+    "Cascadia",
+    "Fira Mono",
+    "Courier New"
+   ],
+   "tier": "mono",
+   "ambiguous": true,
+   "aliasOf": "notify"
+  }
+ },
+ "terminalGalleries": {
+  "fx": {
+   "icon": "fx",
+   "glyph": "✺",
+   "safe": "☼",
+   "ascii": "*"
+  },
+  "objects": {
+   "icon": "objects",
+   "glyph": "◈",
+   "safe": "◊",
+   "ascii": "<>"
+  },
+  "sim": {
+   "icon": "sim",
+   "glyph": "∴",
+   "safe": "°",
+   "ascii": ".:"
+  },
+  "retro": {
+   "icon": "retro",
+   "glyph": "▚",
+   "safe": "▓",
+   "ascii": "%"
+  },
+  "text": {
+   "icon": "text",
+   "glyph": "Aa",
+   "safe": "Aa",
+   "ascii": "Aa"
+  },
+  "loaders": {
+   "icon": "loaders",
+   "glyph": "⠿",
+   "safe": "∙",
+   "ascii": "|"
+  },
+  "progress": {
+   "icon": "progress",
+   "glyph": "▰",
+   "safe": "▬",
+   "ascii": "[=-]"
+  },
+  "charts": {
+   "icon": "charts",
+   "glyph": "▅",
+   "safe": "▄",
+   "ascii": "%"
+  },
+  "ai": {
+   "icon": "ai",
+   "glyph": "✳",
+   "safe": "•",
+   "ascii": "@"
+  },
+  "status": {
+   "icon": "notify",
+   "glyph": "●",
+   "safe": "●",
+   "ascii": "o"
+  },
+  "ops": {
+   "icon": "ops",
+   "glyph": "$_",
+   "safe": "$_",
+   "ascii": "$_"
+  },
+  "diagrams": {
+   "icon": "arch",
+   "glyph": "┬",
+   "safe": "┬",
+   "ascii": "+-"
+  },
+  "callouts": {
+   "icon": "callouts",
+   "glyph": "▌",
+   "safe": "▌",
+   "ascii": ">"
+  },
+  "input": {
+   "icon": "menus",
+   "glyph": "≡",
+   "safe": "≡",
+   "ascii": "="
+  },
+  "maps": {
+   "icon": "maps",
+   "glyph": "◍",
+   "safe": "○",
+   "ascii": "+"
+  },
+  "lab": {
+   "icon": "lab",
+   "glyph": "∿",
+   "safe": "≈",
+   "ascii": "~"
+  },
+  "ascii": {
+   "icon": "ascii",
+   "glyph": "#",
+   "safe": "#",
+   "ascii": "#"
+  }
+ }
+}

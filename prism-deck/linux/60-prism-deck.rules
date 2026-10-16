@@ -1,0 +1,57 @@
+# Prism Deck: hidraw access for the logged-in seat user (systemd-logind uaccess ACL).
+# Elgato Stream Deck family + Corsair Galleon 100 SD (Stream Deck interface only). Generated from
+# prism-deck/src/hid/models.js — regenerate with: prism-deck hid udev > 60-prism-deck.rules
+#
+# Install (the number must sort before 73-seat-late.rules):
+#   sudo install -m 0644 60-prism-deck.rules /etc/udev/rules.d/
+#   sudo udevadm control --reload-rules && sudo udevadm trigger --subsystem-match=hidraw --action=change
+# Headless / service account (no logind seat): replace TAG+="uaccess" with GROUP="plugdev"
+# (Debian/Ubuntu; elsewhere create a group: sudo groupadd --system streamdeck) and add the user to it.
+# Never widen the Corsair rule to the whole vendor (1b1c) or drop its interface check: the Galleon
+# is also a keyboard, and its keyboard hidraw nodes would expose every keystroke to the user.
+
+# Stream Deck [original]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="0060", MODE:="0660", TAG+="uaccess"
+# Stream Deck [original-v2]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="006d", MODE:="0660", TAG+="uaccess"
+# Stream Deck MK.2 [mk2]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="0080", MODE:="0660", TAG+="uaccess"
+# Stream Deck Scissor Keys [scissor]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="00a5", MODE:="0660", TAG+="uaccess"
+# Stream Deck Module 15 [module-15]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="00b9", MODE:="0660", TAG+="uaccess"
+# Stream Deck Module 15 [module-15-scissor]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="00e4", MODE:="0660", TAG+="uaccess"
+# Stream Deck Mini [mini]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="0063", MODE:="0660", TAG+="uaccess"
+# Stream Deck Mini [mini-2022]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="0090", MODE:="0660", TAG+="uaccess"
+# Stream Deck Mini Discord Edition [mini-discord]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="00b3", MODE:="0660", TAG+="uaccess"
+# Stream Deck Module 6 [module-6]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="00b8", MODE:="0660", TAG+="uaccess"
+# Stream Deck XL [xl]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="006c", MODE:="0660", TAG+="uaccess"
+# Stream Deck XL [xl-2022]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="008f", MODE:="0660", TAG+="uaccess"
+# Stream Deck Module 32 [module-32]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="00ba", MODE:="0660", TAG+="uaccess"
+# Stream Deck Neo [neo]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="009a", MODE:="0660", TAG+="uaccess"
+# Stream Deck + [plus]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="0084", MODE:="0660", TAG+="uaccess"
+# Stream Deck + XL [plusxl]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="00c6", MODE:="0660", TAG+="uaccess"
+# Stream Deck Studio [studio]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="00aa", MODE:="0660", TAG+="uaccess"
+# Stream Deck Pedal [pedal]
+KERNEL=="hidraw*", ATTRS{idVendor}=="0fd9", ATTRS{idProduct}=="0086", MODE:="0660", TAG+="uaccess"
+
+# Corsair Galleon 100 SD [galleon] — composite device: only USB interface 00 (the deck) is opened to the
+# seat user. Stage 1 matches the USB id on the usb_device ancestor; stage 2 requires the hidraw
+# node's usb_interface ancestor to be the deck interface. Every other device skips the section.
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1b1c", ATTRS{idProduct}=="2b18", GOTO="prism_deck_galleon"
+GOTO="prism_deck_galleon_end"
+LABEL="prism_deck_galleon"
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{bInterfaceNumber}=="00", MODE:="0660", TAG+="uaccess"
+LABEL="prism_deck_galleon_end"

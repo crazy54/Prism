@@ -1,7 +1,7 @@
 // Toasts & Alerts: a sliding toast stack, alert banners, an incident banner,
 // an on-call page with an ack countdown, and a deploy-succeeded celebration.
 import { mix, scale } from '../../color.js';
-import { glyphs, put, putR, clamp, smooth, safe, ATTR } from '../charts/_data.js';
+import { glyphs, put, putR, clamp, smooth, safe, onFill, ATTR } from '../charts/_data.js';
 
 const TOASTS = [
   ['pos', 'Deploy finished', 'checkout v2.14.2 is live on 12/12 hosts'],
@@ -120,9 +120,9 @@ const incident = {
       for (let y = 0; y < rows; y++) for (let x = 0; x < W; x++) b.set(x, y, ' ', undefined, y === 0 ? bg : mix(th.bg, th.neg, 0.1));
       const secs = 754 + Math.floor(t);
       const timer = `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
-      let x = b.text(1, 0, ` SEV1 `, 0xffffff, th.neg, ATTR.BOLD);
-      x = b.text(x + 1, 0, `${g.dot} INCIDENT  Checkout failing for some customers`, 0xffffff, bg, ATTR.BOLD);
-      putR(b, W - 1, 0, `elapsed ${timer}`, 0xffffff, bg, ATTR.BOLD);
+      let x = b.text(1, 0, ` SEV1 `, onFill(th, th.neg), th.neg, ATTR.BOLD);
+      x = b.text(x + 1, 0, `${g.dot} INCIDENT  Checkout failing for some customers`, th.ink, bg, ATTR.BOLD);
+      putR(b, W - 1, 0, `elapsed ${timer}`, th.ink, bg, ATTR.BOLD);
       if (rows >= 2) {
         let cx = b.text(1, 1, 'affected', th.muted, mix(th.bg, th.neg, 0.1));
         for (const s of svcs) cx = b.text(cx + 1, 1, ` ${s} `, th.ink, mix(th.bg, th.neg, 0.35));

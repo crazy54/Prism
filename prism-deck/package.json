@@ -1,0 +1,60 @@
+{
+  "name": "prism-deck",
+  "version": "0.7.0",
+  "description": "Zero-dependency Stream Deck engine from Prism — glyphs × themes rendered as deterministic SVG for keys, spans of keys, touch strips, screens and whole devices (every Elgato model and the Corsair Galleon 100 SD), with text drawn from bundled Inter outlines.",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./scene": "./src/scene/index.js",
+    "./facets": "./src/facets/index.js",
+    "./devices": "./src/devices.js",
+    "./raster": "./src/raster/index.js",
+    "./audio": "./src/audio/index.js",
+    "./web": "./src/web/index.js",
+    "./package.json": "./package.json",
+    "./hid": "./src/hid/index.js"
+  },
+  "files": [
+    "cli.js",
+    "index.js",
+    "src/",
+    "docs/",
+    "catalog/",
+    "linux/"
+  ],
+  "scripts": {
+    "test": "node --test --test-timeout=600000 \"test/*.test.js\"",
+    "facets:manifest": "node scripts/gen-manifest.mjs",
+    "facets:check": "node scripts/gen-manifest.mjs --check",
+    "devices": "node scripts/gen-devices.mjs",
+    "devices:check": "node scripts/gen-devices.mjs --check",
+    "fonts": "node scripts/extract-fonts.mjs",
+    "fonts:check": "node scripts/extract-fonts.mjs --check",
+    "catalog": "node scripts/build-catalog.mjs",
+    "catalog:check": "node scripts/build-catalog.mjs --check",
+    "island": "node scripts/embed-island.mjs",
+    "island:check": "node scripts/embed-island.mjs --check",
+    "shoot": "node scripts/shoot.mjs",
+    "sync-tokens": "node scripts/sync-tokens.mjs",
+    "raster:goldens": "node scripts/raster-goldens.mjs",
+    "plugin:build": "node scripts/build-plugin.mjs",
+    "iconpacks:build": "node scripts/build-iconpacks.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "stream-deck",
+    "elgato",
+    "svg",
+    "animation",
+    "key-images",
+    "dashboard",
+    "prism"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "bin": {
+    "prism-deck": "./cli.js"
+  }
+}

@@ -1,6 +1,6 @@
 // Sparklines: word-sized trend lines — eighth-block bars, braille, dots, and a wall of them.
 import { mix, scale } from '../../color.js';
-import { signal, glyphs, safe, vbar, put, putR, num, clamp, ATTR, VBLOCKS } from './_data.js';
+import { signal, glyphs, safe, vbar, put, putR, num, clamp, light, lift, ATTR, VBLOCKS } from './_data.js';
 
 const METRICS = [
   { key: 'cpu', label: 'cpu', unit: '%', base: 46, amp: 22, max: 100, warn: 75, crit: 90, seed: 1 },
@@ -44,7 +44,7 @@ const sparkBars = {
           const k = clamp((data[i] - lo) / (hi - lo), 0, 1);
           const idx = Math.max(1, Math.round(k * 8));
           const c = levelColor(th, m, data[i]);
-          b.set(labelW + i, y, g.u ? VBLOCKS[idx] : ' ._-=+*#@'[idx], i === sw - 1 ? mix(c, 0xffffff, 0.35) : scale(c, 0.55 + 0.45 * (i / sw)));
+          b.set(labelW + i, y, g.u ? VBLOCKS[idx] : ' ._-=+*#@'[idx], i === sw - 1 ? lift(th, c, 0.35) : th.mode === 'light' ? mix(th.bg, c, 0.55 + 0.45 * (i / sw)) : scale(c, 0.55 + 0.45 * (i / sw)));
         }
         if (rangeW) {
           // Window min and max, like `spark --range`.
@@ -108,7 +108,7 @@ const sparkBraille = {
         }
         cv.set(iHi, py(hi), th.warn); cv.set(iHi, py(hi) - 1, th.warn);
         cv.set(iLo, py(lo), th.info); cv.set(iLo, py(lo) + 1, th.info);
-        cv.set(n - 1, py(data[n - 1]), 0xffffff); cv.set(n - 2, py(data[n - 1]), 0xffffff);
+        cv.set(n - 1, py(data[n - 1]), light(th)); cv.set(n - 2, py(data[n - 1]), light(th));
         cv.paint(b, 0, y0 + textH);
         if (textH) {
           const v = d.s.now(t);

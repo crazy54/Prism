@@ -7,7 +7,8 @@
 // Facet modules are imported on demand from <engine>/<record.module minus "prism-term/">, the first time a
 // tile scrolls near the viewport, and run by the engine's browser player (src/web/).
 
-import { esc, notify, initChrome, engineUrl } from './site.js';
+import { esc, notify, initChrome, engineUrl, mode, onMode, pageTheme, copyButton, curlHtml, shellToggle, applyShell } from './site.js';
+import { TERMINAL as POSITIONS } from '../assets/rf/positions.mjs';
 
 const root = document.documentElement;
 const byId = (id) => document.getElementById(id);
@@ -23,7 +24,7 @@ const COLOR_LABEL = { mono: 'Mono', 16: '16 colors', 256: '256 colors', truecolo
 const MODES = ['braille', 'sextant', 'quad', 'half', 'ascii'];
 const DEPTHS = ['truecolor', '256', '16', 'mono'];
 const SIZE_PRESETS = [[60, 20], [80, 24], [100, 30], [120, 36]];
-const FEATURED = ['plasma', 'donut', 'cracktro', 'globe', 'ops-htop', 'charts-noc-wallboard', 'synthwave', 'fire'];
+const FEATURED = ['refraction', 'donut', 'cracktro', 'globe', 'ops-htop', 'charts-noc-wallboard', 'synthwave', 'fire'];
 const TILE_FPS = 15;
 const MAX_MOUNTED = 48;
 
@@ -53,9 +54,18 @@ const byIdMap = new Map(facets.map((f, i) => [f.id, Object.assign(f, { _i: i })]
 const galleries = catalog.galleries.filter((g) => g.count > 0);
 const galleryById = new Map(galleries.map((g) => [g.id, g]));
 const themes = palettes.listThemes();
-const defaultTheme = palettes.getTheme();
 const hex = (c) => '#' + (c & 0xffffff).toString(16).padStart(6, '0');
-root.style.setProperty('--term-bg', hex(defaultTheme.bg));
+// Terminal screens follow the page: prism-dark at Night, prism-light by Day (when the engine has them).
+let tileTheme = pageTheme(themes);
+let defaultTheme = palettes.getTheme(tileTheme);
+const paintTermBg = () => root.style.setProperty('--term-bg', hex(defaultTheme.bg));
+paintTermBg();
+// Same id → same hue as the web gallery it shares; terminal-only galleries take their proposed hue.
+const hueId = (g) => POSITIONS[g]?.sameAs || g;
+const lambdaOf = (g) => POSITIONS[g]?.lambda || '';
+const ICONS = new Set(['fx', 'objects', 'sim', 'retro', 'text', 'loaders', 'progress', 'charts', 'ai', 'status', 'ops', 'diagrams', 'callouts', 'input', 'maps', 'lab', 'ascii']);
+const iconOf = (g) => (ICONS.has(g) ? g : 'terminal');
+const icon = (g, cls = '') => `<svg class="ic${cls}" aria-hidden="true"><use href="#i-${iconOf(g)}"/></svg>`;
 
 const fmt = (n) => Number(n).toLocaleString('en-US');
 document.querySelectorAll('[data-terminal-stat="facets"]').forEach((el) => { el.textContent = fmt(facets.length); });
@@ -84,8 +94,7 @@ let motionPaused = reducedMotion.matches;
 function renderMotion() {
   root.dataset.motion = motionPaused ? 'paused' : 'playing';
   const button = byId('motion-toggle');
-  button.setAttribute('aria-pressed', String(motionPaused));
-  button.textContent = motionPaused ? '▶ Resume motion' : 'Ⅱ Pause motion';
+  button.innerHTML = motionPaused ? '<svg class="ic" aria-hidden="true"><use href="#i-play"/></svg><span>Resume motion</span>' : '<svg class="ic" aria-hidden="true"><use href="#i-pause"/></svg><span>Pause motion</span>';
   document.querySelectorAll('.live-dot').forEach((badge) => { badge.textContent = motionPaused ? 'PAUSED' : 'LIVE'; });
 }
 byId('motion-toggle').addEventListener('click', () => {
@@ -165,8 +174,8 @@ const isOverview = () => !state.gallery && !state.q && !state.kind && !state.gly
 
 const galleryList = byId('gallery-list');
 galleryList.innerHTML = [
-  `<button type="button" class="t-gal" data-g=""><span class="t-gal-icon" aria-hidden="true">✳</span><span class="t-gal-name">All facets</span><span class="t-gal-count">${fmt(facets.length)}</span></button>`,
-  ...galleries.map((g) => `<button type="button" class="t-gal" data-g="${esc(g.id)}"><span class="t-gal-icon" aria-hidden="true">${esc(g.icon)}</span><span class="t-gal-name">${esc(g.title)}</span><span class="t-gal-count">${fmt(g.count)}</span></button>`),
+  `<button type="button" class="t-gal is-all" data-g=""><i class="rf-index"></i>${icon('all')}<span class="t-gal-name">All facets</span><span class="t-gal-count">${fmt(facets.length)}</span></button>`,
+  ...galleries.map((g) => `<button type="button" class="t-gal" data-g="${esc(g.id)}" data-rf-gallery="${esc(hueId(g.id))}" data-fl="index"><i class="rf-index"></i>${icon(g.id)}<span class="t-gal-name">${esc(g.title)}</span><span class="lambda">${esc(lambdaOf(g.id))}</span><span class="t-gal-count">${fmt(g.count)}</span></button>`),
 ].join('');
 galleryList.addEventListener('click', (e) => {
   const b = e.target.closest('[data-g]');
@@ -227,10 +236,12 @@ function tileFor(f) {
   el = document.createElement('article');
   el.className = 't-tile';
   el.dataset.id = f.id;
+  el.dataset.rfGallery = hueId(f.gallery);
+  el.setAttribute('data-fl', 'tile');
   const reqs = [f.glyphs === 'ascii' ? '<span class="badge green" title="Runs on 7-bit ASCII terminals">ASCII</span>' : '', f.animated ? '' : '<span class="badge">still</span>'].join('');
   el.innerHTML = `<a class="t-tile-link" href="#${esc(f.id)}" aria-label="${esc(f.title)} — ${esc(f.galleryTitle)}, ${esc(f.category)}. ${esc(f.description)}">
     <div class="t-tile-top"><span>${esc(f.galleryTitle.toUpperCase())} · ${esc(f.category.toUpperCase())}</span><span class="badge">${esc(f.kind)}</span></div>
-    <div class="t-tile-screen"><span class="ph" aria-hidden="true">${esc(galleryById.get(f.gallery)?.icon || '▚')}</span></div>
+    <div class="t-tile-screen"><span class="ph" aria-hidden="true">${icon(f.gallery)}</span></div>
     <div class="t-tile-bottom"><h3>${esc(f.title)}</h3><span class="t-tile-badges">${reqs}<span class="badge">${f.size.w}×${f.size.h}</span></span></div>
     <p class="t-tile-desc">${esc(f.description)}</p></a>`;
   tiles.set(f.id, el);
@@ -265,7 +276,7 @@ function mountTile(id) {
   loadFacet(rec).then((facet) => schedule(() => {
     if (mounted.get(id) !== entry) return; // unmounted while loading
     screen.querySelector('.ph')?.remove();
-    entry.player = web.mountFacet(screen, facet, { fit: tileFit(screen), fps: TILE_FPS, label: `${rec.title} — live terminal render` });
+    entry.player = web.mountFacet(screen, facet, { fit: tileFit(screen), fps: TILE_FPS, theme: tileTheme, label: `${rec.title} — live terminal render` });
     entry.player.canvas.setAttribute('aria-hidden', 'true');
     if (detail.open) entry.player.pause();
   })).catch((err) => {
@@ -284,7 +295,7 @@ function unmountTile(id) {
     entry.player.destroy();
     entry.player.canvas.remove();
     const screen = tiles.get(id)?.querySelector('.t-tile-screen');
-    if (screen && !screen.querySelector('.ph')) screen.insertAdjacentHTML('beforeend', `<span class="ph" aria-hidden="true">${esc(galleryById.get(byIdMap.get(id).gallery)?.icon || '▚')}</span>`);
+    if (screen && !screen.querySelector('.ph')) screen.insertAdjacentHTML('beforeend', `<span class="ph" aria-hidden="true">${icon(byIdMap.get(id).gallery)}</span>`);
   }
 }
 
@@ -322,7 +333,7 @@ let shown = [];
 function renderGrid() {
   const list = filtered();
   const frag = document.createDocumentFragment();
-  const heading = (cls, html) => { const h = document.createElement('div'); h.className = cls; h.innerHTML = html; frag.append(h); };
+  const heading = (cls, html, hue) => { const h = document.createElement('div'); h.className = cls; if (hue) h.dataset.rfGallery = hue; h.innerHTML = html; frag.append(h); };
   shown = [];
   gridCols = columns();
   if (isOverview()) {
@@ -330,7 +341,7 @@ function renderGrid() {
     for (const g of galleries) {
       const items = highlights(list.filter((f) => f.gallery === g.id), per);
       if (!items.length) continue;
-      heading('t-group', `<span class="t-gal-icon" aria-hidden="true">${esc(g.icon)}</span><div><h3>${esc(g.title)}</h3><p>${esc(g.blurb)}</p></div><button type="button" class="ctl-btn" data-open-gallery="${esc(g.id)}">All ${fmt(g.count)} <span aria-hidden="true">→</span></button>`);
+      heading('t-group', `<span class="t-gal-icon" aria-hidden="true">${icon(g.id, ' s18 is-spectral')}</span><div><h3>${esc(g.title)}</h3><p>${esc(g.blurb)}</p></div><span class="lambda">${esc(lambdaOf(g.id))}</span><button type="button" class="ctl-btn" data-open-gallery="${esc(g.id)}">All ${fmt(g.count)} <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>`, hueId(g.id));
       for (const f of items) { frag.append(tileFor(f)); shown.push(f); }
     }
   } else if (state.gallery && !state.category && !state.q) {
@@ -408,7 +419,10 @@ async function showHero(i, user = false) {
     if (featured[hero.i] !== rec.id) return;
     hero.player?.destroy();
     heroScreen.replaceChildren();
-    hero.player = web.mountFacet(heroScreen, facet, { fit: heroFit(), fps: 30, label: `${rec.title} — live terminal render` });
+    // On a phone the prism's instrument labels would be ~5px type: show the art alone.
+    const params = rec.id === 'refraction' && heroScreen.clientWidth < 440 ? { labels: 'off' } : undefined;
+    hero.player = web.mountFacet(heroScreen, facet, { fit: heroFit(), fps: 30, theme: tileTheme, params, label: `${rec.title} — live terminal render` });
+    heroWindow.dataset.rfGallery = hueId(rec.gallery);
     if (detail.open) hero.player.pause();
   } catch (err) { console.error('[prism-terminal] hero:', err); }
   clearTimeout(hero.timer);
@@ -461,7 +475,7 @@ function playerOpts() {
   const { opts } = detail;
   const params = { ...opts.params };
   if (opts.palette) params.palette = opts.palette;
-  return { cols: opts.cols, rows: opts.rows, theme: opts.theme || undefined, mode: opts.mode || null, params, depth: opts.depth, ascii: opts.ascii, seed: opts.seed, speed: opts.speed };
+  return { cols: opts.cols, rows: opts.rows, theme: opts.theme || tileTheme, mode: opts.mode || null, params, depth: opts.depth, ascii: opts.ascii, seed: opts.seed, speed: opts.speed };
 }
 
 function detailFit() {
@@ -475,7 +489,7 @@ function seg(name, label, values, current, { disabled = false, fmtv = (v) => v, 
 
 function renderForm() {
   const { rec, opts } = detail;
-  const themeOpts = ['<option value="">Default · ' + esc(defaultTheme.name) + '</option>',
+  const themeOpts = ['<option value="">Page · ' + esc(defaultTheme.name) + '</option>',
     ...['dark', 'light'].map((m) => `<optgroup label="${m === 'dark' ? 'Dark' : 'Light'}">${themes.filter((t) => t.mode === m).map((t) => `<option value="${esc(t.id)}"${t.id === opts.theme ? ' selected' : ''}>${esc(t.name)}</option>`).join('')}</optgroup>`)].join('');
   const sizes = [[rec.size.w, rec.size.h, 'Native'], [rec.minSize.w, rec.minSize.h, 'Minimum'], ...SIZE_PRESETS.map(([w, h]) => [w, h, ''])];
   const seen = new Set();
@@ -505,10 +519,13 @@ function renderUsage() {
   const rows = [
     ['Play it', withFlags(u.cli || `prism-term play ${rec.id}`), ''],
     ['Without installing · Node 18+', withFlags(u.npx || ''), ''],
-    ['Read it with curl', u.curl || '', `Add <code>.txt</code> for 7-bit terminals · Windows: <code>curl.exe</code>`],
+    ['Read it with curl', u.curl || '', 'shell'],
     ['In code', u.code || '', ''],
   ].filter(([, cmd]) => cmd);
-  byId('d-usage').innerHTML = rows.map(([label, cmd, note]) => `<div class="cmd"><div class="cmd-head"><span>${esc(label)}</span><button type="button" data-copy="${esc(cmd)}" aria-label="Copy: ${esc(label)}">Copy ⧉</button></div><pre>${label === 'In code' ? '' : '<span class="c">$ </span>'}${esc(cmd)}</pre>${note ? `<p class="cmd-note">${note}</p>` : ''}</div>`).join('');
+  byId('d-usage').innerHTML = rows.map(([label, cmd, note]) => note === 'shell'
+    ? `<div class="cmd"><div class="cmd-head"><span>${esc(label)}</span><span class="cmd-actions">${shellToggle}${copyButton(cmd, `Copy: ${label}`)}</span></div><pre><span class="c">$ </span>${curlHtml(cmd)}</pre><p class="cmd-note">Add <code>.txt</code> for 7-bit terminals.</p><p class="cmd-note" data-shell-note></p></div>`
+    : `<div class="cmd"><div class="cmd-head"><span>${esc(label)}</span>${copyButton(cmd, `Copy: ${label}`)}</div><pre>${label === 'In code' ? '' : '<span class="c">$ </span>'}${esc(cmd)}</pre>${note ? `<p class="cmd-note">${note}</p>` : ''}</div>`).join('');
+  applyShell(byId('d-usage'));
   byId('d-cmd').innerHTML = `$ prism-term play <b>${esc(rec.id)}</b>${f ? ` ${esc(f)}` : ''}`;
   byId('d-cmd').title = `prism-term play ${rec.id}${f ? ` ${f}` : ''}`;
 }
@@ -516,8 +533,7 @@ function renderUsage() {
 function syncPlayButton() {
   const p = detail.player, b = byId('d-play');
   const playing = !!p && p.playing && !motionPaused && !p.still;
-  b.setAttribute('aria-pressed', String(!playing));
-  b.innerHTML = playing ? '<span aria-hidden="true">Ⅱ</span> Pause' : '<span aria-hidden="true">▶</span> Play';
+  b.innerHTML = playing ? '<svg class="ic" aria-hidden="true"><use href="#i-pause"/></svg><span>Pause</span>' : '<svg class="ic" aria-hidden="true"><use href="#i-play"/></svg><span>Play</span>';
   b.disabled = !p || !p.animated;
   byId('d-live').textContent = !p?.animated ? 'STILL' : playing ? 'LIVE' : 'PAUSED';
 }
@@ -527,7 +543,7 @@ function applyPlayer(rebuildForm = false) {
   if (rebuildForm) renderForm();
   renderUsage();
   // Letterbox in the color the emulated terminal gives the facet's background.
-  const theme = palettes.getTheme(detail.opts.theme || undefined), q = detail.player?.tc.quant;
+  const theme = palettes.getTheme(detail.opts.theme || tileTheme), q = detail.player?.tc.quant;
   const bg = q ? q(theme.bg) : theme.bg;
   byId('d-screen').style.background = hex(bg < 0 ? theme.bg : bg);
 }
@@ -540,7 +556,8 @@ async function openDetail(id) {
   detail.opts = { theme: '', mode: '', palette: '', params: defaults(rec), cols: rec.size.w, rows: rec.size.h, depth: 'truecolor', ascii: false, seed: 7, speed: 1 };
   const g = galleryById.get(rec.gallery);
   byId('d-crumb').innerHTML = `<a href="?g=${esc(rec.gallery)}" data-crumb-gallery="${esc(rec.gallery)}">${esc(g?.title || rec.galleryTitle)}</a> / ${esc(rec.category)} / <span>${esc(rec.id)}</span>`;
-  byId('d-eyebrow').innerHTML = `${esc(g?.icon || '')} ${esc(rec.galleryTitle.toUpperCase())} · ${esc(rec.category.toUpperCase())}`;
+  byId('d-eyebrow').innerHTML = `${esc(rec.galleryTitle.toUpperCase())}<span class="rf-sep">·</span>${esc(rec.category.toUpperCase())}<span class="rf-sep">·</span><span class="rf-lambda">${esc(lambdaOf(rec.gallery))}</span>`;
+  dialog.dataset.rfGallery = hueId(rec.gallery);
   byId('d-title').textContent = rec.title;
   // CLI hints in descriptions ("--set style=solid") stay on one line.
   byId('d-desc').innerHTML = esc(rec.description).replace(/--set\s+[\w.-]+=[\w.-]+|--[a-z][\w-]*/g, (m) => `<code>${m}</code>`);
@@ -765,6 +782,18 @@ addEventListener('hashchange', route);
 update();
 showHero(0);
 route();
+// First Light: the first tiles on screen join the load sequence.
+window.PrismSite?.tilesReady?.([...grid.querySelectorAll('.t-tile')].slice(0, 12));
+
+// Night ↔ Day: every live terminal re-themes to the matching Prism palette.
+onMode(() => {
+  tileTheme = pageTheme(themes);
+  defaultTheme = palettes.getTheme(tileTheme);
+  paintTermBg();
+  for (const m of mounted.values()) m.player?.set({ theme: tileTheme });
+  hero.player?.set({ theme: tileTheme });
+  if (detail.player && !detail.opts.theme) applyPlayer(true);
+});
 
 // Exposed for performance checks: prismTerminal.stats()
 globalThis.prismTerminal = {

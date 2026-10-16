@@ -3,6 +3,7 @@
 // length, vertices glow, and a tilted orbit ring of dust circles the solid.
 import { meshes, rotate } from '../../math3d.js';
 import { easing } from '../../easing.js';
+import { fadeMark } from '../../palettes.js';
 
 export default {
   title: 'Wireframe Solids',
@@ -30,7 +31,11 @@ export default {
       return [W / 2 + p[0] * k, H / 2 + (p[1] * k) / aspect, d];
     };
 
+    // Depth cue: toward black on glass; on light pages far edges fade into the page.
+    const day = ctx.theme.mode === 'light';
+    const spark = day ? ctx.theme.ink : 0xffffff;
     const shade = (c, k) => {
+      if (day) return fadeMark(ctx.theme, c, Math.min(1, k));
       const r = ((c >> 16) & 255) * k, g = ((c >> 8) & 255) * k, b = (c & 255) * k;
       return ((r > 255 ? 255 : r) << 16) | ((g > 255 ? 255 : g) << 8) | (b > 255 ? 255 : b | 0);
     };
@@ -58,7 +63,7 @@ export default {
         const p = pts[i];
         const g = depthK(p[2]);
         if (g < 0.45) continue;
-        const c = shade(0xffffff, g);
+        const c = shade(spark, g);
         cv.set(p[0], p[1], c); cv.set(p[0] + 1, p[1], c); cv.set(p[0] - 1, p[1], c);
         cv.set(p[0], p[1] + 1, c); cv.set(p[0], p[1] - 1, c);
       }

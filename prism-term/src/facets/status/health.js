@@ -2,7 +2,7 @@
 // budget, a services × regions status matrix and a heartbeat monitor.
 import { mix } from '../../color.js';
 import { rng } from '../../easing.js';
-import { signal, glyphs, put, putR, safe, clamp, VBLOCKS, ATTR } from '../charts/_data.js';
+import { signal, glyphs, put, putR, safe, clamp, light, VBLOCKS, ATTR } from '../charts/_data.js';
 
 const CHECKS = [
   ['api-gateway', 'GET /healthz', 18],
@@ -262,7 +262,7 @@ const heartbeat = {
         if (px) cv.line(px[0], px[1], x, y, c); else cv.set(x, y, c);
         px = [x, y];
       }
-      cv.set(cv.width - 1, px[1], 0xffffff);
+      cv.set(cv.width - 1, px[1], light(th));
       cv.paint(b, 0, head);
       const k = Math.floor(t / PERIOD);
       let last = k; while (missed(last) && last > k - 20) last--;

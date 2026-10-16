@@ -192,8 +192,8 @@ Result:
   "semanticTokens": ["--accent","--info","--pos","--neg","--warn","--crit"],
   "surfaceTokens": ["--bg","--panel","--panel2","--card","--line","--ink","--muted","--dim"],
   "recolor": "Set --c and --c-rgb (or add a c-* class like c-pos) on the effect element to recolor it.",
-  "builtInThemes": ["cloudscape-dark","cloudscape-light"],
-  "note": "Prism ships in the AWS Cloudscape design language with two color modes: cloudscape-dark (default) and cloudscape-light."
+  "builtInThemes": ["prism-dark","prism-light","cloudscape-dark","cloudscape-light","…"],
+  "note": "Prism ships 12 design systems as pure :root token overrides over identical component HTML/CSS: Prism (prism-dark [default], prism-light); Cloudscape (cloudscape-dark, cloudscape-light); …"
 }
 ```
 
@@ -240,25 +240,25 @@ HTML/CSS, so a "variant" is one component under a different token set. These
 tools return token maps + overrides — never N rendered copies.
 
 ### `get_theme_palette`
-Request (one theme; omit `theme` for both modes):
+Request (one theme; omit `theme` for every theme). Overrides are against the Prism Night base (the default theme); `includeRefraction: true` adds the Prism family's `--rf-*` layer:
 ```json
-{ "name": "get_theme_palette", "arguments": { "theme": "cloudscape-light" } }
+{ "name": "get_theme_palette", "arguments": { "theme": "prism-light" } }
 ```
 Result:
 ```json
 {
-  "id": "cloudscape-light", "name": "Cloudscape Light", "mode": "light", "builtin": true,
-  "tokens": { "--bg": "#f2f3f3", "--accent": "#0972d3", "…": "…" },
-  "overrides": { "--bg": "#f2f3f3", "--accent": "#0972d3", "…": "…" },
-  "overrideCount": 21,
-  "css": ":root{ /* Cloudscape Light */\n  --bg: #f2f3f3;\n  --accent: #0972d3;\n  … }"
+  "id": "prism-light", "name": "Prism Day", "ds": "prism", "dsName": "Prism", "mode": "light", "builtin": true, "default": false,
+  "tokens": { "--bg": "#f6f5f9", "--accent": "#7353bb", "…": "…" },
+  "overrides": { "--bg": "#f6f5f9", "--accent": "#7353bb", "…": "…" },
+  "overrideCount": 30, "refractionVersion": "1.2.1", "refractionTokenCount": 252,
+  "css": ":root{ /* Prism Day */\n  --bg: #f6f5f9;\n  --accent: #7353bb;\n  … }"
 }
 ```
 
 ### `get_component_variants`
 Request:
 ```json
-{ "name": "get_component_variants", "arguments": { "id": "charts-big-metric-count-up", "themes": ["cloudscape-dark","cloudscape-light"] } }
+{ "name": "get_component_variants", "arguments": { "id": "charts-big-metric-count-up", "themes": ["prism-dark","prism-light"] } }
 ```
 Result (one payload, one entry per theme):
 ```json
@@ -269,9 +269,9 @@ Result (one payload, one entry per theme):
   "html": "<div …>$1,284,500</div>",
   "variantCount": 2,
   "variants": [
-    { "theme": "cloudscape-dark", "name": "Cloudscape Dark", "mode": "dark", "overrides": {}, "relevantOverrides": {}, "rootCss": ":root{ /* Cloudscape Dark */ … }" },
-    { "theme": "cloudscape-light", "name": "Cloudscape Light", "mode": "light",
-      "relevantOverrides": { "--muted": "#5f6b7a", "--accent": "#0972d3" }, "rootCss": ":root{ /* Cloudscape Light */ … }" }
+    { "theme": "prism-dark", "name": "Prism Night", "mode": "dark", "overrides": {}, "relevantOverrides": {}, "rootCss": ":root{ /* Prism Night */ … }" },
+    { "theme": "prism-light", "name": "Prism Day", "mode": "light",
+      "relevantOverrides": { "--muted": "#55556a", "--accent": "#7353bb" }, "rootCss": ":root{ /* Prism Day */ … }" }
   ]
 }
 ```
@@ -279,18 +279,18 @@ Result (one payload, one entry per theme):
 ### `get_variants_for_theme`
 Request:
 ```json
-{ "name": "get_variants_for_theme", "arguments": { "theme": "cloudscape-light", "gallery": "charts", "themeSensitiveOnly": true, "limit": 2 } }
+{ "name": "get_variants_for_theme", "arguments": { "theme": "prism-light", "gallery": "charts", "themeSensitiveOnly": true, "limit": 2 } }
 ```
 Result:
 ```json
 {
-  "theme": { "id": "cloudscape-light", "name": "Cloudscape Light", "mode": "light" },
-  "overrides": { "--accent": "#0972d3", "…": "…" },
-  "total": 190, "offset": 0, "limit": 2, "returned": 2,
+  "theme": { "id": "prism-light", "name": "Prism Day", "mode": "light" },
+  "overrides": { "--accent": "#7353bb", "…": "…" },
+  "total": 214, "offset": 0, "limit": 2, "returned": 2,
   "items": [
     { "id": "charts-big-metric-count-up", "name": "Big Metric + Count-Up",
       "themeSensitive": true, "usesTokens": ["--muted","--accent"],
-      "tokenValues": { "--muted": "#5f6b7a", "--accent": "#0972d3" } }
+      "tokenValues": { "--muted": "#55556a", "--accent": "#7353bb" } }
   ]
 }
 ```
@@ -306,17 +306,20 @@ Request:
   "name": "compose",
   "arguments": {
     "ids": ["charts-mini-kpi-row", "fx-aurora-veil"],
-    "includeTokens": true,
+    "theme": "prism-light",
     "wrap": { "tag": "section", "className": "dashboard" }
   }
 }
 ```
-Result:
+Result (paste-ready, like Prism's Copy: one :root with exactly the tokens the CSS reads, resolved for the theme, then the .prism-snippet wrapper + border-box reset, then the facet CSS):
 ```json
 {
   "ok": true,
-  "html": "<section class=\"dashboard\">…</section>",
-  "css": ":root{…}\n.kpi-row{…}\n.aurora{…}",
+  "theme": "prism-light",
+  "html": "<div class=\"prism-snippet\">\n<section class=\"dashboard\">…</section>\n</div>",
+  "css": ":root{--accent:#7353bb;--font:Inter, …, sans-serif;--ink:#20202e;--muted:#55556a}\n.prism-snippet{font-family:var(--font);color:var(--ink);…;box-sizing:border-box;…}\n:where(.prism-snippet) *,…{box-sizing:border-box}\n.kpi-row{…}\n.aurora{…}",
+  "snippet": "<!-- Prism · Mini KPI Row + Aurora Veil -->\n<style>\n…\n</style>\n<div class=\"prism-snippet\">…</div>",
+  "tokens": { "theme": "prism-light", "resolved": ["--accent","--font","--ink","--muted"], "unresolved": [], "fallbackOnly": [] },
   "effects": ["charts-mini-kpi-row","fx-aurora-veil"],
   "initializers": [],
   "warnings": [],
@@ -749,6 +752,106 @@ Result:
 ```
 If neither the island nor the JSON exists, every terminal tool returns
 `{ "error": "No terminal catalog found. Build it with `cd prism-term && npm run catalog` …", "code": "unavailable", "data": { "searched": [ … ], "problems": [ … ] } }`.
+
+---
+
+## Prism Deck (Stream Deck + Corsair Galleon)
+
+Prism's third catalog: animated keys, spans of keys, dial segments / touch-strip
+panoramas, screens and whole-deck looks, rendered by the zero-dependency
+[`prism-deck`](../../prism-deck) engine for every device. Catalog from Prism.html's
+`#prism-deck-catalog` island (else `prism-deck/catalog/deck-catalog.json`); render,
+layout validation and export import the engine. Ids and counts are illustrative.
+
+### `deck_search_facets`
+```json
+{ "name": "deck_search_facets", "arguments": { "query": "volume dial", "limit": 2 } }
+```
+```json
+{ "query": "volume dial", "total": 18, "returned": 2, "items": [
+  { "id": "dial-volume", "title": "Volume Dial", "gallery": "dials", "surface": "strip", "footprint": { "segments": 1 },
+    "states": ["on","muted"], "press": "toggle", "params": ["label","value","step"], "data": ["audio"], "score": 40 },
+  { "id": "dial-volume-arc", "title": "Volume Arc", "…": "…", "score": 25 } ] }
+```
+
+### `deck_get_facet`
+```json
+{ "name": "deck_get_facet", "arguments": { "id": "dial-volume" } }
+```
+```json
+{ "id": "dial-volume", "surface": "strip", "press": "toggle",
+  "params": { "label": { "type": "text", "default": "Master", "maxLength": 12 },
+              "value": { "type": "number", "default": 0.64, "min": 0, "max": 1, "step": 0.01 },
+              "step":  { "type": "number", "default": 0.02, "min": 0.005, "max": 0.1, "step": 0.005 } },
+  "stateTones": [ { "index": 0, "name": "on", "tone": "idle" }, { "index": 1, "name": "muted", "tone": "neg" } ],
+  "placement": { "on": "dials (one 200×100 segment each)", "devices": ["plus","plusxl","studio","galleon"] }, "…": "…" }
+```
+
+### `deck_render`
+```json
+{ "name": "deck_render", "arguments": { "facet": "icon-mic", "device": "galleon", "theme": "prism-day", "state": "off" } }
+```
+Result: the JSON summary plus an MCP `image` block (`image/png`):
+```json
+{ "content": [
+  { "type": "text", "text": "{ \"facet\": \"icon-mic\", \"device\": \"galleon\", \"theme\": \"prism\", \"mode\": \"light\", \"stateName\": \"off\", \"w\": 160, \"h\": 160, \"png\": { \"width\": 160, \"height\": 160, \"bytes\": 9120 } }" },
+  { "type": "image", "mimeType": "image/png", "data": "iVBORw0KGgo…" } ] }
+```
+`{ "layoutId": "lay_…", "scale": 0.5 }` renders a whole layout page onto the device panel (Galleon: 720×1280 with the
+four screen widgets); `target: { "kind": "key", "col": 1, "row": 0 }` / `{ "kind": "dial", "dial": 1, "layer": 1 }` one slot;
+`format: "svg"` returns SVG text (`slices: true` adds the per-key / per-segment / per-widget SVGs the hardware receives).
+
+### `deck_layout_create` → `deck_layout_update`
+```json
+{ "name": "deck_layout_create", "arguments": { "device": "galleon-100-sd", "name": "Desk", "template": "sample" } }
+```
+```json
+{ "layoutId": "lay_a779b736", "revision": 1,
+  "layout": { "schema": "prism-deck-layout/0.1", "name": "Desk", "device": "galleon", "pages": [ { "id": "home", "keys": [ … ], "dials": [ … ] }, { "id": "studio", "…": "…" } ] },
+  "validation": { "ok": true, "errors": [], "warnings": [ { "code": "galleon_layers", "…": "…" } ], "review": [] } }
+```
+```json
+{ "name": "deck_layout_update", "arguments": { "layoutId": "lay_a779b736", "baseRevision": 1, "ops": [
+  { "op": "set_key", "col": 0, "row": 0, "look": { "glyph": "mic", "title": "Mic" }, "behavior": { "kind": "prism.toggle" } },
+  { "op": "set_dial", "dial": 1, "layer": 0, "feedback": { "facet": "dial-volume", "params": { "label": "Music" } },
+    "rotate": { "step": 0.02, "value": 0.6 }, "press": { "kind": "prism.toggle" } },
+  { "op": "place_span", "facet": "span-waveform", "at": { "col": 0, "row": 1 }, "rows": 1 } ] } }
+```
+```json
+{ "layoutId": "lay_a779b736", "revision": 2, "applied": 3, "warnings": [], "dropped": [],
+  "validation": { "ok": true, "warnings": [ { "code": "screen_incomplete", "message": "screen-galleon-dashboard fills 3 of 4 dial slots; …" } ] } }
+```
+
+### `deck_export_profile`
+```json
+{ "name": "deck_export_profile", "arguments": { "layoutId": "lay_a779b736", "outPath": "C:/Users/me/Desktop" } }
+```
+```json
+{ "format": "streamDeckProfile", "path": "C:/Users/me/Desktop/Desk.streamDeckProfile", "bytes": 5473, "sha256": "…",
+  "deviceModel": "GRETSCH", "requiredPlugins": ["com.jeremyfhall.prism"], "skipped": [], "review": [], "problems": [],
+  "install": "Ask the user to double-click the file (or Stream Deck → Preferences → Profiles → Import). …" }
+```
+
+### `deck_live_status` → `deck_live_pair` → `deck_live_apply_layout`
+```json
+{ "reachable": false, "reason": "No control file: \"Allow AI editing\" is off or the Prism Deck plugin is not running.",
+  "controlPath": "C:\\Users\\me\\AppData\\Roaming\\Prism\\deck\\control.json", "hint": "… Do not try to enable it …" }
+```
+Once the user switches **Allow AI editing** on:
+```json
+{ "name": "deck_live_pair", "arguments": {} }
+```
+```json
+{ "pairingId": "…", "status": "pending", "code": "4821", "expiresAt": "…",
+  "tellUser": "If you asked for this, press and hold the glowing Prism key that shows 4821 on your deck for 1.5 s (until its ring is full), within 2 minutes, to allow \"Claude via Prism MCP\"." }
+```
+```json
+{ "name": "deck_live_apply_layout", "arguments": { "deviceId": "<from deck_live_status>", "layoutId": "lay_a779b736", "dryRun": true } }
+```
+```json
+{ "dryRun": true, "page": "home", "diff": { "keysSet": 12, "keysCleared": 0, "dialsSet": 4, "dialsCleared": 0 }, "warnings": [] }
+```
+A native action sent live fails with `{ "code": "requires_export" }`; too fast → `{ "code": "rate_limited", "data": { "retryAfterMs": 840 } }`.
 
 ---
 

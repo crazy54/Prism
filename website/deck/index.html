@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en" data-theme="prism-dark" data-rf-mode="night" data-fl-late>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script>(function(d){var v,day,m='none',q=location.search;try{v=localStorage.getItem('prism-site-theme')}catch(e){}day=v?(v==='light'||v==='day'):matchMedia('(prefers-color-scheme: light)').matches;d.setAttribute('data-theme',day?'prism-light':'prism-dark');d.setAttribute('data-rf-mode',day?'day':'night');try{if(!/[?&]fl=off/.test(q)){if(matchMedia('(prefers-reduced-motion: reduce)').matches)m='fade';else{m=/[?&]fl=echo/.test(q)?'echo':/[?&]fl=\d/.test(q)||!(sessionStorage.getItem('prismFirstLight')||localStorage.getItem('prism-site-fl-seen'))?'full':'echo';d.classList.add('pfl-armed')}}}catch(e){}d.setAttribute('data-fl',m)})(document.documentElement)</script>
+  <meta name="description" content="Prism for Stream Deck: animated, stateful keys, dials, touch strips and screens for every model from the Mini to the Corsair Galleon 100 SD. Play them on virtual devices, then install the plugin, an icon pack or a profile.">
+  <meta name="theme-color" content="#0a0c12">
+  <meta name="prism-engine" content="../../prism-deck/">
+  <title>Stream Deck facets — Prism</title>
+  <link rel="canonical" href="https://prism.jeremyfhall.com/deck/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Prism">
+  <meta property="og:title" content="Prism for Stream Deck — light on every key">
+  <meta property="og:description" content="Animated keys, dials, touch strips and screens for every Stream Deck and the Corsair Galleon 100 SD. Plugin, icon packs and profiles.">
+  <meta property="og:url" content="https://prism.jeremyfhall.com/deck/">
+  <meta property="og:image" content="https://prism.jeremyfhall.com/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../assets/prism.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <link rel="preload" href="../assets/fonts/inter-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/inter-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/rf/prism.css">
+  <link rel="stylesheet" href="../assets/rf/prism-mark.css">
+  <link rel="stylesheet" href="../assets/rf/first-light.css">
+  <link rel="stylesheet" href="../assets/site.css">
+  <link rel="stylesheet" href="deck.css">
+  <script src="../assets/rf/first-light.js" defer></script>
+  <script src="../assets/site.js" defer></script>
+  <script type="module" src="deck.js"></script>
+  <script src="../assets/vendor/traceway-1.2.1.js" defer></script>
+  <script src="../assets/vendor/web-vitals-6.2.3.js" defer></script>
+  <script src="../assets/telemetry.js" defer></script>
+</head>
+<body data-rf-surface="deck">
+  <!--rf:icons layers grid loaders lab settings desktop progress play pause replay close check copy chevron-left chevron-right--><svg class="rf-sprite" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden"><defs><linearGradient id="i-spectrum" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c1a8f8"/><stop offset=".3" stop-color="#8fb0ff"/><stop offset=".55" stop-color="#7fd6e6"/><stop offset=".78" stop-color="#a0decf"/><stop offset="1" stop-color="#f1c79a"/></linearGradient></defs><symbol id="i-arrow-down" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path d="M12 4.5v15M6 13.5l6 6 6-6"/></g></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path d="M4.5 12h15M13.5 6l6 6-6 6"/></g></symbol><symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path d="M4.5 12.75 9.5 17.5 19.5 6.5"/></g></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path d="M14.5 5.5 8 12l6.5 6.5"/></g></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path d="M9.5 5.5 16 12l-6.5 6.5"/></g></symbol><symbol id="i-close" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path d="M6 6l12 12M18 6 6 18"/></g></symbol><symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><rect class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2.5 2.5 0 0 0-2.5-2.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/></g></symbol><symbol id="i-deck" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><rect class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" x="5" y="7.75" width="3" height="3" rx=".8"/><rect x="10.5" y="7.75" width="3" height="3" rx=".8"/><rect x="16" y="7.75" width="3" height="3" rx=".8"/><rect x="5" y="13.25" width="3" height="3" rx=".8"/><rect x="10.5" y="13.25" width="3" height="3" rx=".8"/><rect x="16" y="13.25" width="3" height="3" rx=".8"/></g></symbol><symbol id="i-desktop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><rect x="2.5" y="3.75" width="19" height="13.25" rx="2.25"/><path d="M8.5 21h7M12 17v4"/><path class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" d="M10 7.25v6.75l1.85-1.85h3.15Z"/></g></symbol><symbol id="i-download" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path d="M12 3.5V15M7 10l5 5 5-5M4.5 20.5h15"/></g></symbol><symbol id="i-external" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path d="M13.5 3.5h7v7M20.5 3.5l-8.5 8.5"/><path d="M18 13.75v4.25a2.5 2.5 0 0 1-2.5 2.5H6A2.5 2.5 0 0 1 3.5 18V8.5A2.5 2.5 0 0 1 6 6h4.25"/></g></symbol><symbol id="i-github" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path fill="currentColor" stroke="none" d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.76-.24.76-.54v-2.1c-3.12.68-3.78-1.33-3.78-1.33-.51-1.3-1.25-1.64-1.25-1.64-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 1.73 2.62 1.23 3.26.94.1-.73.39-1.23.71-1.51-2.49-.28-5.1-1.24-5.1-5.54 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .94-.3 3.08 1.15a10.74 10.74 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.31-2.62 5.26-5.12 5.54.4.35.76 1.03.76 2.08v3.09c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" transform="translate(1.6 1.6) scale(.867)"/></g></symbol><symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><rect class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></g></symbol><symbol id="i-lab" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path class="f" stroke="none" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" d="M7.4 14.2c1.53-.9 3.07-.9 4.6 0s3.07.9 4.6 0l2.3 4A1.9 1.9 0 0 1 17.2 21H6.8a1.9 1.9 0 0 1-1.7-2.8Z"/><path d="M9.5 3.25h5M10.5 3.25V8.8L5.1 18.2A1.9 1.9 0 0 0 6.8 21h10.4a1.9 1.9 0 0 0 1.7-2.8L13.5 8.8V3.25"/><path class="a" style="stroke:var(--icon-accent,currentColor)" d="M7.4 14.2c1.53-.9 3.07-.9 4.6 0s3.07.9 4.6 0"/></g></symbol><symbol id="i-layers" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" d="M12 3.5 21 8l-9 4.5L3 8Z"/><path d="M3 12l9 4.5 9-4.5M3 16l9 4.5 9-4.5"/></g></symbol><symbol id="i-loaders" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path d="M12 7.6L12 3.4"/><path d="M15.11 8.89L18.08 5.92" stroke-opacity="0.9"/><path d="M16.4 12L20.6 12" stroke-opacity="0.79"/><path d="M15.11 15.11L18.08 18.08" stroke-opacity="0.69"/><path d="M12 16.4L12 20.6" stroke-opacity="0.59"/><path d="M8.89 15.11L5.92 18.08" stroke-opacity="0.49"/><path d="M7.6 12L3.4 12" stroke-opacity="0.38"/><path d="M8.89 8.89L5.92 5.92" stroke-opacity="0.28"/></g></symbol><symbol id="i-moon" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" d="M19.65 13.78A8.25 8.25 0 1 1 11.59 4.25A6.4 6.4 0 0 0 19.65 13.78Z"/><path class="g" style="stroke:var(--icon-glint-color,currentColor);opacity:var(--icon-glint,0)" d="M18.5 2.5Q18.8 4.45 20.75 4.75Q18.8 5.05 18.5 7Q18.2 5.05 16.25 4.75Q18.2 4.45 18.5 2.5Z"/></g></symbol><symbol id="i-pause" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><rect class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" x="6" y="4.5" width="4" height="15" rx="1.25"/><rect class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" x="14" y="4.5" width="4" height="15" rx="1.25"/></g></symbol><symbol id="i-play" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" d="M7.75 5.1v13.8a1.1 1.1 0 0 0 1.67.94l11.1-6.9a1.1 1.1 0 0 0 0-1.88L9.42 4.16a1.1 1.1 0 0 0-1.67.94Z"/></g></symbol><symbol id="i-progress" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><rect x="2.5" y="8.25" width="19" height="7.5" rx="3.75"/><path class="a" style="stroke:var(--icon-accent,currentColor)" stroke-width="2.5" d="M6.25 12h7"/></g></symbol><symbol id="i-replay" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path d="M11.7 3.51A8.5 8.5 0 1 1 3.53 12.74"/><path d="M14.45 5.5L11.7 3.51L14.31 1.32"/><path class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" d="M10.5 9.4v5.2a.6.6 0 0 0 .9.52l4.2-2.6a.6.6 0 0 0 0-1.04l-4.2-2.6a.6.6 0 0 0-.9.52Z"/></g></symbol><symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><circle class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" cx="10.75" cy="10.75" r="6.75"/><path d="m15.75 15.75 4.75 4.75"/><path class="g" style="stroke:var(--icon-glint-color,currentColor);opacity:var(--icon-glint,0)" d="M7.5 10.5a3.25 3.25 0 0 1 3-3"/></g></symbol><symbol id="i-settings" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><path d="M10.46 5.58L10.59 3.11L13.41 3.11L13.54 5.58L15.45 6.37L17.29 4.72L19.28 6.71L17.63 8.55L18.42 10.46L20.89 10.59L20.89 13.41L18.42 13.54L17.63 15.45L19.28 17.29L17.29 19.28L15.45 17.63L13.54 18.42L13.41 20.89L10.59 20.89L10.46 18.42L8.55 17.63L6.71 19.28L4.72 17.29L6.37 15.45L5.58 13.54L3.11 13.41L3.11 10.59L5.58 10.46L6.37 8.55L4.72 6.71L6.71 4.72L8.55 6.37Z"/><circle class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" cx="12" cy="12" r="2.75"/></g></symbol><symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--icon-stroke,1.5)"><circle class="f" style="fill:var(--icon-fill,none);fill-opacity:var(--icon-fill-opacity,1)" cx="12" cy="12" r="3.75"/><path d="M12 5.4L12 3.1M16.67 7.33L18.29 5.71M18.6 12L20.9 12M16.67 16.67L18.29 18.29M12 18.6L12 20.9M7.33 16.67L5.71 18.29M5.4 12L3.1 12M7.33 7.33L5.71 5.71"/></g></symbol></svg><!--/rf:icons-->
+  <a class="skip-link" href="#catalog">Skip to the catalog</a>
+  <header class="site-header" data-fl="surface">
+    <div class="site-header-in">
+      <a class="brand" href="../" aria-label="Prism home"><span class="prism-mark" data-fl="mark" aria-hidden="true"><span class="pm-rotor"><span class="pm-face"><i class="pm-rim"></i><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 50 0M0 100h100"/></svg></span><span class="pm-face"><i class="pm-rim"></i><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 50 0M0 100h100"/></svg></span><span class="pm-face"><i class="pm-rim"></i><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 50 0M0 100h100"/></svg></span><span class="pm-face"><i class="pm-rim"></i><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 50 0M0 100h100"/></svg></span><i class="pm-apex"></i></span></span><span class="brand-word">prism<span class="brand-dot">.</span></span></a>
+      <nav class="surface-nav" aria-label="Prism surfaces">
+        <a href="../Prism.html" data-rf-surface="web" data-fl="index"><i class="rf-index is-dot" data-fl-tick aria-hidden="true"></i>Web<span class="surface-count" data-web-stat="facets">2,668</span></a>
+        <a href="../terminal/" data-rf-surface="terminal" data-fl="index"><i class="rf-index is-dot" data-fl-tick aria-hidden="true"></i>Terminal<span class="surface-count" data-terminal-stat="facets">434</span></a>
+        <a href="./" aria-current="page" data-rf-surface="deck" data-fl="index"><i class="rf-index is-dot" data-fl-tick aria-hidden="true"></i>Stream Deck<span class="surface-count" data-deck-stat="facets">200</span></a>
+      </nav>
+      <div class="header-actions">
+        <nav class="header-links" aria-label="On this page"><a href="#catalog">Catalog</a><a href="#devices">Devices</a><a href="#install">Install</a></nav>
+        <div class="theme-switch" role="group" aria-label="Theme">
+          <button type="button" data-theme-set="night" aria-pressed="true"><svg class="ic s14" aria-hidden="true"><use href="#i-moon"/></svg><span>Night</span></button>
+          <button type="button" data-theme-set="day" aria-pressed="false"><svg class="ic s14" aria-hidden="true"><use href="#i-sun"/></svg><span>Day</span></button>
+        </div>
+        <a class="icon-link" href="https://github.com/crazy54/Prism/tree/main/prism-deck" aria-label="prism-deck on GitHub"><svg class="ic" aria-hidden="true"><use href="#i-github"/></svg></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="d-hero wrap" aria-labelledby="hero-title">
+      <div class="d-hero-copy">
+        <p class="eyebrow" data-fl="text"><span class="status-dot"></span>PRISM FOR STREAM DECK<span class="rf-sep">·</span><span class="rf-lambda" data-rf-lambda="deck">λ 584</span></p>
+        <h1 id="hero-title" data-fl="text">Light on<br>every <span class="deck-text">key.</span></h1>
+        <p class="hero-description" data-fl="text">Animated, stateful keys, dials, touch strips and screens, drawn from the same Refraction tokens as the web and terminal catalogs. Play them on any device below, then take them home as a plugin, an icon pack or a profile.</p>
+        <div class="hero-actions" data-fl="text"><a class="button primary" href="#catalog">Browse the keys <svg class="ic" aria-hidden="true"><use href="#i-arrow-down"/></svg></a><a class="button" href="#install">Install <svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></a></div>
+        <p class="hero-note" data-fl="text">Stream Deck 7.6+ · Windows · macOS · Linux via OpenDeck</p>
+      </div>
+      <figure class="d-stage" aria-labelledby="stage-caption" data-fl="tile">
+        <div class="d-stage-grid" aria-hidden="true"></div><div class="d-stage-halo" aria-hidden="true"></div>
+        <div class="d-stage-device" id="hero-device"></div>
+        <figcaption class="d-stage-bar">
+          <span class="d-stage-name" id="stage-caption"><span class="rf-index is-dot"></span><span id="hero-model">Stream Deck +</span><span class="d-stage-meta" id="hero-meta">8 keys · 4 dials · touch strip</span></span>
+          <span class="d-stage-hint" aria-hidden="true">Press the keys · turn the dials</span>
+        </figcaption>
+        <div class="seg d-models" role="group" aria-label="Choose a device" id="hero-models"></div>
+        <div class="d-theme-pick" id="theme-pick" hidden><span class="d-theme-label" id="theme-pick-label">Key theme</span><div class="seg d-themes" role="group" aria-labelledby="theme-pick-label" id="hero-themes"></div></div>
+        <p class="d-remember" id="remember-note" hidden>Your device and key theme are remembered on this browser.</p>
+      </figure>
+    </section>
+
+    <section class="stats wrap" aria-label="The deck catalog at a glance">
+      <div data-fl="tile"><strong data-deck-stat="facets">19</strong><span>deck facets</span></div>
+      <div data-fl="tile"><strong data-deck-stat="galleries">7</strong><span>galleries</span></div>
+      <div data-fl="tile"><strong id="stat-devices">30</strong><span>devices supported</span></div>
+      <div data-fl="tile"><strong id="stat-themes">3</strong><span>key themes</span></div>
+    </section>
+
+    <section class="section wrap wide" id="catalog" aria-labelledby="catalog-title">
+      <div class="section-head">
+        <div><p class="eyebrow">01 / THE CATALOG<span class="rf-sep">·</span><span class="meta">LIVE</span></p><h2 id="catalog-title">Every key, running live.</h2><p>Tiles play while they are on screen. Press one to change its state, or open it to see it on every device, in every theme.</p></div>
+        <button class="motion-button" id="motion-toggle" type="button"><svg class="ic" aria-hidden="true"><use href="#i-pause"/></svg><span>Pause motion</span></button>
+      </div>
+      <div class="d-catalog">
+        <nav class="d-sidebar" aria-label="Galleries"><p class="d-side-label">GALLERIES <span class="rf-sep">·</span> <span id="gallery-total">7</span></p><div id="gallery-list" role="group" aria-label="Choose a gallery"></div></nav>
+        <div class="d-main">
+          <div class="d-toolbar">
+            <label class="search" for="facet-search"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><span class="sr-only">Search deck facets</span><input id="facet-search" type="search" placeholder="Search mic, timer, waveform, Galleon…" autocomplete="off" spellcheck="false"><kbd class="k" aria-hidden="true">/</kbd></label>
+            <div class="seg" role="group" aria-label="Surface" id="surface-filter"></div>
+            <label class="d-theme-select" id="theme-select-wrap" hidden><span>Key theme</span><select id="theme-select"></select></label>
+          </div>
+          <div class="d-status"><p id="result-status" role="status" aria-live="polite">Lighting the keys…</p><button type="button" class="chip-btn" id="clear-filters" hidden>Clear filters</button></div>
+          <div class="d-grid" id="facet-grid" aria-label="Deck facets"></div>
+          <p class="empty-state" id="empty-state" hidden>No facets match. Try “mic”, “timer” or “waveform”.</p>
+          <noscript><p class="empty-state">The live catalog needs JavaScript. The catalog is also in Prism.html as the <code>#prism-deck-catalog</code> JSON island.</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap wide" id="devices" aria-labelledby="devices-title">
+      <div class="section-head"><div><p class="eyebrow">02 / EVERY DEVICE<span class="rf-sep">·</span><span class="meta">VIRTUAL HARDWARE</span></p><h2 id="devices-title">Built for the hardware you have.</h2><p>Each facet is laid out for real panel geometry: native key sizes, the gaps behind the bezel, the touch strip, the Galleon’s screen and its dial layers. Prism knows <span id="device-count">30</span> devices; the <span id="wall-count">seven</span> below run live.</p></div></div>
+      <div class="d-devices" id="device-wall"></div>
+    </section>
+
+    <section class="section wrap" id="install" aria-labelledby="install-title">
+      <div class="section-head"><div><p class="eyebrow">03 / INSTALL<span class="rf-sep">·</span><span class="meta">THREE WAYS IN</span></p><h2 id="install-title">Take the light home.</h2><p>Pick the depth you want: live animated keys through the plugin, Prism art for any action through an icon pack, or a finished layout as a profile. Each one installs with a double-click.</p></div></div>
+      <div class="d-install">
+        <article class="d-way" aria-labelledby="way-plugin">
+          <p class="d-way-no">01 <span class="rf-sep">/</span> PLUGIN</p>
+          <h3 id="way-plugin">Live keys, dials and strips.</h3>
+          <p>The <b>Prism Display</b> action plays any facet on any key or dial, animated, with states, presses and turns. It is visual; it can also open a web page or switch profile when pressed. <b>Prism Info Bar</b> lights the Neo. The sample profiles put Stream Deck’s own media, volume and hotkey actions in Prism art on their Home page, and simulated data is tagged <b>DEMO</b> on the device.</p>
+          <ol class="d-steps"><li>Download the plugin.</li><li>Double-click it and confirm in the Stream Deck app.</li><li>Drag <b>Prism Display</b> from the <b>Prism Deck</b> category onto a key, then pick a facet.</li></ol>
+          <p class="d-way-note">Stream Deck 7.6+ · Windows 10/11 · macOS 13+</p>
+          <a class="button primary sm" href="dl/com.jeremyfhall.prism.streamDeckPlugin" download>Download the plugin <svg class="ic" aria-hidden="true"><use href="#i-download"/></svg></a>
+        </article>
+        <article class="d-way" aria-labelledby="way-icons">
+          <p class="d-way-no">02 <span class="rf-sep">/</span> ICON PACKS</p>
+          <h3 id="way-icons">Prism art for any action.</h3>
+          <p>One pack per deck theme: every glyph in each of its states, Night and Day, with animated GIFs for the ones that move. Use them on the actions you already have.</p>
+          <ol class="d-steps"><li>Pick a theme below and download its pack.</li><li>Double-click the <code>.streamDeckIconPack</code>.</li><li>Open a key’s icon menu, choose <b>Icon Library</b>, then Prism.</li></ol>
+          <div class="d-dl-list" role="list" aria-label="Icon packs">
+            <a role="listitem" href="dl/iconpacks/com.jeremyfhall.prism.icons.prism.streamDeckIconPack" download>Prism</a><a role="listitem" href="dl/iconpacks/com.jeremyfhall.prism.icons.neon.streamDeckIconPack" download>Neon</a><a role="listitem" href="dl/iconpacks/com.jeremyfhall.prism.icons.ember.streamDeckIconPack" download>Ember</a><a role="listitem" href="dl/iconpacks/com.jeremyfhall.prism.icons.pixel.streamDeckIconPack" download>Pixel</a><a role="listitem" href="dl/iconpacks/com.jeremyfhall.prism.icons.phosphor.streamDeckIconPack" download>Phosphor</a><a role="listitem" href="dl/iconpacks/com.jeremyfhall.prism.icons.aurora.streamDeckIconPack" download>Aurora</a><a role="listitem" href="dl/iconpacks/com.jeremyfhall.prism.icons.blueprint.streamDeckIconPack" download>Blueprint</a><a role="listitem" href="dl/iconpacks/com.jeremyfhall.prism.icons.chrome.streamDeckIconPack" download>Chrome</a><a role="listitem" href="dl/iconpacks/com.jeremyfhall.prism.icons.porcelain.streamDeckIconPack" download>Porcelain</a><a role="listitem" href="dl/iconpacks/com.jeremyfhall.prism.icons.paper.streamDeckIconPack" download>Paper</a><a role="listitem" href="dl/iconpacks/com.jeremyfhall.prism.icons.mono.streamDeckIconPack" download>Mono</a>
+          </div>
+          <p class="d-way-note" id="packs-note">11 packs · 56 icons in every state, Night and Day (240 images each) · 1–8 MB</p>
+        </article>
+        <article class="d-way" aria-labelledby="way-profiles">
+          <p class="d-way-no">03 <span class="rf-sep">/</span> PROFILES</p>
+          <h3 id="way-profiles">A finished layout per device.</h3>
+          <p>Ready-made pages with keys, dials and screens already placed and themed. Each one needs the plugin; the app offers to install it if it’s missing.</p>
+          <ol class="d-steps"><li>Download the profile for your device.</li><li>Double-click it, or use <b>Preferences → Profiles → Import</b>.</li><li>Pick it from the profile list.</li></ol>
+          <div class="d-dl-list" role="list" aria-label="Profiles" id="profile-list">
+            <a role="listitem" href="dl/profiles/Prism%20-%20Galleon%20100%20SD.streamDeckProfile" download>Galleon 100 SD</a><a role="listitem" href="dl/profiles/Prism%20-%20Stream%20Deck%20%2B.streamDeckProfile" download>Stream Deck +</a><a role="listitem" href="dl/profiles/Prism%20-%20Stream%20Deck%20%2B%20XL.streamDeckProfile" download>+ XL</a><a role="listitem" href="dl/profiles/Prism%20-%20Stream%20Deck%20MK.2.streamDeckProfile" download>MK.2</a><a role="listitem" href="dl/profiles/Prism%20-%20Stream%20Deck%20XL.streamDeckProfile" download>XL</a><a role="listitem" href="dl/profiles/Prism%20-%20Stream%20Deck%20Neo.streamDeckProfile" download>Neo</a><a role="listitem" href="dl/profiles/Prism%20-%20Stream%20Deck%20Mini.streamDeckProfile" download>Mini</a>
+          </div>
+          <p class="d-way-note" id="profiles-note">Needs the plugin · 7 devices</p>
+        </article>
+      </div>
+      <div class="d-linux">
+        <div><p class="eyebrow">LINUX</p><h3>No vendor app? No problem.</h3><p><b>OpenDeck</b> runs the same plugin unchanged: install it from OpenDeck’s Plugins tab with <b>Install from file</b>. Keys, spans, dials, the strip and the Neo info bar all work. <b>StreamController</b> takes the icon packs: rename a <code>.streamDeckIconPack</code> to <code>.zip</code> and import it as a custom pack.</p></div>
+        <div class="window"><div class="window-bar"><span class="window-label">OR FROM THE REPOSITORY</span><button type="button" class="chip-btn" data-copy="git clone https://github.com/crazy54/Prism.git&#10;cd Prism/prism-deck&#10;node cli.js devices" aria-label="Copy the repository commands"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span data-label>Copy</span></button></div><pre class="code"><span class="tok-c"># Node.js 20+, nothing to install</span>
+git clone https://github.com/crazy54/Prism.git
+cd Prism/prism-deck
+node cli.js devices</pre></div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="for-agents" aria-labelledby="agents-title">
+      <div class="d-agents">
+        <div><p class="eyebrow">04 / FOR AGENTS</p><h2 id="agents-title">A third island.<br>Every key.</h2><p>The deck catalog ships as <code>#prism-deck-catalog</code> in <code>Prism.html</code>, next to the web and terminal islands. Each record carries its gallery, surface, states, press behavior, device targets and ready-to-use plugin and code snippets, and the island holds every module, so it renders fully offline.</p></div>
+        <div class="window"><div class="window-bar"><span class="window-label">IN THE PAGE, OR IN PRISM.HTML</span></div><pre class="code"><span class="tok-k">const</span> deck = JSON.parse(
+  document.getElementById(<span class="tok-s">'prism-deck-catalog'</span>).textContent);
+
+deck.facets
+  .filter((f) =&gt; f.surface === <span class="tok-s">'key'</span> &amp;&amp; f.states.length)
+  .map((f) =&gt; f.usage.plugin);
+<span class="tok-c">// → ['Stream Deck app → Prism Deck → "Prism Display" → Mic', …]</span></pre></div>
+      </div>
+    </section>
+
+    <section class="closing wrap" aria-label="Back to Prism"><span class="closing-mark" aria-hidden="true"><svg class="ic s32" aria-hidden="true"><use href="#i-deck"/></svg></span><p>Keys you can read <span class="deck-text">across the room.</span></p><a class="button sm" href="../">Back to Prism <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></section>
+  </main>
+
+  <footer class="site-footer wrap"><a class="brand" href="../" aria-label="Prism home"><span class="prism-mark is-still" aria-hidden="true"><span class="pm-rotor"><span class="pm-face"><i class="pm-rim"></i><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 50 0M0 100h100"/></svg></span><span class="pm-face"><i class="pm-rim"></i><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 50 0M0 100h100"/></svg></span><span class="pm-face"><i class="pm-rim"></i><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 50 0M0 100h100"/></svg></span><span class="pm-face"><i class="pm-rim"></i><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 50 0M0 100h100"/></svg></span><i class="pm-apex"></i></span></span><span class="brand-word">prism<span class="brand-dot">.</span></span></a><p>Built by <a href="https://github.com/crazy54">Jeremy Hall</a>. Made for making.</p><div class="footer-links"><a href="../terminal/">Terminal</a><a href="https://github.com/crazy54/Prism/tree/main/prism-deck">Source <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a><a href="https://github.com/crazy54/Prism/blob/main/LICENSE">MIT license <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a></div></footer>
+
+  <dialog class="dd" id="detail" aria-labelledby="dd-title">
+    <div class="dd-head">
+      <p class="dd-crumb" id="dd-crumb"></p>
+      <div class="dd-nav"><button type="button" class="icon-link" id="dd-prev" aria-label="Previous facet"><svg class="ic" aria-hidden="true"><use href="#i-chevron-left"/></svg></button><button type="button" class="icon-link" id="dd-next" aria-label="Next facet"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button></div>
+      <button type="button" class="icon-link" id="dd-close" aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="dd-body">
+      <div class="dd-stage">
+        <div class="dd-device" id="dd-device"></div>
+        <div class="dd-controls">
+          <div class="seg" role="group" aria-label="Device" id="dd-models"></div>
+          <div class="seg" role="group" aria-label="Key theme" id="dd-themes"></div>
+          <div class="seg" role="group" aria-label="Key mode" id="dd-modes"><button type="button" data-v="dark">Dark keys</button><button type="button" data-v="light">Light keys</button></div>
+        </div>
+        <div class="dd-states" id="dd-states" role="group" aria-label="States"></div>
+      </div>
+      <div class="dd-info">
+        <div><p class="eyebrow" id="dd-eyebrow"></p><h2 id="dd-title"></h2></div>
+        <p class="dd-desc" id="dd-desc"></p>
+        <div class="dd-tags" id="dd-tags"></div>
+        <dl class="dd-meta" id="dd-meta"></dl>
+        <div class="dd-section dd-honest" id="dd-honest"></div>
+        <div class="dd-section"><h3>Use it</h3><div class="dd-usage" id="dd-usage"></div></div>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog class="copy-dialog" id="copy-dialog"><h2>Copy it</h2><p>Clipboard access is unavailable. Select and copy the text below.</p><textarea id="copy-fallback" readonly aria-label="Text to copy"></textarea><button type="button" class="button primary" id="close-copy-dialog">Done</button></dialog>
+
+  <script type="application/json" id="prism-deck-catalog"></script>
+</body>
+</html>

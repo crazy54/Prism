@@ -1,0 +1,175 @@
+.TH PRISM-TERM 1 "2026-10-16" "prism-term 0.2.0" "User Commands"
+.SH NAME
+prism-term \- Prism's terminal catalog: animated facets for any terminal
+.SH SYNOPSIS
+.B prism-term
+[\fIcommand\fR] [\fIoptions\fR] [\fIid\fR ...]
+.br
+.B prism-term
+.I facet-id
+[\fIoptions\fR]
+.SH DESCRIPTION
+.B prism-term
+renders Prism's terminal facets (scenes, spinners, progress meters, charts,
+text art, TUI controls, diagrams and ops views) with a zero-dependency Node.js
+engine. It detects the terminal: color depth (truecolor, 256, 16, mono), glyphs
+(braille, sextant and block elements, or 7-bit ASCII) and a light or dark
+background (Prism Day or Prism Night).
+Without a command it opens the catalog browser on an interactive terminal and
+prints the list otherwise.
+.SH COMMANDS
+.TP
+.B (none)
+The catalog browser: galleries, facets and a live preview.
+.TP
+.BI play " id ..."
+Play facets fullscreen in the live player (several make a playlist; or
+\fB\-\-gallery\fR, \fB\-\-category\fR, \fB\-\-kind\fR).
+.TP
+.B showcase
+An auto-advancing tour (\fB\-\-gallery\fR, \fB\-\-duration\fR seconds per facet).
+.TP
+.B list
+Facets grouped by gallery and category (\fB\-\-gallery\fR, \fB\-\-category\fR,
+\fB\-\-kind\fR, \fB\-\-json\fR, \fB\-\-ids\fR).
+.TP
+.B galleries
+The galleries with their counts and categories.
+.TP
+.BI info " id"
+Size, needs, parameters and the commands for one facet (\fB\-\-json\fR).
+.TP
+.BI snapshot " id"
+A still frame to stdout (ANSI), or to \fB\-o\fR \fIfile\fR: \fI.html\fR (\fB\-\-frames\fR
+\fIN\fR for an animated page), \fI.ans\fR (ANSI) or \fI.txt\fR (plain text, shaded).
+Image files are refused: prism-term writes text.
+.TP
+.BI banner " text ..."
+Big text into scrollback (\fB\-\-font\fR, \fB\-\-mode\fR, \fB\-\-palette\fR, \fB\-\-shadow\fR).
+.TP
+.BI "spin \-\- " "command ..."
+Run a command under a spinner on stderr. Its stdout is passed through (streamed
+to a pipe, or printed under the finished spinner on a terminal; \fB\-\-no\-passthrough\fR
+swallows it); on failure its output is shown. Several words are an argv and reach
+the program verbatim (on Windows nothing in them is expanded by cmd.exe, \fI%VAR%\fR
+included); one quoted word is a shell command line. Exits with the command's status.
+.TP
+.B spinners
+Preview every spinner.
+.TP
+.B dashboard
+A live metrics dashboard demo (needs 100x34).
+.TP
+.B demo
+A tour of the inline helpers.
+.TP
+.B caps
+Detected capabilities and glyph test patterns (\fB\-\-json\fR).
+.TP
+.B themes
+The Prism themes.
+.TP
+.B palettes
+The gradient palettes.
+.TP
+.BI theme " [format]"
+Prism Night or Day (\fB\-\-day\fR) as a color scheme for a terminal emulator,
+to stdout or \fB\-o\fR \fIfile\fR: windows-terminal, iterm2, alacritty, kitty,
+wezterm, ghostty, foot, gnome-terminal, konsole, xresources, vscode, ptyxis,
+terminal-app, xfce4-terminal, and osc (one printf of OSC 4/10/11 codes that
+recolors any xterm-compatible terminal for the session, also over SSH).
+Nothing is installed and no configuration is touched.
+.TP
+.B help
+Usage. \fB\-v\fR prints the version.
+.SH OPTIONS
+.TP
+.BI \-\-theme " id"
+prism-dark (Prism Night), prism-light (Prism Day), a family such as primer, or auto.
+.TP
+.B \-\-day\fR, \fB\-\-night
+The Day or Night member of the theme's family.
+.TP
+.BI \-\-mode " m"
+braille | sextant | quad | half | ascii | auto (banner also: block).
+.TP
+.BI \-\-palette " name"
+A gradient palette (prism, fire, ocean, aurora, ...; see \fBpalettes\fR).
+.TP
+.BI \-\-set " key=value"
+A facet parameter (repeatable), e.g. \fB\-\-set speed=2\fR. Unknown keys are refused.
+.TP
+.BI \-\-fps " n"
+Target frame rate, 1 to 240 (default 30).
+.TP
+.BI \-\-duration " s"
+Seconds per facet in playlists and the showcase.
+.TP
+.BI \-\-size " WxH"
+A fixed size in cells, up to 1000x500.
+.TP
+.BI \-\-seed " n"
+A deterministic seed.
+.TP
+.BI \-\-at " s"
+The time of a snapshot (0 to 600 s); \fB\-\-frames\fR \fIn\fR (1 to 3600) for animated HTML.
+.TP
+.BI \-\-depth " d"
+Force the color depth: truecolor | 256 | 16 | mono.
+.TP
+.B \-\-ascii
+No Unicode at all. \fB\-\-sextant\fR / \fB\-\-no\-sextant\fR force sextant glyphs.
+.TP
+.B \-\-transparent
+Keep the terminal's own background. Body text uses the terminal's own foreground,
+and on an interactive terminal the background is asked for (OSC 11) to pick Day or Night.
+.TP
+.B \-\-no\-hud
+Hide the player's status bar.
+.TP
+.B \-\-no\-intro
+Skip First Light, the catalog browser's opening beam.
+.TP
+.B \-\-reduced\-motion
+No intro, wipes or sweeps.
+.TP
+.B \-\-json
+Machine-readable output (list, galleries, info, caps). \fB\-\-ids\fR prints bare ids
+(list, galleries, themes, palettes, theme) for shell completion.
+.SH KEYS
+In the catalog browser: arrows or hjkl move, Tab changes pane, Enter plays,
+s showcase, / search, g gallery, f kind, t theme, d day/night, m mode, ? help, q quit.
+In the live player: left/right facet, space pause, m mode, t theme, d day/night,
+r restart, h HUD, q back. Ctrl-Z suspends both (fg resumes them); Ctrl-C quits.
+.SH ENVIRONMENT
+.TP
+.B NO_COLOR
+Mono output: pictures are drawn as a luminance ramp instead of color.
+.TP
+.B FORCE_COLOR
+0 | 1 | 2 | 3: mono, 16, 256 or truecolor.
+.TP
+.B PRISM_TERM_DEPTH\fR, \fBPRISM_TERM_UNICODE\fR, \fBPRISM_TERM_SEXTANT
+Override detection.
+.TP
+.B PRISM_TERM_THEME
+A theme id, or day | night | auto.
+.TP
+.B LC_ALL\fR, \fBLC_CTYPE\fR, \fBLANG
+The first one set decides Unicode (LC_ALL=C means 7-bit ASCII).
+.TP
+.B PRISM_REDUCED_MOTION\fR, \fBPRISM_TERM_INTRO
+Reduced motion; PRISM_TERM_INTRO=0 skips the intro.
+.SH EXIT STATUS
+0 on success; 1 on a runtime failure; 2 on a usage error (an unknown command,
+option or value). \fBspin\fR exits with its command's status. A signal ends the
+program with 128 plus its number: 130 for SIGINT (Ctrl-C), 129 for SIGHUP, 143 for SIGTERM.
+.SH NOTES
+Git Bash's mintty (without ConPTY) gives programs pipes instead of a console;
+run \fBwinpty prism-term\fR there, or use Windows Terminal.
+.PP
+Without installing: \fBnpx \-y \-\-package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz prism-term\fR
+(checksums: https://prism.jeremyfhall.com/dl/SHA256SUMS; /dl/prism-term.tgz is the
+latest-release alias). Browse with curl: \fBcurl \-sL prism.jeremyfhall.com/tty\fR.
+.SH SEE ALSO
+https://prism.jeremyfhall.com/terminal/

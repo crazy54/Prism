@@ -2,7 +2,7 @@
 // each cell traces x = sin(a·s + δ), y = sin(b·s) in braille. The phase δ
 // drifts slowly, so every figure turns in 3D-looking rotation, and a bright
 // dot runs each curve at its own pace.
-import { mix } from '../../color.js';
+import { fadeMark } from '../../palettes.js';
 import { grid, put, pxRect } from './_lab.js';
 
 export default {
@@ -37,7 +37,7 @@ export default {
         let px = null, py = null;
         for (let i = 0; i <= n; i++) {
           const s = (i / n) * Math.PI * 2, x = cx + Math.sin(a * s + delta) * rx, y = cy - Math.sin(b * s) * ry;
-          if (px !== null) cv.line(px, py, x, y, mix(th.bg, col, 0.75));
+          if (px !== null) cv.line(px, py, x, y, fadeMark(th, col, 0.75));
           px = x; py = y;
         }
         const s = t * 1.3;

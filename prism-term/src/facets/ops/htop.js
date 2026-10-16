@@ -81,7 +81,7 @@ export default {
       const cols = (v) => [lpad(v[0], F[0]), ' ' + pad(v[1], F[1] - 1), lpad(v[2], F[2]), lpad(v[3], F[3]), lpad(v[4], F[4]), lpad(v[5], F[5]), lpad(v[6], F[6]), lpad(v[7], F[7]), lpad(v[8], F[8]), lpad(v[9], F[9]), '  '];
       const head = cols(['PID', 'USER', 'PRI', 'NI', 'VIRT', 'RES', 'S', `CPU%${twoCol ? g.down : 'v'}`, 'MEM%', 'TIME+']).join('') + 'Command';
       w.rowBg(y, c.green);
-      w.put(0, y, head.slice(0, W), c.bg, c.green, ATTR.BOLD);
+      w.put(0, y, head.slice(0, W), c.onFill, c.green, ATTR.BOLD);
       y++;
       const sel = Math.floor(t / 3) % 3;
       procs.forEach((p, i) => {
@@ -89,7 +89,7 @@ export default {
         const secs = p.cpu * 4 + t * p.cpu / 100 + p.pid % 97;
         const time = `${Math.floor(secs / 60)}:${(secs % 60).toFixed(2).padStart(5, '0')}`;
         const f = cols([p.pid, p.user, 20, 0, human(p.virt), human(p.res), p.cpu > 1 ? 'R' : 'S', fixed(p.cpu), fixed(p.mem), time]);
-        if (i === sel) { w.rowBg(y, c.cyan); w.put(0, y, (f.join('') + p.cmd).slice(0, W), c.bg, c.cyan); y++; return; }
+        if (i === sel) { w.rowBg(y, c.cyan); w.put(0, y, (f.join('') + p.cmd).slice(0, W), c.onFill, c.cyan); y++; return; }
         const sp = p.cmd.indexOf(' '), exe = sp < 0 ? p.cmd : p.cmd.slice(0, sp), base = exe.lastIndexOf('/');
         w.seg(0, y, [[f[0], c.fg], [f[1], p.user === 'root' ? c.fg : c.muted], [f.slice(2, 4).join(''), c.fg], [f.slice(4, 6).join(''), c.cyan],
           [f[6], p.cpu > 1 ? c.green : c.fg, p.cpu > 1 ? ATTR.BOLD : 0], [f.slice(7, 10).join(''), c.fg], [f[10], c.fg],
@@ -102,9 +102,9 @@ export default {
       for (const [k, l] of keys) {
         if (x >= W) break;
         x = w.put(x, H - 1, k, c.fg, c.bg);
-        x = w.put(x, H - 1, pad(l, 6), c.bg, c.cyan);
+        x = w.put(x, H - 1, pad(l, 6), c.onFill, c.cyan);
       }
-      if (x < W) w.fill(x, H - 1, W - x, 1, ' ', c.bg, c.cyan);
+      if (x < W) w.fill(x, H - 1, W - x, 1, ' ', c.onFill, c.cyan);
     };
   },
 };

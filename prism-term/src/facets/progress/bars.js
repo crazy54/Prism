@@ -7,6 +7,7 @@ import { mix, gradient, NONE } from '../../color.js';
 import { ATTR } from '../../buffer.js';
 import { truncate } from '../../width.js';
 import { phase, transfer, glyphs, clamp01, clock } from './_sim.js';
+import { light, lift } from '../charts/_data.js';
 
 const C = 'Progress Bars';
 const EIGHTHS = ['', '▏', '▎', '▍', '▌', '▋', '▊', '▉', '█'];
@@ -70,7 +71,7 @@ export default [
             const c = lit ? grad(x / cv.width) : th.line;
             if (r === 0) { if (lit) { cv.set(x, 1, c); cv.set(x, 2, c); } else cv.set(x, 2, c); }
             else if (r === 1) { if (lit) { cv.set(x, 1, c); cv.set(x, 2, c); } else if (x % 2 === 0) cv.set(x, 1.5, th.dim); }
-            else if (lit) { cv.set(x, 1, c); cv.set(x, 2, c); if (fill - x <= 2) { cv.set(x, 0, 0xffffff); cv.set(x, 3, 0xffffff); } }
+            else if (lit) { cv.set(x, 1, c); cv.set(x, 2, c); if (fill - x <= 2) { cv.set(x, 0, light(th)); cv.set(x, 3, light(th)); } }
             else cv.set(x, 3, th.line);
           }
           cv.paint(b, 1, y);
@@ -103,7 +104,7 @@ export default [
               const u = i / Math.max(1, bw - 1);
               const pal = bar.name === 'prism' ? bar.pal(u * 0.85) : bar.pal(0.35 + 0.6 * u);
               const glow = Math.max(0, 1 - Math.abs(u - sweep * f) * 9) * 0.55;
-              const c = mix(pal, 0xffffff, glow);
+              const c = lift(th, pal, glow);
               if (i < full) b.set(1 + lw + i, y, ' ', c, c);
               else if (i === full && rem) b.set(1 + lw + i, y, EIGHTHS[rem], c, th.panel2);
               else b.set(1 + lw + i, y, ' ', th.dim, th.panel2);

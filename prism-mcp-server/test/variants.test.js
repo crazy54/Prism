@@ -4,34 +4,90 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { toolCtx } from './helper.js';
-import { THEME_IDS, BASE_TOKENS, usesTokens, isThemeSensitive } from '../utils/themes.js';
+import fs from 'node:fs';
+import { THEMES, THEME_IDS, BASE_TOKENS, CONTRACT_TOKENS, DEFAULT_THEME_ID, usesTokens, isThemeSensitive } from '../utils/themes.js';
 
 // -------------------- get_theme_palette --------------------
 
-test('get_theme_palette returns every registered theme, dark base first (Cloudscape always present)', () => {
+test('get_theme_palette returns every registered theme, Prism (default) first, Cloudscape always present', () => {
   const ctx = toolCtx();
   const r = ctx.call('get_theme_palette', {});
-  // Count is registry-driven so scaffolded packs (F6) flow through with no edit,
-  // but the Cloudscape base pair is a permanent floor and must lead the list.
+  // Count is registry-driven so scaffolded packs (F6) flow through with no edit.
+  // Refraction's Prism pair (the default) leads; the Cloudscape base pair is a
+  // permanent floor right after it.
   assert.equal(r.themeCount, THEME_IDS.length);
-  assert.ok(THEME_IDS.length >= 2, 'at least the two Cloudscape modes ship');
+  assert.ok(THEME_IDS.length >= 4, 'at least the two Prism and two Cloudscape modes ship');
   assert.deepEqual(r.themes.map((t) => t.id), THEME_IDS, 'palette lists exactly the registered themes, in order');
-  assert.deepEqual(THEME_IDS.slice(0, 2), ['cloudscape-dark', 'cloudscape-light'], 'Cloudscape dark (default) leads, then light');
+  assert.deepEqual(THEME_IDS.slice(0, 4), ['prism-dark', 'prism-light', 'cloudscape-dark', 'cloudscape-light'], 'Prism Night (default) leads, then Day, then Cloudscape');
+  assert.equal(DEFAULT_THEME_ID, 'prism-dark');
+  assert.deepEqual(THEMES.filter((t) => t.isDefault).map((t) => t.id), ['prism-dark'], 'exactly one default theme');
   assert.ok(r.base['--accent'], 'base token map present');
   assert.ok(r.tokenMeta.length >= 10);
 });
 
-test('get_theme_palette(cloudscape-dark) is the default/base and matches the app THEMES values', () => {
+test('get_theme_palette(prism-dark) is the default/base (Prism Night), like the app themeMatrix()', () => {
+  const ctx = toolCtx();
+  const r = ctx.call('get_theme_palette', { theme: 'prism-dark' });
+  assert.equal(r.default, true);
+  assert.equal(r.ds, 'prism');
+  assert.equal(r.dsName, 'Prism', 'the shell labels the family "Prism"');
+  // Prism Night IS the base, so it carries zero overrides.
+  assert.equal(r.overrideCount, 0);
+  assert.equal(BASE_TOKENS['--bg'], '#0a0c12');
+  assert.equal(BASE_TOKENS['--accent'], '#b8a2f2');
+  assert.equal(r.tokens['--accent'], BASE_TOKENS['--accent']);
+  for (const k of CONTRACT_TOKENS) assert.ok(k in BASE_TOKENS, `base defines contract token ${k}`);
+  // the --rf-* layer is opt-in
+  assert.ok(r.refractionTokenCount > 100);
+  assert.ok(!('refraction' in r));
+  assert.ok(!/--rf-/.test(r.css));
+  const full = ctx.call('get_theme_palette', { theme: 'prism-dark', includeRefraction: true });
+  assert.equal(full.refraction['--rf-beam-core'], '#ffffff');
+  assert.match(full.css, /--rf-spectrum:/);
+  const all = ctx.call('get_theme_palette', {});
+  assert.equal(all.baseTheme, 'prism-dark');
+  assert.ok(all.themes.every((t) => !('refraction' in t)), 'no --rf-* payload unless asked');
+});
+
+test('get_theme_palette(cloudscape-dark) is an optional skin with the AWS-console dark values', () => {
   const ctx = toolCtx();
   const r = ctx.call('get_theme_palette', { theme: 'cloudscape-dark' });
   assert.equal(r.mode, 'dark');
+  assert.equal(r.default, false);
   assert.equal(r.tokens['--bg'], '#0f1621');
   assert.equal(r.tokens['--accent'], '#539fe5');
   assert.equal(r.tokens['--accent-rgb'], '83,159,229');
-  // Cloudscape Dark IS the base, so it carries zero overrides.
-  assert.equal(r.overrideCount, 0);
-  assert.equal(r.tokens['--accent'], BASE_TOKENS['--accent']);
+  // overrides are computed against the Prism Night base
+  assert.ok(r.overrideCount > 0);
+  assert.equal(r.overrides['--accent'], '#539fe5');
+  assert.ok(!('--r-md' in r.overrides), 'tokens equal to the base are not overrides');
+  assert.ok(!('refractionTokenCount' in r), 'only the prism family carries a refraction layer');
   assert.match(r.css, /:root\{/);
+});
+
+test('rebasing on Prism Night keeps every pack complete; refraction tokens are in sync with design/themes.js', async (t) => {
+  for (const th of THEMES) for (const k of CONTRACT_TOKENS) assert.ok(th.tokens[k], `${th.id} defines ${k}`);
+  const { DESIGN_THEMES, buildSource, OUT } = await import('../scripts/sync-refraction.mjs');
+  if (!fs.existsSync(DESIGN_THEMES)) return t.skip('design/themes.js not found');
+  assert.ok(fs.readFileSync(OUT, 'utf8') === await buildSource(), 'utils/refraction-tokens.js is stale: run node scripts/sync-refraction.mjs');
+});
+
+test('get_theme_palette(prism-dark / prism-light) are complete Refraction token maps', () => {
+  const ctx = toolCtx();
+  const night = ctx.call('get_theme_palette', { theme: 'prism-dark' });
+  const day = ctx.call('get_theme_palette', { theme: 'prism-light' });
+  assert.equal(night.mode, 'dark');
+  assert.equal(day.mode, 'light');
+  assert.equal(night.name, 'Prism Night');
+  assert.equal(day.name, 'Prism Day');
+  for (const r of [night, day]) {
+    for (const k of Object.keys(BASE_TOKENS)) assert.ok(r.tokens[k], `${r.id} defines ${k}`);
+    for (const k of ['accent', 'info', 'pos', 'warn', 'neg', 'crit']) {
+      const [R, G, B] = r.tokens['--' + k].match(/[0-9a-f]{2}/gi).map((h) => parseInt(h, 16));
+      assert.equal(r.tokens['--' + k + '-rgb'], `${R},${G},${B}`, `${r.id} --${k}-rgb matches --${k}`);
+    }
+    assert.match(r.css, /:root{/);
+  }
 });
 
 test('get_theme_palette(cloudscape-light) is a light theme with the AWS-console palette', () => {
@@ -95,8 +151,8 @@ test('get_component_variants relevantOverrides is a subset of the theme override
       assert.equal(v.relevantOverrides[k], v.overrides[k], `${v.theme}: relevantOverrides[${k}] must equal the override value`);
     }
   }
-  // cloudscape-dark is the base (zero overrides) -> nothing is "relevant" even though the component consumes --ink
-  const dark = r.variants.find((v) => v.theme === 'cloudscape-dark');
+  // prism-dark is the base (zero overrides) -> nothing is "relevant" even though the component consumes --ink
+  const dark = r.variants.find((v) => v.theme === 'prism-dark');
   assert.deepEqual(dark.relevantOverrides, {}, 'base theme yields no relevant overrides');
   assert.ok(r.usesTokens.includes('--ink'), 'sanity: it does consume a token');
 });

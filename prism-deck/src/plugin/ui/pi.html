@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en" data-rf-mode="night">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prism Display</title>
+<link rel="stylesheet" href="pi.css">
+</head>
+<body>
+<main class="pi" id="pi" aria-busy="true">
+  <header class="pi-head">
+    <svg class="pi-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4 36 33H25Z" fill="currentColor" fill-opacity=".1"/><path d="M20 4 36 33H4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M20 4 25 33" fill="none" stroke="currentColor" stroke-opacity=".6" stroke-width="1.3" stroke-linecap="round"/><path class="pi-mark-s" d="M25.9 33H35.1" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <div class="pi-title">
+      <p class="pi-eyebrow" id="where">Prism Deck</p>
+      <h1 id="facetTitle">Prism Display</h1>
+    </div>
+    <span class="pi-lambda" id="lambda" aria-hidden="true"></span>
+  </header>
+
+  <section class="pi-preview" aria-label="Live preview">
+    <div class="pi-stage" id="stage"><img id="preview" alt="" hidden><p class="pi-empty" id="previewEmpty">Waiting for the deck…</p></div>
+    <p class="pi-caption" id="caption"></p>
+  </section>
+
+  <section class="pi-group" aria-labelledby="hFacet">
+    <h2 class="pi-h" id="hFacet">Facet</h2>
+    <div class="pi-row">
+      <label for="search">Search</label>
+      <input id="search" type="search" placeholder="mic, waveform, clock…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="pi-row">
+      <label for="gallery">Gallery</label>
+      <select id="gallery"></select>
+    </div>
+    <div class="pi-row">
+      <label for="facet">Facet</label>
+      <select id="facet"></select>
+    </div>
+    <p class="pi-help" id="facetHelp"></p>
+    <p class="pi-help pi-demo" id="demoNote" hidden></p>
+    <div class="pi-row" id="groupRow" hidden>
+      <label for="group">Span group</label>
+      <select id="group"></select>
+    </div>
+    <p class="pi-help" id="groupHelp" hidden>Put this facet on neighbouring keys with the same group: they render as one block, sliced across the keys. Changes here apply to the whole block.</p>
+    <div class="pi-row" id="gameRow" hidden>
+      <span class="pi-label">Game</span>
+      <div><button type="button" class="pi-btn" id="gameReset">New game</button><p class="pi-help pi-help-inline" id="gameHelp"></p></div>
+    </div>
+    <div class="pi-row" id="audioRow" hidden>
+      <span class="pi-label">Live audio</span>
+      <div><p class="pi-audio" id="audioStatus" aria-live="polite"></p><button type="button" class="pi-btn" id="audioBridge" hidden>Open audio bridge</button></div>
+    </div>
+    <div class="pi-row" id="stateRow" hidden>
+      <label for="state">State</label>
+      <select id="state"></select>
+    </div>
+  </section>
+
+  <section class="pi-group" aria-labelledby="hLook">
+    <h2 class="pi-h" id="hLook">Look</h2>
+    <div class="pi-row">
+      <label for="theme">Theme</label>
+      <select id="theme"></select>
+    </div>
+    <div class="pi-row">
+      <span class="pi-label" id="lMode">Mode</span>
+      <div class="pi-seg" role="radiogroup" aria-labelledby="lMode" id="mode"></div>
+    </div>
+    <div class="pi-row">
+      <span class="pi-label" id="lMotion">Motion</span>
+      <div class="pi-seg" role="radiogroup" aria-labelledby="lMotion" id="motion"></div>
+    </div>
+  </section>
+
+  <section class="pi-group" aria-labelledby="hPress" id="pressGroup">
+    <h2 class="pi-h" id="hPress">On press</h2>
+    <div class="pi-row">
+      <label for="pressKind">Does</label>
+      <select id="pressKind">
+        <option value="">Nothing else (visual only)</option>
+        <option value="url">Open a web page</option>
+        <option value="profile">Switch to the Prism profile</option>
+        <option value="back">Back to the previous profile</option>
+      </select>
+    </div>
+    <div class="pi-row" id="pressUrlRow" hidden>
+      <label for="pressUrl">Address</label>
+      <input id="pressUrl" type="url" inputmode="url" placeholder="https://example.com" autocomplete="url" spellcheck="false" maxlength="2048">
+    </div>
+    <div class="pi-row" id="pressPageRow" hidden>
+      <label for="pressPage">Page</label>
+      <input id="pressPage" type="number" min="1" max="99" step="1" placeholder="1">
+    </div>
+    <p class="pi-help" id="pressHelp">Prism Display changes only this key's picture. It doesn't play music, change the volume or send keys. For those, use a Stream Deck action (Multimedia, Hotkey, Website, Open) and give it an icon from a Prism icon pack: the Prism sample profiles are built that way.</p>
+    <p class="pi-status" id="pressStatus" aria-live="polite"></p>
+  </section>
+
+  <section class="pi-group" aria-labelledby="hParams" id="paramsGroup" hidden>
+    <h2 class="pi-h" id="hParams">Parameters</h2>
+    <div id="params"></div>
+    <div class="pi-actions"><button type="button" class="pi-btn" id="reset">Reset to defaults</button></div>
+  </section>
+
+  <details class="pi-group pi-more" id="plugin">
+    <summary class="pi-h">Plugin settings</summary>
+    <div class="pi-row">
+      <label for="gTheme">Default theme</label>
+      <select id="gTheme"></select>
+    </div>
+    <div class="pi-row">
+      <span class="pi-label" id="lgMode">Default mode</span>
+      <div class="pi-seg" role="radiogroup" aria-labelledby="lgMode" id="gMode"></div>
+    </div>
+    <div class="pi-row">
+      <span class="pi-label" id="lgMotion">Motion</span>
+      <div class="pi-seg" role="radiogroup" aria-labelledby="lgMotion" id="gMotion"></div>
+    </div>
+    <div class="pi-row">
+      <label for="gBytes">Update budget</label>
+      <div class="pi-range"><input id="gBytes" type="range" min="60" max="250" step="10"><output id="gBytesOut" for="gBytes"></output></div>
+    </div>
+    <p class="pi-help">Key and dial updates per second the plugin sends to the Stream Deck app, shared by all devices (default 200, at most 250: the app falls behind above about 250). Lower it if keys lag.</p>
+    <div class="pi-row">
+      <span class="pi-label" id="lgFormat">Image format</span>
+      <div class="pi-seg" role="radiogroup" aria-labelledby="lgFormat" id="gFormat"></div>
+    </div>
+    <p class="pi-help">SVG is sharpest and smallest. Switch to PNG if a device draws some art wrongly.</p>
+
+    <div class="pi-row pi-switch-row">
+      <label for="gBoot">Boot animation</label>
+      <button type="button" role="switch" aria-checked="true" class="pi-switch" id="gBoot"><span class="pi-knob"></span></button>
+    </div>
+    <p class="pi-help">Off by default. When on, the Prism power-on sequence (about 15 s) plays across your keys each time the plugin starts. Press any key to skip it; Still motion skips it too.</p>
+
+    <h3 class="pi-sub" id="hData">Data sources</h3>
+    <p class="pi-help">Keys that show data say where it comes from. Anything simulated wears a small <strong class="pi-demo-tag">DEMO</strong> tag on the device.</p>
+    <dl class="pi-sources" id="sources" aria-labelledby="hData"></dl>
+    <div class="pi-row">
+      <label for="gCalendar">Calendar file</label>
+      <input id="gCalendar" type="text" placeholder="C:\Users\you\calendar.ics" autocomplete="off" spellcheck="false" maxlength="1024">
+    </div>
+    <p class="pi-help">The full path of a local <code>.ics</code> file. Outlook, Google Calendar and Apple Calendar can export or sync one. Prism reads only the event titles and times, every 60 s, and nothing leaves your computer. Leave it empty for the demo day.</p>
+    <p class="pi-status" id="calStatus" aria-live="polite"></p>
+
+    <div class="pi-live" id="liveBox">
+      <div class="pi-row pi-switch-row">
+        <label for="aiEditing">Allow AI editing</label>
+        <button type="button" role="switch" aria-checked="false" class="pi-switch" id="aiEditing"><span class="pi-knob"></span></button>
+      </div>
+      <p class="pi-help">Lets an AI assistant you connect (through Prism's MCP server) change how Prism keys and dials <em>look</em>. It never runs programs, presses keys or opens links. Off by default; each assistant must be approved by pressing a glowing Prism key on your deck. Switching this off removes every AI edit.</p>
+      <p class="pi-status" id="liveStatus" aria-live="polite"></p>
+      <div class="pi-actions" id="liveActions" hidden>
+        <button type="button" class="pi-btn" id="deny">Deny request</button>
+        <button type="button" class="pi-btn" id="revoke">Revoke access</button>
+      </div>
+    </div>
+    <p class="pi-meta" id="meta"></p>
+  </details>
+</main>
+<script src="catalog.js"></script>
+<script src="pi.js"></script>
+</body>
+</html>

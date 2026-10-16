@@ -1,0 +1,74 @@
+#compdef prism-term
+# zsh completion for prism-term
+#   copy to a directory on $fpath (e.g. ~/.zfunc, with fpath=(~/.zfunc $fpath) before compinit)
+# Facet, gallery, theme, palette and format names come from prism-term itself (--ids).
+
+_prism_term_ids() { local -a v; v=(${(f)"$(prism-term "$@" --ids 2>/dev/null)"}); print -l -- $v; }
+
+_prism-term() {
+  local -a commands
+  commands=(
+    'play:play facets fullscreen in the live player'
+    'showcase:auto-advancing tour'
+    'list:facets grouped by gallery and category'
+    'galleries:the galleries with counts'
+    'info:size, needs, params and commands for one facet'
+    'snapshot:a still frame (ANSI, or -o .html / .ans / .txt)'
+    'banner:big text into scrollback'
+    'spin:run a command under a spinner'
+    'spinners:preview every spinner'
+    'dashboard:live metrics dashboard demo'
+    'demo:tour of the inline helpers'
+    'caps:capabilities and glyph test patterns'
+    'themes:list Prism themes'
+    'theme:a terminal color scheme (Prism Night / Day)'
+    'palettes:list gradient palettes'
+    'help:usage'
+  )
+  _arguments -C \
+    '--theme[theme id, family, day, night or auto]:theme:->themes' \
+    '(--night)--day[the Day member of the family]' \
+    '(--day)--night[the Night member of the family]' \
+    '--mode[canvas mode]:mode:(braille sextant quad half ascii auto block)' \
+    '--palette[gradient palette]:palette:->palettes' \
+    '*--set[facet parameter key=value]:key=value: ' \
+    '--fps[frame rate (1-240)]:fps: ' \
+    '--duration[seconds per facet]:seconds: ' \
+    '--size[fixed size WxH (max 1000x500)]:size: ' \
+    '--seed[deterministic seed]:seed: ' \
+    '--at[snapshot time in seconds]:seconds: ' \
+    '--frames[frames of an animated HTML snapshot]:frames: ' \
+    '--depth[force color depth]:depth:(truecolor 256 16 mono)' \
+    '--ascii[no Unicode at all]' \
+    '--sextant[force sextant glyphs]' \
+    '--no-sextant[no sextant glyphs]' \
+    '--transparent[keep the terminal background]' \
+    '--no-hud[hide the status bar]' \
+    '--no-intro[skip First Light]' \
+    '--reduced-motion[no intro, wipes or sweeps]' \
+    '--gallery[a gallery]:gallery:->galleries' \
+    '--category[a category name]:category: ' \
+    '--kind[a facet kind]:kind:(scene widget art text spinner progress chart tui diagram)' \
+    '--json[machine-readable output]' \
+    '--ids[bare ids, one per line]' \
+    '--no-passthrough[spin: swallow the command stdout]' \
+    '-o[output file]:file:_files' \
+    '(- *)--help[usage]' \
+    '(- *)--version[version]' \
+    '1: :->first' \
+    '*:: :->rest' && return
+  case $state in
+    themes) _values theme $(_prism_term_ids themes) day night auto ;;
+    palettes) _values palette $(_prism_term_ids palettes) ;;
+    galleries) _values gallery $(_prism_term_ids galleries) ;;
+    first) _describe command commands; _values facet $(_prism_term_ids list) ;;
+    rest)
+      case $words[1] in
+        play|info|snapshot|showcase) _values facet $(_prism_term_ids list) ;;
+        theme) _values format $(_prism_term_ids theme) ;;
+        spin) _normal ;;
+      esac ;;
+  esac
+}
+
+_prism-term "$@"

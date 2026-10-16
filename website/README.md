@@ -8,9 +8,24 @@ The source for [prism.jeremyfhall.com](https://prism.jeremyfhall.com). Everythin
 | `../Prism.html` | `/Prism.html` | the web catalog, with the terminal catalog's island embedded next to its own |
 | `terminal/index.html`, `terminal/terminal.js` | `/terminal/` | the terminal catalog in the browser: every tile runs the real facet code |
 | `terminal/tty.html`, `terminal/tty.js` | `/terminal/tty.html` | directions for browsing from a terminal, with a live preview of every curl page |
-| `terminal/terminal.css`, `terminal/site.js` | | shared by both terminal pages: styles, header and theme toggle, copy buttons, engine paths |
+| `terminal/terminal.css`, `terminal/site.js` | | shared by both terminal pages: styles, engine paths, the terminal theme that follows Night/Day |
+| `deck/index.html`, `deck/deck.css`, `deck/deck.js` | `/deck/` | the Stream Deck catalog: virtual devices (Galleon 100 SD, Stream Deck +, MK.2, XL, + XL, Neo, Mini) playing every deck facet live through prism-deck's browser runtime, a detail view, and the plugin / icon-pack / profile downloads |
+| `assets/site.css`, `assets/site.js` | | chrome shared by every page: Inter, the glass top bar with the Web · Terminal · Stream Deck switcher, Night/Day with the relight sweep, First Light, copy and toast |
+| `assets/rf/`, `assets/fonts/`, `assets/brand/`, favicons | | the Refraction design language, vendored from `../design/` by `scripts/sync-refraction.mjs` |
+| `assets/deck/` | | the deck adapter (`adapter.js`) plus a sketch runtime it falls back to if prism-deck can't load |
 | `../prism-term/src/site/tty.js` | `/tty`, `/t/…`, `/f/…` | the terminal site: ANSI pages for `curl`, each with `.txt` and `.24` variants |
 | `../prism-term/` | `/dl/prism-term.tgz` | the packed engine the live player runs through `npx` |
+
+## Design language
+
+The site wears Refraction, the same tokens Prism.html uses (`../design/tokens.json`). Design files are vendored, never edited here:
+
+```sh
+node website/scripts/sync-refraction.mjs           # copy prism.css, the mark, First Light, Inter, icons, λ labels
+node website/scripts/sync-refraction.mjs --check   # exit 1 if anything is out of date
+```
+
+It also fills each page's `<!--rf:icons-->` sprite with exactly the icons the page uses and every `data-rf-lambda="<id>"` label. Night/Day is stored as `localStorage['prism-site-theme']` (`dark` | `light`); a first visit follows `prefers-color-scheme`. `?fl=<ms>` freezes First Light at a moment for review (`?fl=echo:<ms>`, `?fl=off`).
 
 ## Build
 

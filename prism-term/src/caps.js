@@ -68,8 +68,10 @@ export function detect({ stream = process.stdout, env = process.env, platform = 
       // Windows 11's default console host (build 22000+ hands off to Terminal).
       unicode = !!(env.WT_SESSION || env.TERM_PROGRAM || env.ConEmuANSI || windowsBuild() >= 22000);
     } else {
-      const lang = `${env.LC_ALL || ''} ${env.LC_CTYPE || ''} ${env.LANG || ''}`;
-      unicode = !/\S/.test(lang) || /utf-?8/i.test(lang);
+      // POSIX precedence: the first non-empty of LC_ALL, LC_CTYPE, LANG decides
+      // (LC_ALL=C means 7-bit even when LANG says UTF-8); none set → assume UTF-8.
+      const lang = env.LC_ALL || env.LC_CTYPE || env.LANG || '';
+      unicode = !lang || /utf-?8/i.test(lang);
     }
   }
 

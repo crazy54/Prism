@@ -17,6 +17,7 @@ import { fileURLToPath } from 'node:url';
 import { mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolveChrome } from './_chrome.mjs';
+import { EXTRACT_FN } from './extract-in-page.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const OUT = HERE;
@@ -50,110 +51,8 @@ const GALLERIES = [
   { gallery: 'spectrums', title: 'Spectrums' },
 ];
 
-// This function is serialized and evaluated INSIDE the gallery iframe. It is a
-// faithful port of extract-manifest.mjs's extractInPage, but reads styles from
-// the iframe document passed as `d` (the CDP evaluate runs in the top frame, so
-// we resolve the iframe doc first and pass it in via a wrapper below).
-const EXTRACT_FN = `function extractInPage(gallery, d){
-  var docStyleSheets = d.styleSheets;
-  function slug(s){return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60);}
-  function cssFor(html){
-    var classes=new Set();
-    (html.match(/class="([^"]*)"/g)||[]).forEach(function(m){m.replace(/class="|"/g,'').split(/\\s+/).forEach(function(c){if(c)classes.add(c);});});
-    var rulesOut=[]; var kf=new Set();
-    function scanAnims(text){
-      (text.match(/animation(?:-name)?:\\s*[^;}]+/g)||[]).forEach(function(a){
-        a.split(/[\\s:,]+/).forEach(function(t){
-          if(/^[a-zA-Z][\\w-]*$/.test(t) && !/^(animation|animation-name|ease|linear|infinite|alternate|reverse|normal|forwards|backwards|both|none|steps|ease-in|ease-out|ease-in-out|paused|running|cubic-bezier|alternate-reverse)$/.test(t)) kf.add(t);
-        });
-      });
-    }
-    for(var si=0; si<docStyleSheets.length; si++){
-      var rules; try{rules=docStyleSheets[si].cssRules;}catch(e){continue;}
-      if(!rules) continue;
-      for(var ri=0; ri<rules.length; ri++){
-        var rule=rules[ri];
-        if(rule.type===1 && rule.selectorText){
-          var hit=false;
-          classes.forEach(function(c){
-            if(hit) return;
-            if(rule.selectorText.split(/[\\s,>+~]+/).some(function(sel){return sel.indexOf('.'+c)!==-1 && new RegExp('\\\\.'+c+'(?![\\\\w-])').test(sel);})){hit=true;}
-          });
-          if(hit){ rulesOut.push(rule.cssText); scanAnims(rule.cssText); }
-        }
-      }
-      for(var rk=0; rk<rules.length; rk++){ if(rules[rk].type===7 && kf.has(rules[rk].name)) rulesOut.push(rules[rk].cssText); }
-    }
-    return {css:[...new Set(rulesOut)].join('\\n'), classes:[...classes], keyframes:[...kf]};
-  }
-  function paramsFor(html, css){
-    var params={};
-    if(/var\\(--c\\b|--c:|--c-rgb/.test(css)) params.color={var:'--c', rgbVar:'--c-rgb', note:'Set --c (hex) and --c-rgb (R,G,B) to recolor', via:'class c-crit|c-neg|c-warn|c-pos|c-info|c-accent or inline style'};
-    var dataAttrs={};
-    (html.match(/data-[a-z-]+="[^"]*"/g)||[]).forEach(function(m){dataAttrs[m.split('=')[0]]=m.split('"')[1];});
-    if(Object.keys(dataAttrs).length) params.dataAttributes=dataAttrs;
-    return params;
-  }
-  var records=[]; var seen={};
-  // Walk the WHOLE body in document order (not just the first .wrap). Some galleries
-  // have content — including newly-spliced sections — that lands outside/after the
-  // first .wrap; scoping to one .wrap silently drops those tiles.
-  var root=d.body||d.documentElement;
-  var currentCat='General';
-  var walker=root.querySelectorAll('h3.sec, .tile, .panel');
-  walker.forEach(function(node){
-    if(node.matches('h3.sec')){
-      // Read the header text WITHOUT the runtime-injected count badge (.sec-count),
-      // which the shell appends after mount; leaving it in poisons every category
-      // with a trailing digit ("Progress & Ratio" -> "Progress & Ratio7").
-      var hc=node.cloneNode(true); var badge=hc.querySelector('.sec-count'); if(badge)badge.remove();
-      currentCat=hc.textContent.replace(/^[^A-Za-z0-9]+/,'').split(/[—–-]/)[0].trim(); return;
-    }
-    var nameEl=node.querySelector('.nm, .ptitle');
-    var name=(nameEl?nameEl.textContent:'').replace(/\\s+/g,' ').trim() || 'effect';
-    var refEl=node.querySelector('.ref'); var ref=refEl?refEl.textContent.trim():'';
-    var descEl=node.querySelector('.desc, .cap'); var description=descEl?descEl.textContent.replace(/\\s+/g,' ').trim():'';
-    var demoNode=node.querySelector('.stage'); var html;
-    if(demoNode){ html=demoNode.innerHTML.trim(); }
-    else { var clone=node.cloneNode(true); var bar=clone.querySelector('.fx-copy'); if(bar)bar.remove(); html=clone.outerHTML; }
-    var snipBtn=node.querySelector('[data-snip]');
-    var dataSnip=snipBtn?snipBtn.getAttribute('data-snip'):null;
-    var id=node.getAttribute('data-fx-id') || (gallery+'-'+slug(name));
-    if(seen[id]){seen[id]++;id+='-'+seen[id];}else seen[id]=1;
-    var r=cssFor(html);
-    var needsJs=null;
-    if(/data-weather=/.test(html)) needsJs='amb-particles';
-    else if(/data-countdown=|data-timer=|data-stopwatch/.test(html)) needsJs='time-widgets';
-    var isBackground=r.classes.some(function(c){return c.indexOf('amb')===0;});
-    var selfContained=!r.css.trim();
-    var isNew=node.classList.contains('is-new');
-    var isFixed=node.classList.contains('is-fixed');
-    // The MCP exposes first-class faceted search over spectrum (design-system/aesthetic
-    // family), componentType, and interaction (catalog.js normalizeEffect + tools facets).
-    // These come from data-* attributes on the tile; capture them here so they are not
-    // dropped (previously ALL null in the manifest, breaking family search).
-    var spectrum=node.getAttribute('data-spectrum')||null;
-    var componentType=node.getAttribute('data-ctype')||null;
-    var interaction=node.getAttribute('data-interact')||null;
-    records.push({
-      id:id, name:name, gallery:gallery, category:currentCat, ref:ref, description:description,
-      classes:r.classes, keyframes:r.keyframes, params:paramsFor(html,r.css),
-      componentType:componentType, interaction:interaction, spectrum:spectrum,
-      tags:[gallery]
-        .concat(spectrum?[spectrum]:[])
-        .concat(isBackground?['background','ambient','behind-content']:[])
-        .concat(needsJs?['needs-js']:[])
-        .concat(selfContained?['self-contained']:[])
-        .concat(r.keyframes.length?['animated']:[])
-        .concat(isNew?['new']:[])
-        .concat(isFixed?['updated','fixed']:[]),
-      usableAsBackground:isBackground, needsJs:needsJs, selfContained:selfContained,
-      isNew:isNew, isFixed:isFixed,
-      html:html, dataSnip:dataSnip, css:r.css,
-    });
-  });
-  return records;
-}`;
+// extractInPage() lives in ./extract-in-page.mjs (shared with the island-sync tool).
+
 
 let ws, id = 0; const pending = new Map();
 const send = (method, params = {}) => { const m = ++id; ws.send(JSON.stringify({ id: m, method, params })); return new Promise(r => pending.set(m, r)); };

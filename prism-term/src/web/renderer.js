@@ -7,7 +7,8 @@
 // monospace stack. Frames are diffed against the previous one and only changed
 // cells are repainted, so mostly-static widgets cost almost nothing.
 
-import { NONE, ANSI16, to256, to16, normalizeDepth } from '../color.js';
+import { NONE, ANSI16, to256, normalizeDepth, ansi16Fg, ansi16Bg, parse } from '../color.js';
+import { terminalScheme } from '../palettes.js';
 import { ATTR } from '../buffer.js';
 import { charWidth } from '../width.js';
 import { glyphClass, blockGeometry, brailleDots, sextantCells, boxGeometry } from './glyphs.js';
@@ -24,9 +25,18 @@ function xterm256(n) {
 const QUANT = {
   truecolor: null,
   '256': (c) => (c === NONE ? c : xterm256(to256(c))),
-  '16': (c) => (c === NONE ? c : ANSI16[to16(c)]),
   mono: () => NONE,
 };
+
+// The 16 colors a terminal set to this theme's scheme shows (Prism Night / Day ship
+// their own, src/themes.js › TERMINAL_SCHEMES); any other theme gets the xterm defaults.
+function ansiOf(theme) {
+  const s = theme?.id ? terminalScheme(theme.id) : null;
+  return s && s.id === theme.id ? s.ansi.map(parse) : ANSI16;
+}
+
+// Refraction's Prism Night canvas (design/tokens.json › terminal.night) until a theme is set.
+const NIGHT = { id: 'prism-dark', bg: 0x0a0c12, ink: 0xe6e6ef };
 
 // Relative ink of common ASCII-art glyphs, for minimap text (default 0.62).
 const INK = { '.': 0.7, ':': 0.8, '-': 0.75, '=': 0.7, '+': 0.42, '*': 0.5, '#': 0.78, '%': 0.72, '@': 0.9, '|': 0.5, '/': 0.48, '\\': 0.48, 'o': 0.5, 'O': 0.62, 'x': 0.5 };
@@ -51,20 +61,30 @@ export class TermCanvas {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d', { alpha: false });
     this.font = font;
-    this.theme = theme || { bg: 0x0f1621, ink: 0xe9ebed };
+    this.theme = theme || NIGHT;
+    this.ansi = ansiOf(this.theme);
     this.setDepth(depth);
     this.cols = 0; this.rows = 0; this.cw = 8; this.chh = 16;
     this.prev = null;
     this.full = true;
   }
 
-  setTheme(theme) { this.theme = theme; this.full = true; }
+  setTheme(theme) { this.theme = theme; this.ansi = ansiOf(theme); this.setDepth(this.depth); }
 
   /** Show colors as a 'truecolor' | '256' | '16' | 'mono' terminal would. */
   setDepth(depth) {
     this.depth = normalizeDepth(depth);
-    this.quant = QUANT[this.depth];
+    // 16 colors: the engine's designed ANSI slots — separately for text and fills, slot -1 being
+    // the terminal's default color — exactly what real 16-color output sends (color.js › fgParam/bgParam).
+    // `quant` maps a fill (letterbox backgrounds use it); cells map text and fills apart.
+    this.quant = this.depth === '16' ? (c) => this._slot(c, ansi16Bg) : QUANT[this.depth];
     this.full = true;
+  }
+
+  _slot(c, role) {
+    if (c === NONE) return c;
+    const n = role(c);
+    return n < 0 ? NONE : this.ansi[n] ?? ANSI16[n];
   }
 
   /**
@@ -135,7 +155,8 @@ export class TermCanvas {
   _cell(x, y, ch, fg, bg, at, wide) {
     const { ctx, cw, chh, theme } = this;
     const X = x * cw, Y = y * chh, w = wide ? cw * 2 : cw;
-    if (this.quant) { fg = this.quant(fg); bg = this.quant(bg); }
+    if (this.depth === '16') { fg = this._slot(fg, ansi16Fg); bg = this._slot(bg, ansi16Bg); }
+    else if (this.quant) { fg = this.quant(fg); bg = this.quant(bg); }
     let f = fg === NONE ? theme.ink : fg, b = bg === NONE ? theme.bg : bg;
     if (at & ATTR.INVERSE) [f, b] = [b, f];
     ctx.fillStyle = cssColor(b);

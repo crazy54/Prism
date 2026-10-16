@@ -10,6 +10,17 @@ export const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
 export const fract = (v) => v - Math.floor(v);
 export const lerpc = (a, b, t) => mix(a, b, clamp01(t));
 
+/**
+ * Shade the theme background by k (0..1): toward black at Night; by Day toward the
+ * theme's hairline tone, so depth reads as a pearl shadow instead of a gray wash.
+ */
+export function shade(theme, k) {
+  return theme.mode === 'light' ? lerpc(theme.bg, theme.line, k * 2.2) : lerpc(theme.bg, 0x000000, k);
+}
+
+/** The color a light-emitting effect rises out of: black at Night, the page by Day. */
+export const ground = (theme) => (theme.mode === 'light' ? theme.bg : 0x000000);
+
 /** Scale a packed color's brightness (0..1+), clamped. */
 export function dim(c, k) {
   if (c === NONE) return NONE;

@@ -133,7 +133,17 @@ test('catalog: schema 2 — records carry no source; `sources` holds every modul
   const keys = Object.keys(c.sources);
   assert.deepEqual(keys, [...keys].sort(), 'sorted by path');
   for (const f of c.facets) assert.ok(Object.hasOwn(c.sources, f.module), `${f.id}: ${f.module}`);
-  assert.ok(keys.every((k) => k.startsWith('prism-term/src/facets/')), 'engine modules (src/*.js) stay out');
+  // Browser engine closure: web/index.js, palettes.js and every engine module they or a facet
+  // import statically are in `sources`; Node-only terminal I/O never is.
+  const engine = keys.filter((k) => !k.startsWith('prism-term/src/facets/'));
+  for (const k of ['prism-term/src/web/index.js', 'prism-term/src/palettes.js', 'prism-term/src/color.js', 'prism-term/src/widgets/index.js']) assert.ok(engine.includes(k), `engine closure carries ${k}`);
+  for (const k of ['prism-term/src/screen.js', 'prism-term/src/loop.js']) assert.ok(!engine.includes(k), `${k} (Node-only) stays out`);
+  for (const k of engine) {
+    for (const [, spec] of c.sources[k].matchAll(SPECS)) {
+      const dep = spec.startsWith('.') ? resolveKey(k, spec) : null;
+      if (dep && !/\/(screen|loop)\.js$/.test(dep)) assert.ok(Object.hasOwn(c.sources, dep), `engine closure: ${k} needs ${dep}`);
+    }
+  }
   // Closed over helpers: every "_" file any module (or helper, via export … from) imports is present.
   for (const k of keys) {
     for (const [, spec] of c.sources[k].matchAll(SPECS)) {
@@ -141,9 +151,9 @@ test('catalog: schema 2 — records carry no source; `sources` holds every modul
       if (dep && isHelper(dep) && fs.existsSync(path.join(ROOT, dep.replace(/^prism-term\//, '')))) assert.ok(Object.hasOwn(c.sources, dep), `${k} needs ${dep}`);
     }
   }
-  // Nothing extra: every key is a facet module or a helper something reaches.
+  // Nothing extra: every facets/ key is a facet module or a helper something reaches.
   const modules = new Set(c.facets.map((f) => f.module));
-  assert.ok(keys.every((k) => modules.has(k) || isHelper(k)));
+  assert.ok(keys.every((k) => modules.has(k) || isHelper(k) || engine.includes(k)));
   assert.ok(keys.length < c.facets.length, 'modules hosting several facets are stored once');
 });
 
@@ -151,9 +161,10 @@ test('catalog: rebuilding modules from `sources` (through the island) byte-match
   const c = full();
   const island = extractIsland(embedIsland(fixture('\r\n'), c).html);
   for (const [k, code] of Object.entries(island.sources)) {
-    assert.ok(Buffer.from(code, 'utf8').equals(fs.readFileSync(path.join(ROOT, k.replace(/^prism-term\//, '')))), `${k} byte-matches disk`);
+    // sources are LF-normalized (a core.autocrlf checkout has CRLF files on disk)
+    assert.equal(code, fs.readFileSync(path.join(ROOT, k.replace(/^prism-term\//, '')), 'utf8').replace(/\r\n/g, '\n'), `${k} matches disk`);
   }
-  // Rebuild a tree from the island alone (plus the engine, which the island leaves out) and load facets from it.
+  // Rebuild a tree from the island alone (plus the Node-side engine, e.g. render.js) and load facets from it.
   const dir = tmpDir('rebuild');
   try {
     fs.cpSync(path.join(ROOT, 'src'), path.join(dir, 'src'), { recursive: true, filter: (p) => !path.relative(path.join(ROOT, 'src'), p).startsWith('facets') });
@@ -217,7 +228,13 @@ test('island: real Prism.html — only the block and breadcrumb change; web isla
   const at = next.indexOf(block);
   assert.ok(at > 0, 'block present verbatim');
   assert.equal(next.slice(at - WEB_END.length - eol.length, at), WEB_END + eol, 'block sits right after the web island');
-  assert.equal(count(next, CRUMB_NOTE), 1);
+  // The breadcrumb names the terminal island exactly once: in its own words (the 2026-10-16 breadcrumb lists
+  // all three islands, which now sit at the end of <body>) or through the note embedIsland appends to an
+  // older breadcrumb that does not.
+  const crumbAt = next.indexOf('<!-- ✦ AI-READABLE:'), crumb = next.slice(crumbAt, next.indexOf('-->', crumbAt));
+  assert.ok(crumbAt >= 0 && crumb.includes(ISLAND_ID), 'the breadcrumb points at the terminal island');
+  assert.equal(count(next, CRUMB_NOTE), count(base.slice(crumbAt, base.indexOf('-->', crumbAt)), ISLAND_ID) ? 0 : 1, 'a note only when the breadcrumb does not name the island');
+  assert.ok(!/<(script|style)\b/i.test(crumb), 'no tag text inside the breadcrumb (the parts tokenizer would cut there)');
   assert.equal((next.slice(0, at) + next.slice(at + block.length)).replace(CRUMB_NOTE + ' -->', ' -->'), base);
   assert.equal(embedIsland(next, catalog).html, next, 'idempotent');
   assert.deepEqual(extractIsland(next), catalog);
@@ -245,10 +262,10 @@ const SGR = /\x1b\[[0-9;]*m/g;
 const lines = (s) => s.replace(/\n$/, '').split('\n');
 
 test('tty: one page per facet and per gallery, plus home, help and all', () => {
-  for (const p of ['tty', 't/help', 't/all']) assert.ok(pages.has(p), p);
+  for (const p of ['tty', 't/help', 't/all', 't/themes']) assert.ok(pages.has(p), p);
   for (const g of galleries) assert.ok(pages.has(`t/${g.id}`), `t/${g.id}`);
   for (const f of facets) assert.ok(pages.has(`f/${f.id}`), `f/${f.id}`);
-  assert.equal(pages.size, 3 + galleries.length + facets.length);
+  assert.equal(pages.size, 4 + galleries.length + facets.length);
 });
 
 test('tty: every variant is ≤ 80 columns, LF only, and contains nothing but text and SGR', () => {
@@ -312,9 +329,11 @@ test('tty: a long tag list wraps at commas, continuation under the first tag, no
 
 test('tty: every .txt line is ≤ 80 columns and every command is whole on its line', () => {
   const bad = [];
-  const url = String.raw`prism\.jeremyfhall\.com/(?:tty|Prism\.html|terminal/\S*|t/(?:<gallery>|[a-z0-9-]+)|f/(?:<facet>|<id>|[a-z0-9-]+))(?:\.txt|\.24)?`;
-  const curl = new RegExp(String.raw`^curl -sL ${url}(?: \| (?:less -R|grep -i \S+))?$`);
-  const tgz = 'https://prism.jeremyfhall.com/dl/prism-term.tgz';
+  const url = String.raw`prism\.jeremyfhall\.com/(?:tty|Prism\.html|terminal/\S*|t/(?:<gallery>|[a-z0-9-]+)|f/(?:<facet>|<id>|[a-z0-9-]+)|themes/[a-z0-9-]+/[A-Za-z0-9.-]+|dl/SHA256SUMS)(?:\.txt|\.24)?`;
+  const curl = new RegExp(String.raw`^curl -sL ${url}(?: \| (?:less -R|grep -i \S+|sh|sha256sum -c --ignore-missing))?$`);
+  // the latest-release alias, or this release's pinned tarball (remote or downloaded)
+  const ver = String.raw`\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?`;
+  const tgz = String.raw`(?:https://prism\.jeremyfhall\.com/dl/prism-term(?:-${ver})?|\./prism-term-${ver})\.tgz`;
   for (const [rel, page] of pages) {
     const ls = lines(page.txt);
     ls.forEach((l, i) => {
@@ -325,10 +344,10 @@ test('tty: every .txt line is ≤ 80 columns and every command is whole on its l
       if (!c) return;
       if (/(\.\.\.|…)$/.test(c)) bad.push(`${at}: cut: ${c}`);
       if (c.startsWith('curl ') && !curl.test(c)) bad.push(`${at}: incomplete curl: ${c}`);
-      if (c.startsWith('npm i -g ') && c !== `npm i -g ${tgz}`) bad.push(`${at}: incomplete npm: ${c}`);
+      if (c.startsWith('npm i -g ') && !new RegExp(`^npm i -g ${tgz}$`).test(c)) bad.push(`${at}: incomplete npm: ${c}`);
       if (c.startsWith('npx ')) {
         const whole = c.endsWith(' \\') ? c.slice(0, -1) + (ls[i + 1] || '').trim() : c;
-        if (!new RegExp(String.raw`^npx -y --package=${tgz.replace(/[.]/g, '\\.')} prism-term(?: (?:play|snapshot|list) [a-z0-9-]+)?$`).test(whole)) bad.push(`${at}: incomplete npx: ${whole}`);
+        if (!new RegExp(String.raw`^npx -y --package=${tgz} prism-term(?: (?:play|snapshot|list) [a-z0-9-]+)?$`).test(whole)) bad.push(`${at}: incomplete npx: ${whole}`);
       }
     });
     // Prose never ends a line with the start of a command (a para() that wrapped one).

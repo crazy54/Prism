@@ -1,15 +1,20 @@
-// The 34 Prism MCP tools. Each entry: { name, description, inputSchema, handler }.
-// Handlers receive (args, ctx) where ctx = { store, collections, terminal, logger }
-// and return a plain JS object (or a promise of one), serialized to JSON text by
-// the server. Handlers throw ToolError for structured, actionable failures.
-// The 5 terminal-catalog tools live in ./terminal.js.
+// The Prism MCP tools (58). Each entry: { name, description, inputSchema, handler[, annotations] }.
+// Handlers receive (args, ctx) where ctx = { store, collections, terminal, deck,
+// deckEngine, deckLayouts, deckControl, clientName, logger } and return a plain JS
+// object (or a promise of one), serialized to JSON text by the server (plus any image
+// blocks attached with deck.js withContent()). Handlers throw ToolError for structured,
+// actionable failures. The 5 terminal-catalog tools live in ./terminal.js, the 16 Prism
+// Deck design tools in ./deck.js and the 8 live deck tools in ./deck-live.js.
 
 import { lightEffect } from '../utils/catalog.js';
 import { compose, composeWithTemplate, availableTemplates } from '../utils/compose.js';
 import { validateFacet, validateComposition } from '../utils/validate.js';
-import { THEMES, THEME_IDS, TOKEN_META, BASE_TOKENS, getTheme, usesTokens, themeRootCss, isThemeSensitive, themeIdList, themesSummary } from '../utils/themes.js';
+import { THEMES, THEME_IDS, TOKEN_META, BASE_TOKENS, DEFAULT_THEME_ID, REFRACTION_VERSION, getTheme, usesTokens, themeRootCss, isThemeSensitive, themeIdList, themesSummary, refractionTokens } from '../utils/themes.js';
 import { CollectionError, toExportSchema } from '../utils/collections.js';
+import { SNIPPET_WRAPPER_CSS } from '../utils/snippet.js';
 import { terminalTools } from './terminal.js';
+import { deckTools } from './deck.js';
+import { deckLiveTools } from './deck-live.js';
 
 export class ToolError extends Error {
   constructor(message, { code = 'tool_error', data = null } = {}) {
@@ -66,6 +71,13 @@ const strArr = { type: 'array', items: { type: 'string' } };
 function nonNegInt(x, fallback = 0) {
   const n = Math.trunc(Number(x));
   return Number.isFinite(n) && n > 0 ? n : fallback;
+}
+
+/** A theme id for paste-ready output (default Prism Night); unknown ids are a structured error. */
+function themeArg(theme) {
+  if (theme == null || theme === '') return DEFAULT_THEME_ID;
+  if (!getTheme(theme)) throw new ToolError(`No theme "${theme}"`, { code: 'invalid_argument', data: { themes: THEME_IDS } });
+  return theme;
 }
 
 function paginate(items, limit, offset) {
@@ -400,13 +412,15 @@ export function buildTools() {
     },
     {
       name: 'get_effect',
-      description: 'Fetch the complete record for one effect by id, including production-ready html and css, classes, keyframes, params, and whether it needs a JS initializer.',
+      description: 'Fetch the complete record for one effect by id: its authored html and css (the facet\'s own rules — no theme tokens, no reset), classes, keyframes, params, and whether it needs a JS initializer. Also returns `tokensCss`, the :root block with exactly the tokens it references resolved for `theme` (default prism-dark), and `wrapperCss`, the .prism-snippet wrapper + border-box reset. snippet:true adds the complete paste-ready `snippet` (what Prism\'s Copy produces; same as compose with one id).',
       inputSchema: {
         type: 'object',
         properties: {
           id: { type: 'string', description: 'The effect id (e.g. "charts-big-metric-count-up")' },
           includeCss: { type: 'boolean', default: true },
           includeHtml: { type: 'boolean', default: true },
+          theme: { type: 'string', enum: THEME_IDS, default: DEFAULT_THEME_ID, description: 'Theme for tokensCss / snippet' },
+          snippet: { type: 'boolean', default: false, description: 'Add the paste-ready snippet string (<style> + wrapped markup)' },
         },
         required: ['id'],
         additionalProperties: false,
@@ -419,7 +433,11 @@ export function buildTools() {
             .filter((x) => x.score > 0).sort((x, y) => y.score - x.score).slice(0, 5).map((x) => x.id);
           throw new ToolError(`No effect with id "${a.id}"`, { code: 'not_found', data: { suggestions } });
         }
-        const out = { ...e };
+        const theme = themeArg(a.theme);
+        const res = compose([e.id], store, { theme });
+        const out = { ...e, theme, tokensCss: res.tokens.block, wrapperCss: SNIPPET_WRAPPER_CSS };
+        if (res.tokens.unresolved.length) out.unresolvedVars = res.tokens.unresolved;
+        if (a.snippet === true) out.snippet = res.snippet;
         if (a.includeCss === false) delete out.css;
         if (a.includeHtml === false) delete out.html;
         return out;
@@ -446,27 +464,35 @@ export function buildTools() {
     },
     {
       name: 'get_theme_palette',
-      description: 'Return the token palette for one theme (or all themes). Prism themes are pure :root token overrides applied over identical component HTML/CSS, so a palette fully defines how every component looks in that theme. Each theme returns its complete token map, the overrides vs the Cloudscape Dark base, mode (light/dark), and a ready-to-paste :root{…} CSS block. Themes: ' + themeIdList() + '.',
+      description: 'Return the token palette for one theme (or all themes). Prism themes are pure :root token overrides applied over identical component HTML/CSS, so a palette fully defines how every component looks in that theme. Each theme returns its family (ds/dsName), its complete token map, the overrides vs the Prism Night base (the default theme, like the app\'s themeMatrix()), mode (light/dark), and a ready-to-paste :root{…} CSS block. The Prism family (Refraction: Prism Night / Prism Day) also carries a --rf-* layer (spectrum stops, beam, glass, type scale, gallery hues) for Prism-native chrome: set includeRefraction to get it. Themes: ' + themeIdList() + '.',
       inputSchema: {
         type: 'object',
         properties: {
           theme: { type: 'string', enum: THEME_IDS, description: 'A theme id. Omit to return all themes.' },
+          includeRefraction: { type: 'boolean', default: false, description: 'Prism themes: include the --rf-* Refraction layer (`refraction` map, and in `css`). Large (~250 tokens); off by default.' },
         },
         additionalProperties: false,
       },
       handler: (a) => {
-        const shape = (t) => ({
-          id: t.id, name: t.name, mode: t.mode, builtin: t.builtin,
-          tokens: t.tokens, overrides: t.overrides,
-          overrideCount: Object.keys(t.overrides).length,
-          css: themeRootCss(t.id),
-        });
+        const rf = a.includeRefraction === true;
+        const shape = (t) => {
+          const layer = refractionTokens(t.id);
+          const n = Object.keys(layer).length;
+          return {
+            id: t.id, name: t.name, ds: t.ds, dsName: t.dsName, mode: t.mode, builtin: t.builtin, default: !!t.isDefault,
+            tokens: t.tokens, overrides: t.overrides,
+            overrideCount: Object.keys(t.overrides).length,
+            ...(n ? { refractionVersion: REFRACTION_VERSION, refractionTokenCount: n } : {}),
+            ...(n && rf ? { refraction: layer } : {}),
+            css: themeRootCss(t.id, { refraction: rf }),
+          };
+        };
         if (a.theme) {
           const t = getTheme(a.theme);
           if (!t) throw new ToolError(`No theme "${a.theme}"`, { code: 'not_found', data: { themes: THEME_IDS } });
           return shape(t);
         }
-        return { base: BASE_TOKENS, tokenMeta: TOKEN_META, themeCount: THEMES.length, themes: THEMES.map(shape) };
+        return { base: BASE_TOKENS, baseTheme: DEFAULT_THEME_ID, defaultTheme: DEFAULT_THEME_ID, tokenMeta: TOKEN_META, themeCount: THEMES.length, themes: THEMES.map(shape) };
       },
     },
     {
@@ -771,12 +797,14 @@ export function buildTools() {
     // ============================== COMPOSITION (3) ==============================
     {
       name: 'compose',
-      description: 'Compose multiple effects (by id) into one production-ready bundle: merged HTML, deduplicated + token-merged CSS, list of required JS initializers, validation, and size metrics. Optionally wrap the markup in a container.',
+      description: 'Compose multiple effects (by id) into one paste-ready bundle, exactly like Prism\'s Copy: a :root block with exactly the theme tokens the composed CSS references (resolved for `theme`, default prism-dark / Prism Night), the .prism-snippet wrapper (font, ink, stage layout) with its border-box reset, the effects\' deduplicated CSS, and the markup inside <div class="prism-snippet">. Returns html, css, a single `snippet` string (<style> + markup), `tokens` ({resolved, unresolved, fallbackOnly}), required JS initializers, validation and size metrics. Optionally wrap the markup in a container.',
       inputSchema: {
         type: 'object',
         properties: {
           ids: { ...strArr, description: 'Effect ids to compose, in display order', minItems: 1 },
-          includeTokens: { type: 'boolean', default: true, description: 'Prepend the global tokens.css' },
+          theme: { type: 'string', enum: THEME_IDS, default: DEFAULT_THEME_ID, description: 'Theme whose token values fill the :root block' },
+          includeTokens: { type: 'boolean', default: true, description: 'Emit the :root token block (and the tokens.css helper classes the markup uses). false = bring your own theme.' },
+          wrapper: { type: 'boolean', default: true, description: 'Wrap in .prism-snippet with the border-box reset (the Copy builder\'s wrapper)' },
           wrap: {
             type: 'object',
             description: 'Optional wrapper element around the combined markup',
@@ -792,27 +820,29 @@ export function buildTools() {
       },
       handler: (a, { store }) => {
         if (!Array.isArray(a.ids) || a.ids.length === 0) throw new ToolError('ids must be a non-empty array', { code: 'invalid_argument' });
-        const res = compose(a.ids, store, { includeTokens: a.includeTokens, wrap: a.wrap, separator: a.separator });
+        const res = compose(a.ids, store, { theme: themeArg(a.theme), includeTokens: a.includeTokens, wrapper: a.wrapper, wrap: a.wrap, separator: a.separator });
         if (!res.ok) throw new ToolError('Composition failed', { code: 'compose_failed', data: { errors: res.errors, missing: res.missing } });
         return res;
       },
     },
     {
       name: 'compose_with_template',
-      description: `Compose effects into a named layout template. Templates arrange the effects: ${availableTemplates().join(', ')}. Returns the same bundle shape as compose plus the applied template.`,
+      description: `Compose effects into a named layout template. Templates arrange the effects: ${availableTemplates().join(', ')}. Returns the same paste-ready bundle as compose (theme-resolved :root tokens, .prism-snippet wrapper + border-box reset, \`snippet\`) plus the applied template.`,
       inputSchema: {
         type: 'object',
         properties: {
           ids: { ...strArr, description: 'Effect ids to compose', minItems: 1 },
           template: { type: 'string', enum: availableTemplates(), default: 'stack' },
+          theme: { type: 'string', enum: THEME_IDS, default: DEFAULT_THEME_ID, description: 'Theme whose token values fill the :root block' },
           includeTokens: { type: 'boolean', default: true },
+          wrapper: { type: 'boolean', default: true },
         },
         required: ['ids'],
         additionalProperties: false,
       },
       handler: (a, { store }) => {
         if (!Array.isArray(a.ids) || a.ids.length === 0) throw new ToolError('ids must be a non-empty array', { code: 'invalid_argument' });
-        const res = composeWithTemplate(a.ids, store, a.template || 'stack', { includeTokens: a.includeTokens });
+        const res = composeWithTemplate(a.ids, store, a.template || 'stack', { theme: themeArg(a.theme), includeTokens: a.includeTokens, wrapper: a.wrapper });
         if (!res.ok) throw new ToolError('Composition failed', { code: 'compose_failed', data: { errors: res.errors, missing: res.missing } });
         return res;
       },
@@ -940,7 +970,7 @@ export function buildTools() {
     },
     {
       name: 'export_collection',
-      description: 'Export effects as a self-contained bundle. Three sources (in priority order): a saved collectionId, an explicit set of ids, or an entire gallery. format="bundle" (default) returns merged deduped CSS + each effect\'s html; format="document" adds a complete standalone <html> document; format="schema" returns the portable prism-collection-1.0 JSON (importable by the Prism.html UI). Only a saved collectionId can produce format="schema".',
+      description: 'Export effects as a self-contained, paste-ready bundle (same output as compose: theme-resolved :root tokens for `theme` (default prism-dark), the .prism-snippet wrapper + border-box reset, deduped CSS, markup, `snippet`). Three sources (in priority order): a saved collectionId, an explicit set of ids, or an entire gallery. format="bundle" (default) returns css + html + snippet; format="document" adds a complete standalone <html> document; format="schema" returns the portable prism-collection-1.0 JSON (importable by the Prism.html UI). Only a saved collectionId can produce format="schema".',
       inputSchema: {
         type: 'object',
         properties: {
@@ -950,12 +980,15 @@ export function buildTools() {
           format: { type: 'string', enum: ['bundle', 'document', 'schema'], default: 'bundle', description: 'bundle (CSS+HTML), document (full <html>), or schema (prism-collection-1.0 JSON)' },
           title: { type: 'string', default: 'Prism Collection' },
           asDocument: { type: 'boolean', default: false, description: 'Deprecated alias for format="document"' },
+          theme: { type: 'string', enum: THEME_IDS, default: DEFAULT_THEME_ID, description: 'Theme whose token values fill the :root block' },
           includeTokens: { type: 'boolean', default: true },
+          wrapper: { type: 'boolean', default: true },
         },
         additionalProperties: false,
       },
       handler: (a, { store, collections }) => {
         const format = a.format || (a.asDocument ? 'document' : 'bundle');
+        const theme = themeArg(a.theme);
         // --- Source resolution: saved collection > explicit ids > gallery ---
         let ids = a.ids;
         let sourceCollection = null;
@@ -974,15 +1007,15 @@ export function buildTools() {
         if (format === 'schema') {
           if (!sourceCollection) throw new ToolError('format="schema" requires a saved collectionId', { code: 'invalid_argument' });
           // totalSize = byte length of the composed CSS+HTML, a useful UI hint.
-          const composed = compose(ids, store, { includeTokens: a.includeTokens });
+          const composed = compose(ids, store, { theme, includeTokens: a.includeTokens, wrapper: a.wrapper });
           const totalSize = composed.ok ? Buffer.byteLength((composed.css || '') + (composed.html || '')) : null;
           return toExportSchema(sourceCollection, { totalSize });
         }
 
         const title = a.title || (sourceCollection && sourceCollection.name) || 'Prism Collection';
-        const res = compose(ids, store, { includeTokens: a.includeTokens });
+        const res = compose(ids, store, { theme, includeTokens: a.includeTokens, wrapper: a.wrapper });
         if (!res.ok) throw new ToolError('Export failed', { code: 'export_failed', data: { errors: res.errors, missing: res.missing } });
-        const bundle = { title, effects: res.effects, css: res.css, html: res.html, initializers: res.initializers, metrics: res.metrics };
+        const bundle = { title, theme: res.theme, effects: res.effects, css: res.css, html: res.html, snippet: res.snippet, tokens: res.tokens, initializers: res.initializers, metrics: res.metrics };
         if (sourceCollection) bundle.collectionId = sourceCollection.id;
         if (format === 'document') {
           // Defense-in-depth: even though the catalog is trusted by design, when we
@@ -1131,6 +1164,12 @@ export function buildTools() {
 
     // ============================== TERMINAL CATALOG (5) ==============================
     ...terminalTools({ ToolError, paginate }),
+
+    // ============================== PRISM DECK: catalog, render, layouts, export (16) ==============================
+    ...deckTools({ ToolError, paginate }),
+
+    // ============================== PRISM DECK: live editing via the plugin (8) ==============================
+    ...deckLiveTools({ ToolError }),
   ];
 }
 

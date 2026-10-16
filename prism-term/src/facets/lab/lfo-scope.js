@@ -3,6 +3,7 @@
 // beam the previous sweep lingers dimmer, like phosphor persistence; each
 // channel is labeled with its shape and rate.
 import { mix } from '../../color.js';
+import { fadeMark } from '../../palettes.js';
 import { put } from './_lab.js';
 
 const SWEEP = 2;
@@ -47,7 +48,7 @@ export default {
         for (let x = 0; x < W; x++) {
           const live = x <= beam, tt = (live ? sweepStart : sweepStart - SWEEP) + (x / W) * SWEEP;
           const y = cy - fn(tt * hz) * amp;
-          const c = live ? cols[k] : mix(th.bg, cols[k], 0.3);
+          const c = live ? cols[k] : fadeMark(th, cols[k], 0.3);
           if (px !== null && Math.abs(x - beam) > 1) cv.line(px, py, x, y, c);
           px = x; py = y;
         }
