@@ -863,6 +863,16 @@ node design/tools/contrast.mjs       # the WCAG 2.2 checks; exits 1 on any failu
 
 ---
 
+## License
+
+Prism is licensed under the [Apache License 2.0](LICENSE).
+
+Copyright 2026 JFH Inc. Created and authored by **Jeremy Francis Hall** ([jeremyfhall.com](https://jeremyfhall.com), [prism.jeremyfhall.com](https://prism.jeremyfhall.com)).
+
+If you redistribute Prism or build on it, keep the [NOTICE](NOTICE) file, which credits JFH Inc. and Jeremy Francis Hall (Apache License 2.0, Section 4(d)).
+
+---
+
 <div align="center">
 <sub>Web · Terminal · Stream Deck · offline · MCP server included. <b>White light in. Every color out.</b></sub>
 </div>
