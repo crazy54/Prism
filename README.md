@@ -640,6 +640,16 @@ node website/build.mjs    # rebuild site-dist/ (fails if either step above was s
 
 ---
 
+## License
+
+Prism is licensed under the [Apache License 2.0](LICENSE).
+
+Copyright 2026 JFH Inc. Created and authored by **Jeremy Francis Hall** ([jeremyfhall.com](https://jeremyfhall.com), [prism.jeremyfhall.com](https://prism.jeremyfhall.com)).
+
+If you redistribute Prism or build on it, keep the [NOTICE](NOTICE) file, which credits JFH Inc. and Jeremy Francis Hall (Apache License 2.0, Section 4(d)).
+
+---
+
 <div align="center">
 <sub>Single-file · offline · terminal catalog · MCP server included — <b>One prism. Every facet of your report.</b></sub>
 </div>
