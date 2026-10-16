@@ -3440,6 +3440,22 @@ var THEME_REGISTRY=[
       else if((site==='dark'||site==='night') && THEMES.hasOwnProperty('prism-dark')) curTheme='prism-dark';
     }
   }catch(e){}
+  // Shareable look: Prism.html?theme=cloudflare-dark  ·  ?theme=cloudflare&mode=day  ·  ?theme=prism-night.
+  // A full id, or a family (+ optional mode: dark|light|night|day; without one the family keeps the current
+  // mode). It wins for this visit only — nothing is saved, so the visitor's own choice returns next time.
+  try{
+    var qp=new URLSearchParams(location.search), qt=(qp.get('theme')||'').toLowerCase().trim(), qm=(qp.get('mode')||'').toLowerCase();
+    if(qt){
+      var qMode=/^(light|day)$/.test(qm)?'light':/^(dark|night)$/.test(qm)?'dark':null;
+      if(THEMES.hasOwnProperty(qt) && !qMode) curTheme=qt;
+      else {
+        var qFam=qt.replace(/-(dark|light|night|day)$/,'');
+        var qSuffix=/-(light|day)$/.test(qt)?'light':/-(dark|night)$/.test(qt)?'dark':null;
+        var qCur=REG_BY_ID[curTheme], qPick=themeFor(qFam, qMode||qSuffix||(qCur&&qCur.mode)||'dark');
+        if(qPick) curTheme=qPick.id;
+      }
+    }
+  }catch(e){}
   // Motion (WCAG 2.2.2): ONE switch — the top-bar Pause motion button, the ⌘K "Reduce motion" command and
   // PrismShell.reduceMotion() — stored as prismMotion = 'reduce' | 'full'. With no stored choice the OS
   // setting decides, live. [data-rf-motion="reduce"] on <html> (and every frame) holds every facet loop still.
@@ -4195,6 +4211,12 @@ window.PrismSearch=(function(){
     out.push({label:'Copy a link to this page', where:'Share', icon:'link', kw:'copy link url share address', run:function(){
       var u=location.href;
       var ok=function(){ sh.toast&&sh.toast({title:'Link copied', body:u.replace(/^.*\//,''), tone:'pos'}); };
+      try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(u).then(ok, function(){}); return; } }catch(e){}
+    }});
+    if(cur) out.push({label:'Copy a link with this theme', where:'Share · opens this page in '+cur, icon:'link', kw:'copy link share theme skin look design system url '+cur, run:function(){
+      var url=new URL(location.href); url.searchParams.set('theme', cur); url.searchParams.delete('mode');
+      var u=url.toString();
+      var ok=function(){ sh.toast&&sh.toast({title:'Link copied', body:'opens in '+cur+' · '+u.replace(/^.*\//,''), tone:'pos'}); };
       try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(u).then(ok, function(){}); return; } }catch(e){}
     }});
     out.push({label:'What’s new in Refraction', where:'Help', icon:'sparkle', kw:'whats new refraction intro help design language', run:function(){ sh.showIntro&&sh.showIntro(); }});
