@@ -166,5 +166,5 @@ node --test test/plugin.test.js test/export.test.js
 - `streamdeck link plugin/com.jeremyfhall.prism.sdPlugin` (Elgato CLI) installs the dev build linked. Only do this on your own machine.
 - `src/plugin/dev/fake-streamdeck.js` is a fake Stream Deck app (a real WebSocket server) for running the plugin without hardware.
 - Validation uses Elgato's official manifest and layout schemas from the research handoff (`PRISM_SD_SCHEMAS` points elsewhere).
-- Licenses: the plugin ships `LICENSE.txt` (MIT, then Inter's SIL OFL 1.1) and `ui/fonts/OFL.txt`; each icon pack ships `license.txt` (MIT + OFL) and `OFL.txt`. The manifest's `SupportURL` is the repository's issue tracker.
+- Licenses: Prism Deck is Apache 2.0 (© 2026 JFH Inc., created by Jeremy Francis Hall). The plugin ships `LICENSE.txt` (the NOTICE, Apache 2.0, then Inter's SIL OFL 1.1), `NOTICE.txt` and `ui/fonts/OFL.txt`; each icon pack ships `license.txt` (NOTICE + Apache 2.0 + OFL), `NOTICE.txt` and `OFL.txt`. The manifest's `SupportURL` is the repository's issue tracker.
 - Layout: runtime `src/plugin/` (`ws.js` transport, `connection.js` protocol, `runtime.js` render units, `budget.js` frame budget, `control.js` live channel, `ui/` property inspector); exporters `src/export/{plugin,iconpack,profile}*.js`.

@@ -2,7 +2,8 @@
 //
 //   com.jeremyfhall.prism.sdPlugin/
 //     manifest.json               SDKVersion 3, Node 20, Software 7.6 (7.1 without the Neo action), SupportURL
-//     LICENSE.txt                 MIT, then the SIL OFL 1.1 of Inter (ui/fonts/OFL.txt too)
+//     LICENSE.txt                 NOTICE + Apache 2.0, then the SIL OFL 1.1 of Inter (ui/fonts/OFL.txt too)
+//     NOTICE.txt                  the project NOTICE (Apache 2.0 §4(d))
 //     bin/plugin.js               entry → bin/prism-deck/src/plugin/index.js (a copy of the engine; zero deps)
 //     bin/package.json            { "type": "module" }
 //     ui/pi.html|css|js           the property inspector + ui/catalog.js (generated) + ui/fonts/Inter
@@ -134,12 +135,21 @@ export function pluginImages({ brandPng } = {}) {
   return out;
 }
 
-/** LICENSE.txt of the plugin: the repo's MIT license, then Inter's OFL. */
+/** The project's NOTICE (Apache-2.0 §4(d): it ships with every redistribution). */
+export function noticeText({ root }) {
+  const f = [path.join(root, 'NOTICE'), path.join(root, '..', 'NOTICE')].find((p) => fs.existsSync(p));
+  return f ? `${fs.readFileSync(f, 'utf8').trim()}\n` : 'Prism\nCopyright 2026 JFH Inc.\n\nCreated and authored by Jeremy Francis Hall\n  https://jeremyfhall.com\n\nLicensed under the Apache License, Version 2.0.\n';
+}
+
+/** LICENSE.txt of the plugin: the NOTICE, the repo's Apache 2.0 license, then Inter's OFL. */
 export function licenseText({ root, ofl }) {
-  const mit = [path.join(root, 'LICENSE'), path.join(root, '..', 'LICENSE')].find((p) => fs.existsSync(p));
-  const head = mit ? fs.readFileSync(mit, 'utf8').trim() : 'MIT License\n\nCopyright (c) 2026 Jeremy Hall';
+  const lic = [path.join(root, 'LICENSE'), path.join(root, '..', 'LICENSE')].find((p) => fs.existsSync(p));
+  const head = lic ? fs.readFileSync(lic, 'utf8').trim() : 'Apache License, Version 2.0\nhttps://www.apache.org/licenses/LICENSE-2.0\n\nCopyright 2026 JFH Inc.';
   return `Prism Deck plugin
 =================
+
+${noticeText({ root }).trim()}
+
 
 ${head}
 
@@ -173,10 +183,11 @@ export function buildPluginFolder({ root, design = path.resolve(root, '..', 'des
   for (const f of ['pi.html', 'pi.css', 'pi.js']) put(`ui/${f}`, fs.readFileSync(path.join(root, 'src', 'plugin', 'ui', f)));
   put('ui/catalog.js', piCatalogScript());
   for (const w of [400, 600, 700]) { const src = path.join(design, 'fonts', `inter-${w}-latin.woff2`); if (fs.existsSync(src)) put(`ui/fonts/inter-${w}-latin.woff2`, fs.readFileSync(src)); }
-  // licenses: the plugin (MIT) and Inter (SIL OFL 1.1: the PI fonts and the outlines every key's text is drawn from)
+  // licenses: the plugin (Apache 2.0 + NOTICE) and Inter (SIL OFL 1.1: the PI fonts and the outlines every key's text is drawn from)
   const ofl = fs.readFileSync(path.join(root, 'src', 'scene', 'fonts', 'OFL.txt'));
   put('ui/fonts/OFL.txt', ofl);
   put('LICENSE.txt', licenseText({ root, ofl }));
+  put('NOTICE.txt', noticeText({ root }));
   // layouts + images
   put(CANVAS_LAYOUT_PATH, `${JSON.stringify(CANVAS_LAYOUT, null, '\t')}\n`);
   put(INFOBAR_LAYOUT_PATH, `${JSON.stringify(INFOBAR_LAYOUT, null, '\t')}\n`);

@@ -177,4 +177,8 @@ Don't edit these by hand:
 
 `devices:check`, `fonts:check`, `facets:check`, `catalog:check` and `island:check` exit non-zero when their output is stale.
 
+## License
+
+Prism Deck is part of Prism and is licensed under the [Apache License 2.0](LICENSE). Copyright 2026 JFH Inc. Created and authored by Jeremy Francis Hall ([jeremyfhall.com](https://jeremyfhall.com)). If you redistribute it or build on it, keep the [NOTICE](NOTICE) file (Apache License 2.0, Section 4(d)); the plugin and every icon pack ship it as `NOTICE.txt`.
+
 Inter is © The Inter Project Authors (SIL Open Font License 1.1).

@@ -106,8 +106,9 @@ test('plugin: the built folder passes the official schemas with file/image check
     assert.deepEqual(imageSize(path.join(built.dir, 'imgs/plugin/icon.png')), { w: 256, h: 256 });
     assert.deepEqual(imageSize(path.join(built.dir, 'imgs/plugin/icon@2x.png')), { w: 512, h: 512 });
     assert.deepEqual(imageSize(path.join(built.dir, 'imgs/actions/facet/strip.svg')), { w: 200, h: 100 });
-    for (const f of ['bin/plugin.js', 'bin/package.json', 'ui/pi.html', 'ui/catalog.js', 'layouts/prism-canvas.json', 'bin/prism-deck/src/plugin/runtime.js', 'bin/prism-deck/src/render.js', 'LICENSE.txt', 'ui/fonts/OFL.txt', 'bin/prism-deck/src/scene/fonts/OFL.txt']) assert.ok(fs.existsSync(path.join(built.dir, f)), f);
-    assert.match(fs.readFileSync(path.join(built.dir, 'LICENSE.txt'), 'utf8'), /MIT License[\s\S]*SIL OPEN FONT LICENSE Version 1\.1/);
+    for (const f of ['bin/plugin.js', 'bin/package.json', 'ui/pi.html', 'ui/catalog.js', 'layouts/prism-canvas.json', 'bin/prism-deck/src/plugin/runtime.js', 'bin/prism-deck/src/render.js', 'LICENSE.txt', 'NOTICE.txt', 'ui/fonts/OFL.txt', 'bin/prism-deck/src/scene/fonts/OFL.txt']) assert.ok(fs.existsSync(path.join(built.dir, f)), f);
+    assert.match(fs.readFileSync(path.join(built.dir, 'LICENSE.txt'), 'utf8'), /JFH Inc[\s\S]*Apache License[\s\S]*Version 2\.0[\s\S]*SIL OPEN FONT LICENSE Version 1\.1/);
+    assert.match(fs.readFileSync(path.join(built.dir, 'NOTICE.txt'), 'utf8'), /JFH Inc[\s\S]*Jeremy Francis Hall/);
     assert.match(fs.readFileSync(path.join(built.dir, 'ui/fonts/OFL.txt'), 'utf8'), /The Inter Project Authors/);
     assert.deepEqual(built.manifest.Profiles.map((p) => p.Name).sort(), Object.values(BUNDLED_PROFILES).sort(), 'profile names = the ones the runtime switches to');
     for (const f of ['bin/prism-deck/src/export', 'bin/prism-deck/src/plugin/dev', 'bin/prism-deck/src/web']) assert.equal(fs.existsSync(path.join(built.dir, f)), false, `${f} is not shipped`);
@@ -151,7 +152,8 @@ test('iconpack: a pack (GIF + PNG twins via src/raster, SVG otherwise) passes th
     assert.match(p.manifest.Version, /^\d+\.\d+\.\d+$/);
     const entries = readZip(p.zip);
     assert.ok(entries.some((e) => e.name.endsWith('/OFL.txt')), 'Inter OFL ships with the pack');
-    assert.match(entries.find((e) => e.name.endsWith('/license.txt')).data.toString('utf8'), /SIL OPEN FONT LICENSE/);
+    assert.match(entries.find((e) => e.name.endsWith('/license.txt')).data.toString('utf8'), /JFH Inc[\s\S]*Apache License[\s\S]*SIL OPEN FONT LICENSE/);
+    assert.match(entries.find((e) => e.name.endsWith('/NOTICE.txt')).data.toString('utf8'), /Jeremy Francis Hall/);
     if (R) {
       assert.ok(p.stats.gif > 0, 'animated glyphs became GIFs');
       for (const ic of p.icons.filter((x) => x.path.endsWith('.gif'))) {

@@ -20,7 +20,8 @@
     "src/",
     "docs/",
     "catalog/",
-    "linux/"
+    "linux/",
+    "NOTICE"
   ],
   "scripts": {
     "test": "node --test --test-timeout=600000 \"test/*.test.js\"",
@@ -52,7 +53,7 @@
     "dashboard",
     "prism"
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {},
   "bin": {
     "prism-deck": "./cli.js"
