@@ -15,6 +15,7 @@ import { SNIPPET_WRAPPER_CSS } from '../utils/snippet.js';
 import { terminalTools } from './terminal.js';
 import { deckTools } from './deck.js';
 import { deckLiveTools } from './deck-live.js';
+import { smartTools } from './smart.js';
 
 export class ToolError extends Error {
   constructor(message, { code = 'tool_error', data = null } = {}) {
@@ -1170,6 +1171,9 @@ export function buildTools() {
 
     // ============================== PRISM DECK: live editing via the plugin (8) ==============================
     ...deckLiveTools({ ToolError }),
+
+    // ============================== PRISM CONTROL SMART DECK: preferences via the "smart" pipe (9) ==============================
+    ...smartTools({ ToolError }),
   ];
 }
 

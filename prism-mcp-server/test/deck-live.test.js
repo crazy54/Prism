@@ -414,7 +414,7 @@ test('end to end over stdio: cli.js start → render a PNG → create a layout �
   const init = await srv.rpc('initialize', { protocolVersion: '2024-11-05', capabilities: {}, clientInfo: { name: 'e2e', version: '1' } });
   assert.match(init.result.instructions, /streamdeck__execute_action/);
   const list = await srv.rpc('tools/list', {});
-  assert.equal(list.result.tools.length, 58);
+  assert.equal(list.result.tools.length, 67);
   let r = await srv.call('deck_live_status');
   assert.equal(r.body.reachable, false, 'AI editing still off');
   r = await srv.call('deck_render', { facet: 'icon-mic', device: 'plus' });

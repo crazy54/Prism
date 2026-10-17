@@ -84,7 +84,7 @@ Add the server to your `claude_desktop_config.json` (see `examples/claude_deskto
 }
 ```
 
-Restart Claude Desktop; the 58 Prism tools appear in the tools menu. To use it next to Elgato's own Stream Deck MCP, see [Coexisting with Elgato's MCP](#coexisting-with-elgatos-stream-deck-mcp).
+Restart Claude Desktop; the 67 Prism tools appear in the tools menu. To use it next to Elgato's own Stream Deck MCP, see [Coexisting with Elgato's MCP](#coexisting-with-elgatos-stream-deck-mcp).
 
 ## Use with the Anthropic API
 
@@ -92,7 +92,7 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 
 ---
 
-## Tools (58)
+## Tools (67)
 
 ### Discovery & search (11)
 | Tool | Purpose |
@@ -220,7 +220,30 @@ Change what **Prism's own** keys, dials and screens show on the user's physical 
 
 Errors are structured (`isError: true`, `{ error, code, data: { hint } }`): `unreachable`, `ai_editing_off`, `not_paired`, `no_physical_key`, `rate_limited`, `unauthorized`, `requires_export`, `forbidden_behavior`, `invalid_ops`, `invalid_layout`, `device_mismatch`, `unknown_device`, `nothing_to_undo`.
 
-Full parameter schemas are returned by `tools/list` (deck tools also carry MCP `annotations`: read-only, destructive, idempotent). Per-tool example calls live in [`examples/`](./examples).
+### Prism Control Smart Deck — preferences (9)
+Tell **Prism Control's Smart Deck** (the one profile whose Smart Keys and Smart Dials Prism draws from what is on screen) what the user likes, in plain terms: "big icons", "camera on the left dial", "never show titles on stream", "keep Undo on that key in VS Code". Through Prism Control's `smart` named pipe (API v1; `prism-control/src/PrismControl.Smart/Control/`, client `utils/smart-pipe-client.js`).
+| Tool | Purpose |
+|------|---------|
+| `smart_status` | Reachable? "Allow AI preferences" on? Paired? Pending prompt (with its code)? What the deck follows (app, pack, context), decks with Smart slots (virtual decks can't approve), undo depth. Never errors: `reachable: false` with the reason when the channel is off. |
+| `smart_pair` | Start pairing (the top-left Smart Key of each physical deck shows **ALLOW AI?** and a 4-digit code; the user **holds** it 1.5 s) or poll it (`pending` · `approved` · `denied` · `expired`). |
+| `smart_get_prefs` | The preferences: on/off, label size, big icons, streamer-safe, paging, dial-by-category, app-switch delay, per-app pins and hidden verbs, plus the allowed values. |
+| `smart_set_pref` | Change several at once: `labelSize`, `bigIcons`, `streamerSafe`, `paging`, `dialCategories {camera: "left"}` (null unsets), `hidden {app, hide[], unhide[]}`, … Unknown keys are ignored and reported; `dryRun`. |
+| `smart_pin` | Pin a verb (key) or control (dial) of one app to a slot of a device kind, or `unpin`; validated against the pack, the context (optional) and the device grid. |
+| `smart_explain_slot` | "Why is this here?" for one Smart slot: what it shows, its binding, safety, the context rule that matched, the layout reason, whether it can run now. |
+| `smart_list` | `packs`, `contexts`, `verbs` (optionally in one context), `controls`, `devices` (connected decks + every kind's grid), `pins`, `history`. |
+| `smart_override` | A validated per-item user pack override (verb label/longLabel/glyph/monogram/priority/category, stricter safety, a keyboard-chord binding; control label/glyph/priority/category) written to `%APPDATA%\Prism\control\packs\<pack>.ai.json` (the user's own `<pack>.json` wins); `dryRun` first. |
+| `smart_undo` | Undo the last N AI changes (history 50). `changed_since` when the user edited the same thing afterwards: ask them before `force: true`. |
+
+**Consent and safety (enforced by Prism Control; the server only follows them).**
+1. **Off by default.** The pipe exists only while the user has switched **Allow AI preferences** on (Stream Deck app → a Smart Key → property inspector → AI preferences). Only then does Prism Control write the per-user discovery file `%APPDATA%\Prism\control\modules\smart\ingress.json` (`$PRISM_CONTROL_DIR` moves the root, `$PRISM_SMART_INGRESS` the file). **No file ⇒ `unreachable`**; the server never tries to switch anything on.
+2. **Per-user pipe + token.** `\\.\pipe\prism-control-smart-<128-bit hex>`: a current-user-only DACL, NETWORK denied, remote clients refused, a fresh name and 256-bit token on every start (re-read on every call; the first frame carries it and a wrong one is dropped unseen). The token is never logged, echoed or returned.
+3. **Approved on the device.** Only a 1.5 s **hold** on the glowing top-left Smart Key of a physical deck approves (a tap never does); Stream Deck Mobile, the Virtual Stream Deck and the MCP Deck never can (`no_physical_key`). Requests expire after 2 minutes; the PI can Deny or Revoke. Only `smart_status` and `smart_pair` work before approval.
+4. **Narrow by design.** Preferences, pins, hidden verbs and per-item overrides only. Overrides are validated like the packs load (no new errors) and may bind keyboard chords only — never text, macros, mouse, module or Sight bindings, never in display-only (online-competitive) packs, and safety only gets stricter. Nothing sends input, runs a verb or installs a profile.
+5. **Undo and audit.** Every change is undoable (50 steps) and audited (`%APPDATA%\Prism\control\modules\smart\audit.jsonl`, no secrets). 20 requests/s per session (`rate_limited` with `retryAfterMs`).
+
+Errors: `unreachable`, `ai_off`, `not_paired`, `no_physical_key`, `rate_limited`, `unknown_pack`, `unknown_item`, `unknown_context`, `not_in_context`, `unknown_device`, `invalid_slot`, `nothing_pinned`, `not_allowed`, `invalid_chord`, `invalid_override`, `safe_mode`, `changed_since`, `nothing_to_undo`.
+
+Full parameter schemas are returned by `tools/list` (deck and smart tools also carry MCP `annotations`: read-only, destructive, idempotent). Per-tool example calls live in [`examples/`](./examples).
 
 ---
 
@@ -308,7 +331,7 @@ prism-mcp-server/
 node --test          # or: npm test
 ```
 
-194 tests cover every tool (incl. paste-ready composition — one theme-resolved `:root`, the snippet wrapper and reset, no undefined `var()` on the fixture or a whole real gallery — the advanced-search & variant-matrix tools, the `themeSensitive` facet, the 6 Collections tools + `export_collection` formats, the 5 terminal-catalog tools and the 24 Prism Deck tools), the CSS/compose/validate utilities, the canonical theme token maps (Prism Night as the base, the Cloudscape skins, the generated Refraction layer in sync with `design/themes.js`), the `CollectionStore`, the `TerminalCatalogStore` and `DeckCatalogStore` (island vs. JSON fallback, malformed/missing sources), the JSON-RPC protocol layer, and loading the real `Prism.html` islands. The deck tests use a fixture copied from the real deck catalog and the real `prism-deck` engine (renders, PNGs, layout validation, `.streamDeckProfile` / `.streamDeckIconPack` exports checked by the exporters' own checkers). The live tests run the plugin's **real control-channel code** (`prism-deck/src/plugin/control.js`) against a fake plugin runtime — pairing by a simulated key press, the pairing and per-key rate limits, safety refusals, apply / snapshot / undo, AI editing off, stale tokens — plus a raw fake server for headers and timeouts, a static check that no deck code reaches the Stream Deck app, and an end-to-end run of `cli.js start` over real stdio. No test reads the user's real `control.json` or talks to the Stream Deck app.
+206 tests cover every tool (incl. paste-ready composition — one theme-resolved `:root`, the snippet wrapper and reset, no undefined `var()` on the fixture or a whole real gallery — the advanced-search & variant-matrix tools, the `themeSensitive` facet, the 6 Collections tools + `export_collection` formats, the 5 terminal-catalog tools and the 24 Prism Deck tools), the CSS/compose/validate utilities, the canonical theme token maps (Prism Night as the base, the Cloudscape skins, the generated Refraction layer in sync with `design/themes.js`), the `CollectionStore`, the `TerminalCatalogStore` and `DeckCatalogStore` (island vs. JSON fallback, malformed/missing sources), the JSON-RPC protocol layer, and loading the real `Prism.html` islands. The deck tests use a fixture copied from the real deck catalog and the real `prism-deck` engine (renders, PNGs, layout validation, `.streamDeckProfile` / `.streamDeckIconPack` exports checked by the exporters' own checkers). The live tests run the plugin's **real control-channel code** (`prism-deck/src/plugin/control.js`) against a fake plugin runtime — pairing by a simulated key press, the pairing and per-key rate limits, safety refusals, apply / snapshot / undo, AI editing off, stale tokens — plus a raw fake server for headers and timeouts, a static check that no deck code reaches the Stream Deck app, and an end-to-end run of `cli.js start` over real stdio. The 9 Smart Deck tools run against a fake `smart` named-pipe server (the real wire format and token check, an in-memory model of preferences, pins, overrides, pairing and undo): unreachable and malformed discovery files, a wrong token dropped unseen, the API version, pairing by a simulated hold, every tool's success and refusal paths, `changed_since` undo, timeouts, and that the token never appears in any output. No test reads the user's real `control.json` or `ingress.json`, or talks to the Stream Deck app or Prism Control.
 
 ---
 

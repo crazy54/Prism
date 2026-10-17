@@ -35,11 +35,11 @@ test('notification (no id) yields no response', async () => {
   assert.equal(s.initialized, true);
 });
 
-test('tools/list returns 58 tools with schemas (34 web/terminal + 16 deck design + 8 deck live)', async () => {
+test('tools/list returns 67 tools with schemas (34 web/terminal + 16 deck design + 8 deck live + 9 smart deck)', async () => {
   const s = fixtureServer();
   const res = await s.handleMessage({ jsonrpc: '2.0', id: 2, method: 'tools/list' });
-  assert.equal(res.result.tools.length, 58);
-  assert.equal(new Set(res.result.tools.map((t) => t.name)).size, 58, 'tool names are unique');
+  assert.equal(res.result.tools.length, 67);
+  assert.equal(new Set(res.result.tools.map((t) => t.name)).size, 67, 'tool names are unique');
   for (const t of res.result.tools) {
     assert.ok(t.name && t.description && t.inputSchema, `tool ${t.name} well-formed`);
     assert.equal(t.inputSchema.type, 'object');
@@ -77,7 +77,7 @@ test('unknown tool yields -32602 with available tools', async () => {
   const s = fixtureServer();
   const res = await s.handleMessage({ jsonrpc: '2.0', id: 6, method: 'tools/call', params: { name: 'nope' } });
   assert.equal(res.error.code, -32602);
-  assert.ok(res.error.data.availableTools.length === 58);
+  assert.ok(res.error.data.availableTools.length === 67);
 });
 
 test('ping responds', async () => {
