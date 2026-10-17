@@ -1,0 +1,187 @@
+{
+    "provider": {
+        "name": "Counter-Strike: Global Offensive",
+        "appid": 730,
+        "version": 14191,
+        "steamid": "76561198000000001",
+        "timestamp": 1791662800
+    },
+    "map": {
+        "mode": "competitive",
+        "name": "de_ancient",
+        "phase": "live",
+        "round": 10,
+        "team_ct": {
+            "score": 6,
+            "consecutive_round_losses": 0,
+            "timeouts_remaining": 2,
+            "matches_won_this_series": 0,
+            "name": "Example Blue"
+        },
+        "team_t": {
+            "score": 4,
+            "consecutive_round_losses": 2,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 0,
+            "name": "Example Gold"
+        },
+        "num_matches_to_win_series": 0
+    },
+    "round": {
+        "phase": "live",
+        "bomb": "planted"
+    },
+    "player": {
+        "steamid": "76561198000000003",
+        "name": "Halcyon",
+        "observer_slot": 1,
+        "team": "CT",
+        "activity": "playing",
+        "state": {
+            "health": 67,
+            "armor": 100,
+            "helmet": true,
+            "defusekit": true,
+            "flashed": 0,
+            "smoked": 0,
+            "burning": 0,
+            "money": 1400,
+            "round_kills": 1,
+            "round_killhs": 0,
+            "equip_value": 5200,
+            "round_totaldmg": 112
+        },
+        "weapons": {
+            "weapon_0": {
+                "name": "weapon_knife",
+                "paintkit": "default",
+                "type": "Knife",
+                "state": "holstered"
+            },
+            "weapon_1": {
+                "name": "weapon_m4a1_silencer",
+                "paintkit": "default",
+                "type": "Rifle",
+                "ammo_clip": 9,
+                "ammo_clip_max": 20,
+                "ammo_reserve": 2,
+                "state": "active"
+            }
+        },
+        "match_stats": {
+            "kills": 14,
+            "assists": 3,
+            "deaths": 10,
+            "mvps": 2,
+            "score": 33
+        },
+        "spectarget": "76561198000000003",
+        "position": "869.10, 83.00, 130.00",
+        "forward": "0.71, -0.70, -0.05"
+    },
+    "phase_countdowns": {
+        "phase": "defuse",
+        "phase_ends_in": "5.0"
+    },
+    "allplayers": {
+        "76561198000000003": {
+            "name": "Halcyon",
+            "observer_slot": 1,
+            "team": "CT",
+            "state": {
+                "health": 67,
+                "armor": 100,
+                "helmet": true,
+                "defusekit": true,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 1400,
+                "round_kills": 1,
+                "round_killhs": 0,
+                "equip_value": 5200,
+                "round_totaldmg": 112
+            },
+            "match_stats": {
+                "kills": 14,
+                "assists": 3,
+                "deaths": 10,
+                "mvps": 2,
+                "score": 33
+            },
+            "weapons": {
+                "weapon_0": {
+                    "name": "weapon_knife",
+                    "paintkit": "default",
+                    "type": "Knife",
+                    "state": "holstered"
+                },
+                "weapon_1": {
+                    "name": "weapon_m4a1_silencer",
+                    "paintkit": "default",
+                    "type": "Rifle",
+                    "ammo_clip": 9,
+                    "ammo_clip_max": 20,
+                    "ammo_reserve": 2,
+                    "state": "active"
+                }
+            },
+            "position": "869.10, 83.00, 130.00",
+            "forward": "0.71, -0.70, -0.05"
+        },
+        "76561198000000004": {
+            "name": "Vesper",
+            "observer_slot": 6,
+            "team": "T",
+            "state": {
+                "health": 100,
+                "armor": 100,
+                "helmet": true,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 1400,
+                "round_kills": 1,
+                "round_killhs": 0,
+                "round_totaldmg": 112,
+                "equip_value": 5200
+            },
+            "match_stats": {
+                "kills": 14,
+                "assists": 3,
+                "deaths": 10,
+                "mvps": 2,
+                "score": 33
+            },
+            "weapons": {
+                "weapon_0": {
+                    "name": "weapon_knife",
+                    "paintkit": "default",
+                    "type": "Knife",
+                    "state": "holstered"
+                },
+                "weapon_1": {
+                    "name": "weapon_ak47",
+                    "paintkit": "default",
+                    "type": "Rifle",
+                    "ammo_clip": 30,
+                    "ammo_clip_max": 30,
+                    "ammo_reserve": 3,
+                    "state": "active"
+                }
+            },
+            "position": "869.10, 83.00, 130.00",
+            "forward": "0.71, -0.70, -0.05"
+        }
+    },
+    "grenades": {},
+    "bomb": {
+        "state": "defusing",
+        "position": "869.1, 83.0, 130.0",
+        "player": "76561198000000003",
+        "countdown": "5.034"
+    },
+    "auth": {
+        "token": "prism-gsi-example-token-0001"
+    }
+}

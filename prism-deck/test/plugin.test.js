@@ -211,6 +211,8 @@ async function plugin(opts = {}) {
 }
 const imageOf = (m) => decodeSvgDataUrl(m.event === 'setImage' ? m.payload.image : m.payload.canvas);
 const framesTo = (sd, ctx) => sd.received.filter((m) => (m.event === 'setImage' || m.event === 'setFeedback') && m.context === ctx);
+// every context's first frame (a fixed settle can return before a cold or busy runtime has drawn)
+const firstFrames = (sd, ctxs, timeoutMs = 3000) => Promise.all(ctxs.map((c) => sd.waitFor((m) => (m.event === 'setImage' || m.event === 'setFeedback') && m.context === c, { timeoutMs })));
 
 test('runtime: a key draws its facet as a deck-subset SVG data URL; a press toggles and persists state', async () => {
   const t = await plugin();
@@ -233,6 +235,7 @@ test('runtime: a span facet on three keys renders one block sliced per key; a lo
   const t = await plugin();
   try {
     const ks = [0, 1, 2].map((c) => t.sd.appear({ device: t.galleon.id, col: c, row: 1, settings: { facet: 'span-waveform' } }));
+    await firstFrames(t.sd, ks);
     await t.sd.settle(120);
     const last = ks.map((k) => framesTo(t.sd, k).at(-1));
     assert.ok(last.every(Boolean), 'every key of the span got a frame');
@@ -271,6 +274,7 @@ test('runtime: the Galleon screen spans its 4 widgets (dial, layer); the Neo inf
   const t = await plugin({ devices: [{ id: 'g', name: 'Galleon 100 SD', size: { columns: 3, rows: 4 }, type: 12 }, { id: 'n', name: 'Stream Deck Neo', size: { columns: 4, rows: 2 }, type: 9 }] });
   try {
     const ws = [[0, 0], [1, 0], [0, 1], [1, 1]].map(([c, r]) => t.sd.appear({ device: 'g', controller: 'Encoder', col: c, row: r, settings: {} }));
+    await firstFrames(t.sd, ws);
     await t.sd.settle(150);
     assert.ok(ws.every((c) => framesTo(t.sd, c).length), 'all four widgets drawn');
     const unit = t.p.runtime.stats().devices.g.units[0];

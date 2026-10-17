@@ -16,7 +16,9 @@ export const GALLERIES = [
   {
     id: 'icons', title: 'Icons', icon: 'grid', hue: 269.8, prefix: ['icon'], surfaces: ['key'],
     blurb: 'One facet per glyph — 48-unit geometry with states and idle motion, rendered in any theme.',
-    categories: ['Media', 'Audio', 'Streaming', 'System', 'Status', 'Time', 'Navigation', 'Productivity', 'Dev & Ops', 'Home & Light'],
+    categories: ['Media', 'Audio', 'Streaming', 'System', 'Status', 'Time', 'Navigation', 'Productivity', 'Dev & Ops', 'Home & Light',
+      // ── Prism Play glyphs ── the glyph families added in the Prism Play pass (build · edit · window · game), appended
+      'Building', 'Editing', 'Windows', 'Games'],
   },
   {
     id: 'motion', title: 'Motion', icon: 'pulse', hue: 243.6, prefix: ['press', 'state', 'idle', 'alert'], surfaces: ['key'],
@@ -48,6 +50,12 @@ export const GALLERIES = [
     blurb: 'Games and toys played on the keys: puzzles across a block of keys, chance and reflex games on one — stateful facets (scene/game.js).',
     categories: ['Puzzles', 'Chance', 'Reflex', 'Board'],
   },
+  // ── Game Link (prism-play) ── appended last so the manifest and showcase order stay stable
+  {
+    id: 'gamelink', title: 'Game Link', icon: 'link', hue: 217.5, prefix: ['gamelink'], surfaces: ['key', 'span', 'strip', 'screen', 'deck'],
+    blurb: 'Your game on the deck: live Counter-Strike 2 data (Valve Game State Integration) and local companions drive health, ammo, money, rounds and whole-deck moments.',
+    categories: ['Whole Deck', 'Vitals', 'Round & Bomb', 'Match', 'Strips & Screens'],
+  },
 ];
 
 export const GALLERY_IDS = GALLERIES.map((g) => g.id);
@@ -58,4 +66,6 @@ export const getGallery = (id) => BY_ID.get(id) || null;
 export const GLYPH_CATEGORIES = {
   media: 'Media', audio: 'Audio', stream: 'Streaming', system: 'System', status: 'Status', time: 'Time',
   nav: 'Navigation', productivity: 'Productivity', dev: 'Dev & Ops', home: 'Home & Light',
+  // ── Prism Play glyphs ── (icons/_more.js files these families here now that the categories exist)
+  build: 'Building', edit: 'Editing', window: 'Windows', game: 'Games',
 };

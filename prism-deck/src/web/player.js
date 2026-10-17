@@ -245,7 +245,7 @@ class Slot {
     return { device: rt.modelId, theme: rt.opts.theme, mode: rt.opts.mode, t, since: Math.max(0, t - this.stateAt), state: this.state, params: this.params, seed: this.seed,
       pressed: this.pressed, pressAge: this.pressAt === -Infinity ? Infinity : Math.max(0, t - this.pressAt), value: this.value, ticks: this.ticks, values: rt.dialValues?.(),
       pressKey: this.pressKey, heldFor: this.heldFor || 0, ...inputState(this, t),
-      now: rt.opts.now ? rt.opts.now() : Date.now(), tzOffset: rt.opts.tzOffset ?? -new Date().getTimezoneOffset(), reduced: rt.still, idPrefix: this.prefix, data: rt.bus.data(this.facet, this.params, rt.opts.data?.() || {}), uniqueIds: true,
+      now: rt.opts.now ? rt.opts.now() : Date.now(), tzOffset: rt.opts.tzOffset ?? -new Date().getTimezoneOffset(), reduced: rt.still, motion: rt.still ? 'still' : rt.opts.motion, idPrefix: this.prefix, data: rt.bus.data(this.facet, this.params, rt.opts.data?.() || {}), uniqueIds: true,
       ...(this.game ? this.game.renderOpts(rt.time()) : {}), ...this.extra };
   }
 
@@ -400,7 +400,7 @@ class Runtime {
 /**
  * A virtual device. opts: { model, theme, mode, width | scale | fit, maxHeight, maxWidth, keys: [facet|spec|id],
  * facet (span/deck over the device; the keys a span does not cover take opts.keys), strip (a full-strip facet),
- * dials: [segment facets], screen (screen facet), dialValues, interactive, autoPause, reducedMotion, fpsCap, seed,
+ * dials: [segment facets], screen (screen facet), dialValues, interactive, autoPause, reducedMotion, motion ('full' | 'calm' → ctx.motion), fpsCap, seed,
  * speed, data(), now(), tzOffset, resolve(id), onPress, onRotate, onTouch, onGame, label, bus (a createLinkBus() shared with other
  * devices on the page, so linked keys agree across them) }.
  * fit: true sizes the device to the host's width (capped by maxHeight / maxWidth) and follows resizes;

@@ -1,0 +1,109 @@
+{
+    "provider": {
+        "name": "Counter-Strike: Global Offensive",
+        "appid": 730,
+        "version": 14191,
+        "steamid": "76561198000000001",
+        "timestamp": 1791659457
+    },
+    "map": {
+        "mode": "competitive",
+        "name": "de_inferno",
+        "phase": "live",
+        "round": 6,
+        "team_ct": {
+            "score": 4,
+            "consecutive_round_losses": 0,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 0
+        },
+        "team_t": {
+            "score": 2,
+            "consecutive_round_losses": 2,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 0
+        },
+        "num_matches_to_win_series": 0,
+        "round_wins": {
+            "1": "ct_win_elimination",
+            "2": "t_win_elimination",
+            "3": "ct_win_elimination",
+            "4": "ct_win_defuse",
+            "5": "t_win_bomb",
+            "6": "ct_win_elimination"
+        }
+    },
+    "round": {
+        "phase": "live"
+    },
+    "player": {
+        "steamid": "76561198000000001",
+        "name": "PrismPilot",
+        "observer_slot": 6,
+        "team": "CT",
+        "activity": "playing",
+        "state": {
+            "health": 73,
+            "armor": 91,
+            "helmet": true,
+            "defusekit": true,
+            "flashed": 64,
+            "smoked": 0,
+            "burning": 0,
+            "money": 850,
+            "round_kills": 0,
+            "round_killhs": 0,
+            "equip_value": 4700
+        },
+        "weapons": {
+            "weapon_0": {
+                "name": "weapon_knife",
+                "paintkit": "default",
+                "type": "Knife",
+                "state": "holstered"
+            },
+            "weapon_1": {
+                "name": "weapon_usp_silencer",
+                "paintkit": "default",
+                "type": "Pistol",
+                "ammo_clip": 12,
+                "ammo_clip_max": 12,
+                "ammo_reserve": 2,
+                "state": "holstered"
+            },
+            "weapon_2": {
+                "name": "weapon_m4a1_silencer",
+                "paintkit": "default",
+                "type": "Rifle",
+                "ammo_clip": 20,
+                "ammo_clip_max": 20,
+                "ammo_reserve": 3,
+                "state": "active"
+            },
+            "weapon_3": {
+                "name": "weapon_flashbang",
+                "paintkit": "default",
+                "type": "Grenade",
+                "ammo_reserve": 1,
+                "state": "holstered"
+            }
+        },
+        "match_stats": {
+            "kills": 7,
+            "assists": 1,
+            "deaths": 4,
+            "mvps": 2,
+            "score": 17
+        }
+    },
+    "previously": {
+        "player": {
+            "state": {
+                "flashed": 113
+            }
+        }
+    },
+    "auth": {
+        "token": "prism-gsi-example-token-0001"
+    }
+}

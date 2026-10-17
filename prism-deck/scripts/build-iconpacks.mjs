@@ -14,6 +14,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildIconPack, checkIconPack, loadRaster } from '../src/export/iconpack.js';
 import { sampleProfiles, checkProfile } from '../src/export/profile.js';
+import { gameProfiles } from '../src/export/profile.js';   // Game Link (prism-play)
 import { THEME_IDS } from '../src/themes/_registry.js';
 import { PLUGIN_VERSION } from '../src/plugin/index.js';
 
@@ -48,6 +49,14 @@ async function main() {
       const problems = checkProfile(p.zip);
       if (problems.length) { failed++; console.error(`${p.name}: ${problems.join('; ')}`); }
       console.log(`${p.name}: ${p.pages.length} page(s), Device.Model ${p.package.DeviceModel}${p.dropped.length ? `, dropped ${p.dropped.length}` : ''} → ${path.relative(ROOT, file)}`);
+    }
+    // ── Game Link (prism-play) ── the CS2 profiles ("Prism · CS2 — <device>")
+    for (const p of gameProfiles({ pluginVersion: PLUGIN_VERSION })) {
+      const file = path.join(out, 'profiles', `${p.file}.streamDeckProfile`);
+      fs.writeFileSync(file, p.zip);
+      const problems = checkProfile(p.zip);
+      if (problems.length || p.dropped.length) { failed++; console.error(`${p.name}: ${[...problems, ...p.dropped.map((d) => JSON.stringify(d))].join('; ')}`); }
+      console.log(`${p.name}: ${p.pages.length} page(s), Device.Model ${p.package.DeviceModel} → ${path.relative(ROOT, file)}`);
     }
   }
   if (failed) process.exitCode = 1;

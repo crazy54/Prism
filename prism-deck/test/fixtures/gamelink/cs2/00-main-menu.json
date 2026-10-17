@@ -1,0 +1,17 @@
+{
+    "provider": {
+        "name": "Counter-Strike: Global Offensive",
+        "appid": 730,
+        "version": 14191,
+        "steamid": "76561198000000001",
+        "timestamp": 1791658800
+    },
+    "player": {
+        "steamid": "76561198000000001",
+        "name": "PrismPilot",
+        "activity": "menu"
+    },
+    "auth": {
+        "token": "prism-gsi-example-token-0001"
+    }
+}

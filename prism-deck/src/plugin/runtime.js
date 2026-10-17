@@ -29,6 +29,7 @@ import { createTimer } from '../apps/sources/timer.js';
 import { createGameHost, GAME_RESET_HOLD_S, GAME_FPS } from '../scene/game.js';
 import { createLinkBus, readoutOf, linksOf } from '../scene/link.js';
 import { facetMode, facetsFor, normalizeSettings, normalizeGlobals, compactSettings, GROUP_MODES, DEFAULT_GLOBALS, bundledProfileFor } from './settings.js';
+import { gameProfileFor } from './settings.js';   // Game Link (prism-play): press { kind: 'profile', profile: 'cs2' }
 import { CANVAS_LAYOUT_PATH, INFOBAR_LAYOUT_PATH, canvasPayload, widgetCanvas, fitCanvas, galleonWidgetRects } from './feedback.js';
 import { SYSTEM_FACETS, PAIR_HOLD_S } from './system-facets.js';
 import { DEMO_KEYS, withDemoBadge, badgeTarget } from './demo-badge.js';
@@ -51,6 +52,8 @@ const GAME_MODES = new Set(['key', 'span', 'deck']); // where games run (docs/ga
 const spanOf = (members) => { const cs = members.map((m) => m.col), rs = members.map((m) => m.row); const col = Math.min(...cs), row = Math.min(...rs); return { col, row, cols: Math.max(...cs) - col + 1, rows: Math.max(...rs) - row + 1 }; };
 const REALLOC_MS = 2000;
 const PREVIEW_MS = 250;
+const DATA_PUSH_MS = 100;         // Game Link (prism-play): ≤ 10 non-urgent data paints/s per unit (runtime.dataChanged)
+const URGENT_GAP_MS = 100;        // Game Link (prism-play): ≤ 1 queue-jumping (priority) data paint per unit per 100 ms; closer ones trail
 
 const exactFacet = (id) => { if (typeof id !== 'string') return null; const f = findFacet(id); return f && f.id === id ? f : null; };
 const hashStr = (s) => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
@@ -442,6 +445,7 @@ export class PrismRuntime extends EventEmitter {
       now: this.wallNow(),
       tzOffset: -new Date(this.wallNow()).getTimezoneOffset(),
       reduced: still,
+      motion: this.motionLevel(u),   // ctx.motion: full | calm | still (Game Link, prism-play)
     };
   }
 
@@ -483,8 +487,8 @@ export class PrismRuntime extends EventEmitter {
     if (u.demo && t - u.demo.at < 1000) return u.demo.keys;
     const hubKeys = keys.filter((k) => !AUDIO_KEYS.includes(k));
     const src = hubKeys.length && typeof this.data.sourceOf === 'function' ? this.data.sourceOf(hubKeys) : {};
-    const audioLive = !!this.audio && !!u.audioRelease && this.audio.mode === 'live';
-    const out = keys.filter((k) => (AUDIO_KEYS.includes(k) ? !audioLive : !(src[k] === 'live' || src[k] === 'custom')));
+    const audioLive = (k) => !!this.audio && !!u.audioRelease && (this.audio.modeOf?.(k) ?? this.audio.mode) === 'live';
+    const out = keys.filter((k) => (AUDIO_KEYS.includes(k) ? !audioLive(k) : !(src[k] === 'live' || src[k] === 'custom')));
     u.demo = { at: t, keys: out.length ? out : null };
     return u.demo.keys;
   }
@@ -912,7 +916,7 @@ export class PrismRuntime extends EventEmitter {
     if (!b) return false;
     let ok = false;
     if (b.kind === 'url') ok = this.conn.openUrl(b.url) !== false;
-    else if (b.kind === 'profile') { const name = bundledProfileFor(dev?.type); ok = !!name && this.conn.switchToProfile(dev.id, name, b.page ? b.page - 1 : undefined) !== false; }
+    else if (b.kind === 'profile') { const name = b.profile ? gameProfileFor(dev?.type, b.profile) : bundledProfileFor(dev?.type); ok = !!name && this.conn.switchToProfile(dev.id, name, b.page ? b.page - 1 : undefined) !== false; }   // b.profile: Game Link (prism-play)
     else if (b.kind === 'back') ok = this.conn.switchToProfile(dev.id) !== false;
     if (!ok) this.conn.showAlert?.(inst.context);
     return ok;
@@ -1052,6 +1056,7 @@ export class PrismRuntime extends EventEmitter {
       calendar: cal?.ok ? 'live' : 'demo',
       calendarFile: this.globals.calendarFile || '',
       calendarCheck: cal ? { ok: !!cal.ok, pending: !!cal.pending, events: cal.events ?? null, error: cal.error || null } : null,
+      gamelink: this.gameLinkStatus ? this.gameLinkStatus().state || 'off' : 'off',   // Game Link (prism-play): live | waiting | off
       platform: process.platform,
     };
   }
@@ -1096,6 +1101,7 @@ export class PrismRuntime extends EventEmitter {
       demo: u ? this.demoKeys(u) : null,
       globals: this.globals,
       live: this.liveStatus ? this.liveStatus() : { running: false },
+      gameLink: this.gameLinkStatus ? this.gameLinkStatus() : null,   // Game Link (prism-play): src/plugin/gamelink.js
     };
   }
 
@@ -1129,6 +1135,7 @@ export class PrismRuntime extends EventEmitter {
         this.sendPiState();
         break;
       }
+      case 'gamelink': this.emit('pi-gamelink', p); break;   // Game Link (prism-play): { action: 'status' | 'connect-cs2' | 'disconnect-cs2' | 'port' }
       default: break;
     }
   }
@@ -1194,6 +1201,65 @@ export class PrismRuntime extends EventEmitter {
     }
     return { devices, instances: this.instances.size, scheduler: { ...this.scheduler.stats, active: this.scheduler.active }, bufferedAmount: this.conn.bufferedAmount || 0, limits: this.globals.limits };
   }
+
+  // ── Game Link (prism-play) ──
+  /**
+   * Live data changed (a source pushed — Game Link today): wake every unit whose facet reads one of `keys` and paint
+   * it now, so a flashbang lands within one frame even when the unit idles at the 2 fps probe or renders nothing under
+   * Still (fps 0: pushes are its only frames). urgent = a new game event: that first frame jumps the queue (priority)
+   * and a short burst follows (Full only: Calm keeps its ≤ 4 fps, Still its zero). Non-urgent pushes are coalesced to
+   * ≤ 1 paint per DATA_PUSH_MS per unit (leading + trailing), so a 20 posts/s stream never renders a whole deck 20 times
+   * a second; an urgent push closer than URGENT_GAP_MS to the unit's last priority paint trails the same way (gamelink-fix).
+   */
+  dataChanged(keys = [], { urgent = false } = {}) {
+    const ks = Array.isArray(keys) ? keys : [keys];
+    if (!ks.length || !this.isRunning()) return 0;
+    const t = this.now();
+    let n = 0;
+    for (const u of this.units.values()) {
+      if (!u.facet?.data?.some((k) => ks.includes(k)) || u.cfg.overlay || u.cfg.system || u.cfg.blank || u.cfg.image) continue;
+      u.demo = null;                     // waiting ↔ demo ↔ live: the DEMO tag follows the data at once
+      u.idle = false; u.stable = 0; u.gov?.reset?.();
+      if (urgent && this.motionLevel(u) === 'full') u.burstUntil = Math.max(u.burstUntil || 0, t + BURST_S * 1000);
+      this.setFps(u);
+      this.paintData(u, urgent);
+      n++;
+    }
+    if (n && urgent) this.reallocate();
+    return n;
+  }
+
+  /**
+   * One data-driven paint for a unit: now (an urgent push whose unit hasn't jumped the queue for URGENT_GAP_MS, or the
+   * unit's last data paint is old enough), else once, trailing. Only the first frame of an effect is a priority frame:
+   * a stream of events (a companion tagging every post, damage ticks) can't pin the update budget every device shares.
+   */
+  paintData(u, urgent) {
+    const t = this.now();
+    const jump = !!urgent && t - (u.urgentPaintAt ?? -Infinity) >= URGENT_GAP_MS;
+    const wait = DATA_PUSH_MS - (t - (u.dataPaintAt ?? -Infinity));
+    if (jump || wait <= 0) {
+      if (u.dataTimer) { this.clearTimer(u.dataTimer); u.dataTimer = null; }
+      u.dataPaintAt = t;
+      if (jump) u.urgentPaintAt = t;
+      this.paint(u, { priority: jump });
+      return;
+    }
+    if (u.dataTimer) return;             // a trailing paint is already due: it will read the newest data
+    u.dataTimer = this.setTimer(() => {
+      u.dataTimer = null;
+      if (!this.isRunning() || this.units.get(u.key) !== u) return;
+      u.dataPaintAt = this.now();
+      this.paint(u);
+    }, Math.ceil(wait));
+    u.dataTimer?.unref?.();
+  }
+
+  /** Between start() and stop(). */
+  isRunning() { return this.started && this.reallocTimer !== null; }
+
+  /** ctx.motion for a unit: 'full' | 'calm' | 'still' (photosensitive effects follow it; Calm = soft). */
+  motionLevel(u) { const m = this.motionOf(u); return m === 'still' || m === 'calm' ? m : 'full'; }
 }
 
 export const createRuntime = (opts) => new PrismRuntime(opts);

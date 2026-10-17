@@ -6,55 +6,191 @@ import * as m3 from './audio/mixer.js';
 import * as m4 from './audio/music-note.js';
 import * as m5 from './audio/volume.js';
 import * as m6 from './audio/waveform.js';
-import * as m7 from './dev/bug.js';
-import * as m8 from './dev/cloud.js';
-import * as m9 from './dev/code.js';
-import * as m10 from './dev/git-branch.js';
-import * as m11 from './dev/rocket.js';
-import * as m12 from './dev/terminal.js';
-import * as m13 from './home/bulb.js';
-import * as m14 from './home/fan.js';
-import * as m15 from './home/plug.js';
-import * as m16 from './home/thermostat.js';
-import * as m17 from './media/play-pause.js';
-import * as m18 from './media/record.js';
-import * as m19 from './media/shuffle.js';
-import * as m20 from './media/skip-next.js';
-import * as m21 from './media/skip-prev.js';
-import * as m22 from './media/stop.js';
-import * as m23 from './nav/back.js';
-import * as m24 from './nav/folder.js';
-import * as m25 from './nav/home.js';
-import * as m26 from './nav/pages.js';
-import * as m27 from './nav/search.js';
-import * as m28 from './productivity/coffee.js';
-import * as m29 from './productivity/mail.js';
-import * as m30 from './productivity/note.js';
-import * as m31 from './productivity/target.js';
-import * as m32 from './status/alert.js';
-import * as m33 from './status/check.js';
-import * as m34 from './status/info.js';
-import * as m35 from './status/lock.js';
-import * as m36 from './status/power.js';
-import * as m37 from './status/sync.js';
-import * as m38 from './stream/broadcast.js';
-import * as m39 from './stream/camera.js';
-import * as m40 from './stream/chat.js';
-import * as m41 from './stream/marker.js';
-import * as m42 from './stream/scene.js';
-import * as m43 from './stream/viewers.js';
-import * as m44 from './system/battery.js';
-import * as m45 from './system/cpu.js';
-import * as m46 from './system/disk.js';
-import * as m47 from './system/gpu.js';
-import * as m48 from './system/memory.js';
-import * as m49 from './system/network.js';
-import * as m50 from './system/wifi.js';
-import * as m51 from './time/alarm.js';
-import * as m52 from './time/calendar.js';
-import * as m53 from './time/clock.js';
-import * as m54 from './time/stopwatch.js';
-import * as m55 from './time/timer.js';
+import * as m7 from './build/align.js';
+import * as m8 from './build/auto-complete.js';
+import * as m9 from './build/bank-left.js';
+import * as m10 from './build/bank-level.js';
+import * as m11 from './build/bank-right.js';
+import * as m12 from './build/bank.js';
+import * as m13 from './build/booster.js';
+import * as m14 from './build/brake.js';
+import * as m15 from './build/chain-lift.js';
+import * as m16 from './build/falloff.js';
+import * as m17 from './build/heatmap.js';
+import * as m18 from './build/length-minus.js';
+import * as m19 from './build/length-plus.js';
+import * as m20 from './build/loop.js';
+import * as m21 from './build/path.js';
+import * as m22 from './build/pitch-down.js';
+import * as m23 from './build/pitch-level.js';
+import * as m24 from './build/pitch-up.js';
+import * as m25 from './build/pitch.js';
+import * as m26 from './build/smooth.js';
+import * as m27 from './build/special.js';
+import * as m28 from './build/stairs.js';
+import * as m29 from './build/station.js';
+import * as m30 from './build/terrain.js';
+import * as m31 from './build/track-curve-left.js';
+import * as m32 from './build/track-curve-right.js';
+import * as m33 from './build/track-straight.js';
+import * as m34 from './dev/bug.js';
+import * as m35 from './dev/build.js';
+import * as m36 from './dev/cloud.js';
+import * as m37 from './dev/code.js';
+import * as m38 from './dev/definition.js';
+import * as m39 from './dev/diff.js';
+import * as m40 from './dev/fold.js';
+import * as m41 from './dev/git-branch.js';
+import * as m42 from './dev/references.js';
+import * as m43 from './dev/rocket.js';
+import * as m44 from './dev/step-into.js';
+import * as m45 from './dev/step-out.js';
+import * as m46 from './dev/symbol.js';
+import * as m47 from './dev/terminal.js';
+import * as m48 from './edit/brush.js';
+import * as m49 from './edit/clear.js';
+import * as m50 from './edit/copy.js';
+import * as m51 from './edit/cursor.js';
+import * as m52 from './edit/cut.js';
+import * as m53 from './edit/delete.js';
+import * as m54 from './edit/edit.js';
+import * as m55 from './edit/forward.js';
+import * as m56 from './edit/magnet.js';
+import * as m57 from './edit/move.js';
+import * as m58 from './edit/paste.js';
+import * as m59 from './edit/rename.js';
+import * as m60 from './edit/replace.js';
+import * as m61 from './edit/rotate.js';
+import * as m62 from './edit/scale.js';
+import * as m63 from './edit/select.js';
+import * as m64 from './edit/snap.js';
+import * as m65 from './game/beam.js';
+import * as m66 from './game/boost.js';
+import * as m67 from './game/crouch.js';
+import * as m68 from './game/exocraft.js';
+import * as m69 from './game/follow.js';
+import * as m70 from './game/freighter.js';
+import * as m71 from './game/galaxy.js';
+import * as m72 from './game/gamepad.js';
+import * as m73 from './game/height.js';
+import * as m74 from './game/jetpack.js';
+import * as m75 from './game/jump.js';
+import * as m76 from './game/land.js';
+import * as m77 from './game/roll.js';
+import * as m78 from './game/scanner.js';
+import * as m79 from './game/sun.js';
+import * as m80 from './game/walk.js';
+import * as m81 from './game/warp.js';
+import * as m82 from './home/bulb.js';
+import * as m83 from './home/fan.js';
+import * as m84 from './home/leaf.js';
+import * as m85 from './home/plug.js';
+import * as m86 from './home/thermostat.js';
+import * as m87 from './media/artist.js';
+import * as m88 from './media/chapter-next.js';
+import * as m89 from './media/chapter-prev.js';
+import * as m90 from './media/forward-10.js';
+import * as m91 from './media/frame-next.js';
+import * as m92 from './media/frame-prev.js';
+import * as m93 from './media/play-pause.js';
+import * as m94 from './media/queue.js';
+import * as m95 from './media/record.js';
+import * as m96 from './media/replay.js';
+import * as m97 from './media/rewind-10.js';
+import * as m98 from './media/shuffle.js';
+import * as m99 from './media/skip-next.js';
+import * as m100 from './media/skip-prev.js';
+import * as m101 from './media/speed.js';
+import * as m102 from './media/stop.js';
+import * as m103 from './nav/address-bar.js';
+import * as m104 from './nav/arrow-down.js';
+import * as m105 from './nav/arrow-left.js';
+import * as m106 from './nav/arrow-right.js';
+import * as m107 from './nav/arrow-up.js';
+import * as m108 from './nav/back.js';
+import * as m109 from './nav/close.js';
+import * as m110 from './nav/folder.js';
+import * as m111 from './nav/fullscreen.js';
+import * as m112 from './nav/goto-line.js';
+import * as m113 from './nav/home.js';
+import * as m114 from './nav/link.js';
+import * as m115 from './nav/pages.js';
+import * as m116 from './nav/pin.js';
+import * as m117 from './nav/radial.js';
+import * as m118 from './nav/scroll-bottom.js';
+import * as m119 from './nav/scroll-top.js';
+import * as m120 from './nav/scroll.js';
+import * as m121 from './nav/search.js';
+import * as m122 from './nav/tab-group.js';
+import * as m123 from './nav/tab.js';
+import * as m124 from './nav/zoom-in.js';
+import * as m125 from './nav/zoom-out.js';
+import * as m126 from './nav/zoom-reset.js';
+import * as m127 from './productivity/bold.js';
+import * as m128 from './productivity/captions.js';
+import * as m129 from './productivity/coffee.js';
+import * as m130 from './productivity/comment.js';
+import * as m131 from './productivity/emoji.js';
+import * as m132 from './productivity/eye.js';
+import * as m133 from './productivity/font-size.js';
+import * as m134 from './productivity/format.js';
+import * as m135 from './productivity/gif.js';
+import * as m136 from './productivity/heading.js';
+import * as m137 from './productivity/heart.js';
+import * as m138 from './productivity/indent.js';
+import * as m139 from './productivity/italic.js';
+import * as m140 from './productivity/keyboard.js';
+import * as m141 from './productivity/layers.js';
+import * as m142 from './productivity/mail.js';
+import * as m143 from './productivity/note.js';
+import * as m144 from './productivity/settings.js';
+import * as m145 from './productivity/star.js';
+import * as m146 from './productivity/sticker.js';
+import * as m147 from './productivity/strike.js';
+import * as m148 from './productivity/target.js';
+import * as m149 from './status/alert.js';
+import * as m150 from './status/check.js';
+import * as m151 from './status/info.js';
+import * as m152 from './status/lock.js';
+import * as m153 from './status/power.js';
+import * as m154 from './status/sync.js';
+import * as m155 from './stream/broadcast.js';
+import * as m156 from './stream/camera.js';
+import * as m157 from './stream/chat.js';
+import * as m158 from './stream/fade.js';
+import * as m159 from './stream/marker.js';
+import * as m160 from './stream/scene.js';
+import * as m161 from './stream/screenshot.js';
+import * as m162 from './stream/viewers.js';
+import * as m163 from './system/battery.js';
+import * as m164 from './system/cpu.js';
+import * as m165 from './system/disk.js';
+import * as m166 from './system/gpu.js';
+import * as m167 from './system/memory.js';
+import * as m168 from './system/network.js';
+import * as m169 from './system/wifi.js';
+import * as m170 from './time/alarm.js';
+import * as m171 from './time/calendar.js';
+import * as m172 from './time/clock.js';
+import * as m173 from './time/stopwatch.js';
+import * as m174 from './time/timer.js';
+import * as m175 from './window/fit.js';
+import * as m176 from './window/hdr.js';
+import * as m177 from './window/layout.js';
+import * as m178 from './window/maximize.js';
+import * as m179 from './window/minimize.js';
+import * as m180 from './window/monitor.js';
+import * as m181 from './window/panel.js';
+import * as m182 from './window/pip.js';
+import * as m183 from './window/sidebar.js';
+import * as m184 from './window/snap-left.js';
+import * as m185 from './window/snap-right.js';
+import * as m186 from './window/split-down.js';
+import * as m187 from './window/split.js';
+import * as m188 from './window/theater.js';
+import * as m189 from './window/view-details.js';
+import * as m190 from './window/view-icons.js';
+import * as m191 from './window/window.js';
 
 export const GLYPH_MODULES = [
   ['audio/equalizer.js', m0],
@@ -64,53 +200,189 @@ export const GLYPH_MODULES = [
   ['audio/music-note.js', m4],
   ['audio/volume.js', m5],
   ['audio/waveform.js', m6],
-  ['dev/bug.js', m7],
-  ['dev/cloud.js', m8],
-  ['dev/code.js', m9],
-  ['dev/git-branch.js', m10],
-  ['dev/rocket.js', m11],
-  ['dev/terminal.js', m12],
-  ['home/bulb.js', m13],
-  ['home/fan.js', m14],
-  ['home/plug.js', m15],
-  ['home/thermostat.js', m16],
-  ['media/play-pause.js', m17],
-  ['media/record.js', m18],
-  ['media/shuffle.js', m19],
-  ['media/skip-next.js', m20],
-  ['media/skip-prev.js', m21],
-  ['media/stop.js', m22],
-  ['nav/back.js', m23],
-  ['nav/folder.js', m24],
-  ['nav/home.js', m25],
-  ['nav/pages.js', m26],
-  ['nav/search.js', m27],
-  ['productivity/coffee.js', m28],
-  ['productivity/mail.js', m29],
-  ['productivity/note.js', m30],
-  ['productivity/target.js', m31],
-  ['status/alert.js', m32],
-  ['status/check.js', m33],
-  ['status/info.js', m34],
-  ['status/lock.js', m35],
-  ['status/power.js', m36],
-  ['status/sync.js', m37],
-  ['stream/broadcast.js', m38],
-  ['stream/camera.js', m39],
-  ['stream/chat.js', m40],
-  ['stream/marker.js', m41],
-  ['stream/scene.js', m42],
-  ['stream/viewers.js', m43],
-  ['system/battery.js', m44],
-  ['system/cpu.js', m45],
-  ['system/disk.js', m46],
-  ['system/gpu.js', m47],
-  ['system/memory.js', m48],
-  ['system/network.js', m49],
-  ['system/wifi.js', m50],
-  ['time/alarm.js', m51],
-  ['time/calendar.js', m52],
-  ['time/clock.js', m53],
-  ['time/stopwatch.js', m54],
-  ['time/timer.js', m55],
+  ['build/align.js', m7],
+  ['build/auto-complete.js', m8],
+  ['build/bank-left.js', m9],
+  ['build/bank-level.js', m10],
+  ['build/bank-right.js', m11],
+  ['build/bank.js', m12],
+  ['build/booster.js', m13],
+  ['build/brake.js', m14],
+  ['build/chain-lift.js', m15],
+  ['build/falloff.js', m16],
+  ['build/heatmap.js', m17],
+  ['build/length-minus.js', m18],
+  ['build/length-plus.js', m19],
+  ['build/loop.js', m20],
+  ['build/path.js', m21],
+  ['build/pitch-down.js', m22],
+  ['build/pitch-level.js', m23],
+  ['build/pitch-up.js', m24],
+  ['build/pitch.js', m25],
+  ['build/smooth.js', m26],
+  ['build/special.js', m27],
+  ['build/stairs.js', m28],
+  ['build/station.js', m29],
+  ['build/terrain.js', m30],
+  ['build/track-curve-left.js', m31],
+  ['build/track-curve-right.js', m32],
+  ['build/track-straight.js', m33],
+  ['dev/bug.js', m34],
+  ['dev/build.js', m35],
+  ['dev/cloud.js', m36],
+  ['dev/code.js', m37],
+  ['dev/definition.js', m38],
+  ['dev/diff.js', m39],
+  ['dev/fold.js', m40],
+  ['dev/git-branch.js', m41],
+  ['dev/references.js', m42],
+  ['dev/rocket.js', m43],
+  ['dev/step-into.js', m44],
+  ['dev/step-out.js', m45],
+  ['dev/symbol.js', m46],
+  ['dev/terminal.js', m47],
+  ['edit/brush.js', m48],
+  ['edit/clear.js', m49],
+  ['edit/copy.js', m50],
+  ['edit/cursor.js', m51],
+  ['edit/cut.js', m52],
+  ['edit/delete.js', m53],
+  ['edit/edit.js', m54],
+  ['edit/forward.js', m55],
+  ['edit/magnet.js', m56],
+  ['edit/move.js', m57],
+  ['edit/paste.js', m58],
+  ['edit/rename.js', m59],
+  ['edit/replace.js', m60],
+  ['edit/rotate.js', m61],
+  ['edit/scale.js', m62],
+  ['edit/select.js', m63],
+  ['edit/snap.js', m64],
+  ['game/beam.js', m65],
+  ['game/boost.js', m66],
+  ['game/crouch.js', m67],
+  ['game/exocraft.js', m68],
+  ['game/follow.js', m69],
+  ['game/freighter.js', m70],
+  ['game/galaxy.js', m71],
+  ['game/gamepad.js', m72],
+  ['game/height.js', m73],
+  ['game/jetpack.js', m74],
+  ['game/jump.js', m75],
+  ['game/land.js', m76],
+  ['game/roll.js', m77],
+  ['game/scanner.js', m78],
+  ['game/sun.js', m79],
+  ['game/walk.js', m80],
+  ['game/warp.js', m81],
+  ['home/bulb.js', m82],
+  ['home/fan.js', m83],
+  ['home/leaf.js', m84],
+  ['home/plug.js', m85],
+  ['home/thermostat.js', m86],
+  ['media/artist.js', m87],
+  ['media/chapter-next.js', m88],
+  ['media/chapter-prev.js', m89],
+  ['media/forward-10.js', m90],
+  ['media/frame-next.js', m91],
+  ['media/frame-prev.js', m92],
+  ['media/play-pause.js', m93],
+  ['media/queue.js', m94],
+  ['media/record.js', m95],
+  ['media/replay.js', m96],
+  ['media/rewind-10.js', m97],
+  ['media/shuffle.js', m98],
+  ['media/skip-next.js', m99],
+  ['media/skip-prev.js', m100],
+  ['media/speed.js', m101],
+  ['media/stop.js', m102],
+  ['nav/address-bar.js', m103],
+  ['nav/arrow-down.js', m104],
+  ['nav/arrow-left.js', m105],
+  ['nav/arrow-right.js', m106],
+  ['nav/arrow-up.js', m107],
+  ['nav/back.js', m108],
+  ['nav/close.js', m109],
+  ['nav/folder.js', m110],
+  ['nav/fullscreen.js', m111],
+  ['nav/goto-line.js', m112],
+  ['nav/home.js', m113],
+  ['nav/link.js', m114],
+  ['nav/pages.js', m115],
+  ['nav/pin.js', m116],
+  ['nav/radial.js', m117],
+  ['nav/scroll-bottom.js', m118],
+  ['nav/scroll-top.js', m119],
+  ['nav/scroll.js', m120],
+  ['nav/search.js', m121],
+  ['nav/tab-group.js', m122],
+  ['nav/tab.js', m123],
+  ['nav/zoom-in.js', m124],
+  ['nav/zoom-out.js', m125],
+  ['nav/zoom-reset.js', m126],
+  ['productivity/bold.js', m127],
+  ['productivity/captions.js', m128],
+  ['productivity/coffee.js', m129],
+  ['productivity/comment.js', m130],
+  ['productivity/emoji.js', m131],
+  ['productivity/eye.js', m132],
+  ['productivity/font-size.js', m133],
+  ['productivity/format.js', m134],
+  ['productivity/gif.js', m135],
+  ['productivity/heading.js', m136],
+  ['productivity/heart.js', m137],
+  ['productivity/indent.js', m138],
+  ['productivity/italic.js', m139],
+  ['productivity/keyboard.js', m140],
+  ['productivity/layers.js', m141],
+  ['productivity/mail.js', m142],
+  ['productivity/note.js', m143],
+  ['productivity/settings.js', m144],
+  ['productivity/star.js', m145],
+  ['productivity/sticker.js', m146],
+  ['productivity/strike.js', m147],
+  ['productivity/target.js', m148],
+  ['status/alert.js', m149],
+  ['status/check.js', m150],
+  ['status/info.js', m151],
+  ['status/lock.js', m152],
+  ['status/power.js', m153],
+  ['status/sync.js', m154],
+  ['stream/broadcast.js', m155],
+  ['stream/camera.js', m156],
+  ['stream/chat.js', m157],
+  ['stream/fade.js', m158],
+  ['stream/marker.js', m159],
+  ['stream/scene.js', m160],
+  ['stream/screenshot.js', m161],
+  ['stream/viewers.js', m162],
+  ['system/battery.js', m163],
+  ['system/cpu.js', m164],
+  ['system/disk.js', m165],
+  ['system/gpu.js', m166],
+  ['system/memory.js', m167],
+  ['system/network.js', m168],
+  ['system/wifi.js', m169],
+  ['time/alarm.js', m170],
+  ['time/calendar.js', m171],
+  ['time/clock.js', m172],
+  ['time/stopwatch.js', m173],
+  ['time/timer.js', m174],
+  ['window/fit.js', m175],
+  ['window/hdr.js', m176],
+  ['window/layout.js', m177],
+  ['window/maximize.js', m178],
+  ['window/minimize.js', m179],
+  ['window/monitor.js', m180],
+  ['window/panel.js', m181],
+  ['window/pip.js', m182],
+  ['window/sidebar.js', m183],
+  ['window/snap-left.js', m184],
+  ['window/snap-right.js', m185],
+  ['window/split-down.js', m186],
+  ['window/split.js', m187],
+  ['window/theater.js', m188],
+  ['window/view-details.js', m189],
+  ['window/view-icons.js', m190],
+  ['window/window.js', m191],
 ];

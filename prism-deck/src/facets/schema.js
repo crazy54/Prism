@@ -42,7 +42,7 @@ import { validateLink } from '../scene/link.js';
 export const SURFACES = ['key', 'span', 'strip', 'screen', 'deck'];
 export const PRESS = ['cycle', 'toggle', 'momentary', 'none'];
 export const PARAM_TYPES = ['number', 'hue', 'text', 'select', 'bool', 'color', 'theme', 'glyph'];
-export const DATA_KEYS = ['audio', 'spectrum', 'cpu', 'mem', 'gpu', 'net', 'disk', 'temp', 'battery', 'uptime', 'clock', 'timer', 'weather', 'calendar', 'media', 'mic', 'camera', 'volume', 'stream', 'game'];
+export const DATA_KEYS = ['audio', 'spectrum', 'cpu', 'mem', 'gpu', 'net', 'disk', 'temp', 'battery', 'uptime', 'clock', 'timer', 'weather', 'calendar', 'media', 'mic', 'camera', 'volume', 'stream', 'game', 'gamelink'];   // gamelink: Game Link (prism-play), src/apps/sources/README.md
 export const SCREENS = ['galleon', 'galleon-widget', 'infobar', 'monitor'];
 export const TONES = ['idle', 'active', 'ok', 'info', 'warn', 'neg', 'alert', 'crit', 'busy', 'off'];
 

@@ -1,0 +1,140 @@
+{
+    "provider": {
+        "name": "Counter-Strike: Global Offensive",
+        "appid": 730,
+        "version": 14191,
+        "steamid": "76561198000000001",
+        "timestamp": 1791659901
+    },
+    "map": {
+        "mode": "competitive",
+        "name": "de_inferno",
+        "phase": "live",
+        "round": 12,
+        "team_ct": {
+            "score": 4,
+            "consecutive_round_losses": 1,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 0
+        },
+        "team_t": {
+            "score": 8,
+            "consecutive_round_losses": 1,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 0
+        },
+        "num_matches_to_win_series": 0,
+        "round_wins": {
+            "1": "ct_win_elimination",
+            "2": "t_win_elimination",
+            "3": "ct_win_elimination",
+            "4": "ct_win_defuse",
+            "5": "t_win_bomb",
+            "6": "ct_win_elimination",
+            "7": "ct_win_defuse",
+            "8": "t_win_elimination",
+            "9": "ct_win_elimination",
+            "10": "ct_win_time",
+            "11": "t_win_bomb",
+            "12": "ct_win_elimination"
+        }
+    },
+    "round": {
+        "phase": "freezetime"
+    },
+    "player": {
+        "steamid": "76561198000000001",
+        "name": "PrismPilot",
+        "observer_slot": 1,
+        "team": "T",
+        "activity": "playing",
+        "state": {
+            "health": 100,
+            "armor": 0,
+            "helmet": false,
+            "flashed": 0,
+            "smoked": 0,
+            "burning": 0,
+            "money": 800,
+            "round_kills": 0,
+            "round_killhs": 0,
+            "equip_value": 200
+        },
+        "weapons": {
+            "weapon_0": {
+                "name": "weapon_knife_t",
+                "paintkit": "default",
+                "type": "Knife",
+                "state": "holstered"
+            },
+            "weapon_1": {
+                "name": "weapon_glock",
+                "paintkit": "default",
+                "type": "Pistol",
+                "ammo_clip": 20,
+                "ammo_clip_max": 20,
+                "ammo_reserve": 3,
+                "state": "active"
+            }
+        },
+        "match_stats": {
+            "kills": 14,
+            "assists": 2,
+            "deaths": 7,
+            "mvps": 4,
+            "score": 36
+        }
+    },
+    "previously": {
+        "map": {
+            "phase": "intermission",
+            "team_ct": {
+                "score": 8,
+                "consecutive_round_losses": 0
+            },
+            "team_t": {
+                "score": 4
+            }
+        },
+        "round": {
+            "phase": "over",
+            "win_team": "CT"
+        },
+        "player": {
+            "observer_slot": 6,
+            "team": "CT",
+            "state": {
+                "armor": 100,
+                "helmet": true,
+                "money": 9850,
+                "round_kills": 1,
+                "round_killhs": 1,
+                "equip_value": 5300
+            },
+            "weapons": {
+                "weapon_0": {
+                    "name": "weapon_knife"
+                },
+                "weapon_1": {
+                    "name": "weapon_usp_silencer",
+                    "ammo_clip": 12,
+                    "ammo_clip_max": 12,
+                    "ammo_reserve": 2,
+                    "state": "holstered"
+                },
+                "weapon_2": {
+                    "name": "weapon_m4a1_silencer",
+                    "paintkit": "default",
+                    "type": "Rifle",
+                    "ammo_clip": 14,
+                    "ammo_clip_max": 20,
+                    "ammo_reserve": 1,
+                    "state": "active"
+                }
+            }
+        }
+    },
+    "auth": {
+        "token": "prism-gsi-example-token-0001"
+    }
+}

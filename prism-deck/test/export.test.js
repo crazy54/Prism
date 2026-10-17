@@ -14,6 +14,7 @@ import { pluginManifest, buildPluginFolder, validatePluginFolder, packPlugin, ch
 import { buildIconPack, checkIconPack, loadRaster, packPlan, gifFrameCount } from '../src/export/iconpack.js';
 import { buildProfile, sampleProfiles, checkProfile, SAMPLE_LAYOUTS, HOME_LAYOUTS, BUILTINS, detUuid } from '../src/export/profile.js';
 import { BUNDLED_PROFILES } from '../src/plugin/settings.js';
+import { GAME_PROFILES } from '../src/plugin/settings.js';   // Game Link (prism-play)
 import { PLUGIN_VERSION } from '../src/plugin/index.js';
 import { CANVAS_LAYOUT, INFOBAR_LAYOUT } from '../src/plugin/feedback.js';
 import { validateSvg } from '../src/scene/validate.js';
@@ -110,7 +111,8 @@ test('plugin: the built folder passes the official schemas with file/image check
     assert.match(fs.readFileSync(path.join(built.dir, 'LICENSE.txt'), 'utf8'), /JFH Inc[\s\S]*Apache License[\s\S]*Version 2\.0[\s\S]*SIL OPEN FONT LICENSE Version 1\.1/);
     assert.match(fs.readFileSync(path.join(built.dir, 'NOTICE.txt'), 'utf8'), /JFH Inc[\s\S]*Jeremy Francis Hall/);
     assert.match(fs.readFileSync(path.join(built.dir, 'ui/fonts/OFL.txt'), 'utf8'), /The Inter Project Authors/);
-    assert.deepEqual(built.manifest.Profiles.map((p) => p.Name).sort(), Object.values(BUNDLED_PROFILES).sort(), 'profile names = the ones the runtime switches to');
+    // Game Link (prism-play): the samples plus the game profiles ("Prism · CS2 — <device>"), each under the name the runtime switches to
+    assert.deepEqual(built.manifest.Profiles.map((p) => p.Name).sort(), [...Object.values(BUNDLED_PROFILES), ...Object.values(GAME_PROFILES).flatMap((g) => Object.values(g))].sort(), 'profile names = the ones the runtime switches to');
     for (const f of ['bin/prism-deck/src/export', 'bin/prism-deck/src/plugin/dev', 'bin/prism-deck/src/web']) assert.equal(fs.existsSync(path.join(built.dir, f)), false, `${f} is not shipped`);
     const cat = fs.readFileSync(path.join(built.dir, 'ui/catalog.js'), 'utf8');
     const C = JSON.parse(cat.slice(cat.indexOf('=') + 1).trim().replace(/;$/, ''));
@@ -196,7 +198,7 @@ test('profile: sample profiles for Galleon 100 SD, Stream Deck +, MK.2, XL, Mini
     assert.equal(home.Name, 'Home');
     const keys = home.Controllers.find((c) => c.Type === 'Keypad').Actions;
     const builtins = Object.values(keys).filter((a) => a.Plugin.UUID !== 'com.jeremyfhall.prism');
-    assert.ok(builtins.length >= 6, `${p.name}: Home is built on built-in actions (${builtins.length})`);
+    assert.ok(builtins.length >= Math.min(6, d.cols * d.rows - 1), `${p.name}: Home is built on built-in actions (${builtins.length})`);   // Game Link (prism-play): the 6-key Mini gives one to the CS2 jump key
     const play = builtins.find((a) => a.UUID === 'com.elgato.streamdeck.system.multimedia' && a.Settings.actionIdx === 1);
     assert.ok(play, `${p.name}: a real play / pause key`);
     assert.match(play.States[0].Image, /^Images\/[0-9A-Z]{26}Z\.png$/);

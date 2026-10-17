@@ -1,0 +1,152 @@
+{
+    "provider": {
+        "name": "Counter-Strike: Global Offensive",
+        "appid": 730,
+        "version": 14191,
+        "steamid": "76561198000000001",
+        "timestamp": 1791660984
+    },
+    "map": {
+        "mode": "competitive",
+        "name": "de_inferno",
+        "phase": "gameover",
+        "round": 24,
+        "team_ct": {
+            "score": 11,
+            "consecutive_round_losses": 1,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 0
+        },
+        "team_t": {
+            "score": 13,
+            "consecutive_round_losses": 0,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 0
+        },
+        "num_matches_to_win_series": 0,
+        "round_wins": {
+            "1": "ct_win_elimination",
+            "2": "t_win_elimination",
+            "3": "ct_win_elimination",
+            "4": "ct_win_defuse",
+            "5": "t_win_bomb",
+            "6": "ct_win_elimination",
+            "7": "ct_win_defuse",
+            "8": "t_win_elimination",
+            "9": "ct_win_elimination",
+            "10": "ct_win_time",
+            "11": "t_win_bomb",
+            "12": "ct_win_elimination",
+            "13": "t_win_elimination",
+            "14": "ct_win_time",
+            "15": "t_win_elimination",
+            "16": "ct_win_time",
+            "17": "t_win_elimination",
+            "18": "ct_win_time",
+            "19": "t_win_elimination",
+            "20": "ct_win_time",
+            "21": "t_win_elimination",
+            "22": "ct_win_time",
+            "23": "t_win_elimination",
+            "24": "t_win_elimination"
+        }
+    },
+    "round": {
+        "phase": "freezetime",
+        "win_team": "T"
+    },
+    "player": {
+        "steamid": "76561198000000001",
+        "name": "PrismPilot",
+        "observer_slot": 1,
+        "team": "T",
+        "activity": "playing",
+        "state": {
+            "health": 64,
+            "armor": 70,
+            "helmet": true,
+            "flashed": 0,
+            "smoked": 0,
+            "burning": 0,
+            "money": 5500,
+            "round_kills": 2,
+            "round_killhs": 0,
+            "equip_value": 3700
+        },
+        "weapons": {
+            "weapon_0": {
+                "name": "weapon_knife_t",
+                "paintkit": "default",
+                "type": "Knife",
+                "state": "holstered"
+            },
+            "weapon_1": {
+                "name": "weapon_glock",
+                "paintkit": "default",
+                "type": "Pistol",
+                "ammo_clip": 20,
+                "ammo_clip_max": 20,
+                "ammo_reserve": 3,
+                "state": "holstered"
+            },
+            "weapon_2": {
+                "name": "weapon_ak47",
+                "paintkit": "default",
+                "type": "Rifle",
+                "ammo_clip": 11,
+                "ammo_clip_max": 30,
+                "ammo_reserve": 2,
+                "state": "active"
+            }
+        },
+        "match_stats": {
+            "kills": 26,
+            "assists": 4,
+            "deaths": 15,
+            "mvps": 7,
+            "score": 62
+        }
+    },
+    "previously": {
+        "map": {
+            "phase": "live",
+            "round": 23,
+            "team_t": {
+                "score": 12
+            }
+        },
+        "round": {
+            "phase": "live"
+        },
+        "player": {
+            "state": {
+                "health": 100,
+                "money": 4900,
+                "round_kills": 0
+            },
+            "weapons": {
+                "weapon_2": {
+                    "ammo_clip": 17
+                }
+            },
+            "match_stats": {
+                "kills": 24,
+                "mvps": 6,
+                "score": 58
+            }
+        }
+    },
+    "added": {
+        "map": {
+            "round_wins": {
+                "24": true
+            }
+        },
+        "round": {
+            "win_team": true
+        }
+    },
+    "auth": {
+        "token": "prism-gsi-example-token-0001"
+    }
+}

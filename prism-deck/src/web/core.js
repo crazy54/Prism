@@ -148,7 +148,7 @@ export function gameAnnouncement(facet, prev, state, params = {}) {
 
 // ── showcase layout ─────────────────────────────────────────────────────────
 
-const GALLERY_ORDER = ['icons', 'apps', 'motion', 'games', 'themes', 'spans', 'dials', 'screens'];
+const GALLERY_ORDER = ['icons', 'apps', 'motion', 'games', 'themes', 'spans', 'dials', 'screens', 'gamelink'];   // gamelink: Game Link (prism-play)
 const isKey = (f) => f.surface === 'key';
 const isDialSeg = (f) => f.surface === 'strip' && (f.segments === 1 || f.segments === '1');
 const isFullStrip = (f) => f.surface === 'strip' && !isDialSeg(f);

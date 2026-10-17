@@ -1,0 +1,99 @@
+{
+    "provider": {
+        "name": "Counter-Strike: Global Offensive",
+        "appid": 730,
+        "version": 14191,
+        "steamid": "76561198000000001",
+        "timestamp": 1791661082
+    },
+    "map": {
+        "mode": "deathmatch",
+        "name": "de_mirage",
+        "phase": "live",
+        "round": 0,
+        "team_ct": {
+            "score": 0,
+            "consecutive_round_losses": 1,
+            "timeouts_remaining": 0,
+            "matches_won_this_series": 0
+        },
+        "team_t": {
+            "score": 0,
+            "consecutive_round_losses": 1,
+            "timeouts_remaining": 0,
+            "matches_won_this_series": 0
+        },
+        "num_matches_to_win_series": 0
+    },
+    "round": {
+        "phase": "live"
+    },
+    "player": {
+        "steamid": "76561198000000001",
+        "name": "PrismPilot",
+        "observer_slot": 3,
+        "team": "CT",
+        "activity": "playing",
+        "state": {
+            "health": 0,
+            "armor": 0,
+            "helmet": false,
+            "flashed": 0,
+            "smoked": 0,
+            "burning": 0,
+            "money": 0,
+            "round_kills": 4,
+            "round_killhs": 2,
+            "equip_value": 3900
+        },
+        "weapons": {},
+        "match_stats": {
+            "kills": 4,
+            "assists": 0,
+            "deaths": 2,
+            "mvps": 0,
+            "score": 40
+        }
+    },
+    "previously": {
+        "player": {
+            "state": {
+                "health": 100,
+                "armor": 100,
+                "helmet": true
+            },
+            "weapons": {
+                "weapon_0": {
+                    "name": "weapon_knife",
+                    "paintkit": "default",
+                    "type": "Knife",
+                    "state": "holstered"
+                },
+                "weapon_1": {
+                    "name": "weapon_usp_silencer",
+                    "paintkit": "default",
+                    "type": "Pistol",
+                    "ammo_clip": 12,
+                    "ammo_clip_max": 12,
+                    "ammo_reserve": 2,
+                    "state": "holstered"
+                },
+                "weapon_2": {
+                    "name": "weapon_m4a1_silencer",
+                    "paintkit": "default",
+                    "type": "Rifle",
+                    "ammo_clip": 6,
+                    "ammo_clip_max": 20,
+                    "ammo_reserve": 2,
+                    "state": "active"
+                }
+            },
+            "match_stats": {
+                "deaths": 1
+            }
+        }
+    },
+    "auth": {
+        "token": "prism-gsi-example-token-0001"
+    }
+}

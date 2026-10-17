@@ -1,0 +1,48 @@
+{
+    "provider": {
+        "name": "Counter-Strike: Global Offensive",
+        "appid": 730,
+        "version": 14191,
+        "steamid": "76561198000000001",
+        "timestamp": 1791659581
+    },
+    "map": {
+        "mode": "competitive",
+        "name": "de_inferno",
+        "phase": "live",
+        "round": 8,
+        "team_ct": {
+            "score": 5,
+            "consecutive_round_losses": 1,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 0
+        },
+        "team_t": {
+            "score": 3,
+            "consecutive_round_losses": 2,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 0
+        },
+        "num_matches_to_win_series": 0,
+        "round_wins": {
+            "1": "ct_win_elimination",
+            "2": "t_win_elimination",
+            "3": "ct_win_elimination",
+            "4": "ct_win_defuse",
+            "5": "t_win_bomb",
+            "6": "ct_win_elimination",
+            "7": "ct_win_defuse",
+            "8": "t_win_elimination"
+        }
+    },
+    "round": {
+        "phase": "over",
+        "win_team": "T"
+    },
+    "previously": {
+        "player": true
+    },
+    "auth": {
+        "token": "prism-gsi-example-token-0001"
+    }
+}

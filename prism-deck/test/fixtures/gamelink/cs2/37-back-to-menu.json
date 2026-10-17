@@ -1,0 +1,71 @@
+{
+    "provider": {
+        "name": "Counter-Strike: Global Offensive",
+        "appid": 730,
+        "version": 14191,
+        "steamid": "76561198000000001",
+        "timestamp": 1791661014
+    },
+    "player": {
+        "steamid": "76561198000000001",
+        "name": "PrismPilot",
+        "activity": "menu"
+    },
+    "previously": {
+        "player": {
+            "activity": "playing",
+            "observer_slot": 1,
+            "team": "T",
+            "state": {
+                "health": 64,
+                "armor": 70,
+                "helmet": true,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 5500,
+                "round_kills": 2,
+                "round_killhs": 0,
+                "equip_value": 3700
+            },
+            "weapons": {
+                "weapon_0": {
+                    "name": "weapon_knife_t",
+                    "paintkit": "default",
+                    "type": "Knife",
+                    "state": "holstered"
+                },
+                "weapon_1": {
+                    "name": "weapon_glock",
+                    "paintkit": "default",
+                    "type": "Pistol",
+                    "ammo_clip": 20,
+                    "ammo_clip_max": 20,
+                    "ammo_reserve": 3,
+                    "state": "holstered"
+                },
+                "weapon_2": {
+                    "name": "weapon_ak47",
+                    "paintkit": "default",
+                    "type": "Rifle",
+                    "ammo_clip": 11,
+                    "ammo_clip_max": 30,
+                    "ammo_reserve": 2,
+                    "state": "active"
+                }
+            },
+            "match_stats": {
+                "kills": 26,
+                "assists": 4,
+                "deaths": 15,
+                "mvps": 7,
+                "score": 62
+            }
+        },
+        "map": true,
+        "round": true
+    },
+    "auth": {
+        "token": "prism-gsi-example-token-0001"
+    }
+}

@@ -17,6 +17,7 @@ import { allGlyphs } from '../src/glyphs/_registry.js';
 import { DEVICE_IDS } from '../src/devices.js';
 import { PLUGIN_VERSION } from '../src/plugin/index.js';
 import { SAMPLE_LAYOUTS } from '../src/export/profile.js';
+import { GAMELINK_LAYOUTS } from '../src/export/profile.js';   // Game Link (prism-play)
 import { packPlan } from '../src/export/iconpack.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -32,6 +33,7 @@ export function docCounts() {
     glyphs: allGlyphs().length,
     devices: DEVICE_IDS.length,
     profiles: Object.keys(SAMPLE_LAYOUTS).length,
+    gameProfiles: Object.keys(GAMELINK_LAYOUTS).length,   // Game Link (prism-play): the "Prism · CS2 — <device>" profiles (<!--n:gameProfiles--> markers)
     packs: THEME_IDS().length,
     packStates: packPlan('prism').list.length,
     version: pkg.version,

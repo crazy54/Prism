@@ -55,6 +55,7 @@ Geometry lives in `src/devices.js` (generated from the hardware research; see `d
 | `data` | live inputs from a runtime (see §7); **always** simulate a fallback |
 | `idPrefix`, `id(name)` | collision-free SVG ids |
 | `reduced` | reduced motion: draw a meaningful static frame |
+| `motion` | the user's motion level: `'full'` · `'calm'` (soft effects: gentle fades, no strobing) · `'still'` (static state only; same as `reduced`). Photosensitive effects (Game Link flashes, alarms) follow it, not just `reduced` |
 
 ## 3. Drawing — the scene API
 
@@ -153,7 +154,7 @@ export default {
 };
 ```
 
-- **Galleries** (`src/facets/galleries.js`; id prefixes in brackets): `themes` [theme-] · `icons` [icon-] · `motion` [press-, state-, idle-, alert-] · `spans` [span-] · `dials` [dial-, strip-] · `screens` [screen-] · `apps` [app-]. Each has fixed categories and allowed surfaces.
+- **Galleries** (`src/facets/galleries.js`; id prefixes in brackets): `themes` [theme-] · `icons` [icon-] · `motion` [press-, state-, idle-, alert-] · `spans` [span-] · `dials` [dial-, strip-] · `screens` [screen-] · `apps` [app-] · `games` [game-] · `gamelink` [gamelink-] (Game Link: live game data, `ctx.data.gamelink`). Each has fixed categories and allowed surfaces.
 - **Params**: `number | hue | text | select | bool | color | theme | glyph`, each with a `default` (and `min/max/step`, `options`, `maxLength`, `label`). They become property-inspector controls in the plugin and knobs in MCP tools.
 - **Press**: runtimes advance state on press (`cycle`/`toggle`), or just report `pressed` (`momentary`). Motion facets can `autoplay` a press each loop when nobody presses (`facets/motion/_autoplay.js`).
 - **Determinism**: everything derives from `ctx` — `t`, `ctx.rng()`, `ctx.noise`, `ctx.clock`, `ctx.data`. Never `Date.now()`, `Math.random()`, timers, `node:*`, `process`, DOM.
@@ -174,6 +175,7 @@ Runtimes (plugin, web, hidraw apps) feed what a facet lists in `data`; shapes ar
 | `clock` / `timer` | use `ctx.clock` / state + `ctx.since` |
 | `media` | `{ title, artist, position, duration, playing }` |
 | `weather` / `calendar` | `{ temp, code, label }` / `{ next: { title, at } }` |
+| `gamelink` | the game you're playing (Game Link, v1): `{ v, game: 'cs2' \| companion id, at, rev, status, player: { fresh, alive, team, health, armor, helmet, flashed 0–1, smoked, burning, money, equip, activity }, weapon: { name, kind, clip, clipMax, reserve, reserveUnit, reloading, low }, stats, round: { phase, number, bomb: 'planted' \| 'defused' \| 'exploded' \| null, win, result, reason: 'elimination' \| 'bomb_defused' \| 'bomb_exploded' \| 'time' \| 'rescue' \| 'other' \| null }, match: { map, title, mode, phase, side, ct, t, us, them, target, matchPoint, result }, events: [{ type, at, seq, … }], [game]: extras }`. **Absent** = Game Link not listening: simulate with `simGameLink(ctx.t)` (`src/facets/gamelink/_gl-sim.js`); **`null`** = listening, no game yet: draw an honest "Waiting for CS2" (or "Waiting for a game") face. No bomb timer, ever; never the spectated player's vitals. Full spec: `src/apps/sources/README.md` § Game Link |
 
 ## 8. The deck SVG subset
 

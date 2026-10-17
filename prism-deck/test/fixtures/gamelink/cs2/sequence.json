@@ -1,0 +1,598 @@
+{
+  "cfg": {
+    "buffer": 0.0,
+    "throttle": 0.05,
+    "heartbeat": 5.0,
+    "timeout": 2.0,
+    "uri": "http://127.0.0.1:38140/v1/cs2"
+  },
+  "selfSteamId": "76561198000000001",
+  "authToken": "prism-gsi-example-token-0001",
+  "frames": [
+    {
+      "file": "00-main-menu.json",
+      "atMs": 0,
+      "note": "Main menu. Only provider + a 3-field player. No map/round.",
+      "basis": "real shape: Necko1 live-gameplay seq 4; sngrotesque cs2_gsi_0001",
+      "expect": [
+        {
+          "type": "context",
+          "value": "menu"
+        }
+      ]
+    },
+    {
+      "file": "01-map-loading.json",
+      "atMs": 9000,
+      "note": "Loading into a match: map only, player gone (previously.player = true), no 'added' for map.",
+      "basis": "real shape: sngrotesque cs2_gsi_0016 (previously {player:true}); Necko1 warmup",
+      "expect": [
+        {
+          "type": "context",
+          "value": "loading"
+        },
+        {
+          "type": "matchJoined",
+          "map": "de_inferno",
+          "mode": "competitive"
+        },
+        {
+          "type": "mapPhase",
+          "value": "warmup"
+        }
+      ]
+    },
+    {
+      "file": "02-warmup.json",
+      "atMs": 13000,
+      "note": "Warmup: map.phase warmup, no round node, money 16000. Player re-appears without an 'added' entry.",
+      "basis": "real shape: Necko1 live-gameplay warmup frames (no round node, money 16000)",
+      "expect": [
+        {
+          "type": "context",
+          "value": "live"
+        }
+      ]
+    },
+    {
+      "file": "03-freezetime.json",
+      "atMs": 613000,
+      "note": "Round 7 freezetime (map.round = 6 rounds completed). Shown as a full-state post (e.g. first post after the listener restarted mid-match), so no deltas.",
+      "basis": "real shape: Necko1 frame 30 (freezetime), map_round_wins keys per CounterStrike2GSI",
+      "expect": [
+        {
+          "type": "resync"
+        }
+      ]
+    },
+    {
+      "file": "04-buy-rifle-armor.json",
+      "atMs": 615100,
+      "note": "Bought M4A1-S (2900) + kevlar & helmet (1000). Money and equip_value move; weapon_2 added.",
+      "basis": "synthesized from real shapes (Necko1 buy frames); prices are CS2 store prices",
+      "expect": [
+        {
+          "type": "weaponSwitch",
+          "weapon": "weapon_m4a1_silencer"
+        },
+        {
+          "type": "money",
+          "delta": -3900,
+          "money": 1450
+        }
+      ]
+    },
+    {
+      "file": "05-buy-kit-flash.json",
+      "atMs": 616000,
+      "note": "Bought defuse kit (400) + flashbang (200). state.defusekit appears only once owned.",
+      "basis": "synthesized; defusekit key per CounterStrike2GSI PlayerState / client strings",
+      "expect": [
+        {
+          "type": "money",
+          "delta": -600,
+          "money": 850
+        }
+      ]
+    },
+    {
+      "file": "06-round-live.json",
+      "atMs": 628000,
+      "note": "Freezetime over: round.phase live (previously.round.phase = freezetime). Round clock starts (1:55).",
+      "basis": "real shape: sngrotesque cs2_gsi_0019-style phase change",
+      "expect": [
+        {
+          "type": "roundLive"
+        }
+      ]
+    },
+    {
+      "file": "07-hurt.json",
+      "atMs": 649400,
+      "note": "Took 27 damage (armor 100 -> 91).",
+      "basis": "synthesized; same shape as Necko1 damage frames",
+      "expect": [
+        {
+          "type": "hurt",
+          "damage": 27,
+          "health": 73
+        }
+      ]
+    },
+    {
+      "file": "08-flash-onset.json",
+      "atMs": 653700,
+      "note": "flashed = 255 (100% white).",
+      "basis": "synthesized: hypothesis curve (no real CS2 flash time series found), decimated",
+      "expect": [
+        {
+          "type": "flashOnset",
+          "value": 255
+        },
+        {
+          "type": "flashFull"
+        }
+      ]
+    },
+    {
+      "file": "09-flash-fade-1.json",
+      "atMs": 656100,
+      "note": "flashed = 177 (69% white).",
+      "basis": "synthesized: hypothesis curve (no real CS2 flash time series found), decimated",
+      "expect": []
+    },
+    {
+      "file": "10-flash-fade-2.json",
+      "atMs": 656600,
+      "note": "flashed = 113 (44% white).",
+      "basis": "synthesized: hypothesis curve (no real CS2 flash time series found), decimated",
+      "expect": []
+    },
+    {
+      "file": "11-flash-fade-3.json",
+      "atMs": 657100,
+      "note": "flashed = 64 (25% white).",
+      "basis": "synthesized: hypothesis curve (no real CS2 flash time series found), decimated",
+      "expect": []
+    },
+    {
+      "file": "12-flash-fade-4.json",
+      "atMs": 657600,
+      "note": "flashed = 28 (11% white).",
+      "basis": "synthesized: hypothesis curve (no real CS2 flash time series found), decimated",
+      "expect": []
+    },
+    {
+      "file": "13-flash-fade-5.json",
+      "atMs": 658100,
+      "note": "flashed = 7 (3% white).",
+      "basis": "synthesized: hypothesis curve (no real CS2 flash time series found), decimated",
+      "expect": []
+    },
+    {
+      "file": "14-flash-clear.json",
+      "atMs": 658600,
+      "note": "flashed = 0 (0% white).",
+      "basis": "synthesized: hypothesis curve (no real CS2 flash time series found), decimated",
+      "expect": [
+        {
+          "type": "flashClear",
+          "peak": 255
+        }
+      ]
+    },
+    {
+      "file": "15-kill.json",
+      "atMs": 660400,
+      "note": "Kill: round_kills 0 -> 1, kill reward +300 arrives at once, match_stats.kills +1, score +2, clip 20 -> 13.",
+      "basis": "synthesized; same fields as Necko1 local kill frames",
+      "expect": [
+        {
+          "type": "kill",
+          "headshot": false,
+          "roundKills": 1
+        },
+        {
+          "type": "money",
+          "delta": 300,
+          "money": 1150
+        }
+      ]
+    },
+    {
+      "file": "16-kill-headshot.json",
+      "atMs": 663000,
+      "note": "Headshot kill: round_kills 2 and round_killhs 1 in the same post (double kill). Clip 4/20 = low ammo.",
+      "basis": "synthesized",
+      "expect": [
+        {
+          "type": "kill",
+          "headshot": true,
+          "roundKills": 2
+        },
+        {
+          "type": "multiKill",
+          "count": 2,
+          "label": "double"
+        },
+        {
+          "type": "lowAmmo",
+          "clip": 4,
+          "clipMax": 20,
+          "reserve": 3
+        },
+        {
+          "type": "money",
+          "delta": 300,
+          "money": 1450
+        }
+      ]
+    },
+    {
+      "file": "17-reload-start.json",
+      "atMs": 664200,
+      "note": "Reload pressed: state reloading, clip unchanged (4).",
+      "basis": "real sequence: Necko1 frames 22-24 (glock)",
+      "expect": [
+        {
+          "type": "reloadStart",
+          "weapon": "weapon_m4a1_silencer"
+        }
+      ]
+    },
+    {
+      "file": "18-reload-done.json",
+      "atMs": 666300,
+      "note": "Magazine swapped: clip 20, reserve 3 -> 2 magazines (remaining 4 rounds discarded, 2026-03-18 rules). State is still 'reloading' for one more post.",
+      "basis": "real sequence: Necko1 frame 23",
+      "expect": []
+    },
+    {
+      "file": "19-reload-end.json",
+      "atMs": 666600,
+      "note": "Back to active.",
+      "basis": "real sequence: Necko1 frame 24",
+      "expect": [
+        {
+          "type": "reloadEnd",
+          "weapon": "weapon_m4a1_silencer"
+        }
+      ]
+    },
+    {
+      "file": "20-bomb-planted.json",
+      "atMs": 681400,
+      "note": "Bomb planted: added.round.bomb = true. The ONLY fuse signal in live play: start a local 40 s clock at receipt. Valve delays this signal for players on a team, so the clock runs late (see cs2-gsi.md).",
+      "basis": "real sequence: aon4o request_samples idx 8 (added {round:{bomb:true}})",
+      "expect": [
+        {
+          "type": "bombPlanted",
+          "fuseS": 40
+        }
+      ]
+    },
+    {
+      "file": "21-defusing-heartbeat.json",
+      "atMs": 703400,
+      "note": "Defusing with a kit (5 s). Live play exposes NO defuse state; this is just a heartbeat (no deltas).",
+      "basis": "real behaviour: heartbeats carry no previously/added (sngrotesque cs2_gsi_0020-0024)",
+      "heartbeat": true,
+      "expect": []
+    },
+    {
+      "file": "22-round-win-defuse.json",
+      "atMs": 708600,
+      "note": "Round over: bomb defused, win_team CT, map.round 6 -> 7, CT score 5, round_wins['7'] added, MVP +1, score +3 for the defuse, money +3500 team win +300 defuse bonus.",
+      "basis": "real sequence: aon4o request_samples idx 13 (over + win_team + bomb defused in one post)",
+      "expect": [
+        {
+          "type": "roundWon",
+          "winTeam": "CT",
+          "reason": "ct_win_defuse"
+        },
+        {
+          "type": "bombDefused",
+          "afterS": 27.2
+        },
+        {
+          "type": "mvp"
+        },
+        {
+          "type": "money",
+          "delta": 3800,
+          "money": 5250
+        }
+      ]
+    },
+    {
+      "file": "23-freezetime-round8.json",
+      "atMs": 715600,
+      "note": "Round 8 freezetime: round.bomb and win_team removed (previously shows old values), health back to 100, round_kills reset.",
+      "basis": "real sequence: aon4o request_samples idx 15; Necko1 frame 30",
+      "expect": [
+        {
+          "type": "roundStart",
+          "round": 8
+        }
+      ]
+    },
+    {
+      "file": "24-round8-live.json",
+      "atMs": 730600,
+      "note": "Round 8 live.",
+      "basis": "synthesized",
+      "expect": [
+        {
+          "type": "roundLive"
+        }
+      ]
+    },
+    {
+      "file": "25-hurt-heavy.json",
+      "atMs": 761600,
+      "note": "Took 62 (100 -> 38).",
+      "basis": "synthesized",
+      "expect": [
+        {
+          "type": "hurt",
+          "damage": 62,
+          "health": 38
+        }
+      ]
+    },
+    {
+      "file": "26-death.json",
+      "atMs": 762300,
+      "note": "Death: health 0, armor 0, helmet false, defusekit key removed, weapons {} (previously lists every lost weapon in full), deaths +1, equip_value unchanged. Still our own steamid.",
+      "basis": "real sequence: Necko1 frame 17; TriggerPad log idx 45",
+      "expect": [
+        {
+          "type": "hurt",
+          "damage": 38,
+          "health": 0
+        },
+        {
+          "type": "death"
+        }
+      ]
+    },
+    {
+      "file": "27-spectating-teammate.json",
+      "atMs": 765350,
+      "note": "Spectating: player.steamid != provider.steamid. All player fields are the TEAMMATE's. previously holds OUR old values (steamid, name, slot, state...).",
+      "basis": "real sequence: Necko1 frame 18",
+      "expect": [
+        {
+          "type": "context",
+          "value": "observing"
+        }
+      ]
+    },
+    {
+      "file": "28-spectating-teammate-flashed.json",
+      "atMs": 769550,
+      "note": "Observed teammate flashed (240). Self-only Game Link must ignore this.",
+      "basis": "synthesized",
+      "expect": []
+    },
+    {
+      "file": "29-round-loss.json",
+      "atMs": 778550,
+      "note": "Round lost (win_team T) while spectating; last teammate died.",
+      "basis": "real shape: Necko1 frame 28",
+      "expect": [
+        {
+          "type": "roundLost",
+          "winTeam": "T",
+          "reason": "t_win_elimination"
+        }
+      ]
+    },
+    {
+      "file": "30-round-over-no-player.json",
+      "atMs": 781650,
+      "note": "Player node gone at round end (previously.player = true).",
+      "basis": "real shape: Necko1 frame 29",
+      "expect": [
+        {
+          "type": "context",
+          "value": "between"
+        }
+      ]
+    },
+    {
+      "file": "31-halftime.json",
+      "atMs": 1081650,
+      "note": "Halftime: the post that ends round 12 already says map.phase intermission (round.phase over). Scores are side-labelled: we are CT with 8.",
+      "basis": "real sequence: Necko1 live-vertigo seq 226-231 (Wingman, halftime after round 8)",
+      "expect": [
+        {
+          "type": "context",
+          "value": "live"
+        },
+        {
+          "type": "resync"
+        }
+      ]
+    },
+    {
+      "file": "32-second-half-freezetime.json",
+      "atMs": 1101650,
+      "note": "Round 13 freezetime: team flipped CT -> T AND the side scores swapped (team_t is now our 8), money 800.",
+      "basis": "real sequence: Necko1 live-vertigo seq 231 (team flip + CT/T scores swap in the same post)",
+      "expect": [
+        {
+          "type": "sideSwap",
+          "from": "CT",
+          "to": "T"
+        },
+        {
+          "type": "mapPhase",
+          "value": "live"
+        },
+        {
+          "type": "roundStart",
+          "round": 13
+        },
+        {
+          "type": "weaponSwitch",
+          "weapon": "weapon_glock"
+        },
+        {
+          "type": "money",
+          "delta": -9050,
+          "money": 800
+        }
+      ]
+    },
+    {
+      "file": "33-round23-over.json",
+      "atMs": 2001650,
+      "note": "Round 23 just won (T 12 : CT 11). Full-state post after a time jump.",
+      "basis": "synthesized",
+      "expect": [
+        {
+          "type": "resync"
+        }
+      ]
+    },
+    {
+      "file": "34-match-point.json",
+      "atMs": 2008650,
+      "note": "Round 24 freezetime, T 12 : CT 11: we (T) are on match point (13 wins in MR12). Derived, not a field. Kept the AK (17/30, 2 mags); money +3250 win reward.",
+      "basis": "synthesized",
+      "expect": [
+        {
+          "type": "roundStart",
+          "round": 24
+        },
+        {
+          "type": "matchPoint",
+          "us": true,
+          "them": false
+        },
+        {
+          "type": "money",
+          "delta": 3250,
+          "money": 4900
+        }
+      ]
+    },
+    {
+      "file": "35-final-round-live.json",
+      "atMs": 2123650,
+      "note": "Round 24 live.",
+      "basis": "synthesized",
+      "expect": [
+        {
+          "type": "roundLive"
+        }
+      ]
+    },
+    {
+      "file": "36-gameover-win.json",
+      "atMs": 2184650,
+      "note": "Gameover straight from live (no separate 'over' post): map.phase gameover, round.phase FREEZETIME with win_team T, T 13 : CT 11. We (T) won the match.",
+      "basis": "real sequence: Necko1 live-vertigo seq 458 (live -> gameover/freezetime/win_team in one post)",
+      "expect": [
+        {
+          "type": "mapPhase",
+          "value": "gameover"
+        },
+        {
+          "type": "roundWon",
+          "winTeam": "T",
+          "reason": "t_win_elimination"
+        },
+        {
+          "type": "gameover",
+          "result": "win",
+          "us": 13,
+          "them": 11
+        },
+        {
+          "type": "hurt",
+          "damage": 36,
+          "health": 64
+        },
+        {
+          "type": "kill",
+          "headshot": false,
+          "roundKills": 1
+        },
+        {
+          "type": "kill",
+          "headshot": false,
+          "roundKills": 2
+        },
+        {
+          "type": "multiKill",
+          "count": 2,
+          "label": "double"
+        },
+        {
+          "type": "mvp"
+        },
+        {
+          "type": "money",
+          "delta": 600,
+          "money": 5500
+        }
+      ]
+    },
+    {
+      "file": "37-back-to-menu.json",
+      "atMs": 2214650,
+      "note": "Left the match: map and round removed (previously.map/round = true), player back to 3 fields.",
+      "basis": "real shape: Necko1 seq 4 / sngrotesque cs2_gsi_0001",
+      "expect": [
+        {
+          "type": "context",
+          "value": "menu"
+        }
+      ]
+    },
+    {
+      "file": "38-dm-live.json",
+      "atMs": 2274650,
+      "note": "Deathmatch (mode deathmatch): one long live round; round_kills keeps counting across lives.",
+      "basis": "synthesized (shape as competitive; DM money, score scale and round_kills behaviour unverified)",
+      "expect": [
+        {
+          "type": "context",
+          "value": "live"
+        },
+        {
+          "type": "resync"
+        }
+      ]
+    },
+    {
+      "file": "39-dm-death.json",
+      "atMs": 2282650,
+      "note": "DM death: health 0, weapons {}.",
+      "basis": "synthesized (same death shape as Necko1 frame 17)",
+      "expect": [
+        {
+          "type": "hurt",
+          "damage": 100,
+          "health": 0
+        },
+        {
+          "type": "death"
+        }
+      ]
+    },
+    {
+      "file": "40-dm-respawn.json",
+      "atMs": 2284750,
+      "note": "DM respawn: health 0 -> 100 while round.phase stays live (this is the respawn signal).",
+      "basis": "synthesized",
+      "expect": [
+        {
+          "type": "respawn"
+        }
+      ]
+    }
+  ]
+}

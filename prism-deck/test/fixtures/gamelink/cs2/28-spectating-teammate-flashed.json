@@ -1,0 +1,102 @@
+{
+    "provider": {
+        "name": "Counter-Strike: Global Offensive",
+        "appid": 730,
+        "version": 14191,
+        "steamid": "76561198000000001",
+        "timestamp": 1791659569
+    },
+    "map": {
+        "mode": "competitive",
+        "name": "de_inferno",
+        "phase": "live",
+        "round": 7,
+        "team_ct": {
+            "score": 5,
+            "consecutive_round_losses": 0,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 0
+        },
+        "team_t": {
+            "score": 2,
+            "consecutive_round_losses": 3,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 0
+        },
+        "num_matches_to_win_series": 0,
+        "round_wins": {
+            "1": "ct_win_elimination",
+            "2": "t_win_elimination",
+            "3": "ct_win_elimination",
+            "4": "ct_win_defuse",
+            "5": "t_win_bomb",
+            "6": "ct_win_elimination",
+            "7": "ct_win_defuse"
+        }
+    },
+    "round": {
+        "phase": "live"
+    },
+    "player": {
+        "steamid": "76561198000000002",
+        "name": "Lumen",
+        "observer_slot": 7,
+        "team": "CT",
+        "activity": "playing",
+        "state": {
+            "health": 81,
+            "armor": 100,
+            "helmet": true,
+            "flashed": 240,
+            "smoked": 0,
+            "burning": 0,
+            "money": 1150,
+            "round_kills": 1,
+            "round_killhs": 0,
+            "equip_value": 5350
+        },
+        "weapons": {
+            "weapon_0": {
+                "name": "weapon_knife",
+                "paintkit": "default",
+                "type": "Knife",
+                "state": "holstered"
+            },
+            "weapon_1": {
+                "name": "weapon_usp_silencer",
+                "paintkit": "default",
+                "type": "Pistol",
+                "ammo_clip": 12,
+                "ammo_clip_max": 12,
+                "ammo_reserve": 2,
+                "state": "holstered"
+            },
+            "weapon_2": {
+                "name": "weapon_ak47",
+                "paintkit": "default",
+                "type": "Rifle",
+                "ammo_clip": 17,
+                "ammo_clip_max": 30,
+                "ammo_reserve": 2,
+                "state": "active"
+            }
+        },
+        "match_stats": {
+            "kills": 11,
+            "assists": 2,
+            "deaths": 4,
+            "mvps": 2,
+            "score": 26
+        }
+    },
+    "previously": {
+        "player": {
+            "state": {
+                "flashed": 0
+            }
+        }
+    },
+    "auth": {
+        "token": "prism-gsi-example-token-0001"
+    }
+}

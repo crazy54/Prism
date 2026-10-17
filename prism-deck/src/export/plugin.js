@@ -30,6 +30,8 @@ import { CANVAS_LAYOUT, INFOBAR_LAYOUT, CANVAS_LAYOUT_PATH, INFOBAR_LAYOUT_PATH 
 import { PLUGIN_VERSION } from '../plugin/index.js';
 import { bundledProfileFor } from '../plugin/settings.js';
 import { piCatalogScript } from '../plugin/catalog.js';
+import { gameProfiles } from './profile.js';   // Game Link (prism-play)
+import { gameProfileFor } from '../plugin/settings.js';   // Game Link (prism-play)
 
 export { PLUGIN_UUID, PLUGIN_NAME, PLUGIN_VERSION };
 export const AUTHOR = 'Jeremy F Hall';
@@ -196,6 +198,8 @@ export function buildPluginFolder({ root, design = path.resolve(root, '..', 'des
   // profiles
   // bundled profile names come from settings.js BUNDLED_PROFILES (by DeviceType), the names switchToProfile uses
   const profiles = sampleProfiles({ pluginVersion: version }).filter((p) => minSoftware >= '7.6' || p.device !== 'neo').map((p) => ({ ...p, name: bundledProfileFor(p.deviceType) || `profiles/prism-${p.device.replace(/-2022$/, '')}` }));
+  // ── Game Link (prism-play) ── the CS2 profiles beside the samples, under their own names (settings.js GAME_PROFILES)
+  profiles.push(...gameProfiles({ pluginVersion: version }).filter((p) => minSoftware >= '7.6' || p.device !== 'neo').map((p) => ({ ...p, name: gameProfileFor(p.deviceType, p.game) || `profiles/prism-${p.game}-${p.device.replace(/-2022$/, '')}` })));   // the Neo needs 7.6, as for the samples
   for (const p of profiles) put(`${p.name}.streamDeckProfile`, p.zip);
   const manifest = pluginManifest({ version, minSoftware, profiles });
   put('manifest.json', `${JSON.stringify(manifest, null, '\t')}\n`);

@@ -28,6 +28,8 @@
 //   data        live inputs a runtime feeds (audio, cpu, mem, net …); facets simulate fallbacks
 //   idPrefix, id(name)                collision-free SVG ids
 //   reduced     true under reduced motion: render a meaningful static frame
+//   motion      the user's motion level: 'full' | 'calm' (soft effects: no strobing, gentle fades) | 'still' (static state
+//               only; = reduced). Photosensitive effects (Game Link flashes) follow it. Defaults from `reduced`.
 //   game        game facets (API 1.5): the current state (runtimes pass opts.game from scene/game.js's
 //               host; without it the facet's game.init() state — what stills and thumbnails show)
 //   gamePrev    the state before the last event (null at the start)
@@ -41,6 +43,8 @@ import { useTheme } from '../themes/_registry.js';
 import { glyphRegistry } from '../glyphs/_registry.js';
 
 const DEFAULT_NOW = Date.UTC(2026, 3, 14, 9, 41, 0); // a fixed, fictional instant for tests and stills
+/** ctx.motion levels (Game Link, prism-play): what runtimes pass as opts.motion. */
+export const MOTION_LEVELS = Object.freeze(['full', 'calm', 'still']);
 
 /** Defaults for every declared param, overlaid with `overrides` (unknown keys ignored, numbers clamped, options enforced). */
 export function resolveParams(decl = {}, overrides = {}) {
@@ -136,6 +140,7 @@ export function createContext(facet, opts = {}) {
     data: opts.data || {},
     idPrefix, id: (name) => `${idPrefix}-${name}`,
     reduced: !!opts.reduced,
+    motion: opts.reduced ? 'still' : MOTION_LEVELS.includes(opts.motion) ? opts.motion : 'full',   // ctx.motion (Game Link, prism-play)
     ...(facet.game ? gameFields(facet, opts, { kind, grid, device, seed, params }) : {}),
   };
 }

@@ -118,7 +118,7 @@
   }
 
   // ── on press (real behaviors) ───────────────────────────────────────────────
-  var DATA_NAMES = { audio: 'sound levels', spectrum: 'the spectrum', media: 'now playing', calendar: 'the calendar', weather: 'the weather', cpu: 'CPU', mem: 'memory', gpu: 'GPU', net: 'network', disk: 'disk', temp: 'temperature', battery: 'battery', uptime: 'uptime' };
+  var DATA_NAMES = { audio: 'sound levels', spectrum: 'the spectrum', media: 'now playing', calendar: 'the calendar', weather: 'the weather', cpu: 'CPU', mem: 'memory', gpu: 'GPU', net: 'network', disk: 'disk', temp: 'temperature', battery: 'battery', uptime: 'uptime', gamelink: 'game data' };
   function renderPress(f) {
     var neo = state && state.controller === 'Neo';
     var game = !!(f && f.game);
@@ -126,6 +126,7 @@
     if (neo || game) return;
     var p = settings.press || {};
     var kind = p.kind === 'url' || p.kind === 'profile' || p.kind === 'back' ? p.kind : '';
+    if (kind === 'profile' && p.profile === 'cs2') kind = 'profile-cs2';   // Game Link (prism-play)
     $('pressKind').value = kind;
     $('pressUrlRow').hidden = kind !== 'url';
     $('pressPageRow').hidden = kind !== 'profile';
@@ -136,9 +137,11 @@
     if (kind === 'url') st.textContent = p.url ? (dial ? 'Pushing the dial' : 'Pressing the key') + ' opens ' + p.url + ' in your browser.' : 'Enter an address that starts with https:// or http://.';
     else if (kind === 'profile') st.textContent = state && state.host === 'opendeck' ? 'OpenDeck can\u2019t switch profiles: the key shows an alert instead.' : 'Switches this device to its Prism sample profile' + (p.page ? ', page ' + p.page : '') + '. Plugins can only switch to the profiles they install.';
     else if (kind === 'back') st.textContent = 'Switches this device back to the profile you came from.';
+    else if (kind === 'profile-cs2') st.textContent = state && state.host === 'opendeck' ? 'OpenDeck can’t switch profiles: the key shows an alert instead.' : 'Switches this device to its Prism · CS2 profile (Game Link). Install it when the Stream Deck app offers the plugin’s profiles.';   // Game Link (prism-play)
   }
   function savePress(patch) {
     var p = Object.assign({}, settings.press || {}, patch);
+    if (p.kind === 'profile-cs2') { p.kind = 'profile'; p.profile = 'cs2'; } else if (patch.kind) delete p.profile;   // Game Link (prism-play)
     if (!p.kind) { delete settings.press; saveSettings({}, true); renderPress(facetOf(settings.facet)); return; }
     if (p.kind !== 'url') delete p.url;
     if (p.kind !== 'profile' || !p.page) delete p.page;
@@ -164,6 +167,7 @@
       ['Calendar', s.calendar, s.calendar === 'live' ? 'From your .ics file.' : 'A demo day. Set a calendar file below.'],
       ['Now playing', s.media, s.media === 'live' ? 'From your media player (MPRIS).' : (win || mac ? 'Demo on ' + (win ? 'Windows' : 'macOS') + ': Prism can\u2019t read the system player there yet.' : 'Demo until playerctl finds a player.')],
       ['Weather', s.weather, s.weather === 'live' ? 'Live.' : 'Always demo: Prism has no weather source. The sample profiles leave weather out.'],
+      ['Game Link', s.gamelink === 'live' || s.gamelink === 'waiting' ? 'live' : 'demo', s.gamelink === 'live' ? 'Live game data.' : s.gamelink === 'waiting' ? 'Listening; no game connected yet. Game Link keys say so until a game sends data.' : 'A demo round. Turn on listening or Connect CS2 below.'],   // Game Link (prism-play)
     ];
     rows.forEach(function (r) {
       box.appendChild(el('dt', null, r[0]));
@@ -293,6 +297,55 @@
     var on = globals.aiEditing === true;
     $('aiEditing').setAttribute('aria-checked', String(on));
     renderLive();
+    renderGameLink();   // Game Link (prism-play)
+  }
+
+  // ── Game Link (prism-play) ──────────────────────────────────────────────────
+  var GL_REASONS = {
+    'not-installed': 'CS2 not found on this computer.',
+    'no-steam': 'CS2 not found: Steam isn\u2019t installed on this computer.',
+    'no-binary': 'CS2 not found: its game files are incomplete. Verify them in Steam, then try again.',
+    'no-cfg-dir': 'CS2 not found: its cfg folder is missing. Verify the game files in Steam, then try again.',
+    'unsupported': 'CS2 isn\u2019t available on this system.',
+    'no-port': 'Couldn\u2019t listen on the Game Link ports: another app uses them. Set a different port below.',
+    'not-listening': 'Couldn\u2019t start listening. Try another port below.',
+    'foreign-file': 'Another app\u2019s file already has Prism\u2019s name in the CS2 cfg folder. Nothing was changed.',
+    'write-failed': 'Couldn\u2019t write the CS2 config file. Check that the CS2 folder is writable.',
+    'remove-failed': 'Couldn\u2019t remove the CS2 config file.',
+    'bad-port': 'Ports go from 1024 to 65535.',
+    'bad-path': 'Couldn\u2019t place the CS2 config file.',
+    'state-write-failed': 'Couldn\u2019t save Game Link\u2019s settings file: another app has it open. Click Disconnect again in a moment.'   // gamelink-fix (L2)
+  };
+  function agoText(ms) { if (ms === null || ms === undefined) return ''; var s = Math.max(0, Math.round(ms / 1000)); return s < 2 ? 'just now' : s < 90 ? s + ' s ago' : Math.round(s / 60) + ' min ago'; }
+  function renderGameLink() {
+    var g = state && state.gameLink, s = $('glStatus');
+    clear(s);
+    $('glBox').hidden = !(g && g.available);
+    if (!g || !g.available) return;
+    var c = g.cs2 || {}, last = g.last || {};
+    var add = function (cls, text) { if (cls) s.appendChild(el('span', { className: cls }, text)); else s.appendChild(document.createTextNode(text)); };
+    $('glListen').setAttribute('aria-checked', String(g.enabled === true));
+    $('glListen').disabled = !!g.busy;
+    if (g.busy) add(null, g.busy === 'connect' ? 'Connecting\u2026' : 'Disconnecting\u2026');
+    else if (g.state === 'live') { add('is-ok', 'Live'); add(null, ' \u00b7 ' + (g.game === 'cs2' ? 'CS2' : g.game || 'game') + ' \u00b7 last update ' + agoText(g.lastAgoMs) + ' \u00b7 127.0.0.1:' + g.port + '.'); }
+    else if (g.state === 'waiting') add(null, 'Listening; no game connected \u00b7 127.0.0.1:' + g.port + '.');
+    else add(null, g.enabled ? 'Starting\u2026' : 'Off: no port is open. Game Link keys show a demo round, tagged DEMO.');
+    if (!g.busy) {
+      if (c.cfg === 'outdated') { add(null, ' '); add('is-warn', 'CS2 config out of date'); add(null, ': click Reconnect CS2.'); }
+      else if (c.cfg === 'current') add(null, last.action === 'connect' && last.restartNeeded ? ' CS2 config installed: restart CS2 if it\u2019s running.' : g.state === 'off' ? ' CS2 config installed: turn listening on to use it.' : ' CS2 config installed.');
+      else if (c.found === false) { add(null, ' '); add(null, GL_REASONS[c.reason] || GL_REASONS['not-installed']); }
+      if (last.action && !last.ok && last.reason) {
+        add(null, ' ');
+        add('is-warn', GL_REASONS[last.reason] || 'Something went wrong.');
+        if (last.reason === 'not-installed') add(null, last.leftover ? ' A leftover Counter-Strike folder isn\u2019t an install: reinstall CS2 from Steam, then click Connect CS2.' : ' Install it from Steam, then click Connect CS2.');
+      } else if (last.action === 'disconnect' && last.ok && last.removed) add(null, ' The CS2 config was removed.');
+    }
+    $('glConnect').textContent = g.outOfDate ? 'Reconnect CS2' : 'Connect CS2';
+    $('glConnect').disabled = !!g.busy;
+    $('glDisconnect').hidden = !(c.cfg === 'current' || c.cfg === 'outdated');
+    $('glDisconnect').disabled = !!g.busy;
+    if (document.activeElement !== $('glPort')) $('glPort').value = g.wantPort ? String(g.wantPort) : '';
+    $('glPort').placeholder = String(g.port || g.defaultPort || 38140);
   }
   function renderLive() {
     var live = (state && state.live) || {};
@@ -359,13 +412,19 @@
   $('audioBridge').addEventListener('click', function () { toPlugin({ cmd: 'audio-bridge' }); });
   $('deny').addEventListener('click', function () { toPlugin({ cmd: 'live', action: 'deny' }); });
   $('revoke').addEventListener('click', function () { toPlugin({ cmd: 'live', action: 'revoke' }); });
+  // Game Link (prism-play): the plugin owns globals.gamelink; the PI only asks
+  $('glListen').addEventListener('click', function () { var g = (state && state.gameLink) || {}; toPlugin({ cmd: 'gamelink', action: 'listen', on: g.enabled !== true }); });
+  $('glConnect').addEventListener('click', function () { toPlugin({ cmd: 'gamelink', action: 'connect-cs2' }); });
+  $('glDisconnect').addEventListener('click', function () { toPlugin({ cmd: 'gamelink', action: 'disconnect-cs2' }); });
+  $('glPort').addEventListener('change', function () { var v = $('glPort').value.trim(); toPlugin({ cmd: 'gamelink', action: 'port', port: v === '' ? null : Number(v) }); });
+  $('plugin').addEventListener('toggle', function () { if ($('plugin').open) toPlugin({ cmd: 'gamelink', action: 'status' }); });
 
   function onMessage(m) {
     if (m.event === 'didReceiveSettings' && m.payload) { settings = m.payload.settings || {}; renderAll(); }
     else if (m.event === 'didReceiveGlobalSettings' && m.payload) { globals = m.payload.settings || {}; renderGlobals(); renderLook(); }
     else if (m.event === 'sendToPropertyInspector' && m.payload) {
       var p = m.payload;
-      if (p.type === 'state') { state = p; if (p.settings) settings = Object.assign({}, settings, p.settings); if (p.globals) globals = Object.assign({}, p.globals, globals); renderAll(); }
+      if (p.type === 'state') { state = p; if (p.settings) settings = Object.assign({}, settings, p.settings); if (p.globals) globals = Object.assign({}, p.globals, globals); if (p.globals && p.globals.gamelink) globals.gamelink = p.globals.gamelink; /* Game Link (prism-play): plugin-owned */ renderAll(); }
       else if (p.type === 'preview' && typeof p.image === 'string' && p.image.indexOf('data:image/') === 0) { var img = $('preview'); img.src = p.image; img.hidden = false; $('previewEmpty').hidden = true; img.alt = 'Preview of ' + ((facetOf(settings.facet) || {}).title || 'this key'); }
     }
   }
@@ -391,6 +450,9 @@
     settings = { facet: C.facets['span-waveform'] ? 'span-waveform' : ids[0], group: 'A', params: {} };
     globals = { theme: 'prism', mode: 'dark', motion: 'full', aiEditing: /live/.test(location.search), limits: { updatesPerSec: 200 }, calendarFile: '' };
     state = { type: 'state', version: '0.7.0.0', host: 'elgato', controller: 'Keypad', device: { name: 'Galleon 100 SD', model: 'galleon' }, coordinates: { column: 0, row: 1 }, unit: { mode: 'span', members: 3, fps: 10.3, audio: true }, audio: { state: 'standby', kind: 'simulated', backend: null, bridgeUrl: 'http://127.0.0.1:43210/', bridgeConnected: false }, choices: ids.filter(function (id) { var s = C.facets[id].surface; return s === 'key' || s === 'span' || s === 'deck'; }), live: /live/.test(location.search) ? { running: true, pending: { client: 'Claude', code: '4821' } } : { running: false }, demo: ['audio'], sources: { system: 'live', audio: 'demo', calendar: 'demo', media: 'demo', weather: 'demo', calendarFile: '', calendarCheck: null, platform: 'win32' } };
+    // Game Link (prism-play): pi.html?demo → off, CS2 not found · ?demo&listening → listening, no game · ?demo&gamelink → live
+    state.gameLink = /listening/.test(location.search) ? { available: true, enabled: true, listening: true, port: 38140, wantPort: null, defaultPort: 38140, state: 'waiting', game: null, lastAgoMs: null, cs2: { found: false, reason: 'not-installed', leftover: true, path: null, cfg: 'absent' }, outOfDate: false, busy: null, last: null, refused: 0 } : /gamelink/.test(location.search) ? { available: true, enabled: true, listening: true, port: 38140, wantPort: null, defaultPort: 38140, state: 'live', game: 'cs2', lastAgoMs: 1200, cs2: { found: true, reason: null, leftover: false, path: 'D:\\SteamLibrary\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\cfg\\gamestate_integration_prism.cfg', cfg: 'current' }, outOfDate: false, busy: null, last: null, refused: 0 } : { available: true, enabled: false, listening: false, port: null, wantPort: null, defaultPort: 38140, state: 'off', game: null, lastAgoMs: null, cs2: { found: false, reason: 'not-installed', leftover: true, path: null, cfg: 'absent' }, outOfDate: false, busy: null, last: null, refused: 0 };
+    state.sources.gamelink = state.gameLink.state;
     renderAll();
     if (window.PRISM_DEMO_PREVIEW) onMessage({ event: 'sendToPropertyInspector', payload: { type: 'preview', image: window.PRISM_DEMO_PREVIEW } });
   }

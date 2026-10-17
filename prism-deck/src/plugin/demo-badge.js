@@ -14,7 +14,7 @@ import { textPath, measureText, capHeight } from '../scene/text.js';
 import { n } from '../scene/svg.js';
 import { BEZEL_INSET } from '../themes/_theme.js';
 
-export const DEMO_KEYS = new Set(['audio', 'spectrum', 'media', 'calendar', 'weather', 'cpu', 'mem', 'gpu', 'net', 'disk', 'temp', 'battery', 'uptime']);
+export const DEMO_KEYS = new Set(['audio', 'spectrum', 'media', 'calendar', 'weather', 'cpu', 'mem', 'gpu', 'net', 'disk', 'temp', 'battery', 'uptime', 'gamelink']);   // gamelink: Game Link (prism-play) — the demo round while it's off
 export const DEMO_TEXT = 'DEMO';
 const INK = '#0b0d14', AMBER = '#ffc861';
 
