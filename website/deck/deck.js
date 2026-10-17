@@ -339,6 +339,7 @@ const DATA_NOTES = [
   [['timer'], 'Timers are real: the key keeps its own time.'],
   [['clock'], 'Clocks are real: your computer’s time.'],
   [['mic', 'camera'], 'Mic and camera keys show the key’s own on/muted state; they don’t switch your microphone or camera.'],
+  [['gamelink'], 'Game Link reads Counter-Strike 2 live, through Valve’s Game State Integration (read-only, on your own computer), once you connect CS2. It arrives with Prism Deck 0.8; the Game Link demo page replays a whole fictional match.'],   // Game Link (prism-play)
 ];
 function honestHtml(f) {
   const keys = new Set(f.data || []);

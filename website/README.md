@@ -10,6 +10,7 @@ The source for [prism.jeremyfhall.com](https://prism.jeremyfhall.com). Everythin
 | `terminal/tty.html`, `terminal/tty.js` | `/terminal/tty.html` | directions for browsing from a terminal, with a live preview of every curl page |
 | `terminal/terminal.css`, `terminal/site.js` | | shared by both terminal pages: styles, engine paths, the terminal theme that follows Night/Day |
 | `deck/index.html`, `deck/deck.css`, `deck/deck.js` | `/deck/` | the Stream Deck catalog: virtual devices (Galleon 100 SD, Stream Deck +, MK.2, XL, + XL, Neo, Mini) playing every deck facet live through prism-deck's browser runtime, a detail view, and the plugin / icon-pack / profile downloads |
+| `deck/game-link.html`, `deck/game-link.js`, `deck/game-link.css`, `deck/game-link/cs2-match.json` | `/deck/game-link.html` | the Game Link demo: a fictional CS2 match (Game State Integration posts) replayed through prism-deck's real normalizer onto a virtual Galleon 100 SD and Stream Deck + (or MK.2 / XL / Mini), with a photosensitivity gate, chapters and the live "what CS2 sent" panel |
 | `assets/site.css`, `assets/site.js` | | chrome shared by every page: Inter, the glass top bar with the Web · Terminal · Stream Deck switcher, Night/Day with the relight sweep, First Light, copy and toast |
 | `assets/rf/`, `assets/fonts/`, `assets/brand/`, favicons | | the Refraction design language, vendored from `../design/` by `scripts/sync-refraction.mjs` |
 | `assets/deck/` | | the deck adapter (`adapter.js`) plus a sketch runtime it falls back to if prism-deck can't load |

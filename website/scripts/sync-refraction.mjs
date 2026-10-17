@@ -108,7 +108,7 @@ await put('assets/rf/positions.css', hueCss);
 // ── HTML markers ────────────────────────────────────────────────────────────
 const icons = JSON.parse(await readFile(path.join(design, 'icons', 'icons.json'), 'utf8'));
 const lambdaOf = (id) => (positions[id] || surfaces[id] || terminal[id])?.lambda;
-const pages = ['index.html', 'terminal/index.html', 'terminal/tty.html', 'deck/index.html'];
+const pages = ['index.html', 'terminal/index.html', 'terminal/tty.html', 'deck/index.html', 'deck/game-link.html'];   // deck/game-link.html: Game Link (prism-play)
 for (const rel of pages) {
   const file = path.join(site, rel);
   if (!existsSync(file)) continue;
