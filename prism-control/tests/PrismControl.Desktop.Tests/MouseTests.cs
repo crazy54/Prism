@@ -401,9 +401,19 @@ public class MouseTests
 /// The ONLY real-input test (lead rule): move and click inside a window this test creates and owns. The window is
 /// topmost, WS_EX_NOACTIVATE and a tool window (never focused, never in alt-tab), 80×80 near the primary monitor's
 /// corner, shown for a fraction of a second; the expected-window check means a click can never land in another app.
+/// It moves the user's real cursor, so it is OPT-IN: set PRISM_CONTROL_REAL_INPUT_TESTS=1 and keep your hands off the
+/// mouse. Default builds (including build.ps1's integration run) skip it.
 /// </summary>
 public partial class MouseRealInputTests
 {
+    internal const string OptInVariable = "PRISM_CONTROL_REAL_INPUT_TESTS";
+
+    private static void RequireOptIn()
+    {
+        if (Environment.GetEnvironmentVariable(OptInVariable) != "1")
+            Assert.Skip($"sends real mouse input on the desktop; set {OptInVariable}=1 to run it");
+    }
+
     private static readonly ConcurrentQueue<uint> Messages = new();
 
     [UnmanagedCallersOnly]
@@ -417,6 +427,7 @@ public partial class MouseRealInputTests
     [Test(Category = "integration", TimeoutMs = 20_000)]
     public async Task Click_lands_in_our_own_window_without_taking_focus_and_the_cursor_returns()
     {
+        RequireOptIn();
         while (Messages.TryDequeue(out _)) { }
         var native = new Win32MouseNative();
         var cursorBefore = native.CursorPos();
