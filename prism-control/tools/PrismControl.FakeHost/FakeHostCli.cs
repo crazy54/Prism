@@ -61,6 +61,30 @@ public static class FakeHostSafety
         "com.jeremyfhall.prismcontrol.spotify.repeat", "com.jeremyfhall.prismcontrol.spotify.shuffle", "com.jeremyfhall.prismcontrol.spotify.volume",
         "com.jeremyfhall.prismcontrol.system.cpu", "com.jeremyfhall.prismcontrol.system.dial", "com.jeremyfhall.prismcontrol.system.disk",
         "com.jeremyfhall.prismcontrol.system.gpu", "com.jeremyfhall.prismcontrol.system.network", "com.jeremyfhall.prismcontrol.system.ram",
+        // Team Prism Play modules (each covered by its module's safe-mode tests; see aaa-prism-play/<role>/NOTES.md).
+        // Browser (browser-mod/NOTES.md §3, 16).
+        "com.jeremyfhall.prismcontrol.browser.download", "com.jeremyfhall.prismcontrol.browser.group", "com.jeremyfhall.prismcontrol.browser.media",
+        "com.jeremyfhall.prismcontrol.browser.meet", "com.jeremyfhall.prismcontrol.browser.nav", "com.jeremyfhall.prismcontrol.browser.page",
+        "com.jeremyfhall.prismcontrol.browser.panic", "com.jeremyfhall.prismcontrol.browser.preview", "com.jeremyfhall.prismcontrol.browser.privacy",
+        "com.jeremyfhall.prismcontrol.browser.reopen", "com.jeremyfhall.prismcontrol.browser.scrub", "com.jeremyfhall.prismcontrol.browser.site",
+        "com.jeremyfhall.prismcontrol.browser.speed", "com.jeremyfhall.prismcontrol.browser.split", "com.jeremyfhall.prismcontrol.browser.tab",
+        "com.jeremyfhall.prismcontrol.browser.tabs",
+        // Windows / WinShell W1 (w1/NOTES.md §5, 13).
+        "com.jeremyfhall.prismcontrol.windows.browser", "com.jeremyfhall.prismcontrol.windows.desktops", "com.jeremyfhall.prismcontrol.windows.game-mode",
+        "com.jeremyfhall.prismcontrol.windows.hdr", "com.jeremyfhall.prismcontrol.windows.input-source", "com.jeremyfhall.prismcontrol.windows.maximize",
+        "com.jeremyfhall.prismcontrol.windows.monitor", "com.jeremyfhall.prismcontrol.windows.next-monitor", "com.jeremyfhall.prismcontrol.windows.placer",
+        "com.jeremyfhall.prismcontrol.windows.refresh", "com.jeremyfhall.prismcontrol.windows.topmost", "com.jeremyfhall.prismcontrol.windows.window",
+        "com.jeremyfhall.prismcontrol.windows.zone",
+        // AI: AI1 sessions + approvals (ai1/NOTES.md §7, 7) and AI2 apps + services (Ai2Ids.All, 7).
+        "com.jeremyfhall.prismcontrol.ai.approve", "com.jeremyfhall.prismcontrol.ai.deny", "com.jeremyfhall.prismcontrol.ai.fleet",
+        "com.jeremyfhall.prismcontrol.ai.next", "com.jeremyfhall.prismcontrol.ai.privacy", "com.jeremyfhall.prismcontrol.ai.request",
+        "com.jeremyfhall.prismcontrol.ai.session",
+        "com.jeremyfhall.prismcontrol.ai.app", "com.jeremyfhall.prismcontrol.ai.ask", "com.jeremyfhall.prismcontrol.ai.dictate",
+        "com.jeremyfhall.prismcontrol.ai.health", "com.jeremyfhall.prismcontrol.ai.healthstrip", "com.jeremyfhall.prismcontrol.ai.ops",
+        "com.jeremyfhall.prismcontrol.ai.usage",
+        // Smart Deck (sd1/NOTES.md §12; SD2 adds no actions) and Prism Sight (sight/NOTES.md §9).
+        "com.jeremyfhall.prismcontrol.smart.dial", "com.jeremyfhall.prismcontrol.smart.key",
+        "com.jeremyfhall.prismcontrol.sight.dial", "com.jeremyfhall.prismcontrol.sight.status",
     };
 
     /// <summary>Placeable without --allow-real-actions: the samples and diagnostics, or a real action whose writes are gated on safe mode.</summary>

@@ -4,7 +4,7 @@ using PrismControl.Tools;
 // prismctl — Prism Control build/dev tool.
 //   validate  --plugin <dir.sdPlugin>                    manifest + layouts against the Elgato schemas, files, cross-refs
 //   validate-layout <file.json>...                       one or more layout files
-//   pack      --exe <PrismControl.exe> [--out dist] [--version x.y.z.w]
+//   pack      --exe <PrismControl.exe> [--out dist] [--version x.y.z.w] [--relay <prism-relay.exe>]
 //   fake-host --exe <PrismControl.exe> [--device galleon|plus|both] [--action <uuid>]... [--gated] [--allow-real-actions] [--seconds 5] [--demo] [--user-dir <dir>]
 //             Always runs the plugin in safe mode (PRISM_CONTROL_SAFE_MODE=1, PRISM_CONTROL_MACROS_DRY_RUN=1). Without --action it
 //             places only the sample and diagnostics actions; any other --action also needs --allow-real-actions.
@@ -39,7 +39,8 @@ switch (args[0])
         if (!File.Exists(exe)) { Console.Error.WriteLine($"exe not found: {exe} (publish first: tools/build.ps1)"); return 2; }
         var outDir = Path.GetFullPath(Opt("--out") ?? Path.Combine(repo, "dist"));
         Directory.CreateDirectory(outDir);
-        var r = Packer.Pack(repo, exe, outDir, Opt("--version"), Console.Out);
+        var relay = Opt("--relay") is { } rp ? Path.GetFullPath(rp) : null;
+        var r = Packer.Pack(repo, exe, outDir, Opt("--version"), Console.Out, relay);
         foreach (var p in r.Problems) Console.Error.WriteLine("  " + p);
         Console.WriteLine($"plugin: {r.PluginDir}");
         Console.WriteLine($"bundle: {r.BundlePath} ({r.BundleBytes / 1048576.0:0.0} MB; exe {r.ExeBytes / 1048576.0:0.0} MB)");
@@ -85,7 +86,7 @@ static int Usage()
     Console.Error.WriteLine("""
         prismctl validate [--plugin <dir.sdPlugin>]
         prismctl validate-layout <layout.json>...
-        prismctl pack [--exe <PrismControl.exe>] [--out dist] [--version x.y.z.w]
+        prismctl pack [--exe <PrismControl.exe>] [--out dist] [--version x.y.z.w] [--relay <prism-relay.exe>]
         prismctl fake-host [--exe <PrismControl.exe>] [--device galleon|plus|both] [--action <uuid>]... [--gated] [--allow-real-actions] [--seconds 5] [--demo] [--user-dir <dir>]
           safe mode always; default placement = sample + diagnostics actions; --gated adds every real action whose module gates
           its writes on safe mode; any other --action UUID needs --allow-real-actions

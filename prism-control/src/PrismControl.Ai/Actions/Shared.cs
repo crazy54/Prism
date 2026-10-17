@@ -108,6 +108,15 @@ internal sealed class AiBinding : IDisposable
         AiText.Draw(d, "OFFLINE", 72, 100, 18, t.Dim, TextAlign.Middle);
         return d;
     }
+
+    /// <summary>The dial face shown when the AI module did not load (a dial must always draw something).</summary>
+    public static SvgDocument OfflineDial(RefractionPalette t)
+    {
+        var d = DialArt.Base(t);
+        AiText.Draw(d, "AI", 100, 44, 22, t.Faint, TextAlign.Middle, baseline: TextBaseline.Middle);
+        AiText.Draw(d, "OFFLINE", 100, 72, 14, t.Dim, TextAlign.Middle);
+        return d;
+    }
 }
 
 /// <summary>

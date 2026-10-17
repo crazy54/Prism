@@ -99,6 +99,7 @@ public sealed class RequestCardAction : DialAction, IDisposable
         if (_b?.S is not { } s)
         {
             if (IsKey) SetImage(AiBinding.Offline(Theme));
+            else SetFeedback(new Feedback().Pixmap("canvas", AiBinding.OfflineDial(Theme)).Text("line1", "").Text("line2", "").Text("line3", ""));
             return;
         }
         var now = s.Time.GetUtcNow();

@@ -116,7 +116,7 @@ public sealed class FleetDialAction : DialAction<FleetSettings>, IDisposable
 
     private void Render()
     {
-        if (_b?.S is not { } s) return;
+        if (_b?.S is not { } s) { SetFeedback(new Feedback().Pixmap(Layouts.Canvas.Frame, AiBinding.OfflineDial(Theme))); return; }
         var now = s.Time.GetUtcNow();
         if (_banner is not null && now >= _bannerUntil) _banner = null;
         var sessions = s.Sessions.Snapshot(s.Privacy);

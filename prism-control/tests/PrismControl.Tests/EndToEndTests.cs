@@ -410,10 +410,17 @@ public sealed class EndToEndTests : IAsyncDisposable
         foreach (var required in new[] { "manifest.json", "bin/PrismControl.exe", "layouts/prism-canvas.json", "pi/default.html", "pi/lib/prism-pi.js", "imgs/plugin/icon.png" })
             Assert.True(names.Contains(Packer.PluginUuid + ".sdPlugin/" + required), required);
 
-        // The packed manifest is exactly what the shipped exe generates.
+        // The packed manifest is exactly what the shipped exe generates, plus the Profiles the packer merges in from
+        // src/*/plugin/profiles/profiles.manifest.json (each one's .streamDeckProfile is checked by the validator above).
         var tmp = Path.Combine(_userDir, "emitted.json");
         Directory.CreateDirectory(_userDir);
         var packed = JsonNode.Parse(File.ReadAllText(Path.Combine(PluginDir, "manifest.json")))!;
+        if (packed["Profiles"] is JsonArray profiles)
+        {
+            foreach (var profile in profiles)
+                Assert.True(names.Contains(Packer.PluginUuid + ".sdPlugin/" + profile!["Name"]!.GetValue<string>() + ".streamDeckProfile"), "bundled profile " + profile["Name"]);
+            packed.AsObject().Remove("Profiles");
+        }
         var psi = new ProcessStartInfo(Exe) { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true };
         foreach (var a in new[] { "--emit-manifest", tmp, "--version", packed["Version"]!.GetValue<string>() }) psi.ArgumentList.Add(a);
         using var p = Process.Start(psi)!;

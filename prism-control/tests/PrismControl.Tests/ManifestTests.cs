@@ -79,9 +79,13 @@ public class ManifestTests
     public void Module_assemblies_come_from_project_references()
     {
         var names = ModuleLoader.ModuleAssemblyNames();
-        foreach (var n in new[] { "PrismControl.Audio", "PrismControl.SystemInfo", "PrismControl.Spotify", "PrismControl.Eq", "PrismControl.Macros", "PrismControl.Cooling" })
+        foreach (var n in new[] { "PrismControl.Audio", "PrismControl.SystemInfo", "PrismControl.Spotify", "PrismControl.Eq", "PrismControl.Macros", "PrismControl.Cooling",
+                                  "PrismControl.Browser", "PrismControl.WinShell", "PrismControl.Ai", "PrismControl.Smart", "PrismControl.Sight" })
             Assert.True(names.Contains(n), $"{n} missing from {string.Join(",", names)}");
         Assert.False(names.Contains("PrismControl.Core"));
+        // Desktop is a shared library (it flows in through the modules) and PrismRelay a separate exe: never modules.
+        Assert.False(names.Contains("PrismControl.Desktop"), "PrismControl.Desktop is a library (a transitive reference), never a module");
+        Assert.False(names.Contains("PrismRelay"), "PrismRelay must not be a ProjectReference of the exe");
     }
 
     [Test]
@@ -118,7 +122,8 @@ public class ManifestTests
         Assert.Equal(3, manifest["SDKVersion"]!.GetValue<int>());
         Assert.Equal("windows", manifest["OS"]![0]!["Platform"]!.GetValue<string>());
         Assert.Null(manifest["Nodejs"]);
-        Assert.Equal("Spotify.exe", manifest["ApplicationsToMonitor"]!["windows"]![0]!.GetValue<string>());
+        var monitored = manifest["ApplicationsToMonitor"]!["windows"]!.AsArray().Select(n => n!.GetValue<string>()).ToList();
+        Assert.True(monitored.Contains("Spotify.exe"), "ApplicationsToMonitor: " + string.Join(",", monitored)); // Browser and Sight add theirs (sorted)
         var dir = Repo.StagePluginFolder(manifest);
         try
         {

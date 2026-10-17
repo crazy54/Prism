@@ -46,19 +46,33 @@
     <ProjectReference Include="..\PrismControl.Eq\PrismControl.Eq.csproj" />
     <ProjectReference Include="..\PrismControl.Macros\PrismControl.Macros.csproj" />
     <ProjectReference Include="..\PrismControl.Cooling\PrismControl.Cooling.csproj" />
+    <!-- Team Prism Play modules. PrismControl.Desktop (a shared library, not a module) flows in through them and must never
+         be referenced here; PrismRelay is a separate exe that tools/build.ps1 publishes into <plugin>/bin/prism-relay.exe. -->
+    <ProjectReference Include="..\PrismControl.Browser\PrismControl.Browser.csproj" />
+    <ProjectReference Include="..\PrismControl.WinShell\PrismControl.WinShell.csproj" />
+    <ProjectReference Include="..\PrismControl.Ai\PrismControl.Ai.csproj" />
+    <ProjectReference Include="..\PrismControl.Smart\PrismControl.Smart.csproj" />
+    <ProjectReference Include="..\PrismControl.Sight\PrismControl.Sight.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <InternalsVisibleTo Include="PrismControl.Tests" />
   </ItemGroup>
 
+  <!-- The exe's DIRECT ProjectReferences, captured at evaluation time. During the build the SDK adds transitive project
+       references to @(ProjectReference) (IncludeTransitiveProjectReferences), e.g. PrismControl.Desktop through the
+       Browser/WinShell/Ai/Smart/Sight modules; those are libraries, not modules. -->
+  <ItemGroup>
+    <PrismModuleReference Include="@(ProjectReference)" />
+  </ItemGroup>
+
   <!-- Records every module ProjectReference as [assembly: AssemblyMetadata("PrismModule", "<name>")] so the host can
        Assembly.Load them without a hand-maintained list (the compiler drops unused assembly references). -->
   <Target Name="PrismModuleMetadata" BeforeTargets="GetAssemblyAttributes">
     <ItemGroup>
-      <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition="'%(ProjectReference.Filename)' != 'PrismControl.Core'">
+      <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition="'%(PrismModuleReference.Filename)' != 'PrismControl.Core'">
         <_Parameter1>PrismModule</_Parameter1>
-        <_Parameter2>%(ProjectReference.Filename)</_Parameter2>
+        <_Parameter2>%(PrismModuleReference.Filename)</_Parameter2>
       </AssemblyAttribute>
     </ItemGroup>
   </Target>
