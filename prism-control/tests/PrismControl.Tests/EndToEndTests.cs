@@ -249,16 +249,19 @@ public sealed class EndToEndTests : IAsyncDisposable
             foreach (var (c, r) in slots) contexts.Add(await host.AppearAsync(d, Diagnostics, c, r, encoder: true, settings: stress));
         }
         // 28 contexts asking for 60 frames/s each = 1,680 frames/s requested.
-        // The hard limit is checked where it is enforced: the scheduler's own sliding 1 s send count (/v1/health
-        // updates.sentLastSec). Arrival times at the fake host bunch up when the OS batches socket frames under load,
-        // so the receive side only guards against a missing budget (2x) and checks the average, which bunching can't move.
+        // The scheduler is a token bucket (rate R, burst B = max(4, R/4)), so its exact guarantee is at most R + B sends in
+        // any 1 s window: tokens saved up while the pump was delayed (a loaded PC) may be spent together. The hard limit is
+        // checked where it is enforced, on the scheduler's own sliding 1 s send count (/v1/health updates.sentLastSec).
+        // Arrival times at the fake host bunch up when the OS batches socket frames under load, so the receive side only
+        // guards against a missing budget (2x) and checks the average, which neither bunching nor one burst can move much.
+        static double Burst(int budget) => Math.Max(4, budget / 4.0);
         var start = host.NowMs;
         await Task.Delay(2000);
         var sentMax = await MaxSentLastSecondAsync(TimeSpan.FromSeconds(3));
         var rate = host.RenderRate(start + 2000, host.NowMs);
-        Assert.True(sentMax <= 62, $"budget 60/s exceeded at the scheduler: worst sentLastSec {sentMax}");
+        Assert.True(sentMax <= 60 + Burst(60), $"budget 60/s (+ burst {Burst(60)}) exceeded at the scheduler: worst sentLastSec {sentMax}");
         Assert.True(rate.MaxInAnyOneSecond <= 120, $"no budget at all? worst 1 s window received {rate.MaxInAnyOneSecond}");
-        Assert.True(rate.AveragePerSecond >= 45 && rate.AveragePerSecond <= 62, $"average {rate.AveragePerSecond:0.0}/s outside 45-62");
+        Assert.True(rate.AveragePerSecond >= 45 && rate.AveragePerSecond <= 60 + Burst(60) / 3, $"average {rate.AveragePerSecond:0.0}/s outside 45-{60 + Burst(60) / 3:0}");
         var served = host.Received.Where(m => m.IsRenderUpdate && m.Ms > start).Select(m => m.Context).Distinct().Count();
         Assert.True(served >= contexts.Count - 1, $"only {served}/{contexts.Count} contexts got frames (fairness)");
 
@@ -268,9 +271,9 @@ public sealed class EndToEndTests : IAsyncDisposable
         await Task.Delay(1500);
         var sentMax2 = await MaxSentLastSecondAsync(TimeSpan.FromSeconds(2.5));
         var rate2 = host.RenderRate(start2 + 1500, host.NowMs);
-        Assert.True(sentMax2 <= 32, $"budget 30/s exceeded at the scheduler: worst sentLastSec {sentMax2}");
+        Assert.True(sentMax2 <= 30 + Burst(30), $"budget 30/s (+ burst {Burst(30)}) exceeded at the scheduler: worst sentLastSec {sentMax2}");
         Assert.True(rate2.MaxInAnyOneSecond <= 60, $"30/s budget ignored? worst 1 s window received {rate2.MaxInAnyOneSecond}");
-        Assert.True(rate2.AveragePerSecond >= 22 && rate2.AveragePerSecond <= 32, $"average {rate2.AveragePerSecond:0.0}/s outside 22-32");
+        Assert.True(rate2.AveragePerSecond >= 22 && rate2.AveragePerSecond <= 30 + Burst(30) / 2.5, $"average {rate2.AveragePerSecond:0.0}/s outside 22-{30 + Burst(30) / 2.5:0}");
         Assert.False(host.Process!.HasExited, "plugin crashed" + LogTail());
     }
 
@@ -431,7 +434,7 @@ public sealed class EndToEndTests : IAsyncDisposable
         using var zip = ZipFile.OpenRead(bundle);
         var names = zip.Entries.Select(e => e.FullName.Replace('\\', '/')).ToList();
         Assert.True(names.All(n => n.StartsWith(Packer.PluginUuid + ".sdPlugin/", StringComparison.Ordinal)), "zip root must be the .sdPlugin folder");
-        foreach (var required in new[] { "manifest.json", "bin/PrismControl.exe", "layouts/prism-canvas.json", "pi/default.html", "pi/lib/prism-pi.js", "imgs/plugin/icon.png" })
+        foreach (var required in new[] { "manifest.json", "bin/PrismControl.exe", "layouts/prism-canvas.json", "pi/default.html", "pi/lib/prism-pi.js", "imgs/plugin/icon.png", "LICENSE.txt", "NOTICE.txt" })
             Assert.True(names.Contains(Packer.PluginUuid + ".sdPlugin/" + required), required);
 
         // The packed manifest is exactly what the shipped exe generates, plus the Profiles the packer merges in from

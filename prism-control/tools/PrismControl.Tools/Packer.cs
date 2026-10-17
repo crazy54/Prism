@@ -29,6 +29,13 @@ public static class Packer
 
         File.Copy(exePath, Path.Combine(pluginDir, "bin", "PrismControl.exe"));
         CopyTree(Path.Combine(repoRoot, "assets", "imgs"), Path.Combine(pluginDir, "imgs"), null, null, WebFiles);
+        // Apache 2.0: the license and (Section 4(d)) the NOTICE crediting JFH Inc. and Jeremy Francis Hall ship with every copy.
+        foreach (var name in new[] { "LICENSE", "NOTICE" })
+        {
+            var source = new[] { Path.Combine(repoRoot, name), Path.Combine(repoRoot, "..", name) }.FirstOrDefault(File.Exists)
+                ?? throw new FileNotFoundException($"{name} not found next to prism-control or at the repo root; the plugin must ship it (Apache 2.0).");
+            File.Copy(source, Path.Combine(pluginDir, name + ".txt"));
+        }
 
         var seen = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         var problems = new List<string>();

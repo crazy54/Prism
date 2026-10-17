@@ -17,9 +17,9 @@
 
     <!-- Version: x.y.z here; the manifest gets x.y.z.0 unless build.ps1 -Version overrides it. -->
     <VersionPrefix>0.1.0</VersionPrefix>
-    <Authors>Jeremy F Hall</Authors>
+    <Authors>Jeremy Francis Hall</Authors>
     <Product>Prism Control</Product>
-    <Copyright>Copyright (c) Jeremy F Hall</Copyright>
+    <Copyright>Copyright 2026 JFH Inc. Created by Jeremy Francis Hall. Licensed under the Apache License 2.0.</Copyright>
 
     <PrismWindowsTfm>net10.0-windows10.0.22621.0</PrismWindowsTfm>
     <PrismMinWindows>10.0.19041.0</PrismMinWindows>
