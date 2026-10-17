@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Spotify tests (owned by the Spotify engineer). Run: dotnet run project tests/PrismControl.Spotify.Tests -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Spotify.Tests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Testing\PrismControl.Testing.csproj" />
+    <ProjectReference Include="..\..\src\PrismControl.Spotify\PrismControl.Spotify.csproj" />
+  </ItemGroup>
+</Project>

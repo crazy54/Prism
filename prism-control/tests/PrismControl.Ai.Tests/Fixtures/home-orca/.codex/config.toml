@@ -1,0 +1,8 @@
+model_reasoning_effort = "high"
+notify = ["C:\\Users\\example\\AppData\\Local\\Example\\notifier.exe", "--codex"]
+
+[projects.'C:\Users\example\projects\hydra']
+trust_level = "trusted"
+
+[features]
+hooks = true

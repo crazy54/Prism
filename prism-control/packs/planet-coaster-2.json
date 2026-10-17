@@ -1,0 +1,6890 @@
+{
+  "$schema": "./schema/context-pack.schema.json",
+  "schemaVersion": 1,
+  "id": "planet-coaster-2",
+  "name": "Planet Coaster 2",
+  "vendor": "Frontier Developments",
+  "kind": "game",
+  "packVersion": "0.1.0",
+  "platforms": [
+    "windows"
+  ],
+  "verifiedAgainst": {
+    "version": "Update 11 + Hotfix 15 (latest documented patch, 2026-08-25)",
+    "build": "Steam build 25677695",
+    "installedHere": "Steam build 25677695 (updated 2026-10-16), E:/SteamLibrary",
+    "date": "2026-10-16",
+    "method": "mixed",
+    "note": "Keys from Frontier's live controls page (no version printed) cross-checked against three guides that mirror it; Steam patch notes for Updates 1–11 add no new keys. Local config/exe read for formats and settings."
+  },
+  "policy": {
+    "class": "safe-offline",
+    "input": "allowed",
+    "sight": "allowed",
+    "closedLoop": "allowed",
+    "reason": "On the safe-offline allowlist (DECISIONS.md). Single-player builder, no anti-cheat; online parts (Franchise, workshop) are not competitive."
+  },
+  "keyMode": "scancode",
+  "match": {
+    "any": [
+      {
+        "process": "PlanetCoaster2.exe",
+        "steamAppId": 2688950,
+        "confidence": "verified-local",
+        "note": "Exe name from the install folder (S12)."
+      },
+      {
+        "titleRegex": "^Planet Coaster 2$",
+        "confidence": "unverified",
+        "note": "Window title not probed (game not running)."
+      }
+    ]
+  },
+  "contexts": [
+    {
+      "id": "park",
+      "label": "Park view",
+      "default": true,
+      "priority": 10,
+      "detect": {
+        "all": [
+          {
+            "type": "always"
+          }
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "menus",
+      "label": "Menus / management",
+      "parent": "park",
+      "priority": 90,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.menu.fullscreen",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.menu.fullscreen is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "trackBuilder",
+      "label": "Coaster / flume track editor",
+      "parent": "park",
+      "priority": 80,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.builder.editPanel",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.builder.editPanel is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "flumeBuilder",
+      "label": "Flume track editor",
+      "parent": "trackBuilder",
+      "priority": 85,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.builder.flumeIndicator",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.builder.flumeIndicator is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "trackEditMode",
+      "label": "Track editor: Edit Mode",
+      "parent": "trackBuilder",
+      "priority": 84,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.builder.editModePanel",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.builder.editModePanel is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "rideCam",
+      "label": "Ride camera (guest POV)",
+      "parent": "park",
+      "priority": 88,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.rideCam.overlay",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.rideCam.overlay is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "freelook",
+      "label": "Freelook camera",
+      "parent": "park",
+      "priority": 40,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.hud.freelookIndicator",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.hud.freelookIndicator is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "paths",
+      "label": "Path / pool edit",
+      "parent": "park",
+      "priority": 70,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.paths.panel",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.paths.panel is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "placement",
+      "label": "Object placement",
+      "parent": "park",
+      "priority": 70,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.placement.panel",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.placement.panel is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "buildingEdit",
+      "label": "Building edit",
+      "parent": "park",
+      "priority": 72,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.buildingEdit.panel",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.buildingEdit.panel is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "multiSelect",
+      "label": "Multi-select",
+      "parent": "park",
+      "priority": 74,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.multiSelect.panel",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.multiSelect.panel is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "sceneryBrush",
+      "label": "Scenery brush",
+      "parent": "park",
+      "priority": 70,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.brush.panel",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.brush.panel is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "demolish",
+      "label": "Demolish",
+      "parent": "park",
+      "priority": 70,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.demolish.panel",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.demolish.panel is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "terrain",
+      "label": "Terrain edit",
+      "parent": "park",
+      "priority": 70,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.terrain.panel",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.terrain.panel is visible only in this mode on the user's recording."
+    },
+    {
+      "id": "visitorCam",
+      "label": "Visitor camera",
+      "parent": "park",
+      "priority": 86,
+      "hysteresisMs": 400,
+      "detect": {
+        "any": [
+          {
+            "type": "sight",
+            "region": "pc2.visitorCam.overlay",
+            "state": "visible"
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "Check that pc2.visitorCam.overlay is visible only in this mode on the user's recording."
+    }
+  ],
+  "verbs": [
+    {
+      "id": "ui.cancel",
+      "label": "BACK",
+      "glyph": "back",
+      "category": "nav",
+      "priority": 70,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Esc"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Cancel placement / close browser / deselect / options menu",
+      "appAction": "unknown (logical button name not public)"
+    },
+    {
+      "id": "edit.undo",
+      "label": "UNDO",
+      "glyph": "back",
+      "category": "primary",
+      "priority": 90,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Z"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "UN"
+    },
+    {
+      "id": "edit.redo",
+      "label": "REDO",
+      "glyph": "sync",
+      "category": "primary",
+      "priority": 70,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Y"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "RE"
+    },
+    {
+      "id": "edit.deleteSelected",
+      "label": "DELETE",
+      "glyph": "delete",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "park",
+        "placement",
+        "buildingEdit",
+        "multiSelect"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Delete"
+      },
+      "safety": "confirm",
+      "unavailable": {
+        "label": "DELETE",
+        "hint": "Select something first.",
+        "when": [
+          "nothingSelected",
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "DEL",
+      "notes": "Can remove a whole multi-selection or building; undoable with Ctrl+Z, but confirm by default."
+    },
+    {
+      "id": "edit.duplicate",
+      "label": "DUPLICATE",
+      "glyph": "copy",
+      "category": "tool",
+      "priority": 55,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+D"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "DUP",
+      "longLabel": "Duplicate object / building"
+    },
+    {
+      "id": "edit.duplicateAdvanced",
+      "label": "DUP + ADV",
+      "glyph": "copy",
+      "category": "tool",
+      "priority": 35,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+X"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S7"
+      ],
+      "monogram": "DA",
+      "longLabel": "Duplicate and Advanced Move / Rotate",
+      "notes": "Update 3 disabled Advance Move (and Duplicate) shortcuts while in Edit Building mode (S7)."
+    },
+    {
+      "id": "edit.move",
+      "label": "MOVE",
+      "glyph": "move",
+      "category": "tool",
+      "priority": 55,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "M"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "MV",
+      "longLabel": "Move selection"
+    },
+    {
+      "id": "edit.advancedMove",
+      "label": "ADV MOVE",
+      "glyph": "move",
+      "category": "tool",
+      "priority": 50,
+      "contexts": [
+        "park",
+        "multiSelect"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "X"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "AM",
+      "longLabel": "Advanced Move / Rotate / Scale selection",
+      "notes": "X is also \"Toggle Advanced Move\" in placement and \"Lock Brush\" in the scenery brush (S1)."
+    },
+    {
+      "id": "edit.edit",
+      "label": "EDIT",
+      "glyph": "edit",
+      "category": "tool",
+      "priority": 50,
+      "contexts": [
+        "park"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "R"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S7"
+      ],
+      "monogram": "ED",
+      "longLabel": "Edit Building; Edit Coaster from a coaster InfoPanel",
+      "notes": "R = \"Edit Building\" (S1); Update 3 restored R for \"Edit Coaster\" in coaster InfoPanels (S7)."
+    },
+    {
+      "id": "camera.torch",
+      "label": "TORCH",
+      "glyph": "bulb",
+      "category": "toggle",
+      "priority": 30,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "L"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Camera torch"
+    },
+    {
+      "id": "ui.skipDialogue",
+      "label": "SKIP",
+      "glyph": "skip-next",
+      "category": "system",
+      "priority": 20,
+      "contexts": [
+        "park"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Tab"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Skip dialogue",
+      "notes": "Tab is also \"Hide Panels\" (camera view modes) and \"Next Alignment Option\" (placement) (S1)."
+    },
+    {
+      "id": "ui.timeOfDay",
+      "label": "TIME OF DAY",
+      "glyph": "clock",
+      "category": "tool",
+      "priority": 25,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "N"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Show Time Of Day popup"
+    },
+    {
+      "id": "ui.weather",
+      "label": "WEATHER",
+      "glyph": "cloud",
+      "category": "tool",
+      "priority": 25,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "K"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Show Weather Report"
+    },
+    {
+      "id": "ui.heatmaps",
+      "label": "HEATMAPS",
+      "glyph": "heatmap",
+      "category": "mode",
+      "priority": 55,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+H"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "HM",
+      "longLabel": "Show Heatmaps"
+    },
+    {
+      "id": "ui.radialMenu",
+      "label": "RADIAL",
+      "glyph": "radial",
+      "category": "mode",
+      "priority": 40,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "LAlt",
+        "mode": "whilePressed",
+        "note": "S1 says \"Show Radial Menu: Alt\"; hold-vs-tap not stated, so the key mirrors the deck press (down/up)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "RAD",
+      "verify": "Press and hold Alt in park view: does the radial stay only while held?",
+      "notes": "Gamepad: hold Y (S13)."
+    },
+    {
+      "id": "ui.hide",
+      "label": "HIDE UI",
+      "glyph": "eye-off",
+      "category": "toggle",
+      "priority": 45,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "RCtrl+RShift+G"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S3"
+      ],
+      "monogram": "UI",
+      "longLabel": "Show / Hide User Interface",
+      "notes": "Right-side modifiers. Game Rant (S3) suggests users rebind it to a simpler key; read the user's rebinds."
+    },
+    {
+      "id": "speed.pause",
+      "label": "PAUSE",
+      "glyph": "pause",
+      "category": "primary",
+      "priority": 85,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Space"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Pause simulation",
+      "stateReadout": "simSpeed"
+    },
+    {
+      "id": "speed.cycle",
+      "label": "SPEED",
+      "glyph": "speed",
+      "category": "primary",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "0"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S3",
+        "S18"
+      ],
+      "monogram": "SP",
+      "longLabel": "Change Simulation Speed (cycle)",
+      "conflict": "S1 (official) shows \"0\" (zero); Game Rant (S3) writes \"O or 1, 2, 3\", and Planet Coaster 1 used the letter O. Update 1 notes (S18) also give 0 to the Terrain tool. S1 is the best evidence.",
+      "verify": "In park view press 0, then O: note which one changes the speed.",
+      "stateReadout": "simSpeed"
+    },
+    {
+      "id": "speed.normal",
+      "label": "SPEED 1x",
+      "glyph": "play",
+      "category": "primary",
+      "priority": 55,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "1"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "stateReadout": "simSpeed"
+    },
+    {
+      "id": "speed.fast",
+      "label": "SPEED 2x",
+      "glyph": "skip-next",
+      "category": "primary",
+      "priority": 55,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "2"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "stateReadout": "simSpeed"
+    },
+    {
+      "id": "speed.fastest",
+      "label": "SPEED 5x",
+      "glyph": "skip-next",
+      "category": "primary",
+      "priority": 50,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "3"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "stateReadout": "simSpeed",
+      "notes": "Key 3 = x5 (not x3) per S1."
+    },
+    {
+      "id": "tool.paths",
+      "label": "PATHS",
+      "glyph": "path-join",
+      "category": "mode",
+      "priority": 45,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "8"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S18"
+      ],
+      "longLabel": "Open the Paths tool",
+      "verify": "Press 8 in park view."
+    },
+    {
+      "id": "tool.sceneryBrush",
+      "label": "BRUSH TOOL",
+      "glyph": "brush",
+      "category": "mode",
+      "priority": 40,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "9"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S18"
+      ],
+      "longLabel": "Open the Scenery Brush",
+      "verify": "Press 9 in park view."
+    },
+    {
+      "id": "tool.terrain",
+      "label": "TERRAIN",
+      "glyph": "terrain",
+      "category": "mode",
+      "priority": 40,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "0"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "unverified",
+      "sources": [
+        "S18",
+        "S1"
+      ],
+      "longLabel": "Open the Terrain tool",
+      "conflict": "Update 1 notes (S18) map 0 to Terrain; the live controls page (S1) maps 0 to Change Simulation Speed. One of them is stale.",
+      "verify": "Press 0 in park view: speed change or Terrain tool?"
+    },
+    {
+      "id": "camera.panForward",
+      "label": "PAN FWD",
+      "glyph": "arrow-up",
+      "category": "camera",
+      "priority": 30,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "W",
+        "mode": "whilePressed"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S18"
+      ],
+      "notes": "Update 1 (S18) also moves the camera with the arrow keys."
+    },
+    {
+      "id": "camera.panBack",
+      "label": "PAN BACK",
+      "glyph": "arrow-down",
+      "category": "camera",
+      "priority": 30,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "S",
+        "mode": "whilePressed"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "camera.panLeft",
+      "label": "PAN LEFT",
+      "glyph": "arrow-left",
+      "category": "camera",
+      "priority": 30,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "A",
+        "mode": "whilePressed"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "camera.panRight",
+      "label": "PAN RIGHT",
+      "glyph": "arrow-right",
+      "category": "camera",
+      "priority": 30,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "D",
+        "mode": "whilePressed"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "camera.rotateLeft",
+      "label": "ROTATE L",
+      "glyph": "rotate",
+      "category": "camera",
+      "priority": 35,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "Q",
+        "mode": "whilePressed"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "In freelook, Q is \"Pan Camera Down\" instead (S1)."
+    },
+    {
+      "id": "camera.rotateRight",
+      "label": "ROTATE R",
+      "glyph": "rotate",
+      "category": "camera",
+      "priority": 35,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "E",
+        "mode": "whilePressed"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "In freelook, E is \"Pan Camera Up\" instead (S1)."
+    },
+    {
+      "id": "camera.zoomIn",
+      "label": "ZOOM IN",
+      "glyph": "zoom-in",
+      "category": "camera",
+      "priority": 35,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "PageUp",
+        "mode": "whilePressed"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "camera.zoomOut",
+      "label": "ZOOM OUT",
+      "glyph": "zoom-out",
+      "category": "camera",
+      "priority": 35,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "PageDown",
+        "mode": "whilePressed"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "camera.up",
+      "label": "CAM UP",
+      "glyph": "camera",
+      "category": "camera",
+      "priority": 25,
+      "contexts": [
+        "freelook"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "E",
+        "mode": "whilePressed"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "camera.down",
+      "label": "CAM DOWN",
+      "glyph": "camera",
+      "category": "camera",
+      "priority": 25,
+      "contexts": [
+        "freelook"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "Q",
+        "mode": "whilePressed"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "camera.fast",
+      "label": "FAST CAM",
+      "glyph": "camera",
+      "category": "camera",
+      "priority": 20,
+      "contexts": [
+        "freelook"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "LShift",
+        "mode": "whilePressed"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Fast movement (freelook)"
+    },
+    {
+      "id": "camera.freelook",
+      "label": "FREELOOK",
+      "glyph": "camera",
+      "category": "toggle",
+      "priority": 45,
+      "contexts": [
+        "park",
+        "freelook"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "T"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Toggle Freelook Camera",
+      "conflict": "S1 also lists T as \"Enter Visitor Camera Placement Mode\" under Visitor Camera Mode; which one T does may depend on the mode.",
+      "verify": "Press T in park view; note whether freelook or visitor-camera placement starts."
+    },
+    {
+      "id": "camera.focus",
+      "label": "FOCUS",
+      "glyph": "target",
+      "category": "camera",
+      "priority": 45,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "H"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Focus camera"
+    },
+    {
+      "id": "camera.reset",
+      "label": "RESET CAM",
+      "glyph": "home",
+      "category": "camera",
+      "priority": 40,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Home"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Reset camera"
+    },
+    {
+      "id": "view.hidePanels",
+      "label": "PANELS",
+      "glyph": "pages",
+      "category": "toggle",
+      "priority": 40,
+      "contexts": [
+        "rideCam"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Tab"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S17"
+      ],
+      "longLabel": "Hide panels (camera view modes)",
+      "notes": "Tab hides the ride-camera overlay (S17, issue 67778)."
+    },
+    {
+      "id": "menu.select",
+      "label": "SELECT",
+      "glyph": "check",
+      "category": "nav",
+      "priority": 60,
+      "contexts": [
+        "menus"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Enter"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "menu.left",
+      "label": "LEFT",
+      "glyph": "back",
+      "category": "nav",
+      "priority": 40,
+      "contexts": [
+        "menus"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Left"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "menu.right",
+      "label": "RIGHT",
+      "glyph": "skip-next",
+      "category": "nav",
+      "priority": 40,
+      "contexts": [
+        "menus"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Right"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "menu.up",
+      "label": "UP",
+      "glyph": "arrow-up",
+      "category": "nav",
+      "priority": 40,
+      "contexts": [
+        "menus"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Up"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "menu.down",
+      "label": "DOWN",
+      "glyph": "arrow-down",
+      "category": "nav",
+      "priority": 40,
+      "contexts": [
+        "menus"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Down"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "menu.prevTab",
+      "label": "PREV TAB",
+      "glyph": "skip-prev",
+      "category": "nav",
+      "priority": 50,
+      "contexts": [
+        "menus"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "BracketLeft"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "menu.nextTab",
+      "label": "NEXT TAB",
+      "glyph": "skip-next",
+      "category": "nav",
+      "priority": 50,
+      "contexts": [
+        "menus"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "BracketRight"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "menu.copySchedule",
+      "label": "COPY SHIFT",
+      "glyph": "copy",
+      "category": "nav",
+      "priority": 20,
+      "contexts": [
+        "menus"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "C"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Copy (staff schedule)"
+    },
+    {
+      "id": "menu.pasteSchedule",
+      "label": "PASTE SHIFT",
+      "glyph": "paste",
+      "category": "nav",
+      "priority": 20,
+      "contexts": [
+        "menus"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "V"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Paste (staff schedule)"
+    },
+    {
+      "id": "menu.uploadBlueprint",
+      "label": "UPLOAD BP",
+      "glyph": "cloud",
+      "category": "nav",
+      "priority": 15,
+      "contexts": [
+        "menus"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "U"
+      },
+      "safety": "never-auto",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Upload Blueprint (browser)",
+      "notes": "Publishes to the workshop: only a direct press."
+    },
+    {
+      "id": "path.place",
+      "label": "PLACE",
+      "glyph": "check",
+      "category": "primary",
+      "priority": 75,
+      "contexts": [
+        "paths"
+      ],
+      "binding": {
+        "kind": "mouse",
+        "button": "left",
+        "note": "Clicks at the cursor: aim with the mouse, press the key."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Place path"
+    },
+    {
+      "id": "path.raise",
+      "label": "RAISE",
+      "glyph": "arrow-up",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "paths"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "U"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Raise path (without placing)"
+    },
+    {
+      "id": "path.lower",
+      "label": "LOWER",
+      "glyph": "arrow-down",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "paths"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "J"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Lower path (without placing)"
+    },
+    {
+      "id": "path.acuteJoin",
+      "label": "ACUTE JOIN",
+      "glyph": "path-join",
+      "category": "tool",
+      "priority": 45,
+      "contexts": [
+        "paths"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Z"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "AJ"
+    },
+    {
+      "id": "path.resetHeight",
+      "label": "RESET HGT",
+      "glyph": "sync",
+      "category": "tool",
+      "priority": 45,
+      "contexts": [
+        "paths",
+        "placement",
+        "buildingEdit"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "LShift",
+        "note": "A tap of Shift resets; Shift + mouse Y adjusts height (S1)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S15"
+      ],
+      "longLabel": "Reset vertical height",
+      "conflict": "S15 (Frontier path guide) tells PC players to hold Tab in one place and Shift in another to slope paths; S1 says Shift + mouse Y."
+    },
+    {
+      "id": "path.noJoins",
+      "label": "NO JOINS",
+      "glyph": "path-join",
+      "category": "toggle",
+      "priority": 35,
+      "contexts": [
+        "paths"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "LCtrl",
+        "mode": "whilePressed",
+        "note": "Held while placing (S1: \"Disable Path Joins: Ctrl\")."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "NJ"
+    },
+    {
+      "id": "builder.build",
+      "label": "BUILD",
+      "glyph": "check",
+      "category": "primary",
+      "priority": 95,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightClick",
+        "sight": "pc2.builder.btn.place",
+        "button": "left",
+        "note": "The panel's \"Place\" / \"Place ({Cost})\" button (S16): cursor-free."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "BUILD",
+        "hint": "Open a coaster or flume in Construction Mode.",
+        "when": [
+          "wrongContext",
+          "notForeground",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S13"
+      ],
+      "altBindings": [
+        {
+          "kind": "mouse",
+          "button": "left",
+          "note": "S1 \"Build Track Piece: LMB\", at the cursor (over the build widget)."
+        }
+      ],
+      "appAction": "TrackEditor_place (UI event)",
+      "longLabel": "Place the piece (then the next one)",
+      "verify": "Also test Enter: Planet Coaster 1 built with Enter (community).",
+      "notes": "Disabled when the piece is unaffordable or invalid; Sight reads that state. Gamepad: A = Place (S13)."
+    },
+    {
+      "id": "builder.delete",
+      "label": "DELETE",
+      "glyph": "delete",
+      "category": "primary",
+      "priority": 90,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Delete"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S16"
+      ],
+      "altBindings": [
+        {
+          "kind": "sightClick",
+          "sight": "pc2.builder.btn.delete",
+          "button": "left",
+          "note": "Round Delete (bulldozer) button (S16)."
+        },
+        {
+          "kind": "mouse",
+          "button": "right",
+          "note": "RMB = Delete Track Piece (S1), at the cursor."
+        }
+      ],
+      "appAction": "EditorsDelete",
+      "monogram": "DEL",
+      "longLabel": "Delete track piece",
+      "notes": "Safe, not confirm: one piece, undoable with Ctrl+Z (S1). A user preference can raise it to confirm."
+    },
+    {
+      "id": "builder.addSelect",
+      "label": "ADD SELECT",
+      "glyph": "select",
+      "category": "tool",
+      "priority": 30,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "mouse",
+        "button": "left",
+        "mods": "Shift",
+        "note": "Additive track selection, at the cursor (S1)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S16"
+      ],
+      "appAction": "EditorsAdditiveTrackSelectModifier",
+      "monogram": "AS"
+    },
+    {
+      "id": "builder.falloff",
+      "label": "FALLOFF",
+      "glyph": "falloff",
+      "category": "toggle",
+      "priority": 35,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "LShift",
+        "mode": "whilePressed",
+        "note": "S1: \"Toggle Centre / Even Falloff: Shift\". The logical button is a modifier (S16), so the key mirrors the deck press: hold while dragging, tap to toggle."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S16"
+      ],
+      "appAction": "EditorsTrackEditWeightedToCentreModifier",
+      "stateReadout": "falloffMode",
+      "monogram": "FO",
+      "longLabel": "Centre / even falloff"
+    },
+    {
+      "id": "builder.worldRelative",
+      "label": "WORLD / REL",
+      "glyph": "axis",
+      "category": "toggle",
+      "priority": 35,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "hold",
+        "chord": "LCtrl",
+        "mode": "whilePressed",
+        "note": "S1: \"Toggle World / Relative Movement: Ctrl\"; a modifier (S16)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S16"
+      ],
+      "appAction": "EditorsTrackEditMovementModifier",
+      "stateReadout": "moveSpace",
+      "monogram": "W/R"
+    },
+    {
+      "id": "builder.flumeGate",
+      "label": "GATE/STAIRS",
+      "glyph": "stairs",
+      "category": "toggle",
+      "priority": 25,
+      "contexts": [
+        "flumeBuilder"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "LCtrl",
+        "note": "S1: \"Toggle Gate / Stairs Entrance (Flumes Only): Ctrl\" — same key as World/Relative."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S16"
+      ],
+      "appAction": "EditorsCycleEntranceGateType",
+      "monogram": "G/S",
+      "conflict": "Ctrl is listed for both World/Relative and Gate/Stairs (flumes only) in S1; meaning depends on what is selected."
+    },
+    {
+      "id": "builder.angleSnap",
+      "label": "ANGLE SNAP",
+      "glyph": "snap",
+      "category": "toggle",
+      "priority": 45,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "P",
+        "note": "The Settings-tab Angle Snap tooltip shows the key of EditorsToggleRotationSnap (S16), the same action as \"Toggle Angle Snap On / Off\" (S1: P)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S16",
+        "S19",
+        "S17",
+        "S6"
+      ],
+      "altBindings": [
+        {
+          "kind": "macro",
+          "steps": [
+            {
+              "kind": "sightClick",
+              "sight": "pc2.builder.tab.settings",
+              "button": "left"
+            },
+            {
+              "kind": "sightClick",
+              "sight": "pc2.builder.settings.angleSnapToggle",
+              "button": "left"
+            }
+          ],
+          "gapMs": 150,
+          "note": "UI route: Settings tab, then the Angle Snap tick box."
+        }
+      ],
+      "appAction": "EditorsToggleRotationSnap",
+      "stateReadout": "trackAngleSnap",
+      "monogram": "AS",
+      "conflict": "Launch week: P did nothing in the coaster builder (S6); fixed in Update 2 (S19, issue 69372). Update 1 (S18) says G for object angle snap; reports mention Space. Use the user's rebind if present.",
+      "verify": "Settings > Mouse & Keyboard: read the \"Toggle Angle Snap On / Off\" row, then press it in the coaster editor."
+    },
+    {
+      "id": "builder.testRide",
+      "label": "TEST",
+      "glyph": "play-pause",
+      "category": "primary",
+      "priority": 85,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "macro",
+        "steps": [
+          {
+            "kind": "sightClick",
+            "sight": "pc2.builder.tab.testing",
+            "button": "left"
+          },
+          {
+            "kind": "sightClick",
+            "sight": "pc2.builder.btn.startTest",
+            "button": "left"
+          }
+        ],
+        "gapMs": 150,
+        "note": "Testing tab, then Start Test / Stop Test (S16). Disabled until the ride has a station."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "TEST",
+        "hint": "Build a station first (or bind Start/Stop Testing in game).",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S2"
+      ],
+      "appAction": "EditorsToggleTesting",
+      "longLabel": "Start / stop the test",
+      "notes": "\"Start/Stop Testing\" is on the in-game rebinding list (EditorsToggleTesting) but not on the website; its default key is unknown and may be unbound. If the user binds it, Prism reads the rebind and sends the key instead."
+    },
+    {
+      "id": "builder.ratings",
+      "label": "RATINGS",
+      "glyph": "star",
+      "category": "readout",
+      "priority": 72,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightClick",
+        "sight": "pc2.builder.tab.testing",
+        "button": "left",
+        "note": "Opens the Testing tab (Live Data / Results) for the full test numbers (S16)."
+      },
+      "safety": "safe",
+      "stateReadout": "rideRatings",
+      "unavailable": {
+        "label": "RATINGS",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S2"
+      ],
+      "verify": "Calibrate the header E/F/N cells on the user's recording; check the Testing tab click lands on the tab icon.",
+      "longLabel": "Ride ratings (Excitement / Fear / Nausea)",
+      "notes": "A readout key: the editor header's live Excitement / Fear / Nausea, labeled RATINGS, so the screen widgets can show their own dial's value (LENGTH shows the length). Press = the Testing tab."
+    },
+    {
+      "id": "builder.rideCam",
+      "label": "RIDE CAM",
+      "glyph": "camera",
+      "category": "mode",
+      "priority": 70,
+      "contexts": [
+        "trackBuilder",
+        "park",
+        "rideCam"
+      ],
+      "binding": {
+        "kind": "macro",
+        "steps": [
+          {
+            "kind": "sightClick",
+            "sight": "pc2.builder.tab.testing",
+            "button": "left"
+          },
+          {
+            "kind": "sightClick",
+            "sight": "pc2.builder.btn.rideCamera",
+            "button": "left"
+          }
+        ],
+        "gapMs": 150,
+        "note": "Testing tab, then Ride Camera (S16). In park view, the ride info panel also has Ride Cam (S22)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "RIDE CAM",
+        "hint": "Needs a station and Prism Sight on the editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S22",
+        "S10"
+      ],
+      "appAction": "TrackEditor_OpenRideCam (UI event)",
+      "longLabel": "Ride camera (guest POV)",
+      "notes": "No PC key on the rebinding page. The user's TrackedRideCamMode is \"guest\" (S10)."
+    },
+    {
+      "id": "builder.modeToggle",
+      "label": "EDIT MODE",
+      "glyph": "edit",
+      "category": "mode",
+      "priority": 75,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightClick",
+        "sight": "pc2.builder.btn.modeToggle",
+        "button": "left",
+        "note": "\"Go to Edit Mode\" / \"Go to Construction Mode\" at the bottom of each piece tab (S16)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "EDIT MODE",
+        "hint": "Needs Prism Sight on the editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16"
+      ],
+      "appAction": "TrackEditor_ChangeMode (UI event)",
+      "longLabel": "Construction / Edit Mode",
+      "monogram": "MOD",
+      "notes": "Edit Mode reshapes placed track; most edits need two or more selected pieces (piece ends), specials can be edited singly (community, Steam 2024-11)."
+    },
+    {
+      "id": "builder.autoComplete",
+      "label": "AUTO END",
+      "glyph": "auto-complete",
+      "category": "tool",
+      "priority": 45,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightClick",
+        "sight": "pc2.builder.btn.autocomplete",
+        "button": "left",
+        "note": "Round Autocomplete button (S16). The flow then shows \"Place ({Cost})\" to compute and \"Confirm ({Cost})\" / \"Cancel\"."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "AUTO END",
+        "hint": "Autocomplete is unavailable for this ride or track ends.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16"
+      ],
+      "appAction": "TrackEditor_autocomplete (UI event)",
+      "longLabel": "Autocomplete the circuit",
+      "monogram": "AE",
+      "notes": "Never available for flumes; Sight reads the disabled state (\"Autocomplete not available for this ride\")."
+    },
+    {
+      "id": "builder.bank.left",
+      "label": "BANK L",
+      "glyph": "bank-left",
+      "category": "tool",
+      "priority": 80,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightAdjust",
+        "sight": "pc2.builder.bankSlider",
+        "direction": "decrease",
+        "steps": 1,
+        "method": "drag",
+        "note": "One slider step (the step comes from game data per piece)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "BANK L",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "No keyboard action exists for this (S1; in-game rebinding list, S16). Route: Prism Sight drags the right-hand panel's slider (typed entry is disabled and the wheel does nothing: S16, S17). Function: verified in game files; route: unverified until calibration. Left/down are negative values (S21), so \"bank left\" = decrease; confirm on screen.",
+      "monogram": "BL"
+    },
+    {
+      "id": "builder.bank.right",
+      "label": "BANK R",
+      "glyph": "bank-right",
+      "category": "tool",
+      "priority": 80,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightAdjust",
+        "sight": "pc2.builder.bankSlider",
+        "direction": "increase",
+        "steps": 1,
+        "method": "drag",
+        "note": "One slider step (the step comes from game data per piece)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "BANK R",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "No keyboard action exists for this (S1; in-game rebinding list, S16). Route: Prism Sight drags the right-hand panel's slider (typed entry is disabled and the wheel does nothing: S16, S17). Function: verified in game files; route: unverified until calibration.",
+      "monogram": "BR"
+    },
+    {
+      "id": "builder.bank.level",
+      "label": "LEVEL",
+      "glyph": "bank-level",
+      "category": "tool",
+      "priority": 85,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "closedLoop",
+        "sight": "pc2.builder.bankValue",
+        "target": 0,
+        "stepSight": "pc2.builder.bankSlider",
+        "step": 1,
+        "unit": "slider step",
+        "tolerance": 0.01,
+        "maxSteps": 48,
+        "settleMs": 80,
+        "fallback": "counted",
+        "note": "Reads the 2-dp bank value, steps the slider toward 0, re-reads. Fallback: undo the steps Prism itself sent since the piece started."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "LEVEL",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "No keyboard action exists for this (S1; in-game rebinding list, S16). Route: Prism Sight drags the right-hand panel's slider (typed entry is disabled and the wheel does nothing: S16, S17). Function: verified in game files; route: unverified until calibration.",
+      "monogram": "LV",
+      "longLabel": "Level the bank to 0 degrees"
+    },
+    {
+      "id": "builder.pitch.up",
+      "label": "PITCH UP",
+      "glyph": "pitch-up",
+      "category": "tool",
+      "priority": 75,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightAdjust",
+        "sight": "pc2.builder.slopeSlider",
+        "direction": "increase",
+        "steps": 1,
+        "method": "drag",
+        "note": "One slider step (the step comes from game data per piece)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PITCH UP",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "No keyboard action exists for this (S1; in-game rebinding list, S16). Route: Prism Sight drags the right-hand panel's slider (typed entry is disabled and the wheel does nothing: S16, S17). Function: verified in game files; route: unverified until calibration.",
+      "monogram": "P+"
+    },
+    {
+      "id": "builder.pitch.down",
+      "label": "PITCH DOWN",
+      "glyph": "pitch-down",
+      "category": "tool",
+      "priority": 75,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightAdjust",
+        "sight": "pc2.builder.slopeSlider",
+        "direction": "decrease",
+        "steps": 1,
+        "method": "drag",
+        "note": "One slider step (the step comes from game data per piece)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PITCH DOWN",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "No keyboard action exists for this (S1; in-game rebinding list, S16). Route: Prism Sight drags the right-hand panel's slider (typed entry is disabled and the wheel does nothing: S16, S17). Function: verified in game files; route: unverified until calibration.",
+      "monogram": "P-"
+    },
+    {
+      "id": "builder.pitch.level",
+      "label": "FLAT",
+      "glyph": "pitch-level",
+      "category": "tool",
+      "priority": 70,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "closedLoop",
+        "sight": "pc2.builder.slopeValue",
+        "target": 0,
+        "stepSight": "pc2.builder.slopeSlider",
+        "step": 1,
+        "unit": "slider step",
+        "tolerance": 0.01,
+        "maxSteps": 48,
+        "settleMs": 80,
+        "fallback": "counted"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "FLAT",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "No keyboard action exists for this (S1; in-game rebinding list, S16). Route: Prism Sight drags the right-hand panel's slider (typed entry is disabled and the wheel does nothing: S16, S17). Function: verified in game files; route: unverified until calibration.",
+      "monogram": "FL",
+      "longLabel": "Slope to 0 (flat)"
+    },
+    {
+      "id": "builder.piece.curveLeft",
+      "label": "CURVE L",
+      "glyph": "track-curve-left",
+      "category": "tool",
+      "priority": 75,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightAdjust",
+        "sight": "pc2.builder.curveSlider",
+        "direction": "decrease",
+        "steps": 1,
+        "method": "drag",
+        "note": "One slider step (the step comes from game data per piece)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "CURVE L",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "No keyboard action exists for this (S1; in-game rebinding list, S16). Route: Prism Sight drags the right-hand panel's slider (typed entry is disabled and the wheel does nothing: S16, S17). Function: verified in game files; route: unverified until calibration.",
+      "monogram": "CL"
+    },
+    {
+      "id": "builder.piece.curveRight",
+      "label": "CURVE R",
+      "glyph": "track-curve-right",
+      "category": "tool",
+      "priority": 75,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightAdjust",
+        "sight": "pc2.builder.curveSlider",
+        "direction": "increase",
+        "steps": 1,
+        "method": "drag",
+        "note": "One slider step (the step comes from game data per piece)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "CURVE R",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "No keyboard action exists for this (S1; in-game rebinding list, S16). Route: Prism Sight drags the right-hand panel's slider (typed entry is disabled and the wheel does nothing: S16, S17). Function: verified in game files; route: unverified until calibration.",
+      "monogram": "CR"
+    },
+    {
+      "id": "builder.piece.straight",
+      "label": "STRAIGHT",
+      "glyph": "track-straight",
+      "category": "tool",
+      "priority": 75,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "closedLoop",
+        "sight": "pc2.builder.curveValue",
+        "target": 0,
+        "stepSight": "pc2.builder.curveSlider",
+        "step": 1,
+        "unit": "slider step",
+        "tolerance": 0.01,
+        "maxSteps": 48,
+        "settleMs": 80,
+        "fallback": "counted",
+        "note": "Curve to 0. Straight-and-flat = STRAIGHT + FLAT (single-target closed loop in v1)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "STRAIGHT",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "No keyboard action exists for this (S1; in-game rebinding list, S16). Route: Prism Sight drags the right-hand panel's slider (typed entry is disabled and the wheel does nothing: S16, S17). Function: verified in game files; route: unverified until calibration.",
+      "monogram": "ST"
+    },
+    {
+      "id": "builder.length.up",
+      "label": "LONGER",
+      "glyph": "length-plus",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightAdjust",
+        "sight": "pc2.builder.lengthSlider",
+        "direction": "increase",
+        "steps": 1,
+        "method": "drag",
+        "note": "One slider step (the step comes from game data per piece)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "LONGER",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "No keyboard action exists for this (S1; in-game rebinding list, S16). Route: Prism Sight drags the right-hand panel's slider (typed entry is disabled and the wheel does nothing: S16, S17). Function: verified in game files; route: unverified until calibration. Logical buttons Editors_IncreaseLength / Editors_DecreaseLength exist in game data (S16) but are not on the PC rebinding page; whether they have keys is unknown.",
+      "monogram": "L+"
+    },
+    {
+      "id": "builder.length.down",
+      "label": "SHORTER",
+      "glyph": "length-minus",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightAdjust",
+        "sight": "pc2.builder.lengthSlider",
+        "direction": "decrease",
+        "steps": 1,
+        "method": "drag",
+        "note": "One slider step (the step comes from game data per piece)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "SHORTER",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "No keyboard action exists for this (S1; in-game rebinding list, S16). Route: Prism Sight drags the right-hand panel's slider (typed entry is disabled and the wheel does nothing: S16, S17). Function: verified in game files; route: unverified until calibration.",
+      "monogram": "L-"
+    },
+    {
+      "id": "builder.chainLift",
+      "label": "CHAIN LIFT",
+      "glyph": "chain-lift",
+      "category": "tool",
+      "priority": 70,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "macro",
+        "steps": [
+          {
+            "kind": "sightClick",
+            "sight": "pc2.builder.tab.utilities",
+            "button": "left"
+          },
+          {
+            "kind": "sightClick",
+            "sight": "pc2.builder.piece.chainLift",
+            "button": "left"
+          }
+        ],
+        "gapMs": 150,
+        "note": "Utilities tab, then the chain-lift icon in the piece grid (S16)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "CHAIN LIFT",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "Utilities holds normal track, chain lift, brakes, boosters and block sections (S16). Which icons exist depends on the coaster type.",
+      "monogram": "CH"
+    },
+    {
+      "id": "builder.brakes",
+      "label": "BRAKES",
+      "glyph": "brake",
+      "category": "tool",
+      "priority": 65,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "macro",
+        "steps": [
+          {
+            "kind": "sightClick",
+            "sight": "pc2.builder.tab.utilities",
+            "button": "left"
+          },
+          {
+            "kind": "sightClick",
+            "sight": "pc2.builder.piece.brakes",
+            "button": "left"
+          }
+        ],
+        "gapMs": 150
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "BRAKES",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "Utilities grid (S16).",
+      "monogram": "BK"
+    },
+    {
+      "id": "builder.boosters",
+      "label": "BOOSTERS",
+      "glyph": "booster",
+      "category": "tool",
+      "priority": 65,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "macro",
+        "steps": [
+          {
+            "kind": "sightClick",
+            "sight": "pc2.builder.tab.utilities",
+            "button": "left"
+          },
+          {
+            "kind": "sightClick",
+            "sight": "pc2.builder.piece.boosters",
+            "button": "left"
+          }
+        ],
+        "gapMs": 150
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "BOOSTERS",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "Utilities grid (S16); launch types vary per coaster (boosters, hydraulic, LSM: S2/S11).",
+      "monogram": "BO"
+    },
+    {
+      "id": "builder.piece.normal",
+      "label": "TRACK",
+      "glyph": "track-straight",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "macro",
+        "steps": [
+          {
+            "kind": "sightClick",
+            "sight": "pc2.builder.tab.utilities",
+            "button": "left"
+          },
+          {
+            "kind": "sightClick",
+            "sight": "pc2.builder.piece.normal",
+            "button": "left"
+          }
+        ],
+        "gapMs": 150
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "TRACK",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "Back to plain track after a special (S16).",
+      "monogram": "TR",
+      "longLabel": "Normal track piece"
+    },
+    {
+      "id": "builder.station",
+      "label": "STATION",
+      "glyph": "station",
+      "category": "tool",
+      "priority": 50,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightClick",
+        "sight": "pc2.builder.tab.station",
+        "button": "left"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "STATION",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "Opens the Station tab (S16).",
+      "monogram": "STN"
+    },
+    {
+      "id": "builder.loop",
+      "label": "LOOPS",
+      "glyph": "loop",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightClick",
+        "sight": "pc2.builder.tab.loops",
+        "button": "left"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "LOOPS",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "Opens the Loops tab; pick the loop in the grid (S16). The coaster must have the Can Invert tag (S2).",
+      "monogram": "LP"
+    },
+    {
+      "id": "builder.rolls",
+      "label": "ROLLS",
+      "glyph": "roll",
+      "category": "tool",
+      "priority": 50,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightClick",
+        "sight": "pc2.builder.tab.rolls",
+        "button": "left"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "ROLLS",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "Opens the Rolls tab (S16).",
+      "monogram": "RL"
+    },
+    {
+      "id": "builder.nonInverted",
+      "label": "NON-INVERT",
+      "glyph": "special",
+      "category": "tool",
+      "priority": 40,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightClick",
+        "sight": "pc2.builder.tab.nonInverted",
+        "button": "left"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "NON-INVERT",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "Opens the Non-inverted tab (S16).",
+      "monogram": "NI"
+    },
+    {
+      "id": "builder.special",
+      "label": "SPECIALS",
+      "glyph": "special",
+      "category": "tool",
+      "priority": 55,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "sightClick",
+        "sight": "pc2.builder.tab.specials",
+        "button": "left"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "SPECIALS",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S1",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording; also test the cheaper keyboard route: click the slider thumb, then press Left/Right (sliders step on focused arrows in code, S16).",
+      "notes": "Opens the Specials tab (S16).",
+      "monogram": "SP"
+    },
+    {
+      "id": "builder.prevTab",
+      "label": "PREV TAB",
+      "glyph": "skip-prev",
+      "category": "nav",
+      "priority": 35,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "BracketLeft",
+        "note": "Menu Navigation \"Previous Tab\" (S1); the panel registers Tab_Prev/Tab_Next (S16)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PREV TAB",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "unverified",
+      "sources": [
+        "S1",
+        "S16"
+      ],
+      "verify": "In the coaster editor press [ and ]: do the builder tabs change?",
+      "notes": "If it works, it is a cursor-free way to walk the tabs."
+    },
+    {
+      "id": "builder.nextTab",
+      "label": "NEXT TAB",
+      "glyph": "skip-next",
+      "category": "nav",
+      "priority": 35,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "BracketRight"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "NEXT TAB",
+        "hint": "Needs Prism Sight on the track editor.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "unverified",
+      "sources": [
+        "S1",
+        "S16"
+      ],
+      "verify": "See builder.prevTab.",
+      "notes": "No keyboard action exists for this (S1; in-game rebinding list, S16). Route: Prism Sight drags the right-hand panel's slider (typed entry is disabled and the wheel does nothing: S16, S17). Function: verified in game files; route: unverified until calibration."
+    },
+    {
+      "id": "builder.smooth",
+      "label": "SMOOTH",
+      "glyph": "smooth",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "trackEditMode"
+      ],
+      "binding": {
+        "kind": "sightClick",
+        "sight": "pc2.builder.btn.smoothSelected",
+        "button": "left",
+        "note": "\"Smooth selected\" button (S16; S2 \"Smooth Selected\")."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "SMOOTH",
+        "hint": "Switch to Edit Mode and select track.",
+        "when": [
+          "wrongContext",
+          "nothingSelected",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S2"
+      ],
+      "monogram": "SM",
+      "longLabel": "Smooth selected track"
+    },
+    {
+      "id": "builder.smoothType",
+      "label": "SMOOTH TYPE",
+      "glyph": "smooth",
+      "category": "tool",
+      "priority": 40,
+      "contexts": [
+        "trackEditMode"
+      ],
+      "binding": {
+        "kind": "sightClick",
+        "sight": "pc2.builder.smoothTypeStepper",
+        "button": "left",
+        "note": "Steps All / Turn / Height / Banking."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "SMOOTH TYPE",
+        "hint": "Switch to Edit Mode and select track.",
+        "when": [
+          "wrongContext",
+          "nothingSelected",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S2"
+      ],
+      "appAction": "EditorsToggleSmoothType",
+      "monogram": "ST",
+      "notes": "\"Change Smoothing Mode\" is on the in-game rebinding list (EditorsToggleSmoothType); its default key is unknown. A user bind replaces the click."
+    },
+    {
+      "id": "builder.editDelete",
+      "label": "DELETE SEL",
+      "glyph": "delete",
+      "category": "primary",
+      "priority": 55,
+      "contexts": [
+        "trackEditMode"
+      ],
+      "binding": {
+        "kind": "sightClick",
+        "sight": "pc2.builder.btn.editDelete",
+        "button": "left",
+        "note": "Edit Mode \"Delete\" button (S16)."
+      },
+      "safety": "confirm",
+      "unavailable": {
+        "label": "DELETE SEL",
+        "hint": "Switch to Edit Mode and select track.",
+        "when": [
+          "wrongContext",
+          "nothingSelected",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S2"
+      ],
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Delete"
+        }
+      ],
+      "monogram": "DS",
+      "longLabel": "Delete the selected track",
+      "notes": "Can delete several pieces at once: confirm."
+    },
+    {
+      "id": "placement.place",
+      "label": "PLACE",
+      "glyph": "check",
+      "category": "primary",
+      "priority": 80,
+      "contexts": [
+        "placement",
+        "buildingEdit"
+      ],
+      "binding": {
+        "kind": "mouse",
+        "button": "left",
+        "note": "Clicks at the cursor."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "placement.rotate90",
+      "label": "ROTATE 90",
+      "glyph": "rotate",
+      "category": "tool",
+      "priority": 70,
+      "contexts": [
+        "placement",
+        "buildingEdit"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Z"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "R90",
+      "notes": "Z + mouse X = free rotate (S1)."
+    },
+    {
+      "id": "placement.scale",
+      "label": "SCALE",
+      "glyph": "scale",
+      "category": "tool",
+      "priority": 45,
+      "contexts": [
+        "placement",
+        "buildingEdit"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "C"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "SC",
+      "verify": "Check whether C toggles scale mode or must be held with mouse movement."
+    },
+    {
+      "id": "placement.advanced",
+      "label": "ADVANCED",
+      "glyph": "move",
+      "category": "toggle",
+      "priority": 55,
+      "contexts": [
+        "placement",
+        "buildingEdit"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "X"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "ADV",
+      "longLabel": "Toggle Advanced Move / Rotate / Scale"
+    },
+    {
+      "id": "placement.snapCenter",
+      "label": "SNAP CENTER",
+      "glyph": "target",
+      "category": "tool",
+      "priority": 40,
+      "contexts": [
+        "placement",
+        "buildingEdit"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "F"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Snap attachment / decoration to wall piece center"
+    },
+    {
+      "id": "placement.angleSnap",
+      "label": "ANGLE SNAP",
+      "glyph": "snap",
+      "category": "toggle",
+      "priority": 50,
+      "contexts": [
+        "placement",
+        "buildingEdit"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "P"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S18",
+        "S17"
+      ],
+      "monogram": "AS",
+      "appAction": "EditorsToggleRotationSnap",
+      "conflict": "S1 lists P; Update 1 notes (S18) say G is \"default mapped\" for object angle snap; tracker reports (S17) mention Space. Read the user's rebinds, else verify.",
+      "verify": "Settings > Mouse & Keyboard > Object Placement: read the \"Toggle Angle Snap On / Off\" row."
+    },
+    {
+      "id": "placement.stickSurface",
+      "label": "STICK SURF",
+      "glyph": "magnet",
+      "category": "toggle",
+      "priority": 40,
+      "contexts": [
+        "placement",
+        "buildingEdit"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "B"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "SS"
+    },
+    {
+      "id": "placement.alignSurface",
+      "label": "ALIGN SURF",
+      "glyph": "align",
+      "category": "toggle",
+      "priority": 40,
+      "contexts": [
+        "placement",
+        "buildingEdit"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "V"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "AL"
+    },
+    {
+      "id": "placement.nextAlign",
+      "label": "NEXT ALIGN",
+      "glyph": "skip-next",
+      "category": "tool",
+      "priority": 30,
+      "contexts": [
+        "placement"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Tab"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "NA"
+    },
+    {
+      "id": "placement.boundingBox",
+      "label": "BOUND BOX",
+      "glyph": "box",
+      "category": "toggle",
+      "priority": 25,
+      "contexts": [
+        "placement"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Backslash"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "BB"
+    },
+    {
+      "id": "multiSelect.open",
+      "label": "MULTI-SEL",
+      "glyph": "select",
+      "category": "mode",
+      "priority": 55,
+      "contexts": [
+        "park",
+        "multiSelect"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "I"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "MS",
+      "longLabel": "Open Multi-Select"
+    },
+    {
+      "id": "multiSelect.add",
+      "label": "ADD",
+      "glyph": "select",
+      "category": "tool",
+      "priority": 35,
+      "contexts": [
+        "multiSelect"
+      ],
+      "binding": {
+        "kind": "mouse",
+        "button": "left",
+        "mods": "Shift",
+        "note": "At the cursor."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "multiSelect.subtract",
+      "label": "SUBTRACT",
+      "glyph": "select",
+      "category": "tool",
+      "priority": 35,
+      "contexts": [
+        "multiSelect"
+      ],
+      "binding": {
+        "kind": "mouse",
+        "button": "left",
+        "mods": "Ctrl",
+        "note": "At the cursor."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "brush.lock",
+      "label": "LOCK BRUSH",
+      "glyph": "lock",
+      "category": "toggle",
+      "priority": 40,
+      "contexts": [
+        "sceneryBrush"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "X"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "LB"
+    },
+    {
+      "id": "brush.place",
+      "label": "PAINT",
+      "glyph": "brush",
+      "category": "primary",
+      "priority": 60,
+      "contexts": [
+        "sceneryBrush"
+      ],
+      "binding": {
+        "kind": "mouse",
+        "button": "left",
+        "note": "At the cursor."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "PT"
+    },
+    {
+      "id": "demolish.apply",
+      "label": "DEMOLISH",
+      "glyph": "delete",
+      "category": "primary",
+      "priority": 60,
+      "contexts": [
+        "demolish"
+      ],
+      "binding": {
+        "kind": "mouse",
+        "button": "left",
+        "note": "At the cursor."
+      },
+      "safety": "confirm",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "DM"
+    },
+    {
+      "id": "terrain.apply",
+      "label": "APPLY",
+      "glyph": "terrain",
+      "category": "primary",
+      "priority": 70,
+      "contexts": [
+        "terrain"
+      ],
+      "binding": {
+        "kind": "mouse",
+        "button": "left",
+        "note": "At the cursor."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "TA"
+    },
+    {
+      "id": "terrain.inverse",
+      "label": "INVERSE",
+      "glyph": "terrain",
+      "category": "primary",
+      "priority": 60,
+      "contexts": [
+        "terrain"
+      ],
+      "binding": {
+        "kind": "mouse",
+        "button": "left",
+        "mods": "Ctrl",
+        "note": "Push / pull brushes, at the cursor."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "monogram": "TI"
+    },
+    {
+      "id": "visitorCam.enter",
+      "label": "VISITOR CAM",
+      "glyph": "viewers",
+      "category": "mode",
+      "priority": 45,
+      "contexts": [
+        "park"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "T"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "conflict": "Same key as Toggle Freelook (S1).",
+      "verify": "See camera.freelook."
+    },
+    {
+      "id": "visitorCam.walk",
+      "label": "WALK",
+      "glyph": "walk",
+      "category": "toggle",
+      "priority": 35,
+      "contexts": [
+        "visitorCam"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "LShift"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Toggle walk"
+    },
+    {
+      "id": "visitorCam.crouch",
+      "label": "CROUCH",
+      "glyph": "crouch",
+      "category": "toggle",
+      "priority": 30,
+      "contexts": [
+        "visitorCam"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "LCtrl"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "longLabel": "Toggle crouch"
+    },
+    {
+      "id": "visitorCam.jump",
+      "label": "JUMP",
+      "glyph": "jump",
+      "category": "primary",
+      "priority": 30,
+      "contexts": [
+        "visitorCam"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "LAlt"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "BANK",
+        "hint": "Needs Prism Sight on the track editor (a piece selected in Construction Mode).",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "id": "bank",
+      "label": "BANK",
+      "glyph": "bank",
+      "category": "tool",
+      "priority": 95,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "turn": {
+        "left": {
+          "kind": "sightAdjust",
+          "sight": "pc2.builder.bankSlider",
+          "direction": "decrease",
+          "steps": 1,
+          "method": "drag"
+        },
+        "right": {
+          "kind": "sightAdjust",
+          "sight": "pc2.builder.bankSlider",
+          "direction": "increase",
+          "steps": 1,
+          "method": "drag"
+        },
+        "step": {
+          "perPress": null,
+          "unit": "slider step",
+          "note": "One tick = one slider step. The step comes from game data per ride and piece (S16) and is not published; community builds use 11.25° / 22.5° / 45° / 90° increments (S21). Sight reads the 2-dp value after each step.",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 3
+            }
+          ],
+          "maxPressesPerEvent": 24,
+          "minIntervalMs": 40
+        }
+      },
+      "push": {
+        "verb": "builder.bank.level"
+      },
+      "readout": "bankAngle",
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S17",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording: locate the slider, drag one step, read the delta. Also try focus + Left/Right arrows (S16) as a keyboard route.",
+      "notes": "Turn = bank toward the turn direction; push = level to 0 via closed loop. Slider for BankingRangeDegrees (S16)."
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "PITCH",
+        "hint": "Needs Prism Sight on the track editor (a piece selected in Construction Mode).",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "id": "pitch",
+      "label": "PITCH",
+      "glyph": "pitch",
+      "category": "tool",
+      "priority": 90,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "turn": {
+        "left": {
+          "kind": "sightAdjust",
+          "sight": "pc2.builder.slopeSlider",
+          "direction": "decrease",
+          "steps": 1,
+          "method": "drag"
+        },
+        "right": {
+          "kind": "sightAdjust",
+          "sight": "pc2.builder.slopeSlider",
+          "direction": "increase",
+          "steps": 1,
+          "method": "drag"
+        },
+        "step": {
+          "perPress": null,
+          "unit": "slider step",
+          "note": "One tick = one slider step. The step comes from game data per ride and piece (S16) and is not published; community builds use 11.25° / 22.5° / 45° / 90° increments (S21). Sight reads the 2-dp value after each step.",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 3
+            }
+          ],
+          "maxPressesPerEvent": 24,
+          "minIntervalMs": 40
+        }
+      },
+      "push": {
+        "verb": "builder.pitch.level"
+      },
+      "readout": "slopeAngle",
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S17",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording: locate the slider, drag one step, read the delta. Also try focus + Left/Right arrows (S16) as a keyboard route.",
+      "notes": "SlopeRangeDegrees slider (S16). Push = flat."
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "CURVE",
+        "hint": "Needs Prism Sight on the track editor (a piece selected in Construction Mode).",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "id": "curve",
+      "label": "CURVE",
+      "glyph": "track-curve-right",
+      "category": "tool",
+      "priority": 85,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "turn": {
+        "left": {
+          "kind": "sightAdjust",
+          "sight": "pc2.builder.curveSlider",
+          "direction": "decrease",
+          "steps": 1,
+          "method": "drag"
+        },
+        "right": {
+          "kind": "sightAdjust",
+          "sight": "pc2.builder.curveSlider",
+          "direction": "increase",
+          "steps": 1,
+          "method": "drag"
+        },
+        "step": {
+          "perPress": null,
+          "unit": "slider step",
+          "note": "One tick = one slider step. The step comes from game data per ride and piece (S16) and is not published; community builds use 11.25° / 22.5° / 45° / 90° increments (S21). Sight reads the 2-dp value after each step.",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 3
+            }
+          ],
+          "maxPressesPerEvent": 24,
+          "minIntervalMs": 40
+        }
+      },
+      "push": {
+        "verb": "builder.piece.straight"
+      },
+      "readout": "curveAngle",
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S17",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording: locate the slider, drag one step, read the delta. Also try focus + Left/Right arrows (S16) as a keyboard route.",
+      "notes": "CurveRangeDegrees slider (S16). Push = straight."
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "LENGTH",
+        "hint": "Needs Prism Sight on the track editor (a piece selected in Construction Mode).",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "id": "length",
+      "label": "LENGTH",
+      "glyph": "length-plus",
+      "category": "tool",
+      "priority": 80,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "turn": {
+        "left": {
+          "kind": "sightAdjust",
+          "sight": "pc2.builder.lengthSlider",
+          "direction": "decrease",
+          "steps": 1,
+          "method": "drag"
+        },
+        "right": {
+          "kind": "sightAdjust",
+          "sight": "pc2.builder.lengthSlider",
+          "direction": "increase",
+          "steps": 1,
+          "method": "drag"
+        },
+        "step": {
+          "perPress": null,
+          "unit": "slider step",
+          "note": "One tick = one slider step. The step comes from game data per ride and piece (S16) and is not published; community builds use 11.25° / 22.5° / 45° / 90° increments (S21). Sight reads the 2-dp value after each step.",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 3
+            }
+          ],
+          "maxPressesPerEvent": 24,
+          "minIntervalMs": 40
+        }
+      },
+      "push": {
+        "verb": "builder.build"
+      },
+      "readout": "pieceLength",
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S17",
+        "S2"
+      ],
+      "verify": "Calibrate on the user's recording: locate the slider, drag one step, read the delta. Also try focus + Left/Right arrows (S16) as a keyboard route.",
+      "notes": "LengthRangeMetres slider, shown in the player's distance unit (S16). Push = place the piece, then shape the next one."
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "BANK OFFSET",
+        "hint": "Only while placing new track.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "id": "bankOffset",
+      "label": "BANK OFFSET",
+      "glyph": "bank",
+      "monogram": "BO",
+      "category": "tool",
+      "priority": 50,
+      "contexts": [
+        "trackBuilder"
+      ],
+      "turn": {
+        "left": {
+          "kind": "sightAdjust",
+          "sight": "pc2.builder.bankOffsetSlider",
+          "direction": "decrease",
+          "steps": 1,
+          "method": "drag"
+        },
+        "right": {
+          "kind": "sightAdjust",
+          "sight": "pc2.builder.bankOffsetSlider",
+          "direction": "increase",
+          "steps": 1,
+          "method": "drag"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "m (1 ft in imperial)",
+          "note": "Range −2..2 m in 1 m steps, or −7..7 ft (S17, issue 74545). Shown only while placing new track (S16).",
+          "confidence": "community"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 14,
+          "minIntervalMs": 40
+        },
+        "clamp": {
+          "min": -7,
+          "max": 7
+        }
+      },
+      "readout": "bankOffsetValue",
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S17"
+      ],
+      "verify": "Calibrate the slider location."
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "SMOOTH STR",
+        "hint": "Switch to Edit Mode.",
+        "when": [
+          "wrongContext",
+          "sightLost"
+        ],
+        "style": "dim"
+      },
+      "id": "smoothStrength",
+      "label": "SMOOTH STR",
+      "glyph": "smooth",
+      "monogram": "SS",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "trackEditMode"
+      ],
+      "turn": {
+        "left": {
+          "kind": "sightAdjust",
+          "sight": "pc2.builder.smoothStrengthSlider",
+          "direction": "decrease",
+          "steps": 1,
+          "method": "drag"
+        },
+        "right": {
+          "kind": "sightAdjust",
+          "sight": "pc2.builder.smoothStrengthSlider",
+          "direction": "increase",
+          "steps": 1,
+          "method": "drag"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "level",
+          "note": "\"Smooth strength\" slider 1–10, step 1 (S16). Default 5; this PC: 10 (S10).",
+          "confidence": "verified-local"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 9,
+          "minIntervalMs": 40
+        },
+        "clamp": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      "push": {
+        "verb": "builder.smooth"
+      },
+      "readout": "smoothStrengthValue",
+      "confidence": "verified-local",
+      "sources": [
+        "S16",
+        "S10"
+      ],
+      "verify": "Calibrate the slider location."
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "id": "camera.zoom",
+      "label": "ZOOM",
+      "glyph": "search",
+      "category": "camera",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "hold",
+          "chord": "PageDown",
+          "mode": "timed",
+          "durationMs": 80
+        },
+        "right": {
+          "kind": "hold",
+          "chord": "PageUp",
+          "mode": "timed",
+          "durationMs": 80
+        },
+        "step": {
+          "perPress": null,
+          "unit": "camera motion",
+          "note": "Camera keys move while held; each tick holds the key ~80 ms (tune on hardware; sensitivity is KeySen in Controls_remote.config.xml, 10.5 here).",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 6,
+              "pressesPerTick": 2
+            }
+          ],
+          "maxPressesPerEvent": 12,
+          "minIntervalMs": 0
+        }
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S9"
+      ],
+      "verify": "Check that an 80 ms SendInput hold moves the camera a useful amount at the user's sensitivity.",
+      "push": {
+        "verb": "camera.focus"
+      }
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "id": "camera.rotate",
+      "label": "ROTATE",
+      "glyph": "rotate",
+      "category": "camera",
+      "priority": 55,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "hold",
+          "chord": "Q",
+          "mode": "timed",
+          "durationMs": 80
+        },
+        "right": {
+          "kind": "hold",
+          "chord": "E",
+          "mode": "timed",
+          "durationMs": 80
+        },
+        "step": {
+          "perPress": null,
+          "unit": "camera motion",
+          "note": "Camera keys move while held; each tick holds the key ~80 ms (tune on hardware; sensitivity is KeySen in Controls_remote.config.xml, 10.5 here).",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 6,
+              "pressesPerTick": 2
+            }
+          ],
+          "maxPressesPerEvent": 12,
+          "minIntervalMs": 0
+        }
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S9"
+      ],
+      "verify": "Check that an 80 ms SendInput hold moves the camera a useful amount at the user's sensitivity.",
+      "push": {
+        "verb": "camera.reset"
+      },
+      "notes": "Q/E are vertical pan in freelook (S1)."
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "id": "camera.panFB",
+      "label": "PAN F/B",
+      "glyph": "camera",
+      "category": "camera",
+      "priority": 45,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "hold",
+          "chord": "S",
+          "mode": "timed",
+          "durationMs": 80
+        },
+        "right": {
+          "kind": "hold",
+          "chord": "W",
+          "mode": "timed",
+          "durationMs": 80
+        },
+        "step": {
+          "perPress": null,
+          "unit": "camera motion",
+          "note": "Camera keys move while held; each tick holds the key ~80 ms (tune on hardware; sensitivity is KeySen in Controls_remote.config.xml, 10.5 here).",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 6,
+              "pressesPerTick": 2
+            }
+          ],
+          "maxPressesPerEvent": 12,
+          "minIntervalMs": 0
+        }
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S9"
+      ],
+      "verify": "Check that an 80 ms SendInput hold moves the camera a useful amount at the user's sensitivity."
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "id": "camera.panLR",
+      "label": "PAN L/R",
+      "glyph": "camera",
+      "category": "camera",
+      "priority": 45,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "hold",
+          "chord": "A",
+          "mode": "timed",
+          "durationMs": 80
+        },
+        "right": {
+          "kind": "hold",
+          "chord": "D",
+          "mode": "timed",
+          "durationMs": 80
+        },
+        "step": {
+          "perPress": null,
+          "unit": "camera motion",
+          "note": "Camera keys move while held; each tick holds the key ~80 ms (tune on hardware; sensitivity is KeySen in Controls_remote.config.xml, 10.5 here).",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 6,
+              "pressesPerTick": 2
+            }
+          ],
+          "maxPressesPerEvent": 12,
+          "minIntervalMs": 0
+        }
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S9"
+      ],
+      "verify": "Check that an 80 ms SendInput hold moves the camera a useful amount at the user's sensitivity."
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "id": "brush.size",
+      "label": "BRUSH SIZE",
+      "glyph": "brush",
+      "category": "tool",
+      "priority": 80,
+      "contexts": [
+        "terrain",
+        "sceneryBrush",
+        "demolish"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Shift+Minus"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Shift+Equal"
+        },
+        "step": {
+          "perPress": null,
+          "unit": "brush step",
+          "note": "One press = one in-game step (size not published).",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 3
+            }
+          ],
+          "maxPressesPerEvent": 24,
+          "minIntervalMs": 20
+        }
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "verify": "Count presses from minimum to maximum on the user's recording.",
+      "readout": "brushSize"
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "id": "brush.intensity",
+      "label": "INTENSITY",
+      "glyph": "brush",
+      "category": "tool",
+      "priority": 75,
+      "contexts": [
+        "terrain",
+        "sceneryBrush"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Minus"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Equal"
+        },
+        "step": {
+          "perPress": null,
+          "unit": "brush step",
+          "note": "One press = one in-game step (size not published).",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 3
+            }
+          ],
+          "maxPressesPerEvent": 24,
+          "minIntervalMs": 20
+        }
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "verify": "Count presses from minimum to maximum on the user's recording.",
+      "readout": "brushIntensity"
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "id": "terrain.hardness",
+      "label": "HARDNESS",
+      "glyph": "terrain",
+      "category": "tool",
+      "priority": 70,
+      "contexts": [
+        "terrain"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Ctrl+Minus"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Ctrl+Equal"
+        },
+        "step": {
+          "perPress": null,
+          "unit": "brush step",
+          "note": "One press = one in-game step (size not published).",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 3
+            }
+          ],
+          "maxPressesPerEvent": 24,
+          "minIntervalMs": 20
+        }
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "verify": "Count presses from minimum to maximum on the user's recording.",
+      "readout": "brushHardness"
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "id": "path.height",
+      "label": "PATH HEIGHT",
+      "glyph": "arrow-up",
+      "category": "tool",
+      "priority": 80,
+      "contexts": [
+        "paths"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "J"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "U"
+        },
+        "step": {
+          "perPress": null,
+          "unit": "height step",
+          "note": "One press = one in-game step (size not published).",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 3
+            }
+          ],
+          "maxPressesPerEvent": 24,
+          "minIntervalMs": 20
+        }
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "verify": "Count presses from minimum to maximum on the user's recording.",
+      "push": {
+        "verb": "path.resetHeight"
+      },
+      "notes": "U raise / J lower without placing (S1). The user's path HeightSnap is 0.5 (S10); whether U/J use it is unverified."
+    },
+    {
+      "safety": "safe",
+      "unavailable": {
+        "label": "PC2",
+        "hint": "Planet Coaster 2 isn't in front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "id": "placement.rotate",
+      "label": "ROTATE",
+      "glyph": "rotate",
+      "category": "tool",
+      "priority": 75,
+      "contexts": [
+        "placement",
+        "buildingEdit"
+      ],
+      "turn": {
+        "left": {
+          "kind": "repeat",
+          "chord": "Z",
+          "count": 3,
+          "intervalMs": 40,
+          "note": "3 x 90 = -90 degrees (Z rotates one way only)."
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Z"
+        },
+        "step": {
+          "perPress": 90,
+          "unit": "deg",
+          "note": "S1: \"Rotate 90-degrees: Z\". Direction (CW/CCW) unverified.",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 4,
+          "minIntervalMs": 40
+        }
+      },
+      "push": {
+        "verb": "placement.advanced"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "verify": "Check Z rotation direction; if CCW, swap left/right."
+    }
+  ],
+  "readouts": [
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "bankAngle",
+      "label": "BANK",
+      "contexts": [
+        "trackBuilder"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.builder.bankValue"
+      },
+      "unit": "deg",
+      "format": "{value}°",
+      "range": [
+        -180,
+        180
+      ],
+      "widget": "horizon",
+      "refreshHz": 10,
+      "sources": [
+        "S16"
+      ],
+      "notes": "The roll/horizon widget. The slider value text is 2-dp degrees (S16) while a piece is selected; otherwise fall back to bankCounted. The 3D handles carry no numbers (S16)."
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Check that each Prism step registers exactly once (no dropped or doubled clicks).",
+      "id": "bankCounted",
+      "label": "BANK ~",
+      "contexts": [
+        "trackBuilder"
+      ],
+      "source": {
+        "kind": "counted",
+        "control": "bank",
+        "note": "Prism's own steps since the piece started (relative, not absolute)."
+      },
+      "unit": "steps",
+      "widget": "horizon",
+      "notes": "Fallback when Sight can't read the bank."
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "sources": [
+        "S16"
+      ],
+      "id": "slopeAngle",
+      "label": "PITCH",
+      "contexts": [
+        "trackBuilder"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.builder.slopeValue"
+      },
+      "unit": "deg",
+      "format": "{value}°",
+      "range": [
+        -180,
+        180
+      ],
+      "widget": "gauge",
+      "refreshHz": 10
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "sources": [
+        "S16"
+      ],
+      "id": "curveAngle",
+      "label": "CURVE",
+      "contexts": [
+        "trackBuilder"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.builder.curveValue"
+      },
+      "unit": "deg",
+      "format": "{value}°",
+      "widget": "gauge",
+      "refreshHz": 10
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "pieceLength",
+      "label": "LENGTH",
+      "contexts": [
+        "trackBuilder"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.builder.lengthValue"
+      },
+      "unit": "ft",
+      "format": "{value} ft",
+      "widget": "number",
+      "refreshHz": 10,
+      "notes": "Whole numbers in the player's distance unit (S16); this user plays in feet / mph (S10).",
+      "sources": [
+        "S10",
+        "S16"
+      ]
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "rideRatings",
+      "label": "RATINGS",
+      "contexts": [
+        "trackBuilder"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.builder.header.efn"
+      },
+      "format": "E {excitement} · F {fear} · N {nausea}",
+      "range": [
+        0,
+        10
+      ],
+      "widget": "meter",
+      "refreshHz": 2,
+      "sources": [
+        "S16",
+        "S2"
+      ],
+      "notes": "The editor header always shows Excitement / Fear / Nausea cells while editing (S16), replaced by a warning line when power or water is missing."
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "rideLive",
+      "label": "LIVE G",
+      "contexts": [
+        "trackBuilder",
+        "rideCam"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.test.liveData"
+      },
+      "format": "Lat {lateral} · Vert {vertical} · Fwd {forward} · {speed}",
+      "range": [
+        -10,
+        10
+      ],
+      "widget": "graph",
+      "refreshHz": 5,
+      "sources": [
+        "S16"
+      ],
+      "notes": "Testing tab > Live Data rows: E/F/N 0–10, Speed, Lateral / Vertical / Forward G −10..+10 (S16). The roll horizon pairs well with this during a test ride."
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "rideResults",
+      "label": "RESULTS",
+      "contexts": [
+        "trackBuilder"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.test.results"
+      },
+      "format": "Max {maxSpeed} · drop {biggestDrop} · {inversions} inv · max G {maxVerticalG}",
+      "widget": "list",
+      "refreshHz": 1,
+      "sources": [
+        "S16"
+      ],
+      "notes": "Testing tab > Results: duration, track length, max/average speed, biggest drop, max lateral G, max/min vertical G, max/min forward G, inversions, airtime count and duration (S16)."
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "pieceCost",
+      "label": "COST",
+      "contexts": [
+        "trackBuilder"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.builder.btn.place"
+      },
+      "unit": "$",
+      "format": "{value}",
+      "widget": "number",
+      "refreshHz": 2,
+      "sources": [
+        "S16"
+      ],
+      "notes": "Parsed from the \"Place ({Cost})\" label (S16)."
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "bankOffsetValue",
+      "label": "OFFSET",
+      "contexts": [
+        "trackBuilder"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.builder.bankOffsetValue"
+      },
+      "unit": "ft",
+      "widget": "number",
+      "refreshHz": 5,
+      "sources": [
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "smoothStrengthValue",
+      "label": "STRENGTH",
+      "contexts": [
+        "trackEditMode"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.builder.smoothStrengthSlider"
+      },
+      "range": [
+        1,
+        10
+      ],
+      "widget": "gauge",
+      "refreshHz": 5,
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Toggle with Shift, then check whether the file changes immediately or on exit.",
+      "id": "falloffMode",
+      "label": "FALLOFF",
+      "contexts": [
+        "trackBuilder"
+      ],
+      "source": {
+        "kind": "file",
+        "field": "Game_remote.config.xml TrackEditFalloffModifier",
+        "note": "Centre | Even. The game may only write this when settings are saved."
+      },
+      "widget": "state",
+      "sources": [
+        "S10"
+      ]
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "As falloffMode.",
+      "id": "moveSpace",
+      "label": "MOVE SPACE",
+      "contexts": [
+        "trackBuilder"
+      ],
+      "source": {
+        "kind": "file",
+        "field": "Game_remote.config.xml TrackEditHorizontalModifier",
+        "note": "Relative | World."
+      },
+      "widget": "state",
+      "sources": [
+        "S10"
+      ]
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Change the Settings-tab Angle Snap and see when the file updates; Sight on the tick box is the live fallback.",
+      "id": "trackAngleSnap",
+      "label": "SNAP",
+      "contexts": [
+        "trackBuilder"
+      ],
+      "source": {
+        "kind": "file",
+        "field": "Game_remote.config.xml TrackEditAngleSnapToggle + TrackEditAngleSnapValue",
+        "note": "This PC: true, 90. Stops come from the game (Off, 11.25 … per S17); whether 90 is a stop is unconfirmed."
+      },
+      "widget": "state",
+      "sources": [
+        "S10",
+        "S16",
+        "S17"
+      ]
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "simSpeed",
+      "label": "SPEED",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.hud.simSpeed"
+      },
+      "widget": "state",
+      "refreshHz": 2
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "parkCash",
+      "label": "CASH",
+      "contexts": [
+        "park"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.hud.cash"
+      },
+      "unit": "$",
+      "widget": "number",
+      "refreshHz": 1
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "guestCount",
+      "label": "GUESTS",
+      "contexts": [
+        "park"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.hud.guests"
+      },
+      "widget": "number",
+      "refreshHz": 1
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "parkRating",
+      "label": "RATING",
+      "contexts": [
+        "park"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.hud.parkRating"
+      },
+      "widget": "gauge",
+      "refreshHz": 1
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "brushSize",
+      "label": "SIZE",
+      "contexts": [
+        "terrain",
+        "sceneryBrush",
+        "demolish"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.brush.sizeValue"
+      },
+      "widget": "gauge",
+      "refreshHz": 5
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "brushIntensity",
+      "label": "INTENSITY",
+      "contexts": [
+        "terrain",
+        "sceneryBrush"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.brush.intensityValue"
+      },
+      "widget": "gauge",
+      "refreshHz": 5
+    },
+    {
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Calibrate on the user's 3440x1440 HDR recording.",
+      "id": "brushHardness",
+      "label": "HARDNESS",
+      "contexts": [
+        "terrain"
+      ],
+      "source": {
+        "kind": "sight",
+        "region": "pc2.brush.hardnessValue"
+      },
+      "widget": "gauge",
+      "refreshHz": 5
+    }
+  ],
+  "sightRegions": [
+    {
+      "id": "pc2.hud.bottomBar",
+      "what": "Park HUD bottom bar (park view is showing)",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.hud.simSpeed",
+      "what": "Simulation speed / pause indicator",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.hud.cash",
+      "what": "Park cash",
+      "valueType": "number",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.hud.guests",
+      "what": "Guest count",
+      "valueType": "number",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.hud.parkRating",
+      "what": "Park rating",
+      "valueType": "bar",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.hud.freelookIndicator",
+      "what": "Freelook camera active (if indicated)",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.menu.fullscreen",
+      "what": "Full-screen menu / management screen open",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.editPanel",
+      "what": "Right-hand track editor panel (\"Editing {name}\" header, S16)",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.editModePanel",
+      "what": "Edit Mode content (smoothing controls / \"Select a piece of track to edit it.\")",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.flumeIndicator",
+      "what": "The edited ride is a flume (Flumes tabs instead of coaster tabs)",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.header.efn",
+      "what": "Header Excitement / Fear / Nausea cells",
+      "valueType": "number",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.btn.place",
+      "what": "\"Place\" / \"Place ({Cost})\" button",
+      "valueType": "text",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.btn.autocomplete",
+      "what": "Round Autocomplete button",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.btn.delete",
+      "what": "Round Delete (bulldozer) button",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.btn.modeToggle",
+      "what": "\"Go to Edit Mode\" / \"Go to Construction Mode\" button",
+      "valueType": "text",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.tab.utilities",
+      "what": "Utilities tab icon",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.tab.loops",
+      "what": "Loops tab icon",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.tab.rolls",
+      "what": "Rolls tab icon",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.tab.nonInverted",
+      "what": "Non-inverted tab icon",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.tab.specials",
+      "what": "Specials tab icon",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.tab.station",
+      "what": "Station tab icon",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.tab.settings",
+      "what": "Settings tab icon",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.tab.testing",
+      "what": "Testing tab icon",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.piece.normal",
+      "what": "Normal track icon in the Utilities grid",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.piece.chainLift",
+      "what": "Chain lift icon in the Utilities grid",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.piece.brakes",
+      "what": "Brakes icon in the Utilities grid",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.piece.boosters",
+      "what": "Booster / launch icon in the Utilities grid",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.bankSlider",
+      "what": "Banking slider (thumb + track)",
+      "valueType": "bar",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.slopeSlider",
+      "what": "Slope slider",
+      "valueType": "bar",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.curveSlider",
+      "what": "Curve slider",
+      "valueType": "bar",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.lengthSlider",
+      "what": "Length slider",
+      "valueType": "bar",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.bankOffsetSlider",
+      "what": "Banking Offset slider (placing only)",
+      "valueType": "bar",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.bankValue",
+      "what": "Banking slider value text (2-dp degrees)",
+      "valueType": "number",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.slopeValue",
+      "what": "Slope slider value text",
+      "valueType": "number",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.curveValue",
+      "what": "Curve slider value text",
+      "valueType": "number",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.lengthValue",
+      "what": "Length slider value text (player distance unit)",
+      "valueType": "number",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.bankOffsetValue",
+      "what": "Banking Offset value text",
+      "valueType": "number",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.btn.smoothSelected",
+      "what": "Edit Mode \"Smooth selected\" button",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.smoothTypeStepper",
+      "what": "Edit Mode \"Smooth type\" stepper",
+      "valueType": "text",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.smoothStrengthSlider",
+      "what": "Edit Mode \"Smooth strength\" slider and value (1–10)",
+      "valueType": "bar",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.btn.editDelete",
+      "what": "Edit Mode \"Delete\" button",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.settings.angleSnapToggle",
+      "what": "Settings tab Angle Snap tick box",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.btn.startTest",
+      "what": "Testing tab \"Start Test\" / \"Stop Test\" button",
+      "valueType": "text",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.builder.btn.rideCamera",
+      "what": "Testing tab \"Ride Camera\" button",
+      "valueType": "icon",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.test.liveData",
+      "what": "Testing tab Live Data rows (E/F/N, speed, lateral/vertical/forward G)",
+      "valueType": "number",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.test.results",
+      "what": "Testing tab Results rows",
+      "valueType": "text",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.rideCam.overlay",
+      "what": "Ride camera panel (Cinematic / Guest / Interest; Train / Car / Seat steppers)",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.paths.panel",
+      "what": "Path / pool tool panel",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.placement.panel",
+      "what": "Object placement active",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.buildingEdit.panel",
+      "what": "Building edit mode",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.multiSelect.panel",
+      "what": "Multi-select tool active",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.brush.panel",
+      "what": "Scenery brush tool active",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.demolish.panel",
+      "what": "Demolish tool active",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.terrain.panel",
+      "what": "Terrain tool active",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.brush.sizeValue",
+      "what": "Brush size value",
+      "valueType": "number",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.brush.intensityValue",
+      "what": "Brush intensity value",
+      "valueType": "number",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.brush.hardnessValue",
+      "what": "Brush hardness value",
+      "valueType": "number",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    },
+    {
+      "id": "pc2.visitorCam.overlay",
+      "what": "Visitor camera active",
+      "valueType": "presence",
+      "confidence": "unverified",
+      "verify": "Locate on the user's recording; confirm it exists at 3440x1440 HDR."
+    }
+  ],
+  "userBindings": {
+    "storage": "file",
+    "summary": "Rebinds made on Settings > Mouse & Keyboard (4th tab) > Change are saved in Controls_remote.config.xml under <ControlBindings>. On this PC it is empty (all defaults). Logical button names are known from game data (S16: EditorsDelete, EditorsToggleRotationSnap, EditorsToggleTesting, …) and are the verbs' appAction; the XML nesting is inferred from the exe; no public example exists.",
+    "locations": [
+      {
+        "path": "%USERPROFILE%\\Saved Games\\Frontier Developments\\Planet Coaster 2\\<steam-id>\\Config\\Controls_remote.config.xml",
+        "format": "xml",
+        "encoding": "UTF-8",
+        "note": "One folder per Steam account id (never copy it). Same folder: Game_remote.config.xml (units, track-edit settings)."
+      }
+    ],
+    "entryShape": "Inferred: <ControlBindings preset=\"Custom\" version=\"N\"><Bindings><LogicalButton><Name>…</Name><Binding><DeviceType>…</DeviceType><Key>…</Key><Modifier>…</Modifier><EventType>…</EventType></Binding></LogicalButton></Bindings></ControlBindings>. Element names exist in the exe (S11); nesting, attribute-vs-element and the logical button names are unverified. Planet Coaster 1 uses <LogicalControlRebinds/> instead.",
+    "example": "<ControlBindings preset=\"Custom\" version=\"1\"><Bindings><LogicalButton><Name>ExampleAction</Name><Binding><DeviceType>Keyboard</DeviceType><Key>K</Key></Binding></LogicalButton></Bindings></ControlBindings> (fictional shape)",
+    "keyNameMap": "Key names are probably the Input_KB_Key_* family (A–Z, 0–9, Space, Tab, Equals, Minus, Enter, Backspace, Escape, Apostrophe, Semicolon, Comma, Grave, LeftBracket, RightBracket, NonUSHash, Backslash, F1…) without the prefix: Equals → Equal, Grave → Backquote, LeftBracket → BracketLeft, Apostrophe → Quote. Unverified.",
+    "readMode": "Read-only; FileSystemWatcher on the Config folder; re-parse on change; if parsing fails, keep defaults and say so in the PI.",
+    "confidence": "unverified",
+    "sources": [
+      "S9",
+      "S11",
+      "S16"
+    ],
+    "verify": "Ask the user to rebind one harmless action (Camera Torch L → K), quit to menu, then read the file read-only to capture the real shape and the logical button name; then reset to default."
+  },
+  "layouts": [
+    {
+      "device": "galleon-100-sd",
+      "context": "trackBuilder",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "builder.build"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "edit.undo"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "builder.delete"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "builder.chainLift"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "builder.brakes"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "builder.boosters"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "builder.loop"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "builder.special"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "builder.ratings"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "builder.testRide"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "builder.rideCam"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "builder.modeToggle"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "bank"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "pitch"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "curve"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "length"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "bankAngle"
+        },
+        {
+          "slot": "TR",
+          "readout": "slopeAngle"
+        },
+        {
+          "slot": "BL",
+          "readout": "curveAngle"
+        },
+        {
+          "slot": "BR",
+          "readout": "pieceLength"
+        }
+      ],
+      "rationale": "The Coaster Console: place/undo/delete on top, piece types in the middle with the live RATINGS (E/F/N) key, test, ride cam and the Construction/Edit switch at the bottom; bank and pitch on layer 0 (push = level/flat), curve and length on layer 1 (push = straight/place); each widget shows its own dial (the horizon for bank)."
+    },
+    {
+      "device": "galleon-100-sd",
+      "context": "trackEditMode",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "builder.smooth"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "edit.undo"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "builder.editDelete"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "builder.smoothType"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "builder.falloff"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "builder.worldRelative"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "builder.angleSnap"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "builder.ratings"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "edit.redo"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "builder.testRide"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "builder.rideCam"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "builder.modeToggle"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "bank"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "pitch"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "curve"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "smoothStrength"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "bankAngle"
+        },
+        {
+          "slot": "TR",
+          "readout": "slopeAngle"
+        },
+        {
+          "slot": "BL",
+          "readout": "curveAngle"
+        },
+        {
+          "slot": "BR",
+          "readout": "smoothStrengthValue"
+        }
+      ],
+      "rationale": "Edit Mode keeps the same dial positions (muscle memory) but swaps length for smoothing strength (its widget shows the strength), and the keys become smooth / delete / modifiers plus the live RATINGS key (smoothing changes them)."
+    },
+    {
+      "device": "stream-deck-plus",
+      "context": "trackBuilder",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "builder.build"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "edit.undo"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "builder.delete"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "verb": "builder.testRide"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "builder.chainLift"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "builder.brakes"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "builder.ratings"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "verb": "builder.rideCam"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "control": "bank"
+        },
+        {
+          "dial": 1,
+          "control": "pitch"
+        },
+        {
+          "dial": 2,
+          "control": "curve"
+        },
+        {
+          "dial": 3,
+          "control": "length"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "0",
+          "readout": "bankAngle"
+        },
+        {
+          "slot": "1",
+          "readout": "slopeAngle"
+        },
+        {
+          "slot": "2",
+          "readout": "curveAngle"
+        },
+        {
+          "slot": "3",
+          "readout": "pieceLength"
+        }
+      ],
+      "rationale": "All four shape dials at once, each strip segment showing its own value; the top row builds, the bottom row has chain lift, brakes, the live RATINGS (E/F/N) key and the ride cam (boosters/loops/specials/station move to page 2)."
+    },
+    {
+      "device": "galleon-100-sd",
+      "context": "park",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "speed.pause"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "speed.cycle"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "ui.heatmaps"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "edit.undo"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "edit.redo"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "multiSelect.open"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "edit.move"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "edit.advancedMove"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "edit.duplicate"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "camera.focus"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "camera.reset"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "camera.torch"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "camera.zoom"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "camera.rotate"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "camera.panFB"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "camera.panLR"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "parkCash"
+        },
+        {
+          "slot": "TR",
+          "readout": "parkRating"
+        },
+        {
+          "slot": "BL",
+          "readout": "guestCount"
+        },
+        {
+          "slot": "BR",
+          "readout": "simSpeed"
+        }
+      ],
+      "rationale": "Time control on top, editing in the middle, camera utilities at the bottom; the camera is continuous so all four dial slots drive it, and the widgets carry the park HUD."
+    },
+    {
+      "device": "stream-deck-plus",
+      "context": "park",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "speed.pause"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "speed.normal"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "speed.fast"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "verb": "speed.fastest"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "edit.undo"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "edit.redo"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "ui.heatmaps"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "verb": "ui.hide"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "control": "camera.zoom"
+        },
+        {
+          "dial": 1,
+          "control": "camera.rotate"
+        },
+        {
+          "dial": 2,
+          "control": "camera.panFB"
+        },
+        {
+          "dial": 3,
+          "control": "camera.panLR"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "0",
+          "readout": "parkCash"
+        },
+        {
+          "slot": "1",
+          "readout": "parkRating"
+        },
+        {
+          "slot": "2",
+          "readout": "guestCount"
+        },
+        {
+          "slot": "3",
+          "readout": "simSpeed"
+        }
+      ],
+      "rationale": "Direct speed keys fit the 4-wide top row; undo/redo/heatmaps/hide UI below; camera on the dials and the HUD on the strip."
+    },
+    {
+      "device": "galleon-100-sd",
+      "context": "terrain",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "terrain.apply"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "terrain.inverse"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "edit.undo"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "edit.redo"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "camera.focus"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "camera.reset"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "speed.pause"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "ui.timeOfDay"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "ui.weather"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "ui.cancel"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "ui.hide"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "camera.torch"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "brush.size"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "brush.intensity"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "terrain.hardness"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "camera.zoom"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "brushSize"
+        },
+        {
+          "slot": "TR",
+          "readout": "brushIntensity"
+        },
+        {
+          "slot": "BL",
+          "readout": "brushHardness"
+        },
+        {
+          "slot": "BR",
+          "readout": "parkCash"
+        }
+      ],
+      "rationale": "Terrain has real keyboard steps (-/=, Shift, Ctrl), so size, intensity and hardness are true dials today; apply/inverse/undo stay under the right hand."
+    },
+    {
+      "device": "stream-deck-plus",
+      "context": "terrain",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "terrain.apply"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "terrain.inverse"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "edit.undo"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "verb": "edit.redo"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "camera.focus"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "camera.reset"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "speed.pause"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "verb": "ui.cancel"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "control": "brush.size"
+        },
+        {
+          "dial": 1,
+          "control": "brush.intensity"
+        },
+        {
+          "dial": 2,
+          "control": "terrain.hardness"
+        },
+        {
+          "dial": 3,
+          "control": "camera.zoom"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "0",
+          "readout": "brushSize"
+        },
+        {
+          "slot": "1",
+          "readout": "brushIntensity"
+        },
+        {
+          "slot": "2",
+          "readout": "brushHardness"
+        },
+        {
+          "slot": "3",
+          "readout": "parkCash"
+        }
+      ],
+      "rationale": "Three brush dials plus zoom, each with its value on the strip; apply and undo on the top row."
+    },
+    {
+      "device": "galleon-100-sd",
+      "context": "placement",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "placement.place"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "placement.rotate90"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "edit.undo"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "placement.advanced"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "placement.scale"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "placement.snapCenter"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "placement.angleSnap"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "placement.stickSurface"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "placement.alignSurface"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "placement.nextAlign"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "placement.boundingBox"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "ui.cancel"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "placement.rotate"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "camera.zoom"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "camera.rotate"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "camera.panFB"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TR",
+          "readout": "simSpeed"
+        }
+      ],
+      "rationale": "Place/rotate/undo on top, transform tools in the middle, the snap toggles below and cancel last; rotation in 90-degree steps is the left dial."
+    },
+    {
+      "device": "galleon-100-sd",
+      "context": "paths",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "path.place"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "path.acuteJoin"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "edit.undo"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "path.raise"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "path.lower"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "edit.redo"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "path.resetHeight"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "path.noJoins"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "ui.heatmaps"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "camera.focus"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "speed.pause"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "ui.cancel"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "path.height"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "camera.zoom"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "camera.rotate"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "camera.panFB"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TR",
+          "readout": "parkCash"
+        }
+      ],
+      "rationale": "Path height (U/J) is a true keyboard step, so it is the left dial with push = reset height; place/join/undo on top."
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Controls Overview & Controller Layouts: Keyboard & Mouse section",
+      "url": "https://www.planetcoaster.com/en-US/controls",
+      "publisher": "Frontier Developments",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "live site 2026-10 (no version printed)",
+      "note": "Server-rendered <details> lists: Mouse, Menu Navigation, Path/Pool, Tracked Ride/Flume Edit Mode, Object Placement, Building Edit, Multi-Select, Scenery Brush, Demolish, Terrain, General, Simulation Speed, Camera, Camera View Modes, Visitor Camera."
+    },
+    {
+      "id": "S2",
+      "title": "Coaster & Ride Building (player guide)",
+      "url": "https://www.planetcoaster.com/en-US/player-guides/coaster-ride-building",
+      "publisher": "Frontier Developments",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "note": "\"Select and place track types from the Edit menu to the right of your screen. Use the tools on screen to tweak the angle and direction of your track.\" Smooth Selected button; Excitement/Fear/Nausea from Test."
+    },
+    {
+      "id": "S3",
+      "title": "Most Important PC Hotkeys For Planet Coaster 2",
+      "url": "https://gamerant.com/planet-coaster-2-pc-hotkeys-most-important/",
+      "publisher": "Game Rant",
+      "kind": "guide",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "launch era (2024-11)",
+      "note": "Rebinding lives in Settings, 4th tab \"Mouse and Keyboard Settings\", Change button. Writes \"O or 1, 2, 3\" for sim speed."
+    },
+    {
+      "id": "S4",
+      "title": "Planet Coaster 2 PC Keyboard Controls & Shortcuts Guide",
+      "url": "https://www.magicgameworld.com/planet-coaster-2-pc-keyboard-controls-shortcuts-guide/",
+      "publisher": "Magic Game World",
+      "kind": "guide",
+      "accessed": "2026-10-16",
+      "note": "Mirrors S1 (same rows, same icon names)."
+    },
+    {
+      "id": "S5",
+      "title": "Planet Coaster 2 keyboard controls",
+      "url": "https://defkey.com/planet-coaster-2-shortcuts",
+      "publisher": "DefKey",
+      "kind": "guide",
+      "accessed": "2026-10-16",
+      "note": "Mirrors S1; \"Tracked ride/Flume edit mode (9 shortcuts)\"."
+    },
+    {
+      "id": "S6",
+      "title": "Hotkey for angle snap (General Discussions)",
+      "url": "https://steamcommunity.com/app/2688950/discussions/0/4634860720019832163/",
+      "publisher": "Steam Community",
+      "kind": "forum",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "2024-11-07 (launch)",
+      "note": "Angle snap toggle is P but only works in some build modes (object placement), not in coaster building."
+    },
+    {
+      "id": "S7",
+      "title": "Update 3 - Available Now! (patch notes)",
+      "url": "https://store.steampowered.com/news/app/2688950",
+      "publisher": "Frontier Developments via Steam",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Update 3 (2025-03-20)",
+      "note": "\"Restored a missing R-key shortcut for Edit Coaster in coaster InfoPanels\"; \"Angle Snap\" in the Edit Track menu; \"The Ride Camera button for Flumes is no longer missing…\"."
+    },
+    {
+      "id": "S8",
+      "title": "Hotfix 2 - Coming November 21st! (patch notes)",
+      "url": "https://store.steampowered.com/news/app/2688950",
+      "publisher": "Frontier Developments via Steam",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Hotfix 2 (2024-11-21)",
+      "note": "\"Added custom rebindable controls for camera tilt and mouse controls\"; \"For PC players, Angle Snap and other sliders that have an Off option will have functionality for easy toggling\"."
+    },
+    {
+      "id": "S9",
+      "title": "Controls_remote.config.xml on this PC (read-only)",
+      "url": "local:%USERPROFILE%/Saved Games/Frontier Developments/Planet Coaster 2/<steam-id>/Config/Controls_remote.config.xml",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "note": "<ControlBindings /> is empty (all defaults). Also <Shortcuts> (DoubleClick, 0.2 s hold/double-click), <Camera> (EdgePan None, RMBDrag Simple, FreelookSpace Mixed), <CameraSensitivity> 10.5."
+    },
+    {
+      "id": "S10",
+      "title": "Game_remote.config.xml on this PC (read-only)",
+      "url": "local:%USERPROFILE%/Saved Games/Frontier Developments/Planet Coaster 2/<steam-id>/Config/Game_remote.config.xml",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "note": "DistanceUnit feet, SpeedUnit milesperhour; TrackEditAngleSnapValue 90, TrackEditAngleSnapToggle true, TrackEditCameraMode 1, TrackEditFalloffModifier Centre, TrackEditHorizontalModifier Relative, TrackEditVerticalModifier World, TrackEditSmoothing*; TrackedRideCamMode guest; RotationSnapSize 15, RotationSnapEnabled false."
+    },
+    {
+      "id": "S11",
+      "title": "PlanetCoaster2.exe string table (read-only grep)",
+      "url": "local:E:/SteamLibrary/steamapps/common/Planet Coaster 2/PlanetCoaster2.exe",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "build 25677695",
+      "note": "Rebind XML vocabulary: ControlBindings, Bindings, LogicalButton, Name, Binding, DeviceType, DeviceVID, DevicePID, Key, Modifier, EventType, EventCode, Chord, HoldTime, UserBinding; key names Input_KB_Key_*; RebindLogicalButton/SaveRebinds. Track params: TrackParam_BankingRange, SlopeRange, CurveRange, LengthRange, BankPivotRange (banking offset), BankOnlyIntoTurns, ChainLiftSpeed, Booster*/Brake*. Heatmap_Excitement/Fear/Nausea/LateralGs/LongGs/VerticalGs/Speed."
+    },
+    {
+      "id": "S12",
+      "title": "Steam appmanifest_2688950.acf (read-only)",
+      "url": "local:E:/SteamLibrary/steamapps/appmanifest_2688950.acf",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "note": "buildid 25677695, LastUpdated 2026-10-16."
+    },
+    {
+      "id": "S13",
+      "title": "Controls page, gamepad tab \"Coaster and Flume Building\" (component JS)",
+      "url": "https://www.planetcoaster.com/en-US/controls",
+      "publisher": "Frontier Developments",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "note": "From the page bundle (component.lang.detail.3.*): A Place; X Toggle Track Edit Controls; Y Delete, (Hold) Radial Menu; B Deselect; LS click Change Colours; left stick Move Track Up/Down + Sideways; LB/RB zoom; LT/RT change tab; right stick camera; Start pause."
+    },
+    {
+      "id": "S14",
+      "title": "Planet Coaster 2 | Update 11 Hotfix 15 (latest documented patch)",
+      "url": "https://store.steampowered.com/news/app/2688950",
+      "publisher": "Frontier Developments via Steam",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Update 11 Hotfix 15 (2026-08-25)",
+      "note": "No control changes in Updates 4–11 notes (scanned all 86 Steam announcements for keyboard/hotkey/shortcut/rebind/track edit)."
+    },
+    {
+      "id": "S15",
+      "title": "Building Your Park / paths guide (stairs)",
+      "url": "https://www.planetcoaster.com/en-US/player-guides/building-your-park",
+      "publisher": "Frontier Developments",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "note": "One paragraph says \"holding Shift on PC\" to slope paths; the How-To box says \"Hold Tab/X Button/Square Button and drag the path up or down\" to make stairs."
+    },
+    {
+      "id": "S16",
+      "title": "Installed game UI and data: UIGameface.ovl (Coherent UI modules), Loc.ovl (English strings), GameMain/Main.ovl (logical buttons), GameMain/Config.ovl (default config)",
+      "url": "local:E:/SteamLibrary/steamapps/common/Planet Coaster 2/Win64/ovldata/",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "build 25677695",
+      "note": "Read in memory only (zlib streams), nothing extracted. TrackEditorPanel (right-hand tools panel; header \"Editing {name}\" + E/F/N cells + Done), tabs Utilities/Loops/Rolls/Non-inverted/Specials/Station/Settings/Testing/Help, Construction vs Edit Mode toggle, Place / Place ({Cost}) + round Autocomplete + round Delete buttons, per-piece horizontal sliders (allowEditValue false; degrees 2 dp; length whole units), Edit Mode smoothing controls, Testing tab Start/Stop Test + Ride Camera + Live Data/Results/Heatmaps, OptionsMenuModel rebinding list, logical button names. Loc keys are hashed, so English labels are inferred by matching strings. See notes/planet-coaster-2-builder-ui.md."
+    },
+    {
+      "id": "S17",
+      "title": "Frontier Issue Tracker (player reports; status set by Frontier)",
+      "url": "https://issues-api.zaonce.net/api/issues/69372",
+      "publisher": "Frontier Developments issue tracker",
+      "kind": "forum",
+      "accessed": "2026-10-16",
+      "note": "69372 coaster-editor angle-snap hotkey (fixed, 2025-02-13); 73987 smallest coaster angle snap 11.25°; 76216 stops 11.25/22.5/30/45/60; 74545 banking offset −2..2 m in 1 m steps (−7..7 ft); 73734 mouse wheel does not adjust sliders; 87630 Ctrl+arrow track nudge broke in 1.11.2; 67778 Tab hides the ride-camera overlay; 78095 banking text near the track (console); 68306/85432 Remote Play / Remote Desktop input not detected."
+    },
+    {
+      "id": "S18",
+      "title": "Update 1 notes (1.1.0)",
+      "url": "https://www.planetcoaster.com/en-US/updates/1-1-0",
+      "publisher": "Frontier Developments",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "1.1.0 (2024-12-11)",
+      "note": "Mouse-input and camera-tilt rebinding; G toggles object angle snap (\"default mapped\"); F-keys for browser tabs; 8 / 9 / 0 open Paths / Scenery Brush / Terrain; Z acute angle join; arrow keys move the camera."
+    },
+    {
+      "id": "S19",
+      "title": "Update 2 notes (1.2.0)",
+      "url": "https://www.planetcoaster.com/en-US/updates/1-2-0",
+      "publisher": "Frontier Developments",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "1.2.0 (2025-02-10)",
+      "note": "\"Adjusted the shortcut for angle snap while in the coaster editor\"; fixed leaving a mouse-entered ride camera with a controller."
+    },
+    {
+      "id": "S20",
+      "title": "Planet Coaster 1 & 2 for Galleon (Stream Deck profile)",
+      "url": "https://marketplace.elgato.com/product/planet-coaster-1-2-for-galleon-6d685ade-99f4-4f4b-92d2-3dd2ff1080e1",
+      "publisher": "iConCity on Elgato Marketplace",
+      "kind": "guide",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "2026-04-11",
+      "note": "\"The included profiles are mapped using the games' default key binds\" (seller claim; implies hotkey input works)."
+    },
+    {
+      "id": "S21",
+      "title": "Common coaster issues (Steam guide)",
+      "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3407268656",
+      "publisher": "Coasterrider, Steam Community",
+      "kind": "guide",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "2025-04-18",
+      "note": "Elements built from 11.25°, 22.5°, 45° and 90° increments for pitch, turn and bank (left/down negative); \"max 20M track pieces\"."
+    },
+    {
+      "id": "S22",
+      "title": "Game Navigation (player guide)",
+      "url": "https://www.planetcoaster.com/en-US/player-guides/game-navigation",
+      "publisher": "Frontier Developments",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "note": "Radial menu while editing a coaster: deleting, smoothing or angling track; Ride Cam is reached from a ride's info panel (train/car/seat); Guest camera."
+    }
+  ],
+  "confidence": "medium",
+  "conflicts": [
+    "Simulation speed cycle: S1 (Frontier) \"0\" vs S3 (Game Rant) \"O\"; S1 wins.",
+    "T is listed both as \"Toggle Freelook Camera\" (Camera) and \"Enter Visitor Camera Placement Mode\" (Visitor Camera) in S1.",
+    "Ctrl is both \"Toggle World / Relative Movement\" and \"Toggle Gate / Stairs Entrance (Flumes Only)\" in the track editor (S1).",
+    "Path slopes/stairs: S1 Shift + mouse Y; S15 says hold Tab in the how-to box and Shift in the tip.",
+    "Q/E rotate the camera, but are down/up in freelook (S1)."
+  ],
+  "gaps": [
+    "No default keyboard binds for bank, slope, curve, length or piece types in the track editor (S1, S2, S14): the Coaster Console relies on Prism Sight (sightAdjust/sightClick) or on binds the user creates, if the rebinding page offers such rows.",
+    "Slider steps come from game data per piece and are not published (community builds use 11.25°/22.5°/45°/90°); per-step value is null until calibrated. Angle Snap stops start at 11.25°; whether this PC's saved 90 is a stop is unconfirmed.",
+    "Keys 0 and 8/9: the live controls page gives 0 to simulation speed, Update 1 notes give 8/9/0 to Paths/Brush/Terrain; verify in game.",
+    "The real rebind XML shape is unconfirmed (logical names are known from game data); one test rebind settles it. Default keys of Start/Stop Testing and Change Smoothing Mode are unknown (possibly unbound).",
+    "Every Sight region is unverified until the calibration recordings exist. Injected input: the engine's RawInput driver explicitly handles NULL-device (SendInput) input by matching it to a real device (S16), and a commercial Galleon profile ships on default binds (S20); still untested here. Levers: -loginput, -legacykeyboard, -legacymouse launch options (S16). Remote Desktop / Remote Play input fails (S17).",
+    "Gamepad-only builder functions: \"Toggle Track Edit Controls\" (X) and stick track movement (S13) have no listed keyboard equivalent."
+  ],
+  "notes": [
+    "Screenshots that settle the gaps: (1) Main Menu > Settings > 4th tab (Mouse & Keyboard) > Change: every page, especially any track/coaster section, including blank rows; (2) the track editor with a piece selected, Edit menu open on the right, Angle Snap visible; (3) the ride panel after a Test (ratings, G-forces).",
+    "The user plays in feet and mph (S10); readouts must keep the game's units.",
+    "Competition: an Elgato Marketplace \"Planet Coaster 1 & 2 for Galleon\" profile (S20) maps the default keys only. Prism's edge is the Sight-driven shaping dials, closed-loop level/flat/straight and the live E/F/N + G readouts.",
+    "Fastest keyboard route to test first: click a slider thumb, then press Left/Right; the UI code steps a focused slider by one step on arrow keys (S16). If it works on mouse and keyboard, the dials become \"focus once, then arrows\".",
+    "Input timing (inference, untested in PC2): send scan codes (keyMode scancode) and hold each key 40–100 ms. A Cobra-engine Elite Dangerous Stream Deck plugin (github.com/mhwlng/streamdeck-elite) holds 40 ms, and VoiceAttack advises ~0.1 s against dropped keys. If keys are still missed, -legacykeyboard / -legacymouse helped older Frontier games, with side effects. See notes/planet-coaster-2-builder-ui.md §6.6."
+  ]
+}

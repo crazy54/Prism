@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Core + host tests (unit, integration) and the end-to-end tests against the PUBLISHED exe (category e2e).
+       Run: dotnet run project tests/PrismControl.Tests then [category unit,integration | category e2e] [filter name]
+       Also: then render-previews <dir>   writes sample key/dial SVGs + an HTML contact sheet. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Tests</RootNamespace>
+    <NoWarn>$(NoWarn);CA1822</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Testing\PrismControl.Testing.csproj" />
+    <ProjectReference Include="..\..\src\PrismControl\PrismControl.csproj" />
+    <ProjectReference Include="..\..\tools\PrismControl.Tools\PrismControl.Tools.csproj" />
+    <ProjectReference Include="..\..\tools\PrismControl.TokensGen\PrismControl.TokensGen.csproj" />
+    <ProjectReference Include="..\..\tools\PrismControl.FakeHost\PrismControl.FakeHost.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Domain module: Cooling. Owned by the Cooling engineer. Build alone: dotnet build src/PrismControl.Cooling -->
+  <PropertyGroup>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Cooling</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Core\PrismControl.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="PrismControl.Cooling.Tests" />
+  </ItemGroup>
+</Project>

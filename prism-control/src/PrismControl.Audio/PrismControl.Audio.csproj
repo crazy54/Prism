@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Domain module: Audio. Owned by the Audio engineer. Build alone: dotnet build src/PrismControl.Audio -->
+  <PropertyGroup>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Audio</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Core\PrismControl.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="PrismControl.Audio.Tests" />
+  </ItemGroup>
+</Project>

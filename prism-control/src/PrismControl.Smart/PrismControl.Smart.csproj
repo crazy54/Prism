@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Domain module: Smart (Prism Smart Deck engine, owned by SD1, team Prism Play).
+    Context packs (prism-control/packs/*.json, embedded; user overrides in %APPDATA%\Prism\control\packs\) + user rebind
+    adapters (read-only) → ContextEngine (foreground app, Prism Sight, browser/module state; hysteresis, debounce,
+    held-key protection, lock page) → LayoutGenerator (device geometry, zones, pack proposals, pins, prefs, pages) →
+    Smart Key / Smart Dial actions (glyph + label + live state, bindings through IInputSender / IMouseSender /
+    IVerbRegistry / Prism Sight with a deck-gesture token).
+    Build alone: dotnet build src/PrismControl.Smart. Not in PrismControl.sln or the exe until the lead integrates it.
+    No reference to PrismControl.Sight: Sight is reached through Desktop contracts resolved from IModuleContext.Services.
+    See aaa-prism-play/sd1/NOTES.md.
+  -->
+  <PropertyGroup>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Smart</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Core\PrismControl.Core.csproj" />
+    <ProjectReference Include="..\PrismControl.Desktop\PrismControl.Desktop.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Shipped packs: prism-control/packs/*.json, validated by aaa-prism-play/packs/tools/validate.mjs before they land. -->
+    <EmbeddedResource Include="..\..\packs\*.json" LogicalName="smart/packs/%(Filename)%(Extension)" />
+    <!-- Prism Deck's glyph library as data (Glyphs/export-glyphs.mjs). -->
+    <EmbeddedResource Include="Glyphs\prism-glyphs.json" LogicalName="smart/prism-glyphs.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="PrismControl.Smart.Tests" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prism Control: AI</title>
+    <link rel="stylesheet" href="lib/prism-pi.css" />
+    <script src="lib/prism-pi.js"></script>
+  </head>
+  <body>
+    <!--
+      Shared property inspector of every AI action (engineer AI1).
+      1. #prism-form: the action's own fields (DescribeForm).
+      2. Privacy and approval preferences: the global "ai" section.
+      3. Prism hooks: preview → "I reviewed these changes" → apply. The plugin refuses an apply without the token of the
+         preview shown here, and refuses everything in safe mode. Plugin data is only ever inserted with textContent.
+      Nothing on this page can approve a permission request.
+    -->
+    <main class="prism-pi">
+      <div id="prism-form"></div>
+
+      <div class="prism-heading"><h2>Privacy</h2></div>
+      <div class="prism-row">
+        <label class="prism-label" for="privacy">On the deck</label>
+        <select id="privacy" data-setting="global:ai.privacy">
+          <option value="private">Private (streamer-safe)</option>
+          <option value="reveal">Reveal names and commands</option>
+        </select>
+      </div>
+      <p class="prism-note">Private shows states, times and tool kinds only. Reveal adds session names, workspace folder
+        names and the scrubbed command, file path or URL of a request (Approve locks when it can't be shown in full). Prompts and
+        replies are never shown. The ON AIR key
+        always forces Private. Approve works only in Reveal, because you must see what you approve.</p>
+
+      <div class="prism-heading"><h2>Approvals</h2></div>
+      <div class="prism-row">
+        <label class="prism-label" for="hold">Hold to approve</label>
+        <input id="hold" type="range" min="0.8" max="3" step="0.1" data-setting="global:ai.approveHoldSeconds" />
+        <span class="prism-info" id="hold-v"></span>
+      </div>
+      <div class="prism-row">
+        <label class="prism-label" for="window">Wait on the deck</label>
+        <input id="window" type="range" min="10" max="55" step="1" data-setting="global:ai.requestWindowSeconds" />
+        <span class="prism-info" id="window-v"></span>
+      </div>
+      <div class="prism-row">
+        <label class="prism-label" for="awayafter">Nobody here after</label>
+        <input id="awayafter" type="range" min="0" max="60" step="1" data-setting="global:ai.awayAfterMinutes" />
+        <span class="prism-info" id="awayafter-v"></span>
+      </div>
+      <p class="prism-note">No request waits on the deck while Windows is locked, or when nobody touched the PC or a deck key for
+        this long (set it to your Stream Deck sleep time; 0 = never by idle time): the agent's own prompt appears at once.</p>
+      <div class="prism-row prism-check">
+        <input id="away" type="checkbox" data-setting="global:ai.awayDenyOnTimeout" />
+        <label for="away">Away mode: deny when nobody answers in time (otherwise the agent's own prompt appears)</label>
+      </div>
+      <div class="prism-row prism-check">
+        <input id="denyonly" type="checkbox" data-setting="global:ai.denyOnlyInPrivate" />
+        <label for="denyonly">In Private mode, still hold requests so Deny works</label>
+      </div>
+      <div class="prism-row prism-check">
+        <input id="tab" type="checkbox" data-setting="global:ai.selectTerminalTab" />
+        <label for="tab">Also try to select the Windows Terminal tab by its title (best effort)</label>
+      </div>
+      <div class="prism-row prism-check">
+        <input id="orca" type="checkbox" data-setting="global:ai.orcaEnrichment" />
+        <label for="orca">Use Orca's pane handles when Orca is installed (optional)</label>
+      </div>
+
+      <div class="prism-heading"><h2>Prism hooks</h2></div>
+      <p class="prism-note">Hooks give instant states and deck approvals for Claude Code and Codex. Without them the fleet
+        board still works from <span class="prism-code">claude agents --json</span>, Codex logs and the process list.</p>
+      <div class="prism-row">
+        <span class="prism-label">Status</span>
+        <span class="prism-info" id="hooks-status">–</span>
+      </div>
+      <div class="prism-actions">
+        <button type="button" id="preview-install" class="prism-primary">Preview install</button>
+        <button type="button" id="preview-remove">Preview removal</button>
+        <button type="button" id="refresh">Refresh</button>
+      </div>
+
+      <section id="plan" hidden>
+        <div class="prism-heading"><h2 id="plan-title">Changes</h2></div>
+        <ul id="plan-notes" class="prism-note"></ul>
+        <ul id="plan-files" class="prism-note"></ul>
+        <div class="prism-row prism-check">
+          <input id="consent" type="checkbox" />
+          <label for="consent">I reviewed these changes</label>
+        </div>
+        <div class="prism-actions">
+          <button type="button" id="apply" class="prism-primary" disabled>Apply</button>
+          <button type="button" id="cancel">Cancel</button>
+        </div>
+      </section>
+      <p class="prism-note" id="result"></p>
+
+      <div class="prism-row">
+        <label class="prism-label" for="backups">Backups</label>
+        <select id="backups"></select>
+      </div>
+      <div class="prism-actions">
+        <button type="button" id="preview-restore">Preview restore</button>
+      </div>
+    </main>
+    <script>
+      (function () {
+        var plan = null;
+        function el(id) { return document.getElementById(id); }
+        function text(id, value) { el(id).textContent = value == null ? '' : String(value); }
+        function li(parent, value) { var n = document.createElement('li'); n.textContent = value; parent.appendChild(n); }
+
+        function showRanges() {
+          text('hold-v', el('hold').value + ' s');
+          text('window-v', el('window').value + ' s');
+          text('awayafter-v', el('awayafter').value === '0' ? 'never' : el('awayafter').value + ' min');
+        }
+        el('hold').addEventListener('input', showRanges);
+        el('window').addEventListener('input', showRanges);
+        el('awayafter').addEventListener('input', showRanges);
+
+        function refresh() {
+          PrismPI.request('hooks.status').then(function (s) {
+            if (!s || s.error) { text('hooks-status', (s && s.error) || 'unavailable'); return; }
+            var parts = [];
+            parts.push(s.installed ? (s.drifted ? 'installed, but some entries are missing' : 'installed') : 'not installed');
+            if (s.safeMode) parts.push('safe mode: nothing can be written');
+            parts.push(s.events + ' events received');
+            if (s.agentList) parts.push('agent list: ' + s.agentList);
+            if (s.orca) parts.push('Orca found');
+            text('hooks-status', parts.join(' · '));
+          }).catch(function () { text('hooks-status', 'unavailable'); });
+          PrismPI.request('hooks.backups').then(function (list) {
+            var sel = el('backups');
+            sel.textContent = '';
+            (list || []).forEach(function (b) {
+              var o = document.createElement('option');
+              o.value = b.value;
+              o.textContent = b.label;
+              sel.appendChild(o);
+            });
+          }).catch(function () {});
+        }
+
+        function showPlan(p) {
+          plan = p;
+          el('consent').checked = false;
+          el('apply').disabled = true;
+          text('result', '');
+          if (!p || p.error) { el('plan').hidden = true; text('result', (p && p.error) || 'No preview.'); return; }
+          text('plan-title', p.action === 'install' ? 'Install Prism hooks' : p.action === 'uninstall' ? 'Remove Prism hooks' : 'Restore a backup');
+          var notes = el('plan-notes'); notes.textContent = '';
+          (p.notes || []).forEach(function (n) { li(notes, n); });
+          if (p.relay) li(notes, 'Relay: ' + p.relay + (p.relaySha256 ? ' (SHA-256 ' + p.relaySha256.slice(0, 16) + '…)' : ''));
+          var files = el('plan-files'); files.textContent = '';
+          (p.files || []).forEach(function (f) {
+            var line = f.path + ': ';
+            if (f.refusal) line += 'NOT CHANGED: ' + f.refusal;
+            else if (f.events && f.events.length) line += (p.action === 'install' ? 'adds ' : 'removes ') + f.events.join(', ');
+            else line += 'no change';
+            li(files, line);
+          });
+          el('plan').hidden = false;
+          if (!p.canApply) text('result', 'Nothing can be applied (see above).');
+        }
+
+        el('consent').addEventListener('change', function () { el('apply').disabled = !(plan && plan.canApply && el('consent').checked); });
+        el('preview-install').addEventListener('click', function () { PrismPI.request('hooks.preview').then(showPlan); });
+        el('preview-remove').addEventListener('click', function () { PrismPI.request('hooks.previewUninstall').then(showPlan); });
+        el('preview-restore').addEventListener('click', function () {
+          var path = el('backups').value;
+          if (path) PrismPI.request('hooks.previewRestore', { path: path }).then(showPlan);
+        });
+        el('cancel').addEventListener('click', function () { plan = null; el('plan').hidden = true; });
+        el('apply').addEventListener('click', function () {
+          if (!plan || !el('consent').checked) return;
+          el('apply').disabled = true;
+          PrismPI.request('hooks.apply', { token: plan.token }, 20000).then(function (r) {
+            text('result', r && r.message ? r.message + (r.backups && r.backups.length ? ' Backups: ' + r.backups.join(', ') : '') : 'Done.');
+            plan = null;
+            el('plan').hidden = true;
+            refresh();
+          }).catch(function (e) { text('result', 'Failed: ' + e.message); });
+        });
+        el('refresh').addEventListener('click', refresh);
+        PrismPI.ready(function () { showRanges(); refresh(); });
+        PrismPI.global.onChange && PrismPI.global.onChange(showRanges);
+      })();
+    </script>
+  </body>
+</html>

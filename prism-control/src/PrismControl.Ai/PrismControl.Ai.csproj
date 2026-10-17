@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Domain module: Ai (team Prism Play). Engineer AI1 owns sessions + approvals + ingress + hooks; AI2 adds Apps + Services
+    (ServicesFeatures.cs). Build alone: dotnet build src/PrismControl.Ai
+    Not in PrismControl.sln or the exe until the lead integrates it.
+    Talks to the PC only through the ports in Platform/Ports.cs; the production adapters wrap PrismControl.Desktop
+    (PipeEndpoint, IForegroundService, IWindowCatalog, RelayInstaller, CwdHash) plus a few read-only Win32 calls.
+  -->
+  <PropertyGroup>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Ai</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Core\PrismControl.Core.csproj" />
+    <ProjectReference Include="..\PrismControl.Desktop\PrismControl.Desktop.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="PrismControl.Ai.Tests" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Review L1: ONE secret scrubber for the relay and the module. The relay owns the file (it cannot reference this
+         assembly); it is compiled into both, and both test projects run the same case table (ScrubberCases.cs). -->
+    <Compile Include="..\PrismRelay\Hook\Scrubber.cs" Link="Shared\Scrubber.cs" />
+  </ItemGroup>
+</Project>

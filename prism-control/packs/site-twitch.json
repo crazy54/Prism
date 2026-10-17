@@ -1,0 +1,133 @@
+{
+  "$schema": "schema/context-pack.schema.json",
+  "schemaVersion": 1,
+  "id": "site-twitch",
+  "name": "Twitch (web)",
+  "vendor": "Twitch Interactive",
+  "kind": "site",
+  "packVersion": "0.1.0",
+  "extends": ["chromium-browser"],
+  "layer": "overlay",
+  "platforms": ["windows"],
+  "verifiedAgainst": {
+    "version": "twitch.tv web app as served 2026-10-16",
+    "date": "2026-10-16",
+    "method": "in-app",
+    "note": "Twitch's Help Center documents no keyboard shortcuts. The player's own 'Keyboard Shortcuts' overlay (S1) and button tooltips (S2) were read from Twitch's production web app, rendered in a throwaway headless Edge profile; extra bindings were read from the same production bundle (S3). Websites change without notice: re-check per player update."
+  },
+  "policy": { "class": "desktop-app", "input": "allowed", "sight": "forbidden", "closedLoop": "forbidden", "reason": "Watching streams in a browser; no game input involved." },
+  "keyMode": "vk",
+  "match": {
+    "any": [
+      { "site": { "hostSuffix": "twitch.tv" }, "confidence": "official", "note": "Covers www.twitch.tv and clips.twitch.tv. Reported by the Prism browser extension." },
+      { "process": "chrome.exe", "titleRegex": "(^| - )Twitch - Google Chrome$", "confidence": "official", "note": "Fallback: Twitch titles are '<Channel> - Twitch' or 'Twitch' (S8); Chrome appends ' - Google Chrome' (S9)." },
+      { "process": "msedge.exe", "titleRegex": "(^| - )Twitch( and \\d+ more pages?)? - .*Edge$", "confidence": "unverified", "note": "Edge title suffix not observed here; verify with a Twitch tab in Edge." }
+    ],
+    "exclude": [
+      { "site": { "host": "dashboard.twitch.tv" }, "note": "Creator Dashboard / Stream Manager is a different tool." },
+      { "site": { "host": "dev.twitch.tv" } }
+    ]
+  },
+  "contexts": [
+    { "id": "browse", "label": "Twitch (browse, directory)", "default": true, "priority": 10, "detect": { "all": [{ "type": "always" }] }, "confidence": "official", "sources": ["S8"] },
+    { "id": "live", "label": "Live stream", "parent": "browse", "priority": 50, "hysteresisMs": 800,
+      "detect": { "any": [
+        { "type": "extension", "status": "in-progress", "field": "media.live", "equals": true },
+        { "type": "windowTitle", "regex": "^.+ - Twitch - (Google Chrome|.*Edge)$", "note": "Heuristic without the extension: also matches offline channels and category pages." }
+      ] }, "confidence": "unverified", "sources": ["S7", "S8"], "verify": "On a live channel, check the extension reports media.live = true (durationMs null/Infinity); on an offline channel and on /directory, check it doesn't." },
+    { "id": "vod", "label": "Past broadcast (VOD)", "parent": "browse", "priority": 55, "hysteresisMs": 500,
+      "detect": { "any": [{ "type": "extension", "status": "in-progress", "field": "site.path", "regex": "^/videos/[0-9]+" }] }, "confidence": "official", "sources": ["S8"] },
+    { "id": "clip", "label": "Clip", "parent": "browse", "priority": 55, "hysteresisMs": 500,
+      "detect": { "any": [
+        { "type": "extension", "status": "in-progress", "field": "site.host", "equals": "clips.twitch.tv" },
+        { "type": "extension", "status": "in-progress", "field": "site.path", "regex": "^/[A-Za-z0-9_]+/clip/" }
+      ] }, "confidence": "unverified", "sources": ["S3"], "verify": "Open a clip from a channel's Clips tab and check the URL shape (clips.twitch.tv/<slug> or twitch.tv/<channel>/clip/<slug>)." }
+  ],
+  "verbs": [
+    { "id": "media.playPause", "label": "PLAY/PAUSE", "longLabel": "Play or pause the stream", "glyph": "play-pause", "category": "primary", "priority": 95, "contexts": ["*"], "binding": { "kind": "module", "verb": "browser.media.toggle", "args": { "key": "active" }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.media" }, "altBindings": [{ "kind": "chord", "chord": "K", "note": "Twitch's own key (overlay: 'Space/k'); Space only when nothing else has focus (S3)." }], "safety": "safe", "stateReadout": "mediaState", "unavailable": { "label": "NO STREAM", "hint": "No player on this page, or connect the Prism browser extension.", "when": ["nothingSelected", "notConnected"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S2", "S7"], "notes": "Overrides the browser pack's verb so K, not the Windows media key, is the lite fallback." },
+    { "id": "tw.theater", "label": "THEATER", "longLabel": "Theater mode (Twitch: 'Theatre Mode', toggle)", "glyph": "theater", "monogram": "TH", "category": "mode", "priority": 80, "contexts": ["live", "vod"], "binding": { "kind": "chord", "chord": "Alt+T" }, "appAction": "alt+t", "safety": "safe", "unavailable": { "label": "THEATER", "hint": "Channel and video pages only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S2", "S3", "S4", "S5"], "notes": "Tooltip 'Theatre Mode (alt+t)' (S2). Esc also leaves theater mode (S3). Alt+T can briefly focus Chrome's toolbar on some setups; Twitch handles the keydown first." },
+    { "id": "tw.fullscreen", "label": "FULLSCREEN", "longLabel": "Player full screen (toggle)", "glyph": "fullscreen", "monogram": "[ ]", "category": "mode", "priority": 75, "contexts": ["live", "vod", "clip"], "binding": { "kind": "chord", "chord": "F" }, "appAction": "f", "safety": "safe", "unavailable": { "label": "FULLSCREEN", "hint": "Pages with a player only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S2"], "notes": "Esc exits (S1)." },
+    { "id": "tw.mute", "label": "MUTE", "longLabel": "Mute / unmute the player (true state)", "glyph": "volume", "category": "toggle", "priority": 85, "contexts": ["live", "vod"], "binding": { "kind": "module", "verb": "browser.media.mute", "args": { "key": "active", "muted": "toggle" }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.media" }, "altBindings": [{ "kind": "chord", "chord": "M" }], "appAction": "m", "safety": "safe", "stateReadout": "mediaMuted", "unavailable": { "label": "MUTE", "hint": "No player here (clips have no mute key).", "when": ["wrongContext", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S2", "S7"], "notes": "Twitch's M does nothing on clips (S1 omits it there; S3 returns early)." },
+    { "id": "tw.clip", "label": "CLIP", "longLabel": "Open the clip creator for this stream", "glyph": "record", "category": "primary", "priority": 88, "contexts": ["live", "vod"], "binding": { "kind": "chord", "chord": "Alt+X" }, "appAction": "alt+x", "safety": "safe", "unavailable": { "label": "CLIP", "hint": "Log in to Twitch; the channel must allow clips.", "when": ["wrongContext", "notForeground", "permissionNeeded"], "style": "dim" }, "confidence": "community", "sources": ["S3", "S4", "S5"], "notes": "Opens the clip creator overlay; nothing is published until you click Publish (S6). Bound only for logged-in viewers where clipping is allowed (S3)." },
+    { "id": "tw.chat", "label": "CHAT", "longLabel": "Show / hide the chat column (toggle)", "glyph": "chat", "category": "toggle", "priority": 70, "contexts": ["live", "vod"], "binding": { "kind": "chord", "chord": "Alt+R" }, "appAction": "alt+r", "safety": "safe", "unavailable": { "label": "CHAT", "hint": "Channel and video pages only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "community", "sources": ["S3", "S5"], "notes": "Bound by the right-column component (S3); listed by S5 as 'Toggles chat side panel'. No true state yet." },
+    { "id": "tw.back10", "label": "BACK 10S", "glyph": "rewind-10", "monogram": "-10", "category": "primary", "priority": 82, "contexts": ["vod", "clip"], "binding": { "kind": "module", "verb": "browser.media.seek", "args": { "key": "active", "deltaMs": -10000 }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.scrub" }, "altBindings": [{ "kind": "chord", "chord": "J", "note": "Also Left. 10 s on VODs, 2 s on clips (S1)." }], "appAction": "j", "safety": "safe", "unavailable": { "label": "BACK 10S", "hint": "Past broadcasts and clips only (live streams can't seek).", "when": ["wrongContext", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3"], "notes": "On live streams with rewind (DVR) the same keys jump 15 s (S3)." },
+    { "id": "tw.fwd10", "label": "FWD 10S", "glyph": "forward-10", "monogram": "+10", "category": "primary", "priority": 81, "contexts": ["vod", "clip"], "binding": { "kind": "module", "verb": "browser.media.seek", "args": { "key": "active", "deltaMs": 10000 }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.scrub" }, "altBindings": [{ "kind": "chord", "chord": "L", "note": "Also Right." }], "appAction": "l", "safety": "safe", "unavailable": { "label": "FWD 10S", "hint": "Past broadcasts and clips only.", "when": ["wrongContext", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3"] },
+    { "id": "tw.speedDown", "label": "SPEED -", "glyph": "stopwatch", "category": "tool", "priority": 50, "contexts": ["vod", "clip"], "binding": { "kind": "module", "verb": "browser.media.rate", "args": { "key": "active", "step": -1 }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.speed" }, "altBindings": [{ "kind": "chord", "chord": "Comma", "note": "Twitch uses , / . for speed (YouTube uses them for frames)." }], "appAction": ",", "safety": "safe", "stateReadout": "mediaRate", "unavailable": { "label": "SPEED -", "hint": "Not on live streams.", "when": ["wrongContext", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3"] },
+    { "id": "tw.speedUp", "label": "SPEED +", "glyph": "stopwatch", "category": "tool", "priority": 51, "contexts": ["vod", "clip"], "binding": { "kind": "module", "verb": "browser.media.rate", "args": { "key": "active", "step": 1 }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.speed" }, "altBindings": [{ "kind": "chord", "chord": "Period" }], "appAction": ".", "safety": "safe", "stateReadout": "mediaRate", "unavailable": { "label": "SPEED +", "hint": "Not on live streams.", "when": ["wrongContext", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3"] },
+    { "id": "tw.captions", "label": "CAPTIONS", "longLabel": "Captions (toggle, when the stream has them)", "glyph": "captions", "monogram": "CC", "category": "toggle", "priority": 40, "contexts": ["live", "vod"], "binding": { "kind": "chord", "chord": "C" }, "appAction": "c", "safety": "safe", "unavailable": { "label": "CAPTIONS", "hint": "Only when the broadcaster provides captions.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "unverified", "sources": ["S3"], "verify": "On a stream with a CC button, press C and check captions toggle. Only seen in Twitch's bundle (captions button component), not in the overlay or any guide." },
+    { "id": "tw.skipAd", "label": "SKIP AD", "longLabel": "Skip the ad when Twitch offers a skip button", "glyph": "skip-next", "category": "tool", "priority": 45, "contexts": ["live", "vod"], "binding": { "kind": "chord", "chord": "G" }, "appAction": "g", "safety": "safe", "unavailable": { "label": "SKIP AD", "hint": "Only while a skippable ad shows its Skip button.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "unverified", "sources": ["S3"], "verify": "During a skippable ad, press G and check the ad skips. Only seen in Twitch's bundle (skip-ad button component binds 'g' once the minimum duration passes)." },
+    { "id": "tw.shortcuts", "label": "SHORTCUTS", "longLabel": "Show Twitch's keyboard shortcut overlay", "glyph": "info", "category": "system", "priority": 15, "contexts": ["live", "vod", "clip"], "binding": { "kind": "chord", "chord": "Shift+Slash" }, "safety": "safe", "unavailable": { "label": "SHORTCUTS", "hint": "Pages with a player only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S5"], "notes": "Also in the player's Settings menu: 'View Keyboard Shortcuts' (S1)." },
+    { "id": "tw.search", "label": "SEARCH", "longLabel": "Focus Twitch search", "glyph": "search", "category": "tool", "priority": 30, "contexts": ["*"], "binding": { "kind": "chord", "chord": "Slash" }, "safety": "safe", "unavailable": { "label": "SEARCH", "hint": "Twitch isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "unverified", "sources": ["S4"], "verify": "Press / on twitch.tv with nothing focused and check the search box takes focus. Listed by S4 only; no '/' binding was found in the bundle (S3)." }
+  ],
+  "controls": [
+    { "id": "twVolume", "label": "VOLUME", "glyph": "volume", "category": "tool", "priority": 65, "contexts": ["live", "vod", "clip"],
+      "turn": { "left": { "kind": "chord", "chord": "Shift+Down" }, "right": { "kind": "chord", "chord": "Shift+Up" },
+        "step": { "perPress": 10, "unit": "%", "note": "Player volume +/-0.1 per press (S3).", "confidence": "official" },
+        "acceleration": { "curve": [{ "minTicks": 1, "pressesPerTick": 1 }], "maxPressesPerEvent": 5, "minIntervalMs": 40 },
+        "clamp": { "min": 0, "max": 100 } },
+      "push": { "verb": "tw.mute" }, "readout": "mediaVolume", "safety": "safe", "unavailable": { "label": "VOLUME", "hint": "Twitch isn't in front.", "when": ["notForeground", "wrongContext"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3"], "notes": "Lite twin of the browser pack's TAB VOL dial (module, 5 %, background)." },
+    { "id": "twSeek", "label": "SEEK", "glyph": "waveform", "category": "primary", "priority": 60, "contexts": ["vod", "clip"],
+      "turn": { "left": { "kind": "chord", "chord": "J" }, "right": { "kind": "chord", "chord": "L" },
+        "step": { "perPress": 10, "unit": "s", "note": "10 s on VODs, 2 s on clips (S1).", "confidence": "official" },
+        "acceleration": { "curve": [{ "minTicks": 1, "pressesPerTick": 1 }, { "minTicks": 6, "pressesPerTick": 2 }], "maxPressesPerEvent": 12, "minIntervalMs": 30 } },
+      "push": { "verb": "media.playPause" }, "readout": "mediaProgress", "safety": "safe", "unavailable": { "label": "SEEK", "hint": "Past broadcasts and clips only.", "when": ["notForeground", "wrongContext"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3"] }
+  ],
+  "readouts": [
+    { "id": "mediaMuted", "label": "MUTED", "contexts": ["live", "vod", "clip"], "source": { "kind": "extension", "field": "media.elementMuted", "status": "in-progress" }, "widget": "state", "privacy": "public", "confidence": "official", "sources": ["S7"] },
+    { "id": "streamLive", "label": "LIVE", "contexts": ["*"], "source": { "kind": "extension", "field": "media.live", "status": "in-progress" }, "widget": "badge", "privacy": "public", "confidence": "official", "sources": ["S7"] }
+  ],
+  "userBindings": {
+    "storage": "none",
+    "summary": "Twitch's player keys are fixed in the web app; there is no shortcut setting (none in the player menu, S1, or the Help Center, S6). Prism always sends the defaults.",
+    "confidence": "community",
+    "sources": ["S1", "S6"]
+  },
+  "layouts": [
+    { "device": "galleon-100-sd", "context": "live",
+      "keys": [
+        { "x": 0, "y": 0, "verb": "media.playPause" }, { "x": 1, "y": 0, "verb": "tw.clip" }, { "x": 2, "y": 0, "verb": "tw.mute" },
+        { "x": 0, "y": 1, "verb": "tw.theater" }, { "x": 1, "y": 1, "verb": "tw.chat" }, { "x": 2, "y": 1, "verb": "tw.fullscreen" },
+        { "x": 0, "y": 2, "verb": "media.pip" }, { "x": 1, "y": 2, "verb": "tw.captions" }, { "x": 2, "y": 2, "verb": "tw.skipAd" },
+        { "x": 0, "y": 3, "verb": "nav.back" }, { "x": 1, "y": 3, "verb": "nav.reload" }, { "x": 2, "y": 3, "verb": "tab.next" }
+      ],
+      "dials": [ { "dial": 0, "layer": 0, "control": "tabVolume" }, { "dial": 0, "layer": 1, "control": "twVolume" }, { "dial": 1, "layer": 0, "control": "tabs" }, { "dial": 1, "layer": 1, "control": "zoom" } ],
+      "screen": [ { "slot": "TL", "readout": "mediaVolume" }, { "slot": "BL", "readout": "mediaNowPlaying" }, { "slot": "TR", "readout": "tabTitle" }, { "slot": "BR", "readout": "zoomLevel" } ],
+      "rationale": "Play/CLIP/mute on top (clip is the Twitch moment), theater/chat/full screen in the middle, PiP and the two unverified extras next, back/reload (the usual player fix)/next tab at the bottom; volume left, tabs right." },
+    { "device": "stream-deck-plus", "context": "live",
+      "keys": [
+        { "x": 0, "y": 0, "verb": "media.playPause" }, { "x": 1, "y": 0, "verb": "tw.clip" }, { "x": 2, "y": 0, "verb": "tw.mute" }, { "x": 3, "y": 0, "verb": "tw.theater" },
+        { "x": 0, "y": 1, "verb": "tw.chat" }, { "x": 1, "y": 1, "verb": "tw.fullscreen" }, { "x": 2, "y": 1, "verb": "media.pip" }, { "x": 3, "y": 1, "verb": "nav.reload" }
+      ],
+      "dials": [ { "dial": 0, "control": "tabVolume" }, { "dial": 1, "control": "tabs" }, { "dial": 2, "control": "scrub" }, { "dial": 3, "control": "zoom" } ],
+      "screen": [ { "slot": "0", "readout": "mediaVolume" }, { "slot": "1", "readout": "tabTitle" }, { "slot": "2", "readout": "mediaProgress" }, { "slot": "3", "readout": "zoomLevel" } ],
+      "rationale": "Same top row plus theater; chat/full screen/PiP/reload below; volume, tabs, scrub (live rewind and VODs) and zoom on the dials." }
+  ],
+  "sources": [
+    { "id": "S1", "title": "Twitch player 'Keyboard Shortcuts' overlay (Settings > View Keyboard Shortcuts, or ?)", "url": "https://www.twitch.tv/", "publisher": "Twitch (player UI)", "kind": "in-app", "accessed": "2026-10-16", "appliesToVersion": "web player served 2026-10-16", "note": "Entries: Pause/Play Space/k; Back/Forward 10 s (2 s on clips) Left/Right and j/l, not live; Slow down/Speed up , and ., not live; Change Volume shift+Up/shift+Down; Mute m (not clips); Toggle Fullscreen f; Exit Fullscreen Esc; Show this menu ?. Read from the overlay component in the production bundle." },
+    { "id": "S2", "title": "Twitch player button tooltips / aria-labels", "url": "https://www.twitch.tv/twitch", "publisher": "Twitch (player UI)", "kind": "in-app", "accessed": "2026-10-16", "note": "Rendered DOM (throwaway headless Edge profile, temp dir deleted): 'Play (space/k)', 'Fullscreen (f)', 'Unmute (m)', 'Menu for skipping to content (Alt+P)'. The theater button wasn't rendered on the offline channel used; its label strings 'Theatre Mode (alt+t)' / 'Exit Theatre Mode (alt+t)' come from the same app's bundle (TheatreModeButtonComponent)." },
+    { "id": "S3", "title": "Twitch production web bundle: Mousetrap key bindings", "url": "https://www.twitch.tv/", "publisher": "Twitch (static.twitchcdn.net assets)", "kind": "source-code", "accessed": "2026-10-16", "note": "Binds: space/k, shift+up/down (+/-0.1), j/l/left/right (10 s VOD, 2 s clip, 15 s live DVR), m, f, , and . (rate, not live), ?, alt+t and esc (theatre), alt+x (clip, logged in), alt+r (right column), c (captions button), g (skip-ad button)." },
+    { "id": "S4", "title": "Twitch keyboard shortcuts cheat sheet", "url": "https://shortcuts.kstanchev.com/apps/twitch/", "publisher": "ShortcutLibrary (Kalin Stanchev)", "kind": "guide", "accessed": "2026-10-16" },
+    { "id": "S5", "title": "Twitch Keyboard Shortcuts", "url": "https://www.maketecheasier.com/cheatsheet/twitch-keyboard-shortcuts/", "publisher": "Make Tech Easier", "kind": "guide", "accessed": "2026-10-16", "appliesToVersion": "published 2022-04-07" },
+    { "id": "S6", "title": "How to Create, Edit, and Share Clips", "url": "https://help.twitch.tv/s/article/how-to-use-clips?language=en_US", "publisher": "Twitch Help", "kind": "official", "accessed": "2026-10-16", "note": "Documents the clip creator (up to 60 s, Publish button) but no keyboard shortcut." },
+    { "id": "S7", "title": "Prism browser research: media protocol (sections 4, 9.2, 9.3)", "url": "local:aaa-prism-play/research/browser.md", "kind": "local", "accessed": "2026-10-16" },
+    { "id": "S8", "title": "Twitch page titles and URL shapes (rendered)", "url": "https://www.twitch.tv/videos/2500000000", "publisher": "Twitch", "kind": "in-app", "accessed": "2026-10-16", "note": "Channel page title '<Channel> - Twitch'; video pages /videos/<id>." },
+    { "id": "S9", "title": "Read-only probe: Chrome window title suffix ' - Google Chrome'", "url": "local:Get-Process chrome | MainWindowTitle (suffix only)", "kind": "local", "accessed": "2026-10-16", "appliesToVersion": "Chrome 155.0.8059.82" }
+  ],
+  "confidence": "medium",
+  "conflicts": [
+    "Volume: S4 lists plain Up/Down; Twitch's own overlay (S1) and bundle (S3) use Shift+Up/Shift+Down. The pack follows S1.",
+    "Clip key: S5 lists Alt+K for clips on VODs and Alt+X on live; only Alt+X is bound in the current bundle (S3). Alt+K is not used.",
+    "Seek: S5 says Left/Right seek the live broadcast by 10 s; S1 hides seeking on live streams, and S3 jumps 15 s only on live streams with rewind (DVR)."
+  ],
+  "gaps": [
+    "No official Twitch documentation of shortcuts exists; everything rests on the live web app (S1-S3), which can change any day.",
+    "Captions (C), skip ad (G) and search (/) are unverified.",
+    "Live vs offline channel detection needs the extension (media.live); the title fallback can't tell them apart.",
+    "Chat and theater have no true-state readout.",
+    "Popout player (player.twitch.tv) and the Stream Manager are not modeled."
+  ],
+  "notes": [
+    "Twitch spells it 'Theatre Mode'; the pack uses US spelling on keys (THEATER).",
+    "Long-form notes: packs/notes/site-twitch.md."
+  ]
+}

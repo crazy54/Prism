@@ -1,0 +1,54 @@
+{
+  "$schema": "../recipe.schema.json",
+  "v": 1,
+  "id": "pc2-coaster-builder",
+  "game": "pc2",
+  "title": "Planet Coaster 2: track builder (Coaster Console)",
+  "status": "draft",
+  "notes": "DRAFT. Region names follow packs/planet-coaster-2.json (sightRegions); every geometry here is a placeholder until the user's calibration capture at 3440x1440 HDR (see aaa-prism-play/sight/NOTES.md). The on-screen controls (bank/slope/curve/length steppers, piece buttons, Test) need templates cut from those frames, so they are added during calibration, not guessed.",
+  "match": { "processes": ["PlanetCoaster2.exe"] },
+  "hud": { "referenceHeight": 1080, "scale": 1.0, "minScale": 0.5, "maxScale": 2.0 },
+  "color": { "paperWhiteNits": null },
+  "regions": [
+    { "id": "pc2.builder.editPanel", "anchor": "right", "x": -420, "y": -360, "w": 240, "h": 28, "notes": "placeholder: the Edit menu header on the right" },
+    { "id": "pc2.builder.bankValue", "anchor": "right", "x": -260, "y": -300, "w": 120, "h": 34, "notes": "placeholder; only if PC2 prints the bank angle" },
+    { "id": "pc2.builder.slopeValue", "anchor": "right", "x": -260, "y": -250, "w": 120, "h": 34, "notes": "placeholder" },
+    { "id": "pc2.builder.curveValue", "anchor": "right", "x": -260, "y": -200, "w": 120, "h": 34, "notes": "placeholder" },
+    { "id": "pc2.builder.lengthValue", "anchor": "right", "x": -260, "y": -150, "w": 140, "h": 34, "notes": "placeholder (feet: the user plays in ft/mph)" },
+    { "id": "pc2.builder.bankControl", "anchor": "right", "x": -420, "y": -310, "w": 400, "h": 48, "notes": "placeholder: the on-screen bank slider or plus/minus buttons" },
+    { "id": "pc2.builder.slopeControl", "anchor": "right", "x": -420, "y": -260, "w": 400, "h": 48, "notes": "placeholder" },
+    { "id": "pc2.builder.curveControl", "anchor": "right", "x": -420, "y": -210, "w": 400, "h": 48, "notes": "placeholder" },
+    { "id": "pc2.builder.lengthControl", "anchor": "right", "x": -420, "y": -160, "w": 400, "h": 48, "notes": "placeholder" },
+    { "id": "pc2.test.excitement", "anchor": "center", "x": -60, "y": -40, "w": 120, "h": 30, "notes": "placeholder: Excitement rating after Test" },
+    { "id": "pc2.test.fear", "anchor": "center", "x": -60, "y": 0, "w": 120, "h": 30, "notes": "placeholder" },
+    { "id": "pc2.test.nausea", "anchor": "center", "x": -60, "y": 40, "w": 120, "h": 30, "notes": "placeholder" },
+    { "id": "pc2.menu.fullscreen", "anchor": "top", "x": -300, "y": 8, "w": 600, "h": 20, "notes": "placeholder: a full-screen management menu's title bar" },
+    { "id": "pc2.hud.bottomBar", "anchor": "bottom", "x": -400, "y": -40, "w": 800, "h": 30, "notes": "placeholder: the park HUD bottom bar" }
+  ],
+  "detectors": [
+    { "id": "editPanel", "region": "pc2.builder.editPanel", "kind": "color", "color": "#1c2430", "tolerance": 36, "minFraction": 0.6, "notes": "color to be sampled from the frames" },
+    { "id": "bankText", "region": "pc2.builder.bankValue", "kind": "ocr", "text": "light", "whitelist": "-+0123456789.", "parse": { "type": "number", "unit": "°" } },
+    { "id": "slopeText", "region": "pc2.builder.slopeValue", "kind": "ocr", "text": "light", "whitelist": "-+0123456789.", "parse": { "type": "number", "unit": "°" } },
+    { "id": "curveText", "region": "pc2.builder.curveValue", "kind": "ocr", "text": "light", "whitelist": "-+0123456789.", "parse": { "type": "number", "unit": "°" } },
+    { "id": "lengthText", "region": "pc2.builder.lengthValue", "kind": "ocr", "text": "light", "whitelist": "0123456789.,", "parse": { "type": "number", "unit": "ft" } },
+    { "id": "excitementText", "region": "pc2.test.excitement", "kind": "ocr", "text": "light", "whitelist": "0123456789.", "parse": { "type": "number" } },
+    { "id": "fearText", "region": "pc2.test.fear", "kind": "ocr", "text": "light", "whitelist": "0123456789.", "parse": { "type": "number" } },
+    { "id": "nauseaText", "region": "pc2.test.nausea", "kind": "ocr", "text": "light", "whitelist": "0123456789.", "parse": { "type": "number" } },
+    { "id": "fullscreenMenu", "region": "pc2.menu.fullscreen", "kind": "color", "color": "#10141c", "tolerance": 30, "minFraction": 0.8 },
+    { "id": "bottomBar", "region": "pc2.hud.bottomBar", "kind": "color", "color": "#1c2430", "tolerance": 36, "minFraction": 0.6 }
+  ],
+  "contexts": [
+    { "id": "menus", "label": "Menus", "when": "fullscreenMenu", "priority": 90 },
+    { "id": "trackBuilder", "label": "Track builder", "when": "editPanel & !fullscreenMenu", "priority": 60, "enterMs": 250, "exitMs": 500 },
+    { "id": "park", "label": "Park", "when": "bottomBar & !editPanel & !fullscreenMenu", "priority": 10 }
+  ],
+  "readouts": [
+    { "id": "bankAngle", "label": "Bank", "from": "bankText", "unit": "deg", "min": -180, "max": 180, "contexts": ["trackBuilder"] },
+    { "id": "slopeAngle", "label": "Pitch", "from": "slopeText", "unit": "deg", "min": -180, "max": 180, "contexts": ["trackBuilder"] },
+    { "id": "curveAngle", "label": "Curve", "from": "curveText", "unit": "deg", "min": -360, "max": 360, "contexts": ["trackBuilder"] },
+    { "id": "pieceLength", "label": "Length", "from": "lengthText", "unit": "ft", "min": 0, "max": 2000, "contexts": ["trackBuilder"] },
+    { "id": "excitement", "label": "Excitement", "from": "excitementText", "min": 0, "max": 100, "precision": 2 },
+    { "id": "fear", "label": "Fear", "from": "fearText", "min": 0, "max": 100, "precision": 2 },
+    { "id": "nausea", "label": "Nausea", "from": "nauseaText", "min": 0, "max": 100, "precision": 2 }
+  ]
+}

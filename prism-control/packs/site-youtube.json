@@ -1,0 +1,136 @@
+{
+  "$schema": "schema/context-pack.schema.json",
+  "schemaVersion": 1,
+  "id": "site-youtube",
+  "name": "YouTube (web)",
+  "vendor": "Google",
+  "kind": "site",
+  "packVersion": "0.1.0",
+  "extends": ["chromium-browser"],
+  "layer": "overlay",
+  "platforms": ["windows"],
+  "verifiedAgainst": {
+    "version": "youtube.com web player as served 2026-10-16",
+    "date": "2026-10-16",
+    "method": "mixed",
+    "note": "Help page (S1) plus the live player's own aria-keyshortcuts/tooltips, read from a throwaway headless Edge render of a public watch page (S2). Websites have no version number; re-check when YouTube ships a new player."
+  },
+  "policy": { "class": "desktop-app", "input": "allowed", "sight": "forbidden", "closedLoop": "forbidden", "reason": "Ordinary website; live state comes from the Prism browser extension." },
+  "keyMode": "vk",
+  "match": {
+    "any": [
+      { "site": { "hostSuffix": "youtube.com" }, "confidence": "official", "note": "Reported by the Prism browser extension." },
+      { "process": "chrome.exe", "titleRegex": "(^|\\) | - )YouTube - Google Chrome$", "confidence": "official", "note": "Fallback without the extension. YouTube titles are '<video> - YouTube' or 'YouTube' (S6), optionally prefixed '(3) '; Chrome appends ' - Google Chrome' (S7)." },
+      { "process": "msedge.exe", "titleRegex": "(^|\\) | - )YouTube( and \\d+ more pages?)? - .*Edge$", "confidence": "unverified", "note": "Edge title suffix not observed on this PC; verify by opening youtube.com in Edge and reading the window title." }
+    ],
+    "exclude": [
+      { "site": { "host": "music.youtube.com" }, "note": "YouTube Music has its own shortcuts." },
+      { "site": { "host": "studio.youtube.com" }, "note": "YouTube Studio is a different app." }
+    ]
+  },
+  "contexts": [
+    { "id": "browse", "label": "YouTube (home, search, channel)", "default": true, "priority": 10, "detect": { "all": [{ "type": "always" }] }, "confidence": "official", "sources": ["S1"] },
+    { "id": "watch", "label": "Watch page (player)", "parent": "browse", "priority": 50, "hysteresisMs": 500,
+      "detect": { "any": [
+        { "type": "extension", "status": "in-progress", "field": "site.path", "regex": "^/(watch|live/)" },
+        { "type": "windowTitle", "regex": ".+ - YouTube - (Google Chrome|.*Edge)$", "note": "Heuristic without the extension: also true on channel and search pages, where the player keys just do nothing." }
+      ] }, "confidence": "official", "sources": ["S1", "S6"] },
+    { "id": "shorts", "label": "Shorts", "parent": "browse", "priority": 55, "hysteresisMs": 500,
+      "detect": { "any": [{ "type": "extension", "status": "in-progress", "field": "site.path", "regex": "^/shorts/" }] }, "confidence": "official", "sources": ["S6"], "notes": "Needs the extension: Shorts titles look like watch titles." }
+  ],
+  "verbs": [
+    { "id": "media.playPause", "label": "PLAY/PAUSE", "longLabel": "Play or pause the video", "glyph": "play-pause", "category": "primary", "priority": 95, "contexts": ["*"], "binding": { "kind": "module", "verb": "browser.media.toggle", "args": { "key": "active" }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.media" }, "altBindings": [{ "kind": "chord", "chord": "K", "note": "YouTube's own key; the player must have focus (S1)." }], "appAction": "k", "safety": "safe", "stateReadout": "mediaState", "unavailable": { "label": "NO VIDEO", "hint": "No video on this page, or connect the Prism browser extension.", "when": ["nothingSelected", "notConnected"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S2", "S5"], "notes": "Overrides the browser pack's verb: YouTube's K replaces the media-key fallback. Space only works when the seek bar has focus (S1)." },
+    { "id": "yt.back10", "label": "BACK 10S", "glyph": "rewind-10", "monogram": "-10", "category": "primary", "priority": 88, "contexts": ["watch"], "binding": { "kind": "module", "verb": "browser.media.seek", "args": { "key": "active", "deltaMs": -10000 }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.scrub" }, "altBindings": [{ "kind": "chord", "chord": "J" }], "appAction": "j", "safety": "safe", "unavailable": { "label": "BACK 10S", "hint": "Watch pages only.", "when": ["wrongContext", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3", "S4"] },
+    { "id": "yt.fwd10", "label": "FWD 10S", "glyph": "forward-10", "monogram": "+10", "category": "primary", "priority": 87, "contexts": ["watch"], "binding": { "kind": "module", "verb": "browser.media.seek", "args": { "key": "active", "deltaMs": 10000 }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.scrub" }, "altBindings": [{ "kind": "chord", "chord": "L" }], "appAction": "l", "safety": "safe", "unavailable": { "label": "FWD 10S", "hint": "Watch pages only.", "when": ["wrongContext", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3", "S4"] },
+    { "id": "yt.speedDown", "label": "SPEED -", "longLabel": "Slow down playback", "glyph": "stopwatch", "category": "tool", "priority": 60, "contexts": ["watch"], "binding": { "kind": "module", "verb": "browser.media.rate", "args": { "key": "active", "step": -1 }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.speed" }, "altBindings": [{ "kind": "chord", "chord": "Shift+Comma", "note": "'<' on a US layout; YouTube's own 0.25x steps." }], "appAction": "<", "safety": "safe", "stateReadout": "mediaRate", "unavailable": { "label": "SPEED -", "hint": "Watch pages only (not live streams).", "when": ["wrongContext", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3", "S4"] },
+    { "id": "yt.speedUp", "label": "SPEED +", "longLabel": "Speed up playback", "glyph": "stopwatch", "category": "tool", "priority": 61, "contexts": ["watch"], "binding": { "kind": "module", "verb": "browser.media.rate", "args": { "key": "active", "step": 1 }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.speed" }, "altBindings": [{ "kind": "chord", "chord": "Shift+Period", "note": "'>' on a US layout." }], "appAction": ">", "safety": "safe", "stateReadout": "mediaRate", "unavailable": { "label": "SPEED +", "hint": "Watch pages only (not live streams).", "when": ["wrongContext", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3", "S4"], "notes": "The module ladder reaches 4x; YouTube's menu stops at 2x but the element accepts more." },
+    { "id": "yt.captions", "label": "CAPTIONS", "longLabel": "Subtitles / closed captions (toggle)", "glyph": "captions", "monogram": "CC", "category": "toggle", "priority": 70, "contexts": ["watch"], "binding": { "kind": "chord", "chord": "C" }, "appAction": "c", "safety": "safe", "unavailable": { "label": "CAPTIONS", "hint": "Watch pages with captions only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S2"], "notes": "No true state yet: the extension doesn't read the captions button. A future content-script field (player.captions) would fix it." },
+    { "id": "yt.theater", "label": "THEATER", "longLabel": "Theater mode (toggle)", "glyph": "theater", "monogram": "TH", "category": "mode", "priority": 68, "contexts": ["watch"], "binding": { "kind": "chord", "chord": "T" }, "appAction": "t", "safety": "safe", "unavailable": { "label": "THEATER", "hint": "Watch pages only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S2", "S3", "S4"], "notes": "Not on the help page (S1), but the player's own tooltip reads 'Theater mode (t)' (S2)." },
+    { "id": "yt.fullscreen", "label": "FULLSCREEN", "longLabel": "Player full screen (toggle)", "glyph": "fullscreen", "monogram": "[ ]", "category": "mode", "priority": 66, "contexts": ["watch", "shorts"], "binding": { "kind": "chord", "chord": "F" }, "appAction": "f", "safety": "safe", "unavailable": { "label": "FULLSCREEN", "hint": "Watch pages only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S2"], "notes": "Esc also exits. Different from the browser's F11." },
+    { "id": "yt.miniplayer", "label": "MINIPLAYER", "longLabel": "Open the miniplayer", "glyph": "pip", "monogram": "MP", "category": "mode", "priority": 50, "contexts": ["watch"], "binding": { "kind": "chord", "chord": "I" }, "appAction": "i", "safety": "safe", "unavailable": { "label": "MINIPLAYER", "hint": "Watch pages only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3", "S4"], "notes": "YouTube's in-page miniplayer; real picture-in-picture is the browser pack's PIP key." },
+    { "id": "yt.mute", "label": "MUTE", "longLabel": "Mute / unmute the video (true state)", "glyph": "volume", "category": "toggle", "priority": 72, "contexts": ["watch", "shorts"], "binding": { "kind": "module", "verb": "browser.media.mute", "args": { "key": "active", "muted": "toggle" }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.media" }, "altBindings": [{ "kind": "chord", "chord": "M" }], "appAction": "m", "safety": "safe", "stateReadout": "mediaMuted", "unavailable": { "label": "MUTE", "hint": "No video on this page.", "when": ["wrongContext", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S2", "S5"] },
+    { "id": "yt.next", "label": "NEXT VIDEO", "longLabel": "Next video (playlist or Up next)", "glyph": "skip-next", "category": "nav", "priority": 64, "contexts": ["watch"], "binding": { "kind": "chord", "chord": "Shift+N" }, "appAction": "SHIFT+n", "safety": "safe", "unavailable": { "label": "NEXT VIDEO", "hint": "Watch pages only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S2"] },
+    { "id": "yt.prev", "label": "PREV VIDEO", "longLabel": "Previous video (playlists only)", "glyph": "skip-prev", "category": "nav", "priority": 40, "contexts": ["watch"], "binding": { "kind": "chord", "chord": "Shift+P" }, "appAction": "SHIFT+p", "safety": "safe", "unavailable": { "label": "PREV VIDEO", "hint": "Only works inside a playlist.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "yt.chapterNext", "label": "NEXT CHAP", "longLabel": "Next chapter", "glyph": "chapter-next", "monogram": "C>", "category": "nav", "priority": 45, "contexts": ["watch"], "binding": { "kind": "chord", "chord": "Ctrl+Right" }, "safety": "safe", "unavailable": { "label": "NEXT CHAP", "hint": "Videos with chapters only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3", "S4"] },
+    { "id": "yt.chapterPrev", "label": "PREV CHAP", "longLabel": "Previous chapter", "glyph": "chapter-prev", "monogram": "<C", "category": "nav", "priority": 44, "contexts": ["watch"], "binding": { "kind": "chord", "chord": "Ctrl+Left" }, "safety": "safe", "unavailable": { "label": "PREV CHAP", "hint": "Videos with chapters only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3", "S4"] },
+    { "id": "yt.frameNext", "label": "FRAME >", "longLabel": "Next frame (while paused)", "glyph": "frame-next", "monogram": "F>", "category": "tool", "priority": 35, "contexts": ["watch"], "binding": { "kind": "chord", "chord": "Period" }, "safety": "safe", "unavailable": { "label": "FRAME >", "hint": "Pause the video first.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3"] },
+    { "id": "yt.framePrev", "label": "< FRAME", "longLabel": "Previous frame (while paused)", "glyph": "frame-prev", "monogram": "<F", "category": "tool", "priority": 34, "contexts": ["watch"], "binding": { "kind": "chord", "chord": "Comma" }, "safety": "safe", "unavailable": { "label": "< FRAME", "hint": "Pause the video first.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3"] },
+    { "id": "yt.restart", "label": "RESTART", "longLabel": "Back to the start of the video", "glyph": "back", "category": "nav", "priority": 38, "contexts": ["watch"], "binding": { "kind": "module", "verb": "browser.media.seek", "args": { "key": "active", "positionMs": 0 }, "status": "in-progress", "action": "com.jeremyfhall.prismcontrol.browser.scrub" }, "altBindings": [{ "kind": "chord", "chord": "0", "note": "Digits 1-9 jump to 10-90 % (S1)." }], "safety": "safe", "unavailable": { "label": "RESTART", "hint": "Watch pages only.", "when": ["wrongContext", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "yt.search", "label": "SEARCH", "longLabel": "Go to the YouTube search box", "glyph": "search", "category": "tool", "priority": 55, "contexts": ["*"], "binding": { "kind": "chord", "chord": "Slash" }, "appAction": "/", "safety": "safe", "unavailable": { "label": "SEARCH", "hint": "YouTube isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S3"] },
+    { "id": "yt.shortcuts", "label": "SHORTCUTS", "longLabel": "Show YouTube's keyboard shortcut list", "glyph": "info", "category": "system", "priority": 15, "contexts": ["*"], "binding": { "kind": "chord", "chord": "Shift+Slash" }, "safety": "safe", "unavailable": { "label": "SHORTCUTS", "hint": "YouTube isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "shorts.next", "label": "NEXT SHORT", "glyph": "skip-next", "category": "primary", "priority": 80, "contexts": ["shorts"], "binding": { "kind": "chord", "chord": "Down" }, "safety": "safe", "unavailable": { "label": "NEXT SHORT", "hint": "Shorts only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "unverified", "sources": ["S1"], "verify": "Open youtube.com/shorts/<id> in Chrome 155, click the short once, press Down: the next short should scroll in. S1 has no Shorts section; the CWS has several extensions that add Shorts keys, so behavior may be limited." },
+    { "id": "shorts.prev", "label": "PREV SHORT", "glyph": "skip-prev", "category": "primary", "priority": 70, "contexts": ["shorts"], "binding": { "kind": "chord", "chord": "Up" }, "safety": "safe", "unavailable": { "label": "PREV SHORT", "hint": "Shorts only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "unverified", "sources": ["S1"], "verify": "Same test as NEXT SHORT with the Up arrow." }
+  ],
+  "controls": [
+    { "id": "ytSeek", "label": "SEEK 10S", "glyph": "waveform", "category": "primary", "priority": 70, "contexts": ["watch"],
+      "turn": { "left": { "kind": "chord", "chord": "J" }, "right": { "kind": "chord", "chord": "L" },
+        "step": { "perPress": 10, "unit": "s", "confidence": "official" },
+        "acceleration": { "curve": [{ "minTicks": 1, "pressesPerTick": 1 }, { "minTicks": 6, "pressesPerTick": 2 }], "maxPressesPerEvent": 12, "minIntervalMs": 30 } },
+      "push": { "verb": "media.playPause" }, "readout": "mediaProgress", "safety": "safe", "unavailable": { "label": "SEEK 10S", "hint": "YouTube isn't in front.", "when": ["notForeground", "wrongContext"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Lite twin of the browser pack's SCRUB dial (module, 5 s, works in the background)." },
+    { "id": "frame", "label": "FRAME", "glyph": "frame-next", "monogram": "FR", "category": "tool", "priority": 45, "contexts": ["watch"],
+      "turn": { "left": { "kind": "chord", "chord": "Comma" }, "right": { "kind": "chord", "chord": "Period" },
+        "step": { "perPress": 1, "unit": "frame", "note": "Only while paused (S1).", "confidence": "official" },
+        "acceleration": { "curve": [{ "minTicks": 1, "pressesPerTick": 1 }, { "minTicks": 6, "pressesPerTick": 2 }], "maxPressesPerEvent": 24, "minIntervalMs": 25 } },
+      "push": { "verb": "media.playPause" }, "safety": "safe", "unavailable": { "label": "FRAME", "hint": "Pause the video first.", "when": ["notForeground", "wrongContext"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "chapters", "label": "CHAPTERS", "glyph": "chapter-next", "monogram": "CH", "category": "nav", "priority": 40, "contexts": ["watch"],
+      "turn": { "left": { "kind": "chord", "chord": "Ctrl+Left" }, "right": { "kind": "chord", "chord": "Ctrl+Right" },
+        "step": { "perPress": 1, "unit": "chapter", "confidence": "official" },
+        "acceleration": { "curve": [{ "minTicks": 1, "pressesPerTick": 1 }], "maxPressesPerEvent": 3, "minIntervalMs": 80 } },
+      "push": { "verb": "media.playPause" }, "readout": "mediaChapter", "safety": "safe", "unavailable": { "label": "CHAPTERS", "hint": "Videos with chapters only.", "when": ["notForeground", "wrongContext"], "style": "dim" }, "confidence": "official", "sources": ["S1"] }
+  ],
+  "readouts": [
+    { "id": "mediaMuted", "label": "MUTED", "contexts": ["watch", "shorts"], "source": { "kind": "extension", "field": "media.elementMuted", "status": "in-progress" }, "widget": "state", "privacy": "public", "confidence": "official", "sources": ["S5"] },
+    { "id": "mediaChapter", "label": "CHAPTER", "contexts": ["watch"], "source": { "kind": "extension", "field": "media.chapters+media.positionMs", "status": "in-progress", "note": "Current chapter = last chapter whose startMs <= position (Media Session chapterInfo)." }, "widget": "text", "privacy": "public", "refreshHz": 1, "confidence": "unverified", "sources": ["S5"], "verify": "Check that YouTube fills MediaMetadata.chapterInfo on a video with chapters (DevTools: navigator.mediaSession.metadata.chapterInfo)." }
+  ],
+  "userBindings": {
+    "storage": "none",
+    "summary": "YouTube's keys are fixed: the help page lists them and offers no way to change them (S1). Prism always sends the defaults.",
+    "confidence": "official",
+    "sources": ["S1"]
+  },
+  "layouts": [
+    { "device": "galleon-100-sd", "context": "watch",
+      "keys": [
+        { "x": 0, "y": 0, "verb": "media.playPause" }, { "x": 1, "y": 0, "verb": "yt.back10" }, { "x": 2, "y": 0, "verb": "yt.fwd10" },
+        { "x": 0, "y": 1, "verb": "yt.captions" }, { "x": 1, "y": 1, "verb": "yt.theater" }, { "x": 2, "y": 1, "verb": "yt.fullscreen" },
+        { "x": 0, "y": 2, "verb": "yt.speedDown" }, { "x": 1, "y": 2, "verb": "yt.miniplayer" }, { "x": 2, "y": 2, "verb": "yt.speedUp" },
+        { "x": 0, "y": 3, "verb": "nav.back" }, { "x": 1, "y": 3, "verb": "yt.mute" }, { "x": 2, "y": 3, "verb": "yt.next" }
+      ],
+      "dials": [ { "dial": 0, "layer": 0, "control": "scrub" }, { "dial": 0, "layer": 1, "control": "frame" }, { "dial": 1, "layer": 0, "control": "tabVolume" }, { "dial": 1, "layer": 1, "control": "speed" } ],
+      "screen": [ { "slot": "TL", "readout": "mediaProgress" }, { "slot": "BL", "readout": "mediaNowPlaying" }, { "slot": "TR", "readout": "mediaVolume" }, { "slot": "BR", "readout": "mediaRate" } ],
+      "rationale": "Play and 10 s jumps on top, view modes (captions/theater/full screen) in the middle with speed around the miniplayer, leave/mute/next at the bottom; scrub+frame on the left dial, volume+speed on the right." },
+    { "device": "stream-deck-plus", "context": "watch",
+      "keys": [
+        { "x": 0, "y": 0, "verb": "media.playPause" }, { "x": 1, "y": 0, "verb": "yt.back10" }, { "x": 2, "y": 0, "verb": "yt.fwd10" }, { "x": 3, "y": 0, "verb": "yt.next" },
+        { "x": 0, "y": 1, "verb": "yt.captions" }, { "x": 1, "y": 1, "verb": "yt.theater" }, { "x": 2, "y": 1, "verb": "yt.fullscreen" }, { "x": 3, "y": 1, "verb": "yt.mute" }
+      ],
+      "dials": [ { "dial": 0, "control": "scrub" }, { "dial": 1, "control": "speed" }, { "dial": 2, "control": "tabVolume" }, { "dial": 3, "control": "chapters" } ],
+      "screen": [ { "slot": "0", "readout": "mediaProgress" }, { "slot": "1", "readout": "mediaRate" }, { "slot": "2", "readout": "mediaVolume" }, { "slot": "3", "readout": "mediaChapter" } ],
+      "rationale": "Transport on the top row, view modes and mute below; scrub, speed, volume and chapters on the four dials with live strip readouts (speed keys live on the dial here)." }
+  ],
+  "sources": [
+    { "id": "S1", "title": "Keyboard shortcuts for YouTube", "url": "https://support.google.com/youtube/answer/7631406?hl=en", "publisher": "Google (YouTube Help)", "kind": "official", "accessed": "2026-10-16", "appliesToVersion": "youtube.com desktop web, current" },
+    { "id": "S2", "title": "YouTube watch-page player controls (aria-keyshortcuts and tooltips)", "url": "https://www.youtube.com/watch?v=jNQXAC9IVRw", "publisher": "Google (YouTube player)", "kind": "in-app", "accessed": "2026-10-16", "appliesToVersion": "player served 2026-10-16", "note": "Rendered in a throwaway headless Edge profile (temp dir, deleted). Buttons carry aria-keyshortcuts k, m, c, t, f, SHIFT+n and tooltips 'Theater mode (t)', 'Subtitles/closed captions (c)', 'Next (SHIFT+n)'." },
+    { "id": "S3", "title": "30 YouTube Keyboard Shortcuts Every Creator Should Know", "url": "https://vidiq.com/blog/post/30-youtube-keyboard-shortcuts/", "publisher": "vidIQ", "kind": "guide", "accessed": "2026-10-16", "appliesToVersion": "updated 2026-06-17" },
+    { "id": "S4", "title": "YouTube keyboard shortcuts cheat sheet", "url": "https://shortcuts.kstanchev.com/apps/youtube/", "publisher": "ShortcutLibrary (Kalin Stanchev)", "kind": "guide", "accessed": "2026-10-16" },
+    { "id": "S5", "title": "Prism browser research: media protocol (sections 3.4, 4, 9.2, 9.3)", "url": "local:aaa-prism-play/research/browser.md", "kind": "local", "accessed": "2026-10-16" },
+    { "id": "S6", "title": "YouTube page titles and URL shapes (fetched)", "url": "https://www.youtube.com/", "publisher": "Google (YouTube)", "kind": "in-app", "accessed": "2026-10-16", "note": "Home title 'YouTube'; watch and Shorts titles '<title> - YouTube'; paths /watch?v=, /shorts/<id>." },
+    { "id": "S7", "title": "Read-only probe: Chrome window title suffix ' - Google Chrome'", "url": "local:Get-Process chrome | MainWindowTitle (suffix only)", "kind": "local", "accessed": "2026-10-16", "appliesToVersion": "Chrome 155.0.8059.82" }
+  ],
+  "confidence": "high",
+  "conflicts": [
+    "S1 says Left/Right (seek 5 s) and Up/Down (volume 5 %) work 'on the seek bar'; S3 and S4 present them as general player keys. Arrows scroll the page when the player lacks focus, so the pack keeps them off keys and uses the module dials instead.",
+    "S3 claims arrow-key seeks grow to 10 s at 2x speed; not in S1. Not used.",
+    "Theater mode (T) and the caption keys O, W, +, - are absent from S1 but in S3/S4; T is confirmed by the player's own tooltip (S2), the caption keys are not (left out)."
+  ],
+  "gaps": [
+    "Shorts keys (Up/Down) are unverified; S1 has no Shorts section.",
+    "Captions and theater have no true-state readout (the extension doesn't read player buttons yet).",
+    "S1: in YouTube's 'new computer experience' the player must be clicked before keys work; chord fallbacks may land on the page instead. The module path avoids this.",
+    "Caption size (+/-), caption opacity (O/W), 360-degree video keys and percent jumps (1-9) left out."
+  ],
+  "notes": [
+    "Overrides media.playPause from chromium-browser so YouTube's K is the lite fallback instead of the Windows media key.",
+    "Long-form notes: packs/notes/site-youtube.md."
+  ]
+}

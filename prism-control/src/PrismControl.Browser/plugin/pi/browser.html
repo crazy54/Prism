@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prism Control: Browser</title>
+    <link rel="stylesheet" href="lib/prism-pi.css" />
+    <script src="lib/prism-pi.js"></script>
+    <style>
+      .browser-steps { margin: 0; padding-left: 18px; }
+      .browser-steps li { margin: 0 0 6px; white-space: pre-wrap; word-break: break-word; }
+      .browser-notes { margin: 0; padding-left: 18px; }
+      .browser-notes li { margin: 0 0 4px; }
+      .browser-banner { padding: 6px 8px; border-radius: 6px; background: var(--pi-card); border: 1px solid var(--pi-line-soft); }
+      .browser-warn { color: var(--pi-warn, #eec36f); }
+      [hidden] { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <!--
+      Browser property inspector (shared by every browser action).
+      "Connect browsers" is a two-step consent: the plugin first returns the exact steps it would take (files, registry
+      values, the extension copy); nothing is written until the user presses "Write these and connect", and the plugin
+      refuses if anything changed since the steps were shown. "Disconnect browsers" works the same way and undoes
+      exactly what was recorded. In safe mode nothing can be written. No external resources.
+    -->
+    <main class="prism-pi">
+      <div class="prism-row prism-heading"><h2>Browsers</h2></div>
+      <div class="prism-row">
+        <span class="prism-label">Status</span>
+        <span class="prism-info" id="status" data-state="status">–</span>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <span class="prism-note" id="detail" data-state="detail"></span>
+      </div>
+      <div class="prism-row" id="problemRow" hidden>
+        <span class="prism-label"></span>
+        <span class="prism-note browser-warn" id="problem"></span>
+      </div>
+      <div class="prism-row" id="updateRow" hidden>
+        <span class="prism-label"></span>
+        <span class="prism-note browser-warn" id="update"></span>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <div class="prism-actions">
+          <button type="button" id="connect" class="prism-primary">Connect browsers</button>
+          <button type="button" id="disconnect">Disconnect browsers</button>
+        </div>
+      </div>
+
+      <section id="consent" hidden>
+        <div class="prism-row prism-heading"><h2 id="consentTitle">Connect browsers will:</h2></div>
+        <div class="prism-row" id="safeRow" hidden>
+          <span class="prism-label"></span>
+          <span class="prism-note browser-banner browser-warn">Prism Control is in safe mode: nothing can be written.</span>
+        </div>
+        <div class="prism-row">
+          <span class="prism-label">Steps</span>
+          <ol class="prism-note browser-steps" id="steps"></ol>
+        </div>
+        <div class="prism-row">
+          <span class="prism-label"></span>
+          <ul class="prism-note browser-notes" id="notes"></ul>
+        </div>
+        <div class="prism-row">
+          <span class="prism-label"></span>
+          <div class="prism-actions">
+            <button type="button" id="apply" class="prism-primary">Write these and connect</button>
+            <button type="button" id="cancel">Cancel</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <span class="prism-note" id="message" role="status"></span>
+      </div>
+
+      <div class="prism-row prism-heading"><h2>Load the extension</h2></div>
+      <div class="prism-row">
+        <span class="prism-label">How</span>
+        <span class="prism-note">Open <code class="prism-code">chrome://extensions</code> (Edge: <code class="prism-code">edge://extensions</code>), turn on <b>Developer mode</b>, choose <b>Load unpacked</b> and select this folder:</span>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label">Folder</span>
+        <code class="prism-code" id="folder">–</code>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <div class="prism-actions"><button type="button" id="openFolder">Open the folder</button></div>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label">Extension id</span>
+        <code class="prism-code" id="extId">–</code>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <span class="prism-note">The id on the extension's card must match. A new site asks once: press the key, then click Allow in the browser's toolbar.</span>
+      </div>
+
+      <div class="prism-row prism-heading"><h2>Streamer-safe</h2></div>
+      <div class="prism-row">
+        <label class="prism-label" for="privacy">Keys show</label>
+        <select id="privacy" data-setting="global:browser.privacy">
+          <option value="full">Tab titles and sites</option>
+          <option value="domain">Sites only (titles hidden)</option>
+          <option value="hidden">Nothing private (glyphs only)</option>
+        </select>
+      </div>
+      <div class="prism-row">
+        <label class="prism-label" for="auto">Streaming</label>
+        <div class="prism-check">
+          <input id="auto" type="checkbox" data-setting="global:browser.autoStreamerSafe" />
+          <label class="prism-note" for="auto">Hide titles by itself while OBS runs (off: OBS changes nothing, in Prism Control or the extension)</label>
+        </div>
+      </div>
+      <div class="prism-row">
+        <label class="prism-label" for="art">Artwork</label>
+        <div class="prism-check">
+          <input id="art" type="checkbox" data-setting="global:browser.fetchArt" />
+          <label class="prism-note" for="art">Fetch media artwork (https, public sites only)</label>
+        </div>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <span class="prism-note">Prism Control downloads that artwork itself, from this PC, not through the browser. If Windows has a proxy for the site, it skips it rather than bypass the proxy.</span>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <span class="prism-note">Hidden titles never leave the browser: the extension filters them before anything reaches Prism Control. Without the extension, media keys show what Windows' media controls show, never more than your strictest browser profile allows.</span>
+      </div>
+
+      <div class="prism-row prism-heading"><h2>Keys Prism Control presses</h2></div>
+      <div class="prism-row">
+        <label class="prism-label" for="pipKey">Picture-in-picture</label>
+        <select id="pipKey" data-setting="global:browser.pipKey">
+          <option value="F24">F24</option><option value="F23">F23</option><option value="F22">F22</option><option value="F21">F21</option>
+          <option value="F20">F20</option><option value="F19">F19</option><option value="F18">F18</option><option value="F17">F17</option>
+          <option value="F16">F16</option><option value="F15">F15</option><option value="F14">F14</option><option value="F13">F13</option>
+        </select>
+      </div>
+      <div class="prism-row">
+        <label class="prism-label" for="focusTrick">Focus trick</label>
+        <div class="prism-check">
+          <input id="focusTrick" type="checkbox" data-setting="global:desktop.focusTrick" />
+          <label class="prism-note" for="focusTrick">Bring windows to the front with a key press (every Prism Control key that raises a window)</label>
+        </div>
+      </div>
+      <div class="prism-row">
+        <label class="prism-label" for="focusTrickKey">Focus key</label>
+        <select id="focusTrickKey" data-setting="global:desktop.focusTrickKey">
+          <option value="F22">F22</option><option value="F24">F24</option><option value="F23">F23</option><option value="F21">F21</option>
+          <option value="F20">F20</option><option value="F19">F19</option><option value="F18">F18</option><option value="F17">F17</option>
+          <option value="F16">F16</option><option value="F15">F15</option><option value="F14">F14</option><option value="F13">F13</option>
+        </select>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <span class="prism-note">Windows only lets an app take the front after a real key press, and the browser only opens picture-in-picture after one. So Prism Control presses a key nobody types: F24 for picture-in-picture, F22 to bring a window to the front. These are global keystrokes: an app with a hotkey on the same key (OBS, Discord, AutoHotkey and others use F13–F24) may react. Prism Control checks first and never presses a key another app registered as a hotkey (the key then says "F24 IN USE"), but hotkeys made with keyboard hooks can't be detected. If something reacts, pick another key here, or turn the focus trick off: the browser then asks Windows itself, and its taskbar button flashes instead of coming to the front.</span>
+      </div>
+
+      <div id="prism-form"></div>
+    </main>
+    <script>
+      (function () {
+        var $ = function (id) { return document.getElementById(id); };
+        var plan = null;
+
+        function show(state) {
+          if (!state) return;
+          $('status').textContent = state.status || '–';
+          $('detail').textContent = state.detail || '';
+          $('folder').textContent = state.extensionFolder || '–';
+          $('extId').textContent = state.extensionId || '–';
+          $('problemRow').hidden = !state.installProblem;
+          $('problem').textContent = state.installProblem || '';
+          $('updateRow').hidden = !state.updateNote;
+          $('update').textContent = state.updateNote || '';
+          $('connect').textContent = state.installed ? 'Connect browsers again' : 'Connect browsers';
+          $('disconnect').disabled = !state.installed && !state.installProblem;
+        }
+
+        function say(text) { $('message').textContent = text || ''; }
+
+        function list(el, items) {
+          el.textContent = '';
+          (items || []).forEach(function (t) { var li = document.createElement('li'); li.textContent = t; el.appendChild(li); });
+        }
+
+        function review(kind) {
+          say('');
+          PrismPI.request('browser.' + kind + '.plan', null, 10000).then(function (p) {
+            plan = { kind: kind, id: p.planId };
+            $('consentTitle').textContent = kind === 'connect' ? 'Connect browsers will:' : 'Disconnect browsers will:';
+            list($('steps'), p.steps);
+            list($('notes'), p.notes);
+            $('safeRow').hidden = !p.safeMode;
+            $('apply').disabled = !!p.safeMode || (p.steps || []).length === 0;
+            $('apply').textContent = kind === 'connect' ? 'Write these and connect' : 'Undo these';
+            $('consent').hidden = false;
+          }).catch(function (e) { say(e.message); });
+        }
+
+        // Global defaults the plugin uses when a key was never written (the binding shows unset as unchecked).
+        function applyDefaults() {
+          var g = PrismPI.global.get('browser');
+          if (g.autoStreamerSafe === undefined) $('auto').checked = true;
+          if (g.fetchArt === undefined) $('art').checked = true;
+          if (g.privacy === undefined) $('privacy').value = 'full';
+          if (g.pipKey === undefined) $('pipKey').value = 'F24';
+          var d = PrismPI.global.get('desktop');
+          if (d.focusTrick === undefined) $('focusTrick').checked = true;
+          if (d.focusTrickKey === undefined) $('focusTrickKey').value = 'F22';
+        }
+
+        PrismPI.ready(function (hello) { show(hello.state); applyDefaults(); });
+        PrismPI.global.onChange(applyDefaults);
+        PrismPI.on('pi.state', show);
+
+        $('connect').addEventListener('click', function () { review('connect'); });
+        $('disconnect').addEventListener('click', function () { review('disconnect'); });
+        $('cancel').addEventListener('click', function () { plan = null; $('consent').hidden = true; say('Nothing was written.'); });
+        $('apply').addEventListener('click', function () {
+          if (!plan) return;
+          var kind = plan.kind;
+          $('apply').disabled = true;
+          PrismPI.request('browser.' + kind + '.apply', { planId: plan.id, consent: true }, 30000).then(function (r) {
+            plan = null;
+            $('consent').hidden = true;
+            say(r.message);
+            if (r.state) show(r.state);
+          }).catch(function (e) { $('apply').disabled = false; say(e.message); });
+        });
+        $('openFolder').addEventListener('click', function () {
+          PrismPI.request('browser.openExtensionFolder', null, 5000).then(function (r) { if (r) say(r.message); }).catch(function (e) { say(e.message); });
+        });
+      })();
+    </script>
+  </body>
+</html>

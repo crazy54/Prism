@@ -1,0 +1,456 @@
+{
+ "id": 0,
+ "Text": "Sensor",
+ "Min": "Min",
+ "Value": "Value",
+ "Max": "Max",
+ "ImageURL": "",
+ "Children": [
+  {
+   "id": 1,
+   "Text": "EXAMPLE-PC",
+   "Min": "",
+   "Value": "",
+   "Max": "",
+   "ImageURL": "images_icon/computer.png",
+   "Children": [
+    {
+     "id": 2,
+     "Text": "ASUS ROG STRIX X870E-E GAMING WIFI",
+     "Min": "",
+     "Value": "",
+     "Max": "",
+     "HardwareId": "/motherboard",
+     "ImageURL": "images_icon/mainboard.png",
+     "Children": [
+      {
+       "id": 3,
+       "Text": "Nuvoton NCT6701D",
+       "Min": "",
+       "Value": "",
+       "Max": "",
+       "HardwareId": "/lpc/nct6701d/0",
+       "ImageURL": "images_icon/chip.png",
+       "Children": [
+        {
+         "id": 15,
+         "Text": "Temperatures",
+         "Min": "",
+         "Value": "",
+         "Max": "",
+         "ImageURL": "images_icon/temperature.png",
+         "Children": [
+          {
+           "id": 16,
+           "Text": "Motherboard",
+           "Min": "22.0 °C",
+           "Value": "23.0 °C",
+           "Max": "23.0 °C",
+           "SensorId": "/lpc/nct6701d/0/temperature/2",
+           "Type": "Temperature",
+           "RawMin": "22.0 °C",
+           "RawValue": "23.0 °C",
+           "RawMax": "23.0 °C",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          }
+         ]
+        },
+        {
+         "id": 17,
+         "Text": "Fans",
+         "Min": "",
+         "Value": "",
+         "Max": "",
+         "ImageURL": "images_icon/fan.png",
+         "Children": [
+          {
+           "id": 18,
+           "Text": "Chassis Fan #1",
+           "Min": "0 RPM",
+           "Value": "0 RPM",
+           "Max": "0 RPM",
+           "SensorId": "/lpc/nct6701d/0/fan/0",
+           "Type": "Fan",
+           "RawMin": "0 RPM",
+           "RawValue": "0 RPM",
+           "RawMax": "0 RPM",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          },
+          {
+           "id": 19,
+           "Text": "CPU Fan",
+           "Min": "0 RPM",
+           "Value": "0 RPM",
+           "Max": "0 RPM",
+           "SensorId": "/lpc/nct6701d/0/fan/1",
+           "Type": "Fan",
+           "RawMin": "0 RPM",
+           "RawValue": "0 RPM",
+           "RawMax": "0 RPM",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          },
+          {
+           "id": 20,
+           "Text": "Chassis Fan #2",
+           "Min": "0 RPM",
+           "Value": "0 RPM",
+           "Max": "0 RPM",
+           "SensorId": "/lpc/nct6701d/0/fan/2",
+           "Type": "Fan",
+           "RawMin": "0 RPM",
+           "RawValue": "0 RPM",
+           "RawMax": "0 RPM",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          },
+          {
+           "id": 21,
+           "Text": "Chassis Fan #3",
+           "Min": "0 RPM",
+           "Value": "0 RPM",
+           "Max": "0 RPM",
+           "SensorId": "/lpc/nct6701d/0/fan/3",
+           "Type": "Fan",
+           "RawMin": "0 RPM",
+           "RawValue": "0 RPM",
+           "RawMax": "0 RPM",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          },
+          {
+           "id": 22,
+           "Text": "Chassis Fan #4",
+           "Min": "0 RPM",
+           "Value": "0 RPM",
+           "Max": "0 RPM",
+           "SensorId": "/lpc/nct6701d/0/fan/4",
+           "Type": "Fan",
+           "RawMin": "0 RPM",
+           "RawValue": "0 RPM",
+           "RawMax": "0 RPM",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          },
+          {
+           "id": 23,
+           "Text": "Chassis Fan #5",
+           "Min": "0 RPM",
+           "Value": "0 RPM",
+           "Max": "0 RPM",
+           "SensorId": "/lpc/nct6701d/0/fan/5",
+           "Type": "Fan",
+           "RawMin": "0 RPM",
+           "RawValue": "0 RPM",
+           "RawMax": "0 RPM",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          },
+          {
+           "id": 24,
+           "Text": "AIO Pump",
+           "Min": "2352 RPM",
+           "Value": "2373 RPM",
+           "Max": "2394 RPM",
+           "SensorId": "/lpc/nct6701d/0/fan/6",
+           "Type": "Fan",
+           "RawMin": "2352 RPM",
+           "RawValue": "2373 RPM",
+           "RawMax": "2394 RPM",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          }
+         ]
+        },
+        {
+         "id": 25,
+         "Text": "Controls",
+         "Min": "",
+         "Value": "",
+         "Max": "",
+         "ImageURL": "images_icon/control.png",
+         "Children": [
+          {
+           "id": 26,
+           "Text": "Chassis Fan #1",
+           "Min": "66.7 %",
+           "Value": "66.7 %",
+           "Max": "69.4 %",
+           "SensorId": "/lpc/nct6701d/0/control/0",
+           "Type": "Control",
+           "RawMin": "66.7 %",
+           "RawValue": "66.7 %",
+           "RawMax": "69.4 %",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          },
+          {
+           "id": 27,
+           "Text": "CPU Fan",
+           "Min": "66.7 %",
+           "Value": "66.7 %",
+           "Max": "69.4 %",
+           "SensorId": "/lpc/nct6701d/0/control/1",
+           "Type": "Control",
+           "RawMin": "66.7 %",
+           "RawValue": "66.7 %",
+           "RawMax": "69.4 %",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          },
+          {
+           "id": 28,
+           "Text": "Chassis Fan #2",
+           "Min": "66.7 %",
+           "Value": "66.7 %",
+           "Max": "69.4 %",
+           "SensorId": "/lpc/nct6701d/0/control/2",
+           "Type": "Control",
+           "RawMin": "66.7 %",
+           "RawValue": "66.7 %",
+           "RawMax": "69.4 %",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          },
+          {
+           "id": 29,
+           "Text": "Chassis Fan #3",
+           "Min": "66.7 %",
+           "Value": "66.7 %",
+           "Max": "69.4 %",
+           "SensorId": "/lpc/nct6701d/0/control/3",
+           "Type": "Control",
+           "RawMin": "66.7 %",
+           "RawValue": "66.7 %",
+           "RawMax": "69.4 %",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          },
+          {
+           "id": 30,
+           "Text": "Chassis Fan #4",
+           "Min": "66.7 %",
+           "Value": "66.7 %",
+           "Max": "69.4 %",
+           "SensorId": "/lpc/nct6701d/0/control/4",
+           "Type": "Control",
+           "RawMin": "66.7 %",
+           "RawValue": "66.7 %",
+           "RawMax": "69.4 %",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          },
+          {
+           "id": 31,
+           "Text": "Chassis Fan #5",
+           "Min": "66.7 %",
+           "Value": "66.7 %",
+           "Max": "69.4 %",
+           "SensorId": "/lpc/nct6701d/0/control/5",
+           "Type": "Control",
+           "RawMin": "66.7 %",
+           "RawValue": "66.7 %",
+           "RawMax": "69.4 %",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          },
+          {
+           "id": 32,
+           "Text": "AIO Pump",
+           "Min": "100.0 %",
+           "Value": "100.0 %",
+           "Max": "100.0 %",
+           "SensorId": "/lpc/nct6701d/0/control/6",
+           "Type": "Control",
+           "RawMin": "100.0 %",
+           "RawValue": "100.0 %",
+           "RawMax": "100.0 %",
+           "ImageURL": "images/transparent.png",
+           "Children": []
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": 33,
+     "Text": "AMD Ryzen 7 9800X3D",
+     "Min": "",
+     "Value": "",
+     "Max": "",
+     "HardwareId": "/amdcpu/0",
+     "ImageURL": "images_icon/cpu.png",
+     "Children": [
+      {
+       "id": 73,
+       "Text": "Temperatures",
+       "Min": "",
+       "Value": "",
+       "Max": "",
+       "ImageURL": "images_icon/temperature.png",
+       "Children": [
+        {
+         "id": 74,
+         "Text": "Core (Tctl/Tdie)",
+         "Min": "51.3 °C",
+         "Value": "52.0 °C",
+         "Max": "57.3 °C",
+         "SensorId": "/amdcpu/0/temperature/2",
+         "Type": "Temperature",
+         "RawMin": "51.3 °C",
+         "RawValue": "52.0 °C",
+         "RawMax": "57.3 °C",
+         "ImageURL": "images/transparent.png",
+         "Children": []
+        },
+        {
+         "id": 75,
+         "Text": "CCD1 (Tdie)",
+         "Min": "44.4 °C",
+         "Value": "48.1 °C",
+         "Max": "59.1 °C",
+         "SensorId": "/amdcpu/0/temperature/3",
+         "Type": "Temperature",
+         "RawMin": "44.4 °C",
+         "RawValue": "48.1 °C",
+         "RawMax": "59.1 °C",
+         "ImageURL": "images/transparent.png",
+         "Children": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": 216,
+     "Text": "NVIDIA GeForce RTX 4070 Ti",
+     "Min": "",
+     "Value": "",
+     "Max": "",
+     "HardwareId": "/gpu-nvidia/0",
+     "ImageURL": "images_icon/nvidia.png",
+     "Children": [
+      {
+       "id": 224,
+       "Text": "Temperatures",
+       "Min": "",
+       "Value": "",
+       "Max": "",
+       "ImageURL": "images_icon/temperature.png",
+       "Children": [
+        {
+         "id": 225,
+         "Text": "GPU Core",
+         "Min": "44.0 °C",
+         "Value": "51.0 °C",
+         "Max": "52.0 °C",
+         "SensorId": "/gpu-nvidia/0/temperature/0",
+         "Type": "Temperature",
+         "RawMin": "44.0 °C",
+         "RawValue": "51.0 °C",
+         "RawMax": "52.0 °C",
+         "ImageURL": "images/transparent.png",
+         "Children": []
+        },
+        {
+         "id": 226,
+         "Text": "GPU Hot Spot",
+         "Min": "48.8 °C",
+         "Value": "48.8 °C",
+         "Max": "61.3 °C",
+         "SensorId": "/gpu-nvidia/0/temperature/2",
+         "Type": "Temperature",
+         "RawMin": "48.8 °C",
+         "RawValue": "48.8 °C",
+         "RawMax": "61.3 °C",
+         "ImageURL": "images/transparent.png",
+         "Children": []
+        }
+       ]
+      },
+      {
+       "id": 251,
+       "Text": "Fans",
+       "Min": "",
+       "Value": "",
+       "Max": "",
+       "ImageURL": "images_icon/fan.png",
+       "Children": [
+        {
+         "id": 252,
+         "Text": "GPU Fan 1",
+         "Min": "1568 RPM",
+         "Value": "1568 RPM",
+         "Max": "1577 RPM",
+         "SensorId": "/gpu-nvidia/0/fan/1",
+         "Type": "Fan",
+         "RawMin": "1568 RPM",
+         "RawValue": "1568 RPM",
+         "RawMax": "1577 RPM",
+         "ImageURL": "images/transparent.png",
+         "Children": []
+        },
+        {
+         "id": 253,
+         "Text": "GPU Fan 2",
+         "Min": "0 RPM",
+         "Value": "0 RPM",
+         "Max": "0 RPM",
+         "SensorId": "/gpu-nvidia/0/fan/2",
+         "Type": "Fan",
+         "RawMin": "0 RPM",
+         "RawValue": "0 RPM",
+         "RawMax": "0 RPM",
+         "ImageURL": "images/transparent.png",
+         "Children": []
+        }
+       ]
+      },
+      {
+       "id": 254,
+       "Text": "Controls",
+       "Min": "",
+       "Value": "",
+       "Max": "",
+       "ImageURL": "images_icon/control.png",
+       "Children": [
+        {
+         "id": 255,
+         "Text": "GPU Fan 1",
+         "Min": "67.0 %",
+         "Value": "67.0 %",
+         "Max": "67.0 %",
+         "SensorId": "/gpu-nvidia/0/control/1",
+         "Type": "Control",
+         "RawMin": "67.0 %",
+         "RawValue": "67.0 %",
+         "RawMax": "67.0 %",
+         "ImageURL": "images/transparent.png",
+         "Children": []
+        },
+        {
+         "id": 256,
+         "Text": "GPU Fan 2",
+         "Min": "69.0 %",
+         "Value": "69.0 %",
+         "Max": "69.0 %",
+         "SensorId": "/gpu-nvidia/0/control/2",
+         "Type": "Control",
+         "RawMin": "69.0 %",
+         "RawValue": "69.0 %",
+         "RawMax": "69.0 %",
+         "ImageURL": "images/transparent.png",
+         "Children": []
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Sight module tests + the calibration/probe host (owned by the Sight engineer).
+       Run: dotnet run (project) tests/PrismControl.Sight.Tests, then the runner options filter / category / exclude.
+       Synthetic HUD frames are drawn in memory (16:9 and 21:9, several HUD scales, SDR and simulated HDR). The only
+       windows captured are windows this process (or its own child) creates; nothing is ever captured from another app.
+       Host modes (prefixed with two dashes): run-recipe, inspect, check-labeled, harvest-glyphs, synth, hdr-probe, ocr-probe,
+       perf, synthetic-game. See aaa-prism-play/sight/NOTES.md. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Sight.Tests</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Testing\PrismControl.Testing.csproj" />
+    <ProjectReference Include="..\..\src\PrismControl.Sight\PrismControl.Sight.csproj" />
+  </ItemGroup>
+</Project>

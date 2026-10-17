@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Prism Control for Stream Deck",
+  "short_name": "Prism Control",
+  "description": "Control your browser from Stream Deck hardware: live tabs, media in any tab, page dials and downloads.",
+  "version": "0.1.0",
+  "minimum_chrome_version": "134",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs88Tg66/N+ht1xNwr7wHKrrEXH9VPwC68249hYckbmM3U0faVGhgEPh+pg3lR3LvI8cgeYJyzLFeBE5wnO/Hfg5IZ1A/7SfecfWvH01kur6jOOCJCHItaKGzfkQqE6relXW0VPmWmK+CEk+dAKgdK6bvdWBPmTRXZ7dGp69jyjG4SDUyMiLjuE0sA5UVzwO24Bspgkzc6YbOI1eJR7P+F2ARprICIS6/TLW/zzCzFueeRMJ1PbnVzjTy0l1s/78ndcVZS3NIM3uYeX0lEuVRdjxl6asRMGvHL/zYQnQFeRpyQdpQ9nh7k6n+g2anUIJ9cy+WY3hEgtGZjEbwKl5DJwIDAQAB",
+  "background": { "service_worker": "sw.js", "type": "module" },
+  "permissions": ["tabs", "favicon", "nativeMessaging", "storage", "alarms", "scripting"],
+  "optional_permissions": ["downloads", "tabGroups", "sessions"],
+  "optional_host_permissions": ["https://*/*", "http://*/*", "<all_urls>"],
+  "incognito": "not_allowed",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Prism Control",
+    "default_icon": { "16": "img/16.png", "32": "img/32.png" }
+  },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "icons": { "16": "img/16.png", "32": "img/32.png", "48": "img/48.png", "128": "img/128.png" }
+}

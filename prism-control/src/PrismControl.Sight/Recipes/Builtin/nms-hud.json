@@ -1,0 +1,35 @@
+{
+  "$schema": "../recipe.schema.json",
+  "v": 1,
+  "id": "nms-hud",
+  "game": "nms",
+  "title": "No Man's Sky: exosuit HUD",
+  "status": "draft",
+  "notes": "DRAFT. Placeholder geometry for the exosuit HUD (life support, hazard protection, jetpack, units). To be calibrated from the user's recording at 3440x1440 HDR.",
+  "match": { "processes": ["NMS.exe"] },
+  "hud": { "referenceHeight": 1080, "scale": 1.0 },
+  "regions": [
+    { "id": "nms.hud.lifeSupport", "anchor": "bottom-left", "x": 60, "y": -120, "w": 220, "h": 10, "notes": "placeholder" },
+    { "id": "nms.hud.hazard", "anchor": "bottom-left", "x": 60, "y": -100, "w": 220, "h": 10, "notes": "placeholder" },
+    { "id": "nms.hud.jetpack", "anchor": "bottom-left", "x": 60, "y": -80, "w": 220, "h": 10, "notes": "placeholder" },
+    { "id": "nms.hud.units", "anchor": "top-right", "x": -320, "y": 40, "w": 260, "h": 36, "notes": "placeholder: units (currency), shown in menus" },
+    { "id": "nms.menu.header", "anchor": "top", "x": -300, "y": 20, "w": 600, "h": 24, "notes": "placeholder: inventory / menu header" }
+  ],
+  "detectors": [
+    { "id": "lifeSupportBar", "region": "nms.hud.lifeSupport", "kind": "bar", "direction": "right", "mode": "bright", "threshold": 0.55 },
+    { "id": "hazardBar", "region": "nms.hud.hazard", "kind": "bar", "direction": "right", "mode": "bright", "threshold": 0.55 },
+    { "id": "jetpackBar", "region": "nms.hud.jetpack", "kind": "bar", "direction": "right", "mode": "bright", "threshold": 0.55 },
+    { "id": "unitsText", "region": "nms.hud.units", "kind": "ocr", "text": "light", "whitelist": "0123456789,", "parse": { "type": "integer", "thousands": "," } },
+    { "id": "menuHeader", "region": "nms.menu.header", "kind": "color", "color": "#0e1116", "tolerance": 30, "minFraction": 0.8 }
+  ],
+  "contexts": [
+    { "id": "menus", "label": "Menus", "when": "menuHeader", "priority": 90 },
+    { "id": "onFoot", "label": "On foot", "when": "lifeSupportBar>0 & !menuHeader", "priority": 20 }
+  ],
+  "readouts": [
+    { "id": "lifeSupport", "label": "Life support", "from": "lifeSupportBar", "type": "percent", "min": 0, "max": 100, "precision": 0, "contexts": ["onFoot"] },
+    { "id": "hazardProtection", "label": "Hazard", "from": "hazardBar", "type": "percent", "min": 0, "max": 100, "precision": 0, "contexts": ["onFoot"] },
+    { "id": "jetpack", "label": "Jetpack", "from": "jetpackBar", "type": "percent", "min": 0, "max": 100, "precision": 0, "contexts": ["onFoot"] },
+    { "id": "units", "label": "Units", "from": "unitsText", "min": 0, "max": 4294967295 }
+  ]
+}

@@ -1,0 +1,9 @@
+[
+  {"pid": 41001, "cwd": "C:\\Users\\example\\projects\\aurora", "kind": "interactive", "startedAt": 1792141200000, "sessionId": "1a2b3c4d-0001-4000-8000-00000000a001", "name": "TITLE-MARKER refactor the parser", "status": "busy"},
+  {"pid": 41002, "cwd": "C:\\Users\\example\\projects\\borealis", "kind": "interactive", "startedAt": 1792141260000, "sessionId": "1a2b3c4d-0002-4000-8000-00000000a002", "name": "TITLE-MARKER fix the build", "status": "waiting", "waitingFor": "permission prompt"},
+  {"pid": 41003, "cwd": "/c/Users/example/projects/cassini", "kind": "interactive", "startedAt": 1792141320000, "sessionId": "1a2b3c4d-0003-4000-8000-00000000a003", "name": "TITLE-MARKER write docs", "status": "waiting", "waitingFor": "input needed"},
+  {"pid": 41004, "cwd": "C:\\Users\\example\\projects\\dione", "kind": "interactive", "startedAt": 1792141380000, "sessionId": "1a2b3c4d-0004-4000-8000-00000000a004", "status": "idle"},
+  {"cwd": "C:\\Users\\example\\projects\\europa", "kind": "background", "startedAt": 1792141440000, "id": "bg-0005", "state": "blocked", "waitingFor": "permission prompt"},
+  {"cwd": "C:\\Users\\example\\projects\\fornax", "kind": "background", "startedAt": 1792141500000, "id": "bg-0006", "state": "failed"},
+  {"cwd": "C:\\Users\\example\\projects\\ghost", "kind": "interactive", "startedAt": 1792141560000}
+]

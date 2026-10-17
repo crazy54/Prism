@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Shared contracts: action framework, devices, render helpers (Qt-safe SVG, stroke font, tokens),
+    layouts/feedback, the update scheduler core, data-API contracts and module interfaces.
+    Portable net10.0 (no Windows APIs) so it can be unit-tested anywhere.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>PrismControl.Core</RootNamespace>
+    <IsTrimmable>false</IsTrimmable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="PrismControl" />
+    <InternalsVisibleTo Include="PrismControl.Testing" />
+    <InternalsVisibleTo Include="PrismControl.Tests" />
+  </ItemGroup>
+</Project>

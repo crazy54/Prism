@@ -1,0 +1,16 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Shadow DOM fixture</title></head>
+<body>
+<!-- A web-component player: <video> inside a CLOSED shadow root; blob: artwork; no action handlers. -->
+<script>
+  const host = document.createElement('div');
+  document.body.append(host);
+  const root = host.attachShadow({ mode: 'closed' });
+  root.innerHTML = '<video src="/tone.wav" autoplay loop width="320" height="180"></video>';
+  window.__shadowVideo = root.querySelector('video');
+  fetch('/art.png').then((r) => r.blob()).then((b) => {
+    navigator.mediaSession.metadata = new MediaMetadata({ title: 'Shadow Clip', artist: 'Closed Root',
+      artwork: [{ src: URL.createObjectURL(b), sizes: '300x300', type: 'image/png' }] });
+  });
+</script>
+</body></html>

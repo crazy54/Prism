@@ -1,0 +1,10 @@
+{
+  "name": "prism-control-extension",
+  "private": true,
+  "type": "module",
+  "description": "Dev-only manifest for the unit and browser tests. The extension itself has no dependencies and no build step.",
+  "scripts": {
+    "test": "node --test tests/unit/",
+    "test:browser": "node tests/e2e/run.mjs"
+  }
+}

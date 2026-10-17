@@ -1,0 +1,128 @@
+{
+  "$schema": "schema/context-pack.schema.json",
+  "schemaVersion": 1,
+  "id": "site-gmail",
+  "name": "Gmail (web)",
+  "vendor": "Google",
+  "kind": "site",
+  "packVersion": "0.1.0",
+  "extends": ["chromium-browser"],
+  "layer": "overlay",
+  "platforms": ["windows"],
+  "verifiedAgainst": {
+    "version": "mail.google.com web, help page as of 2026-10-16",
+    "date": "2026-10-16",
+    "method": "official-docs",
+    "note": "All chords from Google's Gmail Help page (S1). Not tested in a signed-in Gmail (no account was used). IMPORTANT: Gmail's single-key shortcuts are OFF until the user turns them on in Settings."
+  },
+  "policy": { "class": "desktop-app", "input": "allowed", "sight": "forbidden", "closedLoop": "forbidden", "reason": "Ordinary website. Mail content is private: titles and subjects are streamer-hidden." },
+  "keyMode": "vk",
+  "match": {
+    "any": [
+      { "site": { "host": "mail.google.com" }, "confidence": "official", "note": "Reported by the Prism browser extension." },
+      { "process": "chrome.exe", "titleRegex": " - Gmail - Google Chrome$", "confidence": "unverified", "note": "Gmail tab titles look like 'Inbox (3) - <address> - Gmail' (from memory, not checked: no signed-in session was used). Verify in a signed-in Chrome window." },
+      { "process": "msedge.exe", "titleRegex": " - Gmail( and \\d+ more pages?)? - .*Edge$", "confidence": "unverified", "note": "Same, plus Edge's unverified title suffix." }
+    ]
+  },
+  "contexts": [
+    { "id": "list", "label": "Mail list (inbox, labels, search)", "default": true, "priority": 10, "detect": { "all": [{ "type": "always" }] }, "confidence": "official", "sources": ["S1"] },
+    { "id": "thread", "label": "Open conversation", "parent": "list", "priority": 50, "hysteresisMs": 400,
+      "detect": { "any": [{ "type": "extension", "status": "in-progress", "field": "tab.url", "regex": "#[^?]*/[A-Za-z0-9_-]{16,}([?]|$)", "note": "Gmail routes in the URL hash: '#inbox' (list) vs '#inbox/<threadId>' (thread)." }] },
+      "confidence": "unverified", "sources": ["S1"], "verify": "Signed in, open a conversation and read the tab URL from the extension: it should end in '#<view>/<long id>'; the list view should not." },
+    { "id": "compose", "label": "Compose / reply", "priority": 70, "hysteresisMs": 300,
+      "detect": { "any": [{ "type": "extension", "status": "in-progress", "field": "tab.url", "regex": "[?&]compose=" }] },
+      "confidence": "unverified", "sources": ["S1"], "verify": "Press Compose and check the tab URL gains '?compose=new' (or '?compose=<id>' for a draft). Inline replies may not change the URL; a future content-script field (gmail.composeFocused) would cover them." }
+  ],
+  "verbs": [
+    { "id": "gm.compose", "label": "COMPOSE", "longLabel": "Compose a new message", "glyph": "mail", "category": "primary", "priority": 85, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "C" }, "appAction": "Compose", "safety": "safe", "unavailable": { "label": "COMPOSE", "hint": "Turn on Gmail keyboard shortcuts: Settings > See all settings > Keyboard shortcuts on.", "when": ["permissionNeeded", "notForeground"], "style": "badge" }, "confidence": "official", "sources": ["S1"], "notes": "Needs Gmail's keyboard shortcuts setting (off until turned on). D opens compose in a new tab." },
+    { "id": "gm.search", "label": "SEARCH", "longLabel": "Search mail", "glyph": "search", "category": "tool", "priority": 70, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "Slash" }, "appAction": "Search mail", "safety": "safe", "unavailable": { "label": "SEARCH", "hint": "Turn on Gmail keyboard shortcuts in Settings.", "when": ["permissionNeeded", "notForeground"], "style": "badge" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.archive", "label": "ARCHIVE", "longLabel": "Archive the conversation", "glyph": "folder", "category": "primary", "priority": 90, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "E" }, "appAction": "Archive", "safety": "confirm", "unavailable": { "label": "ARCHIVE", "hint": "Select a conversation (X) or open one. Needs Gmail keyboard shortcuts on.", "when": ["nothingSelected", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Hold to confirm. Z undoes." },
+    { "id": "gm.delete", "label": "DELETE", "longLabel": "Move the conversation to Trash", "glyph": "alert", "category": "primary", "priority": 88, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "Shift+3", "note": "'#' on a US layout." }, "appAction": "Delete", "safety": "confirm", "unavailable": { "label": "DELETE", "hint": "Select a conversation (X) or open one. Needs Gmail keyboard shortcuts on.", "when": ["nothingSelected", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Hold to confirm. Trash keeps it (Z undoes right away). On non-US layouts '#' is elsewhere: vk Shift+3 may type another character." },
+    { "id": "gm.spam", "label": "SPAM", "longLabel": "Report as spam", "glyph": "alert", "category": "tool", "priority": 35, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "Shift+1", "note": "'!' on a US layout." }, "appAction": "Report as spam", "safety": "confirm", "unavailable": { "label": "SPAM", "hint": "Select a conversation first. Needs Gmail keyboard shortcuts on.", "when": ["nothingSelected", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.star", "label": "STAR", "longLabel": "Star / rotate superstars", "glyph": "star", "monogram": "*", "category": "toggle", "priority": 65, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "S" }, "appAction": "Toggle star", "safety": "safe", "unavailable": { "label": "STAR", "hint": "Select a conversation first. Needs Gmail keyboard shortcuts on.", "when": ["nothingSelected", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.markUnread", "label": "UNREAD", "longLabel": "Mark as unread", "glyph": "mail", "category": "tool", "priority": 60, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "Shift+U" }, "appAction": "Mark as unread", "safety": "safe", "unavailable": { "label": "UNREAD", "hint": "Select a conversation first. Needs Gmail keyboard shortcuts on.", "when": ["nothingSelected", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Shift+I marks as read." },
+    { "id": "gm.snooze", "label": "SNOOZE", "glyph": "alarm", "category": "tool", "priority": 55, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "B" }, "appAction": "Snooze", "safety": "safe", "unavailable": { "label": "SNOOZE", "hint": "Select a conversation first. Needs Gmail keyboard shortcuts on.", "when": ["nothingSelected", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.labels", "label": "LABEL", "longLabel": "Open the 'Label as' menu", "glyph": "marker", "category": "tool", "priority": 50, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "L" }, "appAction": "Open label as menu", "safety": "safe", "unavailable": { "label": "LABEL", "hint": "Select a conversation first. Needs Gmail keyboard shortcuts on.", "when": ["nothingSelected", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "V opens 'Move to'." },
+    { "id": "gm.select", "label": "SELECT", "longLabel": "Select the conversation under the cursor", "glyph": "check", "category": "tool", "priority": 58, "contexts": ["list"], "binding": { "kind": "chord", "chord": "X" }, "appAction": "Select conversation", "safety": "safe", "unavailable": { "label": "SELECT", "hint": "Mail list only. Needs Gmail keyboard shortcuts on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.open", "label": "OPEN", "longLabel": "Open the conversation under the cursor", "glyph": "mail", "category": "nav", "priority": 52, "contexts": ["list"], "binding": { "kind": "chord", "chord": "O" }, "altBindings": [{ "kind": "chord", "chord": "Enter" }], "appAction": "Open conversation", "safety": "safe", "unavailable": { "label": "OPEN", "hint": "Mail list only. Needs Gmail keyboard shortcuts on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.newer", "label": "NEWER", "longLabel": "Newer conversation", "glyph": "mail-up", "monogram": "K", "category": "nav", "priority": 48, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "K" }, "appAction": "Newer conversation", "safety": "safe", "unavailable": { "label": "NEWER", "hint": "Needs Gmail keyboard shortcuts on.", "when": ["permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.older", "label": "OLDER", "longLabel": "Older conversation", "glyph": "mail-down", "monogram": "J", "category": "nav", "priority": 47, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "J" }, "appAction": "Older conversation", "safety": "safe", "unavailable": { "label": "OLDER", "hint": "Needs Gmail keyboard shortcuts on.", "when": ["permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.backToList", "label": "TO LIST", "longLabel": "Back to the conversation list", "glyph": "back", "category": "nav", "priority": 62, "contexts": ["thread"], "binding": { "kind": "chord", "chord": "U" }, "appAction": "Back to threadlist", "safety": "safe", "unavailable": { "label": "TO LIST", "hint": "Open conversations only. Needs Gmail keyboard shortcuts on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.reply", "label": "REPLY", "glyph": "chat", "category": "primary", "priority": 86, "contexts": ["thread"], "binding": { "kind": "chord", "chord": "R" }, "appAction": "Reply", "safety": "safe", "unavailable": { "label": "REPLY", "hint": "Open a conversation first. Needs Gmail keyboard shortcuts on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Shift+R replies in a new window." },
+    { "id": "gm.replyAll", "label": "REPLY ALL", "glyph": "chat", "category": "primary", "priority": 80, "contexts": ["thread"], "binding": { "kind": "chord", "chord": "A" }, "appAction": "Reply all", "safety": "safe", "unavailable": { "label": "REPLY ALL", "hint": "Open a conversation first. Needs Gmail keyboard shortcuts on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.forward", "label": "FORWARD", "glyph": "mail", "category": "primary", "priority": 70, "contexts": ["thread"], "binding": { "kind": "chord", "chord": "F" }, "appAction": "Forward", "safety": "safe", "unavailable": { "label": "FORWARD", "hint": "Open a conversation first. Needs Gmail keyboard shortcuts on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.undo", "label": "UNDO", "longLabel": "Undo the last action", "glyph": "back", "category": "nav", "priority": 75, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "Z" }, "appAction": "Undo last action", "safety": "safe", "unavailable": { "label": "UNDO", "hint": "Needs Gmail keyboard shortcuts on.", "when": ["permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.goInbox", "label": "INBOX", "longLabel": "Go to Inbox", "glyph": "mail", "category": "nav", "priority": 72, "contexts": ["list", "thread"], "binding": { "kind": "sequence", "steps": ["G", "I"], "gapMs": 60 }, "appAction": "Go to Inbox", "safety": "safe", "stateReadout": "gmUnread", "unavailable": { "label": "INBOX", "hint": "Needs Gmail keyboard shortcuts on.", "when": ["permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1", "S2"], "notes": "The key face can show the unread count parsed from the tab title (S2)." },
+    { "id": "gm.goStarred", "label": "STARRED", "glyph": "star", "monogram": "*", "category": "nav", "priority": 40, "contexts": ["list", "thread"], "binding": { "kind": "sequence", "steps": ["G", "S"], "gapMs": 60 }, "appAction": "Go to Starred conversations", "safety": "safe", "unavailable": { "label": "STARRED", "hint": "Needs Gmail keyboard shortcuts on.", "when": ["permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.goSent", "label": "SENT", "glyph": "mail", "category": "nav", "priority": 42, "contexts": ["list", "thread"], "binding": { "kind": "sequence", "steps": ["G", "T"], "gapMs": 60 }, "appAction": "Go to Sent messages", "safety": "safe", "unavailable": { "label": "SENT", "hint": "Needs Gmail keyboard shortcuts on.", "when": ["permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Also: G D drafts, G A all mail, G B snoozed, G K tasks, G L label (S1)." },
+    { "id": "gm.shortcutsHelp", "label": "SHORTCUTS", "longLabel": "Gmail's keyboard shortcut list (and the Enable link)", "glyph": "info", "category": "system", "priority": 20, "contexts": ["list", "thread"], "binding": { "kind": "chord", "chord": "Shift+Slash" }, "safety": "safe", "unavailable": { "label": "SHORTCUTS", "hint": "Gmail isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "S1: '?' opens the dialog even with shortcuts off; Tab once to its 'Enable' link, Enter turns shortcuts on. Use this as the setup key." },
+    { "id": "gm.toggleShortcuts", "label": "KEYS ON/OFF", "longLabel": "Toggle Gmail keyboard shortcuts (? dialog, Tab, Enter)", "glyph": "power", "category": "system", "priority": 18, "contexts": ["list", "thread"], "binding": { "kind": "macro", "steps": [ { "kind": "chord", "chord": "Shift+Slash" }, { "kind": "chord", "chord": "Tab" }, { "kind": "chord", "chord": "Enter" } ], "gapMs": 400, "note": "The exact keyboard path S1 documents for enabling shortcuts." }, "safety": "never-auto", "unavailable": { "label": "KEYS ON/OFF", "hint": "Gmail isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "It TOGGLES: the link reads 'Enable' or 'Disable', and Prism can't see which, so pressing it with shortcuts already on turns them OFF. Setup key only; never run automatically." },
+    { "id": "gm.send", "label": "SEND", "longLabel": "Send the message", "glyph": "rocket", "category": "primary", "priority": 95, "contexts": ["compose"], "binding": { "kind": "chord", "chord": "Ctrl+Enter" }, "appAction": "Send", "safety": "confirm", "unavailable": { "label": "SEND", "hint": "Click into a compose or reply window first.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Hold to confirm. Works with Gmail shortcuts off (compose keys aren't gated on S1). Undo Send, if enabled, gives a few seconds." },
+    { "id": "gm.cc", "label": "ADD CC", "glyph": "mail", "category": "tool", "priority": 50, "contexts": ["compose"], "binding": { "kind": "chord", "chord": "Ctrl+Shift+C" }, "safety": "safe", "unavailable": { "label": "ADD CC", "hint": "Compose window only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.bcc", "label": "ADD BCC", "glyph": "mail", "category": "tool", "priority": 48, "contexts": ["compose"], "binding": { "kind": "chord", "chord": "Ctrl+Shift+B" }, "safety": "safe", "unavailable": { "label": "ADD BCC", "hint": "Compose window only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.link", "label": "LINK", "longLabel": "Insert a link", "glyph": "link", "monogram": "LNK", "category": "tool", "priority": 45, "contexts": ["compose"], "binding": { "kind": "chord", "chord": "Ctrl+K" }, "safety": "safe", "unavailable": { "label": "LINK", "hint": "Compose window only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Shadows the browser's Ctrl+K web search while composing." },
+    { "id": "gm.bold", "label": "BOLD", "glyph": "bold", "monogram": "B", "category": "tool", "priority": 40, "contexts": ["compose"], "binding": { "kind": "chord", "chord": "Ctrl+B" }, "safety": "safe", "unavailable": { "label": "BOLD", "hint": "Compose window only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gm.bullets", "label": "BULLETS", "longLabel": "Bulleted list", "glyph": "note", "category": "tool", "priority": 38, "contexts": ["compose"], "binding": { "kind": "chord", "chord": "Ctrl+Shift+8" }, "safety": "safe", "unavailable": { "label": "BULLETS", "hint": "Compose window only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Ctrl+Shift+7 numbered list, Ctrl+Shift+9 quote." },
+    { "id": "gm.nextCompose", "label": "NEXT DRAFT", "longLabel": "Advance to the next chat or compose window", "glyph": "chat", "category": "nav", "priority": 30, "contexts": ["compose"], "binding": { "kind": "chord", "chord": "Ctrl+Period" }, "safety": "safe", "unavailable": { "label": "NEXT DRAFT", "hint": "Compose window only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Ctrl+Comma goes back; Shift+Esc focuses the main window; Esc the latest compose." }
+  ],
+  "controls": [
+    { "id": "gmList", "label": "MAIL", "glyph": "mail", "category": "nav", "priority": 75, "contexts": ["list", "thread"],
+      "turn": { "left": { "kind": "chord", "chord": "K" }, "right": { "kind": "chord", "chord": "J" },
+        "step": { "perPress": 1, "unit": "conversation", "note": "Left = newer (K), right = older (J).", "confidence": "official" },
+        "acceleration": { "curve": [{ "minTicks": 1, "pressesPerTick": 1 }, { "minTicks": 6, "pressesPerTick": 2 }], "maxPressesPerEvent": 12, "minIntervalMs": 35 } },
+      "push": { "verb": "gm.open" }, "readout": "gmUnread", "safety": "safe", "unavailable": { "label": "MAIL", "hint": "Turn on Gmail keyboard shortcuts in Settings.", "when": ["permissionNeeded", "notForeground"], "style": "badge" }, "confidence": "official", "sources": ["S1"] }
+  ],
+  "readouts": [
+    { "id": "gmUnread", "label": "UNREAD", "contexts": ["*"], "source": { "kind": "extension", "field": "tab.unread", "status": "in-progress", "note": "Parsed by the extension from 'Inbox (N)' in the tab title (S2 §3.2); counts only, never subjects." }, "widget": "number", "privacy": "public", "refreshHz": 1, "confidence": "official", "sources": ["S2"] }
+  ],
+  "userBindings": {
+    "storage": "cloud",
+    "summary": "Two account-level (server-side) settings, synced with the Google account, not on this PC: (1) 'Keyboard shortcuts on/off' (Settings > See all settings > General), OFF until turned on, which gates every single-key verb; (2) optional custom shortcuts (Settings > Advanced > Custom keyboard shortcuts: Enable, then a 'Keyboard Shortcuts' tab with one key per action).",
+    "entryShape": "Settings > Keyboard Shortcuts tab: one row per action (e.g. 'Archive') with a text field holding the key; 'One key can refer to only one action' (S1).",
+    "example": "Archive: y   (fictional rebind of E)",
+    "keyNameMap": "Single characters as typed; uppercase letters mean Shift+letter; '#' = Shift+3, '!' = Shift+1 on US layouts.",
+    "readMode": "Not readable locally and no documented API exposes it. The PI asks once ('Are Gmail keyboard shortcuts on?' with the ? key + Enable link as the fix) and lets the user type any custom keys; verbs join on appAction (Gmail's action name).",
+    "confidence": "official",
+    "sources": ["S1"]
+  },
+  "layouts": [
+    { "device": "galleon-100-sd", "context": "list",
+      "keys": [
+        { "x": 0, "y": 0, "verb": "gm.archive" }, { "x": 1, "y": 0, "verb": "gm.delete" }, { "x": 2, "y": 0, "verb": "gm.compose" },
+        { "x": 0, "y": 1, "verb": "gm.star" }, { "x": 1, "y": 1, "verb": "gm.markUnread" }, { "x": 2, "y": 1, "verb": "gm.snooze" },
+        { "x": 0, "y": 2, "verb": "gm.select" }, { "x": 1, "y": 2, "verb": "gm.labels" }, { "x": 2, "y": 2, "verb": "gm.search" },
+        { "x": 0, "y": 3, "verb": "gm.undo" }, { "x": 1, "y": 3, "verb": "gm.goInbox" }, { "x": 2, "y": 3, "verb": "gm.goSent" }
+      ],
+      "dials": [ { "dial": 0, "layer": 0, "control": "gmList" }, { "dial": 0, "layer": 1, "control": "pageScroll" }, { "dial": 1, "layer": 0, "control": "tabs" }, { "dial": 1, "layer": 1, "control": "zoom" } ],
+      "screen": [ { "slot": "TL", "readout": "gmUnread" }, { "slot": "BL", "readout": "pageScroll" }, { "slot": "TR", "readout": "tabTitle" }, { "slot": "BR", "readout": "zoomLevel" } ],
+      "rationale": "Triage on top (archive and delete are hold-to-confirm), star/unread/snooze and select/label/search in the middle, undo and inbox/sent jumps at the bottom; the left dial walks conversations (push opens)." },
+    { "device": "stream-deck-plus", "context": "list",
+      "keys": [
+        { "x": 0, "y": 0, "verb": "gm.archive" }, { "x": 1, "y": 0, "verb": "gm.delete" }, { "x": 2, "y": 0, "verb": "gm.compose" }, { "x": 3, "y": 0, "verb": "gm.search" },
+        { "x": 0, "y": 1, "verb": "gm.star" }, { "x": 1, "y": 1, "verb": "gm.markUnread" }, { "x": 2, "y": 1, "verb": "gm.undo" }, { "x": 3, "y": 1, "verb": "gm.goInbox" }
+      ],
+      "dials": [ { "dial": 0, "control": "gmList" }, { "dial": 1, "control": "pageScroll" }, { "dial": 2, "control": "tabs" }, { "dial": 3, "control": "zoom" } ],
+      "screen": [ { "slot": "0", "readout": "gmUnread" }, { "slot": "1", "readout": "pageScroll" }, { "slot": "2", "readout": "tabTitle" }, { "slot": "3", "readout": "zoomLevel" } ],
+      "rationale": "Triage and compose/search on top, star/unread/undo/inbox below; conversation walker, page, tabs and zoom on the dials." }
+  ],
+  "sources": [
+    { "id": "S1", "title": "Keyboard shortcuts for Gmail (Computer)", "url": "https://support.google.com/mail/answer/6594?hl=en&co=GENIE.Platform%3DDesktop", "publisher": "Google (Gmail Help)", "kind": "official", "accessed": "2026-10-16", "appliesToVersion": "Gmail web, current", "note": "States that the Actions, Jumping, Threadlist selection, Navigation and Application shortcuts 'won't work unless keyboard shortcuts are turned on'; documents custom shortcuts under Settings > Advanced." },
+    { "id": "S2", "title": "Prism browser research: titles, unread counts, privacy (sections 3.2, 10)", "url": "local:aaa-prism-play/research/browser.md", "kind": "local", "accessed": "2026-10-16" }
+  ],
+  "confidence": "medium",
+  "conflicts": [
+    "S1 lists 'Archive conversation and go previous/next' as '] or [' without saying which key goes which way; left out until tested."
+  ],
+  "gaps": [
+    "Whether the user has Gmail keyboard shortcuts on is unknowable from outside the page; every single-key verb shows a 'turn on shortcuts' badge until the user confirms in the PI.",
+    "Thread and compose detection (URL hash / ?compose=) are unverified; inline replies may not change the URL.",
+    "Window-title fallback is unverified (no signed-in session); Gmail titles contain the account address and subjects, so tabTitle is streamer-hidden and mail domains are always-hidden in the extension (S2 §10).",
+    "P / N (previous/next message in a conversation) are listed in S1's compose section without the 'needs shortcuts on' note; behavior with shortcuts off not tested.",
+    "Punctuation keys (#, !, *) are US-layout positions; other layouts need a per-locale map.",
+    "Single-key verbs type their letter if a text field has focus (an inline reply box, the search box). The compose context is deliberately NOT a child of list, so list verbs never apply while composing; inline replies that don't change the URL are the remaining risk."
+  ],
+  "notes": [
+    "Safety: archive, delete, spam and send are confirm (hold). None is never-auto, so a user macro can still run them after the hold; the engine must never let AI or schedules run them (treat as never-auto for automation).",
+    "Long-form notes: packs/notes/site-gmail.md."
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "AWS_REGION": "us-east-2"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npm test:*)"
+    ],
+    "deny": []
+  },
+  "model": "opus",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:/Users/example/AppData/Local/Programs/orca/resources/bin/orca-hook.exe\" claude UserPromptSubmit",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:/Users/example/AppData/Local/Programs/orca/resources/bin/orca-hook.exe\" claude PermissionRequest",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:/Users/example/AppData/Local/Programs/orca/resources/bin/orca-hook.exe\" claude Stop",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "powershell -NoProfile -File C:/Users/example/orca-status.ps1"
+  },
+  "enabledPlugins": {
+    "example@marketplace": true
+  },
+  "theme": "dark",
+  "unicodeKey": "Grüße — café ✓"
+}

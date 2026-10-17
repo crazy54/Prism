@@ -1,0 +1,3804 @@
+{
+  "$schema": "./schema/context-pack.schema.json",
+  "schemaVersion": 1,
+  "id": "windows-shell",
+  "name": "Windows 11 shell + File Explorer",
+  "vendor": "Microsoft",
+  "kind": "shell",
+  "layer": "base",
+  "packVersion": "0.1.0",
+  "platforms": [
+    "windows"
+  ],
+  "verifiedAgainst": {
+    "version": "Windows 11 version 26H2 (OS build 26300)",
+    "build": "10.0.26300.9711",
+    "installedHere": "Windows 11 Pro 26H2, 10.0.26300.9711 (registry: CurrentBuild 26300, UBR 9711, DisplayVersion 26H2, LCUVer 10.0.26100.9711, BuildLabEx 26100.1 ge_release; no Insider BranchName under WindowsSelfHost). ProductName still reads 'Windows 10 Pro', as it does on every Windows 11.",
+    "date": "2026-10-16",
+    "method": "mixed",
+    "note": "Not an Insider or 26H1 build: Microsoft's release-information page (S13) lists 26H2 = OS build 26300 in the General Availability Channel (released 2026-09-29), and 26300.9711 is the 2026-10-13 update (KB5127648). 26H2 is an enablement package on the servicing branch shared with 24H2 (26100) and 25H2 (26200); 26H1 is the separate build-28000 platform for new devices. Shortcuts come from Microsoft's own lists (S1-S3, S9-S11) checked on 2026-10-16; none were pressed on this PC (read-only rule)."
+  },
+  "policy": {
+    "class": "desktop-app",
+    "input": "allowed",
+    "sight": "forbidden",
+    "closedLoop": "forbidden",
+    "reason": "The OS shell; every default here is a documented shortcut or a Prism Control windows-module verb, so Sight isn't needed."
+  },
+  "keyMode": "vk",
+  "match": {
+    "any": [
+      {
+        "process": "explorer.exe",
+        "windowClass": "CabinetWClass",
+        "confidence": "official",
+        "note": "File Explorer folder windows (S16). Not observed live: no Explorer window was open during the probe."
+      },
+      {
+        "process": "explorer.exe",
+        "windowClass": "Progman",
+        "confidence": "verified-local",
+        "note": "The desktop (seen in a read-only window-class probe)."
+      },
+      {
+        "process": "explorer.exe",
+        "windowClass": "WorkerW",
+        "confidence": "unverified",
+        "note": "Desktop wallpaper/icon host that can take focus after Win+D."
+      },
+      {
+        "process": "explorer.exe",
+        "windowClass": "Shell_TrayWnd",
+        "confidence": "verified-local",
+        "note": "Main taskbar."
+      },
+      {
+        "process": "explorer.exe",
+        "windowClass": "Shell_SecondaryTrayWnd",
+        "confidence": "verified-local",
+        "note": "Taskbars on the other monitors."
+      },
+      {
+        "process": "Taskmgr.exe",
+        "confidence": "official",
+        "note": "Task Manager (Ctrl+Shift+Esc, S1)."
+      }
+    ]
+  },
+  "contexts": [
+    {
+      "id": "desktop",
+      "label": "Desktop / any app (global shortcuts)",
+      "default": true,
+      "priority": 5,
+      "detect": {
+        "all": [
+          {
+            "type": "always"
+          }
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Kind 'shell' is meant as the base layer under every app: the Win-key verbs (contexts '*') work whatever is in front. The schema has no 'global/fallback' flag; see notes."
+    },
+    {
+      "id": "explorer",
+      "label": "File Explorer window",
+      "parent": "desktop",
+      "priority": 50,
+      "hysteresisMs": 300,
+      "detect": {
+        "all": [
+          {
+            "type": "process",
+            "regex": "^explorer\\.exe$"
+          },
+          {
+            "type": "module",
+            "field": "windows.foreground.windowClass",
+            "equals": "CabinetWClass",
+            "note": "There's no windowClass detector type; Desktop's foreground tracker would publish the class."
+          }
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S16"
+      ],
+      "notes": "explorer.exe also owns the desktop and the taskbar, so the process alone isn't enough."
+    },
+    {
+      "id": "taskManager",
+      "label": "Task Manager",
+      "parent": "desktop",
+      "priority": 50,
+      "hysteresisMs": 300,
+      "detect": {
+        "any": [
+          {
+            "type": "process",
+            "regex": "^Taskmgr\\.exe$"
+          }
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S9"
+      ],
+      "notes": "Task Manager usually runs elevated. If Prism Control isn't elevated, UIPI drops injected keys into it; see gaps."
+    }
+  ],
+  "verbs": [
+    {
+      "id": "shell.win.slot1",
+      "label": "WINDOW 1",
+      "longLabel": "Live window 1 (Alt+Tab order)",
+      "glyph": "window",
+      "monogram": "W1",
+      "category": "primary",
+      "priority": 92,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.window.focus",
+        "args": {
+          "mode": "zorder",
+          "slot": 1
+        },
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.window"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "NO WINDOW",
+        "hint": "Nothing in this slot, or the windows module isn't loaded.",
+        "when": [
+          "moduleMissing",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ],
+      "notes": "Live thumbnail + app icon; title hidden in streamer-safe mode. No Windows shortcut does this (Alt+Tab is the closest)."
+    },
+    {
+      "id": "shell.win.slot2",
+      "label": "WINDOW 2",
+      "longLabel": "Live window 2",
+      "glyph": "window",
+      "monogram": "W2",
+      "category": "primary",
+      "priority": 90,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.window.focus",
+        "args": {
+          "mode": "zorder",
+          "slot": 2
+        },
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.window"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "NO WINDOW",
+        "hint": "Nothing in this slot, or the windows module isn't loaded.",
+        "when": [
+          "moduleMissing",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "shell.win.slot3",
+      "label": "WINDOW 3",
+      "longLabel": "Live window 3",
+      "glyph": "window",
+      "monogram": "W3",
+      "category": "primary",
+      "priority": 88,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.window.focus",
+        "args": {
+          "mode": "zorder",
+          "slot": 3
+        },
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.window"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "NO WINDOW",
+        "hint": "Nothing in this slot, or the windows module isn't loaded.",
+        "when": [
+          "moduleMissing",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "shell.win.last",
+      "label": "LAST APP",
+      "longLabel": "Switch to the previous window (one Alt+Tab)",
+      "glyph": "sync",
+      "category": "nav",
+      "priority": 58,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Tab",
+        "note": "A quick press-and-release flips to the most recent window."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "LAST APP",
+        "hint": "Only one window open.",
+        "when": [
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.desktop.show",
+      "label": "DESKTOP",
+      "longLabel": "Show / hide the desktop",
+      "glyph": "home",
+      "category": "nav",
+      "priority": 74,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+D"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "DESKTOP",
+        "hint": "Windows didn't take the shortcut.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.explorer.open",
+      "label": "EXPLORER",
+      "longLabel": "Open File Explorer",
+      "glyph": "folder",
+      "category": "primary",
+      "priority": 80,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+E"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "EXPLORER",
+        "hint": "Windows didn't take the shortcut.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.search",
+      "label": "SEARCH",
+      "longLabel": "Windows search",
+      "glyph": "search",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+S"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+Q"
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "SEARCH",
+        "hint": "Windows didn't take the shortcut.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.settings",
+      "label": "SETTINGS",
+      "glyph": "gear",
+      "monogram": "SET",
+      "category": "system",
+      "priority": 40,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+I"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "SETTINGS",
+        "hint": "Windows didn't take the shortcut.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.quickSettings",
+      "label": "QUICK SET",
+      "longLabel": "Quick settings (Wi-Fi, Bluetooth, volume, …)",
+      "glyph": "wifi",
+      "category": "system",
+      "priority": 46,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+A"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "QUICK SET",
+        "hint": "Windows didn't take the shortcut.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Microsoft's list calls it the 'action center'; on Windows 11 it opens quick settings."
+    },
+    {
+      "id": "shell.notifications",
+      "label": "NOTIFY",
+      "longLabel": "Notification center and calendar",
+      "glyph": "alert",
+      "category": "system",
+      "priority": 44,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+N"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "NOTIFY",
+        "hint": "Windows didn't take the shortcut.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "The key can badge the count from notificationCount (count only, never content)."
+    },
+    {
+      "id": "shell.taskView",
+      "label": "TASK VIEW",
+      "glyph": "pages",
+      "category": "nav",
+      "priority": 66,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+Tab"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "TASK VIEW",
+        "hint": "Windows didn't take the shortcut.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.desk.next",
+      "label": "NEXT DESK",
+      "longLabel": "Next virtual desktop",
+      "glyph": "skip-next",
+      "category": "nav",
+      "priority": 64,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.desktops.next",
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.desktops",
+        "note": "The module presses Win+Ctrl+Right and reads the true current desktop back from the registry."
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+Ctrl+Right"
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "LAST DESK",
+        "hint": "Already on the last desktop.",
+        "when": [
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S17"
+      ]
+    },
+    {
+      "id": "shell.desk.prev",
+      "label": "PREV DESK",
+      "longLabel": "Previous virtual desktop",
+      "glyph": "skip-prev",
+      "category": "nav",
+      "priority": 63,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.desktops.prev",
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.desktops"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+Ctrl+Left"
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "FIRST DESK",
+        "hint": "Already on the first desktop.",
+        "when": [
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S17"
+      ]
+    },
+    {
+      "id": "shell.desk.new",
+      "label": "NEW DESK",
+      "longLabel": "Create a virtual desktop",
+      "glyph": "pages",
+      "monogram": "D+",
+      "category": "tool",
+      "priority": 38,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+Ctrl+D"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "NEW DESK",
+        "hint": "Windows didn't take the shortcut.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.desk.close",
+      "label": "CLOSE DESK",
+      "longLabel": "Close this virtual desktop (windows move to the neighbor)",
+      "glyph": "pages",
+      "monogram": "D-",
+      "category": "system",
+      "priority": 18,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+Ctrl+F4"
+      },
+      "safety": "never-auto",
+      "unavailable": {
+        "label": "CLOSE DESK",
+        "hint": "Only one desktop.",
+        "when": [
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.snap.left",
+      "label": "SNAP LEFT",
+      "longLabel": "Throw the active window into the left half",
+      "glyph": "snap-left",
+      "monogram": "[<",
+      "category": "tool",
+      "priority": 56,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.placer.zone",
+        "args": {
+          "zone": "leftHalf",
+          "monitor": "current"
+        },
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.zone"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+Left",
+          "note": "Native Snap; repeated presses walk the window across monitors."
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "CAN'T MOVE",
+        "hint": "Elevated, hung or exclusive-fullscreen windows can't be moved from here.",
+        "when": [
+          "moduleMissing",
+          "permissionNeeded"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S17"
+      ]
+    },
+    {
+      "id": "shell.snap.right",
+      "label": "SNAP RIGHT",
+      "longLabel": "Throw the active window into the right half",
+      "glyph": "snap-right",
+      "monogram": ">]",
+      "category": "tool",
+      "priority": 55,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.placer.zone",
+        "args": {
+          "zone": "rightHalf",
+          "monitor": "current"
+        },
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.zone"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+Right"
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "CAN'T MOVE",
+        "hint": "Elevated, hung or exclusive-fullscreen windows can't be moved from here.",
+        "when": [
+          "moduleMissing",
+          "permissionNeeded"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S17"
+      ]
+    },
+    {
+      "id": "shell.snap.layouts",
+      "label": "SNAP MENU",
+      "longLabel": "Snap layouts flyout",
+      "glyph": "layout",
+      "monogram": "SL",
+      "category": "tool",
+      "priority": 48,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+Z"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "SNAP MENU",
+        "hint": "Snap may be turned off in Settings > System > Multitasking.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S11"
+      ],
+      "notes": "Since build 22593 the flyout numbers each layout, so a follow-up digit picks one (a sequence verb could target a layout)."
+    },
+    {
+      "id": "shell.window.maximize",
+      "label": "MAXIMIZE",
+      "longLabel": "Maximize / restore the active window (true state)",
+      "glyph": "maximize",
+      "monogram": "MAX",
+      "category": "toggle",
+      "priority": 52,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.window.maximize",
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.maximize"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+Up",
+          "note": "Maximize only; Win+Shift+Down restores."
+        }
+      ],
+      "stateReadout": "maximizedState",
+      "safety": "safe",
+      "unavailable": {
+        "label": "CAN'T MOVE",
+        "hint": "This window can't be resized from here.",
+        "when": [
+          "moduleMissing",
+          "permissionNeeded"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S17"
+      ]
+    },
+    {
+      "id": "shell.window.minimize",
+      "label": "MINIMIZE",
+      "glyph": "minimize",
+      "monogram": "MIN",
+      "category": "tool",
+      "priority": 42,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+Down",
+        "note": "On a maximized or snapped window the first press restores it; a second press minimizes."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "MINIMIZE",
+        "hint": "Windows didn't take the shortcut.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.window.nextMonitor",
+      "label": "NEXT SCREEN",
+      "longLabel": "Move the active window to the next monitor",
+      "glyph": "monitor-next",
+      "monogram": "M>",
+      "category": "tool",
+      "priority": 50,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.placer.nextMonitor",
+        "args": {
+          "direction": "next"
+        },
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.next-monitor",
+        "note": "Keeps relative size, position and maximized state."
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+Shift+Right"
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "ONE SCREEN",
+        "hint": "Only one monitor, or this window can't be moved from here.",
+        "when": [
+          "moduleMissing",
+          "permissionNeeded"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S17"
+      ],
+      "notes": "Win+Shift+Left moves to the monitor on the left."
+    },
+    {
+      "id": "shell.window.topmost",
+      "label": "ON TOP",
+      "longLabel": "Keep the active window on top (true state)",
+      "glyph": "pin",
+      "monogram": "TOP",
+      "category": "toggle",
+      "priority": 40,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.window.topmost",
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.topmost"
+      },
+      "stateReadout": "topmostState",
+      "safety": "safe",
+      "unavailable": {
+        "label": "ON TOP",
+        "hint": "Admin windows can't be changed from here.",
+        "when": [
+          "moduleMissing",
+          "permissionNeeded"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ],
+      "notes": "Windows has no built-in shortcut. PowerToys Always On Top has its own (user-set) hotkey; the module's SetWindowPos state agrees with it."
+    },
+    {
+      "id": "shell.window.close",
+      "label": "CLOSE APP",
+      "longLabel": "Close the active window (Alt+F4)",
+      "glyph": "close",
+      "monogram": "X",
+      "category": "system",
+      "priority": 26,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+F4"
+      },
+      "safety": "confirm",
+      "unavailable": {
+        "label": "CLOSE APP",
+        "hint": "Nothing to close.",
+        "when": [
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Hold to confirm. With no window focused, Alt+F4 opens the Shut Down dialog; the hold overlay names the target window."
+    },
+    {
+      "id": "shell.clipboard",
+      "label": "CLIPBOARD",
+      "longLabel": "Clipboard history panel",
+      "glyph": "clipboard",
+      "monogram": "CB",
+      "category": "tool",
+      "priority": 68,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+V"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "CLIPBOARD",
+        "hint": "Clipboard history may be off: Settings > System > Clipboard.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "The windows module's clipboard keys (feature 8) paste history items directly; this opens Windows' own panel."
+    },
+    {
+      "id": "shell.snip",
+      "label": "SNIP",
+      "longLabel": "Snip a region to the clipboard",
+      "glyph": "camera",
+      "category": "primary",
+      "priority": 86,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+Shift+S"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "SNIP",
+        "hint": "Windows didn't take the shortcut.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "conflict": "PrintScreen alone does the same on Windows 11 by default (S1), unless 'Use the Print Screen key to open screen capture' is off. The Windows 10 list says PrtScn copies the whole screen. Win+Shift+S is the same everywhere, so it's the primary."
+    },
+    {
+      "id": "shell.screenRecord",
+      "label": "SCREEN REC",
+      "longLabel": "Record a screen region (Snipping Tool, MP4)",
+      "glyph": "record",
+      "category": "tool",
+      "priority": 54,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+Shift+R"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "SCREEN REC",
+        "hint": "Needs a recent Snipping Tool.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Saves to Videos\\Screen Recordings by default. Snipping Tool 11.2608.41.0 is installed here."
+    },
+    {
+      "id": "shell.screenshot",
+      "label": "SCREENSHOT",
+      "longLabel": "Full-screen screenshot saved to Pictures\\Screenshots",
+      "glyph": "camera",
+      "category": "tool",
+      "priority": 52,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+PrintScreen"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Alt+PrintScreen",
+          "note": "Active window only, to the clipboard (no file)."
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "SCREENSHOT",
+        "hint": "Windows didn't take the shortcut.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.emoji",
+      "label": "EMOJI",
+      "longLabel": "Emoji, GIF and symbol panel",
+      "glyph": "emoji",
+      "monogram": ":)",
+      "category": "tool",
+      "priority": 36,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+Period"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+Semicolon"
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "EMOJI",
+        "hint": "Put the cursor in a text box first.",
+        "when": [
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.dictate",
+      "label": "DICTATE",
+      "longLabel": "Voice typing",
+      "glyph": "mic",
+      "category": "tool",
+      "priority": 34,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+H"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "DICTATE",
+        "hint": "Put the cursor in a text box first.",
+        "when": [
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.copilot",
+      "label": "COPILOT",
+      "longLabel": "Copilot (or what the Copilot key is set to)",
+      "glyph": "chat",
+      "category": "tool",
+      "priority": 28,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+C"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+Shift+F23",
+          "note": "What a hardware Copilot key sends on most keyboards (S4, S8); it runs whatever the user picked for the key."
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "COPILOT",
+        "hint": "Copilot isn't available; Windows opens search instead.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S4",
+        "S6",
+        "S8"
+      ],
+      "conflict": "Win+C has changed meaning across Windows 11: Teams Chat (21H2/22H2, secondary sources only), Copilot in Windows (23H2, build 23493), dead for a while in mid-2024 when Copilot became an app, then a Copilot prompt box from the May 2025 preview update (S6). Today S1 says it opens Microsoft Copilot or Microsoft 365 Copilot, or Windows search when Copilot isn't available. The Copilot key sends Win+C on some keyboards and LWin+LShift+F23 on others (S4). The settings path also differs: Personalization > Text input (S1) vs Bluetooth & devices > Keyboard (S5).",
+      "notes": "The Copilot app (installed here) also claims Alt+Space globally (S7)."
+    },
+    {
+      "id": "shell.taskManager",
+      "label": "TASK MGR",
+      "longLabel": "Open Task Manager",
+      "glyph": "cpu",
+      "category": "system",
+      "priority": 50,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Shift+Esc"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "TASK MGR",
+        "hint": "Windows didn't take the shortcut.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "shell.lock",
+      "label": "LOCK",
+      "longLabel": "Lock the PC",
+      "glyph": "lock",
+      "category": "system",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.power.lock",
+        "status": "in-progress",
+        "note": "W2 feature 10 (LockWorkStation); no action UUID yet."
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+L",
+          "note": "Reserved by Windows; whether an injected Win+L locks is unverified, so the module is primary."
+        }
+      ],
+      "safety": "never-auto",
+      "unavailable": {
+        "label": "LOCK",
+        "hint": "Needs the Prism Control windows module.",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S4",
+        "S17"
+      ],
+      "notes": "A single press, per the spec, but never fired by a macro, schedule or AI."
+    },
+    {
+      "id": "shell.restart",
+      "label": "RESTART",
+      "longLabel": "Restart the PC (hold)",
+      "glyph": "sync",
+      "category": "system",
+      "priority": 22,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.power.restart",
+        "status": "in-progress",
+        "note": "W2 feature 10; no action UUID yet."
+      },
+      "safety": "confirm",
+      "unavailable": {
+        "label": "RESTART",
+        "hint": "Needs the Prism Control windows module.",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ],
+      "notes": "No direct Windows shortcut (Ctrl+Alt+Del can't be injected). Hold to confirm; the hold names the action."
+    },
+    {
+      "id": "shell.shutdown",
+      "label": "SHUT DOWN",
+      "longLabel": "Shut down the PC (hold)",
+      "glyph": "power",
+      "category": "system",
+      "priority": 22,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.power.shutdown",
+        "status": "in-progress",
+        "note": "W2 feature 10; no action UUID yet."
+      },
+      "safety": "confirm",
+      "unavailable": {
+        "label": "SHUT DOWN",
+        "hint": "Needs the Prism Control windows module.",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "shell.killApp",
+      "label": "KILL APP",
+      "longLabel": "End the frozen app in front (hold)",
+      "glyph": "alert",
+      "category": "system",
+      "priority": 30,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.system.killForeground",
+        "status": "in-progress",
+        "note": "W2 feature 11: foreground only, built-in deny list, names the target during the hold."
+      },
+      "safety": "confirm",
+      "unavailable": {
+        "label": "PROTECTED",
+        "hint": "System, security, anti-cheat and Explorer processes are never killed from here.",
+        "when": [
+          "moduleMissing",
+          "policyBlocked"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "shell.hdr",
+      "label": "HDR",
+      "longLabel": "HDR on/off for the main monitor (true state)",
+      "glyph": "hdr",
+      "monogram": "HDR",
+      "category": "toggle",
+      "priority": 46,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.hdr.toggle",
+        "args": {
+          "monitor": "primary"
+        },
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.hdr",
+        "note": "Reads DisplayConfig state, sets per monitor, shows a 2 s resync state."
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+Alt+B",
+          "note": "Windows' own toggle (Game Bar-backed); no state, monitor chosen by Windows."
+        }
+      ],
+      "stateReadout": "hdrState",
+      "safety": "safe",
+      "unavailable": {
+        "label": "NO HDR",
+        "hint": "This monitor doesn't report HDR support.",
+        "when": [
+          "moduleMissing",
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S17"
+      ]
+    },
+    {
+      "id": "shell.refreshHz",
+      "label": "REFRESH HZ",
+      "longLabel": "Refresh-rate preset (e.g. 240 / 120 Hz), auto-reverts",
+      "glyph": "refresh-rate",
+      "monogram": "Hz",
+      "category": "toggle",
+      "priority": 34,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.display.refreshToggle",
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.refresh"
+      },
+      "stateReadout": "refreshRate",
+      "safety": "safe",
+      "unavailable": {
+        "label": "REFRESH HZ",
+        "hint": "Needs the Prism Control windows module.",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ],
+      "notes": "No Windows shortcut exists. Display changes always show KEEP? with a countdown and revert if not kept."
+    },
+    {
+      "id": "shell.darkMode",
+      "label": "DARK MODE",
+      "longLabel": "Dark / light mode (true state)",
+      "glyph": "bulb",
+      "category": "toggle",
+      "priority": 32,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.toggles.darkMode",
+        "status": "in-progress",
+        "note": "W2 feature 6; no action UUID yet."
+      },
+      "stateReadout": "darkModeState",
+      "safety": "safe",
+      "unavailable": {
+        "label": "DARK MODE",
+        "hint": "Needs the Prism Control windows module.",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ],
+      "notes": "No Windows shortcut exists."
+    },
+    {
+      "id": "shell.gameBar",
+      "label": "GAME BAR",
+      "glyph": "gamepad",
+      "monogram": "GB",
+      "category": "tool",
+      "priority": 38,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Win+G"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "GAME BAR",
+        "hint": "Game Bar is off in Settings > Gaming.",
+        "when": [
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "shell.gameBar.record",
+      "label": "RECORD",
+      "longLabel": "Start / stop Game Bar recording",
+      "glyph": "record",
+      "category": "tool",
+      "priority": 48,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.capture.gameBarRecord",
+        "status": "in-progress",
+        "note": "W2 feature 12: presses the chord and adds hints (Game Bar off, nothing capturable)."
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+Alt+R"
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "RECORD",
+        "hint": "Game Bar is off, or there's no game/app window to capture.",
+        "when": [
+          "moduleMissing",
+          "busy"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S2",
+        "S3"
+      ],
+      "notes": "The screen flashes at start and stop. The user can change this shortcut in Game Bar settings (S2); where that is stored is unverified (see userBindings)."
+    },
+    {
+      "id": "shell.gameBar.clip",
+      "label": "CLIP LAST",
+      "longLabel": "Save the last moments (Game Bar background recording)",
+      "glyph": "timer",
+      "category": "tool",
+      "priority": 46,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.capture.gameBarClip",
+        "status": "in-progress",
+        "note": "W2 feature 12: says 'background recording off' when it is."
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Win+Alt+G"
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "BG REC OFF",
+        "hint": "Turn on Settings > Gaming > Captures > Record what happened.",
+        "when": [
+          "moduleMissing",
+          "busy"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S2",
+        "S3",
+        "S18"
+      ],
+      "notes": "Only works with background recording on (S2). Win+Alt+PrintScreen (game screenshot) and Win+Alt+M (mic recording on/off) are the other Game Bar defaults."
+    },
+    {
+      "id": "shell.browser.focus",
+      "label": "FOCUS",
+      "longLabel": "Bring the browsed window to the front",
+      "glyph": "target",
+      "category": "nav",
+      "priority": 20,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.browser.focus",
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.browser"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "FOCUS",
+        "hint": "Needs the Prism Control windows module.",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ],
+      "notes": "Push of the windowBrowser dial."
+    },
+    {
+      "id": "shell.monitor.next",
+      "label": "NEXT MON",
+      "longLabel": "Brightness dial: next monitor / all",
+      "glyph": "monitor",
+      "monogram": "MON",
+      "category": "nav",
+      "priority": 18,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.monitor.next",
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.monitor"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "NO DDC/CI",
+        "hint": "No monitor answers DDC/CI.",
+        "when": [
+          "moduleMissing",
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ],
+      "notes": "Push of the brightness dial."
+    },
+    {
+      "id": "shell.placer.throw",
+      "label": "THROW",
+      "longLabel": "Placer: throw the active window into the chosen zone",
+      "glyph": "target",
+      "category": "tool",
+      "priority": 18,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.placer.throw",
+        "status": "in-progress",
+        "action": "com.jeremyfhall.prismcontrol.windows.placer"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "CAN'T MOVE",
+        "hint": "Elevated, hung or exclusive-fullscreen windows can't be moved from here.",
+        "when": [
+          "moduleMissing",
+          "permissionNeeded"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ],
+      "notes": "Push of the placer dial."
+    },
+    {
+      "id": "explorer.nav.up",
+      "label": "UP",
+      "longLabel": "Up one folder",
+      "glyph": "folder-up",
+      "monogram": "UP",
+      "category": "nav",
+      "priority": 80,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Up"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "UP",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "explorer.nav.back",
+      "label": "BACK",
+      "longLabel": "Previous folder",
+      "glyph": "back",
+      "category": "nav",
+      "priority": 78,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Left"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Backspace",
+          "note": "Only when focus isn't in a text box."
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "BACK",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Alt+Right goes forward (on the folderHistory dial)."
+    },
+    {
+      "id": "explorer.folder.new",
+      "label": "NEW FOLDER",
+      "glyph": "folder",
+      "monogram": "F+",
+      "category": "primary",
+      "priority": 92,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Shift+N"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "NEW FOLDER",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "explorer.item.rename",
+      "label": "RENAME",
+      "glyph": "note",
+      "category": "primary",
+      "priority": 88,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "F2"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "RENAME",
+        "hint": "Select a file or folder first.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "explorer.search",
+      "label": "SEARCH",
+      "longLabel": "Search this folder",
+      "glyph": "search",
+      "category": "primary",
+      "priority": 84,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+E"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Ctrl+F"
+        },
+        {
+          "kind": "chord",
+          "chord": "F3"
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "SEARCH",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "explorer.address",
+      "label": "ADDRESS",
+      "longLabel": "Edit the address bar",
+      "glyph": "marker",
+      "category": "tool",
+      "priority": 55,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+L"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Alt+D"
+        },
+        {
+          "kind": "chord",
+          "chord": "F4"
+        }
+      ],
+      "safety": "safe",
+      "unavailable": {
+        "label": "ADDRESS",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "explorer.tab.new",
+      "label": "NEW TAB",
+      "glyph": "pages",
+      "category": "tool",
+      "priority": 62,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+T"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "NEW TAB",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "explorer.tab.close",
+      "label": "CLOSE TAB",
+      "longLabel": "Close the tab (the window, if it's the last tab)",
+      "glyph": "close",
+      "monogram": "XT",
+      "category": "tool",
+      "priority": 40,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+W"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "CLOSE TAB",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Ctrl+1..9 jumps to tab N."
+    },
+    {
+      "id": "explorer.clip.copy",
+      "label": "COPY",
+      "glyph": "copy",
+      "monogram": "CP",
+      "category": "tool",
+      "priority": 76,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+C"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "COPY",
+        "hint": "Select something first.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "explorer.clip.paste",
+      "label": "PASTE",
+      "glyph": "paste",
+      "monogram": "PS",
+      "category": "tool",
+      "priority": 75,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+V"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PASTE",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Ctrl+X cuts (not drawn; add if a user asks)."
+    },
+    {
+      "id": "explorer.edit.undo",
+      "label": "UNDO",
+      "longLabel": "Undo the last file operation (move, rename, delete)",
+      "glyph": "undo",
+      "monogram": "UN",
+      "category": "tool",
+      "priority": 70,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Z"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "UNDO",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "S1 lists Ctrl+Z as general 'undo the previous action'; that Explorer undoes file operations is long-standing behavior, not stated on the page."
+    },
+    {
+      "id": "explorer.copyPath",
+      "label": "COPY PATH",
+      "longLabel": "Copy the selected item's full path (quoted)",
+      "glyph": "copy",
+      "monogram": "CPP",
+      "category": "tool",
+      "priority": 46,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Shift+C"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "COPY PATH",
+        "hint": "Select a file or folder first.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "unverified",
+      "verify": "In Explorer, select a file, press Ctrl+Shift+C, then paste into Notepad: expect the full path in quotes. Do it on a test folder with a fictional file name.",
+      "notes": "Not on Microsoft's list (S1). Secondary sources (How-To Geek 2024, Windows Latest 2021) say Windows 11 22H2 added it alongside 'Copy as path' in the context menu."
+    },
+    {
+      "id": "explorer.pane.preview",
+      "label": "PREVIEW",
+      "longLabel": "Show / hide the preview pane",
+      "glyph": "preview",
+      "monogram": "PV",
+      "category": "toggle",
+      "priority": 56,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+P"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PREVIEW",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Preview and details panes share one slot: turning one on hides the other. No state readout yet."
+    },
+    {
+      "id": "explorer.pane.details",
+      "label": "INFO PANE",
+      "longLabel": "Show / hide the details pane",
+      "glyph": "info",
+      "category": "toggle",
+      "priority": 50,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+P"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "INFO PANE",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "explorer.item.properties",
+      "label": "PROPERTIES",
+      "glyph": "properties",
+      "monogram": "PR",
+      "category": "tool",
+      "priority": 44,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Enter"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "PROPERTIES",
+        "hint": "Select a file or folder first.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "explorer.view.details",
+      "label": "DETAILS",
+      "longLabel": "Details view (columns)",
+      "glyph": "view-details",
+      "monogram": "V6",
+      "category": "mode",
+      "priority": 42,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Shift+6"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "DETAILS",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S12"
+      ],
+      "notes": "Ctrl+Shift+1..8 = extra large, large, medium, small icons, list, details, tiles, content (S12; S1 confirms 2 and 6)."
+    },
+    {
+      "id": "explorer.view.largeIcons",
+      "label": "BIG ICONS",
+      "longLabel": "Large icons view",
+      "glyph": "view-icons",
+      "monogram": "V2",
+      "category": "mode",
+      "priority": 36,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Shift+2"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "BIG ICONS",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S12"
+      ]
+    },
+    {
+      "id": "explorer.view.hidden",
+      "label": "HIDDEN",
+      "longLabel": "Show hidden items (true state)",
+      "glyph": "hidden-files",
+      "monogram": "HID",
+      "category": "toggle",
+      "priority": 52,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "windows.toggles.hiddenFiles",
+        "status": "in-progress",
+        "note": "W2 feature 6: writes the Explorer advanced setting and broadcasts the change; reads it back."
+      },
+      "stateReadout": "hiddenItemsState",
+      "safety": "safe",
+      "unavailable": {
+        "label": "HIDDEN",
+        "hint": "Needs the Prism Control windows module.",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ],
+      "notes": "Explorer has no default shortcut for this (View > Show > Hidden items). File-name extensions are the same pattern (windows.toggles.fileExtensions)."
+    },
+    {
+      "id": "explorer.item.delete",
+      "label": "DELETE",
+      "longLabel": "Move to the Recycle Bin (hold)",
+      "glyph": "trash",
+      "monogram": "DEL",
+      "category": "system",
+      "priority": 48,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+D"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Delete"
+        }
+      ],
+      "safety": "confirm",
+      "unavailable": {
+        "label": "DELETE",
+        "hint": "Select something first.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Recoverable from the Recycle Bin, but a stray press shouldn't delete: hold to confirm."
+    },
+    {
+      "id": "explorer.item.purge",
+      "label": "PERM DELETE",
+      "longLabel": "Delete permanently, skip the Recycle Bin (hold)",
+      "glyph": "trash",
+      "monogram": "DL!",
+      "category": "system",
+      "priority": 16,
+      "contexts": [
+        "explorer"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Shift+Delete"
+      },
+      "safety": "confirm",
+      "unavailable": {
+        "label": "PERM DELETE",
+        "hint": "Select something first.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Windows normally asks again; never automated."
+    },
+    {
+      "id": "taskmgr.filter",
+      "label": "FILTER",
+      "longLabel": "Focus the filter (search) box",
+      "glyph": "search",
+      "category": "primary",
+      "priority": 80,
+      "contexts": [
+        "taskManager"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+F"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "FILTER",
+        "hint": "Task Manager isn't in front, or it's elevated and Prism isn't.",
+        "when": [
+          "notForeground",
+          "permissionNeeded"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S10"
+      ],
+      "notes": "Ctrl+F is not documented for Task Manager."
+    },
+    {
+      "id": "taskmgr.runTask",
+      "label": "RUN TASK",
+      "longLabel": "Run new task",
+      "glyph": "rocket",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "taskManager"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+N"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "RUN TASK",
+        "hint": "Task Manager isn't in front, or it's elevated and Prism isn't.",
+        "when": [
+          "notForeground",
+          "permissionNeeded"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S9"
+      ]
+    },
+    {
+      "id": "taskmgr.efficiency",
+      "label": "EFFICIENCY",
+      "longLabel": "Efficiency mode for the selected process",
+      "glyph": "leaf",
+      "monogram": "EFF",
+      "category": "toggle",
+      "priority": 44,
+      "contexts": [
+        "taskManager"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+V"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "EFFICIENCY",
+        "hint": "Select a process first.",
+        "when": [
+          "notForeground",
+          "nothingSelected",
+          "permissionNeeded"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S9"
+      ],
+      "notes": "Grayed out for some system processes."
+    },
+    {
+      "id": "taskmgr.endTask",
+      "label": "END TASK",
+      "longLabel": "End the selected process (hold)",
+      "glyph": "stop",
+      "category": "system",
+      "priority": 70,
+      "contexts": [
+        "taskManager"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+E"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Delete"
+        }
+      ],
+      "safety": "confirm",
+      "unavailable": {
+        "label": "END TASK",
+        "hint": "Select a process first.",
+        "when": [
+          "notForeground",
+          "nothingSelected",
+          "permissionNeeded"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S9"
+      ],
+      "notes": "Task Manager doesn't ask first, so the deck does (hold). The windows module's KILL APP is the safer route for a frozen foreground app."
+    }
+  ],
+  "controls": [
+    {
+      "id": "windowBrowser",
+      "label": "WINDOWS",
+      "glyph": "window",
+      "category": "nav",
+      "priority": 90,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "windows.browser.prev",
+          "status": "in-progress",
+          "action": "com.jeremyfhall.prismcontrol.windows.browser"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "windows.browser.next",
+          "status": "in-progress",
+          "action": "com.jeremyfhall.prismcontrol.windows.browser"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "window",
+          "note": "Browses the module's window list with a big live preview; nothing changes until the push.",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 12,
+          "minIntervalMs": 0
+        }
+      },
+      "push": {
+        "verb": "shell.browser.focus"
+      },
+      "readout": "windowPreview",
+      "safety": "safe",
+      "unavailable": {
+        "label": "WINDOWS",
+        "hint": "Needs the Prism Control windows module.",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "desktops",
+      "label": "DESKTOPS",
+      "glyph": "pages",
+      "category": "nav",
+      "priority": 70,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "windows.desktops.prev",
+          "status": "in-progress",
+          "action": "com.jeremyfhall.prismcontrol.windows.desktops"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "windows.desktops.next",
+          "status": "in-progress",
+          "action": "com.jeremyfhall.prismcontrol.windows.desktops"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "desktop",
+          "note": "The module takes one step per turn event (300 ms gap) whatever the tick count, so a spin can't skip desktops.",
+          "confidence": "official"
+        }
+      },
+      "push": {
+        "verb": "shell.taskView"
+      },
+      "readout": "desktopPager",
+      "safety": "safe",
+      "unavailable": {
+        "label": "DESKTOPS",
+        "hint": "Needs the Prism Control windows module (Win+Ctrl+Left/Right still work).",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S17"
+      ]
+    },
+    {
+      "id": "brightness",
+      "label": "BRIGHTNESS",
+      "glyph": "bulb",
+      "category": "tool",
+      "priority": 66,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "windows.monitor.brightnessDown",
+          "status": "in-progress",
+          "action": "com.jeremyfhall.prismcontrol.windows.monitor"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "windows.monitor.brightnessUp",
+          "status": "in-progress",
+          "action": "com.jeremyfhall.prismcontrol.windows.monitor"
+        },
+        "step": {
+          "perPress": null,
+          "unit": "%",
+          "note": "DDC/CI writes debounced to 150 ms, final value on release; step size is the module's setting.",
+          "confidence": "official"
+        },
+        "clamp": {
+          "min": 0,
+          "max": 100
+        }
+      },
+      "push": {
+        "verb": "shell.monitor.next"
+      },
+      "readout": "brightnessLevel",
+      "safety": "safe",
+      "unavailable": {
+        "label": "NO DDC/CI",
+        "hint": "No monitor answers DDC/CI, or HDR has locked brightness.",
+        "when": [
+          "moduleMissing",
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ],
+      "notes": "Windows has no brightness shortcut for external monitors."
+    },
+    {
+      "id": "placer",
+      "label": "PLACER",
+      "glyph": "layout",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "windows.placer.prev",
+          "status": "in-progress",
+          "action": "com.jeremyfhall.prismcontrol.windows.placer"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "windows.placer.next",
+          "status": "in-progress",
+          "action": "com.jeremyfhall.prismcontrol.windows.placer"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "zone",
+          "note": "Every monitor's halves/thirds/quadrants in one row, left to right.",
+          "confidence": "official"
+        }
+      },
+      "push": {
+        "verb": "shell.placer.throw"
+      },
+      "readout": "placerZone",
+      "safety": "safe",
+      "unavailable": {
+        "label": "PLACER",
+        "hint": "Needs the Prism Control windows module.",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "folderHistory",
+      "label": "HISTORY",
+      "glyph": "back",
+      "category": "nav",
+      "priority": 80,
+      "contexts": [
+        "explorer"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Alt+Left"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Alt+Right"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "folder",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 6,
+          "minIntervalMs": 60
+        }
+      },
+      "push": {
+        "verb": "explorer.nav.up"
+      },
+      "readout": "explorerFolder",
+      "safety": "safe",
+      "unavailable": {
+        "label": "HISTORY",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "60 ms between presses so each folder load registers."
+    },
+    {
+      "id": "explorerTabs",
+      "label": "TABS",
+      "glyph": "pages",
+      "category": "nav",
+      "priority": 72,
+      "contexts": [
+        "explorer"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Ctrl+Shift+Tab"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Ctrl+Tab"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "tab",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 6,
+          "minIntervalMs": 40
+        }
+      },
+      "push": {
+        "verb": "explorer.tab.new"
+      },
+      "readout": "explorerFolder",
+      "safety": "safe",
+      "unavailable": {
+        "label": "TABS",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "iconSize",
+      "label": "ICON SIZE",
+      "glyph": "view-icons",
+      "category": "tool",
+      "priority": 58,
+      "contexts": [
+        "explorer"
+      ],
+      "turn": {
+        "left": {
+          "kind": "mouse",
+          "button": "wheelDown",
+          "mods": "Ctrl"
+        },
+        "right": {
+          "kind": "mouse",
+          "button": "wheelUp",
+          "mods": "Ctrl"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "size step",
+          "note": "Ctrl+wheel walks through icon sizes and into list/details views.",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 6,
+              "pressesPerTick": 2
+            }
+          ],
+          "maxPressesPerEvent": 10,
+          "minIntervalMs": 20
+        }
+      },
+      "push": {
+        "verb": "explorer.view.details"
+      },
+      "readout": "iconSizeSteps",
+      "safety": "safe",
+      "unavailable": {
+        "label": "ICON SIZE",
+        "hint": "File Explorer isn't in front.",
+        "when": [
+          "notForeground",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "verify": "Wheel input goes to the window under the pointer, not the focused one: check that the engine parks the pointer over the Explorer file list (or skip when the pointer is elsewhere)."
+    },
+    {
+      "id": "taskmgrPages",
+      "label": "PAGES",
+      "glyph": "pages",
+      "category": "nav",
+      "priority": 70,
+      "contexts": [
+        "taskManager"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Ctrl+Shift+Tab"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Ctrl+Tab"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "page",
+          "note": "Processes, Performance, App history, Startup apps, Users, Details, Services.",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 6,
+          "minIntervalMs": 50
+        }
+      },
+      "push": {
+        "verb": "taskmgr.filter"
+      },
+      "readout": "cpuLoad",
+      "safety": "safe",
+      "unavailable": {
+        "label": "PAGES",
+        "hint": "Task Manager isn't in front, or it's elevated and Prism isn't.",
+        "when": [
+          "notForeground",
+          "permissionNeeded"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S9"
+      ]
+    }
+  ],
+  "readouts": [
+    {
+      "id": "windowPreview",
+      "label": "WINDOW",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "windows.browser.preview",
+        "status": "in-progress",
+        "note": "Live WGC thumbnail + icon + title (app name only in streamer-safe)."
+      },
+      "widget": "art",
+      "privacy": "streamer-hide",
+      "refreshHz": 10,
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ],
+      "notes": "A live preview can show anything on screen, so streamer-safe mode hides it."
+    },
+    {
+      "id": "desktopPager",
+      "label": "DESKTOP",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "windows.desktops.current",
+        "status": "in-progress",
+        "note": "Index/count/name from Explorer's registry, re-read every second."
+      },
+      "format": "{index}/{count}",
+      "widget": "text",
+      "privacy": "streamer-hide",
+      "refreshHz": 1,
+      "confidence": "official",
+      "sources": [
+        "S17",
+        "S19"
+      ],
+      "notes": "Desktop names are user text; streamer-safe shows the numbers only."
+    },
+    {
+      "id": "brightnessLevel",
+      "label": "BRIGHT",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "windows.monitor.brightness",
+        "status": "in-progress"
+      },
+      "unit": "%",
+      "format": "{value} %",
+      "range": [
+        0,
+        100
+      ],
+      "widget": "gauge",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "placerZone",
+      "label": "ZONE",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "windows.placer.zone",
+        "status": "in-progress"
+      },
+      "widget": "art",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "hdrState",
+      "label": "HDR",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "windows.hdr.state",
+        "status": "in-progress"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "refreshRate",
+      "label": "HZ",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "windows.display.refreshRate",
+        "status": "in-progress"
+      },
+      "unit": "Hz",
+      "format": "{value} Hz",
+      "widget": "number",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "darkModeState",
+      "label": "DARK",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "windows.toggles.darkMode",
+        "status": "in-progress"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "maximizedState",
+      "label": "MAX",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "windows.window.maximized",
+        "status": "in-progress",
+        "note": "IsZoomed, re-read every second."
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "topmostState",
+      "label": "ON TOP",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "windows.window.topmost",
+        "status": "in-progress"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "notificationCount",
+      "label": "NOTIFS",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "windows.notifications.count",
+        "status": "in-progress",
+        "note": "UserNotificationListener, polled every 5 s; count only."
+      },
+      "widget": "badge",
+      "privacy": "public",
+      "refreshHz": 0.2,
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "gameModeState",
+      "label": "GAME",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "windows.gameMode.active",
+        "status": "in-progress"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "explorerFolder",
+      "label": "FOLDER",
+      "contexts": [
+        "explorer"
+      ],
+      "source": {
+        "kind": "window",
+        "note": "Explorer's title is the current folder (or the full path if 'Display the full path in the title bar' is on)."
+      },
+      "widget": "text",
+      "privacy": "streamer-hide",
+      "refreshHz": 2,
+      "confidence": "official",
+      "sources": [
+        "S16"
+      ],
+      "notes": "Paths can contain user and project names; streamer-safe shows 'File Explorer' only."
+    },
+    {
+      "id": "hiddenItemsState",
+      "label": "HIDDEN",
+      "contexts": [
+        "explorer"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "windows.toggles.hiddenFiles",
+        "status": "in-progress"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "iconSizeSteps",
+      "label": "ICONS",
+      "contexts": [
+        "explorer"
+      ],
+      "source": {
+        "kind": "counted",
+        "control": "iconSize",
+        "note": "Our own wheel steps since the folder opened; Explorer remembers views per folder, so this is relative."
+      },
+      "unit": "steps",
+      "format": "{value:+d}",
+      "widget": "number",
+      "privacy": "public",
+      "confidence": "unverified",
+      "verify": "Check whether UIA exposes the current view mode on the items view (the status-bar view buttons are toggle buttons); if so, switch to a module readout.",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "cpuLoad",
+      "label": "CPU",
+      "contexts": [
+        "taskManager"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "systeminfo.cpu.usage",
+        "status": "exists",
+        "note": "Prism Control SystemInfo series 'cpu.usage' (owned by prism-cb)."
+      },
+      "unit": "%",
+      "format": "{value} %",
+      "range": [
+        0,
+        100
+      ],
+      "widget": "graph",
+      "privacy": "public",
+      "refreshHz": 1,
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    },
+    {
+      "id": "memLoad",
+      "label": "RAM",
+      "contexts": [
+        "taskManager"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "systeminfo.mem.usage",
+        "status": "exists",
+        "note": "SystemInfo series 'mem.usage'."
+      },
+      "unit": "%",
+      "format": "{value} %",
+      "range": [
+        0,
+        100
+      ],
+      "widget": "graph",
+      "privacy": "public",
+      "refreshHz": 1,
+      "confidence": "official",
+      "sources": [
+        "S17"
+      ]
+    }
+  ],
+  "userBindings": {
+    "storage": "file",
+    "summary": "Windows has no rebind store for its own shell shortcuts. Remaps come from PowerToys Keyboard Manager (installed here, v0.102, enabled), a JSON file it applies through a low-level keyboard hook while PowerToys runs. Game Bar's capture shortcuts can be changed in Game Bar > Settings > Shortcuts. What the Copilot key does is a Settings choice. PowerToys' own modules also take global hotkeys (stored per module).",
+    "locations": [
+      {
+        "path": "%LOCALAPPDATA%\\Microsoft\\PowerToys\\Keyboard Manager\\default.json",
+        "format": "json",
+        "encoding": "utf-8",
+        "note": "The remap file. Its name is the active configuration named in the settings.json next to it (here 'default'). Present on this PC."
+      },
+      {
+        "path": "%LOCALAPPDATA%\\Microsoft\\PowerToys\\Keyboard Manager\\settings.json",
+        "format": "json",
+        "note": "properties.activeConfiguration.value = which <name>.json holds the remaps."
+      },
+      {
+        "path": "%LOCALAPPDATA%\\Microsoft\\PowerToys\\settings.json",
+        "format": "json",
+        "note": "enabled['Keyboard Manager'] = whether remaps are live at all."
+      },
+      {
+        "path": "%LOCALAPPDATA%\\Microsoft\\PowerToys\\<Module>\\settings.json",
+        "format": "json",
+        "note": "PowerToys module hotkeys as { win, ctrl, alt, shift, code } objects (e.g. FancyZones' fancyzones_overrideSnapHotkeys, which takes over Win+Arrow when true; it's false here)."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\GameBar",
+        "format": "registry",
+        "note": "Assumed home of custom Game Bar shortcuts (community lore: VK*/VKM* value pairs). None present here, so the defaults apply; unverified."
+      }
+    ],
+    "entryShape": "Keyboard Manager JSON: remapKeys.inProcess[] and remapShortcuts.global[] entries carry originalKeys and newRemapKeys as ';'-separated decimal virtual-key codes (modifiers first); remapShortcuts.appSpecific[] adds targetApp (a process name without .exe); remapKeysToText / remapShortcutsToText carry text targets; newer builds add run-program and URI targets. For Prism, an entry whose originalKeys equals a verb's chord means the user has replaced that Windows shortcut: a press of it may be rewritten. There's no action id (Windows shortcuts have none), so the join is on the chord itself.",
+    "example": "{ \"remapShortcuts\": { \"global\": [ { \"originalKeys\": \"91;17;69\", \"newRemapKeys\": \"91;69\" } ], \"appSpecific\": [ { \"originalKeys\": \"17;66\", \"newRemapKeys\": \"18;38\", \"targetApp\": \"explorer\" } ] }, \"remapKeys\": { \"inProcess\": [] } }",
+    "keyNameMap": "Decimal Win32 virtual-key codes: 91/92 = LWin/RWin; 17/162/163 = Ctrl/LCtrl/RCtrl; 18/164/165 = Alt/LAlt/RAlt; 16/160/161 = Shift/LShift/RShift; 65-90 = A-Z; 48-57 = 0-9; 112-135 = F1-F24; 37/38/39/40 = Left/Up/Right/Down; 44 = PrintScreen; 46 = Delete; 186 = Semicolon; 187 = Equal; 188 = Comma; 189 = Minus; 190 = Period; 191 = Slash; 192 = Backquote; 219/221 = BracketLeft/Right; 220 = Backslash; 222 = Quote. PowerToys module hotkeys use the same codes in 'code'.",
+    "readMode": "Read-only. Parse default.json (or the active configuration) and watch it. Warn on a verb whose chord is a remapped originalKeys (global, or appSpecific for the foreground process) and show the PI note 'PowerToys remaps this'. Ignore everything when PowerToys isn't running or Keyboard Manager is disabled. Never write.",
+    "confidence": "verified-local",
+    "sources": [
+      "S4",
+      "S15",
+      "S2"
+    ],
+    "verify": "Whether Keyboard Manager rewrites input that Prism injects with SendInput (it hooks low-level input and may skip injected events). Test with a fictional remap on a spare chord (e.g. Ctrl+Alt+Shift+F13), then remove it."
+  },
+  "layouts": [
+    {
+      "device": "galleon-100-sd",
+      "context": "desktop",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "shell.win.slot1"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "shell.win.slot2"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "shell.win.slot3"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "shell.snip"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "shell.clipboard"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "shell.explorer.open"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "shell.hdr"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "shell.refreshHz"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "shell.window.maximize"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "shell.desktop.show"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "shell.taskManager"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "shell.lock"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "windowBrowser"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "brightness"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "placer"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "desktops"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "windowPreview"
+        },
+        {
+          "slot": "TR",
+          "readout": "brightnessLevel"
+        },
+        {
+          "slot": "BL",
+          "readout": "placerZone"
+        },
+        {
+          "slot": "BR",
+          "readout": "desktopPager"
+        }
+      ],
+      "rationale": "Follows SPEC-windows: live windows on top, capture and clipboard tools in the middle, true-state toggles below them, and desktop/Task Manager/lock at the bottom; window browser and brightness get layer 0."
+    },
+    {
+      "device": "galleon-100-sd",
+      "context": "explorer",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "explorer.folder.new"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "explorer.item.rename"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "explorer.search"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "explorer.clip.copy"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "explorer.clip.paste"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "explorer.edit.undo"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "explorer.pane.preview"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "explorer.view.hidden"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "explorer.address"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "explorer.nav.up"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "explorer.item.properties"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "explorer.item.delete"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "folderHistory"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "explorerTabs"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "iconSize"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "windowBrowser"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "explorerFolder"
+        },
+        {
+          "slot": "BL",
+          "readout": "iconSizeSteps"
+        },
+        {
+          "slot": "BR",
+          "readout": "windowPreview"
+        }
+      ],
+      "rationale": "Create/rename/search on top, the clipboard and undo trio in the middle, panes and toggles under that, and up/properties/delete (hold) at the bottom; back/forward is a dial (push = up)."
+    },
+    {
+      "device": "galleon-100-sd",
+      "context": "taskManager",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "taskmgr.filter"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "taskmgr.runTask"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "shell.win.slot1"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "taskmgr.efficiency"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "shell.desktop.show"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "taskmgr.endTask"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "taskmgrPages"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "windowBrowser"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "cpuLoad"
+        },
+        {
+          "slot": "TR",
+          "readout": "memLoad"
+        }
+      ],
+      "rationale": "A small page: filter and run on top, efficiency in the middle, END TASK (hold) alone in the bottom corner; pages on the left dial with live CPU/RAM graphs above."
+    },
+    {
+      "device": "stream-deck-plus",
+      "context": "desktop",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "shell.win.slot1"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "shell.win.slot2"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "shell.win.slot3"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "verb": "shell.snip"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "shell.clipboard"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "shell.hdr"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "shell.explorer.open"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "verb": "shell.lock"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "control": "windowBrowser"
+        },
+        {
+          "dial": 1,
+          "control": "brightness"
+        },
+        {
+          "dial": 2,
+          "control": "placer"
+        },
+        {
+          "dial": 3,
+          "control": "desktops"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "0",
+          "readout": "windowPreview"
+        },
+        {
+          "slot": "1",
+          "readout": "brightnessLevel"
+        },
+        {
+          "slot": "2",
+          "readout": "placerZone"
+        },
+        {
+          "slot": "3",
+          "readout": "desktopPager"
+        }
+      ],
+      "rationale": "Matches the spec's S+ layout: three live windows and snip on top, clipboard/HDR/Explorer/lock below, and the four module dials with their readouts on the strip."
+    },
+    {
+      "device": "stream-deck-plus",
+      "context": "explorer",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "explorer.folder.new"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "explorer.item.rename"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "explorer.search"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "verb": "explorer.nav.up"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "explorer.clip.copy"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "explorer.clip.paste"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "explorer.edit.undo"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "verb": "explorer.pane.preview"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "control": "folderHistory"
+        },
+        {
+          "dial": 1,
+          "control": "explorerTabs"
+        },
+        {
+          "dial": 2,
+          "control": "iconSize"
+        },
+        {
+          "dial": 3,
+          "control": "windowBrowser"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "0",
+          "readout": "explorerFolder"
+        },
+        {
+          "slot": "2",
+          "readout": "iconSizeSteps"
+        },
+        {
+          "slot": "3",
+          "readout": "windowPreview"
+        }
+      ],
+      "rationale": "The most-used file verbs fill the eight keys (delete stays off the small deck's first page); history, tabs, icon size and the window browser take the dials."
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Keyboard shortcuts in Windows (Windows 11 tab)",
+      "url": "https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-windows-dcc61a57-8ff0-cffe-9796-cb9706c75eec",
+      "publisher": "Microsoft Support",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Windows 11 (page as of 2026-10-16; undated)",
+      "note": "The Windows 10 tab is the source of the older meanings noted in conflicts."
+    },
+    {
+      "id": "S2",
+      "title": "Customize Game Bar on Windows devices (keyboard shortcuts)",
+      "url": "https://support.xbox.com/en-US/help/games-apps/game-setup-and-play/customize-game-bar-on-windows-10",
+      "publisher": "Xbox Support (Microsoft)",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Game Bar on Windows 10 22H2+ / 11; Microsoft.XboxGamingOverlay 7.326.10120.0 installed here",
+      "note": "Win+G, Win+Alt+PrintScreen, Win+Alt+G, Win+Alt+R, Win+Alt+M; shortcuts are user-changeable in Game Bar settings."
+    },
+    {
+      "id": "S3",
+      "title": "Using Game Bar Widgets: record game clips and take screenshots",
+      "url": "https://support.xbox.com/en-US/help/friends-social-activity/share-socialize/record-game-clips-game-bar-windows-10",
+      "publisher": "Xbox Support (Microsoft)",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Windows 10 and 11"
+    },
+    {
+      "id": "S4",
+      "title": "Remap keys and shortcuts with PowerToys Keyboard Manager",
+      "url": "https://learn.microsoft.com/en-us/windows/powertoys/keyboard-manager",
+      "publisher": "Microsoft Learn",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "PowerToys 0.100+ (page updated 2026-07-30)",
+      "note": "Win+L and Ctrl+Alt+Del can't be remapped; the Copilot key sends Win+C or Left-Shift+Win+F23; remaps need PowerToys running; elevated windows need PowerToys elevated."
+    },
+    {
+      "id": "S5",
+      "title": "Understand updates to the Copilot key on Windows devices",
+      "url": "https://support.microsoft.com/en-us/accessibility/windows/copilot/understand-updates-to-the-copilot-key-on-windows-devices",
+      "publisher": "Microsoft Support",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Windows 11 (remap to Right Ctrl / Menu under Bluetooth & devices > Keyboard)"
+    },
+    {
+      "id": "S6",
+      "title": "Manage Copilot in Windows (Win+C / Copilot key behavior since the May 2025 update)",
+      "url": "https://learn.microsoft.com/en-us/windows/client-management/manage-windows-copilot",
+      "publisher": "Microsoft Learn",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Windows 11 24H2+ with the May 2025 optional update and later"
+    },
+    {
+      "id": "S7",
+      "title": "Update for Copilot for Windows begins rolling out to Windows Insiders (Alt+Space)",
+      "url": "https://blogs.windows.com/windows-insider/2024/12/10/update-for-copilot-for-windows-begins-rolling-out-to-windows-insiders/",
+      "publisher": "Windows Insider Blog (Microsoft)",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Copilot app; Microsoft.Copilot 155.0.4283.45 installed here"
+    },
+    {
+      "id": "S8",
+      "title": "Copilot key is just a reprogrammable macro (Shift+Win+F23)",
+      "url": "https://arstechnica.com/gadgets/2024/04/shoehorned-windows-copilot-key-is-just-a-reprogrammable-macro-journalist-shows/",
+      "publisher": "Ars Technica",
+      "kind": "guide",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Copilot-key keyboards, 2024+"
+    },
+    {
+      "id": "S9",
+      "title": "Announcing Windows 11 Insider Preview Build 22598 (Task Manager Alt+N/E/V, Ctrl+Tab pages, Delete)",
+      "url": "https://blogs.windows.com/windows-insider/2022/04/13/announcing-windows-11-insider-preview-build-22598/",
+      "publisher": "Windows Insider Blog (Microsoft)",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Windows 11 22H2 and later"
+    },
+    {
+      "id": "S10",
+      "title": "Announcing Windows 11 Insider Preview Build 25247 (Task Manager filter, Alt+F)",
+      "url": "https://blogs.windows.com/windows-insider/2022/11/18/announcing-windows-11-insider-preview-build-25247/",
+      "publisher": "Windows Insider Blog (Microsoft)",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Windows 11 22H2 (22623.891+) and later"
+    },
+    {
+      "id": "S11",
+      "title": "Announcing Windows 11 Insider Preview Build 22593 (numbered snap layouts after Win+Z)",
+      "url": "https://blogs.windows.com/windows-insider/2022/04/06/announcing-windows-11-insider-preview-build-22593/",
+      "publisher": "Windows Insider Blog (Microsoft)",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Windows 11 22H2 and later"
+    },
+    {
+      "id": "S12",
+      "title": "Change Folder Layout View in Windows 11 File Explorer (Ctrl+Shift+1..8)",
+      "url": "https://www.elevenforum.com/t/change-folder-layout-view-in-windows-11-file-explorer.1246/",
+      "publisher": "ElevenForum (Brink)",
+      "kind": "guide",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Windows 11 (tutorial updated 2026-05-26)"
+    },
+    {
+      "id": "S13",
+      "title": "Windows 11 release information (26H2 = OS build 26300)",
+      "url": "https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information",
+      "publisher": "Microsoft Learn (Windows release health)",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "26H2 GA 2026-09-29; 26300.9711 = 2026-10-13 (KB5127648)"
+    },
+    {
+      "id": "S14",
+      "title": "Registry probe: HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion (CurrentBuild, UBR, DisplayVersion, LCUVer) and WindowsSelfHost",
+      "url": "local:HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion",
+      "publisher": "This PC",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "10.0.26300.9711"
+    },
+    {
+      "id": "S15",
+      "title": "PowerToys probe: version, Keyboard Manager files, module hotkey settings (read-only)",
+      "url": "local:%LOCALAPPDATA%\\Microsoft\\PowerToys\\",
+      "publisher": "This PC",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "PowerToys v0.102.2862"
+    },
+    {
+      "id": "S16",
+      "title": "The Old New Thing: Explorer was 'Cabinet'; the name lingers in the window class CabinetWClass",
+      "url": "https://devblogs.microsoft.com/oldnewthing/20140729-00/?p=383",
+      "publisher": "Microsoft DevBlogs (Raymond Chen)",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "note": "Microsoft engineer's blog, not product docs."
+    },
+    {
+      "id": "S17",
+      "title": "Prism spec: windows module + WinShell action UUIDs",
+      "url": "local:aaa-prism-play/lead/SPEC-windows.md",
+      "publisher": "Prism Play lead",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "note": "W1 actions exist in Prism-control/prism-control/src/PrismControl.WinShell (window, browser, desktops, zone, placer, next-monitor, maximize, topmost, hdr, refresh, monitor, game-mode). W2 (power, toggles, clipboard, capture, kill) is still a stub; verb names for those are this pack's proposal."
+    },
+    {
+      "id": "S18",
+      "title": "Game Bar registry probe: HKCU\\Software\\Microsoft\\GameBar (no custom shortcut values), HKCU\\System\\GameConfigStore GameDVR_Enabled",
+      "url": "local:HKCU\\Software\\Microsoft\\GameBar",
+      "publisher": "This PC",
+      "kind": "local",
+      "accessed": "2026-10-16"
+    },
+    {
+      "id": "S19",
+      "title": "Windows probe results (virtual desktops from the registry; PowerToys FancyZones/AlwaysOnTop running)",
+      "url": "local:aaa-prism-play/research/windows-probe-results.md",
+      "publisher": "Prism Play windows researcher",
+      "kind": "local",
+      "accessed": "2026-10-16"
+    }
+  ],
+  "confidence": "high",
+  "conflicts": [
+    "PrintScreen: S1 (Windows 11 tab) says it opens screen snipping by default (can be turned off); the Windows 10 tab says it copies the whole screen. Prism uses Win+Shift+S for SNIP, which means the same everywhere.",
+    "Win+C: Teams Chat (Windows 11 21H2/22H2, secondary sources), Copilot in Windows (23H2), briefly nothing (mid-2024), a Copilot prompt box (May 2025+, S6); today 'Microsoft Copilot or Microsoft 365 Copilot, else Windows search' (S1). The Windows 10 tab of S1 still says Cortana.",
+    "Copilot key: S4 (Learn) says it sends Win+C or Left-Shift+Win+F23 depending on the keyboard; S8 and Tom's Hardware say Shift+Win+F23; a Windows Report article says Ctrl+Win+F23 (outlier, not used).",
+    "Copilot key settings path: S1 says Settings > Personalization > Text input > Customize Copilot key; S5 puts the Right Ctrl / Menu remap under Bluetooth & devices > Keyboard.",
+    "Alt+Space: the classic window menu (S1) is also claimed globally by the Copilot app (S7) and PowerToys Run (its default, enabled here), so which one opens depends on what's running.",
+    "Ctrl+Shift+E in Explorer: the Windows 11 tab of S1 says 'expand all folders from the tree in the navigation pane'; the Windows 10 tab says 'display all folders above the selected folder'.",
+    "Win+Ctrl+Shift+B: S1 says 'wake up the device when the screen is blank or black'; Microsoft's blank-screen troubleshooting page says it resets the graphics driver. Not drawn as a verb.",
+    "Ctrl+Shift+Number in Explorer: S1 says 1-9, but only 8 views exist (S12); what 9 does is unknown."
+  ],
+  "gaps": [
+    "Task Manager runs elevated by default; injected keys from a non-elevated Prism Control are dropped (UIPI). The taskManager verbs only work if Prism Control is elevated, which it can be on this PC but shouldn't be by default.",
+    "W2 module verbs (lock, restart, shutdown, kill, dark mode, hidden files, Game Bar capture) have no action UUIDs yet; names here are proposals for W2.",
+    "Explorer pane state (preview/details) and view mode have no readout; iconSize is counted only.",
+    "Ctrl+Shift+C (copy as path) is unverified: not on Microsoft's list.",
+    "Whether an injected Win+L locks the PC is unverified (the module uses LockWorkStation instead).",
+    "Whether PowerToys Keyboard Manager rewrites Prism's injected chords is unverified.",
+    "Start menu, search and quick-settings flyouts (StartMenuExperienceHost.exe, SearchHost.exe, ShellExperienceHost.exe) aren't matched; they're short-lived overlays and keep whatever context was active."
+  ],
+  "notes": [
+    "Kind 'shell' is the base layer: verbs with contexts '*' are the global Win-key shortcuts and module verbs Prism can draw over any app. The schema has no 'global' flag or 'inherit into every pack' rule, so the engine needs a convention (proposal: a shell pack's '*' verbs and controls are always candidates, below the foreground pack's own verbs).",
+    "Also documented in S1 but not drawn (to stay near the 60-verb aim): Win+Ctrl+Enter Narrator, Win+Plus/Minus Magnifier (a good accessibility dial: turn Win+Equal/Win+Minus, push Win+Esc), Win+K Cast, Win+P Project, Win+W Widgets, Win+X Quick Link, Win+R Run, Win+M / Win+Shift+M minimize/restore all, Win+Home minimize others, Win+Comma peek, Win+Alt+Up/Down snap top/bottom half, Win+Shift+Left previous monitor, Win+Alt+K mute mic in supported call apps, Win+Ctrl+V sound output, Win+Alt+D date/time on desktop, Win+J Recall (Copilot+ PCs), Win+1..9 taskbar apps, Win+T taskbar focus, Ctrl+Shift+Tab / Ctrl+1..9 Explorer tabs, Ctrl+N new Explorer window, Ctrl+X cut, F5 refresh, Shift+F10 context menu, Ctrl+Shift+1/3/4/5/7/8 (the other view modes).",
+    "Game Bar extras not drawn: Win+Alt+PrintScreen (game screenshot) and Win+Alt+M (mic recording on/off) (S2).",
+    "PowerToys (enabled here) puts its own defaults in the Win+Shift / Win+Ctrl space and Peek on Ctrl+Space inside Explorer; none collide with the chords drawn here. FancyZones isn't overriding Win+Arrow on this PC (fancyzones_overrideSnapHotkeys false).",
+    "The live switcher, placer, desktop pager, HDR, refresh and lock are module verbs first because the module shows true state and live thumbnails; the Windows chord is kept as altBindings for decks without the module."
+  ]
+}

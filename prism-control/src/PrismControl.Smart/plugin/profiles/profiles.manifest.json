@@ -1,0 +1,53 @@
+{
+  "Profiles": [
+    {
+      "Name": "profiles/prism-smart-galleon",
+      "DeviceType": 12,
+      "AutoInstall": true,
+      "DontAutoSwitchWhenInstalled": true,
+      "Readonly": false
+    },
+    {
+      "Name": "profiles/prism-smart-plus",
+      "DeviceType": 7,
+      "AutoInstall": true,
+      "DontAutoSwitchWhenInstalled": true,
+      "Readonly": false
+    },
+    {
+      "Name": "profiles/prism-smart-plusxl",
+      "DeviceType": 13,
+      "AutoInstall": true,
+      "DontAutoSwitchWhenInstalled": true,
+      "Readonly": false
+    },
+    {
+      "Name": "profiles/prism-smart-mk2",
+      "DeviceType": 0,
+      "AutoInstall": true,
+      "DontAutoSwitchWhenInstalled": true,
+      "Readonly": false
+    },
+    {
+      "Name": "profiles/prism-smart-xl",
+      "DeviceType": 2,
+      "AutoInstall": true,
+      "DontAutoSwitchWhenInstalled": true,
+      "Readonly": false
+    },
+    {
+      "Name": "profiles/prism-smart-mini",
+      "DeviceType": 1,
+      "AutoInstall": true,
+      "DontAutoSwitchWhenInstalled": true,
+      "Readonly": false
+    },
+    {
+      "Name": "profiles/prism-smart-neo",
+      "DeviceType": 9,
+      "AutoInstall": true,
+      "DontAutoSwitchWhenInstalled": true,
+      "Readonly": false
+    }
+  ]
+}

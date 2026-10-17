@@ -1,0 +1,2603 @@
+{
+  "$schema": "./schema/context-pack.schema.json",
+  "schemaVersion": 1,
+  "id": "discord",
+  "name": "Discord (desktop app)",
+  "vendor": "Discord Inc.",
+  "kind": "app",
+  "activation": "running",
+  "packVersion": "0.1.0",
+  "platforms": [
+    "windows"
+  ],
+  "verifiedAgainst": {
+    "version": "Discord web client build 641004 (live 2026-10-16) on desktop host 1.0.9232",
+    "build": "641004",
+    "installedHere": "Desktop host 1.0.9232 (Stable, %LOCALAPPDATA%\\Discord\\app-1.0.9232). No %APPDATA%\\discord user-data folder exists on this PC.",
+    "date": "2026-10-16",
+    "method": "mixed",
+    "note": "The Discord UI (and its shortcut table) is served from discord.com, not shipped in the local install, so the defaults were read from Discord's own client code (live build 641004, cross-checked with a build 533299 snapshot from 2026-04-29) and Discord's Help Center/Blog. The app was not launched."
+  },
+  "policy": {
+    "class": "desktop-app",
+    "input": "allowed",
+    "sight": "forbidden",
+    "closedLoop": "forbidden",
+    "reason": "Ordinary chat/voice app; plain shortcuts and Prism Control module verbs only. Discord's local storage is never read (it holds the auth token)."
+  },
+  "keyMode": "vk",
+  "match": {
+    "any": [
+      {
+        "process": "Discord.exe",
+        "confidence": "verified-local",
+        "note": "Stable. Found at %LOCALAPPDATA%\\Discord\\app-1.0.9232\\Discord.exe on this PC."
+      },
+      {
+        "process": "DiscordPTB.exe",
+        "confidence": "community",
+        "note": "Public Test Build; installs to %LOCALAPPDATA%\\DiscordPTB."
+      },
+      {
+        "process": "DiscordCanary.exe",
+        "confidence": "community",
+        "note": "Canary; installs to %LOCALAPPDATA%\\DiscordCanary."
+      },
+      {
+        "processPathRegex": "\\\\Discord(PTB|Canary|Development)?\\\\app-[0-9.]+\\\\Discord(PTB|Canary|Development)?\\.exe$",
+        "confidence": "verified-local",
+        "note": "Squirrel layout app-<version>; matched the Stable path on this PC. Compare case-insensitively (Windows paths)."
+      }
+    ]
+  },
+  "contexts": [
+    {
+      "id": "chat",
+      "label": "Text chat (default)",
+      "default": true,
+      "priority": 10,
+      "detect": {
+        "all": [
+          {
+            "type": "always"
+          }
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S2",
+        "S5"
+      ]
+    },
+    {
+      "id": "inCall",
+      "label": "In a voice/video call",
+      "parent": "chat",
+      "priority": 60,
+      "hysteresisMs": 1500,
+      "detect": {
+        "any": [
+          {
+            "type": "module",
+            "field": "discord.voice.connected",
+            "equals": true,
+            "note": "PLANNED discord module: RPC GET_SELECTED_VOICE_CHANNEL + VOICE_CHANNEL_SELECT / VOICE_CONNECTION_STATUS events (rpc scope; partner-gated, see S8/S9)."
+          },
+          {
+            "type": "module",
+            "field": "audio.mic.inUseBy",
+            "regex": "^[Dd]iscord(PTB|Canary|ptb|canary)?\\.exe$",
+            "note": "PLANNED audio/windows probe: Windows' microphone-in-use record (CapabilityAccessManager ConsentStore\\microphone\\NonPackaged, LastUsedTimeStop = 0) or an open capture session owned by Discord. Heuristic: also true during a mic test in Settings."
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "No shipped detector yet. (1) With a BYO Discord app authorized for rpc, call GET_SELECTED_VOICE_CHANNEL while in and out of a call. (2) Read-only: while in a call, check HKCU\\...\\CapabilityAccessManager\\ConsentStore\\microphone\\NonPackaged\\<path#Discord.exe> LastUsedTimeStop == 0, and that it changes after leaving. The window title does not change when you join voice.",
+      "notes": "Hysteresis is long on purpose: joining voice should not reshuffle the deck mid-press."
+    }
+  ],
+  "verbs": [
+    {
+      "id": "voice.toggleMute",
+      "label": "MUTE",
+      "longLabel": "Toggle mute (Discord)",
+      "glyph": "mic",
+      "category": "primary",
+      "priority": 98,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Shift+M",
+        "note": "In-app default (Discord focused, also fires inside the message box)."
+      },
+      "altBindings": [
+        {
+          "kind": "module",
+          "verb": "discord.voice.toggleMute",
+          "status": "planned",
+          "note": "RPC SET_VOICE_SETTINGS {mute}; needs rpc + rpc.voice.write, which Discord limits to approved partners (S9). Would work in the background and give the true state."
+        },
+        {
+          "kind": "module",
+          "verb": "audio.micMute",
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.audio.mic-mute",
+          "note": "Windows-level mic mute (works with Discord in the background). Discord's own mute icon does NOT change; others hear silence."
+        }
+      ],
+      "appAction": "TOGGLE_MUTE",
+      "safety": "safe",
+      "stateReadout": "muteState",
+      "unavailable": {
+        "label": "MUTE",
+        "hint": "Discord must be in front for its Ctrl+Shift+M; use WIN MIC or bind Toggle Mute in Discord to mute from a game.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S2",
+        "S3",
+        "S5",
+        "S6"
+      ],
+      "verifiedVersion": "build 641004",
+      "conflict": "S3 (2024 blog) says Ctrl+Shift+M works while Discord is in the background. Live code S5 binds it in-app only (combokeys bindGlobal); the April 2026 build S6 also registered it natively, but only behind a 'showKeybindIndicators' config. S2 also lists Ctrl+Shift+M as inline-code formatting in the message box."
+    },
+    {
+      "id": "voice.toggleDeafen",
+      "label": "DEAFEN",
+      "longLabel": "Toggle deafen (Discord)",
+      "glyph": "headphones",
+      "category": "primary",
+      "priority": 95,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Shift+D",
+        "note": "In-app default."
+      },
+      "altBindings": [
+        {
+          "kind": "module",
+          "verb": "discord.voice.toggleDeafen",
+          "status": "planned",
+          "note": "RPC SET_VOICE_SETTINGS {deaf}; partner-gated scopes (S9)."
+        }
+      ],
+      "appAction": "TOGGLE_DEAFEN",
+      "safety": "safe",
+      "stateReadout": "deafState",
+      "unavailable": {
+        "label": "DEAFEN",
+        "hint": "Discord must be in front; bind Toggle Deafen in Discord > Keybinds for use from a game.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S2",
+        "S3",
+        "S5"
+      ],
+      "verifiedVersion": "build 641004",
+      "conflict": "S3 says it works in the background; S5/S6 code binds it in-app only (no native registration found)."
+    },
+    {
+      "id": "voice.pushToTalk",
+      "label": "PTT",
+      "longLabel": "Push to talk (hold)",
+      "glyph": "mic",
+      "category": "primary",
+      "priority": 80,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "unbound",
+        "reason": "no-default",
+        "note": "Discord has no default PTT key. Once the user records one (Settings > Keybinds > Push to Talk), Prism holds that chord while the deck key is held (hold/whilePressed)."
+      },
+      "altBindings": [
+        {
+          "kind": "module",
+          "verb": "audio.micMute",
+          "args": {
+            "mode": "ptt"
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.audio.mic-mute",
+          "note": "Windows-level hold-to-talk on the default mic; pair with Discord Voice Activity."
+        }
+      ],
+      "appAction": "PUSH_TO_TALK",
+      "safety": "safe",
+      "unavailable": {
+        "label": "BIND PTT",
+        "hint": "Set a Push to Talk key in Discord (Settings > Keybinds), then tell Prism which key in the PI.",
+        "when": [
+          "unbound"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S4",
+        "S5"
+      ],
+      "notes": "PTT keybinds are native/global in Discord (work while a game is in front). Discord also has PUSH_TO_TALK_PRIORITY and PUSH_TO_MUTE actions with no default."
+    },
+    {
+      "id": "voice.disconnect",
+      "label": "HANG UP",
+      "longLabel": "Disconnect from voice",
+      "glyph": "power",
+      "category": "primary",
+      "priority": 90,
+      "contexts": [
+        "inCall"
+      ],
+      "binding": {
+        "kind": "unbound",
+        "reason": "no-default",
+        "suggest": "Ctrl+Alt+Shift+X",
+        "note": "Discord > Keybinds > Disconnect From Voice Channel (native/global once set)."
+      },
+      "altBindings": [
+        {
+          "kind": "module",
+          "verb": "discord.voice.disconnect",
+          "status": "planned",
+          "note": "RPC SELECT_VOICE_CHANNEL {channel_id: null}; rpc scope, partner-gated."
+        }
+      ],
+      "appAction": "DISCONNECT_FROM_VOICE_CHANNEL",
+      "safety": "confirm",
+      "unavailable": {
+        "label": "BIND ME",
+        "hint": "Bind Disconnect From Voice Channel in Discord > Keybinds (suggested Ctrl+Alt+Shift+X).",
+        "when": [
+          "unbound",
+          "wrongContext"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S3",
+        "S5"
+      ]
+    },
+    {
+      "id": "voice.toggleCamera",
+      "label": "CAMERA",
+      "longLabel": "Toggle camera",
+      "glyph": "camera",
+      "category": "tool",
+      "priority": 70,
+      "contexts": [
+        "inCall"
+      ],
+      "binding": {
+        "kind": "unbound",
+        "reason": "no-default",
+        "suggest": "Ctrl+Alt+Shift+C"
+      },
+      "altBindings": [
+        {
+          "kind": "module",
+          "verb": "discord.voice.toggleCamera",
+          "status": "planned",
+          "note": "Not in the public RPC command list; keybind is the only route today."
+        }
+      ],
+      "appAction": "TOGGLE_CAMERA",
+      "safety": "confirm",
+      "unavailable": {
+        "label": "BIND ME",
+        "hint": "Bind Toggle Camera in Discord > Keybinds.",
+        "when": [
+          "unbound",
+          "wrongContext"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S5",
+        "S6"
+      ],
+      "notes": "confirm: turning the camera on is a privacy event."
+    },
+    {
+      "id": "voice.goLive",
+      "label": "GO LIVE",
+      "longLabel": "Start/stop screen share (Go Live)",
+      "glyph": "broadcast",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "inCall"
+      ],
+      "binding": {
+        "kind": "unbound",
+        "reason": "no-default",
+        "suggest": "Ctrl+Alt+Shift+G"
+      },
+      "appAction": "TOGGLE_GO_LIVE_STREAMING",
+      "safety": "confirm",
+      "unavailable": {
+        "label": "BIND ME",
+        "hint": "Bind Toggle Go Live in Discord > Keybinds. Starting a share opens Discord's picker.",
+        "when": [
+          "unbound",
+          "wrongContext"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S5",
+        "S6"
+      ]
+    },
+    {
+      "id": "voice.toggleVoiceMode",
+      "label": "VOICE MODE",
+      "longLabel": "Switch Push to Talk / Voice Activity",
+      "glyph": "waveform",
+      "category": "toggle",
+      "priority": 35,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "unbound",
+        "reason": "no-default",
+        "suggest": "Ctrl+Alt+Shift+B",
+        "note": "Suggested chord is free in Discord's table (avoid Ctrl+Alt+Shift+V: Jump to current call)."
+      },
+      "appAction": "TOGGLE_VOICE_MODE",
+      "safety": "safe",
+      "unavailable": {
+        "label": "BIND ME",
+        "hint": "Bind Toggle Voice Activity in Discord > Keybinds.",
+        "when": [
+          "unbound"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S3",
+        "S4",
+        "S5"
+      ]
+    },
+    {
+      "id": "voice.jumpToCall",
+      "label": "TO CALL",
+      "longLabel": "Jump to the call you are in",
+      "glyph": "target",
+      "category": "nav",
+      "priority": 55,
+      "contexts": [
+        "inCall"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Alt+Shift+V"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Ctrl+Alt+Left",
+          "note": "RETURN_TO_AUDIO_CHANNEL (in-app)."
+        }
+      ],
+      "appAction": "JUMP_TO_CURRENT_CALL",
+      "safety": "safe",
+      "unavailable": {
+        "label": "TO CALL",
+        "hint": "Only while connected to voice, with Discord in front.",
+        "when": [
+          "wrongContext",
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S3",
+        "S5"
+      ],
+      "conflict": "S1 (2020) lists Return to active audio channel = Ctrl+Alt+A and Return to connected audio channel = Alt+Left; current code uses Ctrl+Alt+Shift+V and Ctrl+Alt+Left, and Alt+Left is now Navigate back."
+    },
+    {
+      "id": "voice.soundboard",
+      "label": "SOUNDBOARD",
+      "longLabel": "Open the soundboard",
+      "glyph": "equalizer",
+      "category": "tool",
+      "priority": 50,
+      "contexts": [
+        "inCall"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Shift+B",
+        "note": "In-app (call panel)."
+      },
+      "altBindings": [
+        {
+          "kind": "hold",
+          "chord": "Ctrl+Backquote",
+          "mode": "whilePressed",
+          "note": "Managed default SOUNDBOARD_HOLD (native/global): hold to show the soundboard wheel in the game overlay, release to close."
+        }
+      ],
+      "appAction": "SEARCH_SOUNDBOARD",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SOUNDBOARD",
+        "hint": "Join a voice channel first.",
+        "when": [
+          "wrongContext"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S3",
+        "S5",
+        "S10"
+      ]
+    },
+    {
+      "id": "voice.winMicMute",
+      "label": "WIN MIC",
+      "longLabel": "Windows mic mute (any app)",
+      "glyph": "mic",
+      "monogram": "MIC",
+      "category": "toggle",
+      "priority": 75,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "audio.micMute",
+        "status": "exists",
+        "action": "com.jeremyfhall.prismcontrol.audio.mic-mute",
+        "note": "Mutes the default capture device. Works with Discord in the background, true state from Windows."
+      },
+      "safety": "safe",
+      "stateReadout": "winMicState",
+      "unavailable": {
+        "label": "WIN MIC",
+        "hint": "Prism Control's audio module isn't running.",
+        "when": [
+          "moduleMissing"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S14"
+      ],
+      "notes": "The robust mute: it does not depend on Discord focus, RPC or keybinds. Discord's mute icon stays off."
+    },
+    {
+      "id": "call.answer",
+      "label": "ANSWER",
+      "longLabel": "Answer incoming call",
+      "glyph": "check",
+      "category": "nav",
+      "priority": 65,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Enter"
+      },
+      "appAction": "CALL_ACCEPT",
+      "safety": "safe",
+      "unavailable": {
+        "label": "ANSWER",
+        "hint": "Only does something while a call is ringing, with Discord in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S3",
+        "S5"
+      ]
+    },
+    {
+      "id": "call.decline",
+      "label": "DECLINE",
+      "longLabel": "Decline incoming call",
+      "glyph": "stop",
+      "category": "nav",
+      "priority": 40,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Esc",
+        "note": "Esc is shared: it also marks the channel read / closes popups when no call is ringing."
+      },
+      "appAction": "MARK_CHANNEL_READ",
+      "safety": "safe",
+      "unavailable": {
+        "label": "DECLINE",
+        "hint": "Only declines while a call is ringing.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S3",
+        "S5"
+      ]
+    },
+    {
+      "id": "call.start",
+      "label": "CALL",
+      "longLabel": "Call the DM you are viewing",
+      "glyph": "chat",
+      "category": "tool",
+      "priority": 45,
+      "contexts": [
+        "chat"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Quote"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Ctrl+Shift+Quote",
+          "note": "Second bind in code."
+        }
+      ],
+      "appAction": "CALL_START",
+      "safety": "confirm",
+      "unavailable": {
+        "label": "CALL",
+        "hint": "Open a DM or group DM first.",
+        "when": [
+          "nothingSelected",
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S3",
+        "S5"
+      ],
+      "conflict": "S1 (2020) says Ctrl+[ (Ctrl+BracketLeft); S3 (2024) and the live code S5 say Ctrl+'. Ctrl+[ is not bound in the current code."
+    },
+    {
+      "id": "overlay.toggle",
+      "label": "OVERLAY",
+      "longLabel": "Toggle overlay lock (in game)",
+      "glyph": "scene",
+      "category": "tool",
+      "priority": 40,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Shift+Backquote",
+        "note": "Managed default (native/global) when the game overlay is enabled; the key is the layout's Backquote key."
+      },
+      "appAction": "TOGGLE_OVERLAY_INPUT_LOCK",
+      "safety": "safe",
+      "unavailable": {
+        "label": "OVERLAY",
+        "hint": "Enable the overlay in Discord settings; it only shows over a running game.",
+        "when": [
+          "policyBlocked"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S5",
+        "S11"
+      ],
+      "notes": "Most useful while a game is in front, i.e. from a pinned slot rather than this pack."
+    },
+    {
+      "id": "clips.save",
+      "label": "CLIP",
+      "longLabel": "Save a clip",
+      "glyph": "record",
+      "category": "tool",
+      "priority": 50,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+C",
+        "note": "Managed default (native/global) once Clips is enabled."
+      },
+      "appAction": "SAVE_CLIP",
+      "safety": "safe",
+      "unavailable": {
+        "label": "CLIP",
+        "hint": "Turn on Clips in Discord settings first.",
+        "when": [
+          "policyBlocked"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S5",
+        "S7"
+      ]
+    },
+    {
+      "id": "clips.screenshot",
+      "label": "SCREENSHOT",
+      "longLabel": "Save a screenshot (Clips)",
+      "glyph": "screenshot",
+      "monogram": "SS",
+      "category": "tool",
+      "priority": 20,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "F12",
+        "note": "Managed default in code; same key as Steam's screenshot."
+      },
+      "appAction": "SAVE_SCREENSHOT",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SCREENSHOT",
+        "hint": "Needs Clips enabled.",
+        "when": [
+          "policyBlocked"
+        ]
+      },
+      "confidence": "unverified",
+      "sources": [
+        "S5"
+      ],
+      "verify": "In Discord > Keybinds, check for a default 'Save Screenshot' row bound to F12 (it is registered in code next to Save Clip, but no Help Center page documents it yet)."
+    },
+    {
+      "id": "app.streamerMode",
+      "label": "STREAMER",
+      "longLabel": "Toggle Streamer Mode",
+      "glyph": "lock",
+      "category": "toggle",
+      "priority": 45,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "unbound",
+        "reason": "no-default",
+        "suggest": "Ctrl+Alt+Shift+S"
+      },
+      "appAction": "TOGGLE_STREAMER_MODE",
+      "safety": "safe",
+      "unavailable": {
+        "label": "BIND ME",
+        "hint": "Bind Toggle Streamer Mode in Discord > Keybinds.",
+        "when": [
+          "unbound"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S3",
+        "S4",
+        "S5"
+      ]
+    },
+    {
+      "id": "nav.quickSwitcher",
+      "label": "SWITCHER",
+      "longLabel": "Quick Switcher (jump to any chat)",
+      "glyph": "search",
+      "category": "primary",
+      "priority": 88,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+K"
+      },
+      "appAction": "QUICKSWITCHER_SHOW",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SWITCHER",
+        "hint": "Discord isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S2",
+        "S3",
+        "S5"
+      ],
+      "notes": "Prefixes inside the switcher: @ users, # text channels, ! voice channels, * servers (S3)."
+    },
+    {
+      "id": "nav.back",
+      "label": "BACK",
+      "glyph": "back",
+      "category": "nav",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Left"
+      },
+      "appAction": "NAVIGATE_BACK",
+      "safety": "safe",
+      "unavailable": {
+        "label": "BACK",
+        "hint": "Discord isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S2",
+        "S5"
+      ],
+      "conflict": "S1 (2020) calls Alt+Left 'Return to connected audio channel'."
+    },
+    {
+      "id": "nav.forward",
+      "label": "FORWARD",
+      "glyph": "forward",
+      "monogram": "FWD",
+      "category": "nav",
+      "priority": 30,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Right"
+      },
+      "appAction": "NAVIGATE_FORWARD",
+      "safety": "safe",
+      "unavailable": {
+        "label": "FORWARD",
+        "hint": "Discord isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S5"
+      ],
+      "conflict": "S1 (2020) calls Alt+Right 'Return to previous text channel'."
+    },
+    {
+      "id": "nav.lastServer",
+      "label": "LAST SERVER",
+      "longLabel": "Toggle to the previous server",
+      "glyph": "sync",
+      "category": "nav",
+      "priority": 35,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Alt+Right"
+      },
+      "appAction": "TOGGLE_PREVIOUS_GUILD",
+      "safety": "safe",
+      "unavailable": {
+        "label": "LAST SERVER",
+        "hint": "Discord isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S5"
+      ],
+      "conflict": "S2 (2025) prints Ctrl+Alt+Right/Left as 'switch between servers'; in code Right = previous server toggle, Left = return to audio channel, and server next/prev is Ctrl+Alt+Down/Up."
+    },
+    {
+      "id": "nav.mentionNext",
+      "label": "NEXT @",
+      "longLabel": "Next unread channel with a mention",
+      "glyph": "alert",
+      "category": "nav",
+      "priority": 50,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Alt+Shift+Down"
+      },
+      "appAction": "MENTION_CHANNEL_NEXT",
+      "safety": "safe",
+      "unavailable": {
+        "label": "NEXT @",
+        "hint": "Discord isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S5"
+      ]
+    },
+    {
+      "id": "chat.markRead",
+      "label": "MARK READ",
+      "longLabel": "Mark channel read",
+      "glyph": "check",
+      "category": "tool",
+      "priority": 62,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Esc"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Shift+PageDown",
+          "note": "Second bind in code."
+        }
+      ],
+      "appAction": "MARK_CHANNEL_READ",
+      "safety": "safe",
+      "unavailable": {
+        "label": "MARK READ",
+        "hint": "Discord isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S2",
+        "S5"
+      ],
+      "notes": "Esc first cancels an edit/closes a popup; a second Esc marks read."
+    },
+    {
+      "id": "chat.markServerRead",
+      "label": "READ ALL",
+      "longLabel": "Mark server read",
+      "glyph": "check",
+      "monogram": "RA",
+      "category": "tool",
+      "priority": 40,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Shift+Esc"
+      },
+      "appAction": "MARK_SERVER_READ",
+      "safety": "safe",
+      "unavailable": {
+        "label": "READ ALL",
+        "hint": "Open a server first.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S5"
+      ]
+    },
+    {
+      "id": "chat.inbox",
+      "label": "INBOX",
+      "longLabel": "Open the Inbox (mentions, unreads)",
+      "glyph": "mail",
+      "category": "tool",
+      "priority": 72,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+I"
+      },
+      "appAction": "TOGGLE_INBOX",
+      "safety": "safe",
+      "unavailable": {
+        "label": "INBOX",
+        "hint": "Discord isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S5",
+        "S11"
+      ],
+      "conflict": "S1 calls Ctrl+I 'Toggle mentions popout'; S2 lists Ctrl+I as italic (message box) and 'mentions popout' as Ctrl+Alt+@. With text selected in the message box Ctrl+I formats instead."
+    },
+    {
+      "id": "chat.inboxMarkTopRead",
+      "label": "INBOX READ",
+      "longLabel": "Mark the top Inbox item read",
+      "glyph": "mail",
+      "monogram": "IR",
+      "category": "tool",
+      "priority": 25,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Shift+E"
+      },
+      "appAction": "MARK_TOP_INBOX_CHANNEL_READ",
+      "safety": "safe",
+      "unavailable": {
+        "label": "INBOX READ",
+        "hint": "Open the Inbox first (Ctrl+I).",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S5",
+        "S11"
+      ]
+    },
+    {
+      "id": "chat.pins",
+      "label": "PINS",
+      "longLabel": "Pinned messages",
+      "glyph": "marker",
+      "category": "tool",
+      "priority": 48,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+P"
+      },
+      "appAction": "TOGGLE_CHANNEL_PINS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "PINS",
+        "hint": "Open a channel first.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S2",
+        "S5"
+      ]
+    },
+    {
+      "id": "chat.members",
+      "label": "MEMBERS",
+      "longLabel": "Toggle the member list",
+      "glyph": "viewers",
+      "category": "tool",
+      "priority": 46,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+U"
+      },
+      "appAction": "TOGGLE_USERS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "MEMBERS",
+        "hint": "Open a server channel first.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S2",
+        "S5"
+      ],
+      "conflict": "S2 also lists Ctrl+U as underline in the message box (with text selected)."
+    },
+    {
+      "id": "chat.search",
+      "label": "SEARCH",
+      "longLabel": "Search messages",
+      "glyph": "search",
+      "category": "tool",
+      "priority": 55,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+F"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Ctrl+Shift+F",
+          "note": "S2: search across all channels."
+        }
+      ],
+      "appAction": "FOCUS_SEARCH",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SEARCH",
+        "hint": "Discord isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S2",
+        "S5"
+      ]
+    },
+    {
+      "id": "chat.emoji",
+      "label": "EMOJI",
+      "longLabel": "Emoji picker",
+      "glyph": "emoji",
+      "monogram": "EMJ",
+      "category": "tool",
+      "priority": 58,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+E"
+      },
+      "appAction": "SEARCH_EMOJIS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "EMOJI",
+        "hint": "Open a channel you can type in.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S2",
+        "S3",
+        "S5"
+      ]
+    },
+    {
+      "id": "chat.gif",
+      "label": "GIF",
+      "longLabel": "GIF picker",
+      "glyph": "gif",
+      "monogram": "GIF",
+      "category": "tool",
+      "priority": 52,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+G"
+      },
+      "appAction": "SEARCH_GIFS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "GIF",
+        "hint": "Open a channel you can type in.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S2",
+        "S3",
+        "S5"
+      ]
+    },
+    {
+      "id": "chat.sticker",
+      "label": "STICKER",
+      "longLabel": "Sticker picker",
+      "glyph": "sticker",
+      "monogram": "STK",
+      "category": "tool",
+      "priority": 30,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+S"
+      },
+      "appAction": "SEARCH_STICKERS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "STICKER",
+        "hint": "Open a channel you can type in.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S3",
+        "S5"
+      ]
+    },
+    {
+      "id": "chat.upload",
+      "label": "UPLOAD",
+      "longLabel": "Upload a file",
+      "glyph": "folder",
+      "category": "tool",
+      "priority": 56,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Shift+U"
+      },
+      "appAction": "UPLOAD_FILE",
+      "safety": "safe",
+      "unavailable": {
+        "label": "UPLOAD",
+        "hint": "Open a channel you can post in.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S2",
+        "S3",
+        "S5"
+      ],
+      "notes": "Opens the file dialog; nothing is sent until the user confirms."
+    },
+    {
+      "id": "chat.jumpToUnread",
+      "label": "OLDEST NEW",
+      "longLabel": "Jump to the oldest unread message",
+      "glyph": "pages",
+      "category": "nav",
+      "priority": 38,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Shift+PageUp"
+      },
+      "appAction": "JUMP_TO_FIRST_UNREAD",
+      "safety": "safe",
+      "unavailable": {
+        "label": "OLDEST NEW",
+        "hint": "Discord isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S5"
+      ]
+    },
+    {
+      "id": "chat.copyLink",
+      "label": "COPY LINK",
+      "longLabel": "Copy channel link",
+      "glyph": "note",
+      "category": "tool",
+      "priority": 15,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Shift+L"
+      },
+      "appAction": "COPY_CHANNEL_LINK",
+      "safety": "safe",
+      "unavailable": {
+        "label": "COPY LINK",
+        "hint": "Open a channel first.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S5"
+      ],
+      "notes": "Listed in the in-app Ctrl+/ table (code S5); not in a Help Center article yet."
+    },
+    {
+      "id": "app.settings",
+      "label": "SETTINGS",
+      "longLabel": "User Settings",
+      "glyph": "settings",
+      "monogram": "SET",
+      "category": "system",
+      "priority": 28,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Comma"
+      },
+      "appAction": "TOGGLE_SETTINGS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SETTINGS",
+        "hint": "Discord isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S2",
+        "S11"
+      ]
+    },
+    {
+      "id": "app.shortcuts",
+      "label": "SHORTCUTS",
+      "longLabel": "Show Discord's shortcut list",
+      "glyph": "info",
+      "category": "system",
+      "priority": 22,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Slash"
+      },
+      "appAction": "TOGGLE_HOTKEYS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SHORTCUTS",
+        "hint": "Discord isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S2",
+        "S3",
+        "S5"
+      ]
+    },
+    {
+      "id": "app.zoomReset",
+      "label": "ZOOM 100%",
+      "longLabel": "Reset zoom",
+      "glyph": "search",
+      "monogram": "1:1",
+      "category": "system",
+      "priority": 12,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+0"
+      },
+      "appAction": "ZOOM_RESET",
+      "safety": "safe",
+      "unavailable": {
+        "label": "ZOOM 100%",
+        "hint": "Discord isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S5"
+      ]
+    },
+    {
+      "id": "app.discordAudioMute",
+      "label": "APP MUTE",
+      "longLabel": "Mute Discord's sound in the Windows mixer",
+      "glyph": "volume",
+      "category": "toggle",
+      "priority": 34,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "audio.appVolume",
+        "args": {
+          "app": "Discord.exe",
+          "keyPress": "mute"
+        },
+        "status": "exists",
+        "action": "com.jeremyfhall.prismcontrol.audio.app-volume"
+      },
+      "safety": "safe",
+      "stateReadout": "discordVolume",
+      "unavailable": {
+        "label": "APP MUTE",
+        "hint": "Discord has no audio session yet, or the audio module isn't running.",
+        "when": [
+          "moduleMissing",
+          "notConnected"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S14"
+      ],
+      "notes": "Not Discord's deafen: your mic stays live."
+    }
+  ],
+  "controls": [
+    {
+      "id": "channels",
+      "label": "CHANNELS",
+      "glyph": "chat",
+      "category": "nav",
+      "priority": 85,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Alt+Up"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Alt+Down"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "channel",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 6,
+          "minIntervalMs": 60
+        }
+      },
+      "push": {
+        "verb": "chat.markRead"
+      },
+      "readout": "windowTitle",
+      "safety": "safe",
+      "unavailable": {
+        "label": "CHANNELS",
+        "hint": "Discord isn't in front."
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S2",
+        "S5"
+      ],
+      "notes": "No acceleration: each channel switch loads history, so a fast spin is capped at 6 moves."
+    },
+    {
+      "id": "servers",
+      "label": "SERVERS",
+      "glyph": "home",
+      "category": "nav",
+      "priority": 80,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Ctrl+Alt+Up"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Ctrl+Alt+Down"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "server",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 6,
+          "minIntervalMs": 80
+        }
+      },
+      "push": {
+        "verb": "nav.quickSwitcher"
+      },
+      "readout": "windowTitle",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SERVERS",
+        "hint": "Discord isn't in front."
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S5"
+      ],
+      "notes": "Code also binds Ctrl+Shift+[ / ] and Ctrl+Shift+Tab / Ctrl+Tab to the same actions."
+    },
+    {
+      "id": "unread",
+      "label": "UNREAD",
+      "glyph": "alert",
+      "category": "nav",
+      "priority": 70,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Alt+Shift+Up"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Alt+Shift+Down"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "unread channel",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 4,
+          "minIntervalMs": 80
+        }
+      },
+      "push": {
+        "verb": "chat.markServerRead"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "UNREAD",
+        "hint": "Discord isn't in front."
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S5"
+      ]
+    },
+    {
+      "id": "mentions",
+      "label": "MENTIONS",
+      "glyph": "alert",
+      "category": "nav",
+      "priority": 55,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Ctrl+Alt+Shift+Up"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Ctrl+Alt+Shift+Down"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "channel with a mention",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 4,
+          "minIntervalMs": 80
+        }
+      },
+      "push": {
+        "verb": "chat.inbox"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "MENTIONS",
+        "hint": "Discord isn't in front."
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S5"
+      ]
+    },
+    {
+      "id": "scroll",
+      "label": "SCROLL",
+      "glyph": "pages",
+      "category": "nav",
+      "priority": 50,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "PageUp"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "PageDown"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "page",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 6,
+              "pressesPerTick": 2
+            }
+          ],
+          "maxPressesPerEvent": 12,
+          "minIntervalMs": 30
+        }
+      },
+      "push": {
+        "verb": "chat.jumpToUnread"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "SCROLL",
+        "hint": "Discord isn't in front."
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S5"
+      ]
+    },
+    {
+      "id": "discordVolume",
+      "label": "DISCORD VOL",
+      "glyph": "volume",
+      "category": "tool",
+      "priority": 78,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "audio.appVolume",
+          "args": {
+            "app": "Discord.exe",
+            "ticks": -1
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.audio.app-volume"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "audio.appVolume",
+          "args": {
+            "app": "Discord.exe",
+            "ticks": 1
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.audio.app-volume"
+        },
+        "step": {
+          "perPress": 2,
+          "unit": "%",
+          "note": "AppVolumeSettings.Step default 2 % per tick.",
+          "confidence": "verified-local"
+        },
+        "clamp": {
+          "min": 0,
+          "max": 100
+        }
+      },
+      "push": {
+        "verb": "app.discordAudioMute"
+      },
+      "readout": "discordVolume",
+      "safety": "safe",
+      "unavailable": {
+        "label": "DISCORD VOL",
+        "hint": "No Discord audio session yet.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S14"
+      ],
+      "notes": "Windows mixer level for Discord.exe (works in the background); Discord's own Output Volume slider has no shortcut."
+    },
+    {
+      "id": "micLevel",
+      "label": "MIC LEVEL",
+      "glyph": "mic",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "audio.micMute",
+          "args": {
+            "op": "level",
+            "ticks": -1
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.audio.mic-mute"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "audio.micMute",
+          "args": {
+            "op": "level",
+            "ticks": 1
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.audio.mic-mute"
+        },
+        "step": {
+          "perPress": 2,
+          "unit": "%",
+          "note": "MicSettings.Step default 2 % per tick (Windows capture level, not Discord's input volume).",
+          "confidence": "verified-local"
+        },
+        "clamp": {
+          "min": 0,
+          "max": 100
+        }
+      },
+      "push": {
+        "verb": "voice.winMicMute"
+      },
+      "readout": "micLevel",
+      "safety": "safe",
+      "unavailable": {
+        "label": "MIC LEVEL",
+        "hint": "Prism Control's audio module isn't running.",
+        "when": [
+          "moduleMissing"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S14"
+      ]
+    },
+    {
+      "id": "zoom",
+      "label": "ZOOM",
+      "glyph": "search",
+      "category": "system",
+      "priority": 15,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Ctrl+Minus"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Ctrl+Shift+Equal",
+          "note": "Code binds 'mod+plus' (combokeys maps + to Shift+=); Ctrl+= may also work through Electron."
+        },
+        "step": {
+          "perPress": null,
+          "unit": "zoom step",
+          "note": "Steps through Discord's ZOOM_SCALES list.",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 3,
+          "minIntervalMs": 60
+        }
+      },
+      "push": {
+        "verb": "app.zoomReset"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "ZOOM",
+        "hint": "Discord isn't in front."
+      },
+      "confidence": "official",
+      "sources": [
+        "S5",
+        "S11"
+      ],
+      "verify": "With Discord in front, press Ctrl+= and Ctrl+Shift+= and see which zooms in; read Settings > Appearance > Zoom Level to count the steps."
+    }
+  ],
+  "readouts": [
+    {
+      "id": "windowTitle",
+      "label": "CHANNEL",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "window",
+        "note": "Discord's window title carries the open channel/DM and server name."
+      },
+      "widget": "text",
+      "privacy": "streamer-hide",
+      "refreshHz": 2,
+      "confidence": "unverified",
+      "verify": "Read Discord's window title in a server channel, a DM and the Friends page with the Windows module's foreground probe and record the format (expected something like '#general | Example Server - Discord').",
+      "notes": "Streamer-hide: channel, DM and server names are personal."
+    },
+    {
+      "id": "muteState",
+      "label": "MUTED",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "discord.voice.selfMute",
+        "status": "planned",
+        "note": "RPC GET_VOICE_SETTINGS.mute + VOICE_SETTINGS_UPDATE (rpc.voice.read, partner-gated)."
+      },
+      "widget": "state",
+      "privacy": "public",
+      "unavailable": {
+        "label": "MUTE ?",
+        "hint": "Discord's mute state needs the planned Discord module (RPC).",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "unverified",
+      "verify": "Build the discord module with a BYO client id and confirm VOICE_SETTINGS_UPDATE fires on Ctrl+Shift+M."
+    },
+    {
+      "id": "deafState",
+      "label": "DEAFENED",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "discord.voice.selfDeaf",
+        "status": "planned",
+        "note": "RPC GET_VOICE_SETTINGS.deaf."
+      },
+      "widget": "state",
+      "privacy": "public",
+      "unavailable": {
+        "label": "DEAF ?",
+        "hint": "Needs the planned Discord module (RPC).",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "unverified",
+      "verify": "As muteState, with Ctrl+Shift+D."
+    },
+    {
+      "id": "voiceChannel",
+      "label": "VOICE",
+      "contexts": [
+        "inCall"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "discord.voice.channelName",
+        "status": "planned",
+        "note": "RPC GET_SELECTED_VOICE_CHANNEL (rpc scope)."
+      },
+      "widget": "text",
+      "privacy": "streamer-hide",
+      "unavailable": {
+        "label": "VOICE",
+        "hint": "Needs the planned Discord module (RPC).",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "unverified",
+      "verify": "Call GET_SELECTED_VOICE_CHANNEL while connected; check name and voice_states fields."
+    },
+    {
+      "id": "speakers",
+      "label": "SPEAKING",
+      "contexts": [
+        "inCall"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "discord.voice.speaking",
+        "status": "planned",
+        "note": "RPC SPEAKING_START / SPEAKING_STOP subscriptions (rpc.voice.read)."
+      },
+      "widget": "list",
+      "privacy": "streamer-hide",
+      "refreshHz": 10,
+      "unavailable": {
+        "label": "SPEAKING",
+        "hint": "Needs the planned Discord module (RPC).",
+        "when": [
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "unverified",
+      "verify": "Subscribe to SPEAKING_START/STOP for the selected channel and measure event latency."
+    },
+    {
+      "id": "winMicState",
+      "label": "WIN MIC",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "mic.muted",
+        "topic": "/v1/mic",
+        "status": "exists"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "refreshHz": 4,
+      "confidence": "verified-local",
+      "sources": [
+        "S14",
+        "S15"
+      ]
+    },
+    {
+      "id": "micLevel",
+      "label": "MIC",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "mic.peak",
+        "topic": "/v1/mic",
+        "status": "exists",
+        "note": "peak is metered at 10 Hz only while polled."
+      },
+      "unit": "%",
+      "range": [
+        0,
+        100
+      ],
+      "widget": "meter",
+      "privacy": "public",
+      "refreshHz": 10,
+      "confidence": "verified-local",
+      "sources": [
+        "S15"
+      ]
+    },
+    {
+      "id": "discordVolume",
+      "label": "DISCORD",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "audio.apps[Discord.exe].volumePct",
+        "status": "exists",
+        "note": "Audio module session state (App Volume action); not yet on the data API."
+      },
+      "unit": "%",
+      "format": "{value} %",
+      "range": [
+        0,
+        100
+      ],
+      "widget": "gauge",
+      "privacy": "public",
+      "confidence": "verified-local",
+      "sources": [
+        "S14"
+      ]
+    }
+  ],
+  "userBindings": {
+    "storage": "file",
+    "summary": "Custom keybinds (Settings > Keybinds) live in Discord's Chromium Local Storage for https://discord.com under the key 'keybinds' (KeybindsStore, a device-settings store). That same LevelDB holds the account token, so Prism must NOT read it. Built-in shortcuts (the Ctrl+/ list) are not rebindable.",
+    "neverRead": true,
+    "locations": [
+      {
+        "path": "%APPDATA%\\discord\\Local Storage\\leveldb\\",
+        "format": "leveldb",
+        "note": "Stable. Contains the auth token: do not open. Absent on this PC (no %APPDATA%\\discord folder; names-only probe)."
+      },
+      {
+        "path": "%APPDATA%\\discordptb\\Local Storage\\leveldb\\",
+        "format": "leveldb",
+        "note": "PTB. Same rule."
+      },
+      {
+        "path": "%APPDATA%\\discordcanary\\Local Storage\\leveldb\\",
+        "format": "leveldb",
+        "note": "Canary. Same rule."
+      },
+      {
+        "path": "%APPDATA%\\discord\\settings.json",
+        "format": "json",
+        "note": "Desktop-host settings (window, startup, hardware acceleration). Believed not to hold keybinds."
+      }
+    ],
+    "entryShape": "Value of localStorage['keybinds']: an object keyed by keybind id ('0','1',…; managed defaults use fixed ids such as '1001' for the overlay lock). Each entry: { id, action (PUSH_TO_TALK, PUSH_TO_TALK_PRIORITY, PUSH_TO_MUTE, TOGGLE_MUTE, TOGGLE_DEAFEN, TOGGLE_CAMERA, TOGGLE_VOICE_MODE, TOGGLE_STREAMER_MODE, TOGGLE_GO_LIVE_STREAMING, TOGGLE_OVERLAY_INPUT_LOCK, SOUNDBOARD, SOUNDBOARD_HOLD, SAVE_CLIP, SAVE_SCREENSHOT, SWITCH_TO_VOICE_CHANNEL, DISCONNECT_FROM_VOICE_CHANNEL, NAVIGATE_BACK, NAVIGATE_FORWARD, …), shortcut: [[deviceType, code, env], …], enabled, managed, params { channelId? }, context? }. action is the join key with verb.appAction.",
+    "example": "{ \"3\": { \"id\": \"3\", \"action\": \"TOGGLE_MUTE\", \"shortcut\": [[0, 162, 1], [0, 164, 1], [0, 77, 1]], \"enabled\": true, \"managed\": false, \"params\": {} } }",
+    "keyNameMap": "deviceType 0 = keyboard key, 1 = mouse button (code = button number), 2 = keyboard modifier, 3 = gamepad button. env 1 = Windows, 2 = macOS, 3 = Linux, 4 = browser. With env 1 the code is the Windows virtual-key: 160/161 LShift/RShift, 162/163 LCtrl/RCtrl, 164/165 LAlt/RAlt, 91 LWin, 65-90 A-Z, 48-57 0-9, 112-135 F1-F24, 33/34 PageUp/PageDown, 37-40 Left/Up/Right/Down, 186 Semicolon, 187 Equal, 188 Comma, 189 Minus, 190 Period, 191 Slash, 192 Backquote, 219 BracketLeft, 220 Backslash, 221 BracketRight, 222 Quote. Mouse buttons cannot be sent as chords: map to mouse bindings.",
+    "readMode": "DO NOT READ. Reading Discord's Local Storage is what token stealers do; AV/EDR flags it and it would expose the account token. Prism keeps the defaults above and asks the user in the PI which keys they recorded for Push to Talk / Toggle Mute / Disconnect etc. (a short form keyed by action). A future RPC module still cannot read keybinds (RPC has no keybind command).",
+    "confidence": "community",
+    "sources": [
+      "S5",
+      "S6",
+      "S12",
+      "S13"
+    ],
+    "verify": "Store key, entry shape and VK coding come from Discord's code (S5/S6); the leveldb location from S12. Whether the value is wrapped (e.g. {\"_state\":…,\"_version\":…}) is unverified and should stay that way: verify only on a throwaway VM profile, never on the user's PC."
+  },
+  "layouts": [
+    {
+      "device": "galleon-100-sd",
+      "context": "chat",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "voice.toggleMute"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "voice.toggleDeafen"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "nav.quickSwitcher"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "chat.inbox"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "chat.emoji"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "chat.upload"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "chat.pins"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "chat.members"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "chat.search"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "nav.back"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "chat.markRead"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "call.answer"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "channels"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "servers"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "discordVolume"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "unread"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "windowTitle"
+        },
+        {
+          "slot": "BL",
+          "readout": "windowTitle"
+        },
+        {
+          "slot": "TR",
+          "readout": "discordVolume"
+        },
+        {
+          "slot": "BR",
+          "readout": "winMicState"
+        }
+      ],
+      "rationale": "Voice toggles and the switcher on top, chat tools in the middle rows, back/read/answer at the bottom; channel and server browsing on the left dial, Discord volume and unread triage on the right."
+    },
+    {
+      "device": "galleon-100-sd",
+      "context": "inCall",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "voice.toggleMute"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "voice.toggleDeafen"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "voice.disconnect"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "voice.pushToTalk"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "voice.toggleCamera"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "voice.goLive"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "voice.soundboard"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "voice.jumpToCall"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "clips.save"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "nav.quickSwitcher"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "overlay.toggle"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "voice.winMicMute"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "discordVolume"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "micLevel"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "channels"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "servers"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "discordVolume"
+        },
+        {
+          "slot": "BL",
+          "readout": "micLevel"
+        },
+        {
+          "slot": "TR",
+          "readout": "windowTitle"
+        },
+        {
+          "slot": "BR",
+          "readout": "voiceChannel"
+        }
+      ],
+      "rationale": "Mute/deafen stay in the same top-left keys as in chat (muscle memory) with hang-up (confirm) beside them; call tools in the middle, Windows mic as a backstop bottom-right; levels on the left dial."
+    },
+    {
+      "device": "stream-deck-plus",
+      "context": "chat",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "voice.toggleMute"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "voice.toggleDeafen"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "nav.quickSwitcher"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "verb": "chat.inbox"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "chat.emoji"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "chat.upload"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "nav.back"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "verb": "chat.markRead"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "control": "channels"
+        },
+        {
+          "dial": 1,
+          "control": "servers"
+        },
+        {
+          "dial": 2,
+          "control": "scroll"
+        },
+        {
+          "dial": 3,
+          "control": "discordVolume"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "0",
+          "readout": "windowTitle"
+        },
+        {
+          "slot": "1",
+          "readout": "winMicState"
+        },
+        {
+          "slot": "2",
+          "readout": "muteState"
+        },
+        {
+          "slot": "3",
+          "readout": "discordVolume"
+        }
+      ],
+      "rationale": "Same top row as the Galleon; four dials give channels, servers, scrolling and Discord volume, with the strip showing the channel, mic and volume."
+    },
+    {
+      "device": "stream-deck-plus",
+      "context": "inCall",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "voice.toggleMute"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "voice.toggleDeafen"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "voice.disconnect"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "verb": "voice.toggleCamera"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "voice.soundboard"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "voice.goLive"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "clips.save"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "verb": "voice.jumpToCall"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "control": "discordVolume"
+        },
+        {
+          "dial": 1,
+          "control": "micLevel"
+        },
+        {
+          "dial": 2,
+          "control": "channels"
+        },
+        {
+          "dial": 3,
+          "control": "servers"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "0",
+          "readout": "discordVolume"
+        },
+        {
+          "slot": "1",
+          "readout": "micLevel"
+        },
+        {
+          "slot": "2",
+          "readout": "voiceChannel"
+        },
+        {
+          "slot": "3",
+          "readout": "windowTitle"
+        }
+      ],
+      "rationale": "Call controls on the keys with mute/deafen in the same spots as chat; levels on the first two dials, navigation on the last two."
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "title": "[Windows] Discord Hotkeys",
+      "url": "https://support.discord.com/hc/en-us/articles/225977308-Keyboard-Shortcuts",
+      "publisher": "Discord Help Center",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "2020 client (article dated 2020-02-07)",
+      "note": "Old chart; several rows superseded (Ctrl+B, Ctrl+[, Ctrl+Alt+A, Alt+Left/Right)."
+    },
+    {
+      "id": "S2",
+      "title": "Discord Commands, Shortcuts, and Navigation Guide",
+      "url": "https://support.discord.com/hc/en-us/articles/31232432266647-Discord-Commands-Shortcuts-and-Navigation-Guide",
+      "publisher": "Discord Help Center",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "2025-04-14 article"
+    },
+    {
+      "id": "S3",
+      "title": "How to Use Keyboard Shortcuts on Discord & Create Custom Keybinds",
+      "url": "https://discord.com/blog/how-to-use-keyboard-shortcuts-on-discord-create-custom-keybinds",
+      "publisher": "Discord Blog",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "2024-11-19 post"
+    },
+    {
+      "id": "S4",
+      "title": "How do I add different Keybinds?",
+      "url": "https://support.discord.com/hc/en-us/articles/217083547-How-do-I-add-different-Keybinds",
+      "publisher": "Discord Help Center",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "2020-10 article"
+    },
+    {
+      "id": "S5",
+      "title": "Discord web client bundle (keyboard shortcut table, KeybindsStore, global keybind actions)",
+      "url": "https://discord.com/assets/web.4d4b2f75fdea5470.js",
+      "publisher": "Discord Inc.",
+      "kind": "source-code",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "web build 641004 (live 2026-10-16)",
+      "note": "Read-only fetch of the public client JS. Same code the desktop app loads."
+    },
+    {
+      "id": "S6",
+      "title": "discord-client-datamining snapshot (chunks 915967, 532624, 341383, 350535, 650583, 696016, 980504, 14214)",
+      "url": "https://github.com/wavedevgit/discord-client-datamining",
+      "publisher": "community mirror of Discord client code",
+      "kind": "source-code",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "web build 533299 (2026-04-29)",
+      "note": "Readable copy of the same modules; used to trace key-code encoding and the April managed Ctrl+Shift+M default."
+    },
+    {
+      "id": "S7",
+      "title": "Clips",
+      "url": "https://support.discord.com/hc/en-us/articles/16861982215703-Clips",
+      "publisher": "Discord Help Center",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "current"
+    },
+    {
+      "id": "S8",
+      "title": "RPC (topics/rpc)",
+      "url": "https://discord.com/developers/docs/topics/rpc",
+      "publisher": "Discord Developer Docs",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "current",
+      "note": "IPC pipe \\\\?\\pipe\\discord-ipc-{n}; testers list (up to 50) while not approved; SET_VOICE_SETTINGS, SELECT_VOICE_CHANNEL, GET_SELECTED_VOICE_CHANNEL, VOICE_SETTINGS_UPDATE, SPEAKING_START/STOP."
+    },
+    {
+      "id": "S9",
+      "title": "OAuth2 scopes (topics/oauth2)",
+      "url": "https://discord.com/developers/docs/topics/oauth2",
+      "publisher": "Discord Developer Docs",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "current",
+      "note": "rpc, rpc.voice.read, rpc.voice.write: 'only available to approved partners'."
+    },
+    {
+      "id": "S10",
+      "title": "Soundboard Overlay Keybind Should Be Configurable (community post)",
+      "url": "https://support.discord.com/hc/en-us/community/posts/22951787026711-Soundboard-Overlay-Keybind-Should-Be-Configurable",
+      "publisher": "Discord Help Center community",
+      "kind": "forum",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "2024-2025"
+    },
+    {
+      "id": "S11",
+      "title": "Discord keyboard shortcuts for Windows and Mac",
+      "url": "https://shortcut-tools.com/en/shortcuts/discord/",
+      "publisher": "shortcut-tools.com",
+      "kind": "guide",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "checked against Discord Help Center 2026-10-06"
+    },
+    {
+      "id": "S12",
+      "title": "Discord Forensic Analysis: Recovering Configuration and Activity From the Discord LevelDB Store",
+      "url": "https://forenza.io/user-discord-config/",
+      "publisher": "Forenza",
+      "kind": "guide",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "stable client, 2026-05"
+    },
+    {
+      "id": "S13",
+      "title": "Read-only probe: Discord install on this PC",
+      "url": "local:%LOCALAPPDATA%\\Discord\\app-1.0.9232\\Discord.exe",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "host 1.0.9232",
+      "note": "FileVersion 1.0.9232; app-1.0.9186 is a leftover folder; Discord not running; %APPDATA%\\discord absent; no Start-menu entry. File names only."
+    },
+    {
+      "id": "S14",
+      "title": "Prism Control audio module (MicMuteAction, AppVolumeAction)",
+      "url": "local:Prism-control/prism-control/src/PrismControl.Audio/Actions/",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Prism Control working tree 2026-10-16"
+    },
+    {
+      "id": "S15",
+      "title": "Prism Control data API: GET /v1/mic",
+      "url": "local:Prism-control/prism-control/docs/api.md",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "data API v1"
+    }
+  ],
+  "confidence": "medium",
+  "conflicts": [
+    "Background behavior of Ctrl+Shift+M / Ctrl+Shift+D: S3 (2024) says both work while Discord is in the background; live code S5 binds them in-app only, and the April build S6 only natively registered Ctrl+Shift+M behind a config flag. Treat them as in-app; use audio.micMute or user-set Discord keybinds from a game.",
+    "Start a call: S1 Ctrl+[ vs S3/S5 Ctrl+'.",
+    "Alt+Left / Alt+Right: S1 'return to connected audio channel' / 'previous text channel' vs S2/S5 Navigate back / forward.",
+    "Ctrl+Alt+Right/Left: S2 'switch between servers' vs S5 previous-server toggle / return to audio channel (servers are Ctrl+Alt+Up/Down in S1 and S5).",
+    "Ctrl+B, Ctrl+I, Ctrl+U: S1 previous channel / mentions / member list vs S2 bold / italic / underline in the message box. In S5 Ctrl+B is no longer a navigation shortcut; Ctrl+I opens the Inbox and Ctrl+U the member list unless text is selected in the editor.",
+    "Return to audio channel: S1 Ctrl+Alt+A vs S5 Ctrl+Alt+Left (plus Jump to current call Ctrl+Alt+Shift+V).",
+    "RPC access: S8 allows up to 50 testers on an unapproved app, S9 says the rpc/rpc.voice.* scopes are for approved partners only."
+  ],
+  "gaps": [
+    "No working way yet to know if the user is in a call (inCall detector is planned/unverified).",
+    "Discord's own mute/deafen state is unreadable without the planned RPC module; MUTE/DEAFEN keys are toggles with a guessed state.",
+    "Mute/deafen/disconnect while a game is in front need either audio.micMute (exists) or keybinds the user records in Discord; this pack only applies while Discord is in front.",
+    "User rebinds cannot be read safely (token store); the PI must ask the user.",
+    "Window title format for the channel readout not checked on this PC (Discord has no user data here).",
+    "Channel tabs (Ctrl+T open, Ctrl+W close, Ctrl+Shift+P pin) and Create thread (Ctrl+Alt+Shift+N) appear in build 641004 but are likely experiment-gated; not added.",
+    "Message actions in Keyboard Mode (Tab then E edit, R reply, + react, P pin, F forward, Backspace delete, Alt+Enter mark unread) need a focused message; not added."
+  ],
+  "notes": [
+    "Excluded on purpose: BROWSER_DEVTOOLS (Ctrl+Alt+I in code), the 'vibe with Wumpus' easter egg (Ctrl+Alt+Shift+W), Create server (Ctrl+Shift+N) and Create group DM (Ctrl+Shift+T).",
+    "Do not use these Discord pages in a browser with this pack: browser-reserved chords (Ctrl+T/W/N, Ctrl+Shift+T/N) never reach the page. A discord-web site pack should extend the browser pack and drop them.",
+    "Long-form notes: packs/notes/discord.md."
+  ]
+}

@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Domain module "windows" (team Prism Play). Owned by W1 "Windows & Displays" (WinShellModule.cs, Windows/, Display/,
+    Placement/, Shared/) and W2 "System & Firmware" (System/, Firmware/, Clipboard/, Capture/, SystemFeatures.cs).
+    W2: ask W1 before editing this file.
+    Build alone: dotnet build src/PrismControl.WinShell -artifacts-path <your dir>   (two leading dashes)
+
+    The namespace is PrismControl.WinShell, never PrismControl.Windows: that would shadow WinRT's Windows.* everywhere.
+
+    Desktop: the shared platform library (src/PrismControl.Desktop: foreground, input, window catalog, icons). It is used
+    whenever its project exists (PrismUseDesktop=true, PRISM_DESKTOP). -p:PrismUseDesktop=false compiles the thin local
+    adapters behind the same interfaces instead (Shared/DesktopShim), which is how this module was first built.
+  -->
+  <PropertyGroup>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.WinShell</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PrismUseDesktop Condition="'$(PrismUseDesktop)' == '' And Exists('..\PrismControl.Desktop\PrismControl.Desktop.csproj')">true</PrismUseDesktop>
+    <PrismUseDesktop Condition="'$(PrismUseDesktop)' == ''">false</PrismUseDesktop>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(PrismUseDesktop)' == 'true'">
+    <DefineConstants>$(DefineConstants);PRISM_DESKTOP</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Core\PrismControl.Core.csproj" />
+    <ProjectReference Include="..\PrismControl.Desktop\PrismControl.Desktop.csproj" Condition="'$(PrismUseDesktop)' == 'true'" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="PrismControl.WinShell.Tests" />
+  </ItemGroup>
+</Project>

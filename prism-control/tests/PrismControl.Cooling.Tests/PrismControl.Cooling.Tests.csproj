@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Cooling tests (owned by the Cooling engineer). Run: dotnet run project tests/PrismControl.Cooling.Tests; options: exclude integration,
+       render-previews DIR (see Program.cs and Previews.cs). -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Cooling.Tests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Testing\PrismControl.Testing.csproj" />
+    <ProjectReference Include="..\..\src\PrismControl.Cooling\PrismControl.Cooling.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Recorded, sanitized fixtures: no serials, GUIDs or machine names. -->
+    <None Include="Fixtures\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

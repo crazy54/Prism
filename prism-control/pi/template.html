@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prism Control: custom inspector template</title>
+    <link rel="stylesheet" href="lib/prism-pi.css" />
+    <script src="lib/prism-pi.js"></script>
+  </head>
+  <body>
+    <!--
+      Copy this file to pi/<domain>-<action>.html (or src/PrismControl.<Domain>/pi/<name>.html) and point the action at it:
+        [StreamDeckAction(..., PropertyInspector = "pi/<name>.html")]
+      Patterns shown:
+        1. data-setting binds an input to settings.<name> (two-way, debounced).
+        2. data-state shows a value the plugin pushes (DescribeState() or SendToPropertyInspector("pi.state", ...)).
+        3. PrismPI.request(...) asks the plugin and awaits its answer (OnPiMessageAsync return value).
+        4. PrismPI.send(...) fires a command without an answer.
+      No external scripts, fonts or images: the PI must work offline.
+      Styling (lib/prism-pi.css, Refraction Night/Day): .prism-row = label | control | extra; .prism-heading h2 for a
+      section; .prism-note for help text; .prism-actions around a row of buttons; .prism-primary on the one main button;
+      .prism-code for a value to copy; .prism-check around a checkbox + its sentence. Page-only layout may use the
+      --pi-* tokens (e.g. var(--pi-card), var(--pi-line-soft)). Force a theme with <html data-pi-theme="day|night">.
+    -->
+    <main class="prism-pi">
+      <div class="prism-row">
+        <label class="prism-label" for="label">Label</label>
+        <input id="label" type="text" data-setting="label" placeholder="Shown on the key" />
+      </div>
+      <div class="prism-row">
+        <label class="prism-label" for="device">Device</label>
+        <select id="device" data-setting="deviceId"></select>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label">Status</span>
+        <span class="prism-info" data-state="status"></span>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <button type="button" id="refresh">Refresh devices</button>
+      </div>
+    </main>
+    <script>
+      function loadDevices() {
+        // The action answers in OnPiMessageAsync("devices.list", ...) with [{ value, label }, ...].
+        PrismPI.request('devices.list').then(function (list) {
+          var select = document.getElementById('device');
+          select.textContent = '';
+          (list || []).forEach(function (d) {
+            var o = document.createElement('option');
+            o.value = d.value;
+            o.textContent = d.label;
+            select.appendChild(o);
+          });
+          select.value = PrismPI.settings.deviceId || '';
+        }).catch(function (e) { PrismPI.log('devices.list failed: ' + e.message); });
+      }
+      PrismPI.ready(loadDevices);
+      document.getElementById('refresh').addEventListener('click', loadDevices);
+    </script>
+  </body>
+</html>

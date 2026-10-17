@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Eq tests (owned by the Eq engineer). Run: dotnet run project tests/PrismControl.Eq.Tests -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Eq.Tests</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Testing\PrismControl.Testing.csproj" />
+    <ProjectReference Include="..\..\src\PrismControl.Eq\PrismControl.Eq.csproj" />
+  </ItemGroup>
+</Project>

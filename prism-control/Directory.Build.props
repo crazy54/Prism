@@ -1,0 +1,28 @@
+<Project>
+  <!--
+    Shared build settings for every Prism Control project.
+    Rules (see docs/architecture.md):
+      - No third-party runtime NuGet packages. The BCL, the Windows SDK projection (via the
+        windows TFM) and the .NET runtime packs are the only things we ship.
+      - Domain projects target $(PrismWindowsTfm) so they can use WinRT/COM; Core stays portable.
+  -->
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Deterministic>true</Deterministic>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <NuGetAudit>false</NuGetAudit>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+
+    <!-- Version: x.y.z here; the manifest gets x.y.z.0 unless build.ps1 -Version overrides it. -->
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <Authors>Jeremy Francis Hall</Authors>
+    <Product>Prism Control</Product>
+    <Copyright>Copyright 2026 JFH Inc. Created by Jeremy Francis Hall. Licensed under the Apache License 2.0.</Copyright>
+
+    <PrismWindowsTfm>net10.0-windows10.0.22621.0</PrismWindowsTfm>
+    <PrismMinWindows>10.0.19041.0</PrismMinWindows>
+    <PrismRepoRoot>$(MSBuildThisFileDirectory)</PrismRepoRoot>
+  </PropertyGroup>
+</Project>

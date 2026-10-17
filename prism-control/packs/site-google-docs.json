@@ -1,0 +1,138 @@
+{
+  "$schema": "schema/context-pack.schema.json",
+  "schemaVersion": 1,
+  "id": "site-google-docs",
+  "name": "Google Docs (web)",
+  "vendor": "Google",
+  "kind": "site",
+  "packVersion": "0.1.0",
+  "extends": ["chromium-browser"],
+  "layer": "overlay",
+  "platforms": ["windows"],
+  "verifiedAgainst": {
+    "version": "docs.google.com, help page as of 2026-10-16",
+    "date": "2026-10-16",
+    "method": "official-docs",
+    "note": "All chords from the PC column of Google's Docs Editors Help page (S1). Not tested in a signed-in document."
+  },
+  "policy": { "class": "desktop-app", "input": "allowed", "sight": "forbidden", "closedLoop": "forbidden", "reason": "Ordinary website. Document names are private: streamer-hidden." },
+  "keyMode": "vk",
+  "match": {
+    "any": [
+      { "site": { "host": "docs.google.com", "pathRegex": "^/document/" }, "confidence": "official", "note": "Docs only; Sheets (/spreadsheets/) and Slides (/presentation/) have other shortcuts." },
+      { "process": "chrome.exe", "titleRegex": " - Google Docs - Google Chrome$", "confidence": "unverified", "note": "Doc tab titles look like '<name> - Google Docs' (from memory; not checked, no signed-in session). Verify with any document open in Chrome." },
+      { "process": "msedge.exe", "titleRegex": " - Google Docs( and \\d+ more pages?)? - .*Edge$", "confidence": "unverified", "note": "Same, plus Edge's unverified title suffix." }
+    ]
+  },
+  "contexts": [
+    { "id": "doc", "label": "Document", "default": true, "priority": 10, "detect": { "all": [{ "type": "always" }] }, "confidence": "official", "sources": ["S1"], "notes": "Editing, suggesting and viewing share this context: the mode isn't visible in the URL or title. A future content-script field (docs.mode) could split them." }
+  ],
+  "verbs": [
+    { "id": "docs.undo", "label": "UNDO", "glyph": "back", "category": "primary", "priority": 90, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Z" }, "safety": "safe", "unavailable": { "label": "UNDO", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.redo", "label": "REDO", "glyph": "sync", "category": "primary", "priority": 85, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Shift+Z" }, "safety": "safe", "unavailable": { "label": "REDO", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Ctrl+Y is 'Repeat last action' in Docs, not redo (S1)." },
+    { "id": "docs.comment", "label": "COMMENT", "longLabel": "Insert a comment", "glyph": "chat", "category": "primary", "priority": 80, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Alt+M" }, "safety": "safe", "unavailable": { "label": "COMMENT", "hint": "Select some text first.", "when": ["notForeground", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Opens the comment box; nothing is posted until you press Comment." },
+    { "id": "docs.findReplace", "label": "REPLACE", "longLabel": "Find and replace", "glyph": "search", "category": "tool", "priority": 60, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+H" }, "safety": "safe", "unavailable": { "label": "REPLACE", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Docs takes Ctrl+H; elsewhere it's the browser's History." },
+    { "id": "docs.link", "label": "LINK", "longLabel": "Insert or edit link", "glyph": "link", "monogram": "LNK", "category": "tool", "priority": 58, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+K" }, "safety": "safe", "unavailable": { "label": "LINK", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Shadows the browser's Ctrl+K web search inside a document." },
+    { "id": "docs.bold", "label": "BOLD", "glyph": "bold", "monogram": "B", "category": "tool", "priority": 70, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+B" }, "safety": "safe", "unavailable": { "label": "BOLD", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.italic", "label": "ITALIC", "glyph": "italic", "monogram": "I", "category": "tool", "priority": 68, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+I" }, "safety": "safe", "unavailable": { "label": "ITALIC", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Ctrl+U underline (S1)." },
+    { "id": "docs.strike", "label": "STRIKE", "longLabel": "Strikethrough", "glyph": "strike", "monogram": "S", "category": "tool", "priority": 45, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Alt+Shift+5" }, "safety": "safe", "unavailable": { "label": "STRIKE", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.clearFormat", "label": "CLEAR FMT", "longLabel": "Clear text formatting", "glyph": "stop", "category": "tool", "priority": 50, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Backslash" }, "altBindings": [{ "kind": "chord", "chord": "Ctrl+Space" }], "safety": "safe", "unavailable": { "label": "CLEAR FMT", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.copyFormat", "label": "COPY FMT", "longLabel": "Copy text formatting", "glyph": "pages", "category": "tool", "priority": 42, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Alt+C" }, "safety": "safe", "unavailable": { "label": "COPY FMT", "hint": "Select formatted text first.", "when": ["notForeground", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.pasteFormat", "label": "PASTE FMT", "longLabel": "Paste text formatting", "glyph": "pages", "category": "tool", "priority": 41, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Alt+V" }, "safety": "safe", "unavailable": { "label": "PASTE FMT", "hint": "Copy formatting first (COPY FMT).", "when": ["notForeground", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.heading1", "label": "HEADING 1", "glyph": "heading", "monogram": "H1", "category": "tool", "priority": 62, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Alt+1" }, "safety": "safe", "unavailable": { "label": "HEADING 1", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Ctrl+Alt+1..6 = heading 1..6." },
+    { "id": "docs.heading2", "label": "HEADING 2", "glyph": "heading", "monogram": "H2", "category": "tool", "priority": 61, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Alt+2" }, "safety": "safe", "unavailable": { "label": "HEADING 2", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.normalText", "label": "NORMAL", "longLabel": "Apply normal text style", "glyph": "note", "category": "tool", "priority": 55, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Alt+0" }, "safety": "safe", "unavailable": { "label": "NORMAL", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.bullets", "label": "BULLETS", "longLabel": "Bulleted list", "glyph": "note", "category": "tool", "priority": 60, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Shift+8" }, "safety": "safe", "unavailable": { "label": "BULLETS", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Ctrl+Shift+7 numbered, Ctrl+Shift+9 checklist (S1)." },
+    { "id": "docs.numbered", "label": "NUMBERED", "longLabel": "Numbered list", "glyph": "note", "category": "tool", "priority": 52, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Shift+7" }, "safety": "safe", "unavailable": { "label": "NUMBERED", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.modeEditing", "label": "EDITING", "longLabel": "Switch to editing mode", "glyph": "note", "category": "mode", "priority": 66, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Alt+Shift+Z" }, "safety": "safe", "unavailable": { "label": "EDITING", "hint": "Needs edit access to the document.", "when": ["notForeground", "permissionNeeded"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.modeSuggesting", "label": "SUGGESTING", "longLabel": "Switch to suggesting mode", "glyph": "marker", "category": "mode", "priority": 67, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Alt+Shift+X" }, "safety": "safe", "unavailable": { "label": "SUGGESTING", "hint": "Needs edit or comment access.", "when": ["notForeground", "permissionNeeded"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.modeViewing", "label": "VIEWING", "longLabel": "Switch to viewing mode", "glyph": "viewers", "category": "mode", "priority": 50, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Alt+Shift+C" }, "safety": "safe", "unavailable": { "label": "VIEWING", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.compact", "label": "COMPACT", "longLabel": "Hide the menus (compact mode, toggle)", "glyph": "pages", "category": "toggle", "priority": 35, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Shift+F" }, "safety": "safe", "unavailable": { "label": "COMPACT", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.toolFinder", "label": "TOOL FINDER", "longLabel": "Tool finder (search the menus)", "glyph": "search", "category": "nav", "priority": 64, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Alt+Slash" }, "altBindings": [{ "kind": "chord", "chord": "Alt+Shift+Z" }], "safety": "safe", "unavailable": { "label": "TOOL FINDER", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "S1 also lists Alt+Z for Chrome only; Alt+Slash works in every browser, so it's the primary." },
+    { "id": "docs.wordCount", "label": "WORD COUNT", "glyph": "info", "category": "nav", "priority": 40, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Shift+C" }, "safety": "safe", "unavailable": { "label": "WORD COUNT", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Shadows Chrome's DevTools inspect (Ctrl+Shift+C) inside a document." },
+    { "id": "docs.voiceTyping", "label": "VOICE TYPE", "longLabel": "Start voice typing (Chrome)", "glyph": "mic", "category": "toggle", "priority": 46, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Shift+S" }, "safety": "safe", "unavailable": { "label": "VOICE TYPE", "hint": "Chrome only; allow microphone access for docs.google.com.", "when": ["notForeground", "permissionNeeded"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "S1: 'available in Chrome browsers'. In Edge, expect nothing." },
+    { "id": "docs.revisions", "label": "VERSIONS", "longLabel": "Open revision history", "glyph": "clock", "category": "nav", "priority": 44, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Alt+Shift+H" }, "safety": "safe", "unavailable": { "label": "VERSIONS", "hint": "Needs edit access.", "when": ["notForeground", "permissionNeeded"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "docs.spelling", "label": "SPELLING", "longLabel": "Open spelling and grammar", "glyph": "check", "category": "tool", "priority": 38, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Alt+X" }, "safety": "safe", "unavailable": { "label": "SPELLING", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "S1 also lists F7, which is Chrome's caret-browsing key; not used." },
+    { "id": "docs.nextHeading", "label": "NEXT HEAD", "longLabel": "Move to the next heading", "glyph": "heading", "monogram": "H>", "category": "nav", "priority": 48, "contexts": ["doc"], "binding": { "kind": "sequence", "steps": ["Ctrl+Alt+N", "Ctrl+Alt+H"], "gapMs": 40, "note": "S1: 'holding Ctrl + Alt, press n then h'." }, "safety": "safe", "unavailable": { "label": "NEXT HEAD", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "verify": "The sequence releases Ctrl+Alt between N and H; check Docs still accepts it (S1 says hold Ctrl+Alt). Also check it works without screen-reader support turned on." },
+    { "id": "docs.outline", "label": "OUTLINE", "longLabel": "Show the document outline", "glyph": "pages", "category": "nav", "priority": 43, "contexts": ["doc"], "binding": { "kind": "sequence", "steps": ["Ctrl+Alt+A", "Ctrl+Alt+H"], "gapMs": 40, "note": "S1: 'holding Ctrl + Alt, press a then h'." }, "safety": "safe", "unavailable": { "label": "OUTLINE", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "verify": "Same held-modifier check as NEXT HEAD." },
+    { "id": "docs.nextComment", "label": "NEXT CMT", "longLabel": "Move to the next comment", "glyph": "chat", "category": "nav", "priority": 47, "contexts": ["doc"], "binding": { "kind": "sequence", "steps": ["Ctrl+Alt+N", "Ctrl+Alt+C"], "gapMs": 40, "note": "S1: 'holding Ctrl + Alt, press n then c'." }, "safety": "safe", "unavailable": { "label": "NEXT CMT", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "verify": "Same held-modifier check as NEXT HEAD. On a focused comment, R replies, J/K move, E resolves, U exits (S1)." },
+    { "id": "docs.shortcuts", "label": "SHORTCUTS", "longLabel": "Show common keyboard shortcuts", "glyph": "info", "category": "system", "priority": 15, "contexts": ["doc"], "binding": { "kind": "chord", "chord": "Ctrl+Slash" }, "safety": "safe", "unavailable": { "label": "SHORTCUTS", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] }
+  ],
+  "controls": [
+    { "id": "fontSize", "label": "FONT SIZE", "glyph": "heading", "monogram": "Aa", "category": "tool", "priority": 70, "contexts": ["doc"],
+      "turn": { "left": { "kind": "chord", "chord": "Ctrl+Shift+Comma" }, "right": { "kind": "chord", "chord": "Ctrl+Shift+Period" },
+        "step": { "perPress": null, "unit": "pt", "note": "Docs' size step per press isn't documented.", "confidence": "unverified" },
+        "acceleration": { "curve": [{ "minTicks": 1, "pressesPerTick": 1 }, { "minTicks": 6, "pressesPerTick": 2 }], "maxPressesPerEvent": 12, "minIntervalMs": 40 } },
+      "push": { "verb": "docs.normalText" }, "safety": "safe", "unavailable": { "label": "FONT SIZE", "hint": "Select text first.", "when": ["notForeground", "nothingSelected"], "style": "dim" }, "confidence": "official", "sources": ["S1"],
+      "verify": "Select 11 pt text, press Ctrl+Shift+Period 5 times and read the size box to fill step.perPress." },
+    { "id": "indent", "label": "INDENT", "glyph": "indent", "monogram": ">|", "category": "tool", "priority": 55, "contexts": ["doc"],
+      "turn": { "left": { "kind": "chord", "chord": "Ctrl+BracketLeft" }, "right": { "kind": "chord", "chord": "Ctrl+BracketRight" },
+        "step": { "perPress": 1, "unit": "level", "confidence": "official" },
+        "acceleration": { "curve": [{ "minTicks": 1, "pressesPerTick": 1 }], "maxPressesPerEvent": 4, "minIntervalMs": 50 } },
+      "push": { "verb": "docs.bullets" }, "safety": "safe", "unavailable": { "label": "INDENT", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "headings", "label": "HEADINGS", "glyph": "heading", "monogram": "H", "category": "nav", "priority": 72, "contexts": ["doc"],
+      "turn": { "left": { "kind": "sequence", "steps": ["Ctrl+Alt+P", "Ctrl+Alt+H"], "gapMs": 40 }, "right": { "kind": "sequence", "steps": ["Ctrl+Alt+N", "Ctrl+Alt+H"], "gapMs": 40 },
+        "step": { "perPress": 1, "unit": "heading", "confidence": "official" },
+        "acceleration": { "curve": [{ "minTicks": 1, "pressesPerTick": 1 }], "maxPressesPerEvent": 4, "minIntervalMs": 80 } },
+      "push": { "verb": "docs.outline" }, "safety": "safe", "unavailable": { "label": "HEADINGS", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "verify": "Held-modifier check as for NEXT HEAD." },
+    { "id": "comments", "label": "COMMENTS", "glyph": "chat", "category": "nav", "priority": 65, "contexts": ["doc"],
+      "turn": { "left": { "kind": "sequence", "steps": ["Ctrl+Alt+P", "Ctrl+Alt+C"], "gapMs": 40 }, "right": { "kind": "sequence", "steps": ["Ctrl+Alt+N", "Ctrl+Alt+C"], "gapMs": 40 },
+        "step": { "perPress": 1, "unit": "comment", "confidence": "official" },
+        "acceleration": { "curve": [{ "minTicks": 1, "pressesPerTick": 1 }], "maxPressesPerEvent": 4, "minIntervalMs": 80 } },
+      "push": { "verb": "docs.comment" }, "safety": "safe", "unavailable": { "label": "COMMENTS", "hint": "Google Docs isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "verify": "Held-modifier check as for NEXT HEAD." },
+    { "id": "moveParagraph", "label": "MOVE PARA", "glyph": "pages", "category": "tool", "priority": 45, "contexts": ["doc"],
+      "turn": { "left": { "kind": "chord", "chord": "Ctrl+Shift+Up" }, "right": { "kind": "chord", "chord": "Ctrl+Shift+Down" },
+        "step": { "perPress": 1, "unit": "paragraph", "confidence": "official" },
+        "acceleration": { "curve": [{ "minTicks": 1, "pressesPerTick": 1 }], "maxPressesPerEvent": 6, "minIntervalMs": 50 } },
+      "safety": "safe", "unavailable": { "label": "MOVE PARA", "hint": "Put the cursor in a paragraph first.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] }
+  ],
+  "readouts": [
+    { "id": "docTitle", "label": "DOC", "contexts": ["doc"], "source": { "kind": "window", "note": "Window title minus ' - Google Docs - <browser>'; or tab.title from the extension." }, "widget": "text", "privacy": "streamer-hide", "confidence": "unverified", "sources": ["S3"], "verify": "Check the title shape '<name> - Google Docs' on a real document." }
+  ],
+  "userBindings": {
+    "storage": "none",
+    "summary": "Google Docs keys are fixed; the official list (S1) documents no way to change them (unlike Gmail's page). Prism always sends the defaults.",
+    "confidence": "official",
+    "sources": ["S1"]
+  },
+  "layouts": [
+    { "device": "galleon-100-sd", "context": "doc",
+      "keys": [
+        { "x": 0, "y": 0, "verb": "docs.undo" }, { "x": 1, "y": 0, "verb": "docs.redo" }, { "x": 2, "y": 0, "verb": "docs.comment" },
+        { "x": 0, "y": 1, "verb": "docs.bold" }, { "x": 1, "y": 1, "verb": "docs.italic" }, { "x": 2, "y": 1, "verb": "docs.link" },
+        { "x": 0, "y": 2, "verb": "docs.heading1" }, { "x": 1, "y": 2, "verb": "docs.heading2" }, { "x": 2, "y": 2, "verb": "docs.bullets" },
+        { "x": 0, "y": 3, "verb": "docs.modeEditing" }, { "x": 1, "y": 3, "verb": "docs.modeSuggesting" }, { "x": 2, "y": 3, "verb": "docs.toolFinder" }
+      ],
+      "dials": [ { "dial": 0, "layer": 0, "control": "headings" }, { "dial": 0, "layer": 1, "control": "comments" }, { "dial": 1, "layer": 0, "control": "fontSize" }, { "dial": 1, "layer": 1, "control": "zoom" } ],
+      "screen": [ { "slot": "TL", "readout": "docTitle" }, { "slot": "BR", "readout": "zoomLevel" } ],
+      "rationale": "Undo/redo/comment on top, inline formatting then paragraph styles in the middle, edit/suggest modes and the tool finder at the bottom; the left dial walks headings and comments, the right dial sizes text and zooms." },
+    { "device": "stream-deck-plus", "context": "doc",
+      "keys": [
+        { "x": 0, "y": 0, "verb": "docs.undo" }, { "x": 1, "y": 0, "verb": "docs.redo" }, { "x": 2, "y": 0, "verb": "docs.comment" }, { "x": 3, "y": 0, "verb": "docs.modeSuggesting" },
+        { "x": 0, "y": 1, "verb": "docs.bold" }, { "x": 1, "y": 1, "verb": "docs.italic" }, { "x": 2, "y": 1, "verb": "docs.heading1" }, { "x": 3, "y": 1, "verb": "docs.toolFinder" }
+      ],
+      "dials": [ { "dial": 0, "control": "headings" }, { "dial": 1, "control": "comments" }, { "dial": 2, "control": "fontSize" }, { "dial": 3, "control": "indent" } ],
+      "screen": [ { "slot": "0", "readout": "docTitle" } ],
+      "rationale": "Undo/redo/comment/suggest on top, bold/italic/H1/tool finder below; headings, comments, font size and indent on the four dials." }
+  ],
+  "sources": [
+    { "id": "S1", "title": "Keyboard shortcuts for Google Docs (Computer, PC shortcuts)", "url": "https://support.google.com/docs/answer/179738?hl=en&co=GENIE.Platform%3DDesktop", "publisher": "Google (Docs Editors Help)", "kind": "official", "accessed": "2026-10-16", "appliesToVersion": "Google Docs web, current", "note": "Windows column. Menu keys differ by browser: Alt+<letter> in Chrome, Alt+Shift+<letter> in other browsers; Alt+Z tool finder is Chrome-only." },
+    { "id": "S2", "title": "Prism browser research (privacy, page scroll fallback)", "url": "local:aaa-prism-play/research/browser.md", "kind": "local", "accessed": "2026-10-16" },
+    { "id": "S3", "title": "Read-only probe: Chrome window title suffix ' - Google Chrome'", "url": "local:Get-Process chrome | MainWindowTitle (suffix only)", "kind": "local", "accessed": "2026-10-16", "appliesToVersion": "Chrome 155.0.8059.82" }
+  ],
+  "confidence": "high",
+  "conflicts": [
+    "S1 lists F7 for spelling and grammar; F7 is Chrome's caret-browsing toggle (chromium-browser S3). The pack uses Ctrl+Alt+X.",
+    "Inside a document Docs takes Ctrl+H (find and replace), Ctrl+K (link) and Ctrl+Shift+C (word count), shadowing the browser's History, web search and DevTools inspect."
+  ],
+  "gaps": [
+    "Ctrl+Alt+<key> chords type AltGr characters on some non-US layouts (Polish, German...), where Docs may never see them.",
+    "The 'holding Ctrl+Alt, press X then Y' navigation keys are modeled as a two-chord sequence; whether Docs accepts released modifiers between the keys is unverified.",
+    "Editing / suggesting / viewing mode isn't detectable yet, so mode keys have no true state.",
+    "Menu access keys (Alt+F etc. in Chrome, Alt+Shift+F in Edge) left out: they differ by browser and a site pack can't see the chrome/edge variant context.",
+    "Title fallback unverified (no signed-in session)."
+  ],
+  "notes": [
+    "Long-form notes: packs/notes/site-google-docs.md."
+  ]
+}
