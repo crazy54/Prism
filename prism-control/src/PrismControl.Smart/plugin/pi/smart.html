@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prism Control: Smart Deck</title>
+    <link rel="stylesheet" href="lib/prism-pi.css" />
+    <script src="lib/prism-pi.js"></script>
+    <style>
+      .smart-what { font-weight: 600; }
+      .smart-why { color: var(--pi-dim); }
+      .smart-list { margin: 0; padding-left: 16px; color: var(--pi-dim); font-size: 12px; max-height: 160px; overflow: auto; }
+      .smart-list li { margin: 2px 0; }
+      .smart-hidden-row { display: flex; align-items: center; gap: 8px; margin: 2px 0; }
+      .smart-bad { color: var(--pi-warn, #e0a030); }
+      /* SD2: the one-profile wizard and AI preferences */
+      .smart-map { display: flex; flex-direction: column; gap: 6px; }
+      .smart-grid { display: grid; gap: 4px; }
+      .smart-cell { min-width: 0; height: 34px; border-radius: 6px; border: 1px solid var(--pi-line); background: var(--pi-field);
+        color: var(--pi-faint); font: 600 9.5px/1.1 var(--pi-mono); text-transform: uppercase; display: flex; align-items: center;
+        justify-content: center; text-align: center; padding: 0 2px; overflow: hidden; cursor: pointer; letter-spacing: .02em; }
+      .smart-cell.pin { border-color: var(--pi-accent-line); background: var(--pi-accent-wash); color: var(--pi-accent-hi); }
+      .smart-cell.sel { outline: 2px solid var(--pi-focus); outline-offset: 1px; }
+      .smart-cell.dial { border-radius: 17px; }
+      .smart-cell.widget { height: 30px; border-radius: 4px; }
+      .smart-band { color: var(--pi-dim); font-size: 10.5px; }
+      .smart-pin-row { display: grid; grid-template-columns: 1fr 1.3fr auto; gap: 6px; align-items: center; margin: 3px 0; }
+      .smart-pin-row input { grid-column: 1 / 3; }
+      .smart-pin-row button { padding: 2px 8px; }
+      .smart-ok { color: var(--pi-pos); }
+      .smart-code { font: 700 15px/1 var(--pi-mono); letter-spacing: .12em; color: var(--pi-warn); }
+      /* AI binding proposals waiting for the user (REVIEW) */
+      .smart-review { display: grid; grid-template-columns: 1fr auto auto; gap: 6px; align-items: center; margin: 3px 0; }
+      .smart-review b { color: var(--pi-warn, #e0a030); font-family: var(--pi-mono); }
+      .smart-badge { display: inline-block; padding: 0 6px; border-radius: 8px; border: 1px solid var(--pi-warn, #e0a030); color: var(--pi-warn, #e0a030); font: 700 10px/16px var(--pi-mono); letter-spacing: .06em; }
+    </style>
+  </head>
+  <body>
+    <!--
+      Shared property inspector of the Smart Key and Smart Dial (SD1).
+      1. This slot: what it shows now and why (pack, context, the rule that matched, the layout reason), plus pin / unpin /
+         hide for this app and the page lock.
+      2. Preferences: the global "smart" section (every smart slot follows them).
+      3. Engine: the context, pending switch, packs and rebind files, and the last context changes with their reasons.
+      4. (SD2) Your one profile: choose the device and the pinned slots, then "Create profile" writes a .streamDeckProfile
+         the user double-clicks (Prism never installs it).
+      5. (SD2) AI preferences: "Allow AI preferences" (global:smartai.allowAi, off by default), the pairing status, Deny,
+         Revoke and the last changes (approval is a 1.5 s hold on the glowing top-left Smart Key of a physical deck), and
+         the AI key proposals waiting for you (REVIEW): Approve or Reject each (or hold its REVIEW key on your deck).
+      The "smart" preferences are written by the plugin only (smart.prefs.set): this page never re-sends its own copy of
+      that section, so a stale copy can't undo a change made a moment earlier (review B5). Only "Allow AI preferences"
+      is a global field of this page, and only this page writes it.
+      Plugin data is only ever inserted with textContent. Nothing here sends input to an app.
+    -->
+    <main class="prism-pi">
+      <div class="prism-heading"><h2>This slot</h2></div>
+      <div class="prism-row">
+        <label class="prism-label" for="role">Role</label>
+        <select id="role" data-setting="role">
+          <option value="auto">Smart slot (Prism fills it)</option>
+          <option value="lock">Lock-page key</option>
+        </select>
+      </div>
+      <div class="prism-row"><span class="prism-label">Shows</span><span class="prism-info smart-what" id="what">…</span></div>
+      <div class="prism-row"><span class="prism-label">Binding</span><span class="prism-info" id="binding"></span></div>
+      <div class="prism-row" id="slotReviewRow" hidden>
+        <span class="prism-label"><span class="smart-badge">REVIEW</span></span>
+        <div>
+          <div class="prism-info" id="slotReview"></div>
+          <div class="prism-actions">
+            <button type="button" id="slotApprove" class="prism-primary">Approve</button>
+            <button type="button" id="slotReject">Reject</button>
+          </div>
+        </div>
+      </div>
+      <div class="prism-row"><span class="prism-label">Why here</span><span class="prism-info smart-why" id="why"></span></div>
+      <div class="prism-row"><span class="prism-label">Context</span><span class="prism-info" id="context"></span></div>
+      <div class="prism-row"><span class="prism-label">Because</span><span class="prism-info smart-why" id="reason"></span></div>
+      <div class="prism-row"><span class="prism-label">Right now</span><span class="prism-info" id="now"></span></div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <div class="prism-actions">
+          <button type="button" id="pin" class="prism-primary">Pin it here</button>
+          <button type="button" id="unpin">Unpin this slot</button>
+          <button type="button" id="hide">Hide for this app</button>
+          <button type="button" id="lock">Lock page</button>
+        </div>
+      </div>
+      <p class="prism-note">Pins and hidden verbs are per app. A pinned verb keeps this slot in every context where it
+        exists. Holding the MORE key also locks the page.</p>
+      <div class="prism-row"><span class="prism-label">Hidden</span><div id="hidden"></div></div>
+
+      <div class="prism-heading"><h2>Preferences</h2></div>
+      <div class="prism-row prism-check">
+        <input id="enabled" type="checkbox" data-pref="enabled" />
+        <label for="enabled">Smart Deck on (off = smart slots run nothing)</label>
+      </div>
+      <div class="prism-row">
+        <label class="prism-label" for="labelSize">Labels</label>
+        <select id="labelSize" data-pref="labelSize">
+          <option value="normal">Normal</option>
+          <option value="large">Large</option>
+          <option value="small">Small</option>
+          <option value="none">Icons only</option>
+        </select>
+      </div>
+      <div class="prism-row prism-check">
+        <input id="bigIcons" type="checkbox" data-pref="bigIcons" />
+        <label for="bigIcons">Big icons</label>
+      </div>
+      <div class="prism-row prism-check">
+        <input id="streamerSafe" type="checkbox" data-pref="streamerSafe" />
+        <label for="streamerSafe">Streamer-safe: never show window titles, names or other private readouts</label>
+      </div>
+      <div class="prism-row">
+        <label class="prism-label" for="paging">Overflow</label>
+        <select id="paging" data-pref="paging">
+          <option value="more-key">MORE key with pages</option>
+          <option value="none">Page 1 only</option>
+        </select>
+      </div>
+      <div class="prism-row prism-check">
+        <input id="readoutKeys" type="checkbox" data-pref="readoutKeys" />
+        <label for="readoutKeys">On decks without screens, show live readouts on spare keys</label>
+      </div>
+      <div class="prism-row prism-check">
+        <input id="keepLast" type="checkbox" data-pref="keepLastWhenNoMatch" />
+        <label for="keepLast">Keep the last app's page (dimmed) when the app in front has no pack and no base layer</label>
+      </div>
+      <div class="prism-row">
+        <label class="prism-label" for="debounce">App switch delay</label>
+        <input id="debounce" type="range" min="0" max="600" step="25" data-pref="appDebounceMs" />
+        <output id="debounceOut"></output>
+      </div>
+      <div class="prism-row">
+        <label class="prism-label">Dials</label>
+        <div class="prism-actions" id="dialPrefs"></div>
+      </div>
+      <p class="prism-note">"Camera on the left dial": controls of that kind take that dial first, over the app's own layout.</p>
+
+      <div class="prism-heading"><h2>Your one profile</h2></div>
+      <p class="prism-note">Pin the few controls that never change (headphone volume, mic); Prism draws every other key and
+        dial from what is on screen. <b>Create profile</b> saves a file: double-click it to import it into the Stream Deck
+        app. Prism never installs anything.</p>
+      <div class="prism-row">
+        <label class="prism-label" for="setupDevice">Device</label>
+        <select id="setupDevice"></select>
+      </div>
+      <div class="prism-row"><span class="prism-label">Layout</span><div id="setupMap" class="smart-map"></div></div>
+      <div class="prism-row"><span class="prism-label">Pinned</span><div id="setupPins"></div></div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <div class="prism-actions">
+          <button type="button" id="setupAdd">Pin another slot</button>
+          <button type="button" id="setupReset">Defaults</button>
+        </div>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <div class="prism-actions">
+          <button type="button" id="setupCreate" class="prism-primary">Create profile</button>
+          <button type="button" id="setupReveal" disabled>Show the file</button>
+        </div>
+      </div>
+      <div class="prism-row"><span class="prism-label">Result</span><span class="prism-info" id="setupResult">Saved to <span id="setupFolder">Documents\Prism\Profiles</span>.</span></div>
+
+      <div class="prism-heading"><h2>AI preferences</h2></div>
+      <div class="prism-row prism-check">
+        <input id="allowAi" type="checkbox" data-setting="global:smartai.allowAi" />
+        <label for="allowAi">Allow AI preferences: an assistant connected through Prism's MCP server may change these
+          preferences, pins and pack labels/keys, after you approve it on your deck</label>
+      </div>
+      <div class="prism-row"><span class="prism-label">Status</span><span class="prism-info" id="aiStatus">Off. Nothing listens.</span></div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <div class="prism-actions">
+          <button type="button" id="aiDeny">Deny</button>
+          <button type="button" id="aiRevoke">Revoke</button>
+        </div>
+      </div>
+      <p class="prism-note">To approve, press and <b>hold</b> the glowing top-left Smart Key that shows the code until its
+        ring is full (1.5 s). A tap never approves, and Stream Deck Mobile, the Virtual Stream Deck and the MCP Deck never
+        can. The key never shows the name the assistant gives itself. Every change can be undone (50 steps) and is logged.</p>
+      <div class="prism-row"><span class="prism-label">Waiting for you</span><div id="aiReviews"></div></div>
+      <p class="prism-note">An assistant can only <b>propose</b> a new key for a verb. It never runs until you approve it here
+        or hold its <b>REVIEW</b> key on your deck (1.5 s, which also shows the new key). An approved AI key always needs a
+        hold to run and is marked <b>AI</b>. Alt+F4, Windows-key, Ctrl+Alt+Del, Ctrl+Shift+Esc and Print Screen
+        shortcuts can never be proposed. An assistant can make things stricter, never looser, and can't turn streamer-safe off.</p>
+      <div class="prism-row"><span class="prism-label">Log</span><ul class="smart-list" id="aiAudit"></ul></div>
+
+      <div class="prism-heading"><h2>Engine</h2></div>
+      <div class="prism-row"><span class="prism-label">Following</span><span class="prism-info" id="follow"></span></div>
+      <div class="prism-row"><span class="prism-label">Waiting</span><span class="prism-info smart-why" id="pending"></span></div>
+      <div class="prism-row"><span class="prism-label">Prism Sight</span><span class="prism-info" id="sight"></span></div>
+      <div class="prism-row"><span class="prism-label">Modules</span><span class="prism-info" id="modules"></span></div>
+      <div class="prism-row"><span class="prism-label">Devices</span><ul class="smart-list" id="devices"></ul></div>
+      <div class="prism-row"><span class="prism-label">Packs</span><ul class="smart-list" id="packs"></ul></div>
+      <div class="prism-row"><span class="prism-label">Your binds</span><ul class="smart-list" id="rebinds"></ul></div>
+      <div class="prism-row"><span class="prism-label">History</span><ul class="smart-list" id="history"></ul></div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <div class="prism-actions"><button type="button" id="reload">Reload packs and binds</button></div>
+      </div>
+    </main>
+    <script>
+      (function () {
+        var $ = function (id) { return document.getElementById(id); };
+        var text = function (id, value) { $(id).textContent = value == null || value === '' ? '—' : String(value); };
+        var list = function (id, items, render) {
+          var ul = $(id);
+          ul.textContent = '';
+          (items || []).forEach(function (it) {
+            var li = document.createElement('li');
+            render(li, it);
+            ul.appendChild(li);
+          });
+          if (!items || !items.length) { var li = document.createElement('li'); li.textContent = 'none'; ul.appendChild(li); }
+        };
+
+        function showInspect(d) {
+          if (!d) return;
+          var item = d.item || {};
+          var label = item.label || (item.kind === 'empty' ? 'nothing' : item.kind || '');
+          text('what', item.id ? label + '  (' + item.id + (item.category ? ', ' + item.category : '') + ')' : label);
+          var binding = item.binding ? item.binding + (item.yourBind ? '  · your bind (pack default: ' + item.packDefault + ')' : '') +
+            (item.fallback ? '  · fallback key (the module isn’t connected)' : '') : item.turn || '';
+          if (item.safety && item.safety !== 'safe') binding += '  · ' + (item.safety === 'confirm' ? 'hold to confirm' : 'only a direct press runs it');
+          if (item.aiBound) binding += '  · AI key you approved (always hold to confirm)';
+          text('binding', binding);
+          var rv = item.review;
+          $('slotReviewRow').hidden = !rv;
+          if (rv) {
+            text('slotReview', 'An assistant' + (rv.client ? ' ("' + rv.client + '")' : '') + ' proposes ' + rv.chord + ' for this key. It runs nothing until you approve. You can also hold the key on your deck for 1.5 s.');
+            $('slotApprove').onclick = function () { review('smart.review.approve', rv.pack, item.id); };
+            $('slotReject').onclick = function () { review('smart.review.reject', rv.pack, item.id); };
+          }
+          text('why', item.why);
+          text('context', d.pack ? d.pack.name + ' · ' + (d.context ? d.context.label : '') + (d.locked ? '  (page locked)' : '') : 'no app pack');
+          text('reason', d.reason);
+          var now = (d.inFront ? 'app in front' : 'app not in front') + ' · page ' + d.page + '/' + d.pages;
+          if (!d.available && d.unavailable) now += ' · ' + d.unavailable;
+          text('now', now);
+          $('lock').textContent = d.locked ? 'Unlock page' : 'Lock page';
+          $('pin').disabled = !item.id || item.pinned;
+          $('hide').disabled = !item.id;
+        }
+
+        function inspect() { return PrismPI.request('smart.inspect').then(showInspect).catch(function () {}); }
+
+        function showHidden(ids) {
+          var box = $('hidden');
+          box.textContent = '';
+          (ids || []).forEach(function (id) {
+            var row = document.createElement('div');
+            row.className = 'smart-hidden-row';
+            var span = document.createElement('span');
+            span.textContent = id;
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = 'Unhide';
+            btn.addEventListener('click', function () { PrismPI.request('smart.unhide', { id: id }).then(showHidden).then(inspect); });
+            row.appendChild(span);
+            row.appendChild(btn);
+            box.appendChild(row);
+          });
+          if (!ids || !ids.length) box.textContent = 'none';
+        }
+
+        // The preference fields show the engine's preferences and write one key at a time through the plugin
+        // (smart.prefs.set): the plugin is the only writer of the "smart" section (B5).
+        var prefEls = document.querySelectorAll('[data-pref]');
+        function fillPrefs(prefs) {
+          if (!prefs) return;
+          for (var i = 0; i < prefEls.length; i++) {
+            var el = prefEls[i], key = el.getAttribute('data-pref');
+            if (prefs[key] === undefined || el === document.activeElement && el.type === 'range') continue;
+            if (el.type === 'checkbox') el.checked = !!prefs[key];
+            else el.value = String(prefs[key]);
+          }
+          $('debounceOut').textContent = String(prefs.appDebounceMs);
+        }
+        Array.prototype.forEach.call(prefEls, function (el) {
+          el.addEventListener(el.type === 'range' ? 'change' : 'change', function () {
+            var key = el.getAttribute('data-pref'), patch = {};
+            patch[key] = el.type === 'checkbox' ? el.checked : el.type === 'range' ? Number(el.value) : el.value;
+            PrismPI.request('smart.prefs.set', patch).then(function (p) { showDialPrefs(p); inspect(); }).catch(function () {});
+          });
+          if (el.type === 'range') el.addEventListener('input', function () { $('debounceOut').textContent = el.value; });
+        });
+
+        var categories = ['camera', 'tool', 'nav', 'mode'];
+        function showDialPrefs(prefs) {
+          fillPrefs(prefs);
+          var box = $('dialPrefs');
+          box.textContent = '';
+          var map = (prefs && prefs.dialCategories) || {};
+          categories.forEach(function (cat) {
+            var lab = document.createElement('label');
+            lab.textContent = cat + ' ';
+            var sel = document.createElement('select');
+            [['', 'auto'], ['left', 'left dial'], ['right', 'right dial'], ['0', 'dial 1'], ['1', 'dial 2'], ['2', 'dial 3'], ['3', 'dial 4']].forEach(function (o) {
+              var opt = document.createElement('option');
+              opt.value = o[0];
+              opt.textContent = o[1];
+              sel.appendChild(opt);
+            });
+            sel.value = map[cat] || '';
+            sel.addEventListener('change', function () {
+              var next = Object.assign({}, map);
+              if (sel.value) next[cat] = sel.value; else delete next[cat];
+              PrismPI.request('smart.prefs.set', { dialCategories: next }).then(function (p) { showDialPrefs(p); inspect(); });
+            });
+            lab.appendChild(sel);
+            box.appendChild(lab);
+          });
+        }
+
+        function showStatus(s) {
+          if (!s) return;
+          text('follow', (s.app || 'no app') + ' → ' + (s.pack ? s.pack + '/' + s.context : 'no pack') + (s.locked ? ' (locked)' : '') + (s.enabled === false ? ' · Smart Deck is off' : ''));
+          text('pending', s.pending || 'nothing');
+          text('sight', s.sight);
+          text('modules', (s.modules || []).join(', ') || 'none');
+          list('devices', s.devices, function (li, d) { li.textContent = d.name + ': ' + d.keys + ' smart keys, ' + d.dials + ' smart dials, page ' + d.page + '/' + d.pages; });
+          list('packs', s.packs, function (li, p) {
+            li.textContent = p.id + ' ' + (p.version || '') + ' (' + p.origin + ')' + (p.loaded ? '' : ' NOT LOADED') + (p.errors ? ' · ' + p.errors + ' error(s): ' + (p.problems || []).join(' | ') : '');
+            if (!p.loaded || p.errors) li.className = 'smart-bad';
+          });
+          list('rebinds', (s.rebinds || []).filter(function (r) { return r.file || r.error; }), function (li, r) {
+            li.textContent = r.pack + ': ' + (r.file || '') + (r.error ? ' · ' + r.error : ' · ' + r.applied + ' verb(s) follow your binds');
+            if (r.error) li.className = 'smart-bad';
+          });
+          list('history', s.history, function (li, h) { li.textContent = h; });
+        }
+
+        function refresh() {
+          inspect();
+          PrismPI.request('smart.hidden').then(showHidden).catch(function () {});
+          PrismPI.request('smart.prefs').then(showDialPrefs).catch(function () {});
+          PrismPI.request('smart.status').then(showStatus).catch(function () {});
+          aiStatus();
+        }
+
+        // ---------------------------------------------------------------- SD2: the one-profile wizard
+        var setup = { info: null, device: null, pins: [], sel: null };
+        function devOf(kind) { return ((setup.info && setup.info.devices) || []).filter(function (d) { return d.kind === kind; })[0]; }
+        function actionOf(id) { return ((setup.info && setup.info.actions) || []).filter(function (a) { return a.id === id; })[0]; }
+        function slotName(slot) {
+          var m = /^(key|dial):(\d+),(\d+)$/.exec(slot || '');
+          if (!m) return slot;
+          var d = devOf(setup.device);
+          if (m[1] === 'key') return 'Key ' + (+m[2] + 1) + '·' + (+m[3] + 1);
+          return (d && d.layers > 1 ? (m[2] === '0' ? 'Left dial' : 'Right dial') + ' layer ' + (+m[3] + 1) : 'Dial ' + (+m[2] + 1));
+        }
+        function allSlots(d) {
+          var out = [];
+          for (var y = 0; y < d.rows; y++) for (var x = 0; x < d.columns; x++) out.push('key:' + x + ',' + y);
+          for (var l = 0; l < (d.dials ? d.layers : 0); l++) for (var i = 0; i < d.dials; i++) out.push('dial:' + i + ',' + l);
+          return out;
+        }
+        function pinAt(slot) { return setup.pins.filter(function (p) { return p.slot === slot; })[0]; }
+        function loadDefaults(kind) {
+          setup.device = kind;
+          var def = setup.info.defaults[kind] || { pins: [] };
+          setup.pins = (def.pins || []).map(function (p) { return { slot: p.slot, action: p.action, app: p.app || '' }; });
+          setup.sel = null;
+          drawSetup();
+        }
+        function cell(slot, cls) {
+          var p = pinAt(slot), a = p && actionOf(p.action);
+          var c = document.createElement('div');
+          c.className = 'smart-cell ' + cls + (p ? ' pin' : '') + (setup.sel === slot ? ' sel' : '');
+          c.textContent = a ? a.label : 'smart';
+          c.title = slotName(slot) + ': ' + (a ? a.label + ' (pinned)' : 'Smart (Prism fills it)');
+          c.addEventListener('click', function () {
+            setup.sel = slot;
+            if (!pinAt(slot)) {
+              var isKey = slot.indexOf('key:') === 0;
+              var first = ((setup.info && setup.info.actions) || []).filter(function (x) { return isKey ? x.key : x.dial; })[0];
+              if (first) setup.pins.push({ slot: slot, action: first.id, app: '' });
+            }
+            drawSetup();
+          });
+          return c;
+        }
+        function grid(cols) { var g = document.createElement('div'); g.className = 'smart-grid'; g.style.gridTemplateColumns = 'repeat(' + cols + ', minmax(0, 1fr))'; return g; }
+        function band(text) { var b = document.createElement('div'); b.className = 'smart-band'; b.textContent = text; return b; }
+        function drawSetup() {
+          var d = devOf(setup.device);
+          if (!d) return;
+          var map = $('setupMap');
+          map.textContent = '';
+          if (d.dials && d.layers > 1) {
+            map.appendChild(band('Screen widgets (dials × layers)'));
+            var w = grid(2);
+            [[0, 0], [1, 0], [0, 1], [1, 1]].forEach(function (s) { w.appendChild(cell('dial:' + s[0] + ',' + s[1], 'widget')); });
+            map.appendChild(w);
+          }
+          map.appendChild(band(d.columns + ' × ' + d.rows + ' keys'));
+          var g = grid(d.columns);
+          for (var y = 0; y < d.rows; y++) for (var x = 0; x < d.columns; x++) g.appendChild(cell('key:' + x + ',' + y, 'key'));
+          map.appendChild(g);
+          if (d.dials && d.layers === 1) {
+            map.appendChild(band(d.dials + ' dials'));
+            var dg = grid(d.dials);
+            for (var i = 0; i < d.dials; i++) dg.appendChild(cell('dial:' + i + ',0', 'dial'));
+            map.appendChild(dg);
+          }
+          drawPins(d);
+        }
+        function drawPins(d) {
+          var box = $('setupPins');
+          box.textContent = '';
+          setup.pins.forEach(function (p, idx) {
+            var row = document.createElement('div');
+            row.className = 'smart-pin-row';
+            var ss = document.createElement('select');
+            allSlots(d).forEach(function (slot) {
+              var o = document.createElement('option'); o.value = slot; o.textContent = slotName(slot); ss.appendChild(o);
+            });
+            ss.value = p.slot;
+            var as = document.createElement('select');
+            function fillActions() {
+              as.textContent = '';
+              var isKey = p.slot.indexOf('key:') === 0;
+              setup.info.actions.filter(function (a) { return isKey ? a.key : a.dial; }).forEach(function (a) {
+                var o = document.createElement('option'); o.value = a.id; o.textContent = a.label; o.title = a.description; as.appendChild(o);
+              });
+              if (!actionOf(p.action) || !(isKey ? actionOf(p.action).key : actionOf(p.action).dial)) p.action = as.options.length ? as.options[0].value : '';
+              as.value = p.action;
+            }
+            fillActions();
+            ss.addEventListener('change', function () { p.slot = ss.value; setup.sel = p.slot; fillActions(); drawSetup(); });
+            as.addEventListener('change', function () { p.action = as.value; drawSetup(); });
+            var rm = document.createElement('button');
+            rm.type = 'button'; rm.textContent = '×'; rm.title = 'Leave this slot to Prism';
+            rm.addEventListener('click', function () { setup.pins.splice(idx, 1); setup.sel = null; drawSetup(); });
+            row.appendChild(ss); row.appendChild(as); row.appendChild(rm);
+            var a = actionOf(p.action);
+            if (a && a.needsApp) {
+              var app = document.createElement('input');
+              app.type = 'text'; app.placeholder = 'App exe, e.g. Discord.exe'; app.value = p.app || '';
+              app.addEventListener('input', function () { p.app = app.value; });
+              row.appendChild(app);
+            }
+            box.appendChild(row);
+          });
+          if (!setup.pins.length) box.textContent = 'none: every slot is Smart';
+        }
+        function loadSetup() {
+          PrismPI.request('smart.setup.info').then(function (info) {
+            setup.info = info;
+            var sel = $('setupDevice');
+            sel.textContent = '';
+            info.devices.forEach(function (d) { var o = document.createElement('option'); o.value = d.kind; o.textContent = d.name; sel.appendChild(o); });
+            sel.value = info.current;
+            text('setupFolder', info.folder);
+            loadDefaults(info.current);
+          }).catch(function () {});
+        }
+        $('setupDevice').addEventListener('change', function () { loadDefaults($('setupDevice').value); });
+        $('setupReset').addEventListener('click', function () { loadDefaults(setup.device); });
+        $('setupAdd').addEventListener('click', function () {
+          var d = devOf(setup.device);
+          var free = allSlots(d).filter(function (s) { return !pinAt(s); })[0];
+          if (!free) return;
+          setup.sel = free;
+          var isKey = free.indexOf('key:') === 0;
+          var first = setup.info.actions.filter(function (x) { return isKey ? x.key : x.dial; })[0];
+          setup.pins.push({ slot: free, action: first ? first.id : '', app: '' });
+          drawSetup();
+        });
+        $('setupCreate').addEventListener('click', function () {
+          var body = { device: setup.device, pins: setup.pins.map(function (p) { return { slot: p.slot, action: p.action, app: p.app || undefined }; }) };
+          PrismPI.request('smart.setup.create', body, 15000).then(function (r) {
+            var out = $('setupResult');
+            out.className = 'prism-info ' + (r.ok ? 'smart-ok' : 'smart-bad');
+            out.textContent = r.ok ? r.message : r.message + ' ' + (r.problems || []).join(' ');
+            $('setupReveal').disabled = !r.written;
+          }).catch(function (e) { text('setupResult', String(e && e.message || e)); });
+        });
+        $('setupReveal').addEventListener('click', function () { PrismPI.request('smart.setup.reveal'); });
+
+        // ---------------------------------------------------------------- SD2: AI preferences
+        function showAi(s) {
+          if (!s) return;
+          var st = $('aiStatus');
+          st.textContent = '';
+          if (!s.allowAi) st.textContent = 'Off. Nothing listens.';
+          else if (s.pending) {
+            st.appendChild(document.createTextNode('An assistant that calls itself "' + s.pending.client + '" asks to pair. Code '));
+            var code = document.createElement('span'); code.className = 'smart-code'; code.textContent = s.pending.code; st.appendChild(code);
+            st.appendChild(document.createTextNode(' (until ' + s.pending.expiresAt + '): hold the glowing key on your deck to allow, or Deny.'));
+          }
+          else if (s.paired) st.textContent = 'Paired with an assistant that calls itself "' + s.client + '". ' + s.undoDepth + ' change(s) can be undone. Revoke any time.';
+          else st.textContent = s.running ? 'Listening; no assistant is paired.' : 'Starting…';
+          $('aiDeny').disabled = !s.pending;
+          $('aiRevoke').disabled = !s.paired;
+          showReviews(s.reviews);
+          list('aiAudit', s.audit, function (li, line) { li.textContent = line; });
+        }
+        function showReviews(items) {
+          var box = $('aiReviews');
+          box.textContent = '';
+          (items || []).forEach(function (r) {
+            var row = document.createElement('div');
+            row.className = 'smart-review';
+            var what = document.createElement('span');
+            what.appendChild(document.createTextNode(r.label + ' (' + r.pack + '): ' + r.current + ' → '));
+            var b = document.createElement('b'); b.textContent = r.chord; what.appendChild(b);
+            if (r.client) what.appendChild(document.createTextNode('  · from "' + r.client + '"'));
+            var ok = document.createElement('button'); ok.type = 'button'; ok.className = 'prism-primary'; ok.textContent = 'Approve';
+            ok.addEventListener('click', function () { review('smart.review.approve', r.pack, r.id); });
+            var no = document.createElement('button'); no.type = 'button'; no.textContent = 'Reject';
+            no.addEventListener('click', function () { review('smart.review.reject', r.pack, r.id); });
+            row.appendChild(what); row.appendChild(ok); row.appendChild(no);
+            box.appendChild(row);
+          });
+          if (!items || !items.length) box.textContent = 'nothing';
+        }
+        function review(type, pack, id) {
+          PrismPI.request(type, { pack: pack, id: id }, 15000).then(function (r) {
+            showReviews(r && r.reviews);
+            inspect();
+          }).catch(function () {});
+        }
+        function aiStatus() { return PrismPI.request('smart.ai.status').then(showAi).catch(function () {}); }
+        $('aiDeny').addEventListener('click', function () { PrismPI.request('smart.ai.deny').then(function (r) { showAi(r && r.status); }); });
+        $('aiRevoke').addEventListener('click', function () { PrismPI.request('smart.ai.revoke').then(function (r) { showAi(r && r.status); }); });
+
+        $('pin').addEventListener('click', function () { PrismPI.request('smart.pin').then(function (r) { showInspect(r && r.inspect); }); });
+        $('unpin').addEventListener('click', function () { PrismPI.request('smart.unpin').then(function (r) { showInspect(r && r.inspect); }); });
+        $('hide').addEventListener('click', function () { PrismPI.request('smart.hide').then(function (r) { showInspect(r && r.inspect); refresh(); }); });
+        $('lock').addEventListener('click', function () { PrismPI.request('smart.lock').then(refresh); });
+        $('reload').addEventListener('click', function () { PrismPI.request('smart.reload', null, 15000).then(showStatus).then(inspect); });
+        PrismPI.global.onChange(function () { setTimeout(refresh, 150); });
+        PrismPI.ready(function () { refresh(); loadSetup(); setInterval(refresh, 2000); });
+      })();
+    </script>
+  </body>
+</html>

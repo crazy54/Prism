@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:prism:sight-recipe:v1",
+  "title": "Prism Sight recipe (v1)",
+  "description": "How Prism Sight reads one game's HUD: which windows it applies to, where the regions are (resolution-independent), what each detector looks for, which contexts (modes) exist, which readouts it publishes and which on-screen controls it may operate. RecipeLoader checks semantics beyond this schema (references, kind-specific fields) and reports every problem with its JSON path.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["v", "id", "game", "match", "regions"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "v": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.\\-]{1,63}$", "description": "Recipe id; the same id in the user's folder overrides a built-in recipe." },
+    "game": { "type": "string", "pattern": "^[a-z][a-z0-9]{1,23}$", "description": "The Game Link game id (gamelink.game): 'pc2', 'nms'. Not a reserved key." },
+    "title": { "type": "string" },
+    "status": { "enum": ["draft", "calibrated"], "default": "draft", "description": "Drafts never run live unless sight.allowDraftRecipes is on." },
+    "notes": { "type": "string" },
+    "match": {
+      "type": "object", "additionalProperties": false, "required": ["processes"],
+      "properties": {
+        "processes": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[^\\\\/]+\\.[eE][xX][eE]$" } },
+        "windowClasses": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "hud": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "referenceHeight": { "type": "number", "exclusiveMinimum": 0, "default": 1080, "description": "Frame height at which offsets are authored (1 HUD unit = 1 px there at HUD scale 1)." },
+        "scale": { "type": "number", "default": 1, "description": "The game's UI scale the offsets were authored at; the user's setting overrides it." },
+        "maxAspect": { "type": ["number", "null"], "exclusiveMinimum": 0, "description": "The HUD lives in a centered box no wider than this aspect (16:9 = 1.7778) on wider screens." },
+        "minAspect": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "minScale": { "type": "number", "default": 0.5 },
+        "maxScale": { "type": "number", "default": 2.5 }
+      }
+    },
+    "color": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "paperWhiteNits": { "type": ["number", "null"], "minimum": 40, "maximum": 2000, "description": "HDR: the HUD white level (the game's UI brightness). Null = the monitor's SDR white level." },
+        "whiteReference": {
+          "type": "object", "additionalProperties": false, "required": ["region"],
+          "properties": { "region": { "type": "string" }, "level": { "type": "number", "exclusiveMinimum": 0, "maximum": 1, "default": 1 } }
+        }
+      }
+    },
+    "regions": { "type": "array", "minItems": 1, "maxItems": 64, "items": { "$ref": "#/$defs/region" } },
+    "detectors": { "type": "array", "items": { "$ref": "#/$defs/detector" } },
+    "contexts": { "type": "array", "items": { "$ref": "#/$defs/context" } },
+    "readouts": { "type": "array", "maxItems": 48, "items": { "$ref": "#/$defs/readout" } },
+    "controls": { "type": "array", "items": { "$ref": "#/$defs/control" } }
+  },
+  "$defs": {
+    "dottedId": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*(\\.[A-Za-z0-9_]+)*$" },
+    "fieldId": { "type": "string", "pattern": "^[a-z][a-zA-Z0-9]{0,31}$" },
+    "hex": { "type": "string", "pattern": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$" },
+    "rate": { "type": "number", "exclusiveMinimum": 0, "maximum": 60 },
+    "region": {
+      "type": "object", "additionalProperties": false, "required": ["id", "w", "h"],
+      "properties": {
+        "id": { "$ref": "#/$defs/dottedId", "description": "Packs name regions like 'pc2.builder.bankValue'." },
+        "anchor": { "enum": ["top-left", "top", "top-right", "left", "center", "right", "bottom-left", "bottom", "bottom-right"], "default": "top-left" },
+        "x": { "type": "number", "default": 0, "description": "Offset of the region's top-left corner from the anchor point, in HUD units." },
+        "y": { "type": "number", "default": 0 },
+        "w": { "type": "number", "exclusiveMinimum": 0 },
+        "h": { "type": "number", "exclusiveMinimum": 0 },
+        "rateHz": { "$ref": "#/$defs/rate", "description": "Default: the fastest of its detectors (bar/color/change 10, template 5, ocr 3)." },
+        "scaleWithHud": { "type": "boolean", "default": true },
+        "notes": { "type": "string" }
+      }
+    },
+    "detector": {
+      "type": "object", "additionalProperties": false, "required": ["id", "region", "kind"],
+      "properties": {
+        "id": { "$ref": "#/$defs/dottedId" },
+        "region": { "type": "string" },
+        "kind": { "enum": ["color", "bar", "template", "ocr", "change"] },
+        "rateHz": { "$ref": "#/$defs/rate" },
+        "notes": { "type": "string" },
+        "color": { "$ref": "#/$defs/hex", "description": "color: the expected color. bar: the fill color (mode 'color')." },
+        "tolerance": { "type": "integer", "minimum": 0, "maximum": 255, "description": "Max per-channel distance. Default 32 (color), 40 (bar)." },
+        "minFraction": { "type": "number", "exclusiveMinimum": 0, "maximum": 1, "default": 0.6 },
+        "direction": { "enum": ["right", "left", "up", "down"], "description": "bar: the way it grows." },
+        "mode": { "enum": ["color", "bright"] },
+        "threshold": { "type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1, "description": "bar (bright): luma. template: NCC for 'present' (default 0.8). ocr: min glyph score (0.55). change: mean difference (0.02)." },
+        "band": { "type": "number", "exclusiveMinimum": 0, "maximum": 1, "default": 0.5 },
+        "min": { "type": "number", "default": 0 },
+        "max": { "type": "number", "default": 100 },
+        "templates": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["label"],
+            "properties": {
+              "label": { "type": "string", "minLength": 1 },
+              "file": { "type": "string", "description": "PNG next to the recipe, captured at referenceHeight with HUD scale 1." },
+              "png": { "type": "string", "description": "The PNG inline, base64." }
+            }
+          }
+        },
+        "engine": { "enum": ["auto", "windows", "glyphs"], "default": "auto" },
+        "text": { "enum": ["auto", "light", "dark"], "default": "auto" },
+        "whitelist": { "type": "string" },
+        "stripSuperscript": { "type": "boolean" },
+        "parse": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "type": { "enum": ["number", "integer", "percent", "text", "enum", "duration"], "default": "number" },
+            "unit": { "type": "string" },
+            "decimal": { "type": "string", "maxLength": 1, "default": "." },
+            "thousands": { "type": ["string", "null"], "maxLength": 1, "default": "," },
+            "values": { "type": "object", "additionalProperties": { "type": "string" } },
+            "scale": { "type": "number" }
+          }
+        },
+        "glyphs": { "type": "string", "description": "A glyph set file (harvest-glyphs output) for the game's HUD font." }
+      }
+    },
+    "context": {
+      "type": "object", "additionalProperties": false, "required": ["id", "when"],
+      "properties": {
+        "id": { "$ref": "#/$defs/fieldId" },
+        "label": { "type": "string" },
+        "when": { "type": "string", "description": "Boolean expression over detector ids: a & !b, tool=coaster | tool=track, bar>10." },
+        "priority": { "type": "integer", "default": 0 },
+        "enterMs": { "type": "integer", "minimum": 0, "default": 250 },
+        "exitMs": { "type": "integer", "minimum": 0, "default": 500 }
+      }
+    },
+    "readout": {
+      "type": "object", "additionalProperties": false, "required": ["id", "from"],
+      "properties": {
+        "id": { "$ref": "#/$defs/fieldId", "description": "Becomes a Game Link detail field." },
+        "label": { "type": "string" },
+        "from": { "type": "string" },
+        "type": { "enum": ["number", "percent", "bool", "label", "text"] },
+        "unit": { "type": "string" },
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "contexts": { "type": "array", "items": { "type": "string" } },
+        "staleAfterMs": { "type": "integer", "exclusiveMinimum": 0, "default": 1500 },
+        "confirmReads": { "type": "integer", "minimum": 1, "maximum": 10, "description": "Default 1 (2 for OCR)." },
+        "precision": { "type": "integer", "minimum": 0, "maximum": 6 }
+      }
+    },
+    "point": {
+      "type": "object", "additionalProperties": false,
+      "properties": { "x": { "type": "number", "default": 0.5 }, "y": { "type": "number", "default": 0.5 } }
+    },
+    "control": {
+      "type": "object", "additionalProperties": false, "required": ["id", "kind", "locate"],
+      "properties": {
+        "id": { "$ref": "#/$defs/dottedId" },
+        "label": { "type": "string" },
+        "kind": { "enum": ["button", "stepper", "slider"] },
+        "locate": { "type": "string", "description": "A template detector; its box is the element." },
+        "minScore": { "type": "number", "minimum": 0.5, "maximum": 1, "default": 0.85 },
+        "point": { "$ref": "#/$defs/point" },
+        "increase": { "$ref": "#/$defs/point" },
+        "decrease": { "$ref": "#/$defs/point" },
+        "slider": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "orientation": { "enum": ["horizontal", "vertical"], "default": "horizontal" },
+            "increaseTowards": { "enum": ["right", "left", "up", "down"] },
+            "handle": { "type": "string" },
+            "stepUnits": { "type": "number", "exclusiveMinimum": 0, "default": 8 }
+          }
+        },
+        "wheel": {
+          "type": "object", "additionalProperties": false,
+          "properties": {
+            "notchesPerStep": { "type": "integer", "minimum": 1, "maximum": 10, "default": 1 },
+            "increase": { "enum": ["up", "down"], "default": "up" },
+            "point": { "$ref": "#/$defs/point" }
+          }
+        },
+        "methods": { "type": "array", "items": { "enum": ["buttons", "wheel", "drag"] } },
+        "readout": { "type": "string" },
+        "verify": { "type": "string", "description": "button: an expression that must hold after the click (verified)." },
+        "requires": { "type": "string", "description": "An expression that must hold in a fresh frame before acting (macro preconditions); else nothing is sent." },
+        "settleMs": { "type": "integer", "minimum": 0, "maximum": 2000, "default": 80 },
+        "intervalMs": { "type": "integer", "minimum": 10, "maximum": 1000, "default": 40 }
+      }
+    }
+  }
+}

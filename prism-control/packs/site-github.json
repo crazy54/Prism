@@ -1,0 +1,142 @@
+{
+  "$schema": "schema/context-pack.schema.json",
+  "schemaVersion": 1,
+  "id": "site-github",
+  "name": "GitHub (web)",
+  "vendor": "GitHub",
+  "kind": "site",
+  "packVersion": "0.1.0",
+  "extends": ["chromium-browser"],
+  "layer": "overlay",
+  "platforms": ["windows"],
+  "verifiedAgainst": {
+    "version": "github.com, GitHub Docs as of 2026-10-16",
+    "date": "2026-10-16",
+    "method": "official-docs",
+    "note": "Chords from GitHub Docs (S1, S2). Page-title shapes for the window-title fallbacks were fetched from public github.com pages (S5). Not tested in a signed-in session."
+  },
+  "policy": { "class": "desktop-app", "input": "allowed", "sight": "forbidden", "closedLoop": "forbidden", "reason": "Ordinary website; anything public (comments, reviews) is confirm." },
+  "keyMode": "vk",
+  "match": {
+    "any": [
+      { "site": { "host": "github.com" }, "confidence": "official", "note": "Reported by the Prism browser extension. github.dev (the web editor) is VS Code, not this pack." },
+      { "process": "chrome.exe", "titleRegex": "(^GitHub - .* · GitHub|· GitHub) - Google Chrome$", "confidence": "official", "note": "GitHub titles end in ' · GitHub' (U+00B7, S5); Chrome appends ' - Google Chrome' (S6)." },
+      { "process": "msedge.exe", "titleRegex": "· GitHub( and \\d+ more pages?)? - .*Edge$", "confidence": "unverified", "note": "Edge title suffix not observed here; verify with a GitHub tab in Edge." }
+    ],
+    "exclude": [ { "site": { "host": "docs.github.com" }, "note": "Docs site has no app shortcuts." } ]
+  },
+  "contexts": [
+    { "id": "site", "label": "GitHub (any page)", "default": true, "priority": 10, "detect": { "all": [{ "type": "always" }] }, "confidence": "official", "sources": ["S1"] },
+    { "id": "repo", "label": "Repository", "parent": "site", "priority": 30, "hysteresisMs": 400,
+      "detect": { "any": [
+        { "type": "extension", "status": "in-progress", "field": "site.path", "regex": "^/[A-Za-z0-9-]+/[A-Za-z0-9._-]+(/|$)", "note": "Also matches a few non-repo pages such as /settings/profile; harmless (repo keys just do nothing there)." },
+        { "type": "windowTitle", "regex": "(^GitHub - [^/ ]+/[^: ]+|· [A-Za-z0-9-]+/[A-Za-z0-9._-]+ · GitHub) - (Google Chrome|.*Edge)$" }
+      ] }, "confidence": "official", "sources": ["S1", "S5"] },
+    { "id": "code", "label": "Code view (file or folder)", "parent": "repo", "priority": 50, "hysteresisMs": 400,
+      "detect": { "any": [
+        { "type": "extension", "status": "in-progress", "field": "site.path", "regex": "^/[^/]+/[^/]+/(blob|tree)/" },
+        { "type": "windowTitle", "regex": " at [^ ]+ · [A-Za-z0-9-]+/[A-Za-z0-9._-]+ · GitHub - (Google Chrome|.*Edge)$", "note": "'docs/README.md at main · owner/repo · GitHub' (S5)." }
+      ] }, "confidence": "official", "sources": ["S1", "S5"] },
+    { "id": "list", "label": "Issue / pull request list", "parent": "repo", "priority": 45, "hysteresisMs": 400,
+      "detect": { "any": [
+        { "type": "extension", "status": "in-progress", "field": "site.path", "regex": "^/[^/]+/[^/]+/(issues|pulls)/?$" },
+        { "type": "windowTitle", "regex": "^(Issues|Pull requests) · " }
+      ] }, "confidence": "official", "sources": ["S1", "S5"] },
+    { "id": "issue", "label": "Issue", "parent": "repo", "priority": 55, "hysteresisMs": 400,
+      "detect": { "any": [
+        { "type": "extension", "status": "in-progress", "field": "site.path", "regex": "^/[^/]+/[^/]+/issues/[0-9]+" },
+        { "type": "windowTitle", "regex": "· Issue #[0-9]+ · " }
+      ] }, "confidence": "official", "sources": ["S1", "S5"] },
+    { "id": "pr", "label": "Pull request", "parent": "repo", "priority": 55, "hysteresisMs": 400,
+      "detect": { "any": [
+        { "type": "extension", "status": "in-progress", "field": "site.path", "regex": "^/[^/]+/[^/]+/pull/[0-9]+" },
+        { "type": "windowTitle", "regex": "· Pull Request #[0-9]+ · " }
+      ] }, "confidence": "official", "sources": ["S1", "S5"] },
+    { "id": "prFiles", "label": "PR: Files changed", "parent": "pr", "priority": 60, "hysteresisMs": 400,
+      "detect": { "any": [{ "type": "extension", "status": "in-progress", "field": "site.path", "regex": "^/[^/]+/[^/]+/pull/[0-9]+/(files|changes)" }] }, "confidence": "official", "sources": ["S1", "S5"], "notes": "Needs the extension: the title is the same as the PR conversation tab." },
+    { "id": "actions", "label": "Actions (workflow runs, logs)", "parent": "repo", "priority": 50, "hysteresisMs": 400,
+      "detect": { "any": [{ "type": "extension", "status": "in-progress", "field": "site.path", "regex": "^/[^/]+/[^/]+/actions" }] }, "confidence": "official", "sources": ["S1", "S5"] },
+    { "id": "notifications", "label": "Notifications", "parent": "site", "priority": 40, "hysteresisMs": 400,
+      "detect": { "any": [{ "type": "extension", "status": "in-progress", "field": "site.path", "regex": "^/notifications" }] }, "confidence": "official", "sources": ["S1"] }
+  ],
+  "verbs": [
+    { "id": "gh.palette", "label": "PALETTE", "longLabel": "Command palette", "glyph": "terminal", "category": "primary", "priority": 85, "contexts": ["*"], "binding": { "kind": "chord", "chord": "Ctrl+K" }, "altBindings": [{ "kind": "chord", "chord": "Ctrl+Alt+K", "note": "Use this one while editing Markdown, where Ctrl+K inserts a link (S2)." }], "safety": "safe", "unavailable": { "label": "PALETTE", "hint": "GitHub isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S2"], "notes": "User-configurable in Settings > Accessibility (S2, S3). Shadows the browser's Ctrl+K web search on GitHub. Works with character keys off." },
+    { "id": "gh.commandMode", "label": "COMMANDS", "longLabel": "Command palette in command mode", "glyph": "terminal", "category": "tool", "priority": 50, "contexts": ["*"], "binding": { "kind": "chord", "chord": "Ctrl+Shift+K" }, "safety": "safe", "unavailable": { "label": "COMMANDS", "hint": "GitHub isn't in front.", "when": ["notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S2"], "notes": "Or type '>' in the open palette." },
+    { "id": "gh.search", "label": "SEARCH", "longLabel": "Focus the search bar", "glyph": "search", "category": "tool", "priority": 70, "contexts": ["*"], "binding": { "kind": "chord", "chord": "S" }, "altBindings": [{ "kind": "chord", "chord": "Slash" }], "safety": "safe", "unavailable": { "label": "SEARCH", "hint": "Character-key shortcuts are off (GitHub Settings > Accessibility > Character keys).", "when": ["permissionNeeded", "notForeground"], "style": "badge" }, "confidence": "official", "sources": ["S1", "S3"] },
+    { "id": "gh.notifications", "label": "NOTIFS", "longLabel": "Go to your notifications", "glyph": "alert", "category": "nav", "priority": 60, "contexts": ["*"], "binding": { "kind": "sequence", "steps": ["G", "N"], "gapMs": 60 }, "safety": "safe", "unavailable": { "label": "NOTIFS", "hint": "Character-key shortcuts are off (GitHub Settings > Accessibility).", "when": ["permissionNeeded", "notForeground"], "style": "badge" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.shortcuts", "label": "SHORTCUTS", "longLabel": "Shortcuts for this page", "glyph": "info", "category": "system", "priority": 15, "contexts": ["*"], "binding": { "kind": "chord", "chord": "Shift+Slash" }, "safety": "safe", "unavailable": { "label": "SHORTCUTS", "hint": "Character-key shortcuts are off.", "when": ["permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.goCode", "label": "CODE", "longLabel": "Go to the Code tab", "glyph": "code", "category": "nav", "priority": 55, "contexts": ["repo"], "binding": { "kind": "sequence", "steps": ["G", "C"], "gapMs": 60 }, "safety": "safe", "unavailable": { "label": "CODE", "hint": "Inside a repository only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.goIssues", "label": "ISSUES", "longLabel": "Go to the Issues tab", "glyph": "bug", "category": "nav", "priority": 56, "contexts": ["repo"], "binding": { "kind": "sequence", "steps": ["G", "I"], "gapMs": 60 }, "safety": "safe", "unavailable": { "label": "ISSUES", "hint": "Inside a repository only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.goPulls", "label": "PULLS", "longLabel": "Go to the Pull requests tab", "glyph": "git-branch", "category": "nav", "priority": 58, "contexts": ["repo"], "binding": { "kind": "sequence", "steps": ["G", "P"], "gapMs": 60 }, "safety": "safe", "unavailable": { "label": "PULLS", "hint": "Inside a repository only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.goActions", "label": "ACTIONS", "longLabel": "Go to the Actions tab", "glyph": "rocket", "category": "nav", "priority": 50, "contexts": ["repo"], "binding": { "kind": "sequence", "steps": ["G", "A"], "gapMs": 60 }, "safety": "safe", "unavailable": { "label": "ACTIONS", "hint": "Inside a repository only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Also G W wiki, G G discussions, G S security (S1)." },
+    { "id": "gh.fileFinder", "label": "FIND FILE", "longLabel": "File finder", "glyph": "folder", "category": "tool", "priority": 72, "contexts": ["repo"], "binding": { "kind": "chord", "chord": "T" }, "safety": "safe", "unavailable": { "label": "FIND FILE", "hint": "Inside a repository only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "On a PR's Files changed tab, T filters changed files instead (gh.filterFiles)." },
+    { "id": "gh.devEditor", "label": "DEV EDITOR", "longLabel": "Open in the github.dev editor (this tab)", "glyph": "code", "category": "mode", "priority": 52, "contexts": ["repo"], "binding": { "kind": "chord", "chord": "Period" }, "altBindings": [{ "kind": "chord", "chord": "Shift+Period", "note": "'>' opens it in a new tab (S1)." }], "safety": "safe", "unavailable": { "label": "DEV EDITOR", "hint": "Repository or pull request pages; sign in; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.branch", "label": "BRANCH", "longLabel": "Switch branch or tag", "glyph": "git-branch", "category": "tool", "priority": 60, "contexts": ["code"], "binding": { "kind": "chord", "chord": "W" }, "safety": "safe", "unavailable": { "label": "BRANCH", "hint": "Code view only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.gotoLine", "label": "GO TO LINE", "glyph": "target", "category": "tool", "priority": 55, "contexts": ["code"], "binding": { "kind": "chord", "chord": "L" }, "safety": "safe", "unavailable": { "label": "GO TO LINE", "hint": "Code view only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "In the file editor it's Alt+G (S1)." },
+    { "id": "gh.blame", "label": "BLAME", "longLabel": "Open blame view", "glyph": "viewers", "category": "mode", "priority": 50, "contexts": ["code"], "binding": { "kind": "chord", "chord": "B" }, "safety": "safe", "unavailable": { "label": "BLAME", "hint": "File view only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.permalink", "label": "PERMALINK", "longLabel": "Expand the URL to its canonical (commit) form", "glyph": "lock", "category": "tool", "priority": 45, "contexts": ["code"], "binding": { "kind": "chord", "chord": "Y" }, "safety": "safe", "unavailable": { "label": "PERMALINK", "hint": "Code view only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.editFile", "label": "EDIT FILE", "glyph": "note", "category": "mode", "priority": 48, "contexts": ["code"], "binding": { "kind": "chord", "chord": "E" }, "safety": "safe", "unavailable": { "label": "EDIT FILE", "hint": "File view only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.newIssue", "label": "NEW ISSUE", "glyph": "bug", "category": "primary", "priority": 70, "contexts": ["list"], "binding": { "kind": "chord", "chord": "C" }, "safety": "safe", "unavailable": { "label": "NEW ISSUE", "hint": "Issue/PR list only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Ctrl+Slash focuses the list's search bar (S1)." },
+    { "id": "gh.reviewer", "label": "REVIEWER", "longLabel": "Request a reviewer", "glyph": "viewers", "category": "primary", "priority": 75, "contexts": ["pr"], "binding": { "kind": "chord", "chord": "Q" }, "safety": "safe", "unavailable": { "label": "REVIEWER", "hint": "Pull requests only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.label", "label": "LABEL", "longLabel": "Apply a label", "glyph": "marker", "category": "tool", "priority": 65, "contexts": ["issue", "pr"], "binding": { "kind": "chord", "chord": "L" }, "safety": "safe", "unavailable": { "label": "LABEL", "hint": "Issues and pull requests only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.assignee", "label": "ASSIGNEE", "longLabel": "Set an assignee", "glyph": "viewers", "category": "tool", "priority": 63, "contexts": ["issue", "pr"], "binding": { "kind": "chord", "chord": "A" }, "safety": "safe", "unavailable": { "label": "ASSIGNEE", "hint": "Issues and pull requests only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "M sets a milestone, X links an issue or PR (S1)." },
+    { "id": "gh.preview", "label": "PREVIEW", "longLabel": "Toggle Write / Preview", "glyph": "pages", "category": "mode", "priority": 55, "contexts": ["issue", "pr"], "binding": { "kind": "chord", "chord": "Ctrl+Shift+P" }, "safety": "safe", "unavailable": { "label": "PREVIEW", "hint": "Click into a comment box first.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.quote", "label": "QUOTE", "longLabel": "Quote the selected text in your reply", "glyph": "chat", "category": "tool", "priority": 45, "contexts": ["issue", "pr"], "binding": { "kind": "chord", "chord": "R" }, "safety": "safe", "unavailable": { "label": "QUOTE", "hint": "Select some text first; needs character keys on.", "when": ["nothingSelected", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.comment", "label": "COMMENT", "longLabel": "Submit the comment", "glyph": "chat", "category": "primary", "priority": 78, "contexts": ["issue", "pr"], "binding": { "kind": "chord", "chord": "Ctrl+Enter" }, "safety": "confirm", "unavailable": { "label": "COMMENT", "hint": "Click into a comment box first.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Hold to confirm: posts publicly and notifies people." },
+    { "id": "gh.filterFiles", "label": "FILTER", "longLabel": "Filter changed files", "glyph": "search", "category": "tool", "priority": 60, "contexts": ["prFiles"], "binding": { "kind": "chord", "chord": "T" }, "safety": "safe", "unavailable": { "label": "FILTER", "hint": "PR Files changed tab only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "C opens the commits filter (S1)." },
+    { "id": "gh.diffComments", "label": "COMMENTS", "longLabel": "Show or hide comments on diffs", "glyph": "chat", "category": "toggle", "priority": 50, "contexts": ["prFiles", "code"], "binding": { "kind": "chord", "chord": "I" }, "safety": "safe", "unavailable": { "label": "COMMENTS", "hint": "Diffs only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "A shows or hides annotations on diffs (S1)." },
+    { "id": "gh.submitReview", "label": "SUBMIT REV", "longLabel": "Submit a review comment", "glyph": "check", "category": "primary", "priority": 70, "contexts": ["prFiles"], "binding": { "kind": "chord", "chord": "Ctrl+Shift+Enter" }, "safety": "confirm", "unavailable": { "label": "SUBMIT REV", "hint": "Click into a review comment first.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Hold to confirm: posts publicly." },
+    { "id": "gh.logFullscreen", "label": "LOG FULL", "longLabel": "Toggle full-screen logs", "glyph": "terminal", "category": "toggle", "priority": 50, "contexts": ["actions"], "binding": { "kind": "chord", "chord": "Shift+F" }, "altBindings": [{ "kind": "chord", "chord": "F" }], "safety": "safe", "unavailable": { "label": "LOG FULL", "hint": "Workflow run logs only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Esc exits (S1)." },
+    { "id": "gh.logTimestamps", "label": "TIMESTAMPS", "longLabel": "Toggle timestamps in logs", "glyph": "clock", "category": "toggle", "priority": 45, "contexts": ["actions"], "binding": { "kind": "chord", "chord": "Shift+T" }, "altBindings": [{ "kind": "chord", "chord": "T" }], "safety": "safe", "unavailable": { "label": "TIMESTAMPS", "hint": "Workflow run logs only.", "when": ["wrongContext", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"] },
+    { "id": "gh.markDone", "label": "DONE", "longLabel": "Mark notification as done", "glyph": "check", "category": "primary", "priority": 70, "contexts": ["notifications"], "binding": { "kind": "chord", "chord": "E" }, "safety": "safe", "unavailable": { "label": "DONE", "hint": "Notifications page only; needs character keys on.", "when": ["wrongContext", "permissionNeeded", "notForeground"], "style": "dim" }, "confidence": "official", "sources": ["S1"], "notes": "Shift+U unread, Shift+I read, Shift+M unsubscribe (S1)." }
+  ],
+  "userBindings": {
+    "storage": "cloud",
+    "summary": "Account settings at github.com/settings/accessibility (synced, not on this PC): 'Character keys' (General) turns off every single-key shortcut while modifier shortcuts keep working (S3, S4; on by default); 'Command palette' dropdowns choose the palette keys (S2, S3). Individual shortcuts can't be rebound.",
+    "entryShape": "Two settings: characterKeys on/off; command palette open / command-mode shortcuts chosen from a fixed list.",
+    "example": "Character keys: off   (fictional)",
+    "readMode": "Not readable locally. The PI asks once ('GitHub character-key shortcuts on?'); when off, every single-key verb shows its badge and the palette (Ctrl+K) stays available. If the user picks other palette keys, they type them in the PI.",
+    "confidence": "official",
+    "sources": ["S2", "S3", "S4"]
+  },
+  "layouts": [
+    { "device": "galleon-100-sd", "context": "pr",
+      "keys": [
+        { "x": 0, "y": 0, "verb": "gh.palette" }, { "x": 1, "y": 0, "verb": "gh.reviewer" }, { "x": 2, "y": 0, "verb": "gh.comment" },
+        { "x": 0, "y": 1, "verb": "gh.label" }, { "x": 1, "y": 1, "verb": "gh.assignee" }, { "x": 2, "y": 1, "verb": "gh.preview" },
+        { "x": 0, "y": 2, "verb": "gh.devEditor" }, { "x": 1, "y": 2, "verb": "gh.quote" }, { "x": 2, "y": 2, "verb": "gh.search" },
+        { "x": 0, "y": 3, "verb": "gh.goPulls" }, { "x": 1, "y": 3, "verb": "gh.goIssues" }, { "x": 2, "y": 3, "verb": "gh.notifications" }
+      ],
+      "dials": [ { "dial": 0, "layer": 0, "control": "pageScroll" }, { "dial": 0, "layer": 1, "control": "history" }, { "dial": 1, "layer": 0, "control": "zoom" }, { "dial": 1, "layer": 1, "control": "tabs" } ],
+      "screen": [ { "slot": "TL", "readout": "pageScroll" }, { "slot": "BL", "readout": "siteDomain" }, { "slot": "TR", "readout": "zoomLevel" }, { "slot": "BR", "readout": "tabTitle" } ],
+      "rationale": "Palette, reviewer and COMMENT (hold) on top, triage (label/assignee/preview) and github.dev/quote/search in the middle, repo jumps at the bottom; long PRs get the scroll dial." },
+    { "device": "stream-deck-plus", "context": "pr",
+      "keys": [
+        { "x": 0, "y": 0, "verb": "gh.palette" }, { "x": 1, "y": 0, "verb": "gh.reviewer" }, { "x": 2, "y": 0, "verb": "gh.label" }, { "x": 3, "y": 0, "verb": "gh.comment" },
+        { "x": 0, "y": 1, "verb": "gh.preview" }, { "x": 1, "y": 1, "verb": "gh.devEditor" }, { "x": 2, "y": 1, "verb": "gh.goPulls" }, { "x": 3, "y": 1, "verb": "gh.notifications" }
+      ],
+      "dials": [ { "dial": 0, "control": "pageScroll" }, { "dial": 1, "control": "history" }, { "dial": 2, "control": "tabs" }, { "dial": 3, "control": "zoom" } ],
+      "screen": [ { "slot": "0", "readout": "pageScroll" }, { "slot": "1", "readout": "siteDomain" }, { "slot": "2", "readout": "tabTitle" }, { "slot": "3", "readout": "zoomLevel" } ],
+      "rationale": "Palette/reviewer/label/COMMENT on top, preview/github.dev/jumps below; scroll, history, tabs and zoom dials for reading long diffs." }
+  ],
+  "sources": [
+    { "id": "S1", "title": "Keyboard shortcuts", "url": "https://docs.github.com/en/get-started/accessibility/keyboard-shortcuts", "publisher": "GitHub Docs", "kind": "official", "accessed": "2026-10-16", "appliesToVersion": "github.com (Free, Pro & Team), current" },
+    { "id": "S2", "title": "GitHub Command Palette", "url": "https://docs.github.com/en/get-started/accessibility/github-command-palette", "publisher": "GitHub Docs", "kind": "official", "accessed": "2026-10-16", "note": "Ctrl+K or Ctrl+Alt+K (Ctrl+Alt+K while editing Markdown); Ctrl+Shift+K = command mode; shortcuts customizable in Accessibility settings." },
+    { "id": "S3", "title": "Managing accessibility settings", "url": "https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-user-account-settings/managing-accessibility-settings", "publisher": "GitHub Docs", "kind": "official", "accessed": "2026-10-16", "note": "Settings > Accessibility > Keyboard shortcuts: deselect 'Character keys' to disable shortcuts without modifiers; Command palette dropdowns." },
+    { "id": "S4", "title": "Managing keyboard shortcuts using accessibility settings (changelog, 2021-11-16)", "url": "https://github.blog/changelog/2021-11-15-managing-keyboard-shortcuts-using-accessibility-settings/", "publisher": "GitHub Changelog", "kind": "official", "accessed": "2026-10-16", "note": "Turning off character key shortcuts affects s, g c, '.'; modifier shortcuts unaffected." },
+    { "id": "S5", "title": "github.com page titles (fetched, public pages)", "url": "https://github.com/cli/cli/pull/9000", "publisher": "GitHub", "kind": "in-app", "accessed": "2026-10-16", "note": "Shapes: 'GitHub - owner/repo: <desc> · GitHub', 'Issues · owner/repo · GitHub', 'Pull requests · owner/repo · GitHub', '<title> · Issue #N · owner/repo · GitHub', '<title> by <user> · Pull Request #N · owner/repo · GitHub', '<path> at <branch> · owner/repo · GitHub'. /pull/N/files exists." },
+    { "id": "S6", "title": "Read-only probe: Chrome window title suffix ' - Google Chrome'", "url": "local:Get-Process chrome | MainWindowTitle (suffix only)", "kind": "local", "accessed": "2026-10-16", "appliesToVersion": "Chrome 155.0.8059.82" }
+  ],
+  "confidence": "high",
+  "conflicts": [],
+  "gaps": [
+    "Character-key shortcuts may be off (account setting); the engine can't see it, so the PI must ask.",
+    "Merge, approve and close have no default shortcut; left out (would be unbound + never-auto).",
+    "The newer PR 'Files changed' experience may use a different path (/changes); the detector accepts both but only /files was seen.",
+    "Edge title fallback unverified."
+  ],
+  "notes": [
+    "Per-page shortcut list: '?' (S1). Keys differ by page: L = go to line in code, apply label on issues/PRs; T = file finder in a repo, filter files on a PR's Files tab.",
+    "Long-form notes: packs/notes/site-github.md."
+  ]
+}

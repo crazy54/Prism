@@ -1,0 +1,15 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Meeting fixture</title></head>
+<body>
+<!-- Web meeting: no media element, only Media Session mic/camera/hang-up handlers and state. -->
+<script>
+  let mic = true, cam = false;
+  window.__hung = false;
+  const s = navigator.mediaSession;
+  s.setActionHandler('togglemicrophone', () => { mic = !mic; s.setMicrophoneActive(mic); });
+  s.setActionHandler('togglecamera', () => { cam = !cam; s.setCameraActive(cam); });
+  s.setActionHandler('hangup', () => { window.__hung = true; });
+  s.setMicrophoneActive(true);
+  s.setCameraActive(false);
+</script>
+</body></html>

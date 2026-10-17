@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prism Control options</title>
+  <link rel="stylesheet" href="src/ui/ui.css">
+</head>
+<body class="options">
+<main>
+  <header>
+    <img src="img/48.png" alt="" width="32" height="32">
+    <h1>Prism Control for Stream Deck</h1>
+  </header>
+
+  <div class="banner" id="grantBanner" hidden>
+    <p>Your Stream Deck asked for media controls on <strong id="grantHost" class="mono"></strong>.</p>
+    <button id="grantBtn">Allow on this site</button>
+    <span class="saved" id="grantSaved">Allowed</span>
+  </div>
+
+  <section class="card" id="general">
+    <h2>Connection</h2>
+    <div class="status" id="status" data-state="idle">
+      <span class="dot"></span>
+      <div><div class="line" id="line">Checking...</div><div class="help" id="help"></div></div>
+    </div>
+    <p class="muted" style="margin-top:10px">Extension id <code id="extId"></code> · native host <code id="hostName"></code></p>
+    <button class="ghost" id="retry">Retry now</button>
+  </section>
+
+  <section class="card" id="profile">
+    <h2>Profile label</h2>
+    <p class="muted">Shown on the deck when several browsers or profiles are connected ("Work", "Personal").</p>
+    <input type="text" id="profileLabel" maxlength="48" placeholder="e.g. Work">
+    <span class="saved" id="profileSaved">Saved</span>
+  </section>
+
+  <section class="card" id="privacy">
+    <h2>Streamer-safe</h2>
+    <p class="muted">Filtering happens inside the browser: hidden titles, addresses and file names never reach Prism Control.</p>
+    <div class="choices" id="levels">
+      <label><input type="radio" name="level" value="full"> <span><strong>Off</strong> <span class="muted">titles, addresses and media details are shown</span></span></label>
+      <label><input type="radio" name="level" value="domain"> <span><strong>Domain only</strong> <span class="muted">site names only; no titles, art or file names</span></span></label>
+      <label><input type="radio" name="level" value="hidden"> <span><strong>Hidden</strong> <span class="muted">"Tab 3", "Playing", progress; nothing identifying</span></span></label>
+    </div>
+    <div class="grid2">
+      <label>While a streaming app (OBS) runs
+        <select id="whileStreaming">
+          <option value="domain">Domain only</option>
+          <option value="hidden">Hidden</option>
+          <option value="full">Don't change</option>
+        </select>
+      </label>
+      <div class="muted" id="levelNow"></div>
+    </div>
+    <div class="grid2" style="margin-top:12px">
+      <label>Always hidden (banking, mail, health...), one per line
+        <textarea id="alwaysHidden" placeholder="bank.example&#10;mail.example"></textarea>
+      </label>
+      <label>Media sites whose titles may show in Domain only
+        <textarea id="mediaAllow" placeholder="music.example"></textarea>
+      </label>
+    </div>
+    <span class="saved" id="privacySaved">Saved</span>
+  </section>
+
+  <section class="card" id="sites">
+    <h2>Site access (media controls)</h2>
+    <p class="muted">Media controls (art, progress, scrub, speed, volume, picture-in-picture) need access to each site. Mute and "playing" work everywhere without it.</p>
+    <ul class="sites" id="siteList"></ul>
+    <div class="row">
+      <input type="text" id="addSite" placeholder="video.example">
+      <button id="addSiteBtn">Allow</button>
+    </div>
+    <p style="margin-top:10px"><button class="ghost" id="allSites">Allow on all sites</button> <span class="muted">One click instead of one per site.</span></p>
+  </section>
+
+  <section class="card" id="features">
+    <h2>Optional features</h2>
+    <div class="feature"><div><strong>Downloads</strong><div class="muted">Download progress ring, show in folder, pause/resume.</div></div><button data-perm="downloads">Grant</button></div>
+    <div class="feature"><div><strong>Tab groups</strong><div class="muted">Group colors on keys, collapse and expand.</div></div><button data-perm="tabGroups">Grant</button></div>
+    <div class="feature"><div><strong>Reopen closed tabs</strong><div class="muted">The Reopen key and close-with-undo.</div></div><button data-perm="sessions">Grant</button></div>
+    <div class="feature"><div><strong>Live preview</strong><div class="muted">Mirror the active tab on a deck widget.</div>
+      <div class="muted why" id="previewWhy">Why "all sites": the browser lets an extension take a picture of a tab only if it has access to every site, so the browser will ask to "Read and change all your data on all websites". Prism Control uses that access only for this preview: a small picture of the active tab, at most 2 per second, only while a preview widget is on your deck, never while streamer-safe is on, and never saved. Media controls don't need it. You can remove it here at any time.</div></div>
+      <button data-origin="&lt;all_urls&gt;" aria-describedby="previewWhy">Grant</button></div>
+  </section>
+</main>
+<script type="module" src="src/ui/options.js"></script>
+</body>
+</html>

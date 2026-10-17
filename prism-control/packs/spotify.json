@@ -1,0 +1,2371 @@
+{
+  "$schema": "./schema/context-pack.schema.json",
+  "schemaVersion": 1,
+  "id": "spotify",
+  "name": "Spotify (desktop app)",
+  "vendor": "Spotify AB",
+  "kind": "app",
+  "activation": "running",
+  "packVersion": "0.1.0",
+  "platforms": [
+    "windows"
+  ],
+  "verifiedAgainst": {
+    "version": "1.3.5.3058",
+    "installedHere": "1.3.5.3058 (Win32 installer, %APPDATA%\\Spotify\\Spotify.exe, running). No Microsoft Store package installed.",
+    "date": "2026-10-16",
+    "method": "local-files",
+    "note": "Every default chord was read read-only from the installed app's own shortcut table (V8 snapshot module 31300 + the shortcut dialog in Apps\\xpui.spa), then compared with Spotify Support. Nothing was sent to the app."
+  },
+  "policy": {
+    "class": "desktop-app",
+    "input": "allowed",
+    "sight": "forbidden",
+    "closedLoop": "forbidden",
+    "reason": "Ordinary media app. Prefer the existing spotify.* module verbs (Windows media session + Web API, work in the background, true state); chords are fallbacks."
+  },
+  "keyMode": "vk",
+  "match": {
+    "any": [
+      {
+        "process": "Spotify.exe",
+        "confidence": "verified-local",
+        "note": "Win32 install at %APPDATA%\\Spotify (running on this PC). The Store build's exe is also Spotify.exe."
+      },
+      {
+        "processPathRegex": "\\\\WindowsApps\\\\SpotifyAB\\.SpotifyMusic_",
+        "confidence": "community",
+        "note": "Microsoft Store build under C:\\Program Files\\WindowsApps; compare case-insensitively."
+      },
+      {
+        "aumid": "SpotifyAB.SpotifyMusic_zpdnekdrzrea0!Spotify",
+        "confidence": "community",
+        "note": "Store package family SpotifyAB.SpotifyMusic_zpdnekdrzrea0, app id Spotify (S10, S11, S9). Not installed here; check with Get-StartApps on a PC that has it."
+      }
+    ]
+  },
+  "contexts": [
+    {
+      "id": "player",
+      "label": "Spotify (default)",
+      "default": true,
+      "priority": 10,
+      "detect": {
+        "all": [
+          {
+            "type": "always"
+          }
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "id": "podcast",
+      "label": "Podcast or audiobook playing",
+      "parent": "player",
+      "priority": 40,
+      "hysteresisMs": 1000,
+      "detect": {
+        "any": [
+          {
+            "type": "module",
+            "field": "spotify.itemType",
+            "regex": "^(episode|chapter|audiobook)$",
+            "note": "PlayerSnapshot.ItemType exists in the spotify module (Web API only, after Connect); it is not yet on the /v1/now-playing data API."
+          }
+        ]
+      },
+      "confidence": "unverified",
+      "verify": "After Connect, play a podcast episode and an audiobook and log PlayerSnapshot.ItemType; confirm Shift+, / Shift+. change speed there (the app gates the speed keys by a condition, S2) and do nothing for music.",
+      "notes": "Only adds the speed dial and seek-first keys; everything from player stays valid."
+    }
+  ],
+  "verbs": [
+    {
+      "id": "playback.playPause",
+      "label": "PLAY",
+      "longLabel": "Play / pause",
+      "glyph": "play-pause",
+      "category": "primary",
+      "priority": 100,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "spotify.playPause",
+        "status": "exists",
+        "action": "com.jeremyfhall.prismcontrol.spotify.play-pause",
+        "note": "Windows media session for the app on this PC (no login, works in the background); Web API for other devices after Connect."
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Space",
+          "note": "In-app; ignored while a text field (search box) has focus."
+        },
+        {
+          "kind": "chord",
+          "chord": "MediaPlayPause",
+          "note": "Global media key, but Windows sends it to its current media session, which may be a browser."
+        }
+      ],
+      "appAction": "TOGGLE_PLAY",
+      "safety": "safe",
+      "stateReadout": "playState",
+      "unavailable": {
+        "label": "PLAY",
+        "hint": "Spotify isn't running (the module can start it).",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2",
+        "S8"
+      ]
+    },
+    {
+      "id": "playback.next",
+      "label": "NEXT",
+      "glyph": "skip-next",
+      "category": "primary",
+      "priority": 96,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "spotify.next",
+        "status": "exists",
+        "action": "com.jeremyfhall.prismcontrol.spotify.next"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Ctrl+Right"
+        },
+        {
+          "kind": "chord",
+          "chord": "MediaNext",
+          "note": "Global; goes to Windows' current media session."
+        }
+      ],
+      "appAction": "SKIP_NEXT",
+      "safety": "safe",
+      "unavailable": {
+        "label": "NEXT",
+        "hint": "Nothing is playing.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2",
+        "S8"
+      ],
+      "conflict": "S1 lists Down as 'Go to Next'; in the app's code (S2) that key is the video watch feed only."
+    },
+    {
+      "id": "playback.previous",
+      "label": "PREV",
+      "glyph": "skip-prev",
+      "category": "primary",
+      "priority": 94,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "spotify.previous",
+        "status": "exists",
+        "action": "com.jeremyfhall.prismcontrol.spotify.previous",
+        "note": "Spotify decides between restart and previous track."
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Ctrl+Left"
+        },
+        {
+          "kind": "chord",
+          "chord": "MediaPrev",
+          "note": "Global; goes to Windows' current media session."
+        }
+      ],
+      "appAction": "SKIP_PREVIOUS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "PREV",
+        "hint": "Nothing is playing.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2",
+        "S8"
+      ]
+    },
+    {
+      "id": "library.like",
+      "label": "LIKE",
+      "longLabel": "Like / unlike the current track",
+      "glyph": "heart",
+      "monogram": "LK",
+      "category": "primary",
+      "priority": 88,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "spotify.like",
+        "status": "exists",
+        "action": "com.jeremyfhall.prismcontrol.spotify.like",
+        "note": "Web API library endpoints; needs Connect (BYO Client ID). Shows the real heart state."
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Alt+Shift+B",
+          "note": "In-app toggle; no state feedback."
+        }
+      ],
+      "appAction": "LIKE_DISLIKE_SONG",
+      "safety": "safe",
+      "stateReadout": "likedState",
+      "unavailable": {
+        "label": "CONNECT",
+        "hint": "Connect Spotify in Prism Control to like tracks from the deck (Alt+Shift+B works while Spotify is in front).",
+        "when": [
+          "notConnected"
+        ],
+        "style": "badge"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2",
+        "S8"
+      ]
+    },
+    {
+      "id": "playback.shuffle",
+      "label": "SHUFFLE",
+      "glyph": "shuffle",
+      "category": "toggle",
+      "priority": 80,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "spotify.shuffle",
+        "status": "exists",
+        "action": "com.jeremyfhall.prismcontrol.spotify.shuffle",
+        "note": "Media session (no login) or Web API."
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Ctrl+S"
+        }
+      ],
+      "appAction": "SHUFFLE",
+      "safety": "safe",
+      "stateReadout": "shuffleState",
+      "unavailable": {
+        "label": "SHUFFLE",
+        "hint": "Nothing is playing.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2",
+        "S8"
+      ],
+      "conflict": "Web player uses Alt+S (S5, and S2's non-desktop branch)."
+    },
+    {
+      "id": "playback.repeat",
+      "label": "REPEAT",
+      "longLabel": "Cycle repeat (off, context, track)",
+      "glyph": "sync",
+      "category": "toggle",
+      "priority": 78,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "spotify.repeat",
+        "status": "exists",
+        "action": "com.jeremyfhall.prismcontrol.spotify.repeat"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Ctrl+R"
+        }
+      ],
+      "appAction": "REPEAT",
+      "safety": "safe",
+      "stateReadout": "repeatState",
+      "unavailable": {
+        "label": "REPEAT",
+        "hint": "Nothing is playing.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2",
+        "S8"
+      ],
+      "conflict": "Web player uses Alt+R (S5)."
+    },
+    {
+      "id": "playback.seekBack",
+      "label": "SEEK BACK",
+      "glyph": "seek-back",
+      "monogram": "<<",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Shift+Left"
+      },
+      "altBindings": [
+        {
+          "kind": "module",
+          "verb": "spotify.seek",
+          "args": {
+            "seconds": -15
+          },
+          "status": "planned",
+          "note": "SpotifyService.SeekBy exists; only the Now Playing dial exposes it today."
+        }
+      ],
+      "appAction": "SEEK_BACKWARD",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SEEK BACK",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2"
+      ],
+      "notes": "Seek distance per press is not in the shortcut table (unknown)."
+    },
+    {
+      "id": "playback.seekForward",
+      "label": "SEEK FWD",
+      "glyph": "seek-forward",
+      "monogram": ">>",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Shift+Right"
+      },
+      "altBindings": [
+        {
+          "kind": "module",
+          "verb": "spotify.seek",
+          "args": {
+            "seconds": 15
+          },
+          "status": "planned"
+        }
+      ],
+      "appAction": "SEEK_FORWARD",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SEEK FWD",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2"
+      ]
+    },
+    {
+      "id": "volume.mute",
+      "label": "MUTE",
+      "longLabel": "Mute / restore Spotify",
+      "glyph": "volume",
+      "category": "toggle",
+      "priority": 74,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "spotify.volume",
+        "args": {
+          "press": "muteRestore"
+        },
+        "status": "exists",
+        "action": "com.jeremyfhall.prismcontrol.spotify.volume",
+        "note": "Spotify's own device volume to 0 and back (Web API: Connect + Premium)."
+      },
+      "altBindings": [
+        {
+          "kind": "module",
+          "verb": "audio.appVolume",
+          "args": {
+            "app": "Spotify.exe",
+            "keyPress": "mute"
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.audio.app-volume",
+          "note": "Windows mixer mute for Spotify.exe; no login needed."
+        }
+      ],
+      "safety": "safe",
+      "stateReadout": "spotifyVolume",
+      "unavailable": {
+        "label": "MUTE",
+        "hint": "Connect Spotify (Premium) for its own volume, or use APP MUTE.",
+        "when": [
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2",
+        "S8",
+        "S13"
+      ],
+      "conflict": "S1 lists 'Mute/Unmute: M'; the app's code (S2) binds M only in the video watch feed. S4 (2022) and S6 list Ctrl+Shift+Down, which the current table no longer has. The desktop app has no mute chord."
+    },
+    {
+      "id": "volume.up",
+      "label": "VOL +",
+      "glyph": "volume",
+      "monogram": "V+",
+      "category": "tool",
+      "priority": 50,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Up",
+        "note": "Spotify's own volume; works for free accounts while Spotify is in front."
+      },
+      "altBindings": [
+        {
+          "kind": "module",
+          "verb": "spotify.volume",
+          "args": {
+            "delta": 5
+          },
+          "status": "planned",
+          "note": "SpotifyService.AdjustVolume exists; a key action that steps volume does not."
+        }
+      ],
+      "appAction": "RAISE_VOLUME",
+      "safety": "safe",
+      "unavailable": {
+        "label": "VOL +",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2",
+        "S6"
+      ],
+      "conflict": "Web player uses Alt+Up (S5)."
+    },
+    {
+      "id": "volume.down",
+      "label": "VOL -",
+      "glyph": "volume",
+      "monogram": "V-",
+      "category": "tool",
+      "priority": 50,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Down"
+      },
+      "altBindings": [
+        {
+          "kind": "module",
+          "verb": "spotify.volume",
+          "args": {
+            "delta": -5
+          },
+          "status": "planned"
+        }
+      ],
+      "appAction": "LOWER_VOLUME",
+      "safety": "safe",
+      "unavailable": {
+        "label": "VOL -",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2",
+        "S6"
+      ],
+      "conflict": "Web player uses Alt+Down (S5)."
+    },
+    {
+      "id": "nav.quickSearch",
+      "label": "FIND",
+      "longLabel": "Quick Search",
+      "glyph": "search",
+      "category": "tool",
+      "priority": 72,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+K"
+      },
+      "appAction": "OPEN_SEARCH_MODAL",
+      "safety": "safe",
+      "unavailable": {
+        "label": "FIND",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "nav.search",
+      "label": "SEARCH",
+      "longLabel": "Go to the Search page",
+      "glyph": "search",
+      "category": "nav",
+      "priority": 45,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+L"
+      },
+      "appAction": "GO_TO_SEARCH",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SEARCH",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ],
+      "conflict": "Web player and Mac use Ctrl/Cmd+Shift+L (S1, S5)."
+    },
+    {
+      "id": "nav.home",
+      "label": "HOME",
+      "glyph": "home",
+      "category": "nav",
+      "priority": 55,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+H"
+      },
+      "appAction": "GO_TO_HOME",
+      "safety": "safe",
+      "unavailable": {
+        "label": "HOME",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "nav.back",
+      "label": "BACK",
+      "glyph": "back",
+      "category": "nav",
+      "priority": 58,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Left"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Ctrl+Alt+Left",
+          "note": "Second desktop bind."
+        }
+      ],
+      "appAction": "GO_BACKWARDS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "BACK",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2",
+        "S4"
+      ]
+    },
+    {
+      "id": "nav.forward",
+      "label": "FORWARD",
+      "glyph": "forward",
+      "monogram": "FWD",
+      "category": "nav",
+      "priority": 30,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Right"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Ctrl+Alt+Right"
+        }
+      ],
+      "appAction": "GO_FORWARDS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "FORWARD",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2",
+        "S4"
+      ]
+    },
+    {
+      "id": "nav.nowPlaying",
+      "label": "PLAYING",
+      "longLabel": "Go to the playing item",
+      "glyph": "music-note",
+      "category": "nav",
+      "priority": 42,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+J"
+      },
+      "appAction": "GO_TO_NOW_PLAYING",
+      "safety": "safe",
+      "unavailable": {
+        "label": "PLAYING",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "nav.queue",
+      "label": "QUEUE",
+      "glyph": "queue",
+      "monogram": "Q",
+      "category": "tool",
+      "priority": 66,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+Q"
+      },
+      "appAction": "GO_TO_QUEUE",
+      "safety": "safe",
+      "unavailable": {
+        "label": "QUEUE",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "nav.likedSongs",
+      "label": "LIKED",
+      "longLabel": "Liked Songs",
+      "glyph": "heart",
+      "monogram": "LS",
+      "category": "tool",
+      "priority": 62,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+S"
+      },
+      "appAction": "GO_TO_LIKED_SONGS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "LIKED",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "nav.library",
+      "label": "LIBRARY",
+      "glyph": "folder",
+      "category": "nav",
+      "priority": 48,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+0"
+      },
+      "appAction": "GO_TO_LIBRARY",
+      "safety": "safe",
+      "unavailable": {
+        "label": "LIBRARY",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "nav.playlists",
+      "label": "PLAYLISTS",
+      "glyph": "pages",
+      "category": "nav",
+      "priority": 40,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+1"
+      },
+      "appAction": "GO_TO_PLAYLISTS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "PLAYLISTS",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "nav.podcasts",
+      "label": "PODCASTS",
+      "glyph": "broadcast",
+      "category": "nav",
+      "priority": 38,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+2"
+      },
+      "appAction": "GO_TO_PODCASTS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "PODCASTS",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "nav.artists",
+      "label": "ARTISTS",
+      "glyph": "artist",
+      "monogram": "ART",
+      "category": "nav",
+      "priority": 32,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+3"
+      },
+      "appAction": "GO_TO_ARTISTS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "ARTISTS",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "nav.albums",
+      "label": "ALBUMS",
+      "glyph": "disk",
+      "category": "nav",
+      "priority": 32,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+4"
+      },
+      "appAction": "GO_TO_ALBUMS",
+      "safety": "safe",
+      "unavailable": {
+        "label": "ALBUMS",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "nav.madeForYou",
+      "label": "FOR YOU",
+      "longLabel": "Made For You",
+      "glyph": "target",
+      "category": "nav",
+      "priority": 28,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+M"
+      },
+      "appAction": "GO_TO_MADE_FOR_YOU",
+      "safety": "safe",
+      "unavailable": {
+        "label": "FOR YOU",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "id": "nav.devices",
+      "label": "DEVICES",
+      "longLabel": "Spotify Connect device picker",
+      "glyph": "network",
+      "category": "system",
+      "priority": 44,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+D"
+      },
+      "appAction": "GO_TO_DEVICE_PICKER",
+      "safety": "safe",
+      "unavailable": {
+        "label": "DEVICES",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2",
+        "S5"
+      ]
+    },
+    {
+      "id": "nav.friends",
+      "label": "FRIENDS",
+      "longLabel": "Friend activity",
+      "glyph": "viewers",
+      "category": "nav",
+      "priority": 18,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+U"
+      },
+      "appAction": "GO_TO_BUDDY_FEED",
+      "safety": "safe",
+      "unavailable": {
+        "label": "FRIENDS",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2"
+      ]
+    },
+    {
+      "id": "view.nowPlayingPane",
+      "label": "RIGHT PANE",
+      "longLabel": "Toggle the Now Playing view (right sidebar)",
+      "glyph": "scene",
+      "category": "system",
+      "priority": 26,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Alt+Shift+R"
+      },
+      "appAction": "TOGGLE_NPV_SIDEBAR",
+      "safety": "safe",
+      "unavailable": {
+        "label": "RIGHT PANE",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ],
+      "notes": "Alt+Shift+L toggles the left (Your Library) sidebar."
+    },
+    {
+      "id": "library.newPlaylist",
+      "label": "NEW LIST",
+      "longLabel": "Create a playlist",
+      "glyph": "note",
+      "category": "tool",
+      "priority": 24,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+N"
+      },
+      "appAction": "CREATE_NEW_PLAYLIST",
+      "safety": "safe",
+      "unavailable": {
+        "label": "NEW LIST",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2",
+        "S4"
+      ],
+      "conflict": "Web player uses Alt+Shift+P (S5); S1 lists neither."
+    },
+    {
+      "id": "library.browse",
+      "label": "BROWSE",
+      "longLabel": "Open / play in the playlist browser",
+      "glyph": "music-note",
+      "category": "tool",
+      "priority": 36,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "spotify.browser",
+        "args": {
+          "press": "openOrPlay"
+        },
+        "status": "exists",
+        "action": "com.jeremyfhall.prismcontrol.spotify.browser",
+        "note": "Push of the Playlist Browser dial (needs Connect)."
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "CONNECT",
+        "hint": "Connect Spotify in Prism Control to browse playlists.",
+        "when": [
+          "notConnected"
+        ],
+        "style": "badge"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S8"
+      ]
+    },
+    {
+      "id": "app.preferences",
+      "label": "SETTINGS",
+      "glyph": "settings",
+      "monogram": "SET",
+      "category": "system",
+      "priority": 20,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Comma"
+      },
+      "appAction": "GO_TO_PREFERENCES",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SETTINGS",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ],
+      "conflict": "S4 (2022) and S6/S7 still print Ctrl+P."
+    },
+    {
+      "id": "app.shortcuts",
+      "label": "SHORTCUTS",
+      "glyph": "info",
+      "category": "system",
+      "priority": 16,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Slash"
+      },
+      "appAction": "OPEN_HELP",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SHORTCUTS",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S1",
+        "S2"
+      ],
+      "notes": "The app also accepts '?' alone."
+    },
+    {
+      "id": "app.mixerMute",
+      "label": "APP MUTE",
+      "longLabel": "Mute Spotify in the Windows mixer",
+      "glyph": "mixer",
+      "category": "toggle",
+      "priority": 34,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "audio.appVolume",
+        "args": {
+          "app": "Spotify.exe",
+          "keyPress": "mute"
+        },
+        "status": "exists",
+        "action": "com.jeremyfhall.prismcontrol.audio.app-volume"
+      },
+      "safety": "safe",
+      "stateReadout": "mixerVolume",
+      "unavailable": {
+        "label": "APP MUTE",
+        "hint": "Spotify has no audio session yet.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S13"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": "volume",
+      "label": "SPOTIFY VOL",
+      "glyph": "volume",
+      "category": "tool",
+      "priority": 92,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "spotify.volume",
+          "args": {
+            "ticks": -1
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.spotify.volume"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "spotify.volume",
+          "args": {
+            "ticks": 1
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.spotify.volume"
+        },
+        "step": {
+          "perPress": 2,
+          "unit": "%",
+          "note": "SpotifyVolumeSettings.Step default 2 %/tick; coalesced, latest value every 200 ms.",
+          "confidence": "verified-local"
+        },
+        "clamp": {
+          "min": 0,
+          "max": 100
+        }
+      },
+      "push": {
+        "verb": "volume.mute"
+      },
+      "readout": "spotifyVolume",
+      "safety": "safe",
+      "unavailable": {
+        "label": "CONNECT",
+        "hint": "Spotify's own volume needs Connect + Premium; the MIXER dial works without.",
+        "when": [
+          "notConnected"
+        ],
+        "style": "badge"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S8"
+      ],
+      "notes": "Keyboard fallback while Spotify is in front: Ctrl+Down / Ctrl+Up (verbs volume.down / volume.up)."
+    },
+    {
+      "id": "mixerVolume",
+      "label": "MIXER",
+      "glyph": "mixer",
+      "category": "tool",
+      "priority": 84,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "audio.appVolume",
+          "args": {
+            "app": "Spotify.exe",
+            "ticks": -1
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.audio.app-volume"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "audio.appVolume",
+          "args": {
+            "app": "Spotify.exe",
+            "ticks": 1
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.audio.app-volume"
+        },
+        "step": {
+          "perPress": 2,
+          "unit": "%",
+          "note": "AppVolumeSettings.Step default 2 %/tick.",
+          "confidence": "verified-local"
+        },
+        "clamp": {
+          "min": 0,
+          "max": 100
+        }
+      },
+      "push": {
+        "verb": "app.mixerMute"
+      },
+      "readout": "mixerVolume",
+      "safety": "safe",
+      "unavailable": {
+        "label": "MIXER",
+        "hint": "Spotify has no audio session yet.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S13"
+      ],
+      "notes": "Windows per-app level for Spotify.exe: no login, works in the background."
+    },
+    {
+      "id": "seek",
+      "label": "SEEK",
+      "glyph": "waveform",
+      "category": "tool",
+      "priority": 86,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "spotify.nowPlaying",
+          "args": {
+            "ticks": -1
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.spotify.now-playing"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "spotify.nowPlaying",
+          "args": {
+            "ticks": 1
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.spotify.now-playing"
+        },
+        "step": {
+          "perPress": 5,
+          "unit": "s",
+          "note": "NowPlayingSettings.SeekSeconds default 5 s/tick; ticks accumulate and one seek goes out 300 ms after the last.",
+          "confidence": "verified-local"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 6,
+              "pressesPerTick": 2
+            }
+          ],
+          "maxPressesPerEvent": 24
+        }
+      },
+      "push": {
+        "verb": "playback.playPause"
+      },
+      "readout": "nowPlaying",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SEEK",
+        "hint": "Nothing is playing.",
+        "when": [
+          "notConnected"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S8"
+      ],
+      "notes": "Works without login through the Windows media session for the app on this PC."
+    },
+    {
+      "id": "playlists",
+      "label": "PLAYLISTS",
+      "glyph": "folder",
+      "category": "tool",
+      "priority": 70,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "spotify.browser",
+          "args": {
+            "ticks": -1
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.spotify.browser"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "spotify.browser",
+          "args": {
+            "ticks": 1
+          },
+          "status": "exists",
+          "action": "com.jeremyfhall.prismcontrol.spotify.browser"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "row",
+          "confidence": "verified-local"
+        }
+      },
+      "push": {
+        "verb": "library.browse"
+      },
+      "readout": "playlistBrowser",
+      "safety": "safe",
+      "unavailable": {
+        "label": "CONNECT",
+        "hint": "Connect Spotify in Prism Control to browse playlists.",
+        "when": [
+          "notConnected"
+        ],
+        "style": "badge"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S8"
+      ]
+    },
+    {
+      "id": "speed",
+      "label": "SPEED",
+      "glyph": "stopwatch",
+      "category": "tool",
+      "priority": 65,
+      "contexts": [
+        "podcast"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Shift+Comma"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Shift+Period"
+        },
+        "step": {
+          "perPress": null,
+          "unit": "speed step",
+          "note": "Steps through Spotify's speed list; size unknown.",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 3,
+          "minIntervalMs": 80
+        }
+      },
+      "push": {
+        "verb": "playback.playPause"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "SPEED",
+        "hint": "Speed only applies to podcasts and audiobooks, with Spotify in front.",
+        "when": [
+          "wrongContext",
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S2",
+        "S5"
+      ],
+      "verify": "While a podcast plays, press Shift+. a few times and note the speeds shown on the speed button (expected 0.5x-3.5x list)."
+    },
+    {
+      "id": "zoom",
+      "label": "ZOOM",
+      "glyph": "search",
+      "category": "system",
+      "priority": 12,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Ctrl+Minus"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Ctrl+Equal",
+          "note": "The app's settings text shows Ctrl and '+'; Ctrl+= is the unshifted key."
+        },
+        "step": {
+          "perPress": null,
+          "unit": "zoom step",
+          "confidence": "unverified"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 3,
+          "minIntervalMs": 80
+        }
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "ZOOM",
+        "hint": "Spotify isn't in front.",
+        "when": [
+          "notForeground"
+        ]
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S3"
+      ],
+      "verify": "With Spotify in front press Ctrl+= and Ctrl+Shift+= and watch Settings > Display > Zoom level; also check whether Ctrl+0 resets (community claim only, S7)."
+    }
+  ],
+  "readouts": [
+    {
+      "id": "nowPlaying",
+      "label": "NOW PLAYING",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "topic": "/v1/now-playing",
+        "field": "track",
+        "status": "exists",
+        "note": "Title, artists, album, art (+ /v1/now-playing/art), position. SMTC without login, richer after Connect."
+      },
+      "widget": "art",
+      "privacy": "public",
+      "refreshHz": 1,
+      "confidence": "verified-local",
+      "sources": [
+        "S8",
+        "S14"
+      ],
+      "notes": "Spotify terms: art whole, uncropped, unmasked, untinted, nothing drawn over it; keep a link back (track.url) near it."
+    },
+    {
+      "id": "progress",
+      "label": "PROGRESS",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "topic": "/v1/now-playing",
+        "field": "positionMs/track.durationMs",
+        "status": "exists",
+        "note": "Extrapolate positionMs + (now - positionAt) while playing."
+      },
+      "unit": "ms",
+      "widget": "bar",
+      "privacy": "public",
+      "refreshHz": 2,
+      "confidence": "verified-local",
+      "sources": [
+        "S14"
+      ]
+    },
+    {
+      "id": "playState",
+      "label": "STATE",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "topic": "/v1/now-playing",
+        "field": "state",
+        "status": "exists"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "verified-local",
+      "sources": [
+        "S14"
+      ]
+    },
+    {
+      "id": "spotifyVolume",
+      "label": "VOLUME",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "topic": "/v1/now-playing",
+        "field": "volumePct",
+        "status": "exists",
+        "note": "Spotify Connect device volume; null without Connect."
+      },
+      "unit": "%",
+      "format": "{value} %",
+      "range": [
+        0,
+        100
+      ],
+      "widget": "gauge",
+      "privacy": "public",
+      "unavailable": {
+        "label": "VOLUME",
+        "hint": "Connect Spotify to see its own volume.",
+        "when": [
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S8",
+        "S14"
+      ]
+    },
+    {
+      "id": "mixerVolume",
+      "label": "MIXER",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "audio.apps[Spotify.exe].volumePct",
+        "status": "exists",
+        "note": "Audio module session state (App Volume action); not yet on the data API."
+      },
+      "unit": "%",
+      "format": "{value} %",
+      "range": [
+        0,
+        100
+      ],
+      "widget": "gauge",
+      "privacy": "public",
+      "confidence": "verified-local",
+      "sources": [
+        "S13"
+      ]
+    },
+    {
+      "id": "shuffleState",
+      "label": "SHUFFLE",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "topic": "/v1/now-playing",
+        "field": "shuffle",
+        "status": "exists"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "verified-local",
+      "sources": [
+        "S9",
+        "S14"
+      ]
+    },
+    {
+      "id": "repeatState",
+      "label": "REPEAT",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "topic": "/v1/now-playing",
+        "field": "repeat",
+        "status": "exists",
+        "note": "off | context | track"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "verified-local",
+      "sources": [
+        "S9",
+        "S14"
+      ]
+    },
+    {
+      "id": "likedState",
+      "label": "LIKED",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "topic": "/v1/now-playing",
+        "field": "liked",
+        "status": "exists",
+        "note": "null until Connect (SMTC has no liked state)."
+      },
+      "widget": "state",
+      "privacy": "public",
+      "unavailable": {
+        "label": "LIKED ?",
+        "hint": "Connect Spotify to see the heart.",
+        "when": [
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S8",
+        "S14"
+      ]
+    },
+    {
+      "id": "contextName",
+      "label": "PLAYLIST",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "topic": "/v1/now-playing",
+        "field": "contextName",
+        "status": "exists"
+      },
+      "widget": "text",
+      "privacy": "streamer-hide",
+      "confidence": "verified-local",
+      "sources": [
+        "S14"
+      ],
+      "notes": "Streamer-hide: personal playlist names."
+    },
+    {
+      "id": "deviceName",
+      "label": "DEVICE",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "spotify.deviceName",
+        "status": "exists",
+        "note": "PlayerSnapshot.DeviceName (Web API); not on the data API. Often the PC name."
+      },
+      "widget": "text",
+      "privacy": "streamer-hide",
+      "confidence": "verified-local",
+      "sources": [
+        "S8"
+      ]
+    },
+    {
+      "id": "playlistBrowser",
+      "label": "BROWSER",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "spotify.browser.rows",
+        "status": "exists",
+        "note": "Rendered by the Playlist Browser action (BrowserModel); the Smart Dial hosts its frame."
+      },
+      "widget": "list",
+      "privacy": "streamer-hide",
+      "confidence": "verified-local",
+      "sources": [
+        "S8"
+      ]
+    }
+  ],
+  "userBindings": {
+    "storage": "none",
+    "summary": "Spotify's shortcuts are a constant table compiled into the app (module 31300 in the V8 snapshot, chosen by desktop vs web and Windows vs Mac); there is no rebind UI and no keys file. The prefs file holds settings only.",
+    "locations": [
+      {
+        "path": "%APPDATA%\\Spotify\\prefs",
+        "format": "other",
+        "note": "Win32 installer: key=value settings lines; no key bindings. Exists on this PC (names-only check; content not read)."
+      },
+      {
+        "path": "%LOCALAPPDATA%\\Packages\\SpotifyAB.SpotifyMusic_zpdnekdrzrea0\\LocalState\\Spotify\\prefs",
+        "format": "other",
+        "note": "Microsoft Store build (community path, S11). Not present on this PC."
+      }
+    ],
+    "readMode": "Nothing to read; always use the defaults in this pack.",
+    "confidence": "verified-local",
+    "sources": [
+      "S2",
+      "S3",
+      "S11",
+      "S12"
+    ]
+  },
+  "layouts": [
+    {
+      "device": "galleon-100-sd",
+      "context": "player",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "playback.previous"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "playback.playPause"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "playback.next"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "library.like"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "playback.shuffle"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "playback.repeat"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "nav.quickSearch"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "nav.queue"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "nav.likedSongs"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "nav.back"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "nav.home"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "nav.devices"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "volume"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "mixerVolume"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "seek"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "playlists"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "spotifyVolume"
+        },
+        {
+          "slot": "BL",
+          "readout": "mixerVolume"
+        },
+        {
+          "slot": "TR",
+          "readout": "nowPlaying"
+        },
+        {
+          "slot": "BR",
+          "readout": "playlistBrowser"
+        }
+      ],
+      "rationale": "Transport on top (prev/play/next), library toggles in row 2, finding music in row 3, navigation at the bottom; both volumes on the left dial, seek with now-playing art and the playlist browser on the right."
+    },
+    {
+      "device": "galleon-100-sd",
+      "context": "podcast",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "playback.seekBack"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "playback.playPause"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "playback.seekForward"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "playback.previous"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "library.like"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "playback.next"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "nav.quickSearch"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "nav.queue"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "nav.podcasts"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "nav.back"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "nav.home"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "nav.devices"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "volume"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "mixerVolume"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "seek"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "speed"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "spotifyVolume"
+        },
+        {
+          "slot": "BL",
+          "readout": "mixerVolume"
+        },
+        {
+          "slot": "TR",
+          "readout": "nowPlaying"
+        },
+        {
+          "slot": "BR",
+          "readout": "progress"
+        }
+      ],
+      "rationale": "For spoken word, seeking matters more than skipping: seek keys flank play, prev/next drop to row 2; the right dial's second layer becomes playback speed."
+    },
+    {
+      "device": "stream-deck-plus",
+      "context": "player",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "playback.previous"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "playback.playPause"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "playback.next"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "verb": "library.like"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "playback.shuffle"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "playback.repeat"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "nav.quickSearch"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "verb": "nav.queue"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "control": "volume"
+        },
+        {
+          "dial": 1,
+          "control": "seek"
+        },
+        {
+          "dial": 2,
+          "control": "playlists"
+        },
+        {
+          "dial": 3,
+          "control": "mixerVolume"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "0",
+          "readout": "spotifyVolume"
+        },
+        {
+          "slot": "1",
+          "readout": "nowPlaying"
+        },
+        {
+          "slot": "2",
+          "readout": "playlistBrowser"
+        },
+        {
+          "slot": "3",
+          "readout": "mixerVolume"
+        }
+      ],
+      "rationale": "Transport and like on top, modes and finding below; volume, seek (with art), the playlist browser and the Windows mixer on the four dials."
+    },
+    {
+      "device": "stream-deck-plus",
+      "context": "podcast",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "playback.seekBack"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "playback.playPause"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "playback.seekForward"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "verb": "library.like"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "playback.previous"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "playback.next"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "nav.quickSearch"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "verb": "nav.podcasts"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "control": "volume"
+        },
+        {
+          "dial": 1,
+          "control": "seek"
+        },
+        {
+          "dial": 2,
+          "control": "speed"
+        },
+        {
+          "dial": 3,
+          "control": "mixerVolume"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "0",
+          "readout": "spotifyVolume"
+        },
+        {
+          "slot": "1",
+          "readout": "nowPlaying"
+        },
+        {
+          "slot": "2",
+          "readout": "progress"
+        },
+        {
+          "slot": "3",
+          "readout": "mixerVolume"
+        }
+      ],
+      "rationale": "Same as player with seek keys first and the speed dial replacing the playlist browser."
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Spotify keyboard shortcuts",
+      "url": "https://support.spotify.com/us/article/keyboard-shortcuts/",
+      "publisher": "Spotify Support",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "current desktop app and web player (2026)",
+      "note": "Partial table ('including but not limited to'); no skip, seek or volume rows; M and arrow rows are watch-feed keys."
+    },
+    {
+      "id": "S2",
+      "title": "Spotify's own shortcut table (modules 30057 action ids, 31300 action-to-keys, 74996 context-menu keys)",
+      "url": "local:%APPDATA%\\Spotify\\v8_context_snapshot.bin",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "1.3.5.3058",
+      "note": "Read-only, in memory (UTF-16 source text inside the snapshot). Branches on isDesktop and macOS; this pack uses the Windows desktop branch."
+    },
+    {
+      "id": "S3",
+      "title": "Spotify shortcut dialog, strings and settings chunks (xpui-root-dialogs.js, i18n/en.json, xpui-routes-desktop-settings.js)",
+      "url": "local:%APPDATA%\\Spotify\\Apps\\xpui.spa",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "1.3.5.3058",
+      "note": "Zip read in memory; nothing extracted."
+    },
+    {
+      "id": "S4",
+      "title": "Keyboard shortcuts (archived Spotify Support table)",
+      "url": "https://web.archive.org/web/2021/https://support.spotify.com/us/article/keyboard-shortcuts/",
+      "publisher": "Spotify Support via Internet Archive",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "legacy desktop UI, last updated 2022-01-19"
+    },
+    {
+      "id": "S5",
+      "title": "Spotify keyboard shortcuts for Windows and Mac",
+      "url": "https://shortcut-tools.com/en/shortcuts/spotify/",
+      "publisher": "shortcut-tools.com",
+      "kind": "guide",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Spotify Support + web player dialog, checked 2026-10-07"
+    },
+    {
+      "id": "S6",
+      "title": "Spotify keyboard shortcuts cheat sheet",
+      "url": "https://shortcuts.kstanchev.com/apps/spotify/",
+      "publisher": "ShortcutLibrary (K. Stanchev)",
+      "kind": "guide",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "unspecified (mixes legacy rows)"
+    },
+    {
+      "id": "S7",
+      "title": "All Spotify Keyboard Shortcuts for Windows & Mac (2026)",
+      "url": "https://tutorialtactic.com/blog/spotify-shortcuts/",
+      "publisher": "Tutorial Tactic",
+      "kind": "guide",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "2026-05-27 article",
+      "note": "Several claims contradicted by S2/S3 (global-hotkey setting, Ctrl+P, M mute)."
+    },
+    {
+      "id": "S8",
+      "title": "Prism Control Spotify module (SpotifyService, actions, settings)",
+      "url": "local:Prism-control/prism-control/src/PrismControl.Spotify/",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Prism Control working tree 2026-10-16"
+    },
+    {
+      "id": "S9",
+      "title": "Spotify integration research (SMTC capability matrix, Store AUMID)",
+      "url": "local:aaa-prism-control/research/spotify.md",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "2026-10-16"
+    },
+    {
+      "id": "S10",
+      "title": "G HUB - How to Launch Windows App (shell:appsFolder\\SpotifyAB.SpotifyMusic_zpdnekdrzrea0!Spotify)",
+      "url": "https://www.reddit.com/r/LogitechG/comments/gir0kw/g_hub_how_to_launch_windows_app/",
+      "publisher": "Reddit r/LogitechG",
+      "kind": "forum",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Store build"
+    },
+    {
+      "id": "S11",
+      "title": "spicetify: Store build prefs path (LocalState\\Spotify\\prefs)",
+      "url": "https://www.reddit.com/r/spicetify/comments/pjcawm/help_i_need_help/",
+      "publisher": "Reddit r/spicetify",
+      "kind": "forum",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Store build"
+    },
+    {
+      "id": "S12",
+      "title": "Read-only probe: Spotify install on this PC",
+      "url": "local:%APPDATA%\\Spotify\\Spotify.exe",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "1.3.5.3058",
+      "note": "FileVersion 1.3.5.3058; Get-AppxPackage *Spotify* empty; Start-menu AppID is the exe path; prefs exists (not opened)."
+    },
+    {
+      "id": "S13",
+      "title": "Prism Control audio module (AppVolumeAction)",
+      "url": "local:Prism-control/prism-control/src/PrismControl.Audio/Actions/AppVolumeAction.cs",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "Prism Control working tree 2026-10-16"
+    },
+    {
+      "id": "S14",
+      "title": "Prism Control data API: GET /v1/now-playing",
+      "url": "local:Prism-control/prism-control/docs/api.md",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "data API v1"
+    }
+  ],
+  "confidence": "high",
+  "conflicts": [
+    "S1 lists 'Mute/Unmute: M' and Up/Down/Left/Right as Go to previous / Go to next / Add to Library / Add to Queue; the app's code (S2) binds all five only in the video watch feed (WF_*). The desktop app has no mute chord.",
+    "S4 (2022) and S6: Ctrl+Shift+Down mute, Ctrl+Shift+Up max volume, Ctrl+P preferences, Ctrl+Shift+W log out, F1 help. Current S1/S2: no mute/max keys, Ctrl+Comma preferences, Alt+Shift+F6 log out, Ctrl+/ (or ?) help.",
+    "Desktop vs web player (S5, and S2's own branches): web uses Alt+Up/Down volume, Alt+S shuffle, Alt+R repeat, Ctrl+Shift+L search, Alt+Shift+P new playlist; the Windows desktop app uses Ctrl+Up/Down, Ctrl+S, Ctrl+R, Ctrl+L, Ctrl+N.",
+    "S7 says Spotify for Windows has a Settings > Keyboard shortcuts toggle for global hotkeys; the app's strings (S3) have no such setting (only 'Show desktop overlay when using media keys').",
+    "S1's opener images are captioned Ctrl + Backslash while its table says Ctrl + /; the code (S2) binds mod+/ and ?."
+  ],
+  "gaps": [
+    "Spotify's own volume, like/heart state and the playlist browser need Connect (user's own Client ID); player commands through the Web API also need Premium. Without Connect: transport, shuffle, repeat, seek and now playing still work (Windows media session) and the MIXER dial replaces volume.",
+    "Seek distance of Shift+Left/Right and the playback-speed step are not in the table (unknown).",
+    "Podcast sub-context detection needs PlayerSnapshot.ItemType surfaced to the engine (unverified).",
+    "Video watch-feed keys (Up/Down/Left/Right/M) omitted: no detector for the watch feed.",
+    "Store build not installed here: its AUMID and prefs path come from community sources.",
+    "Key-press seek and volume-step module verbs (spotify.seek, spotify.volume with delta) are marked planned: the service methods exist but no key action calls them."
+  ],
+  "notes": [
+    "Excluded on purpose: Log out (Alt+Shift+F6), Select all (Ctrl+A), context menu (Alt+J), sidebar widths (Alt+Shift+arrows), debug window.",
+    "Also verified in S2 but not added: Ctrl+Shift+N new folder, Ctrl+F filter, Ctrl+Alt+F filter Your Library, Alt+Shift+5/6/7 audiobooks/authors/events, Alt+Shift+N new releases, Alt+Shift+C charts, Alt+Shift+Y recents, Alt+Shift+L left sidebar, Shift+C subtitles.",
+    "Long-form notes: packs/notes/spotify.md."
+  ]
+}

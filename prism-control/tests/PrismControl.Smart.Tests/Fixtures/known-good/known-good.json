@@ -1,0 +1,4252 @@
+{
+ "galleon-100-sd": {
+  "source": "com.jeremyfhall.prismlab.sdPlugin/prismlab-galleon.streamDeckProfile",
+  "entries": [
+   "package.json",
+   "Profiles/",
+   "Profiles/<UUID>.sdProfile/",
+   "Profiles/<UUID>.sdProfile/manifest.json",
+   "Profiles/<UUID>.sdProfile/Profiles/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/Images/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/manifest.json"
+  ],
+  "package": {
+   "AppVersion": "7.6.0.23012",
+   "DeviceModel": "GRETSCH",
+   "DeviceSettings": null,
+   "FormatVersion": 1,
+   "OSType": "Windows",
+   "OSVersion": "10.0.26300",
+   "RequiredPlugins": [
+    "com.jeremyfhall.prismlab"
+   ]
+  },
+  "manifest": {
+   "Device": {
+    "Model": "GRETSCH",
+    "UUID": "53371ccd-3d21-4101-9ec5-49bef9c8e1cd"
+   },
+   "Name": "Prism Lab - Galleon 100 SD",
+   "Pages": {
+    "Current": "00000000-0000-0000-0000-000000000000",
+    "Default": "acd475c5-5efa-4415-b094-9f0a77e430c0",
+    "Pages": [
+     "e30bec5e-69fc-4d89-b1a2-43ef37030a5e"
+    ]
+   },
+   "Version": "3.0"
+  },
+  "firstPage": {
+   "Controllers": [
+    {
+     "Actions": {
+      "0,0": {
+       "ActionID": "677c3fec-7a08-4e45-8a35-db9e828acd6f",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "0,1": {
+       "ActionID": "3b7cd6f6-d66f-4b65-8f69-19392f5dedc5",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "0,2": {
+       "ActionID": "3fd251e4-9e20-4710-ba89-c51f18d7e4bd",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "0,3": {
+       "ActionID": "9d558760-265d-412c-8770-e1f6b542e954",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "1,0": {
+       "ActionID": "d36cc41c-e077-4c97-b2eb-7d2208b88f90",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "1,1": {
+       "ActionID": "e38dfd18-24ff-4a1f-a9b6-815b436151f9",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "1,2": {
+       "ActionID": "45043a5b-cb06-45ff-817c-f6dcfad7e2ac",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "1,3": {
+       "ActionID": "4e3cde96-c3f9-4c44-8189-035fc5a46e0a",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "2,0": {
+       "ActionID": "0bfeab98-0966-4ebe-ac2f-b6cc91c2852d",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "2,1": {
+       "ActionID": "851e11d0-1294-401b-9596-acf6f036b0bc",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "2,2": {
+       "ActionID": "66cbb503-a245-4d31-b0ca-de09b241613d",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "2,3": {
+       "ActionID": "ddf99077-d012-4c6d-b3e8-2fa121ee115f",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      }
+     },
+     "Type": "Keypad"
+    },
+    {
+     "Actions": {
+      "0,0": {
+       "ActionID": "a2da0f9b-779e-4537-b813-bb0323dc001a",
+       "LinkedTitle": true,
+       "Name": "Lab Dial",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.dial"
+      },
+      "0,1": {
+       "ActionID": "e580a75f-39ea-48f8-9902-c175b46c1b6a",
+       "LinkedTitle": true,
+       "Name": "Lab Dial",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.dial"
+      },
+      "1,0": {
+       "ActionID": "f928c7b0-3570-4010-b4cb-f01925506280",
+       "LinkedTitle": true,
+       "Name": "Lab Dial",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.dial"
+      },
+      "1,1": {
+       "ActionID": "209bc6d7-f03d-4644-a0a0-7e2b9b5c5e83",
+       "LinkedTitle": true,
+       "Name": "Lab Dial",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.dial"
+      }
+     },
+     "Routers": {
+      "0,0": "0,0",
+      "1,0": "1,0"
+     },
+     "Type": "Encoder"
+    }
+   ],
+   "Icon": "",
+   "Name": ""
+  },
+  "defaultPage": {
+   "Controllers": [
+    {
+     "Actions": null,
+     "Type": "Keypad"
+    },
+    {
+     "Actions": null,
+     "Type": "Encoder"
+    }
+   ],
+   "Icon": "",
+   "Name": ""
+  }
+ },
+ "stream-deck-plus": {
+  "source": "com.jeremyfhall.prismlab.sdPlugin/prismlab-plus.streamDeckProfile",
+  "entries": [
+   "package.json",
+   "Profiles/",
+   "Profiles/<UUID>.sdProfile/",
+   "Profiles/<UUID>.sdProfile/manifest.json",
+   "Profiles/<UUID>.sdProfile/Profiles/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/Images/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/manifest.json"
+  ],
+  "package": {
+   "AppVersion": "7.6.0.23012",
+   "DeviceModel": "20GBD9901",
+   "DeviceSettings": null,
+   "FormatVersion": 1,
+   "OSType": "Windows",
+   "OSVersion": "10.0.26300",
+   "RequiredPlugins": [
+    "com.jeremyfhall.prismlab"
+   ]
+  },
+  "manifest": {
+   "Device": {
+    "Model": "20GBD9901",
+    "UUID": "9ef42687-22c8-4be0-b50a-ec39788cd040"
+   },
+   "Name": "Prism Lab - Stream Deck +",
+   "Pages": {
+    "Current": "00000000-0000-0000-0000-000000000000",
+    "Default": "1de89604-9b62-4382-a9d6-4bf12b0993bd",
+    "Pages": [
+     "bc85553f-478b-475c-896c-64ed5e615d48"
+    ]
+   },
+   "Version": "3.0"
+  },
+  "firstPage": {
+   "Controllers": [
+    {
+     "Actions": {
+      "0,0": {
+       "ActionID": "d7bb4fd8-96b4-494c-9717-02f32a79c426",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "0,1": {
+       "ActionID": "a4ae626b-84fc-4223-bdd3-f90da8eab7f9",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "1,0": {
+       "ActionID": "f453fc1e-9f47-40b5-a2a7-a8540b147ab6",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "1,1": {
+       "ActionID": "fbaf393a-996f-4bbf-866d-42b4eca64dda",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "2,0": {
+       "ActionID": "44329b03-daad-49bf-924c-f2a602f6b354",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "2,1": {
+       "ActionID": "405697e9-63ac-4dd2-be4d-b4da6acd9310",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "3,0": {
+       "ActionID": "699ddd0a-6acd-4f97-9033-6a3864e84dc7",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      },
+      "3,1": {
+       "ActionID": "c2936925-1837-4273-b481-7f52d2539969",
+       "LinkedTitle": true,
+       "Name": "Lab Key",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.key"
+      }
+     },
+     "Type": "Keypad"
+    },
+    {
+     "Actions": {
+      "0,0": {
+       "ActionID": "115498b2-9205-4abf-8527-c22b09d6ed9a",
+       "LinkedTitle": true,
+       "Name": "Lab Dial",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.dial"
+      },
+      "1,0": {
+       "ActionID": "76a37153-14f3-43e2-93f7-9b154b77b615",
+       "LinkedTitle": true,
+       "Name": "Lab Dial",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.dial"
+      },
+      "2,0": {
+       "ActionID": "cc256027-4535-414d-a7ce-4d05ae4d2983",
+       "LinkedTitle": true,
+       "Name": "Lab Dial",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.dial"
+      },
+      "3,0": {
+       "ActionID": "61679465-68c1-4b99-9b86-9d2d4f6d96ea",
+       "LinkedTitle": true,
+       "Name": "Lab Dial",
+       "Plugin": {
+        "Name": "Prism Lab (hardware probe)",
+        "UUID": "com.jeremyfhall.prismlab",
+        "Version": "0.1.0.0"
+       },
+       "Resources": null,
+       "Settings": {},
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prismlab.dial"
+      }
+     },
+     "Type": "Encoder"
+    }
+   ],
+   "Icon": "",
+   "Name": ""
+  },
+  "defaultPage": {
+   "Controllers": [
+    {
+     "Actions": null,
+     "Type": "Keypad"
+    },
+    {
+     "Actions": null,
+     "Type": "Encoder"
+    }
+   ],
+   "Icon": "",
+   "Name": ""
+  }
+ },
+ "stream-deck-plus-xl": {
+  "source": "com.jeremyfhall.prism.sdPlugin/prism-plusxl.streamDeckProfile",
+  "entries": [
+   "package.json",
+   "Profiles/",
+   "Profiles/<UUID>.sdProfile/",
+   "Profiles/<UUID>.sdProfile/manifest.json",
+   "Profiles/<UUID>.sdProfile/Profiles/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/manifest.json",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/Images/"
+  ],
+  "package": {
+   "AppVersion": "7.6.0.23012",
+   "DeviceModel": "20GBX9901",
+   "DeviceSettings": null,
+   "FormatVersion": 1,
+   "OSType": "Windows",
+   "OSVersion": "10.0.26300",
+   "RequiredPlugins": [
+    "com.jeremyfhall.prism",
+    "com.elgato.streamdeck.system.multimedia",
+    "com.elgato.streamdeck.system.hotkey",
+    "com.elgato.streamdeck.system.open",
+    "com.elgato.streamdeck.system.website",
+    "com.elgato.streamdeck.page",
+    "com.elgato.streamdeck.system.keybrightness"
+   ]
+  },
+  "manifest": {
+   "Device": {
+    "Model": "20GBX9901",
+    "UUID": "3dbd180b-47ae-49f5-aa27-065e50ac8edd"
+   },
+   "Name": "Prism · Stream Deck + XL",
+   "Pages": {
+    "Current": "00000000-0000-0000-0000-000000000000",
+    "Default": "164d060b-ee96-4a08-abf5-83a555329cd0",
+    "Pages": [
+     "6dacd0d4-86e8-4303-9d54-596ca5d578b4",
+     "cef97859-7681-46e2-81f5-9153ba196c69",
+     "38839fe9-7186-41f3-a3a9-dd23f45c9f17",
+     "bdd62ec0-6de4-46e8-aaf3-2474080808a1"
+    ]
+   },
+   "Version": "3.0"
+  },
+  "firstPage": {
+   "Controllers": [
+    {
+     "Actions": {
+      "0,0": {
+       "ActionID": "91407d86-32f9-4e6a-bb1b-05f6d6e202fb",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 0
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/QCIVV3VEHN0DPKFR5WCDEVDEPKZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "1,0": {
+       "ActionID": "1581c2a4-e6ca-44a0-80ae-73820e53277e",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 1
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/768GVNHSVS2PPT5KHE9QRR8V2RZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "2,0": {
+       "ActionID": "41a1f510-1c22-4073-8385-4fd8c65fadb7",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 2
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/3EC5N6LWJLOS91P150PQH4WPR0Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "3,0": {
+       "ActionID": "01416946-8e56-44d4-9993-510ff0f9e5ed",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 3
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/RJTJEFLJ1CWAMW7T47IJKQV4SGZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "4,0": {
+       "ActionID": "bb5bbf02-281f-4f6b-833b-0cbd2dd56b0f",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 6
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/1PQ44VF320DB2IJEW3GV91LW8FZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "5,0": {
+       "ActionID": "8d4a312c-252c-4677-affd-2f816cef2d88",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 4
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/IV0NH3300HMT70KGL948HAL7A9Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "6,0": {
+       "ActionID": "d6e73324-062b-492d-9dd7-dc21cc1a8956",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 5
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/1KKLI4FAC6TJ2M67F42VCS49TFZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "7,0": {
+       "ActionID": "85029606-2fc3-4599-9a73-3856411d2d9a",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": true,
+          "KeyCtrl": false,
+          "KeyModifiers": 9,
+          "KeyOption": false,
+          "KeyShift": true,
+          "NativeCode": 83,
+          "QTKeyCode": 83,
+          "VKeyCode": 83
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/S02RAJGP2961K7S7O1J564QCVQZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "8,0": {
+       "ActionID": "1a57a4a2-9dae-455d-8896-04465015d077",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": true,
+          "KeyCtrl": false,
+          "KeyModifiers": 8,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 68,
+          "QTKeyCode": 68,
+          "VKeyCode": 68
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/VE0NTPN9V9QTRKGC39SS4NSIMWZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "0,1": {
+       "ActionID": "4b79b9c2-bfb2-4fde-8fff-74ec512556d1",
+       "LinkedTitle": true,
+       "Name": "Open",
+       "Plugin": {
+        "Name": "Open",
+        "UUID": "com.elgato.streamdeck.system.open",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "path": "\"C:\\Windows\\explorer.exe\""
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/FWB40KNFGT129WI83EE0HDWARJZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.open"
+      },
+      "1,1": {
+       "ActionID": "e6e9b765-9f7c-4180-9b2b-7eaccbfffe9d",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 3,
+          "KeyOption": false,
+          "KeyShift": true,
+          "NativeCode": 27,
+          "QTKeyCode": 16777216,
+          "VKeyCode": 27
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/96467CKV62TN22ONCGH3RTHG1LZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "2,1": {
+       "ActionID": "41378195-c8ea-4349-8906-86caac2c49f4",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": true,
+          "KeyCtrl": false,
+          "KeyModifiers": 8,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 83,
+          "QTKeyCode": 83,
+          "VKeyCode": 83
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/7HA9W4CCPDV3QBFGKWMJMS5OSNZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "3,1": {
+       "ActionID": "b252c9c9-619e-4f00-9846-58b3d5ac61ff",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": true,
+          "KeyCtrl": false,
+          "KeyModifiers": 8,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 190,
+          "QTKeyCode": 46,
+          "VKeyCode": 190
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/M6BO22RLHCJH66790640GV8WSPZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "4,1": {
+       "ActionID": "744be58f-321d-4130-9820-9bdc5698b023",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 67,
+          "QTKeyCode": 67,
+          "VKeyCode": 67
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/6JJ1HTWMEOHH8JOSHG154VBI0AZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "5,1": {
+       "ActionID": "fafb0791-dee3-415a-b5a4-e78b953b0875",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 86,
+          "QTKeyCode": 86,
+          "VKeyCode": 86
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/PBEK0H7LR0EB2EABRDB06KMJTDZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "6,1": {
+       "ActionID": "18df8c1b-1468-4a20-8bd0-feb0a96adc5f",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 90,
+          "QTKeyCode": 90,
+          "VKeyCode": 90
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/K85OJHTLL7WOCBBP90AI63HE7IZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "7,1": {
+       "ActionID": "ad98f47d-affc-417f-8454-c5fe51511e19",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 89,
+          "QTKeyCode": 89,
+          "VKeyCode": 89
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/BNE2M499A7HONWI5399JC8BADQZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "8,1": {
+       "ActionID": "085efef4-1898-4754-b1e8-288bc420cec1",
+       "LinkedTitle": true,
+       "Name": "Website",
+       "Plugin": {
+        "Name": "Website",
+        "UUID": "com.elgato.streamdeck.system.website",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "browser": "",
+        "openInBrowser": true,
+        "path": "https://prism.jeremyfhall.com/deck/"
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/TAQNKP1MENPP7Q9FGMVFBQCEPDZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.website"
+      },
+      "0,2": {
+       "ActionID": "722bf258-a61d-440e-a5a8-0747dd0b06c1",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-cpu-ring"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "1,2": {
+       "ActionID": "e43c353e-5695-432a-b9ba-3d00db66e6ce",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-mem"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "2,2": {
+       "ActionID": "c5f9267a-4f39-4a54-95c1-ce8ccf2dc2ed",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-net"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "3,2": {
+       "ActionID": "3bf616cb-0c7b-4ef9-929b-35a52cd4e42f",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-disk"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "4,2": {
+       "ActionID": "f9997689-31e1-40ed-b75d-b527c4b01190",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-gpu"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "5,2": {
+       "ActionID": "b336291f-02cb-4e1d-a859-8b3362e510c3",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-date"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "6,2": {
+       "ActionID": "a1940c7e-4e15-4bfc-9c7d-1d3f3f0a28a4",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-world-clock"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "7,2": {
+       "ActionID": "34a9717c-09f2-4ca3-9000-0448b28a16c1",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-stopwatch"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "8,2": {
+       "ActionID": "3e252d1b-7a5b-4e88-b444-5a2af3ca320c",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-focus-timer"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "0,3": {
+       "ActionID": "82b23a05-c473-44df-88eb-ebbc303edaa9",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-countdown"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "1,3": {
+       "ActionID": "48fbdae7-01c0-46de-8428-62dadc92c9da",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-pomodoro-set"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "2,3": {
+       "ActionID": "b61fae1b-a122-4a81-9668-f5167c53d480",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-counter"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "3,3": {
+       "ActionID": "e99a9e7d-2a1a-4774-8aa1-79d6ed5d544d",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-time-zones"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "6,3": {
+       "ActionID": "1b27f37e-3262-4ee3-aad8-8465378d8fb3",
+       "LinkedTitle": true,
+       "Name": "Go to Page",
+       "Plugin": {
+        "Name": "Pages",
+        "UUID": "com.elgato.streamdeck.page",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "PageIndex": 2
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/WFC72PD833GQ017R3PEIP2KSMVZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.page.goto"
+      },
+      "7,3": {
+       "ActionID": "5ed8c7c4-2db9-4f26-beac-9106b613e319",
+       "LinkedTitle": true,
+       "Name": "Go to Page",
+       "Plugin": {
+        "Name": "Pages",
+        "UUID": "com.elgato.streamdeck.page",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "PageIndex": 3
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/KDS36Q2FOK2KDBDA3B6K9J5WCBZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.page.goto"
+      },
+      "8,3": {
+       "ActionID": "14bf973a-032f-40a4-ae9c-7ab96d972424",
+       "LinkedTitle": true,
+       "Name": "Go to Page",
+       "Plugin": {
+        "Name": "Pages",
+        "UUID": "com.elgato.streamdeck.page",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "PageIndex": 4
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/V9ELLIB0NHK0G1IE3LSGNWNGVBZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.page.goto"
+      }
+     },
+     "Type": "Keypad"
+    },
+    {
+     "Actions": {
+      "0,0": {
+       "ActionID": "6b3ea060-7070-4984-a165-c1f9e3c5cabd",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 18
+       },
+       "State": 0,
+       "States": [
+        {
+         "Title": "System volume"
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia",
+       "Encoder": {
+        "Icon": "Images/OK33ADHOHN4432AA499A8H7TJ1Z.png",
+        "IconVisible": true
+       }
+      },
+      "1,0": {
+       "ActionID": "6bf13eb8-7a5c-4186-bc89-99c468461a2b",
+       "LinkedTitle": true,
+       "Name": "Brightness",
+       "Plugin": {
+        "Name": "Brightness",
+        "UUID": "com.elgato.streamdeck.system.keybrightness",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 0
+       },
+       "State": 0,
+       "States": [
+        {
+         "Title": "Deck brightness"
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.keybrightness",
+       "Encoder": {
+        "Icon": "Images/4KNL6G21BNDJVSEGE95QPH1589Z.png",
+        "IconVisible": true
+       }
+      },
+      "2,0": {
+       "ActionID": "8cbd0ad6-23d1-497a-a683-716b5d271276",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 189,
+          "QTKeyCode": 45,
+          "VKeyCode": 189
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 187,
+          "QTKeyCode": 61,
+          "VKeyCode": 187
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": -1,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": -1,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Title": "Zoom"
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey",
+       "Encoder": {
+        "Icon": "Images/J7M2T7VOFMP3BO0FOTW06M9ASGZ.png",
+        "IconVisible": true
+       }
+      },
+      "3,0": {
+       "ActionID": "6fd09747-5249-4a0b-973b-f7289b28db57",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 38,
+          "QTKeyCode": 16777235,
+          "VKeyCode": 38
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 40,
+          "QTKeyCode": 16777237,
+          "VKeyCode": 40
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": -1,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": -1,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Title": "Scroll"
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey",
+       "Encoder": {
+        "Icon": "Images/1PKDEHMRMWSSMRWIV8BS4LWM1RZ.png",
+        "IconVisible": true
+       }
+      },
+      "4,0": {
+       "ActionID": "f9a4b384-1f4c-4db7-ac29-03b29546e00f",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "dial-gauge"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "5,0": {
+       "ActionID": "037979d6-cff5-40bd-8dce-701667837a14",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-system-dial"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      }
+     },
+     "Type": "Encoder"
+    }
+   ],
+   "Icon": "",
+   "Name": "Home"
+  },
+  "defaultPage": {
+   "Controllers": [
+    {
+     "Actions": null,
+     "Type": "Keypad"
+    },
+    {
+     "Actions": null,
+     "Type": "Encoder"
+    }
+   ],
+   "Icon": "",
+   "Name": ""
+  }
+ },
+ "stream-deck": {
+  "source": "com.jeremyfhall.prism.sdPlugin/prism-mk2.streamDeckProfile",
+  "entries": [
+   "package.json",
+   "Profiles/",
+   "Profiles/<UUID>.sdProfile/",
+   "Profiles/<UUID>.sdProfile/manifest.json",
+   "Profiles/<UUID>.sdProfile/Profiles/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/manifest.json",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/Images/"
+  ],
+  "package": {
+   "AppVersion": "7.6.0.23012",
+   "DeviceModel": "20GBA9901",
+   "DeviceSettings": null,
+   "FormatVersion": 1,
+   "OSType": "Windows",
+   "OSVersion": "10.0.26300",
+   "RequiredPlugins": [
+    "com.jeremyfhall.prism",
+    "com.elgato.streamdeck.system.multimedia",
+    "com.elgato.streamdeck.system.hotkey",
+    "com.elgato.streamdeck.system.open",
+    "com.elgato.streamdeck.system.website",
+    "com.elgato.streamdeck.page"
+   ]
+  },
+  "manifest": {
+   "Device": {
+    "Model": "20GBA9901",
+    "UUID": "9b2f70fb-be54-4519-ba59-12d298704b73"
+   },
+   "Name": "Prism · Stream Deck MK.2",
+   "Pages": {
+    "Current": "00000000-0000-0000-0000-000000000000",
+    "Default": "32f6db43-f96e-4e52-ba3a-d8a48506111f",
+    "Pages": [
+     "7c911d96-0086-494a-89d4-8e5045dc32ed",
+     "b094f054-aaed-4dfe-88c4-cdf2c5d4731c"
+    ]
+   },
+   "Version": "3.0"
+  },
+  "firstPage": {
+   "Controllers": [
+    {
+     "Actions": {
+      "0,0": {
+       "ActionID": "7800b2ea-50c7-457c-b99d-cfc425b0b919",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 0
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/Q8B3KV2J78EIQN5DM7BO0DSAA7Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "1,0": {
+       "ActionID": "367ebdec-ecce-4dba-886d-cb642c4341df",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 1
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/6GCW831T67S5AAIDSRIPB9DP5GZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "2,0": {
+       "ActionID": "0ee4bffc-25c8-4cd3-8433-14298a57fb47",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 2
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/BFJS2BD6CT81G7NPG0WSR46J8JZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "3,0": {
+       "ActionID": "a3490eeb-6b55-4526-9deb-a43415741c2f",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 6
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/B4SOSIKWF0KHDNL9FNNEBJ994TZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "4,0": {
+       "ActionID": "39feff63-86a5-4029-a339-fdc7b1160662",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 5
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/WPWVWC1MLGC01P548RJDALAICLZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "0,1": {
+       "ActionID": "bbc9e7dd-727b-4bea-96c7-902ee16d0617",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 4
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/6CH73TE37FVPQ48MTPN4WRDQT5Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "1,1": {
+       "ActionID": "fbf23b07-2f4d-429c-8122-11b241937715",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": true,
+          "KeyCtrl": false,
+          "KeyModifiers": 9,
+          "KeyOption": false,
+          "KeyShift": true,
+          "NativeCode": 83,
+          "QTKeyCode": 83,
+          "VKeyCode": 83
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/07NP9797GGJ91S2DISWI6H3FKNZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "2,1": {
+       "ActionID": "e82dcbf8-c726-4dbf-a34f-a9a2248b2bd7",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": true,
+          "KeyCtrl": false,
+          "KeyModifiers": 8,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 68,
+          "QTKeyCode": 68,
+          "VKeyCode": 68
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/VBDM1Q76IOR6WWN68PBKAGAM19Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "3,1": {
+       "ActionID": "8d32a8f6-8205-4c8c-ae55-eb753e747b47",
+       "LinkedTitle": true,
+       "Name": "Open",
+       "Plugin": {
+        "Name": "Open",
+        "UUID": "com.elgato.streamdeck.system.open",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "path": "\"C:\\Windows\\explorer.exe\""
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/NPTFC16GS2DCJDDFTIR3J6O3L9Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.open"
+      },
+      "4,1": {
+       "ActionID": "bb2db26a-2fd3-4053-b54e-13a8b6d5f60e",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 3,
+          "KeyOption": false,
+          "KeyShift": true,
+          "NativeCode": 27,
+          "QTKeyCode": 16777216,
+          "VKeyCode": 27
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/M9MRVOETW29CSBWQPI133R538TZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "0,2": {
+       "ActionID": "286fdce1-1d0c-423d-a8e6-cee030bfdd60",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 67,
+          "QTKeyCode": 67,
+          "VKeyCode": 67
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/7JVL2F17NSL0TAD82VCV85VDR0Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "1,2": {
+       "ActionID": "c5258a2a-e8a2-40ef-b529-e8fb3ce14d2c",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 86,
+          "QTKeyCode": 86,
+          "VKeyCode": 86
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/L8JC3PFEGFHKWG01MRP36N0HEPZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "2,2": {
+       "ActionID": "820d18fd-9d9b-46c7-b86a-4d2ca74af8de",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 90,
+          "QTKeyCode": 90,
+          "VKeyCode": 90
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/DTM7GWBDWQ0T7PPW5VC6L63O81Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "3,2": {
+       "ActionID": "c525b16d-fa72-461b-a7b9-3bd268732094",
+       "LinkedTitle": true,
+       "Name": "Website",
+       "Plugin": {
+        "Name": "Website",
+        "UUID": "com.elgato.streamdeck.system.website",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "browser": "",
+        "openInBrowser": true,
+        "path": "https://prism.jeremyfhall.com/deck/"
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/B0RE2ECOJ8SJ124GN8743328F3Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.website"
+      },
+      "4,2": {
+       "ActionID": "b7682642-b828-4a98-8963-e8dd211233a3",
+       "LinkedTitle": true,
+       "Name": "Go to Page",
+       "Plugin": {
+        "Name": "Pages",
+        "UUID": "com.elgato.streamdeck.page",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "PageIndex": 2
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/NN515P7TRNDFBRT4BWG601I41MZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.page.goto"
+      }
+     },
+     "Type": "Keypad"
+    }
+   ],
+   "Icon": "",
+   "Name": "Home"
+  },
+  "defaultPage": {
+   "Controllers": [
+    {
+     "Actions": null,
+     "Type": "Keypad"
+    }
+   ],
+   "Icon": "",
+   "Name": ""
+  }
+ },
+ "stream-deck-xl": {
+  "source": "com.jeremyfhall.prism.sdPlugin/prism-xl.streamDeckProfile",
+  "entries": [
+   "package.json",
+   "Profiles/",
+   "Profiles/<UUID>.sdProfile/",
+   "Profiles/<UUID>.sdProfile/manifest.json",
+   "Profiles/<UUID>.sdProfile/Profiles/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/manifest.json",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/Images/"
+  ],
+  "package": {
+   "AppVersion": "7.6.0.23012",
+   "DeviceModel": "20GAT9902",
+   "DeviceSettings": null,
+   "FormatVersion": 1,
+   "OSType": "Windows",
+   "OSVersion": "10.0.26300",
+   "RequiredPlugins": [
+    "com.jeremyfhall.prism",
+    "com.elgato.streamdeck.system.multimedia",
+    "com.elgato.streamdeck.system.website",
+    "com.elgato.streamdeck.system.hotkey",
+    "com.elgato.streamdeck.system.open",
+    "com.elgato.streamdeck.page"
+   ]
+  },
+  "manifest": {
+   "Device": {
+    "Model": "20GAT9902",
+    "UUID": "ec9484ef-132c-4f04-8c04-6634f783e9a8"
+   },
+   "Name": "Prism · Stream Deck XL",
+   "Pages": {
+    "Current": "00000000-0000-0000-0000-000000000000",
+    "Default": "85c5c2f9-3fde-48b1-82a5-7832943708f9",
+    "Pages": [
+     "fa5dfbfc-9e0f-45fa-b2e7-35b92c96f89f",
+     "a740cd61-12e6-4bb1-90a1-38aea311ffc5"
+    ]
+   },
+   "Version": "3.0"
+  },
+  "firstPage": {
+   "Controllers": [
+    {
+     "Actions": {
+      "0,0": {
+       "ActionID": "b3d75a46-8d46-44df-875b-ed595e9acf20",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 0
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/IES1M7BP1CJL1GI5GHVE13MQIIZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "1,0": {
+       "ActionID": "0b340085-755b-4ce5-9bac-7c6b5e406f3a",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 1
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/WLC7R40AH4FK42C8WOA44SPVNCZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "2,0": {
+       "ActionID": "6dba0d81-b4c3-433d-be30-d8a49edcbd5b",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 2
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/8AQ30CLMD1GO2H3HFM5SJF9LANZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "3,0": {
+       "ActionID": "a0e6dd1c-dc2d-4f59-afee-8d326d39b155",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 3
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/VS6JHDHVMP72N58L324RFE66QEZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "4,0": {
+       "ActionID": "c03dc1ad-71f7-45cf-848e-39e3220cfe4a",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 6
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/RKBOL1LB8A8GWNIC1IGCQK9L4KZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "5,0": {
+       "ActionID": "88e7a50d-53e6-42c7-ab41-83f0454bc478",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 4
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/SM8SFK4M9JTV9HA2QPKPK8B4MTZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "6,0": {
+       "ActionID": "688bfb7a-2a21-4fdc-ada5-f25967be0c08",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 5
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/WRN9193QR5GHSP6LTMWC8DF98QZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "7,0": {
+       "ActionID": "c755adda-7da3-4b8c-8e6b-10ba3797bea4",
+       "LinkedTitle": true,
+       "Name": "Website",
+       "Plugin": {
+        "Name": "Website",
+        "UUID": "com.elgato.streamdeck.system.website",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "browser": "",
+        "openInBrowser": true,
+        "path": "https://prism.jeremyfhall.com/deck/"
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/NOHTHFF69H3TG5B91O9AP8HP8IZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.website"
+      },
+      "0,1": {
+       "ActionID": "d5017b65-e2bc-41b5-a58a-f5c0144a903f",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": true,
+          "KeyCtrl": false,
+          "KeyModifiers": 9,
+          "KeyOption": false,
+          "KeyShift": true,
+          "NativeCode": 83,
+          "QTKeyCode": 83,
+          "VKeyCode": 83
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/EK79LR0OAEAW828GL08GGKA1G3Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "1,1": {
+       "ActionID": "b1284507-14cd-4a87-bc23-55579711cd9e",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": true,
+          "KeyCtrl": false,
+          "KeyModifiers": 8,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 68,
+          "QTKeyCode": 68,
+          "VKeyCode": 68
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/JO11401QS9J212F5VH76B785SAZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "2,1": {
+       "ActionID": "7300179c-fe8a-4e22-8d21-a48bdacfd229",
+       "LinkedTitle": true,
+       "Name": "Open",
+       "Plugin": {
+        "Name": "Open",
+        "UUID": "com.elgato.streamdeck.system.open",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "path": "\"C:\\Windows\\explorer.exe\""
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/7K612NVT0WO37574C9AA0V0T4KZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.open"
+      },
+      "3,1": {
+       "ActionID": "ac4b1ef7-1f7c-4c9b-b3e7-475c02edaf06",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 3,
+          "KeyOption": false,
+          "KeyShift": true,
+          "NativeCode": 27,
+          "QTKeyCode": 16777216,
+          "VKeyCode": 27
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/4DBIK5OJ3AC3REHF5NI9PR2WR7Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "4,1": {
+       "ActionID": "916164c5-fe18-48c4-b1a6-bba60b45568c",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": true,
+          "KeyCtrl": false,
+          "KeyModifiers": 8,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 83,
+          "QTKeyCode": 83,
+          "VKeyCode": 83
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/J6LQ264BJLP0L05DWO8OWTW6HWZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "5,1": {
+       "ActionID": "c50d6330-2db5-4cbb-81e8-b301060fc119",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": true,
+          "KeyCtrl": false,
+          "KeyModifiers": 8,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 190,
+          "QTKeyCode": 46,
+          "VKeyCode": 190
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/4EHWPFQRCG965NL8W7WPE8FHTDZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "6,1": {
+       "ActionID": "2dc47622-5be4-4704-b6ef-aa4c10ab249f",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 67,
+          "QTKeyCode": 67,
+          "VKeyCode": 67
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/E7O0SABETASQSQBR5O02MVENBMZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "7,1": {
+       "ActionID": "b00e1ceb-abd3-4867-b786-3387d66aa7fd",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 86,
+          "QTKeyCode": 86,
+          "VKeyCode": 86
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/S5HOMO596GOGL2EHGBVHDDLVWIZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "0,2": {
+       "ActionID": "8e8bf3c5-fffc-49bf-b052-aeffed7d7132",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 90,
+          "QTKeyCode": 90,
+          "VKeyCode": 90
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/1DP2QW762M1SOPC3IBT36KLGG6Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "1,2": {
+       "ActionID": "6dad0843-c73d-4db4-b20e-aee435164425",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": false,
+          "KeyCtrl": true,
+          "KeyModifiers": 2,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 89,
+          "QTKeyCode": 89,
+          "VKeyCode": 89
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/LLF66T10SWMSELSRWM29KRNW2EZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "2,2": {
+       "ActionID": "00bb2421-11cb-40f0-a61b-b5b7c7b0f5e6",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-cpu-ring"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "3,2": {
+       "ActionID": "6d766d29-0cde-484f-ac2b-2175dbddef7a",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-mem"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "4,2": {
+       "ActionID": "9df3ffca-d3d2-4961-8b75-d17a9978c6d5",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-net"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "5,2": {
+       "ActionID": "77670de0-cc29-4df9-9cfd-a5a409d17d7d",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-disk"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "6,2": {
+       "ActionID": "eba8c484-045e-4d50-9094-b33f0aced726",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-date"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "7,2": {
+       "ActionID": "988ae2b7-904b-4071-ab5f-9f81b19e1836",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-stopwatch"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "0,3": {
+       "ActionID": "cd0faf09-6991-4036-a1ab-1109096e7894",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-focus-timer"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "1,3": {
+       "ActionID": "3e56387e-f715-413c-b130-0ca30a63ff30",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-world-clock"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "2,3": {
+       "ActionID": "9260a9c1-b5f2-43e1-839c-dd99cb3213ee",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-countdown"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "3,3": {
+       "ActionID": "764c6cd3-88e7-4278-aec9-8ca66a00cd56",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-pomodoro-set"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "4,3": {
+       "ActionID": "93d4f17b-0e28-4a04-9858-a52d1e97b39d",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-counter"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "5,3": {
+       "ActionID": "47c4e5d0-8536-495f-ae03-a15fc32f2d78",
+       "LinkedTitle": true,
+       "Name": "Prism Display",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "app-time-zones"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.facet"
+      },
+      "7,3": {
+       "ActionID": "8961670e-eddd-4405-8108-93549aaed343",
+       "LinkedTitle": true,
+       "Name": "Go to Page",
+       "Plugin": {
+        "Name": "Pages",
+        "UUID": "com.elgato.streamdeck.page",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "PageIndex": 2
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/SDGMLDE5V3OL8OSM7GA9I1E7BBZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.page.goto"
+      }
+     },
+     "Type": "Keypad"
+    }
+   ],
+   "Icon": "",
+   "Name": "Home"
+  },
+  "defaultPage": {
+   "Controllers": [
+    {
+     "Actions": null,
+     "Type": "Keypad"
+    }
+   ],
+   "Icon": "",
+   "Name": ""
+  }
+ },
+ "stream-deck-mini": {
+  "source": "com.jeremyfhall.prism.sdPlugin/prism-mini.streamDeckProfile",
+  "entries": [
+   "package.json",
+   "Profiles/",
+   "Profiles/<UUID>.sdProfile/",
+   "Profiles/<UUID>.sdProfile/manifest.json",
+   "Profiles/<UUID>.sdProfile/Profiles/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/manifest.json",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/Images/"
+  ],
+  "package": {
+   "AppVersion": "7.6.0.23012",
+   "DeviceModel": "20GAI9902",
+   "DeviceSettings": null,
+   "FormatVersion": 1,
+   "OSType": "Windows",
+   "OSVersion": "10.0.26300",
+   "RequiredPlugins": [
+    "com.jeremyfhall.prism",
+    "com.elgato.streamdeck.system.multimedia",
+    "com.elgato.streamdeck.page"
+   ]
+  },
+  "manifest": {
+   "Device": {
+    "Model": "20GAI9902",
+    "UUID": "5e4edf35-5dfd-4131-91ce-a7c945fcebb6"
+   },
+   "Name": "Prism · Stream Deck Mini",
+   "Pages": {
+    "Current": "00000000-0000-0000-0000-000000000000",
+    "Default": "d5ba6469-a1de-4cc3-bbe7-2eeea2c61f41",
+    "Pages": [
+     "d81e1cca-38ee-496a-8456-555afa69aa9e",
+     "b5c6fcf4-ffc0-47ae-add7-b79c3f64ba01"
+    ]
+   },
+   "Version": "3.0"
+  },
+  "firstPage": {
+   "Controllers": [
+    {
+     "Actions": {
+      "0,0": {
+       "ActionID": "e75ed4fd-464b-48da-85b3-77d75adcba82",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 0
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/NM9EL708LLFIMEJ12EJJ8OWBW3Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "1,0": {
+       "ActionID": "fdcc3277-5bd6-45d4-9b79-9cc04dd8369a",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 1
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/NW1A3F9PVDPDEL611V8NO5VS60Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "2,0": {
+       "ActionID": "a8c87e23-b710-4418-8dcf-1b7ab15f7217",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 2
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/RKS4DNGV85A2AFPT6VL0I39VBFZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "0,1": {
+       "ActionID": "aac5d148-7a51-4ab1-8944-2a546c17cedb",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 6
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/937E345140TOF4P095WVIPVQ4EZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "1,1": {
+       "ActionID": "616976ca-2c9a-4461-8562-c4d6c2d6de62",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 5
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/DHMH2E85N180G0K7BMEOIT8887Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "2,1": {
+       "ActionID": "f17c3bb4-5120-4b21-8151-920a28656859",
+       "LinkedTitle": true,
+       "Name": "Go to Page",
+       "Plugin": {
+        "Name": "Pages",
+        "UUID": "com.elgato.streamdeck.page",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "PageIndex": 2
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/H8S3SA9S1C1VMJSKF229251R9AZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.page.goto"
+      }
+     },
+     "Type": "Keypad"
+    }
+   ],
+   "Icon": "",
+   "Name": "Home"
+  },
+  "defaultPage": {
+   "Controllers": [
+    {
+     "Actions": null,
+     "Type": "Keypad"
+    }
+   ],
+   "Icon": "",
+   "Name": ""
+  }
+ },
+ "stream-deck-neo": {
+  "source": "com.jeremyfhall.prism.sdPlugin/prism-neo.streamDeckProfile",
+  "entries": [
+   "package.json",
+   "Profiles/",
+   "Profiles/<UUID>.sdProfile/",
+   "Profiles/<UUID>.sdProfile/manifest.json",
+   "Profiles/<UUID>.sdProfile/Profiles/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/manifest.json",
+   "Profiles/<UUID>.sdProfile/Profiles/<UUID>/Images/"
+  ],
+  "package": {
+   "AppVersion": "7.6.0.23012",
+   "DeviceModel": "20GBJ9901",
+   "DeviceSettings": null,
+   "FormatVersion": 1,
+   "OSType": "Windows",
+   "OSVersion": "10.0.26300",
+   "RequiredPlugins": [
+    "com.jeremyfhall.prism",
+    "com.elgato.streamdeck.system.multimedia",
+    "com.elgato.streamdeck.system.hotkey",
+    "com.elgato.streamdeck.page"
+   ]
+  },
+  "manifest": {
+   "Device": {
+    "Model": "20GBJ9901",
+    "UUID": "00425fc2-3a81-4b5f-8927-82b16d73e0d9"
+   },
+   "Name": "Prism · Stream Deck Neo",
+   "Pages": {
+    "Current": "00000000-0000-0000-0000-000000000000",
+    "Default": "966f0b54-4e93-4056-a2ad-6c4e8b45dab9",
+    "Pages": [
+     "81446277-4d45-454c-ad4d-0d80ed711c94",
+     "c607373a-d70d-45b9-9b97-a68057f51543"
+    ]
+   },
+   "Version": "3.0"
+  },
+  "firstPage": {
+   "Controllers": [
+    {
+     "Actions": {
+      "0,0": {
+       "ActionID": "0572a9df-002d-401c-b812-d7baab1200ca",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 0
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/KP3Q7F42L2OQ1TOE6HQWH9CWGGZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "1,0": {
+       "ActionID": "3445e7c7-8b1c-4cc4-8bc4-a900a887f0a6",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 1
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/4KWC2FALCMB2H1A3WBB0GCAT55Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "2,0": {
+       "ActionID": "b863d65d-dc03-406d-a731-199a5ed90088",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 2
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/RFBH2S6QRFLL60CMA1SPIGA167Z.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "3,0": {
+       "ActionID": "956b11cd-116e-44c3-a773-fd49ffe937fe",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 4
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/O31W259EWMC44MQ1JWPQWMV79CZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "0,1": {
+       "ActionID": "0e1e432f-8723-46ed-8f92-bc12681f5de7",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 6
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/BT753J87IOSVNNP7G09RODDIALZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "1,1": {
+       "ActionID": "8c7d31f4-9474-4eda-afa7-61e7c18af7d8",
+       "LinkedTitle": true,
+       "Name": "Multimedia",
+       "Plugin": {
+        "Name": "Multimedia",
+        "UUID": "com.elgato.streamdeck.system.multimedia",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "actionIdx": 5
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/0WRFEERIVQECQKO9QIP38KPWFTZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.multimedia"
+      },
+      "2,1": {
+       "ActionID": "1544c00a-5c26-47b6-8a6b-c16f9682c13b",
+       "LinkedTitle": true,
+       "Name": "Hotkey",
+       "Plugin": {
+        "Name": "Activate a Key Command",
+        "UUID": "com.elgato.streamdeck.system.hotkey",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "Coalesce": true,
+        "Hotkeys": [
+         {
+          "KeyCmd": true,
+          "KeyCtrl": false,
+          "KeyModifiers": 9,
+          "KeyOption": false,
+          "KeyShift": true,
+          "NativeCode": 83,
+          "QTKeyCode": 83,
+          "VKeyCode": 83
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         },
+         {
+          "KeyCmd": false,
+          "KeyCtrl": false,
+          "KeyModifiers": 0,
+          "KeyOption": false,
+          "KeyShift": false,
+          "NativeCode": 146,
+          "QTKeyCode": 33554431,
+          "VKeyCode": -1
+         }
+        ]
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/WKOAO7C62PFJ81NPP0G47HOSONZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.system.hotkey"
+      },
+      "3,1": {
+       "ActionID": "eed436c1-986c-4fc3-8284-0dfb23c5c5b8",
+       "LinkedTitle": true,
+       "Name": "Go to Page",
+       "Plugin": {
+        "Name": "Pages",
+        "UUID": "com.elgato.streamdeck.page",
+        "Version": "1.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "PageIndex": 2
+       },
+       "State": 0,
+       "States": [
+        {
+         "Image": "Images/PTTQCNA34J6E48TSHRWMNNMKQIZ.png",
+         "ShowTitle": false
+        }
+       ],
+       "UUID": "com.elgato.streamdeck.page.goto"
+      }
+     },
+     "Type": "Keypad"
+    },
+    {
+     "Actions": {
+      "1,0": {
+       "ActionID": "e1136e3e-9631-4eff-aa96-48c7c5af85a2",
+       "LinkedTitle": true,
+       "Name": "Prism Info Bar",
+       "Plugin": {
+        "Name": "Prism Deck",
+        "UUID": "com.jeremyfhall.prism",
+        "Version": "0.7.0.0"
+       },
+       "Resources": null,
+       "Settings": {
+        "facet": "screen-neo-clock"
+       },
+       "State": 0,
+       "States": [
+        {}
+       ],
+       "UUID": "com.jeremyfhall.prism.infobar"
+      }
+     },
+     "Type": "Neo"
+    }
+   ],
+   "Icon": "",
+   "Name": "Home"
+  },
+  "defaultPage": {
+   "Controllers": [
+    {
+     "Actions": null,
+     "Type": "Keypad"
+    }
+   ],
+   "Icon": "",
+   "Name": ""
+  }
+ }
+}

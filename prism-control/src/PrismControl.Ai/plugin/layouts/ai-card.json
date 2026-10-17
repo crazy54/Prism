@@ -1,0 +1,10 @@
+{
+  "$schema": "https://schemas.elgato.com/streamdeck/plugins/layout.json",
+  "id": "com.jeremyfhall.prismcontrol.ai.card",
+  "items": [
+    { "key": "canvas", "type": "pixmap", "rect": [0, 0, 200, 100], "zOrder": 0 },
+    { "key": "line1", "type": "text", "rect": [10, 25, 180, 17], "zOrder": 1, "font": { "size": 12, "weight": 600 }, "alignment": "left", "color": "#f0f0f5", "text-overflow": "ellipsis", "value": "" },
+    { "key": "line2", "type": "text", "rect": [10, 42, 180, 17], "zOrder": 1, "font": { "size": 12, "weight": 600 }, "alignment": "left", "color": "#f0f0f5", "text-overflow": "ellipsis", "value": "" },
+    { "key": "line3", "type": "text", "rect": [10, 59, 180, 17], "zOrder": 1, "font": { "size": 12, "weight": 600 }, "alignment": "left", "color": "#f0f0f5", "text-overflow": "ellipsis", "value": "" }
+  ]
+}

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- prism-relay tests (owned by the Platform engineer). Unit tests call the relay's internals; process tests run the
+       real exe: PRISM_RELAY_EXE if set (use it for the NativeAOT build), else the apphost built next to these tests.
+       Every process test points PRISM_CONTROL_DIR at a temp folder and talks only to pipes this test process created. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismRelay.Tests</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Testing\PrismControl.Testing.csproj" />
+    <ProjectReference Include="..\..\src\PrismRelay\PrismRelay.csproj" />
+    <ProjectReference Include="..\..\src\PrismControl.Desktop\PrismControl.Desktop.csproj" />
+  </ItemGroup>
+</Project>

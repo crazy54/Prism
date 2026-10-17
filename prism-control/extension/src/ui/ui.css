@@ -1,0 +1,74 @@
+/* Prism Control extension UI: the Refraction look (night + lavender). */
+:root {
+  --night: #0a0c12;
+  --panel: #12151f;
+  --panel-2: #181c28;
+  --line: #262b3a;
+  --text: #e9e6f2;
+  --muted: #9b97ab;
+  --lavender: #b8a2f2;
+  --lavender-2: #d6c9fa;
+  --ok: #8fd6b0;
+  --warn: #f2c48f;
+  --bad: #f29a9a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }   /* author display rules must not resurrect hidden elements */
+html, body { margin: 0; background: var(--night); color: var(--text); font: 13px/1.45 system-ui, "Segoe UI", sans-serif; }
+h1 { font-size: 14px; font-weight: 600; margin: 0; letter-spacing: 0.01em; }
+h2 { font-size: 13px; font-weight: 600; margin: 0 0 8px; color: var(--lavender-2); }
+a { color: var(--lavender); }
+button {
+  font: inherit; color: var(--night); background: var(--lavender); border: 0; border-radius: 6px;
+  padding: 6px 12px; cursor: pointer; font-weight: 600;
+}
+button.ghost { background: transparent; color: var(--lavender); border: 1px solid var(--line); }
+button:hover { filter: brightness(1.08); }
+button:disabled { opacity: 0.5; cursor: default; }
+input[type=text], textarea, select {
+  font: inherit; color: var(--text); background: var(--panel-2); border: 1px solid var(--line);
+  border-radius: 6px; padding: 6px 8px; width: 100%;
+}
+textarea { min-height: 64px; resize: vertical; }
+code, .mono { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: 12px; }
+.muted { color: var(--muted); }
+
+/* status pill */
+.status { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+.status .dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 4px; flex: none; background: var(--muted); }
+.status[data-state=connected] .dot { background: var(--ok); }
+.status[data-state=connecting] .dot { background: var(--lavender); }
+.status[data-state=plugin_down] .dot, .status[data-state=host_error] .dot { background: var(--warn); }
+.status[data-state=host_missing] .dot, .status[data-state=host_forbidden] .dot, .status[data-state=proto_mismatch] .dot { background: var(--bad); }
+.status .line { font-weight: 600; }
+.status .help { color: var(--muted); }
+
+/* popup */
+body.popup { width: 330px; padding: 12px; display: grid; gap: 10px; }
+body.popup header { display: flex; gap: 8px; align-items: center; }
+body.popup footer { display: flex; gap: 8px; justify-content: flex-end; }
+.card { padding: 10px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+.card .label { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+.row { display: flex; gap: 8px; align-items: center; justify-content: space-between; }
+.meta { color: var(--muted); font-size: 12px; display: grid; gap: 2px; }
+.badge { display: inline-block; padding: 1px 6px; border-radius: 4px; background: var(--lavender); color: var(--night); font-weight: 700; font-size: 11px; }
+
+/* options */
+body.options { padding: 24px; }
+body.options main { max-width: 720px; margin: 0 auto; display: grid; gap: 16px; }
+body.options header { display: flex; gap: 10px; align-items: center; margin-bottom: 4px; }
+body.options header h1 { font-size: 18px; }
+section.card { padding: 16px; }
+section.card p { margin: 0 0 8px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.choices { display: grid; gap: 6px; margin: 6px 0 10px; }
+.choices label { display: flex; gap: 8px; align-items: baseline; }
+ul.sites { list-style: none; margin: 8px 0; padding: 0; display: grid; gap: 4px; }
+ul.sites li { display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; background: var(--panel-2); border-radius: 6px; }
+.banner { padding: 12px 14px; border-radius: 10px; border: 1px solid var(--lavender); background: #1a1630; }
+.feature { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 0; border-top: 1px solid var(--line); }
+.feature:first-of-type { border-top: 0; }
+.saved { color: var(--ok); font-size: 12px; margin-left: 8px; opacity: 0; transition: opacity .2s; }
+.saved.on { opacity: 1; }
+.feature .why { margin-top: 4px; font-size: 12px; max-width: 560px; }

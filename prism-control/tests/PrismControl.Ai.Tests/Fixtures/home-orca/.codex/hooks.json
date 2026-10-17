@@ -1,0 +1,37 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Users\\example\\AppData\\Local\\Programs\\orca\\resources\\bin\\orca-hook.exe\" codex SessionStart",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Users\\example\\AppData\\Local\\Programs\\orca\\resources\\bin\\orca-hook.exe\" codex PermissionRequest",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Interrupt": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"C:\\Users\\example\\AppData\\Local\\Programs\\orca\\resources\\bin\\orca-hook.exe\" codex Interrupt",
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}

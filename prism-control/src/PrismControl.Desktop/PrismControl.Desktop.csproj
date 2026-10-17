@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Shared desktop platform for the Browser, Windows (WinShell) and Ai modules. Owned by the Platform engineer.
+    NOT a module: no [assembly: PrismModule], never a direct ProjectReference of the exe (it flows in through the modules).
+    Build alone: dotnet build src/PrismControl.Desktop
+    Contents: shell thread (STA + message pump), foreground helper, SendInput sender, window catalog + icons,
+    per-user named-pipe endpoint + discovery files, art scaler, relay installer. See aaa-prism-play/platform/USAGE.md.
+    Never name a namespace segment "Windows" here: it would shadow the WinRT Windows.* namespaces.
+  -->
+  <PropertyGroup>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Desktop</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsTrimmable>false</IsTrimmable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Core\PrismControl.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="PrismControl.Desktop.Tests" />
+    <InternalsVisibleTo Include="PrismRelay.Tests" />
+  </ItemGroup>
+</Project>

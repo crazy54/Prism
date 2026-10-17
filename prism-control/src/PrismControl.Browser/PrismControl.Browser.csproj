@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Domain module: Browser (owned by the Browser module engineer, team Prism Play).
+    The native half of the browser integration: a per-user named pipe that Chrome/Edge reach through prism-relay
+    (native messaging), the merged BrowserState, the command sink, images, the SMTC lite tier, HostInstaller and the
+    browser actions. Build alone: dotnet build src/PrismControl.Browser
+    Not in PrismControl.sln or the exe until the lead integrates it.
+  -->
+  <PropertyGroup>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Browser</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Core\PrismControl.Core.csproj" />
+    <ProjectReference Include="..\PrismControl.Desktop\PrismControl.Desktop.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="PrismControl.Browser.Tests" />
+  </ItemGroup>
+</Project>

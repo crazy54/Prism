@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Domain module: Sight (Prism Sight, owned by the Sight engineer, team Prism Play).
+    Screen reading for allowlisted OFFLINE games only: Windows.Graphics.Capture of the game window with GPU-side crops
+    of declared HUD regions, HDR-aware conversion, detectors (color, bar, template NCC, OCR, change), recipes (JSON),
+    contexts and readouts with confidence, ISightService for the Smart Deck engine, Game Link forwarding to Prism Deck,
+    and closed-loop control that only ever runs from a fresh deck gesture. See aaa-prism-play/sight/NOTES.md.
+    Build alone: dotnet build src/PrismControl.Sight. Not in PrismControl.sln or the exe until the lead integrates it.
+  -->
+  <PropertyGroup>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Sight</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Core\PrismControl.Core.csproj" />
+    <ProjectReference Include="..\PrismControl.Desktop\PrismControl.Desktop.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Recipes\Builtin\**\*.json" LogicalName="sight/recipes/%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="Recipes\recipe.schema.json" LogicalName="sight/recipe.schema.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="PrismControl.Sight.Tests" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Generic player fixture</title><link rel="icon" href="/icon.png"></head>
+<body style="height:3000px;background:#0a0c12;color:#e9e6f2">
+<!-- Generic <video> with a full Media Session: metadata, http artwork, play/pause/seekto/next/prev, position state. -->
+<video id="v" src="/tone.wav" autoplay loop width="320" height="180"></video>
+<script>
+  const v = document.getElementById('v');
+  window.__calls = [];
+  navigator.mediaSession.metadata = new MediaMetadata({ title: 'Fixture Song', artist: 'Test Artist', album: 'Fixture Album',
+    artwork: [{ src: '/art.png', sizes: '300x300', type: 'image/png' }] });
+  const h = (a, f) => navigator.mediaSession.setActionHandler(a, (d) => { window.__calls.push([a, d && d.seekTime]); if (f) f(d); });
+  h('play', () => v.play());
+  h('pause', () => v.pause());
+  h('seekto', (d) => { v.currentTime = d.seekTime; });
+  h('nexttrack');
+  h('previoustrack');
+  v.addEventListener('loadedmetadata', () => navigator.mediaSession.setPositionState({ duration: v.duration, position: v.currentTime, playbackRate: v.playbackRate }));
+</script>
+</body></html>

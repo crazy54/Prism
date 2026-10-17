@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Prism Control: a generic prism glyph, Refraction look (night #0a0c12, lavender #b8a2f2). No brand marks. -->
+  <rect x="4" y="4" width="120" height="120" rx="28" fill="#0a0c12" stroke="#262b3a" stroke-width="2"/>
+  <path d="M8 76 L44 62" stroke="#e9e6f2" stroke-width="5" stroke-linecap="round"/>
+  <path d="M64 24 L102 94 L26 94 Z" fill="#1a1630" stroke="#b8a2f2" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M84 62 L120 50" stroke="#d6c9fa" stroke-width="5" stroke-linecap="round"/>
+  <path d="M84 66 L120 66" stroke="#b8a2f2" stroke-width="5" stroke-linecap="round"/>
+  <path d="M84 70 L120 82" stroke="#8f7ad8" stroke-width="5" stroke-linecap="round"/>
+</svg>

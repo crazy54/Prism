@@ -1,0 +1,27 @@
+{
+ "result": {
+  "terminals": [
+   {
+    "handle": "term_aaa111",
+    "ptyId": "pty-1",
+    "worktreeId": "wt-aurora",
+    "worktreePath": "C:\\Users\\example\\projects\\aurora",
+    "tabId": "tab-1",
+    "leafId": "leaf-1",
+    "title": "TITLE-MARKER",
+    "connected": true,
+    "writable": true,
+    "agentIdentity": "claude",
+    "preview": "PREVIEW-MARKER secret output"
+   },
+   {
+    "handle": "term_zzz999",
+    "tabId": "tab-9",
+    "leafId": "leaf-9",
+    "worktreeId": "wt-zed",
+    "title": "zed",
+    "preview": "x"
+   }
+  ]
+ }
+}

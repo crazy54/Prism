@@ -1,0 +1,3318 @@
+{
+  "$schema": "./schema/context-pack.schema.json",
+  "schemaVersion": 1,
+  "id": "obs-studio",
+  "name": "OBS Studio",
+  "vendor": "OBS Project",
+  "kind": "app",
+  "activation": "running",
+  "packVersion": "0.1.0",
+  "platforms": [
+    "windows"
+  ],
+  "verifiedAgainst": {
+    "version": "31.0.2",
+    "build": "obs-websocket 5.5.5 (bundled)",
+    "installedHere": "OBS Studio 31.0.2 at C:\\Program Files\\obs-studio (obs64.exe FileVersion; obs-websocket.dll carries 5.5.5). Never launched for this user: no %APPDATA%\\obs-studio folder, so no profile, hotkeys or websocket config exist yet.",
+    "date": "2026-10-16",
+    "method": "mixed",
+    "note": "OBS has no default global hotkeys (every frontend hotkey is registered without a binding, S6), so the pack's real verbs are obs-websocket 5.x requests (S1) served by a planned Prism Control 'obs' module. The only default keys are main-window menu/preview shortcuts (S4, S6, S7), confirmed as strings in the local obs64.exe (S11). Request names were checked against the generated protocol doc on master; master adds canvas fields (5.7.0) that 5.5.5 doesn't have."
+  },
+  "policy": {
+    "class": "desktop-app",
+    "input": "allowed",
+    "sight": "forbidden",
+    "closedLoop": "forbidden",
+    "reason": "Everything important goes through the obs-websocket API, which reports true state; keyboard input is limited to OBS's own window shortcuts and, as a fallback, the user's own OBS hotkeys."
+  },
+  "keyMode": "vk",
+  "match": {
+    "any": [
+      {
+        "process": "obs64.exe",
+        "confidence": "verified-local",
+        "note": "S11: C:\\Program Files\\obs-studio\\bin\\64bit\\obs64.exe."
+      },
+      {
+        "titleRegex": "^OBS (Studio )?[0-9]+\\.[0-9]+",
+        "confidence": "official",
+        "note": "S6 OBSBasic::UpdateTitleBar: 'OBS ' + ('Studio ' in studio mode) + version + ' - Profile: <p> - Scenes: <c>'. Use only together with the process rule; the title also carries the user's profile and collection names."
+      }
+    ]
+  },
+  "contexts": [
+    {
+      "id": "idle",
+      "label": "OBS (not live)",
+      "default": true,
+      "priority": 10,
+      "detect": {
+        "all": [
+          {
+            "type": "always"
+          }
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "streaming",
+      "label": "Live (streaming)",
+      "priority": 60,
+      "hysteresisMs": 1500,
+      "detect": {
+        "any": [
+          {
+            "type": "module",
+            "field": "obs.streaming",
+            "equals": true,
+            "note": "Planned obs module: GetStreamStatus.outputActive at connect, then StreamStateChanged events."
+          }
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Long hysteresis so a reconnect blip (outputReconnecting) doesn't flip the deck back to the offline page."
+    },
+    {
+      "id": "recording",
+      "label": "Recording",
+      "priority": 50,
+      "hysteresisMs": 1000,
+      "detect": {
+        "any": [
+          {
+            "type": "module",
+            "field": "obs.recording",
+            "equals": true,
+            "note": "Planned obs module: GetRecordStatus.outputActive, then RecordStateChanged."
+          }
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Streaming outranks recording; the streaming page still carries the record key."
+    },
+    {
+      "id": "studioMode",
+      "label": "Studio Mode",
+      "priority": 70,
+      "hysteresisMs": 500,
+      "detect": {
+        "any": [
+          {
+            "type": "module",
+            "field": "obs.studioMode",
+            "equals": true,
+            "note": "Planned obs module: GetStudioModeEnabled, then StudioModeStateChanged."
+          },
+          {
+            "type": "windowTitle",
+            "regex": "^OBS Studio [0-9]",
+            "note": "Works without the module: the title gains 'Studio ' only in studio mode (S6). The literal isn't localized."
+          }
+        ]
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S6"
+      ],
+      "notes": "Outranks streaming so the TAKE key stays on screen while live; its layout uses stream.toggle with the true state."
+    }
+  ],
+  "verbs": [
+    {
+      "id": "stream.goLive",
+      "label": "GO LIVE",
+      "longLabel": "Start streaming",
+      "glyph": "broadcast",
+      "category": "primary",
+      "priority": 100,
+      "contexts": [
+        "idle",
+        "recording",
+        "studioMode"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.stream.start",
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback: the user's own OBS hotkey OBSBasic.StartStreaming (profile basic.ini [Hotkeys]) when they set one."
+        }
+      ],
+      "appAction": "StartStream",
+      "safety": "confirm",
+      "stateReadout": "streamStatus",
+      "unavailable": {
+        "label": "GO LIVE",
+        "hint": "Connect OBS: enable Tools > WebSocket Server Settings and pair Prism.",
+        "when": [
+          "moduleMissing",
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S6"
+      ],
+      "notes": "'confirm' (hold, or arm-then-push on a Galleon dial): going live is public and can't be undone (followers get notified). StartStream is idempotent, unlike ToggleStream, so a stale state can't turn it into a stop."
+    },
+    {
+      "id": "stream.end",
+      "label": "END STREAM",
+      "longLabel": "Stop streaming",
+      "glyph": "stop",
+      "category": "primary",
+      "priority": 100,
+      "contexts": [
+        "streaming"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.stream.stop",
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback hotkey OBSBasic.StopStreaming."
+        }
+      ],
+      "appAction": "StopStream",
+      "safety": "confirm",
+      "stateReadout": "streamStatus",
+      "unavailable": {
+        "label": "END STREAM",
+        "hint": "Connect OBS to Prism first.",
+        "when": [
+          "moduleMissing",
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S6"
+      ],
+      "notes": "'confirm': an accidental stop ends the broadcast and splits the VOD."
+    },
+    {
+      "id": "stream.toggle",
+      "label": "STREAM",
+      "longLabel": "Start / stop streaming",
+      "glyph": "broadcast",
+      "category": "primary",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.stream.toggle",
+        "status": "planned"
+      },
+      "appAction": "ToggleStream",
+      "safety": "confirm",
+      "stateReadout": "streamStatus",
+      "unavailable": {
+        "label": "STREAM",
+        "hint": "Connect OBS to Prism first.",
+        "when": [
+          "moduleMissing",
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "For one-key layouts (studio mode). The module should send StartStream/StopStream from the known state rather than ToggleStream when it has fresh state."
+    },
+    {
+      "id": "record.toggle",
+      "label": "RECORD",
+      "longLabel": "Start / stop recording",
+      "glyph": "record",
+      "category": "primary",
+      "priority": 95,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.record.toggle",
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback hotkeys OBSBasic.StartRecording / OBSBasic.StopRecording."
+        }
+      ],
+      "appAction": "ToggleRecord",
+      "safety": "never-auto",
+      "stateReadout": "recordStatus",
+      "unavailable": {
+        "label": "RECORD",
+        "hint": "Connect OBS to Prism first.",
+        "when": [
+          "moduleMissing",
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S6"
+      ],
+      "notes": "Starting is private and harmless; stopping by accident splits the take, so only a direct press may run it."
+    },
+    {
+      "id": "record.pause",
+      "label": "PAUSE REC",
+      "glyph": "pause",
+      "category": "tool",
+      "priority": 70,
+      "contexts": [
+        "recording"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.record.pauseToggle",
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback hotkeys OBSBasic.PauseRecording / OBSBasic.UnpauseRecording."
+        }
+      ],
+      "appAction": "ToggleRecordPause",
+      "safety": "safe",
+      "stateReadout": "recordStatus",
+      "unavailable": {
+        "label": "PAUSE REC",
+        "hint": "Only while recording (not with every encoder setup).",
+        "when": [
+          "wrongContext",
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "record.chapter",
+      "label": "CHAPTER",
+      "longLabel": "Add chapter marker",
+      "glyph": "marker",
+      "category": "tool",
+      "priority": 72,
+      "contexts": [
+        "recording"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.record.chapter",
+        "args": {
+          "chapterName": null
+        },
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback hotkey OBSBasic.AddChapterMarker."
+        }
+      ],
+      "appAction": "CreateRecordChapter",
+      "safety": "safe",
+      "unavailable": {
+        "label": "CHAPTER",
+        "hint": "Needs OBS 30.2+ recording to Hybrid MP4.",
+        "when": [
+          "wrongContext",
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S11"
+      ],
+      "notes": "obs-websocket 5.5.0+. As of OBS 30.2 only Hybrid MP4 stores chapters; other formats return an error, which the slot shows as a badge."
+    },
+    {
+      "id": "record.split",
+      "label": "SPLIT FILE",
+      "longLabel": "Split recording file",
+      "glyph": "split",
+      "monogram": "SPL",
+      "category": "tool",
+      "priority": 50,
+      "contexts": [
+        "recording"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.record.split",
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback hotkey OBSBasic.SplitFile."
+        }
+      ],
+      "appAction": "SplitRecordFile",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SPLIT FILE",
+        "hint": "Only while recording.",
+        "when": [
+          "wrongContext",
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "unverified",
+      "sources": [
+        "S1"
+      ],
+      "verify": "Record with OBS 31 and send SplitRecordFile with Settings > Output > Recording > Automatic File Splitting off, then on with 'Only split manually'; note which setups accept it."
+    },
+    {
+      "id": "replay.save",
+      "label": "SAVE REPLAY",
+      "longLabel": "Save replay buffer",
+      "glyph": "replay",
+      "monogram": "RPL",
+      "category": "primary",
+      "priority": 92,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.replay.save",
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback hotkey ReplayBuffer.Save, stored in basic.ini [Hotkeys] under the key 'ReplayBuffer'."
+        }
+      ],
+      "appAction": "SaveReplayBuffer",
+      "safety": "safe",
+      "stateReadout": "replayState",
+      "unavailable": {
+        "label": "SAVE REPLAY",
+        "hint": "Start the replay buffer first (enable it in Settings > Output).",
+        "when": [
+          "wrongContext",
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S5",
+        "S6"
+      ]
+    },
+    {
+      "id": "replay.toggle",
+      "label": "REPLAY BUF",
+      "longLabel": "Start / stop replay buffer",
+      "glyph": "replay",
+      "monogram": "RB",
+      "category": "toggle",
+      "priority": 55,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.replay.toggle",
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback hotkeys OBSBasic.StartReplayBuffer / OBSBasic.StopReplayBuffer."
+        }
+      ],
+      "appAction": "ToggleReplayBuffer",
+      "safety": "safe",
+      "stateReadout": "replayState",
+      "unavailable": {
+        "label": "REPLAY BUF",
+        "hint": "Enable the replay buffer in Settings > Output.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S6"
+      ]
+    },
+    {
+      "id": "virtualCam.toggle",
+      "label": "VIRTUAL CAM",
+      "longLabel": "Start / stop virtual camera",
+      "glyph": "camera",
+      "category": "toggle",
+      "priority": 45,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.virtualCam.toggle",
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback hotkeys OBSBasic.StartVirtualCam / OBSBasic.StopVirtualCam."
+        }
+      ],
+      "appAction": "ToggleVirtualCam",
+      "safety": "never-auto",
+      "stateReadout": "virtualCamState",
+      "unavailable": {
+        "label": "VIRTUAL CAM",
+        "hint": "Connect OBS to Prism first.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S6"
+      ],
+      "notes": "never-auto: it exposes the OBS output to video-call apps."
+    },
+    {
+      "id": "studio.toggle",
+      "label": "STUDIO MODE",
+      "glyph": "pages",
+      "category": "mode",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.studioMode.set",
+        "args": {
+          "studioModeEnabled": "toggle"
+        },
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback hotkey OBSBasic.TogglePreviewProgram (or the Enable/DisablePreviewProgram pair)."
+        }
+      ],
+      "appAction": "SetStudioModeEnabled",
+      "safety": "safe",
+      "stateReadout": "studioModeState",
+      "unavailable": {
+        "label": "STUDIO MODE",
+        "hint": "Connect OBS to Prism first.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S11"
+      ],
+      "notes": "There is no ToggleStudioMode request: the module reads GetStudioModeEnabled (or the last StudioModeStateChanged) and sends the inverse."
+    },
+    {
+      "id": "studio.transition",
+      "label": "TAKE",
+      "longLabel": "Transition preview to program",
+      "glyph": "skip-next",
+      "category": "primary",
+      "priority": 98,
+      "contexts": [
+        "studioMode"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.studioMode.transition",
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback hotkey OBSBasic.Transition."
+        }
+      ],
+      "appAction": "TriggerStudioModeTransition",
+      "safety": "never-auto",
+      "unavailable": {
+        "label": "TAKE",
+        "hint": "Only in Studio Mode.",
+        "when": [
+          "wrongContext",
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S6"
+      ]
+    },
+    {
+      "id": "scene.slot1",
+      "label": "SCENE 1",
+      "longLabel": "Switch to scene 1 (label shows the scene name)",
+      "glyph": "scene",
+      "category": "mode",
+      "priority": 90,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.scene.select",
+        "args": {
+          "slot": 1,
+          "target": "auto"
+        },
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback: the scene's own hotkey OBSBasic.SelectScene (scene collection JSON, sources[].hotkeys)."
+        }
+      ],
+      "appAction": "SetCurrentProgramScene",
+      "safety": "never-auto",
+      "stateReadout": "currentScene",
+      "unavailable": {
+        "label": "SCENE 1",
+        "hint": "Connect OBS; this slot maps to the 1st scene in the list.",
+        "when": [
+          "notConnected",
+          "moduleMissing",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Slot n = n-th scene from the top of OBS's scene list (GetSceneList returns bottom-up; reverse it). target 'auto' = program scene normally, SetCurrentPreviewScene in Studio Mode. The label is replaced by the scene name (12 chars)."
+    },
+    {
+      "id": "scene.slot2",
+      "label": "SCENE 2",
+      "glyph": "scene",
+      "category": "mode",
+      "priority": 88,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.scene.select",
+        "args": {
+          "slot": 2,
+          "target": "auto"
+        },
+        "status": "planned"
+      },
+      "appAction": "SetCurrentProgramScene",
+      "safety": "never-auto",
+      "stateReadout": "currentScene",
+      "unavailable": {
+        "label": "SCENE 2",
+        "hint": "Connect OBS; this slot maps to the 2nd scene.",
+        "when": [
+          "notConnected",
+          "moduleMissing",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "scene.slot3",
+      "label": "SCENE 3",
+      "glyph": "scene",
+      "category": "mode",
+      "priority": 86,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.scene.select",
+        "args": {
+          "slot": 3,
+          "target": "auto"
+        },
+        "status": "planned"
+      },
+      "appAction": "SetCurrentProgramScene",
+      "safety": "never-auto",
+      "stateReadout": "currentScene",
+      "unavailable": {
+        "label": "SCENE 3",
+        "hint": "Connect OBS; this slot maps to the 3rd scene.",
+        "when": [
+          "notConnected",
+          "moduleMissing",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "scene.slot4",
+      "label": "SCENE 4",
+      "glyph": "scene",
+      "category": "mode",
+      "priority": 84,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.scene.select",
+        "args": {
+          "slot": 4,
+          "target": "auto"
+        },
+        "status": "planned"
+      },
+      "appAction": "SetCurrentProgramScene",
+      "safety": "never-auto",
+      "stateReadout": "currentScene",
+      "unavailable": {
+        "label": "SCENE 4",
+        "hint": "Connect OBS; this slot maps to the 4th scene.",
+        "when": [
+          "notConnected",
+          "moduleMissing",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "scene.slot5",
+      "label": "SCENE 5",
+      "glyph": "scene",
+      "category": "mode",
+      "priority": 82,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.scene.select",
+        "args": {
+          "slot": 5,
+          "target": "auto"
+        },
+        "status": "planned"
+      },
+      "appAction": "SetCurrentProgramScene",
+      "safety": "never-auto",
+      "stateReadout": "currentScene",
+      "unavailable": {
+        "label": "SCENE 5",
+        "hint": "Connect OBS; this slot maps to the 5th scene.",
+        "when": [
+          "notConnected",
+          "moduleMissing",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "scene.slot6",
+      "label": "SCENE 6",
+      "glyph": "scene",
+      "category": "mode",
+      "priority": 80,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.scene.select",
+        "args": {
+          "slot": 6,
+          "target": "auto"
+        },
+        "status": "planned"
+      },
+      "appAction": "SetCurrentProgramScene",
+      "safety": "never-auto",
+      "stateReadout": "currentScene",
+      "unavailable": {
+        "label": "SCENE 6",
+        "hint": "Connect OBS; this slot maps to the 6th scene.",
+        "when": [
+          "notConnected",
+          "moduleMissing",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "scene.take",
+      "label": "GO TO SCENE",
+      "longLabel": "Switch to the scene picked with the scene dial",
+      "glyph": "scene",
+      "category": "mode",
+      "priority": 50,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.scene.take",
+        "status": "planned"
+      },
+      "appAction": "SetCurrentProgramScene",
+      "safety": "never-auto",
+      "stateReadout": "currentScene",
+      "unavailable": {
+        "label": "GO TO SCENE",
+        "hint": "Turn the scene dial to pick a scene first.",
+        "when": [
+          "nothingSelected",
+          "notConnected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "Push of the scene dial. In Studio Mode the dial already set the preview, so the push runs TriggerStudioModeTransition instead."
+    },
+    {
+      "id": "audio.micMute",
+      "label": "MIC",
+      "longLabel": "Mute / unmute Mic/Aux",
+      "glyph": "mic",
+      "category": "toggle",
+      "priority": 88,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.input.muteToggle",
+        "args": {
+          "input": "mic1"
+        },
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback: the source's libobs.mute / libobs.unmute hotkeys (scene collection JSON, AuxAudioDevice1.hotkeys)."
+        }
+      ],
+      "appAction": "ToggleInputMute",
+      "safety": "never-auto",
+      "stateReadout": "micMuted",
+      "unavailable": {
+        "label": "MIC",
+        "hint": "No Mic/Aux source in OBS, or OBS isn't connected.",
+        "when": [
+          "notConnected",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "'mic1' = GetSpecialInputs.mic1 (the global Mic/Aux source); the PI can point it at another input. never-auto: an automated unmute could leak audio on stream."
+    },
+    {
+      "id": "audio.desktopMute",
+      "label": "DESKTOP",
+      "longLabel": "Mute / unmute Desktop Audio",
+      "glyph": "volume",
+      "category": "toggle",
+      "priority": 84,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.input.muteToggle",
+        "args": {
+          "input": "desktop1"
+        },
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback: libobs.mute / libobs.unmute on DesktopAudioDevice1."
+        }
+      ],
+      "appAction": "ToggleInputMute",
+      "safety": "safe",
+      "stateReadout": "desktopMuted",
+      "unavailable": {
+        "label": "DESKTOP",
+        "hint": "No Desktop Audio source in OBS, or OBS isn't connected.",
+        "when": [
+          "notConnected",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "source.slot1",
+      "label": "SOURCE 1",
+      "longLabel": "Show / hide a chosen source in the current scene",
+      "glyph": "eye",
+      "monogram": "S1",
+      "category": "toggle",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.sceneItem.toggle",
+        "args": {
+          "slot": 1
+        },
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback: the scene's libobs.show_scene_item.<item> / libobs.hide_scene_item.<item> hotkeys."
+        }
+      ],
+      "appAction": "SetSceneItemEnabled",
+      "safety": "never-auto",
+      "stateReadout": "source1State",
+      "unavailable": {
+        "label": "PICK SOURCE",
+        "hint": "Choose a source for this key in the PI.",
+        "when": [
+          "nothingSelected",
+          "notConnected"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "GetSceneItemId(sceneName, sourceName) then SetSceneItemEnabled with the inverse of GetSceneItemEnabled. Source names are the user's; nothing is assumed."
+    },
+    {
+      "id": "source.slot2",
+      "label": "SOURCE 2",
+      "glyph": "eye",
+      "monogram": "S2",
+      "category": "toggle",
+      "priority": 58,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.sceneItem.toggle",
+        "args": {
+          "slot": 2
+        },
+        "status": "planned"
+      },
+      "appAction": "SetSceneItemEnabled",
+      "safety": "never-auto",
+      "stateReadout": "source2State",
+      "unavailable": {
+        "label": "PICK SOURCE",
+        "hint": "Choose a source for this key in the PI.",
+        "when": [
+          "nothingSelected",
+          "notConnected"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "capture.screenshot",
+      "label": "SCREENSHOT",
+      "longLabel": "Save a screenshot of the program output",
+      "glyph": "camera",
+      "category": "tool",
+      "priority": 55,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.source.screenshot",
+        "args": {
+          "source": "program",
+          "imageFormat": "png"
+        },
+        "status": "planned"
+      },
+      "altBindings": [
+        {
+          "kind": "unbound",
+          "reason": "no-default",
+          "note": "Fallback hotkey OBSBasic.Screenshot (OBS picks the file name and folder itself)."
+        }
+      ],
+      "appAction": "SaveSourceScreenshot",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SCREENSHOT",
+        "hint": "Connect OBS to Prism first.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S6"
+      ],
+      "notes": "SaveSourceScreenshot needs sourceName (the current program scene) and an absolute imageFilePath; the module writes to the user's chosen folder. TriggerHotkeyByName('OBSBasic.Screenshot') is the simpler alternative."
+    },
+    {
+      "id": "transition.cut",
+      "label": "CUT",
+      "longLabel": "Use the Cut transition",
+      "glyph": "cut",
+      "monogram": "CUT",
+      "category": "tool",
+      "priority": 45,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.transition.set",
+        "args": {
+          "transitionName": "Cut"
+        },
+        "status": "planned"
+      },
+      "appAction": "SetCurrentSceneTransition",
+      "safety": "safe",
+      "unavailable": {
+        "label": "CUT",
+        "hint": "No transition named Cut in this scene collection.",
+        "when": [
+          "notConnected",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "unverified",
+      "sources": [
+        "S1"
+      ],
+      "verify": "Call GetSceneTransitionList on a fresh English install and confirm the built-in names are 'Fade' and 'Cut'; on other UI languages the names are translated, so match on transitionKind (cut_transition / fade_transition) instead."
+    },
+    {
+      "id": "transition.fade",
+      "label": "FADE",
+      "longLabel": "Use the Fade transition",
+      "glyph": "fade",
+      "monogram": "FDE",
+      "category": "tool",
+      "priority": 44,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.transition.set",
+        "args": {
+          "transitionName": "Fade"
+        },
+        "status": "planned"
+      },
+      "appAction": "SetCurrentSceneTransition",
+      "safety": "safe",
+      "unavailable": {
+        "label": "FADE",
+        "hint": "No transition named Fade in this scene collection.",
+        "when": [
+          "notConnected",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "unverified",
+      "sources": [
+        "S1"
+      ],
+      "verify": "As for transition.cut (GetSceneTransitionList; match transitionKind fade_transition)."
+    },
+    {
+      "id": "transition.durationReset",
+      "label": "300 MS",
+      "longLabel": "Reset transition duration to 300 ms",
+      "glyph": "timer",
+      "category": "tool",
+      "priority": 30,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.transition.durationSet",
+        "args": {
+          "transitionDuration": 300
+        },
+        "status": "planned"
+      },
+      "appAction": "SetCurrentSceneTransitionDuration",
+      "safety": "safe",
+      "unavailable": {
+        "label": "300 MS",
+        "hint": "The current transition has a fixed duration (e.g. Cut).",
+        "when": [
+          "notConnected",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S6"
+      ],
+      "notes": "300 ms is OBS's own default (window-basic-main-transitions.cpp)."
+    },
+    {
+      "id": "stats.reset",
+      "label": "RESET STATS",
+      "glyph": "sync",
+      "category": "system",
+      "priority": 25,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.hotkey.trigger",
+        "args": {
+          "hotkeyName": "OBSBasic.ResetStats"
+        },
+        "status": "planned"
+      },
+      "appAction": "TriggerHotkeyByName",
+      "safety": "safe",
+      "unavailable": {
+        "label": "RESET STATS",
+        "hint": "Connect OBS to Prism first.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S11"
+      ],
+      "notes": "No dedicated request; triggers the frontend hotkey by name (works without a key bound)."
+    },
+    {
+      "id": "hotkey.user1",
+      "label": "MY HOTKEY",
+      "longLabel": "Trigger an OBS hotkey picked in the PI",
+      "glyph": "keyboard",
+      "monogram": "HK",
+      "category": "system",
+      "priority": 20,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "module",
+        "verb": "obs.hotkey.trigger",
+        "args": {
+          "hotkeyName": "<picked in the PI from GetHotkeyList>"
+        },
+        "status": "planned"
+      },
+      "appAction": "TriggerHotkeyByName",
+      "safety": "never-auto",
+      "unavailable": {
+        "label": "PICK HOTKEY",
+        "hint": "Pick an OBS hotkey (plugins add their own) in the PI.",
+        "when": [
+          "nothingSelected",
+          "notConnected"
+        ],
+        "style": "badge"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "The protocol doc warns hotkey requests come 'as-is'; prefer the dedicated requests above."
+    },
+    {
+      "id": "transform.edit",
+      "label": "TRANSFORM",
+      "longLabel": "Edit Transform of the selected source",
+      "glyph": "transform",
+      "monogram": "TRN",
+      "category": "tool",
+      "priority": 40,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+E"
+      },
+      "appAction": "actionEditTransform",
+      "safety": "safe",
+      "unavailable": {
+        "label": "TRANSFORM",
+        "hint": "Bring OBS to the front and select a source.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S4",
+        "S7",
+        "S11"
+      ],
+      "notes": "Main-window menu shortcut (fixed; not in Settings > Hotkeys)."
+    },
+    {
+      "id": "transform.fit",
+      "label": "FIT",
+      "longLabel": "Fit to screen",
+      "glyph": "fit",
+      "monogram": "FIT",
+      "category": "tool",
+      "priority": 38,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+F"
+      },
+      "appAction": "actionFitToScreen",
+      "safety": "safe",
+      "unavailable": {
+        "label": "FIT",
+        "hint": "Bring OBS to the front and select a source.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S4",
+        "S7",
+        "S11"
+      ]
+    },
+    {
+      "id": "transform.stretch",
+      "label": "STRETCH",
+      "longLabel": "Stretch to screen",
+      "glyph": "fit",
+      "monogram": "STR",
+      "category": "tool",
+      "priority": 30,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+S"
+      },
+      "appAction": "actionStretchToScreen",
+      "safety": "safe",
+      "unavailable": {
+        "label": "STRETCH",
+        "hint": "Bring OBS to the front and select a source.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S4",
+        "S7",
+        "S11"
+      ]
+    },
+    {
+      "id": "transform.center",
+      "label": "CENTER",
+      "longLabel": "Center to screen",
+      "glyph": "target",
+      "category": "tool",
+      "priority": 36,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+D"
+      },
+      "appAction": "actionCenterToScreen",
+      "safety": "safe",
+      "unavailable": {
+        "label": "CENTER",
+        "hint": "Bring OBS to the front and select a source.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S4",
+        "S7",
+        "S11"
+      ]
+    },
+    {
+      "id": "transform.reset",
+      "label": "RESET XFORM",
+      "longLabel": "Reset transform",
+      "glyph": "sync",
+      "category": "tool",
+      "priority": 32,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+R"
+      },
+      "appAction": "actionResetTransform",
+      "safety": "safe",
+      "unavailable": {
+        "label": "RESET XFORM",
+        "hint": "Bring OBS to the front and select a source.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S4",
+        "S7",
+        "S11"
+      ]
+    },
+    {
+      "id": "source.toTop",
+      "label": "TO TOP",
+      "longLabel": "Move source to top of the list",
+      "glyph": "top",
+      "monogram": "TOP",
+      "category": "tool",
+      "priority": 28,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Home"
+      },
+      "appAction": "actionMoveToTop",
+      "safety": "safe",
+      "unavailable": {
+        "label": "TO TOP",
+        "hint": "Bring OBS to the front and select a source.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S4",
+        "S7",
+        "S11"
+      ]
+    },
+    {
+      "id": "edit.undo",
+      "label": "UNDO",
+      "glyph": "back",
+      "category": "system",
+      "priority": 34,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Z"
+      },
+      "appAction": "actionMainUndo",
+      "safety": "safe",
+      "unavailable": {
+        "label": "UNDO",
+        "hint": "Bring OBS to the front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S4",
+        "S6"
+      ]
+    },
+    {
+      "id": "edit.redo",
+      "label": "REDO",
+      "glyph": "redo",
+      "monogram": "RDO",
+      "category": "system",
+      "priority": 26,
+      "contexts": [
+        "*"
+      ],
+      "binding": {
+        "kind": "chord",
+        "chord": "Ctrl+Y"
+      },
+      "altBindings": [
+        {
+          "kind": "chord",
+          "chord": "Ctrl+Shift+Z"
+        }
+      ],
+      "appAction": "actionMainRedo",
+      "safety": "safe",
+      "unavailable": {
+        "label": "REDO",
+        "hint": "Bring OBS to the front.",
+        "when": [
+          "notForeground"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S4",
+        "S6"
+      ],
+      "conflict": "The KB (S4) lists only Ctrl-Shift-Z; the 31.0.2 source (S6) registers Ctrl+Shift+Z and Ctrl+Y."
+    }
+  ],
+  "controls": [
+    {
+      "id": "micVolume",
+      "label": "MIC VOL",
+      "glyph": "mic",
+      "category": "tool",
+      "priority": 90,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "obs.input.volumeStep",
+          "args": {
+            "input": "mic1",
+            "deltaDb": -1
+          },
+          "status": "planned"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "obs.input.volumeStep",
+          "args": {
+            "input": "mic1",
+            "deltaDb": 1
+          },
+          "status": "planned"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "dB",
+          "note": "The module sums the ticks of one dial event into a single SetInputVolume (inputVolumeDb).",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 3
+            }
+          ],
+          "maxPressesPerEvent": 30,
+          "minIntervalMs": 0
+        },
+        "clamp": {
+          "min": -100,
+          "max": 0
+        }
+      },
+      "push": {
+        "verb": "audio.micMute"
+      },
+      "readout": "micMeter",
+      "safety": "safe",
+      "unavailable": {
+        "label": "MIC VOL",
+        "hint": "Connect OBS to Prism first.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "SetInputVolume accepts -100..26 dB; Prism stops at 0 dB (the mixer fader's top) so a fast spin can't boost into clipping. The push is never-auto (mic mute)."
+    },
+    {
+      "id": "desktopVolume",
+      "label": "DESKTOP VOL",
+      "glyph": "volume",
+      "category": "tool",
+      "priority": 85,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "obs.input.volumeStep",
+          "args": {
+            "input": "desktop1",
+            "deltaDb": -1
+          },
+          "status": "planned"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "obs.input.volumeStep",
+          "args": {
+            "input": "desktop1",
+            "deltaDb": 1
+          },
+          "status": "planned"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "dB",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 3
+            }
+          ],
+          "maxPressesPerEvent": 30,
+          "minIntervalMs": 0
+        },
+        "clamp": {
+          "min": -100,
+          "max": 0
+        }
+      },
+      "push": {
+        "verb": "audio.desktopMute"
+      },
+      "readout": "desktopMeter",
+      "safety": "safe",
+      "unavailable": {
+        "label": "DESKTOP VOL",
+        "hint": "Connect OBS to Prism first.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "sceneBrowser",
+      "label": "SCENES",
+      "glyph": "scene",
+      "category": "mode",
+      "priority": 88,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "obs.scene.browse",
+          "args": {
+            "delta": -1
+          },
+          "status": "planned"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "obs.scene.browse",
+          "args": {
+            "delta": 1
+          },
+          "status": "planned"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "scene",
+          "note": "Moves a Prism-side cursor through GetSceneList (top to bottom); nothing goes on air while turning. In Studio Mode each step also sets the preview scene (SetCurrentPreviewScene), which is off air.",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 3,
+          "minIntervalMs": 0
+        }
+      },
+      "push": {
+        "verb": "scene.take"
+      },
+      "readout": "sceneBrowse",
+      "safety": "safe",
+      "unavailable": {
+        "label": "SCENES",
+        "hint": "Connect OBS to Prism first.",
+        "when": [
+          "notConnected",
+          "moduleMissing"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "The picked scene's key glows; on a Galleon the push arms for 3 s only if scene.take were 'confirm' (it's never-auto, so one push takes it)."
+    },
+    {
+      "id": "transitionDuration",
+      "label": "FADE MS",
+      "glyph": "timer",
+      "category": "tool",
+      "priority": 60,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "module",
+          "verb": "obs.transition.durationStep",
+          "args": {
+            "deltaMs": -50
+          },
+          "status": "planned"
+        },
+        "right": {
+          "kind": "module",
+          "verb": "obs.transition.durationStep",
+          "args": {
+            "deltaMs": 50
+          },
+          "status": "planned"
+        },
+        "step": {
+          "perPress": 50,
+          "unit": "ms",
+          "note": "SetCurrentSceneTransitionDuration; ignored by fixed transitions such as Cut.",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 4
+            }
+          ],
+          "maxPressesPerEvent": 40,
+          "minIntervalMs": 0
+        },
+        "clamp": {
+          "min": 50,
+          "max": 20000
+        }
+      },
+      "push": {
+        "verb": "transition.durationReset"
+      },
+      "readout": "transitionDuration",
+      "safety": "safe",
+      "unavailable": {
+        "label": "FADE MS",
+        "hint": "The current transition has a fixed duration.",
+        "when": [
+          "notConnected",
+          "wrongContext"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "nudgeX",
+      "label": "NUDGE X",
+      "glyph": "move",
+      "category": "tool",
+      "priority": 40,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Left"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Right"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "px",
+          "modifierSteps": {
+            "Shift": 10
+          },
+          "note": "Preview nudge; needs the preview focused, a source selected and the preview unlocked.",
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 5
+            }
+          ],
+          "maxPressesPerEvent": 30,
+          "minIntervalMs": 10
+        }
+      },
+      "push": {
+        "verb": "transform.center"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "NUDGE X",
+        "hint": "Click the source in the OBS preview first.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S4",
+        "S6"
+      ]
+    },
+    {
+      "id": "nudgeY",
+      "label": "NUDGE Y",
+      "glyph": "move",
+      "category": "tool",
+      "priority": 38,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Up"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Down"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "px",
+          "modifierSteps": {
+            "Shift": 10
+          },
+          "confidence": "official"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            },
+            {
+              "minTicks": 4,
+              "pressesPerTick": 2
+            },
+            {
+              "minTicks": 8,
+              "pressesPerTick": 5
+            }
+          ],
+          "maxPressesPerEvent": 30,
+          "minIntervalMs": 10
+        }
+      },
+      "push": {
+        "verb": "transform.fit"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "NUDGE Y",
+        "hint": "Click the source in the OBS preview first.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "official",
+      "sources": [
+        "S4",
+        "S6"
+      ]
+    },
+    {
+      "id": "sourceOrder",
+      "label": "ORDER",
+      "glyph": "layers",
+      "category": "tool",
+      "priority": 35,
+      "contexts": [
+        "*"
+      ],
+      "turn": {
+        "left": {
+          "kind": "chord",
+          "chord": "Ctrl+Up"
+        },
+        "right": {
+          "kind": "chord",
+          "chord": "Ctrl+Down"
+        },
+        "step": {
+          "perPress": 1,
+          "unit": "position",
+          "note": "Edit > Order > Move Up / Move Down for the selected source.",
+          "confidence": "verified-local"
+        },
+        "acceleration": {
+          "curve": [
+            {
+              "minTicks": 1,
+              "pressesPerTick": 1
+            }
+          ],
+          "maxPressesPerEvent": 4,
+          "minIntervalMs": 30
+        }
+      },
+      "push": {
+        "verb": "source.toTop"
+      },
+      "safety": "safe",
+      "unavailable": {
+        "label": "ORDER",
+        "hint": "Bring OBS to the front and select a source.",
+        "when": [
+          "notForeground",
+          "nothingSelected"
+        ],
+        "style": "dim"
+      },
+      "confidence": "verified-local",
+      "sources": [
+        "S4",
+        "S7",
+        "S11"
+      ]
+    }
+  ],
+  "readouts": [
+    {
+      "id": "streamStatus",
+      "label": "LIVE",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.stream",
+        "topic": "StreamStateChanged",
+        "status": "planned",
+        "note": "GetStreamStatus: outputActive, outputReconnecting, outputTimecode (HH:MM:SS.mmm), outputCongestion. Poll 1 Hz while live for the timecode."
+      },
+      "format": "{state} {outputTimecode}",
+      "widget": "state",
+      "privacy": "public",
+      "refreshHz": 1,
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "recordStatus",
+      "label": "REC",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.record",
+        "topic": "RecordStateChanged",
+        "status": "planned",
+        "note": "GetRecordStatus: outputActive, outputPaused, outputTimecode."
+      },
+      "format": "{state} {outputTimecode}",
+      "widget": "state",
+      "privacy": "public",
+      "refreshHz": 1,
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "replayState",
+      "label": "REPLAY",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.replay.active",
+        "topic": "ReplayBufferStateChanged",
+        "status": "planned",
+        "note": "GetReplayBufferStatus at connect; ReplayBufferSaved flashes the key."
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "virtualCamState",
+      "label": "VCAM",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.virtualCam.active",
+        "topic": "VirtualcamStateChanged",
+        "status": "planned"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "studioModeState",
+      "label": "STUDIO",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.studioMode",
+        "topic": "StudioModeStateChanged",
+        "status": "planned"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "droppedFrames",
+      "label": "DROPPED",
+      "contexts": [
+        "streaming",
+        "studioMode",
+        "idle"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.stream.outputSkippedFrames",
+        "status": "planned",
+        "note": "GetStreamStatus.outputSkippedFrames / outputTotalFrames = obs_output_get_frames_dropped, i.e. OBS Stats 'Dropped Frames (Network)'."
+      },
+      "unit": "%",
+      "format": "{skipped} ({percent}%)",
+      "widget": "number",
+      "privacy": "public",
+      "refreshHz": 1,
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S13",
+        "S14"
+      ]
+    },
+    {
+      "id": "renderLag",
+      "label": "RENDER LAG",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.stats.renderSkippedFrames",
+        "status": "planned",
+        "note": "GetStats.renderSkippedFrames / renderTotalFrames = Stats 'Frames missed due to rendering lag'."
+      },
+      "format": "{skipped} ({percent}%)",
+      "widget": "number",
+      "privacy": "public",
+      "refreshHz": 1,
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S14"
+      ]
+    },
+    {
+      "id": "encoderLag",
+      "label": "ENCODE LAG",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.stats.outputSkippedFrames",
+        "status": "planned",
+        "note": "GetStats.outputSkippedFrames / outputTotalFrames = Stats 'Skipped frames due to encoding lag'."
+      },
+      "format": "{skipped} ({percent}%)",
+      "widget": "number",
+      "privacy": "public",
+      "refreshHz": 1,
+      "confidence": "official",
+      "sources": [
+        "S1",
+        "S14"
+      ]
+    },
+    {
+      "id": "perf",
+      "label": "CPU / FPS",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.stats",
+        "status": "planned",
+        "note": "GetStats.cpuUsage (OBS process, %), activeFps, averageFrameRenderTime (ms). Poll 1 Hz."
+      },
+      "format": "{cpuUsage}% CPU  {activeFps} FPS",
+      "widget": "text",
+      "privacy": "public",
+      "refreshHz": 1,
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "micMeter",
+      "label": "MIC",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.meters.mic1",
+        "topic": "InputVolumeMeters",
+        "status": "planned",
+        "note": "High-volume event (subscription bit 1 << 16), every 50 ms for all active inputs; Prism decimates to 10 Hz. Shows the peak level and the fader setting (InputVolumeChanged)."
+      },
+      "unit": "dB",
+      "range": [
+        -60,
+        0
+      ],
+      "widget": "meter",
+      "privacy": "public",
+      "refreshHz": 10,
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ],
+      "notes": "10 Hz keeps one meter at a sixth of Prism Control's 60 updates/s budget."
+    },
+    {
+      "id": "desktopMeter",
+      "label": "DESKTOP",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.meters.desktop1",
+        "topic": "InputVolumeMeters",
+        "status": "planned"
+      },
+      "unit": "dB",
+      "range": [
+        -60,
+        0
+      ],
+      "widget": "meter",
+      "privacy": "public",
+      "refreshHz": 10,
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "micMuted",
+      "label": "MIC",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.input.mic1.muted",
+        "topic": "InputMuteStateChanged",
+        "status": "planned"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "desktopMuted",
+      "label": "DESKTOP",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.input.desktop1.muted",
+        "topic": "InputMuteStateChanged",
+        "status": "planned"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "currentScene",
+      "label": "SCENE",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.scene.program",
+        "topic": "CurrentProgramSceneChanged",
+        "status": "planned",
+        "note": "Lights the scene key that is on air (and CurrentPreviewSceneChanged for the preview in Studio Mode)."
+      },
+      "widget": "text",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "sceneBrowse",
+      "label": "NEXT SCENE",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.scene.browse",
+        "status": "planned",
+        "note": "Prism-side cursor of the scene dial (the scene a push would take)."
+      },
+      "widget": "text",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "transitionDuration",
+      "label": "FADE",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.transition.duration",
+        "topic": "CurrentSceneTransitionDurationChanged",
+        "status": "planned",
+        "note": "GetCurrentSceneTransition.transitionDuration (null for fixed transitions)."
+      },
+      "unit": "ms",
+      "range": [
+        50,
+        20000
+      ],
+      "widget": "number",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "diskSpace",
+      "label": "DISK",
+      "contexts": [
+        "recording",
+        "idle"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.stats.availableDiskSpace",
+        "status": "planned",
+        "note": "GetStats.availableDiskSpace (MB) on the recording drive."
+      },
+      "unit": "GB",
+      "format": "{value} GB free",
+      "widget": "number",
+      "privacy": "public",
+      "refreshHz": 0.2,
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "streamBitrate",
+      "label": "KBPS",
+      "contexts": [
+        "streaming"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.stream.kbps",
+        "status": "planned",
+        "note": "Derived by the module from successive GetStreamStatus.outputBytes samples (1 s apart)."
+      },
+      "unit": "kb/s",
+      "widget": "graph",
+      "privacy": "public",
+      "refreshHz": 1,
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "source1State",
+      "label": "SOURCE 1",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.sceneItem.slot1.enabled",
+        "topic": "SceneItemEnableStateChanged",
+        "status": "planned"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    },
+    {
+      "id": "source2State",
+      "label": "SOURCE 2",
+      "contexts": [
+        "*"
+      ],
+      "source": {
+        "kind": "module",
+        "field": "obs.sceneItem.slot2.enabled",
+        "topic": "SceneItemEnableStateChanged",
+        "status": "planned"
+      },
+      "widget": "state",
+      "privacy": "public",
+      "confidence": "official",
+      "sources": [
+        "S1"
+      ]
+    }
+  ],
+  "userBindings": {
+    "storage": "file",
+    "summary": "OBS ships no global hotkeys; users bind them in Settings > Hotkeys. Frontend hotkeys (stream, record, replay, studio mode, screenshot…) are saved per profile in basic.ini [Hotkeys] as one JSON value per hotkey name. Per-source hotkeys (scene switch, mute/unmute, push-to-talk, show/hide a scene item) are saved inside the scene collection JSON under each source's 'hotkeys' object. Prism reads them only to press the user's own key as a fallback when the websocket isn't connected.",
+    "locations": [
+      {
+        "path": "%APPDATA%\\obs-studio\\basic\\profiles\\<profile>\\basic.ini",
+        "format": "ini",
+        "encoding": "utf-8",
+        "note": "[Hotkeys] section. Value = JSON with newlines escaped as \\n (libobs config-file). Absent here: OBS has never run for this user."
+      },
+      {
+        "path": "%APPDATA%\\obs-studio\\basic\\scenes\\<collection>.json",
+        "format": "json",
+        "encoding": "utf-8",
+        "note": "sources[].hotkeys (OBSBasic.SelectScene on scene sources, libobs.mute / libobs.unmute / libobs.push-to-talk / libobs.push-to-mute on audio sources, libobs.show_scene_item.<item> / libobs.hide_scene_item.<item> on scenes); global audio in DesktopAudioDevice1..2 / AuxAudioDevice1..4 objects with their own 'hotkeys'."
+      },
+      {
+        "path": "%APPDATA%\\obs-studio\\user.ini",
+        "format": "ini",
+        "encoding": "utf-8",
+        "note": "OBS 31+: [General] HotkeyFocusType (default NeverDisableHotkeys = hotkeys work even when OBS isn't focused) and [Basic] Profile / SceneCollection (which files above are active). OBS 30 and older keep these in global.ini."
+      },
+      {
+        "path": "%APPDATA%\\obs-studio\\plugin_config\\obs-websocket\\config.json",
+        "format": "json",
+        "encoding": "utf-8",
+        "note": "obs-websocket server settings (ServerEnabled default false, ServerPort default 4455, AuthRequired default true, a generated ServerPassword). NEVER read or copy the password: Prism asks the user to paste it in the PI and stores it with DPAPI."
+      },
+      {
+        "path": "<install>\\config\\obs-studio\\...",
+        "format": "ini",
+        "note": "Portable mode (portable_mode.txt next to the install, or --portable): the same tree lives under the install folder."
+      }
+    ],
+    "entryShape": "basic.ini: '<hotkeyName>=<json>' under [Hotkeys], e.g. OBSBasic.StartStreaming; the JSON is {\"bindings\":[{\"key\":\"OBS_KEY_*\",\"shift\"?:bool,\"control\"?:bool,\"alt\"?:bool,\"command\"?:bool}, …]} (several bindings allowed; an empty array = unbound). The replay buffer is the exception: key 'ReplayBuffer' holds {\"ReplayBuffer.Save\":[bindings]}. Scene collection: sources[i].hotkeys = {\"<hotkeyName>\": [bindings]}. The action id is the hotkey name, not the websocket request, so Prism joins through the table in the notes file (StartStream <- OBSBasic.StartStreaming, ToggleRecord <- OBSBasic.StartRecording/StopRecording, SaveReplayBuffer <- ReplayBuffer.Save, TriggerStudioModeTransition <- OBSBasic.Transition, SetCurrentProgramScene <- the scene's OBSBasic.SelectScene, ToggleInputMute <- libobs.mute/unmute …).",
+    "example": "[Hotkeys]\nOBSBasic.StartStreaming={\\n    \"bindings\": [\\n        {\\n            \"control\": true,\\n            \"shift\": true,\\n            \"key\": \"OBS_KEY_F9\"\\n        }\\n    ]\\n}\nReplayBuffer={\\n    \"ReplayBuffer.Save\": [\\n        {\\n            \"key\": \"OBS_KEY_F10\"\\n        }\\n    ]\\n}",
+    "keyNameMap": "OBS_KEY_A..OBS_KEY_Z -> A..Z; OBS_KEY_0..9 -> 0..9; OBS_KEY_F1..F24 -> F1..F24; OBS_KEY_NUM0..NUM9 -> Numpad0..9; OBS_KEY_NUMPLUS/NUMMINUS/NUMASTERISK/NUMSLASH/NUMPERIOD -> NumpadAdd/NumpadSubtract/NumpadMultiply/NumpadDivide/NumpadDecimal; OBS_KEY_RETURN -> Enter, OBS_KEY_ESCAPE -> Esc, OBS_KEY_SPACE, OBS_KEY_TAB, OBS_KEY_BACKSPACE, OBS_KEY_INSERT, OBS_KEY_DELETE, OBS_KEY_HOME, OBS_KEY_END, OBS_KEY_PAGEUP, OBS_KEY_PAGEDOWN, OBS_KEY_UP/DOWN/LEFT/RIGHT, OBS_KEY_PRINT -> PrintScreen, OBS_KEY_SCROLLLOCK, OBS_KEY_PAUSE map by name. On Windows the OEM keys are: OBS_KEY_PLUS -> Equal (VK_OEM_PLUS), OBS_KEY_MINUS -> Minus, OBS_KEY_COMMA, OBS_KEY_PERIOD, OBS_KEY_SLASH, OBS_KEY_SEMICOLON, OBS_KEY_APOSTROPHE -> Quote, OBS_KEY_BRACKETLEFT/BRACKETRIGHT, OBS_KEY_BACKSLASH, OBS_KEY_ASCIITILDE -> Backquote (VK_OEM_3), OBS_KEY_BACKSLASH_RT102 -> IntlBackslash. Modifiers: control -> Ctrl, alt -> Alt, shift -> Shift (command is macOS). OBS_KEY_MOUSE1..29 are mouse buttons: no chord, keep the verb on its module binding. Media keys (OBS_KEY_VK_MEDIA_*) -> MediaPlayPause etc.",
+    "readMode": "Read-only. Read user.ini for the active profile and scene collection, parse basic.ini [Hotkeys] (unescape \\n, then JSON) and the collection JSON's hotkeys, watch both files (OBS rewrites them on settings save and on exit). Never open plugin_config/obs-websocket/config.json. A user hotkey is only a fallback: with the websocket connected, the request is always used because it reports true state.",
+    "confidence": "official",
+    "sources": [
+      "S6",
+      "S8",
+      "S9",
+      "S10",
+      "S3",
+      "S2"
+    ],
+    "verify": "Once OBS has been run and a hotkey set, confirm the basic.ini line format on this PC (the example is fictional, built from the source)."
+  },
+  "layouts": [
+    {
+      "device": "galleon-100-sd",
+      "context": "idle",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "stream.goLive"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "record.toggle"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "replay.save"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "scene.slot1"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "scene.slot2"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "scene.slot3"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "scene.slot4"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "audio.micMute"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "audio.desktopMute"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "studio.toggle"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "capture.screenshot"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "virtualCam.toggle"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "micVolume"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "desktopVolume"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "sceneBrowser"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "transitionDuration"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "micMeter"
+        },
+        {
+          "slot": "TR",
+          "readout": "streamStatus"
+        },
+        {
+          "slot": "BL",
+          "readout": "droppedFrames"
+        },
+        {
+          "slot": "BR",
+          "readout": "perf"
+        }
+      ],
+      "rationale": "Go live / record / replay on top, scenes in the middle with the two mute keys, mode and capture keys at the bottom; volume and scene dials, health readouts on the screen."
+    },
+    {
+      "device": "galleon-100-sd",
+      "context": "streaming",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "stream.end"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "record.toggle"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "replay.save"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "scene.slot1"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "scene.slot2"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "scene.slot3"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "scene.slot4"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "audio.micMute"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "audio.desktopMute"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "source.slot1"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "source.slot2"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "capture.screenshot"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "micVolume"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "desktopVolume"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "sceneBrowser"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "transitionDuration"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "micMeter"
+        },
+        {
+          "slot": "TR",
+          "readout": "streamStatus"
+        },
+        {
+          "slot": "BL",
+          "readout": "droppedFrames"
+        },
+        {
+          "slot": "BR",
+          "readout": "perf"
+        }
+      ],
+      "rationale": "Same places as offline so muscle memory holds: the stream key becomes END STREAM (hold), scenes and mutes stay put, and the bottom row trades setup keys for on-air source toggles."
+    },
+    {
+      "device": "galleon-100-sd",
+      "context": "recording",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "stream.goLive"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "record.toggle"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "record.pause"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "scene.slot1"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "scene.slot2"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "scene.slot3"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "record.chapter"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "audio.micMute"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "audio.desktopMute"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "record.split"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "replay.save"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "capture.screenshot"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "micVolume"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "desktopVolume"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "sceneBrowser"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "transitionDuration"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "micMeter"
+        },
+        {
+          "slot": "TR",
+          "readout": "recordStatus"
+        },
+        {
+          "slot": "BL",
+          "readout": "diskSpace"
+        },
+        {
+          "slot": "BR",
+          "readout": "perf"
+        }
+      ],
+      "rationale": "Recording tools replace replay on the top row (pause next to stop), chapter and split take the free slots; the screen swaps stream health for record time and free disk."
+    },
+    {
+      "device": "galleon-100-sd",
+      "context": "studioMode",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "stream.toggle"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "record.toggle"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "studio.transition"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "scene.slot1"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "scene.slot2"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "scene.slot3"
+        },
+        {
+          "x": 0,
+          "y": 2,
+          "verb": "scene.slot4"
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "verb": "transition.cut"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "verb": "transition.fade"
+        },
+        {
+          "x": 0,
+          "y": 3,
+          "verb": "studio.toggle"
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "verb": "audio.micMute"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "verb": "audio.desktopMute"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "layer": 0,
+          "control": "micVolume"
+        },
+        {
+          "dial": 0,
+          "layer": 1,
+          "control": "desktopVolume"
+        },
+        {
+          "dial": 1,
+          "layer": 0,
+          "control": "sceneBrowser"
+        },
+        {
+          "dial": 1,
+          "layer": 1,
+          "control": "transitionDuration"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "TL",
+          "readout": "micMeter"
+        },
+        {
+          "slot": "TR",
+          "readout": "streamStatus"
+        },
+        {
+          "slot": "BL",
+          "readout": "sceneBrowse"
+        },
+        {
+          "slot": "BR",
+          "readout": "transitionDuration"
+        }
+      ],
+      "rationale": "Scene keys load the preview, TAKE sits top-right where the hand rests, Cut/Fade pick the transition; the screen shows the queued preview scene and the transition length."
+    },
+    {
+      "device": "stream-deck-plus",
+      "context": "idle",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "stream.goLive"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "record.toggle"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "replay.save"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "verb": "audio.micMute"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "scene.slot1"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "scene.slot2"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "scene.slot3"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "verb": "audio.desktopMute"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "control": "micVolume"
+        },
+        {
+          "dial": 1,
+          "control": "desktopVolume"
+        },
+        {
+          "dial": 2,
+          "control": "sceneBrowser"
+        },
+        {
+          "dial": 3,
+          "control": "transitionDuration"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "0",
+          "readout": "micMeter"
+        },
+        {
+          "slot": "1",
+          "readout": "desktopMeter"
+        },
+        {
+          "slot": "2",
+          "readout": "sceneBrowse"
+        },
+        {
+          "slot": "3",
+          "readout": "transitionDuration"
+        }
+      ],
+      "rationale": "Outputs and mic mute on top, three scenes and desktop mute below; each dial's strip segment shows its own value."
+    },
+    {
+      "device": "stream-deck-plus",
+      "context": "streaming",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "stream.end"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "record.toggle"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "replay.save"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "verb": "audio.micMute"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "scene.slot1"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "scene.slot2"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "scene.slot3"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "verb": "audio.desktopMute"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "control": "micVolume"
+        },
+        {
+          "dial": 1,
+          "control": "desktopVolume"
+        },
+        {
+          "dial": 2,
+          "control": "sceneBrowser"
+        },
+        {
+          "dial": 3,
+          "control": "transitionDuration"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "0",
+          "readout": "micMeter"
+        },
+        {
+          "slot": "1",
+          "readout": "desktopMeter"
+        },
+        {
+          "slot": "2",
+          "readout": "streamStatus"
+        },
+        {
+          "slot": "3",
+          "readout": "droppedFrames"
+        }
+      ],
+      "rationale": "Same keys as offline with END STREAM in the stream slot; while live the right half of the strip shows stream time and dropped frames (the picked scene glows on its key)."
+    },
+    {
+      "device": "stream-deck-plus",
+      "context": "studioMode",
+      "keys": [
+        {
+          "x": 0,
+          "y": 0,
+          "verb": "stream.toggle"
+        },
+        {
+          "x": 1,
+          "y": 0,
+          "verb": "studio.transition"
+        },
+        {
+          "x": 2,
+          "y": 0,
+          "verb": "transition.cut"
+        },
+        {
+          "x": 3,
+          "y": 0,
+          "verb": "audio.micMute"
+        },
+        {
+          "x": 0,
+          "y": 1,
+          "verb": "scene.slot1"
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "verb": "scene.slot2"
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "verb": "scene.slot3"
+        },
+        {
+          "x": 3,
+          "y": 1,
+          "verb": "studio.toggle"
+        }
+      ],
+      "dials": [
+        {
+          "dial": 0,
+          "control": "micVolume"
+        },
+        {
+          "dial": 1,
+          "control": "desktopVolume"
+        },
+        {
+          "dial": 2,
+          "control": "sceneBrowser"
+        },
+        {
+          "dial": 3,
+          "control": "transitionDuration"
+        }
+      ],
+      "screen": [
+        {
+          "slot": "0",
+          "readout": "micMeter"
+        },
+        {
+          "slot": "1",
+          "readout": "desktopMeter"
+        },
+        {
+          "slot": "2",
+          "readout": "sceneBrowse"
+        },
+        {
+          "slot": "3",
+          "readout": "transitionDuration"
+        }
+      ],
+      "rationale": "TAKE next to the stream key, scenes load the preview; the strip shows the queued scene and transition length over their dials."
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "title": "obs-websocket 5.x protocol (generated)",
+      "url": "https://github.com/obsproject/obs-websocket/blob/master/docs/generated/protocol.md",
+      "publisher": "OBS Project (obs-websocket)",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "5.x master; this PC ships 5.5.5",
+      "note": "Requests, events, value ranges (SetInputVolume -100..26 dB, SetCurrentSceneTransitionDuration 50..20000 ms), CreateRecordChapter / SplitRecordFile added in 5.5.0, InputVolumeMeters every 50 ms behind subscription 1 << 16."
+    },
+    {
+      "id": "S2",
+      "title": "obs-websocket README",
+      "url": "https://github.com/obsproject/obs-websocket/blob/master/README.md",
+      "publisher": "OBS Project (obs-websocket)",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "5.x",
+      "note": "Server on port 4455 by default; a password is generated on first load; Tools menu settings dialog."
+    },
+    {
+      "id": "S3",
+      "title": "obs-websocket Config.h / Config.cpp",
+      "url": "https://github.com/obsproject/obs-websocket/blob/master/src/Config.cpp",
+      "publisher": "OBS Project (obs-websocket)",
+      "kind": "source-code",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "5.x",
+      "note": "ServerEnabled=false, ServerPort=4455, AuthRequired=true by default; settings in the module config file config.json."
+    },
+    {
+      "id": "S4",
+      "title": "Keyboard Shortcuts (OBS Knowledge Base)",
+      "url": "https://obsproject.com/kb/keyboard-shortcuts",
+      "publisher": "OBS Project",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "page dated 2021-08-25",
+      "note": "Main-window shortcuts: Ctrl-Z/Ctrl-Shift-Z, Ctrl-C/V, Del, Ctrl-Up/Down/Home/End, Ctrl-E/R/F/S/D, arrow nudge."
+    },
+    {
+      "id": "S5",
+      "title": "OBS Studio Overview Guide (OBS Knowledge Base)",
+      "url": "https://obsproject.com/kb/obs-studio-overview",
+      "publisher": "OBS Project",
+      "kind": "official",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "page dated 2021-08-25",
+      "note": "Hotkeys section lists what can be bound; the replay buffer save hotkey 'must be set' by the user."
+    },
+    {
+      "id": "S6",
+      "title": "OBS Studio source: UI/window-basic-main.cpp (31.0.2)",
+      "url": "https://github.com/obsproject/obs-studio/blob/31.0.2/UI/window-basic-main.cpp",
+      "publisher": "OBS Project",
+      "kind": "source-code",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "31.0.2",
+      "note": "Frontend hotkeys registered with no default binding and loaded from the profile's [Hotkeys]; nudge 1 px / Shift 10 px on the preview; undo Ctrl+Z, redo Ctrl+Shift+Z and Ctrl+Y; F2 rename; Ctrl+Q only on Linux; UpdateTitleBar format; 300 ms transition default (window-basic-main-transitions.cpp)."
+    },
+    {
+      "id": "S7",
+      "title": "OBS Studio source: UI/forms/OBSBasic.ui (31.0.2)",
+      "url": "https://github.com/obsproject/obs-studio/blob/31.0.2/UI/forms/OBSBasic.ui",
+      "publisher": "OBS Project",
+      "kind": "source-code",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "31.0.2",
+      "note": "Menu action shortcuts (Ctrl+E/F/S/R/D, Ctrl+Shift+C/V, Ctrl+Up/Down/Home/End, Ctrl+C/V, Del, F11 fullscreen interface)."
+    },
+    {
+      "id": "S8",
+      "title": "libobs source: obs-hotkey.c, obs.c, util/config-file.c (31.0.2)",
+      "url": "https://github.com/obsproject/obs-studio/blob/31.0.2/libobs/obs-hotkey.c",
+      "publisher": "OBS Project",
+      "kind": "source-code",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "31.0.2",
+      "note": "Binding JSON fields key/shift/control/alt/command; sources save hotkeys under 'hotkeys'; INI values escape newlines as \\n."
+    },
+    {
+      "id": "S9",
+      "title": "libobs source: obs-windows.c (OBS_KEY to VK mapping, 31.0.2)",
+      "url": "https://github.com/obsproject/obs-studio/blob/31.0.2/libobs/obs-windows.c",
+      "publisher": "OBS Project",
+      "kind": "source-code",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "31.0.2"
+    },
+    {
+      "id": "S10",
+      "title": "OBS Studio source: UI/obs-app.cpp (31.0.2)",
+      "url": "https://github.com/obsproject/obs-studio/blob/31.0.2/UI/obs-app.cpp",
+      "publisher": "OBS Project",
+      "kind": "source-code",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "31.0.2",
+      "note": "user.ini (HotkeyFocusType default NeverDisableHotkeys), basic/profiles and basic/scenes paths."
+    },
+    {
+      "id": "S11",
+      "title": "Local install probe (file version and embedded strings, read-only)",
+      "url": "local:C:\\Program Files\\obs-studio\\bin\\64bit\\obs64.exe",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "31.0.2",
+      "note": "obs64.exe FileVersion 31.0.2; obs-plugins\\64bit\\obs-websocket.dll contains 5.5.5; hotkey names OBSBasic.* (incl. AddChapterMarker, SplitFile, TogglePreviewProgram), ReplayBuffer.Save (obs-ffmpeg.dll), libobs.* and 538 OBS_KEY_* names; menu shortcut strings Ctrl+E/R/S/F/D, Ctrl+Up/Down/Home/End, Ctrl+Shift+C/V, Del."
+    },
+    {
+      "id": "S12",
+      "title": "Local user-folder probe (existence only)",
+      "url": "local:%APPDATA%\\obs-studio\\",
+      "kind": "local",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "31.0.2",
+      "note": "Folder absent: OBS has not been run by this user, so no profile, hotkeys or websocket config yet."
+    },
+    {
+      "id": "S13",
+      "title": "obs-websocket source: RequestHandler_Stream.cpp",
+      "url": "https://github.com/obsproject/obs-websocket/blob/master/src/requesthandler/RequestHandler_Stream.cpp",
+      "publisher": "OBS Project (obs-websocket)",
+      "kind": "source-code",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "5.x",
+      "note": "outputSkippedFrames = obs_output_get_frames_dropped (network drops)."
+    },
+    {
+      "id": "S14",
+      "title": "OBS Studio source: UI/data/locale/en-US.ini (31.0.2)",
+      "url": "https://github.com/obsproject/obs-studio/blob/31.0.2/UI/data/locale/en-US.ini",
+      "publisher": "OBS Project",
+      "kind": "source-code",
+      "accessed": "2026-10-16",
+      "appliesToVersion": "31.0.2",
+      "note": "Stats labels: 'Dropped Frames (Network)', 'Frames missed due to rendering lag', 'Skipped frames due to encoding lag'."
+    }
+  ],
+  "confidence": "medium",
+  "conflicts": [
+    "Redo: the KB (S4) lists only Ctrl-Shift-Z; 31.0.2 (S6) also binds Ctrl+Y.",
+    "Quit: the KB (S4) lists Ctrl-Q for Windows/Linux; 31.0.2 (S6) sets Ctrl+Q only on Linux. Not used in the pack.",
+    "The protocol doc (S1) is generated from master and shows canvasUuid fields (added 5.7.0); the bundled 5.5.5 (S11) predates them, so the module must not send canvas fields to 5.5.x."
+  ],
+  "gaps": [
+    "Everything in the obs.* namespace is planned: the Prism Control obs module (websocket client, auth via a user-pasted password, reconnect, InputVolumeMeters decimation) doesn't exist yet.",
+    "The pack is matched by foreground process, but streamers mostly need these controls while a game is in front. The engine needs a way to keep an 'app running / module connected' pack available in the background or as a pinned overlay page.",
+    "Join key: verbs use the websocket request name as appAction, while user hotkeys are keyed by OBS hotkey names; the mapping lives in userBindings.entryShape and the notes file, not in a field.",
+    "Not tested against a running OBS: OBS has never been launched here and websocket is off by default.",
+    "SplitRecordFile preconditions and localized transition names are unverified."
+  ],
+  "notes": [
+    "OBS has no default global hotkeys. The only built-in keys are main-window shortcuts (transform, order, nudge, undo/redo, F2 rename, Del remove, F11 fullscreen interface); they need OBS focused, and the nudge keys need the preview focused.",
+    "OBS hotkeys are global by default (HotkeyFocusType NeverDisableHotkeys), so the user's own hotkeys work as a fallback even with a game in front.",
+    "Long-form notes, the verb-to-request table and the hotkey-name join table: packs/notes/obs-studio.md."
+  ]
+}

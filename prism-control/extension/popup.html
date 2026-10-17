@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prism Control</title>
+  <link rel="stylesheet" href="src/ui/ui.css">
+</head>
+<body class="popup">
+  <header>
+    <img src="img/32.png" alt="" width="20" height="20">
+    <h1>Prism Control</h1>
+    <span id="safe" class="badge" hidden>SAFE</span>
+  </header>
+
+  <section class="status" id="status" data-state="idle">
+    <span class="dot"></span>
+    <div>
+      <div class="line" id="line">Checking...</div>
+      <div class="help" id="help"></div>
+    </div>
+  </section>
+
+  <section class="card" id="site" hidden>
+    <div class="label">Media controls on this site</div>
+    <div class="row">
+      <span id="siteName" class="mono"></span>
+      <button id="siteBtn">Enable</button>
+    </div>
+  </section>
+
+  <section class="meta" id="meta"></section>
+
+  <footer>
+    <button class="ghost" id="retry">Retry now</button>
+    <button id="options">Options</button>
+  </footer>
+  <script type="module" src="src/ui/popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Detached audio fixture</title></head>
+<body>
+<!-- SoundCloud-like: the player is `new Audio()`, never attached to the DOM; data: artwork; next/prev only. -->
+<script>
+  window.__calls = [];
+  const a = new Audio('/tone.wav');
+  a.loop = true;
+  window.__audio = a;
+  navigator.mediaSession.metadata = new MediaMetadata({ title: 'Detached Track', artist: 'Cloud Artist',
+    artwork: [{ src: 'data:image/png;base64,{{SMALL_PNG_B64}}', sizes: '64x64', type: 'image/png' }] });
+  navigator.mediaSession.setActionHandler('nexttrack', () => window.__calls.push('nexttrack'));
+  navigator.mediaSession.setActionHandler('previoustrack', () => window.__calls.push('previoustrack'));
+  a.play();
+</script>
+</body></html>

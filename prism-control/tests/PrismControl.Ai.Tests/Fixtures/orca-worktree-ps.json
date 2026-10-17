@@ -1,0 +1,42 @@
+{
+ "result": {
+  "worktrees": [
+   {
+    "worktreeId": "wt-aurora",
+    "displayName": "TITLE-MARKER aurora",
+    "branch": "feature/example",
+    "path": "C:\\Users\\example\\projects\\aurora",
+    "status": "working",
+    "unread": 0,
+    "agents": [
+     {
+      "paneKey": "tab-1:leaf-1",
+      "state": "working",
+      "stateStartedAt": 1792141200000,
+      "agentType": "claude",
+      "toolName": "Bash",
+      "interrupted": false,
+      "prompt": "PROMPT-MARKER do the secret thing",
+      "lastAssistantMessage": "CONTENT-MARKER",
+      "toolInput": {
+       "command": "COMMAND-MARKER rm -rf"
+      },
+      "preview": "PREVIEW-MARKER"
+     }
+    ]
+   },
+   {
+    "worktreeId": "wt-zed",
+    "displayName": "zed",
+    "path": "C:\\Users\\example\\projects\\zed",
+    "agents": [
+     {
+      "paneKey": "tab-9:leaf-9",
+      "state": "done",
+      "agentType": "claude"
+     }
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,18 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Live stream fixture</title></head>
+<body>
+<!-- Twitch-like live stream: a MediaStream source (duration Infinity) with a real video track, for PiP. -->
+<video id="v" width="320" height="180" autoplay></video>
+<script>
+  const c = document.createElement('canvas');
+  c.width = 320; c.height = 180;
+  const ctx = c.getContext('2d');
+  let n = 0;
+  setInterval(() => { ctx.fillStyle = n++ % 2 ? '#b8a2f2' : '#0a0c12'; ctx.fillRect(0, 0, 320, 180); }, 100);
+  const v = document.getElementById('v');
+  v.srcObject = c.captureStream(10);
+  v.play();
+  navigator.mediaSession.metadata = new MediaMetadata({ title: 'Live Fixture Stream', artist: 'Streamer Example' });
+  v.addEventListener('enterpictureinpicture', () => { window.__pip = true; });
+</script>
+</body></html>
