@@ -176,6 +176,9 @@ public sealed record FakeHostRunResult(int ExitCode, IReadOnlyList<string> Place
 /// <summary><c>prismctl fake-host</c>: runs the plugin against the fake app, drives random input and prints the traffic.</summary>
 public static class FakeHostCli
 {
+    /// <summary>How long a plugin may take to register before the run gives up: a hang guard, not an expected start-up time.</summary>
+    public static readonly TimeSpan RegistrationHangGuard = TimeSpan.FromSeconds(60);
+
     public static async Task<FakeHostRunResult> RunAsync(FakeHostCliOptions o, TextWriter stdout, TextWriter stderr)
     {
         if (!File.Exists(o.Exe))
@@ -212,12 +215,24 @@ public static class FakeHostCli
                 [FakeHostSafety.MacrosDryRunVariable] = "1",
             };
             host.Launch(o.Exe, env);
-            if (!await host.WaitForRegistrationAsync(TimeSpan.FromSeconds(15)))
+            // Wait for the registration itself; the cap is only a hang guard (start-up is 1-5 s, more on a loaded PC).
+            var startup = System.Diagnostics.Stopwatch.StartNew();
+            var registered = false;
+            while (!registered && startup.Elapsed < RegistrationHangGuard)
             {
-                await stderr.WriteLineAsync("plugin did not register");
+                registered = await host.WaitForRegistrationAsync(TimeSpan.FromMilliseconds(500));
+                if (!registered && host.Process is { HasExited: true } exited)
+                {
+                    await stderr.WriteLineAsync($"plugin exited during start-up (exit code {exited.ExitCode}) after {startup.Elapsed.TotalSeconds:0.0} s");
+                    return new FakeHostRunResult(1, [], null, null, null);
+                }
+            }
+            if (!registered)
+            {
+                await stderr.WriteLineAsync($"plugin did not register within {RegistrationHangGuard.TotalSeconds:0} s (hang guard)");
                 return new FakeHostRunResult(1, [], null, null, null);
             }
-            await stdout.WriteLineAsync($"registered on port {host.Port}; user dir {userDir}");
+            await stdout.WriteLineAsync($"registered on port {host.Port} after {startup.Elapsed.TotalSeconds:0.0} s; user dir {userDir}");
 
             var (safeMode, dryRun) = await ReadSafetyAsync(userDir);
             await stdout.WriteLineAsync($"plugin safe mode: {Show(safeMode)}; macros dry run: {Show(dryRun)}");

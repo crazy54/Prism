@@ -119,12 +119,12 @@ public sealed class MicMuteAction : AudioActionBase<MicSettings>
         Render();
     }
 
-    /// <summary>The key goes away while held: put the mic back now, because its keyUp will never come.</summary>
+    /// <summary>The key goes away while held: its keyUp will never come, so the hold is abandoned and the mic ends muted.</summary>
     private void EndHold(string why)
     {
         if (_hold is not { } hold) return;
         _hold = null;
-        _ = Guard?.ReleaseAsync(hold, why);
+        _ = Guard?.ReleaseAsync(hold, why, abandoned: true);
     }
 
     protected override Task OnKeyPressAsync(KeyUpEvent e) => Mode == "toggle" ? ToggleAsync() : Task.CompletedTask;

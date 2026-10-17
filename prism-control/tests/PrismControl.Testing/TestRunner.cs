@@ -132,11 +132,20 @@ public static class TestRunner
             return 0;
         }
 
-        int passed = 0, failed = 0, skipped = 0;
+        int passed = 0, failed = 0, skipped = 0, notRun = 0;
         var failures = new List<string>();
         var total = Stopwatch.StartNew();
+        string? timedOut = null;
         foreach (var t in tests)
         {
+            // A timed-out test cannot be cancelled (tests take no token), so it may still be running: anything after it
+            // would share the process with it (timers, sockets, child processes) and could fail for the wrong reason.
+            if (timedOut is not null)
+            {
+                notRun++;
+                Console.WriteLine($"NOT RUN {t.Name} ({timedOut} timed out and may still be running)");
+                continue;
+            }
             if (t.Attr.Skip is { } why)
             {
                 skipped++;
@@ -162,10 +171,11 @@ public static class TestRunner
                 failures.Add($"{t.Name}: {msg}");
                 Console.WriteLine($"FAIL {t.Name} ({sw.ElapsedMilliseconds} ms)\n     {msg.Replace("\n", "\n     ")}");
                 if (verbose && ex is AssertException) Console.WriteLine("     " + ex.StackTrace?.Replace("\n", "\n     "));
+                if (ex is TestTimeoutException) timedOut = t.Name;
             }
         }
         Console.WriteLine();
-        Console.WriteLine($"{passed} passed, {failed} failed, {skipped} skipped ({total.Elapsed.TotalSeconds:0.0} s)");
+        Console.WriteLine($"{passed} passed, {failed} failed, {skipped} skipped{(notRun > 0 ? $", {notRun} not run (stopped after a timeout)" : "")} ({total.Elapsed.TotalSeconds:0.0} s)");
         foreach (var f in failures) Console.WriteLine("  FAILED " + f.Split('\n')[0]);
         return failed == 0 ? 0 : 1;
     }
@@ -173,6 +183,7 @@ public static class TestRunner
     private static async Task RunOneAsync(Type type, MethodInfo method, int timeoutMs)
     {
         var instance = method.IsStatic ? null : Activator.CreateInstance(type);
+        var abandoned = false;
         try
         {
             var run = Task.Run(async () =>
@@ -187,13 +198,21 @@ public static class TestRunner
                     ExceptionDispatchInfo.Capture(tie.InnerException).Throw();
                 }
             });
-            if (await Task.WhenAny(run, Task.Delay(timeoutMs)) != run) throw new TimeoutException($"timed out after {timeoutMs} ms");
+            if (await Task.WhenAny(run, Task.Delay(timeoutMs)) != run)
+            {
+                // Don't dispose the fixtures under a test that is still running; the run stops after this test.
+                abandoned = true;
+                throw new TestTimeoutException($"timed out after {timeoutMs} ms");
+            }
             await run;
         }
         finally
         {
-            if (instance is IAsyncDisposable ad) await ad.DisposeAsync();
-            else if (instance is IDisposable d) d.Dispose();
+            if (!abandoned && instance is IAsyncDisposable ad) await ad.DisposeAsync();
+            else if (!abandoned && instance is IDisposable d) d.Dispose();
         }
     }
 }
+
+/// <summary>The runner's own timeout (distinct from a TimeoutException a test throws itself): it stops the run.</summary>
+public sealed class TestTimeoutException(string message) : TimeoutException(message);

@@ -37,16 +37,46 @@ public class PushToTalkTests
     }
 
     [Test]
-    public async Task Hold_to_mute_goes_live_again_when_the_key_disappears_while_held()
+    public async Task Hold_to_mute_stays_muted_when_the_key_disappears_while_held()
     {
+        // The owner's choice (2026-10-17): an abandoned hold never puts a mic live unexpectedly.
         var f = Standard();
         await using var rig = ModuleRig.Start(f);
         var h = await PttAsync(f, "ptm", rig.Services);
         await h.KeyDownAsync();
         Assert.True(Muted(f, UsbMic));
         await h.DisappearAsync();
-        Assert.False(Muted(f, UsbMic), "back to its resting state (live)");
-        Assert.True(rig.Context.Lines.Lines.Any(l => l.Contains("Mic unmuted again", StringComparison.Ordinal) && l.Contains("disappeared", StringComparison.Ordinal)));
+        Assert.True(Muted(f, UsbMic), "an abandoned hold-to-mute stays muted");
+        Assert.True(rig.Context.Lines.Lines.All(l => !l.Contains("Mic unmuted again", StringComparison.Ordinal)));
+    }
+
+    [Test]
+    public async Task Hold_to_mute_goes_live_again_on_a_real_release()
+    {
+        var f = Standard();
+        await using var rig = ModuleRig.Start(f);
+        await using var h = await PttAsync(f, "ptm", rig.Services);
+        await h.KeyDownAsync();
+        Assert.True(Muted(f, UsbMic));
+        await h.KeyUpAsync();
+        Assert.False(Muted(f, UsbMic), "a real keyUp returns hold-to-mute to its resting state (live)");
+    }
+
+    [Test]
+    public async Task A_deck_disconnect_or_shutdown_leaves_a_held_hold_to_mute_muted()
+    {
+        var f = Standard();
+        var guard = new MicHoldGuard(f, PrismControl.Core.Hosting.NullLog.Instance);
+        var hold = guard.Hold("ctx-1", "deck-1", UsbMic, restingMuted: false);   // hold-to-mute: live at rest
+        await f.SetMuteAsync(UsbMic, true);
+        await guard.ReleaseDeckAsync("deck-1", "lost its Stream Deck while held");
+        Assert.True(Muted(f, UsbMic), "deck disconnect = abandoned");
+
+        var hold2 = guard.Hold("ctx-2", "deck-1", UsbMic, restingMuted: false);
+        await guard.ReleaseAllAsync("was held while the plugin shut down");
+        Assert.True(Muted(f, UsbMic), "shutdown = abandoned");
+        _ = hold; _ = hold2;
+        guard.Dispose();
     }
 
     [Test]

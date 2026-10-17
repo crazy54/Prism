@@ -249,22 +249,46 @@ public sealed class EndToEndTests : IAsyncDisposable
             foreach (var (c, r) in slots) contexts.Add(await host.AppearAsync(d, Diagnostics, c, r, encoder: true, settings: stress));
         }
         // 28 contexts asking for 60 frames/s each = 1,680 frames/s requested.
+        // The hard limit is checked where it is enforced: the scheduler's own sliding 1 s send count (/v1/health
+        // updates.sentLastSec). Arrival times at the fake host bunch up when the OS batches socket frames under load,
+        // so the receive side only guards against a missing budget (2x) and checks the average, which bunching can't move.
         var start = host.NowMs;
-        await Task.Delay(5000);
+        await Task.Delay(2000);
+        var sentMax = await MaxSentLastSecondAsync(TimeSpan.FromSeconds(3));
         var rate = host.RenderRate(start + 2000, host.NowMs);
-        Assert.True(rate.MaxInAnyOneSecond <= 62, $"budget 60/s exceeded: worst 1 s window {rate.MaxInAnyOneSecond}");
-        Assert.True(rate.AveragePerSecond >= 45, $"budget underused: {rate.AveragePerSecond:0.0}/s");
+        Assert.True(sentMax <= 62, $"budget 60/s exceeded at the scheduler: worst sentLastSec {sentMax}");
+        Assert.True(rate.MaxInAnyOneSecond <= 120, $"no budget at all? worst 1 s window received {rate.MaxInAnyOneSecond}");
+        Assert.True(rate.AveragePerSecond >= 45 && rate.AveragePerSecond <= 62, $"average {rate.AveragePerSecond:0.0}/s outside 45-62");
         var served = host.Received.Where(m => m.IsRenderUpdate && m.Ms > start).Select(m => m.Context).Distinct().Count();
         Assert.True(served >= contexts.Count - 1, $"only {served}/{contexts.Count} contexts got frames (fairness)");
 
         // The PI changes core.updateBudget to 30.
         await host.GlobalSettingsFromPropertyInspectorAsync(new JsonObject { ["core"] = new JsonObject { ["updateBudget"] = 30 } });
         var start2 = host.NowMs;
-        await Task.Delay(4000);
+        await Task.Delay(1500);
+        var sentMax2 = await MaxSentLastSecondAsync(TimeSpan.FromSeconds(2.5));
         var rate2 = host.RenderRate(start2 + 1500, host.NowMs);
-        Assert.True(rate2.MaxInAnyOneSecond <= 32, $"budget 30/s exceeded: {rate2.MaxInAnyOneSecond}");
-        Assert.True(rate2.AveragePerSecond >= 22, $"30/s budget underused: {rate2.AveragePerSecond:0.0}");
+        Assert.True(sentMax2 <= 32, $"budget 30/s exceeded at the scheduler: worst sentLastSec {sentMax2}");
+        Assert.True(rate2.MaxInAnyOneSecond <= 60, $"30/s budget ignored? worst 1 s window received {rate2.MaxInAnyOneSecond}");
+        Assert.True(rate2.AveragePerSecond >= 22 && rate2.AveragePerSecond <= 32, $"average {rate2.AveragePerSecond:0.0}/s outside 22-32");
         Assert.False(host.Process!.HasExited, "plugin crashed" + LogTail());
+    }
+
+    /// <summary>The highest /v1/health updates.sentLastSec seen while polling every 100 ms for <paramref name="window"/>.</summary>
+    private async Task<int> MaxSentLastSecondAsync(TimeSpan window)
+    {
+        var control = JsonNode.Parse(File.ReadAllText(Path.Combine(_userDir, "control.json")))!;
+        using var http = new HttpClient { BaseAddress = new Uri(control["baseUrl"]!.GetValue<string>()) };
+        http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", control["token"]!.GetValue<string>());
+        var max = 0;
+        var sw = Stopwatch.StartNew();
+        while (sw.Elapsed < window)
+        {
+            var health = JsonNode.Parse(await http.GetStringAsync("/v1/health"))!;
+            max = Math.Max(max, health["updates"]!["sentLastSec"]!.GetValue<int>());
+            await Task.Delay(100);
+        }
+        return max;
     }
 
     [Test(Category = "e2e", TimeoutMs = 60_000)]

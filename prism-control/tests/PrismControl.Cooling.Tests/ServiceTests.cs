@@ -156,7 +156,9 @@ public class ServiceTests
         await Task.Delay(400);
         Assert.True(svc.IsSampling, "one consumer is left");
         lease2.Dispose();
-        await TestUtil.Until(() => !svc.IsSampling, TimeSpan.FromSeconds(3), "stop after the grace period");
+        // IsSampling turns false before the providers stop, so wait for Stopped: it is raised once the stop is complete.
+        await TestUtil.Until(() => Volatile.Read(ref stopped) >= 1, TimeSpan.FromSeconds(5), "stop after the grace period");
+        Assert.False(svc.IsSampling);
         Assert.False(icue.Running);
         Assert.Equal(1, Volatile.Read(ref stopped));
         Assert.Equal(CoolingStatus.Idle, svc.Current.Status);

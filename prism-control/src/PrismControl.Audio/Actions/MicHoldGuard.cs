@@ -6,7 +6,9 @@ namespace PrismControl.Audio;
 /// The privacy guard for hold-to-talk and hold-to-mute keys (review A #3). A held key changes the mic and only its
 /// keyUp changes it back, but keyUp never comes when the key goes away while held: a page or profile switch
 /// (willDisappear), the Stream Deck disconnecting, the PC sleeping, the plugin shutting down. The guard remembers every
-/// held key and puts its mic back in the resting state (muted for hold-to-talk) in each of those cases. A restore that
+/// held key and, in each of those cases, leaves its mic MUTED: for hold-to-talk that is the resting state, and for
+/// hold-to-mute it is the privacy-safe choice the owner picked (2026-10-17) over going live unexpectedly. Only a real
+/// release (keyUp) puts a hold-to-mute mic back live. A restore that
 /// cannot happen right away (audio unavailable, the mic unplugged, the write failed) waits and is retried when audio
 /// comes back, so a mic is never left live by a key nobody is holding.
 /// <para>The module registers one (and wires device, wake and shutdown events); an action without it uses its own.</para>
@@ -48,10 +50,11 @@ internal sealed class MicHoldGuard : IDisposable
     }
 
     /// <summary>
-    /// Ends a hold (once; later calls do nothing) and restores its mic's resting state. False when that has to wait
-    /// (it is then retried when audio comes back).
+    /// Ends a hold (once; later calls do nothing). A real release (<paramref name="abandoned"/> false) restores the mic's
+    /// resting state; an abandoned hold (the key went away while held, its deck disconnected, wake, shutdown) leaves it
+    /// muted whatever the mode. False when that has to wait (it is then retried when audio comes back).
     /// </summary>
-    public Task<bool> ReleaseAsync(MicHold hold, string why)
+    public Task<bool> ReleaseAsync(MicHold hold, string why, bool abandoned = false)
     {
         if (!hold.TryEnd()) return Task.FromResult(true);
         lock (_gate)
@@ -60,14 +63,14 @@ internal sealed class MicHoldGuard : IDisposable
             // Another key still holds the same mic (two hold-to-talk keys): its own release puts the mic back.
             if (_held.Any(h => h.MicId == hold.MicId)) return Task.FromResult(true);
         }
-        return Track(RestoreAsync(hold.MicId, hold.RestingMuted, why));
+        return Track(RestoreAsync(hold.MicId, abandoned || hold.RestingMuted, why));
     }
 
-    /// <summary>Every key held on one Stream Deck (it disconnected).</summary>
-    public Task ReleaseDeckAsync(string deckId, string why) => Task.WhenAll(Snapshot(h => h.DeckId == deckId).Select(h => ReleaseAsync(h, why)));
+    /// <summary>Every key held on one Stream Deck (it disconnected): abandoned, so their mics end muted.</summary>
+    public Task ReleaseDeckAsync(string deckId, string why) => Task.WhenAll(Snapshot(h => h.DeckId == deckId).Select(h => ReleaseAsync(h, why, abandoned: true)));
 
-    /// <summary>Every held key (the PC woke from sleep, the plugin shuts down).</summary>
-    public Task ReleaseAllAsync(string why) => Task.WhenAll(Snapshot(_ => true).Select(h => ReleaseAsync(h, why)));
+    /// <summary>Every held key (the PC woke from sleep, the plugin shuts down): abandoned, so their mics end muted.</summary>
+    public Task ReleaseAllAsync(string why) => Task.WhenAll(Snapshot(_ => true).Select(h => ReleaseAsync(h, why, abandoned: true)));
 
     /// <summary>The user set this mic's mute on purpose: a restore still waiting for it no longer applies.</summary>
     public void Supersede(string micId)
@@ -113,7 +116,7 @@ internal sealed class MicHoldGuard : IDisposable
         {
             await _engine.SetMuteAsync(micId, muted).ConfigureAwait(false);
             lock (_gate) _pending.Remove(micId);
-            _log.Info($"Mic {(muted ? "muted" : "unmuted")} again: a held {(muted ? "hold-to-talk" : "hold-to-mute")} key {why}.");
+            _log.Info($"Mic {(muted ? "muted" : "unmuted")} again: a held mic key {why}.");
             return true;
         }
         catch (Exception ex)
@@ -126,7 +129,7 @@ internal sealed class MicHoldGuard : IDisposable
     private void Wait(string micId, bool muted, string why, string reason)
     {
         lock (_gate) _pending[micId] = new Pending(muted, why);
-        _log.Warn($"A held {(muted ? "hold-to-talk" : "hold-to-mute")} key {why}, but its mic could not be {(muted ? "muted" : "unmuted")} ({reason}); retrying when audio is back.");
+        _log.Warn($"A held mic key {why}, but its mic could not be {(muted ? "muted" : "unmuted")} ({reason}); retrying when audio is back.");
     }
 
     private void OnEngineChanged(AudioChange c)
