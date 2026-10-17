@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prism Control: Spotify</title>
+    <link rel="stylesheet" href="lib/prism-pi.css" />
+    <script src="lib/prism-pi.js"></script>
+  </head>
+  <body>
+    <!--
+      Spotify property inspector (shared by every Spotify action). Matches research/spotify-setup-for-user.md:
+      paste the Client ID into "Spotify Client ID", click "Connect Spotify", the status says "Connected".
+      The Client ID goes to the plugin in the connect message only: it is never written to action settings
+      (settings travel with exported profiles). Tokens never reach this page. No external resources.
+    -->
+    <main class="prism-pi">
+      <div class="prism-row prism-heading"><h2>Spotify account</h2></div>
+      <div class="prism-row">
+        <span class="prism-label">Status</span>
+        <span class="prism-info" id="status" data-state="status">–</span>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <span class="prism-note" id="detail" data-state="detail"></span>
+      </div>
+      <div class="prism-row">
+        <label class="prism-label" for="clientId">Spotify Client ID</label>
+        <input id="clientId" type="text" autocomplete="off" spellcheck="false" placeholder="Paste it from your Spotify app's Settings" />
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <div class="prism-actions">
+          <button type="button" id="connect" class="prism-primary">Connect Spotify</button>
+          <button type="button" id="disconnect">Disconnect</button>
+        </div>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <span class="prism-note" id="message" role="status"></span>
+      </div>
+      <div class="prism-row prism-heading"><h2>Setup and help</h2></div>
+      <div class="prism-row">
+        <span class="prism-label">Setup</span>
+        <span class="prism-note">
+          Create a free app at the Spotify developer dashboard (Web API only) with the Redirect URI
+          <code class="prism-code" id="redirect">http://127.0.0.1:43117/callback</code> (127.0.0.1, not localhost). Copy its Client ID here.
+          Don't paste the client secret: Prism Control doesn't use it.
+        </span>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <div class="prism-actions">
+          <button type="button" id="dashboard">Open the developer dashboard</button>
+          <button type="button" id="manage">Manage access on spotify.com</button>
+        </div>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label">Trouble?</span>
+        <span class="prism-note">
+          "INVALID_CLIENT: Invalid redirect URI" means the Redirect URI in your Spotify app doesn't match exactly.
+          "INVALID_CLIENT: Invalid client" means the Client ID was pasted wrong. Spotify asks you to sign in again every
+          6 months; the keys then show Reconnect.
+        </span>
+      </div>
+      <div class="prism-row prism-heading"><h2>Playback</h2></div>
+      <div class="prism-row">
+        <label class="prism-label" for="anyApp">Other apps</label>
+        <div class="prism-check">
+          <input id="anyApp" type="checkbox" />
+          <label class="prism-note" for="anyApp">Show other media apps when Spotify isn't playing (Now Playing and transport)</label>
+        </div>
+      </div>
+
+      <div id="prism-form"></div>
+
+      <div class="prism-row">
+        <span class="prism-label">Equalizer</span>
+        <span class="prism-note" data-state="eqNote">Spotify's in-app equalizer has no API, so no app can change it. Use the Prism Control EQ actions (SteelSeries Sonar or Equalizer APO) instead.</span>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <span class="prism-note" data-state="attribution">Music data and artwork provided by Spotify.</span>
+      </div>
+    </main>
+    <script>
+      (function () {
+        var $ = function (id) { return document.getElementById(id); };
+        var current = {};
+
+        function show(state) {
+          if (!state) return;
+          current = state;
+          $('connect').textContent = state.connected ? 'Reconnect Spotify' : 'Connect Spotify';
+          $('disconnect').disabled = !state.connected && !state.connecting;
+          if (state.clientIdHint) $('clientId').placeholder = 'Saved: ' + state.clientIdHint + ' (paste a new one to change it)';
+          $('anyApp').checked = !!state.anyApp;
+          if (state.redirectUri) $('redirect').textContent = state.redirectUri;
+        }
+
+        function say(text) { $('message').textContent = text || ''; }
+
+        PrismPI.ready(function (hello) { show(hello.state); });
+        PrismPI.on('pi.state', show);
+
+        $('connect').addEventListener('click', function () {
+          var id = $('clientId').value.trim();
+          say('Opening Spotify in your browser…');
+          PrismPI.request('spotify.connect', { clientId: id }, 10000).then(function (state) {
+            $('clientId').value = '';
+            show(state);
+            say('Approve Prism Control (personal) in the browser, then come back here.');
+          }).catch(function (e) { say(e.message); });
+        });
+
+        $('disconnect').addEventListener('click', function () {
+          PrismPI.request('spotify.disconnect', null).then(function (state) {
+            show(state);
+            say('Disconnected. The saved sign-in and cached artwork were deleted.');
+          }).catch(function (e) { say(e.message); });
+        });
+
+        $('anyApp').addEventListener('change', function () {
+          PrismPI.request('spotify.anyApp', { value: $('anyApp').checked }).then(show).catch(function (e) { say(e.message); });
+        });
+
+        $('dashboard').addEventListener('click', function () { PrismPI.send('spotify.dashboard', null); });
+        $('manage').addEventListener('click', function () { PrismPI.send('spotify.manageAccess', null); });
+      })();
+    </script>
+  </body>
+</html>

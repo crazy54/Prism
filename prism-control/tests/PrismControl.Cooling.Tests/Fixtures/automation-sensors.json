@@ -1,0 +1,21 @@
+{
+  "_comment": "iCUE AutomationSdkIpc GetSensors() as recorded on the dev PC (2026-10-16), sanitized: serial<...> and sensorSN<...> replaced by fictional EXAMPLE values, no GUIDs, no machine name. 'value' strings are exactly as returned.",
+  "sensors": [
+    { "id": "vid<1b1c>pid<000001>serial<0>index<0>senstype<Fan>sensindex<0>", "name": "Fan #1", "value": "2364 RPM" },
+    { "id": "vid<1b1c>pid<000001>serial<0>index<0>senstype<Fan>sensindex<1>", "name": "Fan #2", "value": "2364 RPM" },
+    { "id": "vid<1b1c>pid<000001>serial<0>index<0>senstype<Temperature>sensindex<0>", "name": "Temp #1", "value": "24 °C" },
+    { "id": "vid<1b1c>pid<000001>serial<0>index<0>senstype<VoltageCore>sensindex<0>", "name": "VCPU #1", "value": "1.16 V" },
+    { "id": "vid<1b1c>pid<000002>serial<0>index<0>senstype<Load>sensindex<0>", "name": "Load", "value": "69 %" },
+    { "id": "vid<1b1c>pid<000002>serial<0>index<0>senstype<Temperature>sensindex<0>", "name": "Temp", "value": "59 °C" },
+    { "id": "vid<1b1c>pid<000002>serial<0>index<0>senstype<TemperaturePackage>sensindex<0>", "name": "Package", "value": "61 °C" },
+    { "id": "vid<1b1c>pid<000004>serial<>index<0>senstype<Power>senskind<Power-draw>sensindex<0>", "name": "Total Power Draw", "value": "2 W" },
+    { "id": "vid<1b1c>pid<000007>serial<0>index<1>senstype<Fan>sensindex<0>", "name": "Fan #1", "value": "1678 RPM" },
+    { "id": "vid<1b1c>pid<000007>serial<0>index<1>senstype<Fan>sensindex<1>", "name": "Fan #2", "value": "0 RPM" },
+    { "id": "vid<1b1c>pid<000009>serial<0>index<0>senstype<FPS>sensindex<0>", "name": "FPS", "value": "-1 " },
+    { "id": "vid<6940>pid<3135>serial<EXAMPLEHUB0001>senstype<fan>sensindex<0>sensorSN<EXAMPLEFAN0003>", "name": "iCUE LINK RX RGB #3: Fan", "value": "1507 RPM" },
+    { "id": "vid<6940>pid<3135>serial<EXAMPLEHUB0001>senstype<fan>sensindex<0>sensorSN<EXAMPLEFAN0001>", "name": "iCUE LINK RX RGB #1: Fan", "value": "1495 RPM" },
+    { "id": "vid<6940>pid<3135>serial<EXAMPLEHUB0001>senstype<fan>sensindex<0>sensorSN<EXAMPLEFAN0002>", "name": "iCUE LINK RX RGB #2: Fan", "value": "1503 RPM" },
+    { "id": "vid<6940>pid<3135>serial<EXAMPLEHUB0001>senstype<fan>sensindex<0>sensorSN<EXAMPLEFAN0011>", "name": "iCUE LINK QX RGB #1: Fan", "value": "1781 RPM" },
+    { "id": "vid<6940>pid<3135>serial<EXAMPLEHUB0001>senstype<pump>sensindex<0>sensorSN<EXAMPLEPUMP001>", "name": "iCUE LINK TITAN 360 LCD: Pump", "value": "2389 RPM" }
+  ]
+}

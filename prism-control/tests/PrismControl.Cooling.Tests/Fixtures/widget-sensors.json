@@ -1,0 +1,33 @@
+{
+  "_comment": "iCUE SensorProvider sensors as recorded on the dev PC (2026-10-16), sanitized: iCUE's runtime GUIDs replaced by fictional ids (fixture-sensor-NN), no serials, no machine name. Values are strings exactly as getSensorValue returns them.",
+  "sensors": [
+    { "id": "fixture-sensor-01", "type": "power", "kind": "total-power-draw", "name": "Total Power Draw", "device": "DOMINATOR TITANIUM", "units": "W", "connected": true, "value": "2.25" },
+    { "id": "fixture-sensor-02", "type": "temperature", "kind": "default", "name": "Temp #1", "device": "DOMINATOR TITANIUM", "units": "°C", "connected": true, "value": "46.50" },
+    { "id": "fixture-sensor-09", "type": "", "kind": "", "name": "", "device": "", "units": "", "connected": false, "value": "" },
+    { "id": "fixture-sensor-14", "type": "fan", "kind": "default", "name": "iCUE LINK RX RGB #1: Fan", "device": "iCUE LINK System Hub", "units": "RPM", "connected": true, "value": "1451.00" },
+    { "id": "fixture-sensor-15", "type": "fan", "kind": "default", "name": "iCUE LINK QX RGB #1: Fan", "device": "iCUE LINK System Hub", "units": "RPM", "connected": true, "value": "1747.00" },
+    { "id": "fixture-sensor-16", "type": "fan", "kind": "default", "name": "iCUE LINK RX RGB #2: Fan", "device": "iCUE LINK System Hub", "units": "RPM", "connected": true, "value": "1454.00" },
+    { "id": "fixture-sensor-17", "type": "fan", "kind": "default", "name": "iCUE LINK RX RGB #3: Fan", "device": "iCUE LINK System Hub", "units": "RPM", "connected": true, "value": "1460.00" },
+    { "id": "fixture-sensor-18", "type": "pump", "kind": "default", "name": "iCUE LINK TITAN 360 LCD: Pump", "device": "iCUE LINK System Hub", "units": "RPM", "connected": true, "value": "2383.00" },
+    { "id": "fixture-sensor-19", "type": "fan", "kind": "default", "name": "iCUE LINK RX RGB #4: Fan", "device": "iCUE LINK System Hub", "units": "RPM", "connected": true, "value": "1460.00" },
+    { "id": "fixture-sensor-20", "type": "fan", "kind": "default", "name": "iCUE LINK RX RGB #5: Fan", "device": "iCUE LINK System Hub", "units": "RPM", "connected": true, "value": "1453.00" },
+    { "id": "fixture-sensor-21", "type": "fan", "kind": "default", "name": "iCUE LINK QX RGB #2: Fan", "device": "iCUE LINK System Hub", "units": "RPM", "connected": true, "value": "1731.00" },
+    { "id": "fixture-sensor-22", "type": "fan", "kind": "default", "name": "iCUE LINK QX RGB #3: Fan", "device": "iCUE LINK System Hub", "units": "RPM", "connected": true, "value": "1729.00" },
+    { "id": "fixture-sensor-23", "type": "fan", "kind": "default", "name": "iCUE LINK RX RGB #6: Fan", "device": "iCUE LINK System Hub", "units": "RPM", "connected": true, "value": "1459.00" },
+    { "id": "fixture-sensor-24", "type": "fan", "kind": "default", "name": "iCUE LINK QX RGB #4: Fan", "device": "iCUE LINK System Hub", "units": "RPM", "connected": true, "value": "1726.00" },
+    { "id": "fixture-sensor-25", "type": "temperature", "kind": "default", "name": "iCUE LINK QX RGB #1: Temp", "device": "iCUE LINK System Hub", "units": "°C", "connected": true, "value": "24.60" },
+    { "id": "fixture-sensor-26", "type": "temperature", "kind": "default", "name": "iCUE LINK QX RGB #2: Temp", "device": "iCUE LINK System Hub", "units": "°C", "connected": true, "value": "21.90" },
+    { "id": "fixture-sensor-27", "type": "temperature", "kind": "default", "name": "iCUE LINK TITAN 360 LCD: Coolant Temp", "device": "iCUE LINK System Hub", "units": "°C", "connected": true, "value": "39.80" },
+    { "id": "fixture-sensor-30", "type": "fan", "kind": "default", "name": "Fan #1", "device": "ASUSTeK COMPUTER INC. EXAMPLE BOARD X1", "units": "RPM", "connected": true, "value": "2360.00" },
+    { "id": "fixture-sensor-31", "type": "fan", "kind": "default", "name": "Fan #2", "device": "ASUSTeK COMPUTER INC. EXAMPLE BOARD X1", "units": "RPM", "connected": true, "value": "2360.00" },
+    { "id": "fixture-sensor-32", "type": "temperature", "kind": "default", "name": "Temp #10", "device": "ASUSTeK COMPUTER INC. EXAMPLE BOARD X1", "units": "°C", "connected": true, "value": "60.00" },
+    { "id": "fixture-sensor-33", "type": "voltage", "kind": "voltage-core", "name": "VCPU #1", "device": "ASUSTeK COMPUTER INC. EXAMPLE BOARD X1", "units": "V", "connected": true, "value": "1.16" },
+    { "id": "fixture-sensor-45", "type": "temperature", "kind": "package", "name": "Package", "device": "Example CPU 8-Core", "units": "°C", "connected": true, "value": "60.63" },
+    { "id": "fixture-sensor-46", "type": "temperature", "kind": "default", "name": "Temp", "device": "Example CPU 8-Core", "units": "°C", "connected": true, "value": "54.38" },
+    { "id": "fixture-sensor-47", "type": "load", "kind": "default", "name": "Load", "device": "Example CPU 8-Core", "units": "%", "connected": true, "value": "95.21" },
+    { "id": "fixture-sensor-56", "type": "fan", "kind": "default", "name": "Fan #1", "device": "NVIDIA GeForce Example GPU", "units": "RPM", "connected": true, "value": "1684.00" },
+    { "id": "fixture-sensor-57", "type": "fan", "kind": "default", "name": "Fan #2", "device": "NVIDIA GeForce Example GPU", "units": "RPM", "connected": true, "value": "0.00" },
+    { "id": "fixture-sensor-73", "type": "fan", "kind": "default", "name": "Fan #1", "device": "", "units": "", "connected": false, "value": "" },
+    { "id": "fixture-sensor-80", "type": "temperature", "kind": "default", "name": "Temp #17", "device": "ASUSTeK COMPUTER INC. EXAMPLE BOARD X1", "units": "", "connected": false, "value": "" }
+  ]
+}

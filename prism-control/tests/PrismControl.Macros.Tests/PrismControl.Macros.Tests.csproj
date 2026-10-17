@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Macros tests (owned by the Macros engineer). Run: dotnet run project tests/PrismControl.Macros.Tests
+       Previews: add the arguments "render-previews <dir>" with two leading dashes (see Program.cs).
+       Every test uses a recording input sink and a fake launcher: no keystrokes are sent and nothing is launched. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <RootNamespace>PrismControl.Macros.Tests</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Testing\PrismControl.Testing.csproj" />
+    <ProjectReference Include="..\..\src\PrismControl.Macros\PrismControl.Macros.csproj" />
+  </ItemGroup>
+</Project>

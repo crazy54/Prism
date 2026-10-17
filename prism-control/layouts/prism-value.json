@@ -1,0 +1,10 @@
+{
+  "$schema": "https://schemas.elgato.com/streamdeck/plugins/layout.json",
+  "id": "com.jeremyfhall.prismcontrol.value",
+  "items": [
+    { "key": "bg", "type": "pixmap", "rect": [0, 0, 200, 100], "zOrder": 0 },
+    { "key": "label", "type": "text", "rect": [16, 8, 168, 20], "zOrder": 1, "font": { "size": 14, "weight": 600 }, "alignment": "left", "color": "#a2a4b4", "text-overflow": "ellipsis", "value": "" },
+    { "key": "value", "type": "text", "rect": [16, 30, 168, 38], "zOrder": 1, "font": { "size": 30, "weight": 600 }, "alignment": "left", "color": "#f0f0f5", "text-overflow": "ellipsis", "value": "" },
+    { "key": "bar", "type": "bar", "rect": [16, 76, 168, 10], "zOrder": 1, "value": 0, "range": { "min": 0, "max": 100 }, "subtype": 0, "border_w": 0, "bar_bg_c": "#171a25", "bar_fill_c": "#b8a2f2" }
+  ]
+}

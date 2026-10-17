@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- A fake Stream Deck app for tests and local development: a WebSocket server that launches the plugin exe
+       with realistic -info (Galleon 100 SD type 12 3x4, Stream Deck + type 7 4x2), drives events and records
+       everything the plugin sends. No dependencies. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>PrismControl.FakeHost</RootNamespace>
+  </PropertyGroup>
+</Project>

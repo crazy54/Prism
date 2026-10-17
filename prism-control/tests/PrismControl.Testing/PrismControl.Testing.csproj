@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The in-repo test framework: [Test] discovery + runner, Assert, ManualTimeProvider, ActionHarness.
+       No NuGet test packages: every test project is a console exe whose Main calls TestRunner.RunAsync. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>PrismControl.Testing</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\PrismControl.Core\PrismControl.Core.csproj" />
+  </ItemGroup>
+</Project>

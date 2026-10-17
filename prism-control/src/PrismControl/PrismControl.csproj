@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    The plugin executable (manifest CodePath / CodePathWin = bin/PrismControl.exe).
+    Publish: self-contained single-file win-x64 (tools/build.ps1). Trimming is opt-in (-Trim / -p:PrismTrim=true)
+    because correctness of COM and WinRT interop matters more than size; see docs/architecture.md.
+  -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>$(PrismWindowsTfm)</TargetFramework>
+    <SupportedOSPlatformVersion>$(PrismMinWindows)</SupportedOSPlatformVersion>
+    <AssemblyName>PrismControl</AssemblyName>
+    <RootNamespace>PrismControl</RootNamespace>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <TieredPGO>true</TieredPGO>
+    <UseWindowsForms>false</UseWindowsForms>
+    <UseWPF>false</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <!-- Applied when publishing for a RID (build.ps1 passes -r win-x64 -self-contained). -->
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' != ''">
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>embedded</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(PrismTrim)' == 'true'">
+    <PublishTrimmed>true</PublishTrimmed>
+    <!-- partial: only framework assemblies marked trimmable are trimmed; ours (and their reflection) stay whole. -->
+    <TrimMode>partial</TrimMode>
+    <!-- [ComImport] COM interop and reflection-based System.Text.Json (action settings) are off by default under trimming. -->
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
+    <TrimmerSingleWarn>true</TrimmerSingleWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PrismControl.Core\PrismControl.Core.csproj" />
+    <!-- Domain modules: every ProjectReference except Core is loaded as a module and scanned for actions. -->
+    <ProjectReference Include="..\PrismControl.Audio\PrismControl.Audio.csproj" />
+    <ProjectReference Include="..\PrismControl.SystemInfo\PrismControl.SystemInfo.csproj" />
+    <ProjectReference Include="..\PrismControl.Spotify\PrismControl.Spotify.csproj" />
+    <ProjectReference Include="..\PrismControl.Eq\PrismControl.Eq.csproj" />
+    <ProjectReference Include="..\PrismControl.Macros\PrismControl.Macros.csproj" />
+    <ProjectReference Include="..\PrismControl.Cooling\PrismControl.Cooling.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="PrismControl.Tests" />
+  </ItemGroup>
+
+  <!-- Records every module ProjectReference as [assembly: AssemblyMetadata("PrismModule", "<name>")] so the host can
+       Assembly.Load them without a hand-maintained list (the compiler drops unused assembly references). -->
+  <Target Name="PrismModuleMetadata" BeforeTargets="GetAssemblyAttributes">
+    <ItemGroup>
+      <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition="'%(ProjectReference.Filename)' != 'PrismControl.Core'">
+        <_Parameter1>PrismModule</_Parameter1>
+        <_Parameter2>%(ProjectReference.Filename)</_Parameter2>
+      </AssemblyAttribute>
+    </ItemGroup>
+  </Target>
+
+  <!-- Modules are loaded by name, so root them for the trimmer. -->
+  <Target Name="PrismRootModules" BeforeTargets="PrepareForILLink" Condition="'$(PrismTrim)' == 'true'">
+    <ItemGroup>
+      <TrimmerRootAssembly Include="%(ProjectReference.Filename)" />
+    </ItemGroup>
+  </Target>
+</Project>

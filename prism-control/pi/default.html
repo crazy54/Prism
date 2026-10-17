@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Prism Control</title>
+    <link rel="stylesheet" href="lib/prism-pi.css" />
+    <script src="lib/prism-pi.js"></script>
+  </head>
+  <body>
+    <!-- The default property inspector: renders the form the action returns from DescribeForm().
+         Actions that need custom UI copy pi/template.html instead. -->
+    <main class="prism-pi">
+      <div id="prism-form"></div>
+      <p class="prism-note" id="prism-empty" hidden>This action has no settings.</p>
+    </main>
+    <script>
+      PrismPI.ready(function (hello) {
+        if (!hello.form) document.getElementById('prism-empty').hidden = false;
+      });
+    </script>
+  </body>
+</html>
