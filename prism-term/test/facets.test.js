@@ -105,3 +105,15 @@ for (const f of facets) {
     }
   });
 }
+
+test('mono depth (NO_COLOR): no facet is a wall of half blocks — color pictures become a luminance ramp', () => {
+  const HALF = new Set(['▀', '▄', '▌', '▐']);
+  const bad = [];
+  for (const f of facets) {
+    const b = run(f, { w: 60, h: 20, frames: 6, caps: { unicode: true, braille: true, sextant: false, depth: 'mono' } });
+    let half = 0, ink = 0;
+    for (const c of b.ch) { if (!c || c === ' ') continue; ink++; if (HALF.has(c)) half++; }
+    if (ink > 200 && half / ink > 0.6) bad.push(f.id);
+  }
+  assert.deepEqual(bad, []);
+});

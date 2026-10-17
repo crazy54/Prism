@@ -118,4 +118,4 @@ node examples/bridge.mjs
 ```
 
 This keeps a single warm `CatalogStore` in memory (fast, hot-reloadable) while
-Claude iterates over the 34 tools (including the 5 terminal-catalog tools).
+Claude iterates over the 58 tools (including the 5 terminal-catalog tools and the 24 Prism Deck tools; `deck_render` returns its PNG as an MCP image block).

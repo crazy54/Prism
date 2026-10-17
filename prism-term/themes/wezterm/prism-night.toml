@@ -1,0 +1,22 @@
+# Prism Night — Prism's Night terminal colors (Refraction).
+# WezTerm: save in ~/.config/wezterm/colors/ and set  config.color_scheme = 'Prism Night'
+
+[colors]
+foreground = "#e6e6ef"
+background = "#0a0c12"
+cursor_bg = "#b8a2f2"
+cursor_fg = "#0a0c12"
+cursor_border = "#b8a2f2"
+selection_bg = "#2e2748"
+selection_fg = "#f0f0f5"
+split = "#252834"
+scrollbar_thumb = "#252834"
+compose_cursor = "#ecca76"
+ansi = ["#1d202b", "#f28885", "#7ad59c", "#ecca76", "#81aaf7", "#b8a2f2", "#67cfe3", "#c6c7d3"]
+brights = ["#76798e", "#ffaaa7", "#a5eac1", "#f7e59f", "#aac8ff", "#d9c6fe", "#9eeaf2", "#f6f6fb"]
+
+[metadata]
+name = "Prism Night"
+author = "Prism"
+origin_url = "https://prism.jeremyfhall.com/terminal/"
+aliases = ["prism-night"]

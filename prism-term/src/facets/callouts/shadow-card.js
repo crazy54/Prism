@@ -24,7 +24,8 @@ export default {
       const x = Math.floor((W - cw) / 2) - Math.round(lift), y = Math.floor((H - chh) / 2) - Math.round(lift);
       const off = 1 + Math.round(lift);
       // Turbo Vision-style shadow: a darkened band offset down-right, textured with shade blocks.
-      const shadowBg = mix(th.bg, 0x000000, th.mode === 'light' ? 0.18 : 0.55);
+      // Refraction: depth from light, not heavy drop shadows — a soft band, lighter by Day.
+      const shadowBg = mix(th.bg, 0x000000, th.mode === 'light' ? 0.07 : 0.4);
       const shadowFg = mix(shadowBg, th.line, 0.45);
       const shade = uni(ctx) ? (lift > 0.5 ? '▒' : '░') : ':';
       for (let yy = y + off; yy < y + off + chh; yy++) for (let xx = x + off * 2; xx < x + off * 2 + cw; xx++) b.set(xx, yy, shade, shadowFg, shadowBg);
@@ -33,7 +34,7 @@ export default {
       const tx = 2, gl = (p * 9) % (title.length + 14) - 7;
       [...title].forEach((ch, i) => {
         const k = Math.max(0, 1 - Math.abs(i - gl) / 3);
-        inner.text(tx + i, 1, ch, mix(th.ink, 0xffffff, k), th.panel, ATTR.BOLD);
+        inner.text(tx + i, 1, ch, mix(th.ink, th.mode === 'light' ? th.accent : 0xffffff, k), th.panel, ATTR.BOLD);
       });
       inner.text(tx + title.length + 1, 1, g.check, th.pos, th.panel);
       if (inner.height > 4) {

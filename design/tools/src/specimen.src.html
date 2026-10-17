@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="en" data-theme="prism-dark" data-rf-mode="night">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Prism · Refraction — design language specimen</title>
+<script>
+/* Mode before first paint: ?mode=day|night › saved choice › prefers-color-scheme. */
+(function(){var m=null;try{m=new URLSearchParams(location.search).get('mode');}catch(e){}
+if(m!=='day'&&m!=='night'){try{m=localStorage.getItem('rfSpecimenMode');}catch(e){}}
+if(m!=='day'&&m!=='night'){m=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'day':'night';}
+var h=document.documentElement;h.setAttribute('data-rf-mode',m);h.setAttribute('data-theme',m==='day'?'prism-light':'prism-dark');})();
+</script>
+<style>
+/*@@FONTS@@*/
+</style>
+<style>
+/*@@PRISM_CSS@@*/
+</style>
+<style>
+/* ── Specimen layout (sp-*) — page scaffolding only; components come from prism.css ── */
+html{scroll-behavior:smooth;scroll-padding-top:80px;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 14px/1.6 var(--font)}
+*,*::before,*::after{box-sizing:border-box}
+h1,h2,h3,h4,p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit}
+code{font-family:var(--rf-mono)}
+.sp-skip{position:fixed;left:16px;top:-60px;z-index:100;padding:10px 16px;border-radius:var(--r-md);background:var(--accent);color:var(--rf-accent-ink);text-decoration:none;font-weight:600}
+.sp-skip:focus{top:12px}
+
+/* top bar */
+.sp-top{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:16px;height:var(--rf-topbar-h);padding:0 20px 0 22px;background:var(--rf-glass);-webkit-backdrop-filter:blur(var(--rf-glass-blur)) saturate(var(--rf-glass-sat));backdrop-filter:blur(var(--rf-glass-blur)) saturate(var(--rf-glass-sat));border-bottom:1px solid var(--line);box-shadow:var(--cs-topnav-elev)}
+.sp-brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:700 21px/1 var(--font);letter-spacing:-1px}
+.sp-brand svg{width:24px;height:24px}
+.sp-brand b{color:var(--accent);font-weight:700}
+.sp-crumb{display:flex;align-items:center;gap:10px;padding-left:16px;border-left:1px solid var(--line);color:var(--muted);font-size:13px}
+.sp-ver{font:500 10px/1 var(--rf-mono);letter-spacing:.06em;color:var(--dim);border:1px solid var(--line);border-radius:var(--rf-r-pill);padding:4px 8px}
+.sp-top-r{margin-left:auto;display:flex;align-items:center;gap:14px}
+.sp-status{display:flex;align-items:center;gap:7px;font:500 10px/1 var(--rf-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.sp-status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--pos);box-shadow:0 0 8px rgba(var(--pos-rgb),.6)}
+.sp-mode button .sp-glyph{width:9px;height:9px;border-radius:50%;flex:none}
+.sp-glyph.is-night{background:transparent;box-shadow:inset -3px -1px 0 0 currentColor}
+.sp-glyph.is-day{background:currentColor;box-shadow:0 0 0 2px var(--panel2),0 0 0 3px currentColor;transform:scale(.7)}
+
+/* shell */
+.sp-shell{display:grid;grid-template-columns:var(--rf-rail-w) minmax(0,1fr)}
+.sp-rail{position:sticky;top:var(--rf-topbar-h);align-self:start;height:calc(100vh - var(--rf-topbar-h));overflow:auto;padding:14px 12px 40px;border-right:1px solid var(--line);background:var(--rf-rail);scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.sp-rail .rf-nav-group:first-child{margin-top:6px}
+.sp-rail-foot{margin:28px 14px 0;padding-top:16px;border-top:1px solid var(--line);font:400 10.5px/1.7 var(--rf-mono);color:var(--dim)}
+.sp-rail-foot a{color:var(--muted);text-decoration:none}
+.sp-rail-foot a:hover{color:var(--accent)}
+.sp-main{min-width:0;padding:0 56px 140px}
+.sp-wrap{max-width:1200px;margin:0 auto}
+
+/* hero */
+.sp-hero{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);gap:24px;align-items:center;min-height:600px;padding:72px 0 40px}
+.sp-hero .rf-grid{inset:-20px -56px 0;z-index:-1;-webkit-mask-image:radial-gradient(ellipse 60% 70% at 70% 45%,#000 10%,transparent 75%);mask-image:radial-gradient(ellipse 60% 70% at 70% 45%,#000 10%,transparent 75%)}
+.sp-hero .rf-halo{z-index:-1;width:420px;height:420px;right:12%;top:90px;--rf-hue-rgb:var(--rf-s-violet-rgb)}
+[data-rf-mode="day"] .sp-hero .rf-halo{width:640px;height:440px;right:0;top:80px;border-radius:50%;background:var(--rf-iris);filter:blur(40px);opacity:.95}
+.sp-hero h1{margin:24px 0 22px;font:var(--rf-fw-display) var(--rf-fs-display)/var(--rf-lh-display) var(--font);letter-spacing:var(--rf-ls-display)}
+.sp-hero .rf-lead{font-size:var(--rf-fs-lead);line-height:var(--rf-lh-lead);max-width:470px}
+.sp-hero .rf-lead em{font-style:normal;color:var(--ink)}
+.sp-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.sp-note{margin-top:18px;font:400 11px/1.6 var(--rf-mono);color:var(--dim)}
+.sp-art{position:relative;min-width:0}
+.sp-art svg{display:block;width:100%;height:auto;overflow:visible}
+.sp-stats{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sp-stats>div{position:relative;padding:24px 0 25px;text-align:center}
+.sp-stats>div+div::before{content:"";position:absolute;left:0;top:30px;bottom:30px;width:1px;background:var(--line)}
+.sp-stats strong{display:block;font:600 30px/1.25 var(--font);letter-spacing:-1.2px}
+.sp-stats strong span{font-size:16px;color:var(--accent);margin-left:2px}
+.sp-stats small{font-size:11px;color:var(--muted)}
+
+/* sections */
+.sp-section{padding-top:110px;scroll-margin-top:24px}
+.sp-head{display:grid;gap:12px;margin-bottom:34px}
+.sp-head h2{font:var(--rf-fw-strong) var(--rf-fs-h2)/var(--rf-lh-h2) var(--font);letter-spacing:var(--rf-ls-h2)}
+.sp-head p{max-width:680px;color:var(--muted);line-height:1.75}
+.sp-head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.sp-sub{display:flex;align-items:center;gap:12px;margin:44px 0 16px;font:600 10px/1 var(--rf-mono);letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.sp-sub::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.sp-sub small{font-weight:400;color:var(--dim);letter-spacing:.08em}
+.sp-board{position:relative;padding:28px;border:1px solid var(--line);border-radius:var(--r-xl);background:var(--panel);box-shadow:var(--elev-1)}
+.sp-board.is-canvas{background:var(--bg)}
+.sp-grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.sp-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.sp-anno{display:block;margin-top:16px;font:400 10.5px/1.7 var(--rf-mono);color:var(--dim)}
+.sp-anno b{font-weight:600;color:var(--muted)}
+.sp-label{display:block;margin-bottom:14px;font:600 9.5px/1 var(--rf-mono);letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.sp-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.sp-mono{font-family:var(--rf-mono)}
+
+/* color */
+.sp-surfaces{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.sp-surf{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:188px;padding:16px;border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:inset 0 1px 0 var(--rf-edge)}
+.sp-surf h4{font:600 13px/1.2 var(--font)}
+.sp-surf .sp-hex{margin-top:4px;font:400 10.5px/1.5 var(--rf-mono);color:var(--muted)}
+.sp-surf .sp-role{margin-top:8px;font-size:11.5px;line-height:1.5;color:var(--dim)}
+.sp-ratios{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.sp-ratio{display:inline-flex;align-items:center;gap:5px;height:20px;padding:0 6px;border-radius:var(--rf-r-xs);font:500 10px/1 var(--rf-mono);border:1px solid var(--line)}
+.sp-ratio i{font-style:normal;opacity:.75}
+.sp-ratio.is-fail{border-color:var(--neg);color:var(--neg)}
+.sp-swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.sp-sw{display:grid;grid-template-rows:auto 1fr;overflow:hidden;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--card)}
+.sp-sw-chip{position:relative;height:74px;display:flex;align-items:flex-end;padding:10px 12px;font:600 12px/1 var(--font)}
+.sp-sw-body{display:grid;gap:3px;padding:11px 12px 12px;border-top:1px solid var(--line)}
+.sp-sw-body b{font:600 12px/1.3 var(--font)}
+.sp-sw-body span{font:400 10.5px/1.45 var(--rf-mono);color:var(--muted)}
+.sp-sw-body em{font-style:normal;font-size:11px;color:var(--dim);line-height:1.45}
+.sp-textrows{display:grid;gap:0;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.sp-textrow{display:grid;grid-template-columns:170px minmax(0,1fr) 350px;align-items:center;gap:20px;padding:14px 18px;background:var(--card)}
+.sp-textrow+.sp-textrow{border-top:1px solid var(--line)}
+.sp-textrow code{font-size:11px;color:var(--muted)}
+.sp-textrow .sp-sample{font-size:15px;letter-spacing:-.01em}
+.sp-textrow .sp-ratios{margin:0;justify-content:flex-end}
+.sp-linerow{display:flex;align-items:center;gap:14px;height:100%}
+.sp-linerow i{flex:1;height:1px}
+.sp-linerow i.is-ctl{height:0;border-bottom:1px solid}
+
+/* spectrum */
+.sp-band{position:relative;height:84px;border-radius:var(--r-lg);overflow:hidden;background:var(--rf-spectrum);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+.sp-band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.18),transparent 45%,rgba(0,0,0,.18))}
+.sp-band-ink{height:6px;margin-top:8px;border-radius:3px;background:var(--rf-spectrum-ink)}
+.sp-band-marks{position:relative;height:30px;margin-top:6px}
+.sp-band-marks span{position:absolute;top:0;transform:translateX(-50%);font:400 9.5px/1 var(--rf-mono);color:var(--dim);white-space:nowrap}
+.sp-band-marks span::before{content:"";display:block;width:1px;height:6px;margin:0 auto 5px;background:var(--rf-line-strong)}
+.sp-stops{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:8px;margin-top:22px}
+.sp-stop{display:grid;gap:0;overflow:hidden;border:1px solid var(--line);border-radius:var(--r-md);background:var(--card)}
+.sp-stop-v{height:86px;position:relative}
+.sp-stop-v::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 50%)}
+.sp-stop-w{height:16px}
+.sp-stop-b{display:grid;gap:3px;padding:10px 9px 11px}
+.sp-stop-b b{font:600 12px/1.2 var(--font)}
+.sp-stop-b .sp-aa{font:600 18px/1 var(--font);letter-spacing:-.02em;margin:4px 0 2px}
+.sp-stop-b span{font:400 9.5px/1.45 var(--rf-mono);color:var(--dim)}
+.sp-uni{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:18px;font:400 11px/1.5 var(--rf-mono);color:var(--dim)}
+.sp-uni b{color:var(--muted);font-weight:600}
+.sp-dodont{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.sp-dd{padding:20px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--card)}
+.sp-dd .rf-eyebrow{margin-bottom:12px}
+.sp-dd p{font-size:12.5px;line-height:1.65;color:var(--muted)}
+.sp-dd.is-dont .rf-eyebrow{color:var(--neg)}
+.sp-dd.is-do .rf-eyebrow{color:var(--pos)}
+
+/* positions */
+.sp-scale{position:relative;padding:26px 40px 24px;border:1px solid var(--line);border-radius:var(--r-xl);background:var(--panel);overflow:hidden;isolation:isolate}
+.sp-scale .rf-grid{z-index:-1;-webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent)}
+.sp-scale-track{position:relative;height:330px;margin:0 130px 0 6px}
+.sp-scale-axis{position:absolute;left:-6px;right:-30px;top:196px;height:2px;border-radius:1px;background:var(--rf-spectrum);box-shadow:0 0 16px rgba(var(--accent-rgb),.22)}
+.sp-scale-mark{position:absolute;top:0;bottom:0;width:0}
+.sp-scale-mark .sp-sm-l{position:absolute;left:3px;bottom:calc(330px - 144px);transform-origin:0 100%;transform:rotate(-50deg);white-space:nowrap;font:400 10px/1 var(--rf-mono);letter-spacing:.02em;color:var(--muted)}
+.sp-scale-mark .sp-sm-l b{color:var(--rf-hue);font-weight:600;margin-right:9px}
+.sp-scale-mark i{position:absolute;left:-1px;top:150px;width:2px;height:44px;border-radius:1px;background:linear-gradient(180deg,rgba(var(--rf-hue-rgb),0),var(--rf-hue-v));box-shadow:0 0 10px rgba(var(--rf-hue-rgb),.6)}
+.sp-scale-mark.is-surface i{top:206px;left:-6px;width:12px;height:12px;border-radius:50%;background:var(--rf-hue-v);box-shadow:0 0 0 3px var(--panel),0 0 0 4px rgba(var(--rf-hue-rgb),.6),0 0 16px rgba(var(--rf-hue-rgb),.9)}
+.sp-scale-mark.is-surface .sp-sm-s{position:absolute;top:230px;left:0;transform:translateX(-50%);white-space:nowrap;font:600 10px/1.5 var(--rf-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--rf-hue);text-align:center}
+.sp-scale-mark.is-surface .sp-sm-s small{display:block;font-weight:400;letter-spacing:.04em;color:var(--dim);text-transform:none}
+.sp-scale-white{position:absolute;left:0;top:292px;display:flex;align-items:center;gap:10px;font:400 10px/1 var(--rf-mono);letter-spacing:.04em;color:var(--dim)}
+.sp-scale-white b{font-weight:600;letter-spacing:.14em;color:var(--muted)}
+.sp-scale-white .rf-index{height:12px;opacity:.9}
+.sp-poslist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 28px;margin-top:22px}
+.sp-pos{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;padding:13px 4px;border-bottom:1px solid var(--line)}
+.sp-pos b{font:600 12.5px/1.25 var(--font)}
+.sp-pos small{display:block;margin-top:3px;font:400 10px/1.3 var(--rf-mono);color:var(--dim)}
+.sp-pos .rf-lambda{color:var(--rf-hue)}
+.sp-pos .sp-hexes{display:flex;gap:4px}
+.sp-pos .sp-hexes i{width:12px;height:12px;border-radius:3px;box-shadow:inset 0 0 0 1px rgba(127,127,127,.25)}
+
+/* type */
+.sp-types{border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;background:var(--panel)}
+.sp-type{display:grid;grid-template-columns:200px minmax(0,1fr);align-items:baseline;gap:28px;padding:22px 28px}
+.sp-type+.sp-type{border-top:1px solid var(--line)}
+.sp-type-meta{display:grid;gap:4px;font:400 10.5px/1.5 var(--rf-mono);color:var(--dim)}
+.sp-type-meta b{font-weight:600;color:var(--rf-hue);letter-spacing:.06em}
+.sp-type-sample{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sp-families{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.sp-family{position:relative;overflow:hidden;padding:26px 28px;border:1px solid var(--line);border-radius:var(--r-xl);background:var(--panel)}
+.sp-family .sp-big{font:600 88px/1 var(--font);letter-spacing:-.05em;margin:18px 0 14px}
+.sp-family.is-mono .sp-big{font:400 70px/1 var(--rf-mono);letter-spacing:-.02em}
+.sp-family p{font-size:12.5px;color:var(--muted);line-height:1.65;max-width:440px}
+.sp-family .sp-glyphs{margin-top:14px;font-size:15px;letter-spacing:.06em;color:var(--dim);word-break:break-all}
+
+/* material */
+.sp-mat{position:relative;isolation:isolate;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding:52px 40px;border:1px solid var(--line);border-radius:var(--r-xl);background:var(--bg);overflow:hidden}
+.sp-mat .rf-grid{z-index:-2}
+.sp-blob{position:absolute;z-index:-1;border-radius:50%;filter:blur(36px);opacity:.55}
+.sp-lvl{position:relative;min-height:200px;padding:18px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px}
+.sp-lvl b{font:600 13px/1.2 var(--font)}
+.sp-lvl span{font:400 10.5px/1.6 var(--rf-mono);color:var(--muted)}
+.sp-lvl .rf-eyebrow{position:absolute;top:16px;left:18px}
+.sp-lvl.is-0{border:1px dashed var(--rf-line-strong);border-radius:var(--r-lg)}
+.sp-beams{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.sp-beam-card{display:flex;flex-direction:column;gap:20px;padding:22px;min-height:146px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--card)}
+.sp-beam-card .sp-label{margin:0}
+.sp-beam-card .sp-anno{margin-top:auto}
+.sp-focusdemo{display:inline-flex;align-items:center;height:36px;padding:0 14px;border:1px solid var(--rf-line-strong);border-radius:var(--r-md);background:var(--panel2);font-size:13px;outline:2px solid var(--rf-focus);outline-offset:2px;box-shadow:0 0 0 6px var(--rf-focus-halo)}
+.sp-light{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.sp-light>div{position:relative;isolation:isolate;overflow:hidden;min-height:180px;padding:22px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--bg)}
+.sp-light .rf-halo{z-index:-1;left:40%;top:-40px}
+.sp-light .rf-iris{position:absolute;inset:0;z-index:-1;opacity:.9}
+
+/* components */
+.sp-comp{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.sp-c4{grid-column:span 4}.sp-c5{grid-column:span 5}.sp-c6{grid-column:span 6}.sp-c7{grid-column:span 7}.sp-c8{grid-column:span 8}.sp-c12{grid-column:span 12}
+.sp-stack{display:grid;gap:14px}
+.sp-navdemo{width:264px;padding:6px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--bg)}
+.sp-navdemo .rf-nav-group:first-child{margin-top:8px}
+.is-hover-demo{background:var(--rf-hover);color:var(--ink)!important}
+.is-hover-demo .rf-index{opacity:1}
+.is-hover-demo .rf-lambda{opacity:1!important;transform:none!important}
+.sp-palette-stage{position:relative;isolation:isolate;display:grid;place-items:center;min-height:470px;padding:40px;border:1px solid var(--line);border-radius:var(--r-xl);background:var(--bg);overflow:hidden}
+.sp-palette-stage::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--rf-scrim)}
+.sp-ghost-tiles{position:absolute;inset:24px;z-index:-2;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;opacity:.9}
+.sp-ghost-tiles i{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--card)}
+.sp-ghost-tiles i:nth-child(3n+1){background:linear-gradient(160deg,rgba(var(--rf-s-violet-rgb),.35),var(--card) 60%)}
+.sp-ghost-tiles i:nth-child(4n+2){background:linear-gradient(160deg,rgba(var(--rf-s-mint-rgb),.3),var(--card) 60%)}
+.sp-ghost-tiles i:nth-child(5n+3){background:linear-gradient(160deg,rgba(var(--rf-s-amber-rgb),.3),var(--card) 60%)}
+.sp-toast-stage{display:grid;gap:12px;align-content:center;justify-items:center;min-height:100%;padding:26px;border:1px solid var(--line);border-radius:var(--r-xl);background:var(--bg)}
+
+/* facet stand-ins inside tile stages (demo content only) */
+.fx-kpi{width:170px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--card);box-shadow:var(--elev-1)}
+.fx-kpi small{display:block;font:600 9px/1 var(--rf-mono);letter-spacing:.12em;color:var(--muted)}
+.fx-kpi strong{display:block;margin:9px 0 8px;font:700 34px/1 var(--font);letter-spacing:-.04em;color:var(--info)}
+.fx-kpi strong span{font-size:17px;color:var(--muted);margin-left:1px}
+.fx-kpi em{display:inline-block;padding:3px 7px;border-radius:4px;background:rgba(var(--pos-rgb),.13);color:var(--pos);font:600 10.5px/1 var(--font);font-style:normal}
+.fx-orb{position:relative;width:86px;height:86px;border-radius:50%;background:conic-gradient(from 0deg,var(--rf-s-violet-v),var(--rf-s-azure-v),var(--rf-s-mint-v),var(--rf-s-amber-v),var(--rf-s-rose-v),var(--rf-s-violet-v));-webkit-mask:radial-gradient(closest-side,transparent 78%,#000 80%);mask:radial-gradient(closest-side,transparent 78%,#000 80%);animation:fx-spin 3.2s linear infinite;filter:drop-shadow(0 0 10px rgba(var(--accent-rgb),.5))}
+.fx-orb-cap{position:absolute;bottom:22px;left:0;right:0;text-align:center;font:500 10px/1 var(--font);color:var(--muted)}
+@keyframes fx-spin{to{transform:rotate(1turn)}}
+.fx-grad{font:700 40px/1 var(--font);letter-spacing:-.04em;background:linear-gradient(90deg,var(--rf-s-cerulean-v),var(--rf-s-violet-v),var(--rf-s-coral-v));-webkit-background-clip:text;background-clip:text;color:transparent}
+.fx-spark{width:200px;height:70px}
+.fx-bars{display:flex;align-items:flex-end;gap:7px;height:80px}
+.fx-bars i{width:14px;border-radius:3px 3px 1px 1px;background:linear-gradient(180deg,var(--accent),rgba(var(--accent-rgb),.25))}
+.fx-toggle{display:flex;flex-direction:column;gap:10px;width:170px}
+.fx-toggle div{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted)}
+
+/* app chrome mock */
+.sp-app{overflow:hidden;border:1px solid var(--rf-line-strong);border-radius:var(--r-xl);background:var(--bg);box-shadow:var(--rf-shadow-3),inset 0 1px 0 var(--rf-edge)}
+.sp-app-top{display:flex;align-items:center;gap:14px;height:52px;padding:0 16px;background:var(--cs-topnav-bg);border-bottom:1px solid var(--cs-topnav-line)}
+.sp-app-top .sp-brand{font-size:18px}
+.sp-app-top .sp-brand svg{width:21px;height:21px}
+.sp-app-top .rf-search{width:280px;margin-left:12px}
+.sp-app-body{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:860px}
+.sp-app-rail{padding:8px 8px 20px;border-right:1px solid var(--line);background:var(--rf-rail)}
+.sp-app-rail .rf-nav-item{min-height:31px;font-size:12.5px}
+.sp-app-main{min-width:0}
+.sp-app-main .rf-pagehead{padding:34px 32px 22px}
+.sp-app-bar{display:flex;align-items:center;gap:14px;padding:14px 32px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+.sp-app-bar .rf-chips{flex:1}
+.sp-app-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:22px 32px 32px}
+.sp-app-grid .rf-tile-stage{height:168px}
+.sp-sec{display:flex;align-items:center;gap:12px;margin:2px 32px 0;padding-top:22px;font:600 10px/1 var(--rf-mono);letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.sp-sec .rf-count{color:var(--dim)}
+.sp-sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+/* motion */
+.sp-curves{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.sp-curve{padding:18px 18px 16px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--card)}
+.sp-curve svg{display:block;width:100%;height:auto;margin:6px 0 12px}
+.sp-curve b{display:block;font:600 12.5px/1.3 var(--font)}
+.sp-curve span{display:block;margin-top:3px;font:400 10px/1.5 var(--rf-mono);color:var(--dim)}
+.sp-durs{display:grid;gap:10px;margin-top:16px;padding:22px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--card)}
+.sp-dur{display:grid;grid-template-columns:120px 70px minmax(0,1fr) 260px;align-items:center;gap:16px;font:400 11px/1.4 var(--rf-mono);color:var(--muted)}
+.sp-dur b{color:var(--ink);font-weight:600}
+.sp-dur i{height:6px;border-radius:3px;background:linear-gradient(90deg,rgba(var(--rf-hue-rgb),.2),rgba(var(--rf-hue-rgb),.9));box-shadow:0 0 8px rgba(var(--rf-hue-rgb),.4)}
+.sp-dur em{font-style:normal;color:var(--dim)}
+.sp-stage{position:relative;isolation:isolate;display:grid;grid-template-columns:300px minmax(0,1fr);gap:0;min-height:380px;margin-top:16px;border:1px solid var(--line);border-radius:var(--r-xl);background:var(--bg);overflow:hidden}
+.sp-stage-ctl{display:grid;align-content:start;gap:10px;padding:24px;border-right:1px solid var(--line);background:var(--panel)}
+.sp-stage-ctl .rf-btn{justify-content:space-between;width:100%}
+.sp-stage-ctl label{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.sp-stage-view{position:relative;display:grid;align-content:center;gap:24px;padding:36px 44px;overflow:hidden}
+.sp-stage-view .rf-grid{z-index:-1}
+.sp-stage-view h3{font:var(--rf-fw-display) 46px/1.06 var(--font);letter-spacing:-.045em}
+.sp-cascade{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px}
+.sp-cascade i{height:64px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--card);box-shadow:var(--elev-1)}
+.sp-cascade i:nth-child(odd){background:linear-gradient(170deg,rgba(var(--rf-hue-rgb),.18),var(--card) 70%)}
+
+/* terminal */
+.sp-terms{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.sp-term{overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--tbg);color:var(--tfg);box-shadow:var(--elev-2)}
+.sp-term-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;height:36px;padding:0 14px;border-bottom:1px solid rgba(127,127,140,.18);font:400 10px/1 var(--rf-mono);letter-spacing:.06em;color:var(--t8)}
+.sp-term-bar i{display:inline-block;width:6px;height:6px;margin-right:5px;border-radius:50%;background:rgba(127,127,140,.4)}
+.sp-term pre{margin:0;padding:16px 18px 20px;font:12px/1.7 var(--rf-mono);white-space:pre;overflow:hidden}
+.sp-ansi{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:1px;border-top:1px solid rgba(127,127,140,.18)}
+.sp-ansi div{padding:9px 8px 8px;font:400 9px/1.4 var(--rf-mono);color:var(--tfg)}
+.sp-ansi div i{display:block;height:22px;margin-bottom:7px;border-radius:3px;box-shadow:inset 0 0 0 1px rgba(127,127,140,.22)}
+.sp-ansi div span{display:block;color:var(--t8)}
+.sp-ansi .sp-an{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp-tguide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
+.sp-tguide>div{padding:20px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--card)}
+.sp-tguide h4{margin:12px 0 8px;font:600 14px/1.3 var(--font)}
+.sp-tguide p{font-size:12.5px;line-height:1.65;color:var(--muted)}
+.sp-tguide code{font-size:11.5px;color:var(--ink)}
+.sp-qrow{display:flex;height:18px;margin-top:10px;border-radius:3px;overflow:hidden}
+.sp-qrow i{flex:1}
+
+/* stream deck */
+.sp-deck-wrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;align-items:start;margin-bottom:16px}
+.sp-device{position:relative;display:grid;place-items:center;padding:56px 40px 40px;border:1px solid var(--line);border-radius:var(--r-xl);background:radial-gradient(120% 90% at 50% 0%,#1a1d27,#0b0c11 70%);box-shadow:var(--elev-2)}
+.sp-device-body{padding:22px;border-radius:26px;background:linear-gradient(180deg,#1b1d24,#0e0f13);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 30px 60px -20px rgba(0,0,0,.7),0 0 0 1px #000}
+.sp-keys{display:grid;grid-template-columns:repeat(5,var(--k));gap:18px}
+.sp-device-cap{position:absolute;left:24px;top:20px;font:600 9.5px/1 var(--rf-mono);letter-spacing:.15em;text-transform:uppercase;color:#8a8c9d}
+.dk{--k:96px;--u:calc(var(--k) / 144);position:relative;width:var(--k);height:var(--k);overflow:hidden;border-radius:calc(var(--u) * 18);background:var(--dk-fill);box-shadow:var(--dk-edge),0 0 0 1px rgba(0,0,0,.6);color:var(--dk-ink);font-family:var(--font)}
+:root{--dk-fill:radial-gradient(120% 90% at 50% 0%,#161a27 0%,#0b0d14 62%,#06070b 100%);--dk-edge:inset 0 2px 0 rgba(255,255,255,.08);--dk-ink:#f0f0f5;--dk-muted:#a2a4b4;--dk-faint:#565a6c}
+[data-rf-mode="day"]{--dk-fill:radial-gradient(120% 90% at 50% 0%,#ffffff 0%,#f4f3f8 60%,#e9e7f1 100%);--dk-edge:inset 0 2px 0 #fff;--dk-ink:#20202e;--dk-muted:#55556a;--dk-faint:#a9a8b8}
+.dk-micro{position:absolute;left:calc(var(--u) * 16);top:calc(var(--u) * 16);font:600 calc(var(--u) * 16)/1 var(--rf-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dk-muted)}
+.dk-value{position:absolute;left:calc(var(--u) * 16);right:calc(var(--u) * 16);top:calc(var(--u) * 44);font:600 calc(var(--u) * 44)/1 var(--font);letter-spacing:-.02em;color:var(--dk-muted)}
+.dk-label{position:absolute;left:calc(var(--u) * 16);right:calc(var(--u) * 16);bottom:calc(var(--u) * 30);font:600 calc(var(--u) * 22)/1.1 var(--font);color:var(--dk-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dk-index{position:absolute;left:50%;bottom:calc(var(--u) * 12);width:calc(var(--u) * 32);height:calc(var(--u) * 4);margin-left:calc(var(--u) * -16);border-radius:calc(var(--u) * 2);background:var(--rf-hue-v);opacity:.45}
+.dk.is-on{background:radial-gradient(90% 70% at 50% 110%,rgba(var(--rf-hue-rgb),.24),transparent 70%),var(--dk-fill);box-shadow:var(--dk-edge),inset 0 0 0 calc(var(--u) * 3) rgba(var(--rf-hue-rgb),.9),0 0 0 1px rgba(0,0,0,.6),0 0 calc(var(--u) * 26) rgba(var(--rf-hue-rgb),.35)}
+.dk.is-on .dk-value{color:var(--rf-hue)}
+.dk.is-on .dk-index{opacity:1;box-shadow:0 0 calc(var(--u) * 6) rgba(var(--rf-hue-rgb),.9)}
+.dk.is-alert{--rf-hue:var(--warn);--rf-hue-v:var(--warn);--rf-hue-rgb:var(--warn-rgb)}
+.dk.is-alert::before{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 calc(var(--u) * 4) rgba(var(--rf-hue-rgb),.95),inset 0 0 calc(var(--u) * 24) rgba(var(--rf-hue-rgb),.25)}
+.dk.is-alert.is-neg{--rf-hue:var(--neg);--rf-hue-v:var(--neg);--rf-hue-rgb:var(--neg-rgb)}
+.dk.is-alert .dk-value{color:var(--rf-hue)}
+.dk.is-alert .dk-index{opacity:1}
+.dk.is-alert::after{content:"";position:absolute;right:0;top:0;width:0;height:0;border-style:solid;border-width:0 calc(var(--u) * 28) calc(var(--u) * 28) 0;border-color:transparent rgba(var(--rf-hue-rgb),.95) transparent transparent}
+.dk.is-alert.is-breathe::before{animation:dk-breathe 1s ease-in-out 10}
+@keyframes dk-breathe{0%,100%{opacity:.78}50%{opacity:1}}
+.dk.is-busy .dk-index{opacity:0}
+.dk.is-busy::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:calc(var(--u) * 3);background:conic-gradient(from var(--dk-a,0deg),transparent 0 72%,rgba(255,255,255,.0) 72%,rgba(255,255,255,.95) 86%,transparent 88%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:dk-lap 1.2s steps(12) infinite}
+[data-rf-mode="day"] .dk.is-busy::before{background:conic-gradient(from var(--dk-a,0deg),transparent 0 72%,rgba(115,83,187,0) 72%,rgba(115,83,187,.95) 86%,transparent 88%)}
+@property --dk-a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes dk-lap{to{--dk-a:360deg}}
+.dk.is-disabled .dk-value,.dk.is-disabled .dk-label,.dk.is-disabled .dk-micro{color:var(--dk-faint)}
+.dk.is-disabled .dk-index{display:none}
+.dk-glyph{position:absolute;left:calc(var(--u) * 16);top:calc(var(--u) * 40);width:calc(var(--u) * 44);height:calc(var(--u) * 44)}
+.dk-dots{position:absolute;left:calc(var(--u) * 16);top:calc(var(--u) * 58);display:flex;gap:calc(var(--u) * 8)}
+.dk-dots i{width:calc(var(--u) * 9);height:calc(var(--u) * 9);border-radius:50%;background:var(--dk-muted)}
+.sp-anat{display:grid;gap:16px;padding:22px;border:1px solid var(--line);border-radius:var(--r-xl);background:var(--panel)}
+.sp-anat-key{position:relative;width:288px;height:288px;margin:4px auto 0}
+.sp-anat-key .dk{--k:288px}
+.sp-guide{position:absolute;border:1px dashed;border-radius:calc(288px / 144 * 14);pointer-events:none}
+.sp-guide.is-bleed{inset:16px;border-color:rgba(var(--neg-rgb),.55)}
+.sp-guide.is-content{inset:24px;border-color:rgba(var(--warn-rgb),.6)}
+.sp-guide.is-text{inset:32px;border-color:rgba(var(--pos-rgb),.7)}
+.sp-guide-grid{position:absolute;inset:0;border-radius:36px;background-image:linear-gradient(rgba(127,140,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(127,140,255,.12) 1px,transparent 1px);background-size:16px 16px;pointer-events:none}
+.sp-legend{display:grid;gap:8px;font:400 10.5px/1.5 var(--rf-mono);color:var(--muted)}
+.sp-legend div{display:flex;align-items:center;gap:10px}
+.sp-legend i{width:18px;height:0;border-top:1px dashed}
+.sp-ktable{width:100%;border-collapse:collapse;font:400 11px/1.5 var(--rf-mono);color:var(--muted)}
+.sp-ktable th{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);font-weight:600;color:var(--dim);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase}
+.sp-ktable td{padding:8px 6px;border-bottom:1px solid var(--line)}
+.sp-ktable td:first-child{color:var(--ink)}
+.sp-states{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.sp-state{display:grid;justify-items:start;align-content:start;gap:10px;padding:14px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--card)}
+.sp-state b{font:600 13px/1.2 var(--font)}
+.sp-state p{font-size:11px;line-height:1.55;color:var(--muted)}
+.sp-deck-l{display:grid;gap:16px;align-content:start}
+.sp-strip-wrap{padding:28px;border:1px solid var(--line);border-radius:var(--r-xl);background:radial-gradient(120% 120% at 50% 0%,#1a1d27,#0b0c11 70%);overflow:auto}
+.sp-strip{display:grid;grid-template-columns:repeat(4,200px);width:800px;height:100px;margin:0 auto;overflow:hidden;border-radius:10px;background:var(--dk-fill);box-shadow:var(--dk-edge),0 0 0 1px #000,0 20px 40px -20px #000}
+.sp-dial{position:relative;padding:14px 16px 0 20px;border-left:1px solid rgba(127,127,140,.18)}
+.sp-dial:first-child{border-left:0}
+.sp-dial .dk-micro{position:static;font-size:14px;letter-spacing:.1em}
+.sp-dial strong{display:block;margin-top:9px;font:600 34px/1 var(--font);letter-spacing:-.03em;color:var(--dk-ink)}
+.sp-dial strong span{font-size:16px;color:var(--dk-muted);margin-left:2px}
+.sp-dial .rf-progress{position:absolute;left:20px;right:16px;bottom:14px;height:3px;background:rgba(127,127,140,.22)}
+.sp-dial::before{content:"";position:absolute;left:8px;top:16px;width:3px;height:30px;border-radius:2px;background:var(--rf-hue-v);opacity:.6}
+.sp-dial.is-on{background:radial-gradient(80% 90% at 50% 120%,rgba(var(--rf-hue-rgb),.25),transparent 70%)}
+.sp-dial.is-on::before{opacity:1;box-shadow:0 0 8px rgba(var(--rf-hue-rgb),.9)}
+.sp-dial.is-on strong{color:var(--rf-hue)}
+
+/* accessibility */
+.sp-a11y{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.sp-a11y>div{padding:22px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--card)}
+.sp-a11y h4{margin:12px 0 8px;font:600 15px/1.3 var(--font);letter-spacing:-.01em}
+.sp-a11y p{font-size:12.5px;line-height:1.65;color:var(--muted)}
+.sp-big-num{margin:14px 0 4px;font:700 46px/1 var(--font);letter-spacing:-.04em}
+.sp-big-num span{font-size:20px;color:var(--muted)}
+
+.sp-foot{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:120px;padding:28px 0;border-top:1px solid var(--line);font-size:12px;color:var(--dim)}
+.sp-foot nav{display:flex;gap:20px}
+.sp-foot a{color:var(--muted);text-decoration:none}
+.sp-foot a:hover{color:var(--accent)}
+
+/* hero art */
+.sp-ray{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:sp-draw .9s var(--rf-ease-out-expo) forwards;animation-delay:calc(.75s + var(--i) * 22ms)}
+.sp-inbeam{stroke-dasharray:420;stroke-dashoffset:420;animation:sp-draw .7s var(--rf-ease-out-expo) .1s forwards}
+.sp-glass{opacity:0;animation:rf-fade .8s var(--rf-ease-out) .35s forwards}
+.sp-lab{opacity:0;animation:rf-fade .6s var(--rf-ease-out) forwards;animation-delay:calc(1.1s + var(--i) * 22ms)}
+@keyframes sp-draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.sp-ray,.sp-inbeam{animation:none;stroke-dashoffset:0}.sp-glass,.sp-lab{animation:none;opacity:1}.fx-orb{animation:none}.dk.is-busy::before{animation:none}.dk.is-alert.is-breathe::before{animation:none}html{scroll-behavior:auto}}
+[data-rf-motion="reduce"] .sp-ray,[data-rf-motion="reduce"] .sp-inbeam{animation:none;stroke-dashoffset:0}
+[data-rf-motion="reduce"] .sp-glass,[data-rf-motion="reduce"] .sp-lab{animation:none;opacity:1}
+[data-rf-motion="reduce"] .fx-orb,[data-rf-motion="reduce"] .dk.is-busy::before,[data-rf-motion="reduce"] .dk.is-breathe::before{animation:none}
+.sp-static .sp-ray,.sp-static .sp-inbeam{animation:none;stroke-dashoffset:0}
+.sp-static .sp-glass,.sp-static .sp-lab{animation:none;opacity:1}
+
+@media (max-width:1180px){.sp-shell{grid-template-columns:1fr}.sp-rail{display:none}.sp-main{padding:0 28px 100px}.sp-hero{grid-template-columns:1fr}.sp-stops{grid-template-columns:repeat(6,1fr)}.sp-surfaces{grid-template-columns:repeat(3,1fr)}.sp-swatches{grid-template-columns:repeat(2,1fr)}.sp-poslist,.sp-grid3,.sp-dodont,.sp-a11y,.sp-tguide,.sp-beams{grid-template-columns:1fr 1fr}.sp-terms,.sp-deck-wrap,.sp-families{grid-template-columns:1fr}.sp-comp>*{grid-column:span 12}.sp-mat,.sp-curves,.sp-states{grid-template-columns:1fr 1fr}.sp-app-body{grid-template-columns:1fr}.sp-app-rail{display:none}.sp-app-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body class="rf-root">
+<a class="sp-skip" href="#main">Skip to content</a>
+<i class="rf-relight-beam" aria-hidden="true"></i>
+
+<header class="sp-top">
+  <a class="sp-brand" href="#top" aria-label="Prism — top of page">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="bm" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d5c7ff"/><stop offset=".5" stop-color="#ae9bee"/><stop offset="1" stop-color="#76cef0"/></linearGradient></defs><path d="M20 4 36 33H4Z" fill="none" stroke="url(#bm)" stroke-width="2" stroke-linejoin="round"/><path d="m20 4 5 29H4m21 0 11 0" fill="none" stroke="url(#bm)" stroke-opacity=".55" stroke-width="1.2"/></svg>
+    <span>prism<b>.</b></span>
+  </a>
+  <div class="sp-crumb"><span class="rf-index is-white" aria-hidden="true"></span>Refraction <span class="sp-ver">v@@VERSION@@</span></div>
+  <div class="sp-top-r">
+    <span class="sp-status">Offline · zero dependencies</span>
+    <div class="rf-seg sp-mode" role="group" aria-label="Color mode">
+      <button type="button" data-mode="night" aria-pressed="true"><i class="sp-glyph is-night" aria-hidden="true"></i>Night</button>
+      <button type="button" data-mode="day" aria-pressed="false"><i class="sp-glyph is-day" aria-hidden="true"></i>Day</button>
+    </div>
+  </div>
+</header>
+
+<div class="sp-shell">
+  <nav class="sp-rail" aria-label="Specimen sections">
+    <div class="rf-nav" id="rail"></div>
+    <div class="sp-rail-foot">tokens.json is the source of truth.<br><a href="tokens.json">tokens.json</a> · <a href="prism.css">prism.css</a> · <a href="themes.js">themes.js</a> · <a href="README.md">README.md</a></div>
+  </nav>
+
+  <main class="sp-main" id="main">
+    <div class="sp-wrap">
+
+      <!-- HERO -->
+      <section class="sp-hero" id="top" aria-labelledby="hero-title">
+        <div class="rf-grid" aria-hidden="true"></div>
+        <div class="rf-halo" aria-hidden="true"></div>
+        <div>
+          <p class="rf-eyebrow"><span class="rf-dot" aria-hidden="true"></span>Prism design language<span class="rf-sep">·</span>Refraction<span class="rf-sep">·</span><span class="rf-meta">v@@VERSION@@</span></p>
+          <h1 id="hero-title" class="rf-refract-in">White light in.<br><span class="rf-spectrum-text">Every color out.</span></h1>
+          <p class="rf-lead">One plain input becomes a whole spectrum. <em>Night</em> is ink-navy glass lit from inside; <em>Day</em> is pearl paper with an iridescent sheen. The spectrum is the accent system — every gallery and every surface owns a hue, and a wavelength.</p>
+          <div class="sp-actions">
+            <a class="rf-btn is-primary is-lg" href="#spectrum">Explore the spectrum <span class="rf-arrow" aria-hidden="true">→</span></a>
+            <a class="rf-btn is-lg" href="#chrome">See the app <span class="rf-arrow" aria-hidden="true">↓</span></a>
+          </div>
+          <p class="sp-note">tokens.json → prism.css · themes.js · terminal · Stream Deck — one source of truth.</p>
+        </div>
+        <div class="sp-art" id="art" aria-hidden="true"></div>
+      </section>
+      <div class="sp-stats" role="list">
+        <div role="listitem"><strong>2</strong><small>modes, separately art-directed</small></div>
+        <div role="listitem"><strong>12</strong><small>OKLCH spectrum stops</small></div>
+        <div role="listitem"><strong>26</strong><small>spectral positions</small></div>
+        <div role="listitem"><strong id="stat-pass">—</strong><small>WCAG 2.2 checks pass</small></div>
+        <div role="listitem"><strong>0</strong><small>runtime dependencies</small></div>
+      </div>
+
+      <!-- 01 COLOR -->
+      <section class="sp-section" id="color" data-sec="0" aria-labelledby="h-color">
+        <div class="sp-head">
+          <p class="rf-eyebrow" data-eyebrow="Color"></p>
+          <h2 id="h-color">Light is the material.</h2>
+          <p>Neutrals carry a whisper of the ink-violet hue so the chrome reads as one piece of glass. Every text token clears 4.5:1 on every surface it can sit on — ratios below are computed live from the tokens of the current mode.</p>
+        </div>
+        <div class="sp-sub">Surfaces <small>bg-deep → panel2</small></div>
+        <div class="sp-surfaces" id="surfaces"></div>
+        <div class="sp-sub">Text &amp; lines <small>ratio on bg · panel · card · panel2</small></div>
+        <div class="sp-textrows" id="textrows"></div>
+        <div class="sp-sub">Accent &amp; status <small>as text on bg · on its own wash</small></div>
+        <div class="sp-swatches" id="swatches"></div>
+      </section>
+
+      <!-- 02 SPECTRUM -->
+      <section class="sp-section" id="spectrum" data-sec="1" aria-labelledby="h-spectrum">
+        <div class="sp-head">
+          <p class="rf-eyebrow" data-eyebrow="Spectrum"></p>
+          <h2 id="h-spectrum">One spectrum. Every hue earns its place.</h2>
+          <p>The website's violet → periwinkle → mint gradient, extended into a full spectrum by walking OKLCH hue in even steps from the accent (h 296°) to rose (h 8°). Three tiers per mode: <b>ink</b> for text and strokes, <b>vivid</b> for beams, glows and marks, <b>wash</b> for tints. λ is the real dominant wavelength of each color (CIE 1931); purples carry a <span class="sp-mono">c</span> for complementary.</p>
+        </div>
+        <div class="sp-band" aria-hidden="true"></div>
+        <div class="sp-band-ink" aria-hidden="true"></div>
+        <div class="sp-band-marks" id="bandmarks" aria-hidden="true"></div>
+        <div class="sp-stops" id="stops"></div>
+        <div class="sp-uni" id="uni"></div>
+        <div class="sp-dodont">
+          <div class="sp-dd is-do"><p class="rf-eyebrow">Do · identity</p><p>One hue per context. A gallery's hue marks its index, eyebrow, active state and focus glow — and nothing else on the page competes with it.</p></div>
+          <div class="sp-dd is-do"><p class="rf-eyebrow">Do · state</p><p>Status colors are spectrum positions too (info azure, pos mint, warn citrine, neg coral, crit magenta). Pair them with a shape or a word — never color alone.</p></div>
+          <div class="sp-dd is-dont"><p class="rf-eyebrow">Don't · wallpaper</p><p>No rainbow fills, no multi-hue buttons, no spectrum behind body text. The full ramp appears only where the spectrum <em>is</em> the subject: the ruler, the Spectrums gallery index, First Light.</p></div>
+        </div>
+      </section>
+
+      <!-- 03 POSITIONS -->
+      <section class="sp-section" id="positions" data-sec="2" aria-labelledby="h-positions">
+        <div class="sp-head">
+          <p class="rf-eyebrow" data-eyebrow="Positions"></p>
+          <h2 id="h-positions">Every gallery owns a wavelength.</h2>
+          <p>Galleries take even steps along the ramp in navigation order, so the sidebar reads as one continuous spectrum, top to bottom. App pages are white light — unrefracted — and wear CIE illuminant codes. The three surfaces sit far apart: Web violet, Terminal phosphor mint, Stream Deck lit-key amber.</p>
+        </div>
+        <div class="sp-scale" aria-label="Spectral map of galleries and surfaces">
+          <div class="rf-grid" aria-hidden="true"></div>
+          <div class="sp-scale-track" id="scale"></div>
+        </div>
+        <div class="sp-poslist" id="poslist"></div>
+      </section>
+
+      <!-- 04 TYPE -->
+      <section class="sp-section" id="type" data-sec="3" aria-labelledby="h-type">
+        <div class="sp-head">
+          <p class="rf-eyebrow" data-eyebrow="Type"></p>
+          <h2 id="h-type">Inter, tight. Mono, wide.</h2>
+          <p>Inter is bundled in Prism.html at 400, 600 and 700 (Latin subsets, <span class="sp-mono">design/fonts/</span>). Display sizes track tight and negative; instrument labels are system mono, uppercase, tracked wide. No web fonts, no CDNs.</p>
+        </div>
+        <div class="sp-families">
+          <div class="sp-family"><p class="rf-eyebrow">Sans<span class="rf-sep">·</span><span class="rf-meta">--font</span></p><div class="sp-big">Aa Gg 72</div><p>Inter → Segoe UI Variable → system-ui. 400 for reading, 600 for UI and headings, 700 for display — three real faces, font-synthesis off, never faux bold.</p><div class="sp-glyphs">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 → ↗ · λ</div></div>
+          <div class="sp-family is-mono"><p class="rf-eyebrow">Mono<span class="rf-sep">·</span><span class="rf-meta">--rf-mono</span></p><div class="sp-big">λ 436</div><p>ui-monospace → SF Mono → Cascadia Mono → Consolas. Eyebrows, counts, λ labels, class refs, code and the terminal. Tabular numerals everywhere numbers line up.</p><div class="sp-glyphs">01 / CHARTS · 209 FACETS · λ 436 — .kpi .delta.up</div></div>
+        </div>
+        <div class="sp-types" id="types"></div>
+      </section>
+
+      <!-- 05 MATERIAL -->
+      <section class="sp-section" id="material" data-sec="4" aria-labelledby="h-material">
+        <div class="sp-head">
+          <p class="rf-eyebrow" data-eyebrow="Material"></p>
+          <h2 id="h-material">Depth from light, not shadow.</h2>
+          <p>Surfaces read as cut glass: a hairline border, a one-pixel highlight on the lit top edge, soft radius. Each elevation adds light to the edge and a little lift to the fill; only overlays cast a real shadow. Day replaces emitted light with reflected light — tinted soft shade and a thin-film sheen.</p>
+        </div>
+        <div class="sp-mat">
+          <div class="rf-grid" aria-hidden="true"></div>
+          <i class="sp-blob" style="width:300px;height:220px;left:48%;top:30px;background:var(--rf-s-violet-v)"></i>
+          <i class="sp-blob" style="width:240px;height:200px;left:66%;top:120px;background:var(--rf-s-mint-v)"></i>
+          <i class="sp-blob" style="width:200px;height:160px;left:80%;top:10px;background:var(--rf-s-amber-v)"></i>
+          <div class="sp-lvl is-0"><p class="rf-eyebrow">0 · canvas</p><b>--bg</b><span>no edge, no shadow</span></div>
+          <div class="sp-lvl rf-surface"><p class="rf-eyebrow">1 · resting</p><b>--card · --elev-1</b><span>tiles, panels, inputs</span></div>
+          <div class="sp-lvl rf-surface is-raised"><p class="rf-eyebrow">2 · raised</p><b>--panel2 · --elev-2</b><span>hover, menus, popovers</span></div>
+          <div class="sp-lvl rf-glass"><p class="rf-eyebrow">3 · overlay</p><b>--rf-glass · blur 18</b><span>palette, dialogs, toasts, top bar</span></div>
+        </div>
+        <div class="sp-sub">The beam <small>one hairline of light, everywhere</small></div>
+        <div class="sp-beams">
+          <div class="sp-beam-card"><span class="sp-label">Rule with glint</span><hr class="rf-beam is-glint" style="--rf-beam-x:8%;--rf-beam-w:46%"><div class="sp-anno"><b>.rf-beam.is-glint</b> dividers that catch the light</div></div>
+          <div class="sp-beam-card" style="--rf-hue:var(--rf-g-maps);--rf-hue-v:var(--rf-g-maps-v);--rf-hue-rgb:var(--rf-g-maps-rgb)"><span class="sp-label">Hue beam · Maps &amp; Geo</span><hr class="rf-beam is-hue" style="--rf-beam-x:20%;--rf-beam-w:60%"><div class="sp-anno"><b>.rf-beam.is-hue</b> page headers carry their gallery's light</div></div>
+          <div class="sp-beam-card"><span class="sp-label">Progress</span><div class="rf-progress" style="--rf-p:64%"><i></i></div><div class="sp-anno"><b>.rf-progress</b> a beam with a bright head</div></div>
+          <div class="sp-beam-card"><span class="sp-label">Active indicator</span><div class="sp-row"><span class="rf-beam-v" aria-hidden="true"></span><span style="font-weight:600">Charts &amp; Metrics</span></div><div class="sp-anno"><b>.rf-beam-v</b> the lit nav index</div></div>
+          <div class="sp-beam-card"><span class="sp-label">Focus ring</span><div><span class="sp-focusdemo">Focused control</span></div><div class="sp-anno"><b>--rf-focus</b> 2px + 2px offset + 6px halo</div></div>
+          <div class="sp-beam-card"><span class="sp-label">Tab underline</span><div class="rf-tabs" role="tablist" aria-label="Demo tabs"><button class="rf-tab" role="tab" aria-selected="true">Preview</button><button class="rf-tab" role="tab" aria-selected="false">HTML</button><button class="rf-tab" role="tab" aria-selected="false">CSS</button></div><div class="sp-anno"><b>.rf-tab</b> 2px beam in the hue</div></div>
+        </div>
+        <div class="sp-light">
+          <div><div class="rf-grid" aria-hidden="true"></div><div class="rf-halo" aria-hidden="true"></div><p class="rf-eyebrow">Measurement grid · interior light</p><p style="margin-top:12px;max-width:340px;color:var(--muted);font-size:12.5px;line-height:1.65">A faint 34 px grid behind hero areas, masked radially, with a halo of the page's hue. <span class="sp-mono">.rf-grid</span> + <span class="sp-mono">.rf-halo</span>.</p></div>
+          <div><div class="rf-iris" aria-hidden="true"></div><p class="rf-eyebrow">Iridescence · --rf-iris</p><p style="margin-top:12px;max-width:340px;color:var(--muted);font-size:12.5px;line-height:1.65">Day's pearl sheen (Night: a faint interior spectrum). Behind hero areas and the hover edge of Day tiles (<span class="sp-mono">--rf-iris-edge</span>). Never behind body text blocks.</p></div>
+        </div>
+      </section>
+
+      <!-- 06 COMPONENTS -->
+      <section class="sp-section" id="components" data-sec="5" aria-labelledby="h-components">
+        <div class="sp-head">
+          <p class="rf-eyebrow" data-eyebrow="Components"></p>
+          <h2 id="h-components">Iconless anatomy.</h2>
+          <p>The chrome's building blocks, drawn from prism.css. Glyphs here are typographic (→ ↗ ↵) or CSS; the hairline icon family comes from design/icons/. Hue-aware components read <span class="sp-mono">--rf-hue</span>, so they take on the color of the gallery they live in.</p>
+        </div>
+        <div class="sp-comp">
+          <div class="sp-board sp-c7">
+            <span class="sp-label">Buttons</span>
+            <div class="sp-row"><button class="rf-btn is-primary is-lg">Open the library <span class="rf-arrow">↗</span></button><button class="rf-btn is-lg">Get Prism <span class="rf-arrow">↓</span></button><button class="rf-btn is-ghost is-lg">Docs</button></div>
+            <div class="sp-row" style="margin-top:14px"><button class="rf-btn is-primary">Primary</button><button class="rf-btn">Secondary</button><button class="rf-btn is-ghost">Ghost</button><button class="rf-btn is-sm">Small</button><button class="rf-btn" disabled>Disabled</button></div>
+            <div class="sp-anno"><b>46 / 40 / 32</b> heights · <b>--r-md</b> · primary = <b>--accent</b> + <b>--rf-accent-ink</b>, glint on hover · secondary = <b>--panel</b> + <b>--rf-line-strong</b></div>
+          </div>
+          <div class="sp-board sp-c5">
+            <span class="sp-label">Copy action</span>
+            <div class="sp-row"><button class="rf-copy is-primary" id="copydemo">Copy HTML</button><button class="rf-copy">CSS</button><button class="rf-copy is-done">Copied</button></div>
+            <div class="sp-anno"><b>.rf-copy</b> mono, uppercase · idle → <b>.is-done</b> (pos + beam sweep) for 1.6s, announced via aria-live</div>
+          </div>
+          <div class="sp-board sp-c7" data-rf-gallery="charts">
+            <span class="sp-label">Filter chips · tabs · segmented</span>
+            <div class="rf-chips"><button class="rf-chip" aria-pressed="true">All <span class="rf-count">209</span></button><button class="rf-chip" aria-pressed="false">KPI &amp; value <span class="rf-count">9</span></button><button class="rf-chip" aria-pressed="false">Gauges <span class="rf-count">14</span></button><button class="rf-chip" aria-pressed="true">Trends <span class="rf-count">22</span></button><button class="rf-chip" aria-pressed="false">Status <span class="rf-count">12</span></button></div>
+            <div class="sp-row" style="margin-top:22px;gap:28px"><div class="rf-tabs" role="tablist" aria-label="View" style="flex:1"><button class="rf-tab" role="tab" aria-selected="true">Preview</button><button class="rf-tab" role="tab" aria-selected="false">HTML</button><button class="rf-tab" role="tab" aria-selected="false">CSS</button><button class="rf-tab" role="tab" aria-selected="false">Tokens</button></div>
+            <div class="rf-seg" role="group" aria-label="Density"><button aria-pressed="true">Comfortable</button><button aria-pressed="false">Compact</button></div></div>
+            <div class="sp-anno"><b>selected</b> = hue wash + hue border + leading dot (shape, not just color) · <b>aria-pressed</b> / <b>aria-selected</b></div>
+          </div>
+          <div class="sp-board sp-c5">
+            <span class="sp-label">Inputs — fields sit on a 3:1 baseline</span>
+            <div class="sp-stack">
+              <label class="rf-field"><span class="rf-label">Collection name</span><input class="rf-input" placeholder="e.g. Launch dashboard"><span class="rf-help">Up to 50 characters.</span></label>
+              <label class="rf-field"><span class="rf-label">Focused</span><input class="rf-input is-focus" value="Quarterly KPIs"></label>
+              <div class="sp-row"><span class="rf-search" style="flex:1"><span>Search 2,668 facets</span><span class="rf-kbd">Ctrl K</span></span></div>
+              <div class="sp-row" style="gap:22px"><span class="sp-row" style="gap:10px;font-size:12.5px;color:var(--muted)"><button class="rf-switch" role="switch" aria-checked="true" aria-label="Animate previews"></button>Animate previews</span><span class="sp-row" style="gap:10px;font-size:12.5px;color:var(--muted)"><button class="rf-switch" role="switch" aria-checked="false" aria-label="Show code"></button>Show code</span><span class="sp-row" style="gap:10px;font-size:12.5px;color:var(--muted)"><button class="rf-check" role="checkbox" aria-checked="true" aria-label="New only"></button>New only</span></div>
+            </div>
+          </div>
+          <div class="sp-board sp-c4">
+            <span class="sp-label">Nav item · spectral index</span>
+            <div class="sp-navdemo">
+              <div class="rf-nav">
+                <div class="rf-nav-group">Library</div>
+                <a class="rf-nav-item" href="#components" data-rf-gallery="facets"><span class="rf-index is-white"></span><span class="rf-nav-label">New Facets</span><span class="rf-lambda">D65</span><span class="rf-count">128</span></a>
+                <div class="rf-nav-group">Galleries</div>
+                <a class="rf-nav-item" href="#components" data-rf-gallery="charts" aria-current="page"><span class="rf-index"></span><span class="rf-nav-label">Charts &amp; Metrics</span><span class="rf-lambda">λ 436</span><span class="rf-count">209</span></a>
+                <a class="rf-nav-item is-hover-demo" href="#components" data-rf-gallery="fx"><span class="rf-index"></span><span class="rf-nav-label">FX Store</span><span class="rf-lambda" data-lambda="fx"></span><span class="rf-count">146</span></a>
+                <a class="rf-nav-item" href="#components" data-rf-gallery="lab"><span class="rf-index"></span><span class="rf-nav-label">Animation Lab</span><span class="rf-lambda" data-lambda="lab"></span><span class="rf-count">217</span></a>
+                <a class="rf-nav-item" href="#components" data-rf-gallery="spectrums"><span class="rf-index is-full"></span><span class="rf-nav-label">Spectrums</span><span class="rf-lambda" data-lambda="spectrums"></span><span class="rf-count">1,266</span></a>
+              </div>
+            </div>
+            <div class="sp-anno"><b>active</b> white beam carrying the hue · <b>hover</b> (FX) reveals λ · white light for app pages · full ramp for Spectrums</div>
+          </div>
+          <div class="sp-board sp-c8 is-canvas" style="padding:0;overflow:hidden" data-rf-gallery="maps">
+            <header class="rf-pagehead">
+              <div class="rf-grid" aria-hidden="true"></div><div class="rf-halo" aria-hidden="true"></div>
+              <p class="rf-eyebrow"><span>09</span><span class="rf-sep">/</span><span>Maps &amp; Geo</span><span class="rf-sep">·</span><span class="rf-meta">50 facets</span><span class="rf-sep">·</span><span class="rf-nocase" data-lambda="maps"></span></p>
+              <h1 class="rf-title" style="font-size:38px">Maps &amp; Geo</h1>
+              <p class="rf-lead">Offline maps — stylized world and region SVG, pulsing markers, great-circle arcs, choropleth regions, radar sweeps and live telemetry.</p>
+              <div class="rf-ruler" data-ruler="maps"></div>
+            </header>
+            <div style="padding:0 40px 24px"><div class="sp-anno" style="margin:0"><b>page header</b> = instrument eyebrow (index / name · count · λ) + h1 + lead + spectral ruler (where this gallery sits) · grid + halo in the gallery hue</div></div>
+          </div>
+          <div class="sp-c12 sp-grid3" id="tiles"></div>
+          <div class="sp-c7 sp-palette-stage">
+            <div class="sp-ghost-tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="rf-palette rf-glass" role="dialog" aria-label="Command palette (static demo)">
+              <div class="rf-palette-input"><span>glo<i class="rf-palette-caret"></i></span><span class="rf-kbd">esc</span></div>
+              <hr class="rf-beam is-full" style="--rf-beam:var(--rf-spectrum);opacity:.55">
+              <div class="rf-palette-list" id="palette"></div>
+              <div class="rf-palette-foot"><span><span class="rf-kbd">↑↓</span>navigate</span><span><span class="rf-kbd">↵</span>open</span><span><span class="rf-kbd">Ctrl C</span>copy HTML</span><span style="margin-left:auto">7 results · 4 galleries</span></div>
+            </div>
+          </div>
+          <div class="sp-c5 sp-toast-stage">
+            <div class="rf-toast rf-glass" role="status" style="--rf-hue-v:var(--pos);--rf-hue-rgb:var(--pos-rgb)"><span class="rf-index is-lit"></span><div><p class="rf-toast-title">Copied to clipboard</p><p class="rf-toast-body">kpi-tile-delta.html · 2.1 KB · HTML + CSS</p></div><div class="rf-progress" style="--rf-p:62%"><i></i></div></div>
+            <div class="rf-toast rf-glass" role="status" style="--rf-hue-v:var(--warn);--rf-hue-rgb:var(--warn-rgb)"><span class="rf-index is-lit"></span><div><p class="rf-toast-title">Collection is almost full</p><p class="rf-toast-body">48 / 50 components in “Launch dashboard”</p></div></div>
+            <div class="rf-toast rf-glass" role="status" data-rf-gallery="ai"><span class="rf-index is-lit"></span><div><p class="rf-toast-title">Added to AI Working</p><p class="rf-toast-body">token-stream-cursor · <span data-lambda="ai"></span></p></div></div>
+            <div class="sp-anno" style="justify-content:center"><b>toast</b> = glass overlay · status index · mono detail · beam timer</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 CHROME -->
+      <section class="sp-section" id="chrome" data-sec="6" aria-labelledby="h-chrome">
+        <div class="sp-head">
+          <p class="rf-eyebrow" data-eyebrow="App chrome"></p>
+          <h2 id="h-chrome">The app, assembled.</h2>
+          <p>Top bar in glass with brand, breadcrumb index, search, surface switcher and theme switch; the sidebar's white-light library pages above the refracted galleries; a gallery page header with its eyebrow, title and ruler; filter chips; tiles with stage, metadata and copy bar. This is the target for the shell and pages.</p>
+        </div>
+        <div class="sp-app" id="app" data-rf-gallery="charts"></div>
+      </section>
+
+      <!-- 08 MOTION -->
+      <section class="sp-section" id="motion" data-sec="7" aria-labelledby="h-motion">
+        <div class="sp-head">
+          <p class="rf-eyebrow" data-eyebrow="Motion"></p>
+          <h2 id="h-motion">Things arrive by converging.</h2>
+          <p>Motion is refraction: a slight chromatic split that resolves into focus, eased out exponentially. Arrivals 240–600 ms, exits faster, nothing blocks input. Every pattern has a reduced-motion form: a 120 ms fade, or nothing.</p>
+        </div>
+        <div class="sp-curves" id="curves"></div>
+        <div class="sp-durs" id="durs" style="--rf-hue-rgb:var(--rf-s-lime-rgb)"></div>
+        <div class="sp-stage" data-rf-gallery="ai">
+          <div class="sp-stage-ctl">
+            <span class="sp-label">Replay</span>
+            <button class="rf-btn" data-demo="refract">Refract in <span class="rf-mono rf-count">600ms</span></button>
+            <button class="rf-btn" data-demo="cascade">Tile cascade <span class="rf-mono rf-count">400 + 28n</span></button>
+            <button class="rf-btn" data-demo="sweep">Beam sweep <span class="rf-mono rf-count">600ms</span></button>
+            <button class="rf-btn" data-demo="relight">Theme relight <span class="rf-mono rf-count">600ms</span></button>
+            <label>Simulate reduced motion <button class="rf-switch" role="switch" aria-checked="false" id="rm" aria-label="Simulate reduced motion"></button></label>
+          </div>
+          <div class="sp-stage-view">
+            <div class="rf-grid" aria-hidden="true"></div>
+            <p class="rf-eyebrow"><span>04</span><span class="rf-sep">/</span><span>AI Working</span><span class="rf-sep">·</span><span class="rf-meta">118 facets</span></p>
+            <h3 id="demo-title">Thinking, made visible.</h3>
+            <hr class="rf-beam is-hue" id="demo-beam" style="--rf-beam-w:100%">
+            <div class="sp-cascade" id="demo-cascade"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09 TERMINAL -->
+      <section class="sp-section" id="terminal" data-sec="8" aria-labelledby="h-terminal">
+        <div class="sp-head">
+          <p class="rf-eyebrow" data-eyebrow="Terminal"></p>
+          <h2 id="h-terminal">Prism in sixteen colors.</h2>
+          <p>prism-term ships a Night and a Day palette. Magenta is the Prism violet so prompts and highlights carry the brand; bright black is a legible dim (≥4.5:1). Truecolor uses the spectrum directly; 256-color maps by OKLab distance; 16-color uses only the semantic slots.</p>
+        </div>
+        <div class="sp-terms" id="terms"></div>
+        <div class="sp-tguide">
+          <div><p class="rf-eyebrow" style="color:var(--rf-s-mint)">Depth</p><h4>Detect, never guess</h4><p><code>NO_COLOR</code> → none · <code>COLORTERM=truecolor</code> → 24-bit · <code>TERM=*256color*</code> → 256 · else 16. Gradients interpolate in OKLCH.</p></div>
+          <div><p class="rf-eyebrow" style="color:var(--rf-s-mint)">Mode</p><h4>Night unless the terminal is light</h4><p>Query <code>OSC 11</code> with a 100 ms timeout, else <code>COLORFGBG</code>; background lightness above 0.6 → Day palette.</p></div>
+          <div><p class="rf-eyebrow" style="color:var(--rf-s-mint)">Quantize</p><h4>Spectrum in 24-bit vs 256</h4><p>Top: the 12 stops in truecolor. Bottom: the designed xterm-256 index for each — the nearest that keeps 4.5:1 as text on every 256-color surface (tokens.json → terminal.*.spectrum256).</p><div class="sp-qrow" id="q24"></div><div class="sp-qrow" id="q256" style="margin-top:4px"></div></div>
+        </div>
+      </section>
+
+      <!-- 10 STREAM DECK -->
+      <section class="sp-section" id="deck" data-sec="9" aria-labelledby="h-deck">
+        <div class="sp-head">
+          <p class="rf-eyebrow" data-eyebrow="Stream Deck"></p>
+          <h2 id="h-deck">Keys you can read from across the desk.</h2>
+          <p>Author every key at 144 × 144 and downsample to 72. One value, one label, one hue index; everything essential inside the 12 px safe area, text inside 16 px. States are light, not decoration: off is quiet glass, on lights the edge in the gallery hue, alert adds a corner notch, busy sends a beam around the rim.</p>
+        </div>
+        <div class="sp-deck-wrap">
+          <div class="sp-deck-l"><div class="sp-device"><span class="sp-device-cap">Virtual deck · 5 × 3 · keys at 96 px (⅔ of 144)</span><div class="sp-device-body"><div class="sp-keys" id="keys" style="--k:96px"></div></div></div>
+          <div class="sp-states" id="states"></div></div>
+          <div class="sp-anat">
+            <span class="sp-label">Key anatomy · 144 canvas at 2×</span>
+            <div class="sp-anat-key"><div class="dk is-on" data-rf-gallery="charts"><span class="dk-micro rf-nocase">λ 436</span><span class="dk-value">72%</span><span class="dk-label">Coverage</span><i class="dk-index"></i></div><div class="sp-guide-grid"></div><i class="sp-guide is-bleed"></i><i class="sp-guide is-content"></i><i class="sp-guide is-text"></i></div>
+            <div class="sp-legend"><div><i style="border-color:rgba(var(--neg-rgb),.8)"></i>8 px bleed — bezel may crop</div><div><i style="border-color:rgba(var(--warn-rgb),.9)"></i>12 px content safe area</div><div><i style="border-color:rgba(var(--pos-rgb),.9)"></i>16 px text safe area · 8 px grid</div></div>
+            <table class="sp-ktable"><thead><tr><th>Role</th><th>@144</th><th>@72</th><th>Spec</th></tr></thead><tbody><tr><td>Value</td><td>44</td><td>22</td><td>600 · ≤5 chars</td></tr><tr><td>Label</td><td>22</td><td>11</td><td>600 · ≤2 × 9 chars</td></tr><tr><td>Micro</td><td>16</td><td>8</td><td>mono caps · non-essential</td></tr><tr><td>Index</td><td>32×4</td><td>16×2</td><td>hue · 12 above bottom</td></tr></tbody></table>
+          </div>
+        </div>
+        <div class="sp-strip-wrap"><div class="sp-strip" id="strip"></div><div class="sp-anno" style="text-align:center;color:#8a8c9d"><b style="color:#a2a4b4">Stream Deck + touch strip</b> 800 × 100 · four 200 × 100 dial segments · the touched segment lights in its hue · the dial value is a beam</div></div>
+      </section>
+
+      <!-- 11 ACCESSIBILITY -->
+      <section class="sp-section" id="a11y" data-sec="10" aria-labelledby="h-a11y">
+        <div class="sp-head">
+          <p class="rf-eyebrow" data-eyebrow="Accessibility"></p>
+          <h2 id="h-a11y">Beautiful is not an excuse.</h2>
+          <p>WCAG 2.2 AA in both modes: text 4.5:1, controls and focus 3:1, visible focus everywhere, full keyboard reach, reduced motion honored, and no meaning carried by color alone.</p>
+        </div>
+        <div class="sp-a11y">
+          <div><p class="rf-eyebrow">Contrast · live</p><div class="sp-big-num" id="a11y-num">—</div><p id="a11y-detail">Computed in this page from the current mode's tokens.</p></div>
+          <div><p class="rf-eyebrow">Focus</p><h4>A beam, never removed</h4><p>2 px <span class="sp-mono">--rf-focus</span> outline, 2 px offset, 6 px halo. ≥7:1 against every surface in both modes. Inputs move the ring onto the baseline.</p></div>
+          <div><p class="rf-eyebrow">Motion</p><h4>Fade or nothing</h4><p><span class="sp-mono">prefers-reduced-motion</span> turns every pattern into a 120 ms fade, stops loops, skips First Light and the relight sweep. <span class="sp-mono">[data-rf-motion="reduce"]</span> forces it in-app.</p></div>
+          <div><p class="rf-eyebrow">Color is never alone</p><h4>Shape + word + hue</h4><p>Selected chips gain a dot; alerts gain a corner notch; status toasts carry a title. The spectral index is a reinforcement of the label, never a replacement.</p></div>
+          <div><p class="rf-eyebrow">Keyboard</p><h4>Everything reachable</h4><p>Skip link, roving focus in nav and chips, Ctrl/⌘ K for the palette, Esc closes overlays, ↵ opens, arrow keys move. First Light is skippable by any key and never blocks input.</p></div>
+          <div><p class="rf-eyebrow">Showcased content</p><h4>Chrome only</h4><p>Facets that demonstrate other design languages render as authored. Refraction restyles only chrome: tile scaffolding, filters, headers — never <span class="sp-mono">.panel</span> / <span class="sp-mono">.card</span>.</p></div>
+        </div>
+      </section>
+
+      <footer class="sp-foot"><span>Prism · Refraction v@@VERSION@@ — white light in, every color out.</span><nav aria-label="Design files"><a href="tokens.json">tokens.json</a><a href="prism.css">prism.css</a><a href="themes.js">themes.js</a><a href="README.md">README</a><a href="CHANGELOG.md">Changelog</a></nav></footer>
+    </div>
+  </main>
+</div>
+<div id="sr" class="sp-mono" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></div>
+
+<script>
+(function(){
+'use strict';
+var RF=/*@@TOKENS@@*/;
+var html=document.documentElement;
+var $=function(s,r){return (r||document).querySelector(s);}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+var mode=function(){return html.getAttribute('data-rf-mode')==='day'?'day':'night';};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+
+/* ── WCAG contrast ── */
+function hex2rgb(h){h=h.replace('#','');var n=parseInt(h.slice(0,6),16);return [(n>>16)&255,(n>>8)&255,n&255];}
+function lin(c){c/=255;return c<=.04045?c/12.92:Math.pow((c+.055)/1.055,2.4);}
+function lum(h){var r=hex2rgb(h);return .2126*lin(r[0])+.7152*lin(r[1])+.0722*lin(r[2]);}
+function cr(a,b){var x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+function over(rgb,a,bg){var B=hex2rgb(bg),F=rgb.split(',').map(Number);return '#'+F.map(function(v,i){return Math.round(v*a+B[i]*(1-a)).toString(16).padStart(2,'0');}).join('');}
+function trip(h){return hex2rgb(h).join(',');}
+function badge(label,ratio,need){var ok=ratio>=need;return '<span class="sp-ratio'+(ok?'':' is-fail')+'"><i>'+label+'</i>'+ratio.toFixed(2)+'</span>';}
+
+var C=function(){var o={},c=RF.color[mode()];for(var k in c)o[k]=c[k].hex;return o;};
+var G={};RF.galleries.web.concat(RF.galleries.app,RF.galleries.surfaces).forEach(function(g){G[g.id]=g;});
+var hueStyle=function(id){var p=G[id]&&G[id].kind==='surface'?'--rf-surf-':'--rf-g-';return '--rf-hue:var('+p+id+');--rf-hue-v:var('+p+id+'-v);--rf-hue-rgb:var('+p+id+'-rgb)';};
+var stopStyle=function(n){return '--rf-hue:var(--rf-s-'+n+');--rf-hue-v:var(--rf-s-'+n+'-v);--rf-hue-rgb:var(--rf-s-'+n+'-rgb)';};
+
+/* ── Sections + rail ── */
+var SECTIONS=[['color','Color','Foundations'],['spectrum','Spectrum'],['positions','Positions'],['type','Type'],['material','Material'],['components','Components','Build'],['chrome','App chrome'],['motion','Motion','Move & ship'],['terminal','Terminal'],['deck','Stream Deck'],['a11y','Accessibility']];
+var STOPS=RF.spectrum.stops;
+function buildRail(){
+  var out='',meta={color:'24 tokens',spectrum:'12 stops',positions:'26',type:'13 sizes',material:'4 levels',components:'12',chrome:'1:1',motion:'6 patterns',terminal:'16 · 256 · 24-bit',deck:'72 · 144',a11y:'AA'};
+  SECTIONS.forEach(function(s,i){
+    if(s[2]) out+='<div class="rf-nav-group">'+s[2]+'</div>';
+    out+='<a class="rf-nav-item" href="#'+s[0]+'" style="'+stopStyle(STOPS[i].name)+'"><span class="rf-index"></span><span class="rf-nav-label">'+String(i+1).padStart(2,'0')+'&nbsp;&nbsp;'+s[1]+'</span><span class="rf-lambda">'+STOPS[i].lambda+'</span></a>';
+  });
+  $('#rail').innerHTML=out;
+  $$('[data-sec]').forEach(function(sec){var i=+sec.getAttribute('data-sec');sec.setAttribute('style',stopStyle(STOPS[i].name));
+    var eb=$('[data-eyebrow]',sec);eb.innerHTML='<span>'+String(i+1).padStart(2,'0')+'</span><span class="rf-sep">/</span><span>'+eb.getAttribute('data-eyebrow')+'</span><span class="rf-sep">·</span><span class="rf-meta" data-modename></span><span class="rf-sep">·</span><span class="rf-meta rf-nocase">'+STOPS[i].lambda+'</span>';});
+  var links=$$('#rail .rf-nav-item');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var id=e.target.id;links.forEach(function(a){a.toggleAttribute('aria-current',a.getAttribute('href')==='#'+id);if(a.getAttribute('href')==='#'+id)a.setAttribute('aria-current','page');});}});},{rootMargin:'-30% 0px -60% 0px'});
+  $$('.sp-section').forEach(function(s){io.observe(s);});
+}
+
+/* ── Hero spectrometer ── */
+/* ── Hero spectrometer ──
+   Night: a dark optics lab — a white beam strikes the glass and fans into glowing rays.
+   Day: the same diagram printed on pearl paper — a dashed construction ray, crisp jewel
+   rays, a soft rainbow caustic on the screen and the prism's cast shadow. */
+function buildArt(){
+  var m=mode(),W=760,H=500,px=290,web=RF.galleries.web,n=web.length,day=m==='day';
+  var ex=338,ey=262,dx=618,top=58,bot=446,MONO='ui-monospace,SFMono-Regular,Consolas,monospace';
+  var s='<svg viewBox="0 0 '+W+' '+H+'" role="img"><defs>';
+  s+='<linearGradient id="glassf" x1="0" y1="0" x2="1" y2="1">'+(day?'<stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#ece6fb" stop-opacity=".85"/><stop offset=".7" stop-color="#dff0f6" stop-opacity=".8"/><stop offset="1" stop-color="#f6ecd9" stop-opacity=".85"/>':'<stop offset="0" stop-color="#fff" stop-opacity=".10"/><stop offset="1" stop-color="#b8a2f2" stop-opacity=".03"/>')+'</linearGradient>';
+  s+='<linearGradient id="inb" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".55" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff"/></linearGradient>';
+  s+='<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.2"/></filter>';
+  s+='<filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>';
+  s+='<linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">'+STOPS.map(function(st,i){return '<stop offset="'+(i/(STOPS.length-1)).toFixed(3)+'" stop-color="'+(day?st.day.sheen.hex:st.night.vivid.hex)+'"/>';}).join('')+'</linearGradient>';
+  s+='</defs>';
+  s+='<polygon points="'+ex+','+ey+' '+dx+','+top+' '+dx+','+bot+'" fill="url(#haze)" opacity="'+(day?'.16':'.07')+'"/>';
+  if(day){
+    s+='<rect class="sp-lab" style="--i:4" x="'+(dx-7)+'" y="'+(top-8)+'" width="14" height="'+(bot-top+16)+'" rx="7" fill="url(#haze)" opacity=".75" filter="url(#soft)"/>';
+    s+='<ellipse class="sp-glass" cx="'+(px+4)+'" cy="360" rx="98" ry="9" fill="rgba(48,32,120,.16)" filter="url(#soft)"/>';
+    s+='<line class="sp-inbeam" x1="0" y1="300" x2="268" y2="258" stroke="#20202e" stroke-opacity=".55" stroke-width="1.3" stroke-dasharray="5 6"/>';
+    s+='<circle class="sp-lab" style="--i:0" cx="268" cy="258" r="3" fill="#fff" stroke="#20202e" stroke-opacity=".5"/>';
+  }else{
+    s+='<line class="sp-inbeam" x1="0" y1="300" x2="268" y2="258" stroke="url(#inb)" stroke-width="2" stroke-linecap="round"/>';
+    s+='<line class="sp-inbeam" x1="0" y1="300" x2="268" y2="258" stroke="#cdbfff" stroke-width="6" opacity=".35" filter="url(#glow)"/>';
+  }
+  web.forEach(function(g,i){var y=top+(bot-top)*i/(n-1),len=Math.hypot(dx-ex,y-ey).toFixed(1),c=g[m].vivid;
+    s+='<line class="sp-ray" style="--len:'+len+';--i:'+i+'" x1="'+ex+'" y1="'+ey+'" x2="'+dx+'" y2="'+y.toFixed(1)+'" stroke="'+c+'" stroke-width="'+(day?1.25:1.3)+'" stroke-opacity="'+(day?.9:.85)+'"/>';
+    s+='<line class="sp-ray" style="--len:'+len+';--i:'+i+'" x1="'+ex+'" y1="'+ey+'" x2="'+dx+'" y2="'+y.toFixed(1)+'" stroke="'+(day?STOPS[Math.round(i*11/(n-1))].day.sheen.hex:c)+'" stroke-width="'+(day?7:5)+'" stroke-opacity="'+(day?.18:.22)+'" filter="url(#glow)"/>';
+  });
+  s+='<g class="sp-glass"><path d="M'+px+' 120 L370 352 L210 352 Z" fill="url(#glassf)" stroke="'+(day?'rgba(32,32,46,.42)':'rgba(255,255,255,.55)')+'" stroke-width="1.2" stroke-linejoin="round"/>';
+  s+='<path d="M'+px+' 120 L210 352" stroke="#fff" stroke-opacity="'+(day?'1':'.9')+'" stroke-width="'+(day?2:1.4)+'"/>';
+  s+='<path d="M'+(px+6)+' 150 L'+(px+52)+' 300" stroke="#fff" stroke-opacity="'+(day?'.95':'.18')+'" stroke-width="'+(day?1.6:1)+'"/>';
+  s+='<line x1="268" y1="258" x2="'+ex+'" y2="'+ey+'" stroke="'+(day?'#20202e':'#fff')+'" stroke-opacity="'+(day?'.4':'.55')+'" stroke-width="1.3"'+(day?' stroke-dasharray="3 4"':'')+'/></g>';
+  s+='<g class="sp-glass"><line x1="'+dx+'" y1="'+(top-14)+'" x2="'+dx+'" y2="'+(bot+14)+'" stroke="'+(day?'rgba(32,32,46,.22)':'rgba(255,255,255,.14)')+'"/>';
+  for(var t=0;t<=34;t++){var yy=top-14+(bot-top+28)*t/34;s+='<line x1="'+(dx-(t%5?3:6))+'" y1="'+yy.toFixed(1)+'" x2="'+dx+'" y2="'+yy.toFixed(1)+'" stroke="'+(day?'rgba(32,32,46,.25)':'rgba(255,255,255,.16)')+'"/>';}
+  s+='</g>';
+  web.forEach(function(g,i){var y=top+(bot-top)*i/(n-1);
+    s+='<g class="sp-lab" style="--i:'+i+'"><circle cx="'+dx+'" cy="'+y.toFixed(1)+'" r="2.4" fill="'+g[m].vivid+'"/>';
+    s+='<text x="'+(dx+12)+'" y="'+(y+3.2).toFixed(1)+'" font-family="'+MONO+'" font-size="9.5" letter-spacing=".6" fill="'+g[m].ink+'">'+esc(g.lambda)+'</text>';
+    s+='<text x="'+(dx+64)+'" y="'+(y+3.2).toFixed(1)+'" font-family="'+MONO+'" font-size="9" letter-spacing="1.2" fill="'+C().dim+'">'+esc(g.id.toUpperCase())+'</text></g>';
+  });
+  s+='<g class="sp-lab" style="--i:0"><text x="0" y="330" font-family="'+MONO+'" font-size="9" letter-spacing="1.5" fill="'+C().dim+'">WHITE LIGHT · D65</text><text x="0" y="346" font-family="'+MONO+'" font-size="9" letter-spacing="1.5" fill="'+C().dim+'">5 LIBRARY PAGES</text>';
+  s+='<text x="'+(dx-2)+'" y="'+(top-26)+'" text-anchor="end" font-family="'+MONO+'" font-size="9" letter-spacing="1.5" fill="'+C().accent+'">18 GALLERIES · 2,668 FACETS</text></g>';
+  s+='</svg>';
+  $('#art').innerHTML=s;
+}
+
+/* ── 01 Color ── */
+function buildColor(){
+  var c=C(),T=RF.color[mode()];
+  var surf=['bg-deep','bg','panel','card','panel2'];
+  $('#surfaces').innerHTML=surf.map(function(k){var bg=c[k];
+    return '<div class="sp-surf" style="background:'+bg+'"><div><h4>--'+k+'</h4><div class="sp-hex">'+bg+' · '+T[k].oklch.replace('oklch','')+'</div><div class="sp-role">'+esc(T[k].note||'')+'</div></div><div class="sp-ratios">'+badge('ink',cr(c.ink,bg),4.5)+badge('muted',cr(c.muted,bg),4.5)+badge('dim',cr(c.dim,bg),4.5)+'</div></div>';}).join('');
+  var rows=[['ink','The quick brown fox refracts the light.'],['muted','Secondary copy, descriptions, nav labels.'],['dim','Captions, counts, λ labels, placeholders.'],['faint','Disabled and decorative only — exempt.']];
+  var tr=rows.map(function(r){var k=r[0],need=k==='faint'?0:4.5;
+    return '<div class="sp-textrow"><code>--'+k+' '+c[k]+'</code><span class="sp-sample" style="color:'+c[k]+'">'+r[1]+'</span><span class="sp-ratios">'+(k==='faint'?'<span class="sp-ratio"><i>bg</i>'+cr(c[k],c.bg).toFixed(2)+'</span>':['bg','panel','card','panel2'].map(function(s){return badge(s,cr(c[k],c[s]),need);}).join(''))+'</span></div>';}).join('');
+  var lines=[['line','Hairlines (decorative)'],['line-soft','Internal dividers'],['line-strong','Hover borders'],['line-control','Control boundary · 3:1']];
+  tr+=lines.map(function(l){var k=l[0],ctl=k==='line-control';
+    return '<div class="sp-textrow"><code>--'+(k==='line'?'':'rf-')+k+' '+c[k]+'</code><span class="sp-linerow"><i class="'+(ctl?'is-ctl':'')+'" style="'+(ctl?'border-color:':'background:')+c[k]+'"></i><span style="font-size:12px;color:var(--muted)">'+l[1]+'</span></span><span class="sp-ratios">'+(ctl?['bg','panel','panel2'].map(function(s){return badge(s,cr(c[k],c[s]),3);}).join(''):'<span class="sp-ratio"><i>bg</i>'+cr(c[k],c.bg).toFixed(2)+'</span>')+'</span></div>';}).join('');
+  $('#textrows').innerHTML=tr;
+  var sw=[['accent','Brand violet'],['accent-hi','Hover'],['accent-lo','Pressed'],['accent2','Periwinkle partner'],['info','Info'],['pos','Positive'],['warn','Warning'],['neg','Negative'],['crit','Critical']];
+  var htm=sw.map(function(s){var k=s[0],v=c[k],w=over(trip(v),.12,c.panel);
+    var chip=k.indexOf('accent')===0&&k!=='accent2'?'<div class="sp-sw-chip" style="background:'+v+';color:'+c['accent-ink']+'">Open the library ↗</div>':'<div class="sp-sw-chip" style="background:'+w+';color:'+v+';box-shadow:inset 0 0 0 1px rgba('+trip(v)+',.35)"><span style="display:inline-flex;align-items:center;gap:7px"><i style="width:6px;height:6px;border-radius:50%;background:'+v+'"></i>'+s[1]+'</span></div>';
+    var rr=k.indexOf('accent')===0&&k!=='accent2'?badge('on bg',cr(v,c.bg),4.5)+badge('ink on it',cr(c['accent-ink'],v),4.5):badge('on bg',cr(v,c.bg),4.5)+badge('on wash',cr(v,w),4.5);
+    return '<div class="sp-sw">'+chip+'<div class="sp-sw-body"><b>--'+k+'</b><span>'+v+' · '+T[k].oklch.replace('oklch','')+'</span><div class="sp-ratios" style="margin-top:8px">'+rr+'</div></div></div>';}).join('');
+  htm+='<div class="sp-sw"><div class="sp-sw-chip" style="background:var(--rf-selection);color:var(--ink)">Selected text</div><div class="sp-sw-body"><b>--rf-selection · --rf-scrim</b><span>'+RF.color[mode()].accent.hex+' @ '+(mode()==='night'?'32%':'18%')+'</span><em>Selection, overlays behind palette/dialogs.</em></div></div>';
+  htm+='<div class="sp-sw"><div class="sp-sw-chip" style="background:var(--rf-code-bg);color:var(--rf-code-ink);font-family:var(--rf-mono);font-weight:400;font-size:11.5px"><span><span style="color:var(--rf-syn-tag)">&lt;div</span> <span style="color:var(--rf-syn-attr)">class</span>=<span style="color:var(--rf-syn-string)">"kpi"</span><span style="color:var(--rf-syn-tag)">&gt;</span><span style="color:var(--rf-syn-number)">72</span></span></div><div class="sp-sw-body"><b>--rf-code-* · --rf-syn-*</b><span>keyword violet · string mint · number '+(mode()==='night'?'citrine':'amber')+'</span><em>Every syntax color ≥4.5:1 on the code well.</em></div></div>';
+  htm+='<div class="sp-sw"><div class="sp-sw-chip" style="background:var(--panel);"><span class="sp-focusdemo" style="height:30px;font-size:12px">Focus</span></div><div class="sp-sw-body"><b>--rf-focus</b><span>'+RF.rf[mode()].focus+'</span><div class="sp-ratios" style="margin-top:8px">'+badge('on bg',cr(RF.rf[mode()].focus,c.bg),3)+badge('on panel',cr(RF.rf[mode()].focus,c.panel),3)+'</div></div></div>';
+  $('#swatches').innerHTML=htm;
+}
+
+/* ── 02 Spectrum ── */
+function buildSpectrum(){
+  var m=mode(),c=C();
+  $('#bandmarks').innerHTML=STOPS.map(function(s,i){return '<span style="left:'+(i/(STOPS.length-1)*100*0.9817+0.9).toFixed(2)+'%">'+s.lambda+'</span>';}).join('');
+  $('#stops').innerHTML=STOPS.map(function(s){var ink=s[m].ink.hex,viv=s[m].vivid.hex,wash=m==='night'?s.night.wash:s.day.wash.hex;
+    return '<div class="sp-stop"><div class="sp-stop-v" style="background:'+viv+'"></div><div class="sp-stop-w" style="background:'+wash+'"></div><div class="sp-stop-b"><b>'+s.name+'</b><span class="sp-aa" style="color:'+ink+'">Aa</span><span>h '+s.h+'°<br>'+s.lambda+'<br>ink '+ink+'<br>vivid '+viv+'</span>'+badge('',cr(ink,c.bg),4.5)+'</div></div>';}).join('');
+  var u=RF.spectrum.uniformity[m];
+  $('#uni').innerHTML='<span><b>ΔE OKLab between neighbours</b></span><span>ink '+u.ink.min.toFixed(3)+'–'+u.ink.max.toFixed(3)+'</span><span>vivid '+u.vivid.min.toFixed(3)+'–'+u.vivid.max.toFixed(3)+'</span><span>'+(m==='night'?'Night ink: L 0.80–0.84, C 0.105 — near-constant lightness':'Day ink: L solved per hue for 4.9:1 — constant contrast')+'</span>';
+}
+
+/* ── 03 Positions ── */
+function buildPositions(){
+  var m=mode(),web=RF.galleries.web,sur=RF.galleries.surfaces,s='';
+  web.forEach(function(g){var x=(g.t*100).toFixed(2);
+    s+='<div class="sp-scale-mark" style="left:'+x+'%;'+hueStyle(g.id)+'"><span class="sp-sm-l"><b>'+g.lambda+'</b>'+String(g.order).padStart(2,'0')+'  '+esc(g.label)+'</span><i></i></div>';});
+  sur.forEach(function(g){var x=(g.t*100).toFixed(2);
+    s+='<div class="sp-scale-mark is-surface" style="left:'+x+'%;'+hueStyle(g.id)+'"><i></i><span class="sp-sm-s">'+esc(g.label)+'<small>'+g.lambda+'</small></span></div>';});
+  s+='<div class="sp-scale-axis"></div><div class="sp-scale-white"><span class="rf-index is-white"></span><b>WHITE LIGHT</b> app pages, unrefracted — '+RF.galleries.app.map(function(a){return esc(a.label)+' '+a.lambda;}).join(' · ')+'</div>';
+  $('#scale').innerHTML=s;
+  var list=RF.galleries.app.concat(web);
+  $('#poslist').innerHTML=list.map(function(g){var idx=g.index==='white-light'?'rf-index is-white':(g.index==='full-spectrum'?'rf-index is-full':'rf-index');
+    return '<div class="sp-pos" style="'+hueStyle(g.id)+'"><span class="'+idx+'"></span><span><b>'+esc(g.label)+'</b><small>'+g.id+(g.h!=null?' · h '+g.h+'°':' · white light')+'</small></span><span style="display:grid;justify-items:end;gap:6px"><span class="rf-lambda">'+g.lambda+'</span><span class="sp-hexes"><i style="background:'+g.night.ink+'" title="Night ink"></i><i style="background:'+g.day.ink+'" title="Day ink"></i></span></span></div>';}).join('');
+}
+
+/* ── 04 Type ── */
+function buildType(){
+  var sc=RF.type.scale,keys=Object.keys(sc),samp={display:'Every possibility.',h1:'Charts & Metrics',hero:'One library.',section:'Every gallery, one spectrum.',h2:'A whole spectrum to explore.',h3:'Save to a collection',h4:'KPI Tile + Delta',lead:'Give your ideas a little more light. Thousands of animated facets.',body:'Value with a colored change badge vs a prior period. Green up, red down.',ui:'Animation Lab   Input Methods   Text Effects',small:'Rounded-rect tonal row; the selected state is tinted.',caption:'Updated 2 minutes ago · fictional data',eyebrow:'01 / Charts & Metrics · 209 facets · λ 436',code:'.kpi .delta.up { color: var(--pos) }',count:'209   1,266   λ 436   D65'};
+  $('#types').innerHTML=keys.map(function(k,i){var t=sc[k],fam=t.family==='mono'?'var(--rf-mono)':'var(--font)';
+    var st='font-family:'+fam+';font-size:'+(t.fluid||t.size+'px')+';line-height:'+t.line+';letter-spacing:'+t.tracking+';font-weight:'+t.weight+(t.transform?';text-transform:'+t.transform:'')+(k==='eyebrow'?';color:var(--accent)':k==='caption'||k==='count'?';color:var(--dim)':k==='small'||k==='lead'?';color:var(--muted)':'');
+    return '<div class="sp-type" style="'+stopStyle(STOPS[Math.min(i,11)].name)+'"><div class="sp-type-meta"><b>--rf-fs-'+k+'</b><span>'+(t.fluid?t.min+'–'+t.size:t.size)+' / '+t.line+' · '+t.tracking+' · '+t.weight+(t.family==='mono'?' · mono':'')+'</span><span>'+esc(t.use)+'</span></div><div class="sp-type-sample" style="'+st+'">'+esc(samp[k]||'').replace(/λ d+/g,function(x){return '<span class="rf-nocase">'+x+'</span>';})+'</div></div>';}).join('');
+}
+
+/* ── 06 tiles, palette ── */
+var FX={
+  kpi:'<div class="fx-kpi"><small>COVERAGE</small><strong>72<span>%</span></strong><em>▲ 6.2 pts vs last mo</em></div>',
+  orb:'<div style="display:grid;place-items:center;gap:12px"><div class="fx-orb"></div></div><span class="fx-orb-cap">Model inference active</span>',
+  grad:'<div class="fx-grad">GRADIENT</div>',
+  spark:'<svg class="fx-spark" viewBox="0 0 200 70" aria-hidden="true"><defs><linearGradient id="sg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".35"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs><path d="M0 52 L20 46 L40 50 L60 34 L80 38 L100 22 L120 28 L140 16 L160 24 L180 10 L200 14 L200 70 L0 70Z" fill="url(#sg)"/><path d="M0 52 L20 46 L40 50 L60 34 L80 38 L100 22 L120 28 L140 16 L160 24 L180 10 L200 14" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/><circle cx="200" cy="14" r="3.5" fill="var(--neg)"/></svg>',
+  bars:'<div class="fx-bars"><i style="height:40%"></i><i style="height:62%"></i><i style="height:48%"></i><i style="height:80%"></i><i style="height:58%"></i><i style="height:92%"></i><i style="height:70%"></i></div>',
+  toggles:'<div class="fx-toggle"><div>Show grid lines <button class="rf-switch" role="switch" aria-checked="true" aria-label="Show grid lines"></button></div><div>Snap to guides <button class="rf-switch" role="switch" aria-checked="false" aria-label="Snap to guides"></button></div><div>Dark surface <button class="rf-switch" role="switch" aria-checked="true" aria-label="Dark surface"></button></div></div>'
+};
+function tile(g,coord,name,ref,desc,fx,opts){opts=opts||{};
+  return '<article class="rf-tile rf-lit" style="'+hueStyle(g)+'"><div class="rf-tile-stage"><span class="rf-tile-coord">'+coord+'</span>'+(opts.live?'<span class="rf-tile-live">LIVE</span>':'')+FX[fx]+'</div><div class="rf-tile-meta"><h3 class="rf-tile-name">'+esc(name)+(opts.isNew?'<span class="rf-tag">NEW</span>':'')+'</h3><code class="rf-ref">'+esc(ref)+'</code><p class="rf-tile-desc">'+esc(desc)+'</p><div class="rf-copybar"><button class="rf-copy is-primary">Copy</button><button class="rf-copy">HTML</button><button class="rf-copy">CSS</button><span class="rf-lambda"><span class="rf-index is-dot"></span>'+G[g].lambda+'</span></div></div></article>';}
+function buildTiles(){
+  $('#tiles').innerHTML=tile('charts','01.012','KPI Tile + Delta','.kpi .delta.up','Value with a colored change badge vs a prior period. Green up, red down, grey flat.','kpi',{isNew:true})+
+    tile('ai','04.031','Processing Orb','.ai-orb','A spectral ring that turns while a model works. Pauses under reduced motion.','orb',{live:true})+
+    tile('text','07.044','Gradient Flow','.tx-grad','Display type filled with a slow-moving gradient drawn from the spectrum tokens.','grad');
+  var rows=[['GALLERIES',[['fx','<mark>Glo</mark>ws &amp; Halos','FX Store',true],['text','<mark>Glo</mark>w Text','Text Effects']]],['FACETS',[['fx','Neon <mark>Glo</mark>w Button','FX Store · .fx-glow'],['charts','KPI + <mark>Glo</mark>w Ring','Charts & Metrics · .kpi-ring'],['ai','Agent <mark>Glo</mark>w Pulse','AI Working · .ai-pulse']]],['COMMANDS',[['facets','Toggle <mark>glo</mark>bal motion','Preferences'],['facets','Open <mark>Glo</mark>ssary','Help']]]];
+  $('#palette').innerHTML=rows.map(function(gr){return '<div class="rf-palette-group">'+gr[0]+'</div>'+gr[1].map(function(r){var w=G[r[0]].kind==='app';
+    return '<div class="rf-palette-row" style="'+hueStyle(r[0])+'"'+(r[3]?' aria-selected="true"':'')+'><span class="rf-index'+(w?' is-white':'')+'"></span><span class="rf-name">'+r[1]+'</span><span class="rf-where">'+esc(r[2])+'</span>'+(r[3]?'<span class="rf-kbd">↵</span>':'<span class="rf-lambda">'+G[r[0]].lambda+'</span>')+'</div>';}).join('');}).join('');
+  $$('[data-lambda]').forEach(function(el){el.textContent=G[el.getAttribute('data-lambda')].lambda;});
+  $$('[data-ruler]').forEach(function(el){var id=el.getAttribute('data-ruler');el.innerHTML=RF.galleries.web.map(function(g){return '<i style="left:'+(g.t*100)+'%"></i>';}).join('')+'<b style="left:'+(G[id].t*100)+'%"></b>';});
+}
+
+/* ── 07 App chrome ── */
+function buildApp(){
+  var counts={charts:209,fx:146,lab:217,ai:118,objects:91,input:101,text:100,shapes:53,maps:50,notify:50,arch:50,callouts:50,obsidian:130,menus:37,spectrums:'1,266',idea:'',mobile:'',desktop:''};
+  var rail='<div class="rf-nav"><div class="rf-nav-group">Library</div>'+RF.galleries.app.map(function(a){return '<a class="rf-nav-item" href="#chrome" style="'+hueStyle(a.id)+'"><span class="rf-index is-white"></span><span class="rf-nav-label">'+esc(a.label)+'</span><span class="rf-lambda">'+a.lambda+'</span></a>';}).join('');
+  rail+='<div class="rf-nav-group">Galleries · 18</div>'+RF.galleries.web.map(function(g){return '<a class="rf-nav-item" href="#chrome" style="'+hueStyle(g.id)+'"'+(g.id==='charts'?' aria-current="page"':'')+'><span class="rf-index'+(g.index==='full-spectrum'?' is-full':'')+'"></span><span class="rf-nav-label">'+esc(g.label)+'</span><span class="rf-lambda">'+g.lambda+'</span>'+(counts[g.id]?'<span class="rf-count">'+counts[g.id]+'</span>':'')+'</a>';}).join('')+'</div>';
+  var top='<div class="sp-app-top"><span class="sp-brand">'+$('.sp-brand svg').outerHTML+'<span>prism<b>.</b></span></span><span class="sp-crumb"><span class="rf-index" style="'+hueStyle('charts')+'"></span>Charts &amp; Metrics</span><span class="rf-search"><span>Search facets, galleries, commands</span><span class="rf-kbd">Ctrl K</span></span>'+
+    '<span style="margin-left:auto;display:flex;align-items:center;gap:12px"><span class="rf-seg" role="group" aria-label="Surface"><button aria-pressed="true" style="'+hueStyle('web')+'"><span class="rf-index is-dot"></span>Web</button><button aria-pressed="false" style="'+hueStyle('terminal')+'"><span class="rf-index is-dot"></span>Terminal</button><button aria-pressed="false" style="'+hueStyle('deck')+'"><span class="rf-index is-dot"></span>Deck</button></span>'+
+    '<span class="rf-seg" role="group" aria-label="Theme"><button aria-pressed="'+(mode()==='night')+'">Night</button><button aria-pressed="'+(mode()==='day')+'">Day</button></span><span class="sp-status">Offline</span></span></div>';
+  var head='<header class="rf-pagehead"><div class="rf-grid" aria-hidden="true"></div><div class="rf-halo" aria-hidden="true"></div><p class="rf-eyebrow"><span>01</span><span class="rf-sep">/</span><span>Charts &amp; Metrics</span><span class="rf-sep">·</span><span class="rf-meta">209 facets</span><span class="rf-sep">·</span><span class="rf-nocase">'+G.charts.lambda+'</span></p><h1 class="rf-title">Charts &amp; Metrics</h1><p class="rf-lead">KPIs, gauges, progress, trends, comparisons and status — hand-authored inline SVG + CSS, zero dependencies, fully offline.</p><div class="rf-ruler" data-ruler="charts"></div></header>';
+  var bar='<div class="sp-app-bar"><div class="rf-chips"><button class="rf-chip" aria-pressed="true">All <span class="rf-count">209</span></button><button class="rf-chip" aria-pressed="false">KPI &amp; Value <span class="rf-count">9</span></button><button class="rf-chip" aria-pressed="false">Gauges <span class="rf-count">14</span></button><button class="rf-chip" aria-pressed="false">Progress <span class="rf-count">11</span></button><button class="rf-chip" aria-pressed="false">Trends <span class="rf-count">22</span></button><button class="rf-chip" aria-pressed="false">Compare <span class="rf-count">16</span></button><button class="rf-chip" aria-pressed="false">Status <span class="rf-count">12</span></button></div><span class="rf-seg" role="group" aria-label="Density"><button aria-pressed="true">Cozy</button><button aria-pressed="false">Dense</button></span></div>';
+  var grid='<div class="sp-sec">KPI &amp; single value <span class="rf-count">9</span></div><div class="sp-app-grid">'+
+    tile('charts','01.001','KPI Tile + Delta','.kpi .delta.up','Value with a colored change badge vs a prior period. Green up, red down.','kpi',{isNew:true})+
+    tile('charts','01.002','KPI + Sparkline','.kpi + .sparkline','A value paired with a tiny inline trend line — dense dashboards and table cells.','spark',{live:true})+
+    tile('charts','01.003','Value Bars','.vbar','Seven-period bars with the latest highlighted. Honors reduced motion.','bars')+'</div>'+
+    '<div class="sp-sec">Status <span class="rf-count">12</span></div><div class="sp-app-grid">'+
+    tile('charts','01.044','Processing Orb','.ai-orb','A spectral ring that turns while work is in progress.','orb',{live:true})+
+    tile('charts','01.045','Settings Toggles','.tgl-list','Switch rows that sit on the 3:1 control boundary in both modes.','toggles')+
+    tile('charts','01.046','Gradient Headline','.tx-grad','Display type filled with the spectrum tokens.','grad')+'</div>';
+  $('#app').innerHTML=top+'<div class="sp-app-body"><aside class="sp-app-rail">'+rail+'</aside><div class="sp-app-main">'+head+bar+grid+'</div></div>';
+}
+
+/* ── 08 Motion ── */
+function bez(p){var x1=p[0],y1=p[1],x2=p[2],y2=p[3];return 'M10 110 C '+(10+x1*160)+' '+(110-y1*100)+', '+(10+x2*160)+' '+(110-y2*100)+', 170 10';}
+function buildMotion(){
+  var E=RF.motion.easing,list=[['out-expo','Arrivals — refract-in, rise, palette','[.16,1,.3,1]'],['out','Hover, small UI moves (website)','[.22,1,.36,1]'],['in-out','Sweeps, relight, loops','[.65,0,.35,1]'],['in','Exits at ~60% of arrival','[.7,0,.84,0]']];
+  $('#curves').innerHTML=list.map(function(l,i){var p=E[l[0]].replace(/cubic-bezier\(|\)/g,'').split(',').map(Number);
+    return '<div class="sp-curve" style="'+stopStyle(STOPS[7+i>11?11:7+i].name)+'"><p class="rf-eyebrow">--rf-ease-'+l[0]+'</p><svg viewBox="0 0 180 120" aria-hidden="true"><path d="M10 110 H170 M10 110 V10" stroke="var(--line)" fill="none"/><path d="'+bez(p)+'" stroke="var(--rf-hue-v)" stroke-width="2" fill="none" style="filter:drop-shadow(0 0 4px rgba(var(--rf-hue-rgb),.6))"/></svg><b>'+esc(l[1])+'</b><span>'+E[l[0]]+'</span></div>';}).join('');
+  var D=RF.motion.duration,rows=[['instant',D.instant,'Pressed states, color flips'],['fast',D.fast,'Hover, chip select'],['base',D.base,'--dur · UI state, tabs, switches'],['slow',D.slow,'Tile rise, palette open, copy sweep'],['deliberate',D.deliberate,'Refract-in headers and hero'],['sweep',D.sweep,'Beam sweep · theme relight'],['firstLight',D.firstLight,'Ceiling · design/first-light/']];
+  $('#durs').innerHTML='<span class="sp-label" style="margin:0 0 4px">Durations</span>'+rows.map(function(r){return '<div class="sp-dur"><b>'+r[0]+'</b><span>'+r[1]+' ms</span><i style="width:'+(r[1]/1600*100)+'%"></i><em>'+r[2]+'</em></div>';}).join('');
+}
+function replay(el,cls){el.classList.remove(cls);void el.offsetWidth;el.classList.add(cls);}
+function wireMotion(){
+  $$('[data-demo]').forEach(function(b){b.addEventListener('click',function(){var d=b.getAttribute('data-demo');
+    if(d==='refract'){replay($('#demo-title'),'rf-refract-in');}
+    if(d==='cascade'){$$('#demo-cascade i').forEach(function(i,n){i.style.setProperty('--rf-i',n);replay(i,'rf-rise');});}
+    if(d==='sweep'){replay($('#demo-beam'),'is-sweep');}
+    if(d==='relight'){setMode(mode()==='night'?'day':'night',true,b);}
+  });});
+  var rm=$('#rm');rm.addEventListener('click',function(){var on=rm.getAttribute('aria-checked')!=='true';rm.setAttribute('aria-checked',on);if(on)html.setAttribute('data-rf-motion','reduce');else html.removeAttribute('data-rf-motion');});
+  var cd=$('#copydemo');cd.addEventListener('click',function(){cd.classList.remove('is-done');void cd.offsetWidth;cd.classList.add('is-done');cd.textContent='Copied';$('#sr').textContent='Copied HTML to clipboard';setTimeout(function(){cd.classList.remove('is-done');cd.textContent='Copy HTML';},1600);});
+  $$('.rf-chip').forEach(function(ch){ch.addEventListener('click',function(){ch.setAttribute('aria-pressed',ch.getAttribute('aria-pressed')!=='true');});});
+}
+
+/* ── 09 Terminal ── */
+function term(t,label){
+  var a=t.ansi16.map(function(x){return x.hex;});
+  var v='--tbg:'+t.background+';--tfg:'+t.foreground+';'+a.map(function(h,i){return '--t'+i+':'+h;}).join(';');
+  var k=function(i,s){return '<span style="color:var(--t'+i+')">'+s+'</span>';};
+  var P=k(4,'~/prism')+' '+k(5,'❯')+' ';
+  var lines=[
+    P+'prism-term list --gallery loaders --limit 4',
+    '  '+k(5,'⠋')+' braille-orbit      '+k(8,'Spinners &amp; Loaders')+'   '+k(6,'λ 477'),
+    '  '+k(5,'◐')+' half-moon          '+k(8,'Spinners &amp; Loaders')+'   '+k(6,'λ 477'),
+    '  '+k(5,'▰')+' beam-bar           '+k(8,'Progress &amp; Counters')+'  '+k(6,'λ 484'),
+    '',
+    P+'prism-term play transfer --theme '+label,
+    '  '+k(2,'▇▇▇▇▇▇▇▇▇▇▇▇▇▇')+k(8,'░░░░░░')+'  '+k(15,'68%')+'  '+k(6,'12.4 MB/s')+'  '+k(8,'eta 0:04'),
+    '',
+    P+'git diff --stat',
+    '  src/themes.js   | 24 '+k(2,'++++++++++++++')+k(1,'----------'),
+    '  design/prism.css |  8 '+k(2,'++++++')+k(1,'--'),
+    '',
+    P+'prism-term doctor',
+    '  '+k(2,'✓')+' truecolor '+k(8,'(COLORTERM=truecolor)'),
+    '  '+k(3,'!')+' OSC 11 timed out '+k(8,'— assuming '+(label==='prism-day'?'Day':'Night')),
+    '  '+k(1,'✗')+' NO_COLOR set in child shell '+k(8,'# see --help'),
+    '  '+k(13,'spectrum')+' '+RF.spectrum.stops.map(function(s){return '<span style="color:'+s[label==='prism-day'?'day':'night'].ink.hex+'">█</span>';}).join('')+'  '+k(12,'info')+' '+k(10,'pos')+' '+k(11,'warn')+' '+k(9,'neg'),
+    P+'<span style="background:var(--tfg);color:var(--tbg)"> </span>'
+  ];
+  var sw='<div class="sp-ansi">'+t.ansi16.map(function(x){return '<div><i style="background:'+x.hex+'"></i><b class="sp-an">'+x.index+' '+x.name.replace(/^bright(.)/,function(a,c){return 'bright '+c.toLowerCase();})+'</b><span>'+x.hex+'</span><span>'+x.contrast.toFixed(1)+':1</span></div>';}).join('')+'</div>';
+  return '<div class="sp-term" style="'+v+'"><div class="sp-term-bar"><span><i></i><i></i><i></i></span><span>'+label+' · '+t.background+'</span><span>256 · 24-bit</span></div><pre>'+lines.join('\n')+'</pre>'+sw+'</div>';
+}
+function buildTerminal(){
+  $('#terms').innerHTML=term(RF.terminal.night,'prism-night')+term(RF.terminal.day,'prism-day');
+  var m=mode(),t=RF.terminal[m];
+  $('#q24').innerHTML=RF.spectrum.stops.map(function(s){return '<i style="background:'+s[m].ink.hex+'"></i>';}).join('');
+  $('#q256').innerHTML=t.spectrum256.map(function(s){return '<i title="'+s.index+'" style="background:'+s.hex+'"></i>';}).join('');
+}
+
+/* ── 10 Deck ── */
+function key(g,state,micro,value,label,extra){
+  return '<div class="dk is-'+state+(extra||'')+'" style="'+(g&&state!=='alert'?hueStyle(g):'')+'"><span class="dk-micro rf-nocase">'+micro+'</span>'+(value==='…'?'<span class="dk-dots"><i></i><i></i><i></i></span>':'<span class="dk-value">'+value+'</span>')+'<span class="dk-label">'+label+'</span><i class="dk-index"></i></div>';}
+function buildDeck(){
+  var K=[['charts','on',G.charts.lambda,'72%','Coverage'],['fx','off',G.fx.lambda,'Glow','FX Store'],['lab','off',G.lab.lambda,'240','Easing'],['ai','busy',G.ai.lambda,'…','Thinking'],['objects','off',G.objects.lambda,'3D','Objects'],
+    ['input','on',G.input.lambda,'On','Mic'],['text','off',G.text.lambda,'Aa','Text'],['maps','on',G.maps.lambda,'12','Markers'],['notify','alert',G.notify.lambda,'3','Alerts',' is-breathe'],['arch','off',G.arch.lambda,'VPC','Diagram'],
+    ['callouts','off',G.callouts.lambda,'Tip','Callout'],['menus','disabled',G.menus.lambda,'⌘','Menu'],['spectrums','on',G.spectrums.lambda,'M3','Skin'],['mobile','alert',G.mobile.lambda,'!','Deploy',' is-neg'],['deck','on',G.deck.lambda,'Next','Page 2']];
+  $('#keys').innerHTML=K.map(function(k){return key(k[0],k[1],k[2],k[3],k[4],k[5]);}).join('');
+  var S=[['off','Off · idle','Quiet glass. Index at 45%, glyph muted, lit top edge only.','fx','Glow','FX Store'],['on','On · active','3 px inner ring + glow in the gallery hue; value in hue ink.','maps','12','Markers'],['alert','Alert','4 px warn/neg ring + corner notch. Breathes 1 Hz for ≤10 s, then holds.','notify','3','Alerts'],['busy','Busy','A beam laps the rim, 1.2 s per lap at 10 fps. Reduced motion: static dots.','ai','…','Thinking'],['disabled','Disabled','Faint glyph, no index, no light.','menus','⌘','Menu']];
+  $('#states').innerHTML=S.map(function(s){return '<div class="sp-state">'+key(s[3],s[0],G[s[3]].lambda,s[4],s[5],'')+'<b>'+s[1]+'</b><p>'+s[2]+'</p></div>';}).join('');
+  var D=[['input','Mic gain','62','%',62,false],['maps','Zoom','4.2','×',42,true],['lab','Easing','240','ms',30,false],['deck','Page','2','/ 5',40,false]];
+  $('#strip').innerHTML=D.map(function(d){return '<div class="sp-dial'+(d[5]?' is-on':'')+'" style="'+hueStyle(d[0])+'"><span class="dk-micro">'+d[1]+'</span><strong>'+d[2]+'<span>'+d[3]+'</span></strong><div class="rf-progress" style="--rf-p:'+d[4]+'%"><i></i></div></div>';}).join('');
+}
+
+/* ── 11 a11y (live) ── */
+function audit(){
+  var m=mode(),c=C(),R=RF.rf[m],n=0,p=0,worst=99,wn='';
+  var chk=function(fg,bg,need,name){n++;var r=cr(fg,bg);if(r>=need)p++;if(r/need<worst){worst=r/need;wn=name+' '+r.toFixed(2)+':1';}};
+  ['bg','panel','panel2','card'].forEach(function(s){['ink','muted','dim'].forEach(function(t){chk(c[t],c[s],4.5,'--'+t+' on --'+s);});});
+  ['info','pos','warn','neg','crit','accent'].forEach(function(k){['bg','panel','card'].forEach(function(s){chk(c[k],c[s],4.5,'--'+k+' on --'+s);});});
+  chk(c['accent-ink'],c.accent,4.5,'accent-ink on accent');
+  ['bg','panel','panel2','card'].forEach(function(s){chk(c['line-control'],c[s],3,'line-control on --'+s);chk(R.focus,c[s],3,'focus on --'+s);});
+  RF.spectrum.stops.forEach(function(s){['bg','panel','panel2','card'].forEach(function(b){chk(s[m].ink.hex,c[b],4.5,s.name+' ink on --'+b);});});
+  RF.galleries.web.forEach(function(g){chk(g[m].ink,c.bg,4.5,g.id+' ink');chk(g[m].vivid,c.bg,3,g.id+' tick');});
+  $('#a11y-num').innerHTML=p+'<span> / '+n+'</span>';
+  $('#a11y-detail').textContent=(m==='night'?'Night':'Day')+' — computed in this page. Tightest pair: '+wn+'. The full audit (517 pairs, both modes, terminal and deck) is in README.md.';
+  return [p,n];
+}
+
+/* ── Mode switching (theme relight via View Transitions) ── */
+function render(){
+  $$('[data-modename]').forEach(function(e){e.textContent=mode()==='night'?'Night':'Day';});
+  $$('.sp-mode button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-mode')===mode());});
+  buildArt();buildColor();buildSpectrum();buildPositions();buildType();buildApp();buildTiles();buildMotion();buildTerminal();buildDeck();
+  audit();$('#stat-pass').innerHTML='@@AUDIT@@';
+}
+function apply(m){html.setAttribute('data-rf-mode',m);html.setAttribute('data-theme',m==='day'?'prism-light':'prism-dark');try{localStorage.setItem('rfSpecimenMode',m);}catch(e){}render();$('#art').classList.add('sp-static');}
+/* The light travels away from the control that was pressed (right of centre → right-to-left;
+   no origin → left-to-right), 600 ms, and any input ends it — same contract as PrismFirstLight.relight. */
+function setMode(m,animate,origin){
+  if(m===mode())return;
+  var reduce=html.getAttribute('data-rf-motion')==='reduce'||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+  if(animate&&!reduce&&document.startViewTransition){
+    var rtl=false;if(origin&&origin.getBoundingClientRect){var r=origin.getBoundingClientRect();rtl=r.left+r.width/2>(html.clientWidth||innerWidth)/2;}
+    html.classList.toggle('rf-rtl',rtl);
+    var IN=['pointerdown','keydown','wheel','touchstart'],vt=document.startViewTransition(function(){html.classList.add('rf-relighting');apply(m);});
+    var cut=function(){try{vt.skipTransition();}catch(e){}};
+    vt.ready.then(function(){IN.forEach(function(t){addEventListener(t,cut,{capture:true,passive:true});});},function(){});
+    vt.finished.finally(function(){IN.forEach(function(t){removeEventListener(t,cut,{capture:true});});html.classList.remove('rf-relighting','rf-rtl');});
+  }
+  else apply(m);
+  $('#sr').textContent=(m==='day'?'Day':'Night')+' mode';
+}
+$$('.sp-mode button').forEach(function(b){b.addEventListener('click',function(){setMode(b.getAttribute('data-mode'),true,b);});});
+window.RFSpecimen={setMode:setMode,mode:mode,audit:audit};
+
+buildRail();render();wireMotion();
+})();
+</script>
+</body>
+</html>

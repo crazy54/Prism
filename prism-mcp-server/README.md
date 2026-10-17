@@ -1,14 +1,16 @@
 # Prism MCP Server
 
-A production-grade [Model Context Protocol](https://modelcontextprotocol.io) server that exposes the **Prism component catalog** (1,600+ self-contained CSS/SVG facets) as a set of intelligent tools for agents and AI systems.
+A production-grade [Model Context Protocol](https://modelcontextprotocol.io) server that exposes **Prism's three catalogs** — the web component catalog (2,700+ self-contained CSS/SVG facets), the terminal catalog and **Prism Deck** for Stream Deck — as a set of intelligent tools for agents and AI systems.
 
-It lets an agent ask *"give me a pulsing KPI card with a wind backdrop"* and get back **production-ready HTML/CSS** — discovered, composed, deduplicated, and validated.
+It lets an agent ask *"give me a pulsing KPI card with a wind backdrop"* and get back **production-ready HTML/CSS** — discovered, composed, deduplicated, and validated — or *"make my Galleon look like Prism Night with a volume knob on dial 1"* and get a validated Stream Deck layout, a rendered preview, an importable profile, or (with the user's consent) the change live on the device.
 
 - **Zero runtime dependencies** — pure Node.js (≥18). Speaks MCP JSON-RPC 2.0 over stdio, the transport used by Claude Desktop and the Anthropic API's local MCP integration.
-- **Reads the authoritative catalog** — points at `Prism.html` (the embedded `#prism-catalog` JSON island, which is the source of truth) or a `catalog/manifest.json`.
-- **Hot reload** — edits to the catalog file are picked up without a restart.
+- **Reads the authoritative catalogs** — points at `Prism.html` (the embedded `#prism-catalog`, `#prism-terminal-catalog` and `#prism-deck-catalog` JSON islands, the source of truth) or a `catalog/manifest.json`.
+- **Hot reload** — edits to the catalog files are picked up without a restart.
 - **Composition intelligence** — merges HTML, deduplicates CSS rules, collapses `:root` token blocks, validates output, and reports size savings.
-- **Terminal catalog too** — the same server exposes Prism's **terminal facets** (the [`prism-term`](../prism-term) spinners, progress bars and counters, charts, TUI controls, ops views and animated scenes) from the `#prism-terminal-catalog` island, so an agent can find *"an ASCII-safe spinner for a serial console"* and get the command that runs it.
+- **Refraction themes** — Prism's own design language is the default: **Prism Night** (`prism-dark`) and **Prism Day** (`prism-light`), with the `--rf-*` Refraction layer on request; Cloudscape, Material 3, Duolingo and the other design systems are optional skins.
+- **Terminal catalog** — Prism's **terminal facets** ([`prism-term`](../prism-term): spinners, progress bars and counters, charts, TUI controls, ops views, animated scenes), so an agent can find *"an ASCII-safe spinner for a serial console"* and get the command that runs it.
+- **Prism Deck** — Stream Deck and Corsair Galleon 100 SD facets ([`prism-deck`](../prism-deck)): browse, render to PNG/SVG, design **keys, spans, dials (knobs) and screens** in layout documents, export `.streamDeckProfile` / `.streamDeckIconPack` files, and edit Prism keys **live** through the Prism Deck plugin's loopback control channel.
 
 ---
 
@@ -17,7 +19,7 @@ It lets an agent ask *"give me a pulsing KPI card with a wind backdrop"* and get
 ```bash
 cd prism-mcp-server
 
-# Inspect the catalog (no server; prints stats and exits)
+# Inspect the catalogs (no server; prints stats and exits)
 node cli.js info
 
 # List the available tools
@@ -44,11 +46,21 @@ Options:
                      Terminal catalog: a .html with a #prism-terminal-catalog island or a
                      terminal-catalog.json (default: the catalog's Prism.html island, else
                      ../prism-term/catalog/terminal-catalog.json)
-  --no-watch         Disable catalog hot reload (both catalogs)
+  --deck-catalog <path>
+                     Prism Deck catalog: a .html with a #prism-deck-catalog island or a
+                     deck-catalog.json (default: the Prism.html island, else
+                     ../prism-deck/catalog/deck-catalog.json)
+  --deck-engine <dir> The prism-deck package for render / validate / export (default ../prism-deck)
+  --deck-layouts <file>
+                     Where deck layout documents are stored (default ./deck-layouts.json)
+  --deck-control <file>
+                     The Prism Deck plugin's control.json (default: the per-user path the plugin
+                     writes while "Allow AI editing" is on, or $PRISM_DECK_CONTROL)
+  --no-watch         Disable catalog hot reload (all catalogs)
   --log-level <lvl>  debug | info | warn | error | silent   (default: info)
 ```
 
-> **Note on `--port`:** this build speaks MCP over **stdio**, which is how Claude Desktop and the Anthropic API launch local MCP servers (as a subprocess). A `--port` flag is accepted but ignored; an HTTP/SSE transport can be added by implementing another transport against `PrismMCPServer` (see *Architecture*).
+> **Note on `--port`:** this build speaks MCP over **stdio**, which is how Claude Desktop and the Anthropic API launch local MCP servers (as a subprocess). A `--port` flag is accepted but ignored, and there is deliberately no HTTP or tunnel mode: nothing listens on the network. An HTTP/SSE transport can be added by implementing another transport against `PrismMCPServer` (see *Architecture*).
 
 ---
 
@@ -62,17 +74,17 @@ Add the server to your `claude_desktop_config.json` (see `examples/claude_deskto
     "prism": {
       "command": "node",
       "args": [
-        "C:/path/to/prism-settings-and-custom-themes/prism-mcp-server/cli.js",
+        "C:/path/to/Prism/prism-mcp-server/cli.js",
         "start",
         "--catalog",
-        "C:/path/to/prism-settings-and-custom-themes/Prism.html"
+        "C:/path/to/Prism/Prism.html"
       ]
     }
   }
 }
 ```
 
-Restart Claude Desktop; the 34 Prism tools appear in the tools menu.
+Restart Claude Desktop; the 67 Prism tools appear in the tools menu. To use it next to Elgato's own Stream Deck MCP, see [Coexisting with Elgato's MCP](#coexisting-with-elgatos-stream-deck-mcp).
 
 ## Use with the Anthropic API
 
@@ -80,7 +92,7 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 
 ---
 
-## Tools (34)
+## Tools (67)
 
 ### Discovery & search (11)
 | Tool | Purpose |
@@ -92,7 +104,7 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 | `create_saved_search` | Save a named query+filters+sort (session memory) and get an id back. |
 | `get_saved_searches` | List saved searches for this session. |
 | `execute_saved_search` | Run a saved search by id (with optional sort/limit override). |
-| `get_effect` | Full record for one effect incl. production-ready `html`/`css`. |
+| `get_effect` | Full record for one effect: its authored `html`/`css` plus `tokensCss` (the `:root` block it needs for `theme`) and `wrapperCss`; `snippet:true` adds the complete paste-ready string. |
 | `get_theme_variants` | Theme token reference + how to recolor an effect. |
 | `list_galleries` | All galleries with declared vs. live effect counts. |
 | `get_catalog_stats` | Aggregate stats: per-gallery counts, tags, componentTypes, etc. |
@@ -102,17 +114,19 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 ### Component Variant Matrix (3)
 | Tool | Purpose |
 |------|---------|
-| `get_theme_palette` | Token palette for one theme (or both): complete token map, overrides vs the Cloudscape Dark base, mode (light/dark), and a paste-ready `:root{…}` block. Prism ships in the AWS Cloudscape design language with two color modes: `cloudscape-dark` (default) and `cloudscape-light`. |
+| `get_theme_palette` | Token palette for one theme (or all): family (`ds` / `dsName`), complete token map, overrides vs the **Prism Night** base (the default theme, exactly like the app's `themeMatrix()`), mode (light/dark), and a paste-ready `:root{…}` block. The Prism family (Refraction) also carries the `--rf-*` layer — spectrum stops, beam, glass, type scale, gallery hues — returned with `includeRefraction: true`. Default `prism-dark` (Prism Night), light companion `prism-light` (Prism Day); Cloudscape, Material 3, Duolingo, Mailchimp, Stack Overflow, Monzo, Heroku, Polaris, Primer, Ant Design and Firefox Acorn ship as optional skins. |
 | `get_component_variants` | Every theme variant of one component. Prism themes are pure `:root` token swaps over identical HTML/CSS, so this returns the payload **once** plus each theme's token overrides (and the subset the component actually consumes) — not N copies. |
 | `get_variants_for_theme` | Components rendered under a single theme, each with the token values it uses; supports gallery/componentType/spectrum/tag + `themeSensitiveOnly` filters + pagination. |
 
 > **Variants are token-swaps, not copies.** A "variant" is the same component under a different `:root` token set — the exact mechanism Prism's live theme engine uses. Rendering a variant = component `html` + `css` + the chosen theme's token overrides. This is why one payload yields every theme variant without multiplying storage.
+>
+> **The mirror.** `utils/themes.js` mirrors Prism.html's `THEME_REGISTRY` (checked by `aaa-prism-ds/tools/theme-sync-check.mjs`). The Prism Night / Prism Day maps and their `--rf-*` layer are generated into `utils/refraction-tokens.js` from `design/themes.js` by `node scripts/sync-refraction.mjs` (`--check` fails when stale; a test does the same).
 
 ### Composition (3)
 | Tool | Purpose |
 |------|---------|
-| `compose` | Merge effects into one bundle: combined HTML + deduped/token-merged CSS + required initializers + size metrics. Optional wrapper. |
-| `compose_with_template` | `compose` plus a layout template (`stack`, `row`, `grid`, `card`). |
+| `compose` | Merge effects into one **paste-ready** bundle, exactly like Prism's Copy builder (`fix-copy/prism-snippet.js`): a `:root{}` block with exactly the tokens the CSS references, resolved for `theme` (default `prism-dark`; gallery-level tokens such as `--glm-*` included; `--font` gets the system stack), the `.prism-snippet` wrapper (font, ink, stage layout) with its `box-sizing: border-box` reset, the deduped facet CSS and the markup inside `<div class="prism-snippet">`. Returns `html`, `css`, one `snippet` string, `tokens` (`resolved`, `unresolved`, `fallbackOnly`), initializers, size metrics. `wrapper:false` / `includeTokens:false` opt out. |
+| `compose_with_template` | `compose` plus a layout template (`stack`, `row`, `grid`, `card`), same paste-ready output. |
 | `validate_composition` | Check a set of ids composes cleanly (missing ids, JS needs) without building output. |
 
 ### Content creation (3)
@@ -126,7 +140,7 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 | Tool | Purpose |
 |------|---------|
 | `get_catalog_metadata` | Catalog name/version/source/counts, source path, hot-reload status. |
-| `export_collection` | Export a self-contained bundle from a saved `collectionId`, an explicit set of `ids`, or a whole gallery. `format`: `bundle` (CSS+HTML, default), `document` (full `<html>`), or `schema` (portable `prism-collection-1.0` JSON, saved collections only). |
+| `export_collection` | Export a self-contained, paste-ready bundle (same output as `compose`, `theme` param) from a saved `collectionId`, an explicit set of `ids`, or a whole gallery. `format`: `bundle` (CSS+HTML, default), `document` (full `<html>`), or `schema` (portable `prism-collection-1.0` JSON, saved collections only). |
 | `get_token_reference` | Canonical CSS token reference (tokens.css + token purposes + recolor classes). |
 
 ### Collections & favorites (6)
@@ -158,7 +172,105 @@ Prism's terminal facets — everything [`prism-term`](../prism-term) draws in a 
 
 **Record shape (schema 2).** Module code lives once, in the catalog's top-level `sources` map (`{ "prism-term/src/facets/…/x.js": "<ES module source>" }`), together with the `"_"` gallery helpers those modules import; a facet record points at its code through `module`, and several facets can share one module (e.g. the 15 spinners in `loaders/originals.js`). The server resolves each facet's `source` as `sources[module]` — falling back to the per-facet `source` of a schema-1 catalog, so older islands still load — and keeps the strings shared rather than copied per facet. `get_terminal_facet` returns that `source` plus `helpers`: each `"_"` helper in the facet's `imports` (resolved relative to `module`) that is present in `sources`, followed by any helpers those re-export. List and search results never carry code.
 
-Full parameter schemas are returned by `tools/list`. Per-tool example calls live in [`examples/`](./examples).
+### Prism Deck — catalog (7)
+Prism Deck facets for **every** Stream Deck model and the Corsair Galleon 100 SD: keys, spans of keys (the physical gaps included, so art reads continuously behind the bezel), dial segments and touch-strip panoramas, the Galleon 720×384 screen and the Neo info bar, and whole-deck looks — glyphs × deck themes, each with named states, a press rule and tunable params.
+| Tool | Purpose |
+|------|---------|
+| `deck_list_galleries` | Galleries (themes, icons, motion, spans, dials, screens, apps) with categories and live counts, catalog totals (facets, themes, glyphs, devices by surface) and where it was loaded from. Start here. |
+| `deck_list_facets` | Filter by `gallery`, `category`, `surface` (key · span · strip · screen · deck), `tag`/`tags`, `device` fit (prism-deck id or DESIGN name like `galleon-100-sd`), `animated`, live `data` input, `press` rule + pagination. |
+| `deck_search_facets` | Ranked text search (*"volume dial"*, *"galleon dashboard"*, *"press ripple"*) with the same filters. |
+| `deck_get_facet` | Full record: params (type, default, min/max/step, options), states with tones, press rule, data inputs, render targets, the devices it fits, usage; `includePreview` / `includeSource` add the static preview SVG / module source. |
+| `deck_list_themes` | The deck themes (Prism, Mono, Phosphor, Neon, Ember, Aurora, Chrome, Paper, Porcelain, Pixel, Blueprint …) with Night/Day modes; `includePalette` adds each mode's palette from the engine. |
+| `deck_list_glyphs` | The 56 glyphs (icon id, category, tags, states, `icon-<id>` facet), searchable. |
+| `deck_list_devices` | Every model (30 renderable, 31 with the hidden April-Fools "+ Lever"): SDK DeviceType, profile model, grid, native key px, dials (count, press, touch, rotate, Galleon layers), strip and screen geometry, aliases incl. DESIGN names. |
+
+### Prism Deck — render, layouts, export (9)
+| Tool | Purpose |
+|------|---------|
+| `deck_render` | Render with the prism-deck engine → **PNG as an MCP `image` block** (default) and/or SVG. One facet for a device + theme + state + params + time + press/value (sliced per key / segment / widget with `slices`), or a **layout page composited onto the device panel** (keys, spans, strip segments, Galleon screen widgets, Neo info bar) — or one key / dial of it. |
+| `deck_layout_create` | New stored layout (`prism-deck-layout/0.1`) for a device: `blank`, `sample` (Prism's layouts for Galleon 100 SD, Stream Deck +, MK.2, XL, Mini, Neo) or an imported document. Returns `layoutId`, revision, validation. |
+| `deck_layout_get` / `deck_layout_list` / `deck_layout_delete` | Read (optionally one page), list, delete stored layouts. |
+| `deck_layout_update` | Batch of 1–200 ops, all or nothing, revisioned (`baseRevision` → `revision_conflict`): `set_key` / `clear_key` / `move_key`, `place_span` (multi-key art), **`set_dial` with `feedback` (what the knob shows), `press` (what a push / strip tap does) and `rotate {step, value}`**, `place_screen` (Galleon screen on all 4 widgets, strip panorama, Neo info bar), pages, theme, name, `retarget {device}`. Invalid results are not saved (unless `allowInvalid`). |
+| `deck_layout_validate` | The checks the plugin applies live, offline: grid, dial count, Galleon layers 0–1, the MCP Deck has no dials, facets/glyphs/themes exist and fit their slot, params, titles, images, 200×100 dial layouts, behavior safety; spans/screens complete. `live: true` also rejects export-only behaviors. Returns `errors`, `warnings`, `review`, `stats`. |
+| `deck_export_profile` | `.streamDeckProfile` (FormatVersion 1, via `prism-deck/src/export/profile.js`) for the layout's device — Prism Facet actions (`com.jeremyfhall.prism`) with facet, theme, params, state, value and span group — written **only to the absolute `outPath` the caller gives**. What a profile can't carry (title/image looks, Prism page/toggle behaviors, native actions) is listed in `skipped` / `review`. |
+| `deck_export_iconpack` | `.streamDeckIconPack` for one deck theme (via `prism-deck/src/export/iconpack.js`): glyphs × states × Night/Day at 144×144, GIF idle loops + PNG twins, preview sheets — written only to `outPath`. |
+
+**Behaviors (what a press does).** `none` · `prism.toggle` · `prism.page {page}` · `prism.app {app: clock | timer | stopwatch | counter | sysmon | spectrum | waveform}` are safe and can go live. `native {uuid, settings}` (hotkeys, apps, URLs, other plugins' actions) is **export-only**: never sent live, always listed for the user's review. `streamdeck://` links are refused everywhere. On a dial, **rotate** changes the facet's value by its `step` param per tick (×5 while pressed), **press** (and a tap on the + touch strip) runs the behavior and advances the facet state, a long touch resets the value; holding a Galleon dial ~3 s switches its layer.
+
+**Exports never install.** The server writes files only where it is told (absolute paths; never into the Stream Deck app's folders or a `.sdPlugin` folder; existing files only with `overwrite: true`) and never imports, installs or restarts anything: the user double-clicks the file.
+
+### Prism Deck — live (8)
+Change what **Prism's own** keys, dials and screens show on the user's physical devices, through the Prism Deck plugin's local control channel (API v1; `prism-deck/src/plugin/control.js`, spec `aaa-prism-ds/elgato-mcp/DESIGN.md` §6.3).
+| Tool | Purpose |
+|------|---------|
+| `deck_live_status` | Reachable? AI editing on? Paired? Pending prompt? Connected devices (id, SDK type, model, grid, dials, layers, virtual, where Prism keys/dials are) and limits. Never errors: `reachable: false` with the reason when the channel is off. |
+| `deck_live_pair` | Start pairing (the deck shows **ALLOW AI?** and a 4-digit code on a Prism key) or poll it (`pending` · `approved` · `denied` · `expired`). |
+| `deck_live_set_key` / `deck_live_set_dial` | One key (look: facet or glyph + params, state, title, theme, accent, image; safe behavior) / one knob (feedback, press, rotate; Galleon layer 0–1). `clear`, `dryRun`. |
+| `deck_live_batch` | Up to 64 key/dial changes atomically. |
+| `deck_live_apply_layout` | Replace a device's live Prism surface with one page of a stored or inline layout (DESIGN device names and prism-deck ids both work); `dryRun` returns the diff first. Destructive (annotated). |
+| `deck_live_snapshot` | What Prism shows now on a device (`render` adds each key's SVG). |
+| `deck_live_undo` | Undo the last N live changes (history 50). |
+
+**Consent and safety (enforced by the plugin; the server only follows them).**
+1. **Off by default.** The channel exists only while the user has switched **Allow AI editing** on in the plugin (Stream Deck app → a Prism Facet key → property inspector → Plugin settings). Only then does the plugin write the per-user discovery file `control.json` — `%APPDATA%\Prism\deck\control.json` (Windows), `~/Library/Application Support/Prism/deck/control.json` (macOS), `$XDG_STATE_HOME/prism/deck/control.json` (Linux), or `$PRISM_DECK_CONTROL` / `--deck-control`. **No file ⇒ the tools report `unreachable`** and point the AI at the export path; the server never tries to switch anything on.
+2. **Loopback + token.** The client re-reads `control.json` on every call (port and 256-bit token rotate on each plugin start), connects to `127.0.0.1` only, sends the exact `Host` the plugin expects, never an `Origin`, JSON bodies ≤ 2 MB. The token is never logged, echoed or returned.
+3. **A physical key press pairs.** The approval key lights on a physical deck; the MCP Deck, Virtual Stream Deck and Mobile can't approve (`no_physical_key`, HTTP 409). Pairing requests are rate limited (`rate_limited`, 429). Nothing over the API can approve a pairing.
+4. **Limits.** 10 updates/s per key, 30/s per device, one full apply/s per device, 50 requests/s; `rate_limited` carries `retryAfterMs`. Prism facets animate on the device — never animate by calling tools in a loop.
+5. **Undo and audit.** Every live write is undoable (50 steps) and audited by the plugin (`audit.jsonl` next to `control.json`, without tokens or images). Switching AI editing off removes every live edit.
+
+Errors are structured (`isError: true`, `{ error, code, data: { hint } }`): `unreachable`, `ai_editing_off`, `not_paired`, `no_physical_key`, `rate_limited`, `unauthorized`, `requires_export`, `forbidden_behavior`, `invalid_ops`, `invalid_layout`, `device_mismatch`, `unknown_device`, `nothing_to_undo`.
+
+### Prism Control Smart Deck — preferences (9)
+Tell **Prism Control's Smart Deck** (the one profile whose Smart Keys and Smart Dials Prism draws from what is on screen) what the user likes, in plain terms: "big icons", "camera on the left dial", "never show titles on stream", "keep Undo on that key in VS Code". Through Prism Control's `smart` named pipe (API v1; `prism-control/src/PrismControl.Smart/Control/`, client `utils/smart-pipe-client.js`).
+| Tool | Purpose |
+|------|---------|
+| `smart_status` | Reachable? "Allow AI preferences" on? Paired? Pending prompt (with its code)? What the deck follows (app, pack, context), decks with Smart slots (virtual decks can't approve), undo depth. Never errors: `reachable: false` with the reason when the channel is off. |
+| `smart_pair` | Start pairing (the top-left Smart Key of each physical deck shows **ALLOW AI?** and a 4-digit code; the user **holds** it 1.5 s) or poll it (`pending` · `approved` · `denied` · `expired`). |
+| `smart_get_prefs` | The preferences: on/off, label size, big icons, streamer-safe, paging, dial-by-category, app-switch delay, per-app pins and hidden verbs, plus the allowed values. |
+| `smart_set_pref` | Change several at once: `labelSize`, `bigIcons`, `streamerSafe`, `paging`, `dialCategories {camera: "left"}` (null unsets), `hidden {app, hide[], unhide[]}`, … Unknown keys are ignored and reported; `dryRun`. |
+| `smart_pin` | Pin a verb (key) or control (dial) of one app to a slot of a device kind, or `unpin`; validated against the pack, the context (optional) and the device grid. |
+| `smart_explain_slot` | "Why is this here?" for one Smart slot: what it shows, its binding, safety, the context rule that matched, the layout reason, whether it can run now. |
+| `smart_list` | `packs`, `contexts`, `verbs` (optionally in one context), `controls`, `devices` (connected decks + every kind's grid), `pins`, `history`. |
+| `smart_override` | A validated per-item user pack override (verb label/longLabel/glyph/monogram/priority/category, stricter safety, a keyboard-chord binding; control label/glyph/priority/category) written to `%APPDATA%\Prism\control\packs\<pack>.ai.json` (the user's own `<pack>.json` wins); `dryRun` first. |
+| `smart_undo` | Undo the last N AI changes (history 50). `changed_since` when the user edited the same thing afterwards: ask them before `force: true`. |
+
+**Consent and safety (enforced by Prism Control; the server only follows them).**
+1. **Off by default.** The pipe exists only while the user has switched **Allow AI preferences** on (Stream Deck app → a Smart Key → property inspector → AI preferences). Only then does Prism Control write the per-user discovery file `%APPDATA%\Prism\control\modules\smart\ingress.json` (`$PRISM_CONTROL_DIR` moves the root, `$PRISM_SMART_INGRESS` the file). **No file ⇒ `unreachable`**; the server never tries to switch anything on.
+2. **Per-user pipe + token.** `\\.\pipe\prism-control-smart-<128-bit hex>`: a current-user-only DACL, NETWORK denied, remote clients refused, a fresh name and 256-bit token on every start (re-read on every call; the first frame carries it and a wrong one is dropped unseen). The token is never logged, echoed or returned.
+3. **Approved on the device.** Only a 1.5 s **hold** on the glowing top-left Smart Key of a physical deck approves (a tap never does); Stream Deck Mobile, the Virtual Stream Deck and the MCP Deck never can (`no_physical_key`). Requests expire after 2 minutes; the PI can Deny or Revoke. Only `smart_status` and `smart_pair` work before approval.
+4. **Narrow by design.** Preferences, pins, hidden verbs and per-item overrides only. Overrides are validated like the packs load (no new errors) and may bind keyboard chords only — never text, macros, mouse, module or Sight bindings, never in display-only (online-competitive) packs, and safety only gets stricter. Nothing sends input, runs a verb or installs a profile.
+5. **Undo and audit.** Every change is undoable (50 steps) and audited (`%APPDATA%\Prism\control\modules\smart\audit.jsonl`, no secrets). 20 requests/s per session (`rate_limited` with `retryAfterMs`).
+
+Errors: `unreachable`, `ai_off`, `not_paired`, `no_physical_key`, `rate_limited`, `unknown_pack`, `unknown_item`, `unknown_context`, `not_in_context`, `unknown_device`, `invalid_slot`, `nothing_pinned`, `not_allowed`, `invalid_chord`, `invalid_override`, `safe_mode`, `changed_since`, `nothing_to_undo`.
+
+Full parameter schemas are returned by `tools/list` (deck and smart tools also carry MCP `annotations`: read-only, destructive, idempotent). Per-tool example calls live in [`examples/`](./examples).
+
+---
+
+## Coexisting with Elgato's Stream Deck MCP
+
+Stream Deck 7.4+ ships an "MCP Deck" and Elgato publishes [`@elgato/mcp-server`](https://github.com/elgatosf/elgato-mcp-server) (tools named `streamdeck__*`, plus `bridge_status`). The two servers do different jobs and never collide (Prism uses `deck_*` / `deck_live_*`):
+
+| User says | Use |
+|---|---|
+| "Make my Galleon look like Prism Night with a spectrum on dial 1" | `deck_layout_*` → `deck_render` → `deck_live_apply_layout` (or `deck_export_profile`) |
+| "Design an icon pack / a profile I can share" | `deck_export_iconpack` / `deck_export_profile` |
+| "Start my stream" / "mute Discord" (an action the user already has) | Elgato: `streamdeck__get_executable_actions` → **confirm with the user** → `streamdeck__execute_action` |
+| "Add a key that opens OBS" | a `native` behavior in a layout → `deck_export_profile` → the user reviews and imports. Never live. |
+| "What can you control?" | `deck_live_status` + `bridge_status` + `streamdeck__get_executable_actions` |
+
+The server's `instructions` tell the AI the same: Elgato's MCP only presses the actions the user curated on its **MCP Actions** profile, so use it for those and **always ask first** when an action looks like keystrokes, launching apps, messages, streaming or purchases; never imitate those actions with Prism tools. Prism never connects to the Stream Deck app, its WebSocket ports or Elgato's named pipe, and never proxies Elgato's tools.
+
+Host config with both servers, versions pinned:
+
+```json
+{ "mcpServers": {
+  "prism":  { "command": "node", "args": ["C:/path/to/Prism/prism-mcp-server/cli.js", "start", "--catalog", "C:/path/to/Prism/Prism.html"] },
+  "elgato": { "command": "npx",  "args": ["-y", "@elgato/mcp-server@0.1.8"] }
+} }
+```
+
+> **Security note (Elgato's server).** Prefer Elgato's server in **stdio** mode, as above. Its **`--http` mode listens on all network interfaces with no authentication** (its CORS check only stops browsers — curl, scripts and other machines on the LAN can call it), and **`--ngrok` publishes that unauthenticated endpoint to the internet**. If you need HTTP (e.g. NVIDIA G-Assist), use it only on a trusted network with the firewall blocking inbound `node.exe`. Pin a version (`@0.1.8`) instead of `@latest`, and keep the MCP Actions profile limited to actions you would let a stranger press — any process running as you can drive Elgato's pipe. Prism's own control channel is loopback-only, token-protected, paired by a physical key press and has no tunnel option.
 
 ---
 
@@ -169,7 +281,7 @@ Full parameter schemas are returned by `tools/list`. Per-tool example calls live
 3. On success `create_facet` registers the facet into the **live** catalog — it is immediately returned by `list_effects` / `search_effects` / `get_effect` with **no restart** (`persisted:false`).
 4. To persist to disk, run the repository's catalog pipeline (`extract-from-prism.mjs` → `catalog/_embed-catalog.mjs`) to embed the facet into `Prism.html`. With hot reload on, the server re-reads the file and the facet becomes permanent (`persisted` on the next load).
 
-> **Source-of-truth note:** the `#prism-catalog` island in `Prism.html` is authoritative and can be fresher than `catalog/manifest.json` on disk. Point `--catalog` at `Prism.html` for the complete catalog. The terminal catalog follows the same rule: the `#prism-terminal-catalog` island wins over `prism-term/catalog/terminal-catalog.json`.
+> **Source-of-truth note:** the `#prism-catalog` island in `Prism.html` is authoritative and can be fresher than `catalog/manifest.json` on disk. Point `--catalog` at `Prism.html` for the complete catalog. The terminal and deck catalogs follow the same rule: the `#prism-terminal-catalog` / `#prism-deck-catalog` islands win over `prism-term/catalog/terminal-catalog.json` / `prism-deck/catalog/deck-catalog.json`.
 
 ---
 
@@ -177,29 +289,39 @@ Full parameter schemas are returned by `tools/list`. Per-tool example calls live
 
 ```
 prism-mcp-server/
-├── index.js          # PrismMCPServer (JSON-RPC dispatch) + StdioTransport
+├── index.js          # PrismMCPServer (JSON-RPC dispatch, instructions, image content) + StdioTransport
 ├── cli.js            # prism-mcp CLI (start / info / tools / help)
 ├── tools/
-│   ├── index.js      # the tool definitions (name, description, schema, handler)
-│   └── terminal.js   # the 5 terminal-catalog tools (spread into buildTools())
+│   ├── index.js      # the tool definitions (name, description, schema, handler[, annotations])
+│   ├── terminal.js   # the 5 terminal-catalog tools (spread into buildTools())
+│   ├── deck.js       # the 16 Prism Deck design tools: catalog, render, layouts, export
+│   └── deck-live.js  # the 8 live tools (plugin control channel)
 ├── utils/
 │   ├── catalog.js    # CatalogStore: load island/manifest, index, hot reload, runtime facets
 │   ├── terminal-catalog.js # TerminalCatalogStore: #prism-terminal-catalog island → JSON fallback, hot reload, shared `sources` + helpers
+│   ├── deck-catalog.js     # DeckCatalogStore: #prism-deck-catalog island → deck-catalog.json, hot reload, search, device fit
+│   ├── deck-engine.js      # lazy loader for prism-deck (index, raster, export/{profile,iconpack}, plugin/{live-validate,settings,system-facets})
+│   ├── deck-render.js      # facet renders + layout pages composited onto the device panel; SVG → PNG
+│   ├── deck-layouts.js     # prism-deck-layout/0.1 documents: ops, validation, profile pages, DeckLayoutStore (disk, revisioned)
+│   ├── deck-control-client.js # control.json reader + loopback HTTP client for the plugin's channel (API v1)
 │   ├── collections.js# CollectionStore: disk-backed named sets + prism-collection-1.0 export
 │   ├── css.js        # split/dedupe/merge/validate CSS; token extraction
 │   ├── compose.js    # composition engine + layout templates
+│   ├── snippet.js    # paste-ready snippets: theme :root block, .prism-snippet wrapper + reset (mirrors the Copy builder)
 │   ├── validate.js   # facet + composition validation
-│   ├── themes.js     # canonical theme token maps (variant matrix) — mirrors Prism.html THEMES
+│   ├── themes.js     # canonical theme token maps (variant matrix) — mirrors Prism.html THEME_REGISTRY
+│   ├── refraction-tokens.js # GENERATED from design/themes.js (Prism Night / Day + --rf-* layer)
 │   └── logger.js     # stderr logger (never pollutes the stdio JSON-RPC channel)
+├── scripts/sync-refraction.mjs # regenerate (or --check) utils/refraction-tokens.js
 ├── examples/         # one example request/response per tool + integration configs
-└── test/             # node:test integration + unit tests (155 tests)
+└── test/             # node:test integration + unit tests (194 tests)
 ```
 
-**Server model.** `new PrismMCPServer(catalogPath, opts)` builds the tool registry, a `CatalogStore`, and a `TerminalCatalogStore` (found next to `catalogPath`, or `opts.terminalCatalogPath`). `await server.load()` reads + indexes both catalogs (a missing terminal catalog is not an error). `server.connect(transport)` wires a transport; `StdioTransport` implements newline-delimited JSON-RPC on stdin/stdout. The transport is pluggable — implement `onMessage(cb)` / `send(obj)` to add HTTP/SSE.
+**Server model.** `new PrismMCPServer(catalogPath, opts)` builds the tool registry, a `CatalogStore`, a `TerminalCatalogStore` and a `DeckCatalogStore` (found next to `catalogPath`, or the explicit paths), a lazily loaded `DeckEngine`, a `DeckLayoutStore` (`./deck-layouts.json` by default) and a `DeckControlClient`. `await server.load()` reads + indexes the catalogs (missing terminal/deck catalogs are not an error). `server.connect(transport)` wires a transport; `StdioTransport` implements newline-delimited JSON-RPC on stdin/stdout. The transport is pluggable — implement `onMessage(cb)` / `send(obj)` to add HTTP/SSE.
 
-**Error handling.** Protocol errors (bad method / unknown tool) return JSON-RPC errors. Tool-level failures (unknown id, validation failure) return an MCP tool result with `isError: true` and a structured `{error, code, data}` payload with actionable messages and suggestions.
+**Error handling.** Protocol errors (bad method / unknown tool) return JSON-RPC errors. Tool-level failures (unknown id, validation failure, a refused live write) return an MCP tool result with `isError: true` and a structured `{error, code, data}` payload with actionable messages and suggestions.
 
-**Logging.** Request + composition trace logs go to **stderr** (stdout is reserved for the JSON-RPC channel). Control verbosity with `--log-level` or `PRISM_MCP_LOG_LEVEL`.
+**Logging.** Request + composition trace logs go to **stderr** (stdout is reserved for the JSON-RPC channel); debug logs shorten long strings and data URLs. Control verbosity with `--log-level` or `PRISM_MCP_LOG_LEVEL`.
 
 ---
 
@@ -209,7 +331,7 @@ prism-mcp-server/
 node --test          # or: npm test
 ```
 
-155 tests cover every tool (incl. the advanced-search & variant-matrix tools, the `themeSensitive` facet, the 6 Collections tools + `export_collection` formats, and the 5 terminal-catalog tools), the CSS/compose/validate utilities, the canonical theme token maps (the two Cloudscape modes), the `CollectionStore`, the `TerminalCatalogStore` (island vs. JSON fallback, malformed/missing sources, hot reload, schema 1 per-facet source vs. schema 2 shared `sources` with helper resolution and flat memory), the JSON-RPC protocol layer, and loading the real `Prism.html` island and `prism-term` terminal catalog.
+206 tests cover every tool (incl. paste-ready composition — one theme-resolved `:root`, the snippet wrapper and reset, no undefined `var()` on the fixture or a whole real gallery — the advanced-search & variant-matrix tools, the `themeSensitive` facet, the 6 Collections tools + `export_collection` formats, the 5 terminal-catalog tools and the 24 Prism Deck tools), the CSS/compose/validate utilities, the canonical theme token maps (Prism Night as the base, the Cloudscape skins, the generated Refraction layer in sync with `design/themes.js`), the `CollectionStore`, the `TerminalCatalogStore` and `DeckCatalogStore` (island vs. JSON fallback, malformed/missing sources), the JSON-RPC protocol layer, and loading the real `Prism.html` islands. The deck tests use a fixture copied from the real deck catalog and the real `prism-deck` engine (renders, PNGs, layout validation, `.streamDeckProfile` / `.streamDeckIconPack` exports checked by the exporters' own checkers). The live tests run the plugin's **real control-channel code** (`prism-deck/src/plugin/control.js`) against a fake plugin runtime — pairing by a simulated key press, the pairing and per-key rate limits, safety refusals, apply / snapshot / undo, AI editing off, stale tokens — plus a raw fake server for headers and timeouts, a static check that no deck code reaches the Stream Deck app, and an end-to-end run of `cli.js start` over real stdio. The 9 Smart Deck tools run against a fake `smart` named-pipe server (the real wire format and token check, an in-memory model of preferences, pins, overrides, pairing and undo): unreachable and malformed discovery files, a wrong token dropped unseen, the API version, pairing by a simulated hold, every tool's success and refusal paths, `changed_since` undo, timeouts, and that the token never appears in any output. No test reads the user's real `control.json` or `ingress.json`, or talks to the Stream Deck app or Prism Control.
 
 ---
 

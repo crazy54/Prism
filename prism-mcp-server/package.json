@@ -1,7 +1,7 @@
 {
   "name": "prism-mcp-server",
-  "version": "1.0.0",
-  "description": "Production-grade MCP server exposing the Prism component catalog for discovery, composition, and facet creation.",
+  "version": "1.1.0",
+  "description": "Production-grade MCP server exposing Prism's web, terminal and Prism Deck (Stream Deck / Corsair Galleon) catalogs: discovery, composition, facet creation, deck rendering, layouts, export and live key/knob editing.",
   "type": "module",
   "bin": {
     "prism-mcp": "./cli.js"
@@ -11,7 +11,9 @@
   },
   "scripts": {
     "start": "node cli.js start",
-    "test": "node --test \"test/*.test.js\""
+    "test": "node --test \"test/*.test.js\"",
+    "sync:refraction": "node scripts/sync-refraction.mjs",
+    "sync:refraction:check": "node scripts/sync-refraction.mjs --check"
   },
   "engines": {
     "node": ">=18"
@@ -23,6 +25,7 @@
     "catalog",
     "css",
     "components",
+    "stream-deck",
     "claude"
   ],
   "license": "Apache-2.0",

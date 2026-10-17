@@ -136,12 +136,65 @@ test('compose reduces size vs naive concatenation', () => {
   assert.ok(r.metrics.finalCssLength < r.metrics.naiveCssLength, 'final smaller than naive');
 });
 
-test('compose includes tokens once and merges :root', () => {
+test('compose emits ONE :root with exactly the referenced tokens, resolved for the theme (default prism-dark)', () => {
   const ctx = toolCtx();
   const r = ctx.call('compose', { ids: ['charts-kpi-pulse'], includeTokens: true });
   const rootCount = (r.css.match(/:root\{/g) || []).length;
   assert.equal(rootCount, 1, 'single merged :root');
-  assert.ok(r.css.includes('--accent'));
+  assert.equal(r.theme, 'prism-dark');
+  assert.ok(r.css.startsWith(':root{'), 'tokens come first');
+  // .kpi reads --ink; the wrapper reads --font and --ink — nothing else
+  assert.deepEqual(r.tokens.resolved, ['--font', '--ink']);
+  assert.match(r.css, /:root\{--font:Inter[^;]*;--ink:#f0f0f5\}/);
+  assert.ok(!r.css.includes('--accent'), 'unreferenced tokens are left out');
+  const day = ctx.call('compose', { ids: ['charts-kpi-pulse'], theme: 'prism-light' });
+  assert.match(day.css, /--ink:#20202e/);
+  const cs = ctx.call('compose', { ids: ['charts-kpi-pulse'], theme: 'cloudscape-dark' });
+  assert.match(cs.css, /--font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;/, 'a stack that ends in a generic family is kept as is');
+  const bad = ctx.callSafe('compose', { ids: ['charts-kpi-pulse'], theme: 'chartreuse' });
+  assert.equal(bad.error.code, 'invalid_argument');
+  const bare = ctx.call('compose', { ids: ['charts-kpi-pulse'], includeTokens: false });
+  assert.ok(!bare.css.includes(':root'), 'includeTokens:false = bring your own theme');
+});
+
+test('compose output is paste-ready: .prism-snippet wrapper + border-box reset, no undefined var() references', () => {
+  const ctx = toolCtx();
+  for (const [tool, args] of [['compose', { ids: ['charts-kpi-pulse', 'charts-kpi-delta', 'fx-wind-bg'] }], ['compose_with_template', { ids: ['charts-kpi-pulse', 'charts-kpi-delta'], template: 'card' }]]) {
+    const r = ctx.call(tool, args);
+    assert.ok(r.html.startsWith('<div class="prism-snippet">') && r.html.trimEnd().endsWith('</div>'), `${tool}: markup inside the wrapper`);
+    assert.ok(r.css.includes('.prism-snippet{font-family:var(--font);color:var(--ink);font-size:14px;line-height:1.5;box-sizing:border-box;'), `${tool}: the builder's wrapper`);
+    assert.ok(r.css.includes(':where(.prism-snippet) *,:where(.prism-snippet) ::before,:where(.prism-snippet) ::after{box-sizing:border-box}'), `${tool}: border-box reset`);
+    assert.deepEqual(r.tokens.unresolved, [], `${tool}: no undefined var()`);
+    // every var(--x) in the bundle is defined by the :root block, a rule, or has a fallback
+    const defined = new Set([...r.css.matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]));
+    for (const m of `${r.css}\n${r.html}`.matchAll(/var\(\s*(--[\w-]+)\s*(,)?/g)) assert.ok(defined.has(m[1]) || m[2], `${tool}: ${m[1]} is undefined`);
+    assert.ok(r.snippet.startsWith('<!-- Prism · ') && r.snippet.includes('<style>\n:root{') && r.snippet.endsWith('</div>'), `${tool}: one paste-ready string`);
+  }
+  const card = ctx.call('compose_with_template', { ids: ['charts-kpi-pulse'], template: 'card', theme: 'prism-light' });
+  assert.match(card.css, /--panel:#ffffff/, 'template tokens resolve too (var(--panel,…) in the card)');
+  const noWrap = ctx.call('compose', { ids: ['charts-kpi-pulse'], wrapper: false });
+  assert.ok(!noWrap.html.includes('prism-snippet') && !noWrap.css.includes('.prism-snippet'));
+});
+
+test('get_effect returns the theme :root block + wrapper; snippet:true adds the paste-ready string', () => {
+  const ctx = toolCtx();
+  const e = ctx.call('get_effect', { id: 'charts-kpi-pulse', theme: 'prism-light' });
+  assert.equal(e.theme, 'prism-light');
+  assert.match(e.tokensCss, /^:root\{--font:[^}]*--ink:#20202e\}$/);
+  assert.match(e.wrapperCss, /box-sizing:border-box/);
+  assert.ok(!('snippet' in e));
+  const s = ctx.call('get_effect', { id: 'charts-kpi-pulse', snippet: true });
+  assert.ok(s.snippet.includes('<div class="prism-snippet">\n<div class="kpi pulse">'));
+});
+
+test('export_collection bundles and documents are paste-ready for the requested theme', () => {
+  const ctx = toolCtx();
+  const b = ctx.call('export_collection', { ids: ['charts-kpi-pulse'], theme: 'prism-light', format: 'document' });
+  assert.equal(b.theme, 'prism-light');
+  assert.match(b.css, /^:root\{[^}]*--ink:#20202e/);
+  assert.ok(b.document.includes('<div class="prism-snippet">'));
+  assert.ok(b.document.includes('box-sizing:border-box'));
+  assert.deepEqual(b.tokens.unresolved, []);
 });
 
 test('compose surfaces required initializers', () => {
@@ -153,8 +206,10 @@ test('compose surfaces required initializers', () => {
 test('compose with wrap wraps markup', () => {
   const ctx = toolCtx();
   const r = ctx.call('compose', { ids: ['charts-kpi-pulse'], wrap: { tag: 'section', className: 'dash' } });
-  assert.ok(r.html.startsWith('<section class="dash">'));
-  assert.ok(r.html.trimEnd().endsWith('</section>'));
+  assert.ok(r.html.startsWith('<div class="prism-snippet">\n<section class="dash">'), 'the container sits inside the snippet wrapper');
+  assert.ok(r.html.trimEnd().endsWith('</section>\n</div>'));
+  const raw = ctx.call('compose', { ids: ['charts-kpi-pulse'], wrap: { tag: 'section', className: 'dash' }, wrapper: false });
+  assert.ok(raw.html.startsWith('<section class="dash">'));
 });
 
 test('compose unknown id fails with structured error', () => {

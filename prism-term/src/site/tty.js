@@ -8,30 +8,39 @@
 // escapes — end with a reset and a newline, and never exceed 80 printable
 // columns. Facet snapshots are stills rendered by the same engine as the live
 // player; "live" means the npx player.
+//
+// Drawn in the Refraction grammar (src/refraction.js, docs/refraction-terminal.md):
+// the mark and an instrument-label header, a full-width beam that strikes the
+// prism and leaves as spectrum, a spectral gallery index with wavelength labels,
+// hue-colored section labels. The page can't see the reader's background, so
+// chrome uses mid-tones (TOKENS.site, the spectrum's `site` tier) that read on
+// dark and light terminals; text that matters is the terminal's own foreground.
 
 import { CellBuffer, ATTR } from '../buffer.js';
-import { NONE } from '../color.js';
+import { NONE, mix } from '../color.js';
 import { renderScene } from '../render.js';
 import { stringWidth, truncate, wrap } from '../width.js';
 import { getTheme } from '../palettes.js';
+import { TOKENS, spectral, siteTone, galleryHue, lambdaLabel, rampHue } from '../refraction.js';
+import { FORMATS, themeFileName } from '../theme-export.js';
 
 export const WIDTH = 80;
 const SNAP_MAX_H = 20;
 
-const theme = getTheme('cloudscape-dark');
-// Chrome colors chosen to read on dark *and* light terminal backgrounds and to
-// land on distinct entries of the 256-color cube.
+// Facet stills are rendered in Prism Night: dark glass tiles that read on any terminal.
+const theme = getTheme('prism-dark');
 const C = {
-  accent: 0x5f87d7,   // 256: 68
-  cmd: 0x5fafaf,      // 256: 73
-  good: 0x5faf5f,     // 256: 71
-  warm: 0xd7875f,     // 256: 173
-  muted: NONE,        // default fg + DIM
+  accent: siteTone(TOKENS.site.accent.h, TOKENS.site.accent.C),
+  cmd: siteTone(TOKENS.site.cmd.h, TOKENS.site.cmd.C),
+  beam: TOKENS.site.beam,
+  line: TOKENS.site.line,
+  muted: NONE, // default fg + DIM
 };
-const SPECTRUM = [0xd75f87, 0xd7875f, 0xd7af5f, 0x87af5f, 0x5fafaf, 0x5f87d7, 0x875fd7, 0xaf5faf];
+const HUES = new Map();
+const hueOf = (id) => { let c = HUES.get(id); if (c === undefined) HUES.set(id, (c = siteTone(galleryHue(id)))); return c; };
 
 // ASCII stand-ins for the decorative glyphs the colored pages use.
-const PLAIN = { '◆': '*', '›': '>', '‹': '<', '·': '-', '…': '...', '─': '-', '│': '|', '━': '=', '▸': '>', '→': '->', '←': '<-', '—': '--', '–': '-', '×': 'x', '≤': '<=' };
+const PLAIN = { '◆': '*', '›': '>', '‹': '<', '·': '-', '…': '...', '─': '-', '│': '|', '━': '=', '▸': '>', '→': '->', '←': '<-', '—': '--', '–': '-', '×': 'x', '≤': '<=', '◢': '/', '◣': '\\', '▌': '|', 'λ': '' };
 
 /** Text helper that swaps decorative glyphs for ASCII when building the .txt variant. */
 function txt(s, plain) {
@@ -47,7 +56,7 @@ export function asciiGlyph(ch) {
   if (cp < 0x80) return cp < 0x20 ? ' ' : ch;
   const base = ch.normalize('NFD')[0];
   if (base.codePointAt(0) < 0x80 && base !== ch) return base; // é → e
-  if (PLAIN[ch]) return PLAIN[ch].length === 1 ? PLAIN[ch] : PLAIN[ch][0];
+  if (PLAIN[ch]) return PLAIN[ch].length === 1 ? PLAIN[ch] : PLAIN[ch][0] || ' ';
   if (cp >= 0x2500 && cp <= 0x257f) {
     if ('─━┄┅┈┉═╌╍╴╶╸╺╼╾'.includes(ch)) return '-';
     if ('│┃┆┇┊┋║╎╏╵╷╹╻╽╿'.includes(ch)) return '|';
@@ -190,29 +199,73 @@ export function snapshot(f, { w = f.size.w, h = f.size.h, plain = false } = {}) 
   const width = Math.max(f.minSize.w, Math.min(WIDTH, w));
   const height = Math.max(f.minSize.h, Math.min(SNAP_MAX_H, h));
   const caps = plain ? { unicode: false, braille: false, sextant: false, depth: '16' } : { sextant: false, depth: '256' };
-  return renderScene(f, { width, height, t: stillAt(f), fps: 15, mode: plain ? 'ascii' : null, caps, theme: 'cloudscape-dark' });
+  return renderScene(f, { width, height, t: stillAt(f), fps: 15, mode: plain ? 'ascii' : null, caps, theme });
 }
 
-// ── content ─────────────────────────────────────────────────────────────────
+// ── Refraction parts ────────────────────────────────────────────────────────
 
 const host = (site) => site.replace(/^https?:\/\//, '');
+const cmd = (t) => ({ text: t, fg: C.cmd });
+const dim = (t) => ({ text: t, attr: ATTR.DIM });
+const label = (t, fg = C.accent) => ({ text: t.toUpperCase(), fg, attr: ATTR.BOLD });
 
-function header(p, site, crumbs) {
-  const parts = [{ text: '◆ PRISM TERMINAL', fg: C.accent, attr: ATTR.BOLD }];
-  for (const c of crumbs) parts.push({ text: ' › ', attr: ATTR.DIM }, { text: c, attr: ATTR.BOLD });
-  p.line(...parts);
+/** The mark, as segments: ──◢◣━━━  (beam in, the prism, the spectrum out). */
+function markSegs() {
+  return [
+    { text: '─', fg: mix(C.line, C.beam, 0.4) }, { text: '─', fg: C.beam },
+    { text: '◢', fg: 0xffffff, attr: ATTR.BOLD }, { text: '◣', fg: C.accent, attr: ATTR.BOLD },
+    ...[0, 0.5, 1].map((u) => ({ text: '━', fg: spectral(rampHue(u), 'site') })),
+  ];
+}
+
+/**
+ * The page beam — 80 columns: a hairline brightening toward the prism (◢◣ at
+ * `at`), then the spectrum leaving it. With `hue`, only that band of the
+ * spectrum leaves (a gallery page is one color of the light).
+ */
+function beamRule(p, { at = 54, hue = null } = {}) {
+  const segs = [];
+  for (let x = 0; x < at; x++) {
+    const k = Math.pow(x / Math.max(1, at - 1), 2.2);
+    segs.push({ text: '─', fg: mix(C.line, C.beam, k) });
+  }
+  segs.push({ text: '◢', fg: 0xffffff, attr: ATTR.BOLD }, { text: '◣', fg: C.accent, attr: ATTR.BOLD });
+  const n = WIDTH - at - 2;
+  for (let i = 0; i < n; i++) {
+    const u = i / Math.max(1, n - 1);
+    const h = hue === null ? rampHue(u) : hue + (u - 0.5) * 36;
+    // The spectrum fades as it travels: brightest just out of the prism.
+    segs.push({ text: '━', fg: mix(spectral(h, 'site'), C.line, Math.pow(u, 1.6) * 0.55) });
+  }
+  return p.line(...segs);
+}
+
+/** A plain hairline (footers, section rules). */
+const rule = (p, w = WIDTH) => p.line({ text: '─'.repeat(w), fg: C.line });
+
+/** Header: the mark, PRISM TERMINAL › crumbs, and a right-aligned instrument label. */
+function header(p, crumbs, right = '', { hue } = {}) {
+  const left = [...markSegs(), { text: ' ' }, { text: 'PRISM TERMINAL', attr: ATTR.BOLD }];
+  for (const c of crumbs) left.push({ text: ' › ', attr: ATTR.DIM }, { text: c.toUpperCase(), attr: ATTR.BOLD, fg: hue ?? undefined });
+  const used = left.reduce((n, s) => n + stringWidth(txt(s.text, p.plain)), 0);
+  const r = txt(right, p.plain);
+  if (r && used + 2 + stringWidth(r) <= WIDTH) left.push({ text: ' '.repeat(WIDTH - used - stringWidth(r)) }, { text: right, fg: hue ?? undefined, attr: hue ? 0 : ATTR.DIM });
+  p.line(...left);
   return p;
 }
 
-function rule(p) { return p.line({ text: '─'.repeat(WIDTH), attr: ATTR.DIM }); }
-
-/** The npx live-player command: one line when it fits 80 columns, else split with a shell continuation. */
-function npxLines(p, site, args = '', indent = 2) {
+/**
+ * The npx live-player command, pinned to this release's tarball (prism-term-<version>.tgz,
+ * checked by /dl/SHA256SUMS): one line when it fits 80 columns, else split with a shell
+ * continuation. The home page keeps the shorter latest-release alias, /dl/prism-term.tgz.
+ */
+function npxLines(p, site, args = '', indent = 2, version = '') {
   const pad = ' '.repeat(indent);
   const run = `prism-term${args ? ' ' + args : ''}`;
-  const one = `${pad}npx -y --package=${site}/dl/prism-term.tgz ${run}`;
+  const tgz = `${site}/dl/prism-term${version ? `-${version}` : ''}.tgz`;
+  const one = `${pad}npx -y --package=${tgz} ${run}`;
   if (stringWidth(one) <= WIDTH) return p.line({ text: one, fg: C.cmd });
-  p.line({ text: `${pad}npx -y --package=${site}/dl/prism-term.tgz \\`, fg: C.cmd });
+  p.line({ text: `${pad}npx -y --package=${tgz} \\`, fg: C.cmd });
   p.line({ text: `${pad}  ${run}`, fg: C.cmd });
   return p;
 }
@@ -233,50 +286,51 @@ function tagLines(p, tags) {
   return p;
 }
 
-/** Footer: a rule, then one labeled, copy-pasteable command per line. */
+/** Section label: an instrument eyebrow, then a hairline to the edge. */
+function section(p, text, fg = C.accent, count = '') {
+  const t = `${text}${count ? ` · ${count}` : ''}`.toUpperCase();
+  const w = stringWidth(txt(t, p.plain));
+  p.line({ text: t, fg, attr: ATTR.BOLD }, { text: ' ' }, { text: '─'.repeat(Math.max(0, Math.min(WIDTH - w - 1, 48 - w))), fg: C.line });
+}
+
+/** Footer: a hairline, then one labeled, copy-pasteable command per line. */
 function footer(p, site, items) {
   p.blank();
   rule(p);
-  for (const [label, command] of items) p.line(dim(label.padEnd(10)), cmd(command));
+  for (const [l, command] of items) p.line(dim(l.padEnd(10)), cmd(command));
   return p;
 }
 
-const cmd = (t) => ({ text: t, fg: C.cmd });
-const dim = (t) => ({ text: t, attr: ATTR.DIM });
+// ── content ─────────────────────────────────────────────────────────────────
 
 function homePage(ctx, plain) {
-  const { site, galleries, facets } = ctx;
+  const { site, galleries, facets, version } = ctx;
   const p = new Page(plain);
-  // Banner: a 3-row block wordmark with the summary beside it.
-  const mark = plain
-    ? ['.--. .--. ---  .--. .   .', "|__' |__'  |   '--. |\\ /|", "|    |  \\ ---  .__' | v |"]
-    : ['█▀▀█ █▀▀█ ▀█▀ █▀▀▀ █▀▄▀█', '█▄▄█ █▄▄▀  █  ▀▀▀█ █ ▀ █', '█    █  █ ▄█▄ ▄▄▄█ █   █'];
-  const side = [
-    [{ text: 'TERMINAL', fg: C.accent, attr: ATTR.BOLD }, dim(`  ${facets.length} facets · ${galleries.length} galleries`)],
-    [{ text: 'Animated terminal art, widgets and TUI parts.' }],
-    [dim('help '), cmd('/t/help'), dim(' · plain '), cmd('.txt'), dim(' · catalog '), cmd('/terminal/')],
-  ];
-  for (let i = 0; i < mark.length; i++) {
-    const m = mark[i];
-    const segs = plain ? [{ text: '  ' + m.padEnd(27) }] : [...m].map((ch, k) => ({ text: k === 0 ? '  ' + ch : ch, fg: SPECTRUM[Math.floor((k / m.length) * SPECTRUM.length)] }));
-    p.line(...segs, { text: '  ' }, ...(side[i] || []));
-  }
+  // 1 · the mark and the instrument line; 2 · the beam striking the prism.
+  header(p, [], `${facets.length} FACETS · ${galleries.length} GALLERIES · ${version}`);
+  beamRule(p);
+  p.line({ text: 'Terminal art, widgets and TUI parts.' }, dim('  help '), cmd('/t/help'), dim(' · plain '), cmd('.txt'), dim(' · web '), cmd('/terminal/'));
   p.blank();
-  const idW = Math.max(...galleries.map((g) => g.id.length));
-  galleries.forEach((g, i) => {
-    const c = `curl -sL ${host(site)}/t/${g.id}`;
+  // The spectral index: swatch, gallery, count, the command, its wavelength.
+  const base = `curl -sL ${host(site)}/t/`;
+  const cw = base.length + Math.max(...galleries.map((g) => g.id.length)) + 2;
+  for (const g of galleries) {
+    const hue = hueOf(g.id);
     p.line(
       { text: '  ' },
-      { text: c.padEnd(`curl -sL ${host(site)}/t/`.length + idW + 2), fg: C.cmd },
-      { text: (plain ? '' : (g.icon + ' ').padEnd(4)), fg: SPECTRUM[i % SPECTRUM.length] },
-      { text: g.title.padEnd(24) },
-      dim(String(g.count).padStart(4)),
+      { text: '▌', fg: hue },
+      { text: ' ' },
+      { text: g.title.padEnd(23) },
+      dim(String(g.count).padStart(3)),
+      { text: ' ' },
+      { text: `${base}${g.id}`.padEnd(cw), fg: C.cmd },
+      { text: lambdaLabel(g.id, !plain), fg: hue },
     );
-  });
-  // Breathing room before the npx line, but only while the page still fits
+  }
+  // Breathing room before the live player, only while the page still fits
   // 23 rows — on an 80×24 terminal the prompt takes the 24th.
   if (p.rows.length + 3 <= 23) p.blank();
-  p.line({ text: '  The live player, animated in your terminal (Node 18+):', attr: ATTR.BOLD });
+  p.line(label('The live player'), dim(' · animated in your terminal · Node 18+'));
   p.line({ text: '  ' }, cmd(`npx -y --package=${site}/dl/prism-term.tgz prism-term`));
   return p;
 }
@@ -284,9 +338,10 @@ function homePage(ctx, plain) {
 function helpPage(ctx, plain) {
   const { site, galleries, facets, version } = ctx;
   const h = host(site);
-  const p = header(new Page(plain), site, ['help']);
+  const p = header(new Page(plain), ['help'], `PRISM-TERM ${version}`);
+  beamRule(p);
   p.blank();
-  const sect = (t) => { p.blank(); p.line({ text: t.toUpperCase(), fg: C.accent, attr: ATTR.BOLD }); };
+  const sect = (t) => { p.blank(); section(p, t); };
   p.para(`This is Prism's terminal site: ${facets.length} animated and static terminal facets — scenes, spinners, progress meters, charts, text art, TUI controls, diagrams and ops views — in ${galleries.length} galleries, drawn by prism-term ${version}, a zero-dependency Node engine.`);
   sect('Browse with curl');
   const rows = [
@@ -294,6 +349,7 @@ function helpPage(ctx, plain) {
     [`curl -sL ${h}/t/<gallery>`, 'one gallery, by category'],
     [`curl -sL ${h}/f/<facet>`, 'one facet: still and commands'],
     [`curl -sL ${h}/t/all`, 'every facet on one line each'],
+    [`curl -sL ${h}/t/themes`, 'color schemes for your terminal'],
     [`curl -sL ${h}/t/help`, 'this page'],
   ];
   const cw = Math.max(...rows.map((r) => r[0].length)) + 2;
@@ -308,21 +364,33 @@ function helpPage(ctx, plain) {
   p.line({ text: '  ' }, dim("PowerShell and cmd don't continue lines with \\: join a command that ends"));
   p.line({ text: '  ' }, dim('in \\ with the next line (drop the \\) before you run it.'));
   sect('The live player');
-  p.para('The live player renders facets in real time and detects your terminal (truecolor, 256, 16, mono; braille and block glyphs, or plain ASCII). It needs Node 18+ and no network after the download.');
-  npxLines(p, site, '', 2);
+  p.para('The live player renders facets in real time and detects your terminal (truecolor, 256, 16, mono; braille and block glyphs, or plain ASCII; Prism Night or Prism Day for dark and light backgrounds). It needs Node 18+ and no network after the download.');
+  npxLines(p, site, '', 2, version);
   p.line(dim('  …then add a command:'));
   const cli = [
     ['(none)', 'browse the catalog: arrows move, / searches, Enter plays'],
     ['play <facet>', 'one facet fullscreen (--size 80x24, --depth 256, --ascii)'],
     ['list', 'every facet, grouped by gallery'],
     ['snapshot <facet>', 'print one still frame to stdout'],
+    ['theme <format>', 'Prism Night / Day colors for your terminal emulator'],
   ];
   for (const [c, d] of cli) p.line({ text: '    ' }, cmd(c.padEnd(18)), dim(d));
+  p.line(dim('  Day or Night: --day, --night, or PRISM_TERM_THEME=day|night; --no-intro skips'));
+  p.line(dim('  the opening beam, and NO_COLOR / PRISM_REDUCED_MOTION=1 are honored.'));
   p.line(dim('  Prefer a permanent install? Run this once, then just type prism-term:'));
-  p.line({ text: '  ' }, cmd(`npm i -g ${site}/dl/prism-term.tgz`));
+  p.line({ text: '  ' }, cmd(`npm i -g ${site}/dl/prism-term-${version}.tgz`));
+  p.line(dim('  /dl/prism-term.tgz is an alias for the newest release. To pin one and verify'));
+  p.line(dim('  it, download it and check it against SHA256SUMS first:'));
+  p.line({ text: '  ' }, cmd(`curl -sLO ${site}/dl/prism-term-${version}.tgz`));
+  p.line({ text: '  ' }, cmd(`curl -sL ${h}/dl/SHA256SUMS | sha256sum -c --ignore-missing`));
+  p.line({ text: '  ' }, cmd(`npx -y --package=./prism-term-${version}.tgz prism-term`));
   sect('Galleries');
   const ids = galleries.map((g) => g.id);
-  for (let i = 0; i < ids.length; i += 6) p.line({ text: '  ' }, cmd(ids.slice(i, i + 6).map((s) => s.padEnd(11)).join('')));
+  for (let i = 0; i < ids.length; i += 6) {
+    const segs = [{ text: '  ' }];
+    for (const id of ids.slice(i, i + 6)) segs.push({ text: '▌', fg: hueOf(id) }, cmd(id.padEnd(10)));
+    p.line(...segs);
+  }
   sect('For agents and tools');
   p.para(`Machine-readable: the JSON island <script id="prism-terminal-catalog"> in the web catalog, ${h}/Prism.html, and the same catalog at ${h}/terminal/engine/catalog/terminal-catalog.json. Each facet record has id, gallery, category, tags, size, glyphs, color depth, params, a plain-text preview and its module path; the module's code, and the "_" helpers it imports, are in the catalog's top-level "sources".`);
   footer(p, site, [
@@ -333,11 +401,42 @@ function helpPage(ctx, plain) {
   return p;
 }
 
+/** Color schemes: the OSC one-liner, then every format's Night / Day file URL. */
+function themesPage(ctx, plain) {
+  const { site } = ctx;
+  const h = host(site);
+  const p = header(new Page(plain), ['themes'], `${Object.keys(FORMATS).length} FORMATS`);
+  beamRule(p);
+  p.blank();
+  p.para('Prism Night and Prism Day as color schemes for your terminal. Each file is plain text with its install notes at the top: read it, then install it yourself. Nothing here changes your settings.');
+  p.blank();
+  section(p, 'Any terminal, this session · also over SSH');
+  p.line({ text: '  ' }, cmd(`curl -sL ${h}/themes/osc/prism-night.sh | sh`));
+  p.line({ text: '  ' }, cmd(`curl -sL ${h}/themes/osc/prism-day.sh | sh`));
+  p.para('One printf of OSC 4 / 10 / 11 codes: on a remote host the codes travel back to your own terminal. It lasts until the terminal closes.', { attr: ATTR.DIM });
+  p.blank();
+  section(p, 'Files');
+  for (const [id, f] of Object.entries(FORMATS)) {
+    if (id === 'osc') continue;
+    p.line({ text: '▌', fg: C.accent }, { text: ` ${f.name}`, attr: ATTR.BOLD });
+    for (const t of ['prism-dark', 'prism-light']) p.line({ text: '   ' }, cmd(`curl -sLO ${h}/themes/${f.dir}/${themeFileName(id, t)}`));
+    p.para(f.install, { indent: 3, attr: ATTR.DIM });
+  }
+  p.blank();
+  p.para('With the live player installed the same files come from prism-term theme <format> [--day] [-o file]; any other Prism theme works too (--theme primer).', { attr: ATTR.DIM });
+  footer(p, site, [
+    ['home', `curl -sL ${h}/tty`],
+    ['help', `curl -sL ${h}/t/help`],
+  ]);
+  return p;
+}
+
 function allPage(ctx, plain) {
   const { site, facets } = ctx;
   const h = host(site);
-  const p = header(new Page(plain), site, ['all facets']);
-  p.line(dim(`  ${facets.length} facets  ·  id  ·  gallery/category  ·  what it is`));
+  const p = header(new Page(plain), ['all facets'], `${facets.length} FACETS`);
+  beamRule(p);
+  p.line(dim('id  ·  gallery / category  ·  what it is'));
   p.blank();
   const idW = Math.min(26, Math.max(...facets.map((f) => f.id.length)) + 1);
   const gcW = 30;
@@ -345,7 +444,8 @@ function allPage(ctx, plain) {
     const gc = `${f.gallery}/${f.category}`;
     p.line(
       { text: f.id.padEnd(idW), fg: C.cmd },
-      dim(truncate(gc, gcW - 1, plain ? '...' : '…').padEnd(gcW)),
+      { text: '▌', fg: hueOf(f.gallery) },
+      dim(truncate(` ${gc}`, gcW - 2, plain ? '...' : '…').padEnd(gcW - 1)),
       { text: f.description, clip: true },
     );
   }
@@ -358,9 +458,12 @@ function allPage(ctx, plain) {
 }
 
 function galleryPage(ctx, g, plain) {
-  const { site } = ctx;
+  const { site, galleries } = ctx;
   const h = host(site);
-  const p = header(new Page(plain), site, [`${g.title} (${g.count})`]);
+  const hue = hueOf(g.id);
+  const n = galleries.findIndex((x) => x.id === g.id) + 1;
+  const p = header(new Page(plain), [g.title], `${lambdaLabel(g.id, !plain)} · ${String(n).padStart(2, '0')} / ${galleries.length}`, { hue });
+  beamRule(p, { hue: galleryHue(g.id) });
   p.para(g.blurb, { indent: 0 });
   // Featured stills: the first facet of the leading categories that reads at tile size.
   const TILE_W = 39, TILE_H = 8;
@@ -377,11 +480,11 @@ function galleryPage(ctx, g, plain) {
     p.line(dim(caption));
   }
   const idW = Math.min(26, Math.max(...g.categories.flatMap((c) => c.facets.map((f) => f.id.length))) + 2);
-  for (const c of g.categories) {
+  g.categories.forEach((c, i) => {
     p.blank();
-    p.line({ text: c.name.toUpperCase(), fg: C.accent, attr: ATTR.BOLD }, dim(`  ${c.facets.length}`));
+    section(p, `${String(i + 1).padStart(2, '0')} / ${c.name}`, hue, `${c.facets.length}`);
     for (const f of c.facets) p.line({ text: '  ' }, { text: f.id.padEnd(idW), fg: C.cmd }, { text: f.description, clip: true });
-  }
+  });
   const first = g.categories[0]?.facets[0]?.id || '<id>';
   footer(p, site, [
     ['one facet', `curl -sL ${h}/f/${first}`],
@@ -395,10 +498,12 @@ function facetPage(ctx, f, plain) {
   const { site, galleries } = ctx;
   const h = host(site);
   const g = galleries.find((x) => x.id === f.gallery);
+  const hue = hueOf(g.id);
   const siblings = g.categories.flatMap((c) => c.facets);
   const i = siblings.findIndex((x) => x.id === f.id);
   const prev = siblings[(i - 1 + siblings.length) % siblings.length], next = siblings[(i + 1) % siblings.length];
-  const p = header(new Page(plain), site, [g.title, f.category]);
+  const p = header(new Page(plain), [g.title, f.category], `${lambdaLabel(g.id, !plain)} · ${i + 1} / ${siblings.length}`, { hue });
+  beamRule(p, { hue: galleryHue(g.id) });
   p.line({ text: f.title, attr: ATTR.BOLD }, dim(`  ${f.id}`));
   p.para(f.description, { indent: 0 });
   const meta = [f.kind, `${f.size.w}×${f.size.h} (min ${f.minSize.w}×${f.minSize.h})`, f.animated ? `${f.loop} s loop` : 'still', f.glyphs, f.color === 'truecolor' ? 'truecolor' : `${f.color} colors`];
@@ -413,7 +518,7 @@ function facetPage(ctx, f, plain) {
   const params = Object.entries(f.params || {});
   if (params.length) {
     p.blank();
-    p.line({ text: 'Params', attr: ATTR.BOLD }, dim('  (--set key=value)'));
+    section(p, 'Params', hue, '--set key=value');
     for (const [k, spec] of params) {
       const range = spec.options ? spec.options.join('|') : spec.min !== undefined ? `${spec.min}–${spec.max}` : '';
       // Long defaults (scroller text) go after the label, where they may be cut.
@@ -427,10 +532,10 @@ function facetPage(ctx, f, plain) {
     }
   }
   p.blank();
-  p.line({ text: 'Run it live', attr: ATTR.BOLD }, dim('  (Node 18+, no install)'));
-  npxLines(p, site, `play ${f.id}`, 2);
-  p.line({ text: 'Snapshot', attr: ATTR.BOLD }, dim('  '), cmd(`prism-term snapshot ${f.id} --size ${f.size.w}x${f.size.h}`));
-  p.line({ text: 'In code', attr: ATTR.BOLD });
+  section(p, 'Run it live', hue, 'Node 18+, no install');
+  npxLines(p, site, `play ${f.id}`, 2, ctx.version);
+  p.line(label('Snapshot', hue), dim('  '), cmd(`prism-term snapshot ${f.id} --size ${f.size.w}x${f.size.h}`));
+  p.line(label('In code', hue));
   p.line({ text: '  ' }, cmd("import { play, findFacet } from 'prism-term';"));
   p.line({ text: '  ' }, cmd(`await play(findFacet('${f.id}'));`));
   footer(p, site, [
@@ -460,6 +565,7 @@ export function buildTtyPages(ctx) {
   add('tty', (plain) => homePage(ctx, plain));
   add('t/help', (plain) => helpPage(ctx, plain));
   add('t/all', (plain) => allPage(ctx, plain));
+  add('t/themes', (plain) => themesPage(ctx, plain));
   for (const g of ctx.galleries) add(`t/${g.id}`, (plain) => galleryPage(ctx, g, plain));
   for (const f of ctx.facets) add(`f/${f.id}`, (plain) => facetPage(ctx, f, plain));
   return pages;

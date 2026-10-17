@@ -3,6 +3,8 @@
 //   node scripts/embed-island.mjs                  embed catalog/terminal-catalog.json into ../Prism.html
 //   node scripts/embed-island.mjs --check          exit 1 if Prism.html's island is stale or missing
 //   node scripts/embed-island.mjs --html <file> --catalog <file>
+//   node scripts/embed-island.mjs --part <parts/island-prism-terminal-catalog.html> [--check]
+//                                                  parts workflow: rewrite only the island part
 //
 // The island sits right after the web catalog island:
 //
@@ -38,7 +40,10 @@ export const START = '<!-- ===== PRISM TERMINAL CATALOG · AI START HERE ===== -
 export const END = '<!-- ===== /PRISM TERMINAL CATALOG ===== -->';
 const WEB_END = '<!-- ===== /PRISM CATALOG ===== -->';
 const CRUMB_OPEN = '<!-- ✦ AI-READABLE:';
-export const CRUMB_NOTE = ' Terminal facets (prism-term) are in <script id="prism-terminal-catalog"> right after it — same "_ai" convention.';
+// No tag text in it: a "<script" inside the breadcrumb comment would cut it in the parts tokenizer. The
+// 2026-10-16 breadcrumb names all three islands (end of <body>) itself, so this note is only ever added
+// to an older breadcrumb that does not mention the terminal island.
+export const CRUMB_NOTE = ' Terminal facets (prism-term) are in the JSON island id="prism-terminal-catalog" right after it — same "_ai" convention.';
 
 /**
  * JSON text for the island: header compact, then one facet per line and one
@@ -58,12 +63,20 @@ export function islandJson(catalog, eol = '\n') {
 
 /**
  * Schema-2 integrity: every facet's `module`, and every "_" gallery helper in
- * its `imports`, must have its code in the top-level `sources`. [] when sound.
+ * its `imports`, must have its code in the top-level `sources`; and the browser
+ * engine closure must be complete — every prism-term/src/ module a facet imports,
+ * and every module those import statically, is in `sources` too (Node-only
+ * screen.js / loop.js excepted). [] when sound.
  */
+const NODE_ONLY_ENGINE = new Set(['prism-term/src/screen.js', 'prism-term/src/loop.js']);
+const STATIC_SPEC = /^\s*(?:import|export)\s(?:[^'"]*?\sfrom\s*)?['"]([^'"]+)['"]/gm;
+const isEngineKey = (k) => k.startsWith('prism-term/src/') && !k.startsWith('prism-term/src/facets/');
 export function catalogProblems(catalog) {
   const out = [];
   const sources = catalog.sources && typeof catalog.sources === 'object' ? catalog.sources : null;
   if (!sources) return ['no top-level `sources` object'];
+  const engineNeeded = new Map();   // engine key -> first importer
+  const need = (key, by) => { if (isEngineKey(key) && !NODE_ONLY_ENGINE.has(key) && !engineNeeded.has(key)) engineNeeded.set(key, by); };
   for (const f of catalog.facets || []) {
     if ('source' in f) out.push(`${f.id}: record still carries \`source\` (schema 2 keeps code in \`sources\`)`);
     if (!Object.hasOwn(sources, f.module)) out.push(`${f.id}: module ${f.module} is not a key of sources`);
@@ -71,8 +84,15 @@ export function catalogProblems(catalog) {
       if (!spec.startsWith('.')) continue;
       const key = path.posix.normalize(path.posix.join(path.posix.dirname(f.module), spec));
       if (key.startsWith('prism-term/src/facets/') && /\/_[^/]*\.js$/.test(key) && !Object.hasOwn(sources, key)) out.push(`${f.id}: helper ${key} (imported as ${spec}) is not in sources`);
+      need(key, f.module);
     }
   }
+  // engine modules already in the island must have their own static imports there too
+  for (const [k, code] of Object.entries(sources)) {
+    if (!isEngineKey(k) || typeof code !== 'string') continue;
+    for (const [, spec] of code.matchAll(STATIC_SPEC)) if (spec.startsWith('.')) need(path.posix.normalize(path.posix.join(path.posix.dirname(k), spec)), k);
+  }
+  for (const [k, by] of engineNeeded) if (!Object.hasOwn(sources, k)) out.push(`engine module ${k} (imported by ${by}) is not in sources`);
   return out;
 }
 
@@ -183,10 +203,45 @@ export function extractIsland(html) {
   return JSON.parse(html.slice(start, end));
 }
 
+/**
+ * Parts workflow (Prism.html edited as aaa-prism-ds/parts/): the island element is its
+ * own part file, `<script type="application/json" id="prism-terminal-catalog">…</script>`,
+ * with the START/END marker comments living in the neighbouring gap parts. Rewrite only
+ * the element's JSON, keeping the part's line endings. Returns { text, changed }.
+ */
+export function embedIntoPart(partText, catalog) {
+  const a = partText.indexOf(ISLAND_OPEN);
+  if (a !== 0 || !partText.trimEnd().endsWith('</script>')) throw new Error(`not a ${ISLAND_ID} island part (expected it to start with ${ISLAND_OPEN} and end with </script>)`);
+  const eol = partText.includes('\r\n') ? '\r\n' : '\n';
+  const tail = partText.slice(partText.lastIndexOf('</script>'));
+  const text = `${ISLAND_OPEN}${eol}${islandJson(catalog, eol)}${eol}${tail}`;
+  if (JSON.stringify(extractIsland(text)) !== JSON.stringify(catalog)) throw new Error('embed self-check failed: island part does not round-trip');
+  return { text, changed: text !== partText };
+}
+
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
   const args = process.argv.slice(2);
   const opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? path.resolve(args[i + 1]) : d; };
+  // --part <aaa-prism-ds/parts/island-prism-terminal-catalog.html>: write the island PART
+  // (a join then carries it into Prism.html). Writing Prism.html directly while the team
+  // edits parts would be overwritten by the next `parts.mjs join`.
+  const partFile = opt('--part', null);
+  if (partFile) {
+    const catFile = opt('--catalog', path.resolve(HERE, '..', 'catalog', 'terminal-catalog.json'));
+    const catalog = JSON.parse(fs.readFileSync(catFile, 'utf8'));
+    const problems = catalogProblems(catalog);
+    if (problems.length) { console.error(`${path.basename(catFile)} is inconsistent:\n  ${problems.join('\n  ')}`); process.exit(1); }
+    const cur = fs.readFileSync(partFile, 'utf8');
+    if (args.includes('--check')) {
+      if (JSON.stringify(extractIsland(cur)) !== JSON.stringify(catalog)) { console.error(`${path.basename(partFile)} is stale — run embed-island.mjs --part`); process.exit(1); }
+      console.log(`${path.basename(partFile)} up to date (${catalog.facets.length} facets)`); process.exit(0);
+    }
+    const { text, changed } = embedIntoPart(cur, catalog);
+    if (changed) { const tmp = partFile + '.tmp-' + process.pid; fs.writeFileSync(tmp, text); fs.renameSync(tmp, partFile); }
+    console.log(`${changed ? 'embedded' : 'unchanged'}: #${ISLAND_ID} in ${path.basename(partFile)} (${catalog.facets.length} facets)`);
+    process.exit(0);
+  }
   const htmlFile = opt('--html', path.resolve(HERE, '..', '..', 'Prism.html'));
   const catFile = opt('--catalog', path.resolve(HERE, '..', 'catalog', 'terminal-catalog.json'));
   if (!fs.existsSync(catFile)) { console.error(`${catFile} not found — run \`npm run catalog\` first`); process.exit(1); }

@@ -2,6 +2,7 @@
 // (verified through a VT emulator), capability detection and CLI parsing.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { EventEmitter } from 'node:events';
 import {
   NONE, rgb, hex, toHex, hsl, parse, mix, mixOklab, gradient, to256, to16, fgParam, bgParam, luminance,
 } from '../src/color.js';
@@ -293,10 +294,11 @@ test('caps: env-driven detection and overrides', () => {
 
 // ── themes / palettes / misc ────────────────────────────────────────────
 test('themes and palettes resolve', () => {
-  assert.ok(THEME_IDS.includes('cloudscape-dark'));
+  assert.ok(THEME_IDS.includes('prism-dark') && THEME_IDS.includes('prism-light') && THEME_IDS.includes('cloudscape-dark'));
   const t = getTheme('primer');
   assert.equal(t.id, 'primer-dark');
-  assert.equal(getTheme('nope').id, 'cloudscape-dark');
+  assert.equal(getTheme('nope').id, 'prism-dark', 'unknown ids fall back to the default, Prism Night');
+  assert.equal(getTheme().id, 'prism-dark');
   for (const k of ['bg', 'ink', 'accent', 'pos', 'warn', 'neg']) assert.equal(typeof t[k], 'number');
   for (const n of PALETTE_NAMES) assert.equal(typeof palette(n, t)(0.5), 'number');
 });
@@ -379,4 +381,115 @@ test('ascii folding: one column per glyph, every category covered', async () => 
   s.set(5, 0, '●');
   assert.equal(b.toString(), '|#| oo');
   assert.equal(asciiSurface(s), s, 'idempotent');
+});
+
+// ── mono depth: luminance ramp instead of color ─────────────────────────
+test('canvas mono: a color field becomes a normalized luminance ramp (Unicode 5 levels, 7-bit ≥ 8)', async () => {
+  const { MONO_RAMP, ASCII_RAMP, monoHint } = await import('../src/canvas.js');
+  const field = (mode, ramp) => {
+    const cv = new Canvas(40, 2, { mode, mono: { ramp, ref: 0x0a0c12 } });
+    // mid-luminance only (0.3 … 0.7): the stretch must still use the whole ramp
+    for (let y = 0; y < cv.height; y++) for (let x = 0; x < cv.width; x++) { const v = Math.round(77 + (x / (cv.width - 1)) * 102); cv.set(x, y, rgb(v, v, v)); }
+    const b = new CellBuffer(40, 2); cv.paint(b);
+    return b;
+  };
+  for (const mode of ['half', 'quad', 'sextant']) {
+    const b = field(mode, MONO_RAMP);
+    assert.deepEqual([...new Set(b.ch)].sort(), [...MONO_RAMP].sort(), `${mode}: every level of ${MONO_RAMP}`);
+    assert.ok(b.ch.indexOf('█') > b.ch.indexOf('░'), 'brighter → denser');
+    assert.ok(Array.from(b.fg).every((c) => c === NONE), 'mono cells use the default fg');
+  }
+  const a = field('ascii', ASCII_RAMP);
+  assert.ok(new Set(a.ch).size >= 8, `7-bit ramp uses ≥ 8 levels (got ${[...new Set(a.ch)].join('')})`);
+  assert.ok([...a.ch].every((c) => c.charCodeAt(0) < 0x7f));
+  // Day (light) background: ink is contrast against the background, so dark pixels are dense
+  const day = new Canvas(2, 1, { mode: 'half', mono: { ref: 0xf6f5f9 } });
+  day.set(0, 0, 0x111111); day.set(0, 1, 0x111111); day.set(1, 0, 0xeeeeee); day.set(1, 1, 0xeeeeee);
+  const db = new CellBuffer(2, 1); day.paint(db);
+  assert.equal(db.ch[0], '█'); assert.equal(db.ch[1], ' ');
+  // the hint: views and wrappers inherit the scene buffer's monoPaint
+  const root = new CellBuffer(4, 4); root.monoPaint = { ramp: MONO_RAMP, ref: NONE };
+  assert.equal(monoHint(root.view(1, 1, 2, 2).view(0, 0, 1, 1)), root.monoPaint);
+  assert.equal(monoHint(new CellBuffer(1, 1)), null);
+});
+
+test('canvas mono: shapes stay crisp (banners, bars), braille keeps its dots, transparent cells untouched', () => {
+  const cv = new Canvas(4, 1, { mode: 'half', mono: { ref: 0 } });
+  cv.set(0, 0, 0xffffff);                          // top only  → ▀
+  cv.set(1, 1, 0xffffff);                          // bottom    → ▄
+  cv.set(2, 0, 0xffffff); cv.set(2, 1, 0xffffff);  // both      → █
+  const b = new CellBuffer(4, 1); b.set(3, 0, 'x');
+  cv.paint(b);
+  assert.deepEqual(b.ch, ['▀', '▄', '█', 'x']);
+  const br = new Canvas(1, 1, { mode: 'braille', mono: { ref: 0 } });
+  assert.equal(br.mono, null, 'braille dots already carry the picture');
+  const plain = new Canvas(1, 1, { mode: 'half' });
+  plain.set(0, 0, 0xff0000); plain.set(0, 1, 0x0000ff);
+  const pb = new CellBuffer(1, 1); plain.paint(pb);
+  assert.equal(pb.ch[0], '▀', 'color depths are unchanged');
+});
+
+test('renderScene at mono: color fields shade with ░▒▓█ and snapshots carry no color', () => {
+  const caps = { depth: 'mono', unicode: true, braille: true, sextant: false };
+  const plasmaLike = { id: 't', setup: (ctx) => { const cv = ctx.canvas('field'); return (t) => { for (let y = 0; y < cv.height; y++) for (let x = 0; x < cv.width; x++) { const v = 128 + 127 * Math.sin(x / 3 + y / 5 + t); cv.set(x, y, rgb(v, v * 0.4, 255 - v)); } cv.paint(ctx.buffer); }; } };
+  const b = renderScene(plasmaLike, { width: 40, height: 10, t: 0.5, fps: 10, caps });
+  const half = b.ch.filter((c) => c === '▀' || c === '▄').length;
+  assert.ok(half / b.ch.length < 0.1, `not a wall of half blocks (${half})`);
+  assert.ok(new Set(b.ch.filter((c) => '░▒▓█'.includes(c))).size >= 3);
+  assert.ok(!b.toAnsi('mono').includes('\x1b'));
+  const seven = renderScene(plasmaLike, { width: 40, height: 10, t: 0.5, fps: 10, caps: { ...caps, unicode: false } });
+  assert.ok(new Set(seven.ch).size >= 8, '7-bit: a ≥ 8-level ASCII ramp');
+});
+
+// ── TUI hygiene: signals, suspend / resume, window title ────────────────
+test('screen: SIGHUP / SIGTERM / SIGINT exit 128 + signo and restore the terminal', () => {
+  const real = process.exit;
+  const codes = [];
+  try {
+    process.exit = (c) => { codes.push(c); };
+    for (const [sig, code] of [['SIGHUP', 129], ['SIGTERM', 143], ['SIGINT', 130]]) {
+      const out = fakeTTY({ columns: 20, rows: 4 });
+      const s = new Screen({ output: out, input: { isTTY: false }, caps: { ...TC, width: 20, height: 4 }, title: 'prism' });
+      s.start();
+      assert.match(out.output, /\x1b\]0;prism\x07/, 'title set');
+      process.emit(sig, sig);
+      assert.equal(codes.at(-1), code, sig);
+      assert.match(out.output, /\x1b\[\?1049l/, 'alt screen left');
+      assert.match(out.output, /\x1b\[\?25h$/, 'cursor shown last');
+    }
+  } finally { process.exit = real; }
+});
+
+test('screen: Ctrl-Z suspends (terminal handed back) and SIGCONT resumes with a full repaint', () => {
+  const out = fakeTTY({ columns: 10, rows: 3 });
+  const input = Object.assign(new (class extends EventEmitter {})(), { isTTY: true, raw: false, setRawMode(v) { this.raw = v; }, resume() {}, pause() {} });
+  const s = new Screen({ output: out, input, caps: { ...TC, width: 10, height: 3 } });
+  s.start();
+  s.buffer.text(0, 0, 'hello', 0xffffff);
+  s.render({ force: true });
+  assert.equal(input.raw, true);
+  s.title = 'prism';
+  s._pause();
+  assert.equal(input.raw, false, 'cooked mode for the shell');
+  assert.ok(out.output.endsWith('\x1b[23;0t'), "the user's title is back while suspended");
+  assert.match(out.output.slice(-60), /\x1b\[\?1049l.*\x1b\[\?25h/s, 'alt screen off, cursor shown');
+  assert.equal(s.render({ force: true }), false, 'no frames while suspended');
+  const before = out.output.length;
+  s._resume();
+  assert.equal(input.raw, true);
+  assert.match(out.output.slice(before), /\x1b\[\?1049h/);
+  assert.match(out.output.slice(before), /\x1b\[22;0t\x1b\]0;prism\x07/, 'pushed and set again: the stack stays balanced');
+  s.render({ force: true });
+  assert.match(out.output.slice(before), /hello/, 'everything repainted');
+  s.stop();
+});
+
+test('caps: the locale is the first non-empty of LC_ALL, LC_CTYPE, LANG (LC_ALL=C beats a UTF-8 LANG)', () => {
+  const tty = { isTTY: true, columns: 80, rows: 24 };
+  const u = (env) => detect({ stream: tty, env: { TERM: 'xterm-256color', ...env }, platform: 'linux' }).unicode;
+  assert.equal(u({ LC_ALL: 'C', LANG: 'en_US.UTF-8' }), false);
+  assert.equal(u({ LC_CTYPE: 'POSIX', LANG: 'en_US.UTF-8' }), false);
+  assert.equal(u({ LC_ALL: '', LC_CTYPE: 'en_US.UTF-8', LANG: 'C' }), true);
+  assert.equal(u({ LANG: 'C.UTF-8' }), true);
+  assert.equal(u({}), true, 'no locale at all: assume UTF-8');
 });

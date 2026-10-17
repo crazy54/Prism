@@ -6,6 +6,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
+import fs from 'node:fs';
+import os from 'node:os';
 import { spawn, spawnSync } from 'node:child_process';
 import { EventEmitter } from 'node:events';
 import { fileURLToPath } from 'node:url';
@@ -81,7 +83,7 @@ test('facetRecord: plain data with usage commands', () => {
   assert.deepEqual(JSON.parse(JSON.stringify(r)), r);
   assert.equal(r.usage.cli, 'prism-term play plasma');
   assert.match(r.usage.snapshot, /^prism-term snapshot plasma --size \d+x\d+$/);
-  assert.match(r.usage.npx, /^npx -y --package=https:\/\/prism\.jeremyfhall\.com\/dl\/prism-term\.tgz prism-term play plasma$/);
+  assert.match(r.usage.npx, /^npx -y --package=https:\/\/prism\.jeremyfhall\.com\/dl\/prism-term-\d+\.\d+\.\d+\.tgz prism-term play plasma$/, 'pinned to this release (SHA256SUMS)');
   assert.equal(r.usage.curl, 'curl -sL https://prism.jeremyfhall.com/f/plasma');
 });
 
@@ -136,7 +138,7 @@ test('info: human and --json', () => {
 
 test('errors: unknown facet, missing args, play without a TTY', () => {
   let r = cli('info', 'no-such-facet-zz');
-  assert.equal(r.code, 1);
+  assert.equal(r.code, 2, 'a usage error');
   assert.match(r.err, /^prism-term: unknown facet "no-such-facet-zz"/);
   r = cli('info');
   assert.match(r.err, /usage: prism-term info <id>/);
@@ -376,7 +378,8 @@ test('browse 140×40: three panes, search, help, gallery picker, play and back, 
 test('browse 80×24: two panes with a gallery switcher; resize to wide brings back three', async () => {
   const s = session({ w: 80, h: 24 });
   let scr = await s.screen(300);
-  assert.doesNotMatch(scr, /GALLERIES/);
+  // No galleries pane (the header's instrument line still counts them).
+  assert.doesNotMatch(scr.split('\n').slice(1).join('\n'), /GALLERIES/);
   assert.match(scr, /◀ FX Store · \d+ ▶/);
   for (const line of scr.split('\n')) assert.ok(line.length <= 80);
   assert.match(scr.split('\n').at(-1), /q quit/, 'key bar fits');
@@ -465,4 +468,85 @@ test('browse --gallery opens at that gallery', async () => {
   const g = GALLERIES.find((x) => x.id === 'loaders');
   if (allFacets().some((f) => f.gallery === 'loaders')) assert.match(scr, new RegExp(`${g.title.toUpperCase()} · \\d+`));
   assert.equal(await s.quit(), 'done');
+});
+
+// ── input validation, exit codes, spin, man page + completions ───────────
+test('usage errors exit 2 with a message that says what works; runtime errors exit 1', () => {
+  const cases = [
+    [['--dept', '16'], /unknown option --dept \(did you mean --depth\?\)/],
+    [['list', '--palette', 'nope'], /unknown palette "nope"/],
+    [['snapshot', 'plasma', '--set', 'nonsense=1'], /unknown parameter "nonsense"/],
+    [['snapshot', 'plasma', '--set', 'speed=fast'], /speed is a number/],
+    [['snapshot', 'plasma', '--set', 'speed'], /--set expects key=value/],
+    [['list', '--kind', 'bogus'], /unknown --kind "bogus"\. Kinds: /],
+    [['snapshot', 'plasma', '-o', 'frame.png'], /writes text, not images/],
+    [['snapshot', 'plasma', '--size', '99999x99999'], /out of range \(1x1 … 1000x500\)/],
+    [['snapshot', 'plasma', '--at', '1e9'], /--at expects a number from 0 to 600/],
+    [['snapshot', 'plasma', '--fps', '0'], /--fps expects a number/],
+    [['list', '--depth', 'lots'], /unknown --depth "lots"/],
+    [['list', '--mode', 'pixels'], /unknown --mode "pixels"/],
+    [['list', '--theme'], /--theme needs a value/],
+    [['theme', 'nope'], /unknown format "nope"/],
+    [['-x'], /unknown option -x/],
+  ];
+  for (const [args, msg] of cases) {
+    const r = cli(...args);
+    assert.equal(r.code, 2, `${args.join(' ')} → exit 2 (${r.err.trim()})`);
+    assert.match(r.err, msg, args.join(' '));
+  }
+  assert.equal(cli('play', 'plasma').code, 1, 'no TTY is a runtime failure');
+  const ok = cli('snapshot', 'plasma', '--size=20x4', '--mode', 'auto', '--set', 'speed=2');
+  assert.equal(ok.code, 0, ok.err);
+});
+
+test('snapshot -o .ans writes ANSI, -o .txt writes the shaded mono frame, -o= works', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'pt-snap-'));
+  try {
+    assert.equal(cli('snapshot', 'plasma', '--size', '30x6', `-o=${path.join(dir, 'p.ans')}`).code, 0);
+    assert.match(fs.readFileSync(path.join(dir, 'p.ans'), 'utf8'), /\x1b\[38;2;/);
+    assert.equal(cli('snapshot', 'plasma', '--size', '30x6', '-o', path.join(dir, 'p.txt')).code, 0);
+    const txt = fs.readFileSync(path.join(dir, 'p.txt'), 'utf8');
+    assert.doesNotMatch(txt, /\x1b/);
+    assert.ok([...txt].filter((c) => '░▒▓█'.includes(c)).length > 60, 'a luminance ramp, not half blocks');
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('spin: an argv reaches the program verbatim (no %VAR% expansion) and its stdout passes through', () => {
+  const r = spawnSync(process.execPath, [CLI, 'spin', '--', process.execPath, '-e', "console.log(process.argv.slice(1).join('|'))", '%PATH%', 'a b', '!x!', 'q"t'], { encoding: 'utf8', env: { ...process.env, NO_COLOR: '1' }, timeout: 60000 });
+  assert.equal(r.status, 0, r.stderr);
+  assert.equal(r.stdout, '%PATH%|a b|!x!|q"t\n');
+  const quiet = spawnSync(process.execPath, [CLI, 'spin', '--no-passthrough', '--', process.execPath, '-e', 'console.log(1)'], { encoding: 'utf8', env: { ...process.env, NO_COLOR: '1' }, timeout: 60000 });
+  assert.equal(quiet.stdout, '');
+  const fail = spawnSync(process.execPath, [CLI, 'spin', '--', process.execPath, '-e', 'process.exit(3)'], { encoding: 'utf8', env: { ...process.env, NO_COLOR: '1' }, timeout: 60000 });
+  assert.equal(fail.status, 3);
+});
+
+test('winQuote: cmd.exe metacharacters are caret-escaped (twice for .cmd / .bat targets)', async () => {
+  const { winQuote } = await import('../cli.js');
+  assert.equal(winQuote('%PATH%'), '^"^%PATH^%^"');
+  assert.equal(winQuote('a b'), '^"a^ b^"');
+  assert.equal(winQuote('q"t'), String.raw`^"q\^"t^"`);
+  assert.equal(winQuote('%X%', true), '^^^"^^^%X^^^%^^^"');
+});
+
+test('man page and bash / zsh / fish completions ship with the package and cover every command', () => {
+  const ROOT = path.dirname(CLI);
+  const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
+  assert.ok(pkg.files.includes('man/') && pkg.files.includes('completions/'));
+  assert.deepEqual(pkg.man, ['./man/prism-term.1']);
+  const man = fs.readFileSync(path.join(ROOT, 'man', 'prism-term.1'), 'utf8');
+  assert.ok(man.startsWith('.TH PRISM-TERM 1 ') && man.split('\n')[0].includes(`"prism-term ${pkg.version}"`), 'man page version = package version');
+  const commands = ['play', 'showcase', 'list', 'galleries', 'info', 'snapshot', 'banner', 'spin', 'spinners', 'dashboard', 'demo', 'caps', 'themes', 'theme', 'palettes', 'help'];
+  for (const c of commands) assert.ok(man.split('\n').some((l) => l.startsWith(`.B ${c}`) || l.startsWith(`.BI ${c}`) || l.startsWith(`.BI "${c}`)), `man: ${c}`);
+  assert.match(man, /EXIT STATUS[\s\S]*usage error[\s\S]*129 for SIGHUP/);
+  for (const f of ['prism-term.bash', '_prism-term', 'prism-term.fish']) {
+    const s = fs.readFileSync(path.join(ROOT, 'completions', f), 'utf8');
+    for (const c of commands) assert.ok(s.includes(c), `${f}: ${c}`);
+    assert.match(s, /list --ids|_ids list/, `${f}: facet ids come from prism-term`);
+  }
+  const bash = spawnSync('bash', ['-n', path.join(ROOT, 'completions', 'prism-term.bash')], { encoding: 'utf8' });
+  if (!bash.error) assert.equal(bash.status, 0, bash.stderr);
+  const ids = cli('list', '--ids');
+  assert.equal(ids.out.trim().split('\n').length, allFacets().length);
+  assert.ok(cli('theme', '--ids').out.split('\n').includes('osc'));
 });

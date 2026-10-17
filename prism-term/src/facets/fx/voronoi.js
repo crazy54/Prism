@@ -27,7 +27,9 @@ export default {
     const seeds = Array.from({ length: n }, () => ({ x: rand(), y: rand(), ax: 0.05 + rand() * 0.07, ay: 0.05 + rand() * 0.07, fa: 1 + Math.floor(rand() * 2), fb: 1 + Math.floor(rand() * 2), ph: rand() * 6.28, hue: rand() }));
     const sx = new Float32Array(n), sy = new Float32Array(n);
     const S = Math.sqrt((W * VH) / n);               // typical cell size
-    const edge = lerpc(0xffffff, ctx.theme.ink, 0.3), lead = lerpc(ctx.theme.bg, 0x000000, 0.4);
+    // The lead between the panes is dark in daylight too: stained glass, not frosted.
+    const edge = lerpc(0xffffff, ctx.theme.ink, 0.3);
+    const lead = ctx.theme.mode === 'light' ? lerpc(ctx.theme.ink, ctx.theme.bg, 0.2) : lerpc(ctx.theme.bg, 0x000000, 0.4);
     return (t) => {
       const u = (t / 24) * Math.PI * 2;
       for (let j = 0; j < n; j++) {

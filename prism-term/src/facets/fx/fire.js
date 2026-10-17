@@ -1,6 +1,10 @@
 // Old-school fire: each pixel averages the heat beneath it (drifting with a
 // gusting wind) minus a scrolling cooling map, which tears the rising heat into
 // tongues of flame; a flickering fuel bed feeds it and embers spiral off the top.
+// On light themes the flame burns in daylight: its cool edge melts into the page
+// instead of a soot-black band.
+import { mix } from '../../color.js';
+
 export default {
   title: 'Fire',
   gallery: 'fx',
@@ -14,6 +18,7 @@ export default {
   setup(ctx) {
     const cv = ctx.canvas();
     const pal = ctx.palette();
+    const day = ctx.theme.mode === 'light' && ctx.bg >= 0, paper = ctx.bg;
     const rand = ctx.rng;
     const { noise3 } = ctx.noise;
     const { width: W, height: H, px, aspect } = cv;
@@ -72,7 +77,7 @@ export default {
 
       for (let i = 0; i < W * H; i++) {
         const h = heat[i];
-        px[i] = h < 10 ? -1 : pal(h / 255);
+        px[i] = h < 10 ? -1 : day ? mix(paper, pal(0.36 + 0.64 * (h / 255)), Math.min(1, (h - 10) / 110)) : pal(h / 255);
       }
       for (let i = embers.length - 1; i >= 0; i--) {
         const e = embers[i];

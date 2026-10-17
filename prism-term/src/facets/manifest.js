@@ -34,202 +34,203 @@ import * as m31 from './objects/hourglass.js';
 import * as m32 from './objects/moon-phases.js';
 import * as m33 from './objects/newton-cradle.js';
 import * as m34 from './objects/prism-logo.js';
-import * as m35 from './objects/ringed-planet.js';
-import * as m36 from './objects/shaded-cube.js';
-import * as m37 from './objects/spinning-coin.js';
-import * as m38 from './objects/studio-sphere.js';
-import * as m39 from './objects/torus-knot.js';
-import * as m40 from './objects/twisty-cube.js';
-import * as m41 from './objects/wireframe.js';
-import * as m42 from './sim/boids.js';
-import * as m43 from './sim/bouncing-balls.js';
-import * as m44 from './sim/brians-brain.js';
-import * as m45 from './sim/double-pendulum.js';
-import * as m46 from './sim/falling-sand.js';
-import * as m47 from './sim/fireworks.js';
-import * as m48 from './sim/flowfield.js';
-import * as m49 from './sim/galaxy.js';
-import * as m50 from './sim/harmonograph.js';
-import * as m51 from './sim/langtons-ant.js';
-import * as m52 from './sim/life.js';
-import * as m53 from './sim/n-body.js';
-import * as m54 from './sim/rain.js';
-import * as m55 from './sim/reaction-diffusion.js';
-import * as m56 from './sim/slime-mold.js';
-import * as m57 from './sim/snow.js';
-import * as m58 from './sim/string-waves.js';
-import * as m59 from './sim/wireworld.js';
-import * as m60 from './retro/ansi-landscape.js';
-import * as m61 from './retro/ansi-logo.js';
-import * as m62 from './retro/bbs-login.js';
-import * as m63 from './retro/bbs-menu.js';
-import * as m64 from './retro/boing-ball.js';
-import * as m65 from './retro/checker-floor.js';
-import * as m66 from './retro/copper-bars.js';
-import * as m67 from './retro/cracktro.js';
-import * as m68 from './retro/dot-tunnel.js';
-import * as m69 from './retro/dycp-scroller.js';
-import * as m70 from './retro/kefrens-bars.js';
-import * as m71 from './retro/modem-connect.js';
-import * as m72 from './retro/neon-skyline.js';
-import * as m73 from './retro/oscilloscope.js';
-import * as m74 from './retro/outrun-road.js';
-import * as m75 from './retro/rotozoomer.js';
-import * as m76 from './retro/sine-scroller.js';
-import * as m77 from './retro/spectrum-analyzer.js';
-import * as m78 from './retro/starfield.js';
-import * as m79 from './retro/synthwave.js';
-import * as m80 from './retro/tracker-pattern.js';
-import * as m81 from './retro/twister.js';
-import * as m82 from './retro/vector-balls.js';
-import * as m83 from './retro/vu-meters.js';
-import * as m84 from './text/banner.js';
-import * as m85 from './text/banners.js';
-import * as m86 from './text/fonts.js';
-import * as m87 from './text/glitch.js';
-import * as m88 from './text/light.js';
-import * as m89 from './text/motion.js';
-import * as m90 from './text/reveal.js';
-import * as m91 from './text/textfx.js';
-import * as m92 from './loaders/bars.js';
-import * as m93 from './loaders/braille.js';
-import * as m94 from './loaders/classic.js';
-import * as m95 from './loaders/orbits.js';
-import * as m96 from './loaders/originals.js';
-import * as m97 from './loaders/truecolor.js';
-import * as m98 from './progress/bars.js';
-import * as m99 from './progress/counters.js';
-import * as m100 from './progress/pipelines.js';
-import * as m101 from './progress/timers.js';
-import * as m102 from './progress/transfers.js';
-import * as m103 from './charts/bars.js';
-import * as m104 from './charts/gauges.js';
-import * as m105 from './charts/heatmaps.js';
-import * as m106 from './charts/kpis.js';
-import * as m107 from './charts/lines.js';
-import * as m108 from './charts/sparklines.js';
-import * as m109 from './ai/approval-prompt.js';
-import * as m110 from './ai/attention-heatmap.js';
-import * as m111 from './ai/chat-transcript.js';
-import * as m112 from './ai/context-window.js';
-import * as m113 from './ai/diff-apply.js';
-import * as m114 from './ai/markdown-stream.js';
-import * as m115 from './ai/multi-agent-log.js';
-import * as m116 from './ai/parallel-tools.js';
-import * as m117 from './ai/reasoning-summary.js';
-import * as m118 from './ai/sampling-probs.js';
-import * as m119 from './ai/status-orb.js';
-import * as m120 from './ai/structured-output.js';
-import * as m121 from './ai/task-plan.js';
-import * as m122 from './ai/thinking-shimmer.js';
-import * as m123 from './ai/throughput-meter.js';
-import * as m124 from './ai/token-stream.js';
-import * as m125 from './ai/tool-calls.js';
-import * as m126 from './ai/typing-indicators.js';
-import * as m127 from './status/alerts.js';
-import * as m128 from './status/badges.js';
-import * as m129 from './status/health.js';
-import * as m130 from './status/lines.js';
-import * as m131 from './status/logs.js';
-import * as m132 from './ops/containers.js';
-import * as m133 from './ops/df.js';
-import * as m134 from './ops/htop.js';
-import * as m135 from './ops/iostat.js';
-import * as m136 from './ops/load-watch.js';
-import * as m137 from './ops/logs.js';
-import * as m138 from './ops/motd.js';
-import * as m139 from './ops/mtr.js';
-import * as m140 from './ops/ncdu.js';
-import * as m141 from './ops/net-commands.js';
-import * as m142 from './ops/nload.js';
-import * as m143 from './ops/nmon.js';
-import * as m144 from './ops/ping.js';
-import * as m145 from './ops/prompts.js';
-import * as m146 from './ops/sensors.js';
-import * as m147 from './ops/services.js';
-import * as m148 from './ops/top.js';
-import * as m149 from './ops/vmstat.js';
-import * as m150 from './ops/zpool.js';
-import * as m151 from './diagrams/architecture.js';
-import * as m152 from './diagrams/cluster-map.js';
-import * as m153 from './diagrams/dependency-tree.js';
-import * as m154 from './diagrams/file-tree.js';
-import * as m155 from './diagrams/flowchart.js';
-import * as m156 from './diagrams/gantt.js';
-import * as m157 from './diagrams/git-branches.js';
-import * as m158 from './diagrams/git-graph.js';
-import * as m159 from './diagrams/git-rebase.js';
-import * as m160 from './diagrams/network-topology.js';
-import * as m161 from './diagrams/org-chart.js';
-import * as m162 from './diagrams/pipeline.js';
-import * as m163 from './diagrams/sequence.js';
-import * as m164 from './diagrams/service-mesh.js';
-import * as m165 from './diagrams/state-machine.js';
-import * as m166 from './diagrams/timeline.js';
-import * as m167 from './callouts/admonitions.js';
-import * as m168 from './callouts/alert-banners.js';
-import * as m169 from './callouts/block-quote.js';
-import * as m170 from './callouts/border-styles.js';
-import * as m171 from './callouts/code-block.js';
-import * as m172 from './callouts/dividers.js';
-import * as m173 from './callouts/focus-panels.js';
-import * as m174 from './callouts/key-value.js';
-import * as m175 from './callouts/neofetch.js';
-import * as m176 from './callouts/section-headers.js';
-import * as m177 from './callouts/shadow-card.js';
-import * as m178 from './callouts/table-grid.js';
-import * as m179 from './callouts/table-sorted.js';
-import * as m180 from './callouts/table-zebra.js';
-import * as m181 from './callouts/titled-panels.js';
-import * as m182 from './input/autocomplete.js';
-import * as m183 from './input/command-palette.js';
-import * as m184 from './input/confirm-dialog.js';
-import * as m185 from './input/date-picker.js';
-import * as m186 from './input/fuzzy-finder.js';
-import * as m187 from './input/menu-bar.js';
-import * as m188 from './input/modeline.js';
-import * as m189 from './input/multiselect.js';
-import * as m190 from './input/number-stepper.js';
-import * as m191 from './input/password.js';
-import * as m192 from './input/progress-dialog.js';
-import * as m193 from './input/prompt-flow.js';
-import * as m194 from './input/radio-group.js';
-import * as m195 from './input/scroll-list.js';
-import * as m196 from './input/select.js';
-import * as m197 from './input/shortcut-bar.js';
-import * as m198 from './input/slash-commands.js';
-import * as m199 from './input/slider.js';
-import * as m200 from './input/tabs.js';
-import * as m201 from './input/text-field.js';
-import * as m202 from './input/textarea.js';
-import * as m203 from './input/toggles.js';
-import * as m204 from './input/wizard.js';
-import * as m205 from './maps/floor.js';
-import * as m206 from './maps/radar.js';
-import * as m207 from './maps/routes.js';
-import * as m208 from './maps/world.js';
-import * as m209 from './lab/bezier.js';
-import * as m210 from './lab/blinds.js';
-import * as m211 from './lab/bounce.js';
-import * as m212 from './lab/dissolve.js';
-import * as m213 from './lab/easing-gallery.js';
-import * as m214 from './lab/easing-race.js';
-import * as m215 from './lab/iris.js';
-import * as m216 from './lab/keyframes.js';
-import * as m217 from './lab/lfo-scope.js';
-import * as m218 from './lab/lissajous.js';
-import * as m219 from './lab/loading-choreo.js';
-import * as m220 from './lab/motion-blur.js';
-import * as m221 from './lab/pendulum-wave.js';
-import * as m222 from './lab/slide.js';
-import * as m223 from './lab/spring.js';
-import * as m224 from './lab/stagger.js';
-import * as m225 from './lab/wipe.js';
-import * as m226 from './ascii/animations.js';
-import * as m227 from './ascii/art.js';
-import * as m228 from './ascii/bars.js';
-import * as m229 from './ascii/classics.js';
-import * as m230 from './ascii/scenes.js';
+import * as m35 from './objects/refraction.js';
+import * as m36 from './objects/ringed-planet.js';
+import * as m37 from './objects/shaded-cube.js';
+import * as m38 from './objects/spinning-coin.js';
+import * as m39 from './objects/studio-sphere.js';
+import * as m40 from './objects/torus-knot.js';
+import * as m41 from './objects/twisty-cube.js';
+import * as m42 from './objects/wireframe.js';
+import * as m43 from './sim/boids.js';
+import * as m44 from './sim/bouncing-balls.js';
+import * as m45 from './sim/brians-brain.js';
+import * as m46 from './sim/double-pendulum.js';
+import * as m47 from './sim/falling-sand.js';
+import * as m48 from './sim/fireworks.js';
+import * as m49 from './sim/flowfield.js';
+import * as m50 from './sim/galaxy.js';
+import * as m51 from './sim/harmonograph.js';
+import * as m52 from './sim/langtons-ant.js';
+import * as m53 from './sim/life.js';
+import * as m54 from './sim/n-body.js';
+import * as m55 from './sim/rain.js';
+import * as m56 from './sim/reaction-diffusion.js';
+import * as m57 from './sim/slime-mold.js';
+import * as m58 from './sim/snow.js';
+import * as m59 from './sim/string-waves.js';
+import * as m60 from './sim/wireworld.js';
+import * as m61 from './retro/ansi-landscape.js';
+import * as m62 from './retro/ansi-logo.js';
+import * as m63 from './retro/bbs-login.js';
+import * as m64 from './retro/bbs-menu.js';
+import * as m65 from './retro/boing-ball.js';
+import * as m66 from './retro/checker-floor.js';
+import * as m67 from './retro/copper-bars.js';
+import * as m68 from './retro/cracktro.js';
+import * as m69 from './retro/dot-tunnel.js';
+import * as m70 from './retro/dycp-scroller.js';
+import * as m71 from './retro/kefrens-bars.js';
+import * as m72 from './retro/modem-connect.js';
+import * as m73 from './retro/neon-skyline.js';
+import * as m74 from './retro/oscilloscope.js';
+import * as m75 from './retro/outrun-road.js';
+import * as m76 from './retro/rotozoomer.js';
+import * as m77 from './retro/sine-scroller.js';
+import * as m78 from './retro/spectrum-analyzer.js';
+import * as m79 from './retro/starfield.js';
+import * as m80 from './retro/synthwave.js';
+import * as m81 from './retro/tracker-pattern.js';
+import * as m82 from './retro/twister.js';
+import * as m83 from './retro/vector-balls.js';
+import * as m84 from './retro/vu-meters.js';
+import * as m85 from './text/banner.js';
+import * as m86 from './text/banners.js';
+import * as m87 from './text/fonts.js';
+import * as m88 from './text/glitch.js';
+import * as m89 from './text/light.js';
+import * as m90 from './text/motion.js';
+import * as m91 from './text/reveal.js';
+import * as m92 from './text/textfx.js';
+import * as m93 from './loaders/bars.js';
+import * as m94 from './loaders/braille.js';
+import * as m95 from './loaders/classic.js';
+import * as m96 from './loaders/orbits.js';
+import * as m97 from './loaders/originals.js';
+import * as m98 from './loaders/truecolor.js';
+import * as m99 from './progress/bars.js';
+import * as m100 from './progress/counters.js';
+import * as m101 from './progress/pipelines.js';
+import * as m102 from './progress/timers.js';
+import * as m103 from './progress/transfers.js';
+import * as m104 from './charts/bars.js';
+import * as m105 from './charts/gauges.js';
+import * as m106 from './charts/heatmaps.js';
+import * as m107 from './charts/kpis.js';
+import * as m108 from './charts/lines.js';
+import * as m109 from './charts/sparklines.js';
+import * as m110 from './ai/approval-prompt.js';
+import * as m111 from './ai/attention-heatmap.js';
+import * as m112 from './ai/chat-transcript.js';
+import * as m113 from './ai/context-window.js';
+import * as m114 from './ai/diff-apply.js';
+import * as m115 from './ai/markdown-stream.js';
+import * as m116 from './ai/multi-agent-log.js';
+import * as m117 from './ai/parallel-tools.js';
+import * as m118 from './ai/reasoning-summary.js';
+import * as m119 from './ai/sampling-probs.js';
+import * as m120 from './ai/status-orb.js';
+import * as m121 from './ai/structured-output.js';
+import * as m122 from './ai/task-plan.js';
+import * as m123 from './ai/thinking-shimmer.js';
+import * as m124 from './ai/throughput-meter.js';
+import * as m125 from './ai/token-stream.js';
+import * as m126 from './ai/tool-calls.js';
+import * as m127 from './ai/typing-indicators.js';
+import * as m128 from './status/alerts.js';
+import * as m129 from './status/badges.js';
+import * as m130 from './status/health.js';
+import * as m131 from './status/lines.js';
+import * as m132 from './status/logs.js';
+import * as m133 from './ops/containers.js';
+import * as m134 from './ops/df.js';
+import * as m135 from './ops/htop.js';
+import * as m136 from './ops/iostat.js';
+import * as m137 from './ops/load-watch.js';
+import * as m138 from './ops/logs.js';
+import * as m139 from './ops/motd.js';
+import * as m140 from './ops/mtr.js';
+import * as m141 from './ops/ncdu.js';
+import * as m142 from './ops/net-commands.js';
+import * as m143 from './ops/nload.js';
+import * as m144 from './ops/nmon.js';
+import * as m145 from './ops/ping.js';
+import * as m146 from './ops/prompts.js';
+import * as m147 from './ops/sensors.js';
+import * as m148 from './ops/services.js';
+import * as m149 from './ops/top.js';
+import * as m150 from './ops/vmstat.js';
+import * as m151 from './ops/zpool.js';
+import * as m152 from './diagrams/architecture.js';
+import * as m153 from './diagrams/cluster-map.js';
+import * as m154 from './diagrams/dependency-tree.js';
+import * as m155 from './diagrams/file-tree.js';
+import * as m156 from './diagrams/flowchart.js';
+import * as m157 from './diagrams/gantt.js';
+import * as m158 from './diagrams/git-branches.js';
+import * as m159 from './diagrams/git-graph.js';
+import * as m160 from './diagrams/git-rebase.js';
+import * as m161 from './diagrams/network-topology.js';
+import * as m162 from './diagrams/org-chart.js';
+import * as m163 from './diagrams/pipeline.js';
+import * as m164 from './diagrams/sequence.js';
+import * as m165 from './diagrams/service-mesh.js';
+import * as m166 from './diagrams/state-machine.js';
+import * as m167 from './diagrams/timeline.js';
+import * as m168 from './callouts/admonitions.js';
+import * as m169 from './callouts/alert-banners.js';
+import * as m170 from './callouts/block-quote.js';
+import * as m171 from './callouts/border-styles.js';
+import * as m172 from './callouts/code-block.js';
+import * as m173 from './callouts/dividers.js';
+import * as m174 from './callouts/focus-panels.js';
+import * as m175 from './callouts/key-value.js';
+import * as m176 from './callouts/neofetch.js';
+import * as m177 from './callouts/section-headers.js';
+import * as m178 from './callouts/shadow-card.js';
+import * as m179 from './callouts/table-grid.js';
+import * as m180 from './callouts/table-sorted.js';
+import * as m181 from './callouts/table-zebra.js';
+import * as m182 from './callouts/titled-panels.js';
+import * as m183 from './input/autocomplete.js';
+import * as m184 from './input/command-palette.js';
+import * as m185 from './input/confirm-dialog.js';
+import * as m186 from './input/date-picker.js';
+import * as m187 from './input/fuzzy-finder.js';
+import * as m188 from './input/menu-bar.js';
+import * as m189 from './input/modeline.js';
+import * as m190 from './input/multiselect.js';
+import * as m191 from './input/number-stepper.js';
+import * as m192 from './input/password.js';
+import * as m193 from './input/progress-dialog.js';
+import * as m194 from './input/prompt-flow.js';
+import * as m195 from './input/radio-group.js';
+import * as m196 from './input/scroll-list.js';
+import * as m197 from './input/select.js';
+import * as m198 from './input/shortcut-bar.js';
+import * as m199 from './input/slash-commands.js';
+import * as m200 from './input/slider.js';
+import * as m201 from './input/tabs.js';
+import * as m202 from './input/text-field.js';
+import * as m203 from './input/textarea.js';
+import * as m204 from './input/toggles.js';
+import * as m205 from './input/wizard.js';
+import * as m206 from './maps/floor.js';
+import * as m207 from './maps/radar.js';
+import * as m208 from './maps/routes.js';
+import * as m209 from './maps/world.js';
+import * as m210 from './lab/bezier.js';
+import * as m211 from './lab/blinds.js';
+import * as m212 from './lab/bounce.js';
+import * as m213 from './lab/dissolve.js';
+import * as m214 from './lab/easing-gallery.js';
+import * as m215 from './lab/easing-race.js';
+import * as m216 from './lab/iris.js';
+import * as m217 from './lab/keyframes.js';
+import * as m218 from './lab/lfo-scope.js';
+import * as m219 from './lab/lissajous.js';
+import * as m220 from './lab/loading-choreo.js';
+import * as m221 from './lab/motion-blur.js';
+import * as m222 from './lab/pendulum-wave.js';
+import * as m223 from './lab/slide.js';
+import * as m224 from './lab/spring.js';
+import * as m225 from './lab/stagger.js';
+import * as m226 from './lab/wipe.js';
+import * as m227 from './ascii/animations.js';
+import * as m228 from './ascii/art.js';
+import * as m229 from './ascii/bars.js';
+import * as m230 from './ascii/classics.js';
+import * as m231 from './ascii/scenes.js';
 
 export const FACET_MODULES = [
   ['fx/aurora.js', m0],
@@ -267,200 +268,201 @@ export const FACET_MODULES = [
   ['objects/moon-phases.js', m32],
   ['objects/newton-cradle.js', m33],
   ['objects/prism-logo.js', m34],
-  ['objects/ringed-planet.js', m35],
-  ['objects/shaded-cube.js', m36],
-  ['objects/spinning-coin.js', m37],
-  ['objects/studio-sphere.js', m38],
-  ['objects/torus-knot.js', m39],
-  ['objects/twisty-cube.js', m40],
-  ['objects/wireframe.js', m41],
-  ['sim/boids.js', m42],
-  ['sim/bouncing-balls.js', m43],
-  ['sim/brians-brain.js', m44],
-  ['sim/double-pendulum.js', m45],
-  ['sim/falling-sand.js', m46],
-  ['sim/fireworks.js', m47],
-  ['sim/flowfield.js', m48],
-  ['sim/galaxy.js', m49],
-  ['sim/harmonograph.js', m50],
-  ['sim/langtons-ant.js', m51],
-  ['sim/life.js', m52],
-  ['sim/n-body.js', m53],
-  ['sim/rain.js', m54],
-  ['sim/reaction-diffusion.js', m55],
-  ['sim/slime-mold.js', m56],
-  ['sim/snow.js', m57],
-  ['sim/string-waves.js', m58],
-  ['sim/wireworld.js', m59],
-  ['retro/ansi-landscape.js', m60],
-  ['retro/ansi-logo.js', m61],
-  ['retro/bbs-login.js', m62],
-  ['retro/bbs-menu.js', m63],
-  ['retro/boing-ball.js', m64],
-  ['retro/checker-floor.js', m65],
-  ['retro/copper-bars.js', m66],
-  ['retro/cracktro.js', m67],
-  ['retro/dot-tunnel.js', m68],
-  ['retro/dycp-scroller.js', m69],
-  ['retro/kefrens-bars.js', m70],
-  ['retro/modem-connect.js', m71],
-  ['retro/neon-skyline.js', m72],
-  ['retro/oscilloscope.js', m73],
-  ['retro/outrun-road.js', m74],
-  ['retro/rotozoomer.js', m75],
-  ['retro/sine-scroller.js', m76],
-  ['retro/spectrum-analyzer.js', m77],
-  ['retro/starfield.js', m78],
-  ['retro/synthwave.js', m79],
-  ['retro/tracker-pattern.js', m80],
-  ['retro/twister.js', m81],
-  ['retro/vector-balls.js', m82],
-  ['retro/vu-meters.js', m83],
-  ['text/banner.js', m84],
-  ['text/banners.js', m85],
-  ['text/fonts.js', m86],
-  ['text/glitch.js', m87],
-  ['text/light.js', m88],
-  ['text/motion.js', m89],
-  ['text/reveal.js', m90],
-  ['text/textfx.js', m91],
-  ['loaders/bars.js', m92],
-  ['loaders/braille.js', m93],
-  ['loaders/classic.js', m94],
-  ['loaders/orbits.js', m95],
-  ['loaders/originals.js', m96],
-  ['loaders/truecolor.js', m97],
-  ['progress/bars.js', m98],
-  ['progress/counters.js', m99],
-  ['progress/pipelines.js', m100],
-  ['progress/timers.js', m101],
-  ['progress/transfers.js', m102],
-  ['charts/bars.js', m103],
-  ['charts/gauges.js', m104],
-  ['charts/heatmaps.js', m105],
-  ['charts/kpis.js', m106],
-  ['charts/lines.js', m107],
-  ['charts/sparklines.js', m108],
-  ['ai/approval-prompt.js', m109],
-  ['ai/attention-heatmap.js', m110],
-  ['ai/chat-transcript.js', m111],
-  ['ai/context-window.js', m112],
-  ['ai/diff-apply.js', m113],
-  ['ai/markdown-stream.js', m114],
-  ['ai/multi-agent-log.js', m115],
-  ['ai/parallel-tools.js', m116],
-  ['ai/reasoning-summary.js', m117],
-  ['ai/sampling-probs.js', m118],
-  ['ai/status-orb.js', m119],
-  ['ai/structured-output.js', m120],
-  ['ai/task-plan.js', m121],
-  ['ai/thinking-shimmer.js', m122],
-  ['ai/throughput-meter.js', m123],
-  ['ai/token-stream.js', m124],
-  ['ai/tool-calls.js', m125],
-  ['ai/typing-indicators.js', m126],
-  ['status/alerts.js', m127],
-  ['status/badges.js', m128],
-  ['status/health.js', m129],
-  ['status/lines.js', m130],
-  ['status/logs.js', m131],
-  ['ops/containers.js', m132],
-  ['ops/df.js', m133],
-  ['ops/htop.js', m134],
-  ['ops/iostat.js', m135],
-  ['ops/load-watch.js', m136],
-  ['ops/logs.js', m137],
-  ['ops/motd.js', m138],
-  ['ops/mtr.js', m139],
-  ['ops/ncdu.js', m140],
-  ['ops/net-commands.js', m141],
-  ['ops/nload.js', m142],
-  ['ops/nmon.js', m143],
-  ['ops/ping.js', m144],
-  ['ops/prompts.js', m145],
-  ['ops/sensors.js', m146],
-  ['ops/services.js', m147],
-  ['ops/top.js', m148],
-  ['ops/vmstat.js', m149],
-  ['ops/zpool.js', m150],
-  ['diagrams/architecture.js', m151],
-  ['diagrams/cluster-map.js', m152],
-  ['diagrams/dependency-tree.js', m153],
-  ['diagrams/file-tree.js', m154],
-  ['diagrams/flowchart.js', m155],
-  ['diagrams/gantt.js', m156],
-  ['diagrams/git-branches.js', m157],
-  ['diagrams/git-graph.js', m158],
-  ['diagrams/git-rebase.js', m159],
-  ['diagrams/network-topology.js', m160],
-  ['diagrams/org-chart.js', m161],
-  ['diagrams/pipeline.js', m162],
-  ['diagrams/sequence.js', m163],
-  ['diagrams/service-mesh.js', m164],
-  ['diagrams/state-machine.js', m165],
-  ['diagrams/timeline.js', m166],
-  ['callouts/admonitions.js', m167],
-  ['callouts/alert-banners.js', m168],
-  ['callouts/block-quote.js', m169],
-  ['callouts/border-styles.js', m170],
-  ['callouts/code-block.js', m171],
-  ['callouts/dividers.js', m172],
-  ['callouts/focus-panels.js', m173],
-  ['callouts/key-value.js', m174],
-  ['callouts/neofetch.js', m175],
-  ['callouts/section-headers.js', m176],
-  ['callouts/shadow-card.js', m177],
-  ['callouts/table-grid.js', m178],
-  ['callouts/table-sorted.js', m179],
-  ['callouts/table-zebra.js', m180],
-  ['callouts/titled-panels.js', m181],
-  ['input/autocomplete.js', m182],
-  ['input/command-palette.js', m183],
-  ['input/confirm-dialog.js', m184],
-  ['input/date-picker.js', m185],
-  ['input/fuzzy-finder.js', m186],
-  ['input/menu-bar.js', m187],
-  ['input/modeline.js', m188],
-  ['input/multiselect.js', m189],
-  ['input/number-stepper.js', m190],
-  ['input/password.js', m191],
-  ['input/progress-dialog.js', m192],
-  ['input/prompt-flow.js', m193],
-  ['input/radio-group.js', m194],
-  ['input/scroll-list.js', m195],
-  ['input/select.js', m196],
-  ['input/shortcut-bar.js', m197],
-  ['input/slash-commands.js', m198],
-  ['input/slider.js', m199],
-  ['input/tabs.js', m200],
-  ['input/text-field.js', m201],
-  ['input/textarea.js', m202],
-  ['input/toggles.js', m203],
-  ['input/wizard.js', m204],
-  ['maps/floor.js', m205],
-  ['maps/radar.js', m206],
-  ['maps/routes.js', m207],
-  ['maps/world.js', m208],
-  ['lab/bezier.js', m209],
-  ['lab/blinds.js', m210],
-  ['lab/bounce.js', m211],
-  ['lab/dissolve.js', m212],
-  ['lab/easing-gallery.js', m213],
-  ['lab/easing-race.js', m214],
-  ['lab/iris.js', m215],
-  ['lab/keyframes.js', m216],
-  ['lab/lfo-scope.js', m217],
-  ['lab/lissajous.js', m218],
-  ['lab/loading-choreo.js', m219],
-  ['lab/motion-blur.js', m220],
-  ['lab/pendulum-wave.js', m221],
-  ['lab/slide.js', m222],
-  ['lab/spring.js', m223],
-  ['lab/stagger.js', m224],
-  ['lab/wipe.js', m225],
-  ['ascii/animations.js', m226],
-  ['ascii/art.js', m227],
-  ['ascii/bars.js', m228],
-  ['ascii/classics.js', m229],
-  ['ascii/scenes.js', m230],
+  ['objects/refraction.js', m35],
+  ['objects/ringed-planet.js', m36],
+  ['objects/shaded-cube.js', m37],
+  ['objects/spinning-coin.js', m38],
+  ['objects/studio-sphere.js', m39],
+  ['objects/torus-knot.js', m40],
+  ['objects/twisty-cube.js', m41],
+  ['objects/wireframe.js', m42],
+  ['sim/boids.js', m43],
+  ['sim/bouncing-balls.js', m44],
+  ['sim/brians-brain.js', m45],
+  ['sim/double-pendulum.js', m46],
+  ['sim/falling-sand.js', m47],
+  ['sim/fireworks.js', m48],
+  ['sim/flowfield.js', m49],
+  ['sim/galaxy.js', m50],
+  ['sim/harmonograph.js', m51],
+  ['sim/langtons-ant.js', m52],
+  ['sim/life.js', m53],
+  ['sim/n-body.js', m54],
+  ['sim/rain.js', m55],
+  ['sim/reaction-diffusion.js', m56],
+  ['sim/slime-mold.js', m57],
+  ['sim/snow.js', m58],
+  ['sim/string-waves.js', m59],
+  ['sim/wireworld.js', m60],
+  ['retro/ansi-landscape.js', m61],
+  ['retro/ansi-logo.js', m62],
+  ['retro/bbs-login.js', m63],
+  ['retro/bbs-menu.js', m64],
+  ['retro/boing-ball.js', m65],
+  ['retro/checker-floor.js', m66],
+  ['retro/copper-bars.js', m67],
+  ['retro/cracktro.js', m68],
+  ['retro/dot-tunnel.js', m69],
+  ['retro/dycp-scroller.js', m70],
+  ['retro/kefrens-bars.js', m71],
+  ['retro/modem-connect.js', m72],
+  ['retro/neon-skyline.js', m73],
+  ['retro/oscilloscope.js', m74],
+  ['retro/outrun-road.js', m75],
+  ['retro/rotozoomer.js', m76],
+  ['retro/sine-scroller.js', m77],
+  ['retro/spectrum-analyzer.js', m78],
+  ['retro/starfield.js', m79],
+  ['retro/synthwave.js', m80],
+  ['retro/tracker-pattern.js', m81],
+  ['retro/twister.js', m82],
+  ['retro/vector-balls.js', m83],
+  ['retro/vu-meters.js', m84],
+  ['text/banner.js', m85],
+  ['text/banners.js', m86],
+  ['text/fonts.js', m87],
+  ['text/glitch.js', m88],
+  ['text/light.js', m89],
+  ['text/motion.js', m90],
+  ['text/reveal.js', m91],
+  ['text/textfx.js', m92],
+  ['loaders/bars.js', m93],
+  ['loaders/braille.js', m94],
+  ['loaders/classic.js', m95],
+  ['loaders/orbits.js', m96],
+  ['loaders/originals.js', m97],
+  ['loaders/truecolor.js', m98],
+  ['progress/bars.js', m99],
+  ['progress/counters.js', m100],
+  ['progress/pipelines.js', m101],
+  ['progress/timers.js', m102],
+  ['progress/transfers.js', m103],
+  ['charts/bars.js', m104],
+  ['charts/gauges.js', m105],
+  ['charts/heatmaps.js', m106],
+  ['charts/kpis.js', m107],
+  ['charts/lines.js', m108],
+  ['charts/sparklines.js', m109],
+  ['ai/approval-prompt.js', m110],
+  ['ai/attention-heatmap.js', m111],
+  ['ai/chat-transcript.js', m112],
+  ['ai/context-window.js', m113],
+  ['ai/diff-apply.js', m114],
+  ['ai/markdown-stream.js', m115],
+  ['ai/multi-agent-log.js', m116],
+  ['ai/parallel-tools.js', m117],
+  ['ai/reasoning-summary.js', m118],
+  ['ai/sampling-probs.js', m119],
+  ['ai/status-orb.js', m120],
+  ['ai/structured-output.js', m121],
+  ['ai/task-plan.js', m122],
+  ['ai/thinking-shimmer.js', m123],
+  ['ai/throughput-meter.js', m124],
+  ['ai/token-stream.js', m125],
+  ['ai/tool-calls.js', m126],
+  ['ai/typing-indicators.js', m127],
+  ['status/alerts.js', m128],
+  ['status/badges.js', m129],
+  ['status/health.js', m130],
+  ['status/lines.js', m131],
+  ['status/logs.js', m132],
+  ['ops/containers.js', m133],
+  ['ops/df.js', m134],
+  ['ops/htop.js', m135],
+  ['ops/iostat.js', m136],
+  ['ops/load-watch.js', m137],
+  ['ops/logs.js', m138],
+  ['ops/motd.js', m139],
+  ['ops/mtr.js', m140],
+  ['ops/ncdu.js', m141],
+  ['ops/net-commands.js', m142],
+  ['ops/nload.js', m143],
+  ['ops/nmon.js', m144],
+  ['ops/ping.js', m145],
+  ['ops/prompts.js', m146],
+  ['ops/sensors.js', m147],
+  ['ops/services.js', m148],
+  ['ops/top.js', m149],
+  ['ops/vmstat.js', m150],
+  ['ops/zpool.js', m151],
+  ['diagrams/architecture.js', m152],
+  ['diagrams/cluster-map.js', m153],
+  ['diagrams/dependency-tree.js', m154],
+  ['diagrams/file-tree.js', m155],
+  ['diagrams/flowchart.js', m156],
+  ['diagrams/gantt.js', m157],
+  ['diagrams/git-branches.js', m158],
+  ['diagrams/git-graph.js', m159],
+  ['diagrams/git-rebase.js', m160],
+  ['diagrams/network-topology.js', m161],
+  ['diagrams/org-chart.js', m162],
+  ['diagrams/pipeline.js', m163],
+  ['diagrams/sequence.js', m164],
+  ['diagrams/service-mesh.js', m165],
+  ['diagrams/state-machine.js', m166],
+  ['diagrams/timeline.js', m167],
+  ['callouts/admonitions.js', m168],
+  ['callouts/alert-banners.js', m169],
+  ['callouts/block-quote.js', m170],
+  ['callouts/border-styles.js', m171],
+  ['callouts/code-block.js', m172],
+  ['callouts/dividers.js', m173],
+  ['callouts/focus-panels.js', m174],
+  ['callouts/key-value.js', m175],
+  ['callouts/neofetch.js', m176],
+  ['callouts/section-headers.js', m177],
+  ['callouts/shadow-card.js', m178],
+  ['callouts/table-grid.js', m179],
+  ['callouts/table-sorted.js', m180],
+  ['callouts/table-zebra.js', m181],
+  ['callouts/titled-panels.js', m182],
+  ['input/autocomplete.js', m183],
+  ['input/command-palette.js', m184],
+  ['input/confirm-dialog.js', m185],
+  ['input/date-picker.js', m186],
+  ['input/fuzzy-finder.js', m187],
+  ['input/menu-bar.js', m188],
+  ['input/modeline.js', m189],
+  ['input/multiselect.js', m190],
+  ['input/number-stepper.js', m191],
+  ['input/password.js', m192],
+  ['input/progress-dialog.js', m193],
+  ['input/prompt-flow.js', m194],
+  ['input/radio-group.js', m195],
+  ['input/scroll-list.js', m196],
+  ['input/select.js', m197],
+  ['input/shortcut-bar.js', m198],
+  ['input/slash-commands.js', m199],
+  ['input/slider.js', m200],
+  ['input/tabs.js', m201],
+  ['input/text-field.js', m202],
+  ['input/textarea.js', m203],
+  ['input/toggles.js', m204],
+  ['input/wizard.js', m205],
+  ['maps/floor.js', m206],
+  ['maps/radar.js', m207],
+  ['maps/routes.js', m208],
+  ['maps/world.js', m209],
+  ['lab/bezier.js', m210],
+  ['lab/blinds.js', m211],
+  ['lab/bounce.js', m212],
+  ['lab/dissolve.js', m213],
+  ['lab/easing-gallery.js', m214],
+  ['lab/easing-race.js', m215],
+  ['lab/iris.js', m216],
+  ['lab/keyframes.js', m217],
+  ['lab/lfo-scope.js', m218],
+  ['lab/lissajous.js', m219],
+  ['lab/loading-choreo.js', m220],
+  ['lab/motion-blur.js', m221],
+  ['lab/pendulum-wave.js', m222],
+  ['lab/slide.js', m223],
+  ['lab/spring.js', m224],
+  ['lab/stagger.js', m225],
+  ['lab/wipe.js', m226],
+  ['ascii/animations.js', m227],
+  ['ascii/art.js', m228],
+  ['ascii/bars.js', m229],
+  ['ascii/classics.js', m230],
+  ['ascii/scenes.js', m231],
 ];

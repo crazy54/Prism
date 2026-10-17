@@ -1,7 +1,7 @@
 // Amiga copper bars: glossy horizontal bars swing past each other in depth,
 // each a vertical gradient with a white-hot center line — the copper chip's
 // party trick, now in a terminal.
-import { lerpc } from './_kit.js';
+import { lerpc, shade, ground } from './_kit.js';
 
 export default {
   title: 'Copper Bars',
@@ -28,10 +28,10 @@ export default {
     const { width: W, height: H, px } = cv;
     const r = Math.max(2, H / 14);
     const bars = Array.from({ length: n }, (_, i) => ({ phase: (i / n) * Math.PI * 2, color: pal(i / n) }));
-    const bg = ctx.theme.bg;
+    const bg = ctx.theme.bg, base = ground(ctx.theme);
     return (t) => {
       const tt = t * speed;
-      for (let y = 0; y < H; y++) px.fill(lerpc(bg, 0x000000, 0.35 * Math.abs(y / H - 0.5) * 2), y * W, (y + 1) * W);
+      for (let y = 0; y < H; y++) px.fill(shade(ctx.theme, 0.35 * Math.abs(y / H - 0.5) * 2), y * W, (y + 1) * W);
       const live = bars.map((b) => {
         const a = tt * 1.4 + b.phase;
         return { y: H / 2 + Math.sin(a) * (H / 2 - r - 1) * 0.92, z: Math.cos(a), color: b.color };
@@ -43,7 +43,7 @@ export default {
           const d = Math.abs(y + 0.5 - b.y) / rr;
           if (d > 1) continue;
           const k = 1 - d;
-          let c = lerpc(0x000000, b.color, Math.min(1, k * 1.6) * depth);
+          let c = lerpc(base, b.color, Math.min(1, k * 1.6) * depth);
           if (k > 0.72) c = lerpc(c, 0xffffff, (k - 0.72) / 0.28 * 0.85 * depth);
           px.fill(c, y * W, (y + 1) * W);
         }

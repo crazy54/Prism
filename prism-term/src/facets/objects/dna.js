@@ -4,6 +4,7 @@
 // the near strand reads in front of the far one even at braille resolution.
 import { rotate, projector } from '../../math3d.js';
 import { mix, NONE } from '../../color.js';
+import { fadeMark } from '../../palettes.js';
 
 export default {
   title: 'DNA Helix',
@@ -36,7 +37,7 @@ export default {
     const bg = ctx.bg === NONE ? 0 : ctx.bg;
     const motes = Array.from({ length: Math.round(W * H * 0.0006) + 8 }, () => ({ x: rand() * W, y: rand() * H, v: 0.5 + rand(), p: rand() * 6.28 }));
 
-    const shade = (c, k) => mix(bg, c, k);
+    const shade = (c, k) => (bg === ctx.bg ? fadeMark(th, c, k) : mix(bg, c, k));
     return (t, dt) => {
       const spin = t * 0.9 * speed;
       const ay = 0.3 * Math.sin(t * 0.21), az = 0.16 * Math.sin(t * 0.13 + 1), ax = 0.25 * Math.sin(t * 0.17);

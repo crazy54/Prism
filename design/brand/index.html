@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" data-theme="prism-dark" data-rf-mode="night">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prism · The mark</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="../prism.css">
+<link rel="stylesheet" href="prism-mark.css">
+<style>
+*{box-sizing:border-box}body{margin:0;background:var(--rf-bg-deep);color:var(--ink);font:14px/1.6 var(--font);-webkit-font-smoothing:antialiased}
+.eyebrow{margin:0;font:600 10px/1.2 var(--rf-mono);letter-spacing:.15em;color:var(--accent)}
+h1{font-size:56px;line-height:1.05;letter-spacing:-.055em;font-weight:600;margin:16px 0 12px}
+h1 span{background:var(--rf-spectrum-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:24px;letter-spacing:-.03em;font-weight:600;margin:10px 0 6px}
+p.lede{max-width:600px;color:var(--muted);margin:0;line-height:1.75}
+section{padding:56px 64px;border-top:1px solid var(--line)}
+.night{background:#0a0c12;color:#f0f0f5}.day{background:#f6f5f9;color:#20202e}
+.hero{position:relative;display:grid;grid-template-columns:1fr 1.1fr;align-items:center;min-height:560px;overflow:hidden;background:#0a0c12;border:0}
+.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--rf-grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--rf-grid-line) 1px,transparent 1px);background-size:34px 34px;-webkit-mask-image:radial-gradient(ellipse 40% 50% at 70% 50%,#000,transparent 75%);mask-image:radial-gradient(ellipse 40% 50% at 70% 50%,#000,transparent 75%)}
+.stage{position:relative;height:480px}
+.stage .prism-mark{position:absolute;left:calc(50% - 130px);top:calc(50% - 150px);--pm:260px}
+.beam-in{position:absolute;left:-40%;right:50%;top:calc(50% + 20px);height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6) 40%,#fff);box-shadow:0 0 10px rgba(205,190,255,.55)}
+.rays{position:absolute;left:calc(50% + 52px);top:calc(50% + 20px);width:0;height:0}
+.rays i{position:absolute;left:0;top:0;width:620px;height:1px;transform-origin:0 50%;background:linear-gradient(90deg,#fff,var(--c) 6%,transparent 90%);opacity:.75}
+.rays i:after{content:"";position:absolute;left:0;right:0;top:-6px;height:13px;filter:blur(5px);opacity:.35;background:linear-gradient(90deg,transparent,var(--c) 8%,transparent 70%)}
+.label{position:absolute;bottom:22px;left:0;right:0;text-align:center;font:600 9px var(--rf-mono);letter-spacing:.15em;color:var(--rf-faint)}
+.row{display:flex;gap:36px;align-items:flex-end;flex-wrap:wrap}
+.row figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:10px}
+figcaption{font:10.5px var(--rf-mono);color:var(--dim)}
+.tb{display:flex;align-items:center;gap:10px;height:56px;padding:0 20px;border:1px solid var(--line);border-radius:12px;width:max-content;margin-top:18px}
+.night .tb{background:rgba(10,12,18,.78);border-color:#1d202b}.day .tb{background:rgba(255,255,255,.8);border-color:#e3e1ec}
+.tb b{font-size:21px;font-weight:600;letter-spacing:-.045em}.tb b i{font-style:normal;color:#b8a2f2}.day .tb b i{color:#7353bb}
+.split{display:grid;grid-template-columns:1fr 1fr;padding:0;border-top:1px solid var(--line)}
+.split>div{padding:44px 64px}
+.chk{background:repeating-conic-gradient(#ffffff08 0 25%,transparent 0 50%) 0 0/16px 16px}
+pre{font:12px/1.75 var(--rf-mono);color:var(--rf-code-ink);background:var(--rf-code-bg);border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;margin:14px 0 0}
+.note{color:var(--muted);font-size:13px;max-width:760px}
+.loading{display:grid;place-items:center;height:300px;border:1px solid #1d202b;border-radius:16px;background:radial-gradient(ellipse at 50% 60%,rgba(145,119,242,.12),transparent 60%),#0a0c12;position:relative;overflow:hidden}
+.loading .bar{position:absolute;left:50%;bottom:58px;width:160px;margin-left:-80px;height:1px;background:#252834;overflow:hidden}
+.loading .bar:after{content:"";position:absolute;inset:0;width:40%;background:linear-gradient(90deg,transparent,#fff,transparent);animation:ld 1.4s cubic-bezier(.65,0,.35,1) infinite}
+@keyframes ld{from{transform:translateX(-100%)}to{transform:translateX(250%)}}
+@media (prefers-reduced-motion:reduce){.loading .bar:after{animation:none;opacity:.5}}
+</style>
+</head>
+<body>
+<section class="hero">
+  <div style="position:relative;z-index:1">
+    <p class="eyebrow">FIG. 003 / IDENTITY · THE GLASS PYRAMID</p>
+    <h1>One beam.<br>Every <span>color</span> of it.</h1>
+    <p class="lede">The website's prism, elevated: a true square pyramid of clear glass that turns slowly in its own light. A key light sits up-left; each face shades as it turns, each edge throws a specular glint as it crosses the light, and the apex holds a point of white. CSS only — transform and opacity on the compositor — from a 20px top-bar mark to a hero or loading screen.</p>
+  </div>
+  <div class="stage">
+    <i class="beam-in"></i>
+    <span data-pm="260" data-cls="is-hero"></span>
+    <div class="rays"></div>
+    <p class="label">ONE SOURCE · <span style="color:#b8a2f2">ENDLESS EXPRESSIONS</span></p>
+  </div>
+</section>
+
+<section class="night">
+  <p class="eyebrow">01 / ANIMATED MARK · prism-mark.css</p>
+  <h2>In the top bar, turning in its own light</h2>
+  <div class="row" style="margin-top:22px">
+    <figure><span data-pm="20" data-cls="is-small"></span><figcaption>20</figcaption></figure>
+    <figure><span data-pm="24" data-cls="is-small"></span><figcaption>24</figcaption></figure>
+    <figure><span data-pm="28"></span><figcaption>28</figcaption></figure>
+    <figure><span data-pm="32"></span><figcaption>32</figcaption></figure>
+    <figure><span data-pm="40"></span><figcaption>40</figcaption></figure>
+    <figure><span data-pm="72"></span><figcaption>72</figcaption></figure>
+    <figure><span data-pm="140" data-cls="is-hero"></span><figcaption>140 · is-hero</figcaption></figure>
+  </div>
+  <div class="tb"><span data-pm="26" data-cls="is-small"></span><b>prism<i>.</i></b></div>
+</section>
+<section class="day" data-rf-mode="day">
+  <p class="eyebrow" style="color:#7353bb">02 / DAY · the same glass on pearl</p>
+  <div class="row" style="margin-top:22px">
+    <figure><span data-pm="20" data-cls="is-small is-day"></span><figcaption>20</figcaption></figure>
+    <figure><span data-pm="24" data-cls="is-small is-day"></span><figcaption>24</figcaption></figure>
+    <figure><span data-pm="32" data-cls="is-day"></span><figcaption>32</figcaption></figure>
+    <figure><span data-pm="72" data-cls="is-day"></span><figcaption>72</figcaption></figure>
+    <figure><span data-pm="140" data-cls="is-hero is-day"></span><figcaption>140 · is-hero</figcaption></figure>
+  </div>
+  <div class="tb"><span data-pm="26" data-cls="is-small is-day"></span><b>prism<i>.</i></b></div>
+</section>
+
+<div class="split">
+  <div class="night"><p class="eyebrow">03 / STATIC MARKS · prism-mark.svg · prism-mark-mono.svg</p>
+    <div class="row" style="margin-top:22px"><img src="prism-mark.svg" width="128" alt=""><img src="prism-mark.svg" width="64" alt=""><img src="prism-mark.svg" width="32" alt=""><img src="prism-mark.svg" width="20" alt=""><img src="prism-mark.svg" width="16" alt=""><span style="color:#b8a2f2"><img src="prism-mark-mono.svg" width="40" alt="" style="filter:none"></span></div>
+    <div style="margin-top:34px"><img src="prism-lockup.svg" height="64" alt="prism."></div>
+    <div style="margin-top:18px"><img src="prism-lockup.svg" height="28" alt="prism."></div>
+  </div>
+  <div class="day"><p class="eyebrow" style="color:#7353bb">prism-mark-day.svg · prism-lockup-day.svg</p>
+    <div class="row" style="margin-top:22px"><img src="prism-mark-day.svg" width="128" alt=""><img src="prism-mark-day.svg" width="64" alt=""><img src="prism-mark-day.svg" width="32" alt=""><img src="prism-mark-day.svg" width="20" alt=""><img src="prism-mark-day.svg" width="16" alt=""></div>
+    <div style="margin-top:34px"><img src="prism-lockup-day.svg" height="64" alt="prism."></div>
+    <div style="margin-top:18px"><img src="prism-lockup-day.svg" height="28" alt="prism."></div>
+  </div>
+</div>
+
+<section class="night">
+  <p class="eyebrow">04 / ICONS · favicon.svg (follows the tab strip's color scheme) · favicon-32/16.png · apple-touch-icon.png · prism-icon-512.png</p>
+  <div class="row" style="margin-top:22px">
+    <figure class="chk"><img src="prism-icon-512.png" width="160" alt=""><figcaption>512</figcaption></figure>
+    <figure class="chk"><img src="apple-touch-icon.png" width="90" alt=""><figcaption>180 @ 90</figcaption></figure>
+    <figure class="chk"><img src="favicon-32.png" width="32" alt=""><figcaption>32</figcaption></figure>
+    <figure class="chk"><img src="favicon-16.png" width="16" alt=""><figcaption>16</figcaption></figure>
+    <figure><img src="favicon.svg" width="32" alt=""><figcaption>svg · dark tab</figcaption></figure>
+    <figure style="background:#dee1e6;padding:6px;border-radius:6px"><img src="favicon.svg" width="32" alt=""><figcaption style="color:#555">svg · light tab</figcaption></figure>
+  </div>
+</section>
+
+<section class="night">
+  <p class="eyebrow">05 / LOADING · the hero mark alone, with a beam for progress</p>
+  <div class="loading" style="margin-top:18px"><span data-pm="150" data-cls="is-hero"></span><i class="bar"></i></div>
+</section>
+
+<section class="night">
+  <p class="eyebrow">06 / USAGE</p>
+  <h2>Drop-in, CSS only</h2>
+<pre>&lt;link rel="stylesheet" href="prism-mark.css"&gt;      &lt;!-- inline it in Prism.html --&gt;
+
+&lt;span class="prism-mark" style="--pm:24px" aria-hidden="true"&gt;
+  &lt;span class="pm-rotor"&gt;
+    &lt;span class="pm-face"&gt;&lt;i class="pm-rim"&gt;&lt;/i&gt;&lt;svg viewBox="0 0 100 100" preserveAspectRatio="none"&gt;&lt;path d="M0 100 50 0M0 100h100"/&gt;&lt;/svg&gt;&lt;/span&gt;
+    &lt;!-- …the same .pm-face three more times… --&gt;
+    &lt;i class="pm-apex"&gt;&lt;/i&gt;
+  &lt;/span&gt;
+&lt;/span&gt;
+
+--pm          box size (20–40px top bar · 120–320px hero/loading)
+--pm-turn     seconds per revolution (16s; is-hero 22s)
+.is-small     ≤ 24px: 1px edges      .is-hero   pool light + four-point apex star
+.is-day       Day palette (also automatic under [data-rf-mode="day"] / [data-theme="prism-light"])
+.is-still     pause (e.g. when the tab is hidden)      prefers-reduced-motion: rests at a 3/4 view</pre>
+  <p class="note" style="margin-top:16px">Clear space: half the mark's width on every side of the lockup. Minimum sizes: animated 20px, static 16px (favicon art below 20px). The mark is always clear glass: never fill it solid, recolor it outside the spectrum, or rotate it off its vertical axis. The lockup is Inter Bold outlines tracked −0.045em, matching the site; the dot is the accent.</p>
+</section>
+<script>
+/* expand <span data-pm> placeholders into the four-face mark (keeps this sheet short) */
+var FACE='<span class="pm-face"><i class="pm-rim"></i><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 50 0M0 100h100"/></svg></span>';
+document.querySelectorAll('[data-pm]').forEach(function(s){
+  var m=document.createElement('span');m.className='prism-mark '+(s.dataset.cls||'');m.style.setProperty('--pm',s.dataset.pm+'px');m.setAttribute('aria-hidden','true');
+  m.innerHTML='<span class="pm-rotor">'+FACE+FACE+FACE+FACE+'<i class="pm-apex"></i></span>';s.replaceWith(m);
+});
+var rays=document.querySelector('.rays'),C=['#ab91eb','#839ef4','#52acee','#00c3be','#94d582','#ebc059','#ec8398'];
+C.forEach(function(c,i){var r=document.createElement('i');r.style.setProperty('--c',c);r.style.transform='rotate('+(25-i*5.5)+'deg)';/* physically true: violet bends most → bottom */rays.appendChild(r);});
+</script>
+</body>
+</html>

@@ -4,6 +4,7 @@
 // trio and gets slung about chaotically by it — some captured, some flung
 // clear — so the stable dance and the chaos sit side by side.
 import { mix } from '../../color.js';
+import { fadeMark } from '../../palettes.js';
 
 const H_STEP = 0.0025, RATE = 1; // integrator step (sim units), sim seconds per second
 const RUN = 30, DUST = 14;
@@ -83,7 +84,7 @@ export default {
       for (const d of D) {
         for (let i = 1; i < d.tr.length; i++) {
           const [x0, y0] = P(...d.tr[i - 1]), [x1, y1] = P(...d.tr[i]);
-          if (Math.abs(x1 - x0) < W / 3) cv.line(x0, y0, x1, y1, mix(th.bg, dustCol, 0.15 + 0.5 * (i / d.tr.length)));
+          if (Math.abs(x1 - x0) < W / 3) cv.line(x0, y0, x1, y1, fadeMark(th, dustCol, 0.15 + 0.5 * (i / d.tr.length)));
         }
         const [x, y] = P(d.x, d.y);
         cv.set(x, y, dustCol);
@@ -91,7 +92,7 @@ export default {
       trails.forEach((tr, k) => {
         for (let i = 1; i < tr.length; i++) {
           const [x0, y0] = P(...tr[i - 1]), [x1, y1] = P(...tr[i]);
-          cv.line(x0, y0, x1, y1, mix(th.bg, bodyCol[k], 0.2 + 0.8 * (i / tr.length)));
+          cv.line(x0, y0, x1, y1, fadeMark(th, bodyCol[k], 0.2 + 0.8 * (i / tr.length)));
         }
       });
       B.forEach((b, k) => { const [x, y] = P(b.x, b.y); cv.circle(x, y, Math.max(1.2, scale * 0.09), bodyCol[k], true); });

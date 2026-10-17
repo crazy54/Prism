@@ -2,7 +2,8 @@
 // walls and a wandering predator that hunts the flock's center while every
 // boid within sight scatters. Boids are little oriented arrowheads colored by
 // heading, dragging short fading wakes; the predator is larger and red.
-import { mix, NONE } from '../../color.js';
+import { NONE } from '../../color.js';
+import { fadeMark } from '../../palettes.js';
 
 export default {
   title: 'Boids',
@@ -13,7 +14,7 @@ export default {
   order: 30,
   description: 'Reynolds flocking (separation, alignment, cohesion) with a hunting predator — oriented arrowheads with fading wakes.',
   canvas: 'line',
-  palette: 'candy',
+  palette: 'prism',
   setup(ctx) {
     const trail = ctx.canvas();
     const view = ctx.canvas();
@@ -108,9 +109,9 @@ export default {
         X[i] = Math.min(W - 0.5, Math.max(0, X[i] + VX[i] * dt));
         Y[i] = Math.min(Hv - 0.5, Math.max(0, Y[i] + VY[i] * dt));
         const hue = Math.atan2(VY[i], VX[i]) / (Math.PI * 2) + 0.5;
-        trail.line(ox, oy / aspect, X[i], Y[i] / aspect, mix(bg, pal(hue), 0.45));
+        trail.line(ox, oy / aspect, X[i], Y[i] / aspect, fadeMark(th, pal(hue), 0.45));
       }
-      trail.line(pox, poy / aspect, pred.x, pred.y / aspect, mix(bg, th.neg, 0.6));
+      trail.line(pox, poy / aspect, pred.x, pred.y / aspect, fadeMark(th, th.neg, 0.6));
       view.px.set(tp);
       for (let i = 0; i < N; i++) arrow(X[i], Y[i], VX[i], VY[i], size, pal(Math.atan2(VY[i], VX[i]) / (Math.PI * 2) + 0.5));
       arrow(pred.x, pred.y, pred.vx, pred.vy, size * 2.1, th.neg);

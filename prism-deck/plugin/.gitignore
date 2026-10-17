@@ -1,0 +1,5 @@
+# Build outputs (node scripts/build-plugin.mjs, node scripts/build-iconpacks.mjs): reproducible, and the
+# .sdPlugin folder holds a copy of the engine. Remove these lines to commit release artifacts.
+/com.jeremyfhall.prism.sdPlugin/
+/dist/
+/.smoke-control.json

@@ -34,6 +34,9 @@ export function C(ctx) {
   const t = ctx.theme;
   return {
     fg: t.ink, muted: t.muted, dim: t.dim, line: t.line, bg: ctx.bg, panel: t.panel, panel2: t.panel2,
+    // text ON a colored fill (status bars, selections): the theme's own background color, also
+    // with --transparent (where bg is the terminal default and would vanish on the fill)
+    onFill: t.bg,
     green: t.pos, red: t.neg, yellow: t.warn, blue: t.info, magenta: t.crit, accent: t.accent,
     cyan: mix(t.info, t.pos, 0.45), orange: mix(t.warn, t.neg, 0.4),
   };

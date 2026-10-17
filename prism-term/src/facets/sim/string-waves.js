@@ -6,6 +6,7 @@
 // and a dotted envelope traces each string's recent swing — the blur your eye
 // sees on a real vibrating string, which single frames would otherwise miss.
 import { mix } from '../../color.js';
+import { fadeMark } from '../../palettes.js';
 
 const STRINGS = 6, N = 72, HZ = 900;
 const PLUCK = 0.5; // seconds between plucks
@@ -77,7 +78,7 @@ export default {
         const base = gap * (k + 0.5), amp = gap * 0.9;
         const glow = Math.min(1, energy[k] * 4);
         const col = mix(mix(th.bg, th.muted, 0.85), cols[k], glow);
-        const haze = mix(th.bg, cols[k], 0.25 + 0.45 * glow);
+        const haze = fadeMark(th, cols[k], 0.25 + 0.45 * glow);
         const Y = y[k], E = env[k];
         let px = x0, py = base;
         for (let s = 1; s <= Math.ceil(x1 - x0); s++) {

@@ -30,7 +30,11 @@ export default {
     const src = Array.from({ length: n }, (_, i) => ({ a: 1 + (i % 3), b: 2 + ((i + 1) % 2), ph: i * 2.1, r: 0.22 + 0.06 * i }));
     const pos = new Float32Array(n * 2);
     const omega = (Math.PI * 2) / 1.25;   // a crest every 1.25 s
-    const node = lerpc(ctx.theme.bg, pal(0), 0.5);
+    // Night: crests glow out of shadowed nodal lines. Day: the nodes are the page and
+    // the waves are drawn in the palette's ink range (no washed-out whites).
+    const day = ctx.theme.mode === 'light';
+    const node = day ? ctx.theme.bg : lerpc(ctx.theme.bg, pal(0), 0.5);
+    const spot = day ? ctx.theme.accent : 0xffffff;
     return (t) => {
       const u = (t / 20) * Math.PI * 2;
       src.forEach((s, i) => {
@@ -50,11 +54,11 @@ export default {
           v /= n;
           // Amplitude picks the color; near-zero (the nodal lines) falls into shadow.
           const a = Math.abs(v);
-          px[i] = lerpc(node, pal(0.5 + v * 0.55), Math.min(1, a * 2.4));
+          px[i] = lerpc(node, pal(day ? 0.45 + v * 0.3 : 0.5 + v * 0.55), Math.min(1, a * 2.4));
         }
       }
       // Bright dots at the sources themselves.
-      for (let j = 0; j < n; j++) cv.set(pos[j * 2], pos[j * 2 + 1] / aspect, 0xffffff);
+      for (let j = 0; j < n; j++) cv.set(pos[j * 2], pos[j * 2 + 1] / aspect, spot);
       cv.paint(ctx.buffer);
     };
   },

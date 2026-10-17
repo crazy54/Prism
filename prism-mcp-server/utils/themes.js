@@ -4,21 +4,52 @@
 // override applied over identical component HTML/CSS. A "variant" is therefore
 // the same component under a different token set — never a separate payload.
 // This module is the MCP-side single source of truth for those token maps,
-// mirroring window.PrismShell.themeMatrix() in Prism.html.
+// mirroring THEME_REGISTRY / window.PrismShell.themeMatrix() in Prism.html
+// (checked by aaa-prism-ds/tools/theme-sync-check.mjs).
 //
-// JFH-13: Cloudscape is Prism's only design system, shipping in exactly two
-// color modes — Cloudscape Dark (the default) and Cloudscape Light. Dark is the
-// BASE every gallery starts from; light is expressed as overrides vs that base.
-// The old Prism/OLED/Cyberpunk themes and the custom-palette compiler are gone.
-// Values are transcribed from the `:root{…}` block of each theme in the app's
-// THEMES object. The bespoke shell-chrome CSS each theme ships alongside its
-// tokens is not part of the token map and is intentionally omitted here (this
-// mirror models `:root` tokens only).
+// Refraction: Prism's own design language is the default family — Prism Night
+// (prism-dark, the default) and Prism Day (prism-light). Like the app's
+// themeMatrix(), which uses THEMES[DEFAULT_THEME] as its base, every theme's
+// `overrides` are computed against Prism Night. The other design systems
+// (Cloudscape, Material 3, Duolingo, …) are optional skins: complete :root maps
+// that override that base.
+//
+// Three layers per Prism theme (all generated into ./refraction-tokens.js from
+// design/themes.js by scripts/sync-refraction.mjs):
+//   - the theme contract (--bg … --dens) every facet reads   → BASE_TOKENS / tokens
+//   - the shell's --cs-topnav-* chrome tokens                → tokens (prism themes)
+//   - the --rf-* Refraction layer (spectrum stops, beam, glass, type scale,
+//     gallery hues …) used by Prism-native chrome            → `refraction` (opt-in in tools)
 
-// The base every theme layers over: Cloudscape Dark's :root tokens. Dark is the
-// default, so its override set is empty (it IS the base) — matching the app,
-// where themeMatrix() uses THEMES['cloudscape-dark'] as the base.
-export const BASE_TOKENS = {
+import { REFRACTION_VERSION, PRISM_NIGHT, PRISM_DAY } from './refraction-tokens.js';
+
+export { REFRACTION_VERSION };
+
+/** The theme contract: every theme defines these (TEAM.md "Theme contract"). */
+export const CONTRACT_TOKENS = ['--bg', '--panel', '--panel2', '--card', '--line', '--ink', '--muted', '--dim', '--accent', '--accent-rgb', '--accent2',
+  '--info', '--info-rgb', '--pos', '--pos-rgb', '--warn', '--warn-rgb', '--neg', '--neg-rgb', '--crit', '--crit-rgb', '--cardgrad', '--font',
+  '--r-sm', '--r-md', '--r-lg', '--r-xl', '--elev-1', '--elev-2', '--dur', '--ease', '--bd', '--head-w', '--dens'];
+
+const isRf = (k) => k.startsWith('--rf-');
+const pick = (o, keys) => Object.fromEntries(keys.filter((k) => k in o).map((k) => [k, o[k]]));
+/** Split a generated Prism map into its :root token map (contract + chrome) and its --rf-* layer. */
+function splitPrism(all) {
+  const tokens = {}, rf = {};
+  for (const [k, v] of Object.entries(all)) (isRf(k) ? rf : tokens)[k] = v;
+  return { tokens, rf };
+}
+const NIGHT = splitPrism(PRISM_NIGHT);
+const DAY = splitPrism(PRISM_DAY);
+
+// The base every theme layers over: Prism Night's :root tokens (contract + the
+// shell's --cs-topnav-* chrome). Night is the default, so its override set is
+// empty (it IS the base) — matching the app, where themeMatrix() uses
+// THEMES[DEFAULT_THEME] as the base.
+export const BASE_TOKENS = { ...NIGHT.tokens };
+
+// Cloudscape Dark — the AWS-console dark palette (the previous Prism default,
+// now an optional skin). A complete contract map.
+const CLOUDSCAPE_DARK_TOKENS = {
   '--bg': '#0f1621', '--panel': '#192534', '--panel2': '#232f3e', '--card': '#1a2633', '--line': '#354150',
   '--ink': '#e9ebed', '--muted': '#a4b0c0', '--dim': '#6b7887',
   '--accent': '#539fe5', '--accent-rgb': '83,159,229', '--accent2': '#539fe5',
@@ -28,21 +59,16 @@ export const BASE_TOKENS = {
   '--neg': '#eb6f6f', '--neg-rgb': '235,111,111',
   '--crit': '#c471ff', '--crit-rgb': '196,113,255',
   '--cardgrad': 'linear-gradient(157deg,rgba(255,255,255,.05),rgba(255,255,255,0) 55%)',
-  // JFH-33 chrome identity: shell font + 4-step corner-radius scale. A theme pack
-  // overrides these so the whole shell (scrollbars, buttons, type) reskins per
-  // design system, not just the facet tiles. Mode-invariant (Cloudscape Light does
-  // not override them), so they live in the shared base for both modes.
+  // JFH-33 chrome identity: shell font + 4-step corner-radius scale.
   '--font': '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',
   '--r-sm': '4px', '--r-md': '8px', '--r-lg': '12px', '--r-xl': '16px',
-  // JFH-33 feel layer: the tokens that make a system FEEL like itself — elevation,
-  // motion, border weight, heading weight, density. A pack overrides these so the
-  // shell's depth/motion/density reskin per system, not just its color+shape. Base =
-  // Cloudscape (flat, snappy, 1px borders, bold heads, normal density).
+  // JFH-33 feel layer: flat, snappy, 1px borders, bold heads, normal density.
   '--elev-1': 'none', '--elev-2': '0 1px 8px rgba(0,0,0,.4)',
   '--dur': '.12s', '--ease': 'ease', '--bd': '1px', '--head-w': '700', '--dens': '1',
 };
 
-// Cloudscape Light — the AWS-console light palette, as overrides vs the dark base.
+// Cloudscape Light — the AWS-console light palette, layered on Cloudscape Dark
+// (the shape/feel tokens are mode-invariant in Cloudscape).
 const CLOUDSCAPE_LIGHT_OVERRIDES = {
   '--bg': '#f2f3f3', '--panel': '#ffffff', '--panel2': '#fafafa', '--card': '#ffffff', '--line': '#d5dbdb',
   '--ink': '#16191f', '--muted': '#5f6b7a', '--dim': '#8d99a8',
@@ -55,32 +81,35 @@ const CLOUDSCAPE_LIGHT_OVERRIDES = {
   '--cardgrad': 'linear-gradient(157deg,rgba(0,0,0,.02),rgba(0,0,0,0) 55%)',
 };
 
-function merge(over) { return { ...BASE_TOKENS, ...over }; }
 function diff(tokens) { const d = {}; for (const k in tokens) if (tokens[k] !== BASE_TOKENS[k]) d[k] = tokens[k]; return d; }
 
-// The complete Cloudscape token map for a given color mode. Theme-pack authoring
-// (catalog/_scaffold_ds.mjs, F6) uses this as the base a sparse profile layers its
-// brand overrides on, so even a profile that only sets --accent yields a full,
-// coherent :root for that mode. 'light' → the AWS-console light palette; anything
-// else → the dark base.
+// The complete contract map for a color mode — Prism Night or Prism Day. Theme-pack
+// authoring (catalog/_scaffold_ds.mjs, F6) layers a sparse profile's brand overrides
+// on it, so even a profile that only sets --accent yields a full, coherent :root for
+// that mode. Contract tokens only: shell chrome tokens (--cs-topnav-*) are a pack's own
+// business. 'light' → Prism Day; anything else → Prism Night.
 export function baseTokensFor(mode) {
-  return mode === 'light' ? merge(CLOUDSCAPE_LIGHT_OVERRIDES) : { ...BASE_TOKENS };
+  return pick(mode === 'light' ? DAY.tokens : NIGHT.tokens, CONTRACT_TOKENS);
 }
 
-// Full token map for a scaffolded pack's mode: the Cloudscape base for that mode
-// with the pack's (sparse) brand overrides layered on. A pack entry only needs to
-// declare the handful of tokens that differ (e.g. --accent), and this fills in a
-// complete, coherent :root. Used by scaffolded THEMES entries below (F6).
+// Full token map for a scaffolded pack's mode: the Prism base for that mode with the
+// pack's (sparse) brand overrides layered on (F6).
 export function packTokens(mode, over) { return { ...baseTokensFor(mode), ...(over || {}) }; }
 
-// The canonical theme list. Each: {id,ds,dsName,name,mode,builtin,tokens,overrides}.
+// The --rf-* Refraction layer of the Prism themes (other families don't carry one).
+const REFRACTION = { 'prism-dark': NIGHT.rf, 'prism-light': DAY.rf };
+
+// The canonical theme list. Each: {id,ds,dsName,name,mode,builtin,tokens,overrides[,refraction]}.
 // ds = design-system family (mirrors THEME_REGISTRY[].ds in Prism.html); dsName =
-// its display label. Theme packs are appended here by catalog/_scaffold_ds.mjs
+// its display label (the shell's family label: "Prism" for the prism family, else the
+// name without its mode word). Theme packs are appended here by catalog/_scaffold_ds.mjs
 // (F6) — the tool metadata below (id list, note, descriptions) derives from this
 // array, so a scaffolded pack surfaces through the MCP with no further edits.
 export const THEMES = [
-  { id: 'cloudscape-dark', ds: 'cloudscape', dsName: 'Cloudscape', name: 'Cloudscape Dark', mode: 'dark', builtin: true, isDefault: true, tokens: merge({}) },
-  { id: 'cloudscape-light', ds: 'cloudscape', dsName: 'Cloudscape', name: 'Cloudscape Light', mode: 'light', builtin: true, tokens: merge(CLOUDSCAPE_LIGHT_OVERRIDES) },
+  { id: 'prism-dark', ds: 'prism', dsName: 'Prism', name: 'Prism Night', mode: 'dark', builtin: true, isDefault: true, tokens: { ...NIGHT.tokens }, refraction: REFRACTION['prism-dark'] },
+  { id: 'prism-light', ds: 'prism', dsName: 'Prism', name: 'Prism Day', mode: 'light', builtin: true, tokens: { ...DAY.tokens }, refraction: REFRACTION['prism-light'] },
+  { id: 'cloudscape-dark', ds: 'cloudscape', dsName: 'Cloudscape', name: 'Cloudscape Dark', mode: 'dark', builtin: true, tokens: { ...CLOUDSCAPE_DARK_TOKENS } },
+  { id: 'cloudscape-light', ds: 'cloudscape', dsName: 'Cloudscape', name: 'Cloudscape Light', mode: 'light', builtin: true, tokens: { ...CLOUDSCAPE_DARK_TOKENS, ...CLOUDSCAPE_LIGHT_OVERRIDES } },
   { id: 'duolingo-dark', ds: 'duolingo', dsName: 'Duolingo', name: 'Duolingo Dark', mode: 'dark', builtin: false, tokens: packTokens('dark', {"--bg":"#131f24","--panel":"#202f36","--panel2":"#1b2a30","--card":"#202f36","--line":"#37464f","--ink":"#f1f7fb","--muted":"#a5b4bd","--dim":"#6b7c85","--accent":"#58cc02","--accent-rgb":"88,204,2","--accent2":"#58cc02","--info":"#1cb0f6","--info-rgb":"28,176,246","--pos":"#89e219","--pos-rgb":"137,226,25","--warn":"#ff9600","--warn-rgb":"255,150,0","--neg":"#ff4b4b","--neg-rgb":"255,75,75","--crit":"#ce82ff","--crit-rgb":"206,130,255","--cardgrad":"linear-gradient(157deg,rgba(88,204,2,.08),rgba(88,204,2,0) 55%)","--font":"Nunito, ui-rounded, \"SF Pro Rounded\", \"Segoe UI\", system-ui, sans-serif","--r-sm":"8px","--r-md":"16px","--r-lg":"24px","--r-xl":"32px","--elev-1":"0 4px 0 rgba(0,0,0,.45)","--elev-2":"0 6px 0 rgba(0,0,0,.5)","--dur":".2s","--ease":"cubic-bezier(.34,1.56,.64,1)","--bd":"2px","--head-w":"800","--dens":"1.15"}) },
   { id: 'duolingo-light', ds: 'duolingo', dsName: 'Duolingo', name: 'Duolingo Light', mode: 'light', builtin: false, tokens: packTokens('light', {"--bg":"#f7f7f7","--panel":"#ffffff","--panel2":"#fbfbfb","--card":"#ffffff","--line":"#e5e5e5","--ink":"#3c3c3c","--muted":"#777777","--dim":"#afafaf","--accent":"#58cc02","--accent-rgb":"88,204,2","--accent2":"#58cc02","--info":"#1cb0f6","--info-rgb":"28,176,246","--pos":"#89e219","--pos-rgb":"137,226,25","--warn":"#ff9600","--warn-rgb":"255,150,0","--neg":"#ff4b4b","--neg-rgb":"255,75,75","--crit":"#ce82ff","--crit-rgb":"206,130,255","--cardgrad":"linear-gradient(157deg,rgba(88,204,2,.06),rgba(88,204,2,0) 55%)","--font":"Nunito, ui-rounded, \"SF Pro Rounded\", \"Segoe UI\", system-ui, sans-serif","--r-sm":"8px","--r-md":"16px","--r-lg":"24px","--r-xl":"32px","--elev-1":"0 4px 0 #e0e0e0","--elev-2":"0 6px 0 #d4d4d4","--dur":".2s","--ease":"cubic-bezier(.34,1.56,.64,1)","--bd":"2px","--head-w":"800","--dens":"1.15"}) },
   { id: 'mailchimp-dark', ds: 'mailchimp', dsName: 'Mailchimp', name: 'Mailchimp Dark', mode: 'dark', builtin: false, tokens: packTokens('dark', {"--bg":"#241c15","--panel":"#302720","--panel2":"#2a221b","--card":"#302720","--line":"#463b30","--ink":"#f7f3ea","--muted":"#c2b6a4","--dim":"#8a7d6c","--accent":"#ffe01b","--accent-rgb":"255,224,27","--accent2":"#ffe01b","--info":"#3fb6c3","--info-rgb":"63,182,195","--pos":"#5cc95c","--pos-rgb":"92,201,92","--warn":"#ffab3f","--warn-rgb":"255,171,63","--neg":"#f0685a","--neg-rgb":"240,104,90","--crit":"#e069a0","--crit-rgb":"224,105,160","--cardgrad":"linear-gradient(157deg,rgba(255,224,27,.12),rgba(255,224,27,0) 55%)","--font":"Bitter, Rockwell, Georgia, \"Times New Roman\", serif","--r-sm":"3px","--r-md":"6px","--r-lg":"9px","--r-xl":"12px","--elev-1":"0 2px 6px rgba(0,0,0,.4)","--elev-2":"0 8px 22px rgba(0,0,0,.5)","--dur":".15s","--ease":"ease","--bd":"1px","--head-w":"700","--dens":"1"}) },
@@ -101,24 +130,28 @@ export const THEMES = [
   { id: 'acorn-light', ds: 'acorn', dsName: 'Firefox Acorn', name: 'Firefox Acorn Light', mode: 'light', builtin: false, tokens: packTokens('light', {"--bg":"#f9f9fb","--panel":"#ffffff","--panel2":"#f0f0f4","--card":"#ffffff","--line":"#cfcfd8","--ink":"#15141a","--muted":"#5b5b66","--dim":"#8f8f9d","--accent":"#ff7139","--accent-rgb":"255,113,57","--accent2":"#ff7139","--info":"#0060df","--info-rgb":"0,96,223","--pos":"#017a5a","--pos-rgb":"1,122,90","--warn":"#a47f00","--warn-rgb":"164,127,0","--neg":"#d70022","--neg-rgb":"215,0,34","--crit":"#8000d7","--crit-rgb":"128,0,215","--cardgrad":"linear-gradient(157deg,rgba(255,113,57,.06),rgba(255,113,57,0) 55%)","--elev-1":"0 1px 4px rgba(28,27,34,.08)","--elev-2":"0 8px 24px rgba(28,27,34,.12)","--dur":".15s","--ease":"cubic-bezier(.07,.95,0,1)","--bd":"1px","--head-w":"600","--dens":"1","--cs-topnav-bg":"#f0f0f4","--cs-topnav-line":"#cfcfd8","--cs-topnav-ink":"#15141a","--cs-topnav-dim":"#5b5b66","--cs-topnav-hover":"rgba(0,0,0,.06)","--font":"Inter, -apple-system, \"Segoe UI\", system-ui, Roboto, \"Helvetica Neue\", Arial, sans-serif","--r-sm":"4px","--r-md":"8px","--r-lg":"12px","--r-xl":"16px"}) },
   { id: 'material3-dark', ds: 'material3', dsName: 'Material Design 3', name: 'Material Design 3 Dark', mode: 'dark', builtin: false, tokens: packTokens('dark', {"--bg":"#1c1b1f","--panel":"#1d1b20","--panel2":"#2b2930","--card":"#211f26","--line":"#49454f","--ink":"#e6e1e5","--muted":"#cac4d0","--dim":"#938f99","--accent":"#d0bcff","--accent-rgb":"208,188,255","--accent2":"#efb8c8","--info":"#9fcaff","--info-rgb":"159,202,255","--pos":"#6edd8a","--pos-rgb":"110,221,138","--warn":"#f5bd3f","--warn-rgb":"245,189,63","--neg":"#f2b8b5","--neg-rgb":"242,184,181","--crit":"#efb8c8","--crit-rgb":"239,184,200","--cardgrad":"linear-gradient(157deg,rgba(208,188,255,.08),rgba(208,188,255,0) 55%)","--elev-1":"0 1px 2px rgba(0,0,0,.30), 0 1px 3px 1px rgba(0,0,0,.15)","--elev-2":"0 1px 3px rgba(0,0,0,.30), 0 4px 8px 3px rgba(0,0,0,.15)","--dur":".2s","--ease":"cubic-bezier(.2,0,0,1)","--bd":"1px","--head-w":"500","--dens":"1.15","--cs-topnav-bg":"#211f26","--cs-topnav-line":"#49454f","--cs-topnav-ink":"#e6e1e5","--cs-topnav-dim":"#cac4d0","--cs-topnav-hover":"rgba(208,188,255,.08)","--font":"Roboto, -apple-system, \"Segoe UI\", system-ui, \"Helvetica Neue\", Arial, sans-serif","--r-sm":"6px","--r-md":"12px","--r-lg":"18px","--r-xl":"24px"}) },
   { id: 'material3-light', ds: 'material3', dsName: 'Material Design 3', name: 'Material Design 3 Light', mode: 'light', builtin: false, tokens: packTokens('light', {"--bg":"#fffbfe","--panel":"#f7f2fa","--panel2":"#ece6f0","--card":"#f3edf7","--line":"#cac4d0","--ink":"#1c1b1f","--muted":"#49454f","--dim":"#79747e","--accent":"#6750a4","--accent-rgb":"103,80,164","--accent2":"#7d5260","--info":"#35618e","--info-rgb":"53,97,142","--pos":"#146c2e","--pos-rgb":"20,108,46","--warn":"#7d5700","--warn-rgb":"125,87,0","--neg":"#b3261e","--neg-rgb":"179,38,30","--crit":"#7d5260","--crit-rgb":"125,82,96","--cardgrad":"linear-gradient(157deg,rgba(103,80,164,.06),rgba(103,80,164,0) 55%)","--elev-1":"0 1px 2px rgba(28,27,31,.20), 0 1px 3px 1px rgba(28,27,31,.10)","--elev-2":"0 1px 3px rgba(28,27,31,.20), 0 4px 8px 3px rgba(28,27,31,.12)","--dur":".2s","--ease":"cubic-bezier(.2,0,0,1)","--bd":"1px","--head-w":"500","--dens":"1.15","--cs-topnav-bg":"#f3edf7","--cs-topnav-line":"#cac4d0","--cs-topnav-ink":"#1c1b1f","--cs-topnav-dim":"#49454f","--cs-topnav-hover":"rgba(103,80,164,.08)","--font":"Roboto, -apple-system, \"Segoe UI\", system-ui, \"Helvetica Neue\", Arial, sans-serif","--r-sm":"6px","--r-md":"12px","--r-lg":"18px","--r-xl":"24px"}) },
+  { id: 'cloudflare-dark', ds: 'cloudflare', dsName: 'Cloudflare', name: 'Cloudflare Dark', mode: 'dark', builtin: false, tokens: packTokens('dark', {"--bg":"#1b1b1c","--panel":"#232325","--panel2":"#2c2c2f","--card":"#262628","--line":"#3a3a3d","--ink":"#f2f2f2","--muted":"#b8b8bb","--dim":"#9a9b9f","--accent":"#f6821f","--accent-rgb":"246,130,31","--accent2":"#faae40","--info":"#6ea8fe","--info-rgb":"110,168,254","--pos":"#3fcf8e","--pos-rgb":"63,207,142","--warn":"#faae40","--warn-rgb":"250,174,64","--neg":"#ff6b5e","--neg-rgb":"255,107,94","--crit":"#c792ea","--crit-rgb":"199,146,234","--cardgrad":"linear-gradient(157deg,rgba(243,128,32,.08),rgba(243,128,32,0) 55%)","--font":"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif","--r-sm":"4px","--r-md":"6px","--r-lg":"8px","--r-xl":"12px","--dur":".15s","--ease":"cubic-bezier(.4,0,.2,1)","--bd":"1px","--head-w":"600","--dens":"1","--elev-1":"0 1px 2px rgba(0,0,0,.4)","--elev-2":"0 6px 16px rgba(0,0,0,.45)"}) },
+  { id: 'cloudflare-light', ds: 'cloudflare', dsName: 'Cloudflare', name: 'Cloudflare Light', mode: 'light', builtin: false, tokens: packTokens('light', {"--bg":"#f2f2f2","--panel":"#ffffff","--panel2":"#f7f7f8","--card":"#ffffff","--line":"#d9d9d9","--ink":"#1d1d1d","--muted":"#4f4f50","--dim":"#646568","--accent":"#c25400","--accent-rgb":"194,84,0","--accent2":"#f38020","--info":"#0051c3","--info-rgb":"0,81,195","--pos":"#0a7a3e","--pos-rgb":"10,122,62","--warn":"#9a5a00","--warn-rgb":"154,90,0","--neg":"#c8231d","--neg-rgb":"200,35,29","--crit":"#7a3fb8","--crit-rgb":"122,63,184","--cardgrad":"linear-gradient(157deg,rgba(243,128,32,.06),rgba(243,128,32,0) 55%)","--font":"-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif","--r-sm":"4px","--r-md":"6px","--r-lg":"8px","--r-xl":"12px","--dur":".15s","--ease":"cubic-bezier(.4,0,.2,1)","--bd":"1px","--head-w":"600","--dens":"1","--elev-1":"0 1px 2px rgba(29,29,29,.08)","--elev-2":"0 4px 12px rgba(29,29,29,.12)"}) },
   // ▼ scaffolded theme packs (F6) — do not hand-edit; see catalog/_scaffold_ds.mjs
 ].map((t) => ({ ...t, overrides: diff(t.tokens) }));
 
 // The out-of-the-box theme for a fresh visitor (mirrors DEFAULT_THEME in Prism.html).
-export const DEFAULT_THEME_ID = 'cloudscape-dark';
+// Refraction: Prism Night is the default (the app follows prefers-color-scheme on a
+// first visit, so Prism Day is the light-mode default).
+export const DEFAULT_THEME_ID = 'prism-dark';
 
 export const THEME_IDS = THEMES.map((t) => t.id);
 
 /** Comma-joined theme-id list, marking the default — for tool descriptions.
- *  e.g. "cloudscape-dark (default), cloudscape-light". */
+ *  e.g. "prism-dark (default), prism-light, cloudscape-dark, …". */
 export function themeIdList() {
   return THEMES.map((t) => t.id + (t.isDefault ? ' (default)' : '')).join(', ');
 }
 
 /** One-line human summary of the shipped design systems + their color modes,
  *  grouped by ds. Derived from THEMES so it self-updates as packs are scaffolded.
- *  e.g. "Prism ships 1 design system as pure :root token overrides: Cloudscape
- *  (cloudscape-dark [default], cloudscape-light)." */
+ *  e.g. "Prism ships 12 design systems as pure :root token overrides …: Prism
+ *  (prism-dark [default], prism-light); Cloudscape (cloudscape-dark, cloudscape-light); …" */
 export function themesSummary() {
   const bySystem = new Map();
   for (const t of THEMES) {
@@ -157,12 +190,16 @@ export function usesTokens(effect) {
   return TOKEN_KEYS.filter((k) => found.has(k));
 }
 
-/** Render an effect's :root override block for one theme (full CSS string). */
-export function themeRootCss(themeId) {
+/** The --rf-* Refraction layer of a theme ({} for families that don't carry one). */
+export function refractionTokens(themeId) { return REFRACTION[themeId] || {}; }
+
+/** Render a theme's :root block (full CSS string); { refraction: true } appends its --rf-* layer. */
+export function themeRootCss(themeId, { refraction = false } = {}) {
   const t = getTheme(themeId);
   if (!t) return '';
+  const map = refraction ? { ...t.tokens, ...refractionTokens(themeId) } : t.tokens;
   let s = `:root{ /* ${t.name} */\n`;
-  for (const k of Object.keys(t.tokens)) s += `  ${k}: ${t.tokens[k]};\n`;
+  for (const k of Object.keys(map)) s += `  ${k}: ${map[k]};\n`;
   return s + '}';
 }
 

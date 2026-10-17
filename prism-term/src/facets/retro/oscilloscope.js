@@ -31,8 +31,13 @@ export default {
     const xy = ctx.param('mode', 'yt') === 'xy';
     const ph = ctx.param('phosphor', 'green');
     const beam = ph === 'theme' ? theme.accent : PHOSPHOR[ph] ?? PHOSPHOR.green;
-    const grid = lerpc(theme.bg, beam, 0.2), axis = lerpc(theme.bg, beam, 0.32);
-    const trails = [1, 0.5, 0.26, 0.12].map((k) => lerpc(theme.bg, beam, k));
+    // Phosphor glows on dark CRT glass, even in daylight; the 'theme' phosphor draws
+    // in the theme's own ink on the page instead (with a firmer persistence by Day).
+    const day = theme.mode === 'light';
+    const glass = day && ph !== 'theme' ? 0x060b08 : theme.bg;
+    const K = (k) => (day && ph === 'theme' ? 1 - (1 - k) * (1 - k) : k);
+    const grid = lerpc(glass, beam, K(0.2)), axis = lerpc(glass, beam, K(0.32));
+    const trails = [1, 0.5, 0.26, 0.12].map((k) => lerpc(glass, beam, K(k)));
     const readout = H >= 10 && W >= 36;
     const cx = PW / 2, cy = PHt / 2;
     const amp = PHt * 0.42;
@@ -84,7 +89,7 @@ export default {
       }
     }
     return (t) => {
-      b.fill(0, 0, W, H, ' ', theme.ink, theme.bg);
+      b.fill(0, 0, W, H, ' ', theme.ink, glass);
       cv.clear();
       graticule();
       // Persistence: older sweeps first, dimmer, so the newest sits on top.
@@ -92,7 +97,7 @@ export default {
       cv.paint(b);
       if (readout) {
         const s = songAt(t);
-        const dim = lerpc(theme.bg, beam, 0.6);
+        const dim = lerpc(glass, beam, K(0.6));
         b.text(1, 0, xy ? 'X: BASS  Y: LEAD' : 'CH1 0.5V/div', dim);
         b.text(W - 12, 0, xy ? '    XY MODE' : 'TRIG ↑ BASS', dim);
         b.text(1, H - 1, xy ? `${RATIO[(((s.leadNote - s.bassNote) % 12) + 12) % 12].join(':')}  ${s.bassFreq.toFixed(1)} Hz` : `${s.bassFreq.toFixed(1)} Hz`, dim);

@@ -13,6 +13,12 @@
 // terminal. Pixel aspect differs per mode (a cell is ~1:2), exposed as `aspect`
 // (pixel height ÷ width) so geometry can stay round.
 //
+// Mono depth (NO_COLOR, pipes, TERM=dumb) has no color to carry a picture, so a
+// canvas built with `mono` paints every mode except braille as a luminance ramp
+// instead: each cell's ink (contrast against the theme background, coverage-
+// weighted) normalized to the canvas's brightest cell, as ' ░▒▓█' (Unicode) or the
+// 10-level ASCII_RAMP (7-bit). Braille keeps its dots: they already carry shape.
+//
 // The NONE color is the transparent pixel: transparent areas leave the target
 // buffer untouched, so canvases compose over text, panels and other canvases.
 
@@ -42,6 +48,24 @@ const SEXTANT_CHARS = (() => {
   return out;
 })();
 export const ASCII_RAMP = ' .:-=+*#%@';
+/** Mono-depth shading ramp for Unicode terminals (blank → full block). */
+export const MONO_RAMP = ' ░▒▓█';
+const HALF_SHAPES = [' ', '▀', '▄', '█']; // bit 0 = top pixel, bit 1 = bottom
+const popcount = (m) => { let c = 0; for (; m; m &= m - 1) c++; return c; };
+
+/**
+ * The mono paint hint of a surface: createContext() sets `surface.monoPaint` =
+ * { ramp, ref } at mono depth (null otherwise); views / wrappers inherit it from
+ * the surface they draw into. So every canvas painted into a mono scene, also
+ * ones a facet builds itself (banners, meters), gets the ramp.
+ */
+export function monoHint(surface) {
+  for (let s = surface, i = 0; s && i < 16; s = s.parent || s.inner, i++) if (s.monoPaint !== undefined) return s.monoPaint;
+  return null;
+}
+// Normalization floor: a canvas whose brightest cell has less ink than this is not
+// stretched to full blocks (keeps faint fields faint instead of amplifying noise).
+const MONO_FLOOR = 0.3;
 // 4×4 Bayer matrix, normalized to (0,1), for ordered-dither braille shading.
 const BAYER4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map((v) => (v + 0.5) / 16);
 
@@ -58,9 +82,10 @@ export class Canvas {
   /**
    * @param {number} cols  width in terminal cells
    * @param {number} rows  height in terminal cells
-   * @param {object} opts  { mode, dither (braille), threshold (braille), ramp (ascii) }
+   * @param {object} opts  { mode, dither (braille), threshold (braille), ramp (ascii),
+   *                         mono: { ramp, ref }: paint as a luminance ramp (mono depth; see top) }
    */
-  constructor(cols, rows, { mode = 'half', dither = false, threshold = 0.08, ramp = ASCII_RAMP, merge = 24 } = {}) {
+  constructor(cols, rows, { mode = 'half', dither = false, threshold = 0.08, ramp = ASCII_RAMP, merge = 24, mono = null } = {}) {
     if (!MODES[mode]) throw new Error(`unknown canvas mode "${mode}" (expected ${MODE_NAMES.join('|')})`);
     this.mode = mode;
     // half mode: pixel pairs closer than this (weighted RGB distance²) paint as one
@@ -69,6 +94,7 @@ export class Canvas {
     this.dither = dither;
     this.threshold = threshold;
     this.ramp = ramp;
+    this.mono = mono && mode !== 'braille' ? { ramp: mono.ramp || MONO_RAMP, ref: mono.ref ?? NONE } : null;
     this.resize(cols, rows);
   }
 
@@ -263,6 +289,8 @@ export class Canvas {
    * at (ox, oy). Transparent cells are left untouched.
    */
   paint(target, ox = 0, oy = 0) {
+    const mono = this.mono || (this.mode !== 'braille' ? monoHint(target) : null);
+    if (mono) return this._paintMono(target, ox, oy, mono);
     switch (this.mode) {
       case 'half': return this._paintHalf(target, ox, oy);
       case 'braille': return this._paintBraille(target, ox, oy);
@@ -327,6 +355,67 @@ export class Canvas {
         if (c === NONE) continue;
         const ch = ramp[Math.min(last, Math.max(1, Math.round(luminance(c) * last)))];
         target.set(cx + ox, cy + oy, ch, c);
+      }
+    }
+    return target;
+  }
+
+  // Mono: each pixel's ink (|luminance − background luminance|) is normalized to
+  // the canvas's brightest pixel (at least MONO_FLOOR, so faint art stays faint);
+  // a fully opaque canvas (a color field) is also stretched up from its darkest
+  // pixel so mid-luminance pictures use the whole ramp. Then per cell:
+  //   • all pixels "no ink" or "full ink" → the shape glyph (▀ ▄ █ / quadrant /
+  //     sextant mask), so banners, bars and outlines stay crisp;
+  //   • an edge cell (some pixels transparent) whose visible pixels are bright →
+  //     the shape of the visible pixels (letters keep their half-block edges);
+  //   • anything else → the ramp glyph of the cell's average (shading).
+  // fg is the terminal default; bg is left as is.
+  _paintMono(target, ox, oy, mono) {
+    const { cols, rows, width: W, px, sx, sy, mode } = this;
+    const { ramp, ref } = mono;
+    const refL = ref === NONE || ref === undefined ? 0 : luminance(ref);
+    const n = sx * sy, last = ramp.length - 1;
+    const shapes = mode === 'half' ? HALF_SHAPES : mode === 'quad' ? QUAD_CHARS : mode === 'sextant' ? SEXTANT_CHARS : null;
+    const N = px.length;
+    const ink = this._monoInk?.length === N ? this._monoInk : (this._monoInk = new Float32Array(N));
+    let lo = Infinity, hi = 0;
+    for (let i = 0; i < N; i++) {
+      const c = px[i];
+      if (c === NONE) { ink[i] = -1; continue; }
+      const v = Math.abs(luminance(c) - refL);
+      ink[i] = v;
+      if (v < lo) lo = v;
+      if (v > hi) hi = v;
+    }
+    if (hi === 0 && lo === Infinity) return target; // fully transparent
+    let transparent = false;
+    for (let i = 0; i < N; i++) if (ink[i] < 0) { transparent = true; break; }
+    const top = Math.max(hi, MONO_FLOOR);
+    const bot = transparent ? 0 : Math.min(Math.max(0, lo), top - MONO_FLOOR);
+    const k = 1 / (top - bot);
+    for (let cy = 0; cy < rows; cy++) {
+      for (let cx = 0; cx < cols; cx++) {
+        let sum = 0, opaque = 0, full = 0, seen = 0, seenSum = 0, binary = true;
+        for (let dy = 0, j = 0; dy < sy; dy++) {
+          const row = (cy * sy + dy) * W + cx * sx;
+          for (let dx = 0; dx < sx; dx++, j++) {
+            const v = ink[row + dx];
+            if (v < 0) continue;
+            opaque++;
+            const q = Math.min(1, Math.max(0, (v - bot) * k));
+            sum += q;
+            const lv = Math.round(q * last);
+            if (lv === last) full |= 1 << j;
+            else if (lv !== 0) binary = false;
+            if (lv > 0) { seen |= 1 << j; seenSum += q; }
+          }
+        }
+        if (!opaque) continue;
+        let ch;
+        if (shapes && binary) ch = shapes[full];
+        else if (shapes && opaque < n && seen && seenSum / popcount(seen) >= 0.5) ch = shapes[seen];
+        else ch = ramp[Math.min(last, Math.round((sum / n) * last))];
+        target.set(cx + ox, cy + oy, ch, NONE);
       }
     }
     return target;

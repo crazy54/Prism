@@ -21,6 +21,37 @@ export const ATTR = Object.freeze({
 
 const ATTR_SGR = [[1, '1'], [2, '2'], [4, '3'], [8, '4'], [16, '5'], [32, '7'], [64, '9']];
 
+/**
+ * True when `surface` (or the buffer it draws into) renders for a light terminal:
+ * createContext() sets `light16` on the root buffer from the theme's mode. At 16
+ * colors that keeps white / bright-white text off the default background (color.js
+ * ansi16Text); other depths ignore it.
+ */
+export function lightTerminal(surface) {
+  for (let s = surface, i = 0; s && i < 16; s = s.parent || s.inner, i++) if (s.light16 !== undefined) return !!s.light16;
+  return false;
+}
+
+/**
+ * The color the serializers send as the terminal's own foreground (SGR 39), or -2:
+ * with --transparent createContext() sets `inkAsDefault` on the root buffer to the
+ * theme's ink, so body text follows the terminal (readable on a light or a dark
+ * background even when the theme guess is wrong).
+ */
+export function defaultInk(surface) {
+  for (let s = surface, i = 0; s && i < 16; s = s.parent || s.inner, i++) if (s.inkAsDefault !== undefined) return s.inkAsDefault ?? -2;
+  return -2;
+}
+
+/**
+ * Is `ch` text (as opposed to a pixel glyph whose fg is a fill: block elements,
+ * shades, braille, sextants)? Only text gets the light-terminal rule.
+ */
+export function lightText(ch) {
+  const cp = ch ? ch.codePointAt(0) : 32;
+  return !((cp >= 0x2580 && cp <= 0x259f) || (cp >= 0x2800 && cp <= 0x28ff) || (cp >= 0x1fb00 && cp <= 0x1fb3b));
+}
+
 /** SGR parameter fragment for an attribute bitmask (empty string for none). */
 export function attrParams(a) {
   if (!a) return '';
@@ -106,27 +137,31 @@ export class Surface {
    */
   toAnsi(depth = 'truecolor') {
     depth = normalizeDepth(depth);
+    const light = depth === '16' && lightTerminal(this), ink = defaultInk(this);
     const lines = [];
     for (let y = 0; y < this.height; y++) {
-      let line = '', fg = NONE, bg = NONE, at = 0, styled = false;
+      let line = '', fg = NONE, bg = NONE, at = 0, styled = false, fgP = '39';
       let end = this.width;
       // Trim trailing default-styled blanks so lines don't wrap in narrow terminals.
       while (end > 0) { const c = this.get(end - 1, y); if (c.ch === ' ' && c.bg === NONE && !c.attr) end--; else break; }
       for (let x = 0; x < end; x++) {
         const c = this.get(x, y);
         if (c.ch === '') continue;
+        if (c.fg === ink) c.fg = NONE;
+        // Light 16: the fg slot depends on the fill and on whether the glyph is text (color.js ansi16Text).
+        const fp = light ? fgParam(c.fg, depth, c.bg, lightText(c.ch)) : null;
         if (depth === 'mono') {
           if (c.attr !== at) { line += `\x1b[0${c.attr ? ';' + attrParams(c.attr) : ''}m`; at = c.attr; styled = true; }
         } else if (c.attr !== at) {
           const ap = attrParams(c.attr);
-          line += `\x1b[0${ap ? ';' + ap : ''};${fgParam(c.fg, depth)};${bgParam(c.bg, depth)}m`;
-          fg = c.fg; bg = c.bg; at = c.attr; styled = true;
-        } else if (c.fg !== fg || c.bg !== bg) {
+          line += `\x1b[0${ap ? ';' + ap : ''};${fp ?? fgParam(c.fg, depth)};${bgParam(c.bg, depth)}m`;
+          fg = c.fg; bg = c.bg; at = c.attr; styled = true; fgP = fp;
+        } else if (light ? fp !== fgP || c.bg !== bg : c.fg !== fg || c.bg !== bg) {
           const parts = [];
-          if (c.fg !== fg) parts.push(fgParam(c.fg, depth));
+          if (light ? fp !== fgP : c.fg !== fg) parts.push(fp ?? fgParam(c.fg, depth));
           if (c.bg !== bg) parts.push(bgParam(c.bg, depth));
           line += `\x1b[${parts.join(';')}m`;
-          fg = c.fg; bg = c.bg; styled = true;
+          fg = c.fg; bg = c.bg; styled = true; fgP = fp;
         }
         line += c.ch;
       }

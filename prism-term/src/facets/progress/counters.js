@@ -5,6 +5,7 @@ import { mix, gradient } from '../../color.js';
 import { sparkline, progressBar, box } from '../../widgets/index.js';
 import { truncate, stringWidth } from '../../width.js';
 import { phase, transfer, glyphs, clamp01, commas, clock } from './_sim.js';
+import { lift } from '../charts/_data.js';
 import { FONT47, FONT35, width35, SEG7, SEG7_RECTS, seg7Ascii, ring, ringCells } from './_fonts.js';
 
 const C = 'Counters & Odometers';
@@ -246,14 +247,14 @@ export default [
             const nx = x;
             [...now].forEach((ch, i) => {
               const changed = was.length !== now.length || was[i] !== ch;
-              b.set(nx + i, y + 1, ch, changed ? mix(tl.c, 0xffffff, 0.35) : th.ink, undefined, ATTR.BOLD);
+              b.set(nx + i, y + 1, ch, changed ? lift(th, tl.c, 0.35) : th.ink, undefined, ATTR.BOLD);
             });
             const data = Array.from({ length: w }, (_, k) => tl.sim.at(Math.max(0, local - (w - 1 - k) * 0.2)).rate);
             if (g.unicode) sparkline(b, x, y + 2, w, data, { theme: th, color: tl.c, min: 0 });
             else asciiSpark(b, x, y + 2, w, data, tl.c);
           } else {
             b.text(x, y, truncate(tl.label, 12, g.ell), th.muted);
-            [...now].forEach((ch, i) => b.set(x + 13 + i, y, ch, was[i] !== ch ? mix(tl.c, 0xffffff, 0.35) : th.ink));
+            [...now].forEach((ch, i) => b.set(x + 13 + i, y, ch, was[i] !== ch ? lift(th, tl.c, 0.35) : th.ink));
             if (w >= 13 + now.length + r.length + 1) b.text(x + w - r.length, y, r, tl.c);
           }
         };
@@ -342,7 +343,7 @@ export default [
             sets.forEach((r, i) => {
               const s = r.sim.at(local);
               const rad = cx - 0.5 - i * 4.2;
-              ring(cv, { cx, cy, rx: rad, ry: rad, thick: 2.8, frac: s.frac, color: (u) => mix(r.c, 0xffffff, u > s.frac - 0.03 ? 0.35 : 0), track: mix(th.bg, r.c, 0.35) });
+              ring(cv, { cx, cy, rx: rad, ry: rad, thick: 2.8, frac: s.frac, color: (u) => lift(th, r.c, u > s.frac - 0.03 ? 0.35 : 0), track: mix(th.bg, r.c, 0.35) });
             });
             cv.paint(b, 1, 0);
           } else {

@@ -8,6 +8,7 @@ import { Canvas } from '../../canvas.js';
 import { mix } from '../../color.js';
 import { truncate, stringWidth } from '../../width.js';
 import { phase, glyphs, clamp01, commas } from './_sim.js';
+import { lift } from '../charts/_data.js';
 import { FONT47, FONT35, layout } from './_fonts.js';
 import { segs } from './_log.js';
 
@@ -185,7 +186,7 @@ export default [
       const th = ctx.theme, g = glyphs(ctx);
       const start = 24 * 3600 - 6;                          // 23:59:54
       const FLIP = 0.32;
-      const face = mix(th.bg, th.panel2, 0.95), hinge = mix(th.bg, th.panel2, 0.45), ink = mix(th.ink, 0xffffff, 0.3);
+      const face = mix(th.bg, th.panel2, 0.95), hinge = mix(th.bg, th.panel2, 0.45), ink = lift(th, th.ink, 0.3);
       const lit = (d, x, y) => y >= 1 && y <= 7 && x >= 1 && x <= 4 && FONT47[d][y - 1][x - 1] === '#';
       return (t) => {
         const b = ctx.buffer, W = ctx.width, H = ctx.height;

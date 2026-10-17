@@ -1,0 +1,124 @@
+/* Vendored from design/first-light/first-light.css by website/scripts/sync-refraction.mjs — edit the source, then re-run. */
+/* ════════════════════════════════════════════════════════════════════════
+   Prism · First Light — the load moment + the Day↔Night relight.
+   Drop-in: first-light.css + first-light.js (+ ../brand/prism-mark.css).
+   Zero dependencies, offline. Every animated property is transform, opacity
+   or filter; the overlay never takes pointer events. See SPEC.md.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* 0 — arming. An inline <head> snippet adds html.pfl-armed before first paint
+   (only when the full/echo play is due), so painted targets start dark instead
+   of flashing in and out. A CSS-only failsafe re-shows them after 2.2s even if
+   the script never runs. Targets are tagged in markup with data-fl="…". */
+html.pfl-armed [data-fl]{opacity:0;animation:pfl-failsafe 0s 2.2s forwards}
+html.pfl-armed{background:var(--bg,#0a0c12)}
+@keyframes pfl-failsafe{to{opacity:1}}
+
+/* 1 — the overlay ----------------------------------------------------------- */
+.pfl{
+  --pfl-bg:var(--bg,#0a0c12);
+  --pfl-white:var(--rf-beam-core,#fff);
+  --pfl-glow:rgba(205,190,255,.55);
+  --pfl-grid:var(--rf-grid-line,rgba(255,255,255,.035));
+  --pfl-split-a:var(--rf-split-a,rgba(255,92,130,.6));
+  --pfl-split-b:var(--rf-split-b,rgba(92,170,255,.6));
+  --pfl-fringe:var(--rf-fringe,linear-gradient(90deg,rgba(255,110,140,0),rgba(255,110,140,.55),rgba(255,214,120,.5),rgba(120,230,190,.5),rgba(110,170,255,.55),rgba(184,140,255,0)));
+  --pfl-blend:screen;
+  position:fixed;inset:0;z-index:2147483600;pointer-events:none;overflow:hidden;contain:strict;
+  font:550 10px/1 var(--rf-mono,ui-monospace,"SF Mono","Cascadia Mono",Consolas,monospace);
+}
+.pfl.is-day{
+  --pfl-white:var(--rf-beam-core,#7353bb);
+  --pfl-glow:rgba(115,83,187,.35);
+  --pfl-blend:multiply;
+}
+.pfl *{position:absolute;box-sizing:border-box;pointer-events:none}
+.pfl-veil{inset:0;background:var(--pfl-bg)}
+.pfl-grid{inset:0;background-image:linear-gradient(var(--pfl-grid) 1px,transparent 1px),linear-gradient(90deg,var(--pfl-grid) 1px,transparent 1px);
+  background-size:var(--rf-grid-cell,34px) var(--rf-grid-cell,34px);opacity:0;
+  -webkit-mask-image:radial-gradient(ellipse 46% 42% at var(--pfl-cx) var(--pfl-cy),#000 8%,transparent 72%);
+          mask-image:radial-gradient(ellipse 46% 42% at var(--pfl-cx) var(--pfl-cy),#000 8%,transparent 72%)}
+
+/* the beam: a 1px core with a bloom, drawn left → right; the head is a travelling spark */
+.pfl-beam{left:0;height:12px;margin-top:-6px;transform-origin:0 50%}
+.pfl-beam i{left:0;right:0;top:50%;display:block}
+.pfl-beam .core{height:1px;margin-top:-.5px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--pfl-white) 55%,transparent) 30%,var(--pfl-white))}
+.pfl-beam .bloom{height:9px;margin-top:-4.5px;filter:blur(3px);opacity:.55;background:linear-gradient(90deg,transparent,var(--pfl-glow) 45%,var(--pfl-white))}
+.pfl-head{width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;
+  background:radial-gradient(closest-side,var(--pfl-white),color-mix(in srgb,var(--pfl-white) 40%,transparent) 22%,transparent 70%)}
+
+/* the stage holds the prism and its spectrum; it flies to the top-bar mark */
+.pfl-dock{width:var(--pfl-p);height:var(--pfl-p);margin:calc(var(--pfl-p) / -2) 0 0 calc(var(--pfl-p) / -2);transform-origin:50% 50%}
+.pfl-dock .prism-mark{position:absolute;inset:0;--pm:var(--pfl-p);--pm-edge:#f1ecff;--pm-edge-w:1.45px;--pm-glass-a:rgba(220,210,255,.2);--pm-glass-b:rgba(131,158,244,.04)}
+.pfl.is-day .pfl-dock .prism-mark{--pm-edge:#5b3ea8;--pm-glass-a:rgba(152,118,227,.24)}
+.pfl-glow{left:50%;top:58%;width:calc(var(--pfl-p) * 1.1);height:calc(var(--pfl-p) * 1.1);margin:calc(var(--pfl-p) * -.55) 0 0 calc(var(--pfl-p) * -.55);border-radius:50%;opacity:0;mix-blend-mode:var(--pfl-blend);
+  background:radial-gradient(closest-side,rgba(226,217,255,.5),rgba(171,145,235,.22) 38%,rgba(131,158,244,.06) 66%,transparent)}
+.pfl.is-day .pfl-glow{background:radial-gradient(closest-side,rgba(152,118,227,.3),rgba(103,131,236,.12) 45%,transparent)}
+.pfl-core{height:2px;margin-top:-1px;transform-origin:0 50%;border-radius:2px;
+  background:linear-gradient(90deg,var(--pfl-white),color-mix(in srgb,var(--pfl-white) 70%,#a8b9fc))}
+.pfl-flash{width:calc(var(--pfl-p) * 1.5);height:calc(var(--pfl-p) * 1.5);margin:calc(var(--pfl-p) * -.75) 0 0 calc(var(--pfl-p) * -.75);border-radius:50%;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--pfl-white) 80%,transparent),color-mix(in srgb,var(--pfl-glow) 60%,transparent) 18%,transparent 64%);mix-blend-mode:var(--pfl-blend)}
+
+/* the spectrum: seven hairline rays + a volumetric haze; pivots at the exit face */
+.pfl-fan{width:0;height:0;transform-origin:0 0}
+.pfl-ray{left:0;top:0;width:var(--pfl-len);height:14px;margin-top:-7px;transform-origin:0 50%;mix-blend-mode:var(--pfl-blend)}
+.pfl-ray::before,.pfl-ray::after{content:"";position:absolute;left:0;right:0;top:50%}
+.pfl-ray::before{height:1px;margin-top:-.5px;background:linear-gradient(90deg,color-mix(in srgb,var(--pfl-white) 80%,transparent),var(--c) 5%,color-mix(in srgb,var(--c) 55%,transparent) 34%,transparent 88%)}
+.pfl-ray::after{height:14px;margin-top:-7px;filter:blur(5px);opacity:.3;background:linear-gradient(90deg,transparent,var(--c) 8%,transparent 70%)}
+.pfl-haze{left:0;top:0;width:var(--pfl-len);height:var(--pfl-len);margin-top:calc(var(--pfl-len) / -2);transform-origin:0 50%;opacity:0;mix-blend-mode:var(--pfl-blend);
+  /* physically true: rose (least bent) at the top of the wedge, violet (most bent) at the bottom; --pfl-fs = the ray step */
+  background:conic-gradient(from 90deg at 0 50%,transparent 0deg,var(--s6) 4deg,var(--s5) calc(4deg + var(--pfl-fs,6deg)),var(--s4) calc(4deg + 2 * var(--pfl-fs,6deg)),var(--s3) calc(4deg + 3 * var(--pfl-fs,6deg)),var(--s2) calc(4deg + 4 * var(--pfl-fs,6deg)),var(--s1) calc(4deg + 5 * var(--pfl-fs,6deg)),var(--s0) calc(4deg + 6 * var(--pfl-fs,6deg)),transparent calc(9deg + 6 * var(--pfl-fs,6deg)),transparent 360deg);
+  -webkit-mask-image:radial-gradient(circle at 0 50%,#000,rgba(0,0,0,.35) 30%,transparent 62%);
+          mask-image:radial-gradient(circle at 0 50%,#000,rgba(0,0,0,.35) 30%,transparent 62%)}
+.pfl-label{white-space:nowrap;letter-spacing:.15em;color:var(--rf-faint,#8a8c9d);transform:translateX(-50%);opacity:0}
+.pfl-label b{position:static;font-weight:550;color:var(--accent,#b8a2f2)}
+
+/* paint-in garnish, positioned over the real targets */
+.pfl-spark{width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;}
+.pfl-tick{width:10px;height:30px;margin:-15px 0 0 -5px;border-radius:50%;opacity:0;mix-blend-mode:var(--pfl-blend);background:radial-gradient(closest-side,var(--pfl-white),var(--c) 30%,color-mix(in srgb,var(--c) 30%,transparent) 62%,transparent)}
+.pfl-spark{opacity:0;mix-blend-mode:var(--pfl-blend);
+  background:radial-gradient(closest-side,var(--c),color-mix(in srgb,var(--c) 35%,transparent) 40%,transparent)}
+.pfl-ghost{border:1px solid var(--c);border-radius:var(--r,12px);opacity:0;mix-blend-mode:var(--pfl-blend)}
+.pfl-glint{height:1px;background:var(--pfl-fringe);opacity:0}
+.pfl-flick{height:1px;transform-origin:0 50%;background:linear-gradient(90deg,var(--pfl-white),color-mix(in srgb,var(--pfl-white) 40%,transparent) 40%,transparent)}
+
+/* 2 — relight (Day ↔ Night). The beam is its own view-transition group so it
+   rides above both snapshots; the new snapshot is revealed behind it. ------- */
+.pfl-relight-beam{position:fixed;top:0;bottom:0;left:0;width:var(--pfl-rb-w,160px);z-index:2147483601;pointer-events:none;
+  view-transition-name:pfl-relight-beam;contain:strict}
+/* the leading edge is a colour-split hairline: red fringe | white core | blue fringe (painted once into the
+   beam's own snapshot, then only translated — no per-frame paint) */
+.pfl-relight-beam::before{content:"";position:absolute;top:0;bottom:0;right:0;width:5px;
+  background:linear-gradient(90deg,var(--rf-split-b,rgba(92,170,255,.6)) 0 1px,transparent 1px 1.5px,var(--rf-beam-core,#fff) 1.5px 3.5px,transparent 3.5px 4px,var(--rf-split-a,rgba(255,92,130,.6)) 4px 5px);
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);
+  filter:drop-shadow(0 0 6px rgba(var(--accent-rgb,184,162,242),.7))}
+.pfl-relight-beam::after{content:"";position:absolute;top:0;bottom:0;left:0;right:2px;opacity:.55;
+  background:linear-gradient(90deg,rgba(255,110,140,0),rgba(255,110,140,.10) 30%,rgba(255,214,120,.12) 52%,rgba(120,230,190,.14) 72%,rgba(110,170,255,.20) 90%,rgba(184,140,255,.30));
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent)}
+.pfl-relight-beam.is-rtl::before{right:auto;left:0;transform:scaleX(-1)}
+.pfl-relight-beam.is-rtl::after{left:2px;right:0;transform:scaleX(-1)}
+/* where engines honor it, let input fall through the transition layer (Chromium currently hit-tests <html>; the JS skips the sweep on input) */
+html.pfl-relighting::view-transition{pointer-events:none}
+html.pfl-relighting::view-transition-old(root),html.pfl-relighting::view-transition-new(root){animation:none;mix-blend-mode:normal}
+html.pfl-relighting::view-transition-new(root){animation:pfl-reveal-ltr var(--pfl-rl-dur,600ms) var(--rf-ease-in-out,cubic-bezier(.65,0,.35,1)) both}
+html.pfl-relighting.pfl-rtl::view-transition-new(root){animation-name:pfl-reveal-rtl}
+html.pfl-relighting::view-transition-group(pfl-relight-beam){animation-duration:var(--pfl-rl-dur,600ms);animation-timing-function:var(--rf-ease-in-out,cubic-bezier(.65,0,.35,1))}
+html.pfl-relighting::view-transition-old(pfl-relight-beam){animation:pfl-beam-out var(--pfl-rl-dur,600ms) linear both}
+html.pfl-relighting::view-transition-new(pfl-relight-beam){animation:none;opacity:0}
+/* the lead's CSS-only recipe in prism.css uses rf-relight-beam; keep it dark while this one runs */
+html.pfl-relighting .rf-relight-beam{opacity:0!important}
+/* the new theme starts at the toggle (--pfl-rl-x = its center, set by relight()) and follows the beam */
+@keyframes pfl-reveal-ltr{from{clip-path:inset(0 var(--pfl-rl-xr,100%) 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes pfl-reveal-rtl{from{clip-path:inset(0 0 0 var(--pfl-rl-x,100%))}to{clip-path:inset(0 0 0 0)}}
+@keyframes pfl-beam-out{0%,84%{opacity:1}100%{opacity:0}}
+
+@media (prefers-reduced-motion:reduce){
+  html.pfl-armed [data-fl]{animation-delay:.2s}
+  html.pfl-relighting::view-transition-new(root){animation:pfl-fade 120ms linear both}
+  html.pfl-relighting::view-transition-old(root){animation:pfl-fade 120ms linear reverse both}
+  html.pfl-relighting::view-transition-group(pfl-relight-beam){animation:none;display:none}
+}
+@keyframes pfl-fade{from{opacity:0}to{opacity:1}}
+/* Day: the impact reads as pearl light with an iridescent halo, not a dark bloom */
+.pfl.is-day .pfl-flash{mix-blend-mode:normal;background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,.6) 16%,rgba(203,185,247,.32) 30%,rgba(160,222,207,.16) 44%,rgba(241,199,154,.08) 54%,transparent 66%)}
+.pfl.is-day .pfl-head{background:radial-gradient(closest-side,#fff,rgba(115,83,187,.45) 30%,transparent 70%)}

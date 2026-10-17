@@ -35,14 +35,20 @@ test('notification (no id) yields no response', async () => {
   assert.equal(s.initialized, true);
 });
 
-test('tools/list returns 34 tools with schemas', async () => {
+test('tools/list returns 67 tools with schemas (34 web/terminal + 16 deck design + 8 deck live + 9 smart deck)', async () => {
   const s = fixtureServer();
   const res = await s.handleMessage({ jsonrpc: '2.0', id: 2, method: 'tools/list' });
-  assert.equal(res.result.tools.length, 34);
+  assert.equal(res.result.tools.length, 67);
+  assert.equal(new Set(res.result.tools.map((t) => t.name)).size, 67, 'tool names are unique');
   for (const t of res.result.tools) {
     assert.ok(t.name && t.description && t.inputSchema, `tool ${t.name} well-formed`);
     assert.equal(t.inputSchema.type, 'object');
   }
+  const deck = res.result.tools.filter((t) => t.name.startsWith('deck_'));
+  assert.equal(deck.length, 24);
+  assert.ok(deck.every((t) => t.annotations && typeof t.annotations.readOnlyHint === 'boolean'), 'deck tools carry MCP annotations');
+  assert.equal(res.result.tools.find((t) => t.name === 'deck_live_apply_layout').annotations.destructiveHint, true);
+  assert.ok(!res.result.tools.some((t) => /^streamdeck__|^bridge_status$/.test(t.name)), 'names never collide with Elgato\'s MCP');
 });
 
 test('tools/call wraps result in MCP content', async () => {
@@ -71,7 +77,7 @@ test('unknown tool yields -32602 with available tools', async () => {
   const s = fixtureServer();
   const res = await s.handleMessage({ jsonrpc: '2.0', id: 6, method: 'tools/call', params: { name: 'nope' } });
   assert.equal(res.error.code, -32602);
-  assert.ok(res.error.data.availableTools.length === 34);
+  assert.ok(res.error.data.availableTools.length === 67);
 });
 
 test('ping responds', async () => {
@@ -94,4 +100,26 @@ test('loads the real Prism.html island (authoritative catalog)', async (t) => {
   const e = server.store.get(list[0].id);
   assert.ok(e.html.length > 0);
   server.close();
+});
+
+test('real catalog: composed bundles define every var() they read (theme tokens + gallery-level :root tokens)', async (t) => {
+  if (!fs.existsSync(PRISM_HTML)) return t.skip('Prism.html not found');
+  const { CatalogStore } = await import('../utils/catalog.js');
+  const { compose } = await import('../utils/compose.js');
+  const store = new CatalogStore(PRISM_HTML, { watch: false });
+  await store.load();
+  assert.match(store.galleryTokens('spectrums')['--glm-accent-rgb'] || '', /var\(--accent-rgb/, 'gallery :root tokens are harvested from the gallery templates');
+  // a whole gallery (the bulk of the catalog uses only theme tokens) composes with no undefined var()
+  const charts = compose(store.gallery('charts').map((x) => x.id), store, { theme: 'prism-light' });
+  assert.deepEqual(charts.tokens.unresolved, []);
+  const glass = store.all().find((x) => /--glm-/.test(x.css));
+  if (glass) {
+    const r = compose([glass.id], store, {});
+    assert.deepEqual(r.tokens.unresolved, [], glass.id);
+    assert.match(r.css, /--glm-accent-rgb:var\(--accent-rgb, 255,153,0\)/);
+    assert.match(r.css, /--accent-rgb:184,162,242/, 'and the theme token it refers to (Prism Night)');
+  }
+  const misses = store.all().filter((x) => compose([x.id], store, {}).tokens.unresolved.length);
+  assert.ok(misses.length / store.all().length < 0.05, `${misses.length} effects still read undefined vars (record-extraction gaps): ${misses.slice(0, 5).map((x) => x.id).join(', ')}`);
+  store.close();
 });

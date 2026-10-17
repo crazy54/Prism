@@ -6,8 +6,11 @@
 import { perspective, fillPoly, rotX, rotY, mul, apply, blend } from './_raster.js';
 import { ATTR } from '../../buffer.js';
 import { NONE, gradient, luminance } from '../../color.js';
+import { SPECTRUM as REFRACTION } from '../../palettes.js';
 
-const SPECTRUM = gradient(['#ff3046', '#ff8a1f', '#ffe14d', '#3ddc84', '#2ec5ff', '#4b6bff', '#a24bff']);
+// The fan is Refraction's own spectrum in physical order (rose bends least, violet
+// most): the luminous ink tier at Night, the vivid tier on light pages.
+const fanOf = (dark) => gradient(REFRACTION.map((st) => (dark ? st.night : st.dayVivid)).reverse());
 
 export default {
   title: 'Prism',
@@ -40,6 +43,7 @@ export default {
     // On light themes "white light" can't glow over the page, so the beam and
     // the glass edges are drawn in ink instead and the glass tint deepens.
     const dark = luminance(th.bg) < 0.5;
+    const SPECTRUM = fanOf(dark);
     const glass = blend(th.bg, dark ? 0x9fc4ff : 0x5f8fcf, 0.55);
     const beamInk = dark ? 0xffffff : blend(th.ink, 0x4a6a90, 0.35);
     const edgeInk = dark ? 0xe8f2ff : blend(th.ink, 0x3b5f8a, 0.4);

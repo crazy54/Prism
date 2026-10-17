@@ -14,7 +14,7 @@
 import { Canvas, pickMode, MODES } from '../canvas.js';
 import { CellBuffer } from '../buffer.js';
 import { NONE, parse, mix, gradient, fgParam, normalizeDepth, luminance } from '../color.js';
-import { getTheme, palette as makePalette, PALETTES } from '../palettes.js';
+import { getTheme, palette as makePalette, PALETTES, legible } from '../palettes.js';
 import { detect } from '../caps.js';
 import { getFont, glyph } from './fonts.js';
 
@@ -39,7 +39,16 @@ export function resolveFill(fill, theme) {
   if (typeof fill === 'string' && (PALETTES[fill] || fill === 'theme' || fill === 'theme-heat')) {
     // Most field palettes start near black (great for fire, invisible as text ink):
     // skip the dark head so every letter reads.
-    const fn = makePalette(fill, th);
+    let fn = makePalette(fill, th);
+    // On a light page the pale end is the invisible one: every palette color is
+    // drawn as ink at large-text contrast (3:1), same hue and chroma.
+    if (th.mode === 'light' && th.bg !== NONE) {
+      const lut = Int32Array.from(fn.lut, (c) => legible(th, c, 3)), last = lut.length - 1;
+      const cyc = !!PALETTES[fill]?.cyclic;
+      fn = cyc ? (t) => lut[((Math.floor(t * lut.length) % lut.length) + lut.length) % lut.length] : (t) => lut[t <= 0 ? 0 : t >= 1 ? last : (t * last) | 0];
+      fn.lut = lut;
+      fn.at = (i) => lut[i < 0 ? 0 : i > last ? last : i | 0];
+    }
     let lo = 0;
     while (lo < 160 && luminance(fn.lut[lo]) < 0.22) lo++;
     const span = fn.lut.length - 1 - lo;

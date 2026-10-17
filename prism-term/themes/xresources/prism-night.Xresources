@@ -1,0 +1,26 @@
+! Prism Night — Prism's Night terminal colors (Refraction).
+! X11 (xterm, urxvt, st with xresources): merge with  xrdb -merge prism-night.Xresources
+*.foreground:           #e6e6ef
+*.background:           #0a0c12
+*.cursorColor:          #b8a2f2
+*.pointerColorBackground: #0a0c12
+*.highlightColor:       #2e2748
+*.highlightTextColor:   #f0f0f5
+*.colorBD:              #e6e6ef
+*.colorUL:              #b8a2f2
+*.color0:               #1d202b
+*.color1:               #f28885
+*.color2:               #7ad59c
+*.color3:               #ecca76
+*.color4:               #81aaf7
+*.color5:               #b8a2f2
+*.color6:               #67cfe3
+*.color7:               #c6c7d3
+*.color8:               #76798e
+*.color9:               #ffaaa7
+*.color10:              #a5eac1
+*.color11:              #f7e59f
+*.color12:              #aac8ff
+*.color13:              #d9c6fe
+*.color14:              #9eeaf2
+*.color15:              #f6f6fb
