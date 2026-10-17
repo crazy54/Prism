@@ -597,7 +597,8 @@ test('plugin: a cpu ring, now playing and a waveform on a fake Galleon show Pris
     const wave = sd.appear({ device: g, col: 2, row: 0, settings: { facet: 'app-waveform' } });
     const rt = p.runtime;
     const opts = (ctx) => rt.frameOpts(rt.unitOf(rt.instances.get(ctx)));
-    await waitFor(() => opts(cpu).data.cpu === 0.235 && opts(song).data.media?.title === 'Example Song' && opts(wave).data.audio?.levels?.length === 480 && audio.modeOf('audio') === 'live', { timeoutMs: 6000, what: 'live data in frames' });
+    // The art is fetched after now-playing (only when its etag changes), so wait for it too, not just the title.
+    await waitFor(() => opts(cpu).data.cpu === 0.235 && opts(song).data.media?.title === 'Example Song' && opts(song).data.media?.art && opts(wave).data.audio?.levels?.length === 480 && audio.modeOf('audio') === 'live', { timeoutMs: 6000, what: 'live data (incl. album art) in frames' });
     assert.equal(opts(song).data.media.art.mime, 'image/png', 'real art reaches the facet (it decides how to show it)');
     const tagged = (ctx) => { const f = sd.received.filter((m) => m.event === 'setImage' && m.context === ctx).at(-1); return /id="prism-demo-tag"/.test(decodeSvgDataUrl(f.payload.image)); };
     // the runtime re-decides DEMO tags once a second: wait for the frames after Prism Control's data arrived
