@@ -8,6 +8,7 @@ It lets an agent ask *"give me a pulsing KPI card with a wind backdrop"* and get
 - **Reads the authoritative catalog** — points at `Prism.html` (the embedded `#prism-catalog` JSON island, which is the source of truth) or a `catalog/manifest.json`.
 - **Hot reload** — edits to the catalog file are picked up without a restart.
 - **Composition intelligence** — merges HTML, deduplicates CSS rules, collapses `:root` token blocks, validates output, and reports size savings.
+- **Terminal catalog too** — the same server exposes Prism's **terminal facets** (the [`prism-term`](../prism-term) spinners, progress bars and counters, charts, TUI controls, ops views and animated scenes) from the `#prism-terminal-catalog` island, so an agent can find *"an ASCII-safe spinner for a serial console"* and get the command that runs it.
 
 ---
 
@@ -39,7 +40,11 @@ prism-mcp help                Show help
 Options:
   --catalog <path>   Path to Prism.html or catalog/manifest.json
                      (default: ../Prism.html, else ../catalog/manifest.json)
-  --no-watch         Disable catalog hot reload
+  --terminal-catalog <path>
+                     Terminal catalog: a .html with a #prism-terminal-catalog island or a
+                     terminal-catalog.json (default: the catalog's Prism.html island, else
+                     ../prism-term/catalog/terminal-catalog.json)
+  --no-watch         Disable catalog hot reload (both catalogs)
   --log-level <lvl>  debug | info | warn | error | silent   (default: info)
 ```
 
@@ -67,7 +72,7 @@ Add the server to your `claude_desktop_config.json` (see `examples/claude_deskto
 }
 ```
 
-Restart Claude Desktop; the 29 Prism tools appear in the tools menu.
+Restart Claude Desktop; the 34 Prism tools appear in the tools menu.
 
 ## Use with the Anthropic API
 
@@ -75,7 +80,7 @@ The Messages API accepts local MCP servers via the `mcp_servers` parameter (stdi
 
 ---
 
-## Tools (29)
+## Tools (34)
 
 ### Discovery & search (11)
 | Tool | Purpose |
@@ -137,6 +142,22 @@ Saved, named sets of effects that persist across sessions (disk-backed JSON). Co
 
 > Export a saved collection for the Prism.html UI with `export_collection { collectionId, format: "schema" }` — the resulting `prism-collection-1.0` JSON is the cross-surface bridge between the MCP server and the in-browser Collections panel.
 
+### Terminal catalog (5)
+Prism's terminal facets — everything [`prism-term`](../prism-term) draws in a terminal: scenes, spinners, progress bars and counters, charts, text art, TUI controls, diagrams and Linux/ops views, sorted into galleries and categories like the web catalog.
+| Tool | Purpose |
+|------|---------|
+| `list_terminal_galleries` | Galleries with their categories and declared vs. live facet counts. Start here. |
+| `list_terminal_facets` | Filter by `gallery`, `category`, `kind`, `tag`/`tags` (AND), exact `glyphs`/`color` requirement, **what the target terminal supports** (`maxGlyphs`: ascii < unicode < braille < sextant; `maxColor`: mono < 16 < 256 < truecolor), `animated`, and a size budget (`maxWidth`/`maxHeight` against each facet's minimum size) + pagination. Light records with run commands. |
+| `search_terminal_facets` | Ranked text search over title, id, tags, category/gallery and description (*"braille spinner"*, *"download progress eta"*), combinable with every filter above; each hit carries its `score`. |
+| `get_terminal_facet` | Full record: metadata, tunable `params` (`--set key=value`), run commands (`usage.cli` / `usage.npx` / `usage.snapshot` / `usage.curl` / `usage.code`), the facet's ES-module `source` with its `imports` (relative to `module`), the `"_"` gallery helper modules it needs as `helpers: [{ path, source }]`, and a plain-text `preview` frame. Engine modules (`prism-term/src/*.js`) are never included — they ship in the package. `includeSource` (source + helpers) / `includeHelpers` / `includePreview` trim it. |
+| `get_terminal_catalog_stats` | Totals per gallery, kind, glyph and colour requirement, animated vs. still, top tags, the engine package, the catalog `schema` and number of `sourceModules`, and which source was loaded. |
+
+**Using a facet an agent found:** run its `usage.cli` (`prism-term play <id>`, with the package installed) or `usage.npx` (no install — `npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term play <id>`, Node ≥ 18), or in code `import { play, findFacet } from 'prism-term'; await play(findFacet('<id>'))`. `usage.curl` prints a still frame in any terminal.
+
+**Where it comes from.** The terminal catalog is derived from `prism-term/src/facets/**` by `prism-term/scripts/build-catalog.mjs` (`npm run catalog` → `prism-term/catalog/terminal-catalog.json`) and embedded into `Prism.html` as `<script type="application/json" id="prism-terminal-catalog">` by the site pipeline. The server reads the **island first**, falls back to the **JSON file** when the island is absent (or malformed), and hot-reloads either. If neither exists the five tools return a structured `unavailable` error naming the paths they searched — the rest of the server is unaffected.
+
+**Record shape (schema 2).** Module code lives once, in the catalog's top-level `sources` map (`{ "prism-term/src/facets/…/x.js": "<ES module source>" }`), together with the `"_"` gallery helpers those modules import; a facet record points at its code through `module`, and several facets can share one module (e.g. the 15 spinners in `loaders/originals.js`). The server resolves each facet's `source` as `sources[module]` — falling back to the per-facet `source` of a schema-1 catalog, so older islands still load — and keeps the strings shared rather than copied per facet. `get_terminal_facet` returns that `source` plus `helpers`: each `"_"` helper in the facet's `imports` (resolved relative to `module`) that is present in `sources`, followed by any helpers those re-export. List and search results never carry code.
+
 Full parameter schemas are returned by `tools/list`. Per-tool example calls live in [`examples/`](./examples).
 
 ---
@@ -148,7 +169,7 @@ Full parameter schemas are returned by `tools/list`. Per-tool example calls live
 3. On success `create_facet` registers the facet into the **live** catalog — it is immediately returned by `list_effects` / `search_effects` / `get_effect` with **no restart** (`persisted:false`).
 4. To persist to disk, run the repository's catalog pipeline (`extract-from-prism.mjs` → `catalog/_embed-catalog.mjs`) to embed the facet into `Prism.html`. With hot reload on, the server re-reads the file and the facet becomes permanent (`persisted` on the next load).
 
-> **Source-of-truth note:** the `#prism-catalog` island in `Prism.html` is authoritative and can be fresher than `catalog/manifest.json` on disk. Point `--catalog` at `Prism.html` for the complete catalog.
+> **Source-of-truth note:** the `#prism-catalog` island in `Prism.html` is authoritative and can be fresher than `catalog/manifest.json` on disk. Point `--catalog` at `Prism.html` for the complete catalog. The terminal catalog follows the same rule: the `#prism-terminal-catalog` island wins over `prism-term/catalog/terminal-catalog.json`.
 
 ---
 
@@ -159,9 +180,11 @@ prism-mcp-server/
 ├── index.js          # PrismMCPServer (JSON-RPC dispatch) + StdioTransport
 ├── cli.js            # prism-mcp CLI (start / info / tools / help)
 ├── tools/
-│   └── index.js      # the 29 tool definitions (name, description, schema, handler)
+│   ├── index.js      # the tool definitions (name, description, schema, handler)
+│   └── terminal.js   # the 5 terminal-catalog tools (spread into buildTools())
 ├── utils/
 │   ├── catalog.js    # CatalogStore: load island/manifest, index, hot reload, runtime facets
+│   ├── terminal-catalog.js # TerminalCatalogStore: #prism-terminal-catalog island → JSON fallback, hot reload, shared `sources` + helpers
 │   ├── collections.js# CollectionStore: disk-backed named sets + prism-collection-1.0 export
 │   ├── css.js        # split/dedupe/merge/validate CSS; token extraction
 │   ├── compose.js    # composition engine + layout templates
@@ -169,10 +192,10 @@ prism-mcp-server/
 │   ├── themes.js     # canonical theme token maps (variant matrix) — mirrors Prism.html THEMES
 │   └── logger.js     # stderr logger (never pollutes the stdio JSON-RPC channel)
 ├── examples/         # one example request/response per tool + integration configs
-└── test/             # node:test integration + unit tests (132 tests)
+└── test/             # node:test integration + unit tests (155 tests)
 ```
 
-**Server model.** `new PrismMCPServer(catalogPath, opts)` builds the tool registry and a `CatalogStore`. `await server.load()` reads + indexes the catalog. `server.connect(transport)` wires a transport; `StdioTransport` implements newline-delimited JSON-RPC on stdin/stdout. The transport is pluggable — implement `onMessage(cb)` / `send(obj)` to add HTTP/SSE.
+**Server model.** `new PrismMCPServer(catalogPath, opts)` builds the tool registry, a `CatalogStore`, and a `TerminalCatalogStore` (found next to `catalogPath`, or `opts.terminalCatalogPath`). `await server.load()` reads + indexes both catalogs (a missing terminal catalog is not an error). `server.connect(transport)` wires a transport; `StdioTransport` implements newline-delimited JSON-RPC on stdin/stdout. The transport is pluggable — implement `onMessage(cb)` / `send(obj)` to add HTTP/SSE.
 
 **Error handling.** Protocol errors (bad method / unknown tool) return JSON-RPC errors. Tool-level failures (unknown id, validation failure) return an MCP tool result with `isError: true` and a structured `{error, code, data}` payload with actionable messages and suggestions.
 
@@ -186,7 +209,7 @@ prism-mcp-server/
 node --test          # or: npm test
 ```
 
-129 tests cover every tool (incl. the advanced-search & variant-matrix tools, the `themeSensitive` facet, and the 6 Collections tools + `export_collection` formats), the CSS/compose/validate utilities, the canonical theme token maps (the two Cloudscape modes), the `CollectionStore`, the JSON-RPC protocol layer, and loading the real `Prism.html` island.
+155 tests cover every tool (incl. the advanced-search & variant-matrix tools, the `themeSensitive` facet, the 6 Collections tools + `export_collection` formats, and the 5 terminal-catalog tools), the CSS/compose/validate utilities, the canonical theme token maps (the two Cloudscape modes), the `CollectionStore`, the `TerminalCatalogStore` (island vs. JSON fallback, malformed/missing sources, hot reload, schema 1 per-facet source vs. schema 2 shared `sources` with helper resolution and flat memory), the JSON-RPC protocol layer, and loading the real `Prism.html` island and `prism-term` terminal catalog.
 
 ---
 

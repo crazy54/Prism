@@ -56,17 +56,20 @@ import Anthropic from '@anthropic-ai/sdk';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CatalogStore } from '../utils/catalog.js';
+import { TerminalCatalogStore, resolveTerminalPaths } from '../utils/terminal-catalog.js';
 import { buildTools, ToolError } from '../tools/index.js';
 import { createLogger } from '../utils/logger.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CATALOG = path.resolve(HERE, '..', '..', 'Prism.html');
 
-// Load the catalog once and reuse it across tool calls.
+// Load both catalogs once and reuse them across tool calls.
 const logger = createLogger('warn');
 const store = new CatalogStore(CATALOG, { watch: false, logger });
 await store.load();
-const ctx = { store, logger };
+const terminal = new TerminalCatalogStore({ ...resolveTerminalPaths(CATALOG), logger }); // optional
+await terminal.load();
+const ctx = { store, terminal, logger };
 
 // Map Prism tool defs -> SDK tool defs with an execute() that calls the handler.
 const prismTools = buildTools().map((t) => ({
@@ -75,7 +78,7 @@ const prismTools = buildTools().map((t) => ({
   input_schema: t.inputSchema,
   run: async (args) => {
     try {
-      return JSON.stringify(t.handler(args, ctx));
+      return JSON.stringify(await t.handler(args, ctx)); // some handlers are async
     } catch (e) {
       if (e instanceof ToolError) {
         return JSON.stringify({ error: e.message, code: e.code, data: e.data });
@@ -115,4 +118,4 @@ node examples/bridge.mjs
 ```
 
 This keeps a single warm `CatalogStore` in memory (fast, hot-reloadable) while
-Claude iterates over the 21 tools.
+Claude iterates over the 34 tools (including the 5 terminal-catalog tools).

@@ -4,9 +4,11 @@
 
 **One prism. Every facet of your report.**
 
-A single-file gallery of **1,668** offline, self-contained CSS/SVG animations, components, and backdrops — built to be browsed by humans *and* driven by AI agents. Ships with a **zero-dependency MCP server** so Claude (Desktop, Code, or the API) can search the catalog and compose production-ready HTML/CSS on demand.
+A single-file gallery of **2,668** offline, self-contained CSS/SVG animations, components, and backdrops — built to be browsed by humans *and* driven by AI agents — plus a **terminal catalog** of **434** animated terminal facets you can browse with `curl` and play live with `npx`. Ships with a **zero-dependency MCP server** so Claude (Desktop, Code, or the API) can search both catalogs and compose production-ready HTML/CSS on demand.
 
-![Effects](https://img.shields.io/badge/effects-1668-ff9900) ![Galleries](https://img.shields.io/badge/galleries-15-4493f8) ![Dependencies](https://img.shields.io/badge/dependencies-0-3fb950) ![Offline](https://img.shields.io/badge/offline-100%25-3fb950) ![MCP](https://img.shields.io/badge/MCP-server%20included-c879ff) ![Single file](https://img.shields.io/badge/single%20file-HTML-e0a52b)
+**[prism.jeremyfhall.com](https://prism.jeremyfhall.com)** · `curl -sL https://prism.jeremyfhall.com/tty`
+
+![Effects](https://img.shields.io/badge/effects-2668-ff9900) ![Galleries](https://img.shields.io/badge/galleries-15-4493f8) ![Terminal facets](https://img.shields.io/badge/terminal%20facets-434-ff5fa2) ![Dependencies](https://img.shields.io/badge/dependencies-0-3fb950) ![Offline](https://img.shields.io/badge/offline-100%25-3fb950) ![MCP](https://img.shields.io/badge/MCP-34%20tools-c879ff) ![Single file](https://img.shields.io/badge/single%20file-HTML-e0a52b)
 
 </div>
 
@@ -21,11 +23,20 @@ It serves two audiences from the same source of truth:
 - **Humans** open the file in a browser, browse the galleries, and hit **Copy** on any element to grab ready-to-paste, self-contained markup.
 - **AI agents** talk to the **Prism MCP server** (in [`prism-mcp-server/`](./prism-mcp-server)) — or read the embedded [JSON island](#-the-json-island) directly — to discover effects and compose them programmatically: *"make the KPI cards pulse and put a wind backdrop behind the streaming agent text."*
 
+Prism now has **two catalogs**, sorted into galleries and categories the same way:
+
+| Catalog | What's in it | Where to browse it |
+|---|---|---|
+| **Web catalog** | 2,668 CSS/SVG effects in 15 galleries, in one HTML file | open `Prism.html` in a browser, or [prism.jeremyfhall.com/Prism.html](https://prism.jeremyfhall.com/Prism.html) |
+| **Terminal catalog** | 434 terminal facets in 17 galleries, drawn by [`prism-term`](./prism-term) | with `curl` on the terminal site, live with `npx`, or in the browser at [prism.jeremyfhall.com/terminal/](https://prism.jeremyfhall.com/terminal/) — see [Prism for the terminal](#prism-for-the-terminal) |
+
+Both catalogs are embedded in `Prism.html` as JSON islands, and both are served by the MCP server.
+
 ---
 
 ## Install the MCP server
 
-The [Model Context Protocol](https://modelcontextprotocol.io) lets an AI agent call tools over a well-defined resource. The bundled server exposes Prism's catalog as **21 tools** — discovery, composition, facet creation, and saved collections — so an agent can go from *"give me a pulsing KPI card with a wind background"* to **discovered, composed, deduplicated, validated HTML/CSS** in one turn.
+The [Model Context Protocol](https://modelcontextprotocol.io) lets an AI agent call tools over a well-defined resource. The bundled server exposes Prism's catalogs as **34 tools** — discovery and search, theme variants, composition, facet creation, saved collections, and the terminal catalog — so an agent can go from *"give me a pulsing KPI card with a wind background"* to **discovered, composed, deduplicated, validated HTML/CSS** in one turn.
 
 It has **zero runtime dependencies** (pure Node.js ≥ 18) and speaks MCP JSON-RPC 2.0 over **stdio** — the transport Claude Desktop, Claude Code, and the Anthropic API use to launch a local MCP server as a subprocess.
 
@@ -46,14 +57,14 @@ There is **nothing to `npm install`** — the server has no dependencies. It run
 # Print catalog stats and exit (no server) — confirms it can read Prism.html
 node cli.js info --catalog ../Prism.html
 
-# List the 21 tools it exposes
+# List the 34 tools it exposes
 node cli.js tools
 
 # Run the server over stdio (Ctrl-C to stop). This is what a client launches.
 node cli.js start --catalog ../Prism.html
 ```
 
-`info` should report **1,668 effects across 15 galleries**. If it does, the server is working — the remaining steps just tell a client *how* to launch it.
+`info` should report **2,668 effects across 15 galleries**, followed by a line for the terminal catalog (read from the `#prism-terminal-catalog` island in `Prism.html`, or from `prism-term/catalog/terminal-catalog.json` when the island is missing). If it does, the server is working — the remaining steps just tell a client *how* to launch it.
 
 > **Always point `--catalog` at `Prism.html`.** The `#prism-catalog` island inside it is the authoritative catalog and can be fresher than `catalog/manifest.json`. If `--catalog` is omitted, the server defaults to `../Prism.html`, falling back to `../catalog/manifest.json`.
 
@@ -75,13 +86,13 @@ Use **absolute paths** everywhere below — clients launch the server from their
 claude mcp add prism -- node /ABS/PATH/prism/prism-mcp-server/cli.js start --catalog /ABS/PATH/prism/Prism.html
 ```
 
-Then `claude mcp list` should show `prism`, and the 21 tools become available in your session. Remove it with `claude mcp remove prism`.
+Then `claude mcp list` should show `prism`, and the 34 tools become available in your session. Remove it with `claude mcp remove prism`.
 </details>
 
 <details>
 <summary><b>Claude Desktop</b></summary>
 
-Add the block below to your `claude_desktop_config.json`, then **restart Claude Desktop**. The 21 Prism tools appear in the tools menu.
+Add the block below to your `claude_desktop_config.json`, then **restart Claude Desktop**. The 34 Prism tools appear in the tools menu.
 
 - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
@@ -154,15 +165,19 @@ Options:
 
 Logs go to **stderr** (stdout is reserved for the JSON-RPC channel), so they never corrupt the MCP protocol stream. Verbosity is also settable via `PRISM_MCP_LOG_LEVEL`. A `--port` flag is accepted but ignored — this build is stdio-only; add an HTTP/SSE transport by implementing one against `PrismMCPServer`.
 
-### The 21 tools
+### The 34 tools
 
 | Group | Tools |
 |---|---|
-| **Discovery (6)** | `list_effects` · `search_effects` · `get_effect` · `get_theme_variants` · `list_galleries` · `get_catalog_stats` |
+| **Discovery & search (11)** | `list_effects` · `search_effects` · `get_effect` · `get_theme_variants` · `list_galleries` · `get_catalog_stats` · `get_available_filters` · `list_filter_values` · `create_saved_search` · `get_saved_searches` · `execute_saved_search` |
+| **Component variant matrix (3)** | `get_theme_palette` · `get_component_variants` · `get_variants_for_theme` |
 | **Composition (3)** | `compose` · `compose_with_template` (`stack`/`row`/`grid`/`card`) · `validate_composition` |
 | **Content creation (3)** | `create_facet` · `update_facet` · `validate_facet` |
 | **Catalog management (3)** | `get_catalog_metadata` · `export_collection` (`bundle`/`document`/`schema`) · `get_token_reference` |
 | **Collections & favorites (6)** | `list_collections` · `get_collection` · `create_collection` · `add_to_collection` · `remove_from_collection` · `delete_collection` |
+| **Terminal catalog (5)** | `list_terminal_galleries` · `list_terminal_facets` · `search_terminal_facets` · `get_terminal_facet` · `get_terminal_catalog_stats` |
+
+`search_effects` combines full-text ranking with facet filters (gallery, component type, spectrum, category, tag, interaction); `get_available_filters` and `list_filter_values` tell an agent which filter values exist. The variant-matrix tools exploit the fact that Prism themes are pure `:root` token swaps: `get_component_variants` returns one payload plus each theme's overrides, not N copies. The terminal tools are covered in [For agents](#for-agents-mcp) below.
 
 `compose` merges HTML, deduplicates CSS rules, collapses `:root` token blocks, validates the output, and reports size savings. **Collections** are named, disk-backed sets of effects that persist across sessions (stored in `prism-mcp-server/collections.json`, which is git-ignored); export one with `export_collection { collectionId, format: "schema" }` to hand it to the Prism.html UI. Full parameter schemas come back from `tools/list`, and one example call per tool lives in [`prism-mcp-server/examples/`](./prism-mcp-server/examples).
 
@@ -229,15 +244,203 @@ cd prism-mcp-server
 # Drive search -> get -> compose end to end against the real catalog
 node examples/quickstart.mjs ../Prism.html
 
-# Run the bundled Node-native test suite (129 tests, zero deps)
+# Run the bundled Node-native test suite (155 tests, zero deps)
 node --test test/*.test.js
 ```
 
 ---
 
+## Prism for the terminal
+
+Prism's second catalog is drawn in text: **434 terminal facets** in **17 galleries** — spinners, progress bars and counters, charts, Linux and ops views, TUI controls, diagrams, text art and demoscene effects — sorted into galleries and categories exactly like the web catalog. Every facet is drawn by [`prism-term`](./prism-term), a zero-dependency Node engine, and adapts to the terminal it lands in: truecolor down to mono, braille and block glyphs down to 7-bit ASCII, 80×24 and up.
+
+There are four ways in:
+
+| Where | What you get | Start with |
+|---|---|---|
+| **Your terminal, with curl** | the **terminal site** — every gallery and every facet as an 80-column ANSI page | `curl -sL https://prism.jeremyfhall.com/tty` |
+| **Your terminal, live** | the **live player** — every facet animating in real time (Node.js 18+) | `npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term` |
+| **Your browser** | the **terminal catalog** on the web — every tile runs the real facet code, cell for cell | [prism.jeremyfhall.com/terminal/](https://prism.jeremyfhall.com/terminal/) |
+| **Your agent** | the `#prism-terminal-catalog` JSON island and five MCP tools | [The terminal JSON island](#the-terminal-json-island) |
+
+Step-by-step directions, with a preview of every curl page exactly as your terminal will show it, are at [prism.jeremyfhall.com/terminal/tty.html](https://prism.jeremyfhall.com/terminal/tty.html).
+
+### The terminal galleries
+
+| Gallery | id | What's inside | Count |
+|---|---|---|--:|
+| ✺ **FX Store** | `fx` | Full-field effects: plasma, fire, fractals, water and light. | 24 |
+| ◈ **Animated Objects** | `objects` | 3D solids, wireframes, globes and mechanical things that move. | 18 |
+| ✦ **Particles & Simulations** | `sim` | Particles, cellular automata, physics, flocking and weather. | 18 |
+| ▚ **Retro & Demoscene** | `retro` | Cracktro scrollers, copper bars, BBS-era ANSI art and chiptune visuals. | 24 |
+| Aa **Text Effects** | `text` | Banners, bitmap fonts, reveals, glitches and color on type. | 29 |
+| ⠿ **Spinners & Loaders** | `loaders` | Every way to say "working…" in one or two cells. | 64 |
+| ▰ **Progress & Counters** | `progress` | Progress bars, multi-step pipelines, counters, timers and transfer meters. | 41 |
+| ▁▃▆ **Charts & Metrics** | `charts` | Sparklines, line and bar charts, gauges, heatmaps and KPI tiles. | 30 |
+| ✳ **AI Working** | `ai` | Thinking states, token streams, tool calls and agent pipelines. | 18 |
+| ● **Notifications & Status** | `status` | Toasts, status lines, badges, health indicators and log lines. | 18 |
+| $_ **Linux & Ops** | `ops` | What you see on a real box: monitors, disks, network, services, containers and logins. | 39 |
+| ┌┐ **Architecture Diagrams** | `diagrams` | Box-drawing flows, trees, topologies, sequences and git graphs. | 16 |
+| ▌ **Callouts & Layout** | `callouts` | Panels, borders, admonitions, tables, dividers and key-value blocks. | 15 |
+| ❯ **Input & Menus** | `input` | TUI controls: selects, checkboxes, text fields, palettes, dialogs and tab bars. | 23 |
+| ◍ **Maps & Geo** | `maps` | World maps, radar sweeps, routes, arcs and floorplans in braille and blocks. | 11 |
+| ∿ **Animation Lab** | `lab` | Motion studies: easing curves, springs, timing and the building blocks of animation. | 17 |
+| # **Pure ASCII** | `ascii` | 7-bit only — no Unicode, no color required. Runs on a VT100, a serial console, anything. | 29 |
+
+The taxonomy lives in [`prism-term/src/facets/galleries.js`](./prism-term/src/facets/galleries.js); `prism-term galleries` prints the same list with every category.
+
+### Browse it with curl
+
+The terminal site is a set of plain pages you read with `curl` — no install, no account, no JavaScript:
+
+```bash
+curl -sL https://prism.jeremyfhall.com/tty            # home: every gallery with its facet count
+curl -sL https://prism.jeremyfhall.com/t/ops          # one gallery, by category
+curl -sL https://prism.jeremyfhall.com/f/ops-htop     # one facet: a still frame, what it needs, how to run it
+curl -sL https://prism.jeremyfhall.com/t/all          # every facet, one line each
+curl -sL https://prism.jeremyfhall.com/t/help         # the manual
+```
+
+Pages are stills that fit 80 columns and use only color and text — no cursor movement — so they work over SSH, inside tmux, and in a CI log. Every page also comes in two variants:
+
+- **`<page>.txt`** — plain 7-bit ASCII with no escape codes, for `grep`, `NO_COLOR`, `LANG=C`, serial consoles and screen readers.
+- **`<page>.24`** — 24-bit truecolor instead of the default 256 colors.
+
+```bash
+curl -sL https://prism.jeremyfhall.com/t/ops | less -R                # page through a long gallery
+curl -sL https://prism.jeremyfhall.com/t/all.txt | grep -i spinner    # search every facet
+curl -sL https://prism.jeremyfhall.com/f/plasma.24                    # one facet in truecolor
+```
+
+On **Windows PowerShell 5**, type `curl.exe` instead of `curl` — plain `curl` is an alias for `Invoke-WebRequest` there.
+
+### Play it live
+
+The curl pages are stills. To see facets move — in real time, at your terminal's real size and color depth — run the live player:
+
+```bash
+npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term                  # the catalog browser
+npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term play ops-htop    # one facet, fullscreen
+```
+
+`npx` downloads the packed engine (about 600 KB, no dependencies) and runs it without a global install. It needs **Node.js 18+**. For a permanent `prism-term` command, run `npm i -g https://prism.jeremyfhall.com/dl/prism-term.tgz` once.
+
+The catalog browser shows galleries, facets and a live preview side by side. The keys, exactly as `prism-term help` lists them:
+
+- **Keys in the browser:** `↑↓` `jk` move · `←→` `hl` / `Tab` pane · `Enter` play · `s` showcase · `/` search · `g` gallery · `f` kind · `t` theme · `m` mode · `?` help · `q` quit
+- **Keys while playing:** `←/→` facet · `space` pause · `m` mode · `t` theme · `r` restart · `h` HUD · `q` back
+
+In a window narrower than 110 columns the browser drops the gallery pane: `←→` / `hl` / `Tab` change gallery instead, and `g` opens a gallery picker.
+
+### In the browser
+
+[prism.jeremyfhall.com/terminal/](https://prism.jeremyfhall.com/terminal/) is the terminal catalog on the web. Every tile runs the real facet code through prism-term's browser renderer, so what you see is what your terminal will draw. Filter by gallery, kind, the glyphs your terminal supports, or its color depth; open any facet to change its Prism theme, canvas mode, color depth and parameters, copy the exact command that plays it, download the current frame (`.ans`, `.txt` or `.png`), or read its source.
+
+### The terminal JSON island
+
+Right after the web catalog's island, `Prism.html` carries a second one:
+
+```html
+<!-- ===== PRISM TERMINAL CATALOG · AI START HERE ===== -->
+<script type="application/json" id="prism-terminal-catalog"> … </script>
+<!-- ===== /PRISM TERMINAL CATALOG ===== -->
+```
+
+It follows the same `_ai` convention as [the web island](#-the-json-island), so an agent reads it the same way:
+
+```js
+const term = JSON.parse(document.getElementById('prism-terminal-catalog').textContent);
+term._ai;         // read this first: schema (2) / what / howToUse / fields / sources / count
+term.engine;      // package, version, repo, and the npx / curl / web entry points
+term.galleries;   // id, title, icon, blurb, count, categories[{ name, count }]
+term.facets;      // one record per facet
+term.sources;     // module path → full ES-module source, stored once per module
+```
+
+A facet record:
+
+```jsonc
+{
+  "id": "ops-htop",                       // stable, unique — `prism-term play ops-htop`
+  "title": "htop",
+  "gallery": "ops", "galleryTitle": "Linux & Ops",
+  "category": "System Monitors",
+  "description": "htop as you know it: per-core CPU meters, Mem/Swp bars, …",
+  "tags": ["htop", "top", "cpu", "memory", "processes", "monitor"],
+  "kind": "tui",                          // scene|widget|spinner|progress|text|chart|tui|diagram|art
+  "size": { "w": 80, "h": 24 },           // preferred size in terminal cells
+  "minSize": { "w": 40, "h": 10 },        // smallest size it still reads at
+  "animated": true, "loop": 20,           // seconds per cycle
+  "glyphs": "ascii",                      // minimum glyph support: ascii|unicode|braille|sextant
+  "color": "16",                          // minimum color depth: mono|16|256|truecolor
+  "canvas": null, "palette": null,
+  "params": {},                           // {key:{default,min,max,options,label}} → --set key=value
+  "since": "0.1.0", "credits": null,
+  "module": "prism-term/src/facets/ops/htop.js",   // its source is sources[module]
+  "imports": ["./_kit.js"],               // what the module imports, relative to `module`
+  "usage": {                              // ready-to-run commands
+    "cli": "prism-term play ops-htop",
+    "npx": "npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term play ops-htop",
+    "snapshot": "prism-term snapshot ops-htop --size 80x24",
+    "code": "import { play, findFacet } from 'prism-term'; …",
+    "curl": "curl -sL https://prism.jeremyfhall.com/f/ops-htop"
+  },
+  "preview": { "w": 60, "h": 16, "text": "…" }   // a plain-text frame, no escape codes
+}
+```
+
+Source code lives once, in `sources`, keyed by the module path exactly as it appears in `facet.module`. Many modules host several facets, so records point at their module instead of each repeating it. `sources` also holds every gallery helper module (`src/facets/<gallery>/_*.js`) that facet modules import, directly or through another helper:
+
+```jsonc
+"sources": {
+  "prism-term/src/facets/ops/htop.js": "…",    // the module behind ops-htop
+  "prism-term/src/facets/ops/_kit.js": "…",    // the ops helper it imports ("./_kit.js" resolved against module)
+  …
+}
+```
+
+Engine imports (`../../buffer.js` and the like) aren't in `sources`; they ship in the `prism-term` package.
+
+The same data is published in three places:
+
+- **`Prism.html`** — the full island, `sources` included.
+- **[`/terminal/`](https://prism.jeremyfhall.com/terminal/)** — a lean copy without `sources` or `preview` (`_ai.lean` is `true`; `_ai.leanNote` says where the full records are).
+- **[`prism-term/catalog/terminal-catalog.json`](./prism-term/catalog/terminal-catalog.json)** — the full catalog as a file, also served at `/terminal/engine/catalog/terminal-catalog.json`.
+
+Like the web island, it is **derived** — built from `prism-term/src/facets/**`, never hand-edited (see [Regenerating the catalog](#regenerating-the-catalog)).
+
+### For agents (MCP)
+
+The MCP server's five terminal tools read the island (or the JSON file when the island is missing) and hot-reload either:
+
+| Tool | Purpose |
+|---|---|
+| `list_terminal_galleries` | Galleries with their categories and facet counts. Start here. |
+| `list_terminal_facets` | Filter by gallery, category, kind, tags, and **what the target terminal supports** (`maxGlyphs`, `maxColor`, a size budget), with pagination. |
+| `search_terminal_facets` | Ranked text search — *"braille spinner"*, *"download progress eta"*, *"htop cpu bars"* — combinable with every filter above. |
+| `get_terminal_facet` | The full record: params, run commands, source and imports, and a plain-text preview. |
+| `get_terminal_catalog_stats` | Totals per gallery, kind, glyph and color requirement, and which source was loaded. |
+
+### From a clone
+
+prism-term runs straight from the repository — nothing to install:
+
+```bash
+cd prism-term
+node cli.js                    # the catalog browser
+node cli.js galleries          # every gallery, with counts and categories
+node cli.js play ops-htop      # one facet, fullscreen
+node cli.js snapshot plasma    # a still frame to stdout
+node cli.js dashboard          # PROTEUS-style live metrics + AI triage console (needs 100×34)
+```
+
+See [`prism-term/README.md`](./prism-term/README.md) for every command, the library API, authoring new facets, resolution modes and terminal support.
+
+---
+
 ## Quick start (just open the file)
 
-You don't need the MCP server to use Prism as a human:
+You don't need the MCP server to use Prism as a human. Browse the hosted copy at [prism.jeremyfhall.com](https://prism.jeremyfhall.com), or open your own:
 
 ```bash
 open Prism.html            # macOS — or double-click the file, or serve the folder statically
@@ -249,12 +452,12 @@ The page opens on a loader veil, then routes by device: touch devices land on **
 
 ## The galleries
 
-Fifteen authored galleries, plus special views. Every element carries a name, its canonical CSS selector (`.ref`), a one-line description, and a copy affordance.
+Fifteen authored galleries in the web catalog, plus special views. Every element carries a name, its canonical CSS selector (`.ref`), a one-line description, and a copy affordance. (The terminal catalog's galleries are listed under [Prism for the terminal](#the-terminal-galleries).)
 
 | Gallery | What's inside | Count |
 |---|---|--:|
+| ◆ **Spectrums** | Component families across full visual languages (Material, glass, brutalist, solarpunk…) | 1,266 |
 | 🧪 **Animation Lab** | Motion studies — easing, transforms, loaders, physics, keyframes | 217 |
-| ◆ **Spectrums** | Component families across full visual languages (Material, glass, brutalist, solarpunk…) | 266 |
 | 📊 **Charts & Metrics** | KPIs, gauges, progress, trends, comparisons, status, 3D charts | 209 |
 | 🎇 **FX Store** | Drop-in visual effects: glow, pulse, shimmer, glass, particles, glitch | 146 |
 | ◈ **Obsidian Facets** | Callouts, graph links, note chrome, Dataview dashboards, Canvas, focus scenes | 130 |
@@ -294,8 +497,10 @@ This is the **JSON island**: a complete, machine-readable catalog of every effec
 ```js
 const catalog = JSON.parse(document.getElementById('prism-catalog').textContent);
 catalog._ai;          // read this first: what/howToUse/fields/count
-catalog.effects;      // 1668 records, each with self-contained html + css
+catalog.effects;      // 2668 records, each with self-contained html + css
 ```
+
+(The terminal catalog has its own island, `#prism-terminal-catalog`, right after this one — see [The terminal JSON island](#the-terminal-json-island).)
 
 The island is purpose-built to back an MCP server because everything a tool needs is precomputed and self-describing: a **`_ai` header** that orients a fresh agent, **fully composable records** (each effect ships its own `html` + `css`, `classes`, `keyframes`, `params`, `needsJs`, `usableAsBackground`, `selfContained`), **searchable dimensions** (`gallery`, `category`, `tags`, `ref`, `description`), and **encoded composition rules** (top-level `tokens.css`, `usage`, `galleries`).
 
@@ -337,32 +542,69 @@ The MCP server's `compose` / `compose_with_template` tools do all of this for yo
 
 ---
 
+## The website
+
+[prism.jeremyfhall.com](https://prism.jeremyfhall.com) is built entirely from this repository:
+
+| URL | What |
+|---|---|
+| [`/`](https://prism.jeremyfhall.com/) | the landing page — what Prism is, live previews, and quick starts for browsers, terminals and agents |
+| [`/Prism.html`](https://prism.jeremyfhall.com/Prism.html) | the web catalog — the same single file, carrying both JSON islands |
+| [`/terminal/`](https://prism.jeremyfhall.com/terminal/) | the terminal catalog in the browser, every facet running live |
+| [`/terminal/tty.html`](https://prism.jeremyfhall.com/terminal/tty.html) | directions for browsing from a terminal, with a preview of every curl page |
+| `/tty` · `/t/<gallery>` · `/t/help` · `/t/all` · `/f/<facet-id>` | the terminal site — ANSI pages for `curl`, each with `.txt` and `.24` variants |
+| `/dl/prism-term.tgz` | the packed engine the live player runs through `npx` |
+
+Build it from the repository root (Node.js 18+, nothing to install):
+
+```bash
+node website/build.mjs                 # → site-dist/
+node website/build.mjs /path/to/out    # or any dedicated output directory
+```
+
+The build writes the landing page (`index.html`, `styles.css`, `app.js`, `assets/`), `Prism.html` with both islands, `terminal/` (the web pages plus `engine/` — the browser-safe engine and `terminal-catalog.json` — and `tty-preview/`), the terminal site (`tty`, `t/`, `f/`), `dl/prism-term.tgz`, and `sitemap.xml`, `robots.txt`, `CNAME` and `.nojekyll`. It is deterministic and fails loudly: a stale terminal catalog or island, a missing terminal page, or a broken relative link stops it. For local work, `--allow-stale` and `--allow-incomplete` turn those failures into warnings, and `--no-pack` skips the tarball.
+
+**Hosting.** GitHub Pages serves the `gh-pages` branch: a built `site-dist/` at the branch root, with `.nojekyll` so every file is served as-is, on the custom domain in `CNAME`, with Cloudflare in front. `site-dist/` itself is git-ignored.
+
+---
+
 ## Repository layout
 
 ```
 .
-├── Prism.html              ← the whole tool: UI + all galleries + the JSON island
+├── Prism.html              ← the whole tool: UI + all galleries + both JSON islands
 ├── README.md               ← you are here
-├── prism-mcp-server/       ← the MCP server (zero-dependency Node, 21 tools)
+├── prism-term/             ← the terminal catalog + its engine and CLI (zero-dependency Node)
+│   ├── cli.js                 prism-term CLI (browse / play / snapshot / banner / spin / …)
+│   ├── index.js               public API
+│   ├── src/                   engine: buffers, pixel canvas, renderer, themes, widgets, text
+│   │   ├── facets/            the terminal facets — <gallery>/*.js, plus galleries.js (taxonomy) and schema.js
+│   │   ├── web/               browser renderer used by the web terminal catalog
+│   │   └── site/              the terminal site's page generator
+│   ├── catalog/               terminal-catalog.json (derived — the island's source)
+│   ├── scripts/               manifest, catalog, island, terminal site, pack, contact-sheet tools
+│   ├── docs/                  authoring-facets.md, linux-sme-requirements.md
+│   └── test/                  Node-native test suite
+├── prism-mcp-server/       ← the MCP server (zero-dependency Node, 34 tools)
 │   ├── cli.js                 prism-mcp CLI (start / info / tools / help)
 │   ├── index.js               PrismMCPServer (JSON-RPC dispatch) + StdioTransport
-│   ├── tools/index.js         the 21 tool definitions
-│   ├── utils/                 catalog store, collections, css/compose/validate, logger
+│   ├── tools/index.js         the 34 tool definitions
+│   ├── utils/                 catalog store, terminal catalog, collections, css/compose/validate, logger
 │   ├── examples/              per-tool example calls + Claude Desktop / Anthropic API configs
-│   ├── test/                  Node-native test suite (129 tests)
+│   ├── test/                  Node-native test suite (155 tests)
 │   └── README.md              server internals & architecture
-├── catalog/                ← the catalog + the maintenance pipeline
-│   ├── manifest.json          full catalog (mirror of the island)
-│   ├── index.json             slim discovery index (no html/css)
-│   ├── extract-from-prism.mjs re-extract every effect from Prism.html (headless Chrome)
-│   ├── _embed-catalog.mjs     embed the manifest into the #prism-catalog island
-│   └── …                      scaffold / splice / render-check / screenshot helpers
-└── fragments/              ← standalone gallery fragments (mobile / desktop / text)
+├── website/                ← prism.jeremyfhall.com: landing page, terminal/ pages, build.mjs
+└── catalog/                ← the web catalog + the maintenance pipeline
+    ├── manifest.json          full catalog (mirror of the island)
+    ├── index.json             slim discovery index (no html/css)
+    ├── extract-from-prism.mjs re-extract every effect from Prism.html (headless Chrome)
+    ├── _embed-catalog.mjs     embed the manifest into the #prism-catalog island
+    └── …                      scaffold / splice / render-check / screenshot helpers
 ```
 
 ### Regenerating the catalog
 
-The JSON island is **derived**, not hand-maintained. After editing any gallery, refresh it so the agent-facing catalog (and MCP server) stay in sync with what's on the page:
+Both JSON islands are **derived**, not hand-maintained. After editing any web gallery, refresh the web island so the agent-facing catalog (and MCP server) stay in sync with what's on the page:
 
 ```bash
 node catalog/extract-from-prism.mjs   # loads Prism.html in headless Chrome, re-extracts every effect
@@ -370,6 +612,19 @@ node catalog/_embed-catalog.mjs       # embeds the fresh manifest into the #pris
 ```
 
 > Requires Node and Google Chrome (used headlessly via the DevTools Protocol — no extra packages). With MCP hot reload on, a running server re-reads `Prism.html` automatically.
+
+After adding or changing a terminal facet, rebuild the terminal catalog and its island, then the site:
+
+```bash
+cd prism-term
+npm run facets:manifest   # refresh src/facets/manifest.js after adding or removing a module
+npm run catalog           # src/facets/** → catalog/terminal-catalog.json
+npm run island            # embed it into ../Prism.html as #prism-terminal-catalog
+cd ..
+node website/build.mjs    # rebuild site-dist/ (fails if either step above was skipped)
+```
+
+`npm run catalog:check` and `npm run island:check` exit non-zero when either is stale. How to write a facet is in [`prism-term/docs/authoring-facets.md`](./prism-term/docs/authoring-facets.md).
 
 ---
 
@@ -380,6 +635,7 @@ node catalog/_embed-catalog.mjs       # embeds the fresh manifest into the #pris
 - **Token-themed.** Effects read shared CSS variables, so one theme override reskins everything.
 - **Namespaced.** Each effect's classes/keyframes are prefixed to avoid collisions when composed.
 - **Accessible motion.** Effects honor `prefers-reduced-motion`.
+- **Any terminal.** Terminal facets read at 80×24, fall back to 7-bit ASCII, respect `NO_COLOR`, and always restore the terminal.
 - **Dual-purpose by design.** The same file is a human gallery, an agent-readable catalog, and an MCP-backed toolset.
 
 ---
@@ -395,5 +651,5 @@ If you redistribute Prism or build on it, keep the [NOTICE](NOTICE) file, which 
 ---
 
 <div align="center">
-<sub>Single-file · offline · MCP server included — <b>One prism. Every facet of your report.</b></sub>
+<sub>Single-file · offline · terminal catalog · MCP server included — <b>One prism. Every facet of your report.</b></sub>
 </div>

@@ -616,6 +616,142 @@ Result — the portable `prism-collection-1.0` object the in-browser Collections
 
 ---
 
+## Terminal catalog
+
+Prism's terminal facets (from [`prism-term`](../../prism-term)): scenes, spinners,
+progress bars and counters, charts, TUI controls, diagrams and ops views. Loaded
+from Prism.html's `#prism-terminal-catalog` island, else
+`prism-term/catalog/terminal-catalog.json`. Ids and counts below are illustrative
+— they track whatever the terminal catalog currently holds.
+
+### `list_terminal_galleries`
+Request:
+```json
+{ "name": "list_terminal_galleries", "arguments": {} }
+```
+Result:
+```json
+{
+  "total": 17,
+  "source": "island",
+  "items": [
+    {
+      "id": "fx", "title": "FX Store", "icon": "✺",
+      "blurb": "Full-field effects: plasma, fire, fractals, water and light.",
+      "declaredCount": 8, "liveCount": 8,
+      "categories": [
+        { "name": "Fields", "count": 3 }, { "name": "Fractals", "count": 1 },
+        { "name": "Fire & Water", "count": 2 }, { "name": "Light & Sky", "count": 1 },
+        { "name": "Glitch & Noise", "count": 1 }
+      ]
+    }
+  ]
+}
+```
+
+### `list_terminal_facets`
+Filter by what the target terminal can actually draw. A Linux VT or serial
+console is ASCII-only with 16 colours; a one-line status area has a size budget:
+```json
+{ "name": "list_terminal_facets", "arguments": { "kind": "spinner", "maxGlyphs": "ascii", "maxColor": "16", "maxWidth": 20, "maxHeight": 1, "limit": 2 } }
+```
+Result (light records, each with its run commands):
+```json
+{
+  "total": 6, "offset": 0, "limit": 2, "returned": 2,
+  "items": [
+    { "id": "loaders-line", "title": "Line", "gallery": "loaders", "category": "Classic Spinners",
+      "kind": "spinner", "description": "…", "tags": ["spinner", "ascii"],
+      "size": { "w": 12, "h": 1 }, "animated": true, "glyphs": "ascii", "color": "mono",
+      "usage": { "cli": "prism-term play loaders-line",
+                 "npx": "npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term play loaders-line" } }
+  ]
+}
+```
+
+### `search_terminal_facets`
+Request:
+```json
+{ "name": "search_terminal_facets", "arguments": { "query": "fire", "limit": 2 } }
+```
+Result (ranked; `score` is the relevance):
+```json
+{
+  "query": "fire", "total": 3, "offset": 0, "limit": 2, "returned": 2,
+  "items": [
+    { "id": "fire", "title": "Fire", "gallery": "fx", "category": "Fire & Water", "kind": "scene",
+      "description": "Classic demoscene fire — heat rises, averages and cools through a scrolling noise map, throwing embers on the wind.",
+      "tags": ["fire", "doom", "embers", "heat"], "size": { "w": 80, "h": 24 },
+      "animated": true, "glyphs": "unicode", "color": "truecolor",
+      "usage": { "cli": "prism-term play fire", "npx": "npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term play fire" },
+      "score": 27 },
+    { "id": "fireworks", "title": "Fireworks", "gallery": "sim", "category": "Particles", "…": "…", "score": 15 }
+  ]
+}
+```
+
+### `get_terminal_facet`
+Request (`includePreview: false` skips the preview frame; `includeSource: false` would also drop `source` and `helpers`):
+```json
+{ "name": "get_terminal_facet", "arguments": { "id": "interference", "includePreview": false } }
+```
+Result:
+```json
+{
+  "id": "interference", "title": "Interference", "gallery": "fx", "galleryTitle": "FX Store", "category": "Fields",
+  "description": "A ripple tank: three orbiting sources whose concentric waves reinforce and cancel into sweeping moiré nodal lines.",
+  "tags": ["interference", "waves", "moire", "ripple tank", "physics", "rings"],
+  "kind": "scene", "size": { "w": 80, "h": 24 }, "minSize": { "w": 20, "h": 6 },
+  "animated": true, "loop": 20, "glyphs": "unicode", "color": "truecolor",
+  "canvas": "field", "palette": "ocean",
+  "params": { "sources": { "default": 3, "min": 2, "max": 5, "label": "Sources" },
+              "wavelength": { "default": 1, "min": 0.4, "max": 3, "label": "Wavelength" } },
+  "since": "0.1.0", "credits": null,
+  "module": "prism-term/src/facets/fx/interference.js", "imports": ["../retro/_kit.js"],
+  "source": "// Ripple-tank interference: three point sources on slow Lissajous orbits, …\nimport { lerpc } from '../retro/_kit.js';\n…",
+  "usage": {
+    "cli": "prism-term play interference",
+    "npx": "npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term play interference",
+    "snapshot": "prism-term snapshot interference --size 80x24",
+    "code": "import { play, findFacet } from 'prism-term';\nawait play(findFacet('interference'));",
+    "curl": "curl -sL https://prism.jeremyfhall.com/f/interference"
+  },
+  "helpers": [
+    { "path": "prism-term/src/facets/retro/_kit.js",
+      "source": "// Shared helpers for the retro and fx galleries (underscore → not a facet).\n…" }
+  ],
+  "engine": { "package": "prism-term", "version": "0.2.0",
+              "npx": "npx -y --package=https://prism.jeremyfhall.com/dl/prism-term.tgz prism-term",
+              "repo": "https://github.com/crazy54/Prism/tree/main/prism-term" }
+}
+```
+`source` is the facet's module (shared by every facet in that module); `helpers` are the `"_"` gallery modules it imports, resolved relative to `module` (engine imports such as `../../canvas.js` come from the `prism-term` package and are not listed). A miss returns `isError: true` with `{ "code": "not_found", "data": { "suggestions": [ … ] } }`.
+
+### `get_terminal_catalog_stats`
+Request:
+```json
+{ "name": "get_terminal_catalog_stats", "arguments": {} }
+```
+Result:
+```json
+{
+  "totalFacets": 434, "galleryCount": 17,
+  "byGallery": { "fx": 24, "loaders": 64, "progress": 41, "ops": 39, "…": "…" },
+  "byKind": { "scene": 99, "spinner": 68, "tui": 67, "chart": 44, "progress": 43, "…": "…" },
+  "byGlyphs": { "unicode": 303, "ascii": 86, "braille": 45 },
+  "byColor": { "mono": 5, "16": 164, "256": 83, "truecolor": 182 },
+  "animated": 434, "still": 0, "uniqueTags": 1231,
+  "topTags": [ { "tag": "spinner", "count": 69 }, { "tag": "loader", "count": 65 } ],
+  "engine": { "package": "prism-term", "version": "0.2.0", "…": "…" },
+  "schema": 2, "sourceModules": 252,
+  "source": "island", "filePath": "…/Prism.html"
+}
+```
+If neither the island nor the JSON exists, every terminal tool returns
+`{ "error": "No terminal catalog found. Build it with `cd prism-term && npm run catalog` …", "code": "unavailable", "data": { "searched": [ … ], "problems": [ … ] } }`.
+
+---
+
 ## Raw stdio session (no client library)
 
 You can drive the server by piping newline-delimited JSON-RPC to it:

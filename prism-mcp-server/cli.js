@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 // prism-mcp CLI.
 //
-//   prism-mcp start [--catalog <path>] [--no-watch] [--log-level <level>]
-//   prism-mcp info  [--catalog <path>]     # print catalog stats and exit
+//   prism-mcp start [--catalog <path>] [--terminal-catalog <path>] [--no-watch] [--log-level <level>]
+//   prism-mcp info  [--catalog <path>]     # print catalog + terminal-catalog stats and exit
 //   prism-mcp tools                         # list tool names + descriptions and exit
 //
 // `start` runs the MCP server over stdio (for Claude Desktop / Anthropic API).
 // Default catalog path resolves to ../Prism.html (the authoritative island),
-// falling back to ../catalog/manifest.json.
+// falling back to ../catalog/manifest.json. The terminal catalog is found next
+// to it (Prism.html's #prism-terminal-catalog island, else
+// ../prism-term/catalog/terminal-catalog.json) unless --terminal-catalog is given.
 
 import path from 'node:path';
 import fs from 'node:fs';
@@ -47,6 +49,7 @@ async function main() {
   const cmd = args._[0] || 'start';
   const catalogPath = resolveCatalog(args.catalog);
   const logger = createLogger(args['log-level']);
+  const terminalCatalogPath = typeof args['terminal-catalog'] === 'string' ? args['terminal-catalog'] : undefined;
 
   if (cmd === 'help' || args.help) {
     printHelp();
@@ -63,11 +66,15 @@ async function main() {
   }
 
   if (cmd === 'info') {
-    const server = new PrismMCPServer(catalogPath, { watch: false, logger });
+    const server = new PrismMCPServer(catalogPath, { watch: false, logger, terminalCatalogPath });
     await server.load();
     const stats = await server.toolMap.get('get_catalog_stats').handler({}, { store: server.store, logger });
     const meta = server.store.meta();
-    process.stdout.write(JSON.stringify({ meta, stats }, null, 2) + '\n');
+    const terminal = server.terminal.meta();
+    if (server.terminal.available) {
+      terminal.stats = await server.toolMap.get('get_terminal_catalog_stats').handler({}, { terminal: server.terminal, logger });
+    }
+    process.stdout.write(JSON.stringify({ meta, stats, terminal }, null, 2) + '\n');
     server.close();
     return;
   }
@@ -76,7 +83,7 @@ async function main() {
     if (args.port) {
       logger.warn(`--port ${args.port} noted, but this build speaks MCP over stdio (Claude Desktop / Anthropic API launch it as a stdio subprocess). Ignoring --port.`);
     }
-    const server = new PrismMCPServer(catalogPath, { watch: args.watch !== false, logger });
+    const server = new PrismMCPServer(catalogPath, { watch: args.watch !== false, logger, terminalCatalogPath });
     await server.load();
     server.connect(new StdioTransport());
     // Keep the process alive; stdio transport drives everything.
@@ -103,6 +110,10 @@ Usage:
 Options:
   --catalog <path>   Path to Prism.html or catalog/manifest.json
                      (default: ../Prism.html, else ../catalog/manifest.json)
+  --terminal-catalog <path>
+                     Terminal catalog: a .html with a #prism-terminal-catalog island or a
+                     terminal-catalog.json (default: the catalog's Prism.html island, else
+                     ../prism-term/catalog/terminal-catalog.json)
   --no-watch         Disable catalog hot reload
   --log-level <lvl>  debug | info | warn | error | silent  (default: info)
 
