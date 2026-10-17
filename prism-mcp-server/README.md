@@ -192,4 +192,4 @@ node --test          # or: npm test
 
 ## License
 
-MIT
+Apache License 2.0. Copyright 2026 JFH Inc., created by Jeremy Francis Hall. See [LICENSE](../LICENSE) and [NOTICE](../NOTICE); redistributions and derivative works must keep the NOTICE file.
