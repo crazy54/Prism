@@ -113,6 +113,10 @@ public sealed class MacroContext
     public async Task SendAsync(KeyInput[] batch)
     {
         Cancellation.ThrowIfCancellationRequested();
+        // The plugin-wide gate covers the foreground check and the send together, so no other module's input can land
+        // between them. A dry run sends nothing and needs no gate.
+        var gate = IsDryRun ? null : _engine.InputGate?.Invoke();
+        await using var held = gate is null ? null : await gate.AcquireAsync("macros", Cancellation).ConfigureAwait(false);
         await EnsureInputAllowedAsync().ConfigureAwait(false);
         int sent;
         try { sent = Input.Send(batch); }
@@ -243,6 +247,12 @@ public sealed class MacroEngine : IAsyncDisposable
     public IInputSink Input { get; }
     public IForegroundInspector Foreground { get; }
     public IAppLauncher Launcher { get; }
+
+    /// <summary>
+    /// Finds the plugin-wide input gate (Core <see cref="IInputGate"/>), asked at every send because the module that
+    /// provides it may initialize after Macros. Null or a null result means no gate (tests, or no provider).
+    /// </summary>
+    public Func<IInputGate?>? InputGate { get; set; }
     public IScanCodeMap ScanCodes { get; }
     public ILog Log { get; }
     public MacroStepRegistry Registry { get; }

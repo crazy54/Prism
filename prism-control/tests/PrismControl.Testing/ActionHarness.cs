@@ -237,9 +237,13 @@ public sealed class ActionHarness<TAction> : IAsyncDisposable where TAction : Ac
 
     private async Task DeliverAsync(ActionEvent e)
     {
-        Action.Deliver(e);
+        // Like the receive loop: stamp arrival on the (manual) host clock, so actions can age events deterministically.
+        Action.Deliver(e.ReceivedTimestamp == 0 ? e with { ReceivedTimestamp = Time.GetTimestamp() } : e);
         await SettleAsync();
     }
+
+    /// <summary>Delivers an event exactly as given (e.g. one stamped in the past, to test that stale input is dropped).</summary>
+    public Task DeliverRawAsync(ActionEvent e) => DeliverAsync(e);
 
     private JsonObject? Settings() => Channel.Calls.LastOrDefault(c => c.Kind == "setSettings")?.Payload?.DeepClone() as JsonObject;
 

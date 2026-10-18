@@ -17,6 +17,8 @@ public sealed record ConnectionOptions
     public double LogMessagesPerSecond { get; init; } = 10;
     public int MaxQueuedFrames { get; init; } = 1024;
     public int MaxMessageBytes { get; init; } = 16 * 1024 * 1024;
+    /// <summary>The host clock that stamps every received frame (ActionEvent.ReceivedTimestamp); the same one actions use.</summary>
+    public TimeProvider Time { get; init; } = TimeProvider.System;
 }
 
 public enum DisconnectReason { ClosedByApp, Lost, GaveUp, Shutdown }
@@ -51,7 +53,8 @@ public sealed class StreamDeckConnection : IAsyncDisposable
     }
 
     /// <summary>Raised on the receive loop with each text message. Handlers must be fast and non-blocking.</summary>
-    public event Action<string>? MessageReceived;
+    /// <summary>A complete text frame, with the host-clock timestamp taken the moment its last fragment arrived.</summary>
+    public event Action<string, long>? MessageReceived;
     /// <summary>Raised after (re)registration.</summary>
     public event Action? Registered;
     public event Action<DisconnectReason>? Disconnected;
@@ -224,9 +227,10 @@ public sealed class StreamDeckConnection : IAsyncDisposable
                     if (!r.EndOfMessage) continue;
                     if (r.MessageType == WebSocketMessageType.Text)
                     {
+                        var receivedAt = owner._options.Time.GetTimestamp();
                         var text = Encoding.UTF8.GetString(message.GetBuffer(), 0, (int)message.Length);
                         Interlocked.Increment(ref owner._framesReceived);
-                        try { owner.MessageReceived?.Invoke(text); }
+                        try { owner.MessageReceived?.Invoke(text, receivedAt); }
                         catch (Exception ex) { owner._log.Error("Message handler failed", ex); }
                     }
                     message.SetLength(0);
