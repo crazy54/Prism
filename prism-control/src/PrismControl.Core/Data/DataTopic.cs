@@ -16,6 +16,9 @@ public interface IDataProvider<T> where T : class
 /// <summary>What the HTTP server reads from a topic.</summary>
 public sealed record TopicValue(byte[] Body, string ContentType, long Seq, DateTimeOffset UpdatedAt, string Etag, string? Source);
 
+/// <summary>A binary topic's current value for in-process readers. <see cref="Etag"/> changes whenever the bytes do.</summary>
+public sealed record BinaryValue(ReadOnlyMemory<byte> Data, string Mime, string Etag, int? Width, int? Height);
+
 /// <summary>One data API endpoint. Domain modules claim it and publish into it.</summary>
 public abstract class DataTopic
 {
@@ -288,6 +291,12 @@ public sealed class BinaryTopic : DataTopic
     /// <summary>The current image's ETag (quoted), or null.</summary>
     public string? CurrentEtag { get { lock (_gate) return _current?.Etag; } }
     public (string Mime, int? Width, int? Height)? CurrentInfo { get { lock (_gate) return _current is { } c ? (c.Mime, c.W, c.H) : null; } }
+
+    /// <summary>
+    /// The current image for in-process readers (e.g. a Kaleidoscope key): the bytes exactly as published (read-only),
+    /// its MIME type, ETag (the change key) and pixel size, or null. Album art must be shown whole: no crop, mask or overlay.
+    /// </summary>
+    public BinaryValue? Current { get { lock (_gate) return _current is { } c ? new BinaryValue(c.Data, c.Mime, c.Etag, c.W, c.H) : null; } }
 
     internal void PublishFrom(BinaryPublisher pub, byte[] data, string mime)
     {
