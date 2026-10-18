@@ -53,6 +53,8 @@ public sealed class SpotifyModule : IPrismModule, IAsyncDisposable
         var art = context.Data.NowPlayingArt.Claim("spotify");
         if (nowPlaying is null || art is null) log.Warn("Another provider owns /v1/now-playing; Spotify will not publish it.");
         service.AttachPublishers(nowPlaying, art);
+        // Other modules' dials (Kaleidoscope's volume/seek) drive playback through Core's contract, only while we own now-playing.
+        if (nowPlaying is not null) context.Services.Add<PrismControl.Core.Data.INowPlayingControl>(new SpotifyNowPlayingControl(service));
 
         void ApplyGlobals()
         {
