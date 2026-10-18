@@ -352,3 +352,6 @@
   .aw-front{white-space:nowrap}
 }
 @container aw-screen (max-width:420px){.aw-nav-region{display:none}}
+/* The device chrome in AWS colors too (prism-deck's knob pointer and focus ring are Prism purple elsewhere) */
+.aw-dev .pdk-dial::after,:root[data-rf-mode="day"] .aw-dev .pdk-dial::after{background:var(--aw-orange);box-shadow:0 0 calc(var(--u)*6) rgba(255,153,0,.45)}
+.aw-dev .pdk-key:focus-visible,.aw-dev .pdk-dial:focus-visible,:root[data-rf-mode="day"] .aw-dev .pdk-key:focus-visible,:root[data-rf-mode="day"] .aw-dev .pdk-dial:focus-visible{outline-color:var(--rf-focus)}

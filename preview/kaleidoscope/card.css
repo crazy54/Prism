@@ -18,8 +18,8 @@
 .kd-mandala{position:relative;justify-self:center;width:min(100%,250px);aspect-ratio:1;border-radius:50%;background:#000;box-shadow:0 0 0 1px #ffffff1f,0 0 0 8px #0b0c10,0 0 0 9px #ffffff14,0 0 70px -6px rgba(171,145,235,.55);overflow:hidden;isolation:isolate}
 .kd-mandala>span{position:absolute;inset:0;animation:kd-card-spin 60s linear infinite}
 .kd-mandala>span.is-in{inset:24%;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px #00000099;animation-duration:42s;animation-direction:reverse}
-.kd-mandala i{position:absolute;inset:0;background:url(assets/card-media.svg?v=54b27029b3) 50% 50%/150% no-repeat;clip-path:polygon(50% 50%,100% 50%,100% 78.87%)}
-.kd-mandala .is-in i{background-image:url(assets/card-game.svg?v=9de0e37c6e);background-size:120%;clip-path:polygon(50% 50%,100% 50%,100% 100%,78.87% 100%)}
+.kd-mandala i{position:absolute;inset:0;background:url(assets/card-media.svg?v=04aa015b77) 50% 50%/150% no-repeat;clip-path:polygon(50% 50%,100% 50%,100% 78.87%)}
+.kd-mandala .is-in i{background-image:url(assets/card-game.svg?v=2d4ebe39dd);background-size:120%;clip-path:polygon(50% 50%,100% 50%,100% 100%,78.87% 100%)}
 .kd-mandala::after{content:"";position:absolute;inset:0;z-index:2;border-radius:50%;background:radial-gradient(circle at 32% 26%,#ffffff2e,transparent 46%),conic-gradient(from 0deg,#c2aef814,#7fc4fb14,#7dd9b214,#eac77914,#ffaa9614,#c2aef814);pointer-events:none}
 @keyframes kd-card-spin{to{transform:rotate(360deg)}}
 @media (max-width:860px){.kd-card{grid-template-columns:1fr;gap:22px;padding:24px}.kd-mandala{width:min(70%,220px)}}

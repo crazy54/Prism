@@ -1,6 +1,6 @@
 // Prism Kaleidoscope × AWS — the demo on /aws/. A plain ES module, no dependencies, nothing here talks to AWS.
 //
-// Every deck frame is the REAL Smart engine's render (assets/frames/*.svg, from PrismControl.Aws.Tests --render-demo:
+// Every deck frame is the REAL Smart engine's render, in Night and in Day, each slot in its pack's app theme (assets/frames/*.svg, from PrismControl.Aws.Tests --render-demo:
 // the shipped packs and the real aws provider over a fictional config). This script only picks which frame sits where
 // for the state you put the demo in, and plays the mock console and terminal around the decks. The typed lines are the
 // module's own (assets/demo.json → lines). Account 000000000000, profiles dev / staging / prod: all made up.
@@ -41,7 +41,9 @@ const S = {
   env: { AWS_PROFILE: null, AWS_REGION: null },   // the mock shell's own variables (set when YOU press Enter)
   insp: null,
 };
-const M = () => (S.safe ? D.safe : D.open);
+// The frames of the page's own Night/Day: the engine dressed each slot in its pack's app theme for that mode.
+const T = () => D[document.documentElement.dataset.rfMode === 'day' ? 'day' : 'night'];
+const M = () => (S.safe ? T().safe : T().open);
 
 // ── the devices (server-rendered by build-page.mjs) ──────────────────────────
 const dev = {};
@@ -56,7 +58,7 @@ const cols = { galleon: 3, plus: 4 };
 const layerOf = (sel) => (sel >= 2 ? 1 : 0);   // the Galleon layer of a selected face (TL/TR = 1, BL/BR = 2)
 
 function snap(d) {
-  if (S.mode === 'console') { const list = D.console[S.stop][d]; return list[S.page[d] % list.length]; }
+  if (S.mode === 'console') { const list = T().console[S.stop][d]; return list[S.page[d] % list.length]; }
   if (!S.aws) return M().term[d];
   const m = M();
   const set = S.profile ? (S.cost[S.profile] ? m.costPages[S.profile] : m.pages[S.profile]) : m.pages.none;
@@ -542,7 +544,7 @@ function keyUp(d, i) {
   if (pendingPress && pendingPress.d === d && pendingPress.i === i) { const p = pendingPress; pendingPress = null; act(p.d, p.i, p.v); }
 }
 function holdStart(d, i, v) {
-  const fr = D.open.hold[v];
+  const fr = T().open.hold[v];
   hold = { d, i, v, timers: [], fired: false };
   [175, 350, 525].forEach((ms, k) => hold.timers.push(setTimeout(() => { if (fr?.[d]) { S.keyOver[d][i] = fr[d][k]; render(); } }, ms)));
   hold.timers.push(setTimeout(() => {
@@ -566,7 +568,7 @@ function holdEnd() {
 function act(d, i, v, { held = false } = {}) {
   const m = meta(v);
   if (v === 'more') {
-    const n = S.mode === 'console' ? D.console[S.stop][d].length : S.aws ? snap(d).pages : 1;
+    const n = S.mode === 'console' ? T().console[S.stop][d].length : S.aws ? snap(d).pages : 1;
     if (n <= 1) { notify('More terminal pages live in the plugin; this demo has page 1.'); return; }
     S.page[d] = (S.page[d] + 1) % n;
     render({ wave: true });
@@ -801,13 +803,15 @@ function preload() {
   if (preloaded) return;
   preloaded = true;
   const hs = new Set();
-  (function walk(x) { if (typeof x === 'string') { if (/^[0-9a-f]{10}$/.test(x)) hs.add(x); } else if (x && typeof x === 'object') Object.values(x).forEach(walk); })([D.open.term, D.open.pages.none, D.open.dials.profile.none, D.open.dials.logs.none, D.open.dials.region.none, D.open.dials.page]);
+  (function walk(x) { if (typeof x === 'string') { if (/^[0-9a-f]{10}$/.test(x)) hs.add(x); } else if (x && typeof x === 'object') Object.values(x).forEach(walk); })([T().open.term, T().open.pages.none, T().open.dials.profile.none, T().open.dials.logs.none, T().open.dials.region.none, T().open.dials.page]);
   const list = [...hs];
   const step = () => { for (const h of list.splice(0, 12)) { const im = new Image(); im.src = FR(h); } if (list.length) (window.requestIdleCallback || setTimeout)(step); };
   step();
 }
 
 // ── start ────────────────────────────────────────────────────────────────────
+// Night ↔ Day (the header switch or the system): the decks redraw in that mode's app theme.
+new MutationObserver(() => { preloaded = false; render({ wave: true }); if (S.mode === 'terminal') preload(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-rf-mode'] });
 wire();
 term.draw();
 term.print('PowerShell 7 (demo)', 'c-dim');

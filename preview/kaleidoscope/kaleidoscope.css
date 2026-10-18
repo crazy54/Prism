@@ -474,6 +474,12 @@ button[aria-selected="true"] .kd-tick{opacity:1}
 .kd-aws-h h4{margin:0;font:700 1.35em/1.2 var(--font);color:var(--w-ink)}
 .kd-aws-h h4 span{font-weight:400;color:var(--w-dim)}
 .kd-aws-btn{padding:.45em 1em;border-radius:2em;background:var(--w-aws-acc);font-size:.85em;font-weight:700;color:#000716}
+.kd-aws-home{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.8em}
+.kd-aws-home section{display:flex;flex-direction:column;gap:.4em;padding:.8em .9em;border:1px solid var(--w-aws-line);border-radius:.5em;background:var(--w-aws-head);font-size:.85em;color:var(--w-ink)}
+.kd-aws-home b{margin-bottom:.2em;font-weight:700}
+.kd-aws-home span{color:var(--w-aws-link)}
+.kd-aws-home p{display:flex;justify-content:space-between;gap:.6em;margin:0;color:var(--w-dim)}
+.kd-aws-home strong{font-weight:700;color:var(--w-ink)}
 .kd-aws-t{display:grid;grid-template-columns:1.3fr 1.4fr .9fr .9fr 1fr;border:1px solid var(--w-aws-line);border-radius:.5em;overflow:hidden;font-size:.85em}
 .kd-aws-t>*{padding:.6em .8em;border-top:1px solid var(--w-aws-line);color:var(--w-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .kd-aws-t>b{border-top:0;background:var(--w-aws-head);font-weight:700}
