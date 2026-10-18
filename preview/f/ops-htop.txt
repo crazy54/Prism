@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            578nm - 1 / 39
+------------------------------------------------------/\========================
+htop  ops-htop
+htop as you know it: per-core CPU meters, Mem/Swp bars, tasks, load average and
+uptime over a live, CPU-sorted process list.
+tui - 80x24 (min 40x10) - 20 s loop - ascii - 16 colors
+tags: htop, top, cpu, memory, processes, monitor
+
+ 1[||||||||||||||||||||          56.2%]  5[||||||||||||||||||||||        65.2%]
+ 2[||||||||||                    29.2%]  6[||||||||||||||||||            51.2%]
+ 3[||||||||||||||||||||          56.1%]  7[|||||||||||||||||||           54.4%]
+ 4[|||||||||||||||||||||||       66.7%]  8[||||||||||||||||              46.6%]
+Mem[||||||||||||||||||||||||5.6G/14.4G]  Tasks: 214, 1032 thr; 4 running
+Swp[||                       107M/1.9G]  Load average: 2.09 1.10 1.04
+                                         Uptime: 41 days, 03:12:13
+
+    PID USER      PRI  NI  VIRT   RES S CPU%v MEM%    TIME+  Command
+   3110 app        20   0 10.6G  935M R  28.0  6.2  1:59.65  node /srv/api/serve
+   2051 postgres   20   0  4.1G  515M R  24.6  3.4  1:53.85  postgres: app order
+   8803 app        20   0  391M  286M R  11.3  1.9  1:58.95  python3 /srv/jobs/r
+   3172 app        20   0  5.7G  2.0G R  10.0 13.8  1:48.55  java -Xmx2g -jar /s
+   1289 www-data   20   0 58.2M 30.5M R   2.4  0.4  0:37.61  nginx: worker proce
+   1288 www-data   20   0 58.2M 31.5M R   2.1  0.4  0:35.72  nginx: worker proce
+   7781 ops        20   0  8.7M  5.0M R   1.4  0.0  0:26.55  htop
+   3390 redis      20   0  114M  181M R   1.3  1.2  1:37.42  /usr/bin/redis-serv
+   4107 root       20   0  2.0G  105M S   0.9  0.7  0:36.50  /usr/bin/dockerd -H
+   2044 postgres   20   0  4.0G  315M S   0.6  2.1  0:09.58  postgres: 16/main:
+F1Help  F2Setup F3SearchF4FilterF5Tree  F6SortByF7Nice -F8Nice +F9Kill  F10Quit
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ops-htop
+SNAPSHOT  prism-term snapshot ops-htop --size 80x24
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-htop'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-prompt-starship
+next >    curl -sL prism.jeremyfhall.com/f/ops-load-watch
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

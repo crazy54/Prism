@@ -1,0 +1,53 @@
+# Prism Night — Prism's Night terminal colors (Refraction).
+# Ptyxis: save as ~/.local/share/org.gnome.Ptyxis/palettes/prism-night.palette
+# (Flatpak: ~/.var/app/app.devsuite.Ptyxis/data/org.gnome.Ptyxis/palettes/), restart Ptyxis,
+# then Preferences → Profile → Palette → "Prism Night".
+
+[Palette]
+Name=Prism Night
+
+[Light]
+Foreground=#e6e6ef
+Background=#0a0c12
+Cursor=#b8a2f2
+TitlebarForeground=#e6e6ef
+TitlebarBackground=#10131c
+Color0=#1d202b
+Color1=#f28885
+Color2=#7ad59c
+Color3=#ecca76
+Color4=#81aaf7
+Color5=#b8a2f2
+Color6=#67cfe3
+Color7=#c6c7d3
+Color8=#76798e
+Color9=#ffaaa7
+Color10=#a5eac1
+Color11=#f7e59f
+Color12=#aac8ff
+Color13=#d9c6fe
+Color14=#9eeaf2
+Color15=#f6f6fb
+
+[Dark]
+Foreground=#e6e6ef
+Background=#0a0c12
+Cursor=#b8a2f2
+TitlebarForeground=#e6e6ef
+TitlebarBackground=#10131c
+Color0=#1d202b
+Color1=#f28885
+Color2=#7ad59c
+Color3=#ecca76
+Color4=#81aaf7
+Color5=#b8a2f2
+Color6=#67cfe3
+Color7=#c6c7d3
+Color8=#76798e
+Color9=#ffaaa7
+Color10=#a5eac1
+Color11=#f7e59f
+Color12=#aac8ff
+Color13=#d9c6fe
+Color14=#9eeaf2
+Color15=#f6f6fb

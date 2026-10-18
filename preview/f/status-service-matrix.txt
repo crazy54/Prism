@@ -1,0 +1,34 @@
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > HEALTH & UPTIME
+------------------------------------------------------/\========================
+Service Matrix  status-service-matrix
+Services by region as a status grid: an incident starts in one cell, spreads to
+its neighbors, then heals, with words, not just color.
+widget - 80x11 (min 44x5) - 16 s loop - unicode - truecolor
+tags: status matrix, regions, services, incident, grid
+
+          us-east-1  us-west-2  eu-west-1  eu-north-1 ap-south-1 ap-east-1
+api       o ok       o ok       o ok       o ok       o ok       o ok
+auth      o ok       o ok       o degr     o ok       o ok       o ok
+checkout  o ok       o degr     o degr     o degr     o ok       o ok
+payments  o degr     o degr     o down     o degr     o degr     o ok
+search    o ok       o degr     o degr     o degr     o ok       o ok
+cdn       o ok       o ok       o degr     o ok       o ok       o ok
+email     o ok       o ok       o ok       o ok       # maint    o ok
+kafka     o ok       o ok       o ok       o ok       o ok       o ok
+o 34 ok  o 12 degraded  o 1 down  # 1 maint          INC-2471 payments eu-west-1
+
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play status-service-matrix
+SNAPSHOT  prism-term snapshot status-service-matrix --size 80x11
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('status-service-matrix'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/status-uptime-slo
+next >    curl -sL prism.jeremyfhall.com/f/status-heartbeat
+gallery   curl -sL prism.jeremyfhall.com/t/status
+home      curl -sL prism.jeremyfhall.com/tty

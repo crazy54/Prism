@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            578nm - 5 / 39
+------------------------------------------------------/\========================
+top  ops-top
+procps top: the uptime/Tasks/%Cpu(s)/MiB Mem/MiB Swap summary and a CPU-sorted
+process table that refreshes every few seconds.
+tui - 80x20 (min 50x8) - 15 s loop - ascii - mono colors
+tags: top, procps, cpu, processes, load
+
+top - 14:02:17 up 41 days,  3:12,  2 users,  load average: 1.28, 0.77, 0.69
+Tasks: 214 total,   2 running, 212 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 13.7 us,  3.4 sy,  0.0 ni, 82.0 id,  0.8 wa,  0.0 hi,  0.2 si,  0.0 st
+MiB Mem :  15872.4 total,   2026.6 free,   5689.4 used,   8156.4 buff/cache
+MiB Swap:   2048.0 total,   1936.0 free,    112.0 used.   9829.1 avail Mem
+
+    PID USER     PR  NI    VIRT    RES    SHR S  %CPU  %MEM    TIME+ COMMAND
+   3110 app      20   0   10.6g 935.2m  41.2m R  26.5   6.2  4:37.85 node
+   2051 postgres 20   0    4.4g 540.1m 512.0m R  16.3   3.4  2:26.60 postgres
+   8803 app      20   0  410.2m 300.4m  18.1m R  11.8   1.9  3:20.83 python3
+   3172 app      20   0    6.1g   2.1g  28.7m R   8.8  13.8  2:41.55 java
+   1289 www-data 20   0   61.2m  32.4m   6.0m R   3.1   0.4  1:58.62 nginx
+   1288 www-data 20   0   61.2m  33.1m   6.0m R   3.0   0.4  1:57.12 nginx
+   3390 redis    20   0  120.4m 190.3m   4.1m R   1.8   1.2  1:17.24 redis-serve
+   7781 ops      20   0    9.1m   5.2m   3.4m R   1.2   0.0  1:44.22 top
+   4107 root     20   0    2.1g 110.0m  48.2m S   1.0   0.7  1:17.86 dockerd
+   5562 nobody   20   0  726.0m  21.1m  10.4m S   0.6   0.1  1:47.22 node_export
+    612 root     20   0   88.1m  61.4m  60.1m S   0.4   0.6  2:19.87 systemd-jou
+   4120 root     20   0    1.9g  52.0m  30.3m S   0.3   0.3  1:27.51 containerd
+      1 root     20   0  166.2m  12.1m   8.4m S   0.0   0.1  1:01.00 systemd
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ops-top
+SNAPSHOT  prism-term snapshot ops-top --size 80x20
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-top'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-sensors
+next >    curl -sL prism.jeremyfhall.com/f/ops-vmstat
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

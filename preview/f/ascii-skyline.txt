@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ART                  597nm - 14 / 29
+------------------------------------------------------/\========================
+City at Night  ascii-skyline
+A night skyline whose windows switch on and off, an antenna beacon blinks, stars
+twinkle and a plane crosses the moon.
+art - 80x24 (min 36x12) - 16 s loop - ascii - 16 colors
+tags: city, skyline, night, windows, plane
+
+                    .                            .   .  .                   .
+      .   *                                . .             _..._
+             .                 .    .                    .'     '.    ..     .
+                          __|__.                         '._   _.' .
+                           -*o--                    *       """     .         .
+        .    .              |                       |
+                     .   ______               ____________   .
+                         |    |       .       |   .      |
+       *               . |  []|       ________|[][]  [][]|
+       |                 |    | ______|      ||          |             .   *
+    _______              |[]  | |    ||  [][]||        []|       _______   |
+    |     |              |    | |[][]||      ||          |       |     |______
+    |[]   |       _______|[]  | |    ||      ||[]  []    |   *   |  [] ||    |
+    |     |______ |     ||    | |[][]||      ||          |   |   |     ||  []|__
+____|     ||    | |  [] ||[]  | |    ||  [][]||[][][]  []|_______|  [] ||    ||
+|  ||     ||    | |     ||    | |  []||      ||          ||     ||     ||  []||[
+|  ||     ||    | |     ||[][]| |    ||  [][]||      [][]||     ||     ||    ||
+|  ||     ||[]  | |     ||    | |[]  ||      ||          ||     ||     ||  []||
+|  ||     ||    | |     ||    | |    ||      ||[]    []  ||  [] ||     ||    ||
+|  ||     ||[]  | |     ||    | |    ||      ||          ||     ||     ||[][]||
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ascii-skyline
+SNAPSHOT  prism-term snapshot ascii-skyline --size 80x24
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-skyline'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-mountains
+next >    curl -sL prism.jeremyfhall.com/f/ascii-rocket
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,46 @@
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > INTROS & SCROLLERS   485nm - 7 / 24
+------------------------------------------------------/\========================
+Dot Tunnel  dot-tunnel
+Rings of dots racing at the camera along a snaking path, twisting ring by ring,
+fading with depth.
+scene - 70x24 (min 20x8) - 10 s loop - unicode - truecolor
+tags: tunnel, dots, demoscene, 3d, braille
+
+                        **  **               **  **
+                        **          +  +         **                      **
+                     **       +  +       +  +       **                   **
+                     **     +     + + + + +   +     ****
+                  **      +     +   + + ++  +   +     **
+                  **          +  +++ +++ ++++ +         **
+                 **      +   +  +++*********++ +  +     **
+                 **     +   +  + + ***++++++++++  +
+                 **         +  + +** +++=====*+ +       **
+                 **     +   +  + +***+++=...:*++  +     **
+                 **      +   +  + + ***+++**++ +  +     **
+                 **       +   +  +++++*++*++++  +       **
+                   **           ++  ++ + ++ +         **
+                   **       + +    +  + +   + +       **
+                     **          +  +  + +          **                    *
+                     **                          ** **                    *
+                        **                       **
+                        **  **           **  **
+                            **  **   **  **  **                       **
+                                **   **                               **
+  still at 70x20 - t=5s -- run it live for full size and motion
+
+PARAMS - --SET KEY=VALUE ------------------------
+  speed=1               Speed  (0.25-4)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play dot-tunnel
+SNAPSHOT  prism-term snapshot dot-tunnel --size 70x24
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('dot-tunnel'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/vector-balls
+next >    curl -sL prism.jeremyfhall.com/f/rotozoomer
+gallery   curl -sL prism.jeremyfhall.com/t/retro
+home      curl -sL prism.jeremyfhall.com/tty

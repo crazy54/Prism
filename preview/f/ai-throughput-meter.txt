@@ -1,0 +1,31 @@
+--/\=== PRISM TERMINAL > AI WORKING > TOKEN STREAMS               479nm - 7 / 18
+------------------------------------------------------/\========================
+Throughput Meter  ai-throughput-meter
+An inference panel with concurrent streams, per-stream progress and tok/s, an
+aggregate throughput sparkline, TTFT, cache hit rate and a running cost.
+widget - 70x8 (min 50x8) - 10 s loop - unicode - 256 colors
+tags: throughput, tok/s, inference, dashboard, latency
+
+     + reasoning-large . 4 streaming -------------------------------------+
+     |req 7f3a #########................... 293/900  54 t/s  ttft 280ms   |
+     |req 2c91 ########.................... 206/700  61 t/s  ttft 340ms   |
+     |req 9be0 ###########################. 467/480  48 t/s  ttft 310ms   |
+     |req d41e ###.........................  86/620  66 t/s  ttft 260ms   |
+     |throughput ::::::::::::::::::====############%%%%%%%% 229 tok/s     |
+     |cache hits 62% . input 18.2k . output 1.6k . p95 ttft 340ms         |
+     +---------------------------------------------------------- $0.0267 -+
+  still at t=5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ai-throughput-meter
+SNAPSHOT  prism-term snapshot ai-throughput-meter --size 70x8
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ai-throughput-meter'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ai-markdown-stream
+next >    curl -sL prism.jeremyfhall.com/f/ai-structured-output
+gallery   curl -sL prism.jeremyfhall.com/t/ai
+home      curl -sL prism.jeremyfhall.com/tty

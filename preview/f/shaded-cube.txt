@@ -1,0 +1,46 @@
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > 3D SOLIDS             483nm - 1 / 19
+------------------------------------------------------/\========================
+Shaded Cube  shaded-cube
+A z-buffered cube with Lambert and Blinn-Phong lighting, palette-tinted faces
+and a soft contact shadow.
+scene - 60x22 (min 18x7) - 12 s loop - unicode - truecolor
+tags: cube, 3d, lighting, z-buffer, phong
+
+
+
+                                      +%@-
+                                   +%%%%%%%+
+                                ++%%%%%%%%%%@+
+                             ++%%%%%%%%%%%%%%%%+
+                           +%%%%%%%%%%%%%%%%%%%%@+
+                          %%%%%%%%%%%%%%%%%%%%%%%%@#
+                           +%%%%%%%%%%%%%%%%%%%%%*:+
+                            +%%%%%%%%%%%%%%%%%#::::+
+                             -%%%%%%%%%%%%%**::::::*
+                              -%%%%%%%%%%*:::::::::#*
+                               -%%%%%%*+::::::::#+-
+                                -%%*+:::::::::++
+                                 *+*:::::::**
+                                .....*++:+-.....
+                               ..................
+
+
+
+  still at 60x20 - t=6s -- run it live for full size and motion
+
+PARAMS - --SET KEY=VALUE ------------------------
+  speed=1               Speed  (0.1-4)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play shaded-cube
+SNAPSHOT  prism-term snapshot shaded-cube --size 60x22
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('shaded-cube'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/spinning-coin
+next >    curl -sL prism.jeremyfhall.com/f/donut
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

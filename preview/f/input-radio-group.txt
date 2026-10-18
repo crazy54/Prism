@@ -1,0 +1,32 @@
+--/\=== PRISM TERMINAL > INPUT & MENUS > TOGGLES & CHECKBOXES     487nm - 6 / 23
+------------------------------------------------------/\========================
+Radio Groups  input-radio-group
+Three labeled radio groups -- environment, rollout strategy and notification --
+with the selected dot hopping as choices change.
+tui - 60x9 (min 40x6) - 5 s loop - unicode - 16 colors
+tags: radio, options, choice, form, select
+
+          Environment
+            ( ) dev   ( ) staging   (*) production
+
+          Strategy
+            ( ) rolling   ( ) blue/green   (*) canary
+
+          Notify
+            ( ) nobody   (*) team   ( ) on-call
+
+  still at t=2.5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play input-radio-group
+SNAPSHOT  prism-term snapshot input-radio-group --size 60x9
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-radio-group'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-toggles
+next >    curl -sL prism.jeremyfhall.com/f/input-slider
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

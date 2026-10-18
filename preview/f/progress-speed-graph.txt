@@ -1,0 +1,33 @@
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   558nm - 38 / 41
+------------------------------------------------------/\========================
+Download Speed Graph  progress-speed-graph
+A download drawing its own throughput history as a braille area chart, with a
+dotted average line, peak, now and ETA.
+progress - 72x10 (min 32x3) - 12 s loop - braille - 256 colors
+tags: speed, graph, throughput, braille, download
+
+     prism-dataset-2026q3.tar - 272/470 MB                              57%
+                                                                   110 MB/s
+          +..   .+                       +
+        ..###..+##+.               +    .#
+        ############+    +         #   .##
+       .#############. .+#+.       #   ###                         -- avg
+      .###############.#####+..+   #   ###
+     +##########################...#...###                         0
+     =========================================-----------------------------
+     now 65.1 MB/s - avg 45.3 MB/s - peak 107.6 MB/s - eta 00:03
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play progress-speed-graph
+SNAPSHOT  prism-term snapshot progress-speed-graph --size 72x10
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-speed-graph'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-rsync
+next >    curl -sL prism.jeremyfhall.com/f/progress-eta-converge
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,45 @@
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > CHIPTUNE VISUALS    485nm - 20 / 24
+------------------------------------------------------/\========================
+Oscilloscope  oscilloscope
+A phosphor oscilloscope on the chiptune: graticule, a bass-triggered trace with
+persistence, and an XY Lissajous mode.
+scene - 64x18 (min 20x6) - 7.68 s loop - unicode - truecolor
+tags: oscilloscope, scope, waveform, phosphor, lissajous, audio, chiptune
+
+        :CH1 0.5V/div: :  :: :  : ::  :---  : ::  :  :  :  :TRIG ^ BASS:
+                                       - -
+        :  :  :  :  :  :  :  :  :  :  :- -  :  :  :  :  :  :  :  :  :  :
+        :     :    ####    :      :    ---    :      :     :      :    :
+              #####    #               - -
+        :  ###:  :  :  :# :  :  :  :  :- ######:  :  :  :  :  :  :  :  :
+        : #   :   ...:  #  :      :    --#    :####..:     :      :    :
+        :#.: ::==== :. : #:  :  :  :  :-#.. :::====###  :  :  :  :  :  :
+        .# .-:-=-:-=-.-::##-- --- ---- -#- .-:-=-:-=--#-:---- --- ---- -
+        #======..:::==== :=#############=======..::====#-:===... -:::===
+        :- ---- --- ----=-=:.=--. :-=-:.:- ---- --- ----#=-:.=--. :-=-:.
+        :  :  :  :  :  : =: ::======  :: -  :  :  :  :  #. :::======: ::
+        :     :      :    ..     ..... ---    :      :   #..     ..... :
+                                       - -               #
+        :  :  :  :  :  :  :  :  :  :  :- -  :  :  :  :  : ##  :  :  :  #
+        :     :      :     :      :    ---    :      :     :###########:
+        :  :  :  :  :  :  :  :  :  :  :- -  :  :  :  :  :  :  :  :  :  :
+        :130.8 Hz:  :  :  :  :  :  :  :- -  :  :  :  :  :  : 1.53ms/div:
+  still at t=3.84s -- run it live to see it move
+
+PARAMS - --SET KEY=VALUE ------------------------
+  mode=yt               Mode  (yt|xy)
+  phosphor=green        Phosphor  (green|amber|blue|theme)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play oscilloscope
+SNAPSHOT  prism-term snapshot oscilloscope --size 64x18
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('oscilloscope'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/spectrum-analyzer
+next >    curl -sL prism.jeremyfhall.com/f/tracker-pattern
+gallery   curl -sL prism.jeremyfhall.com/t/retro
+home      curl -sL prism.jeremyfhall.com/tty

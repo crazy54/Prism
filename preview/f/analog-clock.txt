@@ -1,0 +1,46 @@
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > MECHANICAL           483nm - 13 / 19
+------------------------------------------------------/\========================
+Analog Clock  analog-clock
+A braille wall clock with a bezel, ticks, numerals, tapered baton hands and a
+smoothly sweeping second hand.
+widget - 40x20 (min 14x7) - 60 s loop - unicode - truecolor
+tags: clock, time, watch, braille, hands
+
+
+                                 ===+=+=%=+=+===
+                              =%=+=+=++ % ++=+=+=%==
+                            ==+=%     12%       %=+===
+                          =+++                     +++==
+                        ==++                       %%++==
+                       =+%%%                     %%  %%%+=
+                      =+++      %%            %%%      +++=
+                      =++         %%%      %%%%         ++=
+                      =++           %%%%%%***           ++=
+                      =%%%%9         ***** *        3 %%%%==
+                      =++        **** %% %%             ++=
+                      =++   *****                       ++=
+                      =++***                           +++=
+                       =+%%%                         %%%+=
+                        ==++                         ++==
+                          =+++          6          +++==
+                            ==+=%       %       %=+===
+                              =%=+=+=++ % ++=+=+=%==
+                                 ===+=+=%=+=+===
+  still at t=6s -- run it live to see it move
+
+PARAMS - --SET KEY=VALUE ------------------------
+  rate=1                Time multiplier  (1-600)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play analog-clock
+SNAPSHOT  prism-term snapshot analog-clock --size 40x20
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('analog-clock'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/gears
+next >    curl -sL prism.jeremyfhall.com/f/hourglass
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

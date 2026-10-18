@@ -1,0 +1,39 @@
+--/\=== PRISM TERMINAL > CHARTS & METRICS > LINE & AREA          436nm - 10 / 30
+------------------------------------------------------/\========================
+Scatter & Trend  charts-scatter
+Latency against payload size for three services as drifting braille clusters,
+with a least-squares trend line.
+chart - 60x16 (min 24x6) - 16 s loop - braille - truecolor
+tags: scatter, regression, clusters, braille, correlation
+
+          o search  o checkout  o catalog                     r = 0.52
+          ^|                                            #
+           |                            #  #          # ##      # # *
+           |                       #       #    ##  #  ## #   * * *
+           |                            #  # #  #  # # #* * *       #
+           |                *  #   ##  *#####    #* * *#   ##
+           |     #            #      # ##  ** * *##  ##  #
+           |                 * ###### *#*#*###  #  *#
+           |*    *   # #  *# #***** *# ##**     ###      #
+           |*    *#     #** * **# * ## *###  #     #
+           |# * *  **#*#**  # #*## ##*#
+           |  *#* ***   * ##**          *
+           |* ***  # # #     #    # #
+           |*  *      *      #
+           |#           *
+           +--------------------------------------------- payload KB -
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play charts-scatter
+SNAPSHOT  prism-term snapshot charts-scatter --size 60x16
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-scatter'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-stacked-area
+next >    curl -sL prism.jeremyfhall.com/f/charts-bubble
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

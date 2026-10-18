@@ -1,0 +1,39 @@
+--/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             578nm - 35 / 39
+------------------------------------------------------/\========================
+git Prompt  ops-prompt-git
+A __git_ps1 prompt tracking the repo: dirty *, staged +, untracked %, and
+upstream u+1 / u+2-1 / u= as files are staged, committed, rebased and pushed.
+tui - 80x16 (min 60x5) - 26 s loop - ascii - 16 colors
+tags: git, prompt, ps1, branch, ahead-behind, bash
+
+ops@node03:~/src/shop-api (main *% u+1)$ git status -sb
+## main...origin/main [ahead 1]
+ M internal/cart/retry.go
+ M internal/cart/retry_test.go
+?? notes.txt
+ops@node03:~/src/shop-api (main *% u+1)$ git add internal/
+ops@node03:~/src/shop-api (main +% u+1)$ git
+
+
+
+
+
+
+
+
+
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ops-prompt-git
+SNAPSHOT  prism-term snapshot ops-prompt-git --size 80x16
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-prompt-git'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-prompt-bash
+next >    curl -sL prism.jeremyfhall.com/f/ops-prompt-powerline
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

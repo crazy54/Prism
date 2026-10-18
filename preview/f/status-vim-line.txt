@@ -1,0 +1,32 @@
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > STATUS LINES    550nm - 6 / 18
+------------------------------------------------------/\========================
+Vim Statusline  status-vim-line
+A lightline-style vim statusline over a live buffer: modes change, text is typed
+in, :w writes and the ruler follows the cursor.
+widget - 80x9 (min 40x3) - 13 s loop - unicode - truecolor
+tags: vim, statusline, lightline, editor, modes
+
+  39   const started = performance.now();
+  40   while (pool.inUse >= pool.size) {
+  41W    if (performance.now() - started > ms) throw new PoolTimeout(pool.name);
+  42     metrics.waiting.inc(pool.nam|
+  43     await sleep(5);
+  44   }
+  45   pool.inUse++;
+ INSERT  git: main  src/pool.js [+]  x 0 ! 1                        44%   42:33
+-- INSERT --
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play status-vim-line
+SNAPSHOT  prism-term snapshot status-vim-line --size 80x9
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('status-vim-line'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/status-deploy-success
+next >    curl -sL prism.jeremyfhall.com/f/status-tmux-bar
+gallery   curl -sL prism.jeremyfhall.com/t/status
+home      curl -sL prism.jeremyfhall.com/tty

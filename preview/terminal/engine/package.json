@@ -1,0 +1,65 @@
+{
+  "name": "prism-term",
+  "version": "0.2.0",
+  "description": "Zero-dependency terminal animation + high-res Unicode drawing engine from Prism — braille/sextant/quadrant/half-block canvases, truecolor with graceful fallback, flicker-free diff rendering, scenes, widgets, spinners and big text.",
+  "type": "module",
+  "bin": {
+    "prism-term": "./cli.js"
+  },
+  "man": [
+    "./man/prism-term.1"
+  ],
+  "exports": {
+    ".": "./index.js",
+    "./facets": "./src/facets/index.js",
+    "./facets/*": "./src/facets/*.js",
+    "./web": "./src/web/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "cli.js",
+    "index.js",
+    "src/",
+    "themes/",
+    "examples/",
+    "man/",
+    "completions/",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "node cli.js",
+    "test": "node --test --test-timeout=120000 \"test/*.test.js\"",
+    "sync-themes": "node scripts/sync-themes.mjs",
+    "export-themes": "node scripts/export-themes.mjs",
+    "themes:check": "node scripts/sync-themes.mjs --check && node scripts/export-themes.mjs --check",
+    "facets:manifest": "node scripts/gen-manifest.mjs",
+    "facets:check": "node scripts/gen-manifest.mjs --check",
+    "catalog": "node scripts/build-catalog.mjs",
+    "catalog:check": "node scripts/build-catalog.mjs --check",
+    "shoot": "node scripts/shoot.mjs",
+    "island": "node scripts/embed-island.mjs",
+    "island:check": "node scripts/embed-island.mjs --check",
+    "tty-site": "node scripts/build-tty-site.mjs",
+    "pack": "node scripts/pack.mjs",
+    "site": "node ../website/build.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "terminal",
+    "tui",
+    "ansi",
+    "animation",
+    "braille",
+    "unicode",
+    "truecolor",
+    "cli",
+    "spinner",
+    "ascii-art",
+    "demoscene",
+    "prism"
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {}
+}

@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > LINUX & OPS > PROCESSES & SERVICES      578nm - 17 / 39
+------------------------------------------------------/\========================
+systemctl status  ops-systemctl-status
+systemctl status nginx.service: the green * active (running) block, Main PID,
+tasks, memory, CPU, CGroup tree and a journal tail with a live reload.
+tui - 80x20 (min 56x6) - 24 s loop - ascii - 16 colors
+tags: systemd, systemctl, service, status, nginx, unit
+
+* nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; preset: ena
+     Active: active (running) since Tue 2026-10-13 09:14:02 UTC; 4h 48min ago
+       Docs: man:nginx(8)
+    Process: 1281 ExecStartPre=/usr/sbin/nginx -t -q -g "daemon on;" (code=exite
+   Main PID: 1287 (nginx)
+      Tasks: 5 (limit: 18922)
+     Memory: 21.6M (peak: 24.1M)
+        CPU: 2min 11.588s
+     CGroup: /system.slice/nginx.service
+             |-1287 "nginx: master process /usr/sbin/nginx -g daemon on; master_
+             |-1288 "nginx: worker process"
+             |-1289 "nginx: worker process"
+             |-1290 "nginx: worker process"
+             `-1291 "nginx: worker process"
+
+Oct 13 09:14:02 node03 systemd[1]: Starting nginx.service - A high performance w
+Oct 13 09:14:02 node03 systemd[1]: Started nginx.service - A high performance we
+
+
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ops-systemctl-status
+SNAPSHOT  prism-term snapshot ops-systemctl-status --size 80x20
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-systemctl-status'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-traceroute
+next >    curl -sL prism.jeremyfhall.com/f/ops-systemctl-failed
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

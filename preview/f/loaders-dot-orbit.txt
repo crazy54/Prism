@@ -1,0 +1,31 @@
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > BRAILLE SPINNERS   506nm - 18 / 64
+------------------------------------------------------/\========================
+Single Dot  loaders-dot-orbit
+One braille dot tracing the edge of its cell -- the quietest loader in the
+catalog.
+spinner - 44x5 (min 24x2) - 8 s loop - braille - 16 colors
+tags: spinner, loader, braille, minimal, quiet
+
+                   | Idle  polling every 5s...           4.0s
+
+                   - \ | /
+
+                   dots3 (ASCII fallback) - 4 frames - 130 ms
+  still at t=4s -- run it live to see it move
+
+PARAMS - --SET KEY=VALUE ------------------------
+  speed=1               Speed  (0.25-4)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play loaders-dot-orbit
+SNAPSHOT  prism-term snapshot loaders-dot-orbit --size 44x5
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-dot-orbit'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-dots-fill
+next >    curl -sL prism.jeremyfhall.com/f/loaders-dot-bounce
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

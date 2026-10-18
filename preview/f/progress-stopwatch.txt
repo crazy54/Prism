@@ -1,0 +1,34 @@
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TIMERS & COUNTDOWNS
+------------------------------------------------------/\========================
+Lap Stopwatch  progress-stopwatch
+A centisecond stopwatch timing benchmark runs; each lap is logged with its delta
+to the best, and the best lap is marked.
+progress - 48x11 (min 28x2) - 20 s loop - unicode - 256 colors
+tags: stopwatch, laps, benchmark, timer
+
+                 bench: cold start - lap 3/6          * running
+                          ### ###   ### ###   ### ###
+                          # # # # # # # #     # # # #
+                          # # # #   # # ###   # # # #
+                          # # # # # # # # #   # # # #
+                          ### ###   ### ### # ### ###
+
+                  lap 1   00:03.07    00:03.07            +0.24
+                  lap 2   00:02.83    00:05.90           * best
+
+
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play progress-stopwatch
+SNAPSHOT  prism-term snapshot progress-stopwatch --size 48x11
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-stopwatch'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-countdown
+next >    curl -sL prism.jeremyfhall.com/f/progress-health-wait
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

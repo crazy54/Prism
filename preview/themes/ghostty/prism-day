@@ -1,0 +1,27 @@
+# Prism Day — Prism's Day terminal colors (Refraction).
+# Ghostty: save as ~/.config/ghostty/themes/prism-day, then in the config:
+#   theme = light:prism-day,dark:prism-night   (follows the system appearance)
+#   theme = prism-day                   (always this one)
+
+palette = 0=#23222f
+palette = 1=#b73232
+palette = 2=#007240
+palette = 3=#835c00
+palette = 4=#2a5ec5
+palette = 5=#7353bb
+palette = 6=#006d7d
+palette = 7=#e6e5ee
+palette = 8=#55546a
+palette = 9=#cf354b
+palette = 10=#00823a
+palette = 11=#8d6c00
+palette = 12=#006fd8
+palette = 13=#a04ac2
+palette = 14=#007c87
+palette = 15=#ffffff
+background = #f8f7fb
+foreground = #23222f
+cursor-color = #7353bb
+cursor-text = #ffffff
+selection-background = #ddd5f3
+selection-foreground = #20202e

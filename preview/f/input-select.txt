@@ -1,0 +1,33 @@
+--/\=== PRISM TERMINAL > INPUT & MENUS > SELECTS & LISTS          487nm - 1 / 23
+------------------------------------------------------/\========================
+Select Prompt  input-select
+An inquirer/gum-style single select: the pointer moves through regions with a
+hint line, Enter confirms and the answer collapses inline.
+tui - 56x10 (min 32x7) - 6 s loop - unicode - 16 colors
+tags: select, prompt, list, choose, inquirer
+
+            ? Deploy region
+               us-east-1       N. Virginia
+               us-east-2       Ohio
+             > us-west-2       Oregon
+               eu-west-1       Ireland
+               ap-southeast-2  Sydney
+
+            ^/v move . enter select . esc cancel
+
+
+  still at t=3s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play input-select
+SNAPSHOT  prism-term snapshot input-select --size 56x10
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-select'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-modeline
+next >    curl -sL prism.jeremyfhall.com/f/input-fuzzy-finder
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

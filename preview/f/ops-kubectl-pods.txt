@@ -1,0 +1,39 @@
+--/\=== PRISM TERMINAL > LINUX & OPS > CONTAINERS & CLUSTERS     578nm - 23 / 39
+------------------------------------------------------/\========================
+kubectl get pods -w  ops-kubectl-pods
+kubectl get pods -w during a rolling update: new pods go Pending ->
+ContainerCreating -> Running while old ones go Terminating, appended live.
+tui - 80x16 (min 60x6) - 30 s loop - ascii - 16 colors
+tags: kubernetes, kubectl, pods, rollout, watch, k8s
+
+ops@node03:~/deploy$ kubectl get pods -n shop -w
+NAME                        READY   STATUS              RESTARTS   AGE
+worker-5f4b9c7d6f-q8l2c     1/1     Running             0          6d2h
+redis-0                     1/1     Running             0          19d
+api-6c8f7d9b5c-4tq2m        1/1     Running             0          3d4h
+api-6c8f7d9b5c-7mzxk        1/1     Running             0          3d4h
+api-6c8f7d9b5c-r9b8n        1/1     Running             0          3d4h
+api-7d9c6b5f8d-2xk4p        0/1     Pending             0          0s
+api-7d9c6b5f8d-2xk4p        0/1     ContainerCreating   0          0s
+api-7d9c6b5f8d-2xk4p        1/1     Running             0          3s
+
+
+
+
+
+
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ops-kubectl-pods
+SNAPSHOT  prism-term snapshot ops-kubectl-pods --size 80x16
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-kubectl-pods'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-docker-stats
+next >    curl -sL prism.jeremyfhall.com/f/ops-kubectl-rollout
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

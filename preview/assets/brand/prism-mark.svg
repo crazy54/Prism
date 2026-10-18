@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" role="img" aria-label="Prism">
+<title>Prism</title>
+<defs>
+<linearGradient id="pm-night-e" x1="6" y1="4" x2="36" y2="33" gradientUnits="userSpaceOnUse"><stop offset="0.00" stop-color="#ece6ff"/><stop offset="0.50" stop-color="#b8a2f2"/><stop offset="1.00" stop-color="#64ceea"/></linearGradient>
+<linearGradient id="pm-night-l" x1="11" y1="5" x2="17" y2="33" gradientUnits="userSpaceOnUse"><stop stop-color="#e2d9ff" stop-opacity="0.46"/><stop offset=".55" stop-color="#ab91eb" stop-opacity="0.14"/><stop offset="1" stop-color="#839ef4" stop-opacity="0.04"/></linearGradient>
+<linearGradient id="pm-night-r" x1="22" y1="5" x2="33" y2="33" gradientUnits="userSpaceOnUse"><stop stop-color="#839ef4" stop-opacity="0.07"/><stop offset="1" stop-color="#52cea0" stop-opacity="0.17"/></linearGradient>
+<linearGradient id="pm-night-f" x1="20" y1="4" x2="25" y2="33" gradientUnits="userSpaceOnUse"><stop stop-color="#ffffff" stop-opacity="1"/><stop offset=".62" stop-color="#ffffff" stop-opacity="0.38"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+<radialGradient id="pm-night-a"><stop stop-color="#ffffff"/><stop offset=".35" stop-color="#ffffff" stop-opacity=".7"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+<linearGradient id="pm-night-s" x1="25" y1="0" x2="36" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0.00" stop-color="#ab91eb"/><stop offset="0.25" stop-color="#52acee"/><stop offset="0.50" stop-color="#52cea0"/><stop offset="0.75" stop-color="#ebc059"/><stop offset="1.00" stop-color="#ec8398"/></linearGradient>
+</defs>
+<path d="M20 4 25 33H4Z" fill="url(#pm-night-l)"/>
+<path d="M20 4 36 33H25Z" fill="url(#pm-night-r)"/>
+<path d="M20 4 36 33H4Z" fill="none" stroke="url(#pm-night-e)" stroke-width="1.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+<path d="M20 4 25 33" fill="none" stroke="url(#pm-night-f)" stroke-width="1.13" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+<path d="M25.9 33H35.1" stroke="url(#pm-night-s)" stroke-width="1.5" stroke-linecap="round" opacity="0.8" vector-effect="non-scaling-stroke"/>
+<circle cx="20" cy="4" r="2" fill="url(#pm-night-a)"/>
+</svg>

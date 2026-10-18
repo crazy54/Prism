@@ -1,0 +1,37 @@
+--/\=== PRISM TERMINAL > AI WORKING > TOKEN STREAMS               479nm - 8 / 18
+------------------------------------------------------/\========================
+Structured Output  ai-structured-output
+Structured output streaming in: JSON arrives token by token, pretty-printed with
+syntax color, while a schema checklist ticks off each completed field.
+text - 72x14 (min 44x10) - 9 s loop - unicode - 16 colors
+tags: json, structured output, schema, streaming, tool use
+
+    {                                                   | IncidentSummary
+      "incident": "INC-3127",                           |
+      "severity": "sev2",                               | + incident
+      "service": "checkout-api",                        | + severity
+      "cause": "db pool starvation",                    | + service
+      "confidence": 0.87,                               | + cause
+      "actions": [                                      | + confidence
+        { "type": "config", "set": "DB_POOL_SIZE=40" }, | + actions
+        { "type": "alert", "on": "pool_wait_ms > 200" } | + needs_approval
+      ],                                                |
+      "needs_approval": true                            |
+    }                                                   |
+                                                        |
+    + valid against IncidentSummary . 7/7 fields . needs_approval: true
+  still at t=4.5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ai-structured-output
+SNAPSHOT  prism-term snapshot ai-structured-output --size 72x14
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ai-structured-output'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ai-throughput-meter
+next >    curl -sL prism.jeremyfhall.com/f/ai-tool-call-card
+gallery   curl -sL prism.jeremyfhall.com/t/ai
+home      curl -sL prism.jeremyfhall.com/tty

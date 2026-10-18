@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > 3D SOLIDS             483nm - 2 / 19
+------------------------------------------------------/\========================
+Donut  donut
+The donut.c torus, z-buffered and properly lit -- frosted with sprinkles, or
+--set style=solid.
+scene - 80x24 (min 20x6) - 8 s loop - unicode - truecolor
+tags: donut, torus, donut.c, 3d, lighting
+
+
+
+                               ++++*+++++++++==
+                            +*##*+================
+                          +#%%%==-----=----==*=====-
+                         *#@%*==---:-::::----========-
+                       +*@@%==--:::......:::--==+++==--
+                       +#@%*==--:..........:--==+**+==-:
+                      ++*@%*==-::...       .:-==+*%*+=--.
+                      ++#%#+==--:..          -=++%@#+=--:
+                      =++#*+===--:.          =++*@@#+=-::
+                      ==++**+====--:        ++%*%@#+==-:.
+                      -===++++===========++++%*#%*+==--:.
+                       -==============+++++++***++==--:.
+                        --=============++++++++===---:..
+                         :---=================-----:...
+                           ::-----=---==------::::...
+                             :::::----------:::....
+                                 ...:..:........
+
+  still at 80x20 - t=4s -- run it live for full size and motion
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play donut
+SNAPSHOT  prism-term snapshot donut --size 80x24
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('donut'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/shaded-cube
+next >    curl -sL prism.jeremyfhall.com/f/studio-sphere
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

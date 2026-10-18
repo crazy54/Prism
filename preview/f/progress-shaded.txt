@@ -1,0 +1,26 @@
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > PROGRESS BARS      558nm - 9 / 41
+------------------------------------------------------/\========================
+Shaded Edge  progress-shaded
+Full blocks with a %:. shaded leading edge over a light-shade track -- the bar
+that feels like a DOS installer.
+progress - 56x3 (min 20x1) - 8 s loop - unicode - 16 colors
+tags: shade, dos, retro, installer
+
+             #################################+..............   69%
+
+             #####################################...........   77%
+  still at t=4s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play progress-shaded
+SNAPSHOT  prism-term snapshot progress-shaded --size 56x3
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-shaded'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-vertical
+next >    curl -sL prism.jeremyfhall.com/f/progress-multi-bar
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

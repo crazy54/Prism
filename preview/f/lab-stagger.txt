@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > ANIMATION LAB > EASING & TIMING          474nm - 5 / 17
+------------------------------------------------------/\========================
+Stagger  lab-stagger
+A grid of tiles staggering in and out four ways -- from the left, from the
+center, as a wave, and shuffled.
+scene - 60x20 (min 20x7) - 13.6 s loop - unicode - truecolor
+tags: stagger, cascade, delay, outback, choreography, ui motion
+
+          ***** ##### *****  +++               +++  ***** ##### *****
+          ***** ##### *****  +++   ===   ===   +++  ***** ##### *****
+          ***** ##### *****  +++               +++  ***** ##### *****
+
+          ***** ##### +++++                         +++++ ##### *****
+          ***** ##### +++++   -                 -   +++++ ##### *****
+          ***** ##### +++++                         +++++ ##### *****
+
+          ***** #####  +++                           +++  ##### *****
+          ***** #####  +++    -                 -    +++  ##### *****
+          ***** #####  +++                           +++  ##### *****
+
+          ***** ##### +++++                         +++++ ##### *****
+          ***** ##### +++++   -                 -   +++++ ##### *****
+          ***** ##### +++++                         +++++ ##### *****
+
+          ***** ##### *****  +++               +++  ***** ##### *****
+          ***** ##### *****  +++   ===   ===   +++  ***** ##### *****
+          ***** ##### *****  +++               +++  ***** ##### *****
+           stagger . from the centre . 22 ms apart . outBack in, inQu
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play lab-stagger
+SNAPSHOT  prism-term snapshot lab-stagger --size 60x20
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('lab-stagger'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/lab-keyframes
+next >    curl -sL prism.jeremyfhall.com/f/lab-motion-blur
+gallery   curl -sL prism.jeremyfhall.com/t/lab
+home      curl -sL prism.jeremyfhall.com/tty

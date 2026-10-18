@@ -1,0 +1,33 @@
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   558nm - 41 / 41
+------------------------------------------------------/\========================
+Throughput Gauge  progress-throughput
+A needle gauge of link use during a backup stream, beside the running total,
+average and peak and a rolling rate sparkline.
+progress - 64x10 (min 30x2) - 12 s loop - braille - 256 colors
+tags: throughput, gauge, bandwidth, network, backup
+
+                                    backup stream -> 10.20.0.31
+         869 MB/s                   sent   22.64 GB
+         [###############.......]   now    869 MB/s  70% of 10GbE
+         egress                     avg    707 MB/s  peak 1.08 GB/s
+
+
+
+                                    last 6s
+
+                                    .....-==**+++=++*++=-----==:.:--=++
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play progress-throughput
+SNAPSHOT  prism-term snapshot progress-throughput --size 64x10
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-throughput'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-queue-drain
+next >    curl -sL prism.jeremyfhall.com/f/progress-smooth
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,37 @@
+--/\=== PRISM TERMINAL > LINUX & OPS > SYSTEM MONITORS            578nm - 6 / 39
+------------------------------------------------------/\========================
+vmstat 1  ops-vmstat
+vmstat 1 streaming one line a second under its two-line header: run queue,
+memory, swap, block I/O, interrupts, context switches, CPU split.
+tui - 80x14 (min 50x5) - 20 s loop - ascii - mono colors
+tags: vmstat, memory, io, cpu, procps
+
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 1  0 114688 2103262 430112 8347760    0    0   410   379 2625 4938 13  4 80  3
+ 2  0 114688 2034645 430112 8344078    0    0   542   141 3398 6558 18  5 75  2
+ 3  0 114688 2020561 430112 8343353    0    0   293   262 3550 6877 19  5 75  1
+ 4  0 114688 1945781 430112 8339392    0    0   411   231 4382 8619 25  6 66  3
+ 3  0 114688 1982178 430112 8341786    0    0   604   367 3879 7566 22  6 70  2
+ 1  0 114688 2089435 430112 8347564    0    0   366   252 2666 5024 13  4 81  2
+ 1  0 114688 2141388 430112 8350130    0    0   680    82 2127 3895  9  3 85  3
+ 2  0 114688 2052365 430112 8345240    0    0    80   642 3154 6047 16  4 78  2
+ 3  0 114688 1994759 430112 8341655    0    0   352   768 3907 7624 22  6 70  2
+ 4  0 114688 1935434 430112 8338460    0    0   253   372 4578 9030 27  7 64  2
+ 4  0 114688 1953616 430112 8339070    0    0   255   148 4450 8761 26  7 65  2
+ 4  0 114688 1965769 430112 8339537    0    0   446   188 4352 8556 25  6 66  3
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ops-vmstat
+SNAPSHOT  prism-term snapshot ops-vmstat --size 80x14
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-vmstat'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-top
+next >    curl -sL prism.jeremyfhall.com/f/ops-df
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

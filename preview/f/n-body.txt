@@ -1,0 +1,46 @@
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PHYSICS       471nm - 12 / 18
+------------------------------------------------------/\========================
+N-Body Orbits  n-body
+The figure-eight three-body choreography, with a ring of dust that the dancing
+trio flings about chaotically.
+scene - 60x22 (min 20x7) - 30 s loop - unicode - truecolor
+tags: n-body, gravity, orbits, three-body, figure eight, chaos, braille
+
+
+                                                          .::
+                                                             ::
+                                                              ::-
+                                                                --
+          ==                                                      -
+            =#          =====---                 +::::***          -
+                     ====       ----         ++++      **---       -=
+                    ++              --    +++              -=       =
+                    :                 --=++                 =        =
+                    **                ===::         #==.::::+       #=
+                   ***             ====   ::###    ---     ++:
+                     :---       ====        #####  - #  *+++ :
+                        -------=                 ********     :
+                                                    :   ====  -
+                                                     :::::: ==-=-
+                                                              - ------
+                                                              -      -
+                                                             -
+           figure-eight choreography . 3 equal masses
+  still at 60x20 - t=6s -- run it live for full size and motion
+
+PARAMS - --SET KEY=VALUE ------------------------
+  dust=14               Dust particles  (0-40)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play n-body
+SNAPSHOT  prism-term snapshot n-body --size 60x22
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('n-body'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/harmonograph
+next >    curl -sL prism.jeremyfhall.com/f/string-waves
+gallery   curl -sL prism.jeremyfhall.com/t/sim
+home      curl -sL prism.jeremyfhall.com/tty

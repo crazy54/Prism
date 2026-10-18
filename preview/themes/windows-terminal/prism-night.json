@@ -1,0 +1,23 @@
+{
+  "name": "Prism Night",
+  "background": "#0a0c12",
+  "foreground": "#e6e6ef",
+  "cursorColor": "#b8a2f2",
+  "selectionBackground": "#2e2748",
+  "black": "#1d202b",
+  "red": "#f28885",
+  "green": "#7ad59c",
+  "yellow": "#ecca76",
+  "blue": "#81aaf7",
+  "purple": "#b8a2f2",
+  "cyan": "#67cfe3",
+  "white": "#c6c7d3",
+  "brightBlack": "#76798e",
+  "brightRed": "#ffaaa7",
+  "brightGreen": "#a5eac1",
+  "brightYellow": "#f7e59f",
+  "brightBlue": "#aac8ff",
+  "brightPurple": "#d9c6fe",
+  "brightCyan": "#9eeaf2",
+  "brightWhite": "#f6f6fb"
+}

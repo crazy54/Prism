@@ -1,0 +1,37 @@
+--/\=== PRISM TERMINAL > CHARTS & METRICS > HEATMAPS & MATRICES  436nm - 24 / 30
+------------------------------------------------------/\========================
+Latency Heatmap  charts-heatmap-latency
+Request latency as a scrolling heatmap -- log-spaced buckets over time in
+half-blocks, hot where requests pile up.
+chart - 72x14 (min 24x5) - 16 s loop - unicode - truecolor
+tags: heatmap, latency, histogram over time, half blocks, magma
+
+        5s """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+           """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+           """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        1s """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+           """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+           """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+     200ms """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+           """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+           """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+      50ms """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+           """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+           """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+      10ms """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+           -60s                      checkout p95                        now
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play charts-heatmap-latency
+SNAPSHOT  prism-term snapshot charts-heatmap-latency --size 72x14
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-heatmap-latency'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-radar
+next >    curl -sL prism.jeremyfhall.com/f/charts-heatmap-week
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

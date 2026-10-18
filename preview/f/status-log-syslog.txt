@@ -1,0 +1,37 @@
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > LOG LINES      550nm - 16 / 18
+------------------------------------------------------/\========================
+journalctl -f  status-log-syslog
+A journal follow in syslog format with journald priority colors -- red errors,
+yellow warnings, dim debug -- scrolling as lines arrive.
+widget - 80x14 (min 40x4) - 20 s loop - unicode - truecolor
+tags: journalctl, syslog, logs, tail -f, priority
+
+-- Journal begins at Mon 2026-10-12 00:00:01 UTC. --
+Oct 13 14:02:06 pg-orders-01 postgres[1518]: checkpoint complete: wrote 1458 bu.
+Oct 13 14:02:06 payments-01 nginx[1555]: GET /api/v2/catalog?page=17 200 81ms
+Oct 13 14:02:07 pg-orders-01 sshd[1592]: Accepted publickey for deploy from 192.
+Oct 13 14:02:07 web-01 sshd[1629]: Accepted publickey for deploy from 192.0.2.1.
+Oct 13 14:02:08 web-02 cron[1666]: (root) CMD (/usr/local/bin/backup --incremen.
+Oct 13 14:02:08 auth-01 sshd[1703]: Accepted publickey for deploy from 192.0.2..
+Oct 13 14:02:09 auth-01 envoy[1740]: upstream checkout -> 10.20.2.31:8085 ok rtt
+Oct 13 14:02:09 payments-01 sshd[1777]: Accepted publickey for deploy from 192..
+Oct 13 14:02:10 auth-01 auth[1814]: session issued user=u1251 mfa=webauthn
+Oct 13 14:02:10 pg-orders-01 postgres[1851]: checkpoint complete: wrote 3846 bu.
+Oct 13 14:02:10 api-gw-01 envoy[1888]: upstream checkout -> 10.20.2.32:8085 ok r
+Oct 13 14:02:11 auth-01 checkout[1925]: order ord-897712 placed total=$155.78
+Oct 13 14:02:11 payments-01 cron[1962]: (root) CMD (/usr/local/bin/backup --inc.
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play status-log-syslog
+SNAPSHOT  prism-term snapshot status-log-syslog --size 80x14
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('status-log-syslog'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/status-heartbeat
+next >    curl -sL prism.jeremyfhall.com/f/status-log-json
+gallery   curl -sL prism.jeremyfhall.com/t/status
+home      curl -sL prism.jeremyfhall.com/tty

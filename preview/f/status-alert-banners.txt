@@ -1,0 +1,31 @@
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > TOASTS & ALERTS
+------------------------------------------------------/\========================
+Alert Banners  status-alert-banners
+Info, success, warning and error banners with accent rails, icons and dismiss
+marks; the newest one pulses for attention.
+widget - 72x8 (min 30x4) - 8 s loop - unicode - truecolor
+tags: alert, banner, callout, severity, message
+
+    | i Heads up  pg-orders maintenance tonight 02:00-02:30 UTC.          x
+
+    | + Resolved  Checkout latency is back to normal.                     x
+
+    | ! Degraded  Search is slower than usual (p95 1.8 s).                x
+
+    | x Outage  Payments failing in eu-west-1 - team engaged.             x
+
+  still at t=4s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play status-alert-banners
+SNAPSHOT  prism-term snapshot status-alert-banners --size 72x8
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('status-alert-banners'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/status-toast-stack
+next >    curl -sL prism.jeremyfhall.com/f/status-incident-banner
+gallery   curl -sL prism.jeremyfhall.com/t/status
+home      curl -sL prism.jeremyfhall.com/tty

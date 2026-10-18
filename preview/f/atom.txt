@@ -1,0 +1,46 @@
+--/\=== PRISM TERMINAL > ANIMATED OBJECTS > ICONS & LOGOS        483nm - 18 / 19
+------------------------------------------------------/\========================
+Atom  atom
+A lit nucleus of protons and neutrons inside three tilted orbits, with glowing
+electrons trailing light.
+art - 56x22 (min 18x7) - 12 s loop - unicode - truecolor
+tags: atom, science, orbit, electron, nucleus, physics
+
+
+                                .:----:..
+                               :-:....:--:....:::::.
+                              .:.       .-+=::...::-:.
+                              :. ......:::.-=:     .-:
+                          .::-=======++====-=*+:..  .=
+                       .:---:.::. ..:.    ...:=+-==-:+
+                      .-:.    .: .:..    +     :-..:=*=:.
+                      :.       :::. *#=.==:     :-..=:.-=.
+                      .:.      :-. =::.==-.+-   .-:--   :+
+                       .::...-%*-:  +*=:..--.    .*=. .:#@-.
+                        ..:::+@+:.. -..:--:.    .-+- ..-*+:.
+                           ..+-:::::............==-%=-:.
+                            .=   ..::.........-+-:+@%:.
+                            ::      .:..    :=-.  .*:
+                            ::       ..:..:==:    .*.
+                            .-.       .:=*=:.    .=-
+                             .--::::--=-:..:::::-=:
+                               .:::::..      ....
+
+  still at 56x20 - t=6s -- run it live for full size and motion
+
+PARAMS - --SET KEY=VALUE ------------------------
+  electrons=3           Electrons  (1-6)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play atom
+SNAPSHOT  prism-term snapshot atom --size 56x22
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('atom'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/prism-logo
+next >    curl -sL prism.jeremyfhall.com/f/spinning-coin
+gallery   curl -sL prism.jeremyfhall.com/t/objects
+home      curl -sL prism.jeremyfhall.com/tty

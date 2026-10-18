@@ -1,0 +1,36 @@
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > HEALTH & UPTIME
+------------------------------------------------------/\========================
+Uptime & SLO  status-uptime-slo
+A status-page uptime history: 90 daily bars per service, uptime against its SLO,
+the error budget left and a cursor reading each day.
+widget - 80x13 (min 40x4) - 18 s loop - unicode - truecolor
+tags: uptime, slo, error budget, status page, history
+
+API       ###################################################### 99.99% 75% left
+          SLO 99.95%  ---------------------------------------- error budget
+Checkout  ######=###########=######=######=#=################### 99.94% 43% left
+          SLO 99.90%  ---------------------------------------- error budget
+Payments  ###################################=##=############### 99.79%  0% left
+          SLO 99.95%  ---------------------------------------- error budget
+Search    ########################################=#########_### 99.91% 83% left
+          SLO 99.5%   ---------------------------------------- error budget
+Webhooks  #################=#######=####=#####=#####=########### 99.91% 10% left
+          SLO 99.90%  ---------------------------------------- error budget
+          54 days ago                                      today
+          > Sep  8: Checkout 11 min down
+
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play status-uptime-slo
+SNAPSHOT  prism-term snapshot status-uptime-slo --size 80x13
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('status-uptime-slo'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/status-health-checks
+next >    curl -sL prism.jeremyfhall.com/f/status-service-matrix
+gallery   curl -sL prism.jeremyfhall.com/t/status
+home      curl -sL prism.jeremyfhall.com/tty

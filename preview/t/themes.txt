@@ -1,0 +1,82 @@
+--/\=== PRISM TERMINAL > THEMES                                       15 FORMATS
+------------------------------------------------------/\========================
+
+  Prism Night and Prism Day as color schemes for your terminal. Each file is
+  plain text with its install notes at the top: read it, then install it
+  yourself. Nothing here changes your settings.
+
+ANY TERMINAL, THIS SESSION - ALSO OVER SSH ------
+  curl -sL prism.jeremyfhall.com/themes/osc/prism-night.sh | sh
+  curl -sL prism.jeremyfhall.com/themes/osc/prism-day.sh | sh
+  One printf of OSC 4 / 10 / 11 codes: on a remote host the codes travel back to
+  your own terminal. It lasts until the terminal closes.
+
+FILES -------------------------------------------
+| Windows Terminal
+   curl -sLO prism.jeremyfhall.com/themes/windows-terminal/prism-night.json
+   curl -sLO prism.jeremyfhall.com/themes/windows-terminal/prism-day.json
+   paste the object into "schemes" in settings.json, then pick it under Profiles
+   -> Appearance -> Color scheme
+| iTerm2
+   curl -sLO prism.jeremyfhall.com/themes/iterm2/prism-night.itermcolors
+   curl -sLO prism.jeremyfhall.com/themes/iterm2/prism-day.itermcolors
+   Settings -> Profiles -> Colors -> Color Presets... -> Import...
+| Alacritty
+   curl -sLO prism.jeremyfhall.com/themes/alacritty/prism-night.toml
+   curl -sLO prism.jeremyfhall.com/themes/alacritty/prism-day.toml
+   import it from alacritty.toml ([general] import = [...])
+| kitty
+   curl -sLO prism.jeremyfhall.com/themes/kitty/prism-night.conf
+   curl -sLO prism.jeremyfhall.com/themes/kitty/prism-day.conf
+   copy to ~/.config/kitty/themes/ and run `kitten themes`
+| WezTerm
+   curl -sLO prism.jeremyfhall.com/themes/wezterm/prism-night.toml
+   curl -sLO prism.jeremyfhall.com/themes/wezterm/prism-day.toml
+   copy to ~/.config/wezterm/colors/ and set config.color_scheme
+| Ghostty
+   curl -sLO prism.jeremyfhall.com/themes/ghostty/prism-night
+   curl -sLO prism.jeremyfhall.com/themes/ghostty/prism-day
+   copy to ~/.config/ghostty/themes/ and set theme =
+   light:prism-day,dark:prism-night
+| foot
+   curl -sLO prism.jeremyfhall.com/themes/foot/prism-night.ini
+   curl -sLO prism.jeremyfhall.com/themes/foot/prism-day.ini
+   include it from foot.ini ([main] include=...)
+| GNOME Terminal
+   curl -sLO prism.jeremyfhall.com/themes/gnome-terminal/prism-night.sh
+   curl -sLO prism.jeremyfhall.com/themes/gnome-terminal/prism-day.sh
+   run it to PRINT the dconf commands, review, then pipe to sh
+| Konsole
+   curl -sLO prism.jeremyfhall.com/themes/konsole/prism-night.colorscheme
+   curl -sLO prism.jeremyfhall.com/themes/konsole/prism-day.colorscheme
+   copy to ~/.local/share/konsole/ and pick it in the profile
+| Xresources
+   curl -sLO prism.jeremyfhall.com/themes/xresources/prism-night.Xresources
+   curl -sLO prism.jeremyfhall.com/themes/xresources/prism-day.Xresources
+   xrdb -merge the file (xterm, urxvt, ...)
+| VS Code terminal
+   curl -sLO prism.jeremyfhall.com/themes/vscode/prism-night.json
+   curl -sLO prism.jeremyfhall.com/themes/vscode/prism-day.json
+   merge into settings.json (workbench.colorCustomizations)
+| Ptyxis
+   curl -sLO prism.jeremyfhall.com/themes/ptyxis/prism-night.palette
+   curl -sLO prism.jeremyfhall.com/themes/ptyxis/prism-day.palette
+   copy to ~/.local/share/org.gnome.Ptyxis/palettes/ and pick it under
+   Preferences -> Palette
+| Terminal.app (macOS)
+   curl -sLO prism.jeremyfhall.com/themes/terminal-app/prism-night.terminal
+   curl -sLO prism.jeremyfhall.com/themes/terminal-app/prism-day.terminal
+   double-click it (or Settings -> Profiles -> Import...), then make it the
+   default
+| xfce4-terminal
+   curl -sLO prism.jeremyfhall.com/themes/xfce4-terminal/prism-night.theme
+   curl -sLO prism.jeremyfhall.com/themes/xfce4-terminal/prism-day.theme
+   copy to ~/.local/share/xfce4/terminal/colorschemes/ and pick it under
+   Preferences -> Colors
+
+  With the live player installed the same files come from prism-term theme
+  <format> [--day] [-o file]; any other Prism theme works too (--theme primer).
+
+--------------------------------------------------------------------------------
+home      curl -sL prism.jeremyfhall.com/tty
+help      curl -sL prism.jeremyfhall.com/t/help

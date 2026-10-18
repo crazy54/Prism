@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > TEXT EFFECTS > GLITCH & DISTORT         492nm - 20 / 29
+------------------------------------------------------/\========================
+Melting Type  text-melt
+Letters soften and sag, drips run from their undersides and drop into a
+spreading puddle -- then the word sets again.
+text - 72x20 (min 36x10) - 10 s loop - unicode - truecolor
+tags: melt, drip, liquid, horror, distort
+
+
+
+            ####      ####  ############  ####          ############
+            ######  ######  ####          ####              ####
+            ##############  ####          ####              ####
+            ##############  ####          ####          #   ####
+            ####  ##  ####  ##########    ####          #   ####
+            ####  #   ####  ####          ####          #   ####
+            ####  # ######  ####          ####          #   ####
+            ####  # ######  ####      ##  ######        #   ####
+            ###   # ######  ########## #  ####  ######  #   ####
+            ###   # ### ##       ## ## #  #  #  ## #    #   ##
+             ##     ###  #       #  ## #  #  #  ## #    #   ##
+             ##     ###  #       #  ## #  #     ## #    #   ##
+             ##     ##           #  ##          ##      #   #
+             ##   # ##               #          #           #
+             ##      ##              #          #           #
+             ##                      #          #
+             ##                      #
+                    ########################################
+  still at t=5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play text-melt
+SNAPSHOT  prism-term snapshot text-melt --size 72x20
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('text-melt'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/text-vhs
+next >    curl -sL prism.jeremyfhall.com/f/text-neon-sign
+gallery   curl -sL prism.jeremyfhall.com/t/text
+home      curl -sL prism.jeremyfhall.com/tty

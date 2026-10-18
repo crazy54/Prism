@@ -1,0 +1,56 @@
+[38;2;154;154;154m─[38;2;208;208;208m─[0;1;38;2;255;255;255;49m◢[38;2;131;100;199m◣[0;38;2;129;103;189;49m━[38;2;34;135;74m━[38;2;185;85;108m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;2;186;89;68;49mPURE ASCII[0;39;49m                              [38;2;186;89;68mλ 597 · 17 / 17[0m
+[38;2;118;118;118m──────[38;2;119;119;119m───[38;2;120;120;120m──[38;2;121;121;121m──[38;2;122;122;122m─[38;2;123;123;123m─[38;2;124;124;124m──[38;2;125;125;125m─[38;2;126;126;126m─[38;2;127;127;127m─[38;2;129;129;129m─[38;2;130;130;130m─[38;2;131;131;131m─[38;2;132;132;132m─[38;2;134;134;134m─[38;2;135;135;135m─[38;2;137;137;137m─[38;2;138;138;138m─[38;2;140;140;140m─[38;2;142;142;142m─[38;2;144;144;144m─[38;2;146;146;146m─[38;2;148;148;148m─[38;2;150;150;150m─[38;2;152;152;152m─[38;2;154;154;154m─[38;2;156;156;156m─[38;2;159;159;159m─[38;2;161;161;161m─[38;2;164;164;164m─[38;2;166;166;166m─[38;2;169;169;169m─[38;2;172;172;172m─[38;2;175;175;175m─[38;2;178;178;178m─[38;2;181;181;181m─[38;2;184;184;184m─[38;2;187;187;187m─[38;2;190;190;190m─[38;2;194;194;194m─[38;2;197;197;197m─[38;2;201;201;201m─[38;2;204;204;204m─[38;2;208;208;208m─[0;1;38;2;255;255;255;49m◢[38;2;131;100;199m◣[0;38;2;187;86;97;49m━[38;2;187;86;94m━[38;2;186;86;92m━[38;2;186;87;91m━[38;2;185;87;88m━[38;2;184;88;86m━[38;2;183;89;84m━[38;2;181;90;83m━[38;2;180;91;81m━[38;2;179;92;80m━[38;2;176;92;79m━[38;2;175;93;77m━[38;2;173;95;77m━[38;2;170;96;76m━[38;2;168;98;76m━[38;2;166;98;75m━[38;2;164;99;76m━[38;2;162;100;76m━[38;2;159;102;76m━[38;2;156;103;76m━[38;2;154;105;78m━[38;2;151;105;78m━[38;2;149;106;79m━[38;2;145;108;81m━[0m
+7-bit only — no Unicode, no color required. Runs on a VT100, a serial console,
+anything.
+
+[48;2;10;12;18m                                       [49m  [48;2;10;12;18m [0;1;38;2;184;162;242;48;2;10;12;18m|[0;39;48;2;10;12;18m        [38;2;162;164;180mline[39m                         [0m
+[48;2;10;12;18m          [38;2;184;162;242m ___  ___  ___  ___  __  __ [39m [49m  [48;2;10;12;18m [0;1;38;2;139;216;186;48;2;10;12;18m.  [0;39;48;2;10;12;18m      [38;2;162;164;180mdots[39m                         [0m
+[48;2;10;12;18m          [38;2;184;162;242m| _ \| _ \|_ _|/ __||  \/  |[39m [49m  [48;2;10;12;18m [0;1;38;2;238;195;111;48;2;10;12;18mO[0;39;48;2;10;12;18m        [38;2;162;164;180mgrow[39m                         [0m
+[48;2;10;12;18m          [38;2;184;162;242m|  _/|   / | | \__ \| |\/| |[39m [49m  [48;2;10;12;18m [0;1;38;2;134;189;249;48;2;10;12;18m>[0;39;48;2;10;12;18m        [38;2;162;164;180marrows[39m                       [0m
+[48;2;10;12;18m          [38;2;184;162;242m|_|  |_|_\|___||___/|_|  |_|[39m [49m  [48;2;10;12;18m [0;1;38;2;240;127;179;48;2;10;12;18m[=   ][0;39;48;2;10;12;18m   [38;2;162;164;180mbounce[39m                       [0m
+[48;2;10;12;18m          [38;2;184;162;242m    ~~~ screensaver ~~~     [39m [49m  [48;2;10;12;18m [0;1;38;2;184;162;242;48;2;10;12;18m( *   )[0;39;48;2;10;12;18m  [38;2;162;164;180mscanner[39m                      [0m
+[48;2;10;12;18m                                       [49m  [48;2;10;12;18m [0;1;38;2;139;216;186;48;2;10;12;18m[|][0;39;48;2;10;12;18m      [38;2;162;164;180mpipe[39m                         [0m
+[48;2;10;12;18m                                       [49m  [48;2;10;12;18m [0;1;38;2;238;195;111;48;2;10;12;18m[    ][0;39;48;2;10;12;18m   [38;2;162;164;180mfill[39m                         [0m
+[0;2;39;49mascii-bounce-logo                        ascii-spinners[0m
+
+[0;1;38;2;186;89;68;49m01 / ASCII ANIMATIONS · 11[0;39;49m [38;2;118;118;118m──────────────────────[0m
+  [38;2;65;121;180mascii-donut          [39mThe canonical spinning ASCII torus: z-buffered, lit with…[0m
+  [38;2;65;121;180mascii-fire           [39mOld-school text-mode fire: heat averages upward and cool…[0m
+  [38;2;65;121;180mascii-rain           [39mSlanting rain in three depths, splashing on a street lin…[0m
+  [38;2;65;121;180mascii-starfield      [39mStars fly out of the center of the screen, growing from …[0m
+  [38;2;65;121;180mascii-plasma         [39mFour interfering sine fields mapped onto the " .:-=+*#%@…[0m
+  [38;2;65;121;180mascii-cube           [39mA tumbling wireframe cube in perspective, edges drawn wi…[0m
+  [38;2;65;121;180mascii-bounce-logo    [39mThe screensaver everyone waited on: a logo drifts, chang…[0m
+  [38;2;65;121;180mascii-aquarium       [39mFish of five shapes cruise both ways past swaying seawee…[0m
+  [38;2;65;121;180mascii-train          [39mAn original take on the sl gag: a steam express thunders…[0m
+  [38;2;65;121;180mascii-walker         [39mA stick figure strolls past lamp posts and drifting clou…[0m
+  [38;2;65;121;180mascii-matrix         [39mColumns of falling ASCII code with bright heads and deca…[0m
+
+[0;1;38;2;186;89;68;49m02 / ASCII ART · 5[0;39;49m [38;2;118;118;118m──────────────────────────────[0m
+  [38;2;65;121;180mascii-sea            [39mA sailboat rides rolling ~ and ^ swells under a low sun …[0m
+  [38;2;65;121;180mascii-mountains      [39mThree ridgelines of /\ peaks drift past at different spe…[0m
+  [38;2;65;121;180mascii-skyline        [39mA night skyline whose windows switch on and off, an ante…[0m
+  [38;2;65;121;180mascii-rocket         [39mCountdown from T-5, ignition, a flickering exhaust plume…[0m
+  [38;2;65;121;180mascii-coffee         [39mA cup on its saucer with three wisps of steam curling up…[0m
+
+[0;1;38;2;186;89;68;49m03 / ASCII SPINNERS & BARS · 4[0;39;49m [38;2;118;118;118m──────────────────[0m
+  [38;2;65;121;180mascii-spinners       [39mSixteen pure-ASCII spinners — |/-\, bouncing brackets, s…[0m
+  [38;2;65;121;180mascii-progress-bars  [39mThe progress lines everyone recognizes — wget, curl, apt…[0m
+  [38;2;65;121;180mascii-hourglass      [39mSand drains grain by grain through the neck of a 7-bit h…[0m
+  [38;2;65;121;180mascii-vu-meter       [39mA hi-fi spectrum analyzer in #: bars bounce to a synthet…[0m
+
+[0;1;38;2;186;89;68;49m04 / CLASSICS · 9[0;39;49m [38;2;118;118;118m───────────────────────────────[0m
+  [38;2;65;121;180mascii-cowsay         [39mA cowsay-style speech bubble over an original ASCII cow …[0m
+  [38;2;65;121;180mascii-banner         [39mHuge letters built from # like the Unix banner command, …[0m
+  [38;2;65;121;180mascii-figlet         [39mOutlined big letters traced from Prism's bitmap fonts wi…[0m
+  [38;2;65;121;180mascii-figlet-clock   [39mHH:MM:SS in outlined figlet digits with a blinking colon…[0m
+  [38;2;65;121;180mascii-clock          [39mA round wall clock in dots and digits; hour, minute and …[0m
+  [38;2;65;121;180mascii-life           [39mConway's Game of Life the way it first ran on terminals …[0m
+  [38;2;65;121;180mascii-maze           [39mA depth-first backtracker carves a +--+ maze cell by cel…[0m
+  [38;2;65;121;180mascii-snake          [39mSnake plays itself: breadth-first search steers @ to the…[0m
+  [38;2;65;121;180mascii-pong           [39mTwo imperfect AI paddles rally an o across a dotted net;…[0m
+
+[38;2;118;118;118m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;2;65;121;180;49mcurl -sL prism.jeremyfhall.com/f/ascii-donut[0m
+[0;2;39;49mpaged     [0;38;2;65;121;180;49mcurl -sL prism.jeremyfhall.com/t/ascii | less -R[0m
+[0;2;39;49mgalleries [0;38;2;65;121;180;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

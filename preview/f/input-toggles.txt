@@ -1,0 +1,36 @@
+--/\=== PRISM TERMINAL > INPUT & MENUS > TOGGLES & CHECKBOXES     487nm - 5 / 23
+------------------------------------------------------/\========================
+Toggle Switches  input-toggles
+A settings pane of on/off switches whose knobs slide across with color easing as
+a scripted user flips them, labels dimming when off.
+tui - 52x13 (min 34x6) - 6 s loop - unicode - 256 colors
+tags: toggle, switch, settings, preferences, on off
+
+              + Settings ----------------------------------------+
+              | Auto-approve diagnostics                   [OFF] |
+              |                                                  |
+              | Stream reasoning summaries                 [ON ] |
+              |                                                  |
+              | Page on-call for sev1               locked [ON ] |
+              |                                                  |
+              | Compact log view                           [ON ] |
+              |                                                  |
+              | Telemetry to OTLP                          [ON ] |
+              |                                                  |
+              | One line per event; expand with enter.           |
+              +------------------------ space toggle . ^/v move -+
+  still at t=3s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play input-toggles
+SNAPSHOT  prism-term snapshot input-toggles --size 52x13
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-toggles'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-multiselect
+next >    curl -sL prism.jeremyfhall.com/f/input-radio-group
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

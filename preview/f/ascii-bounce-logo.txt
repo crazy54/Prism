@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ANIMATIONS            597nm - 7 / 29
+------------------------------------------------------/\========================
+Bouncing Screensaver Logo  ascii-bounce-logo
+The screensaver everyone waited on: a logo drifts, changes color at every wall,
+and celebrates the corner hit.
+art - 80x24 (min 30x8) - 16 s loop - ascii - 16 colors
+tags: screensaver, bounce, logo, corner, nostalgia
+
+
+                                                   ___  ___  ___  ___  __  __
+                                                  | _ \| _ \|_ _|/ __||  \/  |
+                                                  |  _/|   / | | \__ \| |\/| |
+                                                  |_|  |_|_\|___||___/|_|  |_|
+                                                      ~~~ screensaver ~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ascii-bounce-logo
+SNAPSHOT  prism-term snapshot ascii-bounce-logo --size 80x24
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-bounce-logo'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-cube
+next >    curl -sL prism.jeremyfhall.com/f/ascii-aquarium
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

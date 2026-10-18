@@ -1,0 +1,31 @@
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS    506nm - 3 / 64
+------------------------------------------------------/\========================
+Arc  loaders-arc
+A quarter arc sweeping round a circle in six steps -- the smooth, modern
+single-cell loader.
+spinner - 44x5 (min 24x2) - 8 s loop - unicode - 16 colors
+tags: spinner, loader, circle, arc, smooth
+
+                   | Negotiating TLS...                  4.0s
+
+                   - \ | /
+
+                   arc (ASCII fallback) - 4 frames - 130 ms
+  still at t=4s -- run it live to see it move
+
+PARAMS - --SET KEY=VALUE ------------------------
+  speed=1               Speed  (0.25-4)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play loaders-arc
+SNAPSHOT  prism-term snapshot loaders-arc --size 44x5
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-arc'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-pipe
+next >    curl -sL prism.jeremyfhall.com/f/loaders-circle
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

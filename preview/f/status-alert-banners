@@ -1,0 +1,31 @@
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;64;49mNOTIFICATIONS & STATUS[0;2;39;49m › [0;1;38;5;64;49mTOASTS & ALERTS[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;64;49m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;65m━[38;5;65m━[38;5;65m━[0m
+[0;1;39;49mAlert Banners[0;2;39;49m  status-alert-banners[0m
+Info, success, warning and error banners with accent rails, icons and dismiss
+marks; the newest one pulses for attention.
+[0;2;39;49mwidget · 72×8 (min 30×4) · 8 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: alert, banner, callout, severity, message[0m
+
+    [38;5;111;48;5;235m▌[39m [0;1;38;5;111;48;5;235mℹ[0;39;48;5;235m [0;1;38;5;111;48;5;235mHeads up[0;39;48;5;235m  [38;5;255mpg-orders maintenance tonight 02:00–02:30 UTC.[39m          [38;5;248m×[39m [0m
+    [48;5;232m                                                                        [0m
+    [38;5;115;48;5;235m▌[39m [0;1;38;5;115;48;5;235m✔[0;39;48;5;235m [0;1;38;5;115;48;5;235mResolved[0;39;48;5;235m  [38;5;255mCheckout latency is back to normal.[39m                     [38;5;248m×[39m [0m
+    [48;5;232m                                                                        [0m
+    [38;5;215;48;5;235m▌[39m [0;1;38;5;215;48;5;235m▲[0;39;48;5;235m [0;1;38;5;215;48;5;235mDegraded[0;39;48;5;235m  [38;5;255mSearch is slower than usual (p95 1.8 s).[39m                [38;5;248m×[39m [0m
+    [48;5;232m                                                                        [0m
+    [38;5;210;48;5;235m▌[39m [0;1;38;5;210;48;5;235m✖[0;39;48;5;235m [0;1;38;5;210;48;5;235mOutage[0;39;48;5;235m  [38;5;255mPayments failing in eu-west-1 — team engaged.[39m             [38;5;248m×[39m [0m
+    [48;5;232m                                                                        [0m
+[0;2;39;49m  still at t=4s — run it live to see it move[0m
+
+[0;1;38;5;64;49mRUN IT LIVE · NODE 18+, NO INSTALL[0;39;49m [38;5;243m──────────────[0m
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \[0m
+[38;5;31m    prism-term play status-alert-banners[0m
+[0;1;38;5;64;49mSNAPSHOT[0;2;39;49m  [0;38;5;31;49mprism-term snapshot status-alert-banners --size 72x8[0m
+[0;1;38;5;64;49mIN CODE[0m
+  [38;5;31mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;31mawait play(findFacet('status-alert-banners'));[0m
+
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/status-toast-stack[0m
+[0;2;39;49mnext ›    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/status-incident-banner[0m
+[0;2;39;49mgallery   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/status[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

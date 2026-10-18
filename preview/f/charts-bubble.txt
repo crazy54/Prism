@@ -1,0 +1,39 @@
+--/\=== PRISM TERMINAL > CHARTS & METRICS > LINE & AREA          436nm - 11 / 30
+------------------------------------------------------/\========================
+Bubble Chart  charts-bubble
+Services plotted by request rate and error rate, bubble area showing cost --
+bubbles breathe as traffic shifts.
+chart - 64x16 (min 24x6) - 14 s loop - unicode - truecolor
+tags: bubble chart, cost, services, blocks, x y
+
+        ^ errors
+
+
+                                         *****            #
+                                       ***::::**       notify
+                                       checkout:*        ####
+                                       *:::::::**
+                                       ***:::***
+                              +++++      ****
+                              auth+               ######
+                        ****    ++               #------#
+                      search*                    #catalog
+                       **:***                    ########
+                         *
+
+        requests ->
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play charts-bubble
+SNAPSHOT  prism-term snapshot charts-bubble --size 64x16
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-bubble'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-scatter
+next >    curl -sL prism.jeremyfhall.com/f/charts-bars-vertical
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

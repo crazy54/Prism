@@ -1,0 +1,35 @@
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;64;49mNOTIFICATIONS & STATUS[0;2;39;49m › [0;1;38;5;64;49mSTATUS LINES[0;39;49m    [38;5;64mλ 550 · 7 / 18[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;64;49m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;29m━[38;5;65m━[38;5;65m━[38;5;65m━[0m
+[0;1;39;49mtmux Session[0;2;39;49m  status-tmux-bar[0m
+A tmux session: split panes with a shell and a live log tail, the active-pane
+border, and the classic green status bar with a ticking clock.
+[0;2;39;49mwidget · 80×12 (min 40×4) · 12 s loop · unicode · truecolor[0m
+[0;2;39;49mtags: tmux, status bar, panes, multiplexer, session[0m
+
+[38;5;111;48;5;232m~/src/checkout[39m [38;5;248m$[39m [38;5;255mmake test[39m              [38;5;235m│[38;5;245m14:02:06[39m [38;5;111mauth    [39m [38;5;248msession issued user=…[0m
+[38;5;115;48;5;232mok   checkout/pool     0.412s[39m           [38;5;235m│[38;5;245m14:02:06[39m [38;5;111mcheckout[39m [38;5;248morder ord-887686 pla…[0m
+[38;5;115;48;5;232mok   checkout/cart     0.208s[39m           [38;5;235m│[38;5;245m14:02:07[39m [38;5;111menvoy   [39m [38;5;248mupstream checkout → …[0m
+[38;5;210;48;5;232m--- FAIL: TestRefund (0.03s)[39m            [38;5;235m│[38;5;245m14:02:08[39m [38;5;111msystemd [39m [38;5;248mStarted Daily apt do…[0m
+[38;5;210;48;5;232mFAIL checkout/refund   0.031s[39m           [38;5;235m│[38;5;245m14:02:08[39m [38;5;111msshd    [39m [38;5;248mAccepted publickey f…[0m
+[38;5;111;48;5;232m~/src/checkout[39m [38;5;248m$[39m [38;5;255mgit sta[39m                [38;5;235m│[38;5;245m14:02:09[39m [38;5;215mcheckout[39m [38;5;248mpool at 85% (18/20 c…[0m
+[48;5;232m                                        [38;5;115m│[38;5;245m14:02:10[39m [38;5;111mpostgres[39m [38;5;248mcheckpoint complete:…[0m
+[48;5;232m                                        [38;5;115m│[38;5;245m14:02:10[39m [38;5;111menvoy   [39m [38;5;248mupstream checkout → …[0m
+[48;5;232m                                        [38;5;115m│[38;5;245m14:02:11[39m [38;5;210mpayments[39m [38;5;210mTLS handshake with p…[0m
+[48;5;232m                                        [38;5;115m│[38;5;245m14:02:11[39m [38;5;111menvoy   [39m [38;5;248mupstream checkout → …[0m
+[48;5;232m                                        [38;5;115m│[38;5;245m14:02:12[39m [38;5;245morders  [39m [38;5;248mkafka produce topic=[38;5;232;48;5;255m [0m
+[38;5;232;48;5;115m[ops] 0:zsh  1:vim- [0;1;38;5;232;48;5;151m2:logs*[0;38;5;232;48;5;115m 3:k9s  4:psql               "web-01" 14:02 13-Oct-26[0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;38;5;64;49mRUN IT LIVE · NODE 18+, NO INSTALL[0;39;49m [38;5;243m──────────────[0m
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \[0m
+[38;5;31m    prism-term play status-tmux-bar[0m
+[0;1;38;5;64;49mSNAPSHOT[0;2;39;49m  [0;38;5;31;49mprism-term snapshot status-tmux-bar --size 80x12[0m
+[0;1;38;5;64;49mIN CODE[0m
+  [38;5;31mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;31mawait play(findFacet('status-tmux-bar'));[0m
+
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/status-vim-line[0m
+[0;2;39;49mnext ›    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/status-powerline[0m
+[0;2;39;49mgallery   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/status[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

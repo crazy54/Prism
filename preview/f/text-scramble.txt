@@ -1,0 +1,35 @@
+--/\=== PRISM TERMINAL > TEXT EFFECTS > REVEAL & TYPE            492nm - 17 / 29
+------------------------------------------------------/\========================
+Scramble Styles  text-scramble
+Four ways to scramble a line -- glyph noise, binary, hex and shaded blocks --
+each morphing phrase to phrase, char by char.
+text - 60x12 (min 34x8) - 16 s loop - unicode - truecolor
+tags: scramble, decode, morph, binary, hex
+
+
+
+           glyphs   retrying in 3 seconds
+
+           binary   session key rotated
+
+           hex      block 4.2M sealed
+
+           blocks   :o#n:eg ##@..#@cy
+
+
+
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play text-scramble
+SNAPSHOT  prism-term snapshot text-scramble --size 60x12
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('text-scramble'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/text-split-flap
+next >    curl -sL prism.jeremyfhall.com/f/text-glitch
+gallery   curl -sL prism.jeremyfhall.com/t/text
+home      curl -sL prism.jeremyfhall.com/tty

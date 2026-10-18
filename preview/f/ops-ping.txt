@@ -1,0 +1,37 @@
+--/\=== PRISM TERMINAL > LINUX & OPS > NETWORK                   578nm - 13 / 39
+------------------------------------------------------/\========================
+ping  ops-ping
+ping streaming replies (with the odd late or lost packet), a latency sparkline
+of recent RTTs and the running rtt min/avg/max/mdev line.
+tui - 78x14 (min 46x5) - 30 s loop - ascii - 16 colors
+tags: ping, icmp, latency, rtt, network, sparkline
+
+ PING api.example (192.0.2.80) 56(84) bytes of data.
+
+
+
+ 64 bytes from api.example (192.0.2.80): icmp_seq=1 ttl=56 time=24.7 ms
+ no answer yet for icmp_seq=2
+ 64 bytes from api.example (192.0.2.80): icmp_seq=3 ttl=56 time=25.6 ms
+ 64 bytes from api.example (192.0.2.80): icmp_seq=4 ttl=56 time=25.3 ms
+ 64 bytes from api.example (192.0.2.80): icmp_seq=5 ttl=56 time=25.6 ms
+ 64 bytes from api.example (192.0.2.80): icmp_seq=6 ttl=56 time=25.7 ms
+ 64 bytes from api.example (192.0.2.80): icmp_seq=7 ttl=56 time=24.7 ms
+ rtt .!.....
+ 7 packets transmitted, 6 received, 14% packet loss, time 7007ms
+ rtt min/avg/max/mdev = 24.665/25.246/25.662/0.413 ms
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ops-ping
+SNAPSHOT  prism-term snapshot ops-ping --size 78x14
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-ping'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-nload
+next >    curl -sL prism.jeremyfhall.com/f/ops-ss-listen
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

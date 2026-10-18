@@ -1,0 +1,35 @@
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > GIT GRAPHS      563nm - 16 / 16
+------------------------------------------------------/\========================
+Rebase, Visualized  diagrams-git-rebase
+A git rebase, visualized: feature commits lift off their old base and replay
+onto main with new hashes, leaving ghosts, then main fast-forwards to a line.
+diagram - 72x12 (min 52x12) - 9 s loop - unicode - 16 colors
+tags: git, rebase, fast-forward, history, branches
+
+
+          A        B        C
+          o--------o--------o  main
+       6c4f2d9  9d02c55  e41d7f2
+                   |        |          D'       E'
+                   |        +----------o--------o  feat/pool-size
+                   |                9a1c4e0  f02b7d3
+                   |         D        E
+                   +---------o--------o
+                          3b8d0aa  7c2e9b1
+    Successfully rebased and updated refs/heads/feat/pool-size.
+    $ git swit
+  still at t=4.5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play diagrams-git-rebase
+SNAPSHOT  prism-term snapshot diagrams-git-rebase --size 72x12
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('diagrams-git-rebase'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/diagrams-git-branches
+next >    curl -sL prism.jeremyfhall.com/f/diagrams-architecture
+gallery   curl -sL prism.jeremyfhall.com/t/diagrams
+home      curl -sL prism.jeremyfhall.com/tty

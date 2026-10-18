@@ -1,0 +1,26 @@
+! Prism Day — Prism's Day terminal colors (Refraction).
+! X11 (xterm, urxvt, st with xresources): merge with  xrdb -merge prism-day.Xresources
+*.foreground:           #23222f
+*.background:           #f8f7fb
+*.cursorColor:          #7353bb
+*.pointerColorBackground: #ffffff
+*.highlightColor:       #ddd5f3
+*.highlightTextColor:   #20202e
+*.colorBD:              #23222f
+*.colorUL:              #7353bb
+*.color0:               #23222f
+*.color1:               #b73232
+*.color2:               #007240
+*.color3:               #835c00
+*.color4:               #2a5ec5
+*.color5:               #7353bb
+*.color6:               #006d7d
+*.color7:               #e6e5ee
+*.color8:               #55546a
+*.color9:               #cf354b
+*.color10:              #00823a
+*.color11:              #8d6c00
+*.color12:              #006fd8
+*.color13:              #a04ac2
+*.color14:              #007c87
+*.color15:              #ffffff

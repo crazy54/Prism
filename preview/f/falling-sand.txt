@@ -1,0 +1,46 @@
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PARTICLES      471nm - 1 / 18
+------------------------------------------------------/\========================
+Falling Sand  falling-sand
+Sweeping spouts pour color-drifting grains that pile into strata over ledges,
+then drain through a trapdoor.
+scene - 60x22 (min 20x8) - 24 s loop - unicode - truecolor
+tags: sand, falling sand, automaton, granular, pile, sand art
+
+                     #########  ##                ##
+              %%%   #+++++++++##**#              #**##
+                 %%%%+++++++++++***#            #*****#
+                     %%%%%++++++****#          #*******#
+                          %%%%%+*****#        #*********#
+                               %%%%+**#      #***********#
+                                   %%%*#    #*************#
+                                      **#  #***************#
+                                     #***##*****************#
+                                    #************************# %%%
+                                   #***********************%%%%
+                                  #*******************%%%%%
+                                 #***************%%%%%
+                                #************%%%%
+                               #**********%%%
+                              #*****+**++*
+                             #******+++++*#
+                            #*****+++++*+++#
+                           #******+*+++++*++#
+                          #********+++++*+++*#
+  still at 60x20 - t=6s -- run it live for full size and motion
+
+PARAMS - --SET KEY=VALUE ------------------------
+  rate=1                Pour rate  (0.2-3)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play falling-sand
+SNAPSHOT  prism-term snapshot falling-sand --size 60x22
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('falling-sand'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/rain
+next >    curl -sL prism.jeremyfhall.com/f/fireworks
+gallery   curl -sL prism.jeremyfhall.com/t/sim
+home      curl -sL prism.jeremyfhall.com/tty

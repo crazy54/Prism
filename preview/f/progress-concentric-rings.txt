@@ -1,0 +1,34 @@
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > COUNTERS & ODOMETERS
+------------------------------------------------------/\========================
+Concentric Rings  progress-concentric-rings
+Three nested rings for the three phases of a rolling deploy, each with a legend
+row giving its count, so color is never the only cue.
+progress - 52x11 (min 24x3) - 11 s loop - braille - 256 colors
+tags: rings, activity, nested, rollout, braille
+
+                     ##########
+                  #####      #####
+                 ###  ....====  ###
+                ##  ....    ====  ##   # nodes drained   24/24 OK
+               ### ===  ..++  === ###
+               ##  ==  ..  ++  ==  ##  = images pulled        7/9
+               ### ===  ++++  === ###
+                ##  ====    ====  ##   + health checks      37/60
+                 ###  ========  ###
+                  #####      #####     rolling out 0.9.2
+                     ##########
+  still at t=5.5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play progress-concentric-rings
+SNAPSHOT  prism-term snapshot progress-concentric-rings --size 52x11
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-concentric-rings'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-ring
+next >    curl -sL prism.jeremyfhall.com/f/progress-countdown
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

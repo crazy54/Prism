@@ -1,0 +1,66 @@
+--/\=== PRISM TERMINAL > HELP                                   PRISM-TERM 0.2.0
+------------------------------------------------------/\========================
+
+  This is Prism's terminal site: 435 animated and static terminal facets --
+  scenes, spinners, progress meters, charts, text art, TUI controls, diagrams
+  and ops views -- in 17 galleries, drawn by prism-term 0.2.0, a zero-dependency
+  Node engine.
+
+BROWSE WITH CURL --------------------------------
+  curl -sL prism.jeremyfhall.com/tty          the terminal site's home
+  curl -sL prism.jeremyfhall.com/t/<gallery>  one gallery, by category
+  curl -sL prism.jeremyfhall.com/f/<facet>    one facet: still and commands
+  curl -sL prism.jeremyfhall.com/t/all        every facet on one line each
+  curl -sL prism.jeremyfhall.com/t/themes     color schemes for your terminal
+  curl -sL prism.jeremyfhall.com/t/help       this page
+
+  Pages are stills that fit 80 columns. Long pages: pipe to less -R. Every page
+  also comes as:
+  <page>.txt  plain ASCII, no escape codes -- for grep, NO_COLOR, screen readers
+  <page>.24   truecolor instead of the default 256 colors
+  Search:   curl -sL prism.jeremyfhall.com/t/all.txt | grep -i spinner
+  Paging:   curl -sL prism.jeremyfhall.com/t/ops | less -R
+  Windows PowerShell 5: type curl.exe (plain "curl" is an alias there).
+  PowerShell and cmd don't continue lines with \: join a command that ends
+  in \ with the next line (drop the \) before you run it.
+
+THE LIVE PLAYER ---------------------------------
+  The live player renders facets in real time and detects your terminal
+  (truecolor, 256, 16, mono; braille and block glyphs, or plain ASCII; Prism
+  Night or Prism Day for dark and light backgrounds). It needs Node 18+ and no
+  network after the download.
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term
+  ...then add a command:
+    (none)            browse the catalog: arrows move, / searches, Enter plays
+    play <facet>      one facet fullscreen (--size 80x24, --depth 256, --ascii)
+    list              every facet, grouped by gallery
+    snapshot <facet>  print one still frame to stdout
+    theme <format>    Prism Night / Day colors for your terminal emulator
+  Day or Night: --day, --night, or PRISM_TERM_THEME=day|night; --no-intro skips
+  the opening beam, and NO_COLOR / PRISM_REDUCED_MOTION=1 are honored.
+  Prefer a permanent install? Run this once, then just type prism-term:
+  npm i -g https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz
+  /dl/prism-term.tgz is an alias for the newest release. To pin one and verify
+  it, download it and check it against SHA256SUMS first:
+  curl -sLO https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz
+  curl -sL prism.jeremyfhall.com/dl/SHA256SUMS | sha256sum -c --ignore-missing
+  npx -y --package=./prism-term-0.2.0.tgz prism-term
+
+GALLERIES ---------------------------------------
+  |fx        |objects   |sim       |retro     |text      |loaders
+  |progress  |charts    |ai        |status    |ops       |diagrams
+  |callouts  |input     |maps      |lab       |ascii
+
+FOR AGENTS AND TOOLS ----------------------------
+  Machine-readable: the JSON island <script id="prism-terminal-catalog"> in the
+  web catalog, prism.jeremyfhall.com/Prism.html, and the same catalog at
+  prism.jeremyfhall.com/terminal/engine/catalog/terminal-catalog.json. Each
+  facet record has id, gallery, category, tags, size, glyphs, color depth,
+  params, a plain-text preview and its module path; the module's code, and the
+  "_" helpers it imports, are in the catalog's top-level "sources".
+
+--------------------------------------------------------------------------------
+home      curl -sL prism.jeremyfhall.com/tty
+catalog   https://prism.jeremyfhall.com/terminal/
+source    https://github.com/crazy54/Prism (prism-term/, Apache-2.0)

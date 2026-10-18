@@ -1,0 +1,40 @@
+--/\=== PRISM TERMINAL > AI WORKING > AGENTS & PIPELINES         479nm - 14 / 18
+------------------------------------------------------/\========================
+Chat Transcript  ai-chat-transcript
+A chat transcript: user questions sit right-aligned in tinted bubbles, the
+assistant streams replies on the left with a tool-use chip, and the view
+scrolls.
+tui - 64x16 (min 40x10) - 9.5 s loop - unicode - 256 colors
+tags: chat, transcript, assistant, conversation, streaming
+
+                                                                     you
+                                     Why is checkout slow since lunch?
+
+         * searched traces, metrics, deploys
+
+        mainbrain
+        p99 went from 180ms to 2.4s at 12:02,
+        right when v2.14.1 shipped. That
+        release runs 32 workers against a
+        20-connection pool, so requests queue
+        for a connection.
+
+
+
+
+
+  still at t=4.75s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ai-chat-transcript
+SNAPSHOT  prism-term snapshot ai-chat-transcript --size 64x16
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ai-chat-transcript'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ai-task-plan
+next >    curl -sL prism.jeremyfhall.com/f/ai-multi-agent-log
+gallery   curl -sL prism.jeremyfhall.com/t/ai
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,34 @@
+--/\=== PRISM TERMINAL > AI WORKING > THINKING STATES             479nm - 3 / 18
+------------------------------------------------------/\========================
+Reasoning Summary  ai-reasoning-summary
+A collapsible reasoning block: thought summaries stream in dim italics while the
+model works, fold to "Thought for 14s", then the final answer streams below.
+text - 64x11 (min 40x7) - 11 s loop - unicode - 256 colors
+tags: reasoning, thinking, collapsible, summary, chain of thought
+
+        > Thought for 14s . 4 steps
+
+        The p99 spike is connection-pool starvation: v_
+
+
+
+
+
+
+
+
+  still at t=5.5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ai-reasoning-summary
+SNAPSHOT  prism-term snapshot ai-reasoning-summary --size 64x11
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ai-reasoning-summary'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ai-typing-indicators
+next >    curl -sL prism.jeremyfhall.com/f/ai-status-orb
+gallery   curl -sL prism.jeremyfhall.com/t/ai
+home      curl -sL prism.jeremyfhall.com/tty

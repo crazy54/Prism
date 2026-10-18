@@ -1,0 +1,33 @@
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > BADGES & PILLS
+------------------------------------------------------/\========================
+CI Pipeline  status-ci-pipeline
+A CI pipeline graph: stages of jobs going pending -> running -> passed, one
+flaky test failing and retrying, and the overall badge.
+widget - 80x10 (min 44x6) - 18 s loop - unicode - truecolor
+tags: ci, pipeline, build, jobs, deploy
+
+ | running  Pipeline #48213 - main - 4c1e9a2 "await sleep in pool"        2m 00s
+
+build           test            security        staging         production
+
++ compile    ---+ unit       ---o sast       ---o deploy     ---o canary 10%
++ docker-ima.   - integratio.   o deps-audit    o smoke         o promote
+                + lint
+
+
+4/11 jobs passed - 1 retried - artifacts 3 - coverage 87.4%
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play status-ci-pipeline
+SNAPSHOT  prism-term snapshot status-ci-pipeline --size 80x10
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('status-ci-pipeline'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/status-shields
+next >    curl -sL prism.jeremyfhall.com/f/status-health-checks
+gallery   curl -sL prism.jeremyfhall.com/t/status
+home      curl -sL prism.jeremyfhall.com/tty

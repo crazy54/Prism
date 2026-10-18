@@ -1,0 +1,37 @@
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > BOXES & FLOWS    563nm - 4 / 16
+------------------------------------------------------/\========================
+State Machine  diagrams-state-machine
+A job lifecycle state machine with labeled transitions: the active state lights
+up and a token rides each edge through a failure, a backoff retry and success.
+diagram - 70x14 (min 68x14) - 10 s loop - unicode - 16 colors
+tags: state machine, fsm, lifecycle, transitions, retry
+
+
+         +----------+ schedule +---------+   exit 0   +-----------+
+      *->| PENDING  |--o------>| RUNNING |----------->| SUCCEEDED |--->@
+         +----------+          +---------+            +-----------+
+               ^                    |
+               |                    |
+               | backoff 4s         | exit 1
+               |                    |
+               |                    v
+         +----------+ retry <=3+---------+   exhausted   +------+
+         | RETRYING |<---------| FAILED  |-------------->| DEAD |
+         +----------+          +---------+               +------+
+
+     12:04:41 job/reindex-8812 attempt 2/3  PENDING -> RUNNING (schedule)
+  still at t=5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play diagrams-state-machine
+SNAPSHOT  prism-term snapshot diagrams-state-machine --size 70x14
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('diagrams-state-machine'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/diagrams-pipeline
+next >    curl -sL prism.jeremyfhall.com/f/diagrams-file-tree
+gallery   curl -sL prism.jeremyfhall.com/t/diagrams
+home      curl -sL prism.jeremyfhall.com/tty

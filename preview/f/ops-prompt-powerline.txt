@@ -1,0 +1,40 @@
+--/\=== PRISM TERMINAL > LINUX & OPS > SHELL PROMPTS             578nm - 36 / 39
+------------------------------------------------------/\========================
+Powerline Prompt  ops-prompt-powerline
+A powerline prompt of colored segments (user@host, path, git branch going dirty
+and clean) plus a red exit-code segment after a failing make lint.
+tui - 80x14 (min 60x5) - 22 s loop - ascii - 256 colors
+tags: powerline, prompt, segments, git, exit-code, nerd-font
+
+ ops@node03 > ~/src/shop-api > main + > make test
+ok    shop/api/internal/cart       0.412s
+ok    shop/api/internal/checkout   1.208s
+ ops@node03 > ~/src/shop-api > main + > make lint
+internal/cart/retry.go:42:2: ineffectual assignment to err (ineffassign)
+make: *** [Makefile:18: lint] Error 1
+ x 2 > ops@node03 > ~/src/shop-api > main + >
+
+
+
+
+
+
+
+  still at t=6s -- run it live to see it move
+
+PARAMS - --SET KEY=VALUE ------------------------
+  nerd=0                Powerline font glyphs  (0-1)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ops-prompt-powerline
+SNAPSHOT  prism-term snapshot ops-prompt-powerline --size 80x14
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-prompt-powerline'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-prompt-git
+next >    curl -sL prism.jeremyfhall.com/f/ops-prompt-exitcode
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

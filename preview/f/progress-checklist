@@ -1,0 +1,30 @@
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;64;49mPROGRESS & COUNTERS[0;2;39;49m › [0;1;38;5;64;49mSTEPS & PIPELINES[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;64;49m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;64m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[38;5;65m━[0m
+[0;1;39;49mRunbook Checklist[0;2;39;49m  progress-checklist[0m
+A maintenance runbook ticking through its steps with timings; on alternate runs
+the smoke test fails once and is retried.
+[0;2;39;49mprogress · 64×7 (min 32×3) · 12 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: checklist, tasks, runbook, retry[0m
+
+        [48;5;232m [38;5;115m✔[39m [38;5;255mCheck free disk space[39m                                   [38;5;245m0.6s[39m [0m
+        [48;5;232m [38;5;115m✔[39m [38;5;255mDrain prism-api from the load balancer[39m                  [38;5;245m1.2s[39m [0m
+        [48;5;232m [38;5;115m✔[39m [38;5;255mMigrate database[39m                                        [38;5;245m2.8s[39m [0m
+        [48;5;232m [38;5;111m⠹[39m [38;5;255mStart prism-api 0.9.2[39m                                   [38;5;248m0.8s[39m [0m
+        [48;5;232m [38;5;245m○[39m [38;5;245mRun smoke tests[39m                                              [0m
+        [48;5;232m [38;5;245m○[39m [38;5;245mReturn to the load balancer[39m                                  [0m
+        [48;5;232m [38;5;248m3/6 steps  ·  5.8s[39m                                             [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;38;5;64;49mRUN IT LIVE · NODE 18+, NO INSTALL[0;39;49m [38;5;243m──────────────[0m
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \[0m
+[38;5;31m    prism-term play progress-checklist[0m
+[0;1;38;5;64;49mSNAPSHOT[0;2;39;49m  [0;38;5;31;49mprism-term snapshot progress-checklist --size 64x7[0m
+[0;1;38;5;64;49mIN CODE[0m
+  [38;5;31mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;31mawait play(findFacet('progress-checklist'));[0m
+
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/progress-step-wizard[0m
+[0;2;39;49mnext ›    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/progress-apt[0m
+[0;2;39;49mgallery   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/progress[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

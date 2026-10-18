@@ -1,0 +1,35 @@
+--/\=== PRISM TERMINAL > CALLOUTS & LAYOUT > ADMONITIONS          570nm - 7 / 15
+------------------------------------------------------/\========================
+Alert Banners  callouts-alert-banners
+Full-width info, success, warning and error banners that slide in from the edge,
+stack, pulse when critical and get dismissed.
+widget - 76x12 (min 36x4) - 9 s loop - unicode - 16 colors
+tags: banner, alert, notification, status, slide
+
+  | i  Maintenance                                                         x
+  |    pg-orders-replica-01 patch window starts at 02:00 UTC
+
+  | +  Resolved                                                            x
+  |    checkout latency back to baseline (p95 212 ms)
+
+  | !  Degraded                                                            x
+  |    payments p95 above SLO for 3 minutes
+
+  | x  Outage                                                              x
+  |    insurance-claims.example.net timing out; rx refills queued
+
+  still at t=4.5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play callouts-alert-banners
+SNAPSHOT  prism-term snapshot callouts-alert-banners --size 76x12
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('callouts-alert-banners'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/callouts-admonitions
+next >    curl -sL prism.jeremyfhall.com/f/callouts-block-quote
+gallery   curl -sL prism.jeremyfhall.com/t/callouts
+home      curl -sL prism.jeremyfhall.com/tty

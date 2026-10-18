@@ -1,0 +1,35 @@
+--/\=== PRISM TERMINAL > INPUT & MENUS > SELECTS & LISTS          487nm - 3 / 23
+------------------------------------------------------/\========================
+Scrolling List  input-scroll-list
+A long pod list in a short framed window: the cursor runs down and back, the
+view scrolls with it and the scrollbar thumb tracks position.
+tui - 52x12 (min 34x6) - 10 s loop - unicode - 16 colors
+tags: list, scroll, scrollbar, pods, cursor
+
+              + pods --------------------------------------------+
+              |  checkout-7d9f1bc                 Running   32m ||
+              |  payments-7d9f7fb                 Running   45m ||
+              |  catalog-7d9f6la                  Pending   58m ||
+              |  search-7d9f5r9                   Running   12m ||
+              |  cart-7d9f4x8                     Running   25m ||
+              |  auth-7d9f437                     Running   38m ||
+              |  orders-7d9f396                   Running   51m #|
+              |  notify-7d9f2f5                   Pending    5m #|
+              |  checkout-7d9f1l4                 Running   18m #|
+              |> payments-7d9f7p3                 Running   31m #|
+              +------------------------------------------ 26/26 -+
+  still at t=5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play input-scroll-list
+SNAPSHOT  prism-term snapshot input-scroll-list --size 52x12
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-scroll-list'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-fuzzy-finder
+next >    curl -sL prism.jeremyfhall.com/f/input-multiselect
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

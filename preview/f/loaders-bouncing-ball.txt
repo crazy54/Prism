@@ -1,0 +1,31 @@
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > ORBITS & SHAPES    506nm - 46 / 64
+------------------------------------------------------/\========================
+Bouncing Ball  loaders-bouncing-ball
+A ball bouncing wall to wall inside parentheses -- the playful indeterminate
+bar.
+spinner - 44x5 (min 24x2) - 8 s loop - unicode - 16 colors
+tags: spinner, loader, ball, bounce, indeterminate
+
+                   | Shuffling data...                   4.0s
+
+                   - \ | /
+
+                   bouncingBall (ASCII fallback) - 4 frames .
+  still at t=4s -- run it live to see it move
+
+PARAMS - --SET KEY=VALUE ------------------------
+  speed=1               Speed  (0.25-4)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play loaders-bouncing-ball
+SNAPSHOT  prism-term snapshot loaders-bouncing-ball --size 44x5
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-bouncing-ball'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-heart
+next >    curl -sL prism.jeremyfhall.com/f/loaders-gravity-bounce
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

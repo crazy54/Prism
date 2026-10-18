@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > LIFE & FLOCKING
+------------------------------------------------------/\========================
+Boids  boids
+Reynolds flocking (separation, alignment, cohesion) with a hunting predator --
+oriented arrowheads with fading wakes.
+scene - 80x24 (min 20x6) - 8 s loop - unicode - truecolor
+tags: boids, flocking, birds, predator
+
+                                    ..::...... ..
+                                       #: ..::-:-###:..:
+   .                                   *#.. .:#############              *
+   ...            .. .. . .           .*   .:***.:::-########     ...    **
+   ..:-         ..........                  ...**::--:-####          ::###*:***
+   ...## .. ****::.:::...                      .:*. ###             ...::###***
+    :- #.. **-*-**-**:-:                          -##                  ..:-****
+   :.# :# .*-*****:****                              #                ***::###**
+   # #-: :  **:.* *                                       ..::--###      ..:-...
+    #:* -: ***:                                       ....                  ..:*
+     * **  *                                                                ...
+    *         **                                             ...:-::    ***:...
+               *:.                                              ..#####  -:-##
+     +           ...  **:   ..                                   ..:####**. ..
+   *++  *        * ***:****:.***:...   **                    ....:####-##*##.
+ *:+++.  *:.      **-*************:.**. **:.              .....:*##:####***::.
+  **+*..   ***:    *******:.....:***:**:.  ...              ::###..######    .
+   ..::.***:  :..    *   ***:*:***:.***:...                    .:-####
+   . ***:..:.... .       *- *..*          ..                          #
+
+  still at 80x20 - t=4s -- run it live for full size and motion
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play boids
+SNAPSHOT  prism-term snapshot boids --size 80x24
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('boids'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/reaction-diffusion
+next >    curl -sL prism.jeremyfhall.com/f/slime-mold
+gallery   curl -sL prism.jeremyfhall.com/t/sim
+home      curl -sL prism.jeremyfhall.com/tty

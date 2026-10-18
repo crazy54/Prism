@@ -1,0 +1,35 @@
+--/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      436nm - 18 / 30
+------------------------------------------------------/\========================
+Arc Gauges  charts-gauge-arc
+CPU, memory and disk as braille arc gauges with warning and critical zones,
+sweeping needles and centered readouts.
+chart - 72x12 (min 20x6) - 12 s loop - braille - truecolor
+tags: gauge, arc, needle, speedometer, zones
+
+
+
+             .....                   .....                   .....
+        .:+#########+:.         .:+#########+:.         .:+#########+:.
+      .+###+:..+..:+###+.     .+###+:...:.:+###+.     .+###+:.....:+###+.
+     .###:     :     :###.   .###:      :    :###.   .###:           :###.
+    .###.             .###. .###.             .###. .###.           ...###.
+    :##:               :##: :##:               :##: :##:           .   :##:
+    :::       51%       ::: :::       55%       ::: :::       81%       :::
+              CPU                   Memory                   Disk
+
+
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play charts-gauge-arc
+SNAPSHOT  prism-term snapshot charts-gauge-arc --size 72x12
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-gauge-arc'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-boxplot
+next >    curl -sL prism.jeremyfhall.com/f/charts-gauge-ring
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

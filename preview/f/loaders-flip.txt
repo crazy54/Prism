@@ -1,0 +1,31 @@
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > CLASSIC SPINNERS   506nm - 14 / 64
+------------------------------------------------------/\========================
+Flip  loaders-flip
+A short line flipping up from the baseline and back down -- a coin toss in a
+single cell.
+spinner - 44x5 (min 24x2) - 8 s loop - unicode - 16 colors
+tags: spinner, loader, flip, coin
+
+                   | Electing primary...                 4.0s
+
+                   - \ | /
+
+                   flip (ASCII fallback) - 4 frames - 130 ms
+  still at t=4s -- run it live to see it move
+
+PARAMS - --SET KEY=VALUE ------------------------
+  speed=1               Speed  (0.25-4)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play loaders-flip
+SNAPSHOT  prism-term snapshot loaders-flip --size 44x5
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-flip'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-dqpb
+next >    curl -sL prism.jeremyfhall.com/f/loaders-bit-counter
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

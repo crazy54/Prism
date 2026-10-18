@@ -1,0 +1,30 @@
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > ORBITS & SHAPES    506nm - 50 / 64
+------------------------------------------------------/\========================
+Pong  loaders-pong
+Two braille paddles rallying a ball across an eight-cell court, forever.
+spinner - 44x5 (min 24x2) - 8 s loop - braille - 16 colors
+tags: spinner, loader, braille, pong, game, original
+
+                   | Exchanging keys...                  4.0s
+
+                   - \ | /
+
+                   pong (ASCII fallback) - 4 frames - 130 ms
+  still at t=4s -- run it live to see it move
+
+PARAMS - --SET KEY=VALUE ------------------------
+  speed=1               Speed  (0.25-4)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play loaders-pong
+SNAPSHOT  prism-term snapshot loaders-pong --size 44x5
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-pong'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-clock-hand
+next >    curl -sL prism.jeremyfhall.com/f/loaders-chomp
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

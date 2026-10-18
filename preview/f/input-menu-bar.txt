@@ -1,0 +1,37 @@
+--/\=== PRISM TERMINAL > INPUT & MENUS > TABS & BARS             487nm - 21 / 23
+------------------------------------------------------/\========================
+Menu Bar  input-menu-bar
+A Turbo Vision-style menu bar with hotkey letters: F10 drops a shadowed menu,
+the highlight walks items past a disabled one, a submenu flies out, Esc closes.
+tui - 64x14 (min 40x11) - 6 s loop - unicode - 16 colors
+tags: menu bar, dropdown, turbo vision, submenu, hotkeys
+
+          File  View  Service  Incident  Help                     12:05
+        12:04:33 WARN+--------------------+ool wait 840ms (20/20 in use)
+        12:04:34 INFO| Restart...  ctrl+r |/search?q=tent 200 22ms
+        12:04:35 INFO| Scale...           | /checkout 201 212ms
+        12:04:36 ERRO| Rollback...        |out acquiring connection afte
+        12:04:37 INFO+--------------------+rve sku=TNT-2P qty=1 ok
+        12:04:38 INFO| Logs             > |/account 200 34ms
+        12:04:39 WARN+--------------------+ying charge order=88415 attem
+        12:04:40 INFO| Delete   no access |dex shard 3/8 done
+        12:04:41 INFO+--------------------+/cart 200 41ms
+        12:04:42 INFO  payments-worker charge ok order=88412 312ms
+        12:04:43 WARN  checkout-api    db pool wait 840ms (20/20 in use)
+        12:04:44 INFO  search-api      GET /search?q=tent 200 22ms
+         ^v move  -> submenu  esc close
+  still at t=3s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play input-menu-bar
+SNAPSHOT  prism-term snapshot input-menu-bar --size 64x14
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-menu-bar'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-tabs
+next >    curl -sL prism.jeremyfhall.com/f/input-shortcut-bar
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

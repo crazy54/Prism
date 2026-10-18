@@ -1,0 +1,35 @@
+--/\=== PRISM TERMINAL > INPUT & MENUS > DIALOGS & PROMPTS       487nm - 19 / 23
+------------------------------------------------------/\========================
+Setup Wizard  input-wizard
+A four-step restore wizard: the stepper header fills as the user picks a
+snapshot, names the target, schedules it and reviews before pressing Restore.
+tui - 64x12 (min 44x11) - 10 s loop - unicode - 256 colors
+tags: wizard, stepper, multi-step, form, onboarding
+
+        + Restore database --------------------------------------------+
+        |    +=================+=================@-----------------o   |
+        | Source            Target           Schedule           Review |
+        |                                                              |
+        |  When should it run?                                         |
+        |  (*) Now                                                     |
+        |  ( ) Next maintenance window                                 |
+        |     Sat 17 Oct 02:00 (in 3 days)                             |
+        |                                                              |
+        |                                                              |
+        |  Step 3 of 4                              [ Back ]  [ Next ] |
+        +--------------------------------------------------------------+
+  still at t=5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play input-wizard
+SNAPSHOT  prism-term snapshot input-wizard --size 64x12
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-wizard'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-date-picker
+next >    curl -sL prism.jeremyfhall.com/f/input-tabs
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

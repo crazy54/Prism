@@ -1,0 +1,33 @@
+--/\=== PRISM TERMINAL > CHARTS & METRICS > HEATMAPS & MATRICES  436nm - 26 / 30
+------------------------------------------------------/\========================
+Contribution Calendar  charts-calendar
+A GitHub-style contributions calendar -- weeks by weekday, five intensity
+levels, month labels and a "today" cell filling in.
+chart - 80x10 (min 24x8) - 12 s loop - unicode - truecolor
+tags: calendar, github, contributions, activity, heatmap
+
+    Mar     Apr     May     Jun     Aug     Sep     Oct     Nov     Jan     Feb
+Mon # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+Wed # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+Fri # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    1,095 contributions in the last year                       Less ##### More
+
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play charts-calendar
+SNAPSHOT  prism-term snapshot charts-calendar --size 80x10
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-calendar'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-heatmap-week
+next >    curl -sL prism.jeremyfhall.com/f/charts-corr-matrix
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

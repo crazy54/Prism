@@ -1,0 +1,31 @@
+--/\=== PRISM TERMINAL > CHARTS & METRICS > GAUGES & METERS      436nm - 21 / 30
+------------------------------------------------------/\========================
+Bullet Charts  charts-bullet
+Stephen Few-style bullet charts: qualitative bands, the actual value as a bar
+and a target tick, one KPI per row.
+chart - 60x8 (min 28x2) - 12 s loop - unicode - truecolor
+tags: bullet chart, kpi, target, bands, goals
+
+          Revenue  =================================|            259k$
+
+          Signups  ============================    |               791
+
+          NPS      =========================|                       59
+
+          Uptime   =================================|=          99.92%
+
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play charts-bullet
+SNAPSHOT  prism-term snapshot charts-bullet --size 60x8
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('charts-bullet'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/charts-vu-meter
+next >    curl -sL prism.jeremyfhall.com/f/charts-pie
+gallery   curl -sL prism.jeremyfhall.com/t/charts
+home      curl -sL prism.jeremyfhall.com/tty

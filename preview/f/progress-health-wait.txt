@@ -1,0 +1,32 @@
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TIMERS & COUNTDOWNS
+------------------------------------------------------/\========================
+Health-Check Wait  progress-health-wait
+Waiting for a service to report healthy within a 12 s budget: probes back off
+1-2-4 s, and every other run it times out and rolls back.
+progress - 72x9 (min 36x2) - 15 s loop - unicode - 16 colors
+tags: timeout, health check, backoff, deploy, failure
+
+    Waiting for prism-api (10.20.0.14:8080/healthz) to become healthy
+      probe 1  XX connect: connection refused  4ms
+      probe 2  XX HTTP 503 Service Unavailable (starting)  6ms
+      probe 3  XX HTTP 503 Service Unavailable (migrations pending)  33ms
+
+
+
+
+    - next probe in 1.5s      #################................. 6.0s left
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play progress-health-wait
+SNAPSHOT  prism-term snapshot progress-health-wait --size 72x9
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-health-wait'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-stopwatch
+next >    curl -sL prism.jeremyfhall.com/f/progress-flip-clock
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

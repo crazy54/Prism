@@ -1,0 +1,31 @@
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > STEPS & PIPELINES
+------------------------------------------------------/\========================
+git clone  progress-git-clone
+git's counters in order -- enumerating, counting, compressing, receiving with
+size and rate, resolving deltas, updating files.
+progress - 80x8 (min 44x3) - 10 s loop - ascii - mono colors
+tags: git, clone, objects, deltas
+
+Cloning into 'prism-demo'...
+remote: Enumerating objects: 4821, done.
+remote: Counting objects: 100% (812/812), done.
+remote: Compressing objects: 100% (390/390), done.
+Receiving objects:  76% (3686/4821), 48.53 MiB | 17.34 MiB/s
+
+
+
+  still at t=5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play progress-git-clone
+SNAPSHOT  prism-term snapshot progress-git-clone --size 80x8
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-git-clone'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-pip-install
+next >    curl -sL prism.jeremyfhall.com/f/progress-npm-install
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

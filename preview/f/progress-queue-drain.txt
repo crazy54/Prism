@@ -1,0 +1,33 @@
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   558nm - 40 / 41
+------------------------------------------------------/\========================
+Queue Drain  progress-queue-drain
+A backlog draining while producers keep adding: consumers autoscale 4 -> 8, the
+net rate sets the ETA, and the depth is charted.
+progress - 64x10 (min 36x2) - 13 s loop - unicode - 256 colors
+tags: queue, backlog, autoscale, workers, eta
+
+         queue thumbnails.render - 8,181 waiting
+         ############################..................................
+         consumers ########  8 running
+
+         |||||||||||||||||||||||||||||||||
+         ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+         ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+         in +478/s  out -2695/s  net -2217/s  eta 00:04
+         processed 12,744 - produced 2,523
+         ^ scaled consumers 4 -> 8 (backlog > 10,000)
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play progress-queue-drain
+SNAPSHOT  prism-term snapshot progress-queue-drain --size 64x10
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-queue-drain'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-eta-converge
+next >    curl -sL prism.jeremyfhall.com/f/progress-throughput
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

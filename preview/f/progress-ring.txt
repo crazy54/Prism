@@ -1,0 +1,33 @@
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > COUNTERS & ODOMETERS
+------------------------------------------------------/\========================
+Progress Rings  progress-ring
+Braille rings filling clockwise around a centered percentage -- upload,
+transcode and verify, finishing one after another.
+progress - 60x10 (min 14x6) - 10 s loop - braille - 256 colors
+tags: ring, donut, circular, braille
+
+                ....####            ....####            ....####
+              ...      ###        ...      ###        ...      ###
+            ###          ###    ...          ###    ...          ###
+            ##            ##    ..            ##    ..            ##
+            ##    85%     ##    ..    68%     ##    ..    59%     ##
+            ###          ###    .##          ###    ...          ###
+              ###      ###        ###      ###        ...      ###
+                ########            ########            ########
+
+           upload 3.6/4.2 GB       transcode         verify 186/312
+  still at t=5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play progress-ring
+SNAPSHOT  prism-term snapshot progress-ring --size 60x10
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-ring'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-counter-tiles
+next >    curl -sL prism.jeremyfhall.com/f/progress-concentric-rings
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

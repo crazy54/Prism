@@ -1,0 +1,46 @@
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > CELLULAR AUTOMATA
+------------------------------------------------------/\========================
+Langton's Ant  langtons-ant
+Two Langton's ants at braille resolution, accelerating through ten thousand
+steps of chaos into the highway.
+scene - 60x22 (min 20x7) - 30 s loop - unicode - truecolor
+tags: langton, ant, turmite, cellular automata, emergence, braille
+
+                     #  #  ## ##  #   # # %#     ** * * *     *
+                    ###   # #  ####      #       * ****       *
+                    # ####### # ##     ###        **      *  *
+                          ###      ##   ###       ** * ** ***
+                      #####   ## ##   #          *****  * **
+                       ####  # #   #  #          * **  **** *
+                        ##  #  #  ## # #        ***    * *  *
+                        # # ######    ##       * *    ** * *
+                       #   ##### ##  # #      *** *  *** *
+                       # #######    # #       **  * * ***** *
+                       ##  #      # ##         * ***    ** * *
+                       # #  #   ###             * ****  ******
+                        ####  #  #                *** *     **
+                         ##    ##              *  ***  * * ****
+                                      ##      *   ******  *****
+                                       ##     * *  %*    **  *
+                              ##  # #  # #     **  * * * **  *
+                           ########   ##        **  ** *  *****
+                      ##  # ####  ## ##    #        * * *   ***
+           step 1,399
+  still at 60x20 - t=6s -- run it live for full size and motion
+
+PARAMS - --SET KEY=VALUE ------------------------
+  ants=2                Ants  (1-4)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play langtons-ant
+SNAPSHOT  prism-term snapshot langtons-ant --size 60x22
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('langtons-ant'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/life
+next >    curl -sL prism.jeremyfhall.com/f/wireworld
+gallery   curl -sL prism.jeremyfhall.com/t/sim
+home      curl -sL prism.jeremyfhall.com/tty

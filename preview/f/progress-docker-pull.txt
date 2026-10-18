@@ -1,0 +1,34 @@
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > STEPS & PIPELINES
+------------------------------------------------------/\========================
+docker pull  progress-docker-pull
+Layers going Waiting -> Downloading -> Extracting -> Pull complete, three at a
+time; like docker, bars only show past 110 columns.
+progress - 112x11 (min 44x4) - 14 s loop - ascii - 16 colors
+tags: docker, container, layers, pull
+
+1.4.2: Pulling from prism/demo
+00fb86738b42: Extracting  12.46MB/29.13MB
+c835484f3e32: Already exists
+248c1e89af9e: Downloading  37.89MB/41.02MB
+d025601c567f: Download complete
+bb5522e53a50: Download complete
+ae8dae18aefd: Download complete
+9ff8d085b8cf: Download complete
+
+
+
+  still at 80x11 - t=6s -- run it live for full size and motion
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play progress-docker-pull
+SNAPSHOT  prism-term snapshot progress-docker-pull --size 112x11
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-docker-pull'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-multi-bar
+next >    curl -sL prism.jeremyfhall.com/f/progress-cargo-build
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty

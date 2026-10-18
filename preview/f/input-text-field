@@ -1,0 +1,31 @@
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;30;49mINPUT & MENUS[0;2;39;49m › [0;1;38;5;30;49mTEXT FIELDS[0;39;49m              [38;5;30mλ 487 · 8 / 23[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;30;49m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;30m━[38;5;66m━[38;5;30m━[0m
+[0;1;39;49mText Field with Validation[0;2;39;49m  input-text-field[0m
+A labeled input with placeholder, blinking caret and inline validation: the user
+types an invalid hostname, sees the error, fixes it and gets a ✔.
+[0;2;39;49mtui · 56×8 (min 34×5) · 9 s loop · unicode · 16 colors[0m
+[0;2;39;49mtags: input, text field, validation, form, caret[0m
+
+            [0;1;38;5;255;48;5;232mHostname[0;39;48;5;232m [38;5;210m*[39m                                              [0m
+            [48;5;234m [38;5;255mpayments-0[39m                                 [48;5;232m            [0m
+            [38;5;147;48;5;232m▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔[39m            [0m
+            [38;5;245;48;5;232mLowercase letters, digits, dots and hyphens             [0m
+            [48;5;232m                                                        [0m
+            [48;5;232m                                                        [0m
+            [48;5;232m                                                        [0m
+            [38;5;245;48;5;232menter submit · esc cancel · ctrl-u clear[39m                [0m
+[0;2;39;49m  still at t=4.5s — run it live to see it move[0m
+
+[0;1;38;5;30;49mRUN IT LIVE · NODE 18+, NO INSTALL[0;39;49m [38;5;243m──────────────[0m
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \[0m
+[38;5;31m    prism-term play input-text-field[0m
+[0;1;38;5;30;49mSNAPSHOT[0;2;39;49m  [0;38;5;31;49mprism-term snapshot input-text-field --size 56x8[0m
+[0;1;38;5;30;49mIN CODE[0m
+  [38;5;31mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;31mawait play(findFacet('input-text-field'));[0m
+
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/input-slider[0m
+[0;2;39;49mnext ›    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/input-password[0m
+[0;2;39;49mgallery   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/input[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

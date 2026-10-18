@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > LINUX & OPS > CONTAINERS & CLUSTERS     578nm - 25 / 39
+------------------------------------------------------/\========================
+k9s-style Pod Console  ops-k9s
+A k9s-style cluster console: context/cluster header with CPU/MEM, key hints, a
+titled pod table colored by status, a moving selection and a crumb bar.
+tui - 80x20 (min 60x10) - 24 s loop - ascii - 256 colors
+tags: k9s, kubernetes, pods, console, tui, k8s
+
+ Context: prod-east               <0>  all
+ Cluster: prod-east               <1>  shop
+ User:    ops                     <2>  default
+ K9s Rev: v0.32.5                 <a>  Attach
+ K8s Rev: v1.31.2                 <d>  Describe
+ CPU:     31%                     <l>  Logs
+ MEM:     62%                     <s>  Shell
++------------------------------- Pods(shop)[9] --------------------------------+
+| NAME^                     READY STATUS            RESTARTS IP         NODE   |
+| api-7d9c6b5f8d-2xk4p      1/1   Running           0        10.42.1.18 node-a |
+| api-7d9c6b5f8d-9qwlz      1/1   Running           0        10.42.2.7  node-b |
+| api-7d9c6b5f8d-hv6s1      1/1   Running           0        10.42.3.22 node-c |
+| worker-5f4b9c7d6f-q8l2c   1/1   Running           0        10.42.1.31 node-a |
+| worker-5f4b9c7d6f-x7d9p   0/1   CrashLoopBackOff  7        10.42.2.12 node-b |
+| reindex-28817640-k2j4f    0/1   Completed         0        10.42.3.9  node-c |
+| redis-0                   1/1   Running           0        10.42.1.4  node-a |
+| postgres-0                1/1   Running           0        10.42.2.3  node-b |
+| migrate-2-14-1-vb7hs      0/1   ContainerCreating 0        <none>     node-c |
++------------------------------------------------------------------------------+
+ <pod>  shop
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ops-k9s
+SNAPSHOT  prism-term snapshot ops-k9s --size 80x20
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-k9s'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-kubectl-rollout
+next >    curl -sL prism.jeremyfhall.com/f/ops-journalctl-follow
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

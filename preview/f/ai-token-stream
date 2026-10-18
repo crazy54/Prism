@@ -1,0 +1,32 @@
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;32;49mAI WORKING[0;2;39;49m › [0;1;38;5;32;49mTOKEN STREAMS[0;39;49m               [38;5;32mλ 479 · 5 / 18[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;31;49m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;67m━[38;5;67m━[38;5;67m━[38;5;67m━[38;5;67m━[38;5;67m━[38;5;67m━[0m
+[0;1;39;49mToken Stream[0;2;39;49m  ai-token-stream[0m
+A response streaming token by token with each new token flashing, a live tok/s
+sparkline and TTFT, then a tokenizer view that tints every token boundary.
+[0;2;39;49mtext · 64×9 (min 36×6) · 9 s loop · unicode · 256 colors[0m
+[0;2;39;49mtags: tokens, streaming, llm, tokenizer, tok/s[0m
+
+        [38;5;255;48;5;232mCheckout latency is up because the DB pool is exhausted. Since[39m  [0m
+        [38;5;255;48;5;232mv2.14.1 the service runs 32 workers but still opens only 20[39m     [0m
+        [38;5;255;48;5;232mconnections, so about a third of requests wait in the pool[39m      [0m
+        [38;5;255;48;5;232mqueue. Raising the[38;5;189;48;5;235m pool[48;5;236m to[0;1;38;5;189;48;5;238m 40[0;38;5;147;48;5;232m▍[39m                                  [0m
+        [48;5;232m                                                                [0m
+        [48;5;232m                                                                [0m
+        [48;5;232m                                                                [0m
+        [38;5;235;48;5;232m────────────────────────────────────────────────────────────────[0m
+        [38;5;248;48;5;232mTTFT 380ms · 18 tok/s · 56/65 tokens[39m                [38;5;147m▇▄▄▄▁▄▅▄▆▂▂▅[0m
+[0;2;39;49m  still at t=4.5s — run it live to see it move[0m
+
+[0;1;38;5;32;49mRUN IT LIVE · NODE 18+, NO INSTALL[0;39;49m [38;5;243m──────────────[0m
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \[0m
+[38;5;31m    prism-term play ai-token-stream[0m
+[0;1;38;5;32;49mSNAPSHOT[0;2;39;49m  [0;38;5;31;49mprism-term snapshot ai-token-stream --size 64x9[0m
+[0;1;38;5;32;49mIN CODE[0m
+  [38;5;31mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;31mawait play(findFacet('ai-token-stream'));[0m
+
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/ai-status-orb[0m
+[0;2;39;49mnext ›    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/ai-markdown-stream[0m
+[0;2;39;49mgallery   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/ai[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

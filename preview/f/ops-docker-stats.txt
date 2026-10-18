@@ -1,0 +1,33 @@
+--/\=== PRISM TERMINAL > LINUX & OPS > CONTAINERS & CLUSTERS     578nm - 22 / 39
+------------------------------------------------------/\========================
+docker stats  ops-docker-stats
+docker stats refreshing every half second per container: name, CPU %, memory
+usage against its limit, MEM %, network I/O and PIDs.
+tui - 80x10 (min 64x4) - 20 s loop - ascii - 16 colors
+tags: docker, stats, containers, cpu, memory, monitor
+
+NAME            CPU %    MEM USAGE / LIMIT    MEM %   NET I/O            PIDS
+shop-api-1      39.97%   379.8MiB / 2.00GiB   18.55%  373.2MB / 302.3MB  4
+shop-api-2      20.53%   375.2MiB / 2.00GiB   18.32%  732.1MB / 593.0MB  11
+shop-worker-1   68.35%   787.2MiB / 1023.3MiB 76.93%  1.10GB / 893.2MB   18
+shop-db-1       29.39%   1.23GiB / 4.00GiB    30.65%  1.45GB / 1.17GB    25
+shop-redis-1    5.23%    57.9MiB / 488.3MiB   11.87%  1.80GB / 1.46GB    32
+shop-nginx-1    3.15%    13.5MiB / 244.1MiB   5.53%   2.16GB / 1.75GB    9
+otel-collector  5.54%    82.7MiB / 488.3MiB   16.94%  2.52GB / 2.04GB    16
+node-exporter   0.96%    17.0MiB / 122.1MiB   13.93%  2.88GB / 2.33GB    23
+
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ops-docker-stats
+SNAPSHOT  prism-term snapshot ops-docker-stats --size 80x10
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-docker-stats'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-docker-pull
+next >    curl -sL prism.jeremyfhall.com/f/ops-kubectl-pods
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

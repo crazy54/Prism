@@ -1,0 +1,36 @@
+--/\=== PRISM TERMINAL > LINUX & OPS > NETWORK                   578nm - 14 / 39
+------------------------------------------------------/\========================
+ss -tulpn  ops-ss-listen
+Typing `sudo ss -tulpn` and getting the listening sockets: Netid, State, queues,
+local/peer addresses and the owning processes.
+tui - 80x13 (min 60x5) - 12 s loop - ascii - 16 colors
+tags: ss, sockets, ports, listening, netstat, network
+
+ops@node03:~$ sudo ss -tulpn
+Netid State   Recv-Q Send-Q     Local Address:Port Peer Address:Port Process
+udp   UNCONN       0      0       127.0.0.53%lo:53 0.0.0.0:*         users:(("sy
+udp   UNCONN       0      0          0.0.0.0:51820 0.0.0.0:*         users:(("wg
+tcp   LISTEN       0   4096       127.0.0.53%lo:53 0.0.0.0:*         users:(("sy
+tcp   LISTEN       0    128             0.0.0.0:22 0.0.0.0:*         users:(("ss
+tcp   LISTEN       0    511             0.0.0.0:80 0.0.0.0:*         users:(("ng
+tcp   LISTEN       0    511            0.0.0.0:443 0.0.0.0:*         users:(("ng
+tcp   LISTEN       0    200         127.0.0.1:5432 0.0.0.0:*         users:(("po
+tcp   LISTEN       0    511         127.0.0.1:6379 0.0.0.0:*         users:(("re
+tcp   LISTEN       0   4096                 *:9100 *:*               users:(("no
+ops@node03:~$
+
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ops-ss-listen
+SNAPSHOT  prism-term snapshot ops-ss-listen --size 80x13
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-ss-listen'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-ping
+next >    curl -sL prism.jeremyfhall.com/f/ops-ip-brief
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

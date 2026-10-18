@@ -1,0 +1,41 @@
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII SPINNERS & BARS      597nm - 18 / 29
+------------------------------------------------------/\========================
+Classic Tool Progress Bars  ascii-progress-bars
+The progress lines everyone recognizes -- wget, curl, apt, tqdm, rsync, docker
+pull, pip and make -- in pure ASCII.
+progress - 80x18 (min 40x8) - 10 s loop - ascii - 16 colors
+tags: progress, wget, curl, apt, tqdm, rsync, docker
+
+$ wget
+prism-term.tgz   100%[============================] 18.40M  822KB/s  in 4.4s
+$ curl
+####################################################################      94.4%
+$ apt
+Progress: [ 82%] [############################################..........]
+$ tqdm
+ 10%|##9                           | 10/100 [00:00<00:05, 18.20it/s]
+$ rsync
+      1,035,717   86%    1.21MB/s    0:00:01
+$ docker
+a3ed95caeb02: Downloading [===========>                    ]  15.0MB/40.3MB
+$ pip
+   ---------------------------------------- 9.6/9.6 MB
+$ make
+[100%] Building C object src/CMakeFiles/prism.dir/render.c.o
+
+
+  still at t=5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ascii-progress-bars
+SNAPSHOT  prism-term snapshot ascii-progress-bars --size 80x18
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-progress-bars'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-spinners
+next >    curl -sL prism.jeremyfhall.com/f/ascii-hourglass
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

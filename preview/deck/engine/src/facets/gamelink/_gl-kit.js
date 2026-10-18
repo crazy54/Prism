@@ -1,0 +1,4 @@
+// Bundled into facets.bundle.js by website/build.mjs (the module itself is in the repository).
+import { __m } from '../../../facets.bundle.js';
+const __n = __m(609);
+export const BOMB_PULSE_S = __n.BOMB_PULSE_S, DATA_SHAPE = __n.DATA_SHAPE, EFFECTS_PARAM = __n.EFFECTS_PARAM, FLASH_PEAK = __n.FLASH_PEAK, FLASH_Q = __n.FLASH_Q, FLASH_REARM_S = __n.FLASH_REARM_S, FLASH_RISE = __n.FLASH_RISE, HURT_MAX_ALPHA = __n.HURT_MAX_ALPHA, MULTI = __n.MULTI, MULTI_SHORT = __n.MULTI_SHORT, REASONS = __n.REASONS, SLOTS = __n.SLOTS, SLOT_HUE = __n.SLOT_HUE, TEAM_HUE = __n.TEAM_HUE, faceOf = __n.faceOf, fxBusy = __n.fxBusy, fxOf = __n.fxOf, gameLinkOf = __n.gameLinkOf, kindTitle = __n.kindTitle, layoutOf = __n.layoutOf, money = __n.money, newest = __n.newest, phaseOf = __n.phaseOf, slotModel = __n.slotModel, stepOf = __n.stepOf, tierOf = __n.tierOf, weaponTitle = __n.weaponTitle;

@@ -1,0 +1,41 @@
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII SPINNERS & BARS      597nm - 20 / 29
+------------------------------------------------------/\========================
+ASCII Spectrum Analyzer  ascii-vu-meter
+A hi-fi spectrum analyzer in #: bars bounce to a synthetic beat, peak markers
+hang and fall, labels sit on the axis.
+chart - 64x18 (min 24x8) - 8 s loop - ascii - 16 colors
+tags: spectrum, vu meter, equalizer, audio, bars
+
+
+
+
+
+
+
+         ==    ==
+            ==       ==
+                  ==    == ==          ==    ==
+                                 ==
+                              ##          ==    ==
+         ##    ##       ##    ##    ##                      == ## ==
+         ## ## ## ## ## ##    ##    ##    ## ## ## ## ## ##    ##
+         ## ## ## ## ## ##    ##    ## ## ## ## ## ## ## ## ## ##
+         ## ## ## ## ## ## ## ##    ## ## ## ## ## ## ## ## ## ## ##
+         ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+         ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+        -60--------150------400-------1k-------2.5k------6k-------15k---
+  still at t=4s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ascii-vu-meter
+SNAPSHOT  prism-term snapshot ascii-vu-meter --size 64x18
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-vu-meter'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-hourglass
+next >    curl -sL prism.jeremyfhall.com/f/ascii-cowsay
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

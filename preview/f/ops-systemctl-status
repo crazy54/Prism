@@ -1,0 +1,43 @@
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;94;49mLINUX & OPS[0;2;39;49m › [0;1;38;5;94;49mPROCESSES & SERVICES[0;39;49m      [38;5;94mλ 578 · 17 / 39[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;130;49m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;130m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;94m━[38;5;101m━[38;5;94m━[38;5;101m━[38;5;101m━[38;5;101m━[38;5;101m━[38;5;65m━[0m
+[0;1;39;49msystemctl status[0;2;39;49m  ops-systemctl-status[0m
+systemctl status nginx.service: the green ● active (running) block, Main PID,
+tasks, memory, CPU, CGroup tree and a journal tail with a live reload.
+[0;2;39;49mtui · 80×20 (min 56×6) · 24 s loop · ascii · 16 colors[0m
+[0;2;39;49mtags: systemd, systemctl, service, status, nginx, unit[0m
+
+[0;1;38;5;115;48;5;232m● [38;5;255mnginx.service - A high performance web server and a reverse proxy server[0;39;48;5;232m      [0m
+[38;5;255;48;5;232m     Loaded: loaded (/usr/lib/systemd/system/nginx.service; [0;1;38;5;115;48;5;232menabled[0;38;5;255;48;5;232m; preset: [0;1;38;5;115;48;5;232mena[0m
+[38;5;255;48;5;232m     Active: [0;1;38;5;115;48;5;232mactive (running)[0;38;5;255;48;5;232m since Tue 2026-10-13 09:14:02 UTC; 4h 48min ago[39m   [0m
+[38;5;255;48;5;232m       Docs: man:nginx(8)[39m                                                       [0m
+[38;5;255;48;5;232m    Process: 1281 ExecStartPre=/usr/sbin/nginx -t -q -g "daemon on;" (code=exite[0m
+[38;5;255;48;5;232m   Main PID: 1287 (nginx)[39m                                                       [0m
+[38;5;255;48;5;232m      Tasks: 5 (limit: 18922)[39m                                                   [0m
+[38;5;255;48;5;232m     Memory: 21.6M (peak: 24.1M)[39m                                                [0m
+[38;5;255;48;5;232m        CPU: 2min 11.588s[39m                                                       [0m
+[38;5;255;48;5;232m     CGroup: /system.slice/nginx.service[39m                                        [0m
+[38;5;248;48;5;232m             ├─[38;5;255m1287 "nginx: master process /usr/sbin/nginx -g daemon on; master_[0m
+[38;5;248;48;5;232m             ├─[38;5;255m1288 "nginx: worker process"[39m                                     [0m
+[38;5;248;48;5;232m             ├─[38;5;255m1289 "nginx: worker process"[39m                                     [0m
+[38;5;248;48;5;232m             ├─[38;5;255m1290 "nginx: worker process"[39m                                     [0m
+[38;5;248;48;5;232m             └─[38;5;255m1291 "nginx: worker process"[39m                                     [0m
+[48;5;232m                                                                                [0m
+[38;5;255;48;5;232mOct 13 09:14:02 node03 systemd[1]: Starting nginx.service - A high performance w[0m
+[38;5;255;48;5;232mOct 13 09:14:02 node03 systemd[1]: Started nginx.service - A high performance we[0m
+[48;5;232m                                                                                [0m
+[48;5;232m                                                                                [0m
+[0;2;39;49m  still at t=6s — run it live to see it move[0m
+
+[0;1;38;5;94;49mRUN IT LIVE · NODE 18+, NO INSTALL[0;39;49m [38;5;243m──────────────[0m
+[38;5;31m  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \[0m
+[38;5;31m    prism-term play ops-systemctl-status[0m
+[0;1;38;5;94;49mSNAPSHOT[0;2;39;49m  [0;38;5;31;49mprism-term snapshot ops-systemctl-status --size 80x20[0m
+[0;1;38;5;94;49mIN CODE[0m
+  [38;5;31mimport { play, findFacet } from 'prism-term';[0m
+  [38;5;31mawait play(findFacet('ops-systemctl-status'));[0m
+
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49m‹ prev    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/ops-traceroute[0m
+[0;2;39;49mnext ›    [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/ops-systemctl-failed[0m
+[0;2;39;49mgallery   [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/ops[0m
+[0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

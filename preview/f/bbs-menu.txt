@@ -1,0 +1,46 @@
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > BBS & ANSI ART      485nm - 14 / 24
+------------------------------------------------------/\========================
+BBS Main Menu  bbs-menu
+A BBS main menu: shaded header, hotkey commands with a walking lightbar,
+who-is-online and time left.
+art - 80x22 (min 40x12) - 10 s loop - unicode - 16 colors
+tags: bbs, ansi, menu, lightbar, hotkeys, sysop
+
+.........:::::::::################ MAIN MENU #################:::::::::.........
+                     PRISM BBS . terminal art since 1991
+
+ +==+ COMMANDS +====================================+  +==+ ONLINE +==========+
+ | [M] Message Bases        [W] Who's Online        |  | 1 ZERO COOL          |
+ | [F] File Areas           [N] New Files Scan      |  |   Playing L.O.R.D.   |
+ | [D] Door Games           [U] User Settings       |  | 2 ACID BURN          |
+ | [C] Chat with SysOp      [L] Last Callers        |  |   Reading msgs       |
+ | [B] Bulletins            [G] Goodbye (Log Off)   |  | 3 LIGHTMAN           |
+ +==================================================+  |   Main menu          |
+                                                       | 4 THE PHREAK         |
+  Command > N#                                         |   Downloading        |
+                                                       +======================+
+
+
+
+
+
+
+ Time left: 58 min  .  Node 3  .  3 new msgs  .  ^v select  Enter
+  still at 80x20 - t=5s -- run it live for full size and motion
+
+PARAMS - --SET KEY=VALUE ------------------------
+  colors=vga            Colors  (vga|theme)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play bbs-menu
+SNAPSHOT  prism-term snapshot bbs-menu --size 80x22
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('bbs-menu'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/bbs-login
+next >    curl -sL prism.jeremyfhall.com/f/ansi-logo
+gallery   curl -sL prism.jeremyfhall.com/t/retro
+home      curl -sL prism.jeremyfhall.com/tty

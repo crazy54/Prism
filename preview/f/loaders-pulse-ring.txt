@@ -1,0 +1,31 @@
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > BARS & PULSES      506nm - 27 / 64
+------------------------------------------------------/\========================
+Pulse Ring  loaders-pulse-ring
+A ring growing from a point to a bullseye and collapsing again -- a sonar ping
+in one glyph.
+spinner - 44x5 (min 24x2) - 8 s loop - unicode - 16 colors
+tags: spinner, loader, pulse, ring, sonar
+
+                   | Broadcasting presence...            4.0s
+
+                   - \ | /
+
+                   pulseRing (ASCII fallback) - 4 frames - 1.
+  still at t=4s -- run it live to see it move
+
+PARAMS - --SET KEY=VALUE ------------------------
+  speed=1               Speed  (0.25-4)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play loaders-pulse-ring
+SNAPSHOT  prism-term snapshot loaders-pulse-ring --size 44x5
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-pulse-ring'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-pulse
+next >    curl -sL prism.jeremyfhall.com/f/loaders-grow
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

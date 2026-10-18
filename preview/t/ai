@@ -1,0 +1,46 @@
+[38;5;247m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;97;49m━[38;5;29m━[38;5;131m━[39m [0;1;39;49mPRISM TERMINAL[0;2;39;49m › [0;1;38;5;32;49mAI WORKING[0;39;49m                              [38;5;32mλ 479 · 09 / 17[0m
+[38;5;243m──────[38;5;243m───[38;5;243m──[38;5;243m──[38;5;243m─[38;5;243m─[38;5;244m──[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;244m─[38;5;102m─[38;5;102m─[38;5;102m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;245m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;246m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;247m─[38;5;248m─[38;5;248m─[38;5;248m─[38;5;145m─[38;5;145m─[38;5;249m─[38;5;249m─[38;5;250m─[38;5;250m─[38;5;250m─[38;5;251m─[38;5;251m─[38;5;251m─[38;5;252m─[38;5;252m─[0;1;38;5;231;49m◢[38;5;98m◣[0;38;5;31;49m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;31m━[38;5;67m━[38;5;67m━[38;5;67m━[38;5;67m━[38;5;67m━[38;5;67m━[38;5;67m━[0m
+Thinking states, token streams, tool calls and agent pipelines.
+
+[0;1;38;5;115;48;5;232m✔[0;39;48;5;232m [38;5;248mRead trace 4bf92f35 (31 spans)       [39;49m  [38;5;255;48;5;232mCheckout latency is up because the DB[39m  [0m
+[0;1;38;5;115;48;5;232m✔[0;39;48;5;232m [38;5;248mCorrelated p99 with pool wait (r=0.9…[39;49m  [38;5;255;48;5;232mpool is exhausted. Since v2.14.1 the[39m   [0m
+[0;1;38;5;147;48;5;232m✳[0;39;48;5;232m [0;1;38;5;103;48;5;232mChecking the d[38;5;139me[38;5;146mp[38;5;188ml[38;5;255mo[38;5;253my[38;5;182m [38;5;146md[38;5;103mi[38;5;103mff…[0;39;48;5;232m            [49m  [38;5;255;48;5;232mservice runs 32 workers but still opens[0m
+[48;5;232m  [38;5;245m(10s · ↓ 1.9k tokens · esc to interr…[39;49m  [38;5;255;48;5;232monly 20 connections, so about a third[39m  [0m
+[48;5;232m                                       [49m  [38;5;255;48;5;232mof requests wait in the pool queue.[39m    [0m
+[48;5;232m                                       [49m  [38;5;255;48;5;232mRaising the[38;5;189;48;5;235m pool[48;5;236m to[0;1;38;5;189;48;5;238m 40[0;38;5;147;48;5;232m▍[39m                [0m
+                                         [38;5;235;48;5;232m───────────────────────────────────────[0m
+                                         [38;5;248;48;5;232mTTFT 380ms · 18 tok/s · 56/65 tokens[39m   [0m
+[0;2;39;49mai-thinking-shimmer                      ai-token-stream[0m
+
+[0;1;38;5;32;49m01 / THINKING STATES · 4[0;39;49m [38;5;243m────────────────────────[0m
+  [38;5;31mai-thinking-shimmer   [39mAn agent working indicator: a breathing glyph and a sta…[0m
+  [38;5;31mai-typing-indicators  [39mSix labeled "model is working" indicators side by side:…[0m
+  [38;5;31mai-reasoning-summary  [39mA collapsible reasoning block: thought summaries stream…[0m
+  [38;5;31mai-status-orb         [39mAn assistant status orb on a hi-res canvas that breathe…[0m
+
+[0;1;38;5;32;49m02 / TOKEN STREAMS · 4[0;39;49m [38;5;243m──────────────────────────[0m
+  [38;5;31mai-token-stream       [39mA response streaming token by token with each new token…[0m
+  [38;5;31mai-markdown-stream    [39mMarkdown rendered live as it streams: headings, bold an…[0m
+  [38;5;31mai-throughput-meter   [39mAn inference panel with concurrent streams, per-stream …[0m
+  [38;5;31mai-structured-output  [39mStructured output streaming in: JSON arrives token by t…[0m
+
+[0;1;38;5;32;49m03 / TOOL CALLS · 4[0;39;49m [38;5;243m─────────────────────────────[0m
+  [38;5;31mai-tool-call-card     [39mAn agent's tool calls stacking up: each shows a spinner…[0m
+  [38;5;31mai-parallel-tools     [39mFour tool calls fanned out in parallel as a live waterf…[0m
+  [38;5;31mai-approval-prompt    [39mA human-in-the-loop approval prompt: the agent proposes…[0m
+  [38;5;31mai-diff-apply         [39mAn agent applying an edit: the unified diff streams in …[0m
+
+[0;1;38;5;32;49m04 / AGENTS & PIPELINES · 3[0;39;49m [38;5;243m─────────────────────[0m
+  [38;5;31mai-task-plan          [39mAn agent's plan as a live checklist: each task moves fr…[0m
+  [38;5;31mai-chat-transcript    [39mA chat transcript: user questions sit right-aligned in …[0m
+  [38;5;31mai-multi-agent-log    [39mA multi-agent message log: color-tagged agents post fin…[0m
+
+[0;1;38;5;32;49m05 / MODEL INTERNALS · 3[0;39;49m [38;5;243m────────────────────────[0m
+  [38;5;31mai-context-window     [39mA 200k context window filling turn by turn as a stacked…[0m
+  [38;5;31mai-sampling-probs     [39mNext-token sampling: top-k candidates as probability ba…[0m
+  [38;5;31mai-attention-heatmap  [39mAn attention heatmap over one sentence with a causal ma…[0m
+
+[38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
+[0;2;39;49mone facet [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/f/ai-thinking-shimmer[0m
+[0;2;39;49mpaged     [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/t/ai | less -R[0m
+[0;2;39;49mgalleries [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m[0m

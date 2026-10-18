@@ -1,0 +1,18 @@
+# Prism Night — Prism's Night terminal colors (Refraction).
+# xfce4-terminal: save as ~/.local/share/xfce4/terminal/colorschemes/prism-night.theme,
+# then Preferences → Colors → Presets → "Prism Night".
+
+[Scheme]
+Name=Prism Night
+ColorForeground=#e6e6ef
+ColorBackground=#0a0c12
+ColorCursor=#b8a2f2
+ColorCursorForeground=#0a0c12
+ColorCursorUseDefault=FALSE
+ColorSelection=#f0f0f5
+ColorSelectionBackground=#2e2748
+ColorSelectionUseDefault=FALSE
+ColorBold=#e6e6ef
+ColorBoldUseDefault=TRUE
+TabActivityColor=#b8a2f2
+ColorPalette=#1d202b;#f28885;#7ad59c;#ecca76;#81aaf7;#b8a2f2;#67cfe3;#c6c7d3;#76798e;#ffaaa7;#a5eac1;#f7e59f;#aac8ff;#d9c6fe;#9eeaf2;#f6f6fb

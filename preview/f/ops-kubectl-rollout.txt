@@ -1,0 +1,35 @@
+--/\=== PRISM TERMINAL > LINUX & OPS > CONTAINERS & CLUSTERS     578nm - 24 / 39
+------------------------------------------------------/\========================
+kubectl rollout status  ops-kubectl-rollout
+kubectl rollout status counting up "N out of 5 new replicas have been
+updated..." to "successfully rolled out", with a replica strip below.
+progress - 80x12 (min 60x5) - 20 s loop - ascii - 16 colors
+tags: kubernetes, kubectl, rollout, deployment, replicas
+
+ops@node03:~/deploy$ kubectl rollout status deployment/api -n shop
+Waiting for deployment "api" rollout to finish: 1 out of 5 new replicas have bee
+n updated...
+Waiting for deployment "api" rollout to finish: 2 out of 5 new replicas have bee
+n updated...
+Waiting for deployment "api" rollout to finish: 3 out of 5 new replicas have bee
+n updated...
+
+
+
+
+replicas ## ## ## ## ##  3/5 updated . revision 42
+  still at t=6s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ops-kubectl-rollout
+SNAPSHOT  prism-term snapshot ops-kubectl-rollout --size 80x12
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ops-kubectl-rollout'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ops-kubectl-pods
+next >    curl -sL prism.jeremyfhall.com/f/ops-k9s
+gallery   curl -sL prism.jeremyfhall.com/t/ops
+home      curl -sL prism.jeremyfhall.com/tty

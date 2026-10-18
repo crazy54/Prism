@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ANIMATIONS            597nm - 1 / 29
+------------------------------------------------------/\========================
+donut.c  ascii-donut
+The canonical spinning ASCII torus: z-buffered, lit with the twelve-step
+.,-~:;=!*#$@ ramp, scaled to any window.
+art - 80x24 (min 32x10) - 10 s loop - ascii - 16 colors
+tags: donut, donut.c, torus, classic, 3d
+
+                                 @@@@@@@@@@@@@@
+                             $$$$$$$$$#######$#$$$$
+                          #$$$#####**************####
+                         ####*********!!!!!!!!*!!!!!***
+                       *##*****!!!====;;;;;;;;====!=!!!!
+                      ***!**!!!===;::::~~~~~~~:::;;;==!!!
+                     =!!!!!!==;;::~~-,,,,,.,,,,,-~::;;===
+                     !!!!===;;::~--,.............,--~:;;;
+                     ====;;::~~-,.................,,~~::;
+                     ==;;;::~--,.....        .....,--~~::
+                     ;;;;::~~-,,....        :....,,-~~~~~
+                     ::::::~~--,...~;    *#*!=~~--~~~~~~-
+                      ~:::~~~~----~;!*$$@@@$#*=;;:::~~~,
+                       -~~~~~~~~~:;=!*#$@@@$#*!=;;::~-
+                        ,--~~~~::;;=!!*#####**!==;:-.
+                          ,---~:::;=!!!!!***!!;;~-.
+                             .,--~~:;;;;;=;:~-..
+                                  ........
+
+
+  still at 80x20 - t=5s -- run it live for full size and motion
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ascii-donut
+SNAPSHOT  prism-term snapshot ascii-donut --size 80x24
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-donut'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-pong
+next >    curl -sL prism.jeremyfhall.com/f/ascii-fire
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

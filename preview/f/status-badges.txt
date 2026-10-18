@@ -1,0 +1,32 @@
+--/\=== PRISM TERMINAL > NOTIFICATIONS & STATUS > BADGES & PILLS  550nm - 9 / 18
+------------------------------------------------------/\========================
+Badges & Pills  status-badges
+Log-level badges with ticking counts, state chips, outline tags, environment
+pills and notification counters, all theme-tinted.
+widget - 72x9 (min 36x4) - 10 s loop - unicode - truecolor
+tags: badge, pill, chip, tag, counter
+
+     DEBUG  41,256   INFO  120,595   WARN  892   ERROR  123   CRIT  3
+
+     | running   . pending   + passed   x failed   - skipped   = paused
+
+    [v2.14.2] [prod] [us-east-1] [canary 40%] [owner: payments]
+
+    env  DEV   STAGING   CANARY   PROD
+
+    Inbox  4   PRs  12   Alerts  4   Mentions 0
+  still at t=5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play status-badges
+SNAPSHOT  prism-term snapshot status-badges --size 72x9
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('status-badges'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/status-powerline
+next >    curl -sL prism.jeremyfhall.com/f/status-shields
+gallery   curl -sL prism.jeremyfhall.com/t/status
+home      curl -sL prism.jeremyfhall.com/tty

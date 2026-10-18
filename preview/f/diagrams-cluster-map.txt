@@ -1,0 +1,35 @@
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > NETWORKS & TOPOLOGIES
+------------------------------------------------------/\========================
+Cluster Map  diagrams-cluster-map
+Three cluster nodes with pods colored by service plus CPU and memory; node-b
+goes NotReady, its pods are evicted and reschedule onto healthy nodes.
+diagram - 72x12 (min 54x10) - 10 s loop - unicode - 256 colors
+tags: kubernetes, cluster, pods, scheduling, nodes
+
+    + node-a . 8 pods ----+ + x node-b NotReady --+ + node-c . 6 pods ----+
+    | # # # # # # # #     | | evicted             | | # # # # # # o       |
+    |                     | |                     | |                     |
+    | cpu #######.... 65% | | cpu ...........  0% | | cpu #####...... 52% |
+    | mem ########... 74% | | mem ...........  0% | | mem ######..... 60% |
+    +-------- 10.20.3.11 -+ +-------- 10.20.3.12 -+ +-------- 10.20.3.13 -+
+    # checkout  # payments  # search  # inventory  o pending
+
+    x node-b NotReady: kubelet stopped posting status
+    ! evicting 6 pods from node-b
+    -> rescheduling onto node-a, node-c
+
+  still at t=5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play diagrams-cluster-map
+SNAPSHOT  prism-term snapshot diagrams-cluster-map --size 72x12
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('diagrams-cluster-map'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/diagrams-network-topology
+next >    curl -sL prism.jeremyfhall.com/f/diagrams-service-mesh
+gallery   curl -sL prism.jeremyfhall.com/t/diagrams
+home      curl -sL prism.jeremyfhall.com/tty

@@ -1,0 +1,31 @@
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > TRUECOLOR SPINNERS
+------------------------------------------------------/\========================
+Orbit  loaders-orbit
+A planet with a short tail circling a lit sun in braille, shaded ice-blue --
+elegant for network waits.
+spinner - 44x5 (min 24x2) - 8 s loop - braille - 256 colors
+tags: spinner, loader, braille, orbit, planet
+
+                   | Handshaking with 10.20.4.11...      4.0s
+
+                   - \ | /
+
+                   orbit (ASCII fallback) - 4 frames - 130 ms
+  still at t=4s -- run it live to see it move
+
+PARAMS - --SET KEY=VALUE ------------------------
+  speed=1               Speed  (0.25-4)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play loaders-orbit
+SNAPSHOT  prism-term snapshot loaders-orbit --size 44x5
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-orbit'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-chomp
+next >    curl -sL prism.jeremyfhall.com/f/loaders-thinking
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

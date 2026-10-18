@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > TREES & HIERARCHIES
+------------------------------------------------------/\========================
+Dependency Tree  diagrams-dependency-tree
+An npm ls --all tree printing line by line with deduped markers, then npm audit
+lights the path from the root to a vulnerable transitive dependency.
+diagram - 60x20 (min 44x10) - 8 s loop - unicode - 16 colors
+tags: dependencies, npm ls, tree, supply chain, vulnerability
+
+          $ npm ls --all
+          @checkout/api@2.14.1 /srv/checkout
+          +-+ express@4.21.2
+          | +-- body-parser@1.20.3
+          | +-+ send@0.19.0
+          | | `-- ms@2.1.3
+          | `-- qs@6.13.0
+          +-+ pg@8.13.1
+          | +-- pg-pool@3.7.0
+          | `-- pg-protocol@1.7.0
+          +-+ @checkout/telemetry@1.4.0
+          | +-- left-padder@1.0.2 ! high
+          | `-- ms@2.1.3 deduped
+          +-- ioredis@5.4.1
+          `-- zod@3.23.8
+          $ npm audit
+          ! 1 high severity vulnerability
+            left-padder <1.0.3 . prototype pollution
+            fix: npm i @checkout/telemetry@1.4.1
+
+  still at t=4s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play diagrams-dependency-tree
+SNAPSHOT  prism-term snapshot diagrams-dependency-tree --size 60x20
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('diagrams-dependency-tree'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/diagrams-org-chart
+next >    curl -sL prism.jeremyfhall.com/f/diagrams-network-topology
+gallery   curl -sL prism.jeremyfhall.com/t/diagrams
+home      curl -sL prism.jeremyfhall.com/tty

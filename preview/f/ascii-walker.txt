@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > PURE ASCII > ASCII ANIMATIONS           597nm - 10 / 29
+------------------------------------------------------/\========================
+Evening Walk  ascii-walker
+A stick figure strolls past lamp posts and drifting clouds -- a four-frame walk
+cycle over three layers of parallax.
+art - 80x24 (min 30x8) - 12 s loop - ascii - 16 colors
+tags: stick figure, walk cycle, parallax, street
+
+
+                                                                            .--.
+__)                 .--.                                                  (_____
+                  (_________)                       .--.
+                                                  (___________)
+
+
+
+
+
+
+
+     _O_                   _O_                   _O_                   _O_
+      |                     |                     |                     |
+      |                     |                     |                     |
+      |                     |     o               |                     |
+      |                     |    /|\              |                     |
+      |                     |    / \              |                     |
+________________________________________________________________________________
+    .    .    .    .    .    .    ,    ,    .    ,    .    ,    ,    ,    ,    .
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play ascii-walker
+SNAPSHOT  prism-term snapshot ascii-walker --size 80x24
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('ascii-walker'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/ascii-train
+next >    curl -sL prism.jeremyfhall.com/f/ascii-matrix
+gallery   curl -sL prism.jeremyfhall.com/t/ascii
+home      curl -sL prism.jeremyfhall.com/tty

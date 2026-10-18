@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > PARTICLES & SIMULATIONS > PHYSICS       471nm - 11 / 18
+------------------------------------------------------/\========================
+Harmonograph  harmonograph
+Damped rotary harmonograph -- a pen traces evolving Lissajous figures in
+braille, re-tuning its pendulums every cycle.
+scene - 80x24 (min 20x6) - 8 s loop - unicode - truecolor
+tags: harmonograph, lissajous, pendulum, curves
+
+
+                                                         *
+                         ****     +++                   +*
+                        **+++++ ++++ ++               ++ +*
+                        * + ++++++  +  ++           + ++ +*
+                        *+++ +++++++ ++  +      ++++++++ +*
+                       * + ++++++++++++++ + ++++++++++++ +*
+                       * +++++++*+++++++=====+++++++++++ +*
+                       *+ ++++++++++++++=+=====+++++++ + +*
+                       *+ ++++++++++++++=++++===++++++ + +*
+                       *+ +++++++++++++==+++++===+++++ + +*
+                       *+ ++++++++#=+++=++++++++==++++ ++ *
+                       *+ +++++ +++==++=+++++++++=++++ ++*
+                       ++ +++++++++++===+++++++++++++ + +*
+                       +++++++++++++ *  +++++++++++++ + +*
+                       +++++++++++    *  +  +++++++++ ++ *
+                       +++++ +         *  ++ ++++++ ++ +**
+                       ++++             **  +++++ +++ ++*
+                       +++                *****     ++ *
+                                                     ***
+  still at 80x20 - t=4s -- run it live for full size and motion
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play harmonograph
+SNAPSHOT  prism-term snapshot harmonograph --size 80x24
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('harmonograph'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/double-pendulum
+next >    curl -sL prism.jeremyfhall.com/f/n-body
+gallery   curl -sL prism.jeremyfhall.com/t/sim
+home      curl -sL prism.jeremyfhall.com/tty

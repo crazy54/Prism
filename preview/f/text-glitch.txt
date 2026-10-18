@@ -1,0 +1,39 @@
+--/\=== PRISM TERMINAL > TEXT EFFECTS > GLITCH & DISTORT         492nm - 18 / 29
+------------------------------------------------------/\========================
+RGB Split Glitch  text-glitch
+Big type torn into horizontal slices, red and cyan channels pulled apart, blocks
+displaced -- in bursts, like a failing signal.
+text - 72x16 (min 36x8) - 6 s loop - unicode - truecolor
+tags: glitch, rgb split, tearing, datamosh, corruption
+
+
+
+
+
+                  ######## ##  ########### ##### ##  ### ##
+                 ## ##  ##### #### #############  ######### ##
+                 ## ## ### ## #### ## ## ####### ### ###### ##
+                 ## ###### ## #### ## ## ####### ########## ##
+                 ## ######### #### ## ## ####### ####  #######
+                 ######### ####### ## ## ############  ########
+                    ####### #### ######### ########### ### ###
+                          ##### ###### ####   ##    ##### ##  ##
+
+                             EER=R0x5+FF*AMEEDR$@P
+
+
+  still at t=3s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play text-glitch
+SNAPSHOT  prism-term snapshot text-glitch --size 72x16
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('text-glitch'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/text-scramble
+next >    curl -sL prism.jeremyfhall.com/f/text-vhs
+gallery   curl -sL prism.jeremyfhall.com/t/text
+home      curl -sL prism.jeremyfhall.com/tty

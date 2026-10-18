@@ -1,0 +1,46 @@
+--/\=== PRISM TERMINAL > RETRO & DEMOSCENE > BBS & ANSI ART      485nm - 13 / 24
+------------------------------------------------------/\========================
+BBS Login  bbs-login
+A 1993 BBS login: block-letter board logo, caller stats in a double frame and a
+login that types itself.
+art - 80x24 (min 40x12) - 12 s loop - unicode - 16 colors
+tags: bbs, ansi, login, dial-up, 1993, sysop
+
+  PRISM BBS . Node 3 of 8 . 2400 bps . ANSI                              23:41
+
+       ####""""##__  ####""""##__  ""####"". __##"""""""". ####__  __####
+       ####____##"". ####____##"".   ####.   ""##______    ####""##""####
+       ####.......   ####..""##__    ####.      .....####. ####.  .. ####
+       """".         """".   """". """""""". """"""""""... """".     """"
+
+                    THE TERMINAL ART UNDERGROUND . EST. 1991
+
+                 +==+ SYSTEM +================================+
+                 | Last caller ..... CRASH OVERRIDE           |
+                 | Calls today ..... 42                       |
+                 | Your node ....... 3 of 8                   |
+                 +============================================+
+
+                 Enter your handle (NEW to apply): LIGHTMAN
+                 Password: ********
+                 Checking credentials... |
+
+                 [ESC] hang up   [?] help   SysOp is AVAILABLE
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+PARAMS - --SET KEY=VALUE ------------------------
+  colors=vga            Colors  (vga|theme)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play bbs-login
+SNAPSHOT  prism-term snapshot bbs-login --size 80x24
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('bbs-login'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/checker-floor
+next >    curl -sL prism.jeremyfhall.com/f/bbs-menu
+gallery   curl -sL prism.jeremyfhall.com/t/retro
+home      curl -sL prism.jeremyfhall.com/tty

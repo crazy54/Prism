@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > ARCHITECTURE DIAGRAMS > SEQUENCE & TIMELINES
+------------------------------------------------------/\========================
+Sequence Diagram  diagrams-sequence
+A sequence diagram of one checkout request: call arrows grow between lifelines,
+activation bars mark who is busy, a note flags pool wait, returns come back
+dashed.
+diagram - 72x19 (min 60x13) - 9 s loop - unicode - 16 colors
+tags: sequence diagram, uml, lifeline, request, trace
+
+        +--------+        +---------+      +----------+      +----------+
+        | client |        | gateway |      | checkout |      | postgres |
+        +--------+        +---------+      +----------+      +----------+
+             :                 :                 :                 :
+             :  POST /checkout :                 :                 :
+             :---------------->#                 :                 :
+             :                 #  createOrder()  :                 :
+             :                 #---------------->#                 :
+             :                 #                 BEGIN; INSERT order
+             :                 #                 #---------------->#
+             :                 #   pool 20/20 busy, waited 840ms
+             :                 #                 #                 #
+             :                 #                 #     ok 12ms     #
+             :                 #                 #<................#
+             :                 #   201 Created   #                 :
+             :                 #<................#                 :
+             :                 #                 :                 :
+             :                .#                 :                 :
+    trace 4bf92f35 . 7/7 spans
+  still at t=4.5s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play diagrams-sequence
+SNAPSHOT  prism-term snapshot diagrams-sequence --size 72x19
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('diagrams-sequence'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/diagrams-service-mesh
+next >    curl -sL prism.jeremyfhall.com/f/diagrams-gantt
+gallery   curl -sL prism.jeremyfhall.com/t/diagrams
+home      curl -sL prism.jeremyfhall.com/tty

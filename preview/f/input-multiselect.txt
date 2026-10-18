@@ -1,0 +1,35 @@
+--/\=== PRISM TERMINAL > INPUT & MENUS > TOGGLES & CHECKBOXES     487nm - 4 / 23
+------------------------------------------------------/\========================
+Multi-select Checkboxes  input-multiselect
+A checkbox list where a scripted user moves and toggles items with space, with a
+live "4 of 7 selected" counter and select-all hint.
+tui - 50x12 (min 32x7) - 6 s loop - unicode - 16 colors
+tags: checkbox, multiselect, list, toggle, prompt
+
+               ? Services to restart
+                  [x] checkout
+                  [x] payments
+                  [ ] inventory
+                  [x] catalog
+                  [ ] search
+                > [x] rx-orders
+                  [ ] loyalty
+
+
+
+               4 of 7 selected . space toggle . a all . enter
+  still at t=3s -- run it live to see it move
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play input-multiselect
+SNAPSHOT  prism-term snapshot input-multiselect --size 50x12
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('input-multiselect'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/input-scroll-list
+next >    curl -sL prism.jeremyfhall.com/f/input-toggles
+gallery   curl -sL prism.jeremyfhall.com/t/input
+home      curl -sL prism.jeremyfhall.com/tty

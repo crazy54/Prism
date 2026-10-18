@@ -1,0 +1,53 @@
+# Prism Day — Prism's Day terminal colors (Refraction).
+# Ptyxis: save as ~/.local/share/org.gnome.Ptyxis/palettes/prism-day.palette
+# (Flatpak: ~/.var/app/app.devsuite.Ptyxis/data/org.gnome.Ptyxis/palettes/), restart Ptyxis,
+# then Preferences → Profile → Palette → "Prism Day".
+
+[Palette]
+Name=Prism Day
+
+[Light]
+Foreground=#23222f
+Background=#f8f7fb
+Cursor=#7353bb
+TitlebarForeground=#23222f
+TitlebarBackground=#ffffff
+Color0=#23222f
+Color1=#b73232
+Color2=#007240
+Color3=#835c00
+Color4=#2a5ec5
+Color5=#7353bb
+Color6=#006d7d
+Color7=#e6e5ee
+Color8=#55546a
+Color9=#cf354b
+Color10=#00823a
+Color11=#8d6c00
+Color12=#006fd8
+Color13=#a04ac2
+Color14=#007c87
+Color15=#ffffff
+
+[Dark]
+Foreground=#23222f
+Background=#f8f7fb
+Cursor=#7353bb
+TitlebarForeground=#23222f
+TitlebarBackground=#ffffff
+Color0=#23222f
+Color1=#b73232
+Color2=#007240
+Color3=#835c00
+Color4=#2a5ec5
+Color5=#7353bb
+Color6=#006d7d
+Color7=#e6e5ee
+Color8=#55546a
+Color9=#cf354b
+Color10=#00823a
+Color11=#8d6c00
+Color12=#006fd8
+Color13=#a04ac2
+Color14=#007c87
+Color15=#ffffff

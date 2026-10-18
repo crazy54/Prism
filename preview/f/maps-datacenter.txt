@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > MAPS & GEO > GRIDS & FLOORPLANS         519nm - 10 / 11
+------------------------------------------------------/\========================
+Data Hall Floorplan  maps-datacenter
+A data-hall floorplan: rack rows with inlet temperatures, cold and hot aisles
+with moving airflow, CRAC units and a hotspot being cooled.
+scene - 80x22 (min 44x12) - 20 s loop - unicode - truecolor
+tags: datacenter, floorplan, racks, temperature, airflow
+
+ +- HALL 2 - ROWS A-F -------------------------------+     HALL 2
+ |   .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  #     IT load  413 kW
+ |C . >.  . >.  . >.  . >.  . >.  . >.  . >.  . >.   #     PUE      1.40
+ |    .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . #
+ |A  22  21  21  22  21  21  22  22  22  22  22  22  |     HOTTEST INLET
+ |B  22  23  21  21  22  22  25  23  22  23  23  23  |     C-07  30.9oC
+ |    .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . |     ! above 30oC limit
+ |H  .< .  .< .  .< .  .< .  .< .  .< .  .< .  .< .  |
+ |  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .   |     COOLING
+ |C  21  22  21  23  24  28  31  28  24  22  23  22  |     CRAC-1 fan 62%
+ |D  22  21  21  21  21  24  27  22  21  22  23  23  |     CRAC-2 fan 62%
+ |  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .   #     supply 18.0oC
+ |C   >  .  >  .  >  .  >  .  >  .  >  .  >  .  >  . #
+ |   .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  #
+ |E  21  22  22  21  21  22  23  21  21  22  22  23  |
+ |F  21  22  21  21  22  22  22  21  21  22  22  23  |
+ |   .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  |
+ |H . <.  . <.  . <.  . <.  . <.  . <.  . <.  . <.   |
+ |    .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . |
+ +---------------------------------------------------+     18               34
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play maps-datacenter
+SNAPSHOT  prism-term snapshot maps-datacenter --size 80x22
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('maps-datacenter'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/maps-topo-trail
+next >    curl -sL prism.jeremyfhall.com/f/maps-warehouse-bots
+gallery   curl -sL prism.jeremyfhall.com/t/maps
+home      curl -sL prism.jeremyfhall.com/tty

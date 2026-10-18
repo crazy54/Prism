@@ -1,0 +1,43 @@
+--/\=== PRISM TERMINAL > MAPS & GEO > ROUTES & ARCS               519nm - 6 / 11
+------------------------------------------------------/\========================
+Great-Circle Flights  maps-flights
+Flights trace great-circle arcs between hubs on a dotted world: planes with
+fading contrails, arrival pulses and a live departures board.
+scene - 80x22 (min 40x10) - 12 s loop - braille - truecolor
+tags: flights, great circle, arcs, world map, routes
+
+                          ==========                        ====
+   ================   ===   =====          =====  ==========    ===============
+   ===   ===      =    = =    @          == @ @ ==                     =======@
+####::::::::=  :  :==== :==  @@@*******::=:@@@@@=  =  :  :  :  :  :  :=-     @##
+        ::::::::       ==:::::@        =**:@@::::::::              =---@---#####
+             ==::::====::              LHR@@@   =:::::::          =-= @@@##-
+                = :   IAD           ===:  =@#===:  ::::::: ==  :===-  NRT  -
+                 ====    *          =       #      ==  :: :: ===    -------
+                     =  =*@          =====  #     =     :::**@ =
+                       =:@@@=             = **  :=     BOM  @@@: =
+                      =   @::===           = :  =            @ :::    ===
+                       =    :  =           = :: =             SIN:## = =
+                        @  : :=            = ::=  =               =###@ =
+                       @@@ ::::             ==:                  ====@@@:=
+                        @#:: GRU             JNB                      @=:::   =
+                       ==                                                SYD =
+                        =
+FLIGHT  ROUTE      PROGRESS              DIST
+PX 248  IAD>GRU    ===========--------- 7,657 km                        en route
+PX 285  LHR>BOM    ====---------------- 7,189 km                        en route
+  still at 80x20 - t=6s -- run it live for full size and motion
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play maps-flights
+SNAPSHOT  prism-term snapshot maps-flights --size 80x22
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('maps-flights'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/maps-sonar
+next >    curl -sL prism.jeremyfhall.com/f/maps-traceroute
+gallery   curl -sL prism.jeremyfhall.com/t/maps
+home      curl -sL prism.jeremyfhall.com/tty

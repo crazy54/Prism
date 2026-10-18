@@ -1,0 +1,31 @@
+--/\=== PRISM TERMINAL > SPINNERS & LOADERS > BARS & PULSES      506nm - 28 / 64
+------------------------------------------------------/\========================
+Grow  loaders-grow
+A lower block rising to full height and falling back -- the simplest level meter
+there is.
+spinner - 44x5 (min 24x2) - 8 s loop - unicode - 16 colors
+tags: spinner, loader, blocks, grow, vertical
+
+                   | Growing heap...                     4.0s
+
+                   - \ | /
+
+                   grow (ASCII fallback) - 4 frames - 130 ms
+  still at t=4s -- run it live to see it move
+
+PARAMS - --SET KEY=VALUE ------------------------
+  speed=1               Speed  (0.25-4)
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play loaders-grow
+SNAPSHOT  prism-term snapshot loaders-grow --size 44x5
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('loaders-grow'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/loaders-pulse-ring
+next >    curl -sL prism.jeremyfhall.com/f/loaders-grow-horizontal
+gallery   curl -sL prism.jeremyfhall.com/t/loaders
+home      curl -sL prism.jeremyfhall.com/tty

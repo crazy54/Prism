@@ -1,0 +1,27 @@
+--/\=== PRISM TERMINAL > PROGRESS & COUNTERS > TRANSFERS & ETA   558nm - 36 / 41
+------------------------------------------------------/\========================
+pv  progress-pv
+pv -pterab on a restore stream: bytes, timer, current and average rate, a
+full-width bar and ETA, with a stall when the far end pushes back.
+progress - 96x4 (min 66x1) - 17 s loop - ascii - 16 colors
+tags: pv, pipe, throughput, restore
+
+$ pv -pterab backup.tar.zst | ssh restore@10.20.0.31 'zstd -d | tar x -C /srv/r.
+ 999MiB 0:00:06 [ 105MiB/s] [ 172MiB/s] [=======>            ]  43% ETA 0:00:12
+
+
+  still at 80x4 - t=6s -- run it live for full size and motion
+
+RUN IT LIVE - NODE 18+, NO INSTALL --------------
+  npx -y --package=https://prism.jeremyfhall.com/dl/prism-term-0.2.0.tgz \
+    prism-term play progress-pv
+SNAPSHOT  prism-term snapshot progress-pv --size 96x4
+IN CODE
+  import { play, findFacet } from 'prism-term';
+  await play(findFacet('progress-pv'));
+
+--------------------------------------------------------------------------------
+< prev    curl -sL prism.jeremyfhall.com/f/progress-curl-meter
+next >    curl -sL prism.jeremyfhall.com/f/progress-rsync
+gallery   curl -sL prism.jeremyfhall.com/t/progress
+home      curl -sL prism.jeremyfhall.com/tty
