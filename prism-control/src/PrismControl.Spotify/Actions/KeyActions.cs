@@ -2,6 +2,7 @@ using System.Text.Json.Nodes;
 using PrismControl.Core.Actions;
 using PrismControl.Core.Render;
 using PrismControl.Core.Render.Tokens;
+using PrismControl.Core.Theming;
 using PrismControl.Spotify.Render;
 
 namespace PrismControl.Spotify.Actions;
@@ -14,8 +15,12 @@ public abstract class SpotifyKeyBase : KeyAction, IDisposable
 {
     private SpotifyBinding? _b;
     private Flash _flash;
+    private IDisposable? _lookWatch;
 
     protected SpotifyService? Svc => _b?.Service;
+
+    /// <summary>The palette to draw with: Spotify's app look when a Kaleidoscope deck shows Spotify, else Prism (core.theme).</summary>
+    protected RefractionPalette Look => AppTheming.For(Services, Device.Id, Theme)?.Palette ?? Theme;
     protected abstract SpotifyView View { get; }
     protected abstract Task<CommandResult> ExecuteAsync(SpotifyService svc);
     /// <summary>Draws the key. <paramref name="hint"/> is a short failure label to show (or null).</summary>
@@ -25,6 +30,8 @@ public abstract class SpotifyKeyBase : KeyAction, IDisposable
     {
         _b?.Dispose();
         _b = SpotifyBinding.Attach(this, Services, GlobalSettings, View, Render);
+        _lookWatch?.Dispose();
+        _lookWatch = AppTheming.Watch(Services, Device.Id, () => Post(Render));
         StartRenderLoop(Render, TimeSpan.FromSeconds(1));
         return Task.CompletedTask;
     }
@@ -63,7 +70,7 @@ public abstract class SpotifyKeyBase : KeyAction, IDisposable
     {
         if (!IsVisible) return;
         var hint = _flash.Get(Time) is { } f ? SpotifyText.KeyHint(f.Text) : null;
-        SetImage(Draw(Theme, Svc, Svc?.Current ?? PlayerSnapshot.Empty, hint));
+        SetImage(Draw(Look, Svc, Svc?.Current ?? PlayerSnapshot.Empty, hint));
     }
 
     /// <summary>"SIGN IN" / "RECONNECT" for Web-API-only keys when not connected.</summary>
@@ -82,6 +89,8 @@ public abstract class SpotifyKeyBase : KeyAction, IDisposable
     {
         _b?.Dispose();
         _b = null;
+        _lookWatch?.Dispose();
+        _lookWatch = null;
     }
 }
 

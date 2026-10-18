@@ -2,6 +2,8 @@ using System.Text.Json.Nodes;
 using PrismControl.Core.Actions;
 using PrismControl.Core.Layouts;
 using PrismControl.Core.PropertyInspector;
+using PrismControl.Core.Render.Tokens;
+using PrismControl.Core.Theming;
 using PrismControl.Spotify.Render;
 
 namespace PrismControl.Spotify.Actions;
@@ -29,6 +31,10 @@ public sealed class NowPlayingSettings
 public sealed class NowPlayingAction : DialAction<NowPlayingSettings>, IDisposable
 {
     private SpotifyBinding? _b;
+    private IDisposable? _lookWatch;
+
+    /// <summary>The palette to draw with: Spotify's app look when a Kaleidoscope deck shows Spotify, else Prism (core.theme).</summary>
+    private RefractionPalette Look => AppTheming.For(Services, Device.Id, Theme)?.Palette ?? Theme;
     private Flash _flash;
     private long _lastSkip;
 
@@ -36,6 +42,8 @@ public sealed class NowPlayingAction : DialAction<NowPlayingSettings>, IDisposab
     {
         _b?.Dispose();
         _b = SpotifyBinding.Attach(this, Services, GlobalSettings, SpotifyView.NowPlaying, Render);
+        _lookWatch?.Dispose();
+        _lookWatch = AppTheming.Watch(Services, Device.Id, () => Post(Render));
         LongPressThreshold = TimeSpan.FromMilliseconds(600);
         if (IsDial)
         {
@@ -153,14 +161,14 @@ public sealed class NowPlayingAction : DialAction<NowPlayingSettings>, IDisposab
         {
             SetFeedback(new Feedback().Pixmap(Layouts.Canvas.Frame,
                 Svc is null
-                    ? SpotifyArt.MessageDial(Theme, "Spotify", "Spotify is unavailable", "See the plugin log", IsInteractive, warn: true)
-                    : SpotifyArt.NowPlayingDial(Theme, snap, now, IsInteractive, flash ?? StatusNotice())));
+                    ? SpotifyArt.MessageDial(Look, "Spotify", "Spotify is unavailable", "See the plugin log", IsInteractive, warn: true)
+                    : SpotifyArt.NowPlayingDial(Look, snap, now, IsInteractive, flash ?? StatusNotice())));
         }
         else
         {
             var hint = flash is { } f ? SpotifyText.KeyHint(f.Text) : null;
             if (!snap.HasItem) hint ??= Svc is null ? "UNAVAILABLE" : Svc.Status.Auth == AuthState.NeedsReconnect ? "RECONNECT" : null;
-            SetImage(SpotifyArt.NowPlayingKey(Theme, snap, now, hint));
+            SetImage(SpotifyArt.NowPlayingKey(Look, snap, now, hint));
         }
     }
 
@@ -179,5 +187,7 @@ public sealed class NowPlayingAction : DialAction<NowPlayingSettings>, IDisposab
     {
         _b?.Dispose();
         _b = null;
+        _lookWatch?.Dispose();
+        _lookWatch = null;
     }
 }

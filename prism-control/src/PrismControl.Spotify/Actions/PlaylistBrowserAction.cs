@@ -2,6 +2,8 @@ using System.Text.Json.Nodes;
 using PrismControl.Core.Actions;
 using PrismControl.Core.Layouts;
 using PrismControl.Core.PropertyInspector;
+using PrismControl.Core.Render.Tokens;
+using PrismControl.Core.Theming;
 using PrismControl.Core.Render;
 using PrismControl.Spotify.Browser;
 using PrismControl.Spotify.Images;
@@ -42,6 +44,10 @@ public sealed class PlaylistBrowserAction : DialAction<BrowserSettings>, IDispos
     private readonly List<Task> _pending = [];
     private readonly Queue<long> _recentTurns = new();
     private SpotifyBinding? _b;
+    private IDisposable? _lookWatch;
+
+    /// <summary>The palette to draw with: Spotify's app look when a Kaleidoscope deck shows Spotify, else Prism (core.theme).</summary>
+    private RefractionPalette Look => AppTheming.For(Services, Device.Id, Theme)?.Palette ?? Theme;
     private IDisposable? _openView;
     private RenderLoop? _loop;
     private ITimer? _settle;
@@ -68,6 +74,8 @@ public sealed class PlaylistBrowserAction : DialAction<BrowserSettings>, IDispos
     {
         _b?.Dispose();
         _b = SpotifyBinding.Attach(this, Services, GlobalSettings, SpotifyView.Browser, MarkDirty);
+        _lookWatch?.Dispose();
+        _lookWatch = AppTheming.Watch(Services, Device.Id, () => Post(MarkDirty));
         if (Svc is { } svc)
         {
             _onArt = (_, _) => Post(MarkDirty);
@@ -383,7 +391,7 @@ public sealed class PlaylistBrowserAction : DialAction<BrowserSettings>, IDispos
     {
         if (!IsVisible) return;
         var svc = Svc;
-        var t = Theme;
+        var t = Look;
         var now = Time.GetUtcNow();
         var active = IsInteractive;
         var flash = _flash.Get(Time);
@@ -445,5 +453,7 @@ public sealed class PlaylistBrowserAction : DialAction<BrowserSettings>, IDispos
         _openView = null;
         _b?.Dispose();
         _b = null;
+        _lookWatch?.Dispose();
+        _lookWatch = null;
     }
 }
