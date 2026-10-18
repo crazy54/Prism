@@ -58,11 +58,11 @@
 .kd-stage[data-app="overwatch"] .kd-wall{--kd-wall:#372610}
 .kd-stage[data-app="overwatch"] .kd-bar{--cap-bg:#1e2438;--cap-ink:#f3f4f8;--cap-dim:#bcc0cd;--cap-tag:#f99e1a;--cap-line:#644b2e;--cap-edge:#b77923}
 :root[data-rf-mode="day"] .kd-stage[data-app="overwatch"] .kd-bar{--cap-bg:#fdf0dc;--cap-ink:#15161f;--cap-dim:#474a58;--cap-tag:#89570f;--cap-line:#fbd192;--cap-edge:#fab754}
-.kd-w-cs2{--w-bg:#1a120c;--w-ink:#eceefa;--w-dim:#9a9fb8;--w-line:#2e2820;--w-bar:#17140f;--w-bar-ink:#d8cfc0;--w-tab:#1e2234;--w-tab-ink:#eceefa;--w-tool:#1e2234;--w-tool-ink:#a9adc4;--w-field:#111421;--w-field-ink:#c9ccdd;--w-side:#10121c;--w-card:#12141e;--w-status:#1e2234;--w-status-ink:#c9ccdd;--w-on-acc:#17140f;--w-acc:#e5ba53;--w-acc-text:#e5ba53;--w-bar-acc:#e5ba53;--w-bar-tag:#e5ba53;--w-tab-acc:#e5ba53;--w-tool-acc:#e5ba53;--w-tab-off:#17140f;--w-acc-text-card:#e5ba53}
-.kd-stage[data-app="cs2"]{--kd-app:#e5ba53}
-.kd-stage[data-app="cs2"] .kd-wall{--kd-wall:#332c1c}
-.kd-stage[data-app="cs2"] .kd-bar{--cap-bg:#1b1712;--cap-ink:#f3f4f8;--cap-dim:#bcc0cd;--cap-tag:#e5ba53;--cap-line:#5c4b27;--cap-edge:#a8893f}
-:root[data-rf-mode="day"] .kd-stage[data-app="cs2"] .kd-bar{--cap-bg:#f6efdc;--cap-ink:#15161f;--cap-dim:#474a58;--cap-tag:#715c28;--cap-line:#f0dba8;--cap-edge:#eaca7c}
+.kd-w-cs2{--w-bg:#1c2125;--w-ink:#eceefa;--w-dim:#9a9fb8;--w-line:#2f363c;--w-bar:#14181b;--w-bar-ink:#c9d1d6;--w-tab:#1e2234;--w-tab-ink:#eceefa;--w-tool:#1e2234;--w-tool-ink:#a9adc4;--w-field:#111421;--w-field-ink:#c9ccdd;--w-side:#10121c;--w-card:#12141e;--w-status:#1e2234;--w-status-ink:#c9ccdd;--w-on-acc:#14181b;--w-acc:#5aa8ee;--w-acc-text:#5aa8ee;--w-bar-acc:#5aa8ee;--w-bar-tag:#5aa8ee;--w-tab-acc:#5aa8ee;--w-tool-acc:#5aa8ee;--w-tab-off:#14181b;--w-acc-text-card:#5aa8ee}
+.kd-stage[data-app="cs2"]{--kd-app:#5aa8ee}
+.kd-stage[data-app="cs2"] .kd-wall{--kd-wall:#18283b}
+.kd-stage[data-app="cs2"] .kd-bar{--cap-bg:#1c2125;--cap-ink:#f3f4f8;--cap-dim:#bcc0cd;--cap-tag:#5aa8ee;--cap-line:#304c65;--cap-edge:#4780b2}
+:root[data-rf-mode="day"] .kd-stage[data-app="cs2"] .kd-bar{--cap-bg:#e8eef2;--cap-ink:#15161f;--cap-dim:#474a58;--cap-tag:#35638c;--cap-line:#b2d3f0;--cap-edge:#85bdef}
 .kd-w-claude{--w-bg:#1f1e1d;--w-ink:#f0eee6;--w-dim:#aaa49c;--w-line:#3a3936;--w-bar:#1f1e1d;--w-bar-ink:#c2bdb6;--w-tab:#30302e;--w-tab-ink:#f5f4ef;--w-tool:#1e2234;--w-tool-ink:#a9adc4;--w-field:#111421;--w-field-ink:#c9ccdd;--w-side:#262624;--w-card:#30302e;--w-status:#1e2234;--w-status-ink:#c9ccdd;--w-on-acc:#1f1e1d;--w-acc:#e2896b;--w-acc-text:#e2896b;--w-bar-acc:#e2896b;--w-bar-tag:#e2896b;--w-tab-acc:#e2896b;--w-tool-acc:#e2896b;--w-tab-off:#262524;--w-acc-text-card:#e2896b}
 .kd-stage[data-app="claude"]{--kd-app:#d97757}
 .kd-stage[data-app="claude"] .kd-wall{--kd-wall:#311e1d}

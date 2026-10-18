@@ -124,7 +124,7 @@
 .kd-cs p{position:absolute;margin:0;font-weight:700;color:#f4efe6;text-shadow:0 1px 3px #000}
 .kd-cs-score{top:.8em;left:50%;display:flex;align-items:center;gap:.8em;transform:translateX(-50%);padding:.3em .9em;border-radius:.4em;background:#000000a6;font-size:1em}
 .kd-cs-score b{font-size:1.25em}
-.kd-cs-score em{font:600 .72em/1 var(--rf-mono);font-style:normal;letter-spacing:.1em;color:#e5ba53}
+.kd-cs-score em{font:600 .72em/1 var(--rf-mono);font-style:normal;letter-spacing:.1em;color:var(--w-acc-text)}
 .kd-cs-money{left:1.2em;top:1em;font-size:1.5em;color:#a5d996!important}
 .kd-cs-hp{left:1.2em;bottom:1em;display:flex;gap:1.4em;font-size:2em}
 .kd-cs-hp i{margin-right:.2em;font-style:normal;color:#ec8398;font-size:.8em}
