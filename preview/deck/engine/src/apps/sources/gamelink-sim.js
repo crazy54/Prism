@@ -4,7 +4,7 @@ import { __m as __bm } from '../../../facets.bundle.js';
 // ctx.data.gamelink is absent. Browser-safe (the web catalog's createSimulatedHub() includes it).
 
 import { simulatedSource } from './_source.js';
-const { simGameLink } = __bm(608);
+const { simGameLink } = __bm(628);
 
 /** ctx.data.gamelink — the fictional demo round on the wall clock (rate Hz). */
 export function simulatedGameLink({ rate = 10, seed = 7, now } = {}) {

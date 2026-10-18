@@ -9,9 +9,9 @@ import { __m as __bm } from '../../facets.bundle.js';
 // in exported profiles the user imports; FORBIDDEN (streamdeck:// deep links,
 // unknown kinds) is refused everywhere.
 
-const { findFacet } = __bm(618);
-const { getGlyph } = __bm(231);
-const { themeRegistry } = __bm(250);
+const { findFacet } = __bm(659);
+const { getGlyph } = __bm(241);
+const { themeRegistry } = __bm(260);
 import { validateSvg } from '../scene/validate.js';
 const { hexToOklch } = __bm(4);
 const { getDevice } = __bm(0);

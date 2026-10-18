@@ -13,8 +13,8 @@ import { __m as __bm } from '../../facets.bundle.js';
 //   const { widgets, screen } = renderGalleon(plan, { data: hub.pick(planData(plan)), theme: 'prism', t, now });
 //   // widgets: [{ dial, layer, svg (360 × 180, 2:1) }] for encoder canvases · screen: one 720 × 384 SVG for hidraw
 
-const { findFacet } = __bm(618);
-const { render } = __bm(253);
+const { findFacet } = __bm(659);
+const { render } = __bm(263);
 const { svgInner, suffixIds, svgDoc, n } = __bm(5);
 
 /** The four slots, as the Stream Deck app reports Galleon coordinates ("dial,layer"). */

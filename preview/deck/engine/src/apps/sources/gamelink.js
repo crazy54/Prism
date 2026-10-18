@@ -30,6 +30,28 @@ import { __m as __bm } from '../../../facets.bundle.js';
 //   - payloads, Steam ids, names and tokens are never logged and never in status(); identities are dropped at the edge
 // Writes to a game folder happen only in connectCs2() / disconnectCs2(), i.e. on the user's click, and touch only
 // <cs2>/game/csgo/cfg/gamestate_integration_prism.cfg (plus its .tmp while writing).
+//
+// ── MOBAs (prism-play, lead/CONTRACT-moba.md) ──
+//   - POST /v1/dota2: the same rules as /v1/cs2 (ALWAYS 204 before parsing; type, size ≤ 128 KiB, JSON, token =
+//     tokens.dota2 in auth.token, appid 570, rate; identities dropped at the edge by sanitizeDota2). tokens.dota2 is
+//     created on the first Connect Dota 2 (a file without it is still valid) and rotated by Disconnect.
+//     connectDota2() / disconnectDota2() write / remove only
+//     <dota>/game/dota/cfg/gamestate_integration/gamestate_integration_prism.cfg (creating that folder if Dota hasn't),
+//     on the user's click. Dota 2 also needs the -gamestateintegration launch option: the PI tells the user; we never
+//     touch Steam's own files.
+//   - gl.attachPoller({ game, start }) → detach(): a local poller (the LoL Live Client poller) feeding the hub.
+//       start({ push, log, now }) → stop | Promise<stop>   called while the listener is up (Listen on); stop() on Listen
+//                                                          off, detach() and gl.stop(). Never called while off.
+//       push({ state, events } | state | null)              a normalized Game Link v1 state for `game` (v: 1, game);
+//                                                          push it on every poll (it's the heartbeat: no push for
+//                                                          staleMs = waiting); null = the game is gone. ≤ 20 pushes/s.
+//                                                          Pushes from a stopped generation are ignored.
+//       log(level, msg)                                     prefixed with the game; never log payloads or names
+//       now()                                               the listener's clock (ms): use it for normalize nowMs
+//   - which game the key serves: the freshest live game, in-match (status live / paused / loading / spectating /
+//     between) before menu / watching; a game that is serving keeps the key until it has been without a change for
+//     holdMs (1.5 s) while another changes (no flapping between two posting games); a stale game (no post for
+//     staleMs) gives way at once.
 
 import http from 'node:http';
 import crypto from 'node:crypto';
@@ -39,8 +61,9 @@ import os from 'node:os';
 import path from 'node:path';
 import { EventEmitter } from 'node:events';
 import { execFile } from 'node:child_process';
-const { normalizeCs2, tickCs2, cs2NextTick, gameLinkView, findCs2, cs2Cfg, cfgState, isPrismCfg, CFG_NAME, URGENT_EVENTS, EVENT_TTL_MS } = __bm(607);
+const { normalizeCs2, tickCs2, cs2NextTick, gameLinkView, findCs2, cs2Cfg, cfgState, isPrismCfg, CFG_NAME, URGENT_EVENTS, EVENT_TTL_MS } = __bm(627);
 import { normalizeCompanion } from './gamelink-companion.js';
+const { normalizeDota2, findDota2, dota2Cfg, dota2CfgState, isPrismDota2Cfg, DOTA2_CFG_NAME, DOTA2_CFG_DIR, DOTA2_LAUNCH_OPTION, MOBA_URGENT } = __bm(635);
 import { stable } from './_source.js';
 import { controlPath } from '../../plugin/paths.js';
 
@@ -48,9 +71,17 @@ export const GAMELINK_API = 1;
 export const GAMELINK_PLUGIN = 'com.jeremyfhall.prism';
 export const DEFAULT_PORT = 38140;
 export const PORT_TRIES = 10;                 // 38140 … 38149
-export const GAMELINK_LIMITS = Object.freeze({ cs2Bytes: 64 * 1024, companionBytes: 256 * 1024, requestsPerSec: 50, requestBurst: 100, staleMs: 15_000, discoverMs: 5000 });
+export const GAMELINK_LIMITS = Object.freeze({ cs2Bytes: 64 * 1024, dota2Bytes: 128 * 1024, companionBytes: 256 * 1024, requestsPerSec: 50, requestBurst: 100, staleMs: 15_000, discoverMs: 5000, holdMs: 1500, pollerPerSec: 20 });
 const HEX64 = /^[0-9a-f]{64}$/;
 const REFUSALS = ['host', 'origin', 'route', 'type', 'size', 'json', 'token', 'appid', 'rate', 'body'];
+/** A poller's game id (the same rule as a companion's). */
+const GAME_ID = /^[a-z][a-z0-9]{1,23}$/;
+/** Statuses that mean "in a match": they win the key over a game that sits in its menu. */
+const IN_MATCH = new Set(['live', 'paused', 'loading', 'spectating', 'between']);
+/** Games with a feed of their own (a route or a poller): never a companion's id. */
+const MOBA_GAMES = new Set(['dota2', 'lol']);
+/** A poller's default urgent event types (attachPoller's `urgent` overrides them per game). */
+const POLLER_URGENT = new Set([...URGENT_EVENTS, ...MOBA_URGENT]);
 
 /** Where gamelink.json lives: PRISM_DECK_GAMELINK_DIR, else beside the live channel's control.json. */
 export function gameLinkDir({ env = process.env, platform = process.platform, home = os.homedir() } = {}) {
@@ -65,13 +96,18 @@ export function tokensEqual(a, b) {
   return crypto.timingSafeEqual(x, y);
 }
 
-/** Strict parse of gamelink.json (what the companion reads too). → { port, tokens } or null. */
+/**
+ * Strict parse of gamelink.json (what the companion reads too). → { port, tokens } or null. tokens.dota2 (Game Link
+ * for Dota 2) is optional: it exists once the user has clicked Connect Dota 2, and a malformed one is left out.
+ */
 export function parseGameLinkFile(text) {
   let j;
   try { j = JSON.parse(text); } catch { return null; }
   if (!j || j.v !== 1 || j.plugin !== GAMELINK_PLUGIN || !j.tokens || !HEX64.test(j.tokens.cs2 || '') || !HEX64.test(j.tokens.companion || '')) return null;
   const port = Number.isInteger(j.port) && j.port >= 1024 && j.port <= 65535 ? j.port : null;
-  return { port, tokens: { cs2: j.tokens.cs2, companion: j.tokens.companion } };
+  const tokens = { cs2: j.tokens.cs2, companion: j.tokens.companion };
+  if (HEX64.test(j.tokens.dota2 || '')) tokens.dota2 = j.tokens.dota2;
+  return { port, tokens };
 }
 
 const validPort = (p) => Number.isInteger(p) && p >= 1024 && p <= 65535;
@@ -161,17 +197,21 @@ export function createGameLink(opts = {}) {
   const ee = new EventEmitter();
 
   let enabled = false, wantPort = null, server = null, port = null, host = '', error = null;
-  let tokens = opts.tokens && HEX64.test(opts.tokens.cs2 || '') && HEX64.test(opts.tokens.companion || '') ? { ...opts.tokens } : null;
+  let tokens = opts.tokens && HEX64.test(opts.tokens.cs2 || '') && HEX64.test(opts.tokens.companion || '') ? { cs2: opts.tokens.cs2, companion: opts.tokens.companion, ...(HEX64.test(opts.tokens.dota2 || '') ? { dota2: opts.tokens.dota2 } : {}) } : null;
   let persistedPort = null, loaded = !!tokens, startedAt = null;
   let consumers = 0, chain = Promise.resolve(), stopped = false;
-  const games = new Map();   // game id → { state, lastPostAt }
-  const stats = { requests: 0, accepted: 0, companion: 0, refused: Object.fromEntries(REFUSALS.map((k) => [k, 0])) };
+  const games = new Map();   // game id → { state, lastPostAt, changedAt }
+  const stats = { requests: 0, accepted: 0, companion: 0, dota2: 0, polled: 0, refused: Object.fromEntries(REFUSALS.map((k) => [k, 0])) };
   let lastPostAt = null;
   let cs2Info = null, cs2InfoAt = -Infinity, discovering = null;
+  let dota2Info = null, dota2InfoAt = -Infinity, discoveringDota = null;
   let memo = { key: null, value: null };
-  let flashTimer = null, staleTimer = null;
+  let flashTimer = null, staleTimer = null, holdTimer = null;
+  let serving = null, servingSince = -Infinity;   // the game the key serves (the hold: see current())
   const cs2Bucket = new Bucket(L.requestsPerSec, L.requestBurst, now);
+  const dota2Bucket = new Bucket(L.requestsPerSec, L.requestBurst, now);
   const companionBucket = new Bucket(L.requestsPerSec, L.requestBurst, now);
+  const pollers = new Map();   // game id → { game, start, stop, gen, bucket, pushes, error }
 
   // ── gamelink.json ─────────────────────────────────────────────────────────
   function load() {
@@ -229,16 +269,21 @@ export function createGameLink(opts = {}) {
     log(fellBack ? 'warn' : 'info', fellBack ? `game link: port ${cands[0]} is taken; listening on ${host} (Connect CS2 again)` : `game link listening on ${host}`);
     cs2InfoAt = -Infinity;    // the cfg's "out of date" depends on the port: re-check (read-only) if we've looked before,
     if (cs2Info || fellBack) discover(true).catch(() => {});   // or once now if we fell back (the PI then offers Reconnect)
+    dota2InfoAt = -Infinity;  // … and the same for Dota 2's cfg
+    if (dota2Info || (fellBack && tokens?.dota2)) discoverDota2(true).catch(() => {});
+    for (const p of pollers.values()) startPoller(p);
   }
   async function close() {
     const s = server;
     server = null;
     host = '';
     clearTimers();
+    for (const p of pollers.values()) stopPoller(p);
     // what each game last said stays only as the baseline the next post is compared with (no phantom events after
     // Listen off → on); it is never served as live again until a new post arrives
     for (const [id, g] of games) games.set(id, { ...g, lastPostAt: null });
     lastPostAt = null;
+    serving = null; servingSince = -Infinity;
     if (!s) return;
     await new Promise((r) => { s.close(() => r()); s.closeAllConnections?.(); });
     emit(false);
@@ -288,6 +333,7 @@ export function createGameLink(opts = {}) {
     const pathname = String(req.url || '').split('?')[0];
     const route = `${req.method} ${pathname}`;
     if (route === 'POST /v1/cs2') return cs2(req, res);
+    if (route === 'POST /v1/dota2') return dota2(req, res);
     if (route === 'POST /v1/companion') return companion(req, res);
     if (route === 'GET /v1/health') return health(req, res);
     stats.refused.route++;
@@ -317,10 +363,106 @@ export function createGameLink(opts = {}) {
     if (r.rejected) { stats.refused.appid++; return; }
     stats.accepted++;
     const changed = r.state?.rev !== g.state?.rev;
-    games.set('cs2', { state: r.state, lastPostAt: t });
+    games.set('cs2', { state: r.state, lastPostAt: t, changedAt: changed || !wasLive ? t : g.changedAt ?? t });
     lastPostAt = t;
     armTimers();
     if (changed || !wasLive) emit(r.events.some((e) => URGENT_EVENTS.has(e.type)));
+  }
+
+  function dota2(req, res) {
+    // the same contract as CS2's: always 204 at once (a Valve GSI client resends hot on errors)
+    let replied = false;
+    const reply = () => { if (replied) return; replied = true; res.writeHead(204, { 'cache-control': 'no-store' }); res.end(); };
+    if (!isJson(req)) { stats.refused.type++; req.resume(); return reply(); }
+    readBody(req, L.dota2Bytes, (buf) => { reply(); setImmediate(() => ingestDota2(buf)); }, () => { stats.refused.size++; reply(); });
+  }
+
+  function ingestDota2(buf) {
+    if (!server) return;
+    let body;
+    try { body = JSON.parse(buf.toString('utf8')); } catch { stats.refused.json++; return; }
+    if (!body || typeof body !== 'object' || Array.isArray(body)) { stats.refused.json++; return; }
+    if (!tokens?.dota2 || !tokensEqual(body.auth?.token, tokens.dota2)) { stats.refused.token++; return; }
+    if (!dota2Bucket.take()) { stats.refused.rate++; return; }
+    const t = now();
+    const g = games.get('dota2') || { state: null, lastPostAt: null };
+    const wasLive = isLive(g, t);
+    const r = normalizeDota2(body, g.state, { nowMs: t });
+    if (r.rejected) { stats.refused.appid++; return; }
+    stats.dota2++;
+    const changed = r.state?.rev !== g.state?.rev;
+    games.set('dota2', { state: r.state, lastPostAt: t, changedAt: changed || !wasLive ? t : g.changedAt ?? t });
+    lastPostAt = t;
+    armTimers();
+    if (changed || !wasLive) emit(r.events.some((e) => MOBA_URGENT.has(e.type)));
+  }
+
+  // ── pollers (the LoL Live Client poller …) ────────────────────────────────
+  /**
+   * attachPoller({ game, start }) → detach(). start({ push, log, now }) → stop | Promise<stop>: called while the
+   * listener is up (now, if it already is), stopped when it closes; detach() stops it for good and forgets its game.
+   */
+  function attachPoller({ game, start, urgent } = {}) {
+    if (typeof game !== 'string' || !GAME_ID.test(game) || game === 'cs2' || game === 'dota2') throw new Error('attachPoller: game must be a game id (/^[a-z][a-z0-9]{1,23}$/, not cs2 / dota2)');
+    if (typeof start !== 'function') throw new Error('attachPoller: start({ push, log, now }) must be a function');
+    if (pollers.has(game)) throw new Error(`attachPoller: a poller for ${game} is already attached`);
+    // urgent: the poller's own effect event types (a push carrying one jumps the queue); default: the CS2 + MOBA ones
+    const hot = urgent instanceof Set || Array.isArray(urgent) ? new Set([...urgent].filter((x) => typeof x === 'string')) : POLLER_URGENT;
+    const p = { game, start, stop: null, gen: 0, running: false, bucket: new Bucket(L.pollerPerSec, L.pollerPerSec, now), pushes: 0, error: null, urgent: hot };
+    pollers.set(game, p);
+    if (server && !stopped) startPoller(p);
+    let detached = false;
+    return function detach() {
+      if (detached) return;
+      detached = true;
+      stopPoller(p);
+      pollers.delete(game);
+      if (games.delete(game) && server) emit(false);
+    };
+  }
+  function startPoller(p) {
+    if (p.running) return;
+    p.running = true;
+    const gen = ++p.gen;
+    const push = (r) => ingestPoll(p, gen, r);
+    const plog = (level, msg) => log(level === 'error' || level === 'warn' || level === 'debug' ? level : 'info', `game link (${p.game}): ${String(msg ?? '').slice(0, 200)}`);
+    const adopt = (s) => { if (p.gen === gen && p.running) p.stop = typeof s === 'function' ? s : null; else if (typeof s === 'function') { try { s(); } catch { /* best effort */ } } };
+    const failed = (e) => { if (p.gen !== gen) return; p.error = e?.message || 'failed'; p.running = false; log('warn', `game link: the ${p.game} poller couldn't start (${String(p.error).slice(0, 120)})`); };
+    try {
+      const s = p.start({ push, log: plog, now });
+      if (s && typeof s.then === 'function') s.then(adopt, failed); else adopt(s);
+      p.error = null;
+    } catch (e) { failed(e); }
+  }
+  function stopPoller(p) {
+    if (!p.running) return;
+    p.running = false;
+    p.gen++;   // pushes from the stopped generation are ignored
+    const s = p.stop;
+    p.stop = null;
+    if (s) { try { const r = s(); if (r && typeof r.catch === 'function') r.catch(() => {}); } catch (e) { log('warn', `game link: the ${p.game} poller's stop failed (${String(e?.message || e).slice(0, 120)})`); } }
+  }
+  function ingestPoll(p, gen, r) {
+    if (gen !== p.gen || !p.running || !server) return false;
+    const t = now();
+    if (r === null || r === undefined) {   // the game is gone (no client running): the key moves on at once
+      const had = games.get(p.game);
+      if (had && had.lastPostAt !== null) { games.set(p.game, { ...had, lastPostAt: null }); emit(false); }
+      return true;
+    }
+    const state = r && typeof r === 'object' && 'state' in r && !('v' in r) ? r.state : r;
+    const events = Array.isArray(r?.events) && r !== state ? r.events : [];
+    if (!state || typeof state !== 'object' || Array.isArray(state) || state.v !== 1 || state.game !== p.game) { stats.refused.body++; return false; }
+    if (!p.bucket.take()) { stats.refused.rate++; return false; }
+    p.pushes++; stats.polled++;
+    const g = games.get(p.game) || { state: null, lastPostAt: null };
+    const wasLive = isLive(g, t);
+    const changed = !g.state || state.rev !== g.state.rev || state.at !== g.state.at;
+    games.set(p.game, { state, lastPostAt: t, changedAt: changed || !wasLive ? t : g.changedAt ?? t });
+    lastPostAt = t;
+    armTimers();
+    if (changed || !wasLive) emit(!wasLive || events.some((e) => e && p.urgent.has(e.type)));
+    return true;
   }
 
   function bearer(req) { const a = String(req.headers.authorization || ''); return a.startsWith('Bearer ') && !!tokens && tokensEqual(a.slice(7), tokens.companion); }
@@ -333,6 +475,8 @@ export function createGameLink(opts = {}) {
       let body;
       try { body = JSON.parse(buf.toString('utf8')); } catch { stats.refused.json++; return fail(res, 400, 'bad_json'); }
       const t = now();
+      // the games with a feed of their own (Dota 2's GSI route, a poller) are never a companion's to post
+      if (MOBA_GAMES.has(body?.game) || pollers.has(body?.game)) { stats.refused.body++; return fail(res, 400, 'bad_game'); }
       const prev = games.get(body?.game)?.state || null;
       const r = normalizeCompanion(body, typeof body?.game === 'string' ? prev : null, { nowMs: t });
       if (r.error) { stats.refused.body++; return fail(res, 400, r.error); }
@@ -340,7 +484,7 @@ export function createGameLink(opts = {}) {
       if (r.duplicate) return;
       stats.companion++;
       const wasLive = isLive(games.get(body.game), t);
-      games.set(body.game, { state: r.state, lastPostAt: t });
+      games.set(body.game, { state: r.state, lastPostAt: t, changedAt: t });
       lastPostAt = t;
       armTimers();
       // urgent only for an effect (URGENT_EVENTS) or the first post: a companion that tags every post with a readout
@@ -358,16 +502,39 @@ export function createGameLink(opts = {}) {
 
   // ── state ─────────────────────────────────────────────────────────────────
   const isLive = (g, t) => !!g && g.lastPostAt !== null && t - g.lastPostAt <= L.staleMs;
+  const rankOf = (g) => (IN_MATCH.has(g.state?.status) ? 1 : 0);
+  const changedOf = (g) => g.changedAt ?? g.lastPostAt ?? 0;
+  /**
+   * The game the key serves: the most recently changed live game, in-match before menu / watching. The one serving
+   * keeps the key until it has been without a change for holdMs while another changes (two posting games never flap);
+   * stale, or out-ranked, it gives way at once. A held-back switch re-checks (a push) when the hold runs out.
+   */
   function current(t) {
-    let best = null;
-    for (const [game, g] of games) if (isLive(g, t) && g.state && (!best || g.lastPostAt > best.lastPostAt)) best = { game, ...g };
+    let best = null, held = null;
+    for (const [game, g] of games) {
+      if (!isLive(g, t) || !g.state) continue;
+      const c = { game, ...g };
+      if (game === serving) held = c;
+      if (!best || rankOf(c) > rankOf(best) || (rankOf(c) === rankOf(best) && changedOf(c) > changedOf(best))) best = c;
+    }
+    if (!best) { serving = null; return null; }
+    if (held && best.game !== held.game && rankOf(best) <= rankOf(held)) {
+      const until = changedOf(held) + L.holdMs;
+      if (t < until) { armHold(until - t); return held; }
+    }
+    if (best.game !== serving) { serving = best.game; servingSince = t; }
     return best;
+  }
+  function armHold(ms) {
+    if (holdTimer) return;
+    holdTimer = setTimer(() => { holdTimer = null; if (server) emit(false); }, Math.max(1, Math.ceil(ms) + 1));
+    holdTimer?.unref?.();
   }
   function view(t) {
     const c = current(t);
     if (!c) { memo = { key: null, value: null }; return null; }
     const expired = (c.state.events || []).filter((e) => t - e.at > EVENT_TTL_MS).length;
-    const key = `${c.game}|${c.state.rev}|${expired}`;
+    const key = `${c.game}|${c.state.rev}|${c.state.at}|${expired}`;
     if (memo.key !== key) memo = { key, value: stable(gameLinkView(c.state, t)) };
     return memo.value;
   }
@@ -376,7 +543,8 @@ export function createGameLink(opts = {}) {
   function clearTimers() {
     if (flashTimer) clearTimer(flashTimer);
     if (staleTimer) clearTimer(staleTimer);
-    flashTimer = staleTimer = null;
+    if (holdTimer) clearTimer(holdTimer);
+    flashTimer = staleTimer = holdTimer = null;
   }
   function armTimers() {
     if (staleTimer) clearTimer(staleTimer);
@@ -468,6 +636,80 @@ export function createGameLink(opts = {}) {
     return rotated ? { ok: true, removed } : { ok: false, removed, reason: 'state-write-failed' };
   }
 
+  // ── Dota 2 install (read-only discovery; writes only on the user's click) ────
+  async function discoverDota2(force = false) {
+    if (!force && dota2Info && now() - dota2InfoAt < L.discoverMs) return dota2Info;
+    if (discoveringDota) return discoveringDota;
+    discoveringDota = (async () => {
+      let info;
+      try { info = await findDota2(steamIo); } catch { info = { found: false, reason: 'not-installed', leftover: false }; }
+      let cfg = 'absent';
+      if (info.found) {
+        const text = await steamIo.readText(info.cfgPath);
+        load();
+        const p = port ?? persistedPort;
+        cfg = text === null ? 'absent' : tokens?.dota2 && validPort(p) ? dota2CfgState(text, { port: p, token: tokens.dota2 }) : isPrismDota2Cfg(text) ? 'outdated' : 'foreign';
+      }
+      dota2Info = { found: !!info.found, reason: info.found ? null : info.reason, leftover: !!info.leftover, path: info.found ? info.cfgPath : null, cfg, folder: info.found ? !!info.folder : false };
+      dota2InfoAt = now();
+      ee.emit('status');
+      return dota2Info;
+    })();
+    try { return await discoveringDota; } finally { discoveringDota = null; }
+  }
+
+  /**
+   * Connect Dota 2 (the user's click): our cfg into <dota>/game/dota/cfg/gamestate_integration/ (the folder is created
+   * there if Dota hasn't made it; only inside a verified cfg/ folder). Dota 2 reads it at launch, and only with the
+   * -gamestateintegration launch option: { launchOption: '-gamestateintegration' } tells the PI to say so.
+   */
+  async function connectDota2() {
+    if (!server) return { ok: false, reason: 'not-listening' };
+    const info = await discoverDota2(true);
+    if (!info.found) return { ok: false, reason: info.reason, leftover: info.leftover };
+    const target = info.path;
+    if (path.basename(target) !== DOTA2_CFG_NAME || path.basename(path.dirname(target)) !== DOTA2_CFG_DIR) return { ok: false, reason: 'bad-path' };
+    if (info.cfg === 'foreign') return { ok: false, reason: 'foreign-file', path: target };
+    ensureTokens();
+    let fresh = false;
+    if (!tokens.dota2) { tokens = { ...tokens, dota2: newToken() }; fresh = true; }
+    if (fresh && !(await writeFile(true))) { const { dota2: _drop, ...rest } = tokens; tokens = rest; return { ok: false, reason: 'state-write-failed' }; }
+    const text = dota2Cfg({ port, token: tokens.dota2, eol: platform === 'win32' ? '\r\n' : '\n' });
+    const tmp = `${target}.${process.pid}.tmp`;
+    try {
+      await fsp.mkdir(path.dirname(target), { recursive: false }).catch((e) => { if (e.code !== 'EEXIST') throw e; });
+      await fsp.writeFile(tmp, text, { encoding: 'ascii', flag: 'w' });
+      await fsp.rename(tmp, target);
+    } catch (e) {
+      try { await fsp.unlink(tmp); } catch { /* not there */ }
+      log('warn', `game link: can't write the Dota 2 config (${e.code || e.message})`);
+      return { ok: false, reason: 'write-failed', code: e.code || null };
+    }
+    log('info', 'game link: Dota 2 config installed');
+    await discoverDota2(true);
+    return { ok: true, path: target, restartNeeded: true, launchOption: DOTA2_LAUNCH_OPTION };
+  }
+
+  async function disconnectDota2() {
+    const info = await discoverDota2(true);
+    let removed = false;
+    if (info.found && (info.cfg === 'current' || info.cfg === 'outdated')) {
+      try { await fsp.unlink(info.path); removed = true; } catch (e) { if (e.code !== 'ENOENT') return { ok: false, reason: 'remove-failed', code: e.code || null }; }
+    }
+    // a new Dota 2 token: any copy of the old cfg stops working (once it is on disk; a failed write keeps the old one)
+    load();
+    let rotated = true;
+    if (tokens?.dota2) {
+      const old = tokens;
+      tokens = { ...tokens, dota2: newToken() };
+      rotated = await writeFile(!!server);
+      if (!rotated) tokens = old;
+    }
+    if (removed) log('info', 'game link: Dota 2 config removed');
+    await discoverDota2(true);
+    return rotated ? { ok: true, removed } : { ok: false, removed, reason: 'state-write-failed' };
+  }
+
   function status() {
     const t = now();
     const c = current(t);
@@ -476,6 +718,10 @@ export function createGameLink(opts = {}) {
       game: c?.game || null, live: !!c, waiting: !!server && !c, lastAt: lastPostAt, lastAgoMs: lastPostAt === null ? null : t - lastPostAt,
       requests: stats.requests, accepted: stats.accepted, companion: stats.companion, refused: { ...stats.refused },
       cs2: cs2Info ? { ...cs2Info } : null,
+      // seen: a Dota 2 post was accepted since the plugin started (the cfg and the launch option work)
+      dota2: dota2Info ? { ...dota2Info, seen: stats.dota2 > 0 } : null,
+      dota2Posts: stats.dota2, polled: stats.polled,
+      pollers: Object.fromEntries([...pollers.values()].map((p) => [p.game, { running: p.running, pushes: p.pushes, error: p.error }])),
     };
   }
 
@@ -484,6 +730,7 @@ export function createGameLink(opts = {}) {
     enabled = false;
     await chain.catch(() => {});
     await close();
+    for (const p of pollers.values()) stopPoller(p);
     clearTimers();
     await writes;
   }
@@ -500,8 +747,9 @@ export function createGameLink(opts = {}) {
   };
 
   return {
-    source, configure, connectCs2, disconnectCs2, status, stop,
+    source, configure, connectCs2, disconnectCs2, connectDota2, disconnectDota2, attachPoller, status, stop,
     cs2Status: (force = false) => discover(force),
+    dota2Status: (force = false) => discoverDota2(force),
     on: (ev, fn) => { ee.on(ev, fn); return () => ee.off(ev, fn); },
     off: (ev, fn) => ee.off(ev, fn),
     get file() { return file; },

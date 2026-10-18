@@ -4,7 +4,7 @@ import { __m as __bm } from '../../../core.bundle.js';
 // looks identical to one with nothing wired. Browser-safe: the web catalog and tests use them.
 
 import { simulatedSource } from './_source.js';
-const { simAudio, simSpectrum, simSystem, simSeries, simMedia, simCalendar, NET_MAX } = __bm(268);
+const { simAudio, simSpectrum, simSystem, simSeries, simMedia, simCalendar, NET_MAX } = __bm(278);
 
 export const SYSTEM_KEYS = ['cpu', 'mem', 'gpu', 'disk', 'net', 'temp', 'battery', 'uptime', 'sys', 'series'];
 export const AUDIO_KEYS = ['audio', 'spectrum'];

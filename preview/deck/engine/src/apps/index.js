@@ -4,7 +4,7 @@ import { __m as __bm } from '../../facets.bundle.js';
 //
 //   import { createSimulatedHub, galleonPlan, planData, renderGalleon, APPS } from './src/apps/index.js';
 
-const { allFacets } = __bm(618);
+const { allFacets } = __bm(659);
 
 export * from './sources/index.js';
 export { GALLEON_SLOTS, DEFAULT_ROUTES, galleonPlan, planData, renderGalleon, composeScreen } from './routing.js';

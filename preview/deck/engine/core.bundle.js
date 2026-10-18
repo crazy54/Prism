@@ -257,7 +257,7 @@ categories: ['Puzzles', 'Chance', 'Reflex', 'Board'],
 {
 id: 'gamelink', title: 'Game Link', icon: 'link', hue: 217.5, prefix: ['gamelink'], surfaces: ['key', 'span', 'strip', 'screen', 'deck'],
 blurb: 'Your game on the deck: live Counter-Strike 2 data (Valve Game State Integration) and local companions drive health, ammo, money, rounds and whole-deck moments.',
-categories: ['Whole Deck', 'Vitals', 'Round & Bomb', 'Match', 'Strips & Screens'],
+categories: ['Whole Deck', 'Vitals', 'Round & Bomb', 'Match', 'Strips & Screens', 'MOBA', 'Rocket League'], 
 },
 ];
 const GALLERY_IDS = GALLERIES.map((g) => g.id);
@@ -3219,6 +3219,33 @@ topTrack(g, straightAt(24, 40), 32, { gauge: 12, pitch: 8, over: 2.5, run: (1 - 
 };
 __d[59] = function (__ns) {
 const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const RIM_Y = 19.5, RIM_RX = 12.5, RIM_RY = 3.5; 
+const FOOT_Y = 37.5, FOOT_RX = 8.5, FOOT_RY = 2.5; 
+const BODY = `M${24 - RIM_RX} ${RIM_Y}L${24 - FOOT_RX} ${FOOT_Y}A${FOOT_RX} ${FOOT_RY} 0 0 0 ${24 + FOOT_RX} ${FOOT_Y}L${24 + RIM_RX} ${RIM_Y}`;
+const halfAt = (y) => RIM_RX - ((RIM_RX - FOOT_RX) * (y - RIM_Y)) / (FOOT_Y - RIM_Y);
+const __default = defineGlyph({
+id: 'bucket',
+title: 'Bucket',
+category: 'dev',
+tags: ['bucket', 'storage', 'object storage', 'blob', 'files', 'pail', 'upload', 'archive'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.5);
+const cy = +lerp(RIM_Y - 2, 5.5, k).toFixed(2);
+g.path(`M13 ${RIM_Y - 0.5}C13 ${cy} 35 ${cy} 35 ${RIM_Y - 0.5}`, { role: 'line', weight: 0.85, opacity: lerp(0.3, 1, k) });
+g.path(BODY, { role: 'line', join: 'round' });
+g.ellipse(24, RIM_Y, RIM_RX, RIM_RY, { role: 'line' });
+if (p > 0.02) {
+const y = +lerp(FOOT_Y - 1.5, 27, p).toFixed(2), h = +(halfAt(y) - 2.5).toFixed(2);
+g.line(24 - h, y, 24 + h, y, { role: 'accent', opacity: Math.min(1, p * 1.5) });
+}
+},
+});
+};
+__d[60] = function (__ns) {
+const { defineGlyph } = __m(16);
 const { arrive } = __m(12);
 const { curve } = __m(26);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3251,7 +3278,7 @@ if (on) { g.dot(20.5, 25, 1.4, { opacity: 0.8 * k }); g.dot(27.5, 30, 1.4, { opa
 },
 });
 };
-__d[60] = function (__ns) {
+__d[61] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp } = __m(12);
 const { enter, xf, xfPts, rot, capsule } = __m(24);
@@ -3284,7 +3311,7 @@ g.line(fx + 2.5 * sn, fy - 2.5 * c, fx + 5 * sn, fy - 5 * c, { role: 'accent', w
 },
 });
 };
-__d[61] = function (__ns) {
+__d[62] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, smoothstep } = __m(12);
 const { partialPolyline, strike } = __m(26);
@@ -3333,7 +3360,33 @@ if (fade > 0.02) g.polyline([[19.5, y + 4.5], [24, y], [28.5, y + 4.5]], { role:
 },
 });
 };
-__d[62] = function (__ns) {
+__d[63] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const C = 24, RING = 15, NODE = 3.5, HOME = 7.5; 
+const ANGLES = [0, 120, 240];
+const __default = defineGlyph({
+id: 'cluster',
+title: 'Cluster',
+category: 'dev',
+tags: ['cluster', 'nodes', 'node group', 'kubernetes', 'k8s', 'orchestration', 'group', 'mesh'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.45);
+g.circle(C, C, RING, { role: 'dim', dash: [2.5, 2.2], opacity: lerp(0.3, 1, k) });
+const r = lerp(RING - NODE - 1, HOME, k);
+const pts = ANGLES.map((a) => g.polar(C, C, r, a).map((v) => +v.toFixed(2)));
+for (let i = 0; i < 3; i++) {
+const [a, b] = [pts[i], pts[(i + 1) % 3]];
+const d = Math.hypot(b[0] - a[0], b[1] - a[1]), ux = (b[0] - a[0]) / d, uy = (b[1] - a[1]) / d, m = NODE + 1;
+g.line(+(a[0] + ux * m).toFixed(2), +(a[1] + uy * m).toFixed(2), +(b[0] - ux * m).toFixed(2), +(b[1] - uy * m).toFixed(2), { role: p > 0.3 ? 'accent' : 'dim' });
+}
+for (const [x, y] of pts) g.circle(x, y, NODE, { role: 'line' });
+},
+});
+};
+__d[64] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp, smoothstep } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3362,7 +3415,57 @@ g.dot(lerp(S0[0], S1[0], u), lerp(S0[1], S1[1], u), 2, { opacity: fade * k });
 },
 });
 };
-__d[63] = function (__ns) {
+__d[65] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const W = 25, H = 12;
+const TOP = [14.5, 11], BOTTOM = [8.5, 25.5]; 
+function box(g, [x, y], role) {
+g.rect(x, y, W, H, { r: 2, role });
+for (const dx of [6, 10.5, 15]) g.line(x + dx, y + 3, x + dx, y + H - 3, { role: 'dim', weight: 0.8 }); 
+g.line(x + W - 4.5, y + 2.5, x + W - 4.5, y + H - 2.5, { role, weight: 0.8 }); 
+}
+const __default = defineGlyph({
+id: 'container',
+title: 'Container',
+category: 'dev',
+tags: ['container', 'containers', 'shipping container', 'deploy', 'service', 'task', 'image', 'stack'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.45);
+box(g, BOTTOM, 'line');
+const dy = +Math.max(-4.5, lerp(-4.5, 0, k) - 2 * p).toFixed(2); 
+g.group({ y: dy }, () => box(g, TOP, p > 0.3 ? 'accent' : 'line'));
+},
+});
+};
+__d[66] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const X0 = 12, X1 = 36, RX = 12, RY = 4.5;
+const TOP = 12.5, BOTTOM = 35; 
+const BANDS = [20, 27.5];
+const side = (y) => `M${X0} ${y}A${RX} ${RY} 0 0 0 ${X1} ${y}`;
+const __default = defineGlyph({
+id: 'database',
+title: 'Database',
+category: 'dev',
+tags: ['database', 'db', 'sql', 'nosql', 'table', 'tables', 'data', 'records', 'storage', 'query'],
+draw(g, s) {
+const p = press(s, 0.4);
+g.path(`M${X0} ${TOP}V${BOTTOM}A${RX} ${RY} 0 0 0 ${X1} ${BOTTOM}V${TOP}`, { role: 'line', join: 'round' });
+BANDS.forEach((y, i) => {
+const k = enter({ since: s.since - 0.1 * i }, 0.4);
+g.path(side(y), { role: 'dim', opacity: lerp(0, 1, k) });
+});
+g.ellipse(24, TOP, RX, RY, { role: p > 0.3 ? 'accent' : 'line' });
+},
+});
+};
+__d[67] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press, chevron } = __m(24);
@@ -3384,7 +3487,7 @@ g.polyline(chevron([16 + d, 23], 90, 5, 45), { role: 'line', join: 'round', opac
 },
 });
 };
-__d[64] = function (__ns) {
+__d[68] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -3405,7 +3508,7 @@ g.line(24 - h2, 31, 24 + h2, 31, { role: p > 0.3 ? 'accent' : 'line', weight: 1.
 },
 });
 };
-__d[65] = function (__ns) {
+__d[69] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3425,7 +3528,31 @@ g.line(9, 24, 39, 24, { role: k > 0.5 ? 'accent' : 'dim', weight: k > 0.5 ? 1.05
 },
 });
 };
-__d[66] = function (__ns) {
+__d[70] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, xf, mirrorX } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const PAREN = 'M15 9.5C10 15.5 10 32.5 15 38.5'; 
+const LAMBDA = 'M17.5 11.5H19C20.5 11.5 21.4 12.3 22 13.8L30 36.5'; 
+const LEG = 'M25.1 22.7L17.5 36.5'; 
+const __default = defineGlyph({
+id: 'function',
+title: 'Function',
+category: 'dev',
+tags: ['function', 'lambda', 'serverless', 'fn', 'f(x)', 'code', 'handler', 'run code'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+const o = lerp(-3, 0, k);
+g.group({ x: o }, () => g.path(PAREN, { role: 'line' }));
+g.group({ x: -o }, () => g.path(xf(PAREN, mirrorX()), { role: 'line' }));
+const role = p > 0.3 ? 'accent' : 'line';
+g.path(LAMBDA, { role, join: 'round', weight: 1.05, opacity: lerp(0.3, 1, k) });
+g.path(LEG, { role, weight: 1.05, opacity: lerp(0.3, 1, k) });
+},
+});
+};
+__d[71] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, smoothstep } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3463,7 +3590,7 @@ if (fade > 0.02) g.dot(x, y, 1.9, { opacity: fade * k });
 },
 });
 };
-__d[67] = function (__ns) {
+__d[72] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press, chevron } = __m(24);
@@ -3490,7 +3617,7 @@ g.polyline(chevron(end, (Math.atan2(ux, -uy) * 180) / Math.PI, 4.5, 45), { role:
 },
 });
 };
-__d[68] = function (__ns) {
+__d[73] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp, smoothstep } = __m(12);
 const { quadC } = __m(26);
@@ -3532,7 +3659,7 @@ if (fade > 0.02) g.line(x, y, x, clamp(y + len, 6, 41), { role: 'dim', opacity: 
 },
 });
 };
-__d[69] = function (__ns) {
+__d[74] = function (__ns) {
 const { lerp } = __m(12);
 const { enter, press, chevron } = __m(24);
 __e(__ns, { "drawStep": () => drawStep }, [], ["drawStep"]);
@@ -3549,9 +3676,9 @@ g.polyline(chevron([24, 9 - d], 0, 8, 45), { role: 'line', join: 'round' });
 }
 }
 };
-__d[70] = function (__ns) {
+__d[75] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawStep } = __m(69);
+const { drawStep } = __m(74);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'step-into',
@@ -3561,9 +3688,9 @@ tags: ['step into', 'debug', 'debugger', 'step', 'breakpoint', 'call'],
 draw(g, s) { drawStep(g, s, 1); },
 });
 };
-__d[71] = function (__ns) {
+__d[76] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawStep } = __m(69);
+const { drawStep } = __m(74);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'step-out',
@@ -3573,7 +3700,7 @@ tags: ['step out', 'debug', 'debugger', 'step', 'return', 'call'],
 draw(g, s) { drawStep(g, s, -1); },
 });
 };
-__d[72] = function (__ns) {
+__d[77] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press, xf, mirrorX } = __m(24);
@@ -3593,7 +3720,7 @@ g.polygon([[24, 18.5], [29.5, 24], [24, 29.5], [18.5, 24]], { role: p > 0.3 ? 'a
 },
 });
 };
-__d[73] = function (__ns) {
+__d[78] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, smoothstep } = __m(12);
 const { blink } = __m(26);
@@ -3631,7 +3758,7 @@ g.line(23.5, y, 23.5 + len, y, { role: 'dim', opacity: fade * k });
 },
 });
 };
-__d[74] = function (__ns) {
+__d[79] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press, capsule } = __m(24);
@@ -3653,7 +3780,7 @@ g.path(TIP, { role: 'accent', join: 'round' });
 },
 });
 };
-__d[75] = function (__ns) {
+__d[80] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press, xf, rot } = __m(24);
@@ -3679,7 +3806,7 @@ g.path(SPLIT, { role: 'line', weight: 0.85 });
 },
 });
 };
-__d[76] = function (__ns) {
+__d[81] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -3699,7 +3826,7 @@ g.rect(9.5, 17.5, 21, 21, { r: 4 });
 },
 });
 };
-__d[77] = function (__ns) {
+__d[82] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp } = __m(12);
 const { enter } = __m(24);
@@ -3725,7 +3852,7 @@ g.line(cx - 2.2, y + 4.5 + dy, cx + 2.2, y + 4.5 + dy, { role: 'accent', weight:
 },
 });
 };
-__d[78] = function (__ns) {
+__d[83] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -3749,7 +3876,7 @@ g.dot(PIV[0], PIV[1], 1.7, { role: 'fill' });
 },
 });
 };
-__d[79] = function (__ns) {
+__d[84] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -3773,7 +3900,7 @@ g.path('M19 12V10A2 2 0 0 1 21 8H27A2 2 0 0 1 29 10V12', { role: 'line', join: '
 },
 });
 };
-__d[80] = function (__ns) {
+__d[85] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, smoothstep } = __m(12);
 const { enter, press, xf, rot } = __m(24);
@@ -3806,7 +3933,7 @@ if (w > 0.02) g.line(10.5, 40, lerp(10.5, 22, w), 40, { role: 'accent', weight: 
 },
 });
 };
-__d[81] = function (__ns) {
+__d[86] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outExpo, clamp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3826,7 +3953,7 @@ g.polyline([[30, 11.5], [37.5, 19], [30, 26.5]], { role: push > 0.3 ? 'accent' :
 },
 });
 };
-__d[82] = function (__ns) {
+__d[87] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, pulse, clamp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3857,7 +3984,7 @@ g.arc(24, 15, r, -58, 58, { role: 'accent', weight: 0.8, opacity: k * lerp(0.25,
 },
 });
 };
-__d[83] = function (__ns) {
+__d[88] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press, chevron } = __m(24);
@@ -3880,7 +4007,7 @@ g.circle(24, 24, 3, { role: 'fill' });
 },
 });
 };
-__d[84] = function (__ns) {
+__d[89] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -3903,7 +4030,7 @@ g.line(16.5, 33.5, 26, 33.5, { role: p > 0.3 ? 'accent' : 'dim' });
 },
 });
 };
-__d[85] = function (__ns) {
+__d[90] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter } = __m(24);
@@ -3929,7 +4056,7 @@ g.line(end + 1, 29, end + 6, 29, { role: 'accent', weight: 0.75, opacity: b });
 },
 });
 };
-__d[86] = function (__ns) {
+__d[91] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -3950,7 +4077,7 @@ g.polyline(arcHead(26, 22, 10, end, { size: 4.2 }), { role: 'line', join: 'round
 },
 });
 };
-__d[87] = function (__ns) {
+__d[92] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, outBack, clamp } = __m(12);
 const { enter, press, xf, rot } = __m(24);
@@ -3971,7 +4098,7 @@ g.path(xf('M19.5 17H28.5A2.5 2.5 0 0 1 31 19.5V28.5A2.5 2.5 0 0 1 28.5 31H19.5A2
 },
 });
 };
-__d[88] = function (__ns) {
+__d[93] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press, chevron } = __m(24);
@@ -3992,7 +4119,7 @@ g.polyline(chevron([35.5, 12.5], 45, 7, 45), { role: 'accent', join: 'round' });
 },
 });
 };
-__d[89] = function (__ns) {
+__d[94] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -4011,7 +4138,7 @@ g.group({ x: 1 * p, y: 1 * p }, () => g.polygon(POINTER, { role: 'line', join: '
 },
 });
 };
-__d[90] = function (__ns) {
+__d[95] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, outBack, clamp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -4035,7 +4162,7 @@ if (on) for (const [x, y] of [[19, 19], [39, 19], [19, 39], [39, 39]]) g.dot(x +
 },
 });
 };
-__d[91] = function (__ns) {
+__d[96] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp, pulse } = __m(12);
 const { enter } = __m(24);
@@ -4058,7 +4185,7 @@ g.line(x1, 24 - h, x1, 24 + h, { role: 'dim', opacity: on ? 0.6 + 0.4 * pulse(s.
 },
 });
 };
-__d[92] = function (__ns) {
+__d[97] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, pulse } = __m(12);
 const { enter, press, chevron } = __m(24);
@@ -4080,7 +4207,7 @@ g.polyline(chevron([24, y - lift - 2 * p + lerp(4, 0, k)], 0, 13, 45), { role, j
 },
 });
 };
-__d[93] = function (__ns) {
+__d[98] = function (__ns) {
 const { lerp } = __m(12);
 __e(__ns, { "figure": () => figure, "blend": () => blend }, [], ["blend","figure"]);
 function figure(g, pose, { role = 'line', opacity = 1 } = {}) {
@@ -4094,11 +4221,11 @@ const L = (x, y) => x.map((p, i) => P(p, y[i]));
 return { head: P(a.head, b.head), spine: L(a.spine, b.spine), arms: a.arms.map((x, i) => L(x, b.arms[i])), legs: a.legs.map((x, i) => L(x, b.legs[i])) };
 }
 };
-__d[94] = function (__ns) {
+__d[99] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp } = __m(12);
 const { enter, chevron } = __m(24);
-const { figure, blend } = __m(93);
+const { figure, blend } = __m(98);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const STAND = { head: [24, 12.5], spine: [[24, 18], [24, 28.5]], arms: [[[24, 19.5], [19.5, 24.5], [18.5, 29]], [[24, 19.5], [28.5, 24.5], [29.5, 29]]], legs: [[[24, 28.5], [21.5, 34], [21, 39.5]], [[24, 28.5], [26.5, 34], [27, 39.5]]] };
 const LOW = { head: [24, 19], spine: [[24, 24.5], [24, 31]], arms: [[[24, 26], [18.5, 28.5], [17, 32.5]], [[24, 26], [29.5, 28.5], [31, 32.5]]], legs: [[[24, 31], [15.5, 32.5], [18.5, 39.5]], [[24, 31], [32.5, 32.5], [29.5, 39.5]]] };
@@ -4116,7 +4243,7 @@ g.line(10, 40.5, 38, 40.5, { role: 'dim' });
 },
 });
 };
-__d[95] = function (__ns) {
+__d[100] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp } = __m(12);
 const { enter } = __m(24);
@@ -4147,7 +4274,7 @@ g.line(cx, 34, sx, sy, { role: 'dim', weight: 0.8 });
 },
 });
 };
-__d[96] = function (__ns) {
+__d[101] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, chevron } = __m(24);
@@ -4175,7 +4302,7 @@ g.polyline(chevron([16.5 + 0.7 * d, 31.5 - 0.7 * d], 45, 7, 40), { role: 'line',
 },
 });
 };
-__d[97] = function (__ns) {
+__d[102] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, pulse } = __m(12);
 const { enter } = __m(24);
@@ -4197,7 +4324,7 @@ g.rect(40, 21, 2, 7, { r: 1, role: 'accent', fill: true, opacity: k * (0.45 + 0.
 },
 });
 };
-__d[98] = function (__ns) {
+__d[103] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter } = __m(24);
@@ -4228,7 +4355,7 @@ for (const [x, y, r] of STARS) g.dot(x, y, r, { opacity: k });
 },
 });
 };
-__d[99] = function (__ns) {
+__d[104] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp } = __m(12);
 const { press } = __m(24);
@@ -4251,7 +4378,7 @@ g.circle(x, y, 2, { role: i === 0 && p > 0.3 ? 'accent' : 'fill', fill: true, op
 },
 });
 };
-__d[100] = function (__ns) {
+__d[105] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press, chevron } = __m(24);
@@ -4274,7 +4401,7 @@ g.polyline(chevron([15, BASE - 2.5], 180, 4.8, 45), { role: 'accent', join: 'rou
 },
 });
 };
-__d[101] = function (__ns) {
+__d[106] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp } = __m(12);
 const { enter, press } = __m(24);
@@ -4305,11 +4432,11 @@ g.path(`M${cx - 3} 33.5C${cx - 3} ${33.5 + h * 0.5} ${cx - 1} ${33.5 + h * 0.8} 
 },
 });
 };
-__d[102] = function (__ns) {
+__d[107] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp } = __m(12);
 const { enter } = __m(24);
-const { figure, blend } = __m(93);
+const { figure, blend } = __m(98);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const AIR = { head: [24, 9], spine: [[24, 14.5], [24, 25]], arms: [[[24, 16], [19, 12.5], [16.5, 8.5]], [[24, 16], [29, 12.5], [31.5, 8.5]]], legs: [[[24, 25], [18.5, 29], [20, 34]], [[24, 25], [29.5, 29], [28, 34]]] };
 const LOW = { head: [24, 15], spine: [[24, 20.5], [24, 29]], arms: [[[24, 22], [18.5, 25], [16.5, 29.5]], [[24, 22], [29.5, 25], [31.5, 29.5]]], legs: [[[24, 29], [18, 33], [20, 38.5]], [[24, 29], [30, 33], [28, 38.5]]] };
@@ -4327,7 +4454,7 @@ g.line(lerp(17, 18.5, t), 40, lerp(31, 29.5, t), 40, { role: 'dim', opacity: ler
 },
 });
 };
-__d[103] = function (__ns) {
+__d[108] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press, chevron } = __m(24);
@@ -4348,7 +4475,7 @@ g.line(39.5, 35.5, 41, 35.5, { role: 'dim' });
 },
 });
 };
-__d[104] = function (__ns) {
+__d[109] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp, outExpo } = __m(12);
 const { enter, chevron } = __m(24);
@@ -4375,7 +4502,7 @@ g.polyline(chevron([end[0], end[1]], dir, 5.5, 45), { role: 'accent', join: 'rou
 },
 });
 };
-__d[105] = function (__ns) {
+__d[110] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter } = __m(24);
@@ -4406,7 +4533,7 @@ g.dot(bx, by, 1.6 + hit, { opacity: on ? 0.35 + 0.65 * hit : 0.8 * k });
 },
 });
 };
-__d[106] = function (__ns) {
+__d[111] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, pulse } = __m(12);
 const { enter } = __m(24);
@@ -4430,11 +4557,11 @@ g.line(x0, y0, x1, y1, { role: long ? 'accent' : 'line' });
 },
 });
 };
-__d[107] = function (__ns) {
+__d[112] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter } = __m(24);
-const { figure, blend } = __m(93);
+const { figure, blend } = __m(98);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const A = { head: [26.5, 10], spine: [[25.5, 15.5], [23, 26]], arms: [[[25, 17], [19, 22.5], [16.5, 27]], [[25, 17], [30.5, 21.5], [33.5, 26]]], legs: [[[23, 26], [18.5, 32.5], [15.5, 39]], [[23, 26], [27.5, 32], [29, 39]]] };
 const B = { head: [26.5, 10], spine: [[25.5, 15.5], [23, 26]], arms: [[[25, 17], [28.5, 22], [31, 26.5]], [[25, 17], [21, 22.5], [19, 27]]], legs: [[[23, 26], [26, 32.5], [27.5, 39]], [[23, 26], [20.5, 32.5], [17.5, 39]]] };
@@ -4453,7 +4580,7 @@ g.group({ x: lerp(-5, 0, k), opacity: lerp(0.3, 1, k) }, () => figure(g, blend(A
 },
 });
 };
-__d[108] = function (__ns) {
+__d[113] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, smoothstep } = __m(12);
 const { enter } = __m(24);
@@ -4486,7 +4613,7 @@ g.circle(24, 24, 2.6, { role: on ? 'accent' : 'fill', fill: true });
 },
 });
 };
-__d[109] = function (__ns) {
+__d[114] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -4516,7 +4643,7 @@ g.line(x1, y1, x2, y2, { role: 'accent', opacity: (0.45 + 0.55 * pulse(s.t + a /
 },
 });
 };
-__d[110] = function (__ns) {
+__d[115] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, phase, clamp } = __m(12);
 const { polar, arcPath } = __m(15);
@@ -4549,7 +4676,7 @@ g.circle(C, C, 2.6, { role: on ? 'spark' : 'dim', fill: true });
 },
 });
 };
-__d[111] = function (__ns) {
+__d[116] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -4574,7 +4701,7 @@ g.path('M10.5 37.5C17 29 23.5 22.5 31 16.5', { role: on ? 'line' : 'dim' });
 },
 });
 };
-__d[112] = function (__ns) {
+__d[117] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outBack, clamp, phase, smoothstep } = __m(12);
 const { along } = __m(44);
@@ -4611,7 +4738,7 @@ g.dot(x, y, 1.5, { opacity: k * smoothstep(0, 0.12, p) * (1 - smoothstep(0.82, 1
 },
 });
 };
-__d[113] = function (__ns) {
+__d[118] = function (__ns) {
 const { P } = __m(5);
 __e(__ns, { "col": () => col, "row": () => row, "digits": () => digits }, [], ["col","digits","row"]);
 const K = 2 / 3; 
@@ -4654,10 +4781,10 @@ for (const st of D[ch]) g.path(strokePath(st, col(c0 + i * 4), row(top)), { role
 });
 }
 };
-__d[114] = function (__ns) {
+__d[119] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, phase, lerp, clamp, smoothstep } = __m(12);
-const { digits, col, row } = __m(113);
+const { digits, col, row } = __m(118);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const C = 24, R = 15, A0 = -135, A1 = 135;
 const __default = defineGlyph({
@@ -4694,7 +4821,7 @@ else g.line(L, row(11.5), Rx, row(11.5), { role: 'dim', weight: 0.85 });
 },
 });
 };
-__d[115] = function (__ns) {
+__d[120] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp } = __m(12);
 const { enter } = __m(24);
@@ -4717,7 +4844,7 @@ g.ellipse(35, 22.5, 2.9, 2.3, { role: 'accent', fill: true });
 },
 });
 };
-__d[116] = function (__ns) {
+__d[121] = function (__ns) {
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
 __e(__ns, { "drawChapter": () => drawChapter }, [], ["drawChapter"]);
@@ -4733,9 +4860,9 @@ g.line(X(a), 36.5, X(b), 36.5, { role: lit ? 'accent' : 'dim', weight: lit ? 1.1
 });
 }
 };
-__d[117] = function (__ns) {
+__d[122] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawChapter } = __m(116);
+const { drawChapter } = __m(121);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'chapter-next',
@@ -4745,9 +4872,9 @@ tags: ['next chapter', 'chapter', 'chapters', 'skip', 'section', 'timeline', 'vi
 draw(g, s) { drawChapter(g, s, 1); },
 });
 };
-__d[118] = function (__ns) {
+__d[123] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawChapter } = __m(116);
+const { drawChapter } = __m(121);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'chapter-prev',
@@ -4757,11 +4884,11 @@ tags: ['previous chapter', 'chapter', 'chapters', 'back', 'section', 'timeline',
 draw(g, s) { drawChapter(g, s, -1); },
 });
 };
-__d[119] = function (__ns) {
+__d[124] = function (__ns) {
 const { lerp, clamp, outExpo } = __m(12);
 const { enter } = __m(24);
 const { arcHead } = __m(26);
-const { digits } = __m(113);
+const { digits } = __m(118);
 __e(__ns, { "drawSeek": () => drawSeek }, [], ["drawSeek"]);
 const R = 13.5;
 function drawSeek(g, s, dir, mark) {
@@ -4777,9 +4904,9 @@ if (mark === 'play') g.polygon([[21, 18.5], [30, 24], [21, 29.5]], { role: 'fill
 else digits(g, mark, { top: 5, role: 'accent', weight: 0.85, opacity: lerp(0.3, 1, k) });
 }
 };
-__d[120] = function (__ns) {
+__d[125] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawSeek } = __m(119);
+const { drawSeek } = __m(124);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'forward-10',
@@ -4789,7 +4916,7 @@ tags: ['forward 10', 'skip forward', 'seek forward', 'fast forward', 'ff', '10 s
 draw(g, s) { drawSeek(g, s, 1, '10'); },
 });
 };
-__d[121] = function (__ns) {
+__d[126] = function (__ns) {
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
 __e(__ns, { "drawFrameStep": () => drawFrameStep }, [], ["drawFrameStep"]);
@@ -4807,9 +4934,9 @@ g.line(x0, 29.5, x0 + 22, 29.5, { role: 'dim' });
 g.polygon([[X(34), 18], [X(40.5), 24], [X(34), 30]], { role: p > 0.3 ? 'accent' : 'fill', join: 'round' });
 }
 };
-__d[122] = function (__ns) {
+__d[127] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawFrameStep } = __m(121);
+const { drawFrameStep } = __m(126);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'frame-next',
@@ -4819,9 +4946,9 @@ tags: ['next frame', 'frame', 'step', 'frame advance', 'film', 'video'],
 draw(g, s) { drawFrameStep(g, s, 1); },
 });
 };
-__d[123] = function (__ns) {
+__d[128] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawFrameStep } = __m(121);
+const { drawFrameStep } = __m(126);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'frame-prev',
@@ -4831,7 +4958,7 @@ tags: ['previous frame', 'frame', 'step back', 'frame', 'film', 'video'],
 draw(g, s) { drawFrameStep(g, s, -1); },
 });
 };
-__d[124] = function (__ns) {
+__d[129] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive } = __m(12);
 const { P } = __m(5);
@@ -4854,7 +4981,7 @@ g.path(p.d, { role: 'fill', join: 'round' });
 },
 });
 };
-__d[125] = function (__ns) {
+__d[130] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -4875,7 +5002,7 @@ g.polygon([[30, 31], [38.5, 36], [30, 41]], { role: p > 0.3 ? 'accent' : 'fill',
 },
 });
 };
-__d[126] = function (__ns) {
+__d[131] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse, lerp, outBack, clamp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -4920,9 +5047,9 @@ g.circle(24, 24, swell * beat, { role: 'accent', fill: true });
 },
 });
 };
-__d[127] = function (__ns) {
+__d[132] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawSeek } = __m(119);
+const { drawSeek } = __m(124);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'replay',
@@ -4932,9 +5059,9 @@ tags: ['replay', 'instant replay', 'replay buffer', 'save replay', 'again', 'cli
 draw(g, s) { drawSeek(g, s, -1, 'play'); },
 });
 };
-__d[128] = function (__ns) {
+__d[133] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawSeek } = __m(119);
+const { drawSeek } = __m(124);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'rewind-10',
@@ -4944,7 +5071,7 @@ tags: ['rewind 10', 'back 10', 'skip back', 'seek back', 'rewind', '10 seconds',
 draw(g, s) { drawSeek(g, s, -1, '10'); },
 });
 };
-__d[129] = function (__ns) {
+__d[134] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp, smoothstep } = __m(12);
 const { n } = __m(5);
@@ -5014,7 +5141,7 @@ if (!head[2]) g.dot(head[0], head[1], 2.5, { opacity: fade });
 },
 });
 };
-__d[130] = function (__ns) {
+__d[135] = function (__ns) {
 const { arrive, outExpo, clamp, lerp } = __m(12);
 __e(__ns, { "drawSkip": () => drawSkip }, [], ["drawSkip"]);
 const TRI_A = [[9, 13], [21, 24], [9, 35]];
@@ -5034,9 +5161,9 @@ g.polygon(pts(TRI_B, 2 + 6 * e), { role: 'fill', opacity: 0.6 * (1 - e) });
 }
 }
 };
-__d[131] = function (__ns) {
+__d[136] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawSkip } = __m(130);
+const { drawSkip } = __m(135);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'skip-next',
@@ -5046,9 +5173,9 @@ tags: ['next', 'skip', 'forward', 'track', 'transport', 'media'],
 draw(g, s) { drawSkip(g, s, 1); },
 });
 };
-__d[132] = function (__ns) {
+__d[137] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawSkip } = __m(130);
+const { drawSkip } = __m(135);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'skip-prev',
@@ -5058,7 +5185,7 @@ tags: ['previous', 'skip', 'back', 'rewind', 'track', 'transport', 'media'],
 draw(g, s) { drawSkip(g, s, -1); },
 });
 };
-__d[133] = function (__ns) {
+__d[138] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp } = __m(12);
 const { enter } = __m(24);
@@ -5085,7 +5212,7 @@ g.circle(CX, CY, 2.6, { role: 'fill' });
 },
 });
 };
-__d[134] = function (__ns) {
+__d[139] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -5110,7 +5237,7 @@ g.polyline([[cx, cy - sy * L], [cx, cy], [cx - sx * L, cy]], { role: 'accent', o
 },
 });
 };
-__d[135] = function (__ns) {
+__d[140] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -5130,7 +5257,7 @@ g.line(end + 3, 20, end + 3, 28, { role: 'accent', weight: 0.9, opacity: lerp(0.
 },
 });
 };
-__d[136] = function (__ns) {
+__d[141] = function (__ns) {
 const { lerp } = __m(12);
 const { enter, press, chevron, xf, xfPts, rot } = __m(24);
 __e(__ns, { "drawArrow": () => drawArrow }, [], ["drawArrow"]);
@@ -5145,9 +5272,9 @@ g.polyline(xfPts(chevron([24, top - d], 0, 11, 45), M), { role: p > 0.3 ? 'accen
 if (bar) g.path(xf('M11 9.5H37', M), { role: 'accent', weight: 1.05 });
 }
 };
-__d[137] = function (__ns) {
+__d[142] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawArrow } = __m(136);
+const { drawArrow } = __m(141);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'arrow-down',
@@ -5157,9 +5284,9 @@ tags: ['down', 'lower', 'decrease', 'arrow', 'move down', 'navigation'],
 draw(g, s) { drawArrow(g, s, 180); },
 });
 };
-__d[138] = function (__ns) {
+__d[143] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawArrow } = __m(136);
+const { drawArrow } = __m(141);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'arrow-left',
@@ -5169,9 +5296,9 @@ tags: ['left', 'previous', 'arrow', 'move left', 'navigation'],
 draw(g, s) { drawArrow(g, s, 270); },
 });
 };
-__d[139] = function (__ns) {
+__d[144] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawArrow } = __m(136);
+const { drawArrow } = __m(141);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'arrow-right',
@@ -5181,9 +5308,9 @@ tags: ['right', 'next', 'arrow', 'move right', 'navigation'],
 draw(g, s) { drawArrow(g, s, 90); },
 });
 };
-__d[140] = function (__ns) {
+__d[145] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawArrow } = __m(136);
+const { drawArrow } = __m(141);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'arrow-up',
@@ -5193,7 +5320,7 @@ tags: ['up', 'raise', 'increase', 'higher', 'arrow', 'move up', 'navigation'],
 draw(g, s) { drawArrow(g, s, 0); },
 });
 };
-__d[141] = function (__ns) {
+__d[146] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outExpo, clamp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -5213,7 +5340,7 @@ g.polyline([[18, 11.5], [10.5, 19], [18, 26.5]], { role: pull > 0.3 ? 'accent' :
 },
 });
 };
-__d[142] = function (__ns) {
+__d[147] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -5232,7 +5359,7 @@ g.line(24 + h, 24 - h, 24 - h, 24 + h, { role, weight: 1.05 });
 },
 });
 };
-__d[143] = function (__ns) {
+__d[148] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 const { P } = __m(5);
@@ -5261,7 +5388,7 @@ g.path(roundedPoly(front, [lerp(0, 2, k), lerp(0, 2, k), 3, 3]), { role: 'line',
 },
 });
 };
-__d[144] = function (__ns) {
+__d[149] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -5284,7 +5411,7 @@ g.polyline([[cx + ax, cy], [cx, cy], [cx, cy + ay]], { role: on ? 'accent' : 'li
 },
 });
 };
-__d[145] = function (__ns) {
+__d[150] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press, chevron } = __m(24);
@@ -5305,7 +5432,7 @@ g.polyline(chevron([x, 24], 90, 5.5, 45), { role: 'line', join: 'round', opacity
 },
 });
 };
-__d[146] = function (__ns) {
+__d[151] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outExpo, clamp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -5326,7 +5453,7 @@ g.polyline([[8.5, 23.5], [24, 10], [39.5, 23.5]], { role: 'line', join: 'round',
 },
 });
 };
-__d[147] = function (__ns) {
+__d[152] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press, xf, rot } = __m(24);
@@ -5347,7 +5474,7 @@ g.path(xf('M18.5 24H29.5', M), { role: 'line', weight: 1.05 });
 },
 });
 };
-__d[148] = function (__ns) {
+__d[153] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outExpo, clamp, lerp } = __m(12);
 const { P } = __m(5);
@@ -5373,7 +5500,7 @@ g.line(15.5, 31.5, 22.5, 31.5, { role: 'dim' });
 },
 });
 };
-__d[149] = function (__ns) {
+__d[154] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 const { xf, rot } = __m(24);
@@ -5399,7 +5526,7 @@ g.path(T(`M24 25.5V${lerp(39.5, 37.5, k)}`), { role: 'line', weight: 1.05 });
 },
 });
 };
-__d[150] = function (__ns) {
+__d[155] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter } = __m(24);
@@ -5421,9 +5548,9 @@ g.circle(24, 24, 4.5, { role: 'line' });
 },
 });
 };
-__d[151] = function (__ns) {
+__d[156] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawArrow } = __m(136);
+const { drawArrow } = __m(141);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'scroll-bottom',
@@ -5433,9 +5560,9 @@ tags: ['bottom', 'scroll to bottom', 'page bottom', 'last', 'end', 'navigation']
 draw(g, s) { drawArrow(g, s, 180, { bar: true }); },
 });
 };
-__d[152] = function (__ns) {
+__d[157] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawArrow } = __m(136);
+const { drawArrow } = __m(141);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'scroll-top',
@@ -5445,7 +5572,7 @@ tags: ['top', 'scroll to top', 'page top', 'first', 'home', 'navigation'],
 draw(g, s) { drawArrow(g, s, 0, { bar: true }); },
 });
 };
-__d[153] = function (__ns) {
+__d[158] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp } = __m(12);
 const { enter, press } = __m(24);
@@ -5466,7 +5593,7 @@ g.line(23, tread, 25, tread, { role: 'accent', weight: 0.7, opacity: k });
 },
 });
 };
-__d[154] = function (__ns) {
+__d[159] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, phase, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -5493,7 +5620,7 @@ g.arc(CX, CY, 6.5, a - 32, a + 18, { role: busy ? 'accent' : 'dim', weight: 0.85
 },
 });
 };
-__d[155] = function (__ns) {
+__d[160] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -5517,7 +5644,7 @@ g.line(12, 31.5, 24, 31.5, { role: 'dim', opacity: k });
 },
 });
 };
-__d[156] = function (__ns) {
+__d[161] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -5541,10 +5668,10 @@ g.line(12, 24.5, 30, 24.5, { role: 'dim', opacity: k });
 },
 });
 };
-__d[157] = function (__ns) {
+__d[162] = function (__ns) {
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
-const { digits } = __m(113);
+const { digits } = __m(118);
 __e(__ns, { "drawZoom": () => drawZoom }, [], ["drawZoom"]);
 const CX = 21, CY = 21, R = 11.5;
 function drawZoom(g, s, mode) {
@@ -5563,9 +5690,9 @@ g.circle(22.8, 23.6, 1.2, { role: 'accent', fill: true });
 });
 }
 };
-__d[158] = function (__ns) {
+__d[163] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawZoom } = __m(157);
+const { drawZoom } = __m(162);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'zoom-in',
@@ -5575,9 +5702,9 @@ tags: ['zoom in', 'zoom', 'magnify', 'enlarge', 'bigger', 'plus'],
 draw(g, s) { drawZoom(g, s, 'in'); },
 });
 };
-__d[159] = function (__ns) {
+__d[164] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawZoom } = __m(157);
+const { drawZoom } = __m(162);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'zoom-out',
@@ -5587,9 +5714,9 @@ tags: ['zoom out', 'zoom', 'shrink', 'smaller', 'minus'],
 draw(g, s) { drawZoom(g, s, 'out'); },
 });
 };
-__d[160] = function (__ns) {
+__d[165] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawZoom } = __m(157);
+const { drawZoom } = __m(162);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'zoom-reset',
@@ -5599,7 +5726,7 @@ tags: ['zoom reset', 'actual size', '100%', '1:1', 'zoom', 'reset'],
 draw(g, s) { drawZoom(g, s, 'reset'); },
 });
 };
-__d[161] = function (__ns) {
+__d[166] = function (__ns) {
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
 __e(__ns, { "typeGlyph": () => typeGlyph }, [], ["typeGlyph"]);
@@ -5609,9 +5736,9 @@ g.group({ y: lerp(-3, 0, k), opacity: lerp(0.3, 1, k) }, () => fn(p > 0.3 ? 'acc
 return { k, p };
 }
 };
-__d[162] = function (__ns) {
+__d[167] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { typeGlyph } = __m(161);
+const { typeGlyph } = __m(166);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'bold',
@@ -5625,7 +5752,7 @@ g.path('M16 10.5H25.5A6.75 6.75 0 0 1 25.5 24H16ZM16 24H27A6.75 6.75 0 0 1 27 37
 },
 });
 };
-__d[163] = function (__ns) {
+__d[168] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -5645,7 +5772,7 @@ if (on && k > 0.02) g.line(24 - 9 * k, 40, 24 + 9 * k, 40, { role: 'accent', wei
 },
 });
 };
-__d[164] = function (__ns) {
+__d[169] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, phase, smoothstep } = __m(12);
 const { smooth } = __m(44);
@@ -5682,7 +5809,7 @@ g.path(smooth(pts), { role: 'accent', weight: 0.8, opacity: op });
 },
 });
 };
-__d[165] = function (__ns) {
+__d[170] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -5702,7 +5829,32 @@ g.line(29, 28.5, lerp(29, 36, k), 28.5, { role: 'dim' });
 },
 });
 };
-__d[166] = function (__ns) {
+__d[171] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { clamp, lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const C = 24, R = 15; 
+const S = 'M29 18.8C28.2 17 26.4 16 24 16C21.1 16 19.2 17.5 19.2 19.8C19.2 25.1 28.8 22.7 28.8 28.3C28.8 30.7 26.8 32.2 24 32.2C21.4 32.2 19.6 31.1 18.8 29.3';
+const __default = defineGlyph({
+id: 'dollar',
+title: 'Dollar',
+category: 'productivity',
+tags: ['dollar', 'money', 'cost', 'costs', 'billing', 'bill', 'budget', 'price', 'pay', 'currency', 'coin', 'spend'],
+hue: 150, 
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.4);
+g.ellipse(C, C, +lerp(2.5, R, k).toFixed(2), R, { role: 'line' });
+const show = clamp((k - 0.55) / 0.35);
+if (show <= 0) return;
+const role = p > 0.3 ? 'accent' : 'line';
+g.path(S, { role, join: 'round', opacity: show });
+g.line(C, 12.5, C, 16, { role, opacity: show });
+g.line(C, 32.2, C, 35.5, { role, opacity: show });
+},
+});
+};
+__d[172] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -5723,7 +5875,7 @@ else g.circle(29.5, 19.5, 2.2, { role: 'fill' });
 },
 });
 };
-__d[167] = function (__ns) {
+__d[173] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 const { strike } = __m(26);
@@ -5756,7 +5908,7 @@ g.dot(26.6, 21.4, 1.3, { opacity: o });
 },
 });
 };
-__d[168] = function (__ns) {
+__d[174] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -5779,7 +5931,7 @@ A(g, 29, 14, { role: 'line', weight: 0.95 });
 },
 });
 };
-__d[169] = function (__ns) {
+__d[175] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp, outBack } = __m(12);
 const { enter, press } = __m(24);
@@ -5800,7 +5952,7 @@ g.group({ scale: Math.max(0.01, lerp(0.4, 1, b)), origin: [35, 13] }, () => g.pa
 },
 });
 };
-__d[170] = function (__ns) {
+__d[176] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -5824,9 +5976,9 @@ g.line(31, 24, 35.5, 24, { role: 'line', opacity: op(2) });
 },
 });
 };
-__d[171] = function (__ns) {
+__d[177] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { typeGlyph } = __m(161);
+const { typeGlyph } = __m(166);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'heading',
@@ -5844,7 +5996,7 @@ g.line(31, 34, 37, 34, { role: 'dim' });
 },
 });
 };
-__d[172] = function (__ns) {
+__d[178] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outBack, clamp, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -5872,7 +6024,7 @@ g.path(HEART, { role: 'accent', join: 'round' });
 },
 });
 };
-__d[173] = function (__ns) {
+__d[179] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -5893,9 +6045,9 @@ g.polyline([[9, 18.5], [14.5, 24], [9, 29.5]], { role: 'accent', join: 'round', 
 },
 });
 };
-__d[174] = function (__ns) {
+__d[180] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { typeGlyph } = __m(161);
+const { typeGlyph } = __m(166);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'italic',
@@ -5911,7 +6063,7 @@ g.line(27.5, 10.5, 20.5, 37.5, { role, weight: 1.1 });
 },
 });
 };
-__d[175] = function (__ns) {
+__d[181] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp } = __m(12);
 const { press } = __m(24);
@@ -5935,7 +6087,7 @@ g.line(16.5, 30, 31.5, 30, { role: 'line' });
 },
 });
 };
-__d[176] = function (__ns) {
+__d[182] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -5955,7 +6107,7 @@ g.path(SHEET(24 - gap - 2.5 * p), { role: p > 0.3 ? 'accent' : 'line', join: 'ro
 },
 });
 };
-__d[177] = function (__ns) {
+__d[183] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outBack, clamp, pulse } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -5987,7 +6139,7 @@ if (r > 0.05) g.circle(BX, BY, r, { role: 'spark' });
 },
 });
 };
-__d[178] = function (__ns) {
+__d[184] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, phase, clamp, smoothstep, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6019,7 +6171,7 @@ if (w > 0.02) g.line(x0, y, lerp(x0, x1, w), y, { role: editing && i === LINES.l
 },
 });
 };
-__d[179] = function (__ns) {
+__d[185] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp, outBack } = __m(12);
 const { enter, press, xf, rot } = __m(24);
@@ -6046,7 +6198,7 @@ g.circle(24, 24, 5.5, { role: p > 0.3 ? 'accent' : 'line' });
 },
 });
 };
-__d[180] = function (__ns) {
+__d[186] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outBack, clamp, lerp } = __m(12);
 const { roundPoly } = __m(26);
@@ -6082,7 +6234,7 @@ g.path(STAR, { role: 'accent', join: 'round' });
 },
 });
 };
-__d[181] = function (__ns) {
+__d[187] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -6104,10 +6256,10 @@ g.arc(23.5, 24, 7.5, 125, 235, { role: 'accent', weight: 1.05 });
 },
 });
 };
-__d[182] = function (__ns) {
+__d[188] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
-const { typeGlyph } = __m(161);
+const { typeGlyph } = __m(166);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'strike',
@@ -6122,7 +6274,7 @@ g.line(9, 24, lerp(9, 39, k), 24, { role: 'accent', weight: 1.05 });
 },
 });
 };
-__d[183] = function (__ns) {
+__d[189] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outBack, clamp, phase, lerp, smoothstep } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6152,7 +6304,7 @@ g.circle(C, C, 3 + (focus ? 0.8 * pop : 0), { role: focus ? 'accent' : 'fill', f
 },
 });
 };
-__d[184] = function (__ns) {
+__d[190] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { clamp, pulse } = __m(12);
 const { roundPoly, blink } = __m(26);
@@ -6185,7 +6337,7 @@ g.dot(24 + dx, 31.5, 2.1, { opacity: crit ? on : 0.55 + 0.45 * pulse(s.t, 1.2) }
 },
 });
 };
-__d[185] = function (__ns) {
+__d[191] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp, outCubic } = __m(12);
 const { alongPolyline, partialPolyline, polyLength } = __m(26);
@@ -6211,7 +6363,7 @@ if (b > 0 && b < 1) g.circle(24, 24, 13 + 4.5 * outCubic(b), { role: 'accent', w
 },
 });
 };
-__d[186] = function (__ns) {
+__d[192] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp, outBack, pulse } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6231,7 +6383,32 @@ g.dot(24, lerp(10.5, 16, d), 2.3, { opacity: (0.7 + 0.3 * pulse(s.t, 2.4)) * Mat
 },
 });
 };
-__d[187] = function (__ns) {
+__d[193] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const BOW = [17, 17], BR = 6.5; 
+const SHAFT = [[21.6, 21.6], [37, 37]]; 
+const TEETH = [[[30, 30], [33.5, 26.5]], [[34.5, 34.5], [38, 31]]];
+const __default = defineGlyph({
+id: 'key',
+title: 'Key',
+category: 'status',
+tags: ['key', 'credentials', 'password', 'secret', 'access key', 'api key', 'auth', 'sign in', 'login', 'unlock'],
+hue: 80, 
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.45);
+const o = +lerp(-3.5, 0, k).toFixed(2);
+g.group({ x: o, y: o }, () => g.group({ rotate: +(-10 * p * k).toFixed(2), origin: [27, 27] }, () => {
+g.circle(BOW[0], BOW[1], BR, { role: 'line' });
+g.polyline(SHAFT, { role: 'line' });
+for (const t of TEETH) g.polyline(t, { role: p > 0.3 ? 'accent' : 'line' });
+}));
+},
+});
+};
+__d[194] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp, outBack, outExpo } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6258,7 +6435,26 @@ g.line(24, 31, 24, 34.5, { role: on > 0.5 ? 'accent' : 'dim', weight: 0.9, opaci
 },
 });
 };
-__d[188] = function (__ns) {
+__d[195] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const HX = 24, HY = 15.5, HR = 5.5; 
+const SHOULDERS = 'M12.5 38.5V36.5A11.5 11.5 0 0 1 35.5 36.5V38.5'; 
+const __default = defineGlyph({
+id: 'person',
+title: 'Person',
+category: 'status',
+tags: ['person', 'user', 'account', 'profile', 'identity', 'who am i', 'whoami', 'me', 'member', 'contact', 'avatar'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+g.path(SHOULDERS, { role: 'line', join: 'round', opacity: lerp(0.35, 1, k) });
+g.circle(HX, +(HY - lerp(3.5, 0, k)).toFixed(2), HR, { role: p > 0.3 ? 'accent' : 'line' });
+},
+});
+};
+__d[196] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6278,7 +6474,30 @@ if (on) g.dot(24, 8.5, 1.5, { opacity: k });
 },
 });
 };
-__d[189] = function (__ns) {
+__d[197] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, lerp } = __m(12);
+const { enter, press } = __m(24);
+const { partialPolyline } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const SHIELD = 'M24 8.5L36 13V23.5C36 31.2 31 36.6 24 39.5C17 36.6 12 31.2 12 23.5V13Z'; 
+const CHECK = [[18.5, 24], [22.5, 28], [30, 20.5]];
+const __default = defineGlyph({
+id: 'shield',
+title: 'Shield',
+category: 'status',
+tags: ['shield', 'security', 'secure', 'protect', 'protected', 'firewall', 'security group', 'guard', 'defense', 'safe'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+g.group({ y: +lerp(2, 0, k).toFixed(2) }, () => {
+g.path(SHIELD, { role: p > 0.3 ? 'accent' : 'line', join: 'round' });
+const pts = partialPolyline(CHECK, arrive(Math.max(0, s.since - 0.15), 0.4));
+if (pts.length > 1) g.polyline(pts, { role: 'accent', weight: 1.05, join: 'round' });
+});
+},
+});
+};
+__d[198] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 const { arcHead, partialPolyline } = __m(26);
@@ -6318,7 +6537,7 @@ g.dot(24, 30, 2, { role: 'spark', opacity: k });
 },
 });
 };
-__d[190] = function (__ns) {
+__d[199] = function (__ns) {
 const { defineGlyph } = __m(16);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
@@ -6340,7 +6559,7 @@ g.arc(24, 24, r, 222, 318, { role: i ? 'dim' : 'line', opacity: op });
 },
 });
 };
-__d[191] = function (__ns) {
+__d[200] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6364,7 +6583,7 @@ g.line(9, 8.5, 9 + 30 * k, 8.5 + 31 * k, { role: 'accent', weight: 1.15 });
 },
 });
 };
-__d[192] = function (__ns) {
+__d[201] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse, outBack, clamp, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6394,7 +6613,7 @@ g.circle(x, 21.5 - 2.6 * hop, 2.3, { role: active ? 'accent' : 'dim', fill: true
 },
 });
 };
-__d[193] = function (__ns) {
+__d[202] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { clamp, inOutSine } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6414,7 +6633,7 @@ if (k > 0.02) g.rect(11 + i * 6.75, 14.5, 5.75, 19, { r: i === 0 ? 1.8 : 0.8, ro
 },
 });
 };
-__d[194] = function (__ns) {
+__d[203] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp, clamp, outExpo } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6445,7 +6664,7 @@ if (e > 0) g.ellipse(PX, BASE, lerp(2, 11, e), lerp(0.8, 3.2, e), { role: 'accen
 },
 });
 };
-__d[195] = function (__ns) {
+__d[204] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6469,7 +6688,7 @@ g.dot(26.5, 20.5, 1.9, { role: lit ? 'spark' : 'dim' });
 },
 });
 };
-__d[196] = function (__ns) {
+__d[205] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -6492,7 +6711,7 @@ else g.dot(24, 24, 1.8, { role: 'fill' });
 },
 });
 };
-__d[197] = function (__ns) {
+__d[206] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6523,7 +6742,7 @@ g.path(`M${14.5 + ox} 39A9.5 8.5 0 0 1 ${33.5 + ox} 39`, { role: 'line' });
 },
 });
 };
-__d[198] = function (__ns) {
+__d[207] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp, lerp, pulse, smoothstep } = __m(12);
 const { rectAround } = __m(26);
@@ -6566,7 +6785,7 @@ if (w > 0.3) g.rect(X0, Y0, w, H, { r: Math.min(1.5, w / 2), role: 'accent', fil
 },
 });
 };
-__d[199] = function (__ns) {
+__d[208] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { clamp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6596,7 +6815,7 @@ g.rect(x, y, 4.5, 4.5, { r: 1, role: on ? 'spark' : 'fill', fill: true, opacity:
 },
 });
 };
-__d[200] = function (__ns) {
+__d[209] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp, lerp, pulse } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -6642,7 +6861,29 @@ g.dot(15.5, 35, 1.5, { role: st === 'idle' ? 'dim' : 'spark', opacity: io });
 },
 });
 };
-__d[201] = function (__ns) {
+__d[210] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const C = 24, R = 14; 
+const LAT = 7, HALF = +Math.sqrt(R * R - LAT * LAT).toFixed(2); 
+const __default = defineGlyph({
+id: 'globe',
+title: 'Globe',
+category: 'system',
+tags: ['globe', 'world', 'earth', 'region', 'regions', 'global', 'international', 'internet', 'web', 'language', 'location'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.45);
+g.circle(C, C, R);
+g.line(C - R, C, C + R, C, { role: 'dim' });
+for (const y of [C - LAT, C + LAT]) g.line(C - HALF, y, C + HALF, y, { role: 'dim', opacity: lerp(0.2, 1, k) });
+const rx = lerp(R - 1, 6.5, k) * (1 - 0.6 * p);
+g.ellipse(C, C, +Math.max(1.5, rx).toFixed(2), R, { role: p > 0.3 ? 'accent' : 'line' });
+},
+});
+};
+__d[211] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp } = __m(12);
 const { curve } = __m(26);
@@ -6682,7 +6923,7 @@ g.line(30, y, 36.5, y, { role: on ? 'accent' : 'dim', opacity: on ? 0.4 + 0.6 * 
 },
 });
 };
-__d[202] = function (__ns) {
+__d[212] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp } = __m(12);
 const { bump } = __m(26);
@@ -6718,7 +6959,7 @@ g.rect(x, CY + CH - h, CW, h, { r: Math.min(1.2, h / 2), role: 'accent', fill: t
 },
 });
 };
-__d[203] = function (__ns) {
+__d[213] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp } = __m(12);
 const { strike } = __m(26);
@@ -6761,7 +7002,7 @@ if (k < 1) { g.line(XD, TOP, XD, BOT, { role: 'line', opacity: 1 - k }); g.line(
 },
 });
 };
-__d[204] = function (__ns) {
+__d[214] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp, pulse } = __m(12);
 const { bump, strike } = __m(26);
@@ -6810,7 +7051,7 @@ g.circle(CX, CY, 2.6, { role: 'fill' });
 },
 });
 };
-__d[205] = function (__ns) {
+__d[215] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, phase, smoothstep } = __m(12);
 const { P } = __m(5);
@@ -6860,11 +7101,11 @@ for (const [a0, a1] of [[248, 292], [68, 112]]) g.arc(CX, CY, 16.5, a0, a1, { ro
 },
 });
 };
-__d[206] = function (__ns) {
+__d[216] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 const { P } = __m(5);
-const { digits } = __m(113);
+const { digits } = __m(118);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const X0 = 9.5, X1 = 38.5, Y0 = 11, Y1 = 40, HEAD = 19, RAD = 4;
 const __default = defineGlyph({
@@ -6889,7 +7130,7 @@ g.group({ y: 3.5 * (1 - k), opacity: k }, () => digits(g, day, { top: 7, role: e
 },
 });
 };
-__d[207] = function (__ns) {
+__d[217] = function (__ns) {
 const { defineGlyph } = __m(16);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
@@ -6913,7 +7154,7 @@ g.dot(24, 24, 1.8);
 },
 });
 };
-__d[208] = function (__ns) {
+__d[218] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse, clamp } = __m(12);
 const { wedge } = __m(44);
@@ -6958,7 +7199,7 @@ g.dot(CX, CY, 2, { role: 'fill' });
 },
 });
 };
-__d[209] = function (__ns) {
+__d[219] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse, phase, lerp, clamp, outExpo } = __m(12);
 const { wedge } = __m(44);
@@ -7009,7 +7250,7 @@ g.line(x0, y0, x1, y1, { role: 'accent', weight: 0.75, opacity: op });
 },
 });
 };
-__d[210] = function (__ns) {
+__d[220] = function (__ns) {
 const { P } = __m(5);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -7037,10 +7278,10 @@ return p.Z().d;
 }
 const motion = (s) => ({ k: enter(s, 0.5), p: press(s, 0.4) });
 };
-__d[211] = function (__ns) {
+__d[221] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { chevron } = __m(24);
-const { frame, motion, lerp } = __m(210);
+const { frame, motion, lerp } = __m(220);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'fit',
@@ -7058,7 +7299,7 @@ g.polyline(chevron([b, 24], 90, 6, 45), { role: 'accent', join: 'round' });
 },
 });
 };
-__d[212] = function (__ns) {
+__d[222] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -7084,9 +7325,9 @@ g.line(x0, y0, x1, y1, { role: on ? 'accent' : 'dim', opacity: lerp(0.5, 1, k) }
 },
 });
 };
-__d[213] = function (__ns) {
+__d[223] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { frame, region, motion, lerp, X0, X1, Y0, Y1 } = __m(210);
+const { frame, region, motion, lerp, X0, X1, Y0, Y1 } = __m(220);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const XS = 22, YS = 24;
 const ZONES = [[X0, Y0, XS, Y1], [XS, Y0, X1, YS], [XS, YS, X1, Y1]];
@@ -7106,10 +7347,10 @@ g.line(x, y, X1, y, { role: 'line' });
 },
 });
 };
-__d[214] = function (__ns) {
+__d[224] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { chevron } = __m(24);
-const { frame, header, motion, lerp } = __m(210);
+const { frame, header, motion, lerp } = __m(220);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'maximize',
@@ -7125,10 +7366,10 @@ g.polyline(chevron([24, y], 0, 9, 45), { role: 'accent', join: 'round', weight: 
 },
 });
 };
-__d[215] = function (__ns) {
+__d[225] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { chevron } = __m(24);
-const { frame, header, motion, lerp } = __m(210);
+const { frame, header, motion, lerp } = __m(220);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'minimize',
@@ -7145,7 +7386,7 @@ g.line(17, 33, 31, 33, { role: 'accent', weight: 1.05 });
 },
 });
 };
-__d[216] = function (__ns) {
+__d[226] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp, clamp } = __m(12);
 const { enter, press } = __m(24);
@@ -7167,10 +7408,10 @@ g.line(11.5, 13.5, 16.5, 13.5, { role: 'dim', opacity: k });
 },
 });
 };
-__d[217] = function (__ns) {
+__d[227] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive } = __m(12);
-const { frame, region, lerp, X0, X1, Y1 } = __m(210);
+const { frame, region, lerp, X0, X1, Y1 } = __m(220);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'panel',
@@ -7188,10 +7429,10 @@ g.line(X0, y, X1, y, { role: k > 0.5 ? 'line' : 'dim' });
 },
 });
 };
-__d[218] = function (__ns) {
+__d[228] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
-const { frame } = __m(210);
+const { frame } = __m(220);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'pip',
@@ -7209,10 +7450,10 @@ g.rect(36.5 - w, 34 - h, w, h, { r: 2.5, role: on ? 'accent' : 'fill', fill: tru
 },
 });
 };
-__d[219] = function (__ns) {
+__d[229] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive } = __m(12);
-const { frame, region, lerp, X0, Y0, Y1 } = __m(210);
+const { frame, region, lerp, X0, Y0, Y1 } = __m(220);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'sidebar',
@@ -7230,9 +7471,9 @@ g.line(x, Y0, x, Y1, { role: k > 0.5 ? 'line' : 'dim' });
 },
 });
 };
-__d[220] = function (__ns) {
+__d[230] = function (__ns) {
 const { chevron } = __m(24);
-const { frame, region, motion, lerp, X0, X1, Y0, Y1 } = __m(210);
+const { frame, region, motion, lerp, X0, X1, Y0, Y1 } = __m(220);
 __e(__ns, { "drawSnap": () => drawSnap }, [], ["drawSnap"]);
 function drawSnap(g, s, side) {
 const { k, p } = motion(s);
@@ -7245,9 +7486,9 @@ const cx = 24 - side * 8.5 + side * 1.5 * p;
 g.polyline(chevron([cx + side * 2.5, 24], side < 0 ? 270 : 90, 6, 45), { role: 'line', join: 'round', opacity: k });
 }
 };
-__d[221] = function (__ns) {
+__d[231] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawSnap } = __m(220);
+const { drawSnap } = __m(230);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'snap-left',
@@ -7257,9 +7498,9 @@ tags: ['snap', 'snap left', 'left half', 'tile', 'arrange', 'window'],
 draw(g, s) { drawSnap(g, s, -1); },
 });
 };
-__d[222] = function (__ns) {
+__d[232] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawSnap } = __m(220);
+const { drawSnap } = __m(230);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'snap-right',
@@ -7269,9 +7510,9 @@ tags: ['snap', 'snap right', 'right half', 'tile', 'arrange', 'window'],
 draw(g, s) { drawSnap(g, s, 1); },
 });
 };
-__d[223] = function (__ns) {
+__d[233] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { frame, region, motion, lerp, X0, X1, Y1 } = __m(210);
+const { frame, region, motion, lerp, X0, X1, Y1 } = __m(220);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'split-down',
@@ -7287,9 +7528,9 @@ g.line(X0, y, X1, y, { role: 'line' });
 },
 });
 };
-__d[224] = function (__ns) {
+__d[234] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { frame, region, motion, lerp, X1, Y0, Y1 } = __m(210);
+const { frame, region, motion, lerp, X1, Y0, Y1 } = __m(220);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'split',
@@ -7305,7 +7546,7 @@ g.line(x, Y0, x, Y1, { role: 'line' });
 },
 });
 };
-__d[225] = function (__ns) {
+__d[235] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 const { chevron } = __m(24);
@@ -7328,7 +7569,7 @@ g.polyline(chevron([36 + o, 24], 90, 4.5, 45), { role: 'dim', join: 'round' });
 },
 });
 };
-__d[226] = function (__ns) {
+__d[236] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -7348,7 +7589,7 @@ g.line(19, y, lerp(19, [40, 35, 38][i], k), y, { role: i === 0 && p > 0.3 ? 'acc
 },
 });
 };
-__d[227] = function (__ns) {
+__d[237] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { lerp } = __m(12);
 const { enter, press } = __m(24);
@@ -7367,9 +7608,9 @@ g.rect(x + h, y + h, 13 - 2 * h, 13 - 2 * h, { r: 3, role: i === 0 && p > 0.3 ? 
 },
 });
 };
-__d[228] = function (__ns) {
+__d[238] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { frame, header, motion, lerp } = __m(210);
+const { frame, header, motion, lerp } = __m(220);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'window',
@@ -7387,7 +7628,7 @@ g.line(12.5, 30.5, lerp(12.5, 26, k), 30.5, { role: 'dim' });
 },
 });
 };
-__d[229] = function (__ns) {
+__d[239] = function (__ns) {
 const m0 = __m(17);
 const m1 = __m(18);
 const m2 = __m(19);
@@ -7432,11 +7673,11 @@ const m40 = __m(65);
 const m41 = __m(66);
 const m42 = __m(67);
 const m43 = __m(68);
-const m44 = __m(70);
-const m45 = __m(71);
-const m46 = __m(72);
-const m47 = __m(73);
-const m48 = __m(74);
+const m44 = __m(69);
+const m45 = __m(70);
+const m46 = __m(71);
+const m47 = __m(72);
+const m48 = __m(73);
 const m49 = __m(75);
 const m50 = __m(76);
 const m51 = __m(77);
@@ -7455,11 +7696,11 @@ const m63 = __m(89);
 const m64 = __m(90);
 const m65 = __m(91);
 const m66 = __m(92);
-const m67 = __m(94);
-const m68 = __m(95);
-const m69 = __m(96);
-const m70 = __m(97);
-const m71 = __m(98);
+const m67 = __m(93);
+const m68 = __m(94);
+const m69 = __m(95);
+const m70 = __m(96);
+const m71 = __m(97);
 const m72 = __m(99);
 const m73 = __m(100);
 const m74 = __m(101);
@@ -7474,29 +7715,29 @@ const m82 = __m(109);
 const m83 = __m(110);
 const m84 = __m(111);
 const m85 = __m(112);
-const m86 = __m(114);
-const m87 = __m(115);
-const m88 = __m(117);
-const m89 = __m(118);
-const m90 = __m(120);
-const m91 = __m(122);
-const m92 = __m(123);
-const m93 = __m(124);
-const m94 = __m(125);
-const m95 = __m(126);
+const m86 = __m(113);
+const m87 = __m(114);
+const m88 = __m(115);
+const m89 = __m(116);
+const m90 = __m(117);
+const m91 = __m(119);
+const m92 = __m(120);
+const m93 = __m(122);
+const m94 = __m(123);
+const m95 = __m(125);
 const m96 = __m(127);
 const m97 = __m(128);
 const m98 = __m(129);
-const m99 = __m(131);
-const m100 = __m(132);
-const m101 = __m(133);
-const m102 = __m(134);
-const m103 = __m(135);
-const m104 = __m(137);
-const m105 = __m(138);
-const m106 = __m(139);
-const m107 = __m(140);
-const m108 = __m(141);
+const m99 = __m(130);
+const m100 = __m(131);
+const m101 = __m(132);
+const m102 = __m(133);
+const m103 = __m(134);
+const m104 = __m(136);
+const m105 = __m(137);
+const m106 = __m(138);
+const m107 = __m(139);
+const m108 = __m(140);
 const m109 = __m(142);
 const m110 = __m(143);
 const m111 = __m(144);
@@ -7512,14 +7753,14 @@ const m120 = __m(153);
 const m121 = __m(154);
 const m122 = __m(155);
 const m123 = __m(156);
-const m124 = __m(158);
-const m125 = __m(159);
-const m126 = __m(160);
-const m127 = __m(162);
-const m128 = __m(163);
-const m129 = __m(164);
-const m130 = __m(165);
-const m131 = __m(166);
+const m124 = __m(157);
+const m125 = __m(158);
+const m126 = __m(159);
+const m127 = __m(160);
+const m128 = __m(161);
+const m129 = __m(163);
+const m130 = __m(164);
+const m131 = __m(165);
 const m132 = __m(167);
 const m133 = __m(168);
 const m134 = __m(169);
@@ -7563,23 +7804,33 @@ const m171 = __m(206);
 const m172 = __m(207);
 const m173 = __m(208);
 const m174 = __m(209);
-const m175 = __m(211);
-const m176 = __m(212);
-const m177 = __m(213);
-const m178 = __m(214);
-const m179 = __m(215);
-const m180 = __m(216);
-const m181 = __m(217);
-const m182 = __m(218);
-const m183 = __m(219);
-const m184 = __m(221);
-const m185 = __m(222);
-const m186 = __m(223);
-const m187 = __m(224);
-const m188 = __m(225);
-const m189 = __m(226);
-const m190 = __m(227);
-const m191 = __m(228);
+const m175 = __m(210);
+const m176 = __m(211);
+const m177 = __m(212);
+const m178 = __m(213);
+const m179 = __m(214);
+const m180 = __m(215);
+const m181 = __m(216);
+const m182 = __m(217);
+const m183 = __m(218);
+const m184 = __m(219);
+const m185 = __m(221);
+const m186 = __m(222);
+const m187 = __m(223);
+const m188 = __m(224);
+const m189 = __m(225);
+const m190 = __m(226);
+const m191 = __m(227);
+const m192 = __m(228);
+const m193 = __m(229);
+const m194 = __m(231);
+const m195 = __m(232);
+const m196 = __m(233);
+const m197 = __m(234);
+const m198 = __m(235);
+const m199 = __m(236);
+const m200 = __m(237);
+const m201 = __m(238);
 __e(__ns, { "GLYPH_MODULES": () => GLYPH_MODULES }, [], ["GLYPH_MODULES"]);
 const GLYPH_MODULES = [
 ['audio/equalizer.js', m0],
@@ -7616,178 +7867,193 @@ const GLYPH_MODULES = [
 ['build/track-curve-left.js', m31],
 ['build/track-curve-right.js', m32],
 ['build/track-straight.js', m33],
-['dev/bug.js', m34],
-['dev/build.js', m35],
-['dev/cloud.js', m36],
-['dev/code.js', m37],
-['dev/definition.js', m38],
-['dev/diff.js', m39],
-['dev/fold.js', m40],
-['dev/git-branch.js', m41],
-['dev/references.js', m42],
-['dev/rocket.js', m43],
-['dev/step-into.js', m44],
-['dev/step-out.js', m45],
-['dev/symbol.js', m46],
-['dev/terminal.js', m47],
-['edit/brush.js', m48],
-['edit/clear.js', m49],
-['edit/copy.js', m50],
-['edit/cursor.js', m51],
-['edit/cut.js', m52],
-['edit/delete.js', m53],
-['edit/edit.js', m54],
-['edit/forward.js', m55],
-['edit/magnet.js', m56],
-['edit/move.js', m57],
-['edit/paste.js', m58],
-['edit/rename.js', m59],
-['edit/replace.js', m60],
-['edit/rotate.js', m61],
-['edit/scale.js', m62],
-['edit/select.js', m63],
-['edit/snap.js', m64],
-['game/beam.js', m65],
-['game/boost.js', m66],
-['game/crouch.js', m67],
-['game/exocraft.js', m68],
-['game/follow.js', m69],
-['game/freighter.js', m70],
-['game/galaxy.js', m71],
-['game/gamepad.js', m72],
-['game/height.js', m73],
-['game/jetpack.js', m74],
-['game/jump.js', m75],
-['game/land.js', m76],
-['game/roll.js', m77],
-['game/scanner.js', m78],
-['game/sun.js', m79],
-['game/walk.js', m80],
-['game/warp.js', m81],
-['home/bulb.js', m82],
-['home/fan.js', m83],
-['home/leaf.js', m84],
-['home/plug.js', m85],
-['home/thermostat.js', m86],
-['media/artist.js', m87],
-['media/chapter-next.js', m88],
-['media/chapter-prev.js', m89],
-['media/forward-10.js', m90],
-['media/frame-next.js', m91],
-['media/frame-prev.js', m92],
-['media/play-pause.js', m93],
-['media/queue.js', m94],
-['media/record.js', m95],
-['media/replay.js', m96],
-['media/rewind-10.js', m97],
-['media/shuffle.js', m98],
-['media/skip-next.js', m99],
-['media/skip-prev.js', m100],
-['media/speed.js', m101],
-['media/stop.js', m102],
-['nav/address-bar.js', m103],
-['nav/arrow-down.js', m104],
-['nav/arrow-left.js', m105],
-['nav/arrow-right.js', m106],
-['nav/arrow-up.js', m107],
-['nav/back.js', m108],
-['nav/close.js', m109],
-['nav/folder.js', m110],
-['nav/fullscreen.js', m111],
-['nav/goto-line.js', m112],
-['nav/home.js', m113],
-['nav/link.js', m114],
-['nav/pages.js', m115],
-['nav/pin.js', m116],
-['nav/radial.js', m117],
-['nav/scroll-bottom.js', m118],
-['nav/scroll-top.js', m119],
-['nav/scroll.js', m120],
-['nav/search.js', m121],
-['nav/tab-group.js', m122],
-['nav/tab.js', m123],
-['nav/zoom-in.js', m124],
-['nav/zoom-out.js', m125],
-['nav/zoom-reset.js', m126],
-['productivity/bold.js', m127],
-['productivity/captions.js', m128],
-['productivity/coffee.js', m129],
-['productivity/comment.js', m130],
-['productivity/emoji.js', m131],
-['productivity/eye.js', m132],
-['productivity/font-size.js', m133],
-['productivity/format.js', m134],
-['productivity/gif.js', m135],
-['productivity/heading.js', m136],
-['productivity/heart.js', m137],
-['productivity/indent.js', m138],
-['productivity/italic.js', m139],
-['productivity/keyboard.js', m140],
-['productivity/layers.js', m141],
-['productivity/mail.js', m142],
-['productivity/note.js', m143],
-['productivity/settings.js', m144],
-['productivity/star.js', m145],
-['productivity/sticker.js', m146],
-['productivity/strike.js', m147],
-['productivity/target.js', m148],
-['status/alert.js', m149],
-['status/check.js', m150],
-['status/info.js', m151],
-['status/lock.js', m152],
-['status/power.js', m153],
-['status/sync.js', m154],
-['stream/broadcast.js', m155],
-['stream/camera.js', m156],
-['stream/chat.js', m157],
-['stream/fade.js', m158],
-['stream/marker.js', m159],
-['stream/scene.js', m160],
-['stream/screenshot.js', m161],
-['stream/viewers.js', m162],
-['system/battery.js', m163],
-['system/cpu.js', m164],
-['system/disk.js', m165],
-['system/gpu.js', m166],
-['system/memory.js', m167],
-['system/network.js', m168],
-['system/wifi.js', m169],
-['time/alarm.js', m170],
-['time/calendar.js', m171],
-['time/clock.js', m172],
-['time/stopwatch.js', m173],
-['time/timer.js', m174],
-['window/fit.js', m175],
-['window/hdr.js', m176],
-['window/layout.js', m177],
-['window/maximize.js', m178],
-['window/minimize.js', m179],
-['window/monitor.js', m180],
-['window/panel.js', m181],
-['window/pip.js', m182],
-['window/sidebar.js', m183],
-['window/snap-left.js', m184],
-['window/snap-right.js', m185],
-['window/split-down.js', m186],
-['window/split.js', m187],
-['window/theater.js', m188],
-['window/view-details.js', m189],
-['window/view-icons.js', m190],
-['window/window.js', m191],
+['dev/bucket.js', m34],
+['dev/bug.js', m35],
+['dev/build.js', m36],
+['dev/cloud.js', m37],
+['dev/cluster.js', m38],
+['dev/code.js', m39],
+['dev/container.js', m40],
+['dev/database.js', m41],
+['dev/definition.js', m42],
+['dev/diff.js', m43],
+['dev/fold.js', m44],
+['dev/function.js', m45],
+['dev/git-branch.js', m46],
+['dev/references.js', m47],
+['dev/rocket.js', m48],
+['dev/step-into.js', m49],
+['dev/step-out.js', m50],
+['dev/symbol.js', m51],
+['dev/terminal.js', m52],
+['edit/brush.js', m53],
+['edit/clear.js', m54],
+['edit/copy.js', m55],
+['edit/cursor.js', m56],
+['edit/cut.js', m57],
+['edit/delete.js', m58],
+['edit/edit.js', m59],
+['edit/forward.js', m60],
+['edit/magnet.js', m61],
+['edit/move.js', m62],
+['edit/paste.js', m63],
+['edit/rename.js', m64],
+['edit/replace.js', m65],
+['edit/rotate.js', m66],
+['edit/scale.js', m67],
+['edit/select.js', m68],
+['edit/snap.js', m69],
+['game/beam.js', m70],
+['game/boost.js', m71],
+['game/crouch.js', m72],
+['game/exocraft.js', m73],
+['game/follow.js', m74],
+['game/freighter.js', m75],
+['game/galaxy.js', m76],
+['game/gamepad.js', m77],
+['game/height.js', m78],
+['game/jetpack.js', m79],
+['game/jump.js', m80],
+['game/land.js', m81],
+['game/roll.js', m82],
+['game/scanner.js', m83],
+['game/sun.js', m84],
+['game/walk.js', m85],
+['game/warp.js', m86],
+['home/bulb.js', m87],
+['home/fan.js', m88],
+['home/leaf.js', m89],
+['home/plug.js', m90],
+['home/thermostat.js', m91],
+['media/artist.js', m92],
+['media/chapter-next.js', m93],
+['media/chapter-prev.js', m94],
+['media/forward-10.js', m95],
+['media/frame-next.js', m96],
+['media/frame-prev.js', m97],
+['media/play-pause.js', m98],
+['media/queue.js', m99],
+['media/record.js', m100],
+['media/replay.js', m101],
+['media/rewind-10.js', m102],
+['media/shuffle.js', m103],
+['media/skip-next.js', m104],
+['media/skip-prev.js', m105],
+['media/speed.js', m106],
+['media/stop.js', m107],
+['nav/address-bar.js', m108],
+['nav/arrow-down.js', m109],
+['nav/arrow-left.js', m110],
+['nav/arrow-right.js', m111],
+['nav/arrow-up.js', m112],
+['nav/back.js', m113],
+['nav/close.js', m114],
+['nav/folder.js', m115],
+['nav/fullscreen.js', m116],
+['nav/goto-line.js', m117],
+['nav/home.js', m118],
+['nav/link.js', m119],
+['nav/pages.js', m120],
+['nav/pin.js', m121],
+['nav/radial.js', m122],
+['nav/scroll-bottom.js', m123],
+['nav/scroll-top.js', m124],
+['nav/scroll.js', m125],
+['nav/search.js', m126],
+['nav/tab-group.js', m127],
+['nav/tab.js', m128],
+['nav/zoom-in.js', m129],
+['nav/zoom-out.js', m130],
+['nav/zoom-reset.js', m131],
+['productivity/bold.js', m132],
+['productivity/captions.js', m133],
+['productivity/coffee.js', m134],
+['productivity/comment.js', m135],
+['productivity/dollar.js', m136],
+['productivity/emoji.js', m137],
+['productivity/eye.js', m138],
+['productivity/font-size.js', m139],
+['productivity/format.js', m140],
+['productivity/gif.js', m141],
+['productivity/heading.js', m142],
+['productivity/heart.js', m143],
+['productivity/indent.js', m144],
+['productivity/italic.js', m145],
+['productivity/keyboard.js', m146],
+['productivity/layers.js', m147],
+['productivity/mail.js', m148],
+['productivity/note.js', m149],
+['productivity/settings.js', m150],
+['productivity/star.js', m151],
+['productivity/sticker.js', m152],
+['productivity/strike.js', m153],
+['productivity/target.js', m154],
+['status/alert.js', m155],
+['status/check.js', m156],
+['status/info.js', m157],
+['status/key.js', m158],
+['status/lock.js', m159],
+['status/person.js', m160],
+['status/power.js', m161],
+['status/shield.js', m162],
+['status/sync.js', m163],
+['stream/broadcast.js', m164],
+['stream/camera.js', m165],
+['stream/chat.js', m166],
+['stream/fade.js', m167],
+['stream/marker.js', m168],
+['stream/scene.js', m169],
+['stream/screenshot.js', m170],
+['stream/viewers.js', m171],
+['system/battery.js', m172],
+['system/cpu.js', m173],
+['system/disk.js', m174],
+['system/globe.js', m175],
+['system/gpu.js', m176],
+['system/memory.js', m177],
+['system/network.js', m178],
+['system/wifi.js', m179],
+['time/alarm.js', m180],
+['time/calendar.js', m181],
+['time/clock.js', m182],
+['time/stopwatch.js', m183],
+['time/timer.js', m184],
+['window/fit.js', m185],
+['window/hdr.js', m186],
+['window/layout.js', m187],
+['window/maximize.js', m188],
+['window/minimize.js', m189],
+['window/monitor.js', m190],
+['window/panel.js', m191],
+['window/pip.js', m192],
+['window/sidebar.js', m193],
+['window/snap-left.js', m194],
+['window/snap-right.js', m195],
+['window/split-down.js', m196],
+['window/split.js', m197],
+['window/theater.js', m198],
+['window/view-details.js', m199],
+['window/view-icons.js', m200],
+['window/window.js', m201],
 ];
 };
-__d[230] = function (__ns) {
+__d[240] = function (__ns) {
 
 __e(__ns, { "GLYPH_ALIASES": () => GLYPH_ALIASES }, [], ["GLYPH_ALIASES"]);
 const GLYPH_ALIASES = Object.freeze({
+account: { glyph: 'person' }, 
 axis: { glyph: 'move' }, 
 bottom: { glyph: 'scroll-bottom' },
 box: { glyph: 'scale' }, 
 clipboard: { glyph: 'paste' },
 'close-pane': { glyph: 'close' },
+cost: { glyph: 'dollar' },
+credentials: { glyph: 'key' },
+db: { glyph: 'database' },
 discard: { glyph: 'delete' },
 duplicate: { glyph: 'copy' },
 'eye-off': { glyph: 'eye', state: 'hidden' },
+firewall: { glyph: 'shield' },
 'folder-up': { glyph: 'arrow-up' },
 gear: { glyph: 'settings' },
 'hidden-files': { glyph: 'eye' },
@@ -7795,7 +8061,9 @@ gear: { glyph: 'settings' },
 line: { glyph: 'goto-line' },
 'mail-down': { glyph: 'arrow-down' },
 'mail-up': { glyph: 'arrow-up' },
+money: { glyph: 'dollar' },
 'monitor-next': { glyph: 'monitor' },
+nodes: { glyph: 'cluster' },
 'page-scroll': { glyph: 'scroll' },
 'page-top': { glyph: 'scroll-top' },
 paint: { glyph: 'brush' },
@@ -7810,9 +8078,11 @@ preview: { glyph: 'eye' },
 properties: { glyph: 'info' },
 redo: { glyph: 'forward' },
 'refresh-rate': { glyph: 'monitor' },
+region: { glyph: 'globe' }, 
 reopen: { glyph: 'back' }, 
 resize: { glyph: 'scale' },
 revert: { glyph: 'back' },
+security: { glyph: 'shield' },
 'seek-back': { glyph: 'rewind-10' },
 'seek-forward': { glyph: 'forward-10' },
 'select-all': { glyph: 'select' },
@@ -7833,15 +8103,17 @@ top: { glyph: 'scroll-top' },
 transform: { glyph: 'scale' },
 trash: { glyph: 'delete' },
 undo: { glyph: 'back' },
+user: { glyph: 'person' },
 'width-minus': { glyph: 'length-minus' },
 'width-plus': { glyph: 'length-plus' },
 'window-close': { glyph: 'close' },
+world: { glyph: 'globe' },
 zoom: { glyph: 'zoom-in' },
 });
 };
-__d[231] = function (__ns) {
-const { GLYPH_MODULES } = __m(229);
-const { GLYPH_ALIASES } = __m(230);
+__d[241] = function (__ns) {
+const { GLYPH_MODULES } = __m(239);
+const { GLYPH_ALIASES } = __m(240);
 __e(__ns, { "glyphRegistry": () => glyphRegistry, "allGlyphs": () => allGlyphs, "glyphCategories": () => glyphCategories, "resolveGlyph": () => resolveGlyph, "getGlyph": () => getGlyph, "glyphAliases": () => glyphAliases }, [], ["allGlyphs","getGlyph","glyphAliases","glyphCategories","glyphRegistry","resolveGlyph"]);
 const KEBAB = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 let cache = null;
@@ -7881,14 +8153,14 @@ return a ? { glyph: glyphs.get(a.glyph), state: a.state, alias: id } : null;
 const getGlyph = (id) => glyphRegistry().glyphs.get(id) || resolveGlyph(id)?.glyph || null;
 const glyphAliases = () => [...glyphRegistry().aliases].map(([name, a]) => ({ name, ...a }));
 };
-__d[232] = function (__ns) {
+__d[242] = function (__ns) {
 const { defineTheme, bezelCorner } = __m(14);
 const { rect, path, circle, polygon, url, linearGradient, radialGradient, n, P, attrs } = __m(5);
 const { mix } = __m(4);
 const { clamp, lerp, outCubic, outExpo, pulse, phase, arrive } = __m(12);
 const { hash } = __m(1);
 const { pathBounds } = __m(13);
-const { getGlyph } = __m(231);
+const { getGlyph } = __m(241);
 __e(__ns, { "curtainColors": () => curtainColors, "auroraLayer": () => auroraLayer, "frostLayer": () => frostLayer, "default": () => __default, "pane": () => pane, "paintAurora": () => paintAurora, "ENERGY": () => ENERGY }, [], ["ENERGY","auroraLayer","curtainColors","default","frostLayer","paintAurora","pane"]);
 const NIGHT = {
 bg: '#04060d', surface: '#0e1426', surface2: '#060912', line: '#1c2440',
@@ -8167,13 +8439,13 @@ press: breathPress,
 glyphs,
 });
 };
-__d[233] = function (__ns) {
+__d[243] = function (__ns) {
 const { defineTheme, defaultText, bezelCorner } = __m(14);
 const { rect, path, polygon, url, linearGradient, radialGradient, n, P, attrs } = __m(5);
 const { textPath, fitText, capHeight } = __m(11);
 const { clamp, lerp, outCubic, outExpo, pulse, phase, arrive } = __m(12);
 const { pathBounds, flattenPath } = __m(13);
-const { getGlyph } = __m(231);
+const { getGlyph } = __m(241);
 __e(__ns, { "draftGrid": () => draftGrid, "default": () => __default, "sheet": () => sheet, "paintBlueprint": () => paintBlueprint }, [], ["default","draftGrid","paintBlueprint","sheet"]);
 const CYANOTYPE = {
 bg: '#061733', surface: '#14407a', surface2: '#0b2a57', line: '#2d5d9c',
@@ -8533,7 +8805,7 @@ text: lettering,
 glyphs,
 });
 };
-__d[234] = function (__ns) {
+__d[244] = function (__ns) {
 const { attrs, n } = __m(5);
 const { pathBounds } = __m(13);
 __e(__ns, { "stack": () => stack, "onePen": () => onePen, "isLettering": () => isLettering, "minSide": () => minSide, "strokeOf": () => strokeOf, "fillOf": () => fillOf, "strokeOpts": () => strokeOpts, "once": () => once, "castText": () => castText }, [], ["castText","fillOf","isLettering","minSide","once","onePen","stack","strokeOf","strokeOpts"]);
@@ -8605,14 +8877,14 @@ const body = markup.replace(/ fill="#[0-9a-fA-F]{6}"/g, ` fill="${color}"`).repl
 return `<g transform="translate(${n(dx)} ${n(dy)})"${opacity < 1 ? ` opacity="${n(opacity, 3)}"` : ''}>${body}</g>`;
 }
 };
-__d[235] = function (__ns) {
+__d[245] = function (__ns) {
 const { defineTheme, defaultText, bezelCorner } = __m(14);
 const { rect, path, polygon, url, linearGradient, radialGradient, n, roundRectPath } = __m(5);
 const { mix } = __m(4);
 const { clamp, lerp, outCubic, pulse, phase, spring, arrive } = __m(12);
 const { hash } = __m(1);
-const { getGlyph } = __m(231);
-const { stack, onePen, isLettering, strokeOf, fillOf, strokeOpts, once, castText } = __m(234);
+const { getGlyph } = __m(241);
+const { stack, onePen, isLettering, strokeOf, fillOf, strokeOpts, once, castText } = __m(244);
 __e(__ns, { "default": () => __default, "keyFace": () => keyFace, "plate": () => plate, "paintChrome": () => paintChrome, "stateOf": () => stateOf }, [], ["default","keyFace","paintChrome","plate","stateOf"]);
 const NIGHT = {
 bg: '#07080a', surface: '#3b4048', surface2: '#1c1f24', line: '#4a5059',
@@ -8942,7 +9214,7 @@ g.dot(24, 24, 1.7);
 },
 });
 };
-__d[236] = function (__ns) {
+__d[246] = function (__ns) {
 const { attrs, n } = __m(5);
 const { pathBounds } = __m(13);
 __e(__ns, { "layered": () => layered, "coarse": () => coarse, "onePen": () => onePen, "isLettering": () => isLettering, "minSide": () => minSide, "strokeA": () => strokeA, "fillA": () => fillA }, [], ["coarse","fillA","isLettering","layered","minSide","onePen","strokeA"]);
@@ -9027,14 +9299,14 @@ strokeLinecap: cap, strokeLinejoin: join, strokeDasharray: dash, strokeDashoffse
 });
 const fillA = (color, opacity) => ({ fill: color, fillOpacity: opacity < 0.999 ? n(Math.max(0, opacity), 3) : null });
 };
-__d[237] = function (__ns) {
+__d[247] = function (__ns) {
 const { defineTheme, bezelCorner } = __m(14);
 const { rect, path, url, linearGradient, radialGradient, n, P, roundRectPath } = __m(5);
 const { mix } = __m(4);
 const { clamp, lerp, outCubic, pulse, phase } = __m(12);
 const { hash } = __m(1);
-const { getGlyph } = __m(231);
-const { layered, onePen, strokeA, fillA } = __m(236);
+const { getGlyph } = __m(241);
+const { layered, onePen, strokeA, fillA } = __m(246);
 __e(__ns, { "heatOf": () => heatOf, "bellows": () => bellows, "default": () => __default }, [], ["bellows","default","heatOf"]);
 const NIGHT = {
 bg: '#0b0605', surface: '#1c110c', surface2: '#0d0705', line: '#33211a',
@@ -9292,7 +9564,7 @@ g.polyline(pts, { role: i ? 'dim' : 'line', opacity: op });
 },
 });
 };
-__d[238] = function (__ns) {
+__d[248] = function (__ns) {
 const { attrs, n } = __m(5);
 const { clamp } = __m(12);
 const { rng } = __m(1);
@@ -9377,14 +9649,14 @@ f += `M${n(cx - rr, 1)} ${n(cy, 1)}a${n(rr, 2)} ${n(rr, 2)} 0 1 0 ${n(2 * rr, 2)
 return { fibers: d, flecks: f };
 }
 };
-__d[239] = function (__ns) {
+__d[249] = function (__ns) {
 const { defineTheme, defaultText, bezelCorner } = __m(14);
 const { rect, path, polygon, n, roundRectPath } = __m(5);
 const { clamp, outCubic, phase, arrive } = __m(12);
 const { pathBounds } = __m(13);
 const { capHeight, wrapText } = __m(11);
-const { layeredPaint, strokeA, fillA } = __m(238);
-const { getGlyph } = __m(231);
+const { layeredPaint, strokeA, fillA } = __m(248);
+const { getGlyph } = __m(241);
 __e(__ns, { "default": () => __default, "monoFace": () => face, "monoState": () => stateOf }, [], ["default","monoFace","monoState"]);
 const NIGHT = {
 bg: '#000000', surface: '#000000', surface2: '#000000', line: '#5e5e5e',
@@ -9600,14 +9872,14 @@ const lv = Math.round(clamp(s.level) * 3);
 },
 });
 };
-__d[240] = function (__ns) {
+__d[250] = function (__ns) {
 const { defineTheme, defaultText, defaultGlyphBox, bezelCorner } = __m(14);
 const { rect, path, url, linearGradient, radialGradient, n, P, roundRectPath } = __m(5);
 const { mix } = __m(4);
 const { clamp, lerp, outExpo, pulse, phase } = __m(12);
 const { hash } = __m(1);
-const { getGlyph } = __m(231);
-const { layered, onePen, isLettering, minSide, strokeA, fillA, coarse } = __m(236);
+const { getGlyph } = __m(241);
+const { layered, onePen, isLettering, minSide, strokeA, fillA, coarse } = __m(246);
 __e(__ns, { "current": () => current, "gas": () => gas, "default": () => __default }, [], ["current","default","gas"]);
 const NIGHT = {
 bg: '#030304', surface: '#0c0b10', surface2: '#050508', line: '#1d1b25',
@@ -9887,14 +10159,14 @@ g.line(x1, y1, x2, y2, { role: 'accent', weight: 0.8, opacity: n0 < 7 && i <= n0
 },
 });
 };
-__d[241] = function (__ns) {
+__d[251] = function (__ns) {
 const { defineTheme, defaultText, bezelCorner } = __m(14);
 const { rect, path, polygon, url, linearGradient, radialGradient, n, roundRectPath } = __m(5);
 const { mix } = __m(4);
 const { clamp, lerp, outCubic, pulse, phase, arrive } = __m(12);
-const { layeredPaint, strokeA, fillA, halftone, fibers, strHash } = __m(238);
+const { layeredPaint, strokeA, fillA, halftone, fibers, strHash } = __m(248);
 const { capHeight, wrapText } = __m(11);
-const { getGlyph } = __m(231);
+const { getGlyph } = __m(241);
 __e(__ns, { "default": () => __default, "paperStock": () => stock, "paperCard": () => card }, [], ["default","paperCard","paperStock"]);
 const DAY = {
 bg: '#e4d9c6', surface: '#f7f2e7', surface2: '#ede4d1', line: '#d6c8ad',
@@ -10133,7 +10405,7 @@ if (k > 0.02) g.line(x1, y1, x2, y2, { role: 'accent', weight: long ? 0.62 : 0.5
 },
 });
 };
-__d[242] = function (__ns) {
+__d[252] = function (__ns) {
 
 __e(__ns, { "FONT5": () => FONT5, "FONT3": () => FONT3, "charOf": () => charOf, "measureDots": () => measureDots, "textRuns": () => textRuns, "runsPath": () => runsPath, "pickFace": () => pickFace, "fallbackFaces": () => fallbackFaces, "fitFace": () => fitFace }, [], ["FONT3","FONT5","charOf","fallbackFaces","fitFace","measureDots","pickFace","runsPath","textRuns"]);
 const rows = (s) => s.trim().split(/\s+/);
@@ -10326,10 +10598,10 @@ const text = `${s.join('')}…`;
 return { ...f, text, width: measureDots(text, f.font, tracking) * f.d };
 }
 };
-__d[243] = function (__ns) {
+__d[253] = function (__ns) {
 const { path, n } = __m(5);
 const { capHeight } = __m(11);
-const { pickFace, fitFace, textRuns, runsPath, measureDots } = __m(242);
+const { pickFace, fitFace, textRuns, runsPath, measureDots } = __m(252);
 __e(__ns, { "bitmapText": () => bitmapText }, [], ["bitmapText"]);
 function bitmapText(k, role, str, o = {}, { paint } = {}) {
 const st = k.typeStyle(role, o);
@@ -10389,14 +10661,14 @@ out += path(runsPath(runs, f0.d), { fill: color, fillOpacity: o.opacity !== unde
 return out;
 }
 };
-__d[244] = function (__ns) {
+__d[254] = function (__ns) {
 const { defineTheme } = __m(14);
 const { rect, path, url, linearGradient, radialGradient, n, attrs } = __m(5);
 const { mix } = __m(4);
 const { clamp, phase, lerp } = __m(12);
 const { Pen } = __m(16);
-const { glyphRegistry } = __m(231);
-const { bitmapText } = __m(243);
+const { glyphRegistry } = __m(241);
+const { bitmapText } = __m(253);
 __e(__ns, { "default": () => __default, "tube": () => tube, "raster": () => raster, "scanPath": () => scanPath }, [], ["default","raster","scanPath","tube"]);
 function raster(k) {
 const m = k.ctx.kind === 'key' ? Math.min(k.w, k.h) : Math.max(72, 72 * k.m.u);
@@ -10663,7 +10935,7 @@ overlay: rect({ width: k.w, height: k.h, fill: k.dark ? C.ink : '#ffffff', fillO
 glyphs: GLYPHS,
 });
 };
-__d[245] = function (__ns) {
+__d[255] = function (__ns) {
 const { flattenPath, insidePolys, distToPolys, transformPath } = __m(13);
 __e(__ns, { "MATRIX": () => MATRIX, "LEVELS": () => LEVELS, "applyTf": () => applyTf, "flatD": () => flatD, "quantize": () => quantize, "rasterize": () => rasterize, "bayer": () => bayer, "latticePath": () => latticePath, "cellsToRuns": () => cellsToRuns }, [], ["LEVELS","MATRIX","applyTf","bayer","cellsToRuns","flatD","latticePath","quantize","rasterize"]);
 const MATRIX = Object.freeze({ n: 15, x0: 6, span: 36 });
@@ -10809,13 +11081,13 @@ if (i < xs.length) { s = xs[i]; p = xs[i]; }
 return runs;
 }
 };
-__d[246] = function (__ns) {
+__d[256] = function (__ns) {
 const { defineTheme } = __m(14);
 const { rect, path, n, attrs } = __m(5);
 const { mix } = __m(4);
 const { clamp, phase, smoothstep, arrive } = __m(12);
-const { rasterize, bayer, latticePath, cellsToRuns, MATRIX } = __m(245);
-const { bitmapText } = __m(243);
+const { rasterize, bayer, latticePath, cellsToRuns, MATRIX } = __m(255);
+const { bitmapText } = __m(253);
 __e(__ns, { "cellPx": () => cellPx, "default": () => __default, "lcd": () => lcd, "lattice": () => lattice, "frame": () => frame, "dither": () => dither }, [], ["cellPx","default","dither","frame","lattice","lcd"]);
 const N = MATRIX.n; 
 const CU = MATRIX.span / N; 
@@ -11226,13 +11498,13 @@ overlay: path(`M0 0H${k.w}V${c}H${c}V${k.h}H0Z`, { fill: k.dark ? '#000000' : mi
 glyphs: OVERRIDES,
 });
 };
-__d[247] = function (__ns) {
+__d[257] = function (__ns) {
 const { defineTheme, defaultText, bezelCorner } = __m(14);
 const { rect, path, polygon, url, linearGradient, radialGradient, n, roundRectPath } = __m(5);
 const { mix } = __m(4);
 const { clamp, lerp, pulse, phase, outCubic, arrive, outExpo } = __m(12);
-const { getGlyph } = __m(231);
-const { stack, onePen, isLettering, strokeOf, fillOf, strokeOpts, once } = __m(234);
+const { getGlyph } = __m(241);
+const { stack, onePen, isLettering, strokeOf, fillOf, strokeOpts, once } = __m(244);
 __e(__ns, { "default": () => __default, "keyTile": () => keyTile, "plaque": () => plaque, "paintPorcelain": () => paintPorcelain, "stateOf": () => stateOf }, [], ["default","keyTile","paintPorcelain","plaque","stateOf"]);
 const DAY = {
 bg: '#d6d9e1', surface: '#fbfcfe', surface2: '#d6deeb', line: '#c3cbdb',
@@ -11520,7 +11792,7 @@ g.polygon([[bx, by], [lx, ly], [tx, ty], [rx, ry]], { role: 'accent', fill: true
 },
 });
 };
-__d[248] = function (__ns) {
+__d[258] = function (__ns) {
 const { defineTheme, defaultPaint, cornerFlag } = __m(14);
 const { TOKENS } = __m(3);
 const { rect, path, polygon, url, linearGradient, radialGradient, n, roundRectPath } = __m(5);
@@ -11636,18 +11908,18 @@ overlay: ring(-split, h - 60, 0.7) + ring(split, h + 60, 0.7) + ring(0, h, 0.9),
 },
 });
 };
-__d[249] = function (__ns) {
-const m0 = __m(232);
-const m1 = __m(233);
-const m2 = __m(235);
-const m3 = __m(237);
-const m4 = __m(239);
-const m5 = __m(240);
-const m6 = __m(241);
-const m7 = __m(244);
-const m8 = __m(246);
-const m9 = __m(247);
-const m10 = __m(248);
+__d[259] = function (__ns) {
+const m0 = __m(242);
+const m1 = __m(243);
+const m2 = __m(245);
+const m3 = __m(247);
+const m4 = __m(249);
+const m5 = __m(250);
+const m6 = __m(251);
+const m7 = __m(254);
+const m8 = __m(256);
+const m9 = __m(257);
+const m10 = __m(258);
 __e(__ns, { "THEME_MODULES": () => THEME_MODULES }, [], ["THEME_MODULES"]);
 const THEME_MODULES = [
 ['aurora.js', m0],
@@ -11663,8 +11935,8 @@ const THEME_MODULES = [
 ['prism.js', m10],
 ];
 };
-__d[250] = function (__ns) {
-const { THEME_MODULES } = __m(249);
+__d[260] = function (__ns) {
+const { THEME_MODULES } = __m(259);
 __e(__ns, { "DEFAULT_THEME": () => DEFAULT_THEME, "themeRegistry": () => themeRegistry, "allThemes": () => allThemes, "THEME_IDS": () => THEME_IDS, "useTheme": () => useTheme }, [], ["DEFAULT_THEME","THEME_IDS","allThemes","themeRegistry","useTheme"]);
 const DEFAULT_THEME = 'prism';
 let cache = null;
@@ -11694,12 +11966,12 @@ if (!t) throw new Error('no themes registered');
 return Object.freeze({ ...t, ...t.resolve(m) });
 }
 };
-__d[251] = function (__ns) {
+__d[261] = function (__ns) {
 const { getDevice, keySize, spanGrid, stripGrid, deckLayout, screenOf } = __m(0);
 const { rng: makeRng, hash, noise1, noise2, fbm1, metric, series } = __m(1);
 const { getGallery } = __m(2);
-const { useTheme } = __m(250);
-const { glyphRegistry } = __m(231);
+const { useTheme } = __m(260);
+const { glyphRegistry } = __m(241);
 __e(__ns, { "MOTION_LEVELS": () => MOTION_LEVELS, "resolveParams": () => resolveParams, "clockOf": () => clockOf, "SCREEN_TARGETS": () => SCREEN_TARGETS, "screenTarget": () => screenTarget, "DEFAULT_DEVICE": () => DEFAULT_DEVICE, "createContext": () => createContext, "gameGrid": () => gameGrid }, [], ["DEFAULT_DEVICE","MOTION_LEVELS","SCREEN_TARGETS","clockOf","createContext","gameGrid","resolveParams","screenTarget"]);
 const DEFAULT_NOW = Date.UTC(2026, 3, 14, 9, 41, 0); 
 const MOTION_LEVELS = Object.freeze(['full', 'calm', 'still']);
@@ -11805,7 +12077,7 @@ const ev = opts.gameEvent;
 return { game, gamePrev: opts.gamePrev ?? null, gameEvent: ev ? { ...ev, age: Number.isFinite(ev.age) ? Math.max(0, ev.age) : 0 } : null };
 }
 };
-__d[252] = function (__ns) {
+__d[262] = function (__ns) {
 const { parsePath, arcBounds } = __m(13);
 __e(__ns, { "splitElements": () => splitElements, "parseTransform": () => parseTransform, "pathHullBounds": () => pathHullBounds, "elementBounds": () => elementBounds, "prepareCull": () => prepareCull, "cullInner": () => cullInner }, [], ["cullInner","elementBounds","parseTransform","pathHullBounds","prepareCull","splitElements"]);
 const NUM = (v, d = 0) => { const x = parseFloat(v); return Number.isFinite(x) ? x : d; };
@@ -11983,10 +12255,10 @@ const defs = prep.defs.filter((d) => !d.id || want.has(d.id)).map((d) => d.str).
 return `${prep.title}${defs ? `<defs>${defs}</defs>` : ''}${kept.map((e) => e.str).join('')}`;
 }
 };
-__d[253] = function (__ns) {
-const { createContext } = __m(251);
+__d[263] = function (__ns) {
+const { createContext } = __m(261);
 const { svgWindow, suffixIds, n, SVG_NS } = __m(5);
-const { prepareCull, cullInner } = __m(252);
+const { prepareCull, cullInner } = __m(262);
 __e(__ns, { "renderFacet": () => renderFacet, "renderWithContext": () => renderWithContext, "render": () => render, "renderKey": () => renderKey, "renderSpan": () => renderSpan, "renderStrip": () => renderStrip, "renderScreen": () => renderScreen, "renderDeck": () => renderDeck, "stillTime": () => stillTime, "nextState": () => nextState }, [], ["nextState","render","renderDeck","renderFacet","renderKey","renderScreen","renderSpan","renderStrip","renderWithContext","stillTime"]);
 function renderFacet(facet, opts = {}) {
 const ctx = createContext(facet, opts);
@@ -12049,9 +12321,9 @@ if (!n || facet.press === 'momentary' || facet.press === 'none') return state;
 return (state + 1) % n;
 }
 };
-__d[254] = function (__ns) {
+__d[264] = function (__ns) {
 const { deviceLayout, getDevice } = __m(0);
-const { useTheme } = __m(250);
+const { useTheme } = __m(260);
 const { esc, n } = __m(5);
 const { textPath, pad2 } = __m(11);
 __e(__ns, { "DEVICE_CSS": () => DEVICE_CSS, "infobarSvg": () => infobarSvg, "deviceMarkup": () => deviceMarkup }, [], ["DEVICE_CSS","deviceMarkup","infobarSvg"]);
@@ -12156,7 +12428,7 @@ const cls = `pdk-device pdk-${d.id}${T.dark ? '' : ' pdk-day'}${interactive ? ' 
 return `<div class="${cls}"${opts.id ? ` id="${esc(opts.id)}"` : ''} data-model="${d.id}" role="group" aria-label="${esc(opts.label || `${d.name} (virtual)`)}" style="${style}">${inner}</div>`;
 }
 };
-__d[255] = function (__ns) {
+__d[265] = function (__ns) {
 const { TOKENS } = __m(3);
 __e(__ns, { "FPS_CAP": () => FPS_CAP, "effectiveFps": () => effectiveFps, "quantize": () => quantize, "createScheduler": () => createScheduler, "createChangeGovernor": () => createChangeGovernor }, [], ["FPS_CAP","createChangeGovernor","createScheduler","effectiveFps","quantize"]);
 const FPS_CAP = TOKENS.deck.fps.cap;
@@ -12237,7 +12509,7 @@ get history() { return [...hist]; },
 };
 }
 };
-__d[256] = function (__ns) {
+__d[266] = function (__ns) {
 
 __e(__ns, { "LINK_CHANNELS": () => LINK_CHANNELS, "linksOf": () => linksOf, "validateLink": () => validateLink, "readoutOf": () => readoutOf, "createLinkBus": () => createLinkBus }, [], ["LINK_CHANNELS","createLinkBus","linksOf","readoutOf","validateLink"]);
 const LINK_CHANNELS = Object.freeze(['mic.muted', 'camera.on', 'stream.live', 'volume.level', 'volume.muted', 'game']);
@@ -12352,10 +12624,10 @@ get size() { return vals.size; },
 return bus;
 }
 };
-__d[257] = function (__ns) {
+__d[267] = function (__ns) {
 const { GALLERIES, getGallery } = __m(2);
 const { KEY_SIZES, FAMILY_DEVICES, getDevice } = __m(0);
-const { validateLink } = __m(256);
+const { validateLink } = __m(266);
 __e(__ns, { "SURFACES": () => SURFACES, "PRESS": () => PRESS, "PARAM_TYPES": () => PARAM_TYPES, "DATA_KEYS": () => DATA_KEYS, "SCREENS": () => SCREENS, "TONES": () => TONES, "GAME_SURFACES": () => GAME_SURFACES, "GAME_TICK_MAX_HZ": () => GAME_TICK_MAX_HZ, "normalizeFacet": () => normalizeFacet, "validateFacet": () => validateFacet, "renderTargets": () => renderTargets }, [], ["DATA_KEYS","GAME_SURFACES","GAME_TICK_MAX_HZ","PARAM_TYPES","PRESS","SCREENS","SURFACES","TONES","normalizeFacet","renderTargets","validateFacet"]);
 const SURFACES = ['key', 'span', 'strip', 'screen', 'deck'];
 const PRESS = ['cycle', 'toggle', 'momentary', 'none'];
@@ -12463,11 +12735,11 @@ default: return [];
 }
 }
 };
-__d[258] = function (__ns) {
-const { stillTime } = __m(253);
-const { quantize } = __m(255);
+__d[268] = function (__ns) {
+const { stillTime } = __m(263);
+const { quantize } = __m(265);
 const { getDevice, deviceLayout } = __m(0);
-const { readoutOf } = __m(256);
+const { readoutOf } = __m(266);
 __e(__ns, { "DIAL_SWEEP": () => DIAL_SWEEP, "TAP_SLOP": () => TAP_SLOP, "DRAG_PX": () => DRAG_PX, "WHEEL_PX": () => WHEEL_PX, "clamp01": () => clamp01, "dialAngle": () => dialAngle, "dialStep": () => dialStep, "stepValue": () => stepValue, "wheelTicks": () => wheelTicks, "dragTicks": () => dragTicks, "isTap": () => isTap, "segmentAt": () => segmentAt, "HOLD_S": () => HOLD_S, "stripTouch": () => stripTouch, "inputState": () => inputState, "fitWidth": () => fitWidth, "frameTime": () => frameTime, "slotLabel": () => slotLabel, "gameCell": () => gameCell, "gameAnnouncement": () => gameAnnouncement, "keyPool": () => keyPool, "showcaseLayout": () => showcaseLayout, "KEY_SIZE_DEVICES": () => KEY_SIZE_DEVICES, "FAMILY": () => FAMILY, "devicesFor": () => devicesFor }, [], ["DIAL_SWEEP","DRAG_PX","FAMILY","HOLD_S","KEY_SIZE_DEVICES","TAP_SLOP","WHEEL_PX","clamp01","devicesFor","dialAngle","dialStep","dragTicks","fitWidth","frameTime","gameAnnouncement","gameCell","inputState","isTap","keyPool","segmentAt","showcaseLayout","slotLabel","stepValue","stripTouch","wheelTicks"]);
 const DIAL_SWEEP = 270;
 const TAP_SLOP = 5;
@@ -12612,8 +12884,8 @@ const t = (facet.targets || []).map((x) => x.device).filter(Boolean);
 return t.length ? [...new Set(t)] : FAMILY;
 }
 };
-__d[259] = function (__ns) {
-const { createContext, gameGrid } = __m(251);
+__d[269] = function (__ns) {
+const { createContext, gameGrid } = __m(261);
 __e(__ns, { "gameGrid": () => gameGrid, "GAME_EVENTS": () => GAME_EVENTS, "TICK_MAX_HZ": () => TICK_MAX_HZ, "GAME_STATE_MAX": () => GAME_STATE_MAX, "DEFAULT_ANIMATE": () => DEFAULT_ANIMATE, "GAME_FPS": () => GAME_FPS, "GAME_RESET_HOLD_S": () => GAME_RESET_HOLD_S, "rngSeed": () => rngSeed, "rngNext": () => rngNext, "rngInt": () => rngInt, "rngShuffle": () => rngShuffle, "mix32": () => mix32, "gameArgs": () => gameArgs, "isPlainJson": () => isPlainJson, "createGameHost": () => createGameHost, "replayGame": () => replayGame }, [], ["DEFAULT_ANIMATE","GAME_EVENTS","GAME_FPS","GAME_RESET_HOLD_S","GAME_STATE_MAX","TICK_MAX_HZ","createGameHost","gameArgs","gameGrid","isPlainJson","mix32","replayGame","rngInt","rngNext","rngSeed","rngShuffle"]);
 const GAME_EVENTS = ['press', 'release', 'rotate', 'touch', 'tick', 'reset'];
 const TICK_MAX_HZ = 4;
@@ -12738,16 +13010,16 @@ for (const ev of events) h.dispatch(ev);
 return h.state;
 }
 };
-__d[260] = function (__ns) {
-const { render, nextState } = __m(253);
+__d[270] = function (__ns) {
+const { render, nextState } = __m(263);
 const { getDevice, keySize } = __m(0);
-const { deviceMarkup, DEVICE_CSS } = __m(254);
-const { createScheduler, effectiveFps, createChangeGovernor } = __m(255);
-const { normalizeFacet } = __m(257);
+const { deviceMarkup, DEVICE_CSS } = __m(264);
+const { createScheduler, effectiveFps, createChangeGovernor } = __m(265);
+const { normalizeFacet } = __m(267);
 const { esc } = __m(5);
-const { dialAngle, dialStep, stepValue, wheelTicks, dragTicks, isTap, stripTouch, inputState, HOLD_S, fitWidth, frameTime, slotLabel, gameCell, gameAnnouncement } = __m(258);
-const { createGameHost, GAME_FPS, GAME_RESET_HOLD_S } = __m(259);
-const { createLinkBus, readoutOf, linksOf } = __m(256);
+const { dialAngle, dialStep, stepValue, wheelTicks, dragTicks, isTap, stripTouch, inputState, HOLD_S, fitWidth, frameTime, slotLabel, gameCell, gameAnnouncement } = __m(268);
+const { createGameHost, GAME_FPS, GAME_RESET_HOLD_S } = __m(269);
+const { createLinkBus, readoutOf, linksOf } = __m(266);
 __e(__ns, { "putSvg": () => putSvg, "prefersReducedMotion": () => prefersReducedMotion, "setGlobalMotion": () => setGlobalMotion, "isGlobalMotionPaused": () => isGlobalMotionPaused, "deckStats": () => deckStats, "gameInput": () => gameInput, "gameFps": () => gameFps, "DeckView": () => DeckView, "KeyView": () => KeyView, "mountDevice": () => mountDevice, "mountKey": () => mountKey }, [], ["DeckView","KeyView","deckStats","gameFps","gameInput","isGlobalMotionPaused","mountDevice","mountKey","prefersReducedMotion","putSvg","setGlobalMotion"]);
 const nowMs = () => performance.now();
 const BEAT_MS = 1000 / 15;
@@ -13316,7 +13588,7 @@ set(next = {}) { Object.assign(this.opts, next); if (next.facet) this.sp = spec(
 const mountDevice = (el, opts) => new DeckView(el, opts);
 const mountKey = (el, facet, opts) => new KeyView(el, facet, opts);
 };
-__d[261] = function (__ns) {
+__d[271] = function (__ns) {
 
 __e(__ns, { "createModuleLoader": () => createModuleLoader, "loadIsland": () => loadIsland }, [], ["createModuleLoader","loadIsland"]);
 const IMPORT_RE = /(^|\n)(\s*(?:import|export)\s(?:[^'"]*?\sfrom\s*)?)(['"])([^'"]+)\3/g;
@@ -13366,15 +13638,15 @@ web: async () => loader.import('prism-deck/src/web/index.js'),
 };
 }
 };
-__d[262] = function (__ns) {
-const __r0 = __m(260);
-const __r1 = __m(261);
-const __r2 = __m(256);
-__m(258);
-__e(__ns, { "DeckView": () => __r0.DeckView, "KeyView": () => __r0.KeyView, "mountDevice": () => __r0.mountDevice, "mountKey": () => __r0.mountKey, "setGlobalMotion": () => __r0.setGlobalMotion, "isGlobalMotionPaused": () => __r0.isGlobalMotionPaused, "prefersReducedMotion": () => __r0.prefersReducedMotion, "deckStats": () => __r0.deckStats, "loadIsland": () => __r1.loadIsland, "createModuleLoader": () => __r1.createModuleLoader, "createLinkBus": () => __r2.createLinkBus }, [258], ["DIAL_SWEEP","DRAG_PX","DeckView","FAMILY","HOLD_S","KEY_SIZE_DEVICES","KeyView","TAP_SLOP","WHEEL_PX","clamp01","createLinkBus","createModuleLoader","deckStats","devicesFor","dialAngle","dialStep","dragTicks","fitWidth","frameTime","gameAnnouncement","gameCell","inputState","isGlobalMotionPaused","isTap","keyPool","loadIsland","mountDevice","mountKey","prefersReducedMotion","segmentAt","setGlobalMotion","showcaseLayout","slotLabel","stepValue","stripTouch","wheelTicks"]);
+__d[272] = function (__ns) {
+const __r0 = __m(270);
+const __r1 = __m(271);
+const __r2 = __m(266);
+__m(268);
+__e(__ns, { "DeckView": () => __r0.DeckView, "KeyView": () => __r0.KeyView, "mountDevice": () => __r0.mountDevice, "mountKey": () => __r0.mountKey, "setGlobalMotion": () => __r0.setGlobalMotion, "isGlobalMotionPaused": () => __r0.isGlobalMotionPaused, "prefersReducedMotion": () => __r0.prefersReducedMotion, "deckStats": () => __r0.deckStats, "loadIsland": () => __r1.loadIsland, "createModuleLoader": () => __r1.createModuleLoader, "createLinkBus": () => __r2.createLinkBus }, [268], ["DIAL_SWEEP","DRAG_PX","DeckView","FAMILY","HOLD_S","KEY_SIZE_DEVICES","KeyView","TAP_SLOP","WHEEL_PX","clamp01","createLinkBus","createModuleLoader","deckStats","devicesFor","dialAngle","dialStep","dragTicks","fitWidth","frameTime","gameAnnouncement","gameCell","inputState","isGlobalMotionPaused","isTap","keyPool","loadIsland","mountDevice","mountKey","prefersReducedMotion","segmentAt","setGlobalMotion","showcaseLayout","slotLabel","stepValue","stripTouch","wheelTicks"]);
 
 };
-__d[263] = function (__ns) {
+__d[273] = function (__ns) {
 const { SvgCanvas, svgDoc, n, attrs } = __m(5);
 const { drawGlyph, Pen } = __m(16);
 __e(__ns, { "metricsFor": () => metricsFor, "KeySurface": () => KeySurface, "PanelSurface": () => PanelSurface, "surface": () => surface }, [], ["KeySurface","PanelSurface","metricsFor","surface"]);
@@ -13504,8 +13776,8 @@ return svgDoc({ w: this.w, h: this.h, defs: this.defs, body: (fx.under || '') + 
 class PanelSurface extends Surface {}
 const surface = (ctx) => (ctx.kind === 'key' ? new KeySurface(ctx) : new PanelSurface(ctx));
 };
-__d[264] = function (__ns) {
-const { KeySurface, PanelSurface } = __m(263);
+__d[274] = function (__ns) {
+const { KeySurface, PanelSurface } = __m(273);
 const { n, attrs } = __m(5);
 __e(__ns, { "childContext": () => childContext, "compose": () => compose, "keyInto": () => keyInto }, [], ["childContext","compose","keyInto"]);
 function childContext(ctx, rect, { kind = 'key', tag = 'c', state, tone, hue } = {}) {
@@ -13527,8 +13799,8 @@ return out;
 }
 const keyInto = (parent, cell, draw, opts = {}) => compose(parent, cell, draw, { kind: 'key', tag: `k${cell.i ?? ''}`, ...opts });
 };
-__d[265] = function (__ns) {
-const { splitElements, elementBounds } = __m(252);
+__d[275] = function (__ns) {
+const { splitElements, elementBounds } = __m(262);
 const { n } = __m(5);
 __e(__ns, { "toDeviceSvg": () => toDeviceSvg }, [], ["toDeviceSvg"]);
 const PAINT = /\s(?:fill|stroke|fill-opacity|stroke-opacity|opacity|stroke-width|stroke-dasharray|stroke-dashoffset|stroke-linecap|stroke-linejoin|stroke-miterlimit|fill-rule|clip-rule)="[^"]*"/g;
@@ -13589,9 +13861,9 @@ return Math.abs(want - h) < 0.005 ? open : open.replace(/\sheight="[^"]*"/, ` he
 return out;
 }
 };
-__d[266] = function (__ns) {
-const __r0 = __m(263);
-const __r1 = __m(264);
+__d[276] = function (__ns) {
+const __r0 = __m(273);
+const __r1 = __m(274);
 const __r2 = __m(5);
 const __r3 = __m(11);
 const __r4 = __m(15);
@@ -13599,13 +13871,13 @@ const __r5 = __m(4);
 __m(12);
 const __r7 = __m(1);
 const __r8 = __m(13);
-const __r9 = __m(265);
+const __r9 = __m(275);
 __e(__ns, { "surface": () => __r0.surface, "KeySurface": () => __r0.KeySurface, "PanelSurface": () => __r0.PanelSurface, "metricsFor": () => __r0.metricsFor, "compose": () => __r1.compose, "keyInto": () => __r1.keyInto, "n": () => __r2.n, "esc": () => __r2.esc, "attrs": () => __r2.attrs, "el": () => __r2.el, "g": () => __r2.g, "defs": () => __r2.defs, "rect": () => __r2.rect, "circle": () => __r2.circle, "ellipse": () => __r2.ellipse, "line": () => __r2.line, "path": () => __r2.path, "polyline": () => __r2.polyline, "polygon": () => __r2.polygon, "points": () => __r2.points, "url": () => __r2.url, "linearGradient": () => __r2.linearGradient, "radialGradient": () => __r2.radialGradient, "fill": () => __r2.fill, "stroke": () => __r2.stroke, "translate": () => __r2.translate, "rotate": () => __r2.rotate, "scale": () => __r2.scale, "P": () => __r2.P, "roundRectPath": () => __r2.roundRectPath, "svgDoc": () => __r2.svgDoc, "SvgCanvas": () => __r2.SvgCanvas, "svgInner": () => __r2.svgInner, "svgWindow": () => __r2.svgWindow, "suffixIds": () => __r2.suffixIds, "base64": () => __r2.base64, "svgDataUrl": () => __r2.svgDataUrl, "textPath": () => __r3.textPath, "textOutline": () => __r3.textOutline, "measureText": () => __r3.measureText, "fitText": () => __r3.fitText, "wrapText": () => __r3.wrapText, "ellipsize": () => __r3.ellipsize, "capHeight": () => __r3.capHeight, "xHeight": () => __r3.xHeight, "compact": () => __r3.compact, "pad2": () => __r3.pad2, "clockText": () => __r3.clockText, "textLayout": () => __r3.layout, "polar": () => __r4.polar, "arcPath": () => __r4.arcPath, "sectorPath": () => __r4.sectorPath, "arc": () => __r4.arc, "ring": () => __r4.ring, "spectrumArc": () => __r4.spectrumArc, "ticks": () => __r4.ticks, "needle": () => __r4.needle, "sparkPoints": () => __r4.sparkPoints, "sparkPath": () => __r4.sparkPath, "sparkHead": () => __r4.sparkHead, "sparkline": () => __r4.sparkline, "bars": () => __r4.bars, "segments": () => __r4.segments, "hairline": () => __r4.hairline, "spectrumStops": () => __r4.spectrumStops, "glowStops": () => __r4.glowStops, "parseHex": () => __r5.parseHex, "toHex": () => __r5.toHex, "hexToOklab": () => __r5.hexToOklab, "oklabToHex": () => __r5.oklabToHex, "hexToOklch": () => __r5.hexToOklch, "oklch": () => __r5.oklch, "mix": () => __r5.mix, "shade": () => __r5.shade, "saturate": () => __r5.saturate, "luminance": () => __r5.luminance, "contrast": () => __r5.contrast, "bestInk": () => __r5.bestInk, "lambdaOf": () => __r5.lambdaOf, "hueRamp": () => __r5.hueRamp, "rng": () => __r7.rng, "hash": () => __r7.hash, "noise1": () => __r7.noise1, "noise2": () => __r7.noise2, "fbm1": () => __r7.fbm1, "metric": () => __r7.metric, "series": () => __r7.series, "parsePath": () => __r8.parsePath, "flattenPath": () => __r8.flattenPath, "pathBounds": () => __r8.pathBounds, "insidePolys": () => __r8.insidePolys, "distToPolys": () => __r8.distToPolys, "transformPath": () => __r8.transformPath, "toDeviceSvg": () => __r9.toDeviceSvg }, [12], ["KeySurface","P","PanelSurface","SvgCanvas","arc","arcPath","arrive","attrs","bars","base64","bestInk","capHeight","circle","clamp","clockText","compact","compose","contrast","defs","distToPolys","el","ellipse","ellipsize","esc","fbm1","fill","fitText","flattenPath","g","glowStops","hairline","hash","hexToOklab","hexToOklch","hueRamp","inCubic","inExpo","inOutCubic","inOutExpo","inOutQuad","inOutSine","inQuad","insidePolys","invLerp","keyInto","lambdaOf","lerp","line","linear","linearGradient","luminance","measureText","metric","metricsFor","mix","n","needle","noise1","noise2","oklabToHex","oklch","outBack","outCubic","outElastic","outExpo","outQuad","outQuart","pad2","parseHex","parsePath","path","pathBounds","phase","pingpong","points","polar","polygon","polyline","pulse","radialGradient","rect","remap","ring","rng","rotate","roundRectPath","saturate","scale","sectorPath","segments","series","shade","smoothstep","sparkHead","sparkPath","sparkPoints","sparkline","spectrumArc","spectrumStops","spring","stroke","suffixIds","surface","svgDataUrl","svgDoc","svgInner","svgWindow","textLayout","textOutline","textPath","ticks","toDeviceSvg","toHex","transformPath","translate","url","wrap360","wrapText","xHeight"]);
 
 };
-__d[267] = function (__ns) {
-const { compose, rect, path, circle, n, P, url, linearGradient, roundRectPath, PanelSurface } = __m(266);
-const { childContext } = __m(264);
+__d[277] = function (__ns) {
+const { compose, rect, path, circle, n, P, url, linearGradient, roundRectPath, PanelSurface } = __m(276);
+const { childContext } = __m(274);
 const { capHeight, measureText, pad2 } = __m(11);
 const { arcPath, polar, sparkPath, sparkPoints } = __m(15);
 const { clamp, lerp } = __m(12);
@@ -13810,7 +14082,7 @@ const day = doy - Math.floor((153 * mp + 2) / 5) + 1, month = mp < 10 ? mp + 3 :
 return { h: Math.floor(rem / 3600000), m: Math.floor((rem % 3600000) / 60000), dow: ((days % 7) + 11) % 7, day, month };
 }
 };
-__d[268] = function (__ns) {
+__d[278] = function (__ns) {
 const { hash, metric, fbm1 } = __m(1);
 const { clamp, smoothstep } = __m(12);
 __e(__ns, { "BPM": () => BPM, "BEAT": () => BEAT, "PHRASE": () => PHRASE, "pnoise": () => pnoise, "voices": () => voices, "grooveLevel": () => grooveLevel, "grooveBody": () => grooveBody, "simAudio": () => simAudio, "simSpectrum": () => simSpectrum, "SIM_MACHINE": () => SIM_MACHINE, "NET_MAX": () => NET_MAX, "simMetric": () => simMetric, "simSeries": () => simSeries, "simCores": () => simCores, "simSystem": () => simSystem, "PLAYLIST": () => PLAYLIST, "simMedia": () => simMedia, "AGENDA": () => AGENDA, "simCalendar": () => simCalendar }, [], ["AGENDA","BEAT","BPM","NET_MAX","PHRASE","PLAYLIST","SIM_MACHINE","grooveBody","grooveLevel","pnoise","simAudio","simCalendar","simCores","simMedia","simMetric","simSeries","simSpectrum","simSystem","voices"]);
@@ -13958,8 +14230,8 @@ const next = AGENDA.find((e) => e.at > mins);
 return { next: next ? ev(next) : ev(AGENDA[0], 1), ...(current ? { current: ev(current) } : {}) };
 }
 };
-__d[269] = function (__ns) {
-const { simAudio, simSpectrum, simSeries, simMetric, simSystem, simMedia, simCalendar, NET_MAX, SIM_MACHINE } = __m(268);
+__d[279] = function (__ns) {
+const { simAudio, simSpectrum, simSeries, simMetric, simSystem, simMedia, simCalendar, NET_MAX, SIM_MACHINE } = __m(278);
 const { clamp } = __m(12);
 __e(__ns, { "audioOf": () => audioOf, "resample": () => resample, "spectrumOf": () => spectrumOf, "metricOf": () => metricOf, "tempOf": () => tempOf, "netOf": () => netOf, "seriesOf": () => seriesOf, "sysOf": () => sysOf, "mediaOf": () => mediaOf, "calendarOf": () => calendarOf, "rateText": () => rateText, "bytesText": () => bytesText, "pct": () => pct }, [], ["audioOf","bytesText","calendarOf","mediaOf","metricOf","netOf","pct","rateText","resample","seriesOf","spectrumOf","sysOf","tempOf"]);
 const has = (o, k) => o && Object.hasOwn(o, k);
@@ -14063,11 +14335,11 @@ return `${x >= 100 || i === 0 ? Math.round(x) : x.toFixed(1)} ${u[i]}`;
 }
 const pct = (v) => (v === null || v === undefined ? '—' : `${Math.round(clamp(v) * 100)}%`);
 };
-__d[270] = function (__ns) {
-const { path, roundRectPath } = __m(266);
+__d[280] = function (__ns) {
+const { path, roundRectPath } = __m(276);
 const { capHeight } = __m(11);
-const { metricOf, tempOf, netOf, seriesOf, sysOf, rateText, calendarOf } = __m(269);
-const { header, stat, meter, segmented, gauge, spark, hhmm, localParts, DAYS, MONTHS, HUE, clamp } = __m(267);
+const { metricOf, tempOf, netOf, seriesOf, sysOf, rateText, calendarOf } = __m(279);
+const { header, stat, meter, segmented, gauge, spark, hhmm, localParts, DAYS, MONTHS, HUE, clamp } = __m(277);
 __e(__ns, { "cpuCores": () => cpuCores, "cpuGauge": () => cpuGauge, "gpuGauge": () => gpuGauge, "memory": () => memory, "network": () => network, "volume": () => volume, "clock": () => clock }, [], ["clock","cpuCores","cpuGauge","gpuGauge","memory","network","volume"]);
 const split = (s) => { const i = s.lastIndexOf(' '); return i < 0 ? [s, ''] : [s.slice(0, i), s.slice(i + 1)]; };
 const pctOf = (v) => (v === null ? '—' : Math.round(v * 100));
@@ -14169,10 +14441,10 @@ const dow = ((c.dow + 6) % 7) + 1;
 return Math.max(1, Math.floor((doy - dow + 10) / 7));
 }
 };
-__d[271] = function (__ns) {
-const { surface } = __m(266);
-const { galleon, HUE, GALLEON_PARAMS, clamp } = __m(267);
-const { clock, volume, cpuGauge, network } = __m(270);
+__d[281] = function (__ns) {
+const { surface } = __m(276);
+const { galleon, HUE, GALLEON_PARAMS, clamp } = __m(277);
+const { clock, volume, cpuGauge, network } = __m(280);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'screen-galleon-dashboard',
@@ -14207,14 +14479,14 @@ return galleon(ctx, surface(ctx), [
 },
 };
 };
-__d[272] = function (__ns) {
-const { surface, compose, keyInto, svgInner, n } = __m(266);
-const { createContext } = __m(251);
-const { normalizeFacet } = __m(257);
-const { default: dashboardModule } = __m(271);
-const { glyphRegistry } = __m(231);
+__d[282] = function (__ns) {
+const { surface, compose, keyInto, svgInner, n } = __m(276);
+const { createContext } = __m(261);
+const { normalizeFacet } = __m(267);
+const { default: dashboardModule } = __m(281);
+const { glyphRegistry } = __m(241);
 const { arc } = __m(15);
-const { splitElements } = __m(252);
+const { splitElements } = __m(262);
 const { lerp } = __m(12);
 __e(__ns, { "SHOWCASE": () => SHOWCASE, "showcaseKey": () => showcaseKey, "themeFacet": () => themeFacet }, [], ["SHOWCASE","showcaseKey","themeFacet"]);
 const SHOWCASE = [
@@ -14283,8 +14555,8 @@ return d.svg();
 };
 }
 };
-__d[273] = function (__ns) {
-const { themeFacet } = __m(272);
+__d[283] = function (__ns) {
+const { themeFacet } = __m(282);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = themeFacet('prism', {
 title: 'Prism',

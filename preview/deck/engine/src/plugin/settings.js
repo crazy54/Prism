@@ -27,7 +27,7 @@ import { __m as __bm } from '../../facets.bundle.js';
 //     gamelink: { enabled, port } (Game Link, prism-play: the CS2 / companion listener binds only while enabled — set by
 //               "Connect CS2" in the PI; port null = 38140 with fallbacks. Tokens never live here: gamelink.json) }
 
-const { findFacet, allFacets } = __bm(618);
+const { findFacet, allFacets } = __bm(659);
 import { normalizeLimits } from './budget.js';
 
 export const ACTION_FACET = 'facet';
@@ -105,11 +105,14 @@ export function normalizeGlobals(raw = {}) {
 }
 
 // ── Game Link (prism-play) ──
-/** The Game Link globals: { enabled: boolean (off by default), port: 1024–65535 | null (null = 38140 with fallbacks) }. */
+/**
+ * The Game Link globals: { enabled: boolean (off by default), port: 1024–65535 | null (null = 38140 with fallbacks),
+ * lol, rl: the League of Legends / Rocket League pollers (off by default; they run only while enabled) }.
+ */
 export function normalizeGameLinkGlobals(g) {
   const o = g && typeof g === 'object' && !Array.isArray(g) ? g : {};
   const port = Number(o.port);
-  return { enabled: o.enabled === true, port: Number.isInteger(port) && port >= 1024 && port <= 65535 ? port : null };
+  return { enabled: o.enabled === true, port: Number.isInteger(port) && port >= 1024 && port <= 65535 ? port : null, lol: o.lol === true, rl: o.rl === true };
 }
 
 /**

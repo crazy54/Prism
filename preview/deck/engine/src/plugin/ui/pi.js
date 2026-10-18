@@ -346,6 +346,110 @@
     $('glDisconnect').disabled = !!g.busy;
     if (document.activeElement !== $('glPort')) $('glPort').value = g.wantPort ? String(g.wantPort) : '';
     $('glPort').placeholder = String(g.port || g.defaultPort || 38140);
+    renderGameLinkDota(g);
+  }
+  // ── Game Link · Dota 2 (prism-play, MOBAs) ──
+  var GL_DOTA_REASONS = {
+    'not-installed': 'Dota 2 not found on this computer.',
+    'no-steam': 'Dota 2 not found: Steam isn’t installed on this computer.',
+    'no-binary': 'Dota 2 not found: its game files are incomplete. Verify them in Steam, then try again.',
+    'no-cfg-dir': 'Dota 2 not found: its cfg folder is missing. Verify the game files in Steam, then try again.',
+    'unsupported': 'Dota 2 isn’t available on this system.',
+    'foreign-file': 'Another app’s file already has Prism’s name in Dota 2’s gamestate_integration folder. Nothing was changed.',
+    'write-failed': 'Couldn’t write the Dota 2 config file. Check that the Dota 2 folder is writable.',
+    'remove-failed': 'Couldn’t remove the Dota 2 config file.',
+    'bad-path': 'Couldn’t place the Dota 2 config file.'
+  };
+  function renderGameLinkDota(g) {
+    var s = $('glDotaStatus');
+    if (!s) return;
+    clear(s);
+    var d = g.dota2 || {}, last = g.dota2Last || {}, opt = g.dota2LaunchOption || '-gamestateintegration';
+    var add = function (cls, text) { if (cls) s.appendChild(el('span', { className: cls }, text)); else s.appendChild(document.createTextNode(text)); };
+    if (g.dota2Busy) add(null, g.dota2Busy === 'connect' ? 'Connecting Dota 2…' : 'Disconnecting Dota 2…');
+    else {
+      if (g.state === 'live' && g.game === 'dota2') add('is-ok', 'Dota 2 live.');
+      else if (d.cfg === 'outdated') { add('is-warn', 'Dota 2 config out of date'); add(null, ': click Reconnect Dota 2.'); }
+      else if (d.cfg === 'current') {
+        add(null, 'Dota 2 config installed. ');
+        if (d.seen) add(null, 'Dota 2 has connected.');
+        else { add('is-warn', 'Add the launch option ' + opt); add(null, ' (Steam → Dota 2 → Properties → Launch Options), then restart Dota 2. If Dota doesn’t connect, check the option is there.'); }
+        if (g.state === 'off') add(null, ' Turn listening on to use it.');
+      } else if (d.found === false) add(null, GL_DOTA_REASONS[d.reason] || GL_DOTA_REASONS['not-installed']);
+      if (last.action && !last.ok && last.reason) {
+        add(null, ' ');
+        add('is-warn', GL_DOTA_REASONS[last.reason] || GL_REASONS[last.reason] || 'Something went wrong.');
+        if (last.reason === 'not-installed') add(null, last.leftover ? ' A leftover Dota 2 folder isn’t an install: reinstall Dota 2 from Steam, then click Connect Dota 2.' : ' Install it from Steam, then click Connect Dota 2.');
+      } else if (last.action === 'disconnect' && last.ok && last.removed) add(null, ' The Dota 2 config was removed.');
+    }
+    $('glDotaConnect').textContent = g.dota2OutOfDate ? 'Reconnect Dota 2' : 'Connect Dota 2';
+    $('glDotaConnect').disabled = !!g.dota2Busy;
+    $('glDotaDisconnect').hidden = !(d.cfg === 'current' || d.cfg === 'outdated');
+    $('glDotaDisconnect').disabled = !!g.dota2Busy;
+    renderGameLinkLol(g);
+    renderGameLinkRl(g);
+  }
+  // ── Game Link · League of Legends (prism-play, MOBAs): state.gameLink.lol { available, enabled, state, reason, lastAgoMs } ──
+  var GL_LOL_STATES = {
+    off: 'Off.',
+    probing: 'On: no League match running yet. Game Link keys say “Waiting” until one starts.',
+    loading: 'League is loading a match.',
+    watching: 'Not your match: a spectator view, a replay, or a mode Riot doesn’t allow apps to show (TFT, Brawl).',
+    untrusted: 'Didn’t connect: the game client’s certificate isn’t Riot’s, so nothing was read.'
+  };
+  function renderGameLinkLol(g) {
+    var L = g.lol, s = $('glLolStatus');
+    var show = !!(L && L.available);
+    ['glLolRow', 'glLolStatus', 'glLolHelp', 'glLolLegal'].forEach(function (id) { if ($(id)) $(id).hidden = !show; });
+    if (!show || !s) return;
+    $('glLol').setAttribute('aria-checked', String(L.enabled === true));
+    clear(s);
+    if (L.state === 'live') { s.appendChild(el('span', { className: 'is-ok' }, 'League live')); s.appendChild(document.createTextNode(L.lastAgoMs !== null && L.lastAgoMs !== undefined ? ' · last read ' + agoText(L.lastAgoMs) + '.' : '.')); }
+    else if (L.state === 'untrusted') { s.appendChild(el('span', { className: 'is-warn' }, GL_LOL_STATES.untrusted)); if (L.reason && /^[A-Za-z0-9_-]{1,40}$/.test(L.reason)) s.appendChild(document.createTextNode(' (' + L.reason + ')')); }
+    else s.textContent = GL_LOL_STATES[L.state] || GL_LOL_STATES.off;
+  }
+  // ── Game Link · Rocket League (prism-play): state.gameLink.rl { available, enabled, state, transport, lastAgoMs, install, busy, last } ──
+  var GL_RL_REASONS = {
+    'unsupported': 'Rocket League’s Stats API is only on Windows.',
+    'not-installed': 'Rocket League not found on this computer (Steam or Epic).',
+    'no-binary': 'Rocket League not found: its game files are incomplete. Verify them in Steam or Epic, then try again.',
+    'no-config-dir': 'Rocket League not found: its config folder is missing. Start the game once, then try again.',
+    'no-ini': 'Rocket League’s Stats API settings file wasn’t found. Start the game once, then try again.',
+    'read-failed': 'Couldn’t read Rocket League’s Stats API settings file.',
+    'backup-failed': 'Couldn’t back up Rocket League’s Stats API settings file, so nothing was changed.',
+    'write-failed': 'Couldn’t write Rocket League’s Stats API settings file. Check that the game folder is writable.',
+    'bad-record': 'Prism’s backup of the Stats API settings is damaged, so nothing was restored.',
+    'error': 'Couldn’t check Rocket League.'
+  };
+  function renderGameLinkRl(g) {
+    var R = g.rl, s = $('glRlStatus');
+    var show = !!(R && R.available);
+    ['glRlRow', 'glRlStatus', 'glRlActions', 'glRlHelp', 'glRlLegal'].forEach(function (id) { if ($(id)) $(id).hidden = !show; });
+    if (!show || !s) return;
+    var i = R.install || {}, last = R.last || {};
+    var add = function (cls, text) { if (cls) s.appendChild(el('span', { className: cls }, text)); else s.appendChild(document.createTextNode(text)); };
+    $('glRl').setAttribute('aria-checked', String(R.enabled === true));
+    $('glRl').disabled = !!R.busy;
+    clear(s);
+    if (R.busy) add(null, R.busy === 'connect' ? 'Connecting Rocket League…' : 'Disconnecting Rocket League…');
+    else {
+      if (R.state === 'connected') { add('is-ok', 'Rocket League live'); add(null, R.lastAgoMs !== null && R.lastAgoMs !== undefined ? ' · last update ' + agoText(R.lastAgoMs) + '.' : '.'); }
+      else if (R.state === 'probing') add(null, 'On: Rocket League isn’t running, or its Stats API is off.');
+      else add(null, 'Off.');
+      if (i.found === false) { add(null, ' '); add(null, GL_RL_REASONS[i.reason] || GL_RL_REASONS['not-installed']); }
+      else if (i.ini === 'current') add(null, ' Stats API on (as Prism set it).');
+      else if (i.ini === 'on') add(null, ' Stats API on (set by another app or by you).');
+      else if (i.ini === 'off' || i.ini === 'absent') add(null, ' Stats API off: click Connect Rocket League.');
+      if (last.action === 'rl-connect' && last.ok) { add(null, ' '); add('is-warn', last.already ? 'Already set up.' : 'Rocket League must be restarted after Connect.'); }
+      else if (last.action === 'rl-disconnect' && last.ok) {
+        add(null, ' The Stats API settings were put back.');
+        var kept = (last.kept || []).filter(function (k) { return typeof k === 'string' && /^[A-Za-z]{1,32}$/.test(k); });
+        if (kept.length) add(null, ' Keys you changed since were kept: ' + kept.join(', ') + '.');
+      } else if (last.action && !last.ok && last.reason) { add(null, ' '); add('is-warn', GL_RL_REASONS[last.reason] || 'Something went wrong.'); }
+    }
+    $('glRlConnect').disabled = !!R.busy;
+    $('glRlDisconnect').hidden = !i.connected;
+    $('glRlDisconnect').disabled = !!R.busy;
   }
   function renderLive() {
     var live = (state && state.live) || {};
@@ -416,6 +520,12 @@
   $('glListen').addEventListener('click', function () { var g = (state && state.gameLink) || {}; toPlugin({ cmd: 'gamelink', action: 'listen', on: g.enabled !== true }); });
   $('glConnect').addEventListener('click', function () { toPlugin({ cmd: 'gamelink', action: 'connect-cs2' }); });
   $('glDisconnect').addEventListener('click', function () { toPlugin({ cmd: 'gamelink', action: 'disconnect-cs2' }); });
+  $('glDotaConnect').addEventListener('click', function () { toPlugin({ cmd: 'gamelink', action: 'connect-dota2' }); });         // Game Link · Dota 2
+  $('glDotaDisconnect').addEventListener('click', function () { toPlugin({ cmd: 'gamelink', action: 'disconnect-dota2' }); });
+  $('glLol').addEventListener('click', function () { var L = (state && state.gameLink && state.gameLink.lol) || {}; toPlugin({ cmd: 'gamelink', action: 'lol', on: L.enabled !== true }); });   // Game Link · LoL
+  $('glRl').addEventListener('click', function () { var R = (state && state.gameLink && state.gameLink.rl) || {}; toPlugin({ cmd: 'gamelink', action: 'rl', on: R.enabled !== true }); });   // Game Link · Rocket League
+  $('glRlConnect').addEventListener('click', function () { toPlugin({ cmd: 'gamelink', action: 'rl-connect' }); });
+  $('glRlDisconnect').addEventListener('click', function () { toPlugin({ cmd: 'gamelink', action: 'rl-disconnect' }); });
   $('glPort').addEventListener('change', function () { var v = $('glPort').value.trim(); toPlugin({ cmd: 'gamelink', action: 'port', port: v === '' ? null : Number(v) }); });
   $('plugin').addEventListener('toggle', function () { if ($('plugin').open) toPlugin({ cmd: 'gamelink', action: 'status' }); });
 

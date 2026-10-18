@@ -27,9 +27,9 @@ import { __m as __bm } from '../../facets.bundle.js';
 import crypto from 'node:crypto';
 import { writeZip, readZip } from './plugin-zip.js';
 const { getDevice } = __bm(0);
-const { findFacet } = __bm(618);
+const { findFacet } = __bm(659);
 import { facetMode } from '../plugin/settings.js';
-const { render, stillTime } = __bm(253);
+const { render, stillTime } = __bm(263);
 import { rasterize, encodePNG } from '../raster/index.js';
 
 export const PLUGIN_UUID = 'com.jeremyfhall.prism';

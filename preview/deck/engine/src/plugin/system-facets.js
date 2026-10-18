@@ -6,8 +6,8 @@ import { __m as __bm } from '../../core.bundle.js';
 //   sys-layout  an inline live feedback layout ({ items: [text | bar | gbar | pixmap] }) composited into the canvas
 // Inputs arrive through ctx.data (opts.data), so params stay the engine's business.
 
-const { normalizeFacet } = __bm(257);
-const { surface } = __bm(263);
+const { normalizeFacet } = __bm(267);
+const { surface } = __bm(273);
 const { textPath } = __bm(11);
 const { n, esc, svgInner } = __bm(5);
 import { validateSvg } from '../scene/validate.js';

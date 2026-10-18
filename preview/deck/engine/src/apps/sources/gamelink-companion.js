@@ -17,7 +17,7 @@ import { __m as __bm } from '../../../facets.bundle.js';
 // state[game] as small plain JSON. Events are stamped with the receipt time; ones the adapter held for more than
 // 3 s are dropped (an old kill never fires late). The same (session, seq) is ignored the second time.
 
-const { GAMELINK_VERSION, STATUSES, EVENT_TTL_MS, EVENT_MAX } = __bm(607);
+const { GAMELINK_VERSION, STATUSES, EVENT_TTL_MS, EVENT_MAX } = __bm(627);
 
 export const COMPANION_STATUSES = Object.freeze([...STATUSES, 'paused']);
 export const COMPANION_EVENT_MAX_AGE_MS = 3000;

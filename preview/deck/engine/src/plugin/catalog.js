@@ -4,10 +4,10 @@ import { __m as __bm } from '../../facets.bundle.js';
 // with the plugin. Written to ui/catalog.js at build time as a classic script
 // (window.PRISM_CATALOG), so the PI works offline with no module loading.
 
-const { allFacets } = __bm(618);
+const { allFacets } = __bm(659);
 const { GALLERIES } = __bm(2);
-const { allThemes, useTheme } = __bm(250);
-const { allGlyphs } = __bm(231);
+const { allThemes, useTheme } = __bm(260);
+const { allGlyphs } = __bm(241);
 import { API_VERSION } from '../../index.js';
 
 export function piCatalog() {

@@ -22,13 +22,13 @@ import { __m as __bm } from '../../core.bundle.js';
 // (not on the Galleon, where holds belong to the layer switch), and the slot renders only during a
 // transition or while the game ticks. opts.onGame({ slot, facet, event, snapshot }) lets a host persist it.
 
-const { render, nextState } = __bm(253);
-const { createScheduler, effectiveFps, quantize, FPS_CAP } = __bm(255);
+const { render, nextState } = __bm(263);
+const { createScheduler, effectiveFps, quantize, FPS_CAP } = __bm(265);
 import { rasterize as defaultRasterize } from '../raster/index.js';
 import { pad, fillRect } from './pixels.js';
-const { SCREEN_TARGETS } = __bm(251);
-const { useTheme } = __bm(250);
-const { createGameHost, GAME_FPS, GAME_RESET_HOLD_S } = __bm(259);
+const { SCREEN_TARGETS } = __bm(261);
+const { useTheme } = __bm(260);
+const { createGameHost, GAME_FPS, GAME_RESET_HOLD_S } = __bm(269);
 
 const BURST_MS = 1200;   // render at the facet's (or 10) fps this long after an interaction
 const CLOCK_DATA = ['clock', 'timer'];

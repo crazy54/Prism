@@ -26,8 +26,8 @@ import { __m as __bm } from '../../facets.bundle.js';
 import { readZip, writeZip } from './plugin-zip.js';
 import { PLUGIN_UUID, ACTION_FACET, ACTION_INFOBAR } from './profile.js';
 import { normalizeSetup, renderPage, safeName, svgDataUrl } from './linux.js';
-const { render, stillTime } = __bm(253);
-const { findFacet } = __bm(618);
+const { render, stillTime } = __bm(263);
+const { findFacet } = __bm(659);
 
 export const OD_FLATPAK_ID = 'me.amankhanna.opendeck';
 export const PLUGIN_DIR = `${PLUGIN_UUID}.sdPlugin`;

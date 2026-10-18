@@ -20,15 +20,15 @@ import { __m as __bm } from '../../facets.bundle.js';
 // setPrompt(), and the 'pair-press' / 'behavior' / 'globals' events.
 
 import { EventEmitter } from 'node:events';
-const { render, stillTime, nextState } = __bm(253);
-const sched = __bm(255);
+const { render, stillTime, nextState } = __bm(263);
+const sched = __bm(265);
 const { svgDataUrl, svgWindow } = __bm(5);
-const { findFacet } = __bm(618);
+const { findFacet } = __bm(659);
 const { deviceFromInfo, deckLayout } = __bm(0);
 import { DeviceBudget, allocateFps, createUpdateBucket, elementCount, updateCost } from './budget.js';
 import { createTimer } from '../apps/sources/timer.js';
-const { createGameHost, GAME_RESET_HOLD_S, GAME_FPS } = __bm(259);
-const { createLinkBus, readoutOf, linksOf } = __bm(256);
+const { createGameHost, GAME_RESET_HOLD_S, GAME_FPS } = __bm(269);
+const { createLinkBus, readoutOf, linksOf } = __bm(266);
 import { facetMode, facetsFor, normalizeSettings, normalizeGlobals, compactSettings, GROUP_MODES, DEFAULT_GLOBALS, bundledProfileFor } from './settings.js';
 import { gameProfileFor } from './settings.js';   // Game Link (prism-play): press { kind: 'profile', profile: 'cs2' }
 import { CANVAS_LAYOUT_PATH, INFOBAR_LAYOUT_PATH, canvasPayload, widgetCanvas, fitCanvas, galleonWidgetRects } from './feedback.js';

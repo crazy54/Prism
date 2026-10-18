@@ -10,7 +10,7 @@ import { StreamDeckConnection, parseLaunchArgs } from './connection.js';
 import { PrismRuntime } from './runtime.js';
 import { LiveController } from './control.js';
 import { createDataHub } from './data.js';
-import { GameLinkController } from './gamelink.js';   // Game Link (prism-play)
+import { GameLinkController, LolLinkController, RlLinkController } from './gamelink.js';   // Game Link (prism-play)
 
 export { StreamDeckConnection, parseLaunchArgs, detectHost, hostFeatures } from './connection.js';
 export { PrismRuntime, createRuntime, PLUGIN_UUID } from './runtime.js';
@@ -61,7 +61,10 @@ export async function main({ argv = process.argv.slice(2), env = process.env, co
   // The CS2 GSI / companion listener (src/apps/sources/gamelink.js) lives in the node data hub (data.gameLink) and stops
   // with it; tests inject their own (opts.gamelink), so they never bind a real port. The controller applies the
   // gamelink globals and the PI's Connect CS2 / Disconnect clicks, and pushes data changes into the runtime.
-  new GameLinkController({ runtime, gameLink: injectedGameLink === undefined ? data?.gameLink || null : injectedGameLink, log: write });
+  const gameLink = injectedGameLink === undefined ? data?.gameLink || null : injectedGameLink;
+  new GameLinkController({ runtime, gameLink, log: write });
+  new LolLinkController({ runtime, gameLink, log: write });   // League of Legends: Riot's Live Client Data poller, off by default
+  new RlLinkController({ runtime, gameLink, log: write });    // Rocket League: Psyonix's Stats API client, off by default
   let stopping = false;
   const stop = async (code = 0) => {
     if (stopping) return;

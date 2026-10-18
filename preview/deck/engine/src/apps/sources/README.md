@@ -325,3 +325,23 @@ Companions send their own event types (`/^[a-z][a-zA-Z0-9]{0,31}$/`, up to 8 sca
 ```bash
 node --test test/gamelink-cs2.test.js test/gamelink-source.test.js test/gamelink-cfg.test.js test/gamelink-plugin.test.js
 ```
+
+<!-- ── Game Link · MOBAs (prism-play, lead/CONTRACT-moba.md) ── -->
+### MOBAs: Dota 2, League of Legends, and pollers
+
+Game Link v1 is unchanged: a MOBA fills the common fields and puts the rest in one shared per-game block, `gamelink.dota2` / `gamelink.lol` (`{ phase, clock, hero, economy, abilities, items, status, aegis }`, the contract's shape; `null` = this game doesn't report it). Two additive fields: `abilities[].cooldownMax` / `items[].cooldownMax` (Dota: the cooldown's full length — the item's own `max_cooldown` on newer builds, else what the first post after the cast read; `null` when unknown, so no sweep is invented) and `hero.streak` (Dota: the game's `player.kill_streak`).
+
+| file | what |
+|---|---|
+| `gamelink-dota2.js` | **pure, browser-safe.** `normalizeDota2(payload, prev, { nowMs }) → { state, events }`, `sanitizeDota2` (drops Steam / account ids, names, the match id, player ids, positions; the spectator / caster shape is "watching" and keeps nothing), `findDota2` (appid 570, `dota 2 beta`, `game/bin/win64/dota2.exe` · `game/bin/linuxsteamrt64/dota2`, `game/dota/cfg/`), `dota2Cfg` / `dota2CfgState` / `isPrismDota2Cfg` |
+| `gamelink-lol.js` · `gamelink-lol-client.js` | League of Legends (the LoL engineer): `normalizeLol`, the Live Client Data poller fed through `attachPoller` |
+
+- **`POST /v1/dota2`**: the `/v1/cs2` rules — always **204** before parsing; `type`, `size` (> 128 KiB), `json`, `token` (`auth.token` = `tokens.dota2`, created on the first **Connect Dota 2**, rotated by Disconnect; a `gamelink.json` without it is valid), `appid` ≠ 570, `rate` are dropped silently and counted.
+- **Connect Dota 2** (`connectDota2()`, the user's click) writes only `<dota>/game/dota/cfg/gamestate_integration/gamestate_integration_prism.cfg` (making `gamestate_integration/` if needed), subscribing provider, map, player, hero, abilities, items, buildings, events — nothing spectator-only. Dota 2 reads it at launch, and only with the Steam launch option **`-gamestateintegration`** (Valve's 11 March 2022 update): the PI tells the user to add it; Prism never edits Steam's files. `dota2Status()` → `{ found, reason, leftover, path, cfg, seen }` (`seen`: a Dota post has arrived).
+- **Dota events**: `kill` (`streak`, `label`), `multiKill` (the announcer's rule: each kill within 18 s of game time of the last; `double` · `triple` · `ultra` · `rampage`), `firstBlood` (`ours`: the team kill score leaving 0 – 0), `death`, `respawn` (`buyback`), `buybackReady` (dead, off cooldown, enough gold), `levelUp`, `ultReady`, `objective` (`roshan` / `aegis` / `tormentor` from the events block; `tower` / `barracks` when one of OUR buildings falls — player mode reports only your own team's), `gameover`. Never a Roshan, rune or day / night countdown.
+- **`gl.attachPoller({ game, start, urgent? }) → detach()`** — a local poller (League's) feeding the hub: `start({ push, log, now }) → stop | Promise<stop>` runs while the listener is up (and stops on Listen off, `detach()`, `gl.stop()`). `push({ state, events } | state | null)`: a v1 state for `game` (v 1), pushed on every poll (it's the heartbeat; no push for 15 s = waiting); `null` = the game is gone; ≤ 20 pushes/s; pushes from a stopped generation are ignored. `urgent`: the poller's own effect event types. Companions can't post a poller's game, `dota2` or `lol`.
+- **Which game the key serves**: the most recently changed live game, in a match (`live` · `paused` · `loading` · `spectating` · `between`) before one in its menu; the serving game keeps the key until it has been without a change for 1.5 s while another changes (no flapping); a stale game gives way at once.
+
+```bash
+node --test test/gamelink-dota2.test.js test/gamelink-moba.test.js
+```

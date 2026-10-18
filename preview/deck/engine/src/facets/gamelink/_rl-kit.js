@@ -1,0 +1,4 @@
+// Bundled into facets.bundle.js by website/build.mjs (the module itself is in the repository).
+import { __m } from '../../../facets.bundle.js';
+const __n = __m(646);
+export const BRIGHT = __n.BRIGHT, DATA_SHAPE = __n.DATA_SHAPE, DUR = __n.DUR, EFFECTS_PARAM = __n.EFFECTS_PARAM, FLOOD_PEAK = __n.FLOOD_PEAK, ONSET_GAP_S = __n.ONSET_GAP_S, OT_PERIOD_S = __n.OT_PERIOD_S, RISE_S = __n.RISE_S, RL_GAME = __n.RL_GAME, SHAKE = __n.SHAKE, SHAKE_MAX = __n.SHAKE_MAX, SLOTS = __n.SLOTS, TEAM_NAME = __n.TEAM_NAME, brightOnsets = __n.brightOnsets, clockText = __n.clockText, faceOf = __n.faceOf, fxBusy = __n.fxBusy, fxOf = __n.fxOf, kmhText = __n.kmhText, layoutOf = __n.layoutOf, newest = __n.newest, rlOf = __n.rlOf, sideOf = __n.sideOf, slotModel = __n.slotModel, stepOf = __n.stepOf, tierOf = __n.tierOf;
