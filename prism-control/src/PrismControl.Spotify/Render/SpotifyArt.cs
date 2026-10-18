@@ -101,6 +101,8 @@ public static class SpotifyArt
     /// </summary>
     public static SvgDocument NowPlayingKey(RefractionPalette t, PlayerSnapshot s, DateTimeOffset now, string? hint = null)
     {
+        // Streamer-safe hid another app's title and art: the app name only, lit while it plays.
+        if (s.Private) return GlyphKey(t, Glyphs.MusicNote, hint ?? (s.AppName ?? "MEDIA").ToUpperInvariant(), on: s.IsPlaying && hint is null);
         if (!s.HasItem) return GlyphKey(t, Glyphs.MusicNote, hint ?? "NOT PLAYING", on: false);
         var hue = Hue(t);
         var d = KeyArt.Base(t, hue, false);
@@ -113,11 +115,12 @@ public static class SpotifyArt
         return d;
     }
 
-    public static SvgDocument TransportKey(RefractionPalette t, TransportGlyph kind, bool playing, bool enabled) => kind switch
+    /// <summary>A transport key. <paramref name="app"/> names the app it controls when that isn't Spotify ("CHROME"): text only.</summary>
+    public static SvgDocument TransportKey(RefractionPalette t, TransportGlyph kind, bool playing, bool enabled, string? app = null) => kind switch
     {
-        TransportGlyph.PlayPause => GlyphKey(t, playing ? SpotifyGlyphs.Pause : SpotifyGlyphs.Play, null, on: playing, enabled),
-        TransportGlyph.Next => GlyphKey(t, SpotifyGlyphs.Next, null, on: false, enabled),
-        _ => GlyphKey(t, SpotifyGlyphs.Previous, null, on: false, enabled),
+        TransportGlyph.PlayPause => GlyphKey(t, playing ? SpotifyGlyphs.Pause : SpotifyGlyphs.Play, app, on: playing, enabled),
+        TransportGlyph.Next => GlyphKey(t, SpotifyGlyphs.Next, app, on: false, enabled),
+        _ => GlyphKey(t, SpotifyGlyphs.Previous, app, on: false, enabled),
     };
 
     public static SvgDocument LikeKey(RefractionPalette t, bool? liked, bool enabled, string? label = null) =>
@@ -133,12 +136,13 @@ public static class SpotifyArt
         return GlyphKey(t, (d, c) => SpotifyGlyphs.Repeat(d, c, mode == RepeatMode.Track, t.IsDark ? t.Bg : Color.White), label ?? (mode == RepeatMode.Track ? "TRACK" : null), on, enabled);
     }
 
-    public static SvgDocument VolumeKey(RefractionPalette t, int? percent, bool enabled, string? label = null)
+    /// <param name="caption">The value caption: "VOLUME", or "SPOTIFY" while another app is shown (it is still Spotify's volume).</param>
+    public static SvgDocument VolumeKey(RefractionPalette t, int? percent, bool enabled, string? label = null, string caption = "VOLUME")
     {
         var hue = Hue(t);
-        if (!enabled || percent is null) return GlyphKey(t, (d, c) => Glyphs.Speaker(d, c, 2), label ?? "VOLUME", on: false, enabled: enabled);
+        if (!enabled || percent is null) return GlyphKey(t, (d, c) => Glyphs.Speaker(d, c, 2), label ?? caption, on: false, enabled: enabled);
         var muted = percent == 0;
-        return KeyArt.Value(t, "VOLUME", muted ? "MUTED" : percent.Value.ToString(System.Globalization.CultureInfo.InvariantCulture) + "%", hue,
+        return KeyArt.Value(t, caption, muted ? "MUTED" : percent.Value.ToString(System.Globalization.CultureInfo.InvariantCulture) + "%", hue,
             muted ? null : percent.Value / 100.0, on: !muted);
     }
 
@@ -155,10 +159,21 @@ public static class SpotifyArt
         d.Text(Fit(caption, w - 14, 10, textCase: TextCase.Upper, tracking: 0.08), x, 23, 10, t.Dim, tracking: 0.08, textCase: TextCase.Upper);
         if (s.State == PlayState.Paused)
             d.Path(new PathBuilder().RoundedRect(x + w - 9, 15, 3, 8, 1).RoundedRect(x + w - 3.5, 15, 3, 8, 1), new Style { Fill = t.Dim });
+        if (s.Private)
+        {
+            // Streamer-safe: the app and its state, never the (possibly private) tab title or artwork.
+            d.Text(s.IsPlaying ? "Playing" : s.State == PlayState.Paused ? "Paused" : "Loaded", x, 43, 16, s.IsPlaying ? t.KeyInk : t.KeyMuted);
+            NoticeText(d, notice?.Text ?? SpotifyText.HiddenTitle, x, 60, w, notice is { IsError: true } ? t.Warn : t.Muted);
+            var ppos = s.PositionNow(now);
+            Progress(d, t, x, 70, w, 4, s.DurationMs is > 0 && ppos is { } pp ? (double)pp / s.DurationMs.Value : 0, s.IsPlaying);
+            d.Text(SpotifyText.Duration(ppos), x, 89, 11, t.Dim);
+            d.Text(SpotifyText.Duration(s.DurationMs), x + w, 89, 11, t.Dim, TextAlign.End);
+            return d;
+        }
         if (!s.HasItem)
         {
             d.Text("Nothing playing", x, 47, 14, t.KeyInk);
-            NoticeText(d, notice?.Text ?? "Play something in Spotify", x, 64, w, notice is { IsError: true } ? t.Warn : t.Muted);
+            NoticeText(d, notice?.Text ?? (s.IsSpotify ? "Play something in Spotify" : "No track info"), x, 64, w, notice is { IsError: true } ? t.Warn : t.Muted);
             return d;
         }
         var titleSize = StrokeFont.FitSize(s.Title!, w, 16, 13);

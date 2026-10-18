@@ -22,6 +22,22 @@ public static class SpotifyText
     public const string DashboardUrl = "https://developer.spotify.com/dashboard";
     public const string RedirectUri = "http://127.0.0.1:43117/callback";
 
+    // Other apps' media sessions (YouTube in a browser, any player Windows lists).
+    public const string NoResponse = "The player didn't respond";
+    public const string NothingPlaying = "Nothing is playing";
+    public const string SeekSpotifyOnly = "Seek works with Spotify only";
+    /// <summary>Shown instead of another app's title in streamer-safe mode.</summary>
+    public const string HiddenTitle = "Title hidden";
+    private const string CantPlayPauseSuffix = " can't play or pause from here";
+    private const string CantSkipSuffix = " can't skip";
+    private const string CantGoBackSuffix = " can't go back";
+
+    public static string CantPlayPause(string? app) => (app ?? "This app") + CantPlayPauseSuffix;
+    public static string CantSkip(string? app) => (app ?? "This app") + CantSkipSuffix;
+    public static string CantGoBack(string? app) => (app ?? "This app") + CantGoBackSuffix;
+    /// <summary>The other app's session went away between the press and the command.</summary>
+    public static string Gone(string? app) => (app ?? "That app") + " isn't playing anymore";
+
     public static string Busy(DateTimeOffset until, DateTimeOffset now)
     {
         var s = Math.Max(1, (int)Math.Ceiling((until - now).TotalSeconds));
@@ -90,6 +106,8 @@ public static class SpotifyText
         NotAllowed => "Account not allowed",
         Reconnect => "Reconnect in settings",
         BasicMode => "Limit reached: basic",
+        SeekSpotifyOnly => "Seek: Spotify only",
+        _ when message.EndsWith(CantPlayPauseSuffix, StringComparison.Ordinal) => "Can't play or pause",
         _ when message.StartsWith("Spotify is busy, retrying in ", StringComparison.Ordinal) => "Busy, retry in " + message["Spotify is busy, retrying in ".Length..],
         _ when message.StartsWith(BusyTryPrefix, StringComparison.Ordinal) => "Busy · try in " + message[BusyTryPrefix.Length..],
         _ => message,
@@ -105,6 +123,12 @@ public static class SpotifyText
         Reconnect => "RECONNECT",
         BasicMode => "BASIC MODE",
         "Offline" => "OFFLINE",
+        SeekSpotifyOnly => "SPOTIFY ONLY",
+        NothingPlaying => "NOT PLAYING",
+        _ when message.EndsWith(CantPlayPauseSuffix, StringComparison.Ordinal) => "CAN'T PLAY",
+        _ when message.EndsWith(CantSkipSuffix, StringComparison.Ordinal) => "CAN'T SKIP",
+        _ when message.EndsWith(CantGoBackSuffix, StringComparison.Ordinal) => "CAN'T GO BACK",
+        _ when message.EndsWith(" isn't playing anymore", StringComparison.Ordinal) => "GONE",
         _ when message.StartsWith(BusyTryPrefix, StringComparison.Ordinal) => "BUSY · " + message[BusyTryPrefix.Length..].ToUpperInvariant(),
         _ when message.StartsWith("Spotify is busy", StringComparison.Ordinal) => "BUSY",
         _ when message.Length <= 12 => message.ToUpperInvariant(),

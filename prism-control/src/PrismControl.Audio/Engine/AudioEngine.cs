@@ -43,7 +43,8 @@ internal sealed class AudioEngineOptions
 /// <item>Every COM call runs on one MTA worker thread (<see cref="ComWorker"/>); COM callbacks only post to it.</item>
 /// <item>Endpoints, defaults, volumes and mutes live in a cache that <see cref="IMMNotificationClient"/> and one
 /// <see cref="IAudioEndpointVolumeCallback"/> per active endpoint keep current, so reads are cheap and never poll.</item>
-/// <item>Sessions (the mixer) and peak meters run only while something holds a lease (<see cref="WatchSessions"/>, <see cref="OpenMeter"/>).</item>
+/// <item>Sessions (the mixer) and peak meters run only while something holds a lease (<see cref="WatchSessions"/>, <see cref="OpenMeter"/>);
+/// loopback capture for the spectrum only while a stream is open (AudioEngine.Loopback.cs).</item>
 /// <item>Our own writes carry <see cref="EventContext"/>; notifications with it are ignored (no echo loops with dials).</item>
 /// <item>Every COM object is a unique RCW released as soon as it is no longer needed, callbacks are unregistered before
 /// the objects they live on are released, and nothing waits for the GC.</item>
@@ -52,13 +53,14 @@ internal sealed class AudioEngineOptions
 /// notices an outage nobody is writing during.</item>
 /// </list>
 /// </summary>
-public sealed class AudioEngine : IAudioEngine, IAsyncDisposable, IAudioCallbackSink
+public sealed partial class AudioEngine : IAudioEngine, IAsyncDisposable, IAudioCallbackSink
 {
     /// <summary>The event-context GUID on every Set* call this plugin makes.</summary>
     public static readonly Guid EventContext = new("5b0e3f6c-7a3d-4c1e-9d42-8f1a6b2c9e70");
 
     private static readonly TimeSpan MeterInterval = TimeSpan.FromMilliseconds(33);
     private static readonly TimeSpan SessionLinger = TimeSpan.FromSeconds(5);
+    private static readonly uint s_ownPid = (uint)Environment.ProcessId;
 
     private readonly ILog _log;
     private readonly AudioEngineOptions _options;
@@ -650,6 +652,7 @@ public sealed class AudioEngine : IAudioEngine, IAsyncDisposable, IAudioCallback
     /// </summary>
     private void RemoveEndpoint(string id)
     {
+        CloseLoopbacks(id, HResults.AUDCLNT_E_DEVICE_INVALIDATED);
         DropSessions(id);
         if (_endpoints.Remove(id, out var ep)) ReleaseEndpoint(ep);
     }
@@ -920,6 +923,7 @@ public sealed class AudioEngine : IAudioEngine, IAsyncDisposable, IAudioCallback
             // AUDCLNT_S_NO_SINGLE_PROCESS is a success code: the pid is then the session's first process.
             if (pidHr >= 0 && pid != 0) path = Native.ProcessImagePath(pid, out exists);
             if (!exists) return null; // the app already exited
+            if (pid == s_ownPid) return null; // our own loopback capture (the spectrum) is not an app to mix
             c2.GetSessionIdentifier(out var sid);
             var idPath = AppNames.PathFromSessionIdentifier(sid);
             var keySource = path ?? idPath;
@@ -1172,6 +1176,7 @@ public sealed class AudioEngine : IAudioEngine, IAsyncDisposable, IAudioCallback
             _meterLeases.Clear();
             _sessionWatchers = 0;
         }
+        StopFrameDrivers();
         try { await _worker.InvokeAsync(Teardown).WaitAsync(TimeSpan.FromSeconds(1.5)).ConfigureAwait(false); }
         catch (Exception ex) { _log.Debug($"audio teardown: {ex.Message}"); }
         _worker.Stop(TimeSpan.FromSeconds(1));
@@ -1181,6 +1186,7 @@ public sealed class AudioEngine : IAudioEngine, IAsyncDisposable, IAudioCallback
     /// <summary>Unregisters every callback, then releases every COM object (sessions, endpoints, the enumerator, the policy client).</summary>
     private void Teardown()
     {
+        CloseLoopbacks(null, HResults.CO_E_OBJNOTCONNECTED);
         foreach (var e in _sessions.Values) ReleaseSession(e);
         _sessions.Clear();
         foreach (var m in _sessionManagers.Values) UnregisterManager(m);

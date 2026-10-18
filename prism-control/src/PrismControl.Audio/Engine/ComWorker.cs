@@ -7,13 +7,19 @@ namespace PrismControl.Audio;
 /// One dedicated MTA thread that owns every Core Audio COM object and makes every COM call. COM callbacks
 /// (audio-service RPC threads) only copy their arguments and <see cref="Post"/> here, so nothing ever registers,
 /// unregisters or blocks inside a callback (windows.md §1.5), and the engine's COM state needs no locks.
+/// <para>
+/// The idle thread sleeps on a kernel event, not a spinning wait: meters and the spectrum post work ~30 times a second,
+/// and spin-then-block waits (BlockingCollection, SemaphoreSlim, Monitor) would burn ~100 µs of CPU per wake-up.
+/// </para>
 /// </summary>
 internal sealed class ComWorker : IDisposable
 {
-    private readonly BlockingCollection<Action> _queue = new();
+    private readonly ConcurrentQueue<Action> _queue = new();
+    private readonly AutoResetEvent _signal = new(false);
+    private readonly object _gate = new();
     private readonly Thread _thread;
     private readonly ILog _log;
-    private volatile bool _stopped;
+    private bool _stopped; // under _gate
 
     public ComWorker(ILog log, string name = "PrismControl.Audio COM")
     {
@@ -28,9 +34,13 @@ internal sealed class ComWorker : IDisposable
     /// <summary>Queues work; returns false after shutdown.</summary>
     public bool Post(Action work)
     {
-        if (_stopped) return false;
-        try { _queue.Add(work); return true; }
-        catch (InvalidOperationException) { return false; }
+        lock (_gate)
+        {
+            if (_stopped) return false;
+            _queue.Enqueue(work);
+        }
+        _signal.Set();
+        return true;
     }
 
     public Task InvokeAsync(Action work) => InvokeAsync(() => { work(); return true; });
@@ -54,19 +64,31 @@ internal sealed class ComWorker : IDisposable
 
     private void Run()
     {
-        foreach (var work in _queue.GetConsumingEnumerable())
+        while (true)
         {
-            try { work(); }
-            catch (Exception ex) { _log.Error("audio worker task failed", ex); }
+            while (_queue.TryDequeue(out var work))
+            {
+                try { work(); }
+                catch (Exception ex) { _log.Error("audio worker task failed", ex); }
+            }
+            lock (_gate)
+            {
+                // Post enqueues under the same lock, so nothing can slip in after this check.
+                if (_stopped && _queue.IsEmpty) return;
+            }
+            _signal.WaitOne();
         }
     }
 
     /// <summary>Stops accepting work, lets queued work finish (bounded), and ends the thread.</summary>
     public void Stop(TimeSpan timeout)
     {
-        if (_stopped) return;
-        _stopped = true;
-        _queue.CompleteAdding();
+        lock (_gate)
+        {
+            if (_stopped) return;
+            _stopped = true;
+        }
+        _signal.Set();
         if (!IsCurrentThread) _thread.Join(timeout);
     }
 

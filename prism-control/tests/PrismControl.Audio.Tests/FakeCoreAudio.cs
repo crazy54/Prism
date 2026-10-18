@@ -210,6 +210,25 @@ internal sealed class FakeEndpoint(string id, EDataFlow flow, string friendly, s
     public float Peak { get; set; }
     public List<FakeSessionModel> Sessions { get; } = [];
 
+    /// <summary>The shared-mode mix format loopback clients see (FakeCoreAudioLoopback.cs).</summary>
+    public int MixRate { get; set; } = 48000;
+    public int MixChannels { get; set; } = 2;
+    public bool MixIsPcm16 { get; set; }
+    /// <summary>Every IAudioClient activated on this endpoint, in order.</summary>
+    public List<FakeAudioClient> AudioClients { get; } = [];
+
+    public FakeAudioClient[] ClientsSnapshot()
+    {
+        lock (AudioClients) return [.. AudioClients];
+    }
+
+    /// <summary>What the endpoint plays: one packet into every started loopback stream.</summary>
+    public void Play(float[] interleaved, uint flags = 0)
+    {
+        foreach (var c in ClientsSnapshot())
+            if (c.Started) c.Capture.Enqueue(interleaved, flags);
+    }
+
     /// <summary>The COM objects of one service generation (the engine asks for them again after a restart).</summary>
     public FakeEndpointObjects ObjectsFor(FakeAudioService svc, int generation)
     {
@@ -360,6 +379,13 @@ internal sealed partial class FakeDevice(FakeAudioService svc, FakeEndpoint ep, 
         ppInterface = 0;
         if (svc.IsDead(generation)) return FakeAudioService.Down;
         var objects = ep.ObjectsFor(svc, generation);
+        if (iid == Wasapi.IID_IAudioClient)
+        {
+            var client = new FakeAudioClient(svc, ep, generation); // a new stream object per Activate, like Windows
+            lock (ep.AudioClients) ep.AudioClients.Add(client);
+            ppInterface = svc.Out(client, iid);
+            return 0;
+        }
         object? o = iid == Iids.IAudioEndpointVolume ? objects.Volume
             : iid == Iids.IAudioMeterInformation ? objects.Meter
             : iid == Iids.IAudioSessionManager2 ? objects.SessionManager

@@ -294,7 +294,7 @@ public sealed class PlaylistBrowserAction : DialAction<BrowserSettings>, IDispos
                             if (_m.Level == BrowserLevel.Playlists)
                             {
                                 _m.AddPlaylists(r);
-                                if (!_userMoved && svc.Current.ContextUri is { } ctx) _m.FocusPlaylist(ctx);
+                                if (!_userMoved && svc.SpotifyCurrent.ContextUri is { } ctx) _m.FocusPlaylist(ctx);
                             }
                             MarkDirty();
                             LoadWanted();
@@ -400,7 +400,7 @@ public sealed class PlaylistBrowserAction : DialAction<BrowserSettings>, IDispos
             frame = SpotifyArt.MessageDial(t, "Spotify", "Spotify is unavailable", "See the plugin log", active, warn: true);
         else if (!svc.IsConnected)
         {
-            var snap = svc.Current;
+            var snap = svc.SpotifyCurrent;   // the browser is Spotify's, whatever app the deck shows
             var expired = svc.Status.Auth == AuthState.NeedsReconnect;
             frame = snap.HasItem && flash is null
                 ? SpotifyArt.NowPlayingDial(t, snap, now, active, new FrameNotice(expired ? "Reconnect to browse" : "Connect Spotify to browse", false))
@@ -408,7 +408,7 @@ public sealed class PlaylistBrowserAction : DialAction<BrowserSettings>, IDispos
         }
         else if (!_browsing)
         {
-            var snap = svc.Current;
+            var snap = svc.SpotifyCurrent;
             frame = snap.HasItem
                 ? SpotifyArt.NowPlayingDial(t, snap, now, active, flash)
                 : SpotifyArt.MessageDial(t, "Spotify", "Push to browse your playlists", null, active);

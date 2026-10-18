@@ -47,7 +47,7 @@ public class DataTopicTests
         f.ExternalDefault(AudioFlow.Render, MixerChat, AudioRole.Communications);
         var (registry, data) = Start(f);
         await using var _ = data;
-        Assert.True(data.ClaimedDevices && data.ClaimedMic && data.ClaimedLevels);
+        Assert.True(data.ClaimedDevices && data.ClaimedMic && data.ClaimedLevels && data.ClaimedSpectrum);
         var j = (await ReadAsync(registry.AudioDevices))!;
         Assert.Equal(Speakers, j["output"]!["defaultId"]!.GetValue<string>());
         Assert.Equal(MixerChat, j["output"]!["defaultCommunicationsId"]!.GetValue<string>());
@@ -148,6 +148,6 @@ public class DataTopicTests
         await using var _ = data;
         await using var second = new AudioDataProviders(f, registry, TimeProvider.System, NullLog.Instance, CancellationToken.None);
         second.Start();
-        Assert.False(second.ClaimedDevices || second.ClaimedMic || second.ClaimedLevels);
+        Assert.False(second.ClaimedDevices || second.ClaimedMic || second.ClaimedLevels || second.ClaimedSpectrum);
     }
 }

@@ -77,11 +77,15 @@ public sealed class SpotifyService : IAsyncDisposable
     private string? _localDeviceId;
     private bool _meFetched;
 
-    // SMTC art
-    private ArtImage? _smtcArt;
+    // SMTC art: the shown session's and Spotify's (by thumbnail hash; at most a few kept)
+    private readonly Dictionary<string, ArtImage> _smtcArts = new(StringComparer.Ordinal);
+    private string? _lastSpotifySig;
+    private string? _lastShownSig;
+    private volatile bool _streamerSafe;
 
-    // optimistic overrides
-    private (PlayState Value, DateTimeOffset Until)? _playOverride;
+    // optimistic overrides (the play override names its target: SpotifyTarget, or another app's session key)
+    private const string SpotifyTarget = "spotify";
+    private (PlayState Value, DateTimeOffset Until, string Target)? _playOverride;
     private (bool Value, DateTimeOffset Until)? _shuffleOverride;
     private (RepeatMode Value, DateTimeOffset Until)? _repeatOverride;
     private (long PositionMs, DateTimeOffset At, DateTimeOffset Until)? _seekOverride;
@@ -108,6 +112,7 @@ public sealed class SpotifyService : IAsyncDisposable
     private DateTimeOffset? _lastQuotaAt;
 
     private volatile PlayerSnapshot _current = PlayerSnapshot.Empty;
+    private volatile PlayerSnapshot _spotifyCurrent = PlayerSnapshot.Empty;
     private volatile SpotifyStatus _status = new();
     private TaskCompletionSource _wake = new(TaskCreationOptions.RunContinuationsAsynchronously);
     private Task? _pollLoop;
@@ -176,6 +181,10 @@ public sealed class SpotifyService : IAsyncDisposable
     /// <summary>Raised (any thread) when a cover finished downloading (browser lists redraw).</summary>
     public event EventHandler<string>? ArtLoaded;
 
+    /// <summary>
+    /// What the deck shows (now playing, play/pause, next, previous and /v1/now-playing): Spotify, or another app's
+    /// session when <see cref="Follow"/> picked one (YouTube in a browser, any player).
+    /// </summary>
     public PlayerSnapshot Current
     {
         get
@@ -183,19 +192,56 @@ public sealed class SpotifyService : IAsyncDisposable
             var now = _time.GetUtcNow();
             lock (_lock)
             {
-                if (PruneOverrides(now)) _current = Build(now);
+                if (PruneOverrides(now)) (_current, _spotifyCurrent) = BuildAll(now);
                 return _current;
             }
         }
     }
 
+    /// <summary>
+    /// Spotify's own state, whatever is shown: what the Spotify-only keys (like, shuffle, repeat, Spotify volume, the
+    /// playlist browser) draw and control. The same object as <see cref="Current"/> while Spotify is shown.
+    /// </summary>
+    public PlayerSnapshot SpotifyCurrent
+    {
+        get
+        {
+            var now = _time.GetUtcNow();
+            lock (_lock)
+            {
+                if (PruneOverrides(now)) (_current, _spotifyCurrent) = BuildAll(now);
+                return _spotifyCurrent;
+            }
+        }
+    }
+
+    /// <summary>True when another app's session is shown (the Spotify-only keys then show a calm "Spotify" state).</summary>
+    public bool OtherAppShown => Current.IsOtherApp;
+
     public SpotifyStatus Status => _status;
     public bool IsConnected => Auth.State == AuthState.Connected;
 
-    public bool FollowAnyApp
+    /// <summary>Which media session the deck follows (global setting <c>spotify."media.follow"</c>).</summary>
+    public MediaFollow Follow
     {
-        get => _smtc.FollowAnyApp;
-        set => _smtc.FollowAnyApp = value;
+        get => _smtc.Follow;
+        set => _smtc.Follow = value;
+    }
+
+    /// <summary>
+    /// Streamer-safe (Smart's <c>smart.streamerSafe</c>, or OBS running with the browser's auto streamer-safe): another
+    /// app's title, artist, album and art are hidden on keys, dials and /v1/now-playing (a browser tab title can be
+    /// private). Spotify's own track stays visible.
+    /// </summary>
+    public bool StreamerSafe
+    {
+        get => _streamerSafe;
+        set
+        {
+            if (_streamerSafe == value) return;
+            _streamerSafe = value;
+            Recompute();
+        }
     }
 
     /// <summary>Starts SMTC, loads the saved sign-in and the poll loop.</summary>
@@ -256,15 +302,26 @@ public sealed class SpotifyService : IAsyncDisposable
         if (Volatile.Read(ref _disposed) == 1) return;
         var now = _time.GetUtcNow();
         PlayerSnapshot snap;
+        PlayState? remote;
         lock (_lock)
         {
             PruneOverrides(now);
-            snap = Build(now);
+            (snap, _spotifyCurrent) = BuildAll(now);
             _current = snap;
             _status = BuildStatus();
+            remote = SpotifyRemoteState(now);
         }
+        // The follow policy counts Spotify playing on a phone or speaker as "Spotify is playing" (spotifyFirst).
+        if (_smtc.SpotifyRemote != remote) _smtc.SpotifyRemote = remote;
         Publish(snap, now);
         Changed?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>Spotify playback the Web API reports on another device (caller holds the lock).</summary>
+    private PlayState? SpotifyRemoteState(DateTimeOffset now)
+    {
+        if (!ApiUsable(now) || _player is not { } p || p.Dto.Item is null || p.Dto.Device is null || IsLocalDevice(p.Dto.Device)) return null;
+        return p.Dto.IsPlaying ? PlayState.Playing : PlayState.Paused;
     }
 
     private SpotifyStatus BuildStatus() => new()
@@ -297,9 +354,44 @@ public sealed class SpotifyService : IAsyncDisposable
         s is { IsSpotify: true, HasMedia: true } && s.State is PlayState.Playing or PlayState.Paused
         && (p is null || IsLocalDevice(p.Dto.Device) || SameTitle(s.Title, p.Dto.Item?.Name));
 
-    private PlayerSnapshot Build(DateTimeOffset now)
+    /// <summary>Spotify's own media session (whatever is shown).</summary>
+    private SmtcSnapshot? SpotifySmtc() => _smtc.Spotify ?? (_smtc.Current is { IsSpotify: true } c ? c : null);
+
+    /// <summary>The shown snapshot and Spotify's (the same object while Spotify is shown). Caller holds the lock.</summary>
+    private (PlayerSnapshot Shown, PlayerSnapshot Spotify) BuildAll(DateTimeOffset now)
     {
-        var s = _smtc.Current;
+        var spotify = BuildSpotify(now);
+        return _smtc.Current is { IsSpotify: false } other ? (BuildOther(other, now), spotify) : (spotify, spotify);
+    }
+
+    /// <summary>
+    /// Another app's session (YouTube in a browser, any player): everything from SMTC, the thumbnail exactly as given.
+    /// Spotify-only fields (liked, context, Spotify volume, device) stay null. Streamer-safe hides title, artist, album
+    /// and art. Caller holds the lock.
+    /// </summary>
+    private PlayerSnapshot BuildOther(SmtcSnapshot s, DateTimeOffset now)
+    {
+        var snap = FromSmtc(s) with
+        {
+            SessionKey = s.Key,
+            Art = SmtcArtFor(s),
+            CanPlayPause = s.CanPlay || s.CanPause,
+            CanSkipNext = s.CanNext,
+            CanSkipPrevious = s.CanPrevious,
+        };
+        if (_streamerSafe && s.HasMedia) snap = snap with { Private = true, Title = null, Artists = [], Album = null, Art = null };
+        if (_playOverride is { } po && po.Until > now && po.Target == s.Key)
+        {
+            snap = snap.IsPlaying && po.Value != PlayState.Playing
+                ? snap with { State = po.Value, PositionMs = snap.PositionNow(now), PositionAt = now }
+                : snap with { State = po.Value };
+        }
+        return snap;
+    }
+
+    private PlayerSnapshot BuildSpotify(DateTimeOffset now)
+    {
+        var s = SpotifySmtc();
         var p = ApiUsable(now) ? _player : null;
         var item = p?.Dto.Item;
         var smtcSpotify = s is { IsSpotify: true, HasMedia: true };
@@ -326,7 +418,7 @@ public sealed class SpotifyService : IAsyncDisposable
         else snap = PlayerSnapshot.Empty;
 
         // Optimistic overrides from our own commands (until confirmed or expired).
-        if (_playOverride is { } po && po.Until > now)
+        if (_playOverride is { } po && po.Until > now && po.Target == SpotifyTarget)
         {
             // Pausing freezes the interpolated position where it is now.
             snap = snap.IsPlaying && po.Value != PlayState.Playing
@@ -440,7 +532,7 @@ public sealed class SpotifyService : IAsyncDisposable
         return null;
     }
 
-    private ArtImage? SmtcArtFor(SmtcSnapshot s) => _smtcArt is { } a && a.Hash == s.ThumbnailHash ? a : null;
+    private ArtImage? SmtcArtFor(SmtcSnapshot s) => s.ThumbnailHash is { } h && _smtcArts.TryGetValue(h, out var a) ? a : null;
     private ArtImage? ApiArtFor(ItemDto item) => _apiArt is { } a && a.ItemUri == item.Uri ? a.Art : null;
 
     // ------------------------------------------------------------------ data API
@@ -479,7 +571,9 @@ public sealed class SpotifyService : IAsyncDisposable
                     DurationMs = snap.DurationMs,
                     Uri = snap.Uri,
                     Url = snap.Url,
-                } : null,
+                }
+                // Streamer-safe: something is loaded, but its title, artists and album are withheld (and art is cleared).
+                : snap.Private ? new TrackInfo { Title = "", Artists = [], Album = null, DurationMs = snap.DurationMs } : null,
                 PositionMs = pos,
                 PositionAt = pos is null ? null : now,
                 Shuffle = snap.Shuffle,
@@ -494,36 +588,55 @@ public sealed class SpotifyService : IAsyncDisposable
 
     // ------------------------------------------------------------------ SMTC events
 
+    /// <summary>What a session change means for the deck (title, state, shuffle/repeat; not the position).</summary>
+    private static string? Sig(SmtcSnapshot? s) => s is null ? null : string.Join('\n', s.Key, s.Title, s.Artist, s.Album, s.State, s.Shuffle, s.Repeat);
+
     private void OnSmtcChanged(object? sender, SmtcChange what)
     {
-        var s = _smtc.Current;
-        if (what.HasFlag(SmtcChange.Media) || what.HasFlag(SmtcChange.Session)) _ = LoadSmtcArtAsync(s);
-        if ((what & (SmtcChange.Media | SmtcChange.Playback | SmtcChange.Session)) != 0 && s is { IsSpotify: true })
+        var shown = _smtc.Current;
+        var spotify = SpotifySmtc();
+        _ = LoadSmtcArtAsync(shown);
+        if (!ReferenceEquals(spotify, shown)) _ = LoadSmtcArtAsync(spotify);
+        var spotifySig = Sig(spotify);
+        var shownSig = Sig(shown);
+        var fastRead = false;
+        lock (_lock)
         {
-            // The fast signal: one debounced read 300 ms after a meaningful local change.
-            lock (_lock)
+            if (spotifySig != _lastSpotifySig)
             {
-                var due = _time.GetUtcNow() + TimeSpan.FromMilliseconds(300);
-                _explicitDue = due;
-                if (_playOverride is not null) _playOverride = null;      // the session reported the new state
-                if (what.HasFlag(SmtcChange.Timeline)) _seekOverride = null;
+                _lastSpotifySig = spotifySig;
+                if (spotify is not null)
+                {
+                    // The fast signal: one debounced read 300 ms after a meaningful local change in Spotify's session.
+                    _explicitDue = _time.GetUtcNow() + TimeSpan.FromMilliseconds(300);
+                    fastRead = true;
+                }
+                if (_playOverride is { Target: SpotifyTarget }) _playOverride = null;   // the session reported the new state
             }
-            Wake();
+            if (shownSig != _lastShownSig)
+            {
+                _lastShownSig = shownSig;
+                if (shown is { IsSpotify: false } && _playOverride is { } po && po.Target == shown.Key) _playOverride = null;
+            }
+            if (what.HasFlag(SmtcChange.Timeline)) _seekOverride = null;
         }
-        else if (what.HasFlag(SmtcChange.Timeline))
-        {
-            lock (_lock) _seekOverride = null;
-        }
+        if (fastRead) Wake();
         Recompute();
     }
 
     private async Task LoadSmtcArtAsync(SmtcSnapshot? s)
     {
-        if (s?.Thumbnail is not { } bytes) return;
-        if (_smtcArt?.Hash == s.ThumbnailHash) return;
+        if (s?.Thumbnail is not { } bytes || s.ThumbnailHash is not { } hash) return;
+        lock (_lock) if (_smtcArts.ContainsKey(hash)) return;
         var art = await Images.FromBytesAsync(bytes, _o.KeyArtPx).ConfigureAwait(false);
         if (art is null) return;
-        lock (_lock) _smtcArt = art;
+        lock (_lock)
+        {
+            _smtcArts[hash] = art;
+            // Keep only what is shown and Spotify's own (art is cached in memory only, and briefly).
+            var keep = new HashSet<string?>(StringComparer.Ordinal) { hash, _smtc.Current?.ThumbnailHash, SpotifySmtc()?.ThumbnailHash };
+            foreach (var old in _smtcArts.Keys.Where(k => !keep.Contains(k)).ToList()) _smtcArts.Remove(old);
+        }
         Recompute();
     }
 
@@ -589,7 +702,7 @@ public sealed class SpotifyService : IAsyncDisposable
     {
         trackEnd = null;
         if (_views.GetValueOrDefault(SpotifyView.BrowserOpen) > 0) return TimeSpan.FromSeconds(30);
-        var s = _smtc.Current;
+        var s = SpotifySmtc();
         if (IsLocalPlayback(s, _player)) return TimeSpan.FromSeconds(30);   // event-driven + safety read
         if (_player is null)
             return _idleSince is { } idle && now - idle > TimeSpan.FromMinutes(2) ? TimeSpan.FromSeconds(30) : TimeSpan.FromSeconds(10);
@@ -675,7 +788,7 @@ public sealed class SpotifyService : IAsyncDisposable
             // A fresh read confirms (or corrects) our optimistic overrides.
             if (_shuffleOverride is { } so && dto?.ShuffleState == so.Value) _shuffleOverride = null;
             if (_repeatOverride is { } ro && SpotifyApi.ParseRepeat(dto?.RepeatState) == ro.Value) _repeatOverride = null;
-            if (_playOverride is { } po && dto is not null && (dto.IsPlaying ? PlayState.Playing : PlayState.Paused) == po.Value) _playOverride = null;
+            if (_playOverride is { Target: SpotifyTarget } po && dto is not null && (dto.IsPlaying ? PlayState.Playing : PlayState.Paused) == po.Value) _playOverride = null;
             if (!_volumeSending && _volumeTarget is { } vt && dto?.Device?.VolumePercent == vt) _volumeTarget = null;
             if (_likedRetry is { } retry && retry == dto?.Item?.Uri && newUri is null) { _likedRetry = null; newLikeCheck = retry; }
         }
@@ -863,18 +976,15 @@ public sealed class SpotifyService : IAsyncDisposable
     /// </summary>
     private (Route Route, SmtcSnapshot? Smtc, ApiPlayer? Player) RouteForTransport(Func<SmtcSnapshot, bool>? smtcCan = null)
     {
+        // Spotify only: another app's session is routed by the caller (OtherTransportAsync) before this is asked.
         var now = _time.GetUtcNow();
         lock (_lock)
         {
-            var s = _smtc.Current;
+            var s = SpotifySmtc();
             var apiOk = ApiUsable(now);
             var p = apiOk ? _player : null;
-            if (s is { IsSpotify: true } && (!apiOk || p is null || IsLocalPlayback(s, p) || IsLocalDevice(p.Dto.Device))) return (Route.Smtc, s, p);
-            if (s is { IsSpotify: true } && Gate.IsPausedBeyondMaxWait(now) && (smtcCan?.Invoke(s) ?? true)) return (Route.Smtc, s, p);
-            // Control what is shown: the Web API when it has a player state (or nothing else is there to control) ...
-            if (apiOk && (p is not null || s is not { HasMedia: true })) return (Route.Api, s, p);
-            // ... otherwise the media session on screen (any-app mode, or Spotify without a sign-in).
-            if (s is not null) return (Route.Smtc, s, p);
+            if (s is not null && (!apiOk || p is null || IsLocalPlayback(s, p) || IsLocalDevice(p.Dto.Device))) return (Route.Smtc, s, p);
+            if (s is not null && Gate.IsPausedBeyondMaxWait(now) && (smtcCan?.Invoke(s) ?? true)) return (Route.Smtc, s, p);
             return apiOk ? (Route.Api, s, p) : (Route.None, s, p);
         }
     }
@@ -884,9 +994,90 @@ public sealed class SpotifyService : IAsyncDisposable
         lock (_lock) return _player?.Dto.Device is { IsActive: true, Id: { } id } ? id : null;
     }
 
-    private void SetPlayOverride(PlayState s)
+    private void SetPlayOverride(PlayState s, string target = SpotifyTarget)
     {
-        lock (_lock) _playOverride = (s, _time.GetUtcNow() + OverrideTtl);
+        lock (_lock) _playOverride = (s, _time.GetUtcNow() + OverrideTtl, target);
+    }
+
+    /// <summary>The transport commands that follow the shown session (any app); everything else is Spotify-only.</summary>
+    public enum Transport { PlayPause, Next, Previous }
+
+    /// <summary>
+    /// Whether the shown session can take <paramref name="command"/> right now, without sending anything: another app's
+    /// session by its Windows control flags, Spotify by whether there is anything to control at all. The Web API's own
+    /// refusals (no Premium, a restricted device) only show once the command is sent.
+    /// </summary>
+    public CommandResult CheckTransport(Transport command)
+    {
+        var shown = Current;
+        if (shown.IsOtherApp) return CheckOther(shown, command);
+        var (route, _, _) = RouteForTransport();
+        if (route != Route.None) return CommandResult.Success;
+        return command == Transport.PlayPause && IsConnected ? CommandResult.Success : CommandResult.Fail(SpotifyText.OpenSpotify);
+    }
+
+    /// <summary>
+    /// Sends a transport command to the shown session in the background (for <see cref="SpotifyNowPlayingControl"/>,
+    /// whose contract is synchronous): a clear failure when the session can't do it, otherwise success once sent. A later
+    /// refusal is logged (type only) and the snapshot shows the real state again.
+    /// </summary>
+    public CommandResult StartTransport(Transport command)
+    {
+        var check = CheckTransport(command);
+        if (!check.Ok) return check;
+        _ = RunTransportAsync(command);
+        return CommandResult.Success;
+    }
+
+    private async Task RunTransportAsync(Transport command)
+    {
+        try
+        {
+            var r = await (command switch
+            {
+                Transport.Next => NextAsync(),
+                Transport.Previous => PreviousAsync(),
+                _ => TogglePlayPauseAsync(),
+            }).ConfigureAwait(false);
+            if (!r.Ok) _log.Debug($"Now-playing control: {command} was refused.");
+        }
+        catch (Exception ex) { _log.Warn($"Now-playing control: {command} failed unexpectedly: {ex.GetType().Name}"); }
+    }
+
+    /// <summary>
+    /// Play/pause, next or previous on another app's session (YouTube in a browser, any player): SMTC on exactly the
+    /// session the user saw (safe mode fakes it, like Spotify's). Spotify's Web API is never involved.
+    /// </summary>
+    private static CommandResult CheckOther(PlayerSnapshot shown, Transport command) => command switch
+    {
+        Transport.PlayPause when !shown.CanPlayPause => CommandResult.Fail(SpotifyText.CantPlayPause(shown.AppName)),
+        Transport.Next when !shown.CanSkipNext => CommandResult.Fail(SpotifyText.CantSkip(shown.AppName)),
+        Transport.Previous when !shown.CanSkipPrevious => CommandResult.Fail(SpotifyText.CantGoBack(shown.AppName)),
+        _ => CommandResult.Success,
+    };
+
+    private async Task<CommandResult> OtherTransportAsync(PlayerSnapshot shown, Transport command)
+    {
+        var check = CheckOther(shown, command);
+        if (!check.Ok) return check;
+        var key = shown.SessionKey!;
+        bool ok;
+        switch (command)
+        {
+            case Transport.PlayPause:
+                ok = await _smtc.TogglePlayPauseAsync(key).ConfigureAwait(false);
+                if (ok) SetPlayOverride(shown.IsPlaying ? PlayState.Paused : PlayState.Playing, key);
+                break;
+            case Transport.Next:
+                ok = await _smtc.NextAsync(key).ConfigureAwait(false);
+                break;
+            default:
+                ok = await _smtc.PreviousAsync(key).ConfigureAwait(false);
+                break;
+        }
+        Recompute();
+        if (ok) return CommandResult.Success;
+        return _smtc.Sessions.Any(x => x.Key == key) ? CommandResult.Fail(SpotifyText.NoResponse) : CommandResult.Fail(SpotifyText.Gone(shown.AppName));
     }
 
     private bool InBasicMode()
@@ -897,7 +1088,7 @@ public sealed class SpotifyService : IAsyncDisposable
 
     /// <summary>True when Spotify's own media session should do a toggle/shuffle/repeat because the Web API is paused.</summary>
     private bool SmtcWhilePaused(Func<SmtcSnapshot, bool> can) =>
-        _smtc.Current is { IsSpotify: true } s && can(s) && Gate.IsPausedBeyondMaxWait(_time.GetUtcNow());
+        SpotifySmtc() is { } s && can(s) && Gate.IsPausedBeyondMaxWait(_time.GetUtcNow());
 
     private async Task<CommandResult> ApiCommand(Func<CancellationToken, Task> call)
     {
@@ -921,15 +1112,17 @@ public sealed class SpotifyService : IAsyncDisposable
         }
     }
 
+    /// <summary>Play/pause on the shown session: another app's via SMTC, Spotify's via SMTC (this PC) or the Web API.</summary>
     public async Task<CommandResult> TogglePlayPauseAsync()
     {
         var cur = Current;
-        var (route, _, _) = RouteForTransport(s => s.CanPlay || s.CanPause);
+        if (cur.IsOtherApp) return await OtherTransportAsync(cur, Transport.PlayPause).ConfigureAwait(false);
+        var (route, s, _) = RouteForTransport(x => x.CanPlay || x.CanPause);
         switch (route)
         {
             case Route.Smtc:
-                var ok = await _smtc.TogglePlayPauseAsync().ConfigureAwait(false);
-                if (!ok) return CommandResult.Fail("The player didn't respond");
+                var ok = await _smtc.TogglePlayPauseAsync(s!.Key).ConfigureAwait(false);
+                if (!ok) return CommandResult.Fail(SpotifyText.NoResponse);
                 SetPlayOverride(cur.IsPlaying ? PlayState.Paused : PlayState.Playing);
                 if (IsConnected) ConfirmSoon();
                 Recompute();
@@ -954,13 +1147,15 @@ public sealed class SpotifyService : IAsyncDisposable
 
     private async Task<CommandResult> SkipAsync(bool next)
     {
-        var (route, _, _) = RouteForTransport(s => next ? s.CanNext : s.CanPrevious);
+        var cur = Current;
+        if (cur.IsOtherApp) return await OtherTransportAsync(cur, next ? Transport.Next : Transport.Previous).ConfigureAwait(false);
+        var (route, s, _) = RouteForTransport(x => next ? x.CanNext : x.CanPrevious);
         switch (route)
         {
             case Route.Smtc:
-                var ok = next ? await _smtc.NextAsync().ConfigureAwait(false) : await _smtc.PreviousAsync().ConfigureAwait(false);
+                var ok = next ? await _smtc.NextAsync(s!.Key).ConfigureAwait(false) : await _smtc.PreviousAsync(s!.Key).ConfigureAwait(false);
                 if (ok && IsConnected) ConfirmSoon();
-                return ok ? CommandResult.Success : CommandResult.Fail("The player didn't respond");
+                return ok ? CommandResult.Success : CommandResult.Fail(SpotifyText.NoResponse);
             case Route.Api:
                 var device = ActiveDeviceId();
                 return await ApiCommand(ct => next ? Api.NextAsync(device, ct) : Api.PreviousAsync(device, ct)).ConfigureAwait(false);
@@ -969,16 +1164,17 @@ public sealed class SpotifyService : IAsyncDisposable
         }
     }
 
+    /// <summary>Spotify's shuffle (Web API, or Spotify's own session), whatever app is shown.</summary>
     public async Task<CommandResult> ToggleShuffleAsync()
     {
-        var cur = Current;
+        var cur = SpotifyCurrent;
         var target = !(cur.Shuffle ?? false);
         lock (_lock) _shuffleOverride = (target, _time.GetUtcNow() + OverrideTtl);
         Recompute();
         CommandResult r;
-        var s = _smtc.Current;
+        var s = SpotifySmtc();
         if (ApiUsable(_time.GetUtcNow()) && !SmtcWhilePaused(x => x.CanShuffle)) r = await ApiCommand(ct => Api.SetShuffleAsync(target, ActiveDeviceId(), ct)).ConfigureAwait(false);
-        else if (s is { CanShuffle: true }) r = await _smtc.SetShuffleAsync(target).ConfigureAwait(false) ? CommandResult.Success : CommandResult.Fail("The player didn't respond");
+        else if (s is { CanShuffle: true }) r = await _smtc.SetShuffleAsync(s.Key, target).ConfigureAwait(false) ? CommandResult.Success : CommandResult.Fail(SpotifyText.NoResponse);
         else r = CommandResult.Fail(s is null ? SpotifyText.OpenSpotify : SpotifyText.ConnectHint);
         if (!r.Ok) { lock (_lock) _shuffleOverride = null; Recompute(); }
         return r;
@@ -991,15 +1187,16 @@ public sealed class SpotifyService : IAsyncDisposable
         _ => RepeatMode.Off,
     };
 
+    /// <summary>Spotify's repeat (Web API, or Spotify's own session), whatever app is shown.</summary>
     public async Task<CommandResult> CycleRepeatAsync()
     {
-        var target = NextRepeat(Current.Repeat);
+        var target = NextRepeat(SpotifyCurrent.Repeat);
         lock (_lock) _repeatOverride = (target, _time.GetUtcNow() + OverrideTtl);
         Recompute();
         CommandResult r;
-        var s = _smtc.Current;
+        var s = SpotifySmtc();
         if (ApiUsable(_time.GetUtcNow()) && !SmtcWhilePaused(x => x.CanRepeat)) r = await ApiCommand(ct => Api.SetRepeatAsync(target, ActiveDeviceId(), ct)).ConfigureAwait(false);
-        else if (s is { CanRepeat: true }) r = await _smtc.SetRepeatAsync(target).ConfigureAwait(false) ? CommandResult.Success : CommandResult.Fail("The player didn't respond");
+        else if (s is { CanRepeat: true }) r = await _smtc.SetRepeatAsync(s.Key, target).ConfigureAwait(false) ? CommandResult.Success : CommandResult.Fail(SpotifyText.NoResponse);
         else r = CommandResult.Fail(s is null ? SpotifyText.OpenSpotify : SpotifyText.ConnectHint);
         if (!r.Ok) { lock (_lock) _repeatOverride = null; Recompute(); }
         return r;
@@ -1013,7 +1210,7 @@ public sealed class SpotifyService : IAsyncDisposable
     {
         if (!IsConnected) return CommandResult.Fail(SpotifyText.ConnectHint);
         if (InBasicMode()) return CommandResult.Fail(SpotifyText.BasicMode);
-        var cur = Current;
+        var cur = SpotifyCurrent;   // Spotify's track, even while another app is shown
         if (!cur.CanLike || cur.Uri is not { } uri) return CommandResult.Fail(cur.IsLocalFile ? "Local files can't be liked" : "Nothing to like");
         var was = cur.Liked;
         if (was is null)
@@ -1073,7 +1270,7 @@ public sealed class SpotifyService : IAsyncDisposable
     {
         if (!IsConnected) return CommandResult.Fail(SpotifyText.ConnectHint);
         if (InBasicMode()) return CommandResult.Fail(SpotifyText.BasicMode);
-        var cur = Current;
+        var cur = SpotifyCurrent;   // Spotify's device volume, whatever app is shown
         if (cur.DeviceId is not null && !cur.SupportsVolume) return CommandResult.Fail("This device doesn't support volume control");
         var v = Math.Clamp(percent, 0, 100);
         var sender = 0;
@@ -1092,12 +1289,12 @@ public sealed class SpotifyService : IAsyncDisposable
         return CommandResult.Success;
     }
 
-    public CommandResult AdjustVolume(int delta) => SetVolume((Current.VolumePct ?? 50) + delta);
+    public CommandResult AdjustVolume(int delta) => SetVolume((SpotifyCurrent.VolumePct ?? 50) + delta);
 
     /// <summary>Mute (remembering the level) or restore it.</summary>
     public CommandResult ToggleMute()
     {
-        var v = Current.VolumePct;
+        var v = SpotifyCurrent.VolumePct;
         if (v is > 0)
         {
             lock (_lock) _preMuteVolume = v;
@@ -1108,7 +1305,7 @@ public sealed class SpotifyService : IAsyncDisposable
         return SetVolume(restore);
     }
 
-    public bool IsMuted => Current.VolumePct == 0;
+    public bool IsMuted => SpotifyCurrent.VolumePct == 0;
 
     /// <summary>
     /// The one coalescing volume sender (<paramref name="id"/> owns <c>_volumeSending</c> until it exits). Every exit path
@@ -1178,10 +1375,14 @@ public sealed class SpotifyService : IAsyncDisposable
 
     // ---- seek
 
-    /// <summary>Moves the position by <paramref name="delta"/>; ticks accumulate and one seek goes out 300 ms after the last.</summary>
+    /// <summary>
+    /// Moves Spotify's position by <paramref name="delta"/>; ticks accumulate and one seek goes out 300 ms after the last.
+    /// Spotify only: while another app is shown it fails calmly (a seek must never land on a track nobody sees).
+    /// </summary>
     public CommandResult SeekBy(TimeSpan delta)
     {
         var cur = Current;
+        if (cur.IsOtherApp) return CommandResult.Fail(SpotifyText.SeekSpotifyOnly);
         if (!cur.HasItem || cur.DurationMs is null) return CommandResult.Fail("Nothing to seek");
         var now = _time.GetUtcNow();
         lock (_lock)
@@ -1212,10 +1413,10 @@ public sealed class SpotifyService : IAsyncDisposable
             target = so.PositionMs;
             _seekOverride = (target, _time.GetUtcNow(), _time.GetUtcNow() + OverrideTtl);
         }
-        var (route, _, _) = RouteForTransport(s => s.CanSeek);
+        var (route, s, _) = RouteForTransport(x => x.CanSeek);
         var ok = route switch
         {
-            Route.Smtc => await _smtc.SeekAsync(TimeSpan.FromMilliseconds(target)).ConfigureAwait(false),
+            Route.Smtc => await _smtc.SeekAsync(s!.Key, TimeSpan.FromMilliseconds(target)).ConfigureAwait(false),
             Route.Api => (await ApiCommand(ct => Api.SeekAsync(target, ActiveDeviceId(), ct)).ConfigureAwait(false)).Ok,
             _ => false,
         };
@@ -1302,9 +1503,9 @@ public sealed class SpotifyService : IAsyncDisposable
             }
 
             var local = await FindLocalDeviceAsync(ct).ConfigureAwait(false);
-            if (local is null && _smtc.Current is { IsSpotify: true })
+            if (local is null && SpotifySmtc() is { } spotifySession)
             {
-                await _smtc.PlayAsync().ConfigureAwait(false);   // makes the desktop app's device active
+                await _smtc.PlayAsync(spotifySession.Key).ConfigureAwait(false);   // makes the desktop app's device active
                 await Task.Delay(TimeSpan.FromSeconds(1), _time, ct).ConfigureAwait(false);
                 local = await FindLocalDeviceAsync(ct).ConfigureAwait(false);
             }
@@ -1360,10 +1561,10 @@ public sealed class SpotifyService : IAsyncDisposable
         return local;
     }
 
-    /// <summary>Opens the current item in the Spotify app (the link back Spotify requires near art).</summary>
+    /// <summary>Spotify's current item, to open in the Spotify app (the link back Spotify requires near art).</summary>
     public string? LinkBack()
     {
-        var cur = Current;
+        var cur = SpotifyCurrent;
         if (cur.Uri is { } uri && !cur.IsLocalFile) return uri;   // spotify:track:… opens the desktop app
         return cur.Url;
     }

@@ -389,6 +389,16 @@ public sealed class EndToEndTests : IAsyncDisposable
         await Get("/v1/audio/levels"); // first request starts demand-driven metering
         await Task.Delay(200);
         Assert.Equal(200, (await Get("/v1/audio/levels")).Item1);
+        // Demand-driven loopback analysis (read-only, so it runs in safe mode): the first request starts it and may answer 503 before the first frame.
+        var (sp1, _, _) = await Get("/v1/audio/spectrum");
+        Assert.True(sp1 is 200 or 503, $"audio/spectrum answered {sp1}");
+        await Task.Delay(300);
+        var (sps, spectrum, _) = await Get("/v1/audio/spectrum");
+        Assert.Equal(200, sps, "audio/spectrum serves frames once demanded");
+        Assert.Equal("audio", spectrum!["source"]!.GetValue<string>());
+        Assert.Equal(24, spectrum["data"]!["bands"]!.AsArray().Count);
+        Assert.Equal(24, spectrum["data"]!["bandHz"]!.AsArray().Count);
+        Assert.Equal(401, (await Get("/v1/audio/spectrum", auth: false)).Item1);
         Assert.Equal(200, (await Get("/v1/audio/devices")).Item1);
         Assert.Equal(200, (await Get("/v1/mic")).Item1);
         Assert.Equal(401, (await Get("/v1/health", auth: false)).Item1);

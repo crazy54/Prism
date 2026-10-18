@@ -1,15 +1,17 @@
+using PrismControl.Audio.Spectrum;
 using PrismControl.Core.Data;
 using PrismControl.Core.Hosting;
 
 namespace PrismControl.Audio;
 
 /// <summary>
-/// The audio topics of the data API (docs/api.md §4.6-4.8), built on <see cref="IAudioEngine"/> so tests can drive them:
+/// The audio topics of the data API (docs/api.md §4.6-4.8, §4.10), built on <see cref="IAudioEngine"/> so tests can drive them:
 /// <list type="bullet">
 /// <item><c>/v1/audio/devices</c>: pull, cached 500 ms, from the engine's live cache.</item>
 /// <item><c>/v1/mic</c>: pushed on every mute/volume/default change of the default (console) input; while polled,
 /// the peak is metered at 10 Hz and "in use" refreshed every second.</item>
 /// <item><c>/v1/audio/levels</c>: metered at ~30 Hz only while polled (stops 5 s after the last request).</item>
+/// <item><c>/v1/audio/spectrum</c>: loopback analysis of the default output at ~30 Hz, only while polled (<see cref="SpectrumProvider"/>).</item>
 /// </list>
 /// </summary>
 internal sealed class AudioDataProviders : IAsyncDisposable
@@ -23,6 +25,8 @@ internal sealed class AudioDataProviders : IAsyncDisposable
     private readonly TimeProvider _time;
     private readonly ILog _log;
     private readonly CancellationTokenSource _cts;
+    private readonly ILoopbackSource? _loopback;
+    private SpectrumProvider? _spectrum;
     private DataPublisher<MicSnapshot>? _mic;
     private DataPublisher<AudioLevelsSnapshot>? _levels;
     private int _micDirty, _micPublishing, _micLoop, _levelsLoop;
@@ -30,9 +34,12 @@ internal sealed class AudioDataProviders : IAsyncDisposable
     private double? _micPeak;
     private Task _micLoopTask = Task.CompletedTask, _levelsLoopTask = Task.CompletedTask;
 
-    public AudioDataProviders(IAudioEngine engine, IDataRegistry data, TimeProvider time, ILog log, CancellationToken shutdown)
+    /// <param name="loopback">Loopback capture for the spectrum; by default the engine itself (behind the safe-mode
+    /// wrapper, whose purpose is to stop writes: capture is a read).</param>
+    public AudioDataProviders(IAudioEngine engine, IDataRegistry data, TimeProvider time, ILog log, CancellationToken shutdown, ILoopbackSource? loopback = null)
     {
         _engine = engine;
+        _loopback = loopback ?? (((engine as SafeAudioEngine)?.Inner ?? engine) as ILoopbackSource);
         _data = data;
         _time = time;
         _log = log;
@@ -42,6 +49,8 @@ internal sealed class AudioDataProviders : IAsyncDisposable
     public bool ClaimedDevices { get; private set; }
     public bool ClaimedMic => _mic is not null;
     public bool ClaimedLevels => _levels is not null;
+    public bool ClaimedSpectrum => _spectrum?.Claimed == true;
+    internal SpectrumProvider? Spectrum => _spectrum;
 
     public void Start()
     {
@@ -55,7 +64,12 @@ internal sealed class AudioDataProviders : IAsyncDisposable
         }
         _levels = _data.AudioLevels.Claim("audio", LevelsInterval);
         if (_levels is not null) _levels.DemandStarted += (_, _) => StartLevelsLoop();
-        if (!ClaimedDevices || _mic is null || _levels is null)
+        if (_loopback is not null)
+        {
+            _spectrum = new SpectrumProvider(_engine, _loopback, _data.AudioSpectrum, _time, _log, _cts.Token);
+            if (!_spectrum.Claim()) _spectrum = null;
+        }
+        if (!ClaimedDevices || _mic is null || _levels is null || (_loopback is not null && _spectrum is null))
             _log.Warn("Another provider already owns some audio data topics; Prism Control's audio module serves the rest.");
     }
 
@@ -239,6 +253,7 @@ internal sealed class AudioDataProviders : IAsyncDisposable
         _cts.Cancel();
         try { await Task.WhenAll(_micLoopTask, _levelsLoopTask).WaitAsync(TimeSpan.FromSeconds(1)).ConfigureAwait(false); }
         catch (Exception) { /* shutting down */ }
+        if (_spectrum is not null) await _spectrum.DisposeAsync().ConfigureAwait(false);
         _cts.Dispose();
     }
 }

@@ -17,6 +17,12 @@ public interface IDataRegistry
     BinaryTopic NowPlayingArt { get; }
     /// <summary>/v1/audio/levels: ~30 Hz peaks, only while <see cref="DataTopic.IsDemanded"/>.</summary>
     DataTopic<AudioLevelsSnapshot> AudioLevels { get; }
+    /// <summary>
+    /// /v1/audio/spectrum: ~30 Hz 24-band spectrum of the default output, captured only while <see cref="DataTopic.IsDemanded"/>.
+    /// In-process readers create demand with <see cref="DataTopic.Demand"/> (about once a second while shown), then read
+    /// <c>Current</c>; reading <c>Current</c> alone does not.
+    /// </summary>
+    DataTopic<AudioSpectrumSnapshot> AudioSpectrum { get; }
     /// <summary>/v1/audio/devices: on change (or pull with a short cache).</summary>
     DataTopic<AudioDevicesSnapshot> AudioDevices { get; }
     /// <summary>/v1/mic: mute state on change; peak at 10 Hz while demanded.</summary>
@@ -42,6 +48,7 @@ public sealed class DataRegistry : IDataRegistry
         NowPlaying = Add(new DataTopic<NowPlayingSnapshot>(DataPaths.NowPlaying, DataJsonContext.Wire.NowPlayingSnapshot, TimeSpan.Zero, _time));
         NowPlayingArt = Add(new BinaryTopic(DataPaths.NowPlayingArt, TimeSpan.Zero, _time));
         AudioLevels = Add(new DataTopic<AudioLevelsSnapshot>(DataPaths.AudioLevels, DataJsonContext.Wire.AudioLevelsSnapshot, TimeSpan.FromMilliseconds(33), _time));
+        AudioSpectrum = Add(new DataTopic<AudioSpectrumSnapshot>(DataPaths.AudioSpectrum, DataJsonContext.Wire.AudioSpectrumSnapshot, TimeSpan.FromMilliseconds(33), _time));
         AudioDevices = Add(new DataTopic<AudioDevicesSnapshot>(DataPaths.AudioDevices, DataJsonContext.Wire.AudioDevicesSnapshot, TimeSpan.Zero, _time));
         Mic = Add(new DataTopic<MicSnapshot>(DataPaths.Mic, DataJsonContext.Wire.MicSnapshot, TimeSpan.Zero, _time));
     }
@@ -50,6 +57,7 @@ public sealed class DataRegistry : IDataRegistry
     public DataTopic<NowPlayingSnapshot> NowPlaying { get; }
     public BinaryTopic NowPlayingArt { get; }
     public DataTopic<AudioLevelsSnapshot> AudioLevels { get; }
+    public DataTopic<AudioSpectrumSnapshot> AudioSpectrum { get; }
     public DataTopic<AudioDevicesSnapshot> AudioDevices { get; }
     public DataTopic<MicSnapshot> Mic { get; }
 

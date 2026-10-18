@@ -4,7 +4,8 @@ using PrismControl.Spotify.Actions;
 using PrismControl.Spotify.Auth;
 using PrismControl.Spotify.Smtc;
 
-[assembly: PrismModule(typeof(PrismControl.Spotify.SpotifyModule), MonitorApplications = ["Spotify.exe"])]
+// obs64/obs32: OBS running turns on streamer-safe for other apps' titles (with the browser's auto streamer-safe).
+[assembly: PrismModule(typeof(PrismControl.Spotify.SpotifyModule), MonitorApplications = ["Spotify.exe", "obs64.exe", "obs32.exe"])]
 
 namespace PrismControl.Spotify;
 
@@ -17,8 +18,13 @@ public sealed class SpotifyModule : IPrismModule, IAsyncDisposable
 {
     private SpotifyService? _service;
     private Task? _start;
+    private int _streamingApps;
 
     public string Name => "spotify";
+
+    /// <summary>A streaming app (OBS) whose running turns streamer-safe on, like the browser module's auto streamer-safe.</summary>
+    public static bool IsStreamingApp(string? app) =>
+        string.Equals(app, "obs64.exe", StringComparison.OrdinalIgnoreCase) || string.Equals(app, "obs32.exe", StringComparison.OrdinalIgnoreCase);
 
     public void Initialize(IModuleContext context)
     {
@@ -58,12 +64,38 @@ public sealed class SpotifyModule : IPrismModule, IAsyncDisposable
 
         void ApplyGlobals()
         {
-            try { service.FollowAnyApp = context.GlobalSettings.GetSection<SpotifyGlobalSettings>(SpotifyGlobalSettings.Section).AnyMediaApp; }
+            // media.follow; a profile from before it existed migrates: anyMediaApp true → current, false → spotifyFirst.
+            try { service.Follow = context.GlobalSettings.GetSection<SpotifyGlobalSettings>(SpotifyGlobalSettings.Section).EffectiveFollow; }
             catch (Exception ex) { log.Debug("spotify global settings unreadable: " + ex.Message); }
+            service.StreamerSafe = StreamerSafeNow();
+        }
+        bool StreamerSafeNow()
+        {
+            var smart = false;
+            var auto = true;
+            try { smart = context.GlobalSettings.GetSection<SmartStreamerView>("smart").StreamerSafe; } catch (Exception) { }
+            try { auto = context.GlobalSettings.GetSection<BrowserStreamerView>("browser").AutoStreamerSafe; } catch (Exception) { }
+            return smart || (auto && Volatile.Read(ref _streamingApps) > 0);
         }
         context.GlobalSettings.Changed += (_, _) => ApplyGlobals();
-        context.Events.ApplicationLaunched += (_, app) => { if (SmtcSource.IsSpotifyApp(app)) smtc.Rebind(); };
-        context.Events.ApplicationTerminated += (_, app) => { if (SmtcSource.IsSpotifyApp(app)) smtc.Rebind(); };
+        context.Events.ApplicationLaunched += (_, app) =>
+        {
+            if (SmtcSource.IsSpotifyApp(app)) smtc.Rebind();
+            if (IsStreamingApp(app))
+            {
+                Interlocked.Increment(ref _streamingApps);
+                service.StreamerSafe = StreamerSafeNow();
+            }
+        };
+        context.Events.ApplicationTerminated += (_, app) =>
+        {
+            if (SmtcSource.IsSpotifyApp(app)) smtc.Rebind();
+            if (IsStreamingApp(app))
+            {
+                if (Interlocked.Decrement(ref _streamingApps) < 0) Interlocked.Exchange(ref _streamingApps, 0);
+                service.StreamerSafe = StreamerSafeNow();
+            }
+        };
         context.Events.SystemWokeUp += (_, _) => { smtc.Rebind(); service.RequestRefresh(TimeSpan.FromSeconds(2)); };
 
         _start = Task.Run(async () =>

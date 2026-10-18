@@ -22,6 +22,11 @@ public abstract class SpotifyKeyBase : KeyAction, IDisposable
     /// <summary>The palette to draw with: Spotify's app look when a Kaleidoscope deck shows Spotify, else Prism (core.theme).</summary>
     protected RefractionPalette Look => AppTheming.For(Services, Device.Id, Theme)?.Palette ?? Theme;
     protected abstract SpotifyView View { get; }
+    /// <summary>
+    /// True for keys that always draw and control Spotify (like, shuffle, repeat), whatever app the deck shows; false for
+    /// the transport keys, which follow the shown session (YouTube in a browser, any player).
+    /// </summary>
+    protected virtual bool SpotifyOnly => false;
     protected abstract Task<CommandResult> ExecuteAsync(SpotifyService svc);
     /// <summary>Draws the key. <paramref name="hint"/> is a short failure label to show (or null).</summary>
     protected abstract SvgDocument Draw(RefractionPalette t, SpotifyService? svc, PlayerSnapshot snap, string? hint);
@@ -48,7 +53,8 @@ public abstract class SpotifyKeyBase : KeyAction, IDisposable
         var r = await ExecuteAsync(svc);
         if (!r.Ok)
         {
-            ShowAlert();
+            // A Spotify-only key pressed while another app is in front stays calm: the hint says why, no alert.
+            if (!(SpotifyOnly && OtherApp(svc))) ShowAlert();
             if (r.Message is { } m) _flash.Set(Time, m, true, TimeSpan.FromSeconds(2.5));
         }
         else _flash.Clear();
@@ -70,8 +76,18 @@ public abstract class SpotifyKeyBase : KeyAction, IDisposable
     {
         if (!IsVisible) return;
         var hint = _flash.Get(Time) is { } f ? SpotifyText.KeyHint(f.Text) : null;
-        SetImage(Draw(Look, Svc, Svc?.Current ?? PlayerSnapshot.Empty, hint));
+        var svc = Svc;
+        SetImage(Draw(Look, svc, svc is null ? PlayerSnapshot.Empty : SpotifyOnly ? svc.SpotifyCurrent : svc.Current, hint));
     }
+
+    /// <summary>The calm label a Spotify-only key wears while another app is shown: it still controls Spotify.</summary>
+    protected const string SpotifyLabel = "SPOTIFY";
+
+    /// <summary>Another app is in front (the Spotify-only keys then say "SPOTIFY", never an error).</summary>
+    protected static bool OtherApp(SpotifyService? svc) => svc?.OtherAppShown ?? false;
+
+    /// <summary>The shown app's name on a transport key while it isn't Spotify ("CHROME"); text only, no logos.</summary>
+    protected static string? AppLabel(PlayerSnapshot s) => s.IsOtherApp && s.AppName is { Length: > 0 } a ? a.ToUpperInvariant() : null;
 
     /// <summary>"SIGN IN" / "RECONNECT" for Web-API-only keys when not connected.</summary>
     protected static string? SignInLabel(SpotifyService? svc) => svc is null ? "UNAVAILABLE" : svc.Status.Auth switch
@@ -83,7 +99,7 @@ public abstract class SpotifyKeyBase : KeyAction, IDisposable
     };
 
     protected static bool CanTransport(SpotifyService? svc, PlayerSnapshot s) =>
-        svc is not null && (s.HasItem || svc.IsConnected || svc.Smtc.Current is not null);
+        svc is not null && (s.HasItem || s.Private || svc.IsConnected || svc.Smtc.Current is not null || svc.Smtc.Spotify is not null);
 
     public void Dispose()
     {
@@ -94,43 +110,48 @@ public abstract class SpotifyKeyBase : KeyAction, IDisposable
     }
 }
 
-/// <summary>Play / pause (SMTC for the desktop app on this PC, the Web API for other devices).</summary>
+/// <summary>
+/// Play / pause on what Now Playing shows: Spotify (SMTC for the desktop app on this PC, the Web API for other devices),
+/// or another app's media session (YouTube in a browser, any player), whose name then shows under the glyph.
+/// </summary>
 [StreamDeckAction("com.jeremyfhall.prismcontrol.spotify.play-pause", Name = "Play / Pause",
     Icon = "imgs/actions/spotify/play-pause/icon", KeyImage = "imgs/actions/spotify/play-pause/key",
-    Tooltip = "Play or pause Spotify. Works without connecting for the Spotify app on this PC.", PropertyInspector = SpotifyBinding.PiPage)]
+    Tooltip = "Play or pause what Now Playing shows: Spotify, or another app such as YouTube in a browser. No sign-in needed on this PC.",
+    PropertyInspector = SpotifyBinding.PiPage)]
 public sealed class PlayPauseAction : SpotifyKeyBase
 {
     protected override SpotifyView View => SpotifyView.Transport;
     protected override Task<CommandResult> ExecuteAsync(SpotifyService svc) => svc.TogglePlayPauseAsync();
 
     protected override SvgDocument Draw(RefractionPalette t, SpotifyService? svc, PlayerSnapshot s, string? hint) => hint is null
-        ? SpotifyArt.TransportKey(t, TransportGlyph.PlayPause, s.IsPlaying, CanTransport(svc, s))
+        ? SpotifyArt.TransportKey(t, TransportGlyph.PlayPause, s.IsPlaying, CanTransport(svc, s) && s.CanPlayPause, AppLabel(s))
         : SpotifyArt.GlyphKey(t, s.IsPlaying ? SpotifyGlyphs.Pause : SpotifyGlyphs.Play, hint, on: false);
 }
 
 [StreamDeckAction("com.jeremyfhall.prismcontrol.spotify.next", Name = "Next Track",
     Icon = "imgs/actions/spotify/next/icon", KeyImage = "imgs/actions/spotify/next/key",
-    Tooltip = "Skip to the next track in Spotify.", PropertyInspector = SpotifyBinding.PiPage)]
+    Tooltip = "Skip to the next track in what Now Playing shows (Spotify or another app).", PropertyInspector = SpotifyBinding.PiPage)]
 public sealed class NextAction : SpotifyKeyBase
 {
     protected override SpotifyView View => SpotifyView.Transport;
     protected override Task<CommandResult> ExecuteAsync(SpotifyService svc) => svc.NextAsync();
 
     protected override SvgDocument Draw(RefractionPalette t, SpotifyService? svc, PlayerSnapshot s, string? hint) => hint is null
-        ? SpotifyArt.TransportKey(t, TransportGlyph.Next, s.IsPlaying, CanTransport(svc, s))
+        ? SpotifyArt.TransportKey(t, TransportGlyph.Next, s.IsPlaying, CanTransport(svc, s) && s.CanSkipNext, AppLabel(s))
         : SpotifyArt.GlyphKey(t, SpotifyGlyphs.Next, hint, on: false);
 }
 
 [StreamDeckAction("com.jeremyfhall.prismcontrol.spotify.previous", Name = "Previous Track",
     Icon = "imgs/actions/spotify/previous/icon", KeyImage = "imgs/actions/spotify/previous/key",
-    Tooltip = "Go back to the previous track (Spotify decides between restarting and the previous one).", PropertyInspector = SpotifyBinding.PiPage)]
+    Tooltip = "Go back to the previous track in what Now Playing shows (the player decides between restarting and the previous one).",
+    PropertyInspector = SpotifyBinding.PiPage)]
 public sealed class PreviousAction : SpotifyKeyBase
 {
     protected override SpotifyView View => SpotifyView.Transport;
     protected override Task<CommandResult> ExecuteAsync(SpotifyService svc) => svc.PreviousAsync();
 
     protected override SvgDocument Draw(RefractionPalette t, SpotifyService? svc, PlayerSnapshot s, string? hint) => hint is null
-        ? SpotifyArt.TransportKey(t, TransportGlyph.Previous, s.IsPlaying, CanTransport(svc, s))
+        ? SpotifyArt.TransportKey(t, TransportGlyph.Previous, s.IsPlaying, CanTransport(svc, s) && s.CanSkipPrevious, AppLabel(s))
         : SpotifyArt.GlyphKey(t, SpotifyGlyphs.Previous, hint, on: false);
 }
 
@@ -141,12 +162,14 @@ public sealed class PreviousAction : SpotifyKeyBase
 public sealed class LikeAction : SpotifyKeyBase
 {
     protected override SpotifyView View => SpotifyView.Like;
+    protected override bool SpotifyOnly => true;
     protected override Task<CommandResult> ExecuteAsync(SpotifyService svc) => svc.ToggleLikeAsync();
 
+    /// <summary>Spotify's track (the snapshot is <see cref="SpotifyService.SpotifyCurrent"/>), with "SPOTIFY" while another app is shown.</summary>
     protected override SvgDocument Draw(RefractionPalette t, SpotifyService? svc, PlayerSnapshot s, string? hint)
     {
         var connected = svc?.IsConnected ?? false;
-        return SpotifyArt.LikeKey(t, connected ? s.Liked : null, connected && s.CanLike, hint ?? SignInLabel(svc));
+        return SpotifyArt.LikeKey(t, connected ? s.Liked : null, connected && s.CanLike, hint ?? SignInLabel(svc) ?? (OtherApp(svc) ? SpotifyLabel : null));
     }
 }
 
@@ -156,12 +179,14 @@ public sealed class LikeAction : SpotifyKeyBase
 public sealed class ShuffleAction : SpotifyKeyBase
 {
     protected override SpotifyView View => SpotifyView.Transport;
+    protected override bool SpotifyOnly => true;
     protected override Task<CommandResult> ExecuteAsync(SpotifyService svc) => svc.ToggleShuffleAsync();
 
+    /// <summary>Spotify's shuffle (Web API, or Spotify's own session), with "SPOTIFY" while another app is shown.</summary>
     protected override SvgDocument Draw(RefractionPalette t, SpotifyService? svc, PlayerSnapshot s, string? hint)
     {
-        var enabled = svc is not null && (svc.IsConnected || svc.Smtc.Current is { CanShuffle: true });
-        return SpotifyArt.ShuffleKey(t, s.Shuffle, enabled, hint ?? (enabled ? null : SignInLabel(svc)));
+        var enabled = svc is not null && (svc.IsConnected || svc.Smtc.Spotify is { CanShuffle: true });
+        return SpotifyArt.ShuffleKey(t, s.Shuffle, enabled, hint ?? (enabled ? OtherApp(svc) ? SpotifyLabel : null : SignInLabel(svc)));
     }
 }
 
@@ -171,11 +196,13 @@ public sealed class ShuffleAction : SpotifyKeyBase
 public sealed class RepeatAction : SpotifyKeyBase
 {
     protected override SpotifyView View => SpotifyView.Transport;
+    protected override bool SpotifyOnly => true;
     protected override Task<CommandResult> ExecuteAsync(SpotifyService svc) => svc.CycleRepeatAsync();
 
+    /// <summary>Spotify's repeat (Web API, or Spotify's own session), with "SPOTIFY" while another app is shown.</summary>
     protected override SvgDocument Draw(RefractionPalette t, SpotifyService? svc, PlayerSnapshot s, string? hint)
     {
-        var enabled = svc is not null && (svc.IsConnected || svc.Smtc.Current is { CanRepeat: true });
-        return SpotifyArt.RepeatKey(t, s.Repeat, enabled, hint ?? (enabled ? null : SignInLabel(svc)));
+        var enabled = svc is not null && (svc.IsConnected || svc.Smtc.Spotify is { CanRepeat: true });
+        return SpotifyArt.RepeatKey(t, s.Repeat, enabled, hint ?? (enabled ? OtherApp(svc) ? SpotifyLabel : null : SignInLabel(svc)));
     }
 }

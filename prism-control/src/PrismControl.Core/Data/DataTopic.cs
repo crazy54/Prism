@@ -67,12 +67,22 @@ public abstract class DataTopic
     /// <summary>After demand starts, a request without data waits this long for the producer's first publish.</summary>
     public TimeSpan FirstDataWait { get; set; } = TimeSpan.FromMilliseconds(250);
 
+    /// <summary>
+    /// For in-process readers (actions that read <c>Current</c> directly): marks "requested now" exactly as a request
+    /// through <see cref="ReadAsync"/> does. It extends the demand window and, on the idle → demanded transition, raises
+    /// <see cref="DemandStarted"/> (on the calling thread), so demand-driven producers start and keep running. It reads,
+    /// serializes and copies nothing, and never calls a pull provider. Call it at most about once a second while a key or
+    /// screen shows the data, then read <c>Current</c>. Reading <c>Current</c> alone never creates demand.
+    /// </summary>
+    public void Demand() => NoteRequest();
+
     /// <summary>Records a request; returns true if this request started demand (the producer may only now be starting).</summary>
     internal bool NoteRequest()
     {
-        var wasDemanded = IsDemanded;
-        Interlocked.Exchange(ref _lastRequestedTicks, _time.GetTimestamp());
-        if (wasDemanded) return false;
+        // One atomic swap decides the idle → demanded transition, so concurrent first requests raise DemandStarted once.
+        var now = _time.GetTimestamp();
+        var previous = Interlocked.Exchange(ref _lastRequestedTicks, now);
+        if (previous != 0 && _time.GetElapsedTime(previous, now) < DemandWindow) return false;
         DemandStarted?.Invoke(this, EventArgs.Empty);
         return true;
     }

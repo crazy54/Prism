@@ -15,6 +15,7 @@ public static class DataPaths
     public const string NowPlaying = "/v1/now-playing";
     public const string NowPlayingArt = "/v1/now-playing/art";
     public const string AudioLevels = "/v1/audio/levels";
+    public const string AudioSpectrum = "/v1/audio/spectrum";
     public const string AudioDevices = "/v1/audio/devices";
     public const string Mic = "/v1/mic";
 }
@@ -170,6 +171,31 @@ public sealed class LevelInfo
     public List<double>? Channels { get; set; }
 }
 
+// ---------------------------------------------------------------- /v1/audio/spectrum
+
+/// <summary>
+/// A live 24-band spectrum (EQ bars) of what the default output plays, from shared-mode loopback analysis.
+/// Only band numbers leave the audio module: audio is never stored, recorded, written or sent.
+/// </summary>
+public sealed class AudioSpectrumSnapshot
+{
+    /// <summary>The default render endpoint being analyzed (matches /v1/audio/devices); null when there is none.</summary>
+    public string? DeviceId { get; set; }
+    public string? DeviceName { get; set; }
+    /// <summary>24 log-spaced bands, low to high, 0..1 on a dB scale (-60 dBFS = 0, 0 dBFS = 1), smoothed (fast attack, 300 ms release).</summary>
+    public List<double> Bands { get; set; } = [];
+    /// <summary>Band centers in Hz, same length and order as <see cref="Bands"/> (40 Hz … 16 kHz).</summary>
+    public List<double> BandHz { get; set; } = [];
+    /// <summary>Linear 0..1 sample peak of the last frame (all channels).</summary>
+    public double Peak { get; set; }
+    /// <summary>Linear 0..1 RMS of the last frame (all channels).</summary>
+    public double Rms { get; set; }
+    /// <summary>Nothing is playing: every band is ~0 and the last frame peaked below -60 dBFS (or no audio arrived).</summary>
+    public bool Silent { get; set; }
+    /// <summary>The endpoint's mix rate in Hz; null while no capture stream is open.</summary>
+    public int? SampleRate { get; set; }
+}
+
 // ---------------------------------------------------------------- /v1/audio/devices
 
 public sealed class AudioDevicesSnapshot
@@ -229,6 +255,7 @@ public sealed class UtcMillisecondsConverter : JsonConverter<DateTimeOffset>
 [JsonSerializable(typeof(SystemSnapshot))]
 [JsonSerializable(typeof(NowPlayingSnapshot))]
 [JsonSerializable(typeof(AudioLevelsSnapshot))]
+[JsonSerializable(typeof(AudioSpectrumSnapshot))]
 [JsonSerializable(typeof(AudioDevicesSnapshot))]
 [JsonSerializable(typeof(MicSnapshot))]
 public sealed partial class DataJsonContext : JsonSerializerContext

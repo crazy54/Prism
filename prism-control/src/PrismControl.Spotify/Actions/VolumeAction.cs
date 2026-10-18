@@ -123,7 +123,7 @@ public sealed class VolumeAction : DialAction<SpotifyVolumeSettings>, IDisposabl
     {
         if (!IsVisible) return;
         var svc = Svc;
-        var snap = svc?.Current ?? PlayerSnapshot.Empty;
+        var snap = svc?.SpotifyCurrent ?? PlayerSnapshot.Empty;   // Spotify's device volume, whatever app is shown
         var connected = svc?.IsConnected ?? false;
         var flash = _flash.Get(Time);
         var percent = connected ? snap.VolumePct : null;
@@ -136,7 +136,8 @@ public sealed class VolumeAction : DialAction<SpotifyVolumeSettings>, IDisposabl
         else
         {
             var label = flash is { } f ? SpotifyText.KeyHint(f.Text) : !connected ? (svc?.Status.Auth == AuthState.NeedsReconnect ? "RECONNECT" : "SIGN IN") : null;
-            SetImage(label is not null ? SpotifyArt.VolumeKey(Look, null, connected, label) : SpotifyArt.VolumeKey(Look, percent, connected));
+            var caption = svc?.OtherAppShown == true ? "SPOTIFY" : "VOLUME";   // another app in front: say whose volume this is
+            SetImage(label is not null ? SpotifyArt.VolumeKey(Look, null, connected, label, caption) : SpotifyArt.VolumeKey(Look, percent, connected, caption: caption));
         }
     }
 
