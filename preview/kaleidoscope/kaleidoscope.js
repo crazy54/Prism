@@ -11,7 +11,9 @@ const SIGNUP_URL = 'https://github.com/crazy54/Prism/issues/new?title=' + encode
 // and two virtual decks (a Corsair Galleon 100 SD and a Stream Deck +) redraw themselves for it. The tour walks five
 // stops (browsers, Office, play & watch, AI, and more); the visitor can jump to a stop or to any app.
 //
-//   #kd-apps (JSON in index.html)  the stops and every app's caption, status badge and screen-reader summary
+//   #kd-apps (JSON in index.html)  the stops and every app's caption, status badge, maker and screen-reader summary
+//   assets/themes.css              each app's look on the stage: its window, the caption strip and the wallpaper
+//                                  (Night / Day; the strip and wallpaper crossfade with the turn: @property colors)
 //   assets/decks.json              per app × device: which frame sits in which key / widget / strip segment, + the pinned art
 //   assets/frames/<id>.svg         the frames: real renders from the Smart Deck's and the modules' own preview tooling
 //                                  (exactly the SVG the plugin sends to the hardware), fictional data; an app marked
@@ -39,7 +41,7 @@ const TOUR = JSON.parse(byId('kd-apps').textContent);
 const APPS = TOUR.apps, STOPS = TOUR.stops;
 const ORDER = STOPS.flatMap((s) => s.apps);
 const stopOf = (id) => STOPS.find((s) => s.apps.includes(id));
-const FIRST_MS = 1500, DWELL_MS = 2500, RESUME_MS = 2000, HOLD_MS = 12000, DEBOUNCE_MS = 160;
+const FIRST_MS = 1500, DWELL_MS = 1800, RESUME_MS = 2000, HOLD_MS = 12000, DEBOUNCE_MS = 160;
 const DUR = 980, STAGGER = 330, PLUS_OFFSET = 90, FADE_MS = 420;
 const PIN = { galleon: { key: 9, wide: 0 }, plus: { key: 4, wide: 0 } };   // mic mute (bottom-left key), headphone volume (left dial)
 
@@ -290,7 +292,12 @@ function showScreen(id, { announce = false } = {}) {
   }
   byId('kd-tb-stop').textContent = `${st.no} · ${st.label.toUpperCase()}`;
   byId('kd-screen').setAttribute('aria-labelledby', `tab-${id}`);
-  for (const w of wins) w.classList.toggle('is-front', w.dataset.app === id);
+  for (const w of wins) {
+    const on = w.dataset.app === id;
+    if (!on && w.classList.contains('is-front')) { w.classList.add('is-leaving'); clearTimeout(w.leaving); w.leaving = setTimeout(() => w.classList.remove('is-leaving'), 450); }
+    if (on) w.classList.remove('is-leaving');
+    w.classList.toggle('is-front', on);
+  }
   byId('kd-proc').textContent = a.proc;
   byId('kd-ctx').textContent = a.ctx;
   const front = byId('kd-front');
@@ -303,6 +310,7 @@ function showScreen(id, { announce = false } = {}) {
   note.textContent = a.note || '';
   note.hidden = !a.note;
   byId('kd-caption-text').textContent = a.caption;
+  byId('kd-maker').textContent = `Not affiliated with or endorsed by ${a.maker}${a.maker.endsWith('.') ? '' : '.'}`;
   const cap = byId('kd-caption');
   cap.classList.remove('is-new'); void cap.offsetWidth; cap.classList.add('is-new');
   if (announce) byId('kd-live').textContent = `${a.label} is in front (${st.label}). Status: ${a.badge.toLowerCase()}. The decks now show ${a.sr}${a.pending ? ', drawn as placeholders until the real renders land' : ''}. Headphone volume and mic mute stay where they are.`;
@@ -449,7 +457,12 @@ document.addEventListener('click', (e) => {
 // ── start ────────────────────────────────────────────────────────────────────────
 const ready = (async () => {
   try {
-    const r = await fetch(new URL('assets/decks.json', location.href));
+    // Cache-busting: the site build writes <meta name="prism-build"> (Cloudflare caches assets for hours). Frame files are
+    // content-hashed by name, so only decks.json needs the build id.
+    const decksUrl = new URL('assets/decks.json', location.href);
+    const build = document.querySelector('meta[name="prism-build"]')?.content;
+    if (build) decksUrl.searchParams.set('v', build);
+    const r = await fetch(decksUrl);
     if (!r.ok) throw new Error(`decks.json: HTTP ${r.status}`);
     manifest = await r.json();
   } catch (err) {
