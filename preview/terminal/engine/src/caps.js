@@ -13,7 +13,7 @@
 //   PRISM_TERM_DEPTH=truecolor|256|16|mono
 //   PRISM_TERM_UNICODE=0|1, PRISM_TERM_SEXTANT=0|1
 
-import { normalizeDepth } from './color.js';
+import { normalizeDepth } from './color.js?v=a917677388';
 
 // node:os is only needed for the Windows build check; loading it lazily keeps
 // this module importable in browsers (the web catalog runs the same engine).

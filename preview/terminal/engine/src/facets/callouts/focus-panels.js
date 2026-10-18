@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A four-pane layout where focus moves like Tab in a real TUI: the focused
 // pane gets a heavy accent border, the rest recede.
 const { panel, glyphs, ATTR, fit, phase, uni } = __bm(22);

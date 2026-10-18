@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../core.bundle.js';
+import { __m as __bm } from '../../core.bundle.js?v=a917677388';
 // Facets the plugin draws for itself — never in the catalog:
 //   sys-pair    the glowing approval key of the AI pairing prompt (code + client)
 //   sys-label   a text-only key (a live look with just a title)
@@ -10,7 +10,7 @@ const { normalizeFacet } = __bm(267);
 const { surface } = __bm(273);
 const { textPath } = __bm(11);
 const { n, esc, svgInner } = __bm(5);
-import { validateSvg } from '../scene/validate.js';
+import { validateSvg } from '../scene/validate.js?v=a917677388';
 const { pulse } = __bm(12);
 
 const sys = (raw) => normalizeFacet({ gallery: 'apps', category: 'Dashboards', tags: ['system'], description: 'Prism Deck plugin system surface (not in the catalog).', ...raw }, `apps/${raw.id}.js`);

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A torus knot as a braille wire tube with true hidden-line removal: the tube
 // surface is rasterized into a depth buffer first, then only the wire points
 // that survive the depth test are plotted — rings around the tube and strands

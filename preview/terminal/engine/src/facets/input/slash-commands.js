@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A chat composer with a "/" command menu: the list filters as you type,
 // Tab completes, an argument hint appears, Enter sends a pending-approval card.
 const { ATTR, glyphs, uni, phase, typed, blink, tint, mix, fit, panel } = __bm(25);

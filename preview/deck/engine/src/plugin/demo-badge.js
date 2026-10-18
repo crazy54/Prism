@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../core.bundle.js';
+import { __m as __bm } from '../../core.bundle.js?v=a917677388';
 // The DEMO badge: a small amber "DEMO" tag the plugin stamps on a key, dial segment or screen
 // whose data is simulated (no live source on this machine: a demo calendar until you point the
 // plugin at an .ics file, an invented playlist where no media source exists, a simulated groove

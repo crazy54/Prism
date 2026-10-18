@@ -1,10 +1,10 @@
-import { __m as __bm } from '../web.bundle.js';
+import { __m as __bm } from '../web.bundle.js?v=a917677388';
 // Offscreen rendering — run a scene without a terminal. Used by snapshots,
 // HTML export, tests, and anyone who wants frames as data.
 
 const { CellBuffer } = __bm(6);
 const { createContext } = __bm(13);
-import { withOverrides } from './caps.js';
+import { withOverrides } from './caps.js?v=a917677388';
 
 const DEFAULT_CAPS = { isTTY: false, depth: 'truecolor', unicode: true, braille: true, sextant: true, width: 80, height: 24 };
 

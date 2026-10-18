@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Rotozoomer: one small tile — a checker with a prism emblem — rotated and
 // zoomed across the whole screen every frame. The texture-mapping trick that
 // showed what a 7 MHz CPU could do.

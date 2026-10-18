@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Irises: the old cinema in-camera trick. A circle opening on the scene
 // beneath, a diamond, a five-pointed star, and a circle that opens on — and
 // then closes back to — a point of interest instead of the center.

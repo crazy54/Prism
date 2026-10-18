@@ -13,15 +13,15 @@
 // of `budget` reports/s. Every report is checked against the documented-report allowlist first.
 
 import { EventEmitter } from 'node:events';
-import { encodeKeyImage } from '../raster/index.js';
-import { claimDeck, HidError } from './claim.js';
-import { openHidraw } from './transport.js';
-import { packets, checkOutputReport } from './packets.js';
-import { features, galleonRingIndex } from './features.js';
-import { createInputParser } from './input.js';
-import { startFeatureHelper } from './helper.js';
-import { hidKey } from './models.js';
-import { dim, solid, hashBytes } from './pixels.js';
+import { encodeKeyImage } from '../raster/index.js?v=a917677388';
+import { claimDeck, HidError } from './claim.js?v=a917677388';
+import { openHidraw } from './transport.js?v=a917677388';
+import { packets, checkOutputReport } from './packets.js?v=a917677388';
+import { features, galleonRingIndex } from './features.js?v=a917677388';
+import { createInputParser } from './input.js?v=a917677388';
+import { startFeatureHelper } from './helper.js?v=a917677388';
+import { hidKey } from './models.js?v=a917677388';
+import { dim, solid, hashBytes } from './pixels.js?v=a917677388';
 
 const QUALITY = { key: 90, lcd: 85 };
 

@@ -16,7 +16,7 @@
 // section; stage 2 grants access only when the hidraw node's parent interface is
 // the deck interface. The keyboard's hidraw nodes (raw keystrokes) stay root-only.
 
-import { MODELS } from './models.js';
+import { MODELS } from './models.js?v=a917677388';
 
 export const UDEV_RULES_NAME = '60-prism-deck.rules';
 

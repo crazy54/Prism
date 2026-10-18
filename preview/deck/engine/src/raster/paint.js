@@ -11,7 +11,7 @@
 // (focal circle radius 0 at (fx,fy) → end circle r at (cx,cy)), so a focal
 // point outside the circle draws the SVG 2 / Chrome cone.
 
-import { RasterError, mul, invert, parseTransform } from './geometry.js';
+import { RasterError, mul, invert, parseTransform } from './geometry.js?v=a917677388';
 
 const HEX6 = /^#([0-9a-fA-F]{6})$/, HEX3 = /^#([0-9a-fA-F]{3})$/, URL = /^url\(#([^)]+)\)$/;
 

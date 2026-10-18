@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Homage to the 1984 Amiga Boing demo: a red-and-white checkered sphere spins
 // and bounces across a purple grid room, casting a soft shadow on the wall.
 const { lerpc } = __bm(29);

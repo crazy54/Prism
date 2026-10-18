@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // An fzf-style fuzzy finder: the query types, the list filters live with
 // matched characters highlighted and the match count updating.
 const { ATTR, glyphs, phase, typed, blink, uni, tint, fit, fuzzyMatch: match } = __bm(25);

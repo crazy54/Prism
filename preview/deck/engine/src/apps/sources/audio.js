@@ -10,9 +10,9 @@
 // zero-dep); this adapter decodes PCM, runs it through one Analyzer and serves snapshots at
 // ≤ 30 Hz. Nothing is recorded: the analyzer holds one FFT window, the history is levels only.
 
-import { simulatedAudio, AUDIO_KEYS } from './simulated.js';
-import { Analyzer } from '../../audio/analyzer.js';
-import { createPcmDecoder } from '../../audio/pcm.js';
+import { simulatedAudio, AUDIO_KEYS } from './simulated.js?v=a917677388';
+import { Analyzer } from '../../audio/analyzer.js?v=a917677388';
+import { createPcmDecoder } from '../../audio/pcm.js?v=a917677388';
 
 /** Defaults for the live analyzer: 16 s of 30 Hz levels (span apps on big decks show long windows). */
 export const AUDIO_DEFAULTS = Object.freeze({ seconds: 16, rate: 30, bands: 16, sampleRate: 16000 });
@@ -67,7 +67,7 @@ export function createAudioSource(opts = {}) {
  */
 export async function autoAudioSource(opts = {}) {
   try {
-    const mod = await import('../../audio/source.js');
+    const mod = await import('../../audio/source.js?v=a917677388');
     const make = mod.createAudioSource || mod.createSource || mod.default;
     if (typeof make !== 'function') return null;
     const src = await make({ historySeconds: opts.seconds ?? AUDIO_DEFAULTS.seconds, historyRate: AUDIO_DEFAULTS.rate, bands: opts.bands ?? AUDIO_DEFAULTS.bands, fallback: false, ...opts });

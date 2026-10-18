@@ -1,5 +1,5 @@
 // Orbits & shapes — picture spinners: phases, clocks, globes and bouncing balls.
-import { spinnerFacet } from './_kit.js';
+import { spinnerFacet } from './_kit.js?v=a917677388';
 
 const C = 'Orbits & Shapes';
 

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../web.bundle.js';
+import { __m as __bm } from '../web.bundle.js?v=a917677388';
 // Export cell buffers as self-contained HTML — the bridge back into Prism.
 //
 // A terminal frame becomes an offline <pre> (no fonts/scripts fetched, in the

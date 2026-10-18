@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A human-in-the-loop approval prompt: the agent proposes a command, the
 // user reads it, moves to an option and approves; then it runs.
 const { ATTR, glyphs, uni, phase, fit, spin, tint, panel, stepAt } = __bm(23);

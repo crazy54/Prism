@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Structured output streaming: JSON arrives token by token, pretty-printed
 // with syntax color, while a schema checklist ticks off completed fields.
 const { ATTR, glyphs, uni, phase, fit, reveal, stringWidth } = __bm(23);

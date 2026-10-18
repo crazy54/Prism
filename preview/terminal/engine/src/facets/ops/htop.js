@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // htop — per-core CPU meters, Mem/Swp, tasks/load/uptime, a live process table and the F-key bar.
 const { G, C, ATTR, writer, walk, meter, clock, lpad, pad, fixed, human } = __bm(27);
 

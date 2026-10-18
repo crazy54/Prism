@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=a917677388';
 // .streamDeckProfile export — ProfilesV3 "FormatVersion 1" (formats.md §5.2–5.5).
 //
 // The structure mirrors the bundled profiles the hardware lab installed and switched
@@ -25,12 +25,12 @@ import { __m as __bm } from '../../facets.bundle.js';
 //   HOME_LAYOUTS       the built-in Home page (and Galleon / + / + XL dials) of each sample profile
 
 import crypto from 'node:crypto';
-import { writeZip, readZip } from './plugin-zip.js';
+import { writeZip, readZip } from './plugin-zip.js?v=a917677388';
 const { getDevice } = __bm(0);
 const { findFacet } = __bm(659);
-import { facetMode } from '../plugin/settings.js';
+import { facetMode } from '../plugin/settings.js?v=a917677388';
 const { render, stillTime } = __bm(263);
-import { rasterize, encodePNG } from '../raster/index.js';
+import { rasterize, encodePNG } from '../raster/index.js?v=a917677388';
 
 export const PLUGIN_UUID = 'com.jeremyfhall.prism';
 export const PLUGIN_NAME = 'Prism Deck';

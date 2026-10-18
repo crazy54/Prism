@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A keyframe timeline, After-Effects style. Up top a stage where a sprite
 // moves, grows and changes color; below it one track per property with its
 // keyframes (◆ eased, ◇ linear), the value curve between them, and a playhead

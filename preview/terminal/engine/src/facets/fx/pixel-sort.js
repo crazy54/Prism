@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Pixel sorting, the glitch-art staple: a sunset scene whose rows are sorted
 // by brightness wherever they fall inside a moving threshold window — but only
 // within drifting bands, so the clean image and the smeared streaks alternate.

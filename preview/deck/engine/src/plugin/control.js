@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=a917677388';
 // Prism Deck Live — the plugin's local control channel, API v1 (elgato-mcp DESIGN.md §6.3).
 //
 // It exists only while the user has switched "Allow AI editing" on in the property
@@ -23,10 +23,10 @@ import crypto from 'node:crypto';
 import path from 'node:path';
 const { nextState } = __bm(263);
 const { findFacet } = __bm(659);
-import { TokenBucket } from './budget.js';
-import { controlPath as defaultControlPath, writePrivateJson, removeFile, appendJsonl } from './paths.js';
-import { planOps, validateLayout, LIMITS } from './live-validate.js';
-import { PLUGIN_UUID } from './runtime.js';
+import { TokenBucket } from './budget.js?v=a917677388';
+import { controlPath as defaultControlPath, writePrivateJson, removeFile, appendJsonl } from './paths.js?v=a917677388';
+import { planOps, validateLayout, LIMITS } from './live-validate.js?v=a917677388';
+import { PLUGIN_UUID } from './runtime.js?v=a917677388';
 
 export const API_VERSION = 1;
 export const CHANNEL_LIMITS = Object.freeze({

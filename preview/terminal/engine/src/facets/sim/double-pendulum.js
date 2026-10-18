@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Sensitive dependence, made visible: three double pendulums released from
 // starting angles a thousandth of a radian apart, integrated with RK4 at
 // 480 Hz. For a few seconds they move as one; then the trails split and they

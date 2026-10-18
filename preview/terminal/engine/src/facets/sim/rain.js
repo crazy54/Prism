@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Night rain over a city: three parallax layers of slanted braille rain (far
 // drops slow, short and dim; near drops fast and long), splashes on the street
 // and rooftops, lit windows that come and go, and lightning — a branching bolt

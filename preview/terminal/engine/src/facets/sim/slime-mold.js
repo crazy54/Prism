@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Physarum slime mold: thousands of agents each sense the trail ahead-left,
 // ahead and ahead-right, steer toward the strongest scent, step, and deposit.
 // The trail diffuses and evaporates. Food sources keep leaking scent, so the

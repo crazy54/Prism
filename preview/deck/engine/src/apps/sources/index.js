@@ -5,22 +5,22 @@
 //   const hub = createSimulatedHub();               // every key, deterministic, offline
 //   mountDevice(el, { …, data: () => hub.pick(facet.data) });
 
-import { createHub, lease } from './hub.js';
-import { simulatedSystem, simulatedAudio, simulatedMedia, simulatedCalendar, SYSTEM_KEYS, AUDIO_KEYS } from './simulated.js';
+import { createHub, lease } from './hub.js?v=a917677388';
+import { simulatedSystem, simulatedAudio, simulatedMedia, simulatedCalendar, SYSTEM_KEYS, AUDIO_KEYS } from './simulated.js?v=a917677388';
 
 export { createHub, lease };
-export { simulatedSource, createPoller, History, stable } from './_source.js';
+export { simulatedSource, createPoller, History, stable } from './_source.js?v=a917677388';
 export { simulatedSystem, simulatedAudio, simulatedMedia, simulatedCalendar, SYSTEM_KEYS, AUDIO_KEYS };
-export { createAudioSource, autoAudioSource, AUDIO_DEFAULTS } from './audio.js';
-export { createTimer } from './timer.js';
-export { parseIcs, agendaOf, icsTime, createIcsCalendarSource } from './calendar.js';
-export { parsePlayerctl, parseVolume } from './media.js';
-export * as probes from './probes.js';
+export { createAudioSource, autoAudioSource, AUDIO_DEFAULTS } from './audio.js?v=a917677388';
+export { createTimer } from './timer.js?v=a917677388';
+export { parseIcs, agendaOf, icsTime, createIcsCalendarSource } from './calendar.js?v=a917677388';
+export { parsePlayerctl, parseVolume } from './media.js?v=a917677388';
+export * as probes from './probes.js?v=a917677388';
 // ── Game Link (prism-play) ── the pure halves only; the listener (./gamelink.js) is Node-only and never re-exported here
-export { normalizeCs2, tickCs2, gameLinkView, sanitizeCs2, parseVdf, findCs2, cs2Cfg, cfgState, isPrismCfg, mapTitle, roundReason, ROUND_REASONS, CFG_NAME, GAMELINK_VERSION } from './gamelink-cs2.js';
-export { normalizeCompanion } from './gamelink-companion.js';
-export { simulatedGameLink } from './gamelink-sim.js';
-import { simulatedGameLink } from './gamelink-sim.js';
+export { normalizeCs2, tickCs2, gameLinkView, sanitizeCs2, parseVdf, findCs2, cs2Cfg, cfgState, isPrismCfg, mapTitle, roundReason, ROUND_REASONS, CFG_NAME, GAMELINK_VERSION } from './gamelink-cs2.js?v=a917677388';
+export { normalizeCompanion } from './gamelink-companion.js?v=a917677388';
+export { simulatedGameLink } from './gamelink-sim.js?v=a917677388';
+import { simulatedGameLink } from './gamelink-sim.js?v=a917677388';
 
 /** Which source family serves each ctx.data key (README.md). */
 export const KEY_SOURCES = Object.freeze({

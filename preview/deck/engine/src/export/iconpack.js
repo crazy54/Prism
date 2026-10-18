@@ -18,15 +18,15 @@
 // pack is SVG-only (static) — pass { raster: null } to force that.
 
 import fs from 'node:fs';
-import { writeZip, readZip } from './plugin-zip.js';
-import { render, stillTime } from '../render.js';
-import { findFacet } from '../facets/index.js';
-import { allGlyphs } from '../glyphs/_registry.js';
-import { useTheme, themeRegistry } from '../themes/_registry.js';
-import { normalizeFacet } from '../facets/schema.js';
-import { surface } from '../scene/surface.js';
-import { svgInner, suffixIds, n } from '../scene/svg.js';
-import { validateSvg } from '../scene/validate.js';
+import { writeZip, readZip } from './plugin-zip.js?v=a917677388';
+import { render, stillTime } from '../render.js?v=a917677388';
+import { findFacet } from '../facets/index.js?v=a917677388';
+import { allGlyphs } from '../glyphs/_registry.js?v=a917677388';
+import { useTheme, themeRegistry } from '../themes/_registry.js?v=a917677388';
+import { normalizeFacet } from '../facets/schema.js?v=a917677388';
+import { surface } from '../scene/surface.js?v=a917677388';
+import { svgInner, suffixIds, n } from '../scene/svg.js?v=a917677388';
+import { validateSvg } from '../scene/validate.js?v=a917677388';
 
 export const PACK_PREFIX = 'com.jeremyfhall.prism.icons';
 export const ICON_PX = 144;
@@ -44,7 +44,7 @@ const NOTICE = () => projectFile('NOTICE', 'Prism\nCopyright 2026 JFH Inc.\n\nCr
 /** The src/raster backend, or null when it isn't available. */
 export async function loadRaster() {
   try {
-    const r = await import('../raster/index.js');
+    const r = await import('../raster/index.js?v=a917677388');
     return typeof r.rasterize === 'function' && typeof r.encodePNG === 'function' && typeof r.encodeGIF === 'function' ? r : null;
   } catch { return null; }
 }

@@ -12,9 +12,9 @@
 // injected — { sys (src/audio/system.js nodeSystem()), os, fs: { readFile, readdir, statfs } } —
 // so tests drive it with fake files and fake processes; src/apps/sources/node.js wires the real ones.
 
-import { createPoller, History, stable } from './_source.js';
-import * as P from './probes.js';
-import { SYSTEM_KEYS } from './simulated.js';
+import { createPoller, History, stable } from './_source.js?v=a917677388';
+import * as P from './probes.js?v=a917677388';
+import { SYSTEM_KEYS } from './simulated.js?v=a917677388';
 
 const SERIES = ['cpu', 'mem', 'gpu', 'down', 'up', 'read', 'write', 'temp'];
 

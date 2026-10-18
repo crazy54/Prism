@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../web.bundle.js';
+import { __m as __bm } from '../../web.bundle.js?v=a917677388';
 // Small status widgets: badges, status dots, KPI tiles.
 
 const { ATTR } = __bm(6);
@@ -6,7 +6,7 @@ const { mix } = __bm(0);
 const { stringWidth, truncate } = __bm(5);
 const { themeOf, col, contrast, tint, fmt } = __bm(20);
 const { box } = __bm(21);
-import { sparkline } from './bars.js';
+import { sparkline } from './bars.js?v=a917677388';
 
 /**
  * Inline label chip.

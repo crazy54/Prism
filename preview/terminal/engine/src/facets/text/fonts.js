@@ -1,12 +1,12 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Font specimens — one facet per bitmap face, laid out like a type-foundry
 // waterfall: the sample at its largest scale, then smaller, with the face's
 // character set ticking past underneath.
 const { NONE, mix, mixOklab } = __bm(0);
-import { drawBanner, measureBanner } from '../../text/banner.js';
+import { drawBanner, measureBanner } from '../../text/banner.js?v=a917677388';
 const { getFont } = __bm(28);
-import { CYBER_FONT } from './_fonts.js';
-import { bannerMode } from './_text.js';
+import { CYBER_FONT } from './_fonts.js?v=a917677388';
+import { bannerMode } from './_text.js?v=a917677388';
 
 const PAGE = 4;
 

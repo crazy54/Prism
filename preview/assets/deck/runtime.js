@@ -6,8 +6,8 @@
 // prefers-reduced-motion or when the page pauses motion, and takes clicks / Enter / Space on
 // keys and wheel / arrows / drag on dials. adapter.js swaps this for prism-deck's runtime
 // once that ships (docs/CONTRACT-READY).
-import { DEVICES, deviceLayout, wallGrid } from './devices.js';
-import { FACETS, GALLERIES, STILL_TIME, hueColors } from './sketches.js';
+import { DEVICES, deviceLayout, wallGrid } from './devices.js?v=128ca22a3b';
+import { FACETS, GALLERIES, STILL_TIME, hueColors } from './sketches.js?v=2038a29598';
 
 export const SOURCE = 'placeholder';
 const byId = new Map(FACETS.map((f) => [f.id, f]));

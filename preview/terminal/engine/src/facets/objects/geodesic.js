@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A geodesic sphere: an icosahedron subdivided (class I, frequency 2 by
 // default) and pushed out to the sphere, drawn as braille wire with hidden-line
 // treatment — far edges dotted and dim, near edges solid and depth-cued — the
 // twelve five-way vertices picked out, and a scan band sweeping over the dome.
-import { meshes } from '../../math3d.js';
+import { meshes } from '../../math3d.js?v=a917677388';
 const { perspective, rotX, rotY, mul, apply, norm, blend } = __bm(18);
 
 function geodesic(freq) {

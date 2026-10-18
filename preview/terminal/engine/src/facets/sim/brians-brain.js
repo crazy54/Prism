@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Brian's Brain: a three-state automaton (ready → firing → refractory → ready)
 // where a ready cell fires when exactly two neighbors are firing. Almost any
 // seed boils into a sea of colliding "spaceships". Firing cells burn white-hot,

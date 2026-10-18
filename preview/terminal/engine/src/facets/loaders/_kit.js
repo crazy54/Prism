@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Shared presentation for spinner facets.
 //
 // A spinner tile shows the spinner the way you meet it — inline, in front of a
@@ -10,7 +10,7 @@ import { __m as __bm } from '../../../web.bundle.js';
 // Without Unicode (TERM=linux, LANG=C) a non-ASCII spinner falls back to the
 // classic `-\|/` and every label uses plain ASCII.
 
-import { getSpinner } from '../../spinners.js';
+import { getSpinner } from '../../spinners.js?v=a917677388';
 const { palette: makePalette, PALETTES } = __bm(3);
 const { stringWidth, truncate } = __bm(5);
 const { mix } = __bm(0);

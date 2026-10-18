@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Motion — type that moves: a bobbing wave over its rippling reflection, a
 // demoscene sine scroller, a dot-matrix LED board and a big 7-segment clock.
 const { NONE, mix, mixOklab } = __bm(0);
-import { bannerCanvas, layoutText } from '../../text/banner.js';
-import { bannerMode, fitType, canvasLike } from './_text.js';
+import { bannerCanvas, layoutText } from '../../text/banner.js?v=a917677388';
+import { bannerMode, fitType, canvasLike } from './_text.js?v=a917677388';
 
 const shared = { gallery: 'text', category: 'Motion', kind: 'text', glyphs: 'unicode', color: 'truecolor', animated: true };
 const asciiOnly = (ctx) => ctx.caps.unicode === false || ctx.mode === 'ascii';

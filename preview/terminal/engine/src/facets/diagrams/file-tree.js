@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A file tree explorer: tree(1) guide lines, folders that expand and collapse
 // as the cursor walks, git status markers and a running summary.
 const { ATTR, glyphs, uni, phase, tint, fit } = __bm(22);

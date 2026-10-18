@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Stagger studies: a grid of tiles entering one after another, each popping in
 // with an overshoot (outBack) and leaving on the same order reversed. Four
 // orderings cycle — from the left, from the center out, a diagonal wave and a

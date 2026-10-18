@@ -1,4 +1,4 @@
-import { __m as __bm } from '../web.bundle.js';
+import { __m as __bm } from '../web.bundle.js?v=a917677388';
 // Gallery — the interactive catalog browser (`prism-term` with no arguments).
 //
 //    ──◢◣━━━ Prism  434 FACETS · 17 GALLERIES · TRUECOLOR        kind: all · Prism Night · auto
@@ -23,17 +23,17 @@ import { __m as __bm } from '../web.bundle.js';
 // Keys: ↑↓/jk move · ←→/hl or Tab switch pane · Enter play · s showcase ·
 // / search · g gallery picker · f kind filter · t theme · d Day/Night · m mode · ? help · q quit.
 
-import { Screen } from './screen.js';
+import { Screen } from './screen.js?v=a917677388';
 const { createContext } = __bm(13);
-import { createPlayer, resolveCaps, stageRect, growFor, cropMarks, facetPlace, asciify, holdTitle, dayNight } from './player.js';
+import { createPlayer, resolveCaps, stageRect, growFor, cropMarks, facetPlace, asciify, holdTitle, dayNight } from './player.js?v=a917677388';
 const { THEME_IDS, getTheme } = __bm(3);
 const { MODE_NAMES } = __bm(9);
 const { ATTR } = __bm(6);
 const { mix } = __bm(0);
 const { truncate, wrap, stringWidth } = __bm(5);
 const { GALLERIES } = __bm(17);
-import { KINDS } from './facets/schema.js';
-import { chrome, glyphs, beam, mark, instrument, coord, lambdaLabel, galleryHue, rampHue, firstLight, FIRST_LIGHT, sweep, SWEEP_S } from './refraction.js';
+import { KINDS } from './facets/schema.js?v=a917677388';
+import { chrome, glyphs, beam, mark, instrument, coord, lambdaLabel, galleryHue, rampHue, firstLight, FIRST_LIGHT, sweep, SWEEP_S } from './refraction.js?v=a917677388';
 
 const MODE_CYCLE = [null, ...MODE_NAMES];
 const KIND_CYCLE = [null, ...KINDS];

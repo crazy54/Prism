@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A cubic-bézier timing editor, the kind in every browser's devtools. The two
 // handles glide between the CSS presets (and a couple of custom curves); the
 // curve redraws, a dot runs it by *time* (x solved for the curve parameter by

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=a917677388';
 // Validation for the live control channel (DESIGN.md §6.3 / §8.0) — never trust
 // the caller: every look, feedback, behavior, op batch and layout document is
 // checked here against the real registries (facets, glyphs, themes) and the real
@@ -12,10 +12,10 @@ import { __m as __bm } from '../../facets.bundle.js';
 const { findFacet } = __bm(659);
 const { getGlyph } = __bm(241);
 const { themeRegistry } = __bm(260);
-import { validateSvg } from '../scene/validate.js';
+import { validateSvg } from '../scene/validate.js?v=a917677388';
 const { hexToOklch } = __bm(4);
 const { getDevice } = __bm(0);
-import { decodeSvgDataUrl } from './system-facets.js';
+import { decodeSvgDataUrl } from './system-facets.js?v=a917677388';
 
 export const LAYOUT_SCHEMA = 'prism-deck-layout/0.1';
 export const SAFE = 'safe';

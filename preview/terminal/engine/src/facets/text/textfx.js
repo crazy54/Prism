@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Text effects showcase: every effect in src/text/effects.js, applied to big
 // banner text and to a plain line of log-style text, with captions.
 const { MODES } = __bm(9);
-import { measureBanner } from '../../text/banner.js';
-import { EFFECTS } from '../../text/effects.js';
+import { measureBanner } from '../../text/banner.js?v=a917677388';
+import { EFFECTS } from '../../text/effects.js?v=a917677388';
 
 const SEGMENT = 4.2;
 const ORDER = ['decrypt', 'typewriter', 'wave', 'rainbow', 'shimmer', 'glitch', 'fadeIn', 'pulse', 'marquee', 'wipe'];

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A single-select prompt: the cursor walks the options, Enter confirms.
 const { ATTR, glyphs, phase, stepAt, promptLine, tint } = __bm(25);
 

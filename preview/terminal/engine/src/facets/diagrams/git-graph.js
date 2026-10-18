@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // `git log --graph --oneline --decorate`, live: a feature branch forks,
 // main moves on, then the pull request merges. Unicode gets tig-style lanes,
 // ASCII gets git's own * | / \ graph.

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A Lissajous table: columns are the x frequency, rows the y frequency, and
 // each cell traces x = sin(a·s + δ), y = sin(b·s) in braille. The phase δ
 // drifts slowly, so every figure turns in 3D-looking rotation, and a bright

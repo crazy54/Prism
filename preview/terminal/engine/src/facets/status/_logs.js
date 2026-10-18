@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Deterministic, plausible log traffic for the status gallery: line i is a pure
 // function of (seed, i), so a scrolling log is reproducible and seekable.
 

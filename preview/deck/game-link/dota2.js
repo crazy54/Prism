@@ -50,7 +50,7 @@ export default {
     { id: '19-death', label: 'Death', sub: 'respawn · buyback' },
     { id: '22-buyback', label: 'Buyback', sub: 'back in the fight' },
     { id: '23-roshan', label: 'Roshan', sub: 'then the Aegis' },
-    { id: '28-kill-4', label: 'Multi-kill', sub: 'double · triple · ultra', lead: 1200 },
+    { id: '28-kill-4', label: 'Multi-kill', sub: 'double · triple · ultra', lead: 1000 },
     { id: '31-kill-7', label: 'Rampage', sub: 'five in a row', lead: 900 },
     { id: '35-win', label: 'Victory', sub: 'the Dire ancient falls', lead: 900 },
   ],

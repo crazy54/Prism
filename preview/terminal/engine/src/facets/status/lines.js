@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Status Lines: a vim statusline over a live buffer, a tmux session with its
 // status bar, and a powerline prompt with git and kube segments.
 const { mix } = __bm(0);
 const { glyphs, put, putR, safe, ATTR } = __bm(24);
-import { tail, stamp, levelColor } from './_logs.js';
+import { tail, stamp, levelColor } from './_logs.js?v=a917677388';
 
 const KW = new Set(['export', 'async', 'function', 'const', 'let', 'while', 'if', 'throw', 'new', 'await', 'return']);
 

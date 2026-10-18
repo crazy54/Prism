@@ -1,7 +1,7 @@
 // Big text, fonts and text effects.
-export { FONTS, FONT_NAMES, getFont, glyph, hasGlyph, defineFont } from './fonts.js';
-export { BANNER_MODES, banner, bannerCanvas, drawBanner, measureBanner, gradientText, layoutText, resolveFill } from './banner.js';
+export { FONTS, FONT_NAMES, getFont, glyph, hasGlyph, defineFont } from './fonts.js?v=a917677388';
+export { BANNER_MODES, banner, bannerCanvas, drawBanner, measureBanner, gradientText, layoutText, resolveFill } from './banner.js?v=a917677388';
 export {
   EFFECTS, EFFECT_NAMES, effectDuration, animateText,
   typewriter, decrypt, glitch, wave, rainbow, shimmer, fadeIn, pulse, marquee, wipe,
-} from './effects.js';
+} from './effects.js?v=a917677388';

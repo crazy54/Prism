@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A 3×3×3 twisty cube that scrambles itself and then solves itself: twelve
 // random quarter turns, then the same turns undone in reverse — eased, with a
 // pause between moves, while the whole cube slowly orbits. 27 cubies with real

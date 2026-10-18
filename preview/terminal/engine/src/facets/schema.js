@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../web.bundle.js';
+import { __m as __bm } from '../../web.bundle.js?v=a917677388';
 // Terminal facet contract — what every catalog entry must declare.
 //
 // A facet is a scene (src/context.js contract) plus catalog metadata:

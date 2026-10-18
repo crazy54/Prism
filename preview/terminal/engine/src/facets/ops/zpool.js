@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // zpool status — pool tank mid-scrub: scan progress ticking, mirror vdev tree, READ/WRITE/CKSUM columns.
 const { C, ATTR, writer, pad, lpad, fixed, clock } = __bm(27);
 

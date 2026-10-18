@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A classic TUI menu bar (Turbo Vision / mc lineage): F10 opens a dropdown,
 // the highlight walks items, a submenu flies out, Esc closes it again.
 const { ATTR, glyphs, uni, phase, stepAt, mix, fit, backdrop, modal } = __bm(25);

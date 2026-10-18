@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../web.bundle.js';
+import { __m as __bm } from '../../web.bundle.js?v=a917677388';
 // Tables and log tails.
 
 const { ATTR } = __bm(6);

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Bars & Histograms: eased vertical bars, a re-ranking leaderboard, stacked
 // segments, a live latency histogram, OHLC candlesticks and box plots.
 const { mix, scale } = __bm(0);

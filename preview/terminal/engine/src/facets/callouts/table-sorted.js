@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A sortable table: the sort column changes and rows glide to their new places.
 const { ATTR, glyphs, fit, phase, ease, mix } = __bm(22);
 

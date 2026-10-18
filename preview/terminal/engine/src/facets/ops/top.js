@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // procps top — the five-line summary and the classic process table with its reverse-video header.
 const { C, ATTR, writer, walk, clock, lpad, pad, fixed } = __bm(27);
 

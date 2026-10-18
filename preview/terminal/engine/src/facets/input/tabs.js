@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A tab strip whose underline glides between tabs as the user switches,
 // each tab showing its own content.
 const { ATTR, glyphs, uni, phase, ease, mix, fit, hbar } = __bm(25);

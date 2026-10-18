@@ -20,8 +20,8 @@
 //
 // Only the last FFT window of samples is held (≤ 8192 floats) — never a recording.
 
-import { RingBuffer } from './ring.js';
-import { nextPow2, windowedMagnitudes, bandLayout, bandAmplitudes, toLevel, coef, follow, resampleBands } from './dsp.js';
+import { RingBuffer } from './ring.js?v=a917677388';
+import { nextPow2, windowedMagnitudes, bandLayout, bandAmplitudes, toLevel, coef, follow, resampleBands } from './dsp.js?v=a917677388';
 
 export const ANALYZER_DEFAULTS = Object.freeze({
   sampleRate: 16000,

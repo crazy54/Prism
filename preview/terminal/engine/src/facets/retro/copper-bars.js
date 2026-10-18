@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Amiga copper bars: glossy horizontal bars swing past each other in depth,
 // each a vertical gradient with a white-hot center line — the copper chip's
 // party trick, now in a terminal.

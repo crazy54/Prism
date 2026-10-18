@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../web.bundle.js';
+import { __m as __bm } from '../../web.bundle.js?v=a917677388';
 // Bar-shaped widgets: progress bars, sparklines, bar charts, segmented meters.
 // All of them use eighth-block glyphs for 8× sub-cell precision along the bar.
 

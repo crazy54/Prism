@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A studio sphere: per-pixel Blinn-Phong with a key light that orbits the
 // subject (you see it pass behind), a cool rim light, subtle latitude
 // banding, and a floor shadow cast away from the light.

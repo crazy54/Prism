@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // The lunar month in a loop: a cratered Moon (maria from fBm, ray craters
 // with rims) lit by a Sun that swings around it — new, crescent, quarter,
 // gibbous, full and back — with faint earthshine on the night side and the

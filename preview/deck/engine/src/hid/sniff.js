@@ -5,7 +5,7 @@
 //
 //   sniffReports(reports, model) → [{ cmd, target: 'key:3' | 'lcd:x,y,w,h' | 'infobar' | 'full' | 'reset', key?, rect?, bytes }]
 
-import { hidKey } from './models.js';
+import { hidKey } from './models.js?v=a917677388';
 
 const u16 = (p, o) => p[o] | (p[o + 1] << 8);
 

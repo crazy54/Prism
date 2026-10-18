@@ -10,7 +10,7 @@
 // label 22 Inter 600, 30 above the bottom · micro 16 mono caps · index bar 32×4, 12 above the
 // bottom · states off / on / alert / busy / disabled.
 
-import { hueColors } from './hue.js';
+import { hueColors } from './hue.js?v=7e7bd2df03';
 export { hueColors };
 
 const WARN = { night: '#eec36f', day: '#8a5a00' }, NEG = { night: '#f5877f', day: '#bf3434' }, POS = { night: '#8bd8ba', day: '#1f6b4f' };

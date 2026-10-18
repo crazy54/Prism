@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=a917677388';
 // The Prism Deck plugin runtime: action instances → render units → frames.
 //
 //   instance  one Prism action on the deck (a key, a dial / Galleon widget, a Neo info bar),
@@ -25,16 +25,16 @@ const sched = __bm(265);
 const { svgDataUrl, svgWindow } = __bm(5);
 const { findFacet } = __bm(659);
 const { deviceFromInfo, deckLayout } = __bm(0);
-import { DeviceBudget, allocateFps, createUpdateBucket, elementCount, updateCost } from './budget.js';
-import { createTimer } from '../apps/sources/timer.js';
+import { DeviceBudget, allocateFps, createUpdateBucket, elementCount, updateCost } from './budget.js?v=a917677388';
+import { createTimer } from '../apps/sources/timer.js?v=a917677388';
 const { createGameHost, GAME_RESET_HOLD_S, GAME_FPS } = __bm(269);
 const { createLinkBus, readoutOf, linksOf } = __bm(266);
-import { facetMode, facetsFor, normalizeSettings, normalizeGlobals, compactSettings, GROUP_MODES, DEFAULT_GLOBALS, bundledProfileFor } from './settings.js';
-import { gameProfileFor } from './settings.js';   // Game Link (prism-play): press { kind: 'profile', profile: 'cs2' }
-import { CANVAS_LAYOUT_PATH, INFOBAR_LAYOUT_PATH, canvasPayload, widgetCanvas, fitCanvas, galleonWidgetRects } from './feedback.js';
-import { SYSTEM_FACETS, PAIR_HOLD_S } from './system-facets.js';
-import { DEMO_KEYS, withDemoBadge, badgeTarget } from './demo-badge.js';
-import { createDataHub } from './data.js';
+import { facetMode, facetsFor, normalizeSettings, normalizeGlobals, compactSettings, GROUP_MODES, DEFAULT_GLOBALS, bundledProfileFor } from './settings.js?v=a917677388';
+import { gameProfileFor } from './settings.js?v=a917677388';   // Game Link (prism-play): press { kind: 'profile', profile: 'cs2' }
+import { CANVAS_LAYOUT_PATH, INFOBAR_LAYOUT_PATH, canvasPayload, widgetCanvas, fitCanvas, galleonWidgetRects } from './feedback.js?v=a917677388';
+import { SYSTEM_FACETS, PAIR_HOLD_S } from './system-facets.js?v=a917677388';
+import { DEMO_KEYS, withDemoBadge, badgeTarget } from './demo-badge.js?v=a917677388';
+import { createDataHub } from './data.js?v=a917677388';
 
 export const PLUGIN_UUID = 'com.jeremyfhall.prism';
 export const BURST_FPS = 15;          // frames/s while press feedback / a state transition plays

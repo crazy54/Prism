@@ -16,19 +16,19 @@
 //              rate (levels per second), +peak, +rms }
 //   spectrum { bands number[] 0–1 low → high, +peaks number[], +centers number[] (Hz) }
 
-export { createAudioSource, AudioSource } from './source.js';
-export { Analyzer, ANALYZER_DEFAULTS } from './analyzer.js';
-export { RingBuffer } from './ring.js';
-export { createSynth, simulate, hashNoise } from './synthetic.js';
-export { createPcmDecoder, sniffHeader, PCM_FORMATS } from './pcm.js';
-export { fftInPlace, windowedMagnitudes, bandLayout, bandAmplitudes, toLevel, toDb, coef, follow, rmsPeak, resampleBands, nextPow2 } from './dsp.js';
-export { detectBackends, backendList } from './detect.js';
+export { createAudioSource, AudioSource } from './source.js?v=a917677388';
+export { Analyzer, ANALYZER_DEFAULTS } from './analyzer.js?v=a917677388';
+export { RingBuffer } from './ring.js?v=a917677388';
+export { createSynth, simulate, hashNoise } from './synthetic.js?v=a917677388';
+export { createPcmDecoder, sniffHeader, PCM_FORMATS } from './pcm.js?v=a917677388';
+export { fftInPlace, windowedMagnitudes, bandLayout, bandAmplitudes, toLevel, toDb, coef, follow, rmsPeak, resampleBands, nextPow2 } from './dsp.js?v=a917677388';
+export { detectBackends, backendList } from './detect.js?v=a917677388';
 export {
   BACKENDS, BACKEND_IDS, AUTO_ORDER, autoOrder, commandLine, DEFAULT_RATE,
   parsePipewireVersion, versionGte, parseDshowDevices, parseAvfoundationDevices, pickDevice, LOOPBACK_HINTS, hostWrap,
-} from './backends.js';
-export { createBridgeServer, bridgePageHtml, bridgePageScript, bridgeWorkletSource, BRIDGE_PROTOCOL, encodeFrame, createFrameParser, decodeMeter, checkUpgrade } from './bridge.js';
-export { nodeSystem, bareSystem, defaultSystem, manualClock, whichIn, runWith, liveChildren } from './system.js';
+} from './backends.js?v=a917677388';
+export { createBridgeServer, bridgePageHtml, bridgePageScript, bridgeWorkletSource, BRIDGE_PROTOCOL, encodeFrame, createFrameParser, decodeMeter, checkUpgrade } from './bridge.js?v=a917677388';
+export { nodeSystem, bareSystem, defaultSystem, manualClock, whichIn, runWith, liveChildren } from './system.js?v=a917677388';
 
 /** Data keys this module feeds (authoring.md §7). */
 export const AUDIO_DATA_KEYS = Object.freeze(['audio', 'spectrum']);

@@ -10,6 +10,11 @@
   let paused = reducedMotion.matches;
   let showcasePromise;
   const engines = { term: null, deck: null };
+  // cache-safe URLs (website/build.mjs): the built page's <meta name="prism-build"> — the site id for runtime fetches, the
+  // engine id for engine URLs (the engines' own imports carry it); absent in the repository
+  const BUILD_META = document.querySelector('meta[name="prism-build"]');
+  const BUILD_V = BUILD_META?.content || '', ENGINE_V = BUILD_META?.dataset.engine || '';
+  const engineV = (u) => (ENGINE_V ? `${u}?v=${ENGINE_V}` : u);
 
   // ── live previews take the page's own theme tokens ───────────────────────
   // Facets read the theme contract (--bg, --ink, --accent …). The previews were generated with the
@@ -69,7 +74,7 @@
 
   // ── copy + replay ────────────────────────────────────────────────────────
   function loadShowcase() {
-    showcasePromise ||= fetch('assets/showcase.json').then((r) => { if (!r.ok) throw new Error('snippets'); return r.json(); }).catch((err) => { showcasePromise = null; throw err; });
+    showcasePromise ||= fetch(BUILD_V ? `assets/showcase.json?v=${BUILD_V}` : 'assets/showcase.json').then((r) => { if (!r.ok) throw new Error('snippets'); return r.json(); }).catch((err) => { showcasePromise = null; throw err; });
     return showcasePromise;
   }
   // F1 (Copy that works): the same shape as every Copy in the library — a "Prism · name" comment, one <style>
@@ -197,9 +202,9 @@
     try {
       const base = new URL(termEngine, location.href);
       const [web, palettes, mod] = await Promise.all([
-        import(new URL('src/web/index.js', base).href),
-        import(new URL('src/palettes.js', base).href),
-        import(new URL('src/facets/objects/prism-logo.js', base).href),
+        import(engineV(new URL('src/web/index.js', base).href)),
+        import(engineV(new URL('src/palettes.js', base).href)),
+        import(engineV(new URL('src/facets/objects/prism-logo.js', base).href)),
       ]);
       const ids = new Set(palettes.listThemes().map((t) => t.id));
       const theme = () => (ids.has(termTheme()) ? termTheme() : undefined);
@@ -239,7 +244,7 @@
     // mounted; CSS sizes the mount to fit the stage, and fit:true keeps the device at that width.
     const mount = byId('deck-preview'), stage = mount.parentElement, poster = mount.innerHTML;
     try {
-      const { loadDeck } = await import('./assets/deck/adapter.js');
+      const { loadDeck } = await import('./assets/deck/adapter.js?v=74726ad73f');
       // only the facet this preview plays: the built site's deck/engine/core.bundle.js carries it (no facets bundle here)
       const deck = await loadDeck({ engine: deckEngine, catalog: { facets: [], galleries: [], devices: [] }, only: ['src/facets/themes/prism.js'] });
       engines.deck = deck;

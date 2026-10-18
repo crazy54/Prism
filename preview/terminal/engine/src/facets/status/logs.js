@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Log Lines: a journalctl -f follow with priority colors, JSON lines with
 // token coloring, and logfmt with a level filter bar.
 const { mix } = __bm(0);
 const { glyphs, put, putR, safe, ATTR } = __bm(24);
-import { tail, stamp, logLine, LEVEL_KEYS, levelColor } from './_logs.js';
+import { tail, stamp, logLine, LEVEL_KEYS, levelColor } from './_logs.js?v=a917677388';
 
 /** Fade-in highlight for the newest line; `age` in lines. */
 const fresh = (th, c, k) => (k < 1 ? mix(th.bg, c, 0.16 * (1 - k)) : undefined);

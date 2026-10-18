@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // World Maps: a dotted world with pulsing data centers, a follow-the-sun
 // choropleth of pseudo-regions, and a day/night terminator with city lights.
 const { mix } = __bm(0);
 const { glyphs, put, putR, safe, clamp, smooth, NONE, ATTR } = __bm(24);
-import { project, landMask, coastOf, inLand, HUBS } from './_world.js';
+import { project, landMask, coastOf, inLand, HUBS } from './_world.js?v=a917677388';
 
 const RAD = Math.PI / 180;
 

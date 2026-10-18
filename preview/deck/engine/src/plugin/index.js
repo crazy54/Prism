@@ -6,16 +6,16 @@
 //
 // Zero dependencies; runs on the app's bundled Node 20 (no global WebSocket needed).
 
-import { StreamDeckConnection, parseLaunchArgs } from './connection.js';
-import { PrismRuntime } from './runtime.js';
-import { LiveController } from './control.js';
-import { createDataHub } from './data.js';
-import { GameLinkController, LolLinkController, RlLinkController } from './gamelink.js';   // Game Link (prism-play)
+import { StreamDeckConnection, parseLaunchArgs } from './connection.js?v=a917677388';
+import { PrismRuntime } from './runtime.js?v=a917677388';
+import { LiveController } from './control.js?v=a917677388';
+import { createDataHub } from './data.js?v=a917677388';
+import { GameLinkController, LolLinkController, RlLinkController } from './gamelink.js?v=a917677388';   // Game Link (prism-play)
 
-export { StreamDeckConnection, parseLaunchArgs, detectHost, hostFeatures } from './connection.js';
-export { PrismRuntime, createRuntime, PLUGIN_UUID } from './runtime.js';
-export { LiveController, API_VERSION as LIVE_API_VERSION } from './control.js';
-export { DeviceBudget, allocateFps, DEFAULT_LIMITS } from './budget.js';
+export { StreamDeckConnection, parseLaunchArgs, detectHost, hostFeatures } from './connection.js?v=a917677388';
+export { PrismRuntime, createRuntime, PLUGIN_UUID } from './runtime.js?v=a917677388';
+export { LiveController, API_VERSION as LIVE_API_VERSION } from './control.js?v=a917677388';
+export { DeviceBudget, allocateFps, DEFAULT_LIMITS } from './budget.js?v=a917677388';
 
 export const PLUGIN_VERSION = '0.7.0.0';
 
@@ -40,18 +40,18 @@ export async function main({ argv = process.argv.slice(2), env = process.env, co
   if (!data) {
     if (env.PRISM_DECK_LIVE_DATA === 'off') data = createDataHub();
     else {
-      try { const { createNodeHub } = await import('../apps/sources/node.js'); data = await createNodeHub({ audio: false, log: write }); } catch (e) { write('warn', 'live data hub unavailable: ' + e.message); data = createDataHub(); }
+      try { const { createNodeHub } = await import('../apps/sources/node.js?v=a917677388'); data = await createNodeHub({ audio: false, log: write }); } catch (e) { write('warn', 'live data hub unavailable: ' + e.message); data = createDataHub(); }
     }
   }
   // Qt output stage (scene/qt.js): clipPath → luminance mask, no preserveAspectRatio. Guarded: older engines lack it.
   let deviceSvg = null;
-  try { ({ toDeviceSvg: deviceSvg } = await import('../scene/qt.js')); } catch { write('warn', 'scene/qt.js missing: payloads are sent without the Qt output stage'); }
+  try { ({ toDeviceSvg: deviceSvg } = await import('../scene/qt.js?v=a917677388')); } catch { write('warn', 'scene/qt.js missing: payloads are sent without the Qt output stage'); }
   let raster = null;
-  try { raster = await import('../raster/index.js'); } catch { /* optional: only the 'png' format needs it */ }
+  try { raster = await import('../raster/index.js?v=a917677388'); } catch { /* optional: only the 'png' format needs it */ }
   // Live audio (src/audio): capture starts only while a visible facet draws audio / spectrum.
   let audioSource = env.PRISM_DECK_AUDIO === 'off' ? null : audio;   // PRISM_DECK_AUDIO=off: no capture (smoke tests, kiosks)
   if (audioSource === undefined) {
-    try { const { createAudioSource } = await import('../audio/index.js'); audioSource = createAudioSource({ input: 'monitor', onLog: (m) => write('debug', m) }); } catch { audioSource = null; }
+    try { const { createAudioSource } = await import('../audio/index.js?v=a917677388'); audioSource = createAudioSource({ input: 'monitor', onLog: (m) => write('debug', m) }); } catch { audioSource = null; }
   }
   // Prism Control (the native companion plugin) feeds real output levels when it runs; capture or simulation otherwise.
   if (env.PRISM_DECK_AUDIO !== "off" && data?.prismControl) audioSource = data.prismControl.wrapAudio(audioSource);

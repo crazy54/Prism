@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A thunderstorm over the hills: rolling cloud decks, slanting rain, and every
 // few seconds a forked bolt built by midpoint displacement — it flickers two or
 // three times, lighting the clouds from inside and the land beneath.

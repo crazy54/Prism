@@ -1,8 +1,8 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Rotating polyhedra in braille: cube → icosahedron → torus → octahedron, each
 // handing off with a shrink/spring crossfade. Edges are depth-cued along their
 // length, vertices glow, and a tilted orbit ring of dust circles the solid.
-import { meshes, rotate } from '../../math3d.js';
+import { meshes, rotate } from '../../math3d.js?v=a917677388';
 const { easing } = __bm(10);
 const { fadeMark } = __bm(3);
 

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=a917677388';
 // Settings for the Prism Display action (manifest UUID com.jeremyfhall.prism.facet; per instance, stored by the app and
 // exported with profiles) and the plugin (global settings). Everything coming
 // from the app, the property inspector, a profile or the live channel is
@@ -28,7 +28,7 @@ import { __m as __bm } from '../../facets.bundle.js';
 //               "Connect CS2" in the PI; port null = 38140 with fallbacks. Tokens never live here: gamelink.json) }
 
 const { findFacet, allFacets } = __bm(659);
-import { normalizeLimits } from './budget.js';
+import { normalizeLimits } from './budget.js?v=a917677388';
 
 export const ACTION_FACET = 'facet';
 export const ACTION_INFOBAR = 'infobar';

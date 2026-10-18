@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Badges & Pills: level and state badges with live counts, README-style
 // shields, and a CI pipeline whose jobs pass, fail and retry.
 const { mix } = __bm(0);
 const { glyphs, put, putR, safe, clamp, lift, onFill, ATTR } = __bm(24);
-import { LEVEL_KEYS, levelColor } from './_logs.js';
+import { LEVEL_KEYS, levelColor } from './_logs.js?v=a917677388';
 
 /** A rounded pill: half-block caps on Unicode terminals, a padded chip otherwise. */
 function pill(b, g, x, y, text, fg, bg) {

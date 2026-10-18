@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Arcade-racer pseudo-3D: a road built row by row from the horizon down, with
 // curvature integrated per scanline so it sweeps left and right, alternating
 // rumble strips and lane dashes, palm silhouettes scaling past, the sunset

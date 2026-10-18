@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // The atom symbol, built for real: a nucleus of lit, z-buffered protons and
 // neutrons, three tilted orbits drawn as anti-aliased (bilinear-splatted) rings
 // that pass behind and in front of it, and electrons with glowing heads and

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../web.bundle.js';
+import { __m as __bm } from '../../web.bundle.js?v=a917677388';
 // The curl-able terminal site — static pages you read with `curl -sL`.
 //
 // Every page is composed as an 80-column CellBuffer, then serialized three ways:
@@ -19,11 +19,11 @@ import { __m as __bm } from '../../web.bundle.js';
 
 const { CellBuffer, ATTR } = __bm(6);
 const { NONE, mix } = __bm(0);
-import { renderScene } from '../render.js';
+import { renderScene } from '../render.js?v=a917677388';
 const { stringWidth, truncate, wrap } = __bm(5);
 const { getTheme } = __bm(3);
-import { TOKENS, spectral, siteTone, galleryHue, lambdaLabel, rampHue } from '../refraction.js';
-import { FORMATS, themeFileName } from '../theme-export.js';
+import { TOKENS, spectral, siteTone, galleryHue, lambdaLabel, rampHue } from '../refraction.js?v=a917677388';
+import { FORMATS, themeFileName } from '../theme-export.js?v=a917677388';
 
 export const WIDTH = 80;
 const SNAP_MAX_H = 20;

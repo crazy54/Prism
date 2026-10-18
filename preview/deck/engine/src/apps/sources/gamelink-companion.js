@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../facets.bundle.js';
+import { __m as __bm } from '../../../facets.bundle.js?v=a917677388';
 // Game Link · companions: the pure, browser-safe mapper for POST /v1/companion (./gamelink.js).
 //
 // A companion is any local adapter that already knows a game's state and posts it in the game-neutral

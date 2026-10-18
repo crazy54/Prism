@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Fireworks: rockets climb on sparkling trails and burst into one of four shell
 // types — peony (sphere), ring, willow, crackle — whose sparks fly under
 // gravity and drag, cool from white-hot to ember, and leave glowing trails

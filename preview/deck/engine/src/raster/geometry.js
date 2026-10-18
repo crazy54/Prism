@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../core.bundle.js';
+import { __m as __bm } from '../../core.bundle.js?v=a917677388';
 // Raster geometry: affine matrices, the transform list grammar, curve flattening
 // with a device-space tolerance, the basic shapes as subpaths, and a stroker that
 // turns a stroke into fill polygons (joins, caps, dashes) for the scan converter.

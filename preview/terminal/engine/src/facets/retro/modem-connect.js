@@ -1,10 +1,10 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Dialing in, 1992: the modem init string, the dial, RINGING, CONNECT 2400,
 // then the board's welcome screen painting itself cell by cell at line speed —
 // cursor racing ahead of the paint — until NO CARRIER sends you back to start.
 const { CellBuffer } = __bm(6);
 const { textMask, bbsPalette } = __bm(29);
-import { blockLogo, frame } from './_bbs.js';
+import { blockLogo, frame } from './_bbs.js?v=a917677388';
 
 const SCRIPT = [
   [0.0, 'ATZ'], [0.6, 'OK'], [1.0, 'ATDT 555-0142'], [2.4, 'RINGING'], [3.4, 'RINGING'], [4.2, 'CONNECT 2400/ARQ/V42BIS'],

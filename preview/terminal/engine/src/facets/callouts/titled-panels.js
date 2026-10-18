@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Panels with titles and footers in every alignment — the footers carry live state.
 const { panel, glyphs, ATTR, fit, spin } = __bm(22);
 

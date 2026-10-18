@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A 4-channel tracker playing the shared chiptune: hex row numbers, note /
 // instrument / effect columns, the play row locked in the middle while the
 // pattern scrolls under it, per-channel VU strips and an instrument list.
 const { lerpc } = __bm(29);
-import { PATTERN, ROWS, ROW, BPM, SONG, INSTRUMENTS, songAt, levels, noteName } from './_music.js';
+import { PATTERN, ROWS, ROW, BPM, SONG, INSTRUMENTS, songAt, levels, noteName } from './_music.js?v=a917677388';
 
 const CHANNELS = ['DRUMS', 'BASS', 'LEAD', 'HATS'];
 const BAR = ' ▏▎▍▌▋▊▉█';

@@ -1,4 +1,4 @@
 // Bundled into web.bundle.js by website/build.mjs (the module itself is in the repository).
-import { __m } from '../web.bundle.js';
+import { __m } from '../web.bundle.js?v=a917677388';
 const __n = __m(0);
 export const ANSI16 = __n.ANSI16, NONE = __n.NONE, add = __n.add, ansi16Bg = __n.ansi16Bg, ansi16Fg = __n.ansi16Fg, ansi16Text = __n.ansi16Text, bgParam = __n.bgParam, blue = __n.blue, distance2 = __n.distance2, exact256 = __n.exact256, fgParam = __n.fgParam, fromOklab = __n.fromOklab, gradient = __n.gradient, green = __n.green, hex = __n.hex, hsl = __n.hsl, hsv = __n.hsv, luminance = __n.luminance, mix = __n.mix, mixOklab = __n.mixOklab, nearest256 = __n.nearest256, normalizeDepth = __n.normalizeDepth, parse = __n.parse, pin256 = __n.pin256, pinned256 = __n.pinned256, red = __n.red, rgb = __n.rgb, scale = __n.scale, setAnsi16Role = __n.setAnsi16Role, to16 = __n.to16, to256 = __n.to256, toHex = __n.toHex, toOklab = __n.toOklab, toRgb = __n.toRgb;

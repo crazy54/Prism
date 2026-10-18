@@ -1,8 +1,8 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A CI/CD pipeline graph: build fans out to parallel test jobs, fans back in
 // to staging, waits at a human approval gate, then deploys to production.
 const { ATTR, glyphs, uni, phase, fit, spin } = __bm(22);
-import { LineGrid, nodeBox, box } from './_lines.js';
+import { LineGrid, nodeBox, box } from './_lines.js?v=a917677388';
 
 // [id, label, start, end] in seconds; the approval gate waits for a human.
 const JOBS = [

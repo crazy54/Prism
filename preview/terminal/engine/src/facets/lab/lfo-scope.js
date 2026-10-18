@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A four-channel LFO oscilloscope: sine, triangle, saw and square at musical
 // LFO rates, drawn by a sweeping beam over a dotted graticule. Ahead of the
 // beam the previous sweep lingers dimmer, like phosphor persistence; each

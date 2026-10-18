@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // DYCP — "Different Y Character Position", the C64 scroller where every
 // letter bobs on its own sine phase. This one bounces off a mirrored water line
 // that ripples its reflection.

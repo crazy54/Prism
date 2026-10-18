@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // The bottom of a swimming pool on a sunny day: tiles and grout bent by the
 // moving surface, overlaid with the bright network of caustics — light focused
 // where the surface's wave crests act as lenses. Two noise layers drift

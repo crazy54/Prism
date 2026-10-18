@@ -16,11 +16,11 @@
 //
 // Effects draw only through the Surface API, so a View works as a target.
 
-import { getTheme, PALETTES } from '../palettes.js';
-import { NONE, parse, mix, mixOklab, scale } from '../color.js';
-import { charWidth, stringWidth } from '../width.js';
-import { drawBanner, measureBanner, resolveFill } from './banner.js';
-import { getFont, glyph, FONTS } from './fonts.js';
+import { getTheme, PALETTES } from '../palettes.js?v=a917677388';
+import { NONE, parse, mix, mixOklab, scale } from '../color.js?v=a917677388';
+import { charWidth, stringWidth } from '../width.js?v=a917677388';
+import { drawBanner, measureBanner, resolveFill } from './banner.js?v=a917677388';
+import { getFont, glyph, FONTS } from './fonts.js?v=a917677388';
 
 const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
 const fract = (x) => x - Math.floor(x);
@@ -471,7 +471,7 @@ export function effectDuration(name, text, opts = {}) {
  * opts: { effect='decrypt', duration, stream=process.stdout, fps=30, theme, …effect/banner opts }
  */
 export async function animateText(text, opts = {}) {
-  const { Screen } = await import('../screen.js'); // Node-only; loaded on demand
+  const { Screen } = await import('../screen.js?v=a917677388'); // Node-only; loaded on demand
   const { effect = 'decrypt', stream = process.stdout, fps = 30, ...rest } = opts;
   const fx = EFFECTS[effect];
   if (!fx) throw new Error(`unknown text effect "${effect}" (expected ${EFFECT_NAMES.join('|')})`);

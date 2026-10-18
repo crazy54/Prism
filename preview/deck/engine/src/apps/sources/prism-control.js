@@ -32,9 +32,9 @@
 
 import { readFile as fsReadFile } from 'node:fs/promises';
 import path from 'node:path';
-import { History, stable } from './_source.js';
-import { Analyzer } from '../../audio/analyzer.js';
-import { toLevel } from '../../audio/dsp.js';
+import { History, stable } from './_source.js?v=a917677388';
+import { Analyzer } from '../../audio/analyzer.js?v=a917677388';
+import { toLevel } from '../../audio/dsp.js?v=a917677388';
 
 export const PRISM_CONTROL_PLUGIN = 'com.jeremyfhall.prismcontrol';
 

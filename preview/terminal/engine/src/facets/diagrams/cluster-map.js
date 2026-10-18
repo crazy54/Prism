@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A cluster map: three nodes with their pods, CPU and memory. node-b goes
 // NotReady, its pods are evicted and reschedule onto the healthy nodes one
 // by one (Pending → Running), then node-b comes back empty.

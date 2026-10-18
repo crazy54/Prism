@@ -5,8 +5,8 @@
 // sink's volume through `wpctl` (PipeWire) or `pactl` (PulseAudio), polled once a second, read-only.
 // No player running → media: null (facets show "nothing playing").
 
-import { simulatedMedia } from './simulated.js';
-import { stable, createPoller } from './_source.js';
+import { simulatedMedia } from './simulated.js?v=a917677388';
+import { stable, createPoller } from './_source.js?v=a917677388';
 
 /** `playerctl metadata --format …` output (tab-separated) → media or null. */
 export function parsePlayerctl(text = '') {

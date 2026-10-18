@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A neofetch-style system summary: logo art on the left, key/value facts on the
 // right, the color swatch row underneath. The facts tick like a live box.
 const { ATTR, uni, mix } = __bm(22);

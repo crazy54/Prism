@@ -11,7 +11,7 @@
 // frames with disposal 2 (restore to background). Delays are rounded to GIF's
 // centiseconds with carry, so a 15 fps loop keeps its exact total length.
 
-import { buildPalette, paletteMapper, indexImage } from './quantize.js';
+import { buildPalette, paletteMapper, indexImage } from './quantize.js?v=a917677388';
 
 function lzw(indices, minCode, out) {
   const clear = 1 << minCode, eoi = clear + 1;

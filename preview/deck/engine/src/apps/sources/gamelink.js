@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../facets.bundle.js';
+import { __m as __bm } from '../../../facets.bundle.js?v=a917677388';
 // Game Link: the plugin's loopback listener and the `gamelink` hub source. Node only (node:http, node:fs);
 // never re-exported from ./index.js (browser-safe). The pure halves are ./gamelink-cs2.js and ./gamelink-companion.js.
 //
@@ -62,10 +62,10 @@ import path from 'node:path';
 import { EventEmitter } from 'node:events';
 import { execFile } from 'node:child_process';
 const { normalizeCs2, tickCs2, cs2NextTick, gameLinkView, findCs2, cs2Cfg, cfgState, isPrismCfg, CFG_NAME, URGENT_EVENTS, EVENT_TTL_MS } = __bm(627);
-import { normalizeCompanion } from './gamelink-companion.js';
+import { normalizeCompanion } from './gamelink-companion.js?v=a917677388';
 const { normalizeDota2, findDota2, dota2Cfg, dota2CfgState, isPrismDota2Cfg, DOTA2_CFG_NAME, DOTA2_CFG_DIR, DOTA2_LAUNCH_OPTION, MOBA_URGENT } = __bm(635);
-import { stable } from './_source.js';
-import { controlPath } from '../../plugin/paths.js';
+import { stable } from './_source.js?v=a917677388';
+import { controlPath } from '../../plugin/paths.js?v=a917677388';
 
 export const GAMELINK_API = 1;
 export const GAMELINK_PLUGIN = 'com.jeremyfhall.prism';

@@ -26,6 +26,9 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '
 const fmtMoney = (n, sign = false) => (Number.isFinite(n) ? `${n < 0 ? '−' : sign ? '+' : ''}$${Math.abs(n).toLocaleString('en-US')}` : '—');
 const mmss = (ms) => { const s = Math.max(0, Math.floor(ms / 1000)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
 const reducedQuery = matchMedia('(prefers-reduced-motion: reduce)');
+// a game page wears its game: Night whatever the site's mode (its head snippet forces it and the toggle is hidden; an OS
+// switch mid-visit can't relight it either)
+site?.onMode?.(() => { if (root.dataset.rfMode !== 'night') { root.dataset.rfMode = 'night'; root.dataset.theme = 'prism-dark'; } });
 const ONSET_GAP_MS = 1000;   // ≥ 1 s between bright onsets in wall time
 
 // Kill-feed glyphs: our own 16-unit line icons (no game art)
@@ -49,7 +52,12 @@ const GLYPH = {
   objective: G('<path d="M8 1.5 14.5 8 8 14.5 1.5 8z"/><path d="M8 5.5 10.5 8 8 10.5 5.5 8z"/>'),
 };
 
-const cfg = (await import(`./game-link/${GAME}.js`)).default;
+// Cache-safe URLs (website/build.mjs): the page's preload links carry each file's ?v=<hash>; <meta name="prism-build">
+// carries the site id (anything else built here) and the engine id (every engine URL, as the engine's own imports do)
+const BUILD = document.querySelector('meta[name="prism-build"]');
+const withV = (u, v) => (v ? `${u}${u.includes('?') ? '&' : '?'}v=${v}` : u);
+const linked = (k, fallback) => new URL(document.querySelector(`link[data-gl="${k}"]`)?.getAttribute('href') || withV(fallback, BUILD?.content), location.href).href;
+const cfg = (await import(linked('config', `game-link/${GAME}.js`))).default;
 if (cfg.status === 'live') await live(cfg);
 else site?.tilesReady?.([]);
 
@@ -57,13 +65,13 @@ async function live(cfg) {
   const TL = cfg.timeline;
   // ── load: the engine (prism-deck), the match ──────────────────────────────────
   const engine = document.querySelector('meta[name="prism-engine"]')?.content || './engine/';
-  const at = (rel) => new URL(rel, new URL(engine, location.href)).href;
+  const at = (rel) => withV(new URL(rel, new URL(engine, location.href)).href, BUILD?.dataset.engine);
   let web, schema, facetMod, norm, dev, match, viewMod;
   try {
     [web, schema, facetMod, norm, dev, match, viewMod] = await Promise.all([
       import(at('src/web/index.js')), import(at('src/facets/schema.js')), import(at(cfg.engine.facet)),
       import(at(cfg.engine.normalizer)), import(at('src/devices.js')),
-      fetch(new URL(cfg.fixture, location.href)).then((r) => { if (!r.ok) throw new Error(`${cfg.fixture}: HTTP ${r.status}`); return r.json(); }),
+      fetch(linked('fixture', cfg.fixture)).then((r) => { if (!r.ok) throw new Error(`${cfg.fixture}: HTTP ${r.status}`); return r.json(); }),
       cfg.engine.view ? import(at(cfg.engine.view)) : null,   // the module of cfg.view when it isn't the normalizer's (Dota 2: gameLinkView)
     ]);
   } catch (err) {
@@ -312,6 +320,7 @@ async function live(cfg) {
   const chaptersEl = byId('chapters');
   chaptersEl.innerHTML = CHAPTERS.map((c) => `<button type="button" class="gl-chap" data-n="${c.n}"><span class="gl-chap-no"><span>${String(c.n).padStart(2, '0')}</span>${c.tag ? `<span class="gl-chap-r">${esc(c.tag)}</span>` : ''}</span><span class="gl-chap-name">${esc(c.label)}</span><span class="gl-chap-sub">${esc(c.sub)}</span></button>`).join('');
   chaptersEl.style.setProperty('--chapters', String(Math.max(1, CHAPTERS.length)));
+  chaptersEl.classList.toggle('is-many', CHAPTERS.length > 8);   // nine and more: two rows
   const chapButtons = [...chaptersEl.children];
   let lastUi = { sec: -1, fill: '', chap: -2, cap: '' };
   function renderTransport(force = false) {

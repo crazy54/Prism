@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // systemd and process views: systemctl status, failed units, pstree -p, and list-timers counting down.
 const { G, C, ATTR, writer, session, drawSession, clock, pad, lpad, fixed, uni } = __bm(27);
 

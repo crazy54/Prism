@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A context window filling up: a stacked bar of system, tools, files,
 // history and output grows turn by turn until auto-compact squeezes the
 // history into a summary and frees room.

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A nano-style editor: the two-row shortcut bar flashes as keys are pressed,
 // switches to prompt-specific keys during Where Is / Write Out, and the
 // status line reports each action.

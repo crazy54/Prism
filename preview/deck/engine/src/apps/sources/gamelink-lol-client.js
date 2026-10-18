@@ -29,7 +29,7 @@ import tls from 'node:tls';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { normalizeLol } from './gamelink-lol.js';
+import { normalizeLol } from './gamelink-lol.js?v=a917677388';
 
 export const LOL_HOST = '127.0.0.1';
 export const LOL_PORT = 2999;

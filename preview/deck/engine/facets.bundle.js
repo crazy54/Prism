@@ -1,5 +1,5 @@
 // prism-deck browser engine, bundled by website/build.mjs (the modules are in the repository under prism-deck/src).
-import { __m, __d, __e } from './core.bundle.js';
+import { __m, __d, __e } from './core.bundle.js?v=a917677388';
 __d[284] = function (__ns) {
 const { themeFacet } = __m(282);
 __e(__ns, { "default": () => __default }, [], ["default"]);

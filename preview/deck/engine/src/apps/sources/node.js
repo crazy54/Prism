@@ -15,17 +15,17 @@
 // Prism Control beats the Node probes, which keep running underneath and serve every key it doesn't fill.
 // hub.prismControl is the client (status(), wrapAudio(audioSource) for the plugin's per-frame audio).
 
-import { createHub } from './hub.js';
-import { createSystemSource } from './system.js';
-import { createPrismControl } from './prism-control.js';
-import { createAudioSource, autoAudioSource } from './audio.js';
-import { createLinuxMediaSource } from './media.js';
-import { createIcsCalendarSource, parseIcs } from './calendar.js';
-import { simulatedAudio, simulatedMedia, simulatedCalendar } from './simulated.js';
+import { createHub } from './hub.js?v=a917677388';
+import { createSystemSource } from './system.js?v=a917677388';
+import { createPrismControl } from './prism-control.js?v=a917677388';
+import { createAudioSource, autoAudioSource } from './audio.js?v=a917677388';
+import { createLinuxMediaSource } from './media.js?v=a917677388';
+import { createIcsCalendarSource, parseIcs } from './calendar.js?v=a917677388';
+import { simulatedAudio, simulatedMedia, simulatedCalendar } from './simulated.js?v=a917677388';
 
 /** The real OS behind one object: { sys, os, fs } (sys = src/audio/system.js nodeSystem()). */
 export async function nodeDeps(overrides = {}) {
-  const [os, fsp, { nodeSystem }] = await Promise.all([import('node:os'), import('node:fs/promises'), import('../../audio/system.js')]);
+  const [os, fsp, { nodeSystem }] = await Promise.all([import('node:os'), import('node:fs/promises'), import('../../audio/system.js?v=a917677388')]);
   const sys = overrides.sys || await nodeSystem(overrides.sysOverrides);
   const fs = overrides.fs || { readFile: (p) => fsp.readFile(p, 'utf8'), readdir: (p) => fsp.readdir(p), statfs: typeof fsp.statfs === 'function' ? (p) => fsp.statfs(p) : null };
   return { sys, os: overrides.os || os.default || os, fs };
@@ -77,14 +77,14 @@ export async function createNodeHub(opts = {}) {
   // While it's off, the simulated demo round (./gamelink-sim.js) serves ctx.data.gamelink and the plugin tags it DEMO.
   const glOpts = opts.gamelink ?? 'auto';
   if (glOpts && deps.sys.env?.PRISM_DECK_GAMELINK !== 'off') {
-    const { createGameLink } = await import('./gamelink.js');
+    const { createGameLink } = await import('./gamelink.js?v=a917677388');
     const gl = createGameLink({ env: deps.sys.env, log: opts.log, ...(typeof glOpts === 'object' ? glOpts : {}) });
     hub.add(gl.source);
     hub.gameLink = gl;
     const stopBeforeGameLink = hub.stop;
     hub.stop = () => { stopBeforeGameLink(); gl.stop().catch(() => {}); };
   }
-  if (simulate) { const { simulatedGameLink } = await import('./gamelink-sim.js'); hub.add(simulatedGameLink({ seed, now })); }
+  if (simulate) { const { simulatedGameLink } = await import('./gamelink-sim.js?v=a917677388'); hub.add(simulatedGameLink({ seed, now })); }
   return hub;
 }
 

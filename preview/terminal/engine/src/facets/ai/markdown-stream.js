@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Markdown rendered as it streams: headings, bold, inline code, bullets and
 // a fenced code block that is syntax-colored line by line as it arrives.
 const { ATTR, glyphs, uni, phase, tint, fit, clip, codeLine, reveal, stringWidth } = __bm(23);

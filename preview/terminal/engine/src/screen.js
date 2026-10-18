@@ -1,4 +1,4 @@
-import { __m as __bm } from '../web.bundle.js';
+import { __m as __bm } from '../web.bundle.js?v=a917677388';
 // Screen — owns the terminal while an animation runs.
 //
 // Two modes:
@@ -24,9 +24,9 @@ import readline from 'node:readline';
 const { CellBuffer, attrParams, ATTR, lightTerminal, lightText, defaultInk } = __bm(6);
 const { NONE, fgParam, bgParam } = __bm(0);
 const { cursor, screen: scr, reset } = __bm(4);
-import { detect } from './caps.js';
+import { detect } from './caps.js?v=a917677388';
 const { charWidth } = __bm(5);
-import { ticker } from './loop.js';
+import { ticker } from './loop.js?v=a917677388';
 
 // Attributes that make a space's foreground (or a block's background) visible.
 const GLYPH_ATTRS = ATTR.UNDERLINE | ATTR.STRIKE | ATTR.INVERSE;

@@ -1,8 +1,8 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Line & Area: braille line charts, dithered areas, smooth streaming, btop-style
 // graphs, stacked areas, and x/y plots (scatter, bubble).
 const { mix, scale, gradient } = __bm(0);
-import { lineChart } from '../../widgets/index.js';
+import { lineChart } from '../../widgets/index.js?v=a917677388';
 const { signal, glyphs, safe, put, putR, num, clamp, frame, memo, lift, onFill, ATTR } = __bm(24);
 
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map((v) => (v + 0.5) / 16);

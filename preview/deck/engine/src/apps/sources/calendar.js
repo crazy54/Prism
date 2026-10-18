@@ -4,7 +4,7 @@
 // no credentials: a local iCalendar file (.ics — what every calendar app exports or syncs to disk),
 // re-read every 60 s. Only SUMMARY / DTSTART / DTEND of timed events are read.
 
-import { simulatedCalendar } from './simulated.js';
+import { simulatedCalendar } from './simulated.js?v=a917677388';
 
 const DAY = 86400000;
 

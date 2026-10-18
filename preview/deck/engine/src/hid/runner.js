@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../core.bundle.js';
+import { __m as __bm } from '../../core.bundle.js?v=a917677388';
 // The hidraw runner: facets → engine render() → src/raster → HidDeck, at the
 // device's update budget; input reports → facet state.
 //
@@ -24,8 +24,8 @@ import { __m as __bm } from '../../core.bundle.js';
 
 const { render, nextState } = __bm(263);
 const { createScheduler, effectiveFps, quantize, FPS_CAP } = __bm(265);
-import { rasterize as defaultRasterize } from '../raster/index.js';
-import { pad, fillRect } from './pixels.js';
+import { rasterize as defaultRasterize } from '../raster/index.js?v=a917677388';
+import { pad, fillRect } from './pixels.js?v=a917677388';
 const { SCREEN_TARGETS } = __bm(261);
 const { useTheme } = __bm(260);
 const { createGameHost, GAME_FPS, GAME_RESET_HOLD_S } = __bm(269);

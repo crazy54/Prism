@@ -7,8 +7,8 @@
 // Facet modules are imported on demand from <engine>/<record.module minus "prism-term/">, the first time a
 // tile scrolls near the viewport, and run by the engine's browser player (src/web/).
 
-import { esc, notify, initChrome, engineUrl, mode, onMode, pageTheme, copyButton, curlHtml, shellToggle, applyShell } from './site.js';
-import { TERMINAL as POSITIONS } from '../assets/rf/positions.mjs';
+import { esc, notify, initChrome, engineUrl, mode, onMode, pageTheme, copyButton, curlHtml, shellToggle, applyShell } from './site.js?v=69ce3b01a8';
+import { TERMINAL as POSITIONS } from '../assets/rf/positions.mjs?v=50e81b6e00';
 
 const root = document.documentElement;
 const byId = (id) => document.getElementById(id);

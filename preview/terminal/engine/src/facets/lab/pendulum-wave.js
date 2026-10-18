@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A pendulum wave seen from above: fifteen pendulums whose lengths are tuned
 // so pendulum k swings 20 + k times every 30 seconds. They start in a line,
 // drift into traveling snakes, split into two and three interleaved rows,

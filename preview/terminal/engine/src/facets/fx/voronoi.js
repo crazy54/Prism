@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Living Voronoi: drifting seeds carve the plane into cells. Each cell is shaded
 // like a bevelled tile (bright at its seed, darker toward its edge) and the
 // borders — where the nearest and second-nearest seeds tie — glow.

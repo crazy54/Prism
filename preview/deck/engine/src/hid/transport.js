@@ -12,7 +12,7 @@
 // path it was not given.
 
 import nodeFs from 'node:fs';
-import { HidError } from './claim.js';
+import { HidError } from './claim.js?v=a917677388';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 

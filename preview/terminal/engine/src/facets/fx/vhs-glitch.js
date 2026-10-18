@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A worn VHS tape of color bars: per-line jitter, chroma bleeding off the
 // luma, a tracking band rolling down the frame, head-switching noise along the
 // bottom, dropout specks, and the deck's on-screen display over it all.

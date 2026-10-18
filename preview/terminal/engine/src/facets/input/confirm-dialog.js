@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A destructive-action confirm dialog: Cancel is the default, Delete stays
 // disabled until the resource name is typed, then it runs and closes.
 const { ATTR, glyphs, uni, phase, typed, blink, ease, mix, fit, spin, button, backdrop, modal } = __bm(25);

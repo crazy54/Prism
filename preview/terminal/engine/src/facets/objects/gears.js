@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A gear train: three spur gears of 16, 10 and 8 teeth meshing at their pitch
 // circles, each turning at the ratio it should (and in alternating directions).
 // Rendered per pixel from the analytic tooth profile, so every edge is

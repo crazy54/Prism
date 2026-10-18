@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Frame rate versus motion blur, side by side. The same scene — a three-blade
 // propeller and a ball swinging past — sampled four ways: 60 fps sharp, 12 fps
 // sharp (it strobes), 12 fps with a 180° shutter (smooth again, at the same

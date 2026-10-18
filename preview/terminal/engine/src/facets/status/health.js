@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Health & Uptime: live health checks, a 90-day uptime history with SLO
 // budget, a services × regions status matrix and a heartbeat monitor.
 const { mix } = __bm(0);

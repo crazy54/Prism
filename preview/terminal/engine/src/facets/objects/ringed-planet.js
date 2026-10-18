@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A gas giant with a tilted ring system: noise-warped cloud bands that
 // rotate, a soft terminator, the ring split by the planet (back half hidden,
 // front half crossing the disk), the planet's shadow falling across the ring,

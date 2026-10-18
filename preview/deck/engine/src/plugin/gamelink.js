@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=a917677388';
 // Game Link in the plugin (prism-play): turns the global `gamelink` settings into the listener's state, runs the
 // property inspector's "Game Link" subsection, and pushes every data change into the runtime at once.
 //
@@ -199,8 +199,8 @@ export class GameLinkController {
 //   runtime.gameLinkStatus() → { …the base status, lol: { available, enabled, state, reason, lastAgoMs } }
 //     state: 'off' | 'probing' (no game yet) | 'loading' | 'live' | 'watching' | 'untrusted' (a certificate Riot's
 //     root didn't sign, or expired: reason says which). Never a name, a Riot id or a payload.
-import { createLolPoller } from '../apps/sources/gamelink-lol-client.js';
-import { LOL_URGENT } from '../apps/sources/gamelink-lol.js';
+import { createLolPoller } from '../apps/sources/gamelink-lol-client.js?v=a917677388';
+import { LOL_URGENT } from '../apps/sources/gamelink-lol.js?v=a917677388';
 
 export class LolLinkController {
   constructor({ runtime, gameLink = null, log = () => {}, poller = null } = {}) {
@@ -279,7 +279,7 @@ export class LolLinkController {
 //   runtime.gameLinkStatus() → { …, rl: { available, enabled, state, transport, install, busy, last } }
 //     state: 'off' | 'probing' (the game isn't running, or its Stats API is off) | 'connected'. Never a name, an id
 //     or a payload. Nothing is ever sent to the game: the client only reads (no Stats API command, ever).
-import { createRlClient, connectRl, disconnectRl, rlStatus } from '../apps/sources/gamelink-rl-client.js';
+import { createRlClient, connectRl, disconnectRl, rlStatus } from '../apps/sources/gamelink-rl-client.js?v=a917677388';
 const { RL_URGENT } = __bm(644);
 
 export const RL_STATUS_MS = 5000;

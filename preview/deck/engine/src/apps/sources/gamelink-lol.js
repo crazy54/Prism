@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../facets.bundle.js';
+import { __m as __bm } from '../../../facets.bundle.js?v=a917677388';
 // Game Link · League of Legends: the pure, browser-safe half of Riot's Live Client Data API (the Game Client API the
 // game serves on https://127.0.0.1:2999 while a match runs). No node:* imports, no clocks, no I/O: the poller
 // (./gamelink-lol-client.js) and the web demo replay run the same code, so a recorded match looks the same everywhere.

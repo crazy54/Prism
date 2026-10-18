@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Conway's Game of Life on a toroidal grid at canvas-pixel resolution (8 cells
 // per terminal cell in braille). Cells are colored by age — newborns white-hot,
 // survivors cooling through the theme's accents — and recently dead cells leave

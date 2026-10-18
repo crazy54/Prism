@@ -10,7 +10,7 @@
 // skipped (linux.md §1.1).
 
 import { EventEmitter } from 'node:events';
-import { connectWebSocket } from './ws.js';
+import { connectWebSocket } from './ws.js?v=a917677388';
 
 /** Parse the app's launch arguments. → { port, pluginUUID, registerEvent, info } (info parsed; {} when absent). */
 export function parseLaunchArgs(argv = process.argv.slice(2)) {

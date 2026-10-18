@@ -5,9 +5,9 @@
    :root[data-theme="prism-light"] + html[data-rf-mode="day"]. */
 
 /* ── Type: Inter, self-hosted (the same Latin faces Prism.html bundles) ──────── */
-@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-400-latin.woff2) format("woff2")}
-@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(fonts/inter-600-latin.woff2) format("woff2")}
-@font-face{font-family:Inter;font-style:normal;font-weight:700;font-display:swap;src:url(fonts/inter-700-latin.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-400-latin.woff2?v=8909904ab6) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(fonts/inter-600-latin.woff2?v=f9a06e79cd) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:700;font-display:swap;src:url(fonts/inter-700-latin.woff2?v=6f56409fd3) format("woff2")}
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
 :root{--mono:var(--rf-mono);--site-max:1424px;--site-pad:32px;--header-h:60px;scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 12px)}

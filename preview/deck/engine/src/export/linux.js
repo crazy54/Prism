@@ -15,11 +15,11 @@
 // Rendering is deterministic (stillTime of each facet, fixed seed): the same setup gives
 // byte-identical exports.
 
-import { getDevice } from '../devices.js';
-import { findFacet } from '../facets/index.js';
-import { render, stillTime } from '../render.js';
-import { facetMode, GROUP_MODES } from '../plugin/settings.js';
-import { svgDataUrl } from '../scene/svg.js';
+import { getDevice } from '../devices.js?v=a917677388';
+import { findFacet } from '../facets/index.js?v=a917677388';
+import { render, stillTime } from '../render.js?v=a917677388';
+import { facetMode, GROUP_MODES } from '../plugin/settings.js?v=a917677388';
+import { svgDataUrl } from '../scene/svg.js?v=a917677388';
 
 export { svgDataUrl };
 
@@ -99,7 +99,7 @@ export function pageUnits(model, page) {
 /** The src/raster backend, or null when it isn't available. */
 export async function loadRaster() {
   try {
-    const r = await import('../raster/index.js');
+    const r = await import('../raster/index.js?v=a917677388');
     return typeof r.rasterize === 'function' && typeof r.encodePNG === 'function' ? r : null;
   } catch { return null; }
 }

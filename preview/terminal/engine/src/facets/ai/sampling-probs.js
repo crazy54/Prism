@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Next-token sampling: top-k candidates as probability bars that sharpen or
 // flatten as the temperature slides, the sampled token flashing and joining
 // the text above.

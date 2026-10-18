@@ -5,7 +5,7 @@
 // Key art is SVG; PNG/GIF raster for icon packs comes from src/raster (raster engineer).
 
 import zlib from 'node:zlib';
-import { crc32 } from './plugin-zip.js';
+import { crc32 } from './plugin-zip.js?v=a917677388';
 
 const SIG = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
 

@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // KPI Tiles: a tile row with sparklines and deltas, a big-number tile in a
 // bitmap font, and a compact NOC wallboard.
 const { mix } = __bm(0);
-import { kpi, lineChart } from '../../widgets/index.js';
-import { drawBanner, measureBanner } from '../../text/index.js';
+import { kpi, lineChart } from '../../widgets/index.js?v=a917677388';
+import { drawBanner, measureBanner } from '../../text/index.js?v=a917677388';
 const { signal, glyphs, safe, frame, put, putR, num, clamp, memo, ATTR } = __bm(24);
 
 const kpiRow = {

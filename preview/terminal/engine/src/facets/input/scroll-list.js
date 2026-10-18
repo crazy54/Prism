@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A long list in a short window: the cursor runs down, the view scrolls, the
 // scrollbar thumb tracks it.
 const { ATTR, glyphs, phase, panel, scrollbar, tint, fit } = __bm(25);

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Multi-select checkboxes: items get ticked one by one, the counter follows.
 const { ATTR, glyphs, phase, promptLine, tint, fit, listAnswer } = __bm(25);
 

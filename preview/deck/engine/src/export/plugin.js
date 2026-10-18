@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=a917677388';
 // The Prism Deck Stream Deck plugin package (formats.md §1):
 //
 //   com.jeremyfhall.prism.sdPlugin/
@@ -18,21 +18,21 @@ import { __m as __bm } from '../../facets.bundle.js';
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { writeZip, readZip } from './plugin-zip.js';
-import { decodePng, encodePng, downscale } from './plugin-png.js';
-import { validate } from './plugin-schema.js';
-import { sampleProfiles, checkProfile, PLUGIN_UUID, PLUGIN_NAME, ACTION_FACET, ACTION_INFOBAR } from './profile.js';
+import { writeZip, readZip } from './plugin-zip.js?v=a917677388';
+import { decodePng, encodePng, downscale } from './plugin-png.js?v=a917677388';
+import { validate } from './plugin-schema.js?v=a917677388';
+import { sampleProfiles, checkProfile, PLUGIN_UUID, PLUGIN_NAME, ACTION_FACET, ACTION_INFOBAR } from './profile.js?v=a917677388';
 const { render } = __bm(263);
 const { findFacet } = __bm(659);
 const { normalizeFacet } = __bm(267);
 const { surface } = __bm(273);
-import { validateSvg } from '../scene/validate.js';
-import { CANVAS_LAYOUT, INFOBAR_LAYOUT, CANVAS_LAYOUT_PATH, INFOBAR_LAYOUT_PATH } from '../plugin/feedback.js';
-import { PLUGIN_VERSION } from '../plugin/index.js';
-import { bundledProfileFor } from '../plugin/settings.js';
-import { piCatalogScript } from '../plugin/catalog.js';
-import { gameProfiles } from './profile.js';   // Game Link (prism-play)
-import { gameProfileFor } from '../plugin/settings.js';   // Game Link (prism-play)
+import { validateSvg } from '../scene/validate.js?v=a917677388';
+import { CANVAS_LAYOUT, INFOBAR_LAYOUT, CANVAS_LAYOUT_PATH, INFOBAR_LAYOUT_PATH } from '../plugin/feedback.js?v=a917677388';
+import { PLUGIN_VERSION } from '../plugin/index.js?v=a917677388';
+import { bundledProfileFor } from '../plugin/settings.js?v=a917677388';
+import { piCatalogScript } from '../plugin/catalog.js?v=a917677388';
+import { gameProfiles } from './profile.js?v=a917677388';   // Game Link (prism-play)
+import { gameProfileFor } from '../plugin/settings.js?v=a917677388';   // Game Link (prism-play)
 
 export { PLUGIN_UUID, PLUGIN_NAME, PLUGIN_VERSION };
 export const AUTHOR = 'Jeremy F Hall';

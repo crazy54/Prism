@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Dot tunnel: rings of dots flying at the camera along a snaking path, each
 // ring twisted a little further than the last. Near dots are big and bright,
 // far ones fade into the dark — braille makes the dots razor sharp.

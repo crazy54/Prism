@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // mtr — "My traceroute": the header, key help line, and per-hop Loss%/Snt/Last/Avg/Best/Wrst/StDev updating.
 const { C, ATTR, writer, hash, walk, pad, lpad, fixed, clock } = __bm(27);
 

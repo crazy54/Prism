@@ -10,7 +10,7 @@
 // win32 / darwin ffmpeg → browser bridge. Detection follows process.platform (inside
 // OpenDeck the -info platform says "windows" even on Linux — never trust it for this).
 
-import { BACKENDS, autoOrder } from './backends.js';
+import { BACKENDS, autoOrder } from './backends.js?v=a917677388';
 
 const withTimeout = (p, ms, onTimeout) => new Promise((resolve) => {
   let done = false;

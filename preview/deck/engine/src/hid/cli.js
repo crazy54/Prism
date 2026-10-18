@@ -17,16 +17,16 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import { spawnSync } from 'node:child_process';
-import { listDecks, selectDeck } from './discover.js';
-import { MODEL_BY_ID, modelForDevice } from './models.js';
-import { findHolders, findDeckApps } from './claim.js';
-import { memoryTransport } from './transport.js';
-import { HidDeck } from './deck.js';
-import { resolveLayout, defaultLayout, parseSpanArg } from './layout.js';
-import { createRunner } from './runner.js';
-import { udevRules, UDEV_RULES_NAME } from './udev.js';
-import { HELPER_PATH } from './helper.js';
-import { solid } from './pixels.js';
+import { listDecks, selectDeck } from './discover.js?v=a917677388';
+import { MODEL_BY_ID, modelForDevice } from './models.js?v=a917677388';
+import { findHolders, findDeckApps } from './claim.js?v=a917677388';
+import { memoryTransport } from './transport.js?v=a917677388';
+import { HidDeck } from './deck.js?v=a917677388';
+import { resolveLayout, defaultLayout, parseSpanArg } from './layout.js?v=a917677388';
+import { createRunner } from './runner.js?v=a917677388';
+import { udevRules, UDEV_RULES_NAME } from './udev.js?v=a917677388';
+import { HELPER_PATH } from './helper.js?v=a917677388';
+import { solid } from './pixels.js?v=a917677388';
 
 const HELP = `prism-deck hid — drive Stream Decks and the Corsair Galleon 100 SD directly on Linux (hidraw)
 
@@ -211,7 +211,7 @@ async function cmdRun(opt, out, err, io, env) {
 /** --audio [monitor|mic]: feed ctx.data.audio / .spectrum from src/audio (levels only, never recorded) at 15 Hz. */
 async function startAudio(input, runner, out, err) {
   let mod;
-  try { mod = await import('../audio/index.js'); } catch (e) { err(`--audio: src/audio is not available (${e.message})`); return null; }
+  try { mod = await import('../audio/index.js?v=a917677388'); } catch (e) { err(`--audio: src/audio is not available (${e.message})`); return null; }
   const src = mod.createAudioSource({ input });
   await src.start();
   const timer = setInterval(() => { const snap = src.snapshot(); if (snap) runner.setData(snap); }, 1000 / 15);

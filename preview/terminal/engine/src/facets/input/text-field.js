@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // A labeled text field: placeholder, typing, a validation error, the fix, ✔.
 const { ATTR, glyphs, uni, phase, typed, blink, tint, mix, fit } = __bm(25);
 

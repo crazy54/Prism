@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../facets.bundle.js';
+import { __m as __bm } from '../../../facets.bundle.js?v=a917677388';
 // Game Link · Rocket League: the client of the game's Stats API socket, and the ini switch. Node only (node:net,
 // node:fs, node:crypto); never re-exported from ./index.js (browser-safe). The pure half is ./gamelink-rl.js.
 //
@@ -38,7 +38,7 @@ import fsp from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { StringDecoder } from 'node:string_decoder';
-import { gameLinkDir } from './gamelink.js';
+import { gameLinkDir } from './gamelink.js?v=a917677388';
 const { normalizeRl, rlIdle, findRl, rlIniApply, rlIniRestore, rlIniState, RL_TCP_PORT, RL_WS_PORT, RL_RATE } = __bm(644);
 
 export const RL_HOST = '127.0.0.1';
@@ -264,10 +264,12 @@ export function createRlClient(opts = {}) {
     const split = createJsonSplitter({ maxBytes });
     const ws = transport === 'ws' ? createWsParser({ maxBytes }) : null;
     let closed = false;
-    const end = (why) => {
+    /** End the session. bye: a WebSocket close frame to answer with — sent with end() (flushed, then FIN), the socket destroyed a moment later. */
+    const end = (why, bye = null) => {
       if (closed) return;
       closed = true;
-      try { sock.destroy(); } catch { /* gone */ }
+      if (bye) { try { sock.end(bye); } catch { /* gone */ } const t = setTimeout(() => { try { sock.destroy(); } catch { /* gone */ } }, 1000); t.unref?.(); }
+      else { try { sock.destroy(); } catch { /* gone */ } }
       if (r.sock === sock) r.sock = null;
       if (run !== r) return;
       gone(r, why);
@@ -280,7 +282,7 @@ export function createRlClient(opts = {}) {
       for (const f of frames) {
         if (f.op === 'text' || f.op === 'binary') text(f.data.toString('utf8'));
         else if (f.op === 'ping') { try { sock.write(wsFrame(10, f.data)); } catch { /* closing */ } }
-        else if (f.op === 'close') { try { sock.write(wsFrame(8, f.data.subarray(0, 2))); } catch { /* closing */ } return end('closed'); }
+        else if (f.op === 'close') return end('closed', wsFrame(8, f.data.subarray(0, 2)));   // the close handshake: answered, flushed
       }
     };
     sock.on('data', bytes);

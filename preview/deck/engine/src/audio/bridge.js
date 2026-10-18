@@ -17,7 +17,7 @@
 //     ≤ 16 KiB per message, ≤ 120 messages/s; strict CSP on the page (script-src 'self', no inline script)
 // Zero dependencies: node:http + node:crypto (loaded lazily), RFC 6455 framing below.
 
-import { fftInPlace, windowedMagnitudes, bandLayout, bandAmplitudes } from './dsp.js';
+import { fftInPlace, windowedMagnitudes, bandLayout, bandAmplitudes } from './dsp.js?v=a917677388';
 
 export const BRIDGE_PROTOCOL = 'prism-audio.v1';
 export const WS_GUID = '258EAFA5-E914-47DA-95CA-C5AB0DC85B11';

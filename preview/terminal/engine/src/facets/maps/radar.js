@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=a917677388';
 // Radar & Sonar: a phosphor radar sweep painting moving tracks, and an
 // active sonar with expanding pings, echoes and a bearing-time waterfall.
 const { mix } = __bm(0);
