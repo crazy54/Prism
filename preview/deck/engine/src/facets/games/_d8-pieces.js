@@ -1,4 +1,0 @@
-// Bundled into facets.bundle.js by website/build.mjs (the module itself is in the repository).
-import { __m } from '../../../facets.bundle.js?v=a917677388';
-const __n = __m(614);
-export const PADS = __n.PADS, PIECES = __n.PIECES, PIECE_NAMES = __n.PIECE_NAMES, arrow = __n.arrow, mark = __n.mark;

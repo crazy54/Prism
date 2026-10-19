@@ -1,4 +1,0 @@
-// Bundled into core.bundle.js by website/build.mjs (the module itself is in the repository).
-import { __m } from '../../core.bundle.js?v=a917677388';
-const __n = __m(5);
-export const P = __n.P, SVG_NS = __n.SVG_NS, SvgCanvas = __n.SvgCanvas, attrs = __n.attrs, base64 = __n.base64, circle = __n.circle, defs = __n.defs, el = __n.el, ellipse = __n.ellipse, esc = __n.esc, fill = __n.fill, g = __n.g, line = __n.line, linearGradient = __n.linearGradient, n = __n.n, path = __n.path, points = __n.points, polygon = __n.polygon, polyline = __n.polyline, radialGradient = __n.radialGradient, rect = __n.rect, rotate = __n.rotate, roundRectPath = __n.roundRectPath, scale = __n.scale, stroke = __n.stroke, suffixIds = __n.suffixIds, svgDataUrl = __n.svgDataUrl, svgDoc = __n.svgDoc, svgInner = __n.svgInner, svgWindow = __n.svgWindow, translate = __n.translate, url = __n.url;
