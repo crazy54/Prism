@@ -32,7 +32,11 @@ public sealed class MacrosModule : IPrismModule, IAsyncDisposable
         IAppLauncher? launcher = dryRun ? null : new ShellAppLauncher(log);
         // Safe mode reads the trust list but never writes it: a fake host pressing at random must not trust anything for later.
         var trust = new LaunchTrustStore(context.DataDirectory, log, persist: !safeMode, time: context.Time);
-        _engine = new MacroEngine(sink, foreground, launcher, new Win32ScanCodeMap(), log, shutdown: context.ShutdownToken, trust: trust, dryRun: dryRun);
+        _engine = new MacroEngine(sink, foreground, launcher, new Win32ScanCodeMap(), log, shutdown: context.ShutdownToken, trust: trust, dryRun: dryRun)
+        {
+            // The plugin-wide input gate (registered by the Desktop stack), looked up per send: it may register after us.
+            InputGate = () => context.Services.TryGet<IInputGate>(out var gate) ? gate : null,
+        };
         context.Services.Add(_engine);
         var mode = !dryRun ? "live"
             : safeMode ? "DRY RUN: safe mode; no input is sent, nothing is launched, opened or focused"

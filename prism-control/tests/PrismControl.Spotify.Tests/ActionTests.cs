@@ -341,9 +341,24 @@ public partial class ActionTests
         Assert.Contains("Spotify", status["data"]!["attribution"]!.GetValue<string>());
         var hello = Assert.NotNull(await h.PiMessageAsync("pi.ready"));
         Assert.Equal("Not connected", hello["data"]!["state"]!["status"]!.GetValue<string>());
-        await h.PiMessageAsync("spotify.anyApp", new { value = true }, requestId: 3);
-        Assert.True(rig.Smtc.FollowAnyApp);
+        Assert.Equal("spotifyFirst", status["data"]!["follow"]!.GetValue<string>(), "the new default");
+
+        // The follow select: written as "media.follow" in the spotify section, applied at once.
+        var reply = Assert.NotNull(await h.PiMessageAsync("spotify.follow", new { value = "spotifyOnly" }, requestId: 3));
+        Assert.Equal("spotifyOnly", reply["data"]!["follow"]!.GetValue<string>());
+        Assert.Equal(Smtc.MediaFollow.SpotifyOnly, rig.Smtc.Follow);
+        var section = h.GlobalSettings.Snapshot()["spotify"]!.AsObject();
+        Assert.Equal("spotifyOnly", section["media.follow"]!.GetValue<string>());
+        Assert.False(section["anyMediaApp"]!.GetValue<bool>());
+        var refused = Assert.NotNull(await h.PiMessageAsync("spotify.follow", new { value = "everything" }, requestId: 4));
+        Assert.False(refused["ok"]!.GetValue<bool>(), "an unknown mode is refused");
+        Assert.Equal(Smtc.MediaFollow.SpotifyOnly, rig.Smtc.Follow);
+
+        // An older PI page's checkbox still works: on = Windows' current session.
+        await h.PiMessageAsync("spotify.anyApp", new { value = true }, requestId: 5);
+        Assert.Equal(Smtc.MediaFollow.Current, rig.Smtc.Follow);
         Assert.True(h.GlobalSettings.GetSection<SpotifyGlobalSettings>("spotify").AnyMediaApp);
+        Assert.Equal(Smtc.MediaFollow.Current, h.GlobalSettings.GetSection<SpotifyGlobalSettings>("spotify").EffectiveFollow);
     }
 
     [Test]

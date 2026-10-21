@@ -16,6 +16,9 @@ public interface IDataProvider<T> where T : class
 /// <summary>What the HTTP server reads from a topic.</summary>
 public sealed record TopicValue(byte[] Body, string ContentType, long Seq, DateTimeOffset UpdatedAt, string Etag, string? Source);
 
+/// <summary>A binary topic's current value for in-process readers. <see cref="Etag"/> changes whenever the bytes do.</summary>
+public sealed record BinaryValue(ReadOnlyMemory<byte> Data, string Mime, string Etag, int? Width, int? Height);
+
 /// <summary>One data API endpoint. Domain modules claim it and publish into it.</summary>
 public abstract class DataTopic
 {
@@ -64,12 +67,22 @@ public abstract class DataTopic
     /// <summary>After demand starts, a request without data waits this long for the producer's first publish.</summary>
     public TimeSpan FirstDataWait { get; set; } = TimeSpan.FromMilliseconds(250);
 
+    /// <summary>
+    /// For in-process readers (actions that read <c>Current</c> directly): marks "requested now" exactly as a request
+    /// through <see cref="ReadAsync"/> does. It extends the demand window and, on the idle → demanded transition, raises
+    /// <see cref="DemandStarted"/> (on the calling thread), so demand-driven producers start and keep running. It reads,
+    /// serializes and copies nothing, and never calls a pull provider. Call it at most about once a second while a key or
+    /// screen shows the data, then read <c>Current</c>. Reading <c>Current</c> alone never creates demand.
+    /// </summary>
+    public void Demand() => NoteRequest();
+
     /// <summary>Records a request; returns true if this request started demand (the producer may only now be starting).</summary>
     internal bool NoteRequest()
     {
-        var wasDemanded = IsDemanded;
-        Interlocked.Exchange(ref _lastRequestedTicks, _time.GetTimestamp());
-        if (wasDemanded) return false;
+        // One atomic swap decides the idle → demanded transition, so concurrent first requests raise DemandStarted once.
+        var now = _time.GetTimestamp();
+        var previous = Interlocked.Exchange(ref _lastRequestedTicks, now);
+        if (previous != 0 && _time.GetElapsedTime(previous, now) < DemandWindow) return false;
         DemandStarted?.Invoke(this, EventArgs.Empty);
         return true;
     }
@@ -288,6 +301,12 @@ public sealed class BinaryTopic : DataTopic
     /// <summary>The current image's ETag (quoted), or null.</summary>
     public string? CurrentEtag { get { lock (_gate) return _current?.Etag; } }
     public (string Mime, int? Width, int? Height)? CurrentInfo { get { lock (_gate) return _current is { } c ? (c.Mime, c.W, c.H) : null; } }
+
+    /// <summary>
+    /// The current image for in-process readers (e.g. a Kaleidoscope key): the bytes exactly as published (read-only),
+    /// its MIME type, ETag (the change key) and pixel size, or null. Album art must be shown whole: no crop, mask or overlay.
+    /// </summary>
+    public BinaryValue? Current { get { lock (_gate) return _current is { } c ? new BinaryValue(c.Data, c.Mime, c.Etag, c.W, c.H) : null; } }
 
     internal void PublishFrom(BinaryPublisher pub, byte[] data, string mime)
     {

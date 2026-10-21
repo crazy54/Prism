@@ -19,6 +19,16 @@ public sealed record UnknownMessage(string Name, JsonObject Raw) : PluginMessage
 /// <summary>Parses app → plugin WebSocket messages into typed events (action events are Core records).</summary>
 public static class InboundParser
 {
+    /// <summary>
+    /// Returns an <see cref="ActionEvent"/>, a <see cref="PluginMessage"/>, or null for unparseable input. Action events carry
+    /// <paramref name="receivedTimestamp"/> (the receive loop's host-clock stamp; 0 = unknown).
+    /// </summary>
+    public static object? Parse(string json, long receivedTimestamp)
+    {
+        var parsed = Parse(json);
+        return parsed is ActionEvent e && receivedTimestamp != 0 ? e with { ReceivedTimestamp = receivedTimestamp } : parsed;
+    }
+
     /// <summary>Returns an <see cref="ActionEvent"/>, a <see cref="PluginMessage"/>, or null for unparseable input.</summary>
     public static object? Parse(string json)
     {

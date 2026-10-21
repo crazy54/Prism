@@ -77,40 +77,59 @@ public sealed class FakeHttp : HttpMessageHandler
     }
 }
 
-/// <summary>A scripted Windows media session. Records every command; never touches the real system.</summary>
+/// <summary>
+/// A scripted media-session source (what <see cref="SmtcSource"/> would report after its policy ran). Records every
+/// command; never touches the real system. Commands to Spotify's session record "toggle"; to another app's,
+/// "toggle@chrome.exe".
+/// </summary>
 public sealed class FakeSmtc : IMediaSessionSource
 {
     private SmtcSnapshot? _current;
+    private SmtcSnapshot? _spotify;
     public readonly List<string> Commands = [];
 
     public SmtcSnapshot? Current => _current;
-    public bool FollowAnyApp { get; set; }
+    public SmtcSnapshot? Spotify => _spotify;
+    public IReadOnlyList<SmtcSessionInfo> Sessions =>
+        [.. new[] { _current, _spotify }.Where(s => s is not null).Distinct().Select(s => new SmtcSessionInfo(s!.Key, s.AppId, s.AppName, s.IsSpotify, s.State, ReferenceEquals(s, _current), false))];
+    public MediaFollow Follow { get; set; } = MediaFollow.SpotifyFirst;
+    public PlayState? SpotifyRemote { get; set; }
     public bool CommandResult { get; set; } = true;
     public event EventHandler<SmtcChange>? Changed;
 
+    /// <summary>Shows <paramref name="s"/>. A Spotify snapshot is also Spotify's own; null clears Spotify too if it was shown.</summary>
     public void Set(SmtcSnapshot? s, SmtcChange what = SmtcChange.Media | SmtcChange.Playback | SmtcChange.Timeline)
     {
+        if (s is { IsSpotify: true } || (s is null && _current is { IsSpotify: true })) _spotify = s;
         _current = s;
+        Changed?.Invoke(this, what);
+    }
+
+    /// <summary>Shows <paramref name="shown"/> while Spotify's own session is <paramref name="spotify"/> (in the background).</summary>
+    public void Set(SmtcSnapshot? shown, SmtcSnapshot? spotify, SmtcChange what = SmtcChange.Media | SmtcChange.Playback | SmtcChange.Timeline | SmtcChange.Background)
+    {
+        _spotify = spotify;
+        _current = shown;
         Changed?.Invoke(this, what);
     }
 
     public Task StartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
     public void Rebind() { }
 
-    private Task<bool> Cmd(string name)
+    private Task<bool> Cmd(string name, string key)
     {
-        lock (Commands) Commands.Add(name);
+        lock (Commands) Commands.Add(SmtcSource.IsSpotifyApp(key) ? name : name + "@" + key);
         return Task.FromResult(CommandResult);
     }
 
-    public Task<bool> TogglePlayPauseAsync() => Cmd("toggle");
-    public Task<bool> PlayAsync() => Cmd("play");
-    public Task<bool> PauseAsync() => Cmd("pause");
-    public Task<bool> NextAsync() => Cmd("next");
-    public Task<bool> PreviousAsync() => Cmd("previous");
-    public Task<bool> SeekAsync(TimeSpan position) => Cmd("seek:" + (long)position.TotalMilliseconds);
-    public Task<bool> SetShuffleAsync(bool on) => Cmd("shuffle:" + on);
-    public Task<bool> SetRepeatAsync(PrismControl.Spotify.RepeatMode mode) => Cmd("repeat:" + mode);
+    public Task<bool> TogglePlayPauseAsync(string sessionKey) => Cmd("toggle", sessionKey);
+    public Task<bool> PlayAsync(string sessionKey) => Cmd("play", sessionKey);
+    public Task<bool> PauseAsync(string sessionKey) => Cmd("pause", sessionKey);
+    public Task<bool> NextAsync(string sessionKey) => Cmd("next", sessionKey);
+    public Task<bool> PreviousAsync(string sessionKey) => Cmd("previous", sessionKey);
+    public Task<bool> SeekAsync(string sessionKey, TimeSpan position) => Cmd("seek:" + (long)position.TotalMilliseconds, sessionKey);
+    public Task<bool> SetShuffleAsync(string sessionKey, bool on) => Cmd("shuffle:" + on, sessionKey);
+    public Task<bool> SetRepeatAsync(string sessionKey, PrismControl.Spotify.RepeatMode mode) => Cmd("repeat:" + mode, sessionKey);
     public ValueTask DisposeAsync() => ValueTask.CompletedTask;
 }
 

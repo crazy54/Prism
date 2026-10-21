@@ -36,6 +36,13 @@ public static class Previews
         };
         var paused = playing with { State = PlayState.Paused, Title = "A Much Longer Example Song Title (Extended Mix)", Art = wide };
         var noArt = playing with { Art = null, Title = "Example Song 2" };
+        // Another app's session (a video in a browser): SMTC only, its 16:9-ish artwork whole, no Spotify fields.
+        var video = new PlayerSnapshot
+        {
+            Source = SnapshotSource.Smtc, AppName = "Chrome", IsSpotify = false, SessionKey = "Chrome", State = PlayState.Playing,
+            Title = "Example Video: A Walk Through the Demo City", Artists = ["Example Channel"], DurationMs = 754_000, PositionMs = 312_000, PositionAt = at, Art = wide,
+        };
+        var hidden = video with { Private = true, Title = null, Artists = [], Art = null };
 
         var pages = JsonSerializer.Deserialize(Fx.PlaylistsPage(0, 48), SpotifyJsonContext.Default.PagingDtoPlaylistDto)!;
         var playlists = new PageResult<PlaylistEntry>(0, 48, pages.Items!.Select(PlaylistLibrary.ToEntry).ToList());
@@ -95,10 +102,21 @@ public static class Previews
             keys.Add(($"{n}-repeat-track", SpotifyArt.RepeatKey(t, RepeatMode.Track, true)));
             keys.Add(($"{n}-volume", SpotifyArt.VolumeKey(t, 62, true)));
             keys.Add(($"{n}-volume-muted", SpotifyArt.VolumeKey(t, 0, true)));
+            keys.Add(($"{n}-other-now-playing", SpotifyArt.NowPlayingKey(t, video, at)));
+            keys.Add(($"{n}-other-now-playing-hidden", SpotifyArt.NowPlayingKey(t, hidden, at)));
+            keys.Add(($"{n}-other-pause", SpotifyArt.TransportKey(t, TransportGlyph.PlayPause, true, true, "CHROME")));
+            keys.Add(($"{n}-other-next", SpotifyArt.TransportKey(t, TransportGlyph.Next, true, true, "CHROME")));
+            keys.Add(($"{n}-other-previous-disabled", SpotifyArt.TransportKey(t, TransportGlyph.Previous, true, false, "CHROME")));
+            keys.Add(($"{n}-spotify-like-while-other", SpotifyArt.LikeKey(t, true, true, "SPOTIFY")));
+            keys.Add(($"{n}-spotify-shuffle-while-other", SpotifyArt.ShuffleKey(t, false, true, "SPOTIFY")));
+            keys.Add(($"{n}-spotify-volume-while-other", SpotifyArt.VolumeKey(t, 62, true, caption: "SPOTIFY")));
 
             dials.Add(($"{n}-now-playing", SpotifyArt.NowPlayingDial(t, playing, at, active: false)));
             dials.Add(($"{n}-now-playing-paused-active", SpotifyArt.NowPlayingDial(t, paused, at, active: true)));
             dials.Add(($"{n}-now-playing-notice", SpotifyArt.NowPlayingDial(t, noArt, at, false, new FrameNotice(SpotifyText.OpenSpotify, true))));
+            dials.Add(($"{n}-other-now-playing", SpotifyArt.NowPlayingDial(t, video, at, active: false)));
+            dials.Add(($"{n}-other-now-playing-hidden", SpotifyArt.NowPlayingDial(t, hidden, at, active: false)));
+            dials.Add(($"{n}-other-seek-notice", SpotifyArt.NowPlayingDial(t, video, at, true, new FrameNotice(SpotifyText.SeekSpotifyOnly, false))));
             dials.Add(($"{n}-volume-active", SpotifyArt.VolumeDial(t, 62, "EXAMPLE-PC", true)));
             dials.Add(($"{n}-volume-sign-in", SpotifyArt.VolumeDial(t, null, null, false, new FrameNotice("Connect in settings", false))));
             dials.Add(($"{n}-galleon-playlists", SpotifyArt.BrowserGalleon(t, Level0(12), lookup, active: true)));

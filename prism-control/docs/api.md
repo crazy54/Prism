@@ -4,16 +4,16 @@
 **Audience:** the sibling plugin `com.jeremyfhall.prism` (session prism-27), and anything else on this PC that wants Prism Control's live data.
 **Copies:** `prism-control/docs/api.md` (source of truth) and `aaa-prism-ds/prism-control/API.md`. Both files are identical.
 
-Prism Control (`com.jeremyfhall.prismcontrol`) runs a **read-only HTTP/1.1 API on the loopback interface**. It serves system stats, now playing (including album art), audio levels, audio devices and microphone state. The API never changes anything on the PC.
+Prism Control (`com.jeremyfhall.prismcontrol`) runs a **read-only HTTP/1.1 API on the loopback interface**. It serves system stats, now playing (including album art), audio levels, an audio spectrum, audio devices and microphone state. The API never changes anything on the PC.
 
 Contents:
 
 1. Discovery: `control.json`
 2. Auth handshake and transport rules
 3. Response envelope, caching and errors
-4. Endpoints: `/v1`, `/v1/health`, `/v1/system`, `/v1/now-playing`, `/v1/now-playing/art`, `/v1/audio/levels`, `/v1/audio/devices`, `/v1/mic`
+4. Endpoints: `/v1`, `/v1/health`, `/v1/system`, `/v1/now-playing`, `/v1/now-playing/art`, `/v1/audio/levels`, `/v1/audio/devices`, `/v1/mic`, `/v1/cooling`, `/v1/audio/spectrum`
 5. Units and conventions
-6. Update cadence and recommended polling
+6. Update cadence and recommended polling, and in-process readers (6.1)
 7. Availability today, and demo mode
 8. Versioning policy
 9. A minimal Node client
@@ -163,6 +163,7 @@ The body of every error is:
 | `GET /v1/now-playing` | Track, state, position, shuffle/repeat/like, art metadata (`?art=dataUrl` inlines the image) | On change |
 | `GET /v1/now-playing/art` | The album art bytes (`image/jpeg` or `image/png`) | On track change |
 | `GET /v1/audio/levels` | Output and input peak meters | ≈30 Hz, **only while polled** |
+| `GET /v1/audio/spectrum` | 24-band spectrum (EQ bars) of the default output, peak, RMS, silence | ≈30 Hz, **only while polled** |
 | `GET /v1/audio/devices` | Output and input endpoints, defaults, volume, mute | On change (cached ≤ 0.5 s) |
 | `GET /v1/mic` | Default mic: mute, volume, peak, in use | Mute on change; peak 10 Hz while polled |
 | `GET /v1/cooling` | Fans, AIO pump, coolant and CPU package temperature (iCUE, LibreHardwareMonitor fallback) | 1 Hz, **only while polled or shown** |
@@ -180,6 +181,7 @@ Every field listed below is **always present** in v1 payloads. A field that is u
     { "path": "/v1/now-playing", "available": true, "source": "spotify", "demo": false, "cadenceMs": 0, "contentType": "application/json" },
     { "path": "/v1/now-playing/art", "available": true, "source": "spotify", "demo": false, "cadenceMs": 0, "contentType": "image/*" },
     { "path": "/v1/audio/levels", "available": false, "source": "audio", "demo": false, "cadenceMs": 33, "contentType": "application/json" },
+    { "path": "/v1/audio/spectrum", "available": false, "source": "audio", "demo": false, "cadenceMs": 33, "contentType": "application/json" },
     { "path": "/v1/audio/devices", "available": true, "source": "audio", "demo": false, "cadenceMs": 500, "contentType": "application/json" },
     { "path": "/v1/mic", "available": true, "source": "audio", "demo": false, "cadenceMs": 0, "contentType": "application/json" }
   ]
@@ -189,7 +191,7 @@ Every field listed below is **always present** in v1 payloads. A field that is u
 - `available` means data can be served right now.
 - `cadenceMs: 0` means the endpoint is event-driven (it updates on change).
 - For a pull provider, `cadenceMs` is its cache time.
-- `/v1/audio/levels` shows `available: false` until someone polls it, because metering only runs on demand.
+- `/v1/audio/levels` and `/v1/audio/spectrum` show `available: false` until someone polls them, because metering and analysis only run on demand.
 
 ### 4.2 `GET /v1/health`
 
@@ -305,10 +307,10 @@ Query: **`?art=dataUrl`** adds `data.art.dataUrl` (the image as a `data:` URL). 
 
 | Field | Type | Unit / values |
 |---|---|---|
-| `source` | string | `spotify` (Web API, any device), `smtc` (the Windows media session: local players, no login), or `demo`. |
+| `source` | string | `spotify` (Web API, any device), `smtc` (the Windows media session: local players, no login), or `demo`. Since 2026-10-18 the module follows the session that is playing (setting `spotify.media.follow`, default `spotifyFirst`: Spotify while it plays, else the most recently playing app), so `smtc` with a non-Spotify `app` (e.g. `Chrome`, YouTube in a tab) is a normal value. Spotify-only fields (`liked`, `contextName`, `volumePct`) are then null. |
 | `app` | string or null | Player display name. |
 | `state` | string | `playing`, `paused`, `stopped`, or `none` (nothing is loaded; `track` is null). |
-| `track.title` | string | |
+| `track.title` | string | Empty (`""`) when streamer-safe mode hides another app's track (title, artist, album and art are withheld); Spotify's own track stays visible. |
 | `track.artists` | string[] | In order. |
 | `track.album` | string or null | |
 | `track.durationMs` | int or null | Milliseconds. |
@@ -354,6 +356,8 @@ Demand-driven. Metering starts on the first request and stops 5 s after the last
 | `peakDb` | number or null | dBFS of `peak` (≤ 0). Null when silent. |
 | `channels` | number[] or null | Linear 0..1 per channel (L, R, …). |
 | `intervalMs` | int | The metering interval. |
+
+For a frequency spectrum (EQ bars) of the default output, see `/v1/audio/spectrum` (§4.10).
 
 ### 4.7 `GET /v1/audio/devices`
 
@@ -478,6 +482,71 @@ Fans, AIO pump, coolant and CPU package temperature, read-only from Corsair **iC
 
 **Read-only.** Prism Control only calls iCUE's sensor getters (`getAllSensorIds`, `getSensorValue/Units/Name/DeviceName/Type/Kind`, `sensorIsConnected`; `GetSensors`/`GetSensor` on the fallback pipe). It never sets, activates or releases anything, and never changes fans, pumps, lighting or profiles.
 
+### 4.10 `GET /v1/audio/spectrum`
+
+A live **24-band spectrum** (EQ bars) of what the default output is playing, from loopback analysis. The envelope's `source` is `audio`.
+
+**Demand-driven.** Nothing is captured while nobody looks.
+- The first request starts loopback capture of the default output. It waits up to 250 ms for the first frame and may still answer `503 unavailable`; retry.
+- While demanded, a frame is analyzed and published every ~33 ms (≈30 Hz).
+- 5 s after the last request, capture stops, every capture object is released, and the endpoint answers `503` again until the next request.
+- While a spectrum is on screen, poll at up to **30 Hz** with `If-None-Match` on one keep-alive connection. Stop polling when it is hidden.
+
+```json
+{
+  "api": 1, "path": "/v1/audio/spectrum", "seq": 212, "updatedAt": "2026-10-18T12:00:01.033Z", "ageMs": 9, "source": "audio", "demo": false,
+  "data": {
+    "deviceId": "{0.0.0.00000000}.{…}",
+    "deviceName": "Speakers (Example Audio)",
+    "bands": [0.612, 0.724, 0.803, 0.771, 0.694, 0.642, 0.583, 0.551, 0.574, 0.522, 0.491, 0.468, 0.452, 0.421, 0.403, 0.384, 0.362, 0.331, 0.307, 0.282, 0.241, 0.193, 0.121, 0.052],
+    "bandHz": [40, 51.9, 67.3, 87.4, 113.4, 147.1, 190.9, 247.7, 321.5, 417.1, 541.2, 702.3, 911.3, 1182.5, 1534.3, 1990.9, 2583.4, 3352.1, 4349.7, 5644, 7323.5, 9502.9, 12330.7, 16000],
+    "peak": 0.5124, "rms": 0.1371, "silent": false, "sampleRate": 48000
+  }
+}
+```
+
+| Field | Type | Unit / values |
+|---|---|---|
+| `deviceId` | string or null | The default render endpoint (console role) being analyzed. It matches `/v1/audio/devices` `output.defaultId`. Null when there is no output device or Core Audio is unavailable. |
+| `deviceName` | string or null | Its friendly name. |
+| `bands` | number[] | Always 24 band levels, **low to high**, 0–1 on a dB scale: −60 dBFS and below = 0, 0 dBFS = 1, linear in dB between (0.5 = −30 dBFS). Rounded to 3 decimals. Smoothed with a fast attack (10 ms time constant) and a **300 ms release** time constant: a bar falls 63% of the way in 300 ms, and to 0 in about 2 s. |
+| `bandHz` | number[] | Band centers in Hz, in the same order: log-spaced from 40 Hz to 16 kHz (each ×1.2976, ~0.38 octave), rounded to 0.1 Hz. Constant, so cache it. |
+| `peak` | number | Linear 0–1: the sample peak of the last frame (~33 ms) over every channel. Unsmoothed. Rounded to 4 decimals. |
+| `rms` | number | Linear 0–1: the RMS of the last frame over every channel. Unsmoothed. |
+| `silent` | bool | Nothing audible is playing: every band is below 0.01 and the last frame peaked below −60 dBFS (0.001). It turns `true` at once when nothing was playing, and about 1.5 s after the sound stops (once the bars have fallen). |
+| `sampleRate` | int or null | The output's mix rate in Hz, e.g. `48000`. Null while no capture stream is open: no device, or the stream failed to open (capture retries with backoff). |
+
+**How the bands are computed:**
+1. Loopback audio is what the endpoint plays (the Windows mix). It is mixed to mono: the sum of the channels ÷ min(channels, 2), so stereo is (L+R)/2 and stereo content on a 7.1 output keeps its level.
+2. A periodic Hann window and an FFT run once per frame: 2048 samples at 44.1/48 kHz, 4096 at 88.2/96 kHz (~43 ms of audio).
+3. Each band reads its **loudest FFT bin**, calibrated so a full-scale sine reads 0 dBFS in its band. The lowest bands are narrower than one bin at 48 kHz, so they are interpolated at their center.
+   - A pure tone shows its true level.
+   - Broadband noise reads a few dB higher in the wide treble bands than in the narrow bass bands.
+
+**Silence and repeated frames:**
+- While nothing plays, Windows' loopback delivers no audio at all. After 150 ms without any, the input counts as silence.
+- Identical frames (silence, or a steady tone) are republished at most once a second. So `If-None-Match` polls get `304`, and `ageMs` stays under ~1.1 s.
+
+**Follows the default output:**
+- A default-device change switches the capture within a frame.
+- If the device goes away, its format changes or the audio service restarts, capture reopens with backoff (250 ms, doubling up to 10 s).
+- Meanwhile the payload carries `sampleRate: null` and falling bands.
+
+**Privacy and side effects:**
+- **Analysis only.** Prism Control never stores, records, writes or sends audio. The samples stay in memory for one ~43 ms analysis window, and only the numbers above leave the audio module.
+- It captures in shared loopback mode, so nothing changes for the device or other apps: no volume, mute, format or default-device change.
+- Its own stream opts out of Windows' communications ducking, so "reduce the volume of other sounds" never triggers.
+- Capture is a read, so it also runs in safe mode.
+- Loopback of an output is not microphone capture: Windows shows no microphone-in-use indicator for it.
+- While a spectrum is shown, the capture stream may appear under Prism Control in the Windows volume mixer. Prism Control's own mixer hides it.
+
+**In-process readers.** Prism Control actions, such as Kaleidoscope EQ keys or the Galleon screen, read `IDataRegistry.AudioSpectrum` (a `DataTopic<AudioSpectrumSnapshot>`) directly (§6.1):
+- `AudioSpectrum.Current` returns the latest snapshot, or null while idle. **Reading `Current` does not create demand.**
+- While the bars are on screen, call `AudioSpectrum.Demand()` about once a second, and read `Current` on each render tick.
+  - `Demand()` starts capture when it is idle and keeps it running. It reads, serializes and copies nothing.
+  - The first frame appears in `Current` 33–150 ms after the first `Demand()`. Until then `Current` is null: draw empty bars.
+- Stop calling `Demand()` when the bars are hidden: capture stops 5 s after the last call.
+
 ---
 
 ## 5. Units and conventions
@@ -492,8 +561,9 @@ Fans, AIO pump, coolant and CPU package temperature, read-only from Corsair **iC
   - `Mhz` = MHz
   - `Ms` = milliseconds
   - `Sec` = seconds
-  - `peak` = linear 0..1
+  - `peak`, `rms` = linear 0..1
   - `Db` = dBFS
+  - `Hz` = hertz (`bandHz`)
 - Numbers are JSON numbers. Integers may arrive as `42` or `42.0`.
 - Timestamps are ISO 8601 UTC with milliseconds: `2026-10-16T19:22:49.547Z`.
 - JSON is UTF-8, without a BOM, with no HTML escaping (`+`, `<`, `'` appear literally).
@@ -510,11 +580,23 @@ Fans, AIO pump, coolant and CPU package temperature, read-only from Corsair **iC
 | `/v1/now-playing` | On change | 1 Hz + ETag | Extrapolate the position locally. |
 | `/v1/now-playing/art` | On track change | Only when `art.etag` changes | Or use `?art=dataUrl` once per change. |
 | `/v1/audio/levels` | ≈30 Hz while demanded | ≤ 30 Hz, only while visible | Metering stops 5 s after the last request. |
+| `/v1/audio/spectrum` | ≈30 Hz while demanded; identical frames (silence) once a second | ≤ 30 Hz + ETag, only while visible | Capture stops 5 s after the last request; the first request after idle waits up to 250 ms and may answer `503`. |
 | `/v1/audio/devices` | On change (≤ 0.5 s cache) | Every 2–5 s + ETag | |
 | `/v1/mic` | Mute on change; peak 10 Hz while demanded | 2–4 Hz + ETag | |
 | `/v1/cooling` | 1 Hz while demanded | 1 Hz + ETag | Sampling stops 15 s after the last request; the first request after idle may answer `503` or `status: "connecting"`. |
 
 Data API traffic does **not** count against Prism Control's Stream Deck update budget. Your own `setImage`/`setFeedback` calls count against the Stream Deck app's shared ceiling of about 230–300 updates/s; `/v1/health` → `updates.sentLastSec` shows Prism Control's share.
+
+### 6.1 In-process readers
+
+Prism Control's own actions, such as Kaleidoscope keys or the Galleon screen, read the topics directly through `IDataRegistry` instead of over HTTP:
+- `topic.Current` is the latest snapshot, or null when there is none. Reading it **never creates demand**. Demand-driven producers stay idle while only `Current` is read: for example audio levels, the spectrum, the mic peak, cooling, and Spotify's remote polling behind now playing.
+- While a key or screen shows the data, call `topic.Demand()` at most about once a second, then read `Current`.
+  - `Demand()` counts as a request: it extends the 5 s demand window and starts an idle producer.
+  - It reads, serializes and copies nothing, and never calls a pull provider.
+- Stop calling it when the data is hidden; the producer stops when the window lapses.
+- `await topic.ReadAsync(ct)` also counts as a request and returns the JSON bytes, but `Demand()` is the cheap way.
+- Snapshots are shared between readers: treat them as read-only.
 
 ---
 
@@ -528,9 +610,10 @@ The server, auth, envelope and every endpoint are live and covered by tests. As 
 | `/v1/system` | Live, **full**: CPU, GPU (NVML; D3DKMT for AMD/Intel and iGPUs), RAM, disks, network. `cpu.tempC` needs LibreHardwareMonitor’s web server or HWiNFO shared memory | — |
 | `/v1/now-playing` (+ `/art`) | Live from the Windows media session (SMTC) without sign-in; the Spotify Web API adds like/shuffle/repeat/volume/context after Connect | — |
 | `/v1/audio/levels`, `/v1/audio/devices`, `/v1/mic` | Live (Core Audio). `/v1/mic` follows the console default capture device | — |
+| `/v1/audio/spectrum` | Live (WASAPI loopback of the console default output). It has no demo provider: in demo mode it still analyzes the real output, read-only | — |
 | `/v1/cooling` | Live (iCUE; LibreHardwareMonitor fallback) | — |
 
-**Demo mode** gives you fictional, moving data on every endpoint now. Every payload is marked `"demo": true` with source `demo`. Real providers always win: a real claim replaces the demo, so `/v1/system` shows the partial real data even in demo mode.
+**Demo mode** gives you fictional, moving data on every endpoint now, except `/v1/audio/spectrum` (always real; see the table above). Every payload is marked `"demo": true` with source `demo`. Real providers always win: a real claim replaces the demo, so `/v1/system` shows the partial real data even in demo mode.
 
 The Stream Deck app does not pass custom environment variables to plugins, so run the plugin against the fake host instead. This writes `control.json` where your client looks for it:
 
@@ -594,6 +677,8 @@ setInterval(async () => {
 
 | Date | Version | Change |
 |---|---|---|
+| 2026-10-18 | v1 | Added `/v1/audio/spectrum` (§4.10): a 24-band loopback spectrum of the default output with peak, RMS and silence, demand-driven at ≈30 Hz. `/v1` lists it and `/v1/health` reports it. In-process readers create demand with `DataTopic.Demand()` (§6.1). Additive only. |
+| 2026-10-18 | v1 | `/v1/now-playing` follows the playing session (`source: "smtc"` with another `app` is normal); streamer-safe sends an empty `track.title`. Additive. |
 | 2026-10-16 | v1 | `/v1/system` gains `cpu.tempSource`, and `cpu.tempC` can now come from iCUE through the Cooling module. `/v1/health` gains `safeMode` and `macrosDryRun`. Additive only. |
 | 2026-10-16 | v1 | Added `/v1/cooling` (§4.9). `/v1/system` is now full (§7); documented that `perCorePct` is null unless a per-core view is visible, integrated GPUs appear in `gpus[]` with null power/fan, and network totals count hardware adapters only. Additive only. |
 | 2026-10-16 | v1 | First release: discovery file, bearer auth with Host/Origin rules, envelope, ETag/304, and the endpoints `/v1`, `/v1/health`, `/v1/system`, `/v1/now-playing` (+ `?art=dataUrl`), `/v1/now-playing/art`, `/v1/audio/levels`, `/v1/audio/devices`, `/v1/mic`. Demo mode. |

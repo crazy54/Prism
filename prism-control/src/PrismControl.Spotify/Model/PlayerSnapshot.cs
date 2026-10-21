@@ -33,9 +33,20 @@ public sealed record PlayerSnapshot
     public static readonly PlayerSnapshot Empty = new();
 
     public SnapshotSource Source { get; init; }
-    /// <summary>"Spotify", or the media app's name in "any app" mode.</summary>
+    /// <summary>"Spotify", or the shown media app's friendly name ("Chrome", "Edge"): text only, never a path.</summary>
     public string? AppName { get; init; }
     public bool IsSpotify { get; init; } = true;
+    /// <summary>The other app's Windows media session this snapshot shows (its commands go there). Null for Spotify.</summary>
+    public string? SessionKey { get; init; }
+    /// <summary>
+    /// Streamer-safe hid this other app's title, artist, album and art (a browser tab title can be private). The app
+    /// name, state and position stay.
+    /// </summary>
+    public bool Private { get; init; }
+    /// <summary>What the shown session accepts (Windows' control flags for other apps; always true for Spotify).</summary>
+    public bool CanPlayPause { get; init; } = true;
+    public bool CanSkipNext { get; init; } = true;
+    public bool CanSkipPrevious { get; init; } = true;
     public PlayState State { get; init; }
     /// <summary>"track", "episode", "ad" or "unknown" (null for SMTC).</summary>
     public string? ItemType { get; init; }
@@ -66,6 +77,8 @@ public sealed record PlayerSnapshot
     public ArtImage? Art { get; init; }
 
     public bool HasItem => !string.IsNullOrEmpty(Title);
+    /// <summary>Another app's session is shown (not Spotify).</summary>
+    public bool IsOtherApp => !IsSpotify && SessionKey is not null;
     public bool IsPlaying => State == PlayState.Playing;
     public string ArtistLine => string.Join(", ", Artists);
 
@@ -88,7 +101,7 @@ public sealed record PlayerSnapshot
 
     /// <summary>A stable identity of everything drawn except the moving position (used to skip identical publishes).</summary>
     public string Signature => string.Join('|', Source, AppName, State, Title, ArtistLine, Album, Uri, DurationMs, Shuffle, Repeat, Liked, VolumePct,
-        SupportsVolume, ContextUri, ContextName, DeviceId, DeviceRestricted, Art?.Hash, IsLocalFile, ItemType);
+        SupportsVolume, ContextUri, ContextName, DeviceId, DeviceRestricted, Art?.Hash, IsLocalFile, ItemType, SessionKey, Private);
 }
 
 public enum AuthState { SignedOut, Connecting, Connected, NeedsReconnect }

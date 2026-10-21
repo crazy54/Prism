@@ -46,8 +46,16 @@ public class ArtAndProbeTests
     {
         Assert.Equal("Spotify", SmtcSource.AppNameFor("Spotify.exe"));
         Assert.Equal("Spotify", SmtcSource.AppNameFor("SpotifyAB.SpotifyMusic_zpdnekdrzrea0!Spotify"));
-        Assert.Equal("ZuneMusic", SmtcSource.AppNameFor("Microsoft.ZuneMusic_8wekyb3d8bbwe!Microsoft.ZuneMusic"));
+        Assert.Equal("Media Player", SmtcSource.AppNameFor("Microsoft.ZuneMusic_8wekyb3d8bbwe!Microsoft.ZuneMusic"));
         Assert.Equal("Chrome", SmtcSource.AppNameFor("chrome.exe"));
+        Assert.Equal("Chrome", SmtcSource.AppNameFor("Chrome"));
+        Assert.Equal("Edge", SmtcSource.AppNameFor("MSEdge"));
+        Assert.Equal("Firefox", SmtcSource.AppNameFor("308046B0AF4A39CB"));
+        // Never a process path: a Win32 app registered by its exe path shows its name only.
+        Assert.Equal("VLC", SmtcSource.AppNameFor(@"C:\Program Files\VideoLAN\VLC\vlc.exe"));
+        Assert.Equal("Fooplayer", SmtcSource.AppNameFor(@"{6D809377-6AF0-444B-8957-A3773F02200E}\Example\fooplayer.exe"));
+        Assert.Equal("Player", SmtcSource.AppNameFor("Contoso.Player_1a2b3c4d5e6f7!App"));
+        Assert.Equal("Media", SmtcSource.AppNameFor(""));
     }
 
     /// <summary>
@@ -58,12 +66,14 @@ public class ArtAndProbeTests
     public async Task Probe_reads_the_spotify_media_session_read_only()
     {
         var log = new CaptureLog();
-        await using var smtc = new SmtcSource(log);
+        var guard = new ReadOnlySmtcGuard();   // every command method refuses and records: none may run
+        await using var smtc = new SmtcSource(log, connect: async ct => guard.Wrap(await WinRtSmtcManager.RequestAsync(ct)));
         var sw = Stopwatch.StartNew();
         await smtc.StartAsync(CancellationToken.None);
         var start = sw.ElapsedMilliseconds;
         await Task.Delay(300);
-        var s = smtc.Current ?? throw new SkipException("no Spotify media session on this PC right now");
+        Assert.Empty(guard.Attempts);
+        var s = smtc.Spotify ?? throw new SkipException("no Spotify media session on this PC right now");
         Assert.True(s.IsSpotify, s.AppId);
         var info = s.Thumbnail is { } t ? ImageInfo.Probe(t) : null;
         Console.WriteLine($"     session '{s.AppId}', state {s.State}, title {s.Title?.Length ?? 0} chars, duration {s.Duration?.TotalSeconds:0} s, " +

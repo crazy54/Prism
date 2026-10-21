@@ -64,11 +64,20 @@
       </div>
       <div class="prism-row prism-heading"><h2>Playback</h2></div>
       <div class="prism-row">
-        <label class="prism-label" for="anyApp">Other apps</label>
-        <div class="prism-check">
-          <input id="anyApp" type="checkbox" />
-          <label class="prism-note" for="anyApp">Show other media apps when Spotify isn't playing (Now Playing and transport)</label>
-        </div>
+        <label class="prism-label" for="follow">Now Playing shows</label>
+        <select id="follow">
+          <option value="spotifyFirst">Spotify first, then any app (YouTube in a browser, other players)</option>
+          <option value="spotifyOnly">Spotify only</option>
+          <option value="current">The app Windows shows (its media flyout)</option>
+        </select>
+      </div>
+      <div class="prism-row">
+        <span class="prism-label"></span>
+        <span class="prism-note">
+          Now Playing, Play/Pause, Next and Previous follow this choice. Like, Shuffle, Repeat, Spotify Volume and the
+          playlist browser always control Spotify. With streamer-safe on (or while OBS runs), other apps' titles are hidden.
+          <span id="showing"></span>
+        </span>
       </div>
 
       <div id="prism-form"></div>
@@ -93,7 +102,8 @@
           $('connect').textContent = state.connected ? 'Reconnect Spotify' : 'Connect Spotify';
           $('disconnect').disabled = !state.connected && !state.connecting;
           if (state.clientIdHint) $('clientId').placeholder = 'Saved: ' + state.clientIdHint + ' (paste a new one to change it)';
-          $('anyApp').checked = !!state.anyApp;
+          if (state.follow) $('follow').value = state.follow;
+          $('showing').textContent = state.showing ? 'Showing now: ' + state.showing + '.' : '';
           if (state.redirectUri) $('redirect').textContent = state.redirectUri;
         }
 
@@ -119,8 +129,8 @@
           }).catch(function (e) { say(e.message); });
         });
 
-        $('anyApp').addEventListener('change', function () {
-          PrismPI.request('spotify.anyApp', { value: $('anyApp').checked }).then(show).catch(function (e) { say(e.message); });
+        $('follow').addEventListener('change', function () {
+          PrismPI.request('spotify.follow', { value: $('follow').value }).then(show).catch(function (e) { say(e.message); });
         });
 
         $('dashboard').addEventListener('click', function () { PrismPI.send('spotify.dashboard', null); });

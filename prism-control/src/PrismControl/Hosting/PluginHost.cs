@@ -43,7 +43,7 @@ internal static class PluginHost
         var devices = new DeviceDirectory(args.Info.Devices);
         var scheduler = new UpdateScheduler(new SchedulerOptions());
         var reconnect = double.TryParse(Environment.GetEnvironmentVariable(ReconnectEnv), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var rs) ? rs : 10;
-        await using var connection = new StreamDeckConnection(args, log.For("ws"), new ConnectionOptions { ReconnectWindow = TimeSpan.FromSeconds(reconnect) });
+        await using var connection = new StreamDeckConnection(args, log.For("ws"), new ConnectionOptions { ReconnectWindow = TimeSpan.FromSeconds(reconnect), Time = time });
         log.RemoteSink = msg => connection.TrySend(Outbound.LogMessage("Prism Control: " + msg), isLog: true);
         var pump = new UpdatePump(scheduler, connection, time, log.For("pump"));
         var globals = new GlobalSettingsStore(s => connection.TrySend(Outbound.SetGlobalSettings(args.PluginUuid, s)), log.For("settings"));
@@ -107,7 +107,7 @@ internal static class PluginHost
         }
 
         // ---- connection wiring
-        connection.MessageReceived += text => OnMessage(text, actions, globals, devices, events, log);
+        connection.MessageReceived += (text, receivedAt) => OnMessage(text, receivedAt, actions, globals, devices, events, log);
         connection.Registered += () =>
         {
             connection.TrySend(Outbound.GetGlobalSettings(args.PluginUuid));
@@ -144,9 +144,9 @@ internal static class PluginHost
         return outcome == DisconnectReason.GaveUp ? 1 : 0;
     }
 
-    private static void OnMessage(string text, ActionHost actions, GlobalSettingsStore globals, DeviceDirectory devices, PluginEvents events, ILog log)
+    private static void OnMessage(string text, long receivedAt, ActionHost actions, GlobalSettingsStore globals, DeviceDirectory devices, PluginEvents events, ILog log)
     {
-        switch (InboundParser.Parse(text))
+        switch (InboundParser.Parse(text, receivedAt))
         {
             case ActionEvent e:
                 actions.Dispatch(e);

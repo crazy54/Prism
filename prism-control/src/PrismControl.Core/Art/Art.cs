@@ -20,7 +20,12 @@ namespace PrismControl.Core.Art;
 /// </summary>
 public static class Hues
 {
-    public static SpectrumColor For(RefractionPalette t, string domain) => Index(domain) is { } i ? t.Spectrum[i] : White(t);
+    /// <summary>
+    /// The domain's hue on <paramref name="t"/>; on an app palette from <see cref="Theming.AppTheming.For"/> it is the
+    /// app's accent instead (a Kaleidoscope deck showing that app), so module art follows the app with no extra parameter.
+    /// </summary>
+    public static SpectrumColor For(RefractionPalette t, string domain) =>
+        Theming.AppTheming.LookOf(t) is { } look ? Theming.AppTheming.Hue(look) : Index(domain) is { } i ? t.Spectrum[i] : White(t);
 
     /// <summary>The spectrum stop a domain owns, or null for white light.</summary>
     public static int? Index(string domain) => domain switch

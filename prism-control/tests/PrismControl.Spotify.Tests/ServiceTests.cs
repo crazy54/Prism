@@ -12,6 +12,10 @@ public class ServiceTests
 {
     private static int PlayerReads(Rig rig) => rig.Http.Count(HttpMethod.Get, "/v1/me/player");
 
+    /// <summary>Waits until the poll loop armed its 2 s wait on the manual clock.</summary>
+    private static Task WaitForPollTimer(Rig rig) => Fx.WaitUntil(
+        () => rig.Time.UntilNextTimer is { } d && d > TimeSpan.FromSeconds(1.5) && d <= TimeSpan.FromSeconds(2), "the poll loop armed its wait");
+
     [Test]
     public async Task Polls_only_while_a_spotify_action_is_visible()
     {
@@ -32,12 +36,16 @@ public class ServiceTests
         await using var rig = await Rig.StartAsync(configure: r => r.PlayerJson = () => Fx.Player(local: false));
         using var view = rig.Service.AttachView(SpotifyView.NowPlaying);
         await Fx.WaitUntil(() => PlayerReads(rig) == 1, "first read");
+        // The loop reads the clock, then arms its wait: advancing in between would push the wait out (a test race, not a
+        // product one), so let it arm first.
+        await WaitForPollTimer(rig);
         rig.Time.Advance(TimeSpan.FromSeconds(1.9));
         await rig.SettleAsync();
         Assert.Equal(1, PlayerReads(rig));
         rig.Time.Advance(TimeSpan.FromSeconds(0.2));
         await Fx.WaitUntil(() => PlayerReads(rig) == 2, "2 s remote cadence");
         rig.PlayerJson = () => Fx.Player(local: false, playing: false);
+        await WaitForPollTimer(rig);
         rig.Time.Advance(TimeSpan.FromSeconds(2));
         await Fx.WaitUntil(() => PlayerReads(rig) == 3, "read that sees the pause");
         var paused = rig.Service.NextPoll(rig.Time.GetUtcNow()).Delay!.Value.TotalSeconds;
@@ -141,12 +149,13 @@ public class ServiceTests
     public async Task Any_app_mode_controls_the_session_on_screen_when_spotify_is_idle()
     {
         await using var rig = await Rig.StartAsync(configure: r => r.PlayerJson = () => null);
-        rig.Service.FollowAnyApp = true;
+        rig.Service.Follow = Smtc.MediaFollow.Current;
+        Assert.Equal(Smtc.MediaFollow.Current, rig.Smtc.Follow, "the mode reaches the session source");
         rig.Smtc.Set(Fx.SmtcSpotify(title: "Example Podcast") with { AppId = "chrome.exe", IsSpotify = false, AppName = "Chrome" });
         await rig.Service.PollOnceAsync(RequestPriority.Poll);   // Spotify: nothing active
         Assert.Equal("Chrome", rig.Service.Current.AppName);
         Assert.True((await rig.Service.TogglePlayPauseAsync()).Ok);
-        Assert.Equal("toggle", Assert.Single(rig.Smtc.Commands));
+        Assert.Equal("toggle@chrome.exe", Assert.Single(rig.Smtc.Commands));
         Assert.False(rig.Http.Api.Any(r => r.Method != HttpMethod.Get), "the shown app is controlled, not Spotify");
     }
 

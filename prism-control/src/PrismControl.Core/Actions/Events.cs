@@ -7,6 +7,13 @@ namespace PrismControl.Core.Actions;
 public abstract record ActionEvent(string Context, string ActionUuid, string DeviceId)
 {
     public JsonObject? RawSettings { get; init; }
+
+    /// <summary>
+    /// When the frame arrived from the Stream Deck app, as the host clock's <see cref="TimeProvider.GetTimestamp"/>
+    /// (monotonic; 0 = unknown). Stamped in the receive loop, so time spent waiting in a busy mailbox counts and a wall-clock
+    /// step can't make a stale press look fresh. Age it with <c>Time.GetElapsedTime(e.ReceivedTimestamp)</c>.
+    /// </summary>
+    public long ReceivedTimestamp { get; init; }
 }
 
 public sealed record WillAppearEvent(string Context, string ActionUuid, string DeviceId, Controller Controller, Coordinates? Coordinates,

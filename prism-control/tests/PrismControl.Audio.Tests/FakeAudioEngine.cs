@@ -1,4 +1,5 @@
 using PrismControl.Audio;
+using PrismControl.Audio.Spectrum;
 
 namespace PrismControl.Audio.Tests;
 
@@ -6,8 +7,9 @@ namespace PrismControl.Audio.Tests;
 /// An in-memory <see cref="IAudioEngine"/>: every write is recorded and applied to the fake state (never to Windows),
 /// and tests simulate external changes (another app, a headset button) with <see cref="External"/> and friends.
 /// Change events are raised synchronously, like the real engine raises them on its worker.
+/// Loopback capture (the spectrum) comes from <see cref="Loopback"/>: synthetic signals, never real audio.
 /// </summary>
-public sealed class FakeAudioEngine : IAudioEngine
+public sealed class FakeAudioEngine : IAudioEngine, ILoopbackSource
 {
     public const string Speakers = "{0.0.0.00000000}.{example-out-speakers}";
     public const string MixerChat = "{0.0.0.00000000}.{example-out-mixer-chat}";
@@ -32,6 +34,12 @@ public sealed class FakeAudioEngine : IAudioEngine
     public int SessionWatchers { get; private set; }
     public int OpenMeters { get; private set; }
     public List<string> MeteredDevices { get; } = [];
+
+    /// <summary>What loopback capture "hears" per device (nothing until a test says so).</summary>
+    internal FakeLoopbackSource Loopback { get; } = new();
+
+    ILoopbackStream ILoopbackSource.OpenLoopback(string deviceId) => Loopback.OpenLoopback(deviceId);
+    IDisposable ILoopbackSource.StartFrames(TimeSpan interval, Action frame) => Loopback.StartFrames(interval, frame);
 
     /// <summary>Two outputs plus a headset and a fixed-volume output; two inputs. Defaults: speakers and the USB mic.</summary>
     public static FakeAudioEngine Standard()
@@ -103,6 +111,15 @@ public sealed class FakeAudioEngine : IAudioEngine
             foreach (var r in roles.Length == 0 ? Enum.GetValues<AudioRole>() : roles)
                 _defaults[(flow, r)] = id;
         Raise(new AudioChange(AudioChangeKind.Defaults, id, flow));
+    }
+
+    /// <summary>The flow has no default device (every role).</summary>
+    public void NoDefault(AudioFlow flow)
+    {
+        lock (_gate)
+            foreach (var r in Enum.GetValues<AudioRole>())
+                _defaults[(flow, r)] = null;
+        Raise(new AudioChange(AudioChangeKind.Defaults, null, flow));
     }
 
     public void ExternalAppVolume(string appKey, float volume, bool muted)

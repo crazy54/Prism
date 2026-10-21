@@ -2,6 +2,8 @@ using System.Text.Json.Nodes;
 using PrismControl.Core.Actions;
 using PrismControl.Core.Layouts;
 using PrismControl.Core.PropertyInspector;
+using PrismControl.Core.Render.Tokens;
+using PrismControl.Core.Theming;
 using PrismControl.Spotify.Render;
 
 namespace PrismControl.Spotify.Actions;
@@ -26,6 +28,10 @@ public sealed class SpotifyVolumeSettings
 public sealed class VolumeAction : DialAction<SpotifyVolumeSettings>, IDisposable
 {
     private SpotifyBinding? _b;
+    private IDisposable? _lookWatch;
+
+    /// <summary>The palette to draw with: Spotify's app look when a Kaleidoscope deck shows Spotify, else Prism (core.theme).</summary>
+    private RefractionPalette Look => AppTheming.For(Services, Device.Id, Theme)?.Palette ?? Theme;
     private Flash _flash;
     private EventHandler<string>? _onFailed;
 
@@ -35,6 +41,8 @@ public sealed class VolumeAction : DialAction<SpotifyVolumeSettings>, IDisposabl
     {
         _b?.Dispose();
         _b = SpotifyBinding.Attach(this, Services, GlobalSettings, SpotifyView.Volume, Render);
+        _lookWatch?.Dispose();
+        _lookWatch = AppTheming.Watch(Services, Device.Id, () => Post(Render));
         if (Svc is { } svc)
         {
             _onFailed = (_, message) => Post(() => { _flash.Set(Time, message, true, TimeSpan.FromSeconds(2.5)); Render(); });
@@ -115,7 +123,7 @@ public sealed class VolumeAction : DialAction<SpotifyVolumeSettings>, IDisposabl
     {
         if (!IsVisible) return;
         var svc = Svc;
-        var snap = svc?.Current ?? PlayerSnapshot.Empty;
+        var snap = svc?.SpotifyCurrent ?? PlayerSnapshot.Empty;   // Spotify's device volume, whatever app is shown
         var connected = svc?.IsConnected ?? false;
         var flash = _flash.Get(Time);
         var percent = connected ? snap.VolumePct : null;
@@ -123,12 +131,13 @@ public sealed class VolumeAction : DialAction<SpotifyVolumeSettings>, IDisposabl
         {
             var notice = flash ?? (!connected ? new FrameNotice(svc is null ? "Unavailable" : svc.Status.Auth == AuthState.NeedsReconnect ? "Reconnect in settings" : "Connect in settings", false)
                 : snap.DeviceId is null ? new FrameNotice("No active device", false) : null);
-            SetFeedback(new Feedback().Pixmap(Layouts.Canvas.Frame, SpotifyArt.VolumeDial(Theme, percent, connected ? snap.DeviceName : null, IsInteractive, notice)));
+            SetFeedback(new Feedback().Pixmap(Layouts.Canvas.Frame, SpotifyArt.VolumeDial(Look, percent, connected ? snap.DeviceName : null, IsInteractive, notice)));
         }
         else
         {
             var label = flash is { } f ? SpotifyText.KeyHint(f.Text) : !connected ? (svc?.Status.Auth == AuthState.NeedsReconnect ? "RECONNECT" : "SIGN IN") : null;
-            SetImage(label is not null ? SpotifyArt.VolumeKey(Theme, null, connected, label) : SpotifyArt.VolumeKey(Theme, percent, connected));
+            var caption = svc?.OtherAppShown == true ? "SPOTIFY" : "VOLUME";   // another app in front: say whose volume this is
+            SetImage(label is not null ? SpotifyArt.VolumeKey(Look, null, connected, label, caption) : SpotifyArt.VolumeKey(Look, percent, connected, caption: caption));
         }
     }
 
@@ -138,5 +147,7 @@ public sealed class VolumeAction : DialAction<SpotifyVolumeSettings>, IDisposabl
         _onFailed = null;
         _b?.Dispose();
         _b = null;
+        _lookWatch?.Dispose();
+        _lookWatch = null;
     }
 }

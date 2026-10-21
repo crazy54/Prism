@@ -2,6 +2,8 @@ using System.Text.Json.Nodes;
 using PrismControl.Core.Actions;
 using PrismControl.Core.Layouts;
 using PrismControl.Core.PropertyInspector;
+using PrismControl.Core.Render.Tokens;
+using PrismControl.Core.Theming;
 using PrismControl.Spotify.Render;
 
 namespace PrismControl.Spotify.Actions;
@@ -16,19 +18,25 @@ public sealed class NowPlayingSettings
 
 /// <summary>
 /// Now playing: album art and title on a key; art left with title, artist, progress and times on a dial / strip
-/// segment / Galleon widget. Works without login (Windows media session) and gets richer after Connect.
+/// segment / Galleon widget. Works without login (Windows media session) and gets richer after Connect. Follows the
+/// global <c>media.follow</c> policy: Spotify while it plays, otherwise another app (YouTube in a browser, any player)
+/// with that app's name as the dial caption and its artwork exactly as given; streamer-safe hides another app's title.
 /// Key: press = play/pause, hold = open the track in Spotify (the link back Spotify requires near art).
-/// Dial: turn = seek (or skip), push = play/pause; Stream Deck + touch = play/pause, long touch = open in Spotify.
+/// Dial: turn = seek (Spotify only) or skip, push = play/pause; Stream Deck + touch = play/pause, long touch = open in Spotify.
 /// </summary>
 [StreamDeckAction("com.jeremyfhall.prismcontrol.spotify.now-playing", Name = "Now Playing",
     Icon = "imgs/actions/spotify/now-playing/icon", KeyImage = "imgs/actions/spotify/now-playing/key", EncoderIcon = "imgs/actions/spotify/now-playing/dial",
     Controllers = Controllers.Keypad | Controllers.Encoder,
-    Tooltip = "Album art and the current track. Press to play or pause; hold to open it in Spotify.",
+    Tooltip = "Album art and the current track: Spotify, or another app such as YouTube in a browser. Press to play or pause; hold to open Spotify.",
     Layout = Layouts.Canvas.Path, PropertyInspector = SpotifyBinding.PiPage,
     TriggerRotate = "Seek", TriggerPush = "Play / Pause", TriggerTouch = "Play / Pause", TriggerLongTouch = "Open in Spotify")]
 public sealed class NowPlayingAction : DialAction<NowPlayingSettings>, IDisposable
 {
     private SpotifyBinding? _b;
+    private IDisposable? _lookWatch;
+
+    /// <summary>The palette to draw with: Spotify's app look when a Kaleidoscope deck shows Spotify, else Prism (core.theme).</summary>
+    private RefractionPalette Look => AppTheming.For(Services, Device.Id, Theme)?.Palette ?? Theme;
     private Flash _flash;
     private long _lastSkip;
 
@@ -36,6 +44,8 @@ public sealed class NowPlayingAction : DialAction<NowPlayingSettings>, IDisposab
     {
         _b?.Dispose();
         _b = SpotifyBinding.Attach(this, Services, GlobalSettings, SpotifyView.NowPlaying, Render);
+        _lookWatch?.Dispose();
+        _lookWatch = AppTheming.Watch(Services, Device.Id, () => Post(Render));
         LongPressThreshold = TimeSpan.FromMilliseconds(600);
         if (IsDial)
         {
@@ -98,7 +108,8 @@ public sealed class NowPlayingAction : DialAction<NowPlayingSettings>, IDisposab
             r = e.Ticks > 0 ? await svc.NextAsync() : await svc.PreviousAsync();
         }
         else r = svc.SeekBy(TimeSpan.FromSeconds(e.Ticks * Math.Clamp(Settings.SeekSeconds, 1, 60)));
-        if (!r.Ok && r.Message is { } m) _flash.Set(Time, m, true, TimeSpan.FromSeconds(2));
+        // Seeking another app's session is not offered: say so calmly (not as an error).
+        if (!r.Ok && r.Message is { } m) _flash.Set(Time, m, error: m != SpotifyText.SeekSpotifyOnly, TimeSpan.FromSeconds(2));
         Render();
     }
 
@@ -153,20 +164,20 @@ public sealed class NowPlayingAction : DialAction<NowPlayingSettings>, IDisposab
         {
             SetFeedback(new Feedback().Pixmap(Layouts.Canvas.Frame,
                 Svc is null
-                    ? SpotifyArt.MessageDial(Theme, "Spotify", "Spotify is unavailable", "See the plugin log", IsInteractive, warn: true)
-                    : SpotifyArt.NowPlayingDial(Theme, snap, now, IsInteractive, flash ?? StatusNotice())));
+                    ? SpotifyArt.MessageDial(Look, "Spotify", "Spotify is unavailable", "See the plugin log", IsInteractive, warn: true)
+                    : SpotifyArt.NowPlayingDial(Look, snap, now, IsInteractive, flash ?? StatusNotice())));
         }
         else
         {
             var hint = flash is { } f ? SpotifyText.KeyHint(f.Text) : null;
             if (!snap.HasItem) hint ??= Svc is null ? "UNAVAILABLE" : Svc.Status.Auth == AuthState.NeedsReconnect ? "RECONNECT" : null;
-            SetImage(SpotifyArt.NowPlayingKey(Theme, snap, now, hint));
+            SetImage(SpotifyArt.NowPlayingKey(Look, snap, now, hint));
         }
     }
 
     private FrameNotice? StatusNotice()
     {
-        if (Svc is not { } svc) return null;
+        if (Svc is not { } svc || svc.OtherAppShown) return null;   // Spotify's sign-in and limits don't concern another app
         var s = svc.Status;
         var now = svc.Time.GetUtcNow();
         if (s.Notice is { } n && s.NoticeUntil is { } u && u > now) return new FrameNotice(n, n != "Starting Spotify…");
@@ -179,5 +190,7 @@ public sealed class NowPlayingAction : DialAction<NowPlayingSettings>, IDisposab
     {
         _b?.Dispose();
         _b = null;
+        _lookWatch?.Dispose();
+        _lookWatch = null;
     }
 }
