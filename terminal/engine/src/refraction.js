@@ -1,4 +1,4 @@
-import { __m as __bm } from '../web.bundle.js';
+import { __m as __bm } from '../web.bundle.js?v=b7d3401196';
 // Refraction — Prism's design language, translated to terminal cells.
 //
 // "White light in, every color out." The terminal chrome (catalog browser,

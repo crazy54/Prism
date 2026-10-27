@@ -9,17 +9,17 @@
 //   transformImage(img, xf)              → img                    none | rot180 | mirrorX | ccw90 (| mirrorY | cw90)
 //   decodePNG / decodeGIF / decodeJPEG / decodeBMP, diffImages, flattenImage
 
-export { rasterize, parseSvg, RasterError, SUBSET_ELEMENTS, SUBSET_ATTRIBUTES } from './rasterize.js';
-export { encodePNG, decodePNG, crc32 } from './png.js';
-export { encodeGIF, decodeGIF } from './gif.js';
-export { encodeJPEG, decodeJPEG } from './jpeg.js';
-export { encodeBMP, decodeBMP, BMP_PRESETS } from './bmp.js';
-export { transformImage, flattenImage, diffImages, diffImage, TRANSFORMS } from './image.js';
-export { buildPalette } from './quantize.js';
+export { rasterize, parseSvg, RasterError, SUBSET_ELEMENTS, SUBSET_ATTRIBUTES } from './rasterize.js?v=b7d3401196';
+export { encodePNG, decodePNG, crc32 } from './png.js?v=b7d3401196';
+export { encodeGIF, decodeGIF } from './gif.js?v=b7d3401196';
+export { encodeJPEG, decodeJPEG } from './jpeg.js?v=b7d3401196';
+export { encodeBMP, decodeBMP, BMP_PRESETS } from './bmp.js?v=b7d3401196';
+export { transformImage, flattenImage, diffImages, diffImage, TRANSFORMS } from './image.js?v=b7d3401196';
+export { buildPalette } from './quantize.js?v=b7d3401196';
 
-import { encodeJPEG } from './jpeg.js';
-import { encodeBMP } from './bmp.js';
-import { transformImage } from './image.js';
+import { encodeJPEG } from './jpeg.js?v=b7d3401196';
+import { encodeBMP } from './bmp.js?v=b7d3401196';
+import { transformImage } from './image.js?v=b7d3401196';
 
 /**
  * Encode a rendered key / strip / screen image the way a hidraw model expects it.

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // An inference throughput panel: concurrent streams with progress and
 // per-stream rates, an aggregate tok/s sparkline, TTFT, cache hits and cost.
 const { ATTR, glyphs, uni, phase, fit, hbar, panel, mix } = __bm(23);

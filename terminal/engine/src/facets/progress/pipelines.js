@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Steps & pipelines — multi-part work as the real tools print it.
 //
 // Every number agrees with every other: bytes done never exceed totals, counts
@@ -7,8 +7,8 @@ import { __m as __bm } from '../../../web.bundle.js';
 const { ATTR } = __bm(6);
 const { rgb } = __bm(0);
 const { stringWidth, truncate } = __bm(5);
-import { phase, transfer, glyphs, bytes, clock, commas, clamp01 } from './_sim.js';
-import { segs, visible } from './_log.js';
+import { phase, transfer, glyphs, bytes, clock, commas, clamp01 } from './_sim.js?v=b7d3401196';
+import { segs, visible } from './_log.js?v=b7d3401196';
 
 const C = 'Steps & Pipelines';
 const pct = (f) => `${String(Math.floor(clamp01(f) * 100)).padStart(3)}%`;

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Old-school fire: each pixel averages the heat beneath it (drifting with a
 // gusting wind) minus a scrolling cooling map, which tears the rising heat into
 // tongues of flame; a flickering fuel bed feeds it and embers spiral off the top.

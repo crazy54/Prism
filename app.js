@@ -10,6 +10,11 @@
   let paused = reducedMotion.matches;
   let showcasePromise;
   const engines = { term: null, deck: null };
+  // cache-safe URLs (website/build.mjs): the built page's <meta name="prism-build"> — the site id for runtime fetches, the
+  // engine id for engine URLs (the engines' own imports carry it); absent in the repository
+  const BUILD_META = document.querySelector('meta[name="prism-build"]');
+  const BUILD_V = BUILD_META?.content || '', ENGINE_V = BUILD_META?.dataset.engine || '';
+  const engineV = (u) => (ENGINE_V ? `${u}?v=${ENGINE_V}` : u);
 
   // ── live previews take the page's own theme tokens ───────────────────────
   // Facets read the theme contract (--bg, --ink, --accent …). The previews were generated with the
@@ -69,7 +74,7 @@
 
   // ── copy + replay ────────────────────────────────────────────────────────
   function loadShowcase() {
-    showcasePromise ||= fetch('assets/showcase.json').then((r) => { if (!r.ok) throw new Error('snippets'); return r.json(); }).catch((err) => { showcasePromise = null; throw err; });
+    showcasePromise ||= fetch(BUILD_V ? `assets/showcase.json?v=${BUILD_V}` : 'assets/showcase.json').then((r) => { if (!r.ok) throw new Error('snippets'); return r.json(); }).catch((err) => { showcasePromise = null; throw err; });
     return showcasePromise;
   }
   // F1 (Copy that works): the same shape as every Copy in the library — a "Prism · name" comment, one <style>
@@ -197,9 +202,9 @@
     try {
       const base = new URL(termEngine, location.href);
       const [web, palettes, mod] = await Promise.all([
-        import(new URL('src/web/index.js', base).href),
-        import(new URL('src/palettes.js', base).href),
-        import(new URL('src/facets/objects/prism-logo.js', base).href),
+        import(engineV(new URL('src/web/index.js', base).href)),
+        import(engineV(new URL('src/palettes.js', base).href)),
+        import(engineV(new URL('src/facets/objects/prism-logo.js', base).href)),
       ]);
       const ids = new Set(palettes.listThemes().map((t) => t.id));
       const theme = () => (ids.has(termTheme()) ? termTheme() : undefined);
@@ -239,7 +244,7 @@
     // mounted; CSS sizes the mount to fit the stage, and fit:true keeps the device at that width.
     const mount = byId('deck-preview'), stage = mount.parentElement, poster = mount.innerHTML;
     try {
-      const { loadDeck } = await import('./assets/deck/adapter.js');
+      const { loadDeck } = await import('./assets/deck/adapter.js?v=45f8efd71d');
       // only the facet this preview plays: the built site's deck/engine/core.bundle.js carries it (no facets bundle here)
       const deck = await loadDeck({ engine: deckEngine, catalog: { facets: [], galleries: [], devices: [] }, only: ['src/facets/themes/prism.js'] });
       engines.deck = deck;
@@ -256,6 +261,18 @@
       stage.insertAdjacentHTML('beforeend', '<p class="sc-deck-note">Live preview unavailable · <a href="deck/">open the Stream Deck page</a></p>');
     }
   }
+
+  // ── blog announcement: dismissed for this post only ─────────────────────
+  // Stores the post slug in localStorage 'prism-site-blog-dismissed'; the <head> snippet reads it before first paint,
+  // so a dismissed strip never flashes, and a new post (a new data-blog-slug) shows again.
+  const blogBanner = document.querySelector('.blog-banner[data-blog-slug]');
+  blogBanner?.querySelector('[data-blog-dismiss]')?.addEventListener('click', () => {
+    try { localStorage.setItem('prism-site-blog-dismissed', blogBanner.dataset.blogSlug); } catch { /* storage is optional: hidden for this visit */ }
+    root.classList.add('blog-dismissed');
+    // focus would fall back to <body>: hand it to the hero heading instead
+    const next = byId('hero-title');
+    if (next) { next.setAttribute('tabindex', '-1'); next.focus({ preventScroll: true }); next.addEventListener('blur', () => next.removeAttribute('tabindex'), { once: true }); }
+  });
 
   site?.onMode(() => { readTokens(); refreshFrames(); });
   setMotion(paused);

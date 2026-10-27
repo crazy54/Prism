@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../core.bundle.js';
+import { __m as __bm } from '../../core.bundle.js?v=b7d3401196';
 // Dial / screen canvases. Every Prism encoder draws into one full-canvas pixmap
 // ("canvas") of a custom layout, so a facet's art reaches the touch strip, the
 // Galleon screen and the Neo info bar exactly as rendered (formats.md §3.3).

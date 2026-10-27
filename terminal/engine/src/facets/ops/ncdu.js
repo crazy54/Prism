@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // ncdu — the reverse-video title, a sorted directory listing with [#####] bars, a moving selection, and totals.
 const { C, ATTR, writer, pad, lpad, fixed } = __bm(27);
 

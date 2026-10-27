@@ -13,7 +13,7 @@
 //   window   1024    8       1016     [02 0B 00 last len16 page16]          Neo info bar, whole window
 //   region   1024    16      1008     [02 0C x16 y16 w16 h16 last page16 len16 00]   logical coords
 
-import { OUTPUT_COMMANDS } from './models.js';
+import { OUTPUT_COMMANDS } from './models.js?v=b7d3401196';
 
 export const REPORT = Object.freeze({
   orig: { total: 8191, header: 16 },

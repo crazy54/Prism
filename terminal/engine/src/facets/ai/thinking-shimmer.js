@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A working indicator: a breathing glyph, a status verb with a shimmer band
 // sweeping across it, elapsed time and token count, finished steps above.
 const { ATTR, glyphs, phase, fit, mix, thinkGlyph, shimmer, stringWidth } = __bm(23);

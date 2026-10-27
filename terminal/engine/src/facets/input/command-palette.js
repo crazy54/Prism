@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A ctrl+shift+p style command palette over the app: the query filters
 // commands live, the cursor moves, Enter runs one and a status line reports it.
 const { ATTR, glyphs, uni, phase, typed, blink, tint, mix, fit, spin, stringWidth, backdrop, panel, fuzzyMatch } = __bm(25);

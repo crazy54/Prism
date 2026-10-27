@@ -1,10 +1,10 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Glitch & Distort — pixel-level abuse of big type: tearing RGB splits, a
 // worn VHS tape with tracking noise, and letters that melt and drip.
 const { NONE, mix, mixOklab } = __bm(0);
-import { bannerCanvas } from '../../text/banner.js';
-import { glitch as glitchSmall } from '../../text/effects.js';
-import { bannerMode, fitScale, fitType, hash, canvasLike } from './_text.js';
+import { bannerCanvas } from '../../text/banner.js?v=b7d3401196';
+import { glitch as glitchSmall } from '../../text/effects.js?v=b7d3401196';
+import { bannerMode, fitScale, fitType, hash, canvasLike } from './_text.js?v=b7d3401196';
 
 const shared = { gallery: 'text', category: 'Glitch & Distort', kind: 'text', glyphs: 'unicode', color: 'truecolor', animated: true };
 const asciiOnly = (ctx) => ctx.caps.unicode === false || ctx.mode === 'ascii';

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../web.bundle.js';
+import { __m as __bm } from '../web.bundle.js?v=b7d3401196';
 // Spinner collection. Each entry is { frames, interval (ms) } and optionally
 // { palette } — a gradient that sweeps across the frame's characters over time
 // on color terminals (the glyphs still animate on their own in mono).

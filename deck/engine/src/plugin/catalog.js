@@ -1,14 +1,14 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=b7d3401196';
 // The property inspector's catalog: facet metadata (params, states, surfaces),
 // galleries (with their λ labels), themes and glyphs, from the engine bundled
 // with the plugin. Written to ui/catalog.js at build time as a classic script
 // (window.PRISM_CATALOG), so the PI works offline with no module loading.
 
-const { allFacets } = __bm(318);
+const { allFacets } = __bm(659);
 const { GALLERIES } = __bm(2);
-const { allThemes, useTheme } = __bm(97);
-const { allGlyphs } = __bm(78);
-import { API_VERSION } from '../../index.js';
+const { allThemes, useTheme } = __bm(260);
+const { allGlyphs } = __bm(241);
+import { API_VERSION } from '../../index.js?v=b7d3401196';
 
 export function piCatalog() {
   const prism = useTheme('prism', 'dark');

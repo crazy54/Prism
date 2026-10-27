@@ -8,7 +8,7 @@
 //   encodeBMP(img, 'original' | 'mini')         the same, by model preset
 //   encodeBMP(img, 'none', { rowOrder: 'bottom-up' })   a standard BMP any viewer shows upright
 
-import { transformImage, flattenImage, TRANSFORMS } from './image.js';
+import { transformImage, flattenImage, TRANSFORMS } from './image.js?v=b7d3401196';
 
 export const BMP_PRESETS = {
   original: { xf: 'mirrorX', ppm: 3780 },

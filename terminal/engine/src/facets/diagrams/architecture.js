@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A service architecture: clients → load balancer → three app servers →
 // postgres / replica / redis, with request packets flowing along the edges.
 // Mid-loop app-2 fails its health checks and traffic shifts to its peers.
 const { ATTR, glyphs, uni, phase, fit } = __bm(22);
-import { LineGrid, nodeBox, box, polyline, along } from './_lines.js';
+import { LineGrid, nodeBox, box, polyline, along } from './_lines.js?v=b7d3401196';
 
 const DOWN = [3.4, 5.8];
 const PACKETS = 14;

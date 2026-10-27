@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // BBS-era helpers: an ANSI-art encoder and block-letter logos.
 //
 // ansify() turns a 1×2-pixel-per-cell image into what an ANSI artist would

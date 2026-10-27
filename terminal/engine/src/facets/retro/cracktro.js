@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A complete cracktro screen: chrome group logo with a shine sweep, raster bars
 // pumping in the middle, a greetings sine scroller along the bottom, and a
 // parallax starfield behind it all. Everything a 1989 floppy needed.

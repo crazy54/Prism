@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // BBS main menu: a shaded header, two columns of hotkey commands with a
 // lightbar walking through them, a who's-online panel and the classic
 // time-left status line.
 const { bbsPalette } = __bm(29);
-import { frame } from './_bbs.js';
+import { frame } from './_bbs.js?v=b7d3401196';
 
 const ITEMS = [
   ['M', 'Message Bases'], ['F', 'File Areas'], ['D', 'Door Games'], ['C', 'Chat with SysOp'],

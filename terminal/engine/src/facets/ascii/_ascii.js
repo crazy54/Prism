@@ -2,7 +2,7 @@
 // 7-bit ASCII only (0x20–0x7e), so facets built on it run on a VT100, a serial
 // console, TERM=linux or LANG=C without a single byte of mojibake.
 
-import { layoutText } from '../../text/banner.js';
+import { layoutText } from '../../text/banner.js?v=b7d3401196';
 
 export const RAMP = ' .:-=+*#%@';
 export const RAMP_DONUT = '.,-~:;=!*#$@';

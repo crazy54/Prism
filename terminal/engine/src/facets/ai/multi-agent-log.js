@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A multi-agent message log: agents post findings and hand work to each
 // other, color-tagged, with handoffs marked and the newest line flashing.
 const { ATTR, glyphs, uni, phase, fit, tint, stringWidth } = __bm(23);

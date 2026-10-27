@@ -1,4 +1,4 @@
-import { __m as __bm } from '../web.bundle.js';
+import { __m as __bm } from '../web.bundle.js?v=b7d3401196';
 // Inline CLI helpers — spinners, progress, task lists, "AI is thinking", and a
 // token-stream typewriter — that animate in place in normal scrollback and
 // leave clean final lines behind (ora / listr territory, zero dependencies).
@@ -9,15 +9,15 @@ import { __m as __bm } from '../web.bundle.js';
 // typewrite() writes content and defaults to stdout.
 
 import { performance } from 'node:perf_hooks';
-import { Screen } from './screen.js';
-import { detect } from './caps.js';
+import { Screen } from './screen.js?v=b7d3401196';
+import { detect } from './caps.js?v=b7d3401196';
 const { getTheme, palette: makePalette } = __bm(3);
 const { fgParam, mix } = __bm(0);
 const { ATTR } = __bm(6);
 const { stringWidth, truncate } = __bm(5);
 const { reset } = __bm(4);
-import { drawSpinner, getSpinner } from './spinners.js';
-import { progressBar } from './widgets/bars.js';
+import { drawSpinner, getSpinner } from './spinners.js?v=b7d3401196';
+import { progressBar } from './widgets/bars.js?v=b7d3401196';
 const { col, fmt, fmtDuration } = __bm(20);
 
 const SYMBOLS = {

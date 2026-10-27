@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Heatmaps & Matrices: a scrolling latency heatmap, a contributions calendar
 // and a live correlation matrix.
 const { mix, gradient } = __bm(0);

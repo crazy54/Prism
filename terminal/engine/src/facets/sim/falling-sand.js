@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A falling-sand automaton like the old sand-art toys: three spouts sweep back
 // and forth pouring grains whose hue drifts slowly, so the pile builds up in
 // colored strata over sloped ledges. Grains fall, then slide diagonally when

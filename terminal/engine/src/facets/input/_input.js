@@ -1,4 +1,4 @@
 // Bundled into web.bundle.js by website/build.mjs (the module itself is in the repository).
-import { __m } from '../../../web.bundle.js';
+import { __m } from '../../../web.bundle.js?v=b7d3401196';
 const __n = __m(25);
 export const ATTR = __n.ATTR, NONE = __n.NONE, backdrop = __n.backdrop, blink = __n.blink, bstyle = __n.bstyle, button = __n.button, center = __n.center, clearRect = __n.clearRect, clip = __n.clip, codeLine = __n.codeLine, ease = __n.ease, ell = __n.ell, fit = __n.fit, fuzzyMatch = __n.fuzzyMatch, glyphs = __n.glyphs, hbar = __n.hbar, listAnswer = __n.listAnswer, mix = __n.mix, modal = __n.modal, panel = __n.panel, phase = __n.phase, promptLine = __n.promptLine, scrollbar = __n.scrollbar, span = __n.span, spin = __n.spin, stepAt = __n.stepAt, stringWidth = __n.stringWidth, tint = __n.tint, truncate = __n.truncate, typed = __n.typed, uni = __n.uni;

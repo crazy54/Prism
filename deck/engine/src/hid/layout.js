@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=b7d3401196';
 // Layouts — which facet drives which part of a physical deck.
 //
 //   {
@@ -15,9 +15,9 @@ import { __m as __bm } from '../../facets.bundle.js';
 // Precedence: deck → spans → keys; strip | dials; screen | widgets. Conflicts are errors.
 // resolveLayout(model, spec) → { slots, keyOwner, segOwner, widgetOwner, infobarOwner, problems }
 
-const { findFacet, allFacets } = __bm(318);
+const { findFacet, allFacets } = __bm(659);
 const { getDevice } = __bm(0);
-const { SCREEN_TARGETS } = __bm(98);
+const { SCREEN_TARGETS } = __bm(261);
 
 // API 1.4: Galleon widget art is a 2:1 window (360×180) centred in its 360×192 quadrant (6 px gutters);
 // the region write stays 360×192, the gutters are filled with the theme background.

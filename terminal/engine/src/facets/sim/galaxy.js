@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A rotating barred-free spiral galaxy built on the density-wave trick: each
 // star orbits on an ellipse whose tilt grows with radius, and inner orbits run
 // faster (differential rotation). Where neighboring ellipses crowd together

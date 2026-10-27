@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A phosphor oscilloscope on the chiptune: graticule, a trace triggered on the
 // bass so it stands still, and persistence — the last few sweeps fading out
 // behind the beam. `--set mode=xy` plots bass against lead as Lissajous figures.
 const { lerpc } = __bm(29);
-import { songAt } from './_music.js';
+import { songAt } from './_music.js?v=b7d3401196';
 
 const PHOSPHOR = { green: 0x40ff80, amber: 0xffb020, blue: 0x60c8ff };
 

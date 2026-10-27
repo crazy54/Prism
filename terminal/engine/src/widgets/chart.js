@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../web.bundle.js';
+import { __m as __bm } from '../../web.bundle.js?v=b7d3401196';
 // Line charts (braille, 2×4 dots per cell) and half-block heatmaps.
 
 const { NONE, mix } = __bm(0);

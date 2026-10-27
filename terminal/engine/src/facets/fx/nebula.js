@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Deep field: a domain-warped emission nebula with dark dust lanes, painted
 // once into a texture larger than the screen, then slowly turned and breathed
 // through. Twinkling stars in front, a few bright ones with diffraction spikes.

@@ -1,0 +1,4 @@
+// Bundled into facets.bundle.js by website/build.mjs (the module itself is in the repository).
+import { __m } from '../../../facets.bundle.js?v=b7d3401196';
+const __n = __m(635);
+export const DOTA2_APPID = __n.DOTA2_APPID, DOTA2_CFG_DATA = __n.DOTA2_CFG_DATA, DOTA2_CFG_DIR = __n.DOTA2_CFG_DIR, DOTA2_CFG_NAME = __n.DOTA2_CFG_NAME, DOTA2_CFG_TITLE = __n.DOTA2_CFG_TITLE, DOTA2_INSTALL_DIR = __n.DOTA2_INSTALL_DIR, DOTA2_LAUNCH_OPTION = __n.DOTA2_LAUNCH_OPTION, MOBA_EVENT_TYPES = __n.MOBA_EVENT_TYPES, MOBA_URGENT = __n.MOBA_URGENT, MULTI_KILL_WINDOW_S = __n.MULTI_KILL_WINDOW_S, MULTI_LABELS = __n.MULTI_LABELS, OBJECTIVES = __n.OBJECTIVES, SPECTATOR_BLOCKS = __n.SPECTATOR_BLOCKS, STREAK_LABELS = __n.STREAK_LABELS, dota2Cfg = __n.dota2Cfg, dota2CfgState = __n.dota2CfgState, findDota2 = __n.findDota2, heroTitle = __n.heroTitle, isPrismDota2Cfg = __n.isPrismDota2Cfg, normalizeDota2 = __n.normalizeDota2, sanitizeDota2 = __n.sanitizeDota2, streakLabel = __n.streakLabel;

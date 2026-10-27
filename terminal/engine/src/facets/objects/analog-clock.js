@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A wall clock in braille: a double bezel, minute and hour ticks, numerals,
 // tapered baton hands that pass over the numerals, a sweeping second hand with
 // a counterweight, and a date window. Time starts at 10:08:36 — the

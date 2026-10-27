@@ -1,7 +1,7 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A block quote that types itself out, then hands over to the next.
 const { uni, ATTR, phase, typed, blink, mix } = __bm(22);
-import { wrapText } from './_admon.js';
+import { wrapText } from './_admon.js?v=b7d3401196';
 
 const QUOTES = [
   ['Simplicity is prerequisite for reliability.', 'Edsger W. Dijkstra'],

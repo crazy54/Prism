@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Containers & clusters: docker pull, docker stats, kubectl get pods -w, rollout status, and a k9s-style console.
 const { G, C, ATTR, writer, walk, hash, typed, bashPrompt, pad, lpad, fixed, uni } = __bm(27);
 

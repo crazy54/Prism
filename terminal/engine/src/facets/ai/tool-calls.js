@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // An agent's tool calls stacking up, coding-agent style: each call shows a
 // spinner while it runs, then collapses to a one-line result under a ⎿ elbow.
 const { ATTR, glyphs, uni, phase, fit, spin, stringWidth } = __bm(23);

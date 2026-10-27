@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../core.bundle.js';
+import { __m as __bm } from '../../core.bundle.js?v=b7d3401196';
 // HID model table — USB vendor/product id → wire protocol for every deck Prism
 // Deck can drive directly over Linux hidraw.
 //

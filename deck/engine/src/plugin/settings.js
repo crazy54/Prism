@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=b7d3401196';
 // Settings for the Prism Display action (manifest UUID com.jeremyfhall.prism.facet; per instance, stored by the app and
 // exported with profiles) and the plugin (global settings). Everything coming
 // from the app, the property inspector, a profile or the live channel is
@@ -17,15 +17,18 @@ import { __m as __bm } from '../../facets.bundle.js';
 //             { kind: 'url', url: 'https://…' }        open a web page (http/https only) — openUrl
 //             { kind: 'profile', page? }               switch this device to its Prism sample profile (page 1-based) — switchToProfile
 //             { kind: 'back' }                         switch back to the previous profile — switchToProfile
+//             { kind: 'profile', profile: 'cs2' }       switch to this device's Game Link CS2 profile (GAME_PROFILES) — Game Link (prism-play)
 //             Set only from the property inspector (the user); the AI live channel never writes it.
 // Global settings:
 //   { theme, mode, motion, limits: { updatesPerSec (≤ MAX_UPDATES_PER_SEC), perKeyPerSec, … }, aiEditing,
 //     format: 'svg' | 'png' (png = rasterized by src/raster, a fallback if a device mis-renders SVG),
 //     boot (false by default: the power-on sequence plays only when switched on),
-//     calendarFile (a local .ics file the calendar facets read; '' = demo calendar) }
+//     calendarFile (a local .ics file the calendar facets read; '' = demo calendar),
+//     gamelink: { enabled, port } (Game Link, prism-play: the CS2 / companion listener binds only while enabled — set by
+//               "Connect CS2" in the PI; port null = 38140 with fallbacks. Tokens never live here: gamelink.json) }
 
-const { findFacet, allFacets } = __bm(318);
-import { normalizeLimits } from './budget.js';
+const { findFacet, allFacets } = __bm(659);
+import { normalizeLimits } from './budget.js?v=b7d3401196';
 
 export const ACTION_FACET = 'facet';
 export const ACTION_INFOBAR = 'infobar';
@@ -35,7 +38,7 @@ export const MODES = ['dark', 'light'];
 export const GAME_SNAPSHOT_MAX = 4096 + 1024; // GAME_STATE_MAX of state + the snapshot envelope
 
 export const FORMATS = ['svg', 'png'];
-export const DEFAULT_GLOBALS = Object.freeze({ theme: 'prism', mode: 'dark', motion: 'full', limits: {}, aiEditing: false, format: 'svg', boot: false, calendarFile: '' });
+export const DEFAULT_GLOBALS = Object.freeze({ theme: 'prism', mode: 'dark', motion: 'full', limits: {}, aiEditing: false, format: 'svg', boot: false, calendarFile: '', gamelink: Object.freeze({ enabled: false, port: null }) });
 /** The update budget's ceiling: the hardware lab saw the app queue (and its watchdog kill the plugin) above ~230–300 updates/s. */
 export const MAX_UPDATES_PER_SEC = 250;
 export const MIN_UPDATES_PER_SEC = 60;
@@ -64,6 +67,7 @@ export function safeUrl(v) {
 export function normalizePress(p) {
   if (!p || typeof p !== 'object' || Array.isArray(p)) return null;
   if (p.kind === 'url') { const url = safeUrl(p.url); return url ? { kind: 'url', url } : null; }
+  if (p.kind === 'profile' && GAME_PROFILES[p.profile]) return { kind: 'profile', profile: p.profile };   // Game Link (prism-play): a game profile (no pages)
   if (p.kind === 'profile') { const page = Math.trunc(Number(p.page)); return page >= 1 && page <= 99 ? { kind: 'profile', page } : { kind: 'profile' }; }
   if (p.kind === 'back') return { kind: 'back' };
   return null;
@@ -75,6 +79,12 @@ export function normalizePress(p) {
  */
 export const BUNDLED_PROFILES = Object.freeze({ 12: 'profiles/prism-galleon', 7: 'profiles/prism-plus', 0: 'profiles/prism-mk2', 2: 'profiles/prism-xl', 1: 'profiles/prism-mini', 9: 'profiles/prism-neo', 13: 'profiles/prism-plusxl' });
 export const bundledProfileFor = (deviceType) => BUNDLED_PROFILES[deviceType] || null;
+
+// ── Game Link (prism-play) ──
+/** The bundled game profiles (manifest Profiles[].Name) per game, by DeviceType: "Prism · CS2 — <device>" (src/export/profile.js gameProfiles). */
+export const GAME_PROFILES = Object.freeze({ cs2: Object.freeze({ 12: 'profiles/prism-cs2-galleon', 7: 'profiles/prism-cs2-plus', 0: 'profiles/prism-cs2-mk2', 2: 'profiles/prism-cs2-xl', 1: 'profiles/prism-cs2-mini', 9: 'profiles/prism-cs2-neo', 13: 'profiles/prism-cs2-plusxl' }) });
+export const gameProfileFor = (deviceType, game) => GAME_PROFILES[game]?.[deviceType] || null;
+// ── /Game Link (prism-play) ──
 
 /** Normalize global settings. */
 export function normalizeGlobals(raw = {}) {
@@ -90,7 +100,19 @@ export function normalizeGlobals(raw = {}) {
     format: FORMATS.includes(r.format) ? r.format : 'svg',
     boot: r.boot === true,    // off by default; when on, span-power-on plays once at plugin start on physical decks
     calendarFile: normalizeIcsPath(r.calendarFile),
+    gamelink: normalizeGameLinkGlobals(r.gamelink),   // Game Link (prism-play)
   };
+}
+
+// ── Game Link (prism-play) ──
+/**
+ * The Game Link globals: { enabled: boolean (off by default), port: 1024–65535 | null (null = 38140 with fallbacks),
+ * lol, rl: the League of Legends / Rocket League pollers (off by default; they run only while enabled) }.
+ */
+export function normalizeGameLinkGlobals(g) {
+  const o = g && typeof g === 'object' && !Array.isArray(g) ? g : {};
+  const port = Number(o.port);
+  return { enabled: o.enabled === true, port: Number.isInteger(port) && port >= 1024 && port <= 65535 ? port : null, lol: o.lol === true, rl: o.rl === true };
 }
 
 /**

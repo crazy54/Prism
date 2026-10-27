@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Section header styles that type themselves in: numbered, underlined, boxed,
 // inverse bar and markdown-setext.
 const { ATTR, uni, phase, typed, blink, mix, fit } = __bm(22);

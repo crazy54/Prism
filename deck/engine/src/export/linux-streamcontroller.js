@@ -21,8 +21,8 @@
 //   streamControllerPaths({ home, flatpak }) → where the app keeps its data
 
 import crypto from 'node:crypto';
-import { writeZip } from './plugin-zip.js';
-import { normalizeSetup, renderPage, safeName } from './linux.js';
+import { writeZip } from './plugin-zip.js?v=b7d3401196';
+import { normalizeSetup, renderPage, safeName } from './linux.js?v=b7d3401196';
 
 export const SC_FORMAT_PAGE = 'streamcontroller-page';
 export const SC_FORMAT_PAGES = 'streamcontroller-pages';

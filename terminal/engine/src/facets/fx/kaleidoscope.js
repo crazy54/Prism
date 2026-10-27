@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A kaleidoscope: a slowly flowing field of interleaved waves and noise, folded
 // through mirrored wedges around the center and turning — the classic tube,
 // with a soft vignette like the eyepiece.

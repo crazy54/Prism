@@ -34,9 +34,13 @@ async function onlyRegistry(at, paths) {
   return { findFacet: (id) => byId.get(id) || null };
 }
 
+// Cache-safe engine URLs (website/build.mjs): the built page's <meta name="prism-build" data-engine> versions every engine
+// URL the way the engine's own imports are versioned (nothing in the repository: the meta is absent there).
+const ENGINE_V = typeof document !== 'undefined' ? document.querySelector('meta[name="prism-build"]')?.dataset.engine || '' : '';
+const engineV = (u) => (ENGINE_V ? `${u}${u.includes('?') ? '&' : '?'}v=${ENGINE_V}` : u);
 async function realDeck(engine, catalog, only) {
   const base = new URL(engine, location.href);
-  const at = (rel) => new URL(rel, base).href;
+  const at = (rel) => engineV(new URL(rel, base).href);
   const [web, registry, cat, core] = await Promise.all([
     import(at('src/web/index.js')),
     only ? onlyRegistry(at, only) : import(at('src/facets/index.js')),
@@ -71,7 +75,7 @@ async function realDeck(engine, catalog, only) {
 }
 
 async function placeholderDeck() {
-  const [rt, sk, dv] = await Promise.all([import('./runtime.js'), import('./sketches.js'), import('./devices.js')]);
+  const [rt, sk, dv] = await Promise.all([import('./runtime.js?v=5a912e2654'), import('./sketches.js?v=7fc81234f7'), import('./devices.js?v=b46177968c')]);
   const counts = new Map();
   for (const f of sk.FACETS) counts.set(f.gallery, (counts.get(f.gallery) || 0) + 1);
   return {

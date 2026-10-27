@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A sampler of "the model is working" indicators, each labeled:
 // bouncing dots, a braille wave, a pulse, an orbit, a scanner and a meter.
 const { ATTR, uni, phase, mix, fit } = __bm(23);

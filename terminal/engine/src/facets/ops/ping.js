@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // ping — replies streaming once a second, a latency sparkline, and the live rtt min/avg/max/mdev summary.
 const { C, ATTR, writer, walk, hash, spark, fixed } = __bm(27);
 

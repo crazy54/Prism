@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // An ANSI group logo in the 1994 style: bevelled block letters encoded as real
 // ANSI art (VGA colors, ░▒▓ shading, half blocks), a light sweep gliding
 // across them, sparkles, and the obligatory scene tagline and credits.
 const { textMask, maskAt, bbsPalette, lerpc, hash2 } = __bm(29);
-import { ansify } from './_bbs.js';
+import { ansify } from './_bbs.js?v=b7d3401196';
 
 export default {
   title: 'ANSI Group Logo',

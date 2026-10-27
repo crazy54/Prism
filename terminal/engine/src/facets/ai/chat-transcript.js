@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A chat transcript: the user's question sits right-aligned, the assistant
 // streams its reply on the left with a tool chip, then a follow-up arrives.
 const { ATTR, glyphs, uni, phase, fit, tint, reveal, wrapLines, stringWidth, thinkGlyph } = __bm(23);

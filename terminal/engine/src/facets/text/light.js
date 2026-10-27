@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Color & Light — type that emits or reflects: a flickering neon sign, words
 // on fire, a rainbow sweep, lolcat'd output and 80s chrome.
 const { NONE, rgb, mix, mixOklab, luminance } = __bm(0);
-import { drawBanner, bannerCanvas, measureBanner, layoutText } from '../../text/banner.js';
-import { bannerMode, fitType, hash } from './_text.js';
+import { drawBanner, bannerCanvas, measureBanner, layoutText } from '../../text/banner.js?v=b7d3401196';
+import { bannerMode, fitType, hash } from './_text.js?v=b7d3401196';
 
 const shared = { gallery: 'text', category: 'Color & Light', kind: 'text', glyphs: 'unicode', color: 'truecolor', animated: true };
 const asciiOnly = (ctx) => ctx.caps.unicode === false || ctx.mode === 'ascii';

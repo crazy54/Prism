@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // df -h — the familiar table plus usage bars (dfc-style), red at ≥ 90 %, with /var/log filling up.
 const { G, C, ATTR, writer, walk, pad, lpad } = __bm(27);
 

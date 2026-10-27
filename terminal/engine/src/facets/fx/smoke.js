@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Incense smoke: a thin laminar ribbon leaves the glowing tip, wavers, then
 // breaks into curling turbulence as it climbs — the column is advected through
 // a noise flow that strengthens with height, widening and thinning to nothing.

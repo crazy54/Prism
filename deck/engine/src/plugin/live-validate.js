@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=b7d3401196';
 // Validation for the live control channel (DESIGN.md §6.3 / §8.0) — never trust
 // the caller: every look, feedback, behavior, op batch and layout document is
 // checked here against the real registries (facets, glyphs, themes) and the real
@@ -9,13 +9,13 @@ import { __m as __bm } from '../../facets.bundle.js';
 // in exported profiles the user imports; FORBIDDEN (streamdeck:// deep links,
 // unknown kinds) is refused everywhere.
 
-const { findFacet } = __bm(318);
-const { getGlyph } = __bm(78);
-const { themeRegistry } = __bm(97);
-import { validateSvg } from '../scene/validate.js';
+const { findFacet } = __bm(659);
+const { getGlyph } = __bm(241);
+const { themeRegistry } = __bm(260);
+import { validateSvg } from '../scene/validate.js?v=b7d3401196';
 const { hexToOklch } = __bm(4);
 const { getDevice } = __bm(0);
-import { decodeSvgDataUrl } from './system-facets.js';
+import { decodeSvgDataUrl } from './system-facets.js?v=b7d3401196';
 
 export const LAYOUT_SCHEMA = 'prism-deck-layout/0.1';
 export const SAFE = 'safe';

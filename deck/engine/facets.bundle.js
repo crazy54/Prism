@@ -1,7 +1,7 @@
 // prism-deck browser engine, bundled by website/build.mjs (the modules are in the repository under prism-deck/src).
-import { __m, __d, __e } from './core.bundle.js';
-__d[121] = function (__ns) {
-const { themeFacet } = __m(119);
+import { __m, __d, __e } from './core.bundle.js?v=b7d3401196';
+__d[284] = function (__ns) {
+const { themeFacet } = __m(282);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = themeFacet('aurora', {
 title: 'Aurora',
@@ -11,8 +11,8 @@ tags: ['aurora', 'frost', 'glass', 'gradient', 'soft', 'night', 'day', 'opal'],
 order: 40,
 });
 };
-__d[122] = function (__ns) {
-const { themeFacet } = __m(119);
+__d[285] = function (__ns) {
+const { themeFacet } = __m(282);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = themeFacet('blueprint', {
 title: 'Blueprint',
@@ -22,8 +22,8 @@ tags: ['blueprint', 'drafting', 'technical', 'grid', 'linework', 'cyanotype', 'w
 order: 41,
 });
 };
-__d[123] = function (__ns) {
-const { themeFacet } = __m(119);
+__d[286] = function (__ns) {
+const { themeFacet } = __m(282);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = themeFacet('chrome', {
 title: 'Chrome',
@@ -33,8 +33,8 @@ tags: ['chrome', 'metal', 'machined', 'aluminum', 'led', 'night', 'day'],
 order: 40,
 });
 };
-__d[124] = function (__ns) {
-const { themeFacet } = __m(119);
+__d[287] = function (__ns) {
+const { themeFacet } = __m(282);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = themeFacet('ember', {
 title: 'Ember',
@@ -44,12 +44,12 @@ tags: ['ember', 'fire', 'coal', 'warm', 'amber', 'pyrography'],
 order: 21,
 });
 };
-__d[125] = function (__ns) {
-const { themeFacet } = __m(119);
-const { normalizeFacet } = __m(104);
-const { createContext } = __m(98);
+__d[288] = function (__ns) {
+const { themeFacet } = __m(282);
+const { normalizeFacet } = __m(267);
+const { createContext } = __m(261);
 const { svgInner, n } = __m(5);
-const { default: dashboardModule } = __m(118);
+const { default: dashboardModule } = __m(281);
 __e(__ns, { "themeFacetWithScreen": () => themeFacetWithScreen }, [], ["themeFacetWithScreen"]);
 const dashboard = normalizeFacet(dashboardModule, 'screens/galleon-dashboard.js');
 function themeFacetWithScreen(themeId, opts) {
@@ -71,8 +71,8 @@ return head + g + svg.slice(end);
 };
 }
 };
-__d[126] = function (__ns) {
-const { themeFacetWithScreen } = __m(125);
+__d[289] = function (__ns) {
+const { themeFacetWithScreen } = __m(288);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = themeFacetWithScreen('mono', {
 title: 'Mono',
@@ -82,8 +82,8 @@ tags: ['mono', 'accessibility', 'high contrast', 'low vision', 'aaa', 'black', '
 order: 12,
 });
 };
-__d[127] = function (__ns) {
-const { themeFacet } = __m(119);
+__d[290] = function (__ns) {
+const { themeFacet } = __m(282);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = themeFacet('neon', {
 title: 'Neon',
@@ -93,8 +93,8 @@ tags: ['neon', 'glow', 'sign', 'tubes', 'night', 'day'],
 order: 20,
 });
 };
-__d[128] = function (__ns) {
-const { themeFacetWithScreen } = __m(125);
+__d[291] = function (__ns) {
+const { themeFacetWithScreen } = __m(288);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = themeFacetWithScreen('paper', {
 title: 'Paper',
@@ -104,8 +104,8 @@ tags: ['paper', 'print', 'letterpress', 'halftone', 'foil', 'light', 'warm'],
 order: 31,
 });
 };
-__d[129] = function (__ns) {
-const { themeFacet } = __m(119);
+__d[292] = function (__ns) {
+const { themeFacet } = __m(282);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = themeFacet('phosphor', {
 title: 'Phosphor',
@@ -114,8 +114,8 @@ description: 'Green CRT keys: beam-drawn glyphs in a phosphor bloom, whole-pixel
 tags: ['crt', 'terminal', 'phosphor', 'scanlines', 'retro', 'green'],
 });
 };
-__d[130] = function (__ns) {
-const { themeFacet } = __m(119);
+__d[293] = function (__ns) {
+const { themeFacet } = __m(282);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = themeFacet('pixel', {
 title: 'Pixel',
@@ -124,8 +124,8 @@ description: '8-bit LCD keys: glyphs on a whole-pixel dot matrix, dithered light
 tags: ['8-bit', 'pixel', 'lcd', 'retro', 'dither', 'bitmap'],
 });
 };
-__d[131] = function (__ns) {
-const { themeFacet } = __m(119);
+__d[294] = function (__ns) {
+const { themeFacet } = __m(282);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = themeFacet('porcelain', {
 title: 'Porcelain',
@@ -135,10 +135,10 @@ tags: ['porcelain', 'ceramic', 'glaze', 'cobalt', 'gold', 'day', 'night'],
 order: 40,
 });
 };
-__d[132] = function (__ns) {
-const { getGlyph } = __m(78);
+__d[295] = function (__ns) {
+const { getGlyph } = __m(241);
 const { GLYPH_CATEGORIES } = __m(2);
-const { surface } = __m(110);
+const { surface } = __m(273);
 __e(__ns, { "iconFacet": () => iconFacet }, [], ["iconFacet"]);
 function iconFacet(glyphId, extra = {}) {
 const g = getGlyph(glyphId);
@@ -178,28 +178,125 @@ return k.svg();
 };
 }
 };
-__d[133] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[296] = function (__ns) {
+const { iconFacet } = __m(295);
+const { getGlyph } = __m(241);
+const { GLYPH_CATEGORIES } = __m(2);
+__e(__ns, { "moreIcon": () => moreIcon }, [], ["moreIcon"]);
+const NEAREST = { build: 'Productivity', edit: 'Productivity', window: 'System', game: 'Navigation' };
+function moreIcon(glyphId, extra = {}) {
+const f = iconFacet(glyphId, { order: 60, ...extra });
+const cat = getGlyph(glyphId).category;
+return GLYPH_CATEGORIES[cat] || !NEAREST[cat] ? f : { ...f, category: NEAREST[cat] };
+}
+};
+__d[297] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('address-bar', { label: 'Address' });
+};
+__d[298] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('alarm', { label: 'Alarm' });
 };
-__d[134] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[299] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('alert');
 };
-__d[135] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[300] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('align');
+};
+__d[301] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('arrow-down', { label: 'Down' });
+};
+__d[302] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('arrow-left', { label: 'Left' });
+};
+__d[303] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('arrow-right', { label: 'Right' });
+};
+__d[304] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('arrow-up', { label: 'Up' });
+};
+__d[305] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('artist');
+};
+__d[306] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('auto-complete', { label: 'Auto End' });
+};
+__d[307] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('back', { label: 'Back' });
 };
-__d[136] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[308] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('bank-left');
+};
+__d[309] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('bank-level');
+};
+__d[310] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('bank-right');
+};
+__d[311] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('bank');
+};
+__d[312] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('battery');
 };
-__d[137] = function (__ns) {
-const { rect, path, n } = __m(113);
+__d[313] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('beam');
+};
+__d[314] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('bold');
+};
+__d[315] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('boost');
+};
+__d[316] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('booster');
+};
+__d[317] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('brake');
+};
+__d[318] = function (__ns) {
+const { rect, path, n } = __m(276);
 const { mix, contrast } = __m(4);
 const { arrive } = __m(12);
 __e(__ns, { "GLYPH_LINKS": () => GLYPH_LINKS, "pairLink": () => pairLink, "washOf": () => washOf, "mutedPlate": () => mutedPlate, "strike": () => strike, "mutedKey": () => mutedKey }, [], ["GLYPH_LINKS","mutedKey","mutedPlate","pairLink","strike","washOf"]);
@@ -245,25 +342,40 @@ if (eyebrow) k.eyebrow(eyebrow, { color: 'ink' });
 if (labeled) k.label(String(label).toUpperCase(), { color: 'ink' });
 }
 };
-__d[138] = function (__ns) {
-const { iconFacet } = __m(132);
-const { pairLink } = __m(137);
+__d[319] = function (__ns) {
+const { iconFacet } = __m(295);
+const { pairLink } = __m(318);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const base = iconFacet('broadcast', { label: 'On Air' });
 const __default = { ...base, tags: [...new Set([...base.tags, 'on air', 'live', 'stream', 'streaming', 'broadcast', 'obs-style'])], link: pairLink('broadcast', ['live', 'offline']) };
 };
-__d[139] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[320] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('brush');
+};
+__d[321] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('bucket');
+};
+__d[322] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('bug');
 };
-__d[140] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[323] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('build');
+};
+__d[324] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('bulb', { label: 'Lights' });
 };
-__d[141] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[325] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const base = iconFacet('calendar', { label: 'Calendar' });
 const __default = {
@@ -276,118 +388,428 @@ return base.render({ ...ctx, params: { ...ctx.params, day } });
 },
 };
 };
-__d[142] = function (__ns) {
-const { iconFacet } = __m(132);
-const { pairLink } = __m(137);
+__d[326] = function (__ns) {
+const { iconFacet } = __m(295);
+const { pairLink } = __m(318);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const base = iconFacet('camera', { label: 'Camera' });
 const __default = { ...base, link: pairLink('camera', ['on', 'off']) };
 };
-__d[143] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[327] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('captions');
+};
+__d[328] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('chain-lift');
+};
+__d[329] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('chapter-next', { label: 'Next Chap' });
+};
+__d[330] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('chapter-prev', { label: 'Prev Chap' });
+};
+__d[331] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const base = iconFacet('chat', { label: 'Chat' });
 const __default = { ...base, tags: [...new Set([...base.tags, 'chat', 'live chat', 'stream', 'streaming', 'messages', 'obs-style'])] };
 };
-__d[144] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[332] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('check');
 };
-__d[145] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[333] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('clear');
+};
+__d[334] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('clock');
 };
-__d[146] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[335] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('close');
+};
+__d[336] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('cloud');
 };
-__d[147] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[337] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('cluster');
+};
+__d[338] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('code');
 };
-__d[148] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[339] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('coffee', { label: 'Coffee' });
 };
-__d[149] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[340] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('comment');
+};
+__d[341] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('container');
+};
+__d[342] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('copy');
+};
+__d[343] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('cpu');
 };
-__d[150] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[344] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('crouch');
+};
+__d[345] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('cursor');
+};
+__d[346] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('cut');
+};
+__d[347] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('database');
+};
+__d[348] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('definition');
+};
+__d[349] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('delete');
+};
+__d[350] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('diff');
+};
+__d[351] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('disk');
 };
-__d[151] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[352] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('dollar');
+};
+__d[353] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('edit');
+};
+__d[354] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('emoji');
+};
+__d[355] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('equalizer', { label: 'EQ' });
 };
-__d[152] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[356] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('exocraft');
+};
+__d[357] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('eye');
+};
+__d[358] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('fade');
+};
+__d[359] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('falloff');
+};
+__d[360] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('fan', { label: 'Fan' });
 };
-__d[153] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[361] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('fit');
+};
+__d[362] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('fold');
+};
+__d[363] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('folder', { label: 'Folder' });
 };
-__d[154] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[364] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('follow');
+};
+__d[365] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('font-size', { label: 'Text Size' });
+};
+__d[366] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('format');
+};
+__d[367] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('forward-10', { label: '+10 s' });
+};
+__d[368] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('forward');
+};
+__d[369] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('frame-next');
+};
+__d[370] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('frame-prev', { label: 'Prev Frame' });
+};
+__d[371] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('freighter');
+};
+__d[372] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('fullscreen');
+};
+__d[373] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('function');
+};
+__d[374] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('galaxy', { label: 'Galaxy' });
+};
+__d[375] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('gamepad');
+};
+__d[376] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('gif');
+};
+__d[377] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('git-branch');
 };
-__d[155] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[378] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('globe');
+};
+__d[379] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('goto-line');
+};
+__d[380] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('gpu');
 };
-__d[156] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[381] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('hdr');
+};
+__d[382] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('heading');
+};
+__d[383] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('headphones', { label: 'Phones' });
 };
-__d[157] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[384] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('heart');
+};
+__d[385] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('heatmap');
+};
+__d[386] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('height');
+};
+__d[387] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('home', { label: 'Home' });
 };
-__d[158] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[388] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('indent');
+};
+__d[389] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('info');
 };
-__d[159] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[390] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('italic');
+};
+__d[391] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('jetpack');
+};
+__d[392] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('jump');
+};
+__d[393] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('key');
+};
+__d[394] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('keyboard');
+};
+__d[395] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('land');
+};
+__d[396] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('layers');
+};
+__d[397] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('layout', { label: 'Layout' });
+};
+__d[398] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('leaf');
+};
+__d[399] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('length-minus');
+};
+__d[400] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('length-plus');
+};
+__d[401] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('link');
+};
+__d[402] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('lock');
 };
-__d[160] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[403] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('loop');
+};
+__d[404] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('magnet');
+};
+__d[405] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('mail', { label: 'Mail' });
 };
-__d[161] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[406] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('marker', { label: 'Marker' });
 };
-__d[162] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[407] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('maximize');
+};
+__d[408] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('memory');
 };
-__d[163] = function (__ns) {
-const { iconFacet } = __m(132);
-const { surface } = __m(110);
-const { mutedKey, pairLink } = __m(137);
+__d[409] = function (__ns) {
+const { iconFacet } = __m(295);
+const { surface } = __m(273);
+const { mutedKey, pairLink } = __m(318);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const base = iconFacet('mic', { label: 'Mic', description: 'The mic glyph, live or muted. Muted fills the key red with a struck mic and MUTED; linked keys and screens on the deck follow. Shows state only.' });
 const __default = {
@@ -402,110 +824,375 @@ return k.svg();
 },
 };
 };
-__d[164] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[410] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('minimize');
+};
+__d[411] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('mixer', { label: 'Mixer' });
 };
-__d[165] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[412] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('monitor');
+};
+__d[413] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('move');
+};
+__d[414] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('music-note', { label: 'Music' });
 };
-__d[166] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[415] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('network');
 };
-__d[167] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[416] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('note', { label: 'Note' });
 };
-__d[168] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[417] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('pages', { label: 'Pages' });
 };
-__d[169] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[418] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('panel');
+};
+__d[419] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('paste');
+};
+__d[420] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('path');
+};
+__d[421] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('person');
+};
+__d[422] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('pin');
+};
+__d[423] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('pip', { label: 'PiP' });
+};
+__d[424] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('pitch-down');
+};
+__d[425] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('pitch-level');
+};
+__d[426] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('pitch-up');
+};
+__d[427] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('pitch');
+};
+__d[428] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('play-pause', { label: 'Play' });
 };
-__d[170] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[429] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('plug', { label: 'Plug' });
 };
-__d[171] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[430] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('power');
 };
-__d[172] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[431] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('queue');
+};
+__d[432] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('radial', { label: 'Radial' });
+};
+__d[433] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const base = iconFacet('record', { label: 'Record' });
 const __default = { ...base, tags: [...new Set([...base.tags, 'rec', 'recording', 'stream', 'streaming', 'broadcast', 'obs-style'])] };
 };
-__d[173] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[434] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('references');
+};
+__d[435] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('rename');
+};
+__d[436] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('replace');
+};
+__d[437] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('replay');
+};
+__d[438] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('rewind-10', { label: '-10 s' });
+};
+__d[439] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('rocket');
 };
-__d[174] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[440] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('roll');
+};
+__d[441] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('rotate');
+};
+__d[442] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('scale');
+};
+__d[443] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('scanner');
+};
+__d[444] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const base = iconFacet('scene', { label: 'Scene' });
 const __default = { ...base, tags: [...new Set([...base.tags, 'stream', 'streaming', 'broadcast', 'scene', 'scenes', 'obs-style'])] };
 };
-__d[175] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[445] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('screenshot', { label: 'Shot' });
+};
+__d[446] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('scroll-bottom', { label: 'Bottom' });
+};
+__d[447] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('scroll-top', { label: 'Top' });
+};
+__d[448] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('scroll');
+};
+__d[449] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('search', { label: 'Search' });
 };
-__d[176] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[450] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('select');
+};
+__d[451] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('settings');
+};
+__d[452] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('shield');
+};
+__d[453] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('shuffle', { label: 'Shuffle' });
 };
-__d[177] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[454] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('sidebar');
+};
+__d[455] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('skip-next', { label: 'Next' });
 };
-__d[178] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[456] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('skip-prev', { label: 'Previous' });
 };
-__d[179] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[457] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('smooth');
+};
+__d[458] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('snap-left');
+};
+__d[459] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('snap-right');
+};
+__d[460] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('snap');
+};
+__d[461] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('special', { label: 'Special' });
+};
+__d[462] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('speed');
+};
+__d[463] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('split-down');
+};
+__d[464] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('split');
+};
+__d[465] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('stairs');
+};
+__d[466] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('star');
+};
+__d[467] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('station');
+};
+__d[468] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('step-into');
+};
+__d[469] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('step-out');
+};
+__d[470] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('sticker');
+};
+__d[471] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('stop', { label: 'Stop' });
 };
-__d[180] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[472] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('stopwatch', { label: 'Chrono' });
 };
-__d[181] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[473] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('strike', { label: 'Strike' });
+};
+__d[474] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('sun');
+};
+__d[475] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('symbol');
+};
+__d[476] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('sync');
 };
-__d[182] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[477] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('tab-group');
+};
+__d[478] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('tab');
+};
+__d[479] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('target', { label: 'Focus' });
 };
-__d[183] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[480] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('terminal');
 };
-__d[184] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[481] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('terrain');
+};
+__d[482] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('theater', { label: 'Theater' });
+};
+__d[483] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const base = iconFacet('thermostat', { label: 'Climate' });
 const __default = {
@@ -517,8 +1204,8 @@ unit: { type: 'select', default: 'C', options: ['C', 'F'], label: 'Unit' },
 },
 };
 };
-__d[185] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[484] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const base = iconFacet('timer', { label: 'Timer' });
 const __default = {
@@ -527,33 +1214,88 @@ data: ['timer'],
 params: { ...base.params, minutes: { type: 'number', default: 5, min: 1, max: 120, step: 1, label: 'Dial minutes' } },
 };
 };
-__d[186] = function (__ns) {
-const { iconFacet } = __m(132);
-const { pairLink } = __m(137);
+__d[485] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('track-curve-left');
+};
+__d[486] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('track-curve-right');
+};
+__d[487] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('track-straight', { label: 'Straight' });
+};
+__d[488] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('view-details', { label: 'Details' });
+};
+__d[489] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('view-icons', { label: 'Icons' });
+};
+__d[490] = function (__ns) {
+const { iconFacet } = __m(295);
+const { pairLink } = __m(318);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const base = iconFacet('viewers', { label: 'Viewers' });
 const __default = { ...base, tags: [...new Set([...base.tags, 'stream', 'streaming', 'audience', 'chat'])], link: pairLink('viewers', ['live', 'offline']) };
 };
-__d[187] = function (__ns) {
-const { iconFacet } = __m(132);
-const { pairLink } = __m(137);
+__d[491] = function (__ns) {
+const { iconFacet } = __m(295);
+const { pairLink } = __m(318);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const base = iconFacet('volume');
 const __default = { ...base, link: pairLink('volume', ['on', 'muted']) };
 };
-__d[188] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[492] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('walk');
+};
+__d[493] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('warp');
+};
+__d[494] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('waveform', { label: 'Waveform' });
 };
-__d[189] = function (__ns) {
-const { iconFacet } = __m(132);
+__d[495] = function (__ns) {
+const { iconFacet } = __m(295);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = iconFacet('wifi');
 };
-__d[190] = function (__ns) {
-const { KeySurface, PanelSurface } = __m(110);
-const { childContext } = __m(111);
+__d[496] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('window');
+};
+__d[497] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('zoom-in');
+};
+__d[498] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('zoom-out');
+};
+__d[499] = function (__ns) {
+const { moreIcon } = __m(296);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = moreIcon('zoom-reset', { label: '100%' });
+};
+__d[500] = function (__ns) {
+const { KeySurface, PanelSurface } = __m(273);
+const { childContext } = __m(274);
 const { n, attrs } = __m(5);
 const { polar } = __m(15);
 __e(__ns, { "glyphId": () => glyphId, "litState": () => litState, "restState": () => restState, "stateWithTone": () => stateWithTone, "themeBox": () => themeBox, "cellOf": () => cellOf, "snapTo": () => snapTo, "layer": () => layer, "addFaded": () => addFaded, "cellRing": () => cellRing, "squaresPath": () => squaresPath, "breath": () => breath, "stepped": () => stepped, "glyphTime": () => glyphTime }, [], ["addFaded","breath","cellOf","cellRing","glyphId","glyphTime","layer","litState","restState","snapTo","squaresPath","stateWithTone","stepped","themeBox"]);
@@ -620,9 +1362,9 @@ const p = (ctx.t % L + L) % L;
 return (p / L) * cycles * gl;
 }
 };
-__d[191] = function (__ns) {
-const { surface, path, rect, n, phase, clamp, arrive, polar, arcPath } = __m(113);
-const { cellOf, themeBox, cellRing, squaresPath } = __m(190);
+__d[501] = function (__ns) {
+const { surface, path, rect, n, phase, clamp, arrive, polar, arcPath } = __m(276);
+const { cellOf, themeBox, cellRing, squaresPath } = __m(500);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const HOLD = 2;
 const __default = {
@@ -688,9 +1430,9 @@ return k.svg();
 },
 };
 };
-__d[192] = function (__ns) {
-const { surface, rect, circle, n, phase, lerp, clamp, outCubic, arrive } = __m(113);
-const { glyphId, stateWithTone, themeBox, cellOf, layer, addFaded, glyphTime } = __m(190);
+__d[502] = function (__ns) {
+const { surface, rect, circle, n, phase, lerp, clamp, outCubic, arrive } = __m(276);
+const { glyphId, stateWithTone, themeBox, cellOf, layer, addFaded, glyphTime } = __m(500);
 __e(__ns, { "SEVERITY": () => SEVERITY, "beat": () => beat, "default": () => __default }, [], ["SEVERITY","beat","default"]);
 const SEVERITY = { warn: 1.6, alert: 1.2, crit: 0.8 };
 const beat = (p) => (p < 0.18 ? outCubic(p / 0.18) : (1 - (p - 0.18) / 0.82) ** 2.2);
@@ -755,10 +1497,10 @@ return k.svg();
 },
 };
 };
-__d[193] = function (__ns) {
-const { surface, path, n, phase, clamp } = __m(113);
-const { glyphId, stateWithTone, themeBox, cellOf, snapTo, glyphTime } = __m(190);
-const { mutedPlate, strike } = __m(137);
+__d[503] = function (__ns) {
+const { surface, path, n, phase, clamp } = __m(276);
+const { glyphId, stateWithTone, themeBox, cellOf, snapTo, glyphTime } = __m(500);
+const { mutedPlate, strike } = __m(318);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const BURST = 0.7;
 const __default = {
@@ -814,9 +1556,9 @@ return k.svg();
 },
 };
 };
-__d[194] = function (__ns) {
-const { surface, path, rect, radialGradient, linearGradient, url, n, phase, clamp, polar, arrive } = __m(113);
-const { glyphId, stateWithTone, themeBox, cellOf, layer, addFaded, glyphTime } = __m(190);
+__d[504] = function (__ns) {
+const { surface, path, rect, radialGradient, linearGradient, url, n, phase, clamp, polar, arrive } = __m(276);
+const { glyphId, stateWithTone, themeBox, cellOf, layer, addFaded, glyphTime } = __m(500);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'alert-siren',
@@ -884,7 +1626,7 @@ return k.svg();
 },
 };
 };
-__d[195] = function (__ns) {
+__d[505] = function (__ns) {
 const { rect, path, circle, n, P, linearGradient, url } = __m(5);
 const { textPath, textOutline, capHeight, measureText, fitText } = __m(11);
 const { arcPath, polar } = __m(15);
@@ -1054,11 +1796,11 @@ const h = (v) => Math.round(clamp(v, 0, 255)).toString(16).padStart(2, '0');
 return `#${h(r)}${h(g)}${h(b)}`;
 }
 };
-__d[196] = function (__ns) {
-const { surface, rect, path, n, P, linearGradient, url } = __m(113);
+__d[506] = function (__ns) {
+const { surface, rect, path, n, P, linearGradient, url } = __m(276);
 const { clamp, pulse, phase, lerp, outExpo } = __m(12);
 const { mix } = __m(4);
-const { text, isBig, mmss } = __m(195);
+const { text, isBig, mmss } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LAMPS = [{ key: 'neg', state: 'failed' }, { key: 'warn', state: 'running' }, { key: 'pos', state: 'passed' }];
 const WORD = { running: 'Running', passed: 'Passed', failed: 'Failed' };
@@ -1136,12 +1878,12 @@ return k.svg();
 },
 };
 };
-__d[197] = function (__ns) {
-const { surface, rect, path, n, P } = __m(113);
+__d[507] = function (__ns) {
+const { surface, rect, path, n, P } = __m(276);
 const { clamp, outExpo, outBack, lerp } = __m(12);
-const { clockOf } = __m(98);
+const { clockOf } = __m(261);
 const { mix } = __m(4);
-const { text, isBig, headDot } = __m(195);
+const { text, isBig, headDot } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const HOLD = 2.6, OUT = 0.4;
 const stamp = (c) => `${c.h}:${String(c.m).padStart(2, '0')}:${String(c.s).padStart(2, '0')}`;
@@ -1221,12 +1963,12 @@ return k.svg();
 },
 };
 };
-__d[198] = function (__ns) {
-const { surface, path, circle, n, P } = __m(113);
+__d[508] = function (__ns) {
+const { surface, path, circle, n, P } = __m(276);
 const { clamp, outExpo, lerp } = __m(12);
-const { clockOf } = __m(98);
+const { clockOf } = __m(261);
 const { mix } = __m(4);
-const { isBig, progressArc, widthOf, capHeight } = __m(195);
+const { isBig, progressArc, widthOf, capHeight } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 function crescentPath(cx, cy, R, ox, oy, r, steps = 36) {
 const d = Math.hypot(ox, oy);
@@ -1341,11 +2083,11 @@ return k.svg();
 },
 };
 };
-__d[199] = function (__ns) {
-const { surface, rect, n } = __m(113);
+__d[509] = function (__ns) {
+const { surface, rect, n } = __m(276);
 const { clamp, lerp, outExpo, inQuad, smoothstep } = __m(12);
 const { mix } = __m(4);
-const { text, isBig, holdAge, progressArc, headDot, burst, perimeterPoint, capHeight } = __m(195);
+const { text, isBig, holdAge, progressArc, headDot, burst, perimeterPoint, capHeight } = __m(505);
 const { polar } = __m(15);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LAUNCH = 0.55; 
@@ -1451,9 +2193,9 @@ return k.svg();
 },
 };
 };
-__d[200] = function (__ns) {
-const { surface, phase, arrive, clamp, n } = __m(113);
-const { glyphId, litState, restState, layer, addFaded, breath, stepped, cellOf, themeBox, glyphTime } = __m(190);
+__d[510] = function (__ns) {
+const { surface, phase, arrive, clamp, n } = __m(276);
+const { glyphId, litState, restState, layer, addFaded, breath, stepped, cellOf, themeBox, glyphTime } = __m(500);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'idle-breathe',
@@ -1491,8 +2233,8 @@ return k.svg();
 },
 };
 };
-__d[201] = function (__ns) {
-const { keyInto, compose, n } = __m(113);
+__d[511] = function (__ns) {
+const { keyInto, compose, n } = __m(276);
 const { clamp } = __m(12);
 __e(__ns, { "BUDGET": () => BUDGET, "frameClock": () => frameClock, "materials": () => materials, "inCell": () => inCell, "inPanel": () => inPanel, "cellAt": () => cellAt, "runsInRect": () => runsInRect, "runsPath": () => runsPath, "circlePoints": () => circlePoints, "vClip": () => vClip, "middleRow": () => middleRow, "rowCells": () => rowCells, "spectrumHue": () => spectrumHue, "half": () => half }, [], ["BUDGET","cellAt","circlePoints","frameClock","half","inCell","inPanel","materials","middleRow","rowCells","runsInRect","runsPath","spectrumHue","vClip"]);
 const BUDGET = { type: 'number', default: 30, min: 10, max: 240, step: 5, label: 'Device budget (key images/s)' };
@@ -1542,10 +2284,10 @@ const rowCells = (grid, row) => grid.cells.filter((c) => c.row === row).sort((a,
 const spectrumHue = (f) => 24 + 276 * clamp(f);
 const half = (v) => Math.round(v * 2) / 2;
 };
-__d[202] = function (__ns) {
-const { n, linearGradient, radialGradient, url } = __m(113);
+__d[512] = function (__ns) {
+const { n, linearGradient, radialGradient, url } = __m(276);
 const { mix } = __m(4);
-const __r0 = __m(201);
+const __r0 = __m(511);
 __e(__ns, { "f1": () => f1, "qo": () => qo, "dotD": () => dotD, "ellipseD": () => ellipseD, "rectD": () => rectD, "polyD": () => polyD, "lineD": () => lineD, "starD": () => starD, "flakeD": () => flakeD, "clipPoly": () => clipPoly, "fillP": () => fillP, "strokeP": () => strokeP, "Batch": () => Batch, "backdrop": () => backdrop, "lit": () => lit, "toBg": () => toBg, "isFlat": () => isFlat, "isoPaths": () => isoPaths, "BUDGET": () => __r0.BUDGET, "frameClock": () => __r0.frameClock, "materials": () => __r0.materials, "cellAt": () => __r0.cellAt, "half": () => __r0.half, "spectrumHue": () => __r0.spectrumHue, "inCell": () => __r0.inCell }, [], ["BUDGET","Batch","backdrop","cellAt","clipPoly","dotD","ellipseD","f1","fillP","flakeD","frameClock","half","inCell","isFlat","isoPaths","lineD","lit","materials","polyD","qo","rectD","spectrumHue","starD","strokeP","toBg"]);
 const f1 = (v) => n(v, 1);
 const qo = (o, steps = 20) => Math.max(0, Math.min(1, Math.round(o * steps) / steps));
@@ -1699,10 +2441,10 @@ out.push(pts[pts.length - 1]);
 return polyD(out);
 }
 };
-__d[203] = function (__ns) {
-const { radialGradient, url, n } = __m(113);
-const { cellOf, themeBox, squaresPath, glyphId, litState, restState, glyphTime } = __m(190);
-const { dotD, ellipseD, polyD, rectD, lineD, f1, fillP, strokeP, qo, isoPaths } = __m(202);
+__d[513] = function (__ns) {
+const { radialGradient, url, n } = __m(276);
+const { cellOf, themeBox, squaresPath, glyphId, litState, restState, glyphTime } = __m(500);
+const { dotD, ellipseD, polyD, rectD, lineD, f1, fillP, strokeP, qo, isoPaths } = __m(512);
 __e(__ns, { "cellOf": () => cellOf, "themeBox": () => themeBox, "squaresPath": () => squaresPath, "glyphId": () => glyphId, "litState": () => litState, "restState": () => restState, "glyphTime": () => glyphTime, "dotD": () => dotD, "ellipseD": () => ellipseD, "polyD": () => polyD, "rectD": () => rectD, "lineD": () => lineD, "f1": () => f1, "fillP": () => fillP, "strokeP": () => strokeP, "qo": () => qo, "isoPaths": () => isoPaths, "dots": () => dots, "glow": () => glow }, [], ["cellOf","dotD","dots","ellipseD","f1","fillP","glow","glyphId","glyphTime","isoPaths","lineD","litState","polyD","qo","rectD","restState","squaresPath","strokeP","themeBox"]);
 function dots(k, pts, paint, cell = 0) {
 if (!pts.length) return;
@@ -1725,11 +2467,11 @@ k.def(radialGradient(id, stops.map(([s, a]) => [s, color, n(a * Math.min(1, o), 
 k.add(`<circle cx="${f1(x)}" cy="${f1(y)}" r="${f1(r)}" fill="${url(id)}"/>`);
 }
 };
-__d[204] = function (__ns) {
-const { surface, linearGradient, url, n } = __m(113);
+__d[514] = function (__ns) {
+const { surface, linearGradient, url, n } = __m(276);
 const { mix } = __m(4);
 const { smoothstep, phase } = __m(12);
-const { glow, polyD, ellipseD, fillP, strokeP, f1, lineD } = __m(203);
+const { glow, polyD, ellipseD, fillP, strokeP, f1, lineD } = __m(513);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 6, TAU = Math.PI * 2;
 function teardrop(x, y, H, W, s) {
@@ -1803,11 +2545,11 @@ return k.svg();
 },
 };
 };
-__d[205] = function (__ns) {
-const { surface } = __m(113);
+__d[515] = function (__ns) {
+const { surface } = __m(276);
 const { mix } = __m(4);
 const { smoothstep, phase } = __m(12);
-const { glyphId, restState, glyphTime, cellOf, themeBox, glow, dots, fillP } = __m(203);
+const { glyphId, restState, glyphTime, cellOf, themeBox, glow, dots, fillP } = __m(513);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 12, TAU = Math.PI * 2;
 const flash = (q) => (q < 0.12 ? smoothstep(0, 0.12, q) : q < 0.3 ? 1 : q < 0.75 ? 1 - smoothstep(0.3, 0.75, q) : 0);
@@ -1865,8 +2607,8 @@ return k.svg();
 },
 };
 };
-__d[206] = function (__ns) {
-const { surface, path, circle, n, phase } = __m(113);
+__d[516] = function (__ns) {
+const { surface, path, circle, n, phase } = __m(276);
 const { noise1, hash } = __m(1);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const gauss = (x, mu, s) => Math.exp(-((x - mu) ** 2) / (2 * s * s));
@@ -1935,11 +2677,11 @@ return k.svg();
 },
 };
 };
-__d[207] = function (__ns) {
-const { surface, linearGradient, url } = __m(113);
+__d[517] = function (__ns) {
+const { surface, linearGradient, url } = __m(276);
 const { mix, shade } = __m(4);
 const { phase } = __m(12);
-const { glyphId, litState, glyphTime, isoPaths, fillP, rectD } = __m(203);
+const { glyphId, litState, glyphTime, isoPaths, fillP, rectD } = __m(513);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 16, TAU = Math.PI * 2;
 const __default = {
@@ -1993,9 +2735,9 @@ return k.svg();
 },
 };
 };
-__d[208] = function (__ns) {
-const { surface, path, circle, ellipse, n, phase, lerp } = __m(113);
-const { glyphId, themeBox, cellOf, squaresPath, glyphTime } = __m(190);
+__d[518] = function (__ns) {
+const { surface, path, circle, ellipse, n, phase, lerp } = __m(276);
+const { glyphId, themeBox, cellOf, squaresPath, glyphTime } = __m(500);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const TAIL = 16;
 const __default = {
@@ -2066,8 +2808,8 @@ return k.svg();
 },
 };
 };
-__d[209] = function (__ns) {
-const { surface, rect, n, phase, clamp } = __m(113);
+__d[519] = function (__ns) {
+const { surface, rect, n, phase, clamp } = __m(276);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 6;
 const __default = {
@@ -2119,9 +2861,9 @@ return k.svg();
 },
 };
 };
-__d[210] = function (__ns) {
-const { surface, polygon, linearGradient, url, n, clamp, inOutCubic, phase, mix } = __m(113);
-const { glyphId, themeBox, cellOf, litState, glyphTime } = __m(190);
+__d[520] = function (__ns) {
+const { surface, polygon, linearGradient, url, n, clamp, inOutCubic, phase, mix } = __m(276);
+const { glyphId, themeBox, cellOf, litState, glyphTime } = __m(500);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const SWEEP = 0.9;
 const __default = {
@@ -2178,12 +2920,12 @@ return k.svg();
 },
 };
 };
-__d[211] = function (__ns) {
-const { surface, linearGradient, url } = __m(113);
+__d[521] = function (__ns) {
+const { surface, linearGradient, url } = __m(276);
 const { mix } = __m(4);
 const { clamp, smoothstep, outCubic, phase, lerp } = __m(12);
 const { hash } = __m(1);
-const { glyphId, litState, cellOf, themeBox, dots, dotD, polyD, fillP, strokeP, f1 } = __m(203);
+const { glyphId, litState, cellOf, themeBox, dots, dotD, polyD, fillP, strokeP, f1 } = __m(513);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 8, TAU = Math.PI * 2;
 const __default = {
@@ -2259,10 +3001,10 @@ return k.svg();
 },
 };
 };
-__d[212] = function (__ns) {
-const { surface, path, circle, n, clamp, outBack, polar } = __m(113);
+__d[522] = function (__ns) {
+const { surface, path, circle, n, clamp, outBack, polar } = __m(276);
 const { pad2 } = __m(11);
-const { glyphId, cellOf, themeBox, cellRing, squaresPath, glyphTime } = __m(190);
+const { glyphId, cellOf, themeBox, cellRing, squaresPath, glyphTime } = __m(500);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'idle-tick',
@@ -2342,11 +3084,11 @@ return k.svg();
 },
 };
 };
-__d[213] = function (__ns) {
-const { surface, rect, n, url, linearGradient } = __m(113);
+__d[523] = function (__ns) {
+const { surface, rect, n, url, linearGradient } = __m(276);
 const { clamp, outExpo } = __m(12);
 const { mix } = __m(4);
-const { text, glowText, widthOf, capHeight, mmss, isBig, chip } = __m(195);
+const { text, glowText, widthOf, capHeight, mmss, isBig, chip } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const WORDS = { 'on-air': ['ON', 'AIR'], live: ['LIVE'], rec: ['REC'], 'mic-live': ['MIC', 'LIVE'] };
 const STRIKE = [0.15, 0, 0.7, 0.05, 0.9, 0.35, 1, 0.8, 1];
@@ -2432,7 +3174,7 @@ return k.svg();
 },
 };
 };
-__d[214] = function (__ns) {
+__d[524] = function (__ns) {
 const { phase } = __m(12);
 __e(__ns, { "autoplay": () => autoplay, "AUTOPLAY_PARAM": () => AUTOPLAY_PARAM }, [], ["AUTOPLAY_PARAM","autoplay"]);
 function autoplay(ctx, { every = ctx.facet.loop, at = 0.4, hold = 0.14 } = {}) {
@@ -2444,15 +3186,15 @@ return { ...ctx, pressed, pressAge: pressed ? 0 : since - hold, autoplayed: true
 }
 const AUTOPLAY_PARAM = { autoplay: { type: 'bool', default: true, label: 'Demo press when idle' } };
 };
-__d[215] = function (__ns) {
-const { KeySurface } = __m(110);
-const { childContext } = __m(111);
+__d[525] = function (__ns) {
+const { KeySurface } = __m(273);
+const { childContext } = __m(274);
 const { attrs, n } = __m(5);
 const { drawGlyph, Pen } = __m(16);
 const { flattenPath, transformPath } = __m(13);
 const { clamp, lerp } = __m(12);
-const { autoplay } = __m(214);
-const { mutedPlate, strike } = __m(137);
+const { autoplay } = __m(524);
+const { mutedPlate, strike } = __m(318);
 __e(__ns, { "face": () => face, "place": () => place, "about": () => about, "pickGlyph": () => pickGlyph, "statePair": () => statePair, "stateLabel": () => stateLabel, "keyFace": () => keyFace, "pressClock": () => pressClock, "stateClock": () => stateClock, "glyphPrims": () => glyphPrims, "ghost": () => ghost, "morphPen": () => morphPen, "paintPen": () => paintPen }, [], ["about","face","ghost","glyphPrims","keyFace","morphPen","paintPen","pickGlyph","place","pressClock","stateClock","stateLabel","statePair"]);
 function face(parent, draw, { tag = 'f', press = true, ...over } = {}) {
 const sub = childContext(parent.ctx, { x: 0, y: 0, w: parent.w, h: parent.h }, { kind: 'key', tag });
@@ -2623,10 +3365,10 @@ const body = k.theme.paintGlyph
 k.add(`<g${attrs({ transform: `translate(${n(box.x)} ${n(box.y)}) scale(${n(box.size / 48, 4)})`, opacity: opacity !== undefined && opacity < 0.999 ? n(opacity, 3) : null })}>${body}</g>`);
 }
 };
-__d[216] = function (__ns) {
-const { surface, rect, n, clamp, outExpo, outCubic, lerp, mix, url, radialGradient, linearGradient } = __m(113);
-const { AUTOPLAY_PARAM } = __m(214);
-const { pickGlyph, statePair, pressClock } = __m(215);
+__d[526] = function (__ns) {
+const { surface, rect, n, clamp, outExpo, outCubic, lerp, mix, url, radialGradient, linearGradient } = __m(276);
+const { AUTOPLAY_PARAM } = __m(524);
+const { pickGlyph, statePair, pressClock } = __m(525);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const HOLD = 0.22, BACK = 0.55;
 const __default = {
@@ -2680,11 +3422,11 @@ return k.svg();
 },
 };
 };
-__d[217] = function (__ns) {
-const { surface, n, clamp, outExpo, outCubic, mix } = __m(113);
-const { AUTOPLAY_PARAM } = __m(214);
+__d[527] = function (__ns) {
+const { surface, n, clamp, outExpo, outCubic, mix } = __m(276);
+const { AUTOPLAY_PARAM } = __m(524);
 const { defaultText } = __m(14);
-const { pickGlyph, statePair, pressClock, ghost } = __m(215);
+const { pickGlyph, statePair, pressClock, ghost } = __m(525);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const HOLD = 0.2, SETTLE = 0.55;
 const __default = {
@@ -2732,9 +3474,9 @@ return k.svg();
 },
 };
 };
-__d[218] = function (__ns) {
-const { surface, circle, n, clamp, outExpo, lerp } = __m(113);
-const { autoplay, AUTOPLAY_PARAM } = __m(214);
+__d[528] = function (__ns) {
+const { surface, circle, n, clamp, outExpo, lerp } = __m(276);
+const { autoplay, AUTOPLAY_PARAM } = __m(524);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'press-ripple',
@@ -2769,10 +3511,10 @@ return k.svg();
 },
 };
 };
-__d[219] = function (__ns) {
-const { surface, rect, n, clamp, outCubic, inQuad, mix, url, linearGradient, phase } = __m(113);
-const { AUTOPLAY_PARAM, autoplay } = __m(214);
-const { pickGlyph, statePair, keyFace, stateLabel } = __m(215);
+__d[529] = function (__ns) {
+const { surface, rect, n, clamp, outCubic, inQuad, mix, url, linearGradient, phase } = __m(276);
+const { AUTOPLAY_PARAM, autoplay } = __m(524);
+const { pickGlyph, statePair, keyFace, stateLabel } = __m(525);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const SLATS = 5, CLOSE = 0.12, OPEN = 0.3, STAGGER = 0.035, HOLD = 0.3; 
 const __default = {
@@ -2832,10 +3574,10 @@ return k.svg();
 },
 };
 };
-__d[220] = function (__ns) {
-const { surface, rect, n, clamp, spring, roundRectPath, path, mix } = __m(113);
-const { AUTOPLAY_PARAM } = __m(214);
-const { face, place, about, pickGlyph, statePair, keyFace, pressClock } = __m(215);
+__d[530] = function (__ns) {
+const { surface, rect, n, clamp, spring, roundRectPath, path, mix } = __m(276);
+const { AUTOPLAY_PARAM } = __m(524);
+const { face, place, about, pickGlyph, statePair, keyFace, pressClock } = __m(525);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const HOLD = 0.2;
 const __default = {
@@ -2880,11 +3622,11 @@ return k.svg();
 },
 };
 };
-__d[221] = function (__ns) {
-const { surface, clamp, inOutSine, outCubic, smoothstep } = __m(113);
-const { AUTOPLAY_PARAM } = __m(214);
-const { pairLink } = __m(137);
-const { face, place, about, pickGlyph, statePair, keyFace, stateLabel, stateClock } = __m(215);
+__d[531] = function (__ns) {
+const { surface, clamp, inOutSine, outCubic, smoothstep } = __m(276);
+const { AUTOPLAY_PARAM } = __m(524);
+const { pairLink } = __m(318);
+const { face, place, about, pickGlyph, statePair, keyFace, stateLabel, stateClock } = __m(525);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const DUR = 0.6;
 const __default = {
@@ -2924,11 +3666,11 @@ return k.svg();
 },
 };
 };
-__d[222] = function (__ns) {
-const { surface, rect, n, clamp, inOutSine, mix } = __m(113);
-const { AUTOPLAY_PARAM } = __m(214);
-const { pairLink } = __m(137);
-const { face, place, pickGlyph, statePair, keyFace, stateLabel, stateClock } = __m(215);
+__d[532] = function (__ns) {
+const { surface, rect, n, clamp, inOutSine, mix } = __m(276);
+const { AUTOPLAY_PARAM } = __m(524);
+const { pairLink } = __m(318);
+const { face, place, pickGlyph, statePair, keyFace, stateLabel, stateClock } = __m(525);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const DUR = 0.6;
 const __default = {
@@ -2974,11 +3716,11 @@ return k.svg();
 },
 };
 };
-__d[223] = function (__ns) {
-const { surface, path, n, clamp, outQuad, mix, P, url, linearGradient } = __m(113);
-const { AUTOPLAY_PARAM } = __m(214);
-const { pairLink } = __m(137);
-const { pickGlyph, statePair, keyFace, stateLabel, stateClock } = __m(215);
+__d[533] = function (__ns) {
+const { surface, path, n, clamp, outQuad, mix, P, url, linearGradient } = __m(276);
+const { AUTOPLAY_PARAM } = __m(524);
+const { pairLink } = __m(318);
+const { pickGlyph, statePair, keyFace, stateLabel, stateClock } = __m(525);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const CLOSE = 0.3, OPEN = 0.4, BLADES = 6;
 const __default = {
@@ -3037,11 +3779,11 @@ return k.svg();
 },
 };
 };
-__d[224] = function (__ns) {
-const { surface, clamp, inOutSine, smoothstep } = __m(113);
-const { AUTOPLAY_PARAM } = __m(214);
-const { pairLink } = __m(137);
-const { face, place, pickGlyph, statePair, keyFace, stateLabel, stateClock, glyphPrims, morphPen, paintPen } = __m(215);
+__d[534] = function (__ns) {
+const { surface, clamp, inOutSine, smoothstep } = __m(276);
+const { AUTOPLAY_PARAM } = __m(524);
+const { pairLink } = __m(318);
+const { face, place, pickGlyph, statePair, keyFace, stateLabel, stateClock, glyphPrims, morphPen, paintPen } = __m(525);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const DUR = 0.7;
 const __default = {
@@ -3085,12 +3827,12 @@ return k.svg();
 },
 };
 };
-__d[225] = function (__ns) {
-const { surface, polygon, linearGradient, url } = __m(113);
+__d[535] = function (__ns) {
+const { surface, polygon, linearGradient, url } = __m(276);
 const { mix } = __m(4);
 const { clamp, smoothstep, lerp } = __m(12);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, dotD, ellipseD, polyD, lit, clipPoly } = __m(202);
+const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, dotD, ellipseD, polyD, lit, clipPoly } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 30, TAU = Math.PI * 2;
 function fishShape(kind, wag) {
@@ -3276,11 +4018,11 @@ return k.svg();
 },
 };
 };
-__d[226] = function (__ns) {
-const { surface, rect, radialGradient, linearGradient, url, n } = __m(113);
+__d[536] = function (__ns) {
+const { surface, rect, radialGradient, linearGradient, url, n } = __m(276);
 const { clamp } = __m(12);
 const { noise1, hash } = __m(1);
-const { BUDGET, frameClock, materials } = __m(201);
+const { BUDGET, frameClock, materials } = __m(511);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 24, TAU = Math.PI * 2;
 function arc(k, { cx, cy, px, py, color, peak, at = 0.82, spread = 0.12, id }) {
@@ -3357,11 +4099,11 @@ return k.svg();
 },
 };
 };
-__d[227] = function (__ns) {
-const { surface, radialGradient, url } = __m(113);
+__d[537] = function (__ns) {
+const { surface, radialGradient, url } = __m(276);
 const { mix } = __m(4);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, isoPaths, rectD, f1 } = __m(202);
+const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, isoPaths, rectD, f1 } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 20, TAU = Math.PI * 2;
 const __default = {
@@ -3447,12 +4189,12 @@ return k.svg();
 },
 };
 };
-__d[228] = function (__ns) {
-const { surface, circle, n } = __m(113);
+__d[538] = function (__ns) {
+const { surface, circle, n } = __m(276);
 const { clamp, outExpo } = __m(12);
 const { measureText } = __m(11);
-const { materials, inCell, middleRow, rowCells } = __m(201);
-const { text, strHash } = __m(195);
+const { materials, inCell, middleRow, rowCells } = __m(511);
+const { text, strHash } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const TURN = 4, IN = 0.7;
 const CHAT = [
@@ -3553,11 +4295,11 @@ return k.svg();
 },
 };
 };
-__d[229] = function (__ns) {
-const { surface, rect, circle, linearGradient, url } = __m(113);
+__d[539] = function (__ns) {
+const { surface, rect, circle, linearGradient, url } = __m(276);
 const { clamp, outExpo, lerp } = __m(12);
 const { pad2 } = __m(11);
-const { BUDGET, frameClock, materials, inCell, middleRow, rowCells, half } = __m(201);
+const { BUDGET, frameClock, materials, inCell, middleRow, rowCells, half } = __m(511);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const DOW = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 const MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
@@ -3663,12 +4405,12 @@ return k.svg();
 },
 };
 };
-__d[230] = function (__ns) {
-const { surface } = __m(113);
+__d[540] = function (__ns) {
+const { surface } = __m(276);
 const { mix } = __m(4);
 const { clamp, smoothstep, outCubic } = __m(12);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, inCell, isFlat, starD, dotD, lit } = __m(202);
+const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, inCell, isFlat, starD, dotD, lit } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const SKY = [
 { name: 'Orion', sub: 'The Hunter', stars: [[0.28, 0.2, 0.5], [0.66, 0.24, 1.6], [0.47, 0.06, 3.4], [0.41, 0.52, 1.8], [0.5, 0.49, 1.7], [0.59, 0.46, 2.2], [0.32, 0.88, 2.1], [0.74, 0.84, 0.2], [0.49, 0.64, 3.6]],
@@ -3807,12 +4549,12 @@ return k.svg();
 },
 };
 };
-__d[231] = function (__ns) {
-const { surface, radialGradient, url } = __m(113);
+__d[541] = function (__ns) {
+const { surface, radialGradient, url } = __m(276);
 const { mix } = __m(4);
 const { clamp, lerp, smoothstep } = __m(12);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, lit, dotD, ellipseD, polyD, clipPoly, rectD, inCell, f1 } = __m(202);
+const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, lit, dotD, ellipseD, polyD, clipPoly, rectD, inCell, f1 } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 96;
 const pad2 = (v) => String(v).padStart(2, '0');
@@ -3984,12 +4726,12 @@ return k.svg();
 },
 };
 };
-__d[232] = function (__ns) {
-const { surface } = __m(113);
+__d[542] = function (__ns) {
+const { surface } = __m(276);
 const { mix } = __m(4);
 const { hash } = __m(1);
-const { FONT5, charOf } = __m(89);
-const { BUDGET, frameClock, materials, Batch, fillP, backdrop, isFlat, lit, f1 } = __m(202);
+const { FONT5, charOf } = __m(252);
+const { BUDGET, frameClock, materials, Batch, fillP, backdrop, isFlat, lit, f1 } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 24;
 const KANA = [
@@ -4082,11 +4824,11 @@ return k.svg();
 },
 };
 };
-__d[233] = function (__ns) {
-const { surface, rect, path, polygon, circle, linearGradient, radialGradient, url, n, P } = __m(113);
+__d[543] = function (__ns) {
+const { surface, rect, path, polygon, circle, linearGradient, radialGradient, url, n, P } = __m(276);
 const { clamp, lerp, smoothstep } = __m(12);
 const { noise1 } = __m(1);
-const { BUDGET, frameClock, materials } = __m(201);
+const { BUDGET, frameClock, materials } = __m(511);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 16, RAD = Math.PI / 180, BANDS = 12;
 const TAU = Math.PI * 2;
@@ -4189,12 +4931,12 @@ return k.svg();
 },
 };
 };
-__d[234] = function (__ns) {
-const { surface, radialGradient, url } = __m(113);
+__d[544] = function (__ns) {
+const { surface, radialGradient, url } = __m(276);
 const { mix } = __m(4);
 const { clamp, smoothstep } = __m(12);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, Batch, fillP, backdrop, isFlat, f1, dotD } = __m(202);
+const { BUDGET, frameClock, materials, Batch, fillP, backdrop, isFlat, f1, dotD } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 24, TAU = Math.PI * 2;
 const SYNC = 1.2; 
@@ -4296,8 +5038,8 @@ return k.svg();
 },
 };
 };
-__d[235] = function (__ns) {
-const { surface, keyInto, path, polygon, circle, rect, linearGradient, radialGradient, url, n, P } = __m(113);
+__d[545] = function (__ns) {
+const { surface, keyInto, path, polygon, circle, rect, linearGradient, radialGradient, url, n, P } = __m(276);
 const { clamp, lerp, outCubic, outExpo, smoothstep, phase } = __m(12);
 const { noise1 } = __m(1);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -4422,12 +5164,12 @@ return k.svg();
 },
 };
 };
-__d[236] = function (__ns) {
-const { surface } = __m(113);
+__d[546] = function (__ns) {
+const { surface } = __m(276);
 const { clamp } = __m(12);
 const { mix } = __m(4);
-const { materials, inCell, middleRow, rowCells } = __m(201);
-const { flap, flapColors, text } = __m(195);
+const { materials, inCell, middleRow, rowCells } = __m(511);
+const { flap, flapColors, text } = __m(505);
 const { capHeight } = __m(11);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const FLIP = 0.55; 
@@ -4500,12 +5242,12 @@ return k.svg();
 },
 };
 };
-__d[237] = function (__ns) {
-const { surface, radialGradient, url } = __m(113);
+__d[547] = function (__ns) {
+const { surface, radialGradient, url } = __m(276);
 const { mix } = __m(4);
 const { clamp } = __m(12);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, lit, dotD, f1, rectD } = __m(202);
+const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, lit, dotD, f1, rectD } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 90, TAU = Math.PI * 2;
 const gauss = (a, b) => Math.sqrt(-2 * Math.log(Math.max(1e-6, a))) * Math.cos(TAU * b);
@@ -4617,12 +5359,12 @@ return k.svg();
 },
 };
 };
-__d[238] = function (__ns) {
-const { surface, rect, path, n, P, linearGradient, url } = __m(113);
+__d[548] = function (__ns) {
+const { surface, rect, path, n, P, linearGradient, url } = __m(276);
 const { clamp, outExpo, lerp } = __m(12);
 const { mix } = __m(4);
-const { materials, inCell, middleRow, rowCells } = __m(201);
-const { text, burst, capHeight } = __m(195);
+const { materials, inCell, middleRow, rowCells } = __m(511);
+const { text, burst, capHeight } = __m(505);
 const { compact, measureText } = __m(11);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const FILL = 1.6, SETTLE = 2.6;
@@ -4706,12 +5448,12 @@ return k.svg();
 },
 };
 };
-__d[239] = function (__ns) {
-const { surface, radialGradient, url } = __m(113);
+__d[549] = function (__ns) {
+const { surface, radialGradient, url } = __m(276);
 const { mix, shade } = __m(4);
 const { clamp } = __m(12);
 const { hash, noise1 } = __m(1);
-const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, f1, clipPoly, lit } = __m(202);
+const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, f1, clipPoly, lit } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 24, TAU = Math.PI * 2;
 function tongue(x, y, H, W, s, ph) {
@@ -4879,12 +5621,12 @@ return k.svg();
 };
 const n2 = (v) => Math.round(clamp(v) * 100) / 100;
 };
-__d[240] = function (__ns) {
-const { surface, rect, radialGradient, linearGradient, url } = __m(113);
+__d[550] = function (__ns) {
+const { surface, rect, radialGradient, linearGradient, url } = __m(276);
 const { mix, shade } = __m(4);
 const { clamp } = __m(12);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, Batch, fillP, backdrop, isoPaths, isFlat, f1 } = __m(202);
+const { BUDGET, frameClock, materials, Batch, fillP, backdrop, isoPaths, isFlat, f1 } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 48, TAU = Math.PI * 2;
 const __default = {
@@ -4968,10 +5710,10 @@ return k.svg();
 },
 };
 };
-__d[241] = function (__ns) {
-const { surface, linearGradient, url, n } = __m(113);
+__d[551] = function (__ns) {
+const { surface, linearGradient, url, n } = __m(276);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, spectrumHue } = __m(201);
+const { BUDGET, frameClock, materials, spectrumHue } = __m(511);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const GENS = 48;
 function board(grid, per) {
@@ -5045,9 +5787,9 @@ return k.svg();
 },
 };
 };
-__d[242] = function (__ns) {
-const { surface, textPath, measureText, capHeight, linearGradient, url, rect, n } = __m(113);
-const { BUDGET, frameClock, materials, middleRow, rowCells, spectrumHue, half } = __m(201);
+__d[552] = function (__ns) {
+const { surface, textPath, measureText, capHeight, linearGradient, url, rect, n } = __m(276);
+const { BUDGET, frameClock, materials, middleRow, rowCells, spectrumHue, half } = __m(511);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'span-marquee',
@@ -5111,10 +5853,10 @@ return k.svg();
 },
 };
 };
-__d[243] = function (__ns) {
-const { surface, keyInto, radialGradient, linearGradient, url } = __m(113);
+__d[553] = function (__ns) {
+const { surface, keyInto, radialGradient, linearGradient, url } = __m(276);
 const { clamp, smoothstep, outExpo, outCubic, lerp } = __m(12);
-const { BUDGET, frameClock, Batch, strokeP, fillP, polyD, rectD, f1 } = __m(202);
+const { BUDGET, frameClock, Batch, strokeP, fillP, polyD, rectD, f1 } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const AXIS = 12 * Math.PI / 180; 
 const FACES = ['mic', 'camera', 'volume', 'play-pause', 'scene', 'chat', 'record', 'broadcast', 'bulb', 'timer', 'home', 'lock', 'music-note', 'headphones', 'mail', 'calendar', 'cpu', 'wifi', 'folder', 'search', 'note', 'coffee', 'stopwatch', 'skip-next', 'shuffle', 'terminal', 'code', 'rocket', 'cloud', 'sync', 'target', 'marker', 'mixer', 'viewers', 'alarm', 'fan'];
@@ -5248,11 +5990,11 @@ return k.svg();
 },
 };
 };
-__d[244] = function (__ns) {
-const { surface, rect, circle, linearGradient, url, n } = __m(113);
+__d[554] = function (__ns) {
+const { surface, rect, circle, linearGradient, url, n } = __m(276);
 const { clamp, lerp, smoothstep, outCubic, phase } = __m(12);
 const { noise1 } = __m(1);
-const { BUDGET, frameClock, materials, inCell, middleRow, rowCells, half } = __m(201);
+const { BUDGET, frameClock, materials, inCell, middleRow, rowCells, half } = __m(511);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const RUN = 11, DONE = 2, LOOP = 14;
 function simulated(tt, seed) {
@@ -5330,12 +6072,12 @@ return k.svg();
 },
 };
 };
-__d[245] = function (__ns) {
-const { surface, radialGradient, url } = __m(113);
+__d[555] = function (__ns) {
+const { surface, radialGradient, url } = __m(276);
 const { mix } = __m(4);
 const { clamp, smoothstep } = __m(12);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, dotD, ellipseD, f1 } = __m(202);
+const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, dotD, ellipseD, f1 } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 30;
 const __default = {
@@ -5445,11 +6187,11 @@ return k.svg();
 },
 };
 };
-__d[246] = function (__ns) {
-const { surface, rect, path, ellipse, linearGradient, url, n } = __m(113);
+__d[556] = function (__ns) {
+const { surface, rect, path, ellipse, linearGradient, url, n } = __m(276);
 const { clamp, outCubic } = __m(12);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, vClip, spectrumHue, half } = __m(201);
+const { BUDGET, frameClock, materials, vClip, spectrumHue, half } = __m(511);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'span-rain',
@@ -5518,11 +6260,11 @@ return k.svg();
 },
 };
 };
-__d[247] = function (__ns) {
-const { surface, rect, path, radialGradient, url, n } = __m(113);
+__d[557] = function (__ns) {
+const { surface, rect, path, radialGradient, url, n } = __m(276);
 const { clamp, smoothstep, outCubic, lerp } = __m(12);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, runsInRect, runsPath, circlePoints, half } = __m(201);
+const { BUDGET, frameClock, materials, runsInRect, runsPath, circlePoints, half } = __m(511);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LIFE = 3.2; 
 const DROP = 2.2; 
@@ -5623,12 +6365,12 @@ return k.svg();
 },
 };
 };
-__d[248] = function (__ns) {
-const { surface, circle, rect, n } = __m(113);
+__d[558] = function (__ns) {
+const { surface, circle, rect, n } = __m(276);
 const { clamp, outExpo } = __m(12);
 const { mix } = __m(4);
-const { materials, inCell, middleRow, rowCells } = __m(201);
-const { flap, flapColors, text, burst, capHeight } = __m(195);
+const { materials, inCell, middleRow, rowCells } = __m(511);
+const { flap, flapColors, text, burst, capHeight } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const UNDO = 0.5, FLIP = 0.55;
 function plan(nKeys) {
@@ -5747,12 +6489,12 @@ return k.svg();
 },
 };
 };
-__d[249] = function (__ns) {
-const { surface, radialGradient, url } = __m(113);
+__d[559] = function (__ns) {
+const { surface, radialGradient, url } = __m(276);
 const { mix } = __m(4);
 const { clamp, smoothstep } = __m(12);
 const { hash, noise1 } = __m(1);
-const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, flakeD, polyD, clipPoly, dotD, f1, lit } = __m(202);
+const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, flakeD, polyD, clipPoly, dotD, f1, lit } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 60, TAU = Math.PI * 2;
 const __default = {
@@ -5866,11 +6608,11 @@ return k.svg();
 },
 };
 };
-__d[250] = function (__ns) {
-const { surface, rect, linearGradient, url, n } = __m(113);
+__d[560] = function (__ns) {
+const { surface, rect, linearGradient, url, n } = __m(276);
 const { clamp } = __m(12);
 const { noise1, fbm1 } = __m(1);
-const { BUDGET, frameClock, materials, spectrumHue } = __m(201);
+const { BUDGET, frameClock, materials, spectrumHue } = __m(511);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 function sim(f, j, t, seed) {
 const beat = t * 2; 
@@ -5967,12 +6709,12 @@ return k.svg();
 },
 };
 };
-__d[251] = function (__ns) {
-const { surface, radialGradient, url } = __m(113);
+__d[561] = function (__ns) {
+const { surface, radialGradient, url } = __m(276);
 const { mix } = __m(4);
 const { clamp } = __m(12);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, polyD, clipPoly, dotD, ellipseD, f1, lit } = __m(202);
+const { BUDGET, frameClock, materials, Batch, fillP, strokeP, backdrop, isFlat, polyD, clipPoly, dotD, ellipseD, f1, lit } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 16, TAU = Math.PI * 2;
 const __default = {
@@ -6070,12 +6812,12 @@ return k.svg();
 },
 };
 };
-__d[252] = function (__ns) {
-const { surface, radialGradient, url } = __m(113);
+__d[562] = function (__ns) {
+const { surface, radialGradient, url } = __m(276);
 const { mix } = __m(4);
 const { clamp, smoothstep } = __m(12);
 const { hash } = __m(1);
-const { BUDGET, frameClock, materials, Batch, strokeP, fillP, backdrop, isFlat, lit, f1, rectD } = __m(202);
+const { BUDGET, frameClock, materials, Batch, strokeP, fillP, backdrop, isFlat, lit, f1, rectD } = __m(512);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LOOP = 20;
 const speed = (s) => 1 + 3 * smoothstep(11, 14.6, s) + 9 * smoothstep(14.2, 15.2, s) * (1 - smoothstep(15.6, 17.4, s)) - 3 * smoothstep(15.4, 19.6, s);
@@ -6160,8 +6902,8 @@ return k.svg();
 },
 };
 };
-__d[253] = function (__ns) {
-const { surface, keyInto, path, linearGradient, url, circle, n, P } = __m(113);
+__d[563] = function (__ns) {
+const { surface, keyInto, path, linearGradient, url, circle, n, P } = __m(276);
 const { noise1 } = __m(1);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 function synth(x, seed) {
@@ -6214,7 +6956,7 @@ return d.svg();
 },
 };
 };
-__d[254] = function (__ns) {
+__d[564] = function (__ns) {
 const { svgDoc, path, n, P } = __m(5);
 const { arcPath, polar } = __m(15);
 const { arrive, clamp, lerp, outExpo } = __m(12);
@@ -6259,10 +7001,10 @@ return ctx.noise.metric(ctx.reduced ? 2 : ctx.t, { lo, hi, speed });
 const dbOf = (v) => (v >= 0.9995 ? '0.0' : `–${Math.min(60, -20 * Math.log10(Math.max(0.001, v))).toFixed(1)}`);
 const pointer = (x, y, s) => P().M(x - s, y).L(x + s, y).L(x, y + s * 1.3).Z().d;
 };
-__d[255] = function (__ns) {
-const { surface, path, rect, sectorPath, oklch, n, P } = __m(113);
+__d[565] = function (__ns) {
+const { surface, path, rect, sectorPath, oklch, n, P } = __m(276);
 const { clamp, lerp, arrive } = __m(12);
-const { finish, arrival, pointer } = __m(254);
+const { finish, arrival, pointer } = __m(564);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const SECTOR = 5;
 const __default = {
@@ -6325,10 +7067,10 @@ return finish(k);
 },
 };
 };
-__d[256] = function (__ns) {
-const { surface, path, rect, linearGradient, url, n, P } = __m(113);
+__d[566] = function (__ns) {
+const { surface, path, rect, linearGradient, url, n, P } = __m(276);
 const { clamp, lerp, arrive } = __m(12);
-const { arrival, ramp } = __m(254);
+const { arrival, ramp } = __m(564);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const SEG = 200, Y0 = 53, RANGE = 22, SIGMA = 88, FLOOR = 80;
 const NAMES = { 4: ['Low', 'Lo mid', 'Hi mid', 'High'], 6: ['Sub', 'Low', 'Lo mid', 'Hi mid', 'High', 'Air'] };
@@ -6418,10 +7160,10 @@ return k.svg();
 },
 };
 };
-__d[257] = function (__ns) {
-const { surface, path, arcPath, polar, n, P } = __m(113);
+__d[567] = function (__ns) {
+const { surface, path, arcPath, polar, n, P } = __m(276);
 const { clamp, lerp } = __m(12);
-const { finish, arrival, tickPaths, ramp } = __m(254);
+const { finish, arrival, tickPaths, ramp } = __m(564);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const METRICS = { cpu: { label: 'CPU', off: 0 }, gpu: { label: 'GPU', off: 41 }, mem: { label: 'Memory', off: 83 } };
 const __default = {
@@ -6481,12 +7223,12 @@ return finish(k);
 },
 };
 };
-__d[258] = function (__ns) {
-const { surface, rect, path, n, P, linearGradient, radialGradient, url } = __m(113);
+__d[568] = function (__ns) {
+const { surface, rect, path, n, P, linearGradient, radialGradient, url } = __m(276);
 const { clamp, lerp, outExpo } = __m(12);
 const { mix, oklch, hexToOklch } = __m(4);
-const { finish, arrival } = __m(254);
-const { text, kelvinHex } = __m(195);
+const { finish, arrival } = __m(564);
+const { text, kelvinHex } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'dial-light',
@@ -6554,8 +7296,8 @@ return finish(k);
 },
 };
 };
-__d[259] = function (__ns) {
-const { surface, path, rect, linearGradient, url, n } = __m(113);
+__d[569] = function (__ns) {
+const { surface, path, rect, linearGradient, url, n } = __m(276);
 const { lerp, clamp, smoothstep } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
@@ -6614,12 +7356,12 @@ return k.svg();
 },
 };
 };
-__d[260] = function (__ns) {
-const { surface, rect, path, n, P, linearGradient, url } = __m(113);
+__d[570] = function (__ns) {
+const { surface, rect, path, n, P, linearGradient, url } = __m(276);
 const { clamp } = __m(12);
 const { mix } = __m(4);
-const { text, mmss } = __m(195);
-const { panelInto } = __m(114);
+const { text, mmss } = __m(505);
+const { panelInto } = __m(277);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const SEG = 200;
 function chaptersOf(spec) {
@@ -6719,11 +7461,11 @@ return k.svg();
 },
 };
 };
-__d[261] = function (__ns) {
-const { surface, rect, circle, n } = __m(113);
+__d[571] = function (__ns) {
+const { surface, rect, circle, n } = __m(276);
 const { clamp } = __m(12);
-const { finish } = __m(254);
-const { flap, flapColors, text } = __m(195);
+const { finish } = __m(564);
+const { flap, flapColors, text } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const FLIP = 0.5;
 const __default = {
@@ -6775,10 +7517,10 @@ return finish(k);
 },
 };
 };
-__d[262] = function (__ns) {
-const { surface, path, rect, n, P } = __m(113);
+__d[572] = function (__ns) {
+const { surface, path, rect, n, P } = __m(276);
 const { clamp } = __m(12);
-const { finish, arrival, pointer } = __m(254);
+const { finish, arrival, pointer } = __m(564);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const PPS = 22; 
 const FPS = 24; 
@@ -6864,10 +7606,10 @@ return finish(k);
 },
 };
 };
-__d[263] = function (__ns) {
-const { surface, path, rect, linearGradient, url, polar, n, P } = __m(113);
+__d[573] = function (__ns) {
+const { surface, path, rect, linearGradient, url, polar, n, P } = __m(276);
 const { clamp, lerp, outCubic } = __m(12);
-const { finish, arrival } = __m(254);
+const { finish, arrival } = __m(564);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'dial-selector',
@@ -6930,11 +7672,11 @@ return finish(k);
 },
 };
 };
-__d[264] = function (__ns) {
-const { surface, path, rect, linearGradient, url, n, P } = __m(113);
+__d[574] = function (__ns) {
+const { surface, path, rect, linearGradient, url, n, P } = __m(276);
 const { clamp, lerp } = __m(12);
 const { rng: makeRng } = __m(1);
-const { arrival, ramp, dbOf, pointer } = __m(254);
+const { arrival, ramp, dbOf, pointer } = __m(564);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const SEG = 200;
 const LANES = { ruler: [25, 33], video: [39, 56], voice: [59, 72], music: [75, 87] };
@@ -7066,10 +7808,10 @@ return k.svg();
 },
 };
 };
-__d[265] = function (__ns) {
-const { surface, rect, path, n } = __m(113);
+__d[575] = function (__ns) {
+const { surface, rect, path, n } = __m(276);
 const { clamp, lerp } = __m(12);
-const { finish, arrival, ramp } = __m(254);
+const { finish, arrival, ramp } = __m(564);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const BARS = 20;
 const __default = {
@@ -7122,11 +7864,11 @@ return finish(k);
 },
 };
 };
-__d[266] = function (__ns) {
-const { surface, path, arcPath, polar, n } = __m(113);
+__d[576] = function (__ns) {
+const { surface, path, arcPath, polar, n } = __m(276);
 const { clamp, lerp, arrive } = __m(12);
-const { finish, arrival, spectralArc, tickPaths, signal, dbOf } = __m(254);
-const { mutedPlate, strike } = __m(137);
+const { finish, arrival, spectralArc, tickPaths, signal, dbOf } = __m(564);
+const { mutedPlate, strike } = __m(318);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'dial-volume-arc',
@@ -7190,11 +7932,11 @@ return finish(k);
 },
 };
 };
-__d[267] = function (__ns) {
-const { surface, rect, linearGradient, url, path, n } = __m(113);
+__d[577] = function (__ns) {
+const { surface, rect, linearGradient, url, path, n } = __m(276);
 const { noise1 } = __m(1);
 const { clamp } = __m(12);
-const { mutedPlate, strike } = __m(137);
+const { mutedPlate, strike } = __m(318);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'dial-volume',
@@ -7254,12 +7996,12 @@ return k.svg();
 },
 };
 };
-__d[268] = function (__ns) {
-const { surface, rect, path, n, P, linearGradient, url } = __m(113);
+__d[578] = function (__ns) {
+const { surface, rect, path, n, P, linearGradient, url } = __m(276);
 const { clamp, lerp, outExpo } = __m(12);
 const { mix } = __m(4);
-const { finish, arrival, pointer } = __m(254);
-const { text } = __m(195);
+const { finish, arrival, pointer } = __m(564);
+const { text } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const LO = 0.1, HI = 8;
 const zoomOf = (v) => LO * (HI / LO) ** clamp(v);
@@ -7327,11 +8069,11 @@ return finish(k);
 },
 };
 };
-__d[269] = function (__ns) {
-const { keyInto, rect, path, P, n, attrs, linearGradient, url } = __m(113);
-const { PanelSurface } = __m(110);
-const { childContext } = __m(111);
-const { gameGrid } = __m(98);
+__d[579] = function (__ns) {
+const { keyInto, rect, path, P, n, attrs, linearGradient, url } = __m(276);
+const { PanelSurface } = __m(273);
+const { childContext } = __m(274);
+const { gameGrid } = __m(261);
 const { Pen } = __m(16);
 const { clamp, lerp, outExpo } = __m(12);
 __e(__ns, { "HUE": () => HUE, "SPECTRUM": () => SPECTRUM, "spread": () => spread, "ageOf": () => ageOf, "cellsOf": () => cellsOf, "middleCell": () => middleCell, "beamColor": () => beamColor, "beam": () => beam, "sweepX": () => sweepX, "burst": () => burst, "ringWave": () => ringWave, "converge": () => converge, "convergeText": () => convergeText, "progressBeam": () => progressBeam, "readoutCard": () => card, "screenCards": () => screenCards, "readout": () => readout, "hasReadout": () => hasReadout, "statusKey": () => statusKey, "cellKey": () => cellKey, "panelBase": () => panelBase }, [], ["HUE","SPECTRUM","ageOf","beam","beamColor","burst","cellKey","cellsOf","converge","convergeText","hasReadout","middleCell","panelBase","progressBeam","readout","readoutCard","ringWave","screenCards","spread","statusKey","sweepX"]);
@@ -7513,9 +8255,9 @@ function panelBase(d, ctx) {
 if (ctx.kind === 'deck') d.add(rect({ width: ctx.w, height: ctx.h, fill: '#000000' }));
 }
 };
-__d[270] = function (__ns) {
-const { surface } = __m(113);
-const { screenCards, HUE } = __m(269);
+__d[580] = function (__ns) {
+const { surface } = __m(276);
+const { screenCards, HUE } = __m(579);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const IDLE = [
 { title: 'Scoreboard', value: 'No game', role: 'value', sub: 'put a game on the keys', hue: HUE.violet },
@@ -7545,12 +8287,12 @@ return screenCards(surface(ctx), ctx, cards);
 },
 };
 };
-__d[271] = function (__ns) {
-const { surface } = __m(113);
+__d[581] = function (__ns) {
+const { surface } = __m(276);
 const { wrapText, capHeight } = __m(11);
-const { mediaOf, spectrumOf, audioOf } = __m(116);
-const { galleon, header, meter, coverArt, mmss, HUE, GALLEON_PARAMS, clamp, lerp } = __m(114);
-const { volume } = __m(117);
+const { mediaOf, spectrumOf, audioOf } = __m(279);
+const { galleon, header, meter, coverArt, mmss, HUE, GALLEON_PARAMS, clamp, lerp } = __m(277);
+const { volume } = __m(280);
 const { path, n, roundRectPath } = __m(5);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
@@ -7642,13 +8384,13 @@ return galleon(ctx, scr, [[nowPlaying, volume(ctx, { value: vol, muted })], [see
 },
 };
 };
-__d[272] = function (__ns) {
-const { surface, rect, path, n, roundRectPath } = __m(113);
+__d[582] = function (__ns) {
+const { surface, rect, path, n, roundRectPath } = __m(276);
 const { wrapText, capHeight } = __m(11);
-const { calendarOf, audioOf } = __m(116);
-const { AGENDA } = __m(115);
-const { mutedPlate, strike } = __m(137);
-const { galleon, header, stat, meter, segmented, hhmm, localParts, HUE, GALLEON_PARAMS, clamp } = __m(114);
+const { calendarOf, audioOf } = __m(279);
+const { AGENDA } = __m(278);
+const { mutedPlate, strike } = __m(318);
+const { galleon, header, stat, meter, segmented, hhmm, localParts, HUE, GALLEON_PARAMS, clamp } = __m(277);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const MIN = 60000;
 function eventsOf(ctx, cal) {
@@ -7782,14 +8524,14 @@ tones: [[soon ? 'warn' : 'idle', muted ? 'neg' : 'idle'], ['idle', camOn ? 'idle
 },
 };
 };
-__d[273] = function (__ns) {
-const { surface, rect, n } = __m(113);
+__d[583] = function (__ns) {
+const { surface, rect, n } = __m(276);
 const { clamp, outExpo } = __m(12);
 const { mix } = __m(4);
-const { audioOf } = __m(116);
-const { mutedPlate } = __m(137);
-const { galleon, header, stat, meter, segmented, spark, pictogram, HUE, GALLEON_PARAMS } = __m(114);
-const { text, glowText, widthOf, mmss } = __m(195);
+const { audioOf } = __m(279);
+const { mutedPlate } = __m(318);
+const { galleon, header, stat, meter, segmented, spark, pictogram, HUE, GALLEON_PARAMS } = __m(277);
+const { text, glowText, widthOf, mmss } = __m(505);
 const { capHeight, compact } = __m(11);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const CHATTERS = ['nova_k', 'pixelmoth', 'dr_lumen', 'quietfox', 'atlas.v', 'mira_codes', 'ember77', 'tess', 'bytewren', 'solstice'];
@@ -7895,10 +8637,10 @@ return galleon(ctx, scr, [[onAir, mic], [goal, chat]], { hues: [[25, HUE.jade], 
 },
 };
 };
-__d[274] = function (__ns) {
-const { surface } = __m(113);
-const { galleon, HUE, GALLEON_PARAMS } = __m(114);
-const { cpuCores, memory, gpuGauge, network } = __m(117);
+__d[584] = function (__ns) {
+const { surface } = __m(276);
+const { galleon, HUE, GALLEON_PARAMS } = __m(277);
+const { cpuCores, memory, gpuGauge, network } = __m(280);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'screen-galleon-system',
@@ -7924,7 +8666,7 @@ return galleon(ctx, surface(ctx), [[cpuCores(ctx, { fahrenheit: ctx.params.fahre
 },
 };
 };
-__d[275] = function (__ns) {
+__d[585] = function (__ns) {
 const { hash } = __m(1);
 const { clamp, lerp } = __m(12);
 __e(__ns, { "kindOf": () => kindOf, "LABEL": () => LABEL, "KIND_HUE": () => KIND_HUE, "weatherOf": () => weatherOf, "hourOf": () => hourOf, "isNight": () => isNight, "toF": () => toF, "compass": () => compass, "drawWeather": () => drawWeather, "clamp": () => clamp }, [], ["KIND_HUE","LABEL","clamp","compass","drawWeather","hourOf","isNight","kindOf","toF","weatherOf"]);
@@ -8025,11 +8767,11 @@ default: CLOUD(g);
 }
 }
 };
-__d[276] = function (__ns) {
-const { surface, path, circle, n, url, linearGradient, rect } = __m(113);
+__d[586] = function (__ns) {
+const { surface, path, circle, n, url, linearGradient, rect } = __m(276);
 const { capHeight, measureText } = __m(11);
-const { galleon, header, stat, pictogram, hhmm, localParts, HUE, GALLEON_PARAMS, DAYS, MONTHS, clamp, lerp } = __m(114);
-const { weatherOf, drawWeather, KIND_HUE, kindOf, hourOf, isNight, toF, compass } = __m(275);
+const { galleon, header, stat, pictogram, hhmm, localParts, HUE, GALLEON_PARAMS, DAYS, MONTHS, clamp, lerp } = __m(277);
+const { weatherOf, drawWeather, KIND_HUE, kindOf, hourOf, isNight, toF, compass } = __m(585);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'screen-galleon-weather',
@@ -8137,11 +8879,11 @@ return galleon(ctx, scr, [[now, today], [hourly, sun]], { hues: [[hueOf(w.kind),
 },
 };
 };
-__d[277] = function (__ns) {
-const { surface, rect } = __m(113);
+__d[587] = function (__ns) {
+const { surface, rect } = __m(276);
 const { capHeight, measureText } = __m(11);
-const { calendarOf } = __m(116);
-const { infobar, px, hhmm, localParts, clamp } = __m(114);
+const { calendarOf } = __m(279);
+const { infobar, px, hhmm, localParts, clamp } = __m(277);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const MIN = 60000;
 const __default = {
@@ -8184,11 +8926,11 @@ if (f > 0.001) p.add(rect({ x: F.x0, y: y - 0.5, width: Math.max(2, F.w * f), he
 },
 };
 };
-__d[278] = function (__ns) {
-const { surface, rect, linearGradient, url, n } = __m(113);
+__d[588] = function (__ns) {
+const { surface, rect, linearGradient, url, n } = __m(276);
 const { capHeight, measureText, pad2 } = __m(11);
-const { calendarOf } = __m(116);
-const { infobar, px, hhmm, localParts, DAYS, MONTHS } = __m(114);
+const { calendarOf } = __m(279);
+const { infobar, px, hhmm, localParts, DAYS, MONTHS } = __m(277);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'screen-neo-clock',
@@ -8228,11 +8970,11 @@ p.add(rect({ x: F.x0, y: p.h - 6.5, width: F.w, height: n(1.5), fill: url(id) })
 },
 };
 };
-__d[279] = function (__ns) {
-const { surface, rect, path, roundRectPath } = __m(113);
+__d[589] = function (__ns) {
+const { surface, rect, path, roundRectPath } = __m(276);
 const { capHeight } = __m(11);
-const { mediaOf, audioOf } = __m(116);
-const { infobar, px, coverArt, mmss, clamp } = __m(114);
+const { mediaOf, audioOf } = __m(279);
+const { infobar, px, coverArt, mmss, clamp } = __m(277);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'screen-neo-now-playing',
@@ -8279,11 +9021,11 @@ p.add(rect({ x, y: y - 0.5, width: Math.max(2, w * f), height: 2.5, rx: 1.25, fi
 },
 };
 };
-__d[280] = function (__ns) {
-const { surface, rect } = __m(113);
-const { metricOf, netOf, rateText } = __m(116);
-const { NET_MAX } = __m(115);
-const { infobar, px, HUE, clamp } = __m(114);
+__d[590] = function (__ns) {
+const { surface, rect } = __m(276);
+const { metricOf, netOf, rateText } = __m(279);
+const { NET_MAX } = __m(278);
+const { infobar, px, HUE, clamp } = __m(277);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'screen-neo-system',
@@ -8320,12 +9062,12 @@ if (c.f > 0.004) p.add(rect({ x, y: p.h - 9.5, width: Math.max(3, cw * c.f), hei
 },
 };
 };
-__d[281] = function (__ns) {
-const { surface, path, roundRectPath } = __m(113);
+__d[591] = function (__ns) {
+const { surface, path, roundRectPath } = __m(276);
 const { capHeight, wrapText } = __m(11);
-const { mediaOf, spectrumOf, audioOf } = __m(116);
-const { PLAYLIST } = __m(115);
-const { strip, stripHeader, stat, meter, segmented, coverArt, mmss, px, HUE, clamp, lerp } = __m(114);
+const { mediaOf, spectrumOf, audioOf } = __m(279);
+const { PLAYLIST } = __m(278);
+const { strip, stripHeader, stat, meter, segmented, coverArt, mmss, px, HUE, clamp, lerp } = __m(277);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'screen-strip-media',
@@ -8401,10 +9143,10 @@ return strip(ctx, surface(ctx), [track, seek, volume, spectrum, next, level], { 
 },
 };
 };
-__d[282] = function (__ns) {
-const { surface } = __m(113);
-const { metricOf, tempOf, netOf, seriesOf, sysOf, rateText, bytesText } = __m(116);
-const { strip, stripHeader, stat, meter, spark, px, HUE, clamp } = __m(114);
+__d[592] = function (__ns) {
+const { surface } = __m(276);
+const { metricOf, tempOf, netOf, seriesOf, sysOf, rateText, bytesText } = __m(279);
+const { strip, stripHeader, stat, meter, spark, px, HUE, clamp } = __m(277);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const split = (s) => { const i = s.lastIndexOf(' '); return i < 0 ? [s, ''] : [s.slice(0, i), s.slice(i + 1)]; };
 const __default = {
@@ -8467,8 +9209,8 @@ return strip(ctx, surface(ctx), [loadCell('cpu', 'CPU'), memory, loadCell('gpu',
 },
 };
 };
-__d[283] = function (__ns) {
-const { keyInto, compose, rect, path, circle, n, P, linearGradient, url } = __m(113);
+__d[593] = function (__ns) {
+const { keyInto, compose, rect, path, circle, n, P, linearGradient, url } = __m(276);
 const { hexToOklch, mix } = __m(4);
 const { clamp, lerp } = __m(12);
 __e(__ns, { "PALETTE_OPTIONS": () => PALETTE_OPTIONS, "paletteOf": () => paletteOf, "hueAt": () => hueAt, "colorAt": () => colorAt, "paletteStops": () => paletteStops, "rampFill": () => rampFill, "whiteOf": () => whiteOf, "lift": () => lift, "keyGlass": () => keyGlass, "gridCols": () => gridCols, "gridRows": () => gridRows, "bandPath": () => bandPath, "smoothLine": () => smoothLine, "glowDot": () => glowDot, "meterBar": () => meterBar, "vHair": () => vHair, "barPath": () => barPath, "path": () => path, "rect": () => rect, "circle": () => circle, "n": () => n, "P": () => P, "clamp": () => clamp, "lerp": () => lerp, "mix": () => mix }, [], ["P","PALETTE_OPTIONS","bandPath","barPath","circle","clamp","colorAt","glowDot","gridCols","gridRows","hueAt","keyGlass","lerp","lift","meterBar","mix","n","paletteOf","paletteStops","path","rampFill","rect","smoothLine","vHair","whiteOf"]);
@@ -8571,10 +9313,10 @@ if (hgt <= 0.01) return '';
 return P().M(x, y0).V(y0 - hgt + rr).Q(x, y0 - hgt, x + rr, y0 - hgt).H(x + w - rr).Q(x + w, y0 - hgt, x + w, y0 - hgt + rr).V(y0).Z().d;
 };
 };
-__d[284] = function (__ns) {
-const { surface, rect, circle, n, linearGradient, url } = __m(113);
+__d[594] = function (__ns) {
+const { surface, rect, circle, n, linearGradient, url } = __m(276);
 const { pad2 } = __m(11);
-const { keyGlass, whiteOf, colorAt } = __m(283);
+const { keyGlass, whiteOf, colorAt } = __m(593);
 __e(__ns, { "clockLines": () => clockLines, "default": () => __default }, [], ["clockLines","default"]);
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -8668,12 +9410,12 @@ return d.svg();
 },
 };
 };
-__d[285] = function (__ns) {
-const { surface, path, circle, rect, n, arcPath, polar } = __m(113);
-const { clockOf } = __m(98);
+__d[595] = function (__ns) {
+const { surface, path, circle, rect, n, arcPath, polar } = __m(276);
+const { clockOf } = __m(261);
 const { pad2, clockText } = __m(11);
 const { clamp, lerp, pulse, smoothstep } = __m(12);
-const { whiteOf, colorAt, glowDot } = __m(283);
+const { whiteOf, colorAt, glowDot } = __m(593);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const big = (k) => Math.min(k.w, k.h) >= 110;
 function skyOf(h) {
@@ -8823,12 +9565,12 @@ return k.svg();
 };
 const __default = [worldClock, stopwatch, countdown];
 };
-__d[286] = function (__ns) {
-const { surface, rect, n } = __m(113);
+__d[596] = function (__ns) {
+const { surface, rect, n } = __m(276);
 const { clamp, outExpo, arrive } = __m(12);
 const { mix } = __m(4);
 const { compact } = __m(11);
-const { text, isBig, perimeter, perimeterStroke, burst } = __m(195);
+const { text, isBig, perimeter, perimeterStroke, burst } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const HOLD = 0.8, ROLL = 0.38;
 const __default = {
@@ -8908,8 +9650,8 @@ return k.svg();
 },
 };
 };
-__d[287] = function (__ns) {
-const { surface, arc, ticks, polar, circle, mix } = __m(113);
+__d[597] = function (__ns) {
+const { surface, arc, ticks, polar, circle, mix } = __m(276);
 const { metric } = __m(1);
 const { lerp } = __m(12);
 const { n } = __m(5);
@@ -8959,12 +9701,12 @@ return k.svg();
 },
 };
 };
-__d[288] = function (__ns) {
-const { surface, rect, path, circle, n, P, linearGradient, url } = __m(113);
-const { clockOf } = __m(98);
+__d[598] = function (__ns) {
+const { surface, rect, path, circle, n, P, linearGradient, url } = __m(276);
+const { clockOf } = __m(261);
 const { clamp, outExpo, inQuad } = __m(12);
 const { mix } = __m(4);
-const { text, isBig, DOW, DOW_LONG, MONTH, MONTH_LONG } = __m(195);
+const { text, isBig, DOW, DOW_LONG, MONTH, MONTH_LONG } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const TEAR = 1.2;
 function isoWeek(y, m, d) {
@@ -9053,8 +9795,8 @@ return k.svg();
 },
 };
 };
-__d[289] = function (__ns) {
-const { surface, arc, polar, circle } = __m(113);
+__d[599] = function (__ns) {
+const { surface, arc, polar, circle } = __m(276);
 const { clockText } = __m(11);
 const { arrive, clamp, pulse, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -9108,10 +9850,10 @@ return k.svg();
 },
 };
 };
-__d[290] = function (__ns) {
-const { surface } = __m(113);
-const { audioOf } = __m(116);
-const { keyGlass, rampFill, bandPath, smoothLine, glowDot, whiteOf, lift, PALETTE_OPTIONS, colorAt, path, rect, n, clamp } = __m(283);
+__d[600] = function (__ns) {
+const { surface } = __m(276);
+const { audioOf } = __m(279);
+const { keyGlass, rampFill, bandPath, smoothLine, glowDot, whiteOf, lift, PALETTE_OPTIONS, colorAt, path, rect, n, clamp } = __m(593);
 __e(__ns, { "LAYOUTS": () => LAYOUTS, "autoLayout": () => autoLayout, "expand": () => expand, "default": () => __default }, [], ["LAYOUTS","autoLayout","default","expand"]);
 const LAYOUTS = ['auto', 'mirror', 'rows', 'skyline', 'pour'];
 const autoLayout = () => 'rows';
@@ -9289,14 +10031,14 @@ return d.svg();
 },
 };
 };
-__d[291] = function (__ns) {
-const { surface, path, rect, n, roundRectPath } = __m(113);
+__d[601] = function (__ns) {
+const { surface, path, rect, n, roundRectPath } = __m(276);
 const { capHeight } = __m(11);
-const { header, stat, meter, segmented, spark, coverArt, frameOf, activeMark, panelInto, galleon, mmss, hhmm, localParts, HUE, clamp } = __m(114);
-const { clock, cpuGauge, cpuCores, gpuGauge, memory, network, volume } = __m(117);
-const { audioOf, spectrumOf, metricOf, seriesOf, sysOf, bytesText, rateText, mediaOf, calendarOf } = __m(116);
-const { colorAt, bandPath, smoothLine } = __m(283);
-const { expand } = __m(290);
+const { header, stat, meter, segmented, spark, coverArt, frameOf, activeMark, panelInto, galleon, mmss, hhmm, localParts, HUE, clamp } = __m(277);
+const { clock, cpuGauge, cpuCores, gpuGauge, memory, network, volume } = __m(280);
+const { audioOf, spectrumOf, metricOf, seriesOf, sysOf, bytesText, rateText, mediaOf, calendarOf } = __m(279);
+const { colorAt, bandPath, smoothLine } = __m(593);
+const { expand } = __m(600);
 __e(__ns, { "WIDGETS": () => WIDGETS, "WIDGET_KINDS": () => WIDGET_KINDS, "WIDGET_DATA": () => WIDGET_DATA, "widgetScreen": () => widgetScreen, "galleonOf": () => galleonOf }, [], ["WIDGETS","WIDGET_DATA","WIDGET_KINDS","galleonOf","widgetScreen"]);
 const MIN = 60000;
 const audioWidget = (ctx) => (p, W) => {
@@ -9422,9 +10164,9 @@ const k = (l, d) => WIDGETS[kinds[l][d]] || WIDGETS.clock;
 return galleon(ctx, surface(ctx), [[k(0, 0).paint(ctx, ctx.params), k(0, 1).paint(ctx, ctx.params)], [k(1, 0).paint(ctx, ctx.params), k(1, 1).paint(ctx, ctx.params)]], { hues: [[k(0, 0).hue, k(0, 1).hue], [k(1, 0).hue, k(1, 1).hue]] });
 }
 };
-__d[292] = function (__ns) {
-const { WIDGET_KINDS, WIDGET_DATA, galleonOf } = __m(291);
-const { GALLEON_PARAMS } = __m(114);
+__d[602] = function (__ns) {
+const { WIDGET_KINDS, WIDGET_DATA, galleonOf } = __m(601);
+const { GALLEON_PARAMS } = __m(277);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const slot = (def, label) => ({ type: 'select', default: def, options: WIDGET_KINDS, label });
 const __default = {
@@ -9454,8 +10196,8 @@ return galleonOf(ctx, [[p.dial0Top, p.dial1Top], [p.dial0Bottom, p.dial1Bottom]]
 },
 };
 };
-__d[293] = function (__ns) {
-const { WIDGETS, widgetScreen } = __m(291);
+__d[603] = function (__ns) {
+const { WIDGETS, widgetScreen } = __m(601);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const FPS = { clock: 2, next: 1, media: 2, volume: 4, audio: 12, spectrum: 12, cpu: 4, cores: 4, gpu: 4, memory: 2, network: 4, disk: 2 };
 const BLURB = {
@@ -9495,14 +10237,14 @@ order: 40 + i,
 render(ctx) { return widgetScreen(ctx, kind, { active: ctx.params.active }); },
 }));
 };
-__d[294] = function (__ns) {
-const { surface, rect, path, circle, n, arcPath, roundRectPath } = __m(113);
+__d[604] = function (__ns) {
+const { surface, rect, path, circle, n, arcPath, roundRectPath } = __m(276);
 const { clockText } = __m(11);
 const { arrive, pulse, clamp } = __m(12);
-const { mediaOf, audioOf, calendarOf } = __m(116);
-const { colorAt, glowDot } = __m(283);
-const { coverArt, pictogram, hhmm, localParts } = __m(114);
-const { mutedPlate, strike } = __m(137);
+const { mediaOf, audioOf, calendarOf } = __m(279);
+const { colorAt, glowDot } = __m(593);
+const { coverArt, pictogram, hhmm, localParts } = __m(277);
+const { mutedPlate, strike } = __m(318);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const big = (k) => Math.min(k.w, k.h) >= 110;
 const MIN = 60000;
@@ -9709,13 +10451,13 @@ return k.svg();
 };
 const __default = [nowPlaying, mediaKey, mic, camera, raise, leave, nextMeeting];
 };
-__d[295] = function (__ns) {
-const { surface, rect, path, n, P } = __m(113);
+__d[605] = function (__ns) {
+const { surface, rect, path, n, P } = __m(276);
 const { clamp } = __m(12);
 const { mix } = __m(4);
-const { audioOf } = __m(116);
-const { text, isBig } = __m(195);
-const { mutedPlate, strike } = __m(137);
+const { audioOf } = __m(279);
+const { text, isBig } = __m(505);
+const { mutedPlate, strike } = __m(318);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'app-mic-meter',
@@ -9791,13 +10533,13 @@ return k.svg();
 },
 };
 };
-__d[296] = function (__ns) {
-const { surface, rect, n, linearGradient, url } = __m(113);
+__d[606] = function (__ns) {
+const { surface, rect, n, linearGradient, url } = __m(276);
 const { pad2 } = __m(11);
 const { arrive, clamp, phase } = __m(12);
-const { mediaOf, calendarOf } = __m(116);
-const { colorAt } = __m(283);
-const { hhmm, localParts } = __m(114);
+const { mediaOf, calendarOf } = __m(279);
+const { colorAt } = __m(593);
+const { hhmm, localParts } = __m(277);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -9865,11 +10607,11 @@ return k.svg();
 },
 };
 };
-__d[297] = function (__ns) {
-const { surface, circle, n } = __m(113);
+__d[607] = function (__ns) {
+const { surface, circle, n } = __m(276);
 const { clamp, outExpo, arrive, lerp } = __m(12);
 const { polar } = __m(15);
-const { text, isBig, progressArc, headDot, burst, mmss } = __m(195);
+const { text, isBig, progressArc, headDot, burst, mmss } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const STATES = ['ready', 'focus-1', 'break-1', 'focus-2', 'break-2', 'focus-3', 'break-3', 'focus-4'];
 const __default = {
@@ -9955,11 +10697,11 @@ return k.svg();
 },
 };
 };
-__d[298] = function (__ns) {
-const { surface, rect, n } = __m(113);
+__d[608] = function (__ns) {
+const { surface, rect, n } = __m(276);
 const { clamp, outExpo, arrive } = __m(12);
 const { mix } = __m(4);
-const { text, isBig, perimeter, perimeterStroke, perimeterPoint, headDot, burst, mmss, capHeight } = __m(195);
+const { text, isBig, perimeter, perimeterStroke, perimeterPoint, headDot, burst, mmss, capHeight } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const SCENES = {
 starting: { title: 'Live soon', short: 'Soon', end: "We're live", hue: 191.3 },
@@ -10040,9 +10782,9 @@ return k.svg();
 },
 };
 };
-__d[299] = function (__ns) {
-const { surface, keyInto, rect, path, circle, n, roundRectPath } = __m(113);
-const { colorAt, whiteOf, mix } = __m(283);
+__d[609] = function (__ns) {
+const { surface, keyInto, rect, path, circle, n, roundRectPath } = __m(276);
+const { colorAt, whiteOf, mix } = __m(593);
 __e(__ns, { "LAYOUTS": () => LAYOUTS, "layoutOf": () => layoutOf, "sceneKey": () => sceneKey, "default": () => __default }, [], ["LAYOUTS","default","layoutOf","sceneKey"]);
 const LAYOUTS = ['camera', 'screen', 'split', 'brb', 'starting', 'ending'];
 function layoutOf(name = '') {
@@ -10130,11 +10872,11 @@ return d.svg();
 };
 const __default = [scene, switcher];
 };
-__d[300] = function (__ns) {
-const { surface, path, rect, n, roundRectPath, P } = __m(113);
-const { spectrumOf } = __m(116);
-const { keyGlass, colorAt, lift, whiteOf, PALETTE_OPTIONS, clamp } = __m(283);
-const { panelInto } = __m(114);
+__d[610] = function (__ns) {
+const { surface, path, rect, n, roundRectPath, P } = __m(276);
+const { spectrumOf } = __m(279);
+const { keyGlass, colorAt, lift, whiteOf, PALETTE_OPTIONS, clamp } = __m(593);
+const { panelInto } = __m(277);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const gainOf = (v, g) => clamp(v * g);
 const span = {
@@ -10298,10 +11040,10 @@ return s.svg();
 };
 const __default = [span, key, strip];
 };
-__d[301] = function (__ns) {
-const { surface, path, rect, circle, n, arcPath, roundRectPath, polar, sparkPath, sparkPoints, spectrumArc } = __m(113);
-const { metricOf, seriesOf, netOf, sysOf, rateText, bytesText } = __m(116);
-const { colorAt, hueAt, whiteOf, lift, glowDot, clamp, lerp } = __m(283);
+__d[611] = function (__ns) {
+const { surface, path, rect, circle, n, arcPath, roundRectPath, polar, sparkPath, sparkPoints, spectrumArc } = __m(276);
+const { metricOf, seriesOf, netOf, sysOf, rateText, bytesText } = __m(279);
+const { colorAt, hueAt, whiteOf, lift, glowDot, clamp, lerp } = __m(593);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const toneFor = (v, warn = 0.75, crit = 0.9) => (v === null ? 'off' : v >= crit ? 'alert' : v >= warn ? 'warn' : 'idle');
 const pctText = (v) => (v === null ? '—' : `${Math.round(v * 100)}%`);
@@ -10517,12 +11259,12 @@ return s.svg();
 };
 const __default = [cpuGraph, cpuCores, mem, gpu, net, disk, systemDial];
 };
-__d[302] = function (__ns) {
-const { surface, rect, path, circle, n, P } = __m(113);
-const { clockOf } = __m(98);
+__d[612] = function (__ns) {
+const { surface, rect, path, circle, n, P } = __m(276);
+const { clockOf } = __m(261);
 const { clamp } = __m(12);
 const { mix } = __m(4);
-const { text, isBig } = __m(195);
+const { text, isBig } = __m(505);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const fmt = (c, h12) => `${h12 ? ((c.h + 11) % 12) + 1 : c.h}:${String(c.m).padStart(2, '0')}`;
 const __default = {
@@ -10594,12 +11336,12 @@ return k.svg();
 },
 };
 };
-__d[303] = function (__ns) {
-const { surface, path, rect, n } = __m(113);
-const { audioOf } = __m(116);
-const { colorAt, lift, whiteOf, bandPath, smoothLine, PALETTE_OPTIONS, clamp } = __m(283);
-const { expand } = __m(290);
-const { panelInto } = __m(114);
+__d[613] = function (__ns) {
+const { surface, path, rect, n } = __m(276);
+const { audioOf } = __m(279);
+const { colorAt, lift, whiteOf, bandPath, smoothLine, PALETTE_OPTIONS, clamp } = __m(593);
+const { expand } = __m(600);
+const { panelInto } = __m(277);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'app-waveform-strip',
@@ -10671,7 +11413,7 @@ return s.svg();
 },
 };
 };
-__d[304] = function (__ns) {
+__d[614] = function (__ns) {
 const { polar } = __m(15);
 __e(__ns, { "PIECE_NAMES": () => PIECE_NAMES, "PIECES": () => PIECES, "PADS": () => PADS, "arrow": () => arrow, "mark": () => mark }, [], ["PADS","PIECES","PIECE_NAMES","arrow","mark"]);
 const ACC = { role: 'accent', fill: true };
@@ -10718,12 +11460,12 @@ if (b > 0) p.line(36, 12, 36 - 24 * b, 12 + 24 * b, { role: 'accent', weight: 1.
 else if (u > 0.01) p.arc(24, 24, 12.5, 0, Math.max(1, 359.9 * u), { role: 'accent', weight: 1.55 });
 }
 };
-__d[305] = function (__ns) {
-const { surface, rect } = __m(113);
-const { rngSeed, rngNext, rngInt } = __m(106);
+__d[615] = function (__ns) {
+const { surface, rect } = __m(276);
+const { rngSeed, rngNext, rngInt } = __m(269);
 const { clamp, lerp, outExpo } = __m(12);
-const { cellsOf, ageOf, spread, beam, sweepX, burst, ringWave, readout, hasReadout, statusKey, cellKey, panelBase, HUE, middleCell } = __m(269);
-const { PIECES } = __m(304);
+const { cellsOf, ageOf, spread, beam, sweepX, burst, ringWave, readout, hasReadout, statusKey, cellKey, panelBase, HUE, middleCell } = __m(579);
+const { PIECES } = __m(614);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const TICK = 4; 
 const LIGHT_HUES = spread(9, HUE.rose, HUE.violet);
@@ -10845,11 +11587,11 @@ return d.svg();
 },
 };
 };
-__d[306] = function (__ns) {
-const { surface, keyInto } = __m(113);
-const { rngSeed, rngNext } = __m(106);
+__d[616] = function (__ns) {
+const { surface, keyInto } = __m(276);
+const { rngSeed, rngNext } = __m(269);
 const { clamp } = __m(12);
-const { ageOf, burst, HUE } = __m(269);
+const { ageOf, burst, HUE } = __m(579);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const SPIN = 0.95;
 function coin(p, side, sx, { lift = 0 } = {}) {
@@ -10935,12 +11677,12 @@ return k.svg();
 },
 };
 };
-__d[307] = function (__ns) {
-const { surface } = __m(113);
-const { rngSeed, rngInt } = __m(106);
+__d[617] = function (__ns) {
+const { surface } = __m(276);
+const { rngSeed, rngInt } = __m(269);
 const { clamp, outExpo } = __m(12);
 const { hash } = __m(1);
-const { HUE } = __m(269);
+const { HUE } = __m(579);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const ROLL = 0.8; 
 const PIPS = { 
@@ -11024,12 +11766,12 @@ return k.svg();
 },
 };
 };
-__d[308] = function (__ns) {
-const { surface } = __m(113);
-const { rngSeed, rngInt } = __m(106);
+__d[618] = function (__ns) {
+const { surface } = __m(276);
+const { rngSeed, rngInt } = __m(269);
 const { clamp, outExpo, pulse } = __m(12);
-const { cellsOf, ageOf, spread, beam, sweepX, burst, readout, hasReadout, statusKey, cellKey, panelBase, HUE, progressBeam, middleCell } = __m(269);
-const { PADS } = __m(304);
+const { cellsOf, ageOf, spread, beam, sweepX, burst, readout, hasReadout, statusKey, cellKey, panelBase, HUE, progressBeam, middleCell } = __m(579);
+const { PADS } = __m(614);
 __e(__ns, { "padLayout": () => padLayout, "padOf": () => padOf, "default": () => __default }, [], ["default","padLayout","padOf"]);
 function padLayout(cols, rows) {
 let best = null;
@@ -11157,13 +11899,13 @@ return d.svg();
 },
 };
 };
-__d[309] = function (__ns) {
-const { surface, keyInto } = __m(113);
-const { gameGrid } = __m(98);
-const { rngSeed, rngShuffle } = __m(106);
+__d[619] = function (__ns) {
+const { surface, keyInto } = __m(276);
+const { gameGrid } = __m(261);
+const { rngSeed, rngShuffle } = __m(269);
 const { clamp, lerp, outExpo } = __m(12);
 const { hash } = __m(1);
-const { HUE } = __m(269);
+const { HUE } = __m(579);
 __e(__ns, { "toggle": () => toggle, "deal": () => deal, "default": () => __default }, [], ["deal","default","toggle"]);
 const BASE = { easy: 2, normal: 4, hard: 7 };
 const NEIGHBORS = [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]];
@@ -11272,12 +12014,12 @@ return k.svg();
 },
 };
 };
-__d[310] = function (__ns) {
-const { surface, P } = __m(113);
-const { rngSeed, rngShuffle } = __m(106);
+__d[620] = function (__ns) {
+const { surface, P } = __m(276);
+const { rngSeed, rngShuffle } = __m(269);
 const { clamp } = __m(12);
-const { cellsOf, ageOf, spread, beam, sweepX, burst, converge, readout, statusKey, cellKey, panelBase, HUE, middleCell } = __m(269);
-const { PIECES } = __m(304);
+const { cellsOf, ageOf, spread, beam, sweepX, burst, converge, readout, statusKey, cellKey, panelBase, HUE, middleCell } = __m(579);
+const { PIECES } = __m(614);
 __e(__ns, { "dealBoard": () => dealBoard, "default": () => __default }, [], ["dealBoard","default"]);
 const HOLD = 1.0; 
 const FLIP = 0.34; 
@@ -11396,13 +12138,13 @@ return d.svg();
 },
 };
 };
-__d[311] = function (__ns) {
-const { surface } = __m(113);
-const { rngSeed, rngNext, rngInt } = __m(106);
+__d[621] = function (__ns) {
+const { surface } = __m(276);
+const { rngSeed, rngNext, rngInt } = __m(269);
 const { getDevice } = __m(0);
 const { clamp, outExpo } = __m(12);
-const { cellsOf, ageOf, beam, sweepX, burst, convergeText, readout, hasReadout, statusKey, cellKey, panelBase, HUE } = __m(269);
-const { arrow } = __m(304);
+const { cellsOf, ageOf, beam, sweepX, burst, convergeText, readout, hasReadout, statusKey, cellKey, panelBase, HUE } = __m(579);
+const { arrow } = __m(614);
 __e(__ns, { "tileHue": () => tileHue, "layout": () => layout, "slide": () => slide, "edgeDir": () => edgeDir, "default": () => __default }, [], ["default","edgeDir","layout","slide","tileHue"]);
 const B36 = '0123456789abcdefghijklmnopqrstuvwxyz';
 const DIRS = ['left', 'right', 'up', 'down'];
@@ -11585,11 +12327,11 @@ return d.svg();
 },
 };
 };
-__d[312] = function (__ns) {
-const { surface, keyInto } = __m(113);
-const { rngSeed, rngInt } = __m(106);
+__d[622] = function (__ns) {
+const { surface, keyInto } = __m(276);
+const { rngSeed, rngInt } = __m(269);
 const { clamp } = __m(12);
-const { ageOf, beam, sweepX, convergeText, HUE } = __m(269);
+const { ageOf, beam, sweepX, convergeText, HUE } = __m(579);
 __e(__ns, { "ANSWERS": () => ANSWERS, "default": () => __default }, [], ["ANSWERS","default"]);
 const ANSWERS = [
 [['Yes'], 1], [['Surely'], 1], [['Count', 'on it'], 1], [['Signs', 'say yes'], 1], [['Most', 'likely'], 1], [['Looks', 'bright'], 1], [['No', 'doubt'], 1], [['It is', 'so'], 1],
@@ -11662,11 +12404,11 @@ return k.svg();
 },
 };
 };
-__d[313] = function (__ns) {
-const { surface, keyInto } = __m(113);
-const { rngSeed, rngNext } = __m(106);
+__d[623] = function (__ns) {
+const { surface, keyInto } = __m(276);
+const { rngSeed, rngNext } = __m(269);
 const { clamp, outExpo } = __m(12);
-const { ageOf, beam, burst, ringWave, convergeText, HUE } = __m(269);
+const { ageOf, beam, burst, ringWave, convergeText, HUE } = __m(579);
 __e(__ns, { "rating": () => rating, "default": () => __default }, [], ["default","rating"]);
 const rating = (ms) => (ms < 200 ? 'Lightning' : ms < 260 ? 'Sharp' : ms < 340 ? 'Quick' : ms < 500 ? 'Steady' : 'Sleepy');
 const __default = {
@@ -11745,13 +12487,13 @@ return k.svg();
 },
 };
 };
-__d[314] = function (__ns) {
-const { surface, P } = __m(113);
-const { rngSeed, rngNext } = __m(106);
+__d[624] = function (__ns) {
+const { surface, P } = __m(276);
+const { rngSeed, rngNext } = __m(269);
 const { clamp } = __m(12);
 const { hash } = __m(1);
-const { cellsOf, ageOf, beam, sweepX, burst, ringWave, cellKey, HUE, beamColor } = __m(269);
-const { PIECES } = __m(304);
+const { cellsOf, ageOf, beam, sweepX, burst, ringWave, cellKey, HUE, beamColor } = __m(579);
+const { PIECES } = __m(614);
 __e(__ns, { "SYMBOLS": () => SYMBOLS, "payout": () => payout, "default": () => __default }, [], ["SYMBOLS","default","payout"]);
 const SYMBOLS = [
 { piece: 0, hue: HUE.violet, weight: 1, pay: 60, name: 'prism' },
@@ -11870,11 +12612,11 @@ return d.svg();
 },
 };
 };
-__d[315] = function (__ns) {
-const { surface, rect } = __m(113);
-const { rngSeed, rngShuffle } = __m(106);
+__d[625] = function (__ns) {
+const { surface, rect } = __m(276);
+const { rngSeed, rngShuffle } = __m(269);
 const { clamp, outExpo } = __m(12);
-const { cellsOf, ageOf, spread, beam, sweepX, burst, cellKey, HUE, beamColor, middleCell, readout, panelBase } = __m(269);
+const { cellsOf, ageOf, spread, beam, sweepX, burst, cellKey, HUE, beamColor, middleCell, readout, panelBase } = __m(579);
 __e(__ns, { "pinsFor": () => pinsFor, "default": () => __default }, [], ["default","pinsFor"]);
 function pinsFor(cols, rows, level) {
 const N = cols * rows, p = Array(N).fill('0');
@@ -11981,12 +12723,12 @@ return d.svg();
 },
 };
 };
-__d[316] = function (__ns) {
-const { surface } = __m(113);
-const { rngSeed, rngNext, rngInt } = __m(106);
+__d[626] = function (__ns) {
+const { surface } = __m(276);
+const { rngSeed, rngNext, rngInt } = __m(269);
 const { clamp } = __m(12);
-const { cellsOf, ageOf, beam, sweepX, burst, ringWave, cellKey, HUE } = __m(269);
-const { mark } = __m(304);
+const { cellsOf, ageOf, beam, sweepX, burst, ringWave, cellKey, HUE } = __m(579);
+const { mark } = __m(614);
 __e(__ns, { "winner": () => winner, "aiMove": () => aiMove, "default": () => __default }, [], ["aiMove","default","winner"]);
 const LINES = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 const YOU = HUE.azure, PRISM = HUE.coral;
@@ -12131,189 +12873,6363 @@ return d.svg();
 },
 };
 };
-__d[317] = function (__ns) {
-const m0 = __m(121);
-const m1 = __m(122);
-const m2 = __m(123);
-const m3 = __m(124);
-const m4 = __m(126);
-const m5 = __m(127);
-const m6 = __m(128);
-const m7 = __m(129);
-const m8 = __m(130);
-const m9 = __m(131);
-const m10 = __m(120);
-const m11 = __m(133);
-const m12 = __m(134);
-const m13 = __m(135);
-const m14 = __m(136);
-const m15 = __m(138);
-const m16 = __m(139);
-const m17 = __m(140);
-const m18 = __m(141);
-const m19 = __m(142);
-const m20 = __m(143);
-const m21 = __m(144);
-const m22 = __m(145);
-const m23 = __m(146);
-const m24 = __m(147);
-const m25 = __m(148);
-const m26 = __m(149);
-const m27 = __m(150);
-const m28 = __m(151);
-const m29 = __m(152);
-const m30 = __m(153);
-const m31 = __m(154);
-const m32 = __m(155);
-const m33 = __m(156);
-const m34 = __m(157);
-const m35 = __m(158);
-const m36 = __m(159);
-const m37 = __m(160);
-const m38 = __m(161);
-const m39 = __m(162);
-const m40 = __m(163);
-const m41 = __m(164);
-const m42 = __m(165);
-const m43 = __m(166);
-const m44 = __m(167);
-const m45 = __m(168);
-const m46 = __m(169);
-const m47 = __m(170);
-const m48 = __m(171);
-const m49 = __m(172);
-const m50 = __m(173);
-const m51 = __m(174);
-const m52 = __m(175);
-const m53 = __m(176);
-const m54 = __m(177);
-const m55 = __m(178);
-const m56 = __m(179);
-const m57 = __m(180);
-const m58 = __m(181);
-const m59 = __m(182);
-const m60 = __m(183);
-const m61 = __m(184);
-const m62 = __m(185);
-const m63 = __m(186);
-const m64 = __m(187);
-const m65 = __m(188);
-const m66 = __m(189);
-const m67 = __m(191);
-const m68 = __m(192);
-const m69 = __m(193);
-const m70 = __m(194);
-const m71 = __m(196);
-const m72 = __m(197);
-const m73 = __m(198);
-const m74 = __m(199);
-const m75 = __m(200);
-const m76 = __m(204);
-const m77 = __m(205);
-const m78 = __m(206);
-const m79 = __m(207);
-const m80 = __m(208);
-const m81 = __m(209);
-const m82 = __m(210);
-const m83 = __m(211);
-const m84 = __m(212);
-const m85 = __m(213);
-const m86 = __m(216);
-const m87 = __m(217);
-const m88 = __m(218);
-const m89 = __m(219);
-const m90 = __m(220);
-const m91 = __m(221);
-const m92 = __m(222);
-const m93 = __m(223);
-const m94 = __m(224);
-const m95 = __m(225);
-const m96 = __m(226);
-const m97 = __m(227);
-const m98 = __m(228);
-const m99 = __m(229);
-const m100 = __m(230);
-const m101 = __m(231);
-const m102 = __m(232);
-const m103 = __m(233);
-const m104 = __m(234);
-const m105 = __m(235);
-const m106 = __m(236);
-const m107 = __m(237);
-const m108 = __m(238);
-const m109 = __m(239);
-const m110 = __m(240);
-const m111 = __m(241);
-const m112 = __m(242);
-const m113 = __m(243);
-const m114 = __m(244);
-const m115 = __m(245);
-const m116 = __m(246);
-const m117 = __m(247);
-const m118 = __m(248);
-const m119 = __m(249);
-const m120 = __m(250);
-const m121 = __m(251);
-const m122 = __m(252);
-const m123 = __m(253);
-const m124 = __m(255);
-const m125 = __m(256);
-const m126 = __m(257);
-const m127 = __m(258);
-const m128 = __m(259);
-const m129 = __m(260);
-const m130 = __m(261);
-const m131 = __m(262);
-const m132 = __m(263);
-const m133 = __m(264);
-const m134 = __m(265);
-const m135 = __m(266);
-const m136 = __m(267);
-const m137 = __m(268);
-const m138 = __m(118);
-const m139 = __m(270);
-const m140 = __m(271);
-const m141 = __m(272);
-const m142 = __m(273);
-const m143 = __m(274);
-const m144 = __m(276);
-const m145 = __m(277);
-const m146 = __m(278);
-const m147 = __m(279);
-const m148 = __m(280);
-const m149 = __m(281);
-const m150 = __m(282);
-const m151 = __m(284);
-const m152 = __m(285);
-const m153 = __m(286);
-const m154 = __m(287);
-const m155 = __m(288);
-const m156 = __m(289);
-const m157 = __m(292);
-const m158 = __m(293);
-const m159 = __m(294);
-const m160 = __m(295);
-const m161 = __m(296);
-const m162 = __m(297);
-const m163 = __m(298);
-const m164 = __m(299);
-const m165 = __m(300);
-const m166 = __m(301);
-const m167 = __m(302);
-const m168 = __m(303);
-const m169 = __m(290);
-const m170 = __m(305);
-const m171 = __m(306);
-const m172 = __m(307);
-const m173 = __m(308);
-const m174 = __m(309);
-const m175 = __m(310);
-const m176 = __m(311);
-const m177 = __m(312);
-const m178 = __m(313);
-const m179 = __m(314);
-const m180 = __m(315);
-const m181 = __m(316);
+__d[627] = function (__ns) {
+
+__e(__ns, { "GAMELINK_VERSION": () => GAMELINK_VERSION, "CS2_APPID": () => CS2_APPID, "CFG_NAME": () => CFG_NAME, "CFG_TITLE": () => CFG_TITLE, "FLASH_ON": () => FLASH_ON, "FLASH_FULL": () => FLASH_FULL, "FLASH_HOLD_MS": () => FLASH_HOLD_MS, "FLASH_STUCK_MS": () => FLASH_STUCK_MS, "FLASH_RESTRIKE": () => FLASH_RESTRIKE, "FLASH_STRIKE_GAP_MS": () => FLASH_STRIKE_GAP_MS, "EVENT_TTL_MS": () => EVENT_TTL_MS, "EVENT_MAX": () => EVENT_MAX, "STATUSES": () => STATUSES, "URGENT_EVENTS": () => URGENT_EVENTS, "ROUND_REASONS": () => ROUND_REASONS, "roundReason": () => roundReason, "deepEqual": () => deepEqual, "sanitizeCs2": () => sanitizeCs2, "mapTitle": () => mapTitle, "normalizeCs2": () => normalizeCs2, "tickCs2": () => tickCs2, "cs2NextTick": () => cs2NextTick, "gameLinkView": () => gameLinkView, "parseVdf": () => parseVdf, "vdfGet": () => vdfGet, "libraryFolders": () => libraryFolders, "joinPath": () => joinPath, "steamRoots": () => steamRoots, "findCs2": () => findCs2, "CFG_DATA": () => CFG_DATA, "cs2Cfg": () => cs2Cfg, "isPrismCfg": () => isPrismCfg, "cfgState": () => cfgState }, [], ["CFG_DATA","CFG_NAME","CFG_TITLE","CS2_APPID","EVENT_MAX","EVENT_TTL_MS","FLASH_FULL","FLASH_HOLD_MS","FLASH_ON","FLASH_RESTRIKE","FLASH_STRIKE_GAP_MS","FLASH_STUCK_MS","GAMELINK_VERSION","ROUND_REASONS","STATUSES","URGENT_EVENTS","cfgState","cs2Cfg","cs2NextTick","deepEqual","findCs2","gameLinkView","isPrismCfg","joinPath","libraryFolders","mapTitle","normalizeCs2","parseVdf","roundReason","sanitizeCs2","steamRoots","tickCs2","vdfGet"]);
+const GAMELINK_VERSION = 1;
+const CS2_APPID = 730;
+const CFG_NAME = 'gamestate_integration_prism.cfg';
+const CFG_TITLE = 'Prism Deck Game Link v1';
+const FLASH_ON = 32; 
+const FLASH_FULL = 250; 
+const FLASH_HOLD_MS = 6500; 
+const FLASH_STUCK_MS = 7500; 
+const FLASH_RESTRIKE = 32; 
+const FLASH_STRIKE_GAP_MS = 1000; 
+const EVENT_TTL_MS = 10000; 
+const EVENT_MAX = 16; 
+const STATUSES = Object.freeze(['menu', 'loading', 'live', 'spectating', 'between', 'watching']);
+const URGENT_EVENTS = new Set(['hurt', 'death', 'respawn', 'flashOnset', 'flashFull', 'flashClear', 'kill', 'multiKill', 'mvp', 'bombPlanted', 'bombDefused', 'bombExploded', 'bombGone', 'roundStart', 'roundLive', 'roundWon', 'roundLost', 'matchPoint', 'halftime', 'gameover', 'reloadStart', 'reloadEnd', 'lowAmmo', 'emptyClip', 'context']);
+const GUNS = new Set(['Pistol', 'Rifle', 'SniperRifle', 'Submachine Gun', 'Shotgun', 'Machine Gun']);
+const KIND = { Knife: 'knife', Pistol: 'pistol', 'Submachine Gun': 'smg', Rifle: 'rifle', Shotgun: 'shotgun', 'Machine Gun': 'mg', SniperRifle: 'sniper', Grenade: 'grenade', C4: 'c4', Taser: 'taser' };
+const TUBE_FED = new Set(['nova', 'xm1014', 'sawedoff']); 
+const UNKNOWN_RESERVE = new Set(['negev', 'm249', 'revolver', 'cz75a']); 
+const MAX_MAGS = 10; 
+const GRENADES = { flashbang: 'flashbang', smokegrenade: 'smoke', hegrenade: 'he', molotov: 'molotov', incgrenade: 'incendiary', decoy: 'decoy' };
+const TARGET = { competitive: 13, scrimcomp2v2: 9, casual: 8, retakes: 8 }; 
+const SPECTATOR_BLOCKS = ['allplayers', 'bomb', 'phase_countdowns', 'grenades'];
+const SPECTATOR_PLAYER_KEYS = ['spectarget', 'position', 'forward'];
+const SPECTATOR_STATE_KEYS = ['round_totaldmg'];
+const MAP_PHASES = new Set(['warmup', 'live', 'intermission', 'gameover', 'paused', 'timeout_t', 'timeout_ct']);
+const ROUND_PHASES = new Set(['freezetime', 'live', 'over']);
+const BOMB = new Set(['planted', 'defused', 'exploded']);
+const SIDES = new Set(['CT', 'T']);
+const ROUND_REASONS = Object.freeze(['elimination', 'bomb_defused', 'bomb_exploded', 'time', 'rescue', 'other']);
+const REASON = { elimination: 'elimination', defuse: 'bomb_defused', bomb: 'bomb_exploded', time: 'time', rescue: 'rescue' };
+function roundReason(raw) {
+if (typeof raw !== 'string' || !raw) return null;
+const m = /^(?:ct|t)_win_([a-z]+)$/.exec(raw);
+return (m && REASON[m[1]]) || 'other';
+}
+const ACTIVITY = new Set(['playing', 'menu', 'textinput']);
+const MEM = Symbol('gamelink.cs2'); 
+const isObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
+const int = (v, lo = 0, hi = 1e9) => { const n = num(v); return n === null ? null : Math.min(hi, Math.max(lo, Math.round(n))); };
+const str = (v, max = 64) => (typeof v === 'string' ? v.slice(0, max) : null);
+const r4 = (x) => Math.round(x * 1e4) / 1e4;
+function deepEqual(a, b) {
+if (a === b) return true;
+if (typeof a !== typeof b || !a || !b || typeof a !== 'object') return false;
+if (Array.isArray(a) !== Array.isArray(b)) return false;
+const ka = Object.keys(a), kb = Object.keys(b);
+if (ka.length !== kb.length) return false;
+for (const k of ka) if (!Object.hasOwn(b, k) || !deepEqual(a[k], b[k])) return false;
+return true;
+}
+function cleanTeam(t) {
+if (!isObj(t)) return null;
+return { score: int(t.score) ?? 0, consecutive_round_losses: int(t.consecutive_round_losses), timeouts_remaining: int(t.timeouts_remaining), matches_won_this_series: int(t.matches_won_this_series) };
+}
+function cleanWeapons(ws) {
+if (!isObj(ws)) return {};
+const out = {};
+for (const [k, w] of Object.entries(ws).slice(0, 32)) {
+if (!/^weapon_\d{1,2}$/.test(k) || !isObj(w)) continue;
+const o = { name: str(w.name) || '', type: str(w.type, 32) || '', state: str(w.state, 16) || '' };
+for (const f of ['ammo_clip', 'ammo_clip_max', 'ammo_reserve']) if (num(w[f]) !== null) o[f] = int(w[f], 0, 10000);
+out[k] = o;
+}
+return out;
+}
+function cleanState(s) {
+if (!isObj(s)) return {};
+const o = {};
+for (const f of ['health', 'armor']) if (num(s[f]) !== null) o[f] = int(s[f], 0, 100);
+for (const f of ['flashed', 'smoked', 'burning']) if (num(s[f]) !== null) o[f] = int(s[f], 0, 255);
+for (const f of ['money', 'round_kills', 'round_killhs', 'equip_value']) if (num(s[f]) !== null) o[f] = int(s[f], 0, 1e7);
+if (typeof s.helmet === 'boolean') o.helmet = s.helmet;
+if (s.defusekit === true) o.defusekit = true; 
+return o; 
+}
+function cleanStats(m) {
+if (!isObj(m)) return {};
+const o = {};
+for (const f of ['kills', 'assists', 'deaths', 'mvps', 'score']) if (num(m[f]) !== null) o[f] = int(m[f], -1e6, 1e6);
+return o;
+}
+function sanitizeCs2(payload) {
+if (!isObj(payload) || !isObj(payload.provider) || payload.provider.appid !== CS2_APPID) return null;
+const me = typeof payload.provider.steamid === 'string' ? payload.provider.steamid : null;
+const pp = isObj(payload.player) ? payload.player : null;
+const spectator = SPECTATOR_BLOCKS.some((k) => k in payload) || (!!pp && (SPECTATOR_PLAYER_KEYS.some((k) => k in pp) || (isObj(pp.state) && SPECTATOR_STATE_KEYS.some((k) => k in pp.state))));
+const out = { hasDelta: isObj(payload.previously) || isObj(payload.added), spectator };
+const m = payload.map;
+if (isObj(m)) {
+out.map = {
+mode: str(m.mode, 32) || '', name: str(m.name, 64) || '', phase: MAP_PHASES.has(m.phase) ? m.phase : null, round: int(m.round, 0, 999) ?? 0,
+team_ct: cleanTeam(m.team_ct), team_t: cleanTeam(m.team_t),
+};
+if (isObj(m.round_wins)) { const rw = {}; for (const [k, v] of Object.entries(m.round_wins).slice(0, 64)) if (/^\d{1,3}$/.test(k) && typeof v === 'string') rw[k] = v.slice(0, 32); out.map.round_wins = rw; }
+}
+const r = payload.round;
+if (isObj(r)) {
+out.round = { phase: ROUND_PHASES.has(r.phase) ? r.phase : null };
+if (SIDES.has(r.win_team)) out.round.win_team = r.win_team;
+if (BOMB.has(r.bomb)) out.round.bomb = r.bomb;
+}
+const p = payload.player;
+if (isObj(p)) {
+const self = !!me && typeof p.steamid === 'string' && p.steamid === me;
+out.player = { self, activity: ACTIVITY.has(p.activity) ? p.activity : null };
+if (SIDES.has(p.team)) out.player.team = p.team;
+if ('state' in p) out.player.state = cleanState(p.state);
+if ('weapons' in p) out.player.weapons = cleanWeapons(p.weapons);
+if ('match_stats' in p) out.player.match_stats = cleanStats(p.match_stats);
+}
+return out;
+}
+function activeWeapon(pl) {
+for (const w of Object.values(pl?.weapons || {})) if (w.state === 'active' || w.state === 'reloading') return w;
+return null;
+}
+const bareName = (n) => String(n || '').replace(/^weapon_/, '');
+const isLow = (w) => (w.ammo_clip ?? 0) <= Math.max(1, Math.floor((w.ammo_clip_max ?? 0) / 4));
+function mapTitle(name) {
+const last = String(name || '').split('/').pop().replace(/^(de|cs|ar|dz|gd|aim|fy|dm)_(?=.)/i, '');
+return last.split(/[_\s]+/).filter(Boolean).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ').slice(0, 32);
+}
+function weaponView(w) {
+if (!w) return null;
+const name = bareName(w.name);
+const kind = KIND[w.type] || 'other';
+const gun = GUNS.has(w.type);
+return {
+name, kind,
+clip: gun ? (w.ammo_clip ?? null) : null,
+clipMax: gun ? (w.ammo_clip_max ?? null) : null,
+reserve: w.ammo_reserve ?? null,
+reserveUnit: gun ? (TUBE_FED.has(name) ? 'shells' : UNKNOWN_RESERVE.has(name) ? null : (w.ammo_reserve ?? 0) > MAX_MAGS ? 'count' : 'mags') : kind === 'grenade' ? 'count' : null,
+reloading: w.state === 'reloading',
+low: gun ? w.state !== 'reloading' && isLow(w) : false,
+};
+}
+function grenadesOf(pl) {
+const g = { flashbang: 0, smoke: 0, he: 0, molotov: 0, incendiary: 0, decoy: 0 };
+for (const w of Object.values(pl?.weapons || {})) { const k = GRENADES[bareName(w.name)]; if (k) g[k] += w.ammo_reserve ?? 1; }
+return g;
+}
+function targetOf(m) {
+let tgt = TARGET[m?.mode] ?? null;
+if (tgt && (m.round ?? 0) >= 2 * (tgt - 1)) tgt += 3; 
+return tgt;
+}
+function scores(m, side) {
+if (!m || !SIDES.has(side)) return { us: null, them: null };
+return { us: m[`team_${side.toLowerCase()}`]?.score ?? null, them: m[side === 'CT' ? 'team_t' : 'team_ct']?.score ?? null };
+}
+const FLASH0 = Object.freeze({ vis: 0, raw: 0, lo: 0, peak: 0, rising: false, pending: false, postAt: null, changedAt: null });
+const flashCold = (raw, nowMs) => ({ ...FLASH0, raw, lo: raw, postAt: nowMs, changedAt: nowMs });
+const strikes = (f, raw) => raw > f.vis && raw >= FLASH_ON && (f.lo < FLASH_ON || raw - f.lo >= FLASH_RESTRIKE);
+function strikeTo(mem, f, raw, nowMs) {
+const ev = [];
+if (f.vis < FLASH_ON) ev.push({ type: 'flashOnset', strength: r4(raw / 255) });
+if (raw >= FLASH_FULL && f.vis < FLASH_FULL) ev.push({ type: 'flashFull' });
+Object.assign(f, { vis: raw, lo: raw, peak: Math.max(f.peak, raw), rising: true, pending: false });
+mem.strikeAt = nowMs;
+return ev;
+}
+function flashPost(mem, raw, nowMs, { quiet = false } = {}) {
+const f = { ...mem.flash };
+const ev = [];
+const was = f.vis;
+if (raw !== f.raw) f.changedAt = nowMs;
+f.raw = raw; f.postAt = nowMs;
+if (f.rising && raw >= f.vis) {
+if (!quiet && raw >= FLASH_FULL && f.vis < FLASH_FULL && nowMs - mem.strikeAt >= FLASH_STRIKE_GAP_MS) { ev.push({ type: 'flashFull' }); mem.strikeAt = nowMs; }
+Object.assign(f, { vis: raw, lo: raw, peak: Math.max(f.peak, raw) });
+} else {
+if (raw < f.vis) { f.vis = raw; f.rising = false; }
+f.lo = Math.min(f.lo, raw);
+if (!quiet && strikes(f, raw)) {
+if (nowMs - mem.strikeAt >= FLASH_STRIKE_GAP_MS) ev.push(...strikeTo(mem, f, raw, nowMs));
+else f.pending = true; 
+}
+}
+if (raw === 0 && was > 0) { if (!quiet) ev.push({ type: 'flashClear', peak: r4(f.peak / 255) }); f.peak = 0; f.pending = false; }
+mem.flash = f;
+return ev;
+}
+function memOf(prev) {
+const m = prev?.[MEM];
+return m ? { ...m } : { prevP: null, selfSnap: null, team: null, flash: FLASH0, strikeAt: -Infinity, ctx: null, evSeq: 0, rev: 0 };
+}
+function withMem(state, mem) { Object.defineProperty(state, MEM, { value: mem, enumerable: false }); return state; }
+function normalizeCs2(payload, prev = null, { nowMs = 0 } = {}) {
+const p = sanitizeCs2(payload);
+if (!p) return { state: prev, events: [], rejected: true };
+const mem = memOf(prev);
+const raw = derive(p, mem, nowMs);
+return finish(prev, mem, p, raw, nowMs);
+}
+function derive(p, mem, nowMs) {
+const ev = [];
+const m = p.map || null, r = p.round || null, pl = p.player || null;
+const prevP = mem.prevP;
+const pm = prevP?.map || {}, pr = prevP?.round || {};
+const common = prevP ? ['map', 'round', 'player'].filter((k) => k in p && k in prevP) : [];
+let resync = !!prevP && !p.hasDelta && common.some((k) => !deepEqual(p[k], prevP[k]));
+if (m && prevP?.map && (m.round ?? 0) - (pm.round ?? 0) > 1) resync = true;
+if (m && (m.name !== pm.name || m.mode !== pm.mode)) { mem.team = null; mem.selfSnap = null; } 
+let ctx;
+if (!m) ctx = 'menu';
+else if (!pl) ctx = r ? 'between' : 'loading';
+else if (pl.self && !p.spectator) ctx = 'self';
+else ctx = mem.selfSnap && !p.spectator ? 'observing' : 'watching';
+const prevCtx = mem.ctx;
+if (ctx !== prevCtx) ev.push({ type: 'context', value: ctx === 'self' ? 'live' : ctx });
+const snap = () => ({ ...pl, _roundPhase: r?.phase ?? null });
+const raw = ctx === 'self' ? (pl.state?.flashed ?? 0) : 0;
+if (!prevP) {
+if (ctx === 'self') { if (pl.team) mem.team = pl.team; mem.selfSnap = snap(); mem.flash = flashCold(raw, nowMs); }
+mem.ctx = ctx; mem.prevP = p;
+return ev;
+}
+if (resync) {
+ev.push({ type: 'resync' });
+if (ctx === 'self') {
+mem.team = pl.team || mem.team; mem.selfSnap = snap();
+if (prevCtx === 'self') flashPost(mem, raw, nowMs, { quiet: true }); else mem.flash = flashCold(raw, nowMs);
+}
+mem.ctx = ctx; mem.prevP = p;
+return ev;
+}
+if (ctx === 'self' && pl.team) {
+if (mem.team && pl.team !== mem.team) ev.push({ type: 'sideSwap', from: mem.team, to: pl.team });
+mem.team = pl.team;
+}
+if (ctx === 'watching') { mem.ctx = ctx; mem.prevP = p; return ev; } 
+if (m) {
+if (m.name !== pm.name || m.mode !== pm.mode) ev.push({ type: 'matchJoined', map: m.name, mode: m.mode });
+if (m.phase !== (pm.phase ?? null)) {
+ev.push({ type: 'mapPhase', value: m.phase });
+if (m.phase === 'intermission') ev.push({ type: 'halftime' });
+}
+if (r?.win_team && !pr.win_team && mem.team) {
+ev.push({ type: r.win_team === mem.team ? 'roundWon' : 'roundLost', winTeam: r.win_team, reason: roundReason(m.round_wins?.[String(m.round)]) });
+}
+if (m.phase === 'gameover' && pm.phase !== 'gameover') {
+const { us, them } = scores(m, mem.team);
+ev.push({ type: 'gameover', result: us === null || them === null ? null : us > them ? 'win' : us < them ? 'loss' : 'draw', us, them }); 
+}
+if (r && r.phase !== (pr.phase ?? null) && m.phase !== 'gameover') {
+if (r.phase === 'freezetime') {
+ev.push({ type: 'roundStart', round: (m.round ?? 0) + 1 });
+const tgt = targetOf(m);
+if (tgt && mem.team) {
+const { us, them } = scores(m, mem.team);
+if (us === tgt - 1 || them === tgt - 1) ev.push({ type: 'matchPoint', us: us === tgt - 1, them: them === tgt - 1 });
+}
+} else if (r.phase === 'live') ev.push({ type: 'roundLive' });
+}
+const b = r?.bomb ?? null, pb = pr.bomb ?? null;
+if (b !== pb) {
+if (b === 'planted') ev.push({ type: 'bombPlanted' });
+else if (b === 'defused') ev.push({ type: 'bombDefused' });
+else if (b === 'exploded') ev.push({ type: 'bombExploded' });
+else if (pb === 'planted' && b === null) ev.push({ type: 'bombGone' }); 
+}
+}
+if (ctx === 'self') {
+const old = mem.selfSnap;
+if (old && ['self', 'observing', 'between', 'loading'].includes(prevCtx) && m) {
+const os = old.state || {}, ns = pl.state || {};
+const oh = os.health ?? 0, nh = ns.health ?? 0;
+const newRound = r?.phase === 'freezetime' && old._roundPhase !== 'freezetime' && m.phase !== 'gameover';
+if (nh < oh) {
+ev.push({ type: 'hurt', damage: oh - nh, health: nh });
+if (nh === 0) ev.push({ type: 'death' });
+} else if (nh > oh && oh === 0 && !newRound) ev.push({ type: 'respawn' });
+if (prevCtx !== 'self') mem.flash = { ...FLASH0, postAt: nowMs, changedAt: nowMs };
+ev.push(...flashPost(mem, raw, nowMs));
+const dk = (ns.round_kills ?? 0) - (os.round_kills ?? 0), dh = (ns.round_killhs ?? 0) - (os.round_killhs ?? 0);
+if (dk > 0) { 
+for (let i = 0; i < dk; i++) ev.push({ type: 'kill', headshot: i < dh, roundKills: (os.round_kills ?? 0) + i + 1 });
+const n = ns.round_kills ?? 0;
+if (n >= 2 && m.mode !== 'deathmatch') ev.push({ type: 'multiKill', count: n, label: { 2: 'double', 3: 'triple', 4: 'quad' }[n] || 'ace' });
+}
+const oms = old.match_stats || {}, nms = pl.match_stats || {};
+const statsReset = ['deaths', 'assists', 'mvps'].some((k) => (nms[k] ?? 0) < (oms[k] ?? 0)) || (pm.phase === 'warmup' && m.phase !== 'warmup');
+const died = (nms.deaths ?? 0) > (oms.deaths ?? 0);
+if ((nms.kills ?? 0) < (oms.kills ?? 0) && !statsReset && !died) ev.push({ type: 'teamKill' });
+if ((nms.mvps ?? 0) > (oms.mvps ?? 0)) ev.push({ type: 'mvp' });
+const ow = activeWeapon(old), nw = activeWeapon(pl);
+const same = !!ow && !!nw && ow.name === nw.name;
+if (nw && nh > 0 && ow && !same) ev.push({ type: 'weaponSwitch', weapon: bareName(nw.name) });
+if (same && ow.state === 'reloading' && nw.state !== 'reloading') ev.push({ type: 'reloadEnd', weapon: bareName(nw.name) });
+if (nw && GUNS.has(nw.type)) {
+if (nw.state === 'reloading' && !(same && ow.state === 'reloading')) ev.push({ type: 'reloadStart', weapon: bareName(nw.name) });
+const c = nw.ammo_clip ?? 0, cm = nw.ammo_clip_max ?? 0, rv = nw.ammo_reserve ?? 0;
+const wasLow = same && isLow(ow);
+if (isLow(nw) && !wasLow && nw.state !== 'reloading') ev.push({ type: 'lowAmmo', clip: c, clipMax: cm, reserve: rv });
+if (c === 0 && !(same && (ow.ammo_clip ?? 0) === 0)) ev.push({ type: 'emptyClip' });
+if (rv === 0 && !(same && (ow.ammo_reserve ?? 0) === 0)) ev.push({ type: 'lastMag' });
+}
+const dm = (ns.money ?? 0) - (os.money ?? 0);
+if (dm) ev.push({ type: 'money', delta: dm, money: ns.money ?? 0 });
+} else mem.flash = flashCold(raw, nowMs); 
+mem.selfSnap = snap();
+} else if (ctx === 'observing' && prevCtx === 'self' && r?.phase === 'live') {
+if ((mem.selfSnap?.state?.health ?? 0) > 0) ev.push({ type: 'death', inferred: true }); 
+}
+mem.ctx = ctx;
+mem.prevP = p;
+return ev;
+}
+const STATUS_OF = { self: 'live', observing: 'spectating', between: 'between', loading: 'loading', menu: 'menu', watching: 'watching' };
+function build(p, mem) {
+const ctx = mem.ctx;
+const status = STATUS_OF[ctx] || 'menu';
+const m = p.map || null, r = p.round || null;
+const fresh = ctx === 'self';
+const ours = fresh ? p.player : (ctx === 'observing' || ctx === 'between') ? mem.selfSnap : null;
+const st = ours?.state || {};
+const side = (fresh ? p.player.team : null) || mem.team || null;
+const health = st.health ?? null;
+const player = ours ? {
+fresh,
+alive: fresh ? (health ?? 0) > 0 : false,
+team: side,
+health, armor: st.armor ?? null, helmet: st.helmet ?? null,
+flashed: fresh ? r4((mem.flash?.vis ?? 0) / 255) : 0, 
+smoked: fresh ? r4((st.smoked ?? 0) / 255) : 0,
+burning: fresh ? r4((st.burning ?? 0) / 255) : 0,
+money: st.money ?? null, equip: st.equip_value ?? null,
+activity: fresh ? p.player.activity : null,
+} : null;
+const ms = ours?.match_stats;
+const stats = ours ? { kills: ms?.kills ?? null, assists: ms?.assists ?? null, deaths: ms?.deaths ?? null, mvps: ms?.mvps ?? null, score: ms?.score ?? null, roundKills: st.round_kills ?? null, roundHs: st.round_killhs ?? null } : null;
+const weapon = fresh ? weaponView(activeWeapon(p.player)) : null;
+const inMatch = !!m && ctx !== 'watching';
+const { us, them } = inMatch ? scores(m, side) : { us: null, them: null };
+const target = inMatch ? targetOf(m) : null;
+const round = r && m ? {
+phase: r.phase,
+number: (m.round ?? 0) + (r.phase === 'over' || m.phase === 'gameover' ? 0 : 1),
+bomb: r.bomb ?? null,
+win: r.win_team ?? null,
+result: r.win_team && side && inMatch ? (r.win_team === side ? 'win' : 'loss') : null,
+reason: r.win_team ? roundReason(m.round_wins?.[String(m.round)]) : null, 
+} : null;
+const match = m ? {
+map: m.name, title: mapTitle(m.name), mode: m.mode, phase: m.phase,
+side: inMatch ? side : null,
+ct: m.team_ct?.score ?? null, t: m.team_t?.score ?? null,
+us, them, target,
+matchPoint: target && us !== null && them !== null && m.phase !== 'gameover' ? (us === target - 1 && them === target - 1 ? 'both' : us === target - 1 ? 'us' : them === target - 1 ? 'them' : null) : null,
+result: m.phase === 'gameover' && us !== null && them !== null ? (us > them ? 'win' : us < them ? 'loss' : 'draw') : null,
+} : null;
+const cs2 = { defuseKit: !!(fresh && st.defusekit), hasC4: fresh ? Object.values(p.player.weapons || {}).some((w) => w.type === 'C4') : false, grenades: grenadesOf(fresh ? p.player : null) };
+return { status, player, weapon, stats, round, match, cs2 };
+}
+const UNSEEN = new Set(['bombPlanted']);
+function finish(prev, mem, p, raw, nowMs) {
+const core = build(p, mem);
+const events = raw.map((e) => (UNSEEN.has(e.type) ? { ...e } : { ...e, at: nowMs, seq: ++mem.evSeq }));
+const seen = events.filter((e) => !UNSEEN.has(e.type));
+const kept = [...(prev?.events || []).filter((e) => nowMs - e.at <= EVENT_TTL_MS), ...seen].slice(-EVENT_MAX);
+if (prev && !events.length && deepEqual(coreOf(prev), core)) return { state: withMem({ ...prev }, mem), events: [] };
+mem.rev++;
+const plantOnly = !!prev && !seen.length && deepEqual(coreOf(prev), { ...core, round: core.round && prev.round ? { ...core.round, bomb: prev.round.bomb } : core.round });
+const state = withMem({ v: GAMELINK_VERSION, game: 'cs2', at: plantOnly ? prev.at : nowMs, rev: mem.rev, ...core, events: kept }, mem);
+return { state, events };
+}
+const coreOf = (s) => ({ status: s.status, player: s.player, weapon: s.weapon, stats: s.stats, round: s.round, match: s.match, cs2: s.cs2 });
+function flashDue(state, { flashHoldMs = FLASH_HOLD_MS, flashStuckMs = FLASH_STUCK_MS } = {}) {
+const mem = state?.[MEM], f = mem?.flash;
+if (!f || !state.player?.fresh || mem.ctx !== 'self') return { clear: null, strike: null };
+const clear = f.vis > 0 && f.postAt !== null ? Math.min(f.postAt + flashHoldMs, (f.changedAt ?? f.postAt) + flashStuckMs) : null;
+return { clear, strike: f.pending ? mem.strikeAt + FLASH_STRIKE_GAP_MS : null };
+}
+function tickCs2(state, nowMs, opts = {}) {
+const { clear, strike } = flashDue(state, opts);
+const dueClear = clear !== null && nowMs >= clear, dueStrike = strike !== null && nowMs >= strike;
+if (!dueClear && !dueStrike) return { state, events: [] };
+const m = { ...state[MEM] }, f = { ...m.flash };
+let raw = [];
+if (dueClear) {
+raw.push({ type: 'flashClear', peak: r4(f.peak / 255), timeout: true });
+Object.assign(f, { vis: 0, lo: f.raw, peak: 0, rising: false, pending: false }); 
+} else {
+f.pending = false;
+if (strikes(f, f.raw)) raw = strikeTo(m, f, f.raw, nowMs);
+}
+m.flash = f;
+if (!raw.length) return { state: withMem({ ...state }, m), events: [] };
+const events = raw.map((e) => ({ ...e, at: nowMs, seq: ++m.evSeq }));
+m.rev++;
+const kept = [...(state.events || []).filter((x) => nowMs - x.at <= EVENT_TTL_MS), ...events].slice(-EVENT_MAX);
+return { state: withMem({ ...state, at: nowMs, rev: m.rev, player: { ...state.player, flashed: r4(f.vis / 255) }, events: kept }, m), events };
+}
+function cs2NextTick(state, opts = {}) {
+const { clear, strike } = flashDue(state, opts);
+return clear === null ? strike : strike === null ? clear : Math.min(clear, strike);
+}
+function gameLinkView(state, nowMs) {
+if (!state) return null;
+const { events = [], ...rest } = state;
+return { ...rest, events: events.filter((e) => nowMs - e.at <= EVENT_TTL_MS) };
+}
+const BAD_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+function parseVdf(text) {
+const s = String(text ?? '').replace(/^\uFEFF/, '').slice(0, 4 * 1024 * 1024);
+const n = s.length;
+const root = {};
+const stack = [root];
+let i = 0, key = null;
+const ws = (c) => c === ' ' || c === '\t' || c === '\r' || c === '\n' || c === '\f' || c === '\v';
+const skip = () => {
+for (;;) {
+while (i < n && ws(s[i])) i++;
+if (s[i] === '/' && s[i + 1] === '/') { while (i < n && s[i] !== '\n') i++; continue; }
+return;
+}
+};
+const quoted = () => {
+i++;
+let out = '';
+while (i < n && s[i] !== '"') {
+if (s[i] === '\\' && i + 1 < n) { const c = s[i + 1]; out += c === 'n' ? '\n' : c === 't' ? '\t' : c; i += 2; } else out += s[i++];
+}
+i++;
+return out;
+};
+const bare = () => { const a = i; while (i < n && !ws(s[i]) && s[i] !== '{' && s[i] !== '}' && s[i] !== '"') i++; return s.slice(a, i); };
+const put = (o, k, v) => { if (!BAD_KEYS.has(k)) o[k] = v; };
+for (;;) {
+skip();
+if (i >= n) break;
+const c = s[i];
+if (c === '{') {
+i++;
+const o = {};
+if (key !== null) put(stack[stack.length - 1], key, o);
+key = null;
+if (stack.length < 64) stack.push(o);
+continue;
+}
+if (c === '}') { i++; if (stack.length > 1) stack.pop(); key = null; continue; }
+const tok = c === '"' ? quoted() : bare();
+if (key === null) {
+if (c !== '"' && tok.startsWith('[') && tok.endsWith(']')) continue; 
+key = tok;
+} else { put(stack[stack.length - 1], key, tok); key = null; }
+}
+return root;
+}
+function vdfGet(o, k) {
+if (!isObj(o)) return undefined;
+if (Object.hasOwn(o, k)) return o[k];
+const lk = k.toLowerCase();
+for (const x of Object.keys(o)) if (x.toLowerCase() === lk) return o[x];
+return undefined;
+}
+function libraryFolders(vdf) {
+const top = vdfGet(vdf, 'libraryfolders');
+if (!isObj(top)) return [];
+const out = [];
+for (const [k, v] of Object.entries(top)) {
+if (!/^\d+$/.test(k)) continue;
+if (typeof v === 'string' && v) out.push({ path: v, apps: null });
+else if (isObj(v) && typeof vdfGet(v, 'path') === 'string' && vdfGet(v, 'path')) {
+const apps = vdfGet(v, 'apps');
+out.push({ path: vdfGet(v, 'path'), apps: isObj(apps) ? new Set(Object.keys(apps)) : null });
+}
+}
+return out;
+}
+const STEAM_KEYS = [['HKCU\\Software\\Valve\\Steam', 'SteamPath'], ['HKLM\\SOFTWARE\\WOW6432Node\\Valve\\Steam', 'InstallPath']];
+function joinPath(platform, ...parts) {
+const sep = platform === 'win32' ? '\\' : '/';
+const ps = parts.filter((x) => typeof x === 'string' && x !== '').map((x) => (platform === 'win32' ? x.replace(/\//g, '\\') : x));
+if (!ps.length) return '';
+const head = ps[0].replace(/[\\/]+$/, '') || sep;
+const rest = ps.slice(1).map((x) => x.replace(/^[\\/]+|[\\/]+$/g, '')).filter(Boolean);
+return [head === sep ? '' : head, ...rest].join(sep) || sep;
+}
+const sameKey = (platform, p) => (platform === 'win32' ? p.replace(/\//g, '\\').replace(/\\+$/, '').toLowerCase() : p.replace(/\/+$/, ''));
+const safeDir = (d) => (typeof d === 'string' && d && d.length <= 128 && !/[\\/:*?"<>|\u0000-\u001f]/.test(d) && d !== '.' && d !== '..' ? d : null);
+async function steamRoots({ platform = 'win32', env = {}, home = '', readRegistry, isDir = async () => false } = {}) {
+const cands = [];
+if (platform === 'win32') {
+for (const [k, v] of STEAM_KEYS) { let p = null; try { p = readRegistry ? await readRegistry(k, v) : null; } catch { p = null; } if (typeof p === 'string' && p.trim()) cands.push(p.trim()); }
+cands.push(joinPath('win32', env['ProgramFiles(x86)'] || 'C:\\Program Files (x86)', 'Steam'));
+} else if (platform === 'linux') {
+if (home) cands.push(joinPath('linux', home, '.steam', 'steam'), joinPath('linux', home, '.local', 'share', 'Steam'));
+}
+const seen = new Set(), out = [];
+for (const c of cands) {
+const p = joinPath(platform, c);
+const k = sameKey(platform, p);
+if (seen.has(k)) continue;
+seen.add(k);
+try { if (await isDir(joinPath(platform, p, 'steamapps'))) out.push(p); } catch { }
+}
+return out;
+}
+async function findCs2(io = {}) {
+const platform = io.platform || 'win32';
+if (platform !== 'win32' && platform !== 'linux') return { found: false, reason: 'unsupported', leftover: false };
+const J = (...a) => joinPath(platform, ...a);
+const read = async (f) => { try { const t = await io.readText?.(f); return typeof t === 'string' ? t : null; } catch { return null; } };
+const isFile = async (f) => { try { return !!(await io.isFile?.(f)); } catch { return false; } };
+const isDir = async (f) => { try { return !!(await io.isDir?.(f)); } catch { return false; } };
+const roots = await steamRoots({ ...io, platform, isDir });
+if (!roots.length) return { found: false, reason: 'no-steam', leftover: false };
+const libs = [], seen = new Set();
+const addLib = (p, apps) => { const path = J(p); const k = sameKey(platform, path); if (seen.has(k)) { const l = libs.find((x) => x.key === k); if (apps && l && !l.apps) l.apps = apps; return; } seen.add(k); libs.push({ path, apps, key: k }); };
+for (const root of roots) {
+const text = await read(J(root, 'steamapps', 'libraryfolders.vdf'));
+const listed = text ? libraryFolders(parseVdf(text)) : [];
+for (const l of listed) addLib(l.path, l.apps);
+addLib(root, null);
+}
+const ordered = [...libs.filter((l) => l.apps?.has(String(CS2_APPID))), ...libs.filter((l) => !l.apps?.has(String(CS2_APPID)))];
+let reason = 'not-installed';
+for (const lib of ordered) {
+const manifest = await read(J(lib.path, 'steamapps', `appmanifest_${CS2_APPID}.acf`));
+if (!manifest) continue;
+const app = vdfGet(parseVdf(manifest), 'AppState');
+const dir = safeDir(vdfGet(app, 'installdir')) || 'Counter-Strike Global Offensive';
+const gameDir = J(lib.path, 'steamapps', 'common', dir);
+const bin = platform === 'win32' ? J(gameDir, 'game', 'bin', 'win64', 'cs2.exe') : J(gameDir, 'game', 'bin', 'linuxsteamrt64', 'cs2');
+if (!(await isFile(bin))) { reason = 'no-binary'; continue; }
+const cfgDir = J(gameDir, 'game', 'csgo', 'cfg');
+if (!(await isDir(cfgDir))) { reason = 'no-cfg-dir'; continue; }
+return { found: true, library: lib.path, gameDir, cfgDir, cfgPath: J(cfgDir, CFG_NAME) };
+}
+let leftover = false;
+for (const lib of ordered) if (await isDir(J(lib.path, 'steamapps', 'common', 'Counter-Strike Global Offensive'))) { leftover = true; break; }
+return { found: false, reason, leftover };
+}
+const CFG_DATA = Object.freeze(['provider', 'map', 'map_round_wins', 'round', 'player_id', 'player_state', 'player_weapons', 'player_match_stats']);
+const TOKEN_RE = /^[A-Za-z0-9_-]{16,128}$/;
+function cs2Cfg({ port, token, eol = '\n' } = {}) {
+if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('cs2Cfg: port must be an integer 1–65535');
+if (typeof token !== 'string' || !TOKEN_RE.test(token)) throw new Error('cs2Cfg: token must be 16–128 url-safe characters');
+const pad = (k) => `"${k}"`.padEnd(22);
+const lines = [
+`"${CFG_TITLE}"`,
+'{',
+'    // Written by Prism Deck (the Stream Deck plugin) when you clicked "Connect CS2".',
+'    // "Disconnect" in the plugin removes this file. It never changes other integrations.',
+`    "uri"       "http://127.0.0.1:${port}/v1/cs2"`,
+'    "timeout"   "2.0"',
+'    "buffer"    "0.0"',
+'    "throttle"  "0.05"',
+'    "heartbeat" "5.0"',
+'    "auth"',
+'    {',
+`        "token" "${token}"`,
+'    }',
+'    "data"',
+'    {',
+...CFG_DATA.map((k) => `        ${pad(k)}"1"`),
+'    }',
+'}',
+'',
+];
+return lines.join(eol);
+}
+function isPrismCfg(text) {
+const first = String(text ?? '').replace(/^\uFEFF/, '').split(/\r?\n/).map((l) => l.trim()).find((l) => l && !l.startsWith('//'));
+return first === `"${CFG_TITLE}"`;
+}
+function cfgState(text, { port, token } = {}) {
+if (text === null || text === undefined) return 'absent';
+if (!isPrismCfg(text)) return 'foreign';
+try { return String(text).replace(/\r\n/g, '\n') === cs2Cfg({ port, token }) ? 'current' : 'outdated'; } catch { return 'outdated'; }
+}
+};
+__d[628] = function (__ns) {
+const { normalizeCs2, gameLinkView } = __m(627);
+__e(__ns, { "SIM_LOOP": () => SIM_LOOP, "SIM_ROUNDS": () => SIM_ROUNDS, "SIM_FRAMES": () => SIM_FRAMES, "simGameLink": () => simGameLink }, [], ["SIM_FRAMES","SIM_LOOP","SIM_ROUNDS","simGameLink"]);
+const SIM_LOOP = 60;
+const SIM_ROUNDS = Object.freeze([
+Object.freeze({ from: 0, to: 30, round: 7, result: 'win' }),
+Object.freeze({ from: 30, to: 60, round: 8, result: 'loss' }),
+]);
+const SELF = '76500000000000001', MATE = '76500000000000002'; 
+const clone = (o) => JSON.parse(JSON.stringify(o));
+const W = {
+knife: { name: 'weapon_knife', type: 'Knife', state: 'holstered' },
+usp: { name: 'weapon_usp_silencer', type: 'Pistol', ammo_clip: 12, ammo_clip_max: 12, ammo_reserve: 2, state: 'active' },
+m4: { name: 'weapon_m4a1_silencer', type: 'Rifle', ammo_clip: 20, ammo_clip_max: 20, ammo_reserve: 3, state: 'active' },
+flash: { name: 'weapon_flashbang', type: 'Grenade', ammo_reserve: 1, state: 'holstered' },
+famas: { name: 'weapon_famas', type: 'Rifle', ammo_clip: 25, ammo_clip_max: 25, ammo_reserve: 3, state: 'active' },
+};
+function world() {
+return {
+map: {
+mode: 'competitive', name: 'de_inferno', phase: 'live', round: 6,
+team_ct: { score: 4, consecutive_round_losses: 0, timeouts_remaining: 3, matches_won_this_series: 0 },
+team_t: { score: 2, consecutive_round_losses: 2, timeouts_remaining: 3, matches_won_this_series: 0 },
+num_matches_to_win_series: 0,
+round_wins: { 1: 'ct_win_elimination', 2: 't_win_elimination', 3: 'ct_win_elimination', 4: 'ct_win_defuse', 5: 't_win_bomb', 6: 'ct_win_elimination' },
+},
+round: { phase: 'freezetime' },
+player: {
+steamid: SELF, name: 'DemoPilot', observer_slot: 6, team: 'CT', activity: 'playing',
+state: { health: 100, armor: 0, helmet: false, flashed: 0, smoked: 0, burning: 0, money: 4750, round_kills: 0, round_killhs: 0, equip_value: 700 },
+weapons: { weapon_0: { ...W.knife }, weapon_1: { ...W.usp } },
+match_stats: { kills: 7, assists: 1, deaths: 4, mvps: 2, score: 17 },
+},
+};
+}
+const st = (w) => w.player.state;
+const gun = (w) => w.player.weapons.weapon_2;
+const flashAt = (v) => (w) => { st(w).flashed = v; };
+const SCRIPT = [
+[0, () => {}],
+[1.5, (w) => { Object.assign(st(w), { money: 850, armor: 100, helmet: true, equip_value: 4600 }); w.player.weapons.weapon_1.state = 'holstered'; w.player.weapons.weapon_2 = { ...W.m4 }; }],
+[2.5, (w) => { Object.assign(st(w), { money: 250, defusekit: true, equip_value: 5200 }); w.player.weapons.weapon_3 = { ...W.flash }; }],
+[4, (w) => { w.round.phase = 'live'; }],
+[6, (w) => { Object.assign(st(w), { health: 73, armor: 91 }); }],
+[8, flashAt(255)],
+[9.6, flashAt(177)], [10, flashAt(113)], [10.4, flashAt(64)], [10.8, flashAt(28)], [11.2, flashAt(7)], [11.6, flashAt(0)],
+[13, (w) => { Object.assign(st(w), { round_kills: 1, money: 550 }); gun(w).ammo_clip = 13; Object.assign(w.player.match_stats, { kills: 8, score: 19 }); }],
+[15, (w) => { Object.assign(st(w), { round_kills: 2, round_killhs: 1, money: 850 }); gun(w).ammo_clip = 4; Object.assign(w.player.match_stats, { kills: 9, score: 21 }); }],
+[16, (w) => { gun(w).state = 'reloading'; }],
+[17.6, (w) => { Object.assign(gun(w), { ammo_clip: 20, ammo_reserve: 2 }); }],
+[18, (w) => { gun(w).state = 'active'; }],
+[20, (w) => { w.round.bomb = 'planted'; }],
+[27, (w) => {
+w.round = { phase: 'over', win_team: 'CT', bomb: 'defused' };
+w.map.round = 7; w.map.team_ct.score = 5; w.map.team_t.consecutive_round_losses = 3; w.map.round_wins[7] = 'ct_win_defuse';
+Object.assign(st(w), { money: 4650 }); Object.assign(w.player.match_stats, { mvps: 3, score: 24 });
+}],
+[30, (w) => { w.round = { phase: 'freezetime' }; Object.assign(st(w), { health: 100, round_kills: 0, round_killhs: 0 }); }],
+[33, (w) => { w.round.phase = 'live'; }],
+[37, (w) => { Object.assign(st(w), { health: 38, armor: 64 }); }],
+[38.5, (w) => {
+const s = st(w);
+Object.assign(s, { health: 0, armor: 0, helmet: false }); delete s.defusekit;
+w.player.weapons = {}; w.player.match_stats.deaths = 5;
+}],
+[41.5, (w) => {
+w.player = {
+steamid: MATE, name: 'DemoWing', observer_slot: 2, team: 'CT', activity: 'playing',
+state: { health: 81, armor: 100, helmet: true, flashed: 0, smoked: 0, burning: 0, money: 1900, round_kills: 1, round_killhs: 0, equip_value: 4100 },
+weapons: { weapon_0: { ...W.knife }, weapon_1: { ...W.famas } },
+match_stats: { kills: 11, assists: 3, deaths: 6, mvps: 1, score: 27 },
+};
+}],
+[46, (w) => { st(w).flashed = 240; }], 
+[47.5, (w) => { st(w).flashed = 0; }],
+[52, (w) => {
+w.round = { phase: 'over', win_team: 'T' };
+w.map.round = 8; w.map.team_t.score = 3; w.map.team_t.consecutive_round_losses = 0; w.map.team_ct.consecutive_round_losses = 1; w.map.round_wins[8] = 't_win_elimination';
+}],
+[55, (w) => { w.player = null; }],
+];
+function payloadOf(w, i, t) {
+const p = { provider: { name: 'Counter-Strike: Global Offensive', appid: 730, version: 14191, steamid: SELF, timestamp: 1791658800 + Math.floor(t) } };
+p.map = clone(w.map);
+if (w.round) p.round = clone(w.round);
+if (w.player) p.player = clone(w.player);
+if (i > 0) p.previously = {};
+return p;
+}
+const SIM_FRAMES = (() => {
+const w = world();
+return Object.freeze(SCRIPT.map(([t, change], i) => { change(w); return Object.freeze({ t, payload: payloadOf(w, i, t) }); }));
+})();
+let STATES = null;
+function states() {
+if (!STATES) {
+let s = null;
+STATES = SIM_FRAMES.map((f) => { s = normalizeCs2(f.payload, s, { nowMs: Math.round(f.t * 1000) }).state; return { t: f.t, state: s }; });
+}
+return STATES;
+}
+let memo = { key: null, value: null };
+function simGameLink(t) {
+const tt = Math.max(0, Number.isFinite(+t) ? +t : 0);
+const k = Math.floor(tt / SIM_LOOP + 1e-9);
+const phase = tt - k * SIM_LOOP;
+const S = states();
+let i = 0;
+for (let j = 0; j < S.length; j++) if (S[j].t <= phase + 1e-9) i = j;
+const v = gameLinkView(S[i].state, Math.round(phase * 1000));
+const key = `${k}|${i}|${v.events.length}`;
+if (memo.key === key) return memo.value;
+const shift = Math.round(k * SIM_LOOP * 1000);
+const value = { ...v, at: v.at + shift, rev: v.rev + k * 1000, events: v.events.map((e) => ({ ...e, at: e.at + shift, seq: e.seq + k * 1000 })) };
+memo = { key, value };
+return value;
+}
+};
+__d[629] = function (__ns) {
+const { simGameLink } = __m(628);
+const { clamp } = __m(12);
+__e(__ns, { "DATA_SHAPE": () => DATA_SHAPE, "gameLinkOf": () => gameLinkOf, "EFFECTS_PARAM": () => EFFECTS_PARAM, "tierOf": () => tierOf, "faceOf": () => faceOf, "phaseOf": () => phaseOf, "newest": () => newest, "stepOf": () => stepOf, "FLASH_Q": () => FLASH_Q, "FLASH_PEAK": () => FLASH_PEAK, "FLASH_RISE": () => FLASH_RISE, "FLASH_REARM_S": () => FLASH_REARM_S, "BOMB_PULSE_S": () => BOMB_PULSE_S, "HURT_MAX_ALPHA": () => HURT_MAX_ALPHA, "fxOf": () => fxOf, "fxBusy": () => fxBusy, "weaponTitle": () => weaponTitle, "kindTitle": () => kindTitle, "money": () => money, "REASONS": () => REASONS, "MULTI": () => MULTI, "MULTI_SHORT": () => MULTI_SHORT, "SLOTS": () => SLOTS, "SLOT_HUE": () => SLOT_HUE, "TEAM_HUE": () => TEAM_HUE, "slotModel": () => slotModel, "layoutOf": () => layoutOf }, [], ["BOMB_PULSE_S","DATA_SHAPE","EFFECTS_PARAM","FLASH_PEAK","FLASH_Q","FLASH_REARM_S","FLASH_RISE","HURT_MAX_ALPHA","MULTI","MULTI_SHORT","REASONS","SLOTS","SLOT_HUE","TEAM_HUE","faceOf","fxBusy","fxOf","gameLinkOf","kindTitle","layoutOf","money","newest","phaseOf","slotModel","stepOf","tierOf","weaponTitle"]);
+const DATA_SHAPE = Object.freeze({
+gamelink: 'Game Link v1 (src/apps/sources/README.md § Game Link): { v, game, status, player { fresh, alive, team, health, armor, helmet, flashed 0–1, money, equip }, weapon { name, kind, clip, clipMax, reserve, reserveUnit, reloading, low }, stats, round { phase, number, bomb, result, reason }, match { map, title, side, us, them, target, matchPoint, result }, events [] } · absent = demo round · null = waiting',
+});
+function gameLinkOf(ctx) {
+const d = ctx.data;
+if (!d || !Object.hasOwn(d, 'gamelink') || d.gamelink === undefined) return { mode: 'demo', s: simGameLink(ctx.t), nowMs: Math.round(ctx.t * 1000) };
+const g = d.gamelink;
+if (!g || typeof g !== 'object') return { mode: 'waiting', s: null, nowMs: ctx.now };
+return { mode: 'live', s: g, nowMs: ctx.now };
+}
+const EFFECTS_PARAM = Object.freeze({ type: 'select', default: 'soft', options: ['soft', 'full', 'off'], label: 'Effects (soft · full · off)' });
+function tierOf(ctx) {
+const e = ctx.params?.effects ?? 'soft';
+if (ctx.reduced || ctx.motion === 'still' || e === 'off') return 'still';
+if (ctx.motion === 'calm') return 'calm';
+return e === 'full' ? 'full' : 'soft';
+}
+function faceOf(view) {
+if (view.mode === 'waiting' || !view.s) return 'waiting';
+const s = view.s;
+switch (s.status) {
+case 'menu': return 'menu';
+case 'loading': return 'loading';
+case 'watching': return 'watching';
+case 'paused': return 'paused';
+case 'spectating': case 'between': return 'spectating';
+case 'live': return s.player && s.player.fresh !== false && s.player.alive === false ? 'dead' : 'live';
+default: return 'menu';
+}
+}
+function phaseOf(s) {
+if (!s?.match) return null;
+const m = s.match, r = s.round;
+if (m.phase === 'gameover') return 'gameover';
+if (m.phase === 'intermission') return 'halftime';
+if (m.phase === 'warmup') return 'warmup';
+if (!r) return m.phase === 'live' ? 'live' : null;
+if (r.phase === 'over') return 'over';
+if (r.phase === 'freezetime') return 'freeze';
+return r.bomb === 'planted' ? 'planted' : 'live';
+}
+function newest(view, types, win) {
+const list = view.s?.events;
+if (!Array.isArray(list)) return null;
+const set = typeof types === 'string' ? [types] : types;
+for (let i = list.length - 1; i >= 0; i--) {
+const e = list[i];
+if (!e || !set.includes(e.type) || !Number.isFinite(e.at)) continue;
+const a = (view.nowMs - e.at) / 1000;
+if (a < -0.05) continue;
+return a < win ? { e, a: Math.max(0, a) } : null;
+}
+return null;
+}
+const stepOf = (a, dur, n) => (a >= dur ? -1 : Math.min(n - 1, Math.floor((a / dur) * n + 1e-9)));
+const FLASH_Q = Object.freeze({ full: 6, soft: 6, calm: 3 });
+const FLASH_PEAK = Object.freeze({ full: 0.93, soft: 0.85, calm: 0.45 });
+const FLASH_RISE = Object.freeze({ full: 0.08, soft: 0.12, calm: 0.5 });
+const FLASH_REARM_S = 1;
+const BOMB_PULSE_S = 1;
+const PULSE_STEPS = [0, 1, 2, 3, 3, 2, 1, 0]; 
+const HURT_MAX_ALPHA = 0.55;
+const DUR = { hurt: 0.6, kill: 1.0, death: 2.4, round: 1.8, defuse: 1.2, explode: 1.4, money: 1.6, hurtLabel: 1.5 };
+function fxOf(view, tier) {
+const s = view.s, face = faceOf(view), phase = phaseOf(s);
+const fx = { tier, face, phase, flash: 0, flashRise: false, flashQ: FLASH_Q[tier] || 6, flashStill: false, hurt: null, kill: null, death: null, round: null, plant: null, pulse: 0, planted: false, defuse: null, explode: null, breathe: 0, dim: 0 };
+if (face === 'spectating' || face === 'watching' || face === 'paused') fx.dim = 2;
+else if (face === 'dead') fx.dim = 1;
+if (!s || face === 'watching' || face === 'waiting' || face === 'menu' || face === 'loading') return fx;
+const still = tier === 'still', calm = tier === 'calm';
+const p = s.player;
+const f = p && p.fresh !== false ? clamp(+p.flashed || 0) : 0;
+if (still) fx.flashStill = f >= 0.3;
+else if (f > 0) {
+const Q = fx.flashQ;
+const lf = Math.min(Q, Math.max(1, Math.ceil(f * Q - 1e-6)));
+let lr = Q;
+const rise = FLASH_RISE[tier];
+const slew = (a) => (calm ? (a < rise / 2 ? 1 : a < rise ? 2 : Q) : a < rise ? Math.ceil(Q / 2) : Q);
+const strike = newest(view, ['flashOnset', 'flashFull'], 1.5);
+if (strike) lr = slew(strike.a);
+const clear = newest(view, 'flashClear', FLASH_REARM_S + rise);
+if (clear && !(strike && strike.e.at > clear.e.at)) lr = Math.min(lr, clear.a < FLASH_REARM_S ? 1 : slew(clear.a - FLASH_REARM_S));
+fx.flash = Math.min(lf, lr);
+fx.flashRise = lr < lf;
+}
+if (still) {
+fx.planted = phase === 'planted';
+return fx;
+}
+const de = newest(view, 'death', DUR.death);
+if (de) {
+const a = de.a;
+const k = calm ? (a < 1.6 ? 3 : a < 2.0 ? 4 : 5) : a < 0.3 ? Math.floor(a / 0.1) : a < 1.6 ? 3 : a < 2.0 ? 4 : 5;
+fx.death = { k, grow: k < 3 ? (k + 1) / 3 : 1, alpha: k <= 3 ? 1 : k === 4 ? 0.5 : 0.22, origin: 'health' };
+}
+const hu = newest(view, 'hurt', DUR.hurt);
+if (hu && !(de && Math.abs(de.e.at - hu.e.at) < 1)) {
+const n = calm ? 2 : 6;
+const k = stepOf(hu.a, DUR.hurt, n);
+if (k >= 0) fx.hurt = { k, n, reach: clamp(0.3 + (+hu.e.damage || 0) / 90, 0.35, 1), dmg: +hu.e.damage || 0 };
+}
+const ki = newest(view, 'kill', DUR.kill);
+if (ki) {
+const mk = s.events.find((e) => e.type === 'multiKill' && e.at === ki.e.at);
+const count = Math.max(1, Math.min(5, +(mk?.count ?? ki.e.roundKills ?? 1) || 1));
+const n = calm ? 4 : 10;
+const k = stepOf(ki.a, DUR.kill, n);
+if (k >= 0) fx.kill = { k, n, headshot: !!ki.e.headshot, count, label: mk?.label || null };
+}
+const ro = newest(view, ['roundWon', 'roundLost'], DUR.round);
+if (ro) {
+const won = ro.e.type === 'roundWon';
+const a = ro.a;
+let sweep = -1, wash = 0;
+if (won && !calm) { if (a < 0.9) sweep = Math.floor(a / 0.09); wash = a < 0.9 ? 0 : a < 1.35 ? 2 : 1; }
+else wash = a < 0.6 ? 3 : a < 1.2 ? 2 : 1;
+if (calm) wash = Math.min(2, wash);
+fx.round = { won, reason: ro.e.reason || null, team: ro.e.winTeam || null, sweep, sweeps: 10, wash };
+}
+fx.planted = phase === 'planted';
+if (fx.planted) {
+const ph = (((view.nowMs / 1000) / BOMB_PULSE_S) % 1 + 1) % 1;
+fx.pulse = PULSE_STEPS[Math.min(7, Math.floor(ph * 8))];
+}
+const bd = newest(view, 'bombDefused', DUR.defuse);
+if (bd) { const n = calm ? 3 : 10; const k = stepOf(bd.a, DUR.defuse, n); if (k >= 0) fx.defuse = { k, n }; }
+const bx = newest(view, 'bombExploded', DUR.explode);
+if (bx) { const n = calm ? 3 : 10; const k = stepOf(bx.a, DUR.explode, n); if (k >= 0) fx.explode = { k, n }; }
+if (phase === 'freeze' && face === 'live') {
+const ph = ((view.nowMs / 4000) % 1 + 1) % 1;
+fx.breathe = Math.round((0.5 - 0.5 * Math.cos(ph * Math.PI * 2)) * 2);
+}
+return fx;
+}
+const fxBusy = (fx) => !!(fx.flash || fx.hurt || fx.kill || fx.death || fx.round || fx.plant || fx.defuse || fx.explode);
+const WEAPONS = {
+ak47: 'AK-47', m4a1_silencer: 'M4A1-S', m4a1: 'M4A4', awp: 'AWP', deagle: 'Deagle', usp_silencer: 'USP-S', glock: 'Glock-18', hkp2000: 'P2000',
+p250: 'P250', fiveseven: 'Five-SeveN', tec9: 'Tec-9', cz75a: 'CZ75', elite: 'Dualies', revolver: 'R8', famas: 'FAMAS', galilar: 'Galil AR', aug: 'AUG',
+sg556: 'SG 553', ssg08: 'SSG 08', scar20: 'SCAR-20', g3sg1: 'G3SG1', mac10: 'MAC-10', mp9: 'MP9', mp7: 'MP7', mp5sd: 'MP5-SD', ump45: 'UMP-45', p90: 'P90',
+bizon: 'PP-Bizon', nova: 'Nova', xm1014: 'XM1014', sawedoff: 'Sawed-Off', mag7: 'MAG-7', m249: 'M249', negev: 'Negev', taser: 'Zeus', c4: 'C4',
+flashbang: 'Flash', smokegrenade: 'Smoke', hegrenade: 'HE', molotov: 'Molotov', incgrenade: 'Incendiary', decoy: 'Decoy', healthshot: 'Medi-Shot',
+};
+function weaponTitle(name) {
+const k = String(name || '').toLowerCase().replace(/^weapon_/, '');
+if (!k) return '—';
+if (/^(knife|bayonet)/.test(k)) return 'Knife';
+return WEAPONS[k] || k.replace(/[^a-z0-9]+/g, ' ').trim().toUpperCase().slice(0, 12) || '—';
+}
+const KINDS = { knife: 'Knife', pistol: 'Pistol', smg: 'SMG', rifle: 'Rifle', shotgun: 'Shotgun', mg: 'MG', sniper: 'Sniper', grenade: 'Grenade', c4: 'C4', taser: 'Taser', other: 'Weapon' };
+const kindTitle = (k) => KINDS[k] || 'Weapon';
+function money(v, { sign = false } = {}) {
+if (!Number.isFinite(v)) return '—';
+const a = Math.round(Math.abs(v)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+return `${v < 0 ? '−' : sign ? '+' : ''}$${a}`;
+}
+const num = (v) => (Number.isFinite(v) ? String(Math.round(v)) : '—');
+const REASONS = Object.freeze({ elimination: 'Elimination', bomb_defused: 'Defused', bomb_exploded: 'Detonated', time: 'Time', rescue: 'Rescue', other: 'Round over' });
+const MULTI = Object.freeze({ 2: 'Double', 3: 'Triple', 4: 'Quad', 5: 'Ace' });
+const MULTI_SHORT = Object.freeze({ 2: '2K', 3: '3K', 4: '4K', 5: 'ACE' });
+const SLOTS = Object.freeze(['health', 'armor', 'ammo', 'money', 'kills', 'score', 'round', 'kda', 'nades', 'weapon', 'gear', 'mvp', 'map', 'scene', 'blank']);
+const SLOT_HUE = Object.freeze({ health: 8, armor: 217.5, ammo: 60.4, money: 138.9, kills: 296, score: 243.6, round: 34.2, kda: 269.8, nades: 165.1, weapon: 86.5, gear: 112.7, mvp: 60.4, map: 191.3, scene: 217.5, blank: 217.5 });
+const TEAM_HUE = Object.freeze({ CT: 232, T: 62 });
+function slotModel(slot, view, fx) {
+const s = view.s, face = fx.face, phase = fx.phase;
+const p = s?.player || null, w = s?.weapon || null, st = s?.stats || null, r = s?.round || null, m = s?.match || null;
+const off = face === 'waiting' || face === 'menu' || face === 'loading' || face === 'watching';
+const stale = face === 'spectating' || face === 'paused'; 
+const out = { slot, title: '', value: '—', unit: null, sub: null, subTone: null, tone: 'idle', bar: null, barTone: null, word: false, hue: SLOT_HUE[slot] ?? 217.5, pict: slot, dimmed: off || stale || face === 'dead' };
+const dead = face === 'dead' || (p && p.alive === false);
+switch (slot) {
+case 'health': {
+out.title = 'Health';
+const hp = p?.health;
+if (off || !Number.isFinite(hp)) { out.tone = 'off'; break; }
+out.value = num(hp); out.bar = clamp(hp / 100);
+if (Number.isFinite(p.armor)) out.bar2 = clamp(p.armor / 100); 
+if (stale || dead || hp <= 0) { out.tone = 'off'; out.sub = 'Down'; out.barTone = 'off'; break; }
+out.tone = hp <= 10 ? 'crit' : hp <= 25 ? 'warn' : hp > 50 ? 'ok' : 'idle';
+out.barTone = hp <= 25 ? 'neg' : hp <= 50 ? 'warn' : 'ok';
+const h = newest(view, 'hurt', DUR.hurtLabel);
+if (h && Number.isFinite(h.e.damage)) { out.sub = `−${Math.round(h.e.damage)}`; out.subTone = 'neg'; }
+break;
+}
+case 'armor': {
+out.title = 'Armor';
+const ar = p?.armor;
+if (off || !Number.isFinite(ar)) { out.tone = 'off'; break; }
+out.value = num(ar); out.bar = clamp(ar / 100); out.barTone = 'info';
+out.helmet = !!p.helmet;
+out.sub = p.helmet ? 'Helmet' : ar > 0 ? 'Vest' : 'None';
+out.tone = stale || dead || ar <= 0 ? 'off' : 'idle';
+break;
+}
+case 'ammo': {
+out.title = 'Ammo';
+if (off || stale || dead || !w) { out.tone = 'off'; out.sub = w ? weaponTitle(w.name) : null; break; }
+out.weapon = w;
+if (!Number.isFinite(w.clip)) { out.value = weaponTitle(w.name); out.word = true; out.sub = kindTitle(w.kind); out.pict = w.kind === 'knife' ? 'knife' : w.kind === 'grenade' ? 'nades' : 'ammo'; break; }
+out.value = num(w.clip);
+out.unit = Number.isFinite(w.clipMax) ? `/${w.clipMax}` : null;
+out.bar = Number.isFinite(w.clipMax) && w.clipMax > 0 ? clamp(w.clip / w.clipMax) : null;
+out.sub = w.reserveUnit === 'mags' && Number.isFinite(w.reserve) ? `${w.reserve} ${w.reserve === 1 ? 'mag' : 'mags'}` : weaponTitle(w.name);
+if (w.reloading) { out.tone = 'busy'; out.sub = 'Reload'; out.barTone = 'off'; }
+else if (w.clip <= 0) { out.tone = 'crit'; out.barTone = 'neg'; out.sub = w.reserveUnit === 'mags' && w.reserve === 0 ? 'Empty' : 'Reload'; }
+else if (w.low) { out.tone = 'warn'; out.barTone = 'warn'; }
+else out.barTone = 'active';
+break;
+}
+case 'money': {
+out.title = phase === 'freeze' && face === 'live' ? 'Buy' : 'Money';
+if (off || !Number.isFinite(p?.money)) { out.tone = 'off'; break; }
+out.value = money(p.money);
+out.tone = stale ? 'off' : phase === 'freeze' && face === 'live' ? 'active' : 'idle';
+const mv = newest(view, 'money', DUR.money);
+if (mv && Number.isFinite(mv.e.delta) && !stale) { out.sub = money(mv.e.delta, { sign: true }); out.subTone = mv.e.delta > 0 ? 'ok' : 'muted'; }
+else if (Number.isFinite(p.equip)) out.sub = `Gear ${money(p.equip)}`;
+break;
+}
+case 'kills': {
+out.title = 'Kills';
+const k = st?.roundKills;
+if (off || !Number.isFinite(k)) { out.tone = 'off'; out.sub = off ? null : 'this round'; break; }
+out.value = num(k);
+out.sub = k >= 2 ? MULTI_SHORT[Math.min(5, k)] : Number.isFinite(st.roundHs) && st.roundHs > 0 ? `${st.roundHs} HS` : Number.isFinite(st.kills) ? `${st.kills} in match` : 'this round';
+out.tone = stale ? 'off' : k >= 2 ? 'active' : 'idle';
+out.multi = k >= 2 ? MULTI_SHORT[Math.min(5, k)] : null;
+break;
+}
+case 'score': {
+out.title = m?.side || 'Score';
+out.side = m?.side || null;
+if (off || !m || !Number.isFinite(m.us) || !Number.isFinite(m.them)) { out.tone = 'off'; if (m && Number.isFinite(m.ct)) { out.value = `${m.ct}–${m.t}`; out.sub = 'CT – T'; } break; }
+out.value = `${m.us}–${m.them}`;
+if (phase === 'gameover') { out.sub = m.result === 'win' ? 'Victory' : m.result === 'loss' ? 'Defeat' : 'Draw'; out.tone = m.result === 'win' ? 'ok' : 'off'; }
+else if (m.matchPoint) { out.sub = 'Match point'; out.tone = 'warn'; }
+else if (phase === 'halftime') { out.sub = 'Sides swap'; }
+else out.sub = Number.isFinite(m.target) ? `first to ${m.target}` : m.title || null;
+if (stale && phase !== 'gameover') out.tone = 'off';
+break;
+}
+case 'round': {
+out.title = r && Number.isFinite(r.number) ? `Round ${r.number}` : m?.title || 'Round';
+out.word = true;
+if (face === 'waiting') { out.value = 'Waiting'; out.sub = 'for CS2'; out.tone = 'off'; out.pict = 'link'; break; }
+if (face === 'menu') { out.value = 'Menu'; out.sub = 'in CS2'; out.tone = 'off'; break; }
+if (face === 'loading') { out.value = 'Loading'; out.sub = m?.title || null; out.tone = 'busy'; break; }
+if (face === 'watching') { out.value = 'Watching'; out.sub = 'not your match'; out.tone = 'off'; break; }
+if (face === 'paused') { out.value = 'Paused'; out.tone = 'off'; break; }
+const reason = r?.reason ? REASONS[r.reason] || null : null;
+switch (phase) {
+case 'gameover': out.title = 'Match'; out.value = 'Final'; out.sub = m?.result === 'win' ? 'Victory' : m?.result === 'loss' ? 'Defeat' : 'Draw'; out.tone = m?.result === 'win' ? 'ok' : 'idle'; break;
+case 'halftime': out.value = 'Half'; out.sub = 'time'; break;
+case 'warmup': out.title = m?.title || 'Warmup'; out.value = 'Warmup'; out.sub = null; break;
+case 'freeze': out.value = 'Buy'; out.sub = m?.matchPoint ? 'Match point' : 'freeze time'; out.tone = 'active'; break;
+case 'planted': out.value = 'Planted'; out.sub = 'bomb'; out.tone = 'warn'; out.pict = 'bomb'; break;
+case 'over': out.value = r?.result === 'win' ? 'Won' : r?.result === 'loss' ? 'Lost' : 'Over'; out.sub = reason; out.tone = r?.result === 'win' ? 'ok' : 'idle'; out.pict = r?.result === 'win' ? 'flag' : 'round'; break;
+case 'live': default: out.value = 'Live'; out.sub = m?.matchPoint ? 'Match point' : m?.title || null; out.tone = m?.matchPoint ? 'warn' : 'idle'; break;
+}
+if (face === 'spectating') { out.title = out.title || 'Round'; out.value = 'Spectating'; out.sub = phase === 'over' ? reason || (r?.result === 'win' ? 'Won' : r?.result === 'loss' ? 'Lost' : null) : phase === 'planted' ? 'Planted' : null; out.tone = 'off'; out.pict = 'eye'; }
+else if (face === 'dead' && phase !== 'over') { out.value = 'Down'; out.sub = phase === 'planted' ? 'Planted' : out.sub; out.tone = 'off'; }
+if (fx.tier === 'still' && phase === 'planted' && face !== 'spectating') { out.value = 'Planted'; out.tone = 'warn'; }
+if (fx.flashStill) out.sub = 'Flashed'; 
+break;
+}
+case 'kda': {
+out.title = 'K · A · D';
+if (off || !st || !Number.isFinite(st.kills)) { out.tone = 'off'; break; }
+out.value = `${num(st.kills)}/${num(st.deaths)}`;
+out.sub = st.assists === 1 ? '1 assist' : `${num(st.assists)} assists`;
+out.kda = [st.kills, st.assists, st.deaths];
+out.tone = stale ? 'off' : 'idle';
+break;
+}
+case 'nades': {
+out.title = 'Utility';
+const g = s?.cs2?.grenades;
+out.nades = g && p?.fresh !== false && !off ? g : null;
+if (!out.nades) { out.tone = 'off'; break; }
+const total = Object.values(g).reduce((a, b) => a + (+b || 0), 0);
+out.value = num(total); out.tone = stale ? 'off' : 'idle';
+break;
+}
+case 'weapon': {
+out.title = w ? kindTitle(w.kind) : 'Weapon';
+out.word = true;
+if (off || stale || !w) { out.tone = 'off'; out.value = '—'; out.word = false; break; }
+out.value = weaponTitle(w.name);
+out.sub = w.reloading ? 'Reloading' : null;
+out.pict = w.kind === 'knife' ? 'knife' : w.kind === 'grenade' ? 'nades' : 'ammo';
+break;
+}
+case 'gear': {
+out.title = 'Gear';
+if (off || !Number.isFinite(p?.equip)) { out.tone = 'off'; break; }
+out.value = money(p.equip);
+const kit = !!s?.cs2?.defuseKit, c4 = !!s?.cs2?.hasC4;
+out.sub = kit ? 'Defuse kit' : c4 ? 'Bomb carrier' : p.helmet ? 'Helmet' : null;
+out.kit = kit; out.c4 = c4;
+out.tone = stale ? 'off' : c4 ? 'active' : 'idle';
+break;
+}
+case 'mvp': {
+out.title = 'MVP';
+if (off || !Number.isFinite(st?.mvps)) { out.tone = 'off'; break; }
+out.value = num(st.mvps); out.sub = Number.isFinite(st.score) ? `score ${st.score}` : null;
+out.tone = stale ? 'off' : newest(view, 'mvp', 6) ? 'active' : 'idle';
+break;
+}
+case 'map': {
+out.title = m?.mode ? m.mode[0].toUpperCase() + m.mode.slice(1) : 'Map';
+out.word = true;
+if (!m) { out.tone = 'off'; out.word = false; break; }
+out.value = m.title || m.map || '—';
+out.sub = m.side ? `${m.side} side` : null;
+out.tone = off ? 'off' : 'idle';
+break;
+}
+default: break;
+}
+return out;
+}
+const L = (...rows) => rows;
+const LAYOUTS = {
+galleon: { keys: L(['score', 'round', 'kills'], ['scene', 'scene', 'scene'], ['scene', 'scene', 'scene'], ['kda', 'nades', 'weapon']), readout: ['health', 'armor', 'ammo', 'money'] },
+plus: { keys: L(['score', 'round', 'kills', 'kda'], ['scene', 'scene', 'scene', 'scene']), readout: ['health', 'armor', 'ammo', 'money'] },
+plusxl: { keys: L(['score', 'round', 'kills', 'kda', 'nades', 'weapon', 'gear', 'mvp', 'map'], Array(9).fill('scene'), Array(9).fill('scene'), Array(9).fill('scene')), readout: ['health', 'armor', 'ammo', 'money', 'kills', 'score'] },
+mk2: { keys: L(['health', 'armor', 'ammo', 'money', 'kills'], Array(5).fill('scene'), ['score', 'round', 'kda', 'nades', 'weapon']) },
+xl: { keys: L(['health', 'armor', 'ammo', 'money', 'kills', 'score', 'round', 'kda'], Array(8).fill('scene'), Array(8).fill('scene'), ['nades', 'weapon', 'scene', 'scene', 'scene', 'scene', 'gear', 'mvp']) },
+mini: { keys: L(['health', 'armor', 'ammo'], ['money', 'kills', 'round']) },
+neo: { keys: L(['health', 'armor', 'ammo', 'money'], ['kills', 'score', 'round', 'kda']), readout: ['round'] },
+studio: { keys: L(['health', 'armor', 'ammo', 'money', 'kills', 'score', 'round', 'kda', 'nades', 'weapon', 'gear', 'mvp', 'map', 'blank', 'blank', 'blank'], Array(16).fill('scene')) },
+};
+const PRIORITY = ['health', 'armor', 'ammo', 'money', 'kills', 'score', 'round', 'kda', 'nades', 'weapon', 'gear', 'mvp', 'map'];
+function layoutOf(ctx, { hud = false, back = false } = {}) {
+const cells = ctx.grid?.cells || [];
+const cols = Math.max(1, ...cells.map((c) => c.col + 1)), rows = Math.max(1, ...cells.map((c) => c.row + 1));
+const D = ctx.deck;
+const nRead = D?.screen?.kind === 'galleon' ? 4 : D?.strip ? D.strip.segments : D?.screen?.kind === 'infobar' ? 1 : 0;
+const known = LAYOUTS[ctx.device?.id] || LAYOUTS[ctx.device?.family]; 
+let grid = known && known.keys.length === rows && known.keys.every((r) => r.length === cols) ? known.keys : null;
+let readout = known?.readout && known.readout.length === nRead ? known.readout : null;
+if (!readout) readout = nRead === 1 ? ['round'] : PRIORITY.slice(0, nRead);
+if (!grid) {
+const onReadout = new Set(nRead > 1 ? readout : []);
+const pool = PRIORITY.filter((x) => !onReadout.has(x));
+grid = Array.from({ length: rows }, (_, r) => Array.from({ length: cols }, () => 'scene'));
+const fill = (r) => { for (let c = 0; c < cols; c++) grid[r][c] = pool.shift() || 'blank'; };
+fill(0);
+if (rows === 2 && cols < 4) fill(1);
+if (rows >= 3) fill(rows - 1);
+}
+let slots = cells.map((c) => grid[c.row]?.[c.col] || 'blank');
+if (hud) {
+const onReadout = new Set(nRead > 1 ? readout : []);
+const pool = PRIORITY.filter((x) => !onReadout.has(x) && !slots.includes(x));
+slots = slots.map((x) => (x === 'scene' ? pool.shift() || 'blank' : x));
+}
+if (back && cells.length > 1) {
+const corner = cells.reduce((b, c, i) => (c.row > cells[b].row || (c.row === cells[b].row && c.col > cells[b].col) ? i : b), 0);
+const gone = slots[corner];
+slots = slots.map((x, i) => (i === corner ? 'blank' : x));
+if (gone === 'round' && !readout.includes('round')) {
+const rank = (x) => { const r = PRIORITY.indexOf(x); return r < 0 ? -1 : r; };
+let worst = -1;
+slots.forEach((x, i) => { if (x !== 'scene' && x !== 'blank' && x !== 'round' && (worst < 0 || rank(x) > rank(slots[worst]))) worst = i; });
+if (worst >= 0) slots = slots.map((x, i) => (i === worst ? 'round' : x));
+}
+}
+return { slots, readout };
+}
+};
+__d[630] = function (__ns) {
+
+__e(__ns, { "PICT": () => PICT, "NADE_KINDS": () => NADE_KINDS }, [], ["NADE_KINDS","PICT"]);
+const ACC = { role: 'accent', fill: true };
+const LINE = { role: 'line' };
+function shield(p, { helmet = false } = {}) {
+p.path('M24 7 L38.5 12.5 L38.5 23 C38.5 31.5 32.5 38 24 41.5 C15.5 38 9.5 31.5 9.5 23 L9.5 12.5 Z', { role: 'accent', weight: 1.1 });
+if (helmet) p.path('M16 25 C16 19.5 19.5 16 24 16 C28.5 16 32 19.5 32 25 L32 27 L16 27 Z', ACC);
+else p.line(24, 15, 24, 34, { role: 'dim', weight: 0.9 });
+}
+function bullet(p, x, y, w, h) {
+const r = w / 2;
+p.path(`M${x} ${y + h} L${x} ${y + r * 1.6} C${x} ${y + r * 0.4} ${x + r} ${y - r * 0.2} ${x + r} ${y - r * 0.2} C${x + r} ${y - r * 0.2} ${x + w} ${y + r * 0.4} ${x + w} ${y + r * 1.6} L${x + w} ${y + h} Z`, ACC);
+p.line(x - 0.6, y + h + 2.2, x + w + 0.6, y + h + 2.2, { role: 'dim', weight: 0.9 });
+}
+function crosshair(p, { dot = true } = {}) {
+p.circle(24, 24, 12.5, { role: 'accent', weight: 1.05 });
+p.line(24, 6.5, 24, 15, LINE); p.line(24, 33, 24, 41.5, LINE); p.line(6.5, 24, 15, 24, LINE); p.line(33, 24, 41.5, 24, LINE);
+if (dot) p.dot(24, 24, 2.6);
+}
+function star(p, cx = 24, cy = 25, R = 17, r = 7.4) {
+const pts = [];
+for (let i = 0; i < 10; i++) { const a = ((i * 36 - 90) * Math.PI) / 180, rr = i % 2 ? r : R; pts.push([cx + rr * Math.cos(a), cy + rr * Math.sin(a)]); }
+p.polygon(pts, ACC);
+}
+const PICT = {
+health: (p) => p.polygon([[19, 8], [29, 8], [29, 19], [40, 19], [40, 29], [29, 29], [29, 40], [19, 40], [19, 29], [8, 29], [8, 19], [19, 19]], ACC),
+armor: (p, o = {}) => shield(p, o),
+ammo: (p) => { bullet(p, 10, 12, 7, 23); bullet(p, 20.5, 12, 7, 23); bullet(p, 31, 12, 7, 23); },
+weapon: (p) => { bullet(p, 19, 9, 10, 28); },
+money: (p) => { p.circle(24, 24, 16, { role: 'accent', weight: 1.1 }); p.text('$', { x: 24, y: 31.5, size: 21, weight: 700, role: 'fill' }); },
+kills: (p) => crosshair(p),
+kda: (p) => { p.line(13, 11, 13, 37, { role: 'accent', weight: 1.2 }); p.line(21, 11, 21, 37, { role: 'accent', weight: 1.2 }); p.line(29, 11, 29, 37, { role: 'accent', weight: 1.2 }); p.line(36, 11, 36, 37, { role: 'dim', weight: 1.2 }); p.line(9, 30, 40, 18, LINE); },
+score: (p) => { p.rect(9, 14, 11, 24, { r: 2.5, role: 'accent', fill: true }); p.rect(28, 20, 11, 18, { r: 2.5, role: 'dim', fill: true }); p.dot(24, 10, 2.2); },
+round: (p) => { p.circle(24, 24, 15, { role: 'accent', weight: 1.1 }); p.circle(24, 24, 7, { role: 'dim', weight: 0.9 }); p.dot(24, 24, 2.6); },
+flag: (p) => { p.line(13, 7, 13, 42, { role: 'line', weight: 1.1 }); p.polygon([[13, 8], [38, 13], [13, 25]], ACC); },
+bomb: (p) => {
+p.circle(22, 28, 12.5, ACC);
+p.path('M29.5 18.5 C31 14.5 33.5 12.5 37 12', { role: 'line', weight: 1 });
+p.line(37.5, 6.5, 37.5, 9, { role: 'spark', weight: 0.8 }); p.line(41.5, 11.5, 39.5, 11.5, { role: 'spark', weight: 0.8 }); p.line(40.8, 7.5, 39.2, 9.1, { role: 'spark', weight: 0.8 });
+p.path('M16 24 C17 21.5 19 20 21.5 19.5', { role: 'spark', weight: 0.7, opacity: 0.8 });
+},
+nades: (p) => {
+p.circle(24, 28, 12, ACC);
+p.rect(20, 11, 8, 6, { r: 1.5, role: 'line', fill: true });
+p.path('M28 14 L36 18 L36 24', { role: 'line', weight: 0.9 });
+p.circle(17, 12, 3.5, { role: 'dim', weight: 0.8 });
+},
+flash: (p) => { p.circle(24, 24, 7.5, ACC); for (let i = 0; i < 8; i++) { const a = (i * 45 * Math.PI) / 180; p.line(24 + 11 * Math.cos(a), 24 + 11 * Math.sin(a), 24 + 17 * Math.cos(a), 24 + 17 * Math.sin(a), { role: 'accent', weight: 0.9 }); } },
+smoke: (p) => p.path('M13 34 C7.5 34 7 26.5 12 25 C11 18.5 19 15 22.5 19.5 C25 13 35 14 34.5 21.5 C40.5 21.5 41.5 34 34.5 34 Z', ACC),
+he: (p) => { p.circle(24, 27, 13, ACC); p.rect(20.5, 9.5, 7, 6, { r: 1.5, role: 'line', fill: true }); p.line(27, 12.5, 34, 16, { role: 'line', weight: 0.9 }); },
+fire: (p) => p.path('M24 7 C27 15 35 18.5 35 28.5 A11 11 0 0 1 13 28.5 C13 22 17 19 18.5 14.5 C20.5 18 21.5 20.5 23.5 21.5 C25 17 24 11 24 7 Z', ACC),
+knife: (p) => { p.path('M9 34 L33 10 C37 9 39.5 11.5 38 15 L15 38 Z', ACC); p.line(13, 30, 18, 35, { role: 'line', weight: 1.1 }); p.line(8, 40, 13, 35, { role: 'line', weight: 1.4 }); },
+gear: (p) => { p.rect(9, 16, 30, 22, { r: 4, role: 'accent', weight: 1.1 }); p.path('M18 16 L18 11.5 L30 11.5 L30 16', { role: 'line', weight: 1 }); p.line(9, 25, 39, 25, { role: 'dim', weight: 0.9 }); p.rect(21, 22.5, 6, 5, { r: 1, role: 'accent', fill: true }); },
+kit: (p) => { p.path('M14 9 L22 25', { role: 'accent', weight: 1.3 }); p.path('M34 9 L26 25', { role: 'accent', weight: 1.3 }); p.circle(24, 27, 3, { role: 'line', fill: true }); p.path('M22 29 L15 40', { role: 'line', weight: 1.6 }); p.path('M26 29 L33 40', { role: 'line', weight: 1.6 }); },
+mvp: (p) => star(p),
+map: (p) => { p.path('M24 41 C17 31 12 25.5 12 19 A12 12 0 0 1 36 19 C36 25.5 31 31 24 41 Z', { role: 'accent', weight: 1.1 }); p.circle(24, 19, 4.6, ACC); },
+eye: (p) => { p.path('M6 24 C13 13 35 13 42 24 C35 35 13 35 6 24 Z', { role: 'line', weight: 1 }); p.circle(24, 24, 6, ACC); },
+link: (p) => {
+p.path('M21 27 L27 21', { role: 'accent', weight: 1.1 });
+p.path('M19.5 18.5 L23 15 A7 7 0 0 1 33 25 L29.5 28.5', { role: 'line', weight: 1 });
+p.path('M28.5 29.5 L25 33 A7 7 0 0 1 15 23 L18.5 19.5', { role: 'line', weight: 1 });
+},
+prism: (p) => { p.polygon([[24, 8], [41, 38], [7, 38]], { role: 'accent', weight: 1.1 }); p.line(24, 15, 15.5, 31, { role: 'spark', weight: 0.6, opacity: 0.8 }); },
+scene: () => {},
+blank: () => {},
+};
+const NADE_KINDS = Object.freeze([['flash', 'flashbang'], ['smoke', 'smoke'], ['he', 'he'], ['fire', 'molotov', 'incendiary']]);
+};
+__d[631] = function (__ns) {
+const { n } = __m(5);
+const { capHeight } = __m(11);
+__e(__ns, { "hudFits": () => hudFits, "hudWidth": () => hudWidth, "hudText": () => hudText }, [], ["hudFits","hudText","hudWidth"]);
+const DIGIT_W = 0.56, GAP = 0.15;
+const W = { digit: DIGIT_W, '$': 0.54, '/': 0.36, '-': 0.4, '−': 0.4, '–': 0.46, '+': 0.5, '×': 0.44, ':': 0.18, '.': 0.18, ',': 0.18, '·': 0.18, ' ': 0.24, K: 0.54 };
+const isDigit = (ch) => ch >= '0' && ch <= '9';
+const widthOf = (ch) => (isDigit(ch) ? DIGIT_W : W[ch]);
+function hudFits(str) {
+const s = String(str ?? '');
+if (!s.trim()) return false;
+for (const ch of s) if (widthOf(ch) === undefined) return false;
+return /[0-9]/.test(s);
+}
+const strokeOf = (H, weight = 700) => Math.max(1.25, H * (weight >= 700 ? 0.17 : 0.145));
+function hudWidth(str, size, { weight = 700 } = {}) {
+const H = capHeight(size, weight);
+const s = String(str ?? '');
+let w = 0, k = 0;
+for (const ch of s) { const cw = widthOf(ch); if (cw === undefined) continue; w += cw * H; k++; }
+return k ? w + GAP * H * (k - 1) : 0;
+}
+function glyph(ch, H, s) {
+const ow = (widthOf(ch) ?? DIGIT_W) * H;
+const x0 = s / 2, x1 = ow - s / 2, t = -H + s / 2, b = -s / 2, m = -H / 2, xm = ow / 2;
+const c = Math.min(H * 0.17, (x1 - x0) * 0.42), h = c * 0.5;
+const L = (...pts) => ({ pts, closed: false });
+const O = (...pts) => ({ pts, closed: true });
+switch (ch) {
+case '0': return { lines: [O([x0 + c, t], [x1 - c, t], [x1, t + c], [x1, b - c], [x1 - c, b], [x0 + c, b], [x0, b - c], [x0, t + c])] };
+case '1': { const xc = x0 + (x1 - x0) * 0.64; return { lines: [L([xc - (x1 - x0) * 0.5, t + c * 1.05], [xc - c * 0.15, t], [xc, t], [xc, b])] }; }
+case '2': return { lines: [L([x0, t + c], [x0 + c, t], [x1 - c, t], [x1, t + c], [x1, m - h], [x1 - h, m], [x0 + h, m], [x0, m + h], [x0, b], [x1, b])] };
+case '3': return { lines: [L([x0, t + c], [x0 + c, t], [x1 - c, t], [x1, t + c], [x1, m - h], [x1 - h, m], [x1, m + h], [x1, b - c], [x1 - c, b], [x0 + c, b], [x0, b - c]), L([x0 + (x1 - x0) * 0.32, m], [x1 - h, m])] };
+case '4': { const xs = x1 - (x1 - x0) * 0.18, yb = m + H * 0.12; return { lines: [L([x0, t], [x0, yb], [x1, yb]), L([xs, t + H * 0.2], [xs, b])] }; }
+case '5': return { lines: [L([x1, t], [x0, t], [x0, m - H * 0.03], [x1 - c, m - H * 0.03], [x1, m - H * 0.03 + c], [x1, b - c], [x1 - c, b], [x0, b])] };
+case '6': return { lines: [L([x1, t], [x0 + c, t], [x0, t + c], [x0, b - c], [x0 + c, b], [x1 - c, b], [x1, b - c], [x1, m + h], [x1 - h, m], [x0, m])] };
+case '7': return { lines: [L([x0, t], [x1, t], [x1, t + c], [x0 + (x1 - x0) * 0.32, b])] };
+case '8': return { lines: [O([x0 + c * 0.75, t], [x1 - c * 0.75, t], [x1, t + c * 0.75], [x1, m - h], [x1 - h, m], [x0 + h, m], [x0, m - h], [x0, t + c * 0.75]), O([x0 + h, m], [x1 - h, m], [x1, m + h], [x1, b - c], [x1 - c, b], [x0 + c, b], [x0, b - c], [x0, m + h])] };
+case '9': return { lines: [L([x0, b], [x1 - c, b], [x1, b - c], [x1, t + c], [x1 - c, t], [x0 + c, t], [x0, t + c], [x0, m - h], [x0 + h, m], [x1, m])] };
+case '$': { const top = t + H * 0.09, bot = b - H * 0.09, mm = (top + bot) / 2, cc = c * 0.85, hh = cc * 0.5; return { lines: [L([x1, top + cc], [x1 - cc, top], [x0 + cc, top], [x0, top + cc], [x0, mm - hh], [x0 + hh, mm], [x1 - hh, mm], [x1, mm + hh], [x1, bot - cc], [x1 - cc, bot], [x0 + cc, bot], [x0, bot - cc]), L([xm, t - H * 0.07], [xm, top]), L([xm, bot], [xm, b + H * 0.07])] }; }
+case '/': return { lines: [L([x1, t], [x0, b])] };
+case '-': case '−': return { lines: [L([x0, m], [x1, m])] };
+case '–': return { lines: [L([x0, m], [x1, m])] };
+case '+': { const r = Math.min(H * 0.22, (x1 - x0) / 2); return { lines: [L([xm, m - r], [xm, m + r]), L([xm - r, m], [xm + r, m])] }; }
+case '×': { const r = Math.min(H * 0.17, (x1 - x0) / 2); return { lines: [L([xm - r, m - r], [xm + r, m + r]), L([xm + r, m - r], [xm - r, m + r])] }; }
+case 'K': return { lines: [L([x0, t], [x0, b]), L([x1, t], [x0 + s * 0.2, m + H * 0.06]), L([x0 + (x1 - x0) * 0.38, m - H * 0.04], [x1, b])] };
+case ':': return { lines: [], dots: [[xm, t + H * 0.2, s], [xm, b - H * 0.08, s]] };
+case '.': return { lines: [], dots: [[xm, -s / 2, s]] };
+case ',': return { lines: [L([xm, -s * 0.2], [xm - s * 0.35, s * 0.85])], dots: [[xm, -s / 2, s]] };
+case '·': return { lines: [], dots: [[xm, m, s]] };
+default: return { lines: [] };
+}
+}
+const memo = new Map();
+function outline(str, size, weight) {
+const key = `${str}|${size}|${weight}`;
+const hit = memo.get(key);
+if (hit) return hit;
+const H = capHeight(size, weight), s = strokeOf(H, weight);
+const dec = H < 14 ? 2 : 1;
+const f = (v) => n(v, dec);
+let d = '', dots = '', x = 0, k = 0;
+for (const ch of String(str)) {
+const cw = widthOf(ch);
+if (cw === undefined) continue;
+if (k++) x += GAP * H;
+const g = glyph(ch, H, s);
+for (const ln of g.lines) {
+ln.pts.forEach(([px, py], i) => { d += `${i ? 'L' : 'M'}${f(x + px)} ${f(py)}`; });
+if (ln.closed) d += 'Z';
+}
+for (const [cx, cy, side] of g.dots || []) dots += `M${f(x + cx - side / 2)} ${f(cy - side / 2)}h${f(side)}v${f(side)}h${f(-side)}Z`;
+x += cw * H;
+}
+const out = { d, dots, width: x, H, s };
+if (memo.size > 400) memo.delete(memo.keys().next().value);
+memo.set(key, out);
+return out;
+}
+function hudText(str, { x = 0, y = 0, size = 16, anchor = 'start', fill = '#ffffff', opacity, weight = 700, maxWidth } = {}) {
+const s = String(str ?? '');
+if (!s) return '';
+let px = size;
+if (maxWidth && maxWidth > 0) { const w = hudWidth(s, px, { weight }); if (w > maxWidth) px = Math.max(size * 0.45, (px * maxWidth) / w); }
+const o = outline(s, Math.round(px * 4) / 4, weight);
+const x0 = anchor === 'middle' ? x - o.width / 2 : anchor === 'end' ? x - o.width : x;
+const op = typeof opacity === 'number' && opacity < 0.999 ? n(Math.max(0, opacity), 3) : null;
+const tf = `translate(${n(x0)} ${n(y)})`;
+let out = '';
+if (o.d) out += `<path transform="${tf}" d="${o.d}" fill="none" stroke="${fill}" stroke-width="${n(o.s, 2)}"${op ? ` stroke-opacity="${op}"` : ''} stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="3"/>`;
+if (o.dots) out += `<path transform="${tf}" d="${o.dots}" fill="${fill}"${op ? ` fill-opacity="${op}"` : ''}/>`;
+return out;
+}
+};
+__d[632] = function (__ns) {
+const { defineTheme, defaultPaint, defaultPress, defaultText, bezelCorner } = __m(14);
+const { useTheme } = __m(260);
+const { rect, path, linearGradient, url, n, P } = __m(5);
+const { capHeight, measureText, textPath } = __m(11);
+const { clamp } = __m(12);
+const { header } = __m(277);
+const { hudText, hudFits, hudWidth } = __m(631);
+const { PICT, NADE_KINDS } = __m(630);
+__e(__ns, { "GAME_SKIN_ID": () => GAME_SKIN_ID, "SKIN_PARAM": () => SKIN_PARAM, "SIDE_COLOR": () => SIDE_COLOR, "SIDE_INK": () => SIDE_INK, "NEUTRAL": () => NEUTRAL, "GAME_FX": () => GAME_FX, "toneHex": () => toneHex, "skinOf": () => skinOf, "sideOf": () => sideOf, "skinned": () => skinned, "isGameSkin": () => isGameSkin, "segBar": () => segBar, "gameKeyInstrument": () => gameKeyInstrument, "gamePanelInstrument": () => gamePanelInstrument, "gameSceneOf": () => gameSceneOf, "gameSceneKey": () => gameSceneKey }, [], ["GAME_FX","GAME_SKIN_ID","NEUTRAL","SIDE_COLOR","SIDE_INK","SKIN_PARAM","gameKeyInstrument","gamePanelInstrument","gameSceneKey","gameSceneOf","isGameSkin","segBar","sideOf","skinOf","skinned","toneHex"]);
+const GAME_SKIN_ID = 'gamelink-cs2';
+const SKIN_PARAM = Object.freeze({ type: 'select', default: 'game', options: ['game', 'prism'], label: 'Skin (game · the deck theme)' });
+const SIDE_COLOR = Object.freeze({ CT: '#5aa8ee', T: '#eea43a' });
+const SIDE_INK = Object.freeze({ CT: '#a9d3f8', T: '#f6cf8e' });
+const NEUTRAL = '#c9d2d8';
+const PAL = {
+bg: '#08090b', surface: '#262c31', surface2: '#14181b', mid: '#1c2125', line: '#3b444b', ink: '#eef2f4', muted: '#a3adb5', dim: '#69747d',
+accent: NEUTRAL, accent2: '#8d99a2', pos: '#7cc97a', info: '#9db3c6', warn: '#f2c94c', neg: '#e5484d', crit: '#ff6b5e',
+edge: '#ffffff', edgeOpacity: 0.07, beam: '#ffffff', beamOpacity: 1, spectrum: { l: 0.74, c: 0.12 },
+};
+const GAME_FX = Object.freeze({ white: '#ffffff', loss: '#5c6c7b', steel: PAL.info, CT: SIDE_COLOR.CT, T: SIDE_COLOR.T });
+const LIT = new Set(['active', 'ok', 'info', 'warn', 'neg', 'alert', 'crit']);
+function toneHex(k, tone) {
+const C = k.colors;
+switch (tone) {
+case 'warn': return C.warn;
+case 'neg': case 'alert': return C.neg;
+case 'crit': return C.crit;
+case 'busy': return C.muted;
+case 'off': return C.dim;
+default: return k.ctx.tint;
+}
+}
+function brackets(k, { x = 0, y = 0, w = k.w, h = k.h, color, opacity = 1, len = 0.15 } = {}) {
+const { i } = bezelCorner(k, { x, y, w, h });
+const L = Math.min(w, h) * len, sw = Math.max(1, k.m.u * 1.15), o = sw / 2;
+const x0 = x + i + o, y0 = y + i + o, x1 = x + w - i - o, y1 = y + h - i - o;
+const d = P().M(x0, y0 + L).L(x0, y0).L(x0 + L, y0).M(x1 - L, y0).L(x1, y0).L(x1, y0 + L).M(x1, y1 - L).L(x1, y1).L(x1 - L, y1).M(x0 + L, y1).L(x0, y1).L(x0, y1 - L).d;
+k.add(path(d, { fill: 'none', stroke: color, strokeWidth: n(sw), strokeOpacity: opacity < 1 ? n(opacity, 3) : null, strokeLinecap: 'square', strokeLinejoin: 'miter' }));
+}
+function plate(k, { tone = 'idle', x = 0, y = 0, w = k.w, h = k.h, panel = false } = {}) {
+const C = k.colors, u = k.m.u;
+const id = k.id('gm');
+k.def(linearGradient(id, [[0, tone === 'off' ? C.mid : C.surface], [0.52, C.mid], [1, C.surface2]], { x1: 0, y1: 0, x2: 0, y2: 1 }));
+k.add(rect({ x, y, width: w, height: h, fill: url(id) }));
+if (tone !== 'off') k.add(rect({ x: x + k.m.safe, y, width: w - k.m.safe * 2, height: Math.max(1, u * 0.9), fill: C.edge, fillOpacity: C.edgeOpacity }));
+const lit = LIT.has(tone), c = toneHex(k, tone);
+if (lit) {
+const wid = k.id('gw');
+k.def(linearGradient(wid, [[0, c, 0], [0.55, c, 0.03], [1, c, panel ? 0.11 : 0.16]], { x1: 0, y1: 0, x2: 0, y2: 1 }));
+k.add(rect({ x, y, width: w, height: h, fill: url(wid) }));
+}
+if (tone === 'off') return;
+brackets(k, { x, y, w, h, color: lit ? c : C.line, opacity: lit ? 0.95 : 1, len: panel ? 0.1 : 0.15 });
+}
+function gameText(k, role, str, o = {}) {
+if (!hudFits(str)) {
+if (role !== 'label' || (o.maxLines || 1) > 1) return defaultText(k, role, str, o);
+const st = k.typeStyle(role, o), safe = k.m.text ?? k.m.safe;
+const anchor = o.align === 'left' ? 'start' : o.align === 'right' ? 'end' : 'middle';
+return textPath(str, { size: st.size, weight: st.weight, tracking: st.tracking || 0, caps: true, fill: k.color(o.color ?? st.color), x: o.x ?? k.w / 2, y: o.y ?? k.h - (st.baseline ?? 6.5) * k.m.u, anchor, maxWidth: o.maxWidth ?? k.w - safe * 2, minSize: st.size * 0.66 });
+}
+const st = k.typeStyle(role, o);
+const weight = role === 'hero' || role === 'value' ? 700 : 600;
+const fill = k.color(o.color ?? st.color);
+const safe = k.m.text ?? k.m.safe;
+const room = o.maxWidth ?? k.w - safe * 2;
+const anchor = o.align === 'left' ? 'start' : o.align === 'right' ? 'end' : o.align === 'center' ? 'middle' : null;
+let size = st.size, x, y, a;
+switch (role) {
+case 'eyebrow': a = anchor || 'start'; x = o.x ?? (a === 'start' ? safe : a === 'end' ? k.w - safe : k.w / 2); y = o.y ?? safe + capHeight(size, weight); break;
+case 'label': a = anchor || 'middle'; x = o.x ?? k.w / 2; y = o.y ?? k.h - (st.baseline ?? 6.5) * k.m.u; break;
+case 'value': case 'hero': {
+const w = hudWidth(str, size, { weight });
+if (w > room) size = Math.max(st.size * 0.55, (size * room) / w);
+a = anchor || 'middle'; x = o.x ?? k.w / 2; y = (o.cy ?? k.h * 0.52) + capHeight(size, weight) / 2;
+break;
+}
+default: a = anchor || 'middle'; x = o.x ?? k.w / 2; y = o.y ?? k.h - safe;
+}
+return hudText(str, { x, y, size, anchor: a, fill, weight, maxWidth: room });
+}
+const GAME_THEME = defineTheme({
+id: GAME_SKIN_ID,
+title: 'Game Link · CS2',
+description: 'The CS2 game skin for Game Link: dark gunmetal plates, HUD corner brackets and numerals, accents tinted by your side.',
+tags: ['game', 'gunmetal', 'hud', 'dark'],
+modes: { dark: PAL },
+defaultMode: 'dark',
+tones: { idle: 'tint', active: 'tint', ok: 'tint', info: 'tint', busy: 'muted', off: 'dim' },
+roles: {
+line: { color: (k, tone) => (tone === 'off' ? k.colors.dim : k.colors.ink), width: 2.6 },
+fill: { color: (k, tone) => (tone === 'off' ? k.colors.dim : k.colors.ink) },
+accent: { color: (k, tone) => toneHex(k, tone), width: 2.8, glow: 0 },
+dim: { color: (k, tone) => (tone === 'off' ? k.colors.line : k.colors.dim), width: 2.2, opacity: 0.9 },
+spark: { color: (k, tone) => toneHex(k, tone) },
+},
+type: {
+eyebrow: { size: 7.5, weight: 600, caps: true, tracking: 0.14, color: 'muted' },
+label: { size: 10, weight: 600, caps: true, tracking: 0.04, color: 'ink', baseline: 10 },
+value: { size: 22, weight: 700, tabular: true, color: 'ink' },
+hero: { size: 31, weight: 700, tabular: true, color: 'ink' },
+caption: { size: 8, weight: 600, caps: true, tracking: 0.04, color: 'muted' },
+},
+background: (k, o) => plate(k, o),
+surface: (k, o) => plate(k, { ...o, panel: true }),
+paint: (k, prim, style) => defaultPaint(k, prim, { ...style, glow: 0 }),
+press: defaultPress,
+text: gameText,
+});
+let instance = null;
+const gameTheme = () => instance || (instance = useTheme(GAME_THEME, 'dark'));
+const skinOf = (ctx) => (ctx.params?.skin === 'prism' ? 'prism' : 'game');
+function sideOf(view) {
+const s = view?.s;
+const side = s?.match?.side ?? s?.player?.team ?? null;
+return side === 'CT' || side === 'T' ? side : null;
+}
+function skinned(ctx, view) {
+if (skinOf(ctx) !== 'game') return ctx;
+const theme = gameTheme(), side = sideOf(view);
+return { ...ctx, theme, colors: theme.colors, tint: SIDE_COLOR[side] ?? NEUTRAL, hue: side === 'T' ? 62 : 232, side };
+}
+const isGameSkin = (q) => q.theme?.id === GAME_SKIN_ID;
+const barColor = (q, t) => (t === 'neg' ? q.colors.neg : t === 'warn' ? q.colors.warn : t === 'off' ? q.colors.dim : t === 'info' ? q.colors.info : q.ctx.tint);
+const subColor = (q, M) => (M.subTone === 'neg' ? q.colors.neg : M.subTone === 'ok' ? q.colors.pos : M.subTone === 'warn' ? q.colors.warn : M.tone === 'off' ? 'dim' : 'muted');
+const pictTone = (M) => (M.tone === 'off' ? 'off' : M.tone === 'busy' ? 'busy' : M.tone === 'warn' || M.tone === 'neg' || M.tone === 'crit' ? M.tone : 'active');
+const measure = (q, role, str, size) => { const st = q.typeStyle(role, size ? { size } : {}); return hudFits(str) ? hudWidth(str, st.size, { weight: role === 'hero' || role === 'value' ? 700 : 600 }) : measureText(str, { size: st.size, weight: st.weight, tracking: st.tracking || 0, caps: !!st.caps, tabular: !!st.tabular }); };
+function segBar(q, { x, y, w, h, value, count, color, slant = 0.45, off, offOpacity = 0.6, onOpacity = 1 }) {
+const g = Math.max(1, Math.min(w / count * 0.24, h * 0.5)), sk = h * slant;
+const sw = (w - sk - g * (count - 1)) / count;
+const lit = Math.round(clamp(value ?? 0) * count);
+let on = '', dark = '';
+for (let i = 0; i < count; i++) {
+const x0 = x + i * (sw + g);
+const d = P().M(x0 + sk, y).L(x0 + sk + sw, y).L(x0 + sw, y + h).L(x0, y + h).Z().d;
+if (i < lit) on += d; else dark += d;
+}
+if (dark) q.add(path(dark, { fill: off ?? q.colors.line, fillOpacity: offOpacity < 1 ? n(offOpacity, 3) : null }));
+if (on) q.add(path(on, { fill: color, fillOpacity: onOpacity < 1 ? n(onOpacity, 3) : null }));
+}
+function nades(q, M, cy) {
+const g = M.nades || {};
+const room = q.w - q.m.text * 2;
+const grid = q.h >= 90 && q.w >= 90;
+const sz = grid ? Math.min(room * 0.36, q.h * 0.27) : Math.min((room / 4) * 1.1, q.h * 0.3);
+NADE_KINDS.forEach(([pict, ...keys], i) => {
+const count = keys.reduce((a, k) => a + (+g[k] || 0), 0);
+const x = grid ? q.m.text + (i % 2) * (room / 2) + (room / 2 - sz) / 2 - (count > 1 ? sz * 0.12 : 0) : q.m.text + i * (sz + (room - sz * 4) / 3);
+const y = grid ? cy - sz * 1.02 + Math.floor(i / 2) * sz * 1.06 : cy - sz / 2;
+q.pictogram(PICT[pict], { box: { x, y, size: sz }, tone: count ? 'active' : 'off', opacity: count ? undefined : 0.5 });
+if (count > 1) q.add(hudText(`×${count}`, { x: x + sz * 0.86, y: y + sz * 0.9, size: Math.max(q.typeStyle('caption').size * 1.2, sz * 0.36), fill: q.colors.ink, weight: 600 }));
+});
+}
+function gameKeyInstrument(q, M, fx) {
+q.background({ tone: M.tone });
+if (M.slot === 'scene' || M.slot === 'blank') return;
+const u = q.m.u, T = q.m.text, H = q.h;
+const eb = q.typeStyle('eyebrow');
+const cap = capHeight(eb.size, eb.weight);
+const by = T + cap + u * 0.6;
+const ps = Math.round(cap * 2.4);
+const px = T - u * 1.2;
+if (PICT[M.pict]) q.pictogram((pen) => PICT[M.pict](pen, { helmet: M.helmet }), { box: { x: px, y: by - cap / 2 - ps / 2, size: ps }, tone: pictTone(M) });
+const tx = px + ps + u * 1.1;
+q.eyebrow(M.title, { x: tx, y: by, maxWidth: q.w - tx - T, color: M.side ? SIDE_INK[M.side] ?? undefined : undefined });
+const hasBar = M.bar !== null && M.bar !== undefined, hasSub = !!M.sub;
+const cy = hasBar && hasSub ? H * 0.47 : hasSub ? H * 0.5 : hasBar ? H * 0.5 : H * 0.55;
+const room = q.w - T * 2;
+const str = M.word ? String(M.value ?? '—').toUpperCase() : String(M.value ?? '—'); 
+const color = str === '—' ? 'dim' : M.tone === 'off' ? 'muted' : undefined;
+if (M.slot === 'nades' && M.nades) nades(q, M, H * 0.6);
+else if (M.word && str !== '—') {
+const st = q.typeStyle('value');
+const per = measureText(str, { size: 100, weight: 700, caps: true }) / 100;
+const size = Math.max(st.size * 0.42, Math.min(st.size * (str.length <= 4 ? 0.92 : 0.84), (room * 0.98) / Math.max(0.01, per)));
+q.text('value', str, { cy, size, maxWidth: room, color });
+} else {
+const role = str.length <= 3 ? 'hero' : 'value';
+if (!M.unit) q.text(role, str, { cy, maxWidth: room, color });
+else {
+const st = q.typeStyle(role), us = Math.max(q.typeStyle('caption').size * 1.1, st.size * 0.4);
+const vw = measure(q, role, str), uw = hudFits(M.unit) ? hudWidth(M.unit, us, { weight: 600 }) : measureText(M.unit, { size: us, weight: 600 });
+const gap = st.size * 0.1, total = Math.min(room, vw + gap + uw);
+const x0 = q.w / 2 - total / 2, base = cy + capHeight(st.size, 700) / 2;
+q.text(role, str, { align: 'left', x: x0, cy, maxWidth: room - uw - gap, color });
+q.caption(M.unit, { align: 'left', x: x0 + Math.min(vw, room - uw - gap) + gap, y: base, size: us, color: 'muted' });
+}
+}
+if (hasBar) {
+const bh = Math.max(3, u * 3.6), y = hasSub ? H * 0.66 : H - u * 19;
+segBar(q, { x: T, y, w: room, h: bh, value: M.bar, count: q.w >= 110 ? 12 : 10, color: barColor(q, M.barTone === 'ok' || M.barTone === 'active' ? 'tint' : M.barTone) });
+if (M.bar2 !== undefined && M.bar2 > 0.004 && M.tone !== 'off') { const h2 = Math.max(1.5, u * 1.3); q.add(rect({ x: T, y: y + bh + Math.max(1.5, u * 1.4), width: Math.max(h2, room * M.bar2), height: h2, fill: q.colors.info, fillOpacity: 0.85 })); }
+}
+if (hasSub) q.label(M.sub, { maxWidth: room, color: subColor(q, M) });
+void fx;
+}
+function frame(p) {
+const strip = p.ctx.kind === 'strip' || p.h <= 110;
+const pad = Math.round(strip ? Math.max(p.m.text ?? p.m.safe, 13) : Math.max(p.m.text ?? p.m.safe, p.h * 0.12));
+const ebSize = strip ? 13 : undefined;
+const eb = p.typeStyle('eyebrow', ebSize ? { size: ebSize } : {});
+return { x0: pad, x1: p.w - pad, w: p.w - pad * 2, top: pad, eyebrowY: pad + capHeight(eb.size, eb.weight) + (strip ? 1 : 0), eyebrowSize: ebSize, footY: p.h - Math.max(pad, p.h * (strip ? 0.13 : 0.14)), u: p.m.u, cx: p.w / 2, pad, strip };
+}
+function gamePanelInstrument(p, M, fx, { meta } = {}) {
+p.background({ tone: M.tone === 'busy' ? 'idle' : M.tone });
+const W = frame(p);
+const delta = M.slot === 'money' && M.subTone && M.sub;
+const metaText = delta ? M.sub : meta !== undefined ? meta : M.sub;
+header(p, W, M.title, metaText || undefined, { size: W.eyebrowSize, metaSize: W.strip ? 12.5 : undefined, metaColor: M.subTone && (delta || meta === undefined) ? subColor(p, M) : 'dim' });
+const hasBar = M.bar !== null && M.bar !== undefined;
+const ps = Math.round(p.h * (W.strip ? 0.34 : 0.38));
+const pictX = W.x1 - ps, pictY = (W.eyebrowY + (hasBar ? W.footY - p.m.u * 3 : W.footY)) / 2 - ps / 2 + p.h * 0.04;
+const room = PICT[M.pict] ? pictX - W.x0 - p.m.u * 2 : W.w;
+const base = Math.round(p.h * (hasBar ? 0.64 : 0.7));
+const str = M.word ? String(M.value ?? '—').toUpperCase() : String(M.value ?? '—');
+const hero = p.typeStyle('hero');
+const size = W.strip ? hero.size * 0.95 : hero.size * 1.12;
+const color = str === '—' ? 'dim' : M.tone === 'off' ? 'muted' : undefined;
+if (M.slot === 'nades' && M.nades) {
+const sz = Math.min(room / 4, p.h * 0.34), gap = sz * 0.14;
+NADE_KINDS.forEach(([pict, ...keys], i) => { const c = keys.reduce((a, k) => a + (+M.nades[k] || 0), 0); p.pictogram(PICT[pict], { box: { x: W.x0 + i * (sz + gap), y: base - sz * 0.85, size: sz }, tone: c ? 'active' : 'off' }); });
+} else if (M.word && str !== '—') {
+const vs = p.typeStyle('value');
+const s = Math.min(vs.size * (W.strip ? 1.08 : 1.2), size);
+p.text('value', str, { align: 'left', x: W.x0, cy: base - capHeight(s, 700) / 2, size: s, maxWidth: room, color });
+} else {
+const fits = hudFits(str);
+let px = size;
+const us = Math.max(p.typeStyle('caption').size * 1.1, px * 0.36);
+const uw = M.unit ? (hudFits(M.unit) ? hudWidth(M.unit, us, { weight: 600 }) : measureText(M.unit, { size: us, weight: 600 })) : 0;
+const gap = M.unit ? px * 0.08 : 0;
+const vw = fits ? hudWidth(str, px) : measureText(str, { size: px, weight: 700, tabular: true });
+if (vw + gap + uw > room) px = Math.max(size * 0.5, px * (room - gap - uw) / vw);
+const w2 = fits ? hudWidth(str, px) : measureText(str, { size: px, weight: 700, tabular: true });
+p.text('hero', str, { align: 'left', x: W.x0, cy: base - capHeight(px, 700) / 2, size: px, color, maxWidth: room - gap - uw });
+if (M.unit) p.caption(M.unit, { align: 'left', x: W.x0 + w2 + gap, y: base, size: us, color: 'muted' });
+}
+if (PICT[M.pict]) p.pictogram((pen) => PICT[M.pict](pen, { helmet: M.helmet }), { box: { x: pictX, y: pictY, size: ps }, tone: pictTone(M) });
+if (M.foot && !hasBar) p.caption(M.foot, { align: 'left', x: W.x0, y: W.footY, maxWidth: room, color: M.footTone === 'warn' ? p.colors.warn : 'muted', size: W.strip ? undefined : p.typeStyle('caption').size * 1.2 });
+if (hasBar) {
+const bh = Math.max(5, Math.round(p.m.u * (W.strip ? 2.6 : 3)));
+const clips = M.weapon && Number.isFinite(M.weapon.clipMax) && M.weapon.clipMax > 1 && M.weapon.clipMax <= 35 ? M.weapon.clipMax : 20;
+segBar(p, { x: W.x0, y: W.footY - bh, w: W.w, h: bh, value: M.bar, count: W.strip ? Math.min(clips, 14) : clips, color: barColor(p, M.barTone === 'ok' || M.barTone === 'active' ? 'tint' : M.barTone), slant: 0.6 });
+if (M.bar2 !== undefined && M.bar2 > 0.004 && M.tone !== 'off') { const h2 = Math.max(2, bh * 0.4); p.add(rect({ x: W.x0, y: W.footY - bh - h2 - Math.max(2, p.m.u * 1.3), width: Math.max(h2, W.w * M.bar2), height: h2, fill: p.colors.info, fillOpacity: 0.85 })); }
+}
+void fx;
+}
+function gameSceneOf(cells, view, fx) {
+if (!cells.length) return null;
+const face = fx.face, p = view.s?.player;
+const rows = [...new Set(cells.map((c) => c.row))].sort((a, b) => a - b);
+const kinds = new Map(rows.map((r, i) => [r, i === 0 ? 'health' : i === 1 ? 'armor' : 'grid']));
+const runs = new Map(rows.map((r) => [r, cells.filter((c) => c.row === r).sort((a, b) => a.col - b.col).map((c) => c.i)]));
+const idle = face === 'waiting' || face === 'menu' || face === 'loading';
+const grey = face === 'spectating' || face === 'watching' || face === 'paused';
+const val = (v) => (idle || face === 'watching' || !Number.isFinite(v) ? null : clamp(v / 100));
+return { kinds, runs, hp: face === 'dead' ? 0 : val(p?.health), ar: face === 'dead' ? 0 : val(p?.armor), hpRaw: Number.isFinite(p?.health) ? Math.round(p.health) : null, arRaw: Number.isFinite(p?.armor) ? Math.round(p.armor) : null, face, grey, idle, planted: fx.planted, breathe: fx.breathe };
+}
+function gameSceneKey(q, cell, S) {
+if (!S) return;
+const C = q.colors, u = q.m.u, W = q.w, H = q.h;
+const kind = S.kinds.get(cell.row), run = S.runs.get(cell.row) || [cell.i];
+const k = run.indexOf(cell.i), N = run.length;
+if (kind === 'grid') {
+const g = Math.max(1, u * 0.8);
+q.add(path(P().M(W / 2, H * 0.3).L(W / 2, H * 0.42).M(W / 2, H * 0.58).L(W / 2, H * 0.7).M(W * 0.3, H / 2).L(W * 0.42, H / 2).M(W * 0.58, H / 2).L(W * 0.7, H / 2).d, { fill: 'none', stroke: S.idle ? C.line : C.dim, strokeWidth: n(g), strokeOpacity: 0.8 }));
+return;
+}
+const v = kind === 'health' ? S.hp : S.ar, raw = kind === 'health' ? S.hpRaw : S.arRaw;
+const per = W >= 110 ? 5 : 4;
+const lit = v === null ? 0 : clamp(v * N * per - k * per, 0, per) / per;
+const low = kind === 'health' && v !== null && v <= 0.25, half = kind === 'health' && v !== null && v <= 0.5;
+const color = S.grey ? C.dim : kind === 'armor' ? C.info : low ? C.neg : half ? C.warn : q.ctx.tint;
+const breathe = [0.8, 0.9, 1][S.breathe] ?? 1;
+const T = q.m.text, bh = H * 0.27, y = H * 0.6 - bh / 2;
+segBar(q, { x: T - u * 1.5, y, w: W - (T - u * 1.5) * 2, h: bh, value: lit, count: per, color, slant: 0.32, offOpacity: S.idle ? 0.35 : 0.55, onOpacity: S.grey ? 1 : breathe });
+const eb = q.typeStyle('eyebrow'), by = T + capHeight(eb.size, eb.weight) + u * 0.6;
+if (k === 0) q.eyebrow(kind === 'health' ? 'Health' : 'Armor', { x: T, y: by, color: S.idle ? 'dim' : 'muted' });
+if (k === N - 1 && raw !== null && !S.idle && S.face !== 'watching') { const vs = q.typeStyle('value').size * 0.62; q.add(hudText(String(raw), { x: W - T, y: T + capHeight(vs, 700) + u * 0.4, size: vs, anchor: 'end', fill: S.grey ? C.dim : low ? C.neg : C.ink, weight: 700 })); }
+}
+};
+__d[633] = function (__ns) {
+const { rect, path, circle, polygon, linearGradient, radialGradient, url, n, P } = __m(276);
+const { capHeight, measureText } = __m(11);
+const { clamp, lerp, outExpo } = __m(12);
+const { burst, beam, beamColor, HUE } = __m(579);
+const { header, stat, segmented, meter } = __m(277);
+const { PICT, NADE_KINDS } = __m(630);
+const { FLASH_PEAK, HURT_MAX_ALPHA, TEAM_HUE, SLOT_HUE } = __m(629);
+const { isGameSkin, GAME_FX, SIDE_COLOR } = __m(632);
+__e(__ns, { "fieldOf": () => fieldOf, "mid": () => mid, "keyInstrument": () => keyInstrument, "panelFrame": () => panelFrame, "panelInstrument": () => panelInstrument, "sceneOf": () => sceneOf, "sceneKey": () => sceneKey, "overlays": () => overlays }, [], ["fieldOf","keyInstrument","mid","overlays","panelFrame","panelInstrument","sceneKey","sceneOf"]);
+const SPECTRUM = [8, 34.2, 60.4, 86.5, 112.7, 138.9, 165.1, 191.3, 217.5, 243.6, 269.8, 296];
+const FAN = [14, 40, 70, 125, 190, 245, 292]; 
+function fieldOf(rects, { keys = rects, origins = {}, K } = {}) {
+const bb = (list) => list.reduce((b, r) => ({ x0: Math.min(b.x0, r.x), y0: Math.min(b.y0, r.y), x1: Math.max(b.x1, r.x + r.w), y1: Math.max(b.y1, r.y + r.h) }), { x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity });
+const all = bb(rects), k = bb(keys.length ? keys : rects);
+const cx = (k.x0 + k.x1) / 2, cy = (k.y0 + k.y1) / 2;
+let R = 1;
+for (const r of rects) for (const [x, y] of [[r.x, r.y], [r.x + r.w, r.y], [r.x, r.y + r.h], [r.x + r.w, r.y + r.h]]) R = Math.max(R, Math.hypot(x - cx, y - cy));
+const c = [cx, cy];
+return { ...all, n: rects.length, cx, cy, R, K: K ?? Math.min(keys[0]?.w || 72, keys[0]?.h || 72), o: { center: c, kills: origins.kills || c, round: origins.round || c, health: origins.health || c } };
+}
+const mid = (r) => [r.x + r.w / 2, r.y + r.h / 2];
+function inField(q, place, markup) {
+if (!markup) return;
+q.add(place.x || place.y ? `<g transform="translate(${n(-place.x)} ${n(-place.y)})">${markup}</g>` : markup);
+}
+const hits = (place, x0, y0, x1, y1, m = 0) => x1 >= place.x - m && x0 <= place.x + place.w + m && y1 >= place.y - m && y0 <= place.y + place.h + m;
+const toneColor = (q, t) => (t === 'muted' ? q.colors.muted : t === 'off' ? q.colors.dim : t === 'neg' ? q.colors.neg : t === 'ok' ? q.colors.pos : t === 'warn' ? q.colors.warn : t === 'info' ? q.colors.info : q.ctx.tint);
+const pictTone = (M) => (M.tone === 'off' ? 'off' : M.tone === 'busy' ? 'idle' : M.dimmed ? 'idle' : 'active');
+function keyValue(q, M, cy) {
+const str = String(M.value ?? '—');
+const room = q.w - q.m.text * 2;
+const color = str === '—' ? 'dim' : undefined;
+if (M.word && str !== '—') {
+const st = q.typeStyle('value');
+const per = measureText(str, { size: 100, weight: st.weight, tracking: st.tracking || 0, caps: !!st.caps }) / 100;
+const size = Math.max(st.size * 0.4, Math.min(st.size * (str.length <= 4 ? 0.98 : 0.9), (room * 0.98) / Math.max(0.01, per)));
+q.text('value', str, { cy, size, maxWidth: room, color });
+return;
+}
+const role = str.length <= 3 ? 'hero' : 'value';
+if (!M.unit) { q.text(role, str, { cy, maxWidth: room, color }); return; }
+const st = q.typeStyle(role), cs = q.typeStyle('caption');
+const us = Math.max(cs.size, st.size * 0.34);
+const vw = measureText(str, { size: st.size, weight: st.weight, tabular: !!st.tabular, tracking: st.tracking || 0 });
+const uw = measureText(M.unit, { size: us, weight: cs.weight });
+const total = Math.min(room, vw + uw + st.size * 0.06);
+const x0 = q.w / 2 - total / 2;
+const base = cy + capHeight(st.size, st.weight) / 2;
+q.text(role, str, { align: 'left', x: x0, cy, maxWidth: room - uw, color });
+q.caption(M.unit, { align: 'left', x: x0 + Math.min(vw, room - uw) + st.size * 0.06, y: base, size: us, color: 'muted' });
+}
+function nadeRow(q, M, cy) {
+const g = M.nades || {};
+const room = q.w - q.m.text * 2;
+const grid = q.h >= 90 && q.w >= 90;
+const sz = grid ? Math.min(room * 0.36, q.h * 0.27) : Math.min((room / 4) * 1.1, q.h * 0.3);
+const cs = q.typeStyle('caption');
+NADE_KINDS.forEach(([pict, ...keys], i) => {
+const count = keys.reduce((a, k) => a + (+g[k] || 0), 0);
+const x = grid ? q.m.text + (i % 2) * (room / 2) + (room / 2 - sz) / 2 - (count > 1 ? sz * 0.12 : 0) : q.m.text + i * (sz + (room - sz * 4) / 3);
+const y = grid ? cy - sz * 1.02 + Math.floor(i / 2) * sz * 1.06 : cy - sz / 2;
+q.pictogram(PICT[pict], { box: { x, y, size: sz }, tone: count ? 'active' : 'off', opacity: count ? undefined : 0.5 });
+if (count > 1) q.caption(`×${count}`, { align: 'left', x: x + sz * 0.86, y: y + sz * 0.88, size: Math.max(cs.size, sz * 0.32), color: 'ink' });
+});
+}
+function keyInstrument(q, M, fx) {
+q.background({ tone: M.tone });
+if (M.slot === 'scene' || M.slot === 'blank') return;
+const u = q.m.u, T = q.m.text, H = q.h;
+const eb = q.typeStyle('eyebrow');
+const cap = capHeight(eb.size, eb.weight);
+const by = T + cap;
+const ps = Math.round(cap * 2.3);
+const px = T - u * 1.2;
+if (PICT[M.pict]) q.pictogram((pen) => PICT[M.pict](pen, { helmet: M.helmet }), { box: { x: px, y: by - cap / 2 - ps / 2, size: ps }, tone: pictTone(M) });
+const tx = px + ps + u * 1.2;
+q.eyebrow(M.title, { x: tx, y: by, maxWidth: q.w - tx - T, color: M.side ? q.theme.ink(TEAM_HUE[M.side] ?? SLOT_HUE.score) : undefined });
+const hasBar = M.bar !== null && M.bar !== undefined, hasSub = !!M.sub;
+const cy = hasBar && hasSub ? H * 0.445 : hasSub ? H * 0.47 : hasBar ? H * 0.48 : H * 0.53;
+if (M.slot === 'nades' && M.nades) nadeRow(q, M, H * 0.57);
+else keyValue(q, M, cy);
+if (hasBar) {
+const bh = Math.max(2, u * 2.4), bw = q.w - T * 2, y = hasSub ? H * 0.655 : H - u * 18;
+q.add(rect({ x: T, y, width: bw, height: bh, rx: bh / 2, fill: q.colors.line || q.colors.dim, fillOpacity: 0.6 }));
+if (M.bar > 0.004) q.add(rect({ x: T, y, width: Math.max(bh, bw * M.bar), height: bh, rx: bh / 2, fill: M.barTone === 'active' || !M.barTone ? q.ctx.tint : toneColor(q, M.barTone) }));
+if (M.bar2 !== undefined && M.bar2 > 0.004 && M.tone !== 'off') { const h2 = Math.max(1.5, bh * 0.55); q.add(rect({ x: T, y: y + bh + Math.max(1.5, u * 1.3), width: Math.max(h2, bw * M.bar2), height: h2, rx: h2 / 2, fill: q.colors.info, fillOpacity: 0.85 })); }
+}
+if (hasSub) q.label(M.sub, { maxWidth: q.w - T * 2, color: M.subTone ? toneColor(q, M.subTone) : M.tone === 'off' ? 'dim' : 'muted' });
+void fx;
+}
+function panelFrame(p) {
+const strip = p.ctx.kind === 'strip' || p.h <= 110;
+const pad = Math.round(strip ? Math.max(p.m.text ?? p.m.safe, 12) : Math.max(p.m.text ?? p.m.safe, p.h * 0.112));
+const ebSize = strip ? 13.5 * ((p.theme.type.eyebrow?.size ?? 8) / 8) : undefined;
+const eb = p.typeStyle('eyebrow', ebSize ? { size: ebSize } : {});
+return { x0: pad, x1: p.w - pad, w: p.w - pad * 2, top: pad, eyebrowY: pad + capHeight(eb.size, eb.weight) + (strip ? 1 : 0), eyebrowSize: ebSize, footY: p.h - Math.max(pad, p.h * (strip ? 0.12 : 0.13)), u: p.m.u, cx: p.w / 2, pad, strip };
+}
+function panelInstrument(p, M, fx, { meta } = {}) {
+p.background({ tone: M.tone === 'busy' ? 'idle' : M.tone });
+const W = panelFrame(p);
+const metaText = meta !== undefined ? meta : M.sub;
+header(p, W, M.title, metaText || undefined, { size: W.eyebrowSize, metaSize: W.strip ? 13.5 * ((p.theme.type.caption?.size ?? 8.5) / 8.5) : undefined, metaColor: M.subTone ? toneColor(p, M.subTone) : 'dim' });
+const hasBar = M.bar !== null && M.bar !== undefined;
+const ps = Math.round(p.h * (W.strip ? 0.36 : 0.4));
+const pictX = W.x1 - ps, pictY = (W.eyebrowY + (hasBar ? W.footY - p.m.u * 3 : W.footY)) / 2 - ps / 2 + p.h * 0.03;
+const room = (PICT[M.pict] ? pictX - W.x0 - p.m.u * 2 : W.w);
+const base = Math.round(p.h * (hasBar ? 0.62 : 0.68));
+const str = String(M.value ?? '—');
+const hero = p.typeStyle('hero');
+const size = W.strip ? hero.size * 0.92 : hero.size * 1.05;
+if (M.slot === 'nades' && M.nades) {
+const sz = Math.min(room / 4, p.h * 0.34), gap = sz * 0.14;
+NADE_KINDS.forEach(([pict, ...keys], i) => { const c = keys.reduce((a, k) => a + (+M.nades[k] || 0), 0); p.pictogram(PICT[pict], { box: { x: W.x0 + i * (sz + gap), y: base - sz * 0.85, size: sz }, tone: c ? 'active' : 'off' }); });
+} else if (M.word && str !== '—') {
+const vs = p.typeStyle('value');
+const s = Math.min(vs.size * (W.strip ? 1.15 : 1.25), size);
+p.text('value', str, { align: 'left', x: W.x0, cy: base - capHeight(s, vs.weight) / 2, y: base, size: s, maxWidth: room });
+} else stat(p, { value: str, unit: M.unit || undefined, xl: W.x0, base, size, maxWidth: room, color: str === '—' ? 'dim' : undefined });
+if (PICT[M.pict]) p.pictogram((pen) => PICT[M.pict](pen, { helmet: M.helmet }), { box: { x: pictX, y: pictY, size: ps }, tone: pictTone(M) });
+if (M.foot && !hasBar) p.caption(M.foot, { align: 'left', x: W.x0, y: W.footY, maxWidth: room, color: M.footTone ? toneColor(p, M.footTone) : 'muted', size: W.strip ? undefined : p.typeStyle('caption').size * 1.15 });
+if (hasBar) {
+const bh = Math.max(4, Math.round(p.m.u * (W.strip ? 2.2 : 2.4)));
+const color = M.barTone === 'active' || !M.barTone ? p.ctx.tint : toneColor(p, M.barTone);
+const clips = M.weapon && Number.isFinite(M.weapon.clipMax) && M.weapon.clipMax > 1 && M.weapon.clipMax <= 35 ? M.weapon.clipMax : 20;
+segmented(p, { x: W.x0, y: W.footY - bh, w: W.w, h: bh, value: M.bar, count: W.strip ? Math.min(clips, 16) : clips, color, off: p.colors.line, offOpacity: 0.7 });
+if (M.bar2 !== undefined && M.bar2 > 0.004 && M.tone !== 'off') { const h2 = Math.max(2, bh * 0.4); p.add(rect({ x: W.x0, y: W.footY - bh - h2 - Math.max(2, p.m.u * 1.2), width: Math.max(h2, W.w * M.bar2), height: h2, rx: h2 / 2, fill: p.colors.info, fillOpacity: 0.8 })); }
+}
+void fx; void meter;
+}
+function sceneOf(cells, view, fx) {
+if (!cells.length) return null;
+const face = fx.face, p = view.s?.player;
+const rows = [...new Set(cells.map((c) => c.row))].sort((a, b) => a - b), r0 = rows[0];
+const top = cells.filter((c) => c.row === r0).sort((a, b) => a.col - b.col);
+const prism = top.length >= (rows.length > 1 ? 4 : 5) ? top[1] : top[0];
+const beams = new Set(top.filter((c) => c.col < prism.col).map((c) => c.i));
+const exit = [prism.x + prism.w * 0.66, prism.y + prism.h * 0.5];
+const beamY = prism.y + prism.h * 0.5;
+const rest = cells.filter((c) => c !== prism && !beams.has(c.i));
+const angle = (c) => Math.atan2(c.y + c.h / 2 - exit[1], c.x + c.w / 2 - exit[0]);
+const angs = rest.map(angle), amin = Math.min(...angs), amax = Math.max(...angs);
+const byRank = amax - amin < 0.18 || rows.length === 1;
+const order = rest.slice().sort((a, b) => (byRank ? a.row - b.row || a.col - b.col : angle(a) - angle(b) || a.col - b.col));
+const live = face === 'live' || face === 'dead';
+const grey = face === 'spectating' || face === 'watching' || face === 'paused';
+const idle = face === 'waiting' || face === 'menu' || face === 'loading';
+const hp = live && Number.isFinite(p?.health) ? p.health : null;
+const lit = face === 'dead' || idle ? 0 : hp === null ? 1 : clamp(hp / 100);
+const fan = new Map();
+const N = order.length;
+order.forEach((c, k) => {
+const f = N > 1 ? k / (N - 1) : 0; 
+const on = clamp(lit * N - k);
+fan.set(c.i, { hue: lerp(14, 296, f), L: Math.round(on * 3), a: angle(c) });
+});
+return { prism, exit, beamY, beams, fan, grey, idle, lit, planted: fx.planted, breathe: fx.breathe, face };
+}
+const FAN_A = [0.07, 0.22, 0.36, 0.5];
+function sceneKey(q, cell, S) {
+if (!S) return;
+const T = q.theme, C = q.colors, dark = q.dark, u = q.m.u, W = q.w, H = q.h;
+const beamC = beamColor(q);
+const breathe = [0.8, 0.93, 1.06][S.breathe] ?? 1;
+const bw = Math.max(1.3, u * 1.5);
+if (cell.i === S.prism.i) {
+const A = [W * 0.47, H * 0.15], L = [W * 0.12, H * 0.79], R = [W * 0.82, H * 0.79];
+const on = (a, b, f) => [lerp(a[0], b[0], f), lerp(a[1], b[1], f)];
+const E = on(A, L, 0.55), X = on(A, R, 0.6);
+if (!S.idle && !S.grey) {
+FAN.forEach((hue, i) => { 
+const t0 = -0.16 + i * 0.1, t1 = t0 + 0.1, far = W * 1.2;
+const lit = i < Math.max(1, Math.round(S.lit * FAN.length));
+const pts = [X, [X[0] + Math.cos(t0) * far, X[1] + Math.sin(t0) * far], [X[0] + Math.cos(t1) * far, X[1] + Math.sin(t1) * far]];
+const gid = q.id(`glpf${i}`);
+const c = T.spectral(hue);
+const a = (lit ? (dark ? 0.85 : 0.7) : 0.12) * breathe;
+q.def(linearGradient(gid, [[0, c, n(Math.min(1, a), 3)], [1, c, n(a * 0.15, 3)]], { x1: n(X[0]), y1: n(X[1]), x2: n(W), y2: n(X[1]), gradientUnits: 'userSpaceOnUse' }));
+q.add(polygon(pts, { fill: url(gid) }));
+});
+const bid = q.id('glpb');
+q.def(linearGradient(bid, [[0, beamC, dark ? 0.55 : 0.45], [1, beamC, 1]], { x1: 0, y1: 0, x2: n(E[0]), y2: 0, gradientUnits: 'userSpaceOnUse' }));
+const d0 = P().M(-2, S.beamY - cell.y).L(E[0], E[1]).d;
+q.add(path(d0, { fill: 'none', stroke: url(bid), strokeWidth: n(bw * 3.8), strokeOpacity: 0.16, strokeLinecap: 'round' }));
+q.add(path(d0, { fill: 'none', stroke: url(bid), strokeWidth: n(bw), strokeLinecap: 'round' }));
+q.add(path(P().M(...E).L(...X).d, { fill: 'none', stroke: beamC, strokeWidth: n(bw * 1.2), strokeOpacity: dark ? 0.5 : 0.4 }));
+}
+const gl = q.id('glpg'), glassC = dark ? '#ffffff' : C.accent;
+q.def(linearGradient(gl, [[0, glassC, dark ? 0.2 : 0.14], [0.55, glassC, 0.05], [1, glassC, dark ? 0.12 : 0.08]], { x1: 0, y1: 0, x2: 0.45, y2: 1 }));
+if (S.planted && !S.grey) {
+const wc = q.id('glpw');
+q.def(radialGradient(wc, [[0, C.warn, dark ? 0.7 : 0.5], [0.6, C.warn, 0.18], [1, C.warn, 0]], { cx: 0.5, cy: 0.66, r: 0.6 }));
+q.add(polygon([A, L, R], { fill: url(wc) }));
+}
+const edge = S.idle || S.grey ? (dark ? 0.42 : 0.38) : dark ? 0.92 : 0.75;
+q.add(polygon([A, L, R], { fill: url(gl), stroke: dark ? '#ffffff' : C.ink, strokeWidth: n(Math.max(1.4, u * 1.45)), strokeOpacity: n(edge, 3), strokeLinejoin: 'round' }));
+const [h0, h1] = [on(A, L, 0.12), on(A, L, 0.42)];
+q.add(path(P().M(h0[0] + u * 1.6, h0[1]).L(h1[0] + u * 1.6, h1[1]).d, { fill: 'none', stroke: glassC, strokeWidth: n(u * 1.4), strokeOpacity: n(edge * 0.55, 3), strokeLinecap: 'round' }));
+if (!S.idle && !S.grey) {
+const fl = q.id('glps'), r = Math.min(W, H) * 0.2;
+q.def(radialGradient(fl, [[0, beamC, 0.85], [0.3, beamC, 0.28], [1, beamC, 0]]));
+q.add(rect({ x: n(E[0] - r), y: n(E[1] - r), width: n(r * 2), height: n(r * 2), fill: url(fl) }));
+}
+return;
+}
+if (S.beams.has(cell.i)) {
+if (S.idle || S.grey) return;
+const y = S.beamY - cell.y;
+const gid = q.id('glbw');
+q.def(linearGradient(gid, [[0, beamC, 0], [0.5, beamC, dark ? 0.18 : 0.12], [1, beamC, 0]], { x1: 0, y1: n(y - H * 0.3), x2: 0, y2: n(y + H * 0.3), gradientUnits: 'userSpaceOnUse' }));
+q.add(rect({ x: 0, y: n(y - H * 0.3), width: W, height: n(H * 0.6), fill: url(gid) }));
+q.add(rect({ x: 0, y: n(y - bw * 1.9), width: W, height: n(bw * 3.8), fill: beamC, fillOpacity: 0.16 }));
+q.add(rect({ x: 0, y: n(y - bw / 2), width: W, height: n(bw), fill: beamC, fillOpacity: dark ? 0.85 : 0.7 }));
+return;
+}
+const F0 = S.fan.get(cell.i);
+if (!F0) return;
+const c = S.grey ? C.dim : T.spectral(F0.hue);
+const L = S.idle ? 0 : S.grey ? Math.min(1, F0.L) : F0.L;
+const a = FAN_A[L] * (dark ? 1 : 0.75) * breathe;
+const ex = S.exit[0] - cell.x, ey = S.exit[1] - cell.y;
+const gx = clamp(ex, -W * 0.25, W * 1.25), gy = clamp(ey, -H * 0.25, H * 1.25);
+const gid = q.id('glfp');
+q.def(radialGradient(gid, [[0, c, n(Math.min(1, a * 1.25), 3)], [0.55, c, n(a * 0.5, 3)], [1, c, n(a * 0.12, 3)]], { cx: n(gx), cy: n(gy), r: n(Math.hypot(W, H) * 1.05), fx: n(gx), fy: n(gy), gradientUnits: 'userSpaceOnUse' }));
+q.add(rect({ width: W, height: H, fill: url(gid) }));
+const far = Math.hypot(W, H) * 3 + Math.hypot(ex, ey);
+const ra = (S.idle ? 0.08 : S.grey ? 0.18 : 0.2 + 0.2 * L) * breathe;
+for (const [da, dh, wf] of [[-0.055, -18, 0.8], [0, 0, 1.5], [0.05, 18, 0.9]]) {
+const ang = F0.a + da;
+q.add(path(P().M(ex, ey).L(ex + Math.cos(ang) * far, ey + Math.sin(ang) * far).d, { fill: 'none', stroke: S.grey ? C.dim : T.spectral(F0.hue + dh), strokeWidth: n(Math.max(1, u * wf)), strokeOpacity: n(Math.min(1, ra), 3) }));
+}
+q.add(rect({ x: q.m.safe, y: 0, width: W - q.m.safe * 2, height: Math.max(1, u * 0.9), fill: c, fillOpacity: n(clamp(0.18 + 0.24 * L), 3) }));
+}
+const CRACKS = new Map();
+function crackOf(F, [ix, iy]) {
+const key = `${n(F.R)}|${n(ix)}|${n(iy)}`;
+if (CRACKS.has(key)) return CRACKS.get(key);
+let s = 0x9e3779b9 ^ Math.round(ix * 31 + iy * 17 + F.R);
+const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
+const lines = [];
+const reach = F.R * 1.2;
+const ARMS = 11;
+for (let i = 0; i < ARMS; i++) {
+const a0 = (i / ARMS) * Math.PI * 2 + (rnd() - 0.5) * 0.35;
+const pts = [[ix, iy]];
+let a = a0, x = ix, y = iy, len = 0;
+const segs = 8;
+for (let j = 0; j < segs; j++) {
+const step = (reach / segs) * (0.7 + rnd() * 0.6);
+a += (rnd() - 0.5) * 0.42;
+x += Math.cos(a) * step; y += Math.sin(a) * step; len += step;
+pts.push([x, y]);
+if (j >= 1 && j <= 6 && rnd() < 0.42) { 
+const ba = a + (rnd() < 0.5 ? -1 : 1) * (0.45 + rnd() * 0.55);
+const bl = reach * (0.12 + rnd() * 0.16);
+const m = [x + Math.cos(ba) * bl * 0.5 + (rnd() - 0.5) * 5, y + Math.sin(ba) * bl * 0.5 + (rnd() - 0.5) * 5];
+lines.push({ pts: [[x, y], m, [x + Math.cos(ba + 0.18) * bl, y + Math.sin(ba + 0.18) * bl]], start: len / reach, branch: true });
+}
+}
+lines.push({ pts, start: 0 });
+}
+for (const [rf, gaps] of [[0.07, 0.15], [0.19, 0.3], [0.4, 0.55]]) {
+const r0 = F.R * rf;
+for (let i = 0; i < ARMS; i++) {
+if (rnd() < gaps) continue;
+const a0 = (i / ARMS) * Math.PI * 2 + rnd() * 0.15, a1 = ((i + 1) / ARMS) * Math.PI * 2 - rnd() * 0.2;
+const pts = [];
+for (let t = 0; t <= 3; t++) { const a = lerp(a0, a1, t / 3), rr = r0 * (0.9 + rnd() * 0.2); pts.push([ix + Math.cos(a) * rr, iy + Math.sin(a) * rr]); }
+lines.push({ pts, start: rf * 0.9, ring: true });
+}
+}
+if (CRACKS.size > 64) CRACKS.delete(CRACKS.keys().next().value);
+CRACKS.set(key, lines);
+return lines;
+}
+function crackPath(F, impact, place, grow) {
+let d = '';
+for (const ln of crackOf(F, impact)) {
+if (ln.start > grow + 1e-6) continue;
+const pts = ln.pts;
+const segN = pts.length - 1;
+const upto = ln.ring || ln.branch ? segN : Math.max(1, Math.round(segN * clamp(grow)));
+let open = false;
+for (let j = 0; j < upto; j++) {
+const [x0, y0] = pts[j], [x1, y1] = pts[j + 1];
+if (!hits(place, Math.min(x0, x1), Math.min(y0, y1), Math.max(x0, x1), Math.max(y0, y1), 3)) { open = false; continue; }
+d += open ? `L${n(x1)} ${n(y1)}` : `M${n(x0)} ${n(y0)}L${n(x1)} ${n(y1)}`;
+open = true;
+}
+}
+return d;
+}
+function shards(place, F, S, push, count = 2) {
+const cx = place.x + place.w / 2, cy = place.y + place.h / 2;
+const centered = Math.hypot(cx - F.cx, cy - F.cy) < S * 0.3;
+const out = [];
+const list = centered ? [0, 1, 2].map((i) => [-Math.PI / 2 + (i * Math.PI * 2) / 3, 0]) : (count === 3 ? [-0.24, 0, 0.24] : [-0.2, 0.2]).map((o) => [Math.atan2(cy - F.cy, cx - F.cx), o]);
+for (const [a, o] of list) {
+const ux = Math.cos(a), uy = Math.sin(a), px = -uy, py = ux;
+const along = -S * 0.3 + S * 0.22 * push + (centered ? S * 0.12 : 0);
+const ox = cx + px * o * S + ux * along, oy = cy + py * o * S + uy * along;
+const len = S * (o === 0 ? 0.62 : 0.5), wid = S * 0.045;
+out.push({ pts: [[ox + px * wid, oy + py * wid], [ox + ux * len, oy + uy * len], [ox - px * wid, oy - py * wid]], nx: px, ny: py });
+}
+return out;
+}
+const FLASH_WHITE = [0, 0.02, 0.1, 0.24, 0.42, 0.68, 1];
+const FLASH_SPECTRUM = [0, 0.36, 0.58, 0.66, 0.58, 0.38, 0];
+const ring = (cx, cy, r) => P().M(cx + r, cy).A(r, r, 0, 0, 1, cx - r, cy).A(r, r, 0, 0, 1, cx + r, cy).Z().d;
+function ringHits(place, cx, cy, r, w) {
+const nx = clamp(cx, place.x, place.x + place.w), ny = clamp(cy, place.y, place.y + place.h);
+const dmin = Math.hypot(cx - nx, cy - ny);
+const dmax = Math.max(...[[place.x, place.y], [place.x + place.w, place.y], [place.x, place.y + place.h], [place.x + place.w, place.y + place.h]].map(([x, y]) => Math.hypot(cx - x, cy - y)));
+return r + w >= dmin && r - w <= dmax;
+}
+function band(q, place, O, r, { hues, width, alpha = 1, glow = 0.24, color, colors } = {}) {
+const u = q.m.u;
+const w = width ?? Math.max(10, u * 7);
+if (r < 1 || alpha <= 0.01 || !ringHits(place, O[0], O[1], r, w)) return;
+const hs = hues || [HUE.rose, HUE.amber, HUE.azure];
+const cs = colors || hs.map((h) => q.theme.spectral(h)); 
+const lw = Math.max(1.4, u * 1.5), gap = Math.max(1.5, u * 1.8);
+let m = path(ring(O[0], O[1], r), { fill: 'none', stroke: color || cs[1], strokeWidth: n(w), strokeOpacity: n(glow * alpha, 3) });
+cs.forEach((c, i) => { const rr = r + (i - (cs.length - 1) / 2) * gap; if (rr > 0.5) m += path(ring(O[0], O[1], rr), { fill: 'none', stroke: i === 1 && color ? color : c, strokeWidth: n(lw), strokeOpacity: n(Math.min(1, alpha * (i === 1 ? 1 : 0.8)), 3) }); });
+inField(q, place, m);
+}
+function rays(q, t, { cx, cy, r0, r1, count = 8, width, colors, rot = 0, alpha = 1 }) {
+if (!(t > 0 && t < 1)) return;
+const e = outExpo(t), op = alpha * Math.pow(1 - t, 1.3);
+const a = r0 + (r1 - r0) * e * 0.45, b = r0 + (r1 - r0) * e;
+const by = new Map();
+for (let i = 0; i < count; i++) {
+const ang = ((rot + (i * 360) / count) * Math.PI) / 180, sx = Math.sin(ang), sy = -Math.cos(ang), c = colors[i % colors.length];
+by.set(c, (by.get(c) || '') + P().M(cx + sx * a, cy + sy * a).L(cx + sx * b, cy + sy * b).d);
+}
+for (const [c, d] of by) q.add(path(d, { fill: 'none', stroke: c, strokeWidth: n(width), strokeOpacity: n(op, 3), strokeLinecap: 'square' }));
+}
+function hitMarker(q, t, { cx, cy, S, color, width }) {
+if (!(t >= 0 && t < 0.8)) return;
+const e = outExpo(clamp(t / 0.35)), g = S * (0.2 - 0.09 * e), L = S * 0.17, k = Math.SQRT1_2;
+let d = '';
+for (const [dx, dy] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) d += P().M(cx + dx * g * k, cy + dy * g * k).L(cx + dx * (g + L) * k, cy + dy * (g + L) * k).d;
+q.add(path(d, { fill: 'none', stroke: color, strokeWidth: n(width), strokeOpacity: n(Math.max(0, 1 - t * 1.1), 3), strokeLinecap: 'square' }));
+}
+function bloom(q, [ox, oy], r, alpha, name, color) {
+if (alpha <= 0.01) return;
+const gid = q.id(name), c = color || beamColor(q);
+q.def(radialGradient(gid, [[0, c, n(alpha, 3)], [0.35, c, n(alpha * 0.32, 3)], [1, c, 0]]));
+q.add(rect({ x: n(ox - r), y: n(oy - r), width: n(r * 2), height: n(r * 2), fill: url(gid) }));
+}
+function rainbow(q, place, F, v, alpha, name) {
+const gid = q.id(name);
+const s = lerp(0.62, 1.05, 1 - v);
+const x0 = F.cx + (F.x0 - F.cx) * s, y0 = F.cy + (F.y0 - F.cy) * s, x1 = F.cx + (F.x1 - F.cx) * s, y1 = F.cy + (F.y1 - F.cy) * s;
+const hs = [8, 38, 70, 125, 185, 240, 296];
+const stops = hs.map((h, i) => [i / (hs.length - 1), q.theme.spectral(h, { tier: 'vivid' }), n(alpha, 3)]);
+q.def(linearGradient(gid, stops, { x1: n(x0 - place.x), y1: n(y0 - place.y), x2: n(x1 - place.x), y2: n(y1 - place.y), gradientUnits: 'userSpaceOnUse' }));
+q.add(rect({ width: q.w, height: q.h, fill: url(gid) }));
+}
+function overlays(q, fx, place, F, { slot } = {}) {
+const C = q.colors, dark = q.dark, u = q.m.u, S = Math.min(q.w, q.h);
+const W = q.w, H = q.h;
+const pcx = place.x + W / 2, pcy = place.y + H / 2;
+const dn = clamp(Math.hypot(pcx - F.cx, pcy - F.cy) / F.R);
+const calm = fx.tier === 'calm';
+const isAt = ([x, y]) => x >= place.x - 0.5 && x <= place.x + W + 0.5 && y >= place.y - 0.5 && y <= place.y + H + 0.5;
+const localOf = ([x, y]) => [x - place.x, y - place.y];
+const K = F.K || S; 
+const game = isGameSkin(q); 
+if (fx.dim) q.add(rect({ width: W, height: H, fill: C.bg, fillOpacity: fx.dim === 2 ? (dark ? 0.46 : 0.5) : dark ? 0.26 : 0.3 }));
+if (fx.round) {
+const R0 = fx.round;
+const team = R0.won ? ({ bomb_defused: HUE.cyan, bomb_exploded: HUE.amber, time: HUE.periwinkle })[R0.reason] ?? TEAM_HUE[R0.team] ?? q.ctx.hue : 250;
+const c = game ? (R0.won ? ({ bomb_defused: GAME_FX.CT, bomb_exploded: GAME_FX.T })[R0.reason] ?? SIDE_COLOR[R0.team] ?? q.ctx.tint : GAME_FX.loss)
+: R0.won ? q.theme.spectral(team) : dark ? q.theme.spectral(250, { tier: 'wash' }) : C.dim;
+if (R0.wash) {
+const gid = q.id('glrw');
+const a = (R0.wash / 3) * (R0.won ? (dark ? 0.5 : 0.34) : dark ? 0.38 : 0.28);
+q.def(radialGradient(gid, [[0, c, n(a, 3)], [0.65, c, n(a * 0.4, 3)], [1, c, 0]], { cx: 0.5, cy: R0.won ? 1 : 0, r: 0.95 }));
+q.add(rect({ width: W, height: H, fill: url(gid) }));
+}
+if (R0.sweep >= 0) {
+const tall = F.y1 - F.y0 > (F.x1 - F.x0) * 1.2;
+const f = (R0.sweep + 0.5) / R0.sweeps, e = outExpo(f) * 0.4 + f * 0.6;
+const a0 = tall ? F.y0 : F.x0, a1 = tall ? F.y1 : F.x1;
+const X = lerp(a0 - (a1 - a0) * 0.06, a1 + (a1 - a0) * 0.06, e);
+const lx = X - (tall ? place.y : place.x), ext = tall ? H : W;
+if (lx > -ext * 0.5 && lx < ext * 1.5) {
+const bandId = q.id('glsw'), wd = K * 0.75;
+q.def(linearGradient(bandId, [[0, c, 0], [0.72, c, dark ? 0.62 : 0.42], [1, c, 0]], tall ? { x1: 0, y1: 0, x2: 0, y2: 1 } : { x1: 0, y1: 0, x2: 1, y2: 0 }));
+q.add(tall ? rect({ x: 0, y: n(lx - wd * 0.85), width: W, height: n(wd), fill: url(bandId) }) : rect({ x: n(lx - wd * 0.85), y: 0, width: n(wd), height: H, fill: url(bandId) }));
+beam(q, lx, { alpha: 1, slant: 0.14, axis: tall ? 'y' : 'x', dir: 1, ...(game ? { fringe: false } : null) });
+}
+}
+}
+if (fx.planted && fx.pulse && slot === 'round') {
+const amp = calm ? 0.55 : fx.tier === 'full' ? 1 : 0.85;
+const lv = fx.pulse / 3;
+const gid = q.id('glpulse');
+q.def(radialGradient(gid, [[0, C.warn, n(0.1 * lv * amp, 3)], [0.6, C.warn, n(0.16 * lv * amp, 3)], [1, C.warn, n(0.5 * lv * amp, 3)]], { cx: 0.5, cy: 0.5, r: 0.72 }));
+q.add(rect({ width: W, height: H, fill: url(gid) }));
+const rw = Math.max(2, u * 3);
+q.add(rect({ x: rw / 2 + u, y: rw / 2 + u, width: W - rw - 2 * u, height: H - rw - 2 * u, rx: q.m.radius, fill: 'none', stroke: C.warn, strokeWidth: n(rw), strokeOpacity: n((0.25 + 0.75 * lv) * amp, 3) }));
+}
+if (fx.defuse) {
+const { k, n: N } = fx.defuse, t = (k + 0.5) / N;
+band(q, place, F.o.round, F.R * 1.25 * outExpo(t), { hues: [HUE.mint, HUE.cyan, HUE.azure], colors: game ? [GAME_FX.CT, GAME_FX.white, GAME_FX.CT] : undefined, alpha: (calm ? 0.5 : 0.95) * (1 - t * 0.85), width: K * 0.14, glow: 0.3 });
+if (!calm && isAt(F.o.round)) {
+const o = localOf(F.o.round);
+if (game) { bloom(q, o, S * 0.7, 0.5 * (1 - t), 'gldf', GAME_FX.CT); rays(q, t, { cx: o[0], cy: o[1], count: 12, width: Math.max(1.5, u * 2), colors: [GAME_FX.CT, GAME_FX.white], r0: S * 0.12, r1: S * 0.72 }); }
+else { bloom(q, o, S * 0.7, 0.55 * (1 - t), 'gldf', q.theme.spectral(HUE.cyan)); burst(q, t, { cx: o[0], cy: o[1], rays: 16, width: Math.max(1.5, u * 2.2), hues: [HUE.cyan, HUE.cerulean, HUE.azure, HUE.mint, HUE.periwinkle], r0: S * 0.12, r1: S * 0.72 }); }
+}
+}
+if (fx.explode) {
+const { k, n: N } = fx.explode, t = (k + 0.5) / N;
+const gid = q.id('glex');
+const a = (calm ? 0.16 : 0.3) * (1 - t);
+q.def(radialGradient(gid, [[0, C.warn, n(a, 3)], [0.7, C.warn, n(a * 0.45, 3)], [1, C.warn, 0]], { cx: 0.5, cy: 0.5, r: 0.8 }));
+q.add(rect({ width: W, height: H, fill: url(gid) }));
+band(q, place, F.o.round, F.R * 1.4 * outExpo(t), { hues: [HUE.coral, HUE.amber, HUE.citrine], colors: game ? [GAME_FX.T, C.warn, GAME_FX.T] : undefined, alpha: (calm ? 0.5 : 0.95) * (1 - t * 0.85), width: K * 0.18, glow: 0.34 });
+if (!calm && isAt(F.o.round)) {
+const o = localOf(F.o.round);
+if (game) { bloom(q, o, S * 0.75, 0.55 * (1 - t), 'glxb', GAME_FX.T); rays(q, t, { cx: o[0], cy: o[1], count: 12, width: Math.max(1.5, u * 2.2), colors: [GAME_FX.T, C.warn], r0: S * 0.12, r1: S * 0.72 }); }
+else { bloom(q, o, S * 0.75, 0.6 * (1 - t), 'glxb', q.theme.spectral(HUE.amber)); burst(q, t, { cx: o[0], cy: o[1], rays: 16, width: Math.max(1.5, u * 2.4), hues: [HUE.amber, HUE.coral, HUE.citrine, HUE.amber], r0: S * 0.12, r1: S * 0.72 }); }
+}
+}
+if (fx.kill) {
+const { k, n: N, headshot, count } = fx.kill;
+const t = (k + 0.5) / N;
+const O = F.o.kills;
+const reach = F.R * [0.7, 0.95, 1.15, 1.35, 1.6][count - 1];
+const rings = calm ? 1 : Math.min(3, count);
+const tr = (F.n || 0) > 20 && !calm ? (Math.floor((k / N) * 6) + 0.5) / 6 : t;
+for (let i = 0; i < rings; i++) {
+const ti = clamp(tr * 1.12 - i * 0.13);
+if (ti <= 0 || ti >= 1) continue;
+const hues = headshot ? [HUE.azure, -1, HUE.violet] : [[HUE.rose, HUE.amber, HUE.lime], [HUE.lime, HUE.cyan, HUE.azure], [HUE.azure, HUE.periwinkle, HUE.violet]][(i + count - 1) % 3];
+band(q, place, O, reach * outExpo(ti) * (1 - i * 0.1), { hues: hues.map((h) => (h < 0 ? HUE.cyan : h)), colors: game ? (headshot ? [GAME_FX.white, GAME_FX.white, GAME_FX.white] : [q.ctx.tint, GAME_FX.white, q.ctx.tint]) : undefined, color: headshot ? beamColor(q) : undefined, alpha: (calm ? 0.5 : 1) * (1 - ti * 0.9), width: K * (headshot ? 0.08 : 0.11) * (1 + 0.15 * (count - 1)), glow: headshot ? 0.32 : 0.26 });
+}
+if (count >= 5 && !calm) {
+if (game) { const gid = q.id('glace'), a = 0.34 * (1 - t); q.def(radialGradient(gid, [[0, q.ctx.tint, n(a, 3)], [0.7, q.ctx.tint, n(a * 0.45, 3)], [1, q.ctx.tint, n(a * 0.15, 3)]], { cx: 0.5, cy: 0.5, r: 0.8 })); q.add(rect({ width: W, height: H, fill: url(gid) })); }
+else rainbow(q, place, F, clamp(1 - t), (dark ? 0.4 : 0.3) * (1 - t), 'glace');
+}
+if (!calm && isAt(O) && game) {
+const o = localOf(O);
+if (k <= 1) bloom(q, o, S * 0.8, (headshot ? 0.8 : 0.55) * (1 - k * 0.45), 'glkb');
+rays(q, t, { cx: o[0], cy: o[1], count: headshot ? 12 : 8, width: Math.max(1.4, u * (headshot ? 1.6 : 2.2)), colors: headshot ? [GAME_FX.white] : [q.ctx.tint, GAME_FX.white], r0: S * 0.12, r1: S * (0.7 + 0.06 * (count - 1)), rot: 22.5 });
+hitMarker(q, t, { cx: o[0], cy: o[1], S, color: headshot ? GAME_FX.white : q.ctx.tint, width: Math.max(2, u * 2.6) });
+}
+if (!calm && isAt(O) && !game) {
+const o = localOf(O);
+if (k <= 1) bloom(q, o, S * 0.8, (headshot ? 0.85 : 0.6) * (1 - k * 0.45), 'glkb');
+burst(q, t, { cx: o[0], cy: o[1], rays: headshot ? 20 : 14, width: Math.max(1.4, u * (headshot ? 1.6 : 2.6)), r0: S * 0.1, r1: S * (0.72 + 0.06 * (count - 1)), alpha: 1, rot: headshot ? 0 : 13 });
+if (headshot && t < 0.75) { 
+const e = outExpo(clamp(t / 0.45)), g = S * (0.4 - 0.27 * e), L = S * 0.14, c = beamColor(q), sw = Math.max(2, u * 2.4);
+q.add(path(P().M(o[0], o[1] - g - L).L(o[0], o[1] - g).M(o[0], o[1] + g).L(o[0], o[1] + g + L).M(o[0] - g - L, o[1]).L(o[0] - g, o[1]).M(o[0] + g, o[1]).L(o[0] + g + L, o[1]).d, { fill: 'none', stroke: c, strokeWidth: n(sw), strokeOpacity: n(1 - t * 0.9, 3), strokeLinecap: 'round' }));
+}
+}
+}
+if (fx.hurt) {
+const { k, n: N, reach } = fx.hurt;
+const t = (k + 0.5) / N;
+if (dn <= reach + 1e-6) {
+const top = calm || (F.n || 0) > 20 ? 2 : 3;
+const arrive = Math.floor((dn / reach) * N * 0.45);
+const lvl = k < arrive ? 0 : Math.max(0, top - (k - arrive));
+if (lvl === top && !calm) band(q, place, [F.cx, F.cy], Math.max(F.R * reach * outExpo(t), dn * F.R), { hues: [HUE.rose, -1, HUE.amber], color: C.neg, alpha: HURT_MAX_ALPHA * (1 - t * 0.6), width: K * 0.1, glow: 0.22 });
+if (lvl > 0) {
+const s = (lvl / 3) * (1 - 0.4 * (dn / reach));
+const a = HURT_MAX_ALPHA * s * (calm ? 0.7 : 1);
+const gid = q.id('glhv');
+q.def(radialGradient(gid, [[0, C.neg, 0], [0.6, C.neg, 0], [0.86, C.neg, n(a * 0.5, 3)], [1, C.neg, n(a, 3)]], { cx: 0.5, cy: 0.5, r: 0.72 }));
+q.add(rect({ width: W, height: H, fill: url(gid) }));
+if (!calm) {
+let core = '', rose = '', amber = '';
+const off = Math.max(1.2, u * 1.6);
+for (const sh of shards(place, F, S, (k - arrive) / 3, fx.hurt.dmg >= 40 ? 3 : 2)) {
+const p = sh.pts;
+const mv = (dx, dy) => P().M(p[0][0] + dx, p[0][1] + dy).L(p[1][0] + dx, p[1][1] + dy).L(p[2][0] + dx, p[2][1] + dy).Z().d;
+core += mv(0, 0); rose += mv(sh.nx * off, sh.ny * off); amber += mv(-sh.nx * off, -sh.ny * off);
+}
+inField(q, place, path(rose, { fill: q.theme.spectral(HUE.rose), fillOpacity: n(a * 0.6, 3) }) + path(amber, { fill: q.theme.spectral(HUE.amber), fillOpacity: n(a * 0.5, 3) }) + path(core, { fill: C.neg, fillOpacity: n(Math.min(HURT_MAX_ALPHA, a * 1.1), 3) }));
+}
+}
+}
+}
+if (fx.death) {
+const { grow, alpha, k } = fx.death;
+const impact = [F.cx, F.cy];
+const d = crackPath(F, impact, place, calm ? 1 : grow);
+if (d) {
+const lw = Math.max(1.2, u * 1.35);
+const shadow = dark ? '#000000' : C.ink;
+let m = path(d, { fill: 'none', stroke: shadow, strokeWidth: n(lw * 3), strokeOpacity: n((dark ? 0.55 : 0.2) * alpha, 3), strokeLinecap: 'round', strokeLinejoin: 'round' });
+if (!calm && !game) m += `<g transform="translate(${n(-lw)} ${n(-lw * 0.5)})">${path(d, { fill: 'none', stroke: q.theme.spectral(HUE.rose), strokeWidth: n(lw), strokeOpacity: n(0.6 * alpha, 3), strokeLinecap: 'round', strokeLinejoin: 'round' })}</g><g transform="translate(${n(lw)} ${n(lw * 0.5)})">${path(d, { fill: 'none', stroke: q.theme.spectral(HUE.azure), strokeWidth: n(lw), strokeOpacity: n(0.55 * alpha, 3), strokeLinecap: 'round', strokeLinejoin: 'round' })}</g>`;
+m += path(d, { fill: 'none', stroke: dark ? '#ffffff' : C.ink, strokeWidth: n(lw), strokeOpacity: n(0.95 * alpha, 3), strokeLinecap: 'round', strokeLinejoin: 'round' });
+inField(q, place, m);
+}
+if (k <= 1 && isAt(impact)) bloom(q, localOf(impact), S * 0.6, 0.75 * (1 - k * 0.4), 'glimp');
+}
+if (fx.flash) {
+const v = fx.flash / fx.flashQ, i = Math.round(v * 6);
+const peak = FLASH_PEAK[fx.tier] ?? 0.84;
+let white, spec;
+if (fx.flashRise) { white = peak * Math.min(1, v * 1.1); spec = 0; } 
+else if (game) { white = peak * v * (1 - 0.3 * (1 - v) * dn); spec = 0; } 
+else {
+white = peak * FLASH_WHITE[i] * (1 - 0.3 * (1 - v) * dn); 
+spec = FLASH_SPECTRUM[i] * (dark ? 1 : 0.8) * (calm ? 0.6 : 1);
+}
+if (spec > 0.01) rainbow(q, place, F, v, spec, 'glfls');
+if (white > 0.004) q.add(rect({ id: q.id('glflash'), width: W, height: H, fill: '#ffffff', fillOpacity: n(Math.min(peak, white), 3) })); 
+} else if (fx.flashStill) q.add(rect({ width: W, height: H, fill: '#ffffff', fillOpacity: dark ? 0.16 : 0.42 }));
+}
+};
+__d[634] = function (__ns) {
+const { surface, keyInto, rect } = __m(276);
+const { textPath } = __m(11);
+const { panelInto } = __m(277);
+const { gameLinkOf, tierOf, fxOf, slotModel, layoutOf, EFFECTS_PARAM, SLOT_HUE, DATA_SHAPE } = __m(629);
+const { fieldOf, mid, keyInstrument, panelInstrument, sceneOf, sceneKey, overlays } = __m(633);
+const { SKIN_PARAM, skinned, skinOf, gameKeyInstrument, gamePanelInstrument, gameSceneOf, gameSceneKey } = __m(632);
+__e(__ns, { "readoutRects": () => readoutRects, "renderDeck": () => renderDeck, "default": () => __default }, [], ["default","readoutRects","renderDeck"]);
+function readoutRects(ctx) {
+const D = ctx.deck;
+if (!D) return [];
+const S = D.screen;
+if (S?.kind === 'galleon') {
+const W = ctx.device.screen?.widgets || { w: 360, h: 180, pitchX: 360, pitchY: 192, insetX: 0, insetY: 6 };
+return [0, 1, 2, 3].map((j) => ({ x: S.x + (j % 2) * W.pitchX + (W.insetX || 0), y: S.y + (j >> 1) * W.pitchY + (W.insetY || 0), w: W.w, h: W.h, kind: 'screen' }));
+}
+if (D.strip) { const w = D.strip.w / D.strip.segments; return Array.from({ length: D.strip.segments }, (_, j) => ({ x: D.strip.x + j * w, y: D.strip.y, w, h: D.strip.h, kind: 'strip' })); }
+if (S?.kind === 'infobar') return [{ x: S.x, y: S.y, w: S.w, h: S.h, kind: 'infobar' }];
+return [];
+}
+function infobarLine(p, view, fx, F, place) {
+p.background({ tone: 'idle' });
+const r = slotModel('round', view, fx), s = slotModel('score', view, fx), m = slotModel('money', view, fx);
+const parts = [r.value, s.value !== '—' ? s.value : null, m.value !== '—' ? m.value : null].filter(Boolean);
+const st = p.typeStyle('label');
+const size = Math.min(p.h * 0.42, st.size * 1.3);
+p.add(textPath(parts.join('  ·  '), { x: p.w / 2, y: p.h / 2 + size * 0.36, size, weight: st.weight, anchor: 'middle', maxWidth: p.w - p.m.text * 2, fill: p.colors.ink }));
+overlays(p, fx, place, F, { slot: 'round' });
+}
+function renderDeck(ctx0, { hud = false, sceneOnly = false, back = false } = {}) {
+const view = gameLinkOf(ctx0), game = skinOf(ctx0) === 'game';
+const ctx = skinned(ctx0, view); 
+const hueOf = (h) => (game ? undefined : h); 
+const keyI = game ? gameKeyInstrument : keyInstrument, panelI = game ? gamePanelInstrument : panelInstrument;
+const d = surface(ctx);
+if (ctx.kind === 'deck') d.add(rect({ width: ctx.w, height: ctx.h, fill: '#000000' }));
+const tier = tierOf(ctx), fx = fxOf(view, tier);
+const { slots, readout } = sceneOnly ? { slots: ctx.grid.cells.map(() => 'scene'), readout: [] } : layoutOf(ctx, { hud, back });
+const cells = ctx.grid.cells;
+const reads = ctx.kind === 'deck' ? readoutRects(ctx) : [];
+const where = (slot) => { const i = slots.indexOf(slot); if (i >= 0) return mid(cells[i]); const j = readout.indexOf(slot); return j >= 0 && reads[j] && reads[j].kind !== 'infobar' ? mid(reads[j]) : null; };
+const F = fieldOf([...cells, ...reads], { keys: cells, origins: { kills: where('kills'), round: where('round'), health: where('health') }, K: Math.min(ctx.grid.key.w, ctx.grid.key.h) });
+const sceneCells = cells.filter((c, i) => slots[i] === 'scene');
+const scene = (game ? gameSceneOf : sceneOf)(sceneCells, view, fx);
+cells.forEach((c, i) => {
+const slot = slots[i];
+const M = slotModel(slot, view, fx);
+const tone = slot === 'scene' ? 'off' : M.tone;
+keyInto(d, c, (q) => {
+keyI(q, { ...M, tone }, fx);
+if (slot === 'scene') (game ? gameSceneKey : sceneKey)(q, c, scene);
+overlays(q, fx, c, F, { slot });
+}, { hue: hueOf(M.hue), tone, tag: `k${c.i}` });
+});
+reads.forEach((r, j) => {
+if (r.kind === 'infobar') { panelInto(d, r, (p) => infobarLine(p, view, fx, F, r), { kind: 'screen', tag: 'ib', hue: hueOf(SLOT_HUE.round) }); return; }
+const final = fx.phase === 'gameover' && reads.length >= 4 ? ['score', 'round', 'kda', 'mvp', 'money', 'kills'] : null;
+const slot = (final || readout)[j] || 'blank';
+const M = slotModel(slot, view, fx);
+const st = view.s?.stats;
+const meta = slot === 'money' && st && Number.isFinite(st.kills) && fx.face !== 'waiting' ? `K ${st.kills} · A ${st.assists ?? '—'} · D ${st.deaths ?? '—'}` : undefined;
+panelInto(d, r, (p) => { panelI(p, M, fx, { meta }); overlays(p, fx, r, F, { slot }); }, { kind: r.kind, tag: `w${j}`, hue: hueOf(M.hue), tone: M.tone });
+});
+return d.svg();
+}
+const __default = {
+id: 'gamelink-cs2-deck',
+title: 'CS2 Deck',
+category: 'Whole Deck',
+description: 'Counter-Strike 2 on the whole deck in a CS2 HUD skin: vitals in your side’s color on keys and screens, flashbang whiteouts, hit markers, damage, death and round sweeps.',
+tags: ['cs2', 'counter-strike', 'game link', 'gsi', 'hud', 'flashbang', 'fps', 'gaming', 'live', 'prism'],
+surface: 'deck',
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 12,
+loop: 60,
+still: 7.5,
+press: 'none',
+params: {
+effects: EFFECTS_PARAM,
+skin: SKIN_PARAM,
+layout: { type: 'select', default: 'scene', options: ['scene', 'hud'], label: 'Layout (scene · all instruments)' },
+back: { type: 'bool', default: false, label: 'Leave the bottom-right key free (a Back key)' }, 
+},
+order: 10,
+render(ctx) { return renderDeck(ctx, { hud: ctx.params.layout === 'hud', back: ctx.params.back === true }); },
+};
+};
+__d[635] = function (__ns) {
+const { deepEqual, steamRoots, libraryFolders, parseVdf, vdfGet, joinPath, EVENT_TTL_MS, EVENT_MAX, GAMELINK_VERSION } = __m(627);
+__e(__ns, { "DOTA2_APPID": () => DOTA2_APPID, "DOTA2_INSTALL_DIR": () => DOTA2_INSTALL_DIR, "DOTA2_CFG_DIR": () => DOTA2_CFG_DIR, "DOTA2_CFG_NAME": () => DOTA2_CFG_NAME, "DOTA2_CFG_TITLE": () => DOTA2_CFG_TITLE, "DOTA2_LAUNCH_OPTION": () => DOTA2_LAUNCH_OPTION, "MULTI_KILL_WINDOW_S": () => MULTI_KILL_WINDOW_S, "MULTI_LABELS": () => MULTI_LABELS, "STREAK_LABELS": () => STREAK_LABELS, "streakLabel": () => streakLabel, "MOBA_EVENT_TYPES": () => MOBA_EVENT_TYPES, "MOBA_URGENT": () => MOBA_URGENT, "OBJECTIVES": () => OBJECTIVES, "SPECTATOR_BLOCKS": () => SPECTATOR_BLOCKS, "heroTitle": () => heroTitle, "sanitizeDota2": () => sanitizeDota2, "normalizeDota2": () => normalizeDota2, "findDota2": () => findDota2, "DOTA2_CFG_DATA": () => DOTA2_CFG_DATA, "dota2Cfg": () => dota2Cfg, "isPrismDota2Cfg": () => isPrismDota2Cfg, "dota2CfgState": () => dota2CfgState }, [], ["DOTA2_APPID","DOTA2_CFG_DATA","DOTA2_CFG_DIR","DOTA2_CFG_NAME","DOTA2_CFG_TITLE","DOTA2_INSTALL_DIR","DOTA2_LAUNCH_OPTION","MOBA_EVENT_TYPES","MOBA_URGENT","MULTI_KILL_WINDOW_S","MULTI_LABELS","OBJECTIVES","SPECTATOR_BLOCKS","STREAK_LABELS","dota2Cfg","dota2CfgState","findDota2","heroTitle","isPrismDota2Cfg","normalizeDota2","sanitizeDota2","streakLabel"]);
+const DOTA2_APPID = 570;
+const DOTA2_INSTALL_DIR = 'dota 2 beta';
+const DOTA2_CFG_DIR = 'gamestate_integration';
+const DOTA2_CFG_NAME = 'gamestate_integration_prism.cfg';
+const DOTA2_CFG_TITLE = 'Prism Deck Game Link v1 (Dota 2)';
+const DOTA2_LAUNCH_OPTION = '-gamestateintegration';
+const MULTI_KILL_WINDOW_S = 18;
+const MULTI_LABELS = Object.freeze({ 2: 'double', 3: 'triple', 4: 'ultra', 5: 'rampage' });
+const STREAK_LABELS = Object.freeze({ 3: 'killing-spree', 4: 'dominating', 5: 'mega-kill', 6: 'unstoppable', 7: 'wicked-sick', 8: 'monster-kill', 9: 'godlike', 10: 'beyond-godlike' });
+const streakLabel = (n) => (Number.isFinite(n) && n >= 3 ? STREAK_LABELS[Math.min(10, Math.floor(n))] : null);
+const MOBA_EVENT_TYPES = Object.freeze(['context', 'resync', 'kill', 'multiKill', 'firstBlood', 'ace', 'death', 'respawn', 'buybackReady', 'levelUp', 'ultReady', 'objective', 'gameover']);
+const MOBA_URGENT = new Set(['context', 'kill', 'multiKill', 'firstBlood', 'ace', 'death', 'respawn', 'buybackReady', 'levelUp', 'ultReady', 'objective', 'gameover']);
+const OBJECTIVES = Object.freeze(['roshan', 'aegis', 'tormentor', 'dragon', 'baron', 'herald', 'grubs', 'tower', 'inhibitor', 'barracks']);
+const GAME_STATES = {
+DOTA_GAMERULES_STATE_INIT: 'init',
+DOTA_GAMERULES_STATE_WAIT_FOR_PLAYERS_TO_LOAD: 'loading',
+DOTA_GAMERULES_STATE_WAIT_FOR_MAP_TO_LOAD: 'loading',
+DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP: 'setup',
+DOTA_GAMERULES_STATE_PLAYER_DRAFT: 'draft',
+DOTA_GAMERULES_STATE_HERO_SELECTION: 'draft',
+DOTA_GAMERULES_STATE_STRATEGY_TIME: 'strategy',
+DOTA_GAMERULES_STATE_TEAM_SHOWCASE: 'strategy',
+DOTA_GAMERULES_STATE_PRE_GAME: 'pregame',
+DOTA_GAMERULES_STATE_GAME_IN_PROGRESS: 'live',
+DOTA_GAMERULES_STATE_POST_GAME: 'post',
+DOTA_GAMERULES_STATE_DISCONNECT: 'disconnect',
+DOTA_GAMERULES_STATE_LAST: 'post',
+};
+const STATE_RANK = { init: 0, loading: 1, setup: 2, draft: 3, strategy: 4, pregame: 5, live: 6, post: 7, disconnect: 6 };
+const PHASE_OF = { draft: 'draft', setup: 'draft', strategy: 'strategy', pregame: 'pregame', live: 'live', post: 'post', disconnect: 'live' };
+const LOADING = new Set(['init', 'loading', 'setup', 'draft', 'strategy']);
+const TEAMS = new Set(['radiant', 'dire']);
+const SPECTATOR_BLOCKS = Object.freeze(['draft', 'minimap', 'roshan', 'couriers', 'neutralitems', 'league']);
+const SPECTATOR_MAP_KEYS = ['radiant_ward_purchase_cooldown', 'dire_ward_purchase_cooldown', 'roshan_state', 'roshan_state_end_seconds', 'tormentor_state', 'radiant_glyph_cooldown', 'dire_glyph_cooldown', 'radiant_win_chance'];
+const TEAM_KEYED = /^team\d{1,2}$/;
+const ITEM_SLOTS = [['slot0', 0], ['slot1', 1], ['slot2', 2], ['slot3', 3], ['slot4', 4], ['slot5', 5], ['teleport0', 'tp'], ['neutral0', 'neutral']];
+const BACKPACK = ['slot6', 'slot7', 'slot8'];
+const STASH = ['stash0', 'stash1', 'stash2', 'stash3', 'stash4', 'stash5'];
+const ABILITY_KEYS = ['Q', 'W', 'E', 'D', 'F'];
+const HIDDEN_ABILITY = /^(?:generic_hidden|plus_|seasonal_|ability_|twin_gate_|abyssal_underlord_portal_warp|special_bonus_|cny_|frostivus|high_five|lamp_use|item_)/;
+const MEM = Symbol('gamelink.dota2'); 
+const isObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
+const int = (v, lo = 0, hi = 1e9) => { const x = num(v); return x === null ? null : Math.min(hi, Math.max(lo, Math.round(x))); };
+const bool = (v) => (typeof v === 'boolean' ? v : null);
+const r4 = (x) => Math.round(x * 1e4) / 1e4;
+const ascii = (v, max = 48) => (typeof v === 'string' && /^[\x20-\x7e]*$/.test(v) ? v.slice(0, max) : null);
+const ident = (v, max = 64) => (typeof v === 'string' && /^[a-z0-9_]{1,64}$/i.test(v) ? v.slice(0, max).toLowerCase() : null);
+const HERO_NAMES = {
+antimage: 'Anti-Mage', nevermore: 'Shadow Fiend', zuus: 'Zeus', obsidian_destroyer: 'Outworld Destroyer', wisp: 'Io', furion: "Nature's Prophet",
+skeleton_king: 'Wraith King', queenofpain: 'Queen of Pain', rattletrap: 'Clockwerk', shredder: 'Timbersaw', life_stealer: 'Lifestealer', magnataur: 'Magnus',
+treant: 'Treant Protector', necrolyte: 'Necrophos', windrunner: 'Windranger', doom_bringer: 'Doom', abyssal_underlord: 'Underlord', vengefulspirit: 'Vengeful Spirit',
+centaur: 'Centaur Warrunner', keeper_of_the_light: 'Keeper of the Light', shadow_demon: 'Shadow Demon', night_stalker: 'Night Stalker', spirit_breaker: 'Spirit Breaker',
+storm_spirit: 'Storm Spirit', ember_spirit: 'Ember Spirit', earth_spirit: 'Earth Spirit', void_spirit: 'Void Spirit', faceless_void: 'Faceless Void', drow_ranger: 'Drow Ranger',
+crystal_maiden: 'Crystal Maiden', dark_seer: 'Dark Seer', dark_willow: 'Dark Willow', dragon_knight: 'Dragon Knight', elder_titan: 'Elder Titan', ancient_apparition: 'Ancient Apparition',
+phantom_assassin: 'Phantom Assassin', phantom_lancer: 'Phantom Lancer', templar_assassin: 'Templar Assassin', troll_warlord: 'Troll Warlord', winter_wyvern: 'Winter Wyvern',
+sand_king: 'Sand King', shadow_shaman: 'Shadow Shaman', skywrath_mage: 'Skywrath Mage', monkey_king: 'Monkey King', naga_siren: 'Naga Siren', lone_druid: 'Lone Druid',
+legion_commander: 'Legion Commander', bounty_hunter: 'Bounty Hunter', chaos_knight: 'Chaos Knight', death_prophet: 'Death Prophet', ogre_magi: 'Ogre Magi', primal_beast: 'Primal Beast',
+witch_doctor: 'Witch Doctor', arc_warden: 'Arc Warden',
+};
+const titleCase = (s) => String(s || '').split(/[_\s]+/).filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+function heroTitle(id) {
+const k = String(id || '').toLowerCase().replace(/^npc_dota_hero_/, '');
+if (!k) return null;
+return (HERO_NAMES[k] || titleCase(k)).slice(0, 32);
+}
+const bareHero = (n) => { const k = ident(String(n || '').replace(/^npc_dota_hero_/i, '')); return k && k !== 'none' ? k : null; };
+const bareItem = (n) => { const k = ident(String(n || '').replace(/^item_/i, '')); return k && k !== 'empty' ? k : null; };
+function cleanMap(m) {
+const o = {
+name: ident(m.name, 48), state: GAME_STATES[m.game_state] ?? null,
+clock: int(m.clock_time, -36000, 360000), gameTime: num(m.game_time) === null ? null : r4(Math.max(-36000, Math.min(360000, m.game_time))),
+daytime: bool(m.daytime), nightstalker: bool(m.nightstalker_night), paused: bool(m.paused),
+radiant: int(m.radiant_score, 0, 9999), dire: int(m.dire_score, 0, 9999),
+win: TEAMS.has(m.win_team) ? m.win_team : null,
+};
+const cg = typeof m.customgamename === 'string' && /^[a-z0-9_]{1,32}$/i.test(m.customgamename) ? m.customgamename.toLowerCase() : null;
+if (cg) o.custom = cg;
+return o; 
+}
+function cleanPlayer(p) {
+const o = { activity: p.activity === 'playing' || p.activity === 'menu' ? p.activity : null, team: TEAMS.has(p.team_name) ? p.team_name : null };
+for (const [k, f] of [['kills', 'kills'], ['deaths', 'deaths'], ['assists', 'assists'], ['lastHits', 'last_hits'], ['denies', 'denies'], ['streak', 'kill_streak'], ['gold', 'gold'], ['goldReliable', 'gold_reliable'], ['goldUnreliable', 'gold_unreliable'], ['gpm', 'gpm'], ['xpm', 'xpm']]) {
+const v = int(p[f], 0, 1e7);
+if (v !== null) o[k] = v;
+}
+return o; 
+}
+function cleanHero(h) {
+const o = { id: bareHero(h.name) };
+for (const [k, f, hi] of [['level', 'level', 100], ['respawn', 'respawn_seconds', 3600], ['buybackCost', 'buyback_cost', 1e6], ['buybackCooldown', 'buyback_cooldown', 3600], ['health', 'health', 1e7], ['maxHealth', 'max_health', 1e7], ['healthPct', 'health_percent', 100], ['mana', 'mana', 1e7], ['maxMana', 'max_mana', 1e7], ['manaPct', 'mana_percent', 100]]) {
+const v = int(h[f], 0, hi);
+if (v !== null) o[k] = v;
+}
+for (const [k, f] of [['alive', 'alive'], ['stunned', 'stunned'], ['silenced', 'silenced'], ['hexed', 'hexed'], ['disarmed', 'disarmed'], ['magicImmune', 'magicimmune'], ['smoked', 'smoked'], ['muted', 'muted'], ['broken', 'break'], ['scepter', 'aghanims_scepter'], ['shard', 'aghanims_shard']]) {
+const v = bool(h[f]);
+if (v !== null) o[k] = v;
+}
+return o; 
+}
+function cleanAbilities(a) {
+const out = [];
+for (const [k, v] of Object.entries(a).slice(0, 40)) {
+const m = /^ability(\d{1,2})$/.exec(k);
+if (!m || !isObj(v)) continue;
+const name = ident(v.name);
+if (!name || HIDDEN_ABILITY.test(name)) continue;
+out.push({
+i: +m[1], name, level: int(v.level, 0, 30) ?? 0,
+canCast: bool(v.can_cast), passive: v.passive === true, active: bool(v.ability_active), ultimate: v.ultimate === true,
+cooldown: num(v.cooldown) === null ? null : r4(Math.max(0, Math.min(3600, v.cooldown))),
+charges: int(v.charges, 0, 99), maxCharges: int(v.max_charges, 0, 99),
+});
+}
+return out.sort((x, y) => x.i - y.i);
+}
+function cleanItem(v) {
+if (!isObj(v)) return null;
+const name = bareItem(v.name);
+if (!name) return null;
+const o = { name, canCast: bool(v.can_cast), passive: v.passive === true, cooldown: num(v.cooldown) === null ? null : r4(Math.max(0, Math.min(3600, v.cooldown))), charges: int(v.charges, 0, 999) };
+const mx = int(v.max_cooldown, 0, 3600);
+if (mx) o.maxCooldown = mx; 
+return o;
+}
+function cleanItems(it) {
+const o = {};
+for (const k of [...ITEM_SLOTS.map((s) => s[0]), ...BACKPACK, ...STASH]) { const c = cleanItem(it[k]); if (c) o[k] = c; }
+return o; 
+}
+const teamOfId = (id) => (Number.isInteger(id) && id >= 0 && id <= 4 ? 'radiant' : Number.isInteger(id) && id >= 5 && id <= 9 ? 'dire' : null);
+function cleanEvents(list) {
+const out = [];
+for (const e of list.slice(-64)) {
+if (!isObj(e)) continue;
+const type = typeof e.event_type === 'string' && /^[a-z_]{1,40}$/.test(e.event_type) ? e.event_type : null;
+if (!type) continue;
+const team = [e.killed_by_team, e.team, e.triggering_team].find((t) => TEAMS.has(t)) ?? teamOfId(e.player_id ?? e.killer_player_id);
+out.push({ type, gameTime: num(e.game_time) === null ? null : r4(e.game_time), team: team ?? null, snatched: e.snatched === true });
+}
+return out; 
+}
+const BUILDING = /^(?:dota_(goodguys|badguys)_(tower)(\d)_(top|mid|bot)|(good|bad)_rax_(melee|range)_(top|mid|bot))$/;
+function cleanBuildings(b) {
+const out = {};
+for (const side of ['radiant', 'dire']) {
+const s = b[side];
+if (!isObj(s)) continue;
+for (const [k, v] of Object.entries(s).slice(0, 48)) {
+const m = BUILDING.exec(k);
+if (!m || !isObj(v)) continue;
+out[k] = { team: side, kind: m[2] ? 'tower' : 'barracks', tier: m[3] ? +m[3] : null, health: int(v.health, 0, 1e6) ?? 0 };
+}
+}
+return out;
+}
+function sanitizeDota2(payload) {
+if (!isObj(payload) || !isObj(payload.provider) || payload.provider.appid !== DOTA2_APPID) return null;
+const keyed = (o) => isObj(o) && Object.keys(o).some((k) => TEAM_KEYED.test(k));
+const spectator = SPECTATOR_BLOCKS.some((k) => k in payload) || ['player', 'hero', 'abilities', 'items'].some((k) => keyed(payload[k]))
+|| (isObj(payload.map) && SPECTATOR_MAP_KEYS.some((k) => k in payload.map)) || payload.player?.team_name === 'spectator';
+const out = { hasDelta: isObj(payload.previously) || isObj(payload.added), spectator };
+if (isObj(payload.map)) out.map = cleanMap(payload.map);
+if (spectator) return out;
+if (isObj(payload.player)) out.player = cleanPlayer(payload.player);
+if (isObj(payload.hero)) out.hero = cleanHero(payload.hero);
+if (isObj(payload.abilities)) out.abilities = cleanAbilities(payload.abilities);
+if (isObj(payload.items)) out.items = cleanItems(payload.items);
+if (Array.isArray(payload.events)) out.events = cleanEvents(payload.events);
+if (isObj(payload.buildings)) out.buildings = cleanBuildings(payload.buildings);
+return out;
+}
+function memOf(prev) {
+const m = prev?.[MEM];
+return m ? { ...m } : { prevP: null, ctx: null, team: null, evSeq: 0, rev: 0, multi: { n: 0, at: null }, fb: false, seen: [], cd: {}, icd: {} };
+}
+function withMem(state, mem) { Object.defineProperty(state, MEM, { value: mem, enumerable: false }); return state; }
+const evKey = (e) => `${e.type}|${e.gameTime ?? ''}|${e.team ?? ''}`;
+const ultOf = (abs) => (abs || []).find((a) => a.ultimate && !a.passive) || null;
+const abilityReady = (a) => !!a && a.level > 0 && (a.maxCharges > 0 ? (a.charges ?? 0) > 0 : (a.cooldown ?? 0) <= 0);
+const totalGold = (pl) => pl?.gold ?? ((pl?.goldReliable ?? null) !== null || (pl?.goldUnreliable ?? null) !== null ? (pl.goldReliable ?? 0) + (pl.goldUnreliable ?? 0) : null);
+function buybackReady(p) {
+const h = p.hero, g = totalGold(p.player);
+if (!h || h.buybackCooldown === undefined || h.buybackCost === undefined || g === null) return null;
+return h.buybackCooldown <= 0 && g >= h.buybackCost;
+}
+const bareAbility = (name, heroId) => (heroId && name.startsWith(`${heroId}_`) ? name.slice(heroId.length + 1) : name);
+const hasAegis = (items) => Object.entries(items || {}).some(([k, v]) => !STASH.includes(k) && v.name === 'aegis');
+function contextOf(p) {
+if (!p.map) return 'menu';
+if (p.spectator) return 'watching';
+if (p.map.state === null || LOADING.has(p.map.state)) return 'loading';
+if (p.map.paused) return 'paused';
+return 'live';
+}
+function normalizeDota2(payload, prev = null, { nowMs = 0 } = {}) {
+const p = sanitizeDota2(payload);
+if (!p) return { state: prev, events: [], rejected: true };
+const mem = memOf(prev);
+const raw = derive(p, mem);
+return finish(prev, mem, p, raw, nowMs);
+}
+function cooldownMaxes(p, mem, prevP) {
+const cd = {}, icd = {};
+const before = new Map((prevP?.abilities || []).map((a) => [a.name, a]));
+for (const a of p.abilities || []) {
+const c = a.cooldown ?? 0;
+if (c <= 0) continue;
+const b = before.get(a.name), known = mem.cd[a.name];
+if (b && (b.cooldown ?? 0) <= 0) cd[a.name] = c;
+else if (known !== undefined && known !== null) cd[a.name] = Math.max(known, c);
+else cd[a.name] = null;
+}
+const pit = prevP?.items || {};
+for (const [k, v] of Object.entries(p.items || {})) {
+const c = v.cooldown ?? 0;
+if (c <= 0) continue;
+const id = `${k}:${v.name}`, b = pit[k], known = mem.icd[id];
+if (v.maxCooldown) icd[id] = Math.max(v.maxCooldown, c);
+else if (b && b.name === v.name && (b.cooldown ?? 0) <= 0) icd[id] = c;
+else if (known !== undefined && known !== null) icd[id] = Math.max(known, c);
+else icd[id] = null;
+}
+mem.cd = cd; mem.icd = icd;
+}
+function derive(p, mem) {
+const ev = [];
+const prevP = mem.prevP;
+const ctx = contextOf(p);
+const prevCtx = mem.ctx;
+const m = p.map || null, pm = prevP?.map || null;
+const newMatch = !!m && (!pm || (STATE_RANK[m.state] ?? 0) < (STATE_RANK[pm.state] ?? 0) || (m.gameTime !== null && pm.gameTime !== null && m.gameTime < pm.gameTime - 30));
+if (newMatch || !m) { mem.team = null; mem.multi = { n: 0, at: null }; mem.fb = false; mem.seen = []; mem.cd = {}; mem.icd = {}; }
+if (ctx !== 'watching' && p.player?.team) mem.team = p.player.team;
+if (ctx !== prevCtx) ev.push({ type: 'context', value: ctx });
+const remember = () => { for (const e of p.events || []) { const k = evKey(e); if (!mem.seen.includes(k)) mem.seen.push(k); } mem.seen = mem.seen.slice(-128); };
+const baseline = () => {
+remember();
+if (m && (m.radiant ?? 0) + (m.dire ?? 0) > 0) mem.fb = true;
+cooldownMaxes(p, mem, null);
+mem.ctx = ctx; mem.prevP = p;
+};
+if (!prevP) { baseline(); return ev; } 
+const common = ['map', 'player', 'hero', 'abilities', 'items'].filter((k) => k in p && k in prevP);
+if (!p.hasDelta && ctx === prevCtx && common.some((k) => !deepEqual(p[k], prevP[k])) && !newMatch) {
+ev.push({ type: 'resync' });
+const fb = mem.fb;
+baseline();
+mem.fb = fb || mem.fb;
+return ev;
+}
+cooldownMaxes(p, mem, prevP);
+if (ctx === 'watching' || ctx === 'menu') { remember(); mem.ctx = ctx; mem.prevP = p; return ev; }
+const team = mem.team;
+const ours = (t) => (t && team ? t === team : null);
+const same = !newMatch && !!pm;
+const wasLive = prevCtx === 'live' || prevCtx === 'paused';
+const liveNow = ctx === 'live' || ctx === 'paused';
+if (same && wasLive && liveNow) {
+const op = prevP.player || {}, np = p.player || {}, oh = prevP.hero || {}, nh = p.hero || {};
+const gt = m.gameTime ?? m.clock ?? null;
+const dk = (np.kills ?? 0) - (op.kills ?? 0);
+if (dk > 0 && dk <= 10) {
+for (let i = 0; i < dk; i++) {
+mem.multi = gt !== null && mem.multi.at !== null && gt - mem.multi.at <= MULTI_KILL_WINDOW_S ? { n: mem.multi.n + 1, at: gt } : { n: 1, at: gt };
+ev.push({ type: 'kill', streak: np.streak ?? null, label: streakLabel(np.streak ?? null) });
+}
+if (mem.multi.n >= 2) ev.push({ type: 'multiKill', count: mem.multi.n, label: MULTI_LABELS[Math.min(5, mem.multi.n)] });
+}
+const tot = (m.radiant ?? 0) + (m.dire ?? 0);
+if (!mem.fb && tot > 0 && pm.radiant !== null && pm.dire !== null && m.radiant !== null && m.dire !== null) {
+mem.fb = true;
+const ourScore = team === 'radiant' ? m.radiant - pm.radiant : team === 'dire' ? m.dire - pm.dire : null;
+ev.push({ type: 'firstBlood', ours: ourScore === null ? null : ourScore > 0 });
+}
+if (oh.alive === true && nh.alive === false) ev.push({ type: 'death' }); 
+if (oh.alive === false && nh.alive === true) {
+const bought = (oh.buybackCooldown ?? 0) <= 0 && (nh.buybackCooldown ?? 0) > 0;
+ev.push({ type: 'respawn', buyback: bought });
+}
+const bbWas = buybackReady(prevP), bbNow = buybackReady(p);
+if (nh.alive === false && bbNow === true && (bbWas !== true || oh.alive !== false)) ev.push({ type: 'buybackReady', cost: nh.buybackCost ?? null });
+if ((nh.level ?? 0) > (oh.level ?? 0) && (oh.level ?? 0) > 0) ev.push({ type: 'levelUp', level: nh.level });
+const ou = ultOf(prevP.abilities), nu = ultOf(p.abilities);
+if (nu && abilityReady(nu) && !(ou && ou.name === nu.name && abilityReady(ou))) ev.push({ type: 'ultReady', name: bareAbility(nu.name, nh.id || oh.id) });
+} else if (!mem.fb && m && (m.radiant ?? 0) + (m.dire ?? 0) > 0) mem.fb = true;
+const fresh = (p.events || []).filter((e) => !mem.seen.includes(evKey(e)));
+remember();
+let aegisEv = false;
+if (same && liveNow) {
+for (const e of fresh) {
+if (e.type === 'roshan_killed') ev.push({ type: 'objective', name: 'roshan', ours: ours(e.team), kind: null });
+else if (e.type === 'aegis_picked_up') { aegisEv = true; ev.push({ type: 'objective', name: 'aegis', ours: ours(e.team), kind: e.snatched ? 'snatched' : null }); }
+else if (e.type === 'aegis_denied') { aegisEv = true; ev.push({ type: 'objective', name: 'aegis', ours: ours(e.team), kind: 'denied' }); }
+else if (e.type === 'tormentor_killed') ev.push({ type: 'objective', name: 'tormentor', ours: ours(e.team), kind: null });
+}
+if (!aegisEv && hasAegis(p.items) && !hasAegis(prevP.items) && wasLive) ev.push({ type: 'objective', name: 'aegis', ours: true, kind: null });
+const ob = prevP.buildings || null, nb = p.buildings || null;
+if (ob && nb) {
+for (const [k, b] of Object.entries(ob)) {
+const now = nb[k];
+if (b.health > 0 && (!now || now.health <= 0)) ev.push({ type: 'objective', name: b.kind, ours: team ? b.team !== team : null, kind: b.tier ? `tier${b.tier}` : null });
+}
+}
+}
+if (m && same && (m.win || m.state === 'post') && !(pm.win || pm.state === 'post')) {
+const res = m.win && team ? (m.win === team ? 'win' : 'loss') : null;
+const us = team === 'radiant' ? m.radiant : team === 'dire' ? m.dire : null, them = team === 'radiant' ? m.dire : team === 'dire' ? m.radiant : null;
+ev.push({ type: 'gameover', result: res, us: us ?? null, them: them ?? null });
+}
+mem.ctx = ctx;
+mem.prevP = p;
+return ev;
+}
+const MAP_TITLES = { start: 'Dota 2', dota: 'Dota 2', hero_demo_main: 'Demo Hero', last_hit_trainer: 'Last Hit Trainer' };
+const STATUS_OF = { menu: 'menu', loading: 'loading', live: 'live', paused: 'paused', watching: 'watching' };
+function build(p, mem) {
+const ctx = mem.ctx;
+const status = STATUS_OF[ctx] || 'menu';
+const m = p.map || null, pl = p.player || null, h = p.hero || null;
+const inGame = ctx === 'live' || ctx === 'paused';
+const mine = ctx !== 'watching' && ctx !== 'menu';
+const team = mine ? (pl?.team || mem.team || null) : null;
+const gold = mine ? totalGold(pl) : null;
+const player = inGame && (pl || h) ? {
+fresh: true, alive: h ? h.alive !== false : true, team,
+health: h?.healthPct ?? null, armor: null, helmet: null, flashed: 0, smoked: 0, burning: 0,
+money: gold, equip: null, activity: pl?.activity ?? null,
+} : null;
+const stats = mine && pl && ctx !== 'loading' ? { kills: pl.kills ?? null, assists: pl.assists ?? null, deaths: pl.deaths ?? null, mvps: null, score: null, roundKills: null, roundHs: null } : null;
+const us = team === 'radiant' ? m?.radiant : team === 'dire' ? m?.dire : null, them = team === 'radiant' ? m?.dire : team === 'dire' ? m?.radiant : null;
+const over = !!m && (m.state === 'post' || !!m.win);
+const match = m && mine ? {
+map: m.name, title: m.custom ? titleCase(m.custom).slice(0, 32) : MAP_TITLES[m.name] || 'Dota 2', mode: m.custom || null,
+phase: over ? 'gameover' : 'live', side: team,
+ct: null, t: null, us: us ?? null, them: them ?? null, target: null, matchPoint: null,
+result: over && m.win && team ? (m.win === team ? 'win' : 'loss') : null,
+} : null;
+const dota2 = mine ? dotaBlock(p, mem, gold) : { phase: null, clock: null, hero: null, economy: null, abilities: [], items: [], status: null, aegis: null };
+return { status, player, weapon: null, stats, round: null, match, dota2 };
+}
+function dotaBlock(p, mem, gold) {
+const m = p.map || null, pl = p.player || null, h = p.hero || null;
+const heroId = h?.id || null;
+const bb = buybackReady(p);
+const hero = heroId ? {
+id: heroId, name: heroTitle(heroId), level: h.level ?? null,
+respawnIn: h.alive === false ? (h.respawn ?? null) : null,
+mana: h.manaPct ?? null, manaMax: h.maxMana ?? null, resource: 'mana', hpMax: h.maxHealth ?? null,
+buybackReady: bb, buybackCost: h.buybackCost ?? null, buybackCooldown: h.buybackCooldown ?? null,
+streak: pl?.streak ?? null, 
+} : null;
+const economy = pl ? { gold, gpm: pl.gpm ?? null, xpm: pl.xpm ?? null, lastHits: pl.lastHits ?? null, denies: pl.denies ?? null, cs: null } : null;
+const keys = [...ABILITY_KEYS];
+const abilities = (p.abilities || []).slice(0, 8).map((a) => ({
+slot: a.ultimate ? 'R' : keys.shift() || null,
+name: bareAbility(a.name, heroId),
+level: a.level, ready: abilityReady(a), cooldown: a.cooldown === null ? null : Math.max(0, a.cooldown),
+cooldownMax: mem.cd[a.name] ?? null,
+ultimate: a.ultimate, passive: a.passive, charges: a.maxCharges > 0 ? (a.charges ?? 0) : null,
+}));
+const items = [];
+for (const [k, slot] of ITEM_SLOTS) {
+const v = p.items?.[k];
+if (!v) continue;
+items.push({ slot, name: v.name, ready: (v.cooldown ?? 0) <= 0, cooldown: v.cooldown, cooldownMax: mem.icd[`${k}:${v.name}`] ?? null, charges: v.charges ?? null });
+}
+const status = h ? { stunned: !!h.stunned, silenced: !!h.silenced, hexed: !!h.hexed, disarmed: !!h.disarmed, magicImmune: !!h.magicImmune, smoked: !!h.smoked, muted: !!h.muted, broken: !!h.broken } : null;
+return {
+phase: m ? PHASE_OF[m.state] ?? null : null,
+clock: m ? { t: m.clock, daytime: m.daytime === null ? null : m.daytime && !m.nightstalker, paused: !!m.paused } : null,
+hero, economy, abilities, items, status,
+aegis: p.items ? hasAegis(p.items) : null,
+};
+}
+const coreOf = (s) => ({ status: s.status, player: s.player, weapon: s.weapon, stats: s.stats, round: s.round, match: s.match, dota2: s.dota2 });
+function finish(prev, mem, p, raw, nowMs) {
+const core = build(p, mem);
+const events = raw.map((e) => ({ ...e, at: nowMs, seq: ++mem.evSeq }));
+const kept = [...(prev?.events || []).filter((e) => nowMs - e.at <= EVENT_TTL_MS), ...events].slice(-EVENT_MAX);
+if (prev && !events.length && deepEqual(coreOf(prev), core)) return { state: withMem({ ...prev }, mem), events: [] };
+mem.rev++;
+const state = withMem({ v: GAMELINK_VERSION, game: 'dota2', at: nowMs, rev: mem.rev, ...core, events: kept }, mem);
+return { state, events };
+}
+const sameKey = (platform, p) => (platform === 'win32' ? p.replace(/\//g, '\\').replace(/\\+$/, '').toLowerCase() : p.replace(/\/+$/, ''));
+const safeDir = (d) => (typeof d === 'string' && d && d.length <= 128 && !/[\\/:*?"<>|\u0000-\u001f]/.test(d) && d !== '.' && d !== '..' ? d : null);
+async function findDota2(io = {}) {
+const platform = io.platform || 'win32';
+if (platform !== 'win32' && platform !== 'linux') return { found: false, reason: 'unsupported', leftover: false };
+const J = (...a) => joinPath(platform, ...a);
+const read = async (f) => { try { const t = await io.readText?.(f); return typeof t === 'string' ? t : null; } catch { return null; } };
+const isFile = async (f) => { try { return !!(await io.isFile?.(f)); } catch { return false; } };
+const isDir = async (f) => { try { return !!(await io.isDir?.(f)); } catch { return false; } };
+const roots = await steamRoots({ ...io, platform, isDir });
+if (!roots.length) return { found: false, reason: 'no-steam', leftover: false };
+const libs = [], seen = new Set();
+const addLib = (p, apps) => { const lp = J(p); const k = sameKey(platform, lp); if (seen.has(k)) { const l = libs.find((x) => x.key === k); if (apps && l && !l.apps) l.apps = apps; return; } seen.add(k); libs.push({ path: lp, apps, key: k }); };
+for (const root of roots) {
+const text = await read(J(root, 'steamapps', 'libraryfolders.vdf'));
+for (const l of text ? libraryFolders(parseVdf(text)) : []) addLib(l.path, l.apps);
+addLib(root, null);
+}
+const id = String(DOTA2_APPID);
+const ordered = [...libs.filter((l) => l.apps?.has(id)), ...libs.filter((l) => !l.apps?.has(id))];
+let reason = 'not-installed';
+for (const lib of ordered) {
+const manifest = await read(J(lib.path, 'steamapps', `appmanifest_${DOTA2_APPID}.acf`));
+if (!manifest) continue;
+const app = vdfGet(parseVdf(manifest), 'AppState');
+const dir = safeDir(vdfGet(app, 'installdir')) || DOTA2_INSTALL_DIR;
+const gameDir = J(lib.path, 'steamapps', 'common', dir);
+const bin = platform === 'win32' ? J(gameDir, 'game', 'bin', 'win64', 'dota2.exe') : J(gameDir, 'game', 'bin', 'linuxsteamrt64', 'dota2');
+if (!(await isFile(bin))) { reason = 'no-binary'; continue; }
+const cfgDir = J(gameDir, 'game', 'dota', 'cfg');
+if (!(await isDir(cfgDir))) { reason = 'no-cfg-dir'; continue; }
+const gsiDir = J(cfgDir, DOTA2_CFG_DIR);
+return { found: true, library: lib.path, gameDir, cfgDir, gsiDir, folder: await isDir(gsiDir), cfgPath: J(gsiDir, DOTA2_CFG_NAME) };
+}
+let leftover = false;
+for (const lib of ordered) if (await isDir(J(lib.path, 'steamapps', 'common', DOTA2_INSTALL_DIR))) { leftover = true; break; }
+return { found: false, reason, leftover };
+}
+const DOTA2_CFG_DATA = Object.freeze(['provider', 'map', 'player', 'hero', 'abilities', 'items', 'buildings', 'events']);
+const TOKEN_RE = /^[A-Za-z0-9_-]{16,128}$/;
+function dota2Cfg({ port, token, eol = '\n' } = {}) {
+if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('dota2Cfg: port must be an integer 1–65535');
+if (typeof token !== 'string' || !TOKEN_RE.test(token)) throw new Error('dota2Cfg: token must be 16–128 url-safe characters');
+const pad = (k) => `"${k}"`.padEnd(22);
+const lines = [
+`"${DOTA2_CFG_TITLE}"`,
+'{',
+'    // Written by Prism Deck (the Stream Deck plugin) when you clicked "Connect Dota 2".',
+'    // "Disconnect" in the plugin removes this file. It never changes other integrations.',
+`    // Dota 2 reads it at launch, with the ${DOTA2_LAUNCH_OPTION} launch option.`,
+`    "uri"       "http://127.0.0.1:${port}/v1/dota2"`,
+'    "timeout"   "5.0"',
+'    "buffer"    "0.1"',
+'    "throttle"  "0.1"',
+'    "heartbeat" "5.0"',
+'    "auth"',
+'    {',
+`        "token" "${token}"`,
+'    }',
+'    "data"',
+'    {',
+...DOTA2_CFG_DATA.map((k) => `        ${pad(k)}"1"`),
+'    }',
+'}',
+'',
+];
+return lines.join(eol);
+}
+function isPrismDota2Cfg(text) {
+const first = String(text ?? '').replace(/^\uFEFF/, '').split(/\r?\n/).map((l) => l.trim()).find((l) => l && !l.startsWith('//'));
+return first === `"${DOTA2_CFG_TITLE}"`;
+}
+function dota2CfgState(text, { port, token } = {}) {
+if (text === null || text === undefined) return 'absent';
+if (!isPrismDota2Cfg(text)) return 'foreign';
+try { return String(text).replace(/\r\n/g, '\n') === dota2Cfg({ port, token }) ? 'current' : 'outdated'; } catch { return 'outdated'; }
+}
+};
+__d[636] = function (__ns) {
+const { normalizeDota2 } = __m(635);
+const { gameLinkView } = __m(627);
+__e(__ns, { "MOBA_SIM_LOOP": () => MOBA_SIM_LOOP, "MOBA_SIM_FRAMES": () => MOBA_SIM_FRAMES, "simMoba": () => simMoba }, [], ["MOBA_SIM_FRAMES","MOBA_SIM_LOOP","simMoba"]);
+const MOBA_SIM_LOOP = 60;
+const clone = (o) => JSON.parse(JSON.stringify(o));
+const ITEM = (name, o = {}) => ({ name: `item_${name}`, purchaser: 0, can_cast: o.cast ?? false, cooldown: o.cd ?? 0, passive: o.passive ?? false, ...(o.charges !== undefined ? { charges: o.charges } : {}) });
+const EMPTY = { name: 'empty' };
+const ABILITY = (name, level, o = {}) => ({ name, level, can_cast: level > 0 && !(o.cd > 0) && !o.passive, passive: !!o.passive, ability_active: true, cooldown: o.cd ?? 0, ultimate: !!o.ult });
+function world() {
+return {
+provider: { name: 'Dota 2', appid: 570, version: 47, timestamp: 1791660000 },
+map: { name: 'start', matchid: '7000000000', game_time: 982, clock_time: 897, daytime: true, nightstalker_night: false, radiant_score: 21, dire_score: 17, game_state: 'DOTA_GAMERULES_STATE_GAME_IN_PROGRESS', paused: false, win_team: 'none', customgamename: '', ward_purchase_cooldown: 0 },
+player: { steamid: '76500000000000001', accountid: '40000001', name: 'DemoPilot', activity: 'playing', kills: 6, deaths: 3, assists: 9, last_hits: 212, denies: 14, kill_streak: 2, commands_issued: 9000, kill_list: {}, team_name: 'radiant', gold: 2140, gold_reliable: 640, gold_unreliable: 1500, gold_from_hero_kills: 0, gold_from_creep_kills: 0, gold_from_income: 0, gold_from_shared: 0, gpm: 584, xpm: 662 },
+hero: {
+xpos: -1200, ypos: 800, id: 8, name: 'npc_dota_hero_juggernaut', level: 15, xp: 9000, alive: true, respawn_seconds: 0, buyback_cost: 1310, buyback_cooldown: 0,
+health: 1610, max_health: 1820, health_percent: 88, mana: 410, max_mana: 590, mana_percent: 69,
+silenced: false, stunned: false, disarmed: false, magicimmune: false, hexed: false, muted: false, break: false, aghanims_scepter: false, aghanims_shard: false, smoked: false, has_debuff: false,
+},
+abilities: {
+ability0: ABILITY('juggernaut_blade_fury', 4),
+ability1: ABILITY('juggernaut_healing_ward', 4),
+ability2: ABILITY('juggernaut_blade_dance', 4, { passive: true }),
+ability3: ABILITY('generic_hidden', 0),
+ability4: ABILITY('juggernaut_omni_slash', 2, { ult: true }),
+},
+items: {
+slot0: ITEM('bfury', { passive: false, cast: true }), slot1: ITEM('phase_boots', { cast: true }), slot2: ITEM('manta', { cast: true }),
+slot3: ITEM('magic_wand', { cast: true, charges: 14 }), slot4: ITEM('smoke_of_deceit', { cast: true, charges: 1 }), slot5: EMPTY,
+slot6: EMPTY, slot7: EMPTY, slot8: EMPTY, stash0: EMPTY, stash1: EMPTY, stash2: EMPTY, stash3: EMPTY, stash4: EMPTY, stash5: EMPTY,
+teleport0: ITEM('tpscroll', { cast: true, charges: 1 }), neutral0: ITEM('mysterious_hat', { passive: true }),
+},
+buildings: {
+radiant: { dota_goodguys_tower1_mid: { health: 300, max_health: 1800 }, dota_goodguys_tower2_mid: { health: 2500, max_health: 2500 } },
+},
+events: [],
+};
+}
+const H = (w) => w.hero, PL = (w) => w.player, AB = (w, i) => w.abilities[`ability${i}`], IT = (w, s) => w.items[s];
+const cool = (a, cd) => { a.cooldown = cd; a.can_cast = cd <= 0 && a.level > 0 && !a.passive; };
+const tick = (w, s = 1) => { w.map.clock_time += s; w.map.game_time += s; for (const a of Object.values(w.abilities)) if (a.cooldown > 0) cool(a, Math.max(0, a.cooldown - s)); for (const it of Object.values(w.items)) if (it.cooldown > 0) { it.cooldown = Math.max(0, it.cooldown - s); it.can_cast = it.cooldown <= 0; } if (!w.hero.alive) w.hero.respawn_seconds = Math.max(0, w.hero.respawn_seconds - s); if (w.hero.buyback_cooldown > 0) w.hero.buyback_cooldown = Math.max(0, w.hero.buyback_cooldown - s); };
+const kill = (w, gold = 280) => { const p = PL(w); p.kills++; p.kill_streak++; p.gold += gold; p.gold_unreliable += gold; w.map.radiant_score++; };
+const status = (w, k, v) => { H(w)[k] = v; };
+const SCRIPT = {
+0: () => {},
+1: (w) => { cool(AB(w, 0), 24); H(w).mana -= 120; H(w).mana_percent = 49; }, 
+3: (w) => { w.map.daytime = false; }, 
+5: (w) => { status(w, 'smoked', true); IT(w, 'slot4').charges = 0; w.items.slot4 = EMPTY; }, 
+8: (w) => { status(w, 'silenced', true); },
+10: (w) => { status(w, 'silenced', false); status(w, 'smoked', false); },
+11: (w) => { kill(w); H(w).health = 1180; H(w).health_percent = 65; },
+14: (w) => { status(w, 'hexed', true); },
+16: (w) => { status(w, 'hexed', false); status(w, 'stunned', true); H(w).health = 620; H(w).health_percent = 34; },
+18: (w) => { H(w).health = 140; H(w).health_percent = 8; },
+19: (w) => { status(w, 'stunned', false); Object.assign(H(w), { alive: false, health: 0, health_percent: 0, respawn_seconds: 34 }); PL(w).deaths++; PL(w).kill_streak = 0; PL(w).gold -= 160; PL(w).gold_unreliable -= 160; w.map.dire_score++; },
+25: (w) => { const p = PL(w); p.gold -= 1310; p.gold_unreliable = Math.max(0, p.gold_unreliable - 1310); Object.assign(H(w), { alive: true, respawn_seconds: 0, buyback_cooldown: 480, health: 1820, health_percent: 100, mana: 590, mana_percent: 100 }); }, 
+27: (w) => { w.events.push({ game_time: w.map.game_time, event_type: 'roshan_killed', killed_by_team: 'radiant', killer_player_id: 2 }); },
+28: (w) => { w.events.push({ game_time: w.map.game_time, event_type: 'aegis_picked_up', player_id: 0, snatched: false }); w.items.slot5 = ITEM('aegis', { passive: true }); },
+31: (w) => { delete w.buildings.radiant.dota_goodguys_tower1_mid; }, 
+34: (w) => { cool(AB(w, 4), 110); H(w).mana -= 275; H(w).mana_percent = 53; cool(AB(w, 0), 24); }, 
+35: (w) => kill(w),
+37: (w) => kill(w),
+39: (w) => { kill(w); IT(w, 'slot2').cooldown = 30; IT(w, 'slot2').can_cast = false; },
+42: (w) => kill(w),
+45: (w) => { kill(w); H(w).health = 990; H(w).health_percent = 54; },
+48: (w) => { H(w).level = 16; PL(w).xpm += 11; },
+50: (w) => { w.map.game_time += 1200 - w.map.clock_time; w.map.clock_time = 1200; w.map.daytime = true; cool(AB(w, 4), 3); }, 
+56: (w) => { w.map.win_team = 'radiant'; w.map.game_state = 'DOTA_GAMERULES_STATE_POST_GAME'; w.map.radiant_score += 1; },
+};
+function payloadOf(w, i) {
+const p = clone(w);
+if (i > 0) p.previously = { map: { clock_time: w.map.clock_time - 1 } };
+p.auth = { token: 'prism-gsi-demo-token-0001' };
+return p;
+}
+const MOBA_SIM_FRAMES = (() => {
+const w = world();
+const out = [];
+for (let t = 0; t < MOBA_SIM_LOOP; t++) {
+if (t > 0 && w.map.game_state !== 'DOTA_GAMERULES_STATE_POST_GAME') tick(w);
+SCRIPT[t]?.(w);
+out.push(Object.freeze({ t, payload: payloadOf(w, t) }));
+}
+return Object.freeze(out);
+})();
+let STATES = null;
+function states() {
+if (!STATES) {
+let s = null;
+STATES = MOBA_SIM_FRAMES.map((f) => { s = normalizeDota2(f.payload, s, { nowMs: Math.round(f.t * 1000) }).state; return { t: f.t, state: s }; });
+}
+return STATES;
+}
+let memo = { key: null, value: null };
+function simMoba(t) {
+const tt = Math.max(0, Number.isFinite(+t) ? +t : 0);
+const k = Math.floor(tt / MOBA_SIM_LOOP + 1e-9);
+const phase = tt - k * MOBA_SIM_LOOP;
+const S = states();
+let i = 0;
+for (let j = 0; j < S.length; j++) if (S[j].t <= phase + 1e-9) i = j;
+const v = gameLinkView(S[i].state, Math.round(phase * 1000));
+const key = `${k}|${i}|${v.events.length}`;
+if (memo.key === key) return memo.value;
+const shift = Math.round(k * MOBA_SIM_LOOP * 1000);
+const value = { ...v, at: v.at + shift, rev: v.rev + k * 1000, events: v.events.map((e) => ({ ...e, at: e.at + shift, seq: e.seq + k * 1000 })) };
+memo = { key, value };
+return value;
+}
+};
+__d[637] = function (__ns) {
+const { simMoba } = __m(636);
+const { STREAK_LABELS } = __m(635);
+__e(__ns, { "MOBA_GAMES": () => MOBA_GAMES, "DATA_SHAPE": () => DATA_SHAPE, "EFFECTS_PARAM": () => EFFECTS_PARAM, "mobaOf": () => mobaOf, "tierOf": () => tierOf, "faceOf": () => faceOf, "newest": () => newest, "stepOf": () => stepOf, "BRIGHT_GAP_MS": () => BRIGHT_GAP_MS, "DUR": () => DUR, "BUYBACK_PULSE_S": () => BUYBACK_PULSE_S, "brightOnsets": () => brightOnsets, "multiText": () => multiText, "streakText": () => streakText, "objectiveText": () => objectiveText, "fxOf": () => fxOf, "fxBusy": () => fxBusy, "nameKey": () => nameKey, "itemTitle": () => itemTitle, "itemShort": () => itemShort, "abilityTitle": () => abilityTitle, "itemPict": () => itemPict, "clockText": () => clockText, "gold": () => gold, "SWEEP_STEPS": () => SWEEP_STEPS, "abilityModel": () => abilityModel, "itemModel": () => itemModel, "VITALS": () => VITALS, "vitalModel": () => vitalModel, "gameName": () => gameName, "teamName": () => teamName, "SLOT_KINDS": () => SLOT_KINDS, "layoutOf": () => layoutOf }, [], ["BRIGHT_GAP_MS","BUYBACK_PULSE_S","DATA_SHAPE","DUR","EFFECTS_PARAM","MOBA_GAMES","SLOT_KINDS","SWEEP_STEPS","VITALS","abilityModel","abilityTitle","brightOnsets","clockText","faceOf","fxBusy","fxOf","gameName","gold","itemModel","itemPict","itemShort","itemTitle","layoutOf","mobaOf","multiText","nameKey","newest","objectiveText","stepOf","streakText","teamName","tierOf","vitalModel"]);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const isObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+const MOBA_GAMES = Object.freeze(['dota2', 'lol']);
+const DATA_SHAPE = Object.freeze({
+gamelink: 'Game Link v1 (src/apps/sources/README.md § Game Link) + the shared MOBA block gamelink.dota2 / gamelink.lol (lead/CONTRACT-moba.md): { phase, clock { t, daytime, paused }, hero { id, name, level, respawnIn, mana, resource, buybackReady, buybackCost, buybackCooldown }, economy { gold, gpm, xpm, lastHits, denies, cs }, abilities [{ slot, name, level, ready, cooldown, cooldownMax, ultimate, passive, charges }], items [{ slot, name, ready, cooldown, cooldownMax, charges }], status { stunned, silenced, hexed, … }, aegis } · absent = demo match · null = waiting',
+});
+const EFFECTS_PARAM = Object.freeze({ type: 'select', default: 'soft', options: ['soft', 'full', 'off'], label: 'Effects (soft · full · off)' });
+const demoView = (t, nowMs) => { const s = simMoba(t); return { mode: 'demo', s, g: s.dota2, game: 'dota2', nowMs }; };
+function mobaOf(ctx) {
+const d = ctx.data;
+if (!d || !Object.hasOwn(d, 'gamelink') || d.gamelink === undefined) return demoView(ctx.t, Math.round(ctx.t * 1000));
+const s = d.gamelink;
+if (!s || typeof s !== 'object') return { mode: 'waiting', s: null, g: null, game: null, nowMs: ctx.now };
+if (!MOBA_GAMES.includes(s.game)) {
+if (Array.isArray(d.demo) && d.demo.includes('gamelink') && Number.isFinite(ctx.now)) return demoView(ctx.now / 1000, ctx.now);
+return { mode: 'other', s, g: null, game: typeof s.game === 'string' ? s.game : null, nowMs: ctx.now };
+}
+return { mode: 'live', s, g: isObj(s[s.game]) ? s[s.game] : null, game: s.game, nowMs: ctx.now };
+}
+function tierOf(ctx) {
+const e = ctx.params?.effects ?? 'soft';
+if (ctx.reduced || ctx.motion === 'still' || e === 'off') return 'still';
+if (ctx.motion === 'calm') return 'calm';
+return e === 'full' ? 'full' : 'soft';
+}
+function faceOf(view) {
+if (view.mode === 'waiting' || !view.s) return 'waiting';
+if (view.mode === 'other') return 'other';
+const s = view.s;
+switch (s.status) {
+case 'menu': return 'menu';
+case 'loading': return 'loading';
+case 'watching': case 'spectating': case 'between': return 'watching';
+case 'paused': return 'paused';
+case 'live': return s.match?.phase === 'gameover' ? 'post' : s.player && s.player.alive === false ? 'dead' : 'live';
+default: return 'menu';
+}
+}
+const ACTIVE = new Set(['live', 'dead', 'paused', 'post']);
+function newest(view, types, win) {
+const list = view.s?.events;
+if (!Array.isArray(list)) return null;
+const set = typeof types === 'string' ? [types] : types;
+for (let i = list.length - 1; i >= 0; i--) {
+const e = list[i];
+if (!e || !set.includes(e.type) || !Number.isFinite(e.at)) continue;
+const a = (view.nowMs - e.at) / 1000;
+if (a < -0.05) continue;
+return a < win ? { e, a: Math.max(0, a) } : null;
+}
+return null;
+}
+const stepOf = (a, dur, n) => (a >= dur ? -1 : Math.min(n - 1, Math.floor((a / dur) * n + 1e-9)));
+const BRIGHT_GAP_MS = 1000;
+const BRIGHT = ['kill', 'multiKill', 'firstBlood', 'ace', 'objective', 'ultReady', 'respawn', 'buybackReady'];
+const DUR = Object.freeze({ kill: 1.0, multi: 2.6, first: 2.6, death: 1.4, respawn: 1.2, ult: 1.4, level: 1.1, objective: 2.8, buyback: 1.6 });
+const BUYBACK_PULSE_S = 3;
+const PULSE = [0, 1, 2, 2, 1, 0, 0, 0];
+function brightOnsets(view) {
+const out = new Set();
+let last = -Infinity;
+const ats = [...new Set((view.s?.events || []).filter((e) => e && BRIGHT.includes(e.type) && Number.isFinite(e.at)).map((e) => e.at))].sort((a, b) => a - b);
+for (const at of ats) if (at - last >= BRIGHT_GAP_MS) { out.add(at); last = at; }
+return out;
+}
+const MULTI_TEXT = { double: 'Double Kill', triple: 'Triple Kill', ultra: 'Ultra Kill', rampage: 'Rampage', quadra: 'Quadra Kill', penta: 'Penta Kill' };
+const MULTI_BY_COUNT = { dota2: { 2: 'double', 3: 'triple', 4: 'ultra', 5: 'rampage' }, lol: { 2: 'double', 3: 'triple', 4: 'quadra', 5: 'penta' } };
+function multiText(e, game) {
+const count = Math.min(5, Math.max(2, e?.count | 0));
+const label = typeof e?.label === 'string' && MULTI_TEXT[e.label] ? e.label : (MULTI_BY_COUNT[game] || MULTI_BY_COUNT.dota2)[count];
+return { text: MULTI_TEXT[label] || 'Multi Kill', level: count };
+}
+const STREAK_TEXT = { 'killing-spree': 'Killing Spree', dominating: 'Dominating', 'mega-kill': 'Mega Kill', unstoppable: 'Unstoppable', 'wicked-sick': 'Wicked Sick', 'monster-kill': 'Monster Kill', godlike: 'Godlike', 'beyond-godlike': 'Beyond Godlike' };
+const streakText = (n) => (Number.isFinite(n) && n >= 3 ? STREAK_TEXT[STREAK_LABELS[Math.min(10, Math.floor(n))]] : null);
+const OBJ_TEXT = { roshan: 'Roshan', aegis: 'Aegis', tormentor: 'Tormentor', dragon: 'Dragon', baron: 'Baron Nashor', herald: 'Rift Herald', grubs: 'Void Grubs', atakhan: 'Atakhan', tower: 'Tower', inhibitor: 'Inhibitor', barracks: 'Barracks' };
+const DRAKE = { fire: 'Infernal Drake', infernal: 'Infernal Drake', water: 'Ocean Drake', ocean: 'Ocean Drake', earth: 'Mountain Drake', mountain: 'Mountain Drake', air: 'Cloud Drake', cloud: 'Cloud Drake', hextech: 'Hextech Drake', chemtech: 'Chemtech Drake', elder: 'Elder Dragon' };
+const LANE = { top: 'Top', mid: 'Mid', bot: 'Bot', bottom: 'Bot' };
+const STRUCTURES = new Set(['tower', 'barracks', 'inhibitor']);
+function objectiveText(e) {
+const text = e.name === 'dragon' && DRAKE[e.kind] ? DRAKE[e.kind] : OBJ_TEXT[e.name] || 'Objective';
+const where = STRUCTURES.has(e.name) ? (LANE[e.kind] ? `${LANE[e.kind]} lane` : /^tier\d$/.test(e.kind || '') ? `Tier ${e.kind.slice(4)}` : null) : null;
+const whose = e.kind === 'snatched' ? 'Snatched' : e.kind === 'denied' ? 'Denied' : e.stolen ? (e.ours === true ? 'Stolen!' : 'Stolen') : STRUCTURES.has(e.name) ? (e.ours === true ? 'Destroyed' : e.ours === false ? 'Lost' : null) : e.ours === true ? 'Ours' : e.ours === false ? 'Theirs' : null;
+return { text, sub: [where, whose].filter(Boolean).join(' · ') || null };
+}
+function fxOf(view, tier) {
+const face = faceOf(view), g = view.g, s = view.s;
+const still = tier === 'still', calm = tier === 'calm';
+const fx = {
+tier, face, game: view.game, still, calm, dim: 0, day: null, smoke: false, stun: false, silence: false, hex: false, mute: false, immune: false, broken: false,
+aegis: false, respawnIn: null, buyback: null, pulse: 0, kill: null, ult: null, level: null, death: null, respawn: null, banner: null, over: null,
+};
+if (face === 'watching' || face === 'paused' || face === 'other') fx.dim = 2;
+else if (face === 'dead') fx.dim = 1;
+if (!ACTIVE.has(face) || !g) return fx;
+const alive = face !== 'dead';
+fx.day = typeof g.clock?.daytime === 'boolean' ? g.clock.daytime : null;
+const st = g.status;
+if (st && alive && face !== 'post') Object.assign(fx, { smoke: !!st.smoked, stun: !!st.stunned, silence: !!st.silenced, hex: !!st.hexed, mute: !!st.muted, immune: !!st.magicImmune, broken: !!st.broken });
+fx.aegis = g.aegis === true && face !== 'post';
+if (face === 'dead') {
+fx.respawnIn = Number.isFinite(g.hero?.respawnIn) ? Math.max(0, Math.round(g.hero.respawnIn)) : null;
+fx.buyback = typeof g.hero?.buybackReady === 'boolean' ? g.hero.buybackReady : null;
+if (fx.buyback && !still) fx.pulse = PULSE[Math.min(7, Math.floor(((((view.nowMs / 1000) / BUYBACK_PULSE_S) % 1) + 1) % 1 * 8))];
+}
+if (face === 'post') fx.over = { result: s.match?.result ?? null };
+if (still) return fx;
+const bright = brightOnsets(view);
+const lit = (e) => bright.has(e.at);
+const kill = newest(view, 'kill', DUR.kill);
+if (kill) { const n = calm ? 3 : 8, k = stepOf(kill.a, DUR.kill, n); if (k >= 0) fx.kill = { k, n, bright: lit(kill.e), streak: kill.e.streak ?? null, label: kill.e.label ?? null }; }
+const ult = newest(view, 'ultReady', DUR.ult);
+if (ult) { const n = calm ? 3 : 7, k = stepOf(ult.a, DUR.ult, n); if (k >= 0) fx.ult = { k, n, bright: lit(ult.e) }; }
+const lv = newest(view, 'levelUp', DUR.level);
+if (lv) { const n = calm ? 2 : 4, k = stepOf(lv.a, DUR.level, n); if (k >= 0) fx.level = { k, n, level: lv.e.level ?? null }; }
+const de = newest(view, 'death', DUR.death);
+if (de) { const n = calm ? 2 : 5, k = stepOf(de.a, DUR.death, n); if (k >= 0) fx.death = { k, n }; }
+const re = newest(view, 'respawn', DUR.respawn);
+if (re) { const n = calm ? 2 : 5, k = stepOf(re.a, DUR.respawn, n); if (k >= 0) fx.respawn = { k, n, bright: lit(re.e), buyback: !!re.e.buyback }; }
+const team = s.player?.team ?? s.match?.side ?? null;
+const pick = [
+['multiKill', DUR.multi, (e) => ({ ...multiText(e, view.game), tone: 'gold' })],
+['firstBlood', DUR.first, (e) => ({ text: 'First Blood', level: 2, tone: e.ours === false ? 'enemy' : 'ally' })],
+['ace', DUR.first, (e) => ({ text: 'Ace', level: 3, tone: e.ours === false ? 'enemy' : 'ally' })],
+['objective', DUR.objective, (e) => ({ ...objectiveText(e), level: 2, tone: e.ours === true ? 'ally' : e.ours === false ? 'enemy' : 'gold', name: e.name })],
+['respawn', DUR.buyback, (e) => (e.buyback ? { text: 'Buyback', level: 1, tone: 'gold' } : null)],
+];
+for (const [type, dur, make] of pick) {
+const hit = newest(view, type, dur);
+if (!hit) continue;
+const b = make(hit.e);
+if (!b) continue;
+const n = calm ? 4 : 10, k = stepOf(hit.a, dur, n);
+if (k < 0) continue;
+fx.banner = { ...b, k, n, bright: lit(hit.e), team };
+break;
+}
+if (fx.banner?.tone === 'gold' && fx.banner.level >= 2) fx.kill = null;
+return fx;
+}
+const fxBusy = (fx) => !!(fx.kill || fx.ult || fx.level || fx.death || fx.respawn || fx.banner || fx.pulse);
+const titleCase = (s) => String(s || '').split(/[_\s]+/).filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+const ITEM_NAMES = {
+bfury: 'Battle Fury', blink: 'Blink Dagger', black_king_bar: 'Black King Bar', tpscroll: 'Town Portal', travel_boots: 'Travel Boots', travel_boots_2: 'Travel Boots',
+manta: 'Manta Style', ultimate_scepter: "Aghanim's Scepter", sphere: "Linken's Sphere", cyclone: "Eul's Scepter", sheepstick: 'Scythe of Vyse', greater_crit: 'Daedalus',
+lesser_crit: 'Crystalys', invis_sword: 'Shadow Blade', silver_edge: 'Silver Edge', monkey_king_bar: 'Monkey King Bar', heart: 'Heart of Tarrasque', assault: 'Assault Cuirass',
+skadi: 'Eye of Skadi', mjollnir: 'Mjollnir', flask: 'Healing Salve', ward_observer: 'Observer Ward', ward_sentry: 'Sentry Ward', ward_dispenser: 'Wards', smoke_of_deceit: 'Smoke of Deceit',
+branches: 'Iron Branch', relic: 'Sacred Relic', aegis: 'Aegis', cheese: 'Cheese', refresher: 'Refresher Orb', refresher_shard: 'Refresher Shard', guardian_greaves: 'Guardian Greaves',
+pipe: 'Pipe of Insight', hand_of_midas: 'Hand of Midas', basher: 'Skull Basher', abyssal_blade: 'Abyssal Blade', force_staff: 'Force Staff', glimmer_cape: 'Glimmer Cape',
+ghost: 'Ghost Scepter', magic_wand: 'Magic Wand', magic_stick: 'Magic Stick', quelling_blade: 'Quelling Blade', power_treads: 'Power Treads', phase_boots: 'Phase Boots',
+arcane_boots: 'Arcane Boots', enchanted_mango: 'Mango', faerie_fire: 'Faerie Fire', tango: 'Tango', clarity: 'Clarity', bottle: 'Bottle', dust: 'Dust', gem: 'Gem of True Sight',
+mysterious_hat: 'Fairy Trinket',
+};
+const ITEM_SHORT = {
+bfury: 'BFury', blink: 'Blink', black_king_bar: 'BKB', tpscroll: 'TP', travel_boots: 'BoTs', travel_boots_2: 'BoTs', manta: 'Manta', ultimate_scepter: 'Aghs', sphere: 'Linkens',
+cyclone: 'Euls', sheepstick: 'Hex', greater_crit: 'Daedalus', invis_sword: 'Sblade', silver_edge: 'SEdge', monkey_king_bar: 'MKB', heart: 'Heart', assault: 'AC', skadi: 'Skadi',
+flask: 'Salve', ward_observer: 'Obs', ward_sentry: 'Sentry', ward_dispenser: 'Wards', smoke_of_deceit: 'Smoke', branches: 'Branch', refresher: 'Refresher', guardian_greaves: 'Greaves',
+hand_of_midas: 'Midas', abyssal_blade: 'Abyssal', force_staff: 'Force', glimmer_cape: 'Glimmer', magic_wand: 'Wand', magic_stick: 'Stick', quelling_blade: 'QB', power_treads: 'Treads',
+phase_boots: 'Phase', arcane_boots: 'Arcanes', enchanted_mango: 'Mango', faerie_fire: 'Faerie', gem: 'Gem', mysterious_hat: 'Trinket', aegis: 'Aegis', cheese: 'Cheese',
+};
+const nameKey = (s) => String(s || '').toLowerCase().replace(/['’`]/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+const isDisplay = (s) => /[A-Z\s'’]/.test(String(s || '')) && !/_/.test(String(s || ''));
+const itemTitle = (id) => (!id ? null : isDisplay(id) ? String(id).slice(0, 32) : ITEM_NAMES[id] || titleCase(id).slice(0, 24));
+function itemShort(id) {
+if (!id) return null;
+if (ITEM_SHORT[id]) return ITEM_SHORT[id];
+const name = itemTitle(id);
+if (name.length <= 11) return name;
+const words = name.split(/\s+/).filter((w) => !/^(of|the|and)$/i.test(w));
+if (words[0] && words[0].length <= 11) return words[0];
+return words.map((w) => w[0].toUpperCase()).join('').slice(0, 5);
+}
+function abilityTitle(id, heroId = null) {
+if (!id) return null;
+const s = String(id);
+if (heroId && s.toLowerCase().startsWith(String(heroId).toLowerCase()) && /^(q|w|e|r|d|f|passive)$/i.test(s.slice(String(heroId).length))) return null;
+if (/^[A-Za-z]+(Q|W|E|R|Passive)$/.test(s) && !/[\s_]/.test(s)) return null;
+return (isDisplay(s) ? s : titleCase(s)).slice(0, 24);
+}
+function itemPict(id) {
+const k = nameKey(id);
+if (!k) return 'empty';
+if (k === 'aegis') return 'aegis';
+if (k === 'cheese') return 'cheese';
+if (/tpscroll|travel_boots|recipe|teleport/.test(k)) return 'scroll';
+if (/boots|treads|greaves|shoes|steelcaps|swiftness|lucidity/.test(k)) return 'boots';
+if (/blink/.test(k)) return 'spark';
+if (/ward|dust|gem|eye|alteration|lens|totem|scarecrow/.test(k)) return 'eye';
+if (/flask|clarity|mango|faerie|tango|bottle|salve|potion|elixir|biscuit/.test(k)) return 'potion';
+if (/smoke/.test(k)) return 'smoke';
+if (/sphere|orb|core|lotus|octarine|refresher|heart|skadi|kaya|aether|hourglass|companion|deathcap|tome|codex|crown|torch|rylai|liandry|void|shadowflame|cosmic/.test(k)) return 'orb';
+if (/shield|vanguard|crimson|pipe|cuirass|assault|mail|aeon|guard|cape|buckler|halberd|plate|armor|cowl|veil|mantle|aegis|warmog|thornmail|sunfire|randuin|locket|bulwark/.test(k)) return 'shield';
+if (/staff|scepter|cyclone|wand|stick|sheepstick|dagon|force|ghost|necronomicon|ethereal|rod|nullifier|morello|archangel/.test(k)) return 'staff';
+if (/fury|blade|edge|crit|rapier|sword|basher|bar|desolator|mjollnir|maelstrom|yasha|sange|butterfly|satanic|axe|claw|daedalus|crystalys|javelin|hammer|quelling|manta|diffusal|echo|bloodthorn|orchid|harpoon|bow|cleaver|hydra|dirk|dagger|scythe|spear|reaver|kraken|collector|dancer|infinity|shiv|cutlass/.test(k)) return 'blade';
+return 'gem';
+}
+function clockText(t) {
+if (!Number.isFinite(t)) return '—';
+const a = Math.abs(Math.round(t)), m = Math.floor(a / 60), sec = a % 60;
+return `${t < 0 ? '−' : ''}${m}:${String(sec).padStart(2, '0')}`;
+}
+const num = (v) => (Number.isFinite(v) ? String(Math.round(v)) : '—');
+const gold = (v) => (Number.isFinite(v) ? Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : '—');
+const DEFAULT_PIPS = { dota2: { basic: 4, ult: 3 }, lol: { basic: 5, ult: 3 } };
+const SWEEP_STEPS = 36;
+const sweep = (cd, max) => (Number.isFinite(cd) && cd > 0 && Number.isFinite(max) && max > 0 ? Math.max(1, Math.ceil(clamp(cd / max) * SWEEP_STEPS - 1e-6)) / SWEEP_STEPS : null);
+function lockOf(fx, kind, passive) {
+if (fx.stun) return 'stun';
+if (fx.hex) return 'hex';
+if (kind === 'ability' && fx.silence && !passive) return 'silence';
+if (kind === 'ability' && fx.broken && passive) return 'broken';
+if (kind === 'item' && fx.mute) return 'mute';
+return null;
+}
+function abilityModel(view, fx, sel) {
+const list = Array.isArray(view.g?.abilities) ? view.g.abilities : [];
+const a = sel === 'ult' ? list.find((x) => x?.ultimate) : Number.isInteger(sel) ? list[sel - 1] : list.find((x) => x?.slot === sel);
+const active = ACTIVE.has(fx.face);
+const pips = DEFAULT_PIPS[view.game] || DEFAULT_PIPS.dota2;
+const ult = !!a?.ultimate || sel === 'R' || sel === 'ult';
+const M = {
+kind: 'ability', sel, letter: a?.slot || (sel === 'ult' ? 'R' : typeof sel === 'string' ? sel : String(sel)), present: !!a && active,
+name: a ? abilityTitle(a.name, view.g?.hero?.id) : null, level: a?.level ?? 0, pips: Math.max(a?.level ?? 0, ult ? pips.ult : pips.basic), ultimate: ult, passive: !!a?.passive,
+ready: a && typeof a.ready === 'boolean' ? a.ready : null, cooldown: Number.isFinite(a?.cooldown) ? Math.ceil(a.cooldown - 1e-6) : null, frac: null,
+charges: Number.isFinite(a?.charges) ? a.charges : null, locked: null, flare: null, dimmed: !active || fx.face === 'dead' || fx.face === 'post',
+};
+if (!M.present) return M;
+M.frac = M.cooldown > 0 ? sweep(a.cooldown, a.cooldownMax) : null;
+M.unknown = M.ready === null && !M.passive; 
+M.unlearned = M.level <= 0 && !(M.passive && a.level === null); 
+M.locked = M.unlearned ? null : lockOf(fx, 'ability', M.passive);
+if (fx.ult && M.ultimate && !M.dimmed) M.flare = fx.ult;
+return M;
+}
+const SLOT_LABEL = { tp: 'TP', neutral: 'Neutral', trinket: 'Trinket' };
+function itemModel(view, fx, slot) {
+const list = Array.isArray(view.g?.items) ? view.g.items : [];
+const it = list.find((x) => x && String(x.slot) === String(slot));
+const active = ACTIVE.has(fx.face);
+const M = {
+kind: 'item', slot, label: SLOT_LABEL[slot] || `Slot ${Number(slot) + 1}`, present: !!it && active, name: it ? itemTitle(it.name) : null, short: it ? itemShort(it.name) : null,
+pict: it ? itemPict(it.name) : 'empty', ready: it && typeof it.ready === 'boolean' ? it.ready : null, cooldown: Number.isFinite(it?.cooldown) ? Math.ceil(it.cooldown - 1e-6) : null,
+frac: null, charges: Number.isFinite(it?.charges) && it.charges > 0 ? it.charges : null, locked: null, aegis: it?.name === 'aegis', dimmed: !active || fx.face === 'dead' || fx.face === 'post',
+};
+if (!M.present) return M;
+M.frac = M.cooldown > 0 ? sweep(it.cooldown, it.cooldownMax) : null;
+M.locked = lockOf(fx, 'item', false);
+return M;
+}
+const VITAL_TITLE = { health: 'Health', mana: 'Mana', gold: 'Gold', kda: 'K · D · A', clock: 'Time', score: 'Score', hero: 'Hero', level: 'Level', buyback: 'Buyback', streak: 'Streak', lasthits: 'Last Hits', respawn: 'Respawn', vitals: 'Vitals' };
+const VITALS = Object.freeze(Object.keys(VITAL_TITLE));
+function vitalModel(view, fx, which) {
+const s = view.s, g = view.g, face = fx.face, p = s?.player, st = s?.stats, m = s?.match, h = g?.hero, eco = g?.economy;
+const active = ACTIVE.has(face);
+const out = { kind: 'vital', which, title: VITAL_TITLE[which] || 'Game', value: '—', unit: null, sub: null, bar: null, bar2: null, barColor: null, tone: 'idle', word: false, dimmed: !active || face === 'dead', team: p?.team ?? m?.side ?? null };
+if (!active) {
+if (which === 'clock' || which === 'hero' || which === 'vitals' || which === 'score') {
+out.word = true; out.tone = 'off';
+const W = { waiting: ['Waiting', 'for a game'], other: [gameName(view.game), 'is live'], menu: ['Menu', gameName(view.game)], loading: [g?.phase === 'draft' ? 'Draft' : g?.phase === 'strategy' ? 'Strategy' : 'Loading', g?.hero?.name || gameName(view.game)], watching: ['Watching', 'not your match'] }[face];
+if (W) { out.value = W[0]; out.sub = W[1]; }
+if (face === 'loading' && which === 'hero' && g?.hero?.name) { out.value = g.hero.name; out.sub = g.phase === 'draft' ? 'Draft' : 'Strategy'; }
+}
+return out;
+}
+const dead = face === 'dead';
+switch (which) {
+case 'health': {
+const hp = p?.health;
+if (!Number.isFinite(hp)) { out.tone = 'off'; break; }
+out.value = num(hp); out.unit = '%'; out.bar = clamp(hp / 100); out.barColor = hp <= 25 ? 'hpLow' : 'hp';
+if (Number.isFinite(h?.hpMax)) out.sub = `${num(Math.round((hp / 100) * h.hpMax))} / ${num(h.hpMax)}`;
+out.tone = dead ? 'off' : hp <= 25 ? 'warn' : 'idle';
+if (dead) { out.value = '0'; out.bar = 0; out.sub = 'Dead'; }
+break;
+}
+case 'mana': {
+const mp = h?.mana;
+out.title = h?.resource && h.resource !== 'mana' ? h.resource[0].toUpperCase() + h.resource.slice(1) : 'Mana';
+if (h?.resource === 'none') { out.value = '—'; out.sub = 'No resource'; out.tone = 'off'; break; }
+if (!Number.isFinite(mp)) { out.tone = 'off'; break; }
+out.value = num(mp); out.unit = '%'; out.bar = clamp(mp / 100); out.barColor = 'mana';
+if (Number.isFinite(h?.manaMax)) out.sub = `${num(Math.round((mp / 100) * h.manaMax))} / ${num(h.manaMax)}`;
+out.tone = dead ? 'off' : 'idle';
+break;
+}
+case 'vitals': {
+const hp = p?.health, mp = h?.mana;
+out.title = h?.name || 'Vitals';
+out.value = Number.isFinite(hp) ? (dead ? '0' : num(hp)) : '—'; out.unit = Number.isFinite(hp) ? '%' : null;
+out.bar = Number.isFinite(hp) ? (dead ? 0 : clamp(hp / 100)) : null; out.barColor = hp <= 25 ? 'hpLow' : 'hp';
+out.bar2 = Number.isFinite(mp) && h?.resource !== 'none' ? clamp(mp / 100) : null;
+out.sub = dead ? (Number.isFinite(h?.respawnIn) ? `Respawn ${num(h.respawnIn)}` : 'Dead') : Number.isFinite(h?.level) ? `Level ${h.level}` : null;
+out.tone = dead ? 'off' : 'idle';
+break;
+}
+case 'gold': {
+const v = eco?.gold ?? p?.money;
+if (!Number.isFinite(v)) { out.tone = 'off'; break; }
+out.value = gold(v);
+out.sub = Number.isFinite(eco?.gpm) ? `${num(eco.gpm)} GPM` : Number.isFinite(eco?.cs) ? `${num(eco.cs)} CS` : null;
+out.tone = 'active';
+break;
+}
+case 'kda': {
+if (!st || !Number.isFinite(st.kills)) { out.tone = 'off'; break; }
+out.value = `${num(st.kills)}/${num(st.deaths)}/${num(st.assists)}`;
+out.kda = [st.kills, st.deaths, st.assists];
+out.sub = Number.isFinite(eco?.lastHits) ? `${num(eco.lastHits)} LH · ${num(eco.denies)} DN` : Number.isFinite(eco?.cs) ? `${num(eco.cs)} CS` : null;
+break;
+}
+case 'lasthits': {
+const v = eco?.lastHits ?? eco?.cs;
+if (!Number.isFinite(v)) { out.tone = 'off'; break; }
+out.title = Number.isFinite(eco?.lastHits) ? 'Last Hits' : 'Creep Score'; out.value = num(v); out.sub = Number.isFinite(eco?.denies) ? `${num(eco.denies)} denies` : null;
+break;
+}
+case 'clock': {
+const c = g?.clock;
+out.value = clockText(c?.t); out.word = false;
+out.sub = c?.paused ? 'Paused' : c?.daytime === true ? 'Day' : c?.daytime === false ? 'Night' : g?.phase === 'pregame' ? 'Pre-game' : null;
+out.daytime = c?.daytime ?? null;
+break;
+}
+case 'score': {
+if (!m || !Number.isFinite(m.us) || !Number.isFinite(m.them)) { out.tone = 'off'; break; }
+out.value = `${m.us}–${m.them}`;
+out.sub = face === 'post' ? (m.result === 'win' ? 'Victory' : m.result === 'loss' ? 'Defeat' : 'Game over') : m.side ? teamName(m.side) : null;
+out.tone = face === 'post' && m.result === 'win' ? 'ok' : 'idle';
+break;
+}
+case 'hero': {
+out.word = true;
+out.value = h?.name || '—';
+out.level = h?.level ?? null;
+const lock = fx.stun ? 'Stunned' : fx.hex ? 'Hexed' : fx.silence ? 'Silenced' : null;
+out.sub = lock || streakText(newestStreak(view)) || (fx.smoke ? 'Smoked' : fx.aegis ? 'Aegis' : null) || (Number.isFinite(h?.level) ? `Level ${h.level}` : null);
+if (face === 'post') { out.value = m?.result === 'win' ? 'Victory' : m?.result === 'loss' ? 'Defeat' : 'Game over'; out.sub = h?.name || null; out.tone = m?.result === 'win' ? 'ok' : 'idle'; }
+if (dead && Number.isFinite(h?.respawnIn)) out.sub = `Respawn ${num(h.respawnIn)}`;
+break;
+}
+case 'level': {
+if (!Number.isFinite(h?.level)) { out.tone = 'off'; break; }
+out.value = num(h.level); out.sub = Number.isFinite(eco?.xpm) ? `${num(eco.xpm)} XPM` : null;
+if (fx.level) out.tone = 'active';
+break;
+}
+case 'streak': {
+const n = newestStreak(view);
+out.value = Number.isFinite(n) ? num(n) : '0'; out.sub = streakText(n) || 'kills in a row';
+out.tone = n >= 3 ? 'active' : 'idle';
+break;
+}
+case 'buyback': {
+if (!h || h.buybackReady === null || h.buybackReady === undefined) { out.tone = 'off'; out.sub = view.game === 'lol' ? 'none in LoL' : null; break; }
+if (Number.isFinite(h.buybackCooldown) && h.buybackCooldown > 0) { out.value = clockText(h.buybackCooldown); out.sub = 'on cooldown'; out.tone = 'off'; break; }
+out.value = Number.isFinite(h.buybackCost) ? gold(h.buybackCost) : '—';
+out.sub = h.buybackReady ? 'Ready' : 'Need gold';
+out.tone = h.buybackReady ? (dead ? 'active' : 'ok') : 'warn';
+out.ready = !!h.buybackReady;
+break;
+}
+case 'respawn': {
+if (!dead) { out.value = 'Alive'; out.word = true; out.sub = h?.name || null; break; }
+out.value = Number.isFinite(h?.respawnIn) ? num(h.respawnIn) : '—'; out.unit = Number.isFinite(h?.respawnIn) ? 's' : null;
+out.sub = h?.buybackReady === true ? 'Buyback ready' : 'Dead';
+out.tone = h?.buybackReady === true ? 'active' : 'off';
+break;
+}
+default: break;
+}
+return out;
+}
+function newestStreak(view) {
+if (Number.isFinite(view.g?.hero?.streak)) return view.g.hero.streak;
+const list = view.s?.events || [];
+for (let i = list.length - 1; i >= 0; i--) { const e = list[i]; if (e?.type === 'death') return 0; if (e?.type === 'kill' && Number.isFinite(e.streak)) return e.streak; }
+return null;
+}
+const gameName = (game) => ({ dota2: 'Dota 2', lol: 'League', cs2: 'CS2' })[game] || (typeof game === 'string' && game ? game.toUpperCase().slice(0, 10) : 'A game');
+const teamName = (t) => ({ radiant: 'Radiant', dire: 'Dire', order: 'Blue side', chaos: 'Red side' })[t] || null;
+const row = (prefix, list) => list.map((x) => `${prefix}:${x}`);
+const rep = (s, n) => Array(n).fill(s);
+const LAYOUTS = {
+galleon: { keys: [row('ab', ['Q', 'W', 'E']), ['ab:R', 'v:hero', 'v:kda'], row('it', [0, 1, 2]), row('it', [3, 4, 5])], readout: ['r:health', 'r:mana', 'r:gold', 'r:match'] },
+plus: { keys: [row('ab', ['Q', 'W', 'E', 'R']), ['it:0', 'it:1', 'it:2', 'v:hero']], readout: ['r:health', 'r:mana', 'r:gold', 'r:match'] },
+plusxl: { keys: [[...row('ab', ['Q', 'W', 'E', 'D', 'F', 'R']), 'v:hero', 'v:kda', 'v:clock'], [...row('it', [0, 1, 2, 3, 4, 5, 'tp', 'neutral']), 'v:buyback'], rep('bar:hp', 9), rep('bar:mp', 9)], readout: ['r:health', 'r:mana', 'r:gold', 'r:match', 'r:kda', 'r:hero'] },
+xl: { keys: [[...row('ab', ['Q', 'W', 'E', 'D', 'F', 'R']), 'v:clock', 'v:score'], row('it', [0, 1, 2, 3, 4, 5, 'tp', 'neutral']), [...rep('bar:hp', 6), 'v:gold', 'v:kda'], [...rep('bar:mp', 6), 'v:hero', 'v:buyback']] },
+mk2: { keys: [[...row('ab', ['Q', 'W', 'E', 'R']), 'v:score'], [...row('it', [0, 1, 2, 3]), 'v:gold'], [...rep('bar:vit', 3), 'v:kda', 'v:hero']] },
+mini: { keys: [row('ab', ['Q', 'W', 'E']), ['ab:R', 'v:vitals', 'v:gold']] },
+neo: { keys: [row('ab', ['Q', 'W', 'E', 'R']), ['it:0', 'it:1', 'v:vitals', 'v:gold']], readout: ['r:line'] },
+studio: { keys: [[...row('ab', ['Q', 'W', 'E', 'D', 'F', 'R']), ...row('it', [0, 1, 2, 3, 4, 5, 'tp', 'neutral']), 'v:clock', 'v:score'], [...rep('bar:vit', 12), 'v:gold', 'v:kda', 'v:hero', 'v:buyback']] },
+};
+const PRIORITY = ['ab:Q', 'ab:W', 'ab:E', 'ab:R', 'v:vitals', 'v:gold', 'v:hero', 'v:kda', 'it:0', 'it:1', 'it:2', 'it:3', 'it:4', 'it:5', 'v:clock', 'v:score', 'ab:D', 'ab:F', 'it:tp', 'it:neutral', 'v:buyback', 'v:level'];
+const SLOT_KINDS = Object.freeze(['ab', 'it', 'v', 'bar', 'r', 'blank']);
+function layoutOf(ctx, { back = false } = {}) {
+const cells = ctx.grid?.cells || [];
+const cols = Math.max(1, ...cells.map((c) => c.col + 1)), rows = Math.max(1, ...cells.map((c) => c.row + 1));
+const D = ctx.deck;
+const nRead = D?.screen?.kind === 'galleon' ? 4 : D?.strip ? D.strip.segments : D?.screen?.kind === 'infobar' ? 1 : 0;
+const known = LAYOUTS[ctx.device?.id] || LAYOUTS[ctx.device?.family];
+let grid = known && known.keys.length === rows && known.keys.every((r) => r.length === cols) ? known.keys : null;
+let readout = known?.readout && known.readout.length === nRead ? known.readout : null;
+if (!readout) readout = nRead === 1 ? ['r:line'] : ['r:health', 'r:mana', 'r:gold', 'r:match', 'r:kda', 'r:hero'].slice(0, nRead);
+if (!grid) {
+const pool = PRIORITY.filter((x) => !(nRead > 1 && (x === 'v:vitals' || x === 'v:gold')));
+grid = Array.from({ length: rows }, (_, r) => Array.from({ length: cols }, () => (rows >= 3 && r === rows - 1 && cols >= 3 ? 'bar:vit' : pool.shift() || 'blank')));
+}
+let slots = cells.map((c) => grid[c.row]?.[c.col] || 'blank');
+if (back && cells.length > 1) {
+const corner = cells.reduce((b, c, i) => (c.row > cells[b].row || (c.row === cells[b].row && c.col > cells[b].col) ? i : b), 0);
+slots = slots.map((x, i) => (i === corner ? 'blank' : x));
+}
+return { slots, readout };
+}
+};
+__d[638] = function (__ns) {
+const { rect, linearGradient, radialGradient, url, n } = __m(5);
+const { textPath, capHeight } = __m(11);
+__e(__ns, { "SKINS": () => SKINS, "SKIN_PARAM": () => SKIN_PARAM, "paletteOf": () => paletteOf, "face": () => face, "say": () => say }, [], ["SKINS","SKIN_PARAM","face","paletteOf","say"]);
+const SKINS = Object.freeze(['game', 'prism']);
+const SKIN_PARAM = Object.freeze({ type: 'select', default: 'game', options: ['game', 'prism'], label: 'Skin (the game · Prism)' });
+const COMMON = {
+shade: '#000000', day: '#ffcf73', night: '#3a4fa8', smoke: '#a7a4c4', stun: '#ffe36b', silence: '#b58cff', hex: '#86d870',
+immune: '#f6c84c', aegis: '#ffd66e', mute: '#a4adbf', brk: '#d08a62', white: '#ffffff',
+};
+const DOTA = {
+...COMMON, name: 'dota2',
+bg0: '#1e1a16', bg1: '#110f0d', panel0: '#1d1915', panel1: '#0f0d0b', rim: '#8c6b3c', rimHi: '#d9b26a',
+ink: '#efe6d3', muted: '#b4a68c', dim: '#6c6252', line: '#3a3229',
+gold: '#e1b65e', goldHi: '#ffe39a', teamA: '#62c552', teamB: '#d2452f', teamAName: 'radiant', teamBName: 'dire',
+hp: '#4fc23d', hpHi: '#9de87c', hpLow: '#e0763a', mana: '#3e86e8', manaHi: '#8fc0ff', ready: '#f3e2b0', ult: '#ffc65a', xp: '#c69bff',
+};
+const LOL = {
+...COMMON, name: 'lol',
+bg0: '#111c2a', bg1: '#070d16', panel0: '#0f1a28', panel1: '#060b13', rim: '#785a28', rimHi: '#c8aa6e',
+ink: '#f0e6d2', muted: '#a8a291', dim: '#5f6168', line: '#1e2d3d',
+gold: '#c8aa6e', goldHi: '#f0e0b0', teamA: '#3f8fe6', teamB: '#df4a3e', teamAName: 'order', teamBName: 'chaos',
+hp: '#3dbb4e', hpHi: '#8ee69a', hpLow: '#e08a3a', mana: '#2a94e0', manaHi: '#90d2ff', ready: '#cdf5f0', ult: '#0ac8b9', xp: '#b58cff',
+};
+const RESOURCE = { energy: '#e9d54a', rage: '#e0563c', fury: '#e0563c', heat: '#e88a3a', shield: '#c9cfd8', ferocity: '#e0563c', flow: '#9fd8ff', bloodwell: '#c84848', courage: '#8fd8ff', grit: '#c9cfd8' };
+function paletteOf(q, { skin = 'game', game = 'dota2', team = null } = {}) {
+let P;
+if (skin === 'prism') {
+const C = q.colors, T = q.theme;
+P = {
+...COMMON, name: 'prism', themed: true,
+bg0: C.surface, bg1: C.surface2, panel0: C.surface, panel1: C.surface2, rim: C.line, rimHi: C.accent,
+ink: C.ink, muted: C.muted, dim: C.dim, line: C.line,
+gold: T.spectral(72), goldHi: T.spectral(72, { tier: 'vivid' }), teamA: T.spectral(138.9), teamB: T.spectral(14),
+teamAName: game === 'lol' ? 'order' : 'radiant', teamBName: game === 'lol' ? 'chaos' : 'dire',
+hp: C.pos, hpHi: C.pos, hpLow: C.warn, mana: C.info, manaHi: C.info, ready: C.ink, ult: T.spectral(80, { tier: 'vivid' }), xp: T.spectral(269.8),
+shade: q.dark ? '#000000' : C.ink,
+};
+if (game === 'lol') { P.teamA = T.spectral(217.5); P.teamB = T.spectral(8); }
+} else P = { ...(game === 'lol' ? LOL : DOTA), themed: false };
+P.ally = team === P.teamBName ? P.teamB : P.teamA; 
+P.enemy = team === P.teamBName ? P.teamA : P.teamB;
+P.teamColor = (t) => (t === P.teamAName ? P.teamA : t === P.teamBName ? P.teamB : P.muted);
+P.resource = (r) => (!r || r === 'mana' ? P.mana : RESOURCE[r] || P.muted);
+return P;
+}
+const TONE_COLOR = (P, tone) => ({ active: P.gold, ok: P.hp, warn: P.gold, neg: P.hpLow, crit: P.hpLow, info: P.mana })[tone] || null;
+function face(q, P, { tone = 'idle', glow = null, rim = null, dim = 0 } = {}) {
+const W = q.w, H = q.h, u = q.m.u;
+if (P.themed) {
+q.background({ tone });
+if (glow) { const id = q.id('mbg'); q.def(radialGradient(id, [[0, glow, q.dark ? 0.32 : 0.2], [1, glow, 0]], { cx: 0.5, cy: 1.05, r: 0.85 })); q.add(rect({ width: W, height: H, fill: url(id) })); }
+return;
+}
+const key = q.ctx.kind === 'key';
+const id = q.id('mbf');
+q.def(linearGradient(id, [[0, key ? P.bg0 : P.panel0], [1, key ? P.bg1 : P.panel1]], { x1: 0, y1: 0, x2: 0.25, y2: 1 }));
+q.add(rect({ width: W, height: H, fill: url(id) }));
+const g = glow || TONE_COLOR(P, tone);
+if (g && !dim) { const gid = q.id('mbg'); q.def(radialGradient(gid, [[0, g, 0.3], [0.6, g, 0.08], [1, g, 0]], { cx: 0.5, cy: 1.08, r: 0.9 })); q.add(rect({ width: W, height: H, fill: url(gid) })); }
+const ins = Math.max(2, (key ? q.m.safe * 0.55 : q.m.safe * 0.4));
+const sw = Math.max(1, u * (key ? 1.1 : 0.9));
+q.add(rect({ x: n(ins), y: n(ins), width: n(W - ins * 2), height: n(H - ins * 2), rx: n(q.m.radius * (key ? 0.7 : 0.4)), fill: 'none', stroke: rim || P.rim, strokeWidth: n(sw), strokeOpacity: n(dim ? 0.35 : rim ? 0.95 : 0.7, 3) }));
+q.add(rect({ x: n(ins + q.m.radius * 0.6), y: n(ins + sw * 0.5), width: n(Math.max(1, W - (ins + q.m.radius * 0.6) * 2)), height: n(Math.max(1, u * 0.7)), fill: P.rimHi, fillOpacity: n(dim ? 0.12 : 0.3, 3) }));
+}
+function say(q, P, str, o = {}) {
+if (str === null || str === undefined || String(str) === '') return;
+const s = String(str);
+const align = o.align || 'center';
+const size = o.size ?? 12 * q.m.u;
+if (P.themed) {
+const role = o.role || 'label';
+const st = q.typeStyle(role, { size });
+const at = role === 'value' || role === 'hero' ? { cy: o.y - capHeight(st.size, st.weight) / 2 } : { y: o.y };
+q.text(role, s, { align, x: o.x, ...at, size, maxWidth: o.maxWidth, color: o.color, opacity: o.opacity });
+return;
+}
+q.add(textPath(s, { x: o.x, y: o.y, size, weight: o.weight ?? 650, anchor: align === 'left' ? 'start' : align === 'right' ? 'end' : 'middle', maxWidth: o.maxWidth, minSize: size * 0.5, fill: o.color || P.ink, caps: !!o.caps, tracking: o.tracking ?? (o.caps ? 0.06 : 0), tabular: !!o.tabular, fillOpacity: o.opacity }));
+}
+};
+__d[639] = function (__ns) {
+const { rect, path, circle, polygon, linearGradient, radialGradient, url, n, P: Path } = __m(5);
+const { textPath, measureText, capHeight } = __m(11);
+const { face, say } = __m(638);
+const { clockText, teamName, gameName } = __m(637);
+__e(__ns, { "fieldOf": () => fieldOf, "mid": () => mid, "pict": () => pict, "sweepPolygon": () => sweepPolygon, "abilityKey": () => abilityKey, "itemKey": () => itemKey, "vitalKey": () => vitalKey, "barKey": () => barKey, "panelVital": () => panelVital, "matchPanel": () => matchPanel, "lineBar": () => lineBar, "overlays": () => overlays }, [], ["abilityKey","barKey","fieldOf","itemKey","lineBar","matchPanel","mid","overlays","panelVital","pict","sweepPolygon","vitalKey"]);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, t) => a + (b - a) * t;
+const outExpo = (t) => (t >= 1 ? 1 : 1 - 2 ** (-10 * t));
+function fieldOf(keys, reads = [], { origins = {}, K } = {}) {
+const bb = (list) => list.reduce((b, r) => ({ x0: Math.min(b.x0, r.x), y0: Math.min(b.y0, r.y), x1: Math.max(b.x1, r.x + r.w), y1: Math.max(b.y1, r.y + r.h) }), { x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity });
+const all = bb([...keys, ...reads]), k = bb(keys.length ? keys : reads);
+const cx = (k.x0 + k.x1) / 2, cy = (k.y0 + k.y1) / 2;
+let R = 1;
+for (const r of [...keys, ...reads]) for (const [x, y] of [[r.x, r.y], [r.x + r.w, r.y], [r.x, r.y + r.h], [r.x + r.w, r.y + r.h]]) R = Math.max(R, Math.hypot(x - cx, y - cy));
+const c = [cx, cy];
+const rows = [...new Map((keys.length ? keys : reads).map((r) => [Math.round(r.y), { y: r.y, h: r.h }])).values()].sort((a, b) => a.y - b.y);
+const row = rows.length ? rows.reduce((b, r) => (Math.abs(r.y + r.h / 2 - cy) < Math.abs(b.y + b.h / 2 - cy) - 0.5 ? r : b), rows[0]) : { y: k.y0, h: k.y1 - k.y0 };
+return { ...all, k, cx, cy, R, row, n: keys.length + reads.length, K: K ?? Math.min(keys[0]?.w || 72, keys[0]?.h || 72), o: { kills: origins.kills || c, ult: origins.ult || c, hero: origins.hero || c } };
+}
+const mid = (r) => [r.x + r.w / 2, r.y + r.h / 2];
+function inField(q, place, markup) {
+if (!markup) return;
+q.add(place.x || place.y ? `<g transform="translate(${n(-place.x)} ${n(-place.y)})">${markup}</g>` : markup);
+}
+const PICTS = {
+boots: [['M15 7 L25 7 L25 27 L37 31 C41 32 42 35 41 39 L41 41 L10 41 L10 35 Z', 'main'], ['M10 36 L41 36', 'line']],
+blade: [['M37 5 L43 5 L43 11 L21 33 L15 27 Z', 'main'], ['M10 29 L19 38 L16 41 L7 32 Z', 'hi'], ['M13 37 L7 43', 'line']],
+staff: [['M22 15 L26 15 L26 43 L22 43 Z', 'main'], ['M24 4 C28 4 31 7 31 11 C31 15 28 18 24 18 C20 18 17 15 17 11 C17 7 20 4 24 4 Z', 'hi']],
+shield: [['M24 6 L39 11 L39 23 C39 32 32 38 24 42 C16 38 9 32 9 23 L9 11 Z', 'main'], ['M24 12 L24 36', 'line']],
+orb: [['M24 10 C32 10 38 16 38 24 C38 32 32 38 24 38 C16 38 10 32 10 24 C10 16 16 10 24 10 Z', 'main'], ['M19 17 C21 15 23 15 25 15', 'line']],
+potion: [['M20 6 L28 6 L28 14 C35 17 38 22 38 28 C38 36 32 42 24 42 C16 42 10 36 10 28 C10 22 13 17 20 14 Z', 'main'], ['M13 29 L35 29', 'line']],
+eye: [['M5 24 C12 13 36 13 43 24 C36 35 12 35 5 24 Z', 'main'], ['M24 18 C27 18 30 21 30 24 C30 27 27 30 24 30 C21 30 18 27 18 24 C18 21 21 18 24 18 Z', 'hi']],
+scroll: [['M13 9 L35 9 C39 9 39 16 35 16 L35 39 L13 39 C9 39 9 32 13 32 Z', 'main'], ['M17 20 L31 20 M17 26 L29 26', 'line']],
+spark: [['M24 4 L28 20 L44 24 L28 28 L24 44 L20 28 L4 24 L20 20 Z', 'main']],
+gem: [['M14 10 L34 10 L42 20 L24 42 L6 20 Z', 'main'], ['M6 20 L42 20 M18 10 L24 20 L30 10', 'line']],
+smoke: [['M13 34 C7 34 7 26 12 25 C11 18 19 15 23 19 C25 13 35 14 35 22 C41 22 42 34 35 34 Z', 'main']],
+aegis: [['M24 5 L40 11 L40 23 C40 32 33 38 24 43 C15 38 8 32 8 23 L8 11 Z', 'hi'], ['M24 14 L27 21 L34 21 L28 26 L30 33 L24 29 L18 33 L20 26 L14 21 L21 21 Z', 'main']],
+cheese: [['M6 33 L40 18 L42 34 L6 40 Z', 'main'], ['M20 32 C22 32 23 33 23 34 M32 27 C34 27 35 28 35 29', 'line']],
+coin: [['M24 7 C33 7 41 15 41 24 C41 33 33 41 24 41 C15 41 7 33 7 24 C7 15 15 7 24 7 Z', 'main'], ['M24 13 C30 13 35 18 35 24 C35 30 30 35 24 35 C18 35 13 30 13 24 C13 18 18 13 24 13 Z M24 18 L24 30', 'line']],
+sun: [['M24 15 C29 15 33 19 33 24 C33 29 29 33 24 33 C19 33 15 29 15 24 C15 19 19 15 24 15 Z', 'main'], ['M24 4 L24 10 M24 38 L24 44 M4 24 L10 24 M38 24 L44 24 M10 10 L14 14 M34 34 L38 38 M38 10 L34 14 M14 34 L10 38', 'line']],
+moon: [['M30 6 C20 8 13 16 13 26 C13 35 21 42 30 42 C34 42 37 41 40 39 C29 38 22 30 22 21 C22 14 25 9 30 6 Z', 'main']],
+skull: [['M24 6 C33 6 39 12 39 21 C39 27 36 30 33 32 L33 38 L15 38 L15 32 C12 30 9 27 9 21 C9 12 15 6 24 6 Z', 'main'], ['M17 20 L21 24 M21 20 L17 24 M27 20 L31 24 M31 20 L27 24', 'line']],
+hero: [['M24 6 L36 12 L36 26 C36 34 30 39 24 42 C18 39 12 34 12 26 L12 12 Z', 'main'], ['M18 20 L30 20 M24 14 L24 32', 'line']],
+empty: [],
+};
+function pict(q, name, { x, y, size }, { main, hi = main, line, opacity = 1, lineWidth } = {}) {
+const parts = PICTS[name];
+if (!parts || !parts.length) return;
+const s = size / 48;
+let body = '';
+const fills = { main: '', hi: '' };
+let lines = '';
+for (const [d, role] of parts) { if (role === 'line') lines += d; else fills[role] += d; }
+if (fills.main) body += `<path d="${fills.main}" fill="${main}"${opacity < 1 ? ` fill-opacity="${n(opacity, 3)}"` : ''}/>`;
+if (fills.hi) body += `<path d="${fills.hi}" fill="${hi}"${opacity < 1 ? ` fill-opacity="${n(opacity, 3)}"` : ''}/>`;
+if (lines && line) body += `<path d="${lines}" fill="none" stroke="${line}" stroke-width="${n(lineWidth ?? 2.6)}" stroke-linecap="round" stroke-linejoin="round"${opacity < 1 ? ` stroke-opacity="${n(opacity, 3)}"` : ''}/>`;
+q.add(`<g transform="translate(${n(x)} ${n(y)}) scale(${n(s, 4)})">${body}</g>`);
+}
+function lockMark(q, P, lock, cx, cy, r) {
+const sw = Math.max(1.4, r * 0.16);
+if (lock === 'stun') {
+let d = '';
+for (let i = 0; i < 3; i++) {
+const a = -Math.PI / 2 + (i - 1) * 0.9, sx = cx + Math.cos(a) * r * 0.9, sy = cy - r * 0.15 + Math.sin(a) * r * 0.55, s = r * 0.34;
+d += Path().M(sx, sy - s).L(sx + s * 0.28, sy - s * 0.28).L(sx + s, sy).L(sx + s * 0.28, sy + s * 0.28).L(sx, sy + s).L(sx - s * 0.28, sy + s * 0.28).L(sx - s, sy).L(sx - s * 0.28, sy - s * 0.28).Z().d;
+}
+q.add(path(d, { fill: P.stun }));
+return;
+}
+if (lock === 'silence' || lock === 'mute') {
+const c = lock === 'silence' ? P.silence : P.mute;
+q.add(path(Path().M(cx + r, cy).A(r, r, 0, 0, 1, cx - r, cy).A(r, r, 0, 0, 1, cx + r, cy).Z().M(cx - r * 0.7, cy - r * 0.7).L(cx + r * 0.7, cy + r * 0.7).d, { fill: 'none', stroke: c, strokeWidth: n(sw), strokeLinecap: 'round' }));
+return;
+}
+if (lock === 'hex') {
+q.add(path(Path().M(cx, cy).C(cx + r * 0.4, cy - r * 0.2, cx + r * 0.3, cy - r * 0.7, cx - r * 0.1, cy - r * 0.65).C(cx - r * 0.75, cy - r * 0.55, cx - r * 0.85, cy + r * 0.3, cx - r * 0.2, cy + r * 0.7).C(cx + r * 0.6, cy + r * 1.05, cx + r * 1.1, cy + r * 0.1, cx + r * 0.85, cy - r * 0.55).d, { fill: 'none', stroke: P.hex, strokeWidth: n(sw), strokeLinecap: 'round' }));
+return;
+}
+if (lock === 'broken') q.add(path(Path().M(cx - r, cy - r * 0.6).L(cx - r * 0.3, cy).L(cx - r * 0.1, cy - r * 0.4).L(cx + r * 0.4, cy + r * 0.2).L(cx + r, cy - r * 0.2).d, { fill: 'none', stroke: P.brk, strokeWidth: n(sw), strokeLinecap: 'round', strokeLinejoin: 'round' }));
+}
+const LOCK_WORD = { stun: 'Stunned', silence: 'Silenced', hex: 'Hexed', mute: 'Muted', broken: 'Broken' };
+function sweepPolygon(W, H, frac, { cx = W / 2, cy = H / 2 } = {}) {
+if (!(frac > 0)) return null;
+if (frac >= 0.9999) return [[0, 0], [W, 0], [W, H], [0, H]];
+const at = (deg) => {
+const a = (deg * Math.PI) / 180, dx = Math.sin(a), dy = -Math.cos(a);
+let t = Infinity;
+if (dx > 1e-9) t = Math.min(t, (W - cx) / dx); else if (dx < -1e-9) t = Math.min(t, -cx / dx);
+if (dy > 1e-9) t = Math.min(t, (H - cy) / dy); else if (dy < -1e-9) t = Math.min(t, -cy / dy);
+return [cx + dx * t, cy + dy * t];
+};
+const ang = ([x, y]) => { const a = (Math.atan2(x - cx, -(y - cy)) * 180) / Math.PI; return a < 0 ? a + 360 : a; };
+const from = (1 - frac) * 360;
+const corners = [[W, 0], [W, H], [0, H], [0, 0]].map((p) => [p, ang(p)]).filter(([, a]) => a > from && a < 360).sort((x, y) => x[1] - y[1]).map(([p]) => p);
+return [[cx, cy], at(from), ...corners, [cx, 0]];
+}
+function cooldownOverlay(q, P, M) {
+const W = q.w, H = q.h, u = q.m.u;
+const shade = P.themed && !q.dark ? P.ink : '#000000';
+if (M.frac !== null) {
+const pts = sweepPolygon(W, H, M.frac);
+if (pts) {
+q.add(polygon(pts, { fill: shade, fillOpacity: 0.62 }));
+const [hx, hy] = pts[1];
+q.add(path(Path().M(W / 2, H / 2).L(hx, hy).d, { fill: 'none', stroke: P.ready, strokeWidth: n(Math.max(1, u * 1.2)), strokeOpacity: 0.55 }));
+}
+} else q.add(rect({ width: W, height: H, fill: shade, fillOpacity: 0.5 })); 
+}
+function pips(q, P, count, lit, { y, color }) {
+const u = q.m.u, W = q.w;
+const k = Math.max(1, Math.min(7, count));
+const s = Math.max(3, Math.min(u * 5.2, (W * 0.62) / (k * 1.5)));
+const gap = s * 0.55, total = k * s + (k - 1) * gap;
+let on = '', off = '';
+for (let i = 0; i < k; i++) {
+const x = W / 2 - total / 2 + i * (s + gap), c = x + s / 2;
+const d = Path().M(c, y - s / 2).L(x + s, y).L(c, y + s / 2).L(x, y).Z().d; 
+if (i < lit) on += d; else off += d;
+}
+if (off) q.add(path(off, { fill: P.dim, fillOpacity: 0.7 }));
+if (on) q.add(path(on, { fill: color || P.gold }));
+}
+function dimKey(q, P, a = 0.45) { q.add(rect({ width: q.w, height: q.h, fill: P.themed ? q.colors.bg : '#000000', fillOpacity: n(a, 3) })); }
+function abilityKey(q, P, M) {
+const W = q.w, H = q.h, u = q.m.u, S = Math.min(W, H);
+const ready = M.present && M.ready === true && !M.unlearned && !M.locked;
+const ultLit = ready && M.ultimate;
+face(q, P, { tone: ready ? 'active' : 'idle', glow: ultLit ? P.ult : ready && !M.passive ? P.ready : null, rim: ultLit ? P.goldHi : null, dim: !M.present || M.unlearned });
+const top = q.m.text + capHeight(S * 0.11, 700);
+const cooling = M.present && !M.unlearned && Number.isFinite(M.cooldown) && M.cooldown > 0 && M.ready !== true;
+if (M.present && M.name && !cooling) say(q, P, M.name, { x: W / 2, y: top, size: S * 0.105, weight: 650, color: M.unlearned ? P.dim : P.muted, maxWidth: W - q.m.text * 2, caps: true, role: 'eyebrow', align: 'center' });
+const letterSize = S * 0.46;
+const cy = H * 0.54;
+const letterColor = !M.present || M.unlearned ? P.dim : M.passive ? P.muted : ready ? (M.ultimate ? P.goldHi : P.ink) : P.muted;
+if (cooling) {
+cooldownOverlay(q, P, M);
+say(q, P, String(M.cooldown), { x: W / 2, y: cy + capHeight(S * 0.4, 750) / 2, size: S * 0.4, weight: 750, color: P.ink, tabular: true, role: 'value' });
+say(q, P, M.name ? `${M.letter} · ${M.name}` : M.letter, { x: W / 2, y: top, size: S * 0.105, weight: 750, color: P.gold, maxWidth: W - q.m.text * 2, caps: true, role: 'eyebrow' });
+} else {
+say(q, P, M.letter, { x: W / 2, y: cy + capHeight(letterSize, 800) / 2, size: letterSize, weight: 800, color: letterColor, role: 'value' });
+if (M.unknown) { 
+const r = S * 0.3;
+q.add(path(Path().M(W / 2 + r, cy).A(r, r, 0, 0, 1, W / 2 - r, cy).A(r, r, 0, 0, 1, W / 2 + r, cy).Z().d, { fill: 'none', stroke: P.dim, strokeWidth: n(Math.max(1, u * 1.2)), strokeDasharray: `${n(r * 0.3)} ${n(r * 0.22)}` }));
+}
+}
+if (M.present && Number.isFinite(M.charges)) {
+const r = S * 0.11, bx = W - S * 0.08 - r, by = H * 0.6;
+q.add(circle({ cx: n(bx), cy: n(by), r: n(r), fill: M.charges > 0 ? P.gold : P.dim }));
+say(q, P, String(M.charges), { x: bx, y: by + capHeight(r * 1.3, 800) / 2, size: r * 1.3, weight: 800, color: '#141210', role: 'caption' });
+}
+const py = H - q.m.text - S * 0.04;
+if (!M.present) say(q, P, M.letter === 'D' || M.letter === 'F' ? '—' : 'No ability', { x: W / 2, y: py + S * 0.03, size: S * 0.1, color: P.dim, role: 'caption' });
+else if (M.locked) {
+dimKey(q, P, 0.42);
+lockMark(q, P, M.locked, W / 2, H * 0.5, S * 0.2);
+say(q, P, LOCK_WORD[M.locked], { x: W / 2, y: py + S * 0.03, size: S * 0.12, weight: 750, color: P[M.locked === 'stun' ? 'stun' : M.locked === 'hex' ? 'hex' : M.locked === 'broken' ? 'brk' : 'silence'], caps: true, role: 'caption' });
+} else if (M.unlearned) say(q, P, 'Not learned', { x: W / 2, y: py + S * 0.03, size: S * 0.1, color: P.dim, role: 'caption' });
+else if (M.passive) { pips(q, P, M.pips, M.level, { y: py, color: P.muted }); }
+else if (M.unknown) { pips(q, P, M.pips, M.level, { y: py }); say(q, P, 'CD —', { x: W / 2, y: py - S * 0.09, size: S * 0.085, color: P.dim, role: 'caption' }); }
+else pips(q, P, M.pips, M.level, { y: py, color: ultLit ? P.goldHi : P.gold });
+if (M.flare) flare(q, P, M.flare, W / 2, H * 0.52, S);
+if (M.dimmed) dimKey(q, P, 0.5);
+}
+function flare(q, P, f, cx, cy, S) {
+const t = (f.k + 0.5) / f.n;
+const e = outExpo(t);
+if (f.bright) {
+const gid = q.id('mbfl');
+q.def(radialGradient(gid, [[0, P.goldHi, n(0.85 * (1 - t), 3)], [0.35, P.ult, n(0.4 * (1 - t), 3)], [1, P.ult, 0]]));
+const r = S * (0.4 + 0.5 * e);
+q.add(rect({ x: n(cx - r), y: n(cy - r), width: n(r * 2), height: n(r * 2), fill: url(gid) }));
+let d = '';
+for (let i = 0; i < 12; i++) { const a = (i / 12) * Math.PI * 2 + 0.13, r0 = S * (0.18 + 0.2 * e), r1 = S * (0.32 + 0.42 * e); d += Path().M(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0).L(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1).d; }
+q.add(path(d, { fill: 'none', stroke: P.goldHi, strokeWidth: n(Math.max(1.2, S * 0.025)), strokeOpacity: n(0.9 * (1 - t), 3), strokeLinecap: 'round' }));
+}
+const r = S * (0.25 + 0.45 * e);
+q.add(path(Path().M(cx + r, cy).A(r, r, 0, 0, 1, cx - r, cy).A(r, r, 0, 0, 1, cx + r, cy).Z().d, { fill: 'none', stroke: P.ult, strokeWidth: n(Math.max(1.4, S * 0.04)), strokeOpacity: n((f.bright ? 0.9 : 0.45) * (1 - t * 0.8), 3) }));
+}
+function itemKey(q, P, M) {
+const W = q.w, H = q.h, S = Math.min(W, H);
+const cooling = M.present && Number.isFinite(M.cooldown) && M.cooldown > 0;
+face(q, P, { tone: 'idle', glow: M.aegis ? P.aegis : null, rim: M.aegis ? P.aegis : null, dim: !M.present });
+const top = q.m.text + capHeight(S * 0.1, 650);
+say(q, P, M.label, { x: W / 2, y: top, size: S * 0.095, weight: 650, color: P.dim, caps: true, role: 'eyebrow' });
+if (!M.present) { say(q, P, 'Empty', { x: W / 2, y: H * 0.58, size: S * 0.12, color: P.dim, role: 'caption' }); if (M.dimmed) dimKey(q, P, 0.4); return; }
+const ps = S * 0.44;
+pict(q, M.pict, { x: W / 2 - ps / 2, y: H * 0.47 - ps / 2, size: ps }, { main: M.aegis ? P.aegis : P.gold, hi: M.aegis ? P.goldHi : P.goldHi, line: P.themed ? q.colors.surface : P.bg1, opacity: cooling ? 0.55 : 1 });
+if (cooling) {
+cooldownOverlay(q, P, M);
+say(q, P, String(M.cooldown), { x: W / 2, y: H * 0.47 + capHeight(S * 0.32, 750) / 2, size: S * 0.32, weight: 750, color: P.ink, tabular: true, role: 'value' });
+}
+if (Number.isFinite(M.charges)) {
+const r = S * 0.1, bx = W - S * 0.08 - r, by = H * 0.3;
+q.add(circle({ cx: n(bx), cy: n(by), r: n(r), fill: P.gold }));
+say(q, P, String(M.charges), { x: bx, y: by + capHeight(r * 1.25, 800) / 2, size: r * 1.25, weight: 800, color: '#141210', role: 'caption' });
+}
+say(q, P, M.short, { x: W / 2, y: H - q.m.text - S * 0.02, size: S * 0.13, weight: 650, color: P.ink, maxWidth: W - q.m.text * 2, role: 'label' });
+if (M.locked) { dimKey(q, P, 0.42); lockMark(q, P, M.locked, W / 2, H * 0.47, S * 0.2); }
+if (M.dimmed) dimKey(q, P, 0.5);
+}
+const BAR = (P, c) => ({ hp: P.hp, hpLow: P.hpLow, mana: P.mana, gold: P.gold })[c] || P.gold;
+function vitalKey(q, P, M) {
+const W = q.w, H = q.h, u = q.m.u, S = Math.min(W, H);
+face(q, P, { tone: M.tone === 'off' ? 'off' : M.tone, glow: M.which === 'buyback' && M.ready ? P.gold : null, dim: M.tone === 'off' });
+const top = q.m.text + capHeight(S * 0.1, 650);
+say(q, P, M.title, { x: W / 2, y: top, size: S * 0.1, weight: 650, color: M.which === 'score' && M.team ? P.teamColor(M.team) : P.muted, caps: true, maxWidth: W - q.m.text * 2, role: 'eyebrow' });
+const hasBar = M.bar !== null && M.bar !== undefined;
+const str = String(M.value ?? '—');
+const vy = hasBar ? H * 0.5 : H * 0.56;
+const room = W - q.m.text * 2;
+if (M.which === 'clock' && M.daytime !== null && M.daytime !== undefined) {
+const ps = S * 0.2;
+pict(q, M.daytime ? 'sun' : 'moon', { x: W / 2 - ps / 2, y: top + S * 0.05, size: ps }, { main: M.daytime ? P.day : P.manaHi, line: M.daytime ? P.day : P.manaHi, lineWidth: 3 });
+}
+const isWord = M.word || /[a-z]/i.test(str) && str.length > 4;
+const vs = Math.min(S * (str.length <= 3 ? 0.36 : str.length <= 5 ? 0.3 : 0.24), (room / Math.max(1, measureText(str, { size: 100, weight: 750 }) / 100)) * 0.98);
+const valueColor = str === '—' ? P.dim : M.which === 'gold' ? P.goldHi : M.tone === 'ok' ? P.hpHi : P.ink;
+say(q, P, str, { x: W / 2, y: (M.which === 'clock' && M.daytime !== null && M.daytime !== undefined ? H * 0.64 : vy) + capHeight(vs, 750) / 2, size: isWord ? Math.min(vs, S * 0.22) : vs, weight: 750, color: valueColor, tabular: !isWord, maxWidth: room, role: isWord ? 'label' : 'value' });
+if (hasBar) {
+const bh = Math.max(3, u * 3.4), y = H * 0.7;
+bar(q, P, { x: q.m.text, y, w: W - q.m.text * 2, h: bh, value: M.bar, color: BAR(P, M.barColor) });
+if (M.bar2 !== null && M.bar2 !== undefined) bar(q, P, { x: q.m.text, y: y + bh + Math.max(1.5, u * 1.4), w: W - q.m.text * 2, h: bh * 0.7, value: M.bar2, color: P.mana });
+}
+if (M.sub) say(q, P, M.sub, { x: W / 2, y: H - q.m.text, size: S * 0.1, color: M.tone === 'active' ? P.gold : P.muted, maxWidth: room, role: 'caption' });
+if (M.dimmed) dimKey(q, P, 0.35);
+}
+function bar(q, P, { x, y, w, h, value, color }) {
+const r = h / 2;
+q.add(rect({ x: n(x), y: n(y), width: n(w), height: n(h), rx: n(r), fill: P.themed ? q.colors.line : '#000000', fillOpacity: P.themed ? 0.7 : 0.55 }));
+if (value > 0.004) q.add(rect({ x: n(x), y: n(y), width: n(Math.max(h, w * clamp(value))), height: n(h), rx: n(r), fill: color }));
+}
+function barKey(q, P, cell, run, view, fx, kind) {
+const W = q.w, H = q.h, u = q.m.u, S = Math.min(W, H);
+face(q, P, { tone: 'idle', dim: fx.face !== 'live' && fx.face !== 'dead' && fx.face !== 'post' });
+const h = view.g?.hero, p = view.s?.player;
+const active = ['live', 'dead', 'post', 'paused'].includes(fx.face);
+const dead = fx.face === 'dead';
+const hpV = active && Number.isFinite(p?.health) ? (dead ? 0 : clamp(p.health / 100)) : null;
+const mpV = active && Number.isFinite(h?.mana) && h?.resource !== 'none' ? clamp(h.mana / 100) : null;
+const x0 = run.x0 - cell.x + q.m.text * 0.6, x1 = run.x1 - cell.x - q.m.text * 0.6, len = x1 - x0;
+const lay = (y, bh, v, color) => {
+const r = bh / 2;
+q.add(rect({ x: n(x0), y: n(y), width: n(len), height: n(bh), rx: n(r), fill: P.themed ? q.colors.line : '#000000', fillOpacity: P.themed ? 0.7 : 0.6 }));
+if (v !== null && v > 0.002) {
+q.add(rect({ x: n(x0), y: n(y), width: n(Math.max(bh, len * v)), height: n(bh), rx: n(r), fill: color }));
+q.add(rect({ x: n(x0 + r), y: n(y + bh * 0.12), width: n(Math.max(1, len * v - r * 2)), height: n(Math.max(1, bh * 0.22)), fill: '#ffffff', fillOpacity: 0.22 })); 
+}
+};
+const first = cell.x <= run.x0 + 1, last = cell.x + cell.w >= run.x1 - 1;
+if (kind === 'vit') {
+lay(H * 0.5, Math.max(6, H * 0.2), hpV, hpV !== null && hpV <= 0.25 ? P.hpLow : P.hp);
+lay(H * 0.5 + Math.max(6, H * 0.2) + Math.max(2, u * 2), Math.max(4, H * 0.11), mpV, P.mana);
+} else {
+const v = kind === 'hp' ? hpV : mpV;
+lay(H * 0.42, Math.max(8, H * 0.3), v, kind === 'hp' ? (v !== null && v <= 0.25 ? P.hpLow : P.hp) : P.resource(h?.resource));
+}
+const top = q.m.text + capHeight(S * 0.1, 650);
+if (first) {
+const label = kind === 'mp' ? (h?.resource && h.resource !== 'mana' ? h.resource : 'Mana') : kind === 'vit' ? (h?.name || 'Vitals') : 'Health';
+say(q, P, label, { x: q.m.text, y: top, size: S * 0.1, weight: 650, color: P.muted, caps: true, align: 'left', maxWidth: W - q.m.text * 2, role: 'eyebrow' });
+const v = kind === 'mp' ? mpV : hpV;
+const txt = v === null ? '—' : `${Math.round(v * 100)}%`;
+say(q, P, txt, { x: q.m.text, y: H - q.m.text, size: S * 0.2, weight: 750, color: v === null ? P.dim : P.ink, align: 'left', tabular: true, role: 'label' });
+} else if (last) {
+const max = kind === 'mp' ? h?.manaMax : h?.hpMax;
+const v = kind === 'mp' ? mpV : hpV;
+if (Number.isFinite(max) && v !== null) say(q, P, `${Math.round(v * max)} / ${max}`, { x: W - q.m.text, y: H - q.m.text, size: S * 0.12, color: P.muted, align: 'right', tabular: true, role: 'caption' });
+else if (kind === 'vit' && mpV !== null) say(q, P, `${Math.round(mpV * 100)}% MP`, { x: W - q.m.text, y: H - q.m.text, size: S * 0.12, color: P.manaHi, align: 'right', role: 'caption' });
+}
+}
+function panelFrame(p) {
+const strip = p.ctx.kind === 'strip' || p.h <= 110;
+const pad = Math.round(strip ? Math.max(p.m.text, 12) : Math.max(p.m.text, p.h * 0.11));
+return { pad, strip, x0: pad, x1: p.w - pad, w: p.w - pad * 2, eb: strip ? 15 : Math.max(15, p.h * 0.095) };
+}
+function panelVital(p, P, M, fx, { meta } = {}) {
+const W = panelFrame(p), H = p.h;
+face(p, P, { tone: M.tone === 'off' ? 'off' : M.tone, glow: M.which === 'buyback' && M.ready ? P.gold : null, dim: M.tone === 'off' });
+const ey = W.pad + capHeight(W.eb, 650);
+say(p, P, M.title, { x: W.x0, y: ey, size: W.eb, weight: 700, color: M.team && M.which === 'score' ? P.teamColor(M.team) : P.muted, caps: true, align: 'left', maxWidth: W.w * 0.6, role: 'eyebrow' });
+const metaText = meta !== undefined ? meta : M.sub;
+if (metaText) say(p, P, metaText, { x: W.x1, y: ey, size: W.eb * 0.92, color: P.muted, align: 'right', maxWidth: W.w * 0.55, role: 'caption' });
+const hasBar = M.bar !== null && M.bar !== undefined;
+const str = String(M.value ?? '—');
+const big = W.strip ? H * 0.4 : H * 0.36;
+const base = hasBar ? H * 0.64 : H * 0.7;
+const pictName = { gold: 'coin', health: null, mana: null, kda: 'skull', hero: 'hero', buyback: 'coin', level: 'hero', respawn: 'skull' }[M.which];
+const ps = H * (W.strip ? 0.36 : 0.36);
+const room = pictName ? W.w - ps - p.m.u * 3 : W.w;
+const isWord = M.word || /[a-z]{3}/i.test(str);
+const color = str === '—' ? P.dim : M.which === 'gold' ? P.goldHi : M.tone === 'ok' ? P.hpHi : P.ink;
+say(p, P, str, { x: W.x0, y: base, size: isWord ? big * 0.72 : big, weight: 750, color, align: 'left', tabular: !isWord, maxWidth: room, role: isWord ? 'label' : 'hero' });
+if (M.unit && !isWord) { const vw = Math.min(room, measureText(str, { size: big, weight: 750, tabular: true })); say(p, P, M.unit, { x: W.x0 + vw + big * 0.08, y: base, size: big * 0.4, color: P.muted, align: 'left', role: 'caption' }); }
+if (pictName) pict(p, pictName, { x: W.x1 - ps, y: (ey + base) / 2 - ps / 2 + H * 0.04, size: ps }, { main: M.which === 'gold' || M.which === 'buyback' ? P.gold : P.muted, hi: P.goldHi, line: P.themed ? p.colors.surface : P.panel1, opacity: M.tone === 'off' ? 0.5 : 1 });
+if (hasBar) {
+const bh = Math.max(6, H * (W.strip ? 0.12 : 0.085)), y = H - W.pad - bh;
+bar(p, P, { x: W.x0, y, w: W.w, h: bh, value: M.bar, color: BAR(P, M.barColor) });
+}
+}
+function matchPanel(p, P, view, fx) {
+const W = panelFrame(p), H = p.h;
+const g = view.g, m = view.s?.match;
+const active = ['live', 'dead', 'post', 'paused'].includes(fx.face);
+face(p, P, { tone: active ? 'idle' : 'off', dim: !active });
+const ey = W.pad + capHeight(W.eb, 650);
+const day = g?.clock?.daytime;
+const title = !active ? 'Match' : g?.clock?.paused ? 'Paused' : day === true ? 'Day' : day === false ? 'Night' : 'Time';
+say(p, P, title, { x: W.x0, y: ey, size: W.eb, weight: 700, color: day === true ? P.day : day === false ? P.manaHi : P.muted, caps: true, align: 'left', role: 'eyebrow' });
+if (!active) {
+const words = { waiting: ['Waiting', 'for a game'], other: [gameName(view.game), 'is live'], menu: ['Menu', gameName(view.game)], loading: [g?.phase === 'draft' ? 'Draft' : g?.phase === 'strategy' ? 'Strategy' : 'Loading', gameName(view.game)], watching: ['Watching', 'not your match'] }[fx.face] || ['—', null];
+say(p, P, words[0], { x: W.x0, y: H * 0.66, size: H * 0.28, weight: 750, color: P.muted, align: 'left', maxWidth: W.w, role: 'label' });
+if (words[1]) say(p, P, words[1], { x: W.x0, y: H - W.pad, size: W.eb, color: P.dim, align: 'left', maxWidth: W.w, role: 'caption' });
+return;
+}
+const ps = H * (W.strip ? 0.3 : 0.3);
+if (day === true || day === false) pict(p, day ? 'sun' : 'moon', { x: W.x1 - ps, y: W.pad * 0.6, size: ps }, { main: day ? P.day : P.manaHi, line: day ? P.day : P.manaHi, lineWidth: 3 });
+const clock = clockText(g?.clock?.t);
+say(p, P, clock, { x: W.x0, y: H * 0.58, size: H * (W.strip ? 0.32 : 0.3), weight: 750, color: P.ink, align: 'left', tabular: true, role: 'hero' });
+if (m && Number.isFinite(m.us) && Number.isFinite(m.them)) {
+const sy = H - W.pad, ss = H * (W.strip ? 0.2 : 0.17);
+const us = String(m.us), them = String(m.them);
+const wu = measureText(us, { size: ss, weight: 750, tabular: true });
+say(p, P, us, { x: W.x0, y: sy, size: ss, weight: 750, color: P.ally, align: 'left', tabular: true, role: 'label' });
+say(p, P, '–', { x: W.x0 + wu + ss * 0.45, y: sy, size: ss, weight: 600, color: P.dim, role: 'label' });
+say(p, P, them, { x: W.x0 + wu + ss * 0.9, y: sy, size: ss, weight: 750, color: P.enemy, align: 'left', tabular: true, role: 'label' });
+const res = fx.face === 'post' ? (m.result === 'win' ? 'Victory' : m.result === 'loss' ? 'Defeat' : 'Game over') : teamName(m.side);
+if (res) say(p, P, res, { x: W.x1, y: sy, size: W.eb, weight: 700, color: fx.face === 'post' && m.result === 'win' ? P.goldHi : P.muted, align: 'right', caps: true, role: 'caption' });
+}
+}
+function lineBar(p, P, view, fx, M) {
+face(p, P, { tone: 'idle' });
+const parts = M.filter(Boolean);
+const size = Math.min(p.h * 0.42, 15 * p.m.u);
+say(p, P, parts.join('  ·  ') || 'Waiting for a game', { x: p.w / 2, y: p.h / 2 + size * 0.36, size, weight: 650, color: P.ink, maxWidth: p.w - p.m.text * 2, role: 'label' });
+}
+const ringD = (cx, cy, r) => Path().M(cx + r, cy).A(r, r, 0, 0, 1, cx - r, cy).A(r, r, 0, 0, 1, cx + r, cy).Z().d;
+function ringHits(place, cx, cy, r, w) {
+const nx = clamp(cx, place.x, place.x + place.w), ny = clamp(cy, place.y, place.y + place.h);
+const dmin = Math.hypot(cx - nx, cy - ny);
+const dmax = Math.max(...[[place.x, place.y], [place.x + place.w, place.y], [place.x, place.y + place.h], [place.x + place.w, place.y + place.h]].map(([x, y]) => Math.hypot(cx - x, cy - y)));
+return r + w >= dmin && r - w <= dmax;
+}
+function ring(q, place, O, r, { color, width, alpha, glow = 0.22 }) {
+if (r < 1 || alpha <= 0.01 || !ringHits(place, O[0], O[1], r, width)) return;
+inField(q, place, path(ringD(O[0], O[1], r), { fill: 'none', stroke: color, strokeWidth: n(width), strokeOpacity: n(glow * alpha, 3) }) + path(ringD(O[0], O[1], r), { fill: 'none', stroke: color, strokeWidth: n(Math.max(1.4, width * 0.18)), strokeOpacity: n(Math.min(1, alpha), 3) }));
+}
+function bigWord(str, F, { weight = 850, fill = 0.9, sub = false, tracking = 0.04 } = {}) {
+const box = F.k, w = box.x1 - box.x0, R = F.row;
+const caps = true;
+const per = measureText(str, { size: 100, weight, tracking, caps }) / 100;
+const capOf = capHeight(100, weight) / 100;
+const size = Math.max(8, Math.min((w * fill) / Math.max(0.01, per), (R.h * (sub ? 0.46 : 0.6)) / capOf));
+const cap = size * capOf;
+const base = sub ? R.y + R.h * 0.12 + cap + (R.h * 0.62 - cap) / 2 : R.y + R.h / 2 + cap / 2;
+return { size, base, x: box.x0 + w / 2, weight, tracking, caps, row: R };
+}
+function countdownOf(str, F) {
+const w = F.k.x1 - F.k.x0, h = F.k.y1 - F.k.y0;
+const size = Math.max(8, (h * 0.62) / (capHeight(100, 800) / 100));
+const natural = measureText(str, { size, weight: 800, tabular: true });
+const sx = Math.max(0.45, Math.min(1, (w * 0.9) / Math.max(1, natural)));
+return { size, sx, weight: 800, tracking: 0, caps: false, tabular: true, x: F.k.x0 + w / 2, base: F.k.y0 + h / 2 + (h * 0.62) / 2 };
+}
+function wordPath(str, W, paint, place = null) {
+const font = { size: W.size, weight: W.weight, caps: W.caps, tracking: W.tracking, tabular: !!W.tabular };
+const total = measureText(str, font), sx = W.sx ?? 1;
+const x0 = W.x - total / 2;
+let out = '';
+for (let i = 0; i < str.length; i++) {
+const ch = str[i];
+if (ch === ' ') continue;
+const a = x0 + measureText(str.slice(0, i), font), b = x0 + measureText(str.slice(0, i + 1), font);
+const L = W.x + (a - W.x) * sx, R = W.x + (b - W.x) * sx, pad = W.size * 0.08;
+if (place && (R + pad < place.x || L - pad > place.x + place.w)) continue;
+out += textPath(ch, { x: a, y: W.base, size: W.size, weight: W.weight, anchor: 'start', caps: W.caps, tabular: !!W.tabular, ...paint });
+}
+return out;
+}
+const hitsBand = (place, y0, y1) => y1 >= place.y && y0 <= place.y + place.h;
+function overlays(q, P, fx, place, F, { slot = null, key = true } = {}) {
+const W = q.w, H = q.h, u = q.m.u;
+const calm = fx.calm;
+const shadeC = P.themed && !q.dark ? P.ink : '#000000';
+if (fx.dim) q.add(rect({ width: W, height: H, fill: P.themed ? q.colors.bg : '#000000', fillOpacity: fx.dim === 2 ? 0.5 : 0.3 }));
+if (fx.day === false) {
+const id = q.id('mbn');
+q.def(linearGradient(id, [[0, P.night, P.themed && !q.dark ? 0.1 : 0.2], [1, P.night, P.themed && !q.dark ? 0.04 : 0.08]], { x1: n((F.x0 - place.x) / W), y1: n((F.y0 - place.y) / H), x2: n((F.x1 - place.x) / W), y2: n((F.y1 - place.y) / H) }));
+q.add(rect({ width: W, height: H, fill: url(id) }));
+} else if (fx.day === true) {
+const id = q.id('mbd');
+q.def(radialGradient(id, [[0, P.day, 0.12], [1, P.day, 0]], { cx: n((F.cx - place.x) / W, 3), cy: n((F.y0 - place.y) / H, 3), r: n(Math.max(1, F.R / Math.max(W, H)), 3) }));
+q.add(rect({ width: W, height: H, fill: url(id) }));
+}
+if (fx.smoke) {
+q.add(rect({ width: W, height: H, fill: P.smoke, fillOpacity: calm ? 0.16 : 0.24 }));
+const id = q.id('mbs');
+q.def(radialGradient(id, [[0, P.smoke, calm ? 0.22 : 0.34], [0.7, P.smoke, 0.1], [1, P.smoke, 0]]));
+let m = '';
+const fw = F.x1 - F.x0, fh = F.y1 - F.y0, r = Math.max(F.K * 0.9, Math.min(fw, fh) * 0.35);
+for (const [fxp, fyp] of [[0.18, 0.3], [0.62, 0.22], [0.42, 0.68], [0.86, 0.74], [0.08, 0.86]]) {
+const cx = F.x0 + fw * fxp, cy = F.y0 + fh * fyp;
+if (cx + r < place.x || cx - r > place.x + W || cy + r < place.y || cy - r > place.y + H) continue;
+m += rect({ x: n(cx - r), y: n(cy - r * 0.7), width: n(r * 2), height: n(r * 1.4), fill: url(id) });
+}
+inField(q, place, m);
+}
+const ctl = fx.stun ? P.stun : fx.hex ? P.hex : fx.silence ? P.silence : null;
+if (ctl) q.add(rect({ x: n(u * 1.5), y: n(u * 1.5), width: n(W - u * 3), height: n(H - u * 3), rx: n(q.m.radius * 0.7), fill: 'none', stroke: ctl, strokeWidth: n(Math.max(1.5, u * 2)), strokeOpacity: 0.7 }));
+if (fx.immune) q.add(rect({ x: n(u * 3), y: n(u * 3), width: n(W - u * 6), height: n(H - u * 6), rx: n(q.m.radius * 0.6), fill: 'none', stroke: P.immune, strokeWidth: n(Math.max(1, u * 1.2)), strokeOpacity: 0.55, strokeDasharray: `${n(u * 6)} ${n(u * 3)}` }));
+if (fx.aegis) edgeGlow(q, P.aegis, place, F, calm ? 0.28 : 0.42);
+const big = (F.n || 0) > 20;
+const coarse = (k, N, levels) => (big ? (Math.floor((k / N) * levels) + 0.5) / levels : (k + 0.5) / N);
+if (fx.death) { 
+const t = big ? (Math.floor((fx.death.k / fx.death.n) * 3) + 1) / 3 : (fx.death.k + 1) / fx.death.n, yLine = lerp(F.y0, F.y1, outExpo(t));
+if (place.y < yLine) { const hh = Math.min(H, yLine - place.y); q.add(rect({ width: W, height: n(hh), fill: shadeC, fillOpacity: n(0.42 * (1 - t * 0.3), 3) })); }
+}
+if (fx.respawn) { 
+const t = coarse(fx.respawn.k, fx.respawn.n, 3), yLine = lerp(F.y1, F.y0, outExpo(t));
+if (hitsBand(place, yLine - F.K * 0.6, yLine + F.K * 0.6)) {
+const id = q.id('mbr'), c = fx.respawn.buyback ? P.gold : P.ally;
+const a = (fx.respawn.bright ? 0.5 : 0.22) * (1 - t * 0.6) * (calm ? 0.6 : 1);
+q.def(linearGradient(id, [[0, c, 0], [0.5, c, n(a, 3)], [1, c, 0]], { x1: 0, y1: n((yLine - F.K * 0.6 - place.y) / H, 3), x2: 0, y2: n((yLine + F.K * 0.6 - place.y) / H, 3) }));
+q.add(rect({ width: W, height: H, fill: url(id) }));
+}
+}
+if (fx.kill) { 
+const { k, n: N, bright, streak } = fx.kill, t = coarse(k, N, 4);
+const rings = calm ? 1 : Math.min(3, 1 + ((streak ?? 0) >= 3 ? 1 : 0) + ((streak ?? 0) >= 6 ? 1 : 0));
+for (let i = 0; i < rings; i++) {
+const ti = clamp(t * 1.1 - i * 0.14);
+if (ti <= 0 || ti >= 1) continue;
+ring(q, place, F.o.kills, F.R * 1.05 * outExpo(ti) * (1 - i * 0.12), { color: i === 1 ? P.ally : P.gold, width: F.K * 0.12, alpha: (bright && !calm ? 1 : 0.45) * (1 - ti * 0.9) });
+}
+if (bright && !calm && k <= 1) bloomAt(q, place, F.o.kills, Math.min(W, H) * 0.8, 0.55 * (1 - k * 0.45), P.goldHi);
+}
+if (fx.ult) { 
+const t = coarse(fx.ult.k, fx.ult.n, 4);
+ring(q, place, F.o.ult, F.R * 0.9 * outExpo(t), { color: P.ult, width: F.K * 0.1, alpha: (fx.ult.bright && !calm ? 0.85 : 0.4) * (1 - t * 0.85) });
+}
+if (fx.level && (slot === 'v:hero' || slot === 'v:level' || slot === 'r:hero')) {
+const t = (fx.level.k + 0.5) / fx.level.n, id = q.id('mbl');
+q.def(linearGradient(id, [[0, P.xp, 0], [1, P.xp, n(0.32 * (1 - t), 3)]], { x1: 0, y1: n(1 - t, 3), x2: 0, y2: 1 }));
+q.add(rect({ width: W, height: H, fill: url(id) }));
+}
+if (fx.face === 'dead') {
+if (fx.buyback) { 
+edgeGlow(q, P.gold, place, F, (calm ? 0.2 : 0.24) + 0.08 * fx.pulse, false);
+q.add(rect({ x: n(u * 2), y: n(u * 2), width: n(W - u * 4), height: n(H - u * 4), rx: n(q.m.radius * 0.7), fill: 'none', stroke: P.gold, strokeWidth: n(Math.max(1.5, u * 2.2)), strokeOpacity: 0.55 }));
+}
+if (key && Number.isFinite(fx.respawnIn)) {
+const col = fx.buyback ? P.goldHi : P.ink;
+const str = String(fx.respawnIn), Wd = countdownOf(str, F);
+if (hitsBand(place, Wd.base - Wd.size, Wd.base + Wd.size * 0.05)) {
+const body = wordPath(str, Wd, { fill: col, fillOpacity: 0.88 }, place);
+if (body) inField(q, place, Wd.sx < 0.999 ? `<g transform="translate(${n(Wd.x)} 0) scale(${n(Wd.sx, 4)} 1) translate(${n(-Wd.x)} 0)">${body}</g>` : body);
+}
+}
+}
+if (fx.over && key) {
+const word = fx.over.result === 'win' ? 'Victory' : fx.over.result === 'loss' ? 'Defeat' : 'Game Over';
+const Wd = bigWord(word, F, { fill: 0.9 });
+if (hitsBand(place, Wd.row.y, Wd.row.y + Wd.row.h)) {
+q.add(rect({ x: 0, y: n(Wd.row.y - place.y), width: W, height: n(Wd.row.h), fill: '#000000', fillOpacity: 0.62 }));
+q.add(rect({ x: 0, y: n(Wd.row.y + Wd.row.h - place.y - Math.max(2, u * 2.5)), width: W, height: n(Math.max(2, u * 2.5)), fill: fx.over.result === 'win' ? P.ally : P.enemy, fillOpacity: 0.8 }));
+inField(q, place, wordPath(word, Wd, { fill: fx.over.result === 'win' ? P.goldHi : P.muted, fillOpacity: 0.95 }, place));
+}
+}
+if (fx.banner) banner(q, P, fx, place, F, key);
+}
+function bloomAt(q, place, O, r, alpha, color) {
+if (alpha <= 0.01) return;
+const [x, y] = [O[0] - place.x, O[1] - place.y];
+if (x + r < 0 || x - r > q.w || y + r < 0 || y - r > q.h) return;
+const id = q.id('mbb');
+q.def(radialGradient(id, [[0, color, n(alpha, 3)], [0.35, color, n(alpha * 0.3, 3)], [1, color, 0]]));
+q.add(rect({ x: n(x - r), y: n(y - r), width: n(r * 2), height: n(r * 2), fill: url(id) }));
+}
+function edgeGlow(q, color, place, F, alpha, rim = false) {
+const W = q.w, H = q.h, e = 2, u = q.m.u;
+const sides = [['t', place.y <= F.y0 + e], ['b', place.y + place.h >= F.y1 - e], ['l', place.x <= F.x0 + e], ['r', place.x + place.w >= F.x1 - e]].filter(([, on]) => on).map(([s]) => s);
+for (const s of sides) {
+const id = q.id(`mbe${s}`);
+const [x1, y1, x2, y2] = s === 't' ? [0, 0, 0, 1] : s === 'b' ? [0, 1, 0, 0] : s === 'l' ? [0, 0, 1, 0] : [1, 0, 0, 0];
+q.def(linearGradient(id, [[0, color, n(alpha, 3)], [0.22, color, n(alpha * 0.3, 3)], [0.5, color, 0]], { x1, y1, x2, y2 }));
+q.add(rect({ width: W, height: H, fill: url(id) }));
+}
+if (rim) q.add(rect({ x: n(u * 2), y: n(u * 2), width: n(W - u * 4), height: n(H - u * 4), rx: n(q.m.radius * 0.7), fill: 'none', stroke: color, strokeWidth: n(Math.max(1.5, u * 2.2)), strokeOpacity: n(Math.min(1, alpha * 2.2), 3) }));
+}
+const BANNER_ALPHA = (k, N) => (k === 0 ? 0.55 : k >= N - 1 ? 0.3 : k >= N - 2 ? 0.65 : 1);
+function banner(q, P, fx, place, F, key) {
+const B = fx.banner, W = q.w, H = q.h, calm = fx.calm;
+const a = BANNER_ALPHA(B.k, B.n) * (B.bright && !calm ? 1 : 0.6);
+const color = B.tone === 'enemy' ? P.ink : B.level >= 5 || B.tone === 'ally' ? P.goldHi : P.gold;
+const accent = B.tone === 'enemy' ? P.enemy : B.tone === 'ally' ? P.ally : P.ult;
+if (B.level >= 5 && B.bright && !calm && B.k < B.n - 2) {
+const t = (B.k + 0.5) / B.n, id = q.id('mbx');
+q.def(radialGradient(id, [[0, P.goldHi, n(0.34 * (1 - t), 3)], [0.6, P.gold, n(0.18 * (1 - t), 3)], [1, P.gold, 0]], { cx: n((F.cx - place.x) / W, 3), cy: n((F.cy - place.y) / H, 3), r: n(Math.max(1, F.R / Math.max(W, H)) * 1.1, 3) }));
+q.add(rect({ width: W, height: H, fill: url(id) }));
+}
+if (!key) { 
+const id = q.id('mbw');
+q.def(linearGradient(id, [[0, accent, 0], [1, accent, n(0.26 * a, 3)]], { x1: 0, y1: 0, x2: 0, y2: 1 }));
+q.add(rect({ width: W, height: H, fill: url(id) }));
+return;
+}
+const word = B.level >= 5 && B.tone === 'gold' ? `${B.text}!` : B.text; 
+const Wd = bigWord(word, F, { fill: 0.92, sub: !!B.sub });
+const y0 = Wd.row.y, y1 = Wd.row.y + Wd.row.h;
+if (!hitsBand(place, y0, y1)) return;
+q.add(rect({ x: 0, y: n(y0 - place.y), width: W, height: n(y1 - y0), fill: '#000000', fillOpacity: n(0.55 * a, 3) }));
+q.add(rect({ x: 0, y: n(y1 - place.y - Math.max(2, q.m.u * 2.5)), width: W, height: n(Math.max(2, q.m.u * 2.5)), fill: accent, fillOpacity: n(0.8 * a, 3) }));
+let m = wordPath(word, Wd, { fill: color, fillOpacity: n(a, 3) }, place);
+if (B.sub) {
+const ss = Math.min(Wd.size * 0.5, (Wd.row.h * 0.16) / (capHeight(100, 700) / 100));
+const Ws = { ...Wd, size: ss, base: Wd.row.y + Wd.row.h * 0.9, weight: 700, tracking: 0.14 };
+m += wordPath(B.sub, Ws, { fill: accent, fillOpacity: n(a, 3) }, place);
+}
+inField(q, place, m);
+if (B.level >= 2 && B.tone === 'gold' && !calm) {
+const t = (B.k + 0.5) / B.n;
+for (let i = 0; i < Math.min(3, B.level - 1); i++) {
+const ti = clamp(t * 1.2 - i * 0.16);
+if (ti > 0 && ti < 1) ring(q, place, [F.cx, F.cy], F.R * outExpo(ti) * (0.6 + 0.2 * i), { color: i % 2 ? P.ult : P.gold, width: F.K * 0.09, alpha: (B.bright ? 0.8 : 0.35) * (1 - ti) });
+}
+}
+}
+};
+__d[640] = function (__ns) {
+const { surface, rect } = __m(276);
+const { panelInto } = __m(277);
+const { keyInto } = __m(274);
+const { mobaOf, tierOf, fxOf, abilityModel, itemModel, vitalModel, layoutOf, clockText, gold } = __m(637);
+const { paletteOf, face } = __m(638);
+const { fieldOf, mid, abilityKey, itemKey, vitalKey, barKey, panelVital, matchPanel, lineBar, overlays } = __m(639);
+__e(__ns, { "readoutRects": () => readoutRects, "drawSlot": () => drawSlot, "drawPanel": () => drawPanel, "renderDeck": () => renderDeck, "renderStrip": () => renderStrip, "renderScreen": () => renderScreen, "renderKey": () => renderKey }, [], ["drawPanel","drawSlot","readoutRects","renderDeck","renderKey","renderScreen","renderStrip"]);
+function readoutRects(ctx) {
+const D = ctx.deck;
+if (!D) return [];
+const S = D.screen;
+if (S?.kind === 'galleon') {
+const W = ctx.device.screen?.widgets || { w: 360, h: 180, pitchX: 360, pitchY: 192, insetX: 0, insetY: 6 };
+return [0, 1, 2, 3].map((j) => ({ x: S.x + (j % 2) * W.pitchX + (W.insetX || 0), y: S.y + (j >> 1) * W.pitchY + (W.insetY || 0), w: W.w, h: W.h, kind: 'screen' }));
+}
+if (D.strip) { const w = D.strip.w / D.strip.segments; return Array.from({ length: D.strip.segments }, (_, j) => ({ x: D.strip.x + j * w, y: D.strip.y, w, h: D.strip.h, kind: 'strip' })); }
+if (S?.kind === 'infobar') return [{ x: S.x, y: S.y, w: S.w, h: S.h, kind: 'infobar' }];
+return [];
+}
+const argOf = (slot) => { const a = slot.split(':')[1]; return /^\d+$/.test(a) ? +a : a; };
+const teamOf = (view) => view.s?.player?.team ?? view.s?.match?.side ?? null;
+const paint = (q, ctx, view) => paletteOf(q, { skin: ctx.params?.skin ?? 'game', game: view.game || 'dota2', team: teamOf(view) });
+function drawSlot(q, P, slot, view, fx, cell, run) {
+const kind = slot.split(':')[0];
+if (kind === 'ab') abilityKey(q, P, abilityModel(view, fx, argOf(slot)));
+else if (kind === 'it') itemKey(q, P, itemModel(view, fx, argOf(slot)));
+else if (kind === 'v') vitalKey(q, P, vitalModel(view, fx, argOf(slot)));
+else if (kind === 'bar') barKey(q, P, cell, run || { x0: cell.x, x1: cell.x + cell.w }, view, fx, argOf(slot));
+else face(q, P, { dim: 1 });
+}
+function drawPanel(p, P, slot, view, fx) {
+if (slot === 'r:match') return matchPanel(p, P, view, fx);
+if (slot === 'r:line') {
+const g = view.g, m = view.s?.match, eco = g?.economy;
+const parts = ['live', 'dead', 'post', 'paused'].includes(fx.face)
+? [clockText(g?.clock?.t), m && Number.isFinite(m.us) ? `${m.us}–${m.them}` : null, Number.isFinite(eco?.gold) ? `${gold(eco.gold)} gold` : null, fx.face === 'dead' && Number.isFinite(g?.hero?.respawnIn) ? `respawn ${g.hero.respawnIn}` : null]
+: [vitalModel(view, fx, 'clock').value, vitalModel(view, fx, 'clock').sub];
+return lineBar(p, P, view, fx, parts.filter((x) => x && x !== '—'));
+}
+const which = slot.slice(2);
+const M = vitalModel(view, fx, which);
+const st = view.s?.stats;
+let meta;
+if (which === 'gold' && st && Number.isFinite(st.kills) && fx.face !== 'waiting') meta = `K ${st.kills} · D ${st.deaths ?? '—'} · A ${st.assists ?? '—'}`;
+if (which === 'health' && (fx.stun || fx.hex || fx.silence)) meta = fx.stun ? 'Stunned' : fx.hex ? 'Hexed' : 'Silenced';
+if (which === 'health' && fx.face === 'dead' && Number.isFinite(view.g?.hero?.respawnIn)) {
+const h = view.g.hero;
+Object.assign(M, { title: 'Respawn', value: String(Math.max(0, Math.round(h.respawnIn))), unit: 's', bar: null, word: false, tone: h.buybackReady ? 'active' : 'off', which: h.buybackReady ? 'buyback' : 'respawn', ready: !!h.buybackReady });
+meta = h.buybackReady === true ? `Buyback ${gold(h.buybackCost)}` : Number.isFinite(h.buybackCooldown) && h.buybackCooldown > 0 ? `Buyback in ${clockText(h.buybackCooldown)}` : h.buybackReady === false ? 'No buyback' : null;
+}
+if (which === 'hero') { M.title = view.g?.hero?.name ? 'Hero' : M.title; }
+return panelVital(p, P, M, fx, { meta });
+}
+function barRuns(cells, slots) {
+const runs = new Map();
+const byRow = new Map();
+cells.forEach((c, i) => { if (slots[i].startsWith('bar:')) { const k = `${c.row}|${slots[i]}`; if (!byRow.has(k)) byRow.set(k, []); byRow.get(k).push(i); } });
+for (const list of byRow.values()) {
+list.sort((a, b) => cells[a].col - cells[b].col);
+let start = 0;
+for (let j = 1; j <= list.length; j++) {
+if (j === list.length || cells[list[j]].col !== cells[list[j - 1]].col + 1) {
+const part = list.slice(start, j);
+const run = { x0: cells[part[0]].x, x1: cells[part.at(-1)].x + cells[part.at(-1)].w };
+for (const i of part) runs.set(i, run);
+start = j;
+}
+}
+}
+return runs;
+}
+function spanSlots(ctx) {
+const cells = ctx.grid.cells;
+const rows = Math.max(1, ...cells.map((c) => c.row + 1));
+const plan = rows === 1 ? ['bar:vit'] : rows === 2 ? ['bar:hp', 'bar:mp'] : ['ab', ...Array(rows - 3).fill('it'), 'bar:hp', 'bar:mp'];
+const ab = ['Q', 'W', 'E', 'D', 'F', 'R'], it = [0, 1, 2, 3, 4, 5, 'tp', 'neutral'];
+return cells.map((c) => {
+const p = plan[c.row];
+if (p === 'ab') return c.col < ab.length ? `ab:${ab[c.col]}` : 'v:gold';
+if (p === 'it') return c.col < it.length ? `it:${it[c.col]}` : 'v:kda';
+return p;
+});
+}
+function renderDeck(ctx, { back = false, span = false } = {}) {
+const d = surface(ctx);
+if (ctx.kind === 'deck') d.add(rect({ width: ctx.w, height: ctx.h, fill: '#000000' }));
+const view = mobaOf(ctx), fx = fxOf(view, tierOf(ctx));
+const cells = ctx.grid.cells;
+const { slots, readout } = span ? { slots: spanSlots(ctx), readout: [] } : layoutOf(ctx, { back });
+const reads = ctx.kind === 'deck' ? readoutRects(ctx) : [];
+const where = (...ss) => { for (const s of ss) { const i = slots.indexOf(s); if (i >= 0) return mid(cells[i]); } return null; };
+const F = fieldOf(cells, reads.filter((r) => r.kind !== 'infobar'), { origins: { kills: where('v:kda', 'v:hero', 'v:vitals'), ult: where('ab:R'), hero: where('v:hero') }, K: Math.min(ctx.grid.key.w, ctx.grid.key.h) });
+const runs = barRuns(cells, slots);
+cells.forEach((c, i) => {
+const slot = slots[i];
+keyInto(d, c, (q) => {
+const P = paint(q, ctx, view);
+drawSlot(q, P, slot, view, fx, c, runs.get(i));
+overlays(q, P, fx, c, F, { slot, key: true });
+}, { tag: `k${c.i}` });
+});
+reads.forEach((r, j) => {
+const slot = r.kind === 'infobar' ? 'r:line' : readout[j] || 'r:gold';
+panelInto(d, r, (p) => {
+const P = paint(p, ctx, view);
+drawPanel(p, P, slot, view, fx);
+if (r.kind !== 'infobar') overlays(p, P, fx, r, F, { slot, key: false });
+}, { kind: r.kind === 'infobar' ? 'screen' : r.kind, tag: `w${j}` });
+});
+return d.svg();
+}
+function renderStrip(ctx, slots) {
+const k = surface(ctx);
+k.add(rect({ width: ctx.w, height: ctx.h, fill: '#000000' }));
+const view = mobaOf(ctx), fx = fxOf(view, tierOf(ctx));
+const N = ctx.strip.segments, sw = ctx.w / N;
+const rects = Array.from({ length: N }, (_, i) => ({ x: i * sw, y: 0, w: sw, h: ctx.h }));
+const F = fieldOf([], rects, { K: ctx.h });
+rects.forEach((r, i) => {
+const slot = slots[i % slots.length];
+panelInto(k, r, (p) => { const P = paint(p, ctx, view); drawPanel(p, P, slot, view, fx); overlays(p, P, fx, r, F, { slot, key: false }); }, { kind: 'strip', tag: `s${i}` });
+});
+return k.svg();
+}
+function renderScreen(ctx) {
+const k = surface(ctx);
+const view = mobaOf(ctx), fx = fxOf(view, tierOf(ctx));
+if (ctx.screen.kind === 'infobar') { drawPanel(k, paint(k, ctx, view), 'r:line', view, fx); return k.svg(); }
+k.add(rect({ width: ctx.w, height: ctx.h, fill: '#000000' }));
+const G = ctx.screen.widgets;
+const rects = [0, 1, 2, 3].map((j) => ({ x: (j % 2) * G.pitchX + G.insetX, y: (j >> 1) * G.pitchY + G.insetY, w: G.w, h: G.h }));
+const slots = ['r:health', 'r:mana', 'r:gold', 'r:match'];
+const F = fieldOf([], rects, { K: 160 });
+rects.forEach((r, j) => panelInto(k, r, (p) => { const P = paint(p, ctx, view); drawPanel(p, P, slots[j], view, fx); overlays(p, P, fx, r, F, { slot: slots[j], key: false }); }, { kind: 'screen', tag: `w${j}` }));
+return k.svg();
+}
+function renderKey(ctx, slot) {
+const k = surface(ctx);
+const view = mobaOf(ctx), fx = fxOf(view, tierOf(ctx));
+const P = paint(k, ctx, view);
+const me = { x: 0, y: 0, w: ctx.w, h: ctx.h };
+const c = [ctx.w / 2, ctx.h / 2];
+const F = fieldOf([me], [], { origins: { kills: c, ult: c, hero: c } });
+drawSlot(k, P, slot, view, fx, me, { x0: 0, x1: ctx.w });
+overlays(k, P, fx, me, F, { slot, key: true });
+return k.svg();
+}
+};
+__d[641] = function (__ns) {
+const { renderDeck } = __m(640);
+const { EFFECTS_PARAM, DATA_SHAPE } = __m(637);
+const { SKIN_PARAM } = __m(638);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = [
+{
+id: 'gamelink-moba-deck',
+title: 'MOBA Deck',
+category: 'MOBA',
+description: 'Dota 2 or League of Legends on the whole deck: abilities with live cooldowns, items, health and mana, gold, the clock, and every kill, death and objective across the keys.',
+tags: ['moba', 'dota 2', 'dota', 'league of legends', 'lol', 'game link', 'gsi', 'abilities', 'cooldowns', 'rampage', 'gaming', 'live'],
+surface: 'deck',
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 10,
+loop: 60,
+still: 36.4,
+press: 'none',
+params: {
+skin: SKIN_PARAM,
+effects: EFFECTS_PARAM,
+back: { type: 'bool', default: false, label: 'Leave the bottom-right key free (a Back key)' },
+},
+order: 60,
+render: (ctx) => renderDeck(ctx, { back: ctx.params.back === true }),
+},
+{
+id: 'gamelink-moba-span',
+title: 'MOBA Vitals Span',
+category: 'MOBA',
+description: 'Your hero\'s health and mana as bars laid across a block of keys, with the respawn countdown, the multi-kill banners and every MOBA moment played across them.',
+tags: ['moba', 'dota 2', 'league of legends', 'game link', 'span', 'health', 'mana', 'bars', 'respawn'],
+surface: 'span',
+span: { cols: 'all', rows: 1 },
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 10,
+loop: 60,
+still: 21.5,
+press: 'none',
+params: { skin: SKIN_PARAM, effects: EFFECTS_PARAM },
+order: 61,
+render: (ctx) => renderDeck(ctx, { span: true }),
+},
+];
+};
+__d[642] = function (__ns) {
+const { renderKey } = __m(640);
+const { EFFECTS_PARAM, DATA_SHAPE, VITALS } = __m(637);
+const { SKIN_PARAM } = __m(638);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const base = { surface: 'key', data: ['gamelink'], dataShape: DATA_SHAPE, animated: true, fps: 10, loop: 60, press: 'none' };
+const ABILITY_SLOTS = ['Q', 'W', 'E', 'D', 'F', 'R', 'ult'];
+const ITEM_SLOTS = ['0', '1', '2', '3', '4', '5', 'tp', 'neutral', 'trinket'];
+const __default = [
+{
+...base,
+id: 'gamelink-moba-ability',
+title: 'MOBA Ability',
+category: 'MOBA',
+description: 'One of your hero\'s abilities: a live cooldown sweep with the seconds left, level pips, charges, the stun or silence lock, and a flare when your ultimate is ready.',
+tags: ['moba', 'dota 2', 'league of legends', 'game link', 'ability', 'cooldown', 'ultimate', 'spell'],
+still: 35.2,
+params: { slot: { type: 'select', default: 'R', options: ABILITY_SLOTS, label: 'Ability (Q W E D F R, or the ultimate)' }, skin: SKIN_PARAM, effects: EFFECTS_PARAM },
+order: 62,
+render: (ctx) => renderKey(ctx, `ab:${ABILITY_SLOTS.includes(ctx.params.slot) ? ctx.params.slot : 'R'}`),
+},
+{
+...base,
+id: 'gamelink-moba-item',
+title: 'MOBA Item',
+category: 'MOBA',
+description: 'One inventory slot: what is in it (a generic symbol and its name), its cooldown sweep and charges, greyed while you are muted, stunned or hexed.',
+tags: ['moba', 'dota 2', 'league of legends', 'game link', 'item', 'inventory', 'cooldown', 'charges'],
+still: 40.2,
+params: { slot: { type: 'select', default: '0', options: ITEM_SLOTS, label: 'Slot (0–5, TP, neutral, trinket)' }, skin: SKIN_PARAM, effects: EFFECTS_PARAM },
+order: 63,
+render: (ctx) => renderKey(ctx, `it:${ITEM_SLOTS.includes(String(ctx.params.slot)) ? ctx.params.slot : '0'}`),
+},
+{
+...base,
+id: 'gamelink-moba-vital',
+title: 'MOBA Readout',
+category: 'MOBA',
+description: 'One MOBA number on a key: gold, K/D/A, the clock with day and night, the team score, your hero and kill streak, health and mana, buyback or respawn.',
+tags: ['moba', 'dota 2', 'league of legends', 'game link', 'gold', 'kda', 'clock', 'score', 'buyback', 'respawn'],
+still: 21.5,
+params: { show: { type: 'select', default: 'gold', options: VITALS, label: 'Shows' }, skin: SKIN_PARAM, effects: EFFECTS_PARAM },
+order: 64,
+render: (ctx) => renderKey(ctx, `v:${VITALS.includes(ctx.params.show) ? ctx.params.show : 'gold'}`),
+},
+];
+};
+__d[643] = function (__ns) {
+const { renderScreen, renderStrip } = __m(640);
+const { EFFECTS_PARAM, DATA_SHAPE } = __m(637);
+const { SKIN_PARAM } = __m(638);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const STRIP = ['r:health', 'r:mana', 'r:gold', 'r:match', 'r:kda', 'r:hero'];
+const SHOW = ['health', 'mana', 'gold', 'match', 'kda', 'hero', 'buyback', 'respawn', 'level', 'streak', 'lasthits'];
+const base = { data: ['gamelink'], dataShape: DATA_SHAPE, animated: true, fps: 10, loop: 60, press: 'none' };
+const __default = [
+{
+...base,
+id: 'gamelink-moba-screen',
+title: 'MOBA Screen',
+category: 'MOBA',
+description: 'Dota 2 or League on the Galleon screen: health and mana bars, your gold and GPM, the game clock with day and night, and the team kill score.',
+tags: ['moba', 'dota 2', 'league of legends', 'game link', 'galleon', 'screen', 'health', 'mana', 'gold', 'neo'],
+surface: 'screen',
+screens: ['galleon', 'infobar'],
+still: 36.4,
+params: { skin: SKIN_PARAM, effects: EFFECTS_PARAM },
+order: 70,
+render: (ctx) => renderScreen(ctx),
+},
+{
+...base,
+id: 'gamelink-moba-strip',
+title: 'MOBA Vitals Strip',
+category: 'MOBA',
+description: 'Your hero across the touch strip: health and mana bars, gold, the clock and the team kill score (+ XL adds K/D/A and the hero), with the deck\'s moments.',
+tags: ['moba', 'dota 2', 'league of legends', 'game link', 'strip', 'health', 'mana', 'gold', 'clock'],
+surface: 'strip',
+segments: 'all',
+still: 36.4,
+params: { skin: SKIN_PARAM, effects: EFFECTS_PARAM },
+order: 71,
+render: (ctx) => renderStrip(ctx, STRIP),
+},
+{
+...base,
+id: 'gamelink-moba-dial',
+title: 'MOBA Dial Readout',
+category: 'MOBA',
+description: 'One MOBA readout on a dial\'s strip segment: health, mana, gold, the match clock and score, K/D/A, the hero, buyback, respawn, level, streak or last hits.',
+tags: ['moba', 'dota 2', 'league of legends', 'game link', 'dial', 'segment', 'health', 'mana', 'gold'],
+surface: 'strip',
+segments: 1,
+still: 21.5,
+params: { show: { type: 'select', default: 'health', options: SHOW, label: 'Shows' }, skin: SKIN_PARAM, effects: EFFECTS_PARAM },
+order: 72,
+render: (ctx) => renderStrip(ctx, [`r:${SHOW.includes(ctx.params.show) ? ctx.params.show : 'health'}`]),
+},
+];
+};
+__d[644] = function (__ns) {
+const { GAMELINK_VERSION, EVENT_TTL_MS, EVENT_MAX, deepEqual, gameLinkView, steamRoots, libraryFolders, parseVdf, vdfGet, joinPath } = __m(627);
+__e(__ns, { "RL_GAME": () => RL_GAME, "RL_STEAM_APPID": () => RL_STEAM_APPID, "RL_EPIC_APP": () => RL_EPIC_APP, "RL_INSTALL_DIR": () => RL_INSTALL_DIR, "RL_GAP_MS": () => RL_GAP_MS, "RL_STATUSES": () => RL_STATUSES, "RL_TEAMS": () => RL_TEAMS, "RL_MAX_PLAYERS": () => RL_MAX_PLAYERS, "RL_SUPERSONIC_KMH": () => RL_SUPERSONIC_KMH, "RL_URGENT": () => RL_URGENT, "RL_STATFEED": () => RL_STATFEED, "RL_CROSSBAR_FULL": () => RL_CROSSBAR_FULL, "RL_ARENAS": () => RL_ARENAS, "arenaTitle": () => arenaTitle, "hexColor": () => hexColor, "sanitizeRl": () => sanitizeRl, "normalizeRl": () => normalizeRl, "rlIdle": () => rlIdle, "RL_SS_GAP_MS": () => RL_SS_GAP_MS, "rlView": () => rlView, "RL_INI_DIR": () => RL_INI_DIR, "RL_INI_NAMES": () => RL_INI_NAMES, "RL_INI_SECTION": () => RL_INI_SECTION, "RL_TCP_PORT": () => RL_TCP_PORT, "RL_WS_PORT": () => RL_WS_PORT, "RL_RATE": () => RL_RATE, "RL_RATE_MAX": () => RL_RATE_MAX, "RL_INI_KEYS": () => RL_INI_KEYS, "rlIniRead": () => rlIniRead, "rlIniState": () => rlIniState, "rlIniApply": () => rlIniApply, "rlIniRestore": () => rlIniRestore, "rlIniTarget": () => rlIniTarget, "RL_USER_CONFIG": () => RL_USER_CONFIG, "rlIniFiles": () => rlIniFiles, "findRl": () => findRl }, [], ["RL_ARENAS","RL_CROSSBAR_FULL","RL_EPIC_APP","RL_GAME","RL_GAP_MS","RL_INI_DIR","RL_INI_KEYS","RL_INI_NAMES","RL_INI_SECTION","RL_INSTALL_DIR","RL_MAX_PLAYERS","RL_RATE","RL_RATE_MAX","RL_SS_GAP_MS","RL_STATFEED","RL_STATUSES","RL_STEAM_APPID","RL_SUPERSONIC_KMH","RL_TCP_PORT","RL_TEAMS","RL_URGENT","RL_USER_CONFIG","RL_WS_PORT","arenaTitle","findRl","hexColor","normalizeRl","rlIdle","rlIniApply","rlIniFiles","rlIniRead","rlIniRestore","rlIniState","rlIniTarget","rlView","sanitizeRl"]);
+const RL_GAME = 'rl';
+const RL_STEAM_APPID = 252950;
+const RL_EPIC_APP = 'Sugar'; 
+const RL_INSTALL_DIR = 'rocketleague';
+const RL_GAP_MS = 10000; 
+const RL_STATUSES = Object.freeze(['menu', 'loading', 'live', 'paused', 'watching']);
+const RL_TEAMS = Object.freeze(['blue', 'orange']);
+const RL_MAX_PLAYERS = 8;
+const RL_SUPERSONIC_KMH = 2200 * 0.036; 
+const RL_URGENT = new Set(['goal', 'demo', 'save', 'epicSave', 'crossbar', 'overtime', 'kickoff', 'matchEnd', 'mvp', 'context']);
+const RL_STATFEED = Object.freeze({ Demolish: 'demo', Demolition: 'demo', Save: 'save', EpicSave: 'epicSave', Shot: 'shot', ShotOnGoal: 'shot', Assist: 'assist', MVP: 'mvp' });
+const RL_CROSSBAR_FULL = 2500;
+const RL_ARENAS = Object.freeze({
+Stadium_P: 'DFH Stadium', Stadium_Day_P: 'DFH Stadium (Day)', Stadium_Foggy_P: 'DFH Stadium (Stormy)', Stadium_Winter_P: 'DFH Stadium (Snowy)', Stadium_Race_Day_P: 'DFH Stadium (Circuit)',
+EuroStadium_P: 'Mannfield', EuroStadium_Night_P: 'Mannfield (Night)', EuroStadium_Rainy_P: 'Mannfield (Stormy)', EuroStadium_SnowNight_P: 'Mannfield (Snowy)', EuroStadium_Dusk_P: 'Mannfield (Dusk)',
+UtopiaStadium_P: 'Utopia Coliseum', UtopiaStadium_Dusk_P: 'Utopia Coliseum (Dusk)', UtopiaStadium_Snow_P: 'Utopia Coliseum (Snowy)',
+Park_P: 'Beckwith Park', Park_Night_P: 'Beckwith Park (Midnight)', Park_Rainy_P: 'Beckwith Park (Stormy)',
+TrainStation_P: 'Urban Central', TrainStation_Night_P: 'Urban Central (Night)', TrainStation_Dawn_P: 'Urban Central (Dawn)',
+CS_P: 'Champions Field', CS_Day_P: 'Champions Field (Day)', CS_HW_P: 'Rivals Arena', Wasteland_P: 'Wasteland', Wasteland_S_P: 'Wasteland', Wasteland_Night_S_P: 'Wasteland (Night)',
+NeoTokyo_Standard_P: 'Neo Tokyo', NeoTokyo_Comic_P: 'Neo Tokyo (Comic)', Farm_P: 'Farmstead', Farm_Night_P: 'Farmstead (Night)', AquaDome_P: 'AquaDome', ARC_Standard_P: 'Starbase ARC',
+Underwater_P: 'AquaDome', Beach_P: 'Salty Shores', Beach_Night_P: 'Salty Shores (Night)', Street_P: 'Sovereign Heights', Chn_Stadium_P: 'Forbidden Temple', Music_P: 'Neon Fields',
+Labs_Basin_P: 'Basin', Labs_Corridor_P: 'Corridor', Labs_Utopia_P: 'Utopia Retro', HoopsStadium_P: 'Dunk House', ShatterShot_P: 'Core 707', Haunted_TrainStation_P: 'Urban Central (Haunted)',
+});
+const MEM = Symbol('gamelink.rl'); 
+const TEAM_OF = { 0: 'blue', 1: 'orange' };
+const isObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : typeof v === 'string' && v.trim() !== '' && Number.isFinite(+v) ? +v : null);
+const int = (v, lo = 0, hi = 1e9) => { const x = num(v); return x === null ? null : Math.min(hi, Math.max(lo, Math.round(x))); };
+const bool = (v) => (typeof v === 'boolean' ? v : v === 1 || v === 0 ? !!v : v === 'true' || v === 'True' ? true : v === 'false' || v === 'False' ? false : null);
+const r1 = (x) => (x === null ? null : Math.round(x * 10) / 10);
+const teamOf = (v, dflt = null) => { const t = v === undefined ? dflt : int(v, -1, 255); return t === null ? null : TEAM_OF[t] || null; };
+const z = (v, hi) => int(v, 0, hi) ?? 0; 
+const f = (v) => bool(v) ?? false; 
+const other = (t) => (t === 'blue' ? 'orange' : t === 'orange' ? 'blue' : null);
+const EVENT_RE = /^[A-Za-z][A-Za-z0-9_]{0,47}$/;
+const MAX_DATA = 512 * 1024;
+function arenaTitle(id) {
+if (typeof id !== 'string' || !/^[A-Za-z0-9_]{1,64}$/.test(id)) return null;
+if (RL_ARENAS[id]) return RL_ARENAS[id];
+return id.replace(/_P$/i, '').split('_').filter(Boolean).join(' ').slice(0, 32) || null;
+}
+function hexColor(v) {
+if (typeof v !== 'string') return null;
+const s = v.trim().replace(/^#/, '');
+if (/^[0-9a-f]{6}$/i.test(s)) return `#${s.toLowerCase()}`;
+if (/^[0-9a-f]{8}$/i.test(s)) return `#${s.slice(2).toLowerCase()}`;
+return null;
+}
+const kmh = (v) => { const x = num(v); if (x === null || x < 0) return null; return r1(Math.min(400, x > 400 ? x * 0.036 : x)); };
+const SPEC_KEYS = ['bHasCar', 'Speed', 'Boost', 'bBoosting', 'bOnGround', 'bOnWall', 'bPowersliding', 'bDemolished', 'bSupersonic', 'PickupClass'];
+function refOf(p) {
+if (!isObj(p)) return null;
+const named = typeof p.Name === 'string' && p.Name !== '';
+const slot = int(p.Shortcut, 0, 99);
+if (!named && !slot) return null;
+const team = teamOf(p.TeamNum, 0);
+if (!team) return null;
+return { slot: slot ?? 0, team };
+}
+function cleanPlayer(p) {
+if (!isObj(p)) return null;
+const o = {
+slot: int(p.Shortcut, 0, 99) ?? 0, team: teamOf(p.TeamNum, 0),
+score: z(p.Score, 1e6), goals: z(p.Goals, 999), shots: z(p.Shots, 999), assists: z(p.Assists, 999), saves: z(p.Saves, 999),
+touches: z(p.Touches, 1e5), demos: z(p.Demos, 999),
+};
+const spec = SPEC_KEYS.some((k) => k in p);
+o.spec = spec ? {
+boost: z(p.Boost, 100), speed: kmh(p.Speed) ?? 0, boosting: f(p.bBoosting), supersonic: f(p.bSupersonic),
+onGround: f(p.bOnGround), onWall: f(p.bOnWall), powersliding: f(p.bPowersliding), demolished: f(p.bDemolished), hasCar: f(p.bHasCar),
+} : null;
+return o;
+}
+function cleanGame(g) {
+if (!isObj(g)) return null;
+const teams = {};
+for (const t of Array.isArray(g.Teams) ? g.Teams.slice(0, 2) : []) {
+if (!isObj(t)) continue;
+const team = teamOf(t.TeamNum, 0);
+if (!team || teams[team]) continue;
+teams[team] = { score: z(t.Score, 999), color: hexColor(t.ColorPrimary), color2: hexColor(t.ColorSecondary) }; 
+}
+const ball = isObj(g.Ball) ? { speed: kmh(g.Ball.Speed) ?? 0, team: teamOf(g.Ball.TeamNum, 0) } : null;
+const target = f(g.bHasTarget) ? refOf(g.Target) : null;
+let winner = null;
+if (f(g.bHasWinner)) {
+const w = typeof g.Winner === 'string' && g.Winner !== '' ? g.Winner : null;
+for (const t of Array.isArray(g.Teams) ? g.Teams.slice(0, 2) : []) if (isObj(t) && w !== null && t.Name === w) winner = teamOf(t.TeamNum, 0);
+if (!winner && teams.blue && teams.orange && teams.blue.score !== teams.orange.score) winner = teams.blue.score > teams.orange.score ? 'blue' : 'orange';
+}
+return {
+teams, time: Math.max(0, Math.round(num(g.TimeSeconds) ?? 0)), overtime: f(g.bOvertime),
+ball, replay: f(g.bReplay), hasWinner: f(g.bHasWinner), winner,
+arena: typeof g.Arena === 'string' && /^[A-Za-z0-9_]{1,64}$/.test(g.Arena) ? g.Arena : null,
+target,
+};
+}
+function dataOf(m) {
+let d = m.Data ?? m.data;
+if (typeof d === 'string') {
+if (d.length > MAX_DATA) return null;
+try { d = JSON.parse(d); } catch { return null; }
+}
+return isObj(d) ? d : d === undefined || d === null ? {} : null;
+}
+function sanitizeRl(message) {
+let m = message;
+if (typeof m === 'string') { if (m.length > MAX_DATA) return null; try { m = JSON.parse(m); } catch { return null; } }
+if (!isObj(m)) return null;
+const event = m.Event ?? m.event;
+if (typeof event !== 'string' || !EVENT_RE.test(event)) return null;
+const d = dataOf(m);
+if (!d) return null;
+const out = { event, online: typeof d.MatchGuid === 'string' && d.MatchGuid !== '' ? true : null };
+switch (event) {
+case 'UpdateState': {
+out.players = (Array.isArray(d.Players) ? d.Players : []).slice(0, RL_MAX_PLAYERS).map(cleanPlayer).filter(Boolean);
+out.game = cleanGame(d.Game);
+break;
+}
+case 'GoalScored': {
+out.speed = kmh(d.GoalSpeed); out.time = num(d.GoalTime);
+out.scorer = refOf(d.Scorer); out.assister = refOf(d.Assister);
+out.lastTouch = refOf(d.BallLastTouch?.Player ?? d.BallLastTouch);
+const y = num(d.ImpactLocation?.Y);
+out.end = y === null || Math.abs(y) < 1 ? null : y > 0 ? 'blue' : 'orange';
+break;
+}
+case 'StatfeedEvent':
+out.name = typeof d.EventName === 'string' && /^[A-Za-z]{1,32}$/.test(d.EventName) ? d.EventName : null;
+out.kind = typeof d.Type === 'string' && /^[A-Za-z ]{1,32}$/.test(d.Type) ? d.Type : null;
+out.main = refOf(d.MainTarget); out.second = refOf(d.SecondaryTarget);
+break;
+case 'CrossbarHit':
+out.force = num(d.ImpactForce); out.speed = kmh(d.BallSpeed); out.lastTouch = refOf(d.BallLastTouch?.Player ?? d.BallLastTouch);
+break;
+case 'BallHit':
+out.speed = kmh(d.Ball?.PostHitSpeed ?? d.Ball?.Speed); out.pre = kmh(d.Ball?.PreHitSpeed);
+out.hitters = (Array.isArray(d.Players) ? d.Players : []).slice(0, RL_MAX_PLAYERS).map(refOf).filter(Boolean);
+break;
+case 'ClockUpdatedSeconds':
+out.time = Math.max(0, Math.round(num(d.TimeSeconds) ?? 0)); out.overtime = f(d.bOvertime);
+break;
+case 'MatchEnded':
+out.winner = 'WinnerTeamNum' in d ? (int(d.WinnerTeamNum, -1, 255) === -1 ? 'none' : teamOf(d.WinnerTeamNum)) : undefined;
+break;
+default: break; 
+}
+return out;
+}
+function newMem(base = null) {
+return {
+evSeq: base?.evSeq ?? 0, rev: base?.rev ?? 0, ctx: base?.ctx ?? null,
+match: false, game: null, players: null, team: null, self: null, selfBy: null, targetSelf: null, spectator: false, lastUpdateAt: null, baseline: true,
+phase: null, paused: false, replay: false, ended: false, result: null, online: null, lastGoal: null, goalInRound: false, mvp: null, overtime: false,
+clock: null, ballSpeed: null, ballTeam: null, ss: {}, ssRiseAt: -Infinity,
+};
+}
+const memOf = (prev) => { const m = prev?.[MEM]; return m ? { ...m } : null; };
+function withMem(state, mem) { Object.defineProperty(state, MEM, { value: mem, enumerable: false }); return state; }
+function whoAmI(players, game, mem) {
+const carrying = players.filter((p) => p.spec);
+if (!carrying.length) return { team: null, self: null, selfBy: null, spectator: false };
+const teams = new Set(carrying.map((p) => p.team));
+if (teams.size !== 1 || teams.has(null)) return { team: null, self: null, selfBy: null, spectator: true };
+const team = [...teams][0];
+const mine = players.filter((p) => p.team === team);
+if (mine.length === 1) return { team, self: mine[0].slot, selfBy: 'duel', spectator: false };
+const t = game?.target;
+if (t && !game.replay && t.team === team && mine.some((p) => p.slot === t.slot)) mem.targetSelf = t.slot;
+if (mem.targetSelf !== null && mine.some((p) => p.slot === mem.targetSelf)) return { team, self: mem.targetSelf, selfBy: 'target', spectator: false };
+return { team, self: null, selfBy: null, spectator: false };
+}
+function normalizeRl(message, prev = null, { nowMs = 0 } = {}) {
+if (message === null || message === undefined) return { state: null, events: [] };
+const p = sanitizeRl(message);
+if (!p) return { state: prev, events: [], rejected: true };
+const mem = memOf(prev) || newMem();
+const raw = derive(p, mem, nowMs);
+return finish(prev, mem, raw, nowMs);
+}
+function rlIdle(prev = null, nowMs = 0) {
+const mem = memOf(prev) || newMem();
+const raw = [];
+if (mem.match || mem.ctx !== 'menu') { Object.assign(mem, newMem(mem)); if (mem.ctx !== 'menu') raw.push({ type: 'context', value: 'menu' }); }
+mem.ctx = 'menu';
+return finish(prev, mem, raw, nowMs);
+}
+function contextOf(mem) {
+if (!mem.match) return 'menu';
+if (!mem.players) return 'loading';
+if (mem.spectator) return 'watching';
+if (mem.paused) return 'paused';
+return 'live';
+}
+function startMatch(mem) {
+Object.assign(mem, newMem(mem), { match: true, baseline: false });
+}
+const ours = (mem, team) => (team && mem.team ? team === mem.team : null);
+const isSelf = (mem, ref) => !!ref && mem.self !== null && ref.team === mem.team && ref.slot === mem.self;
+function derive(p, mem, nowMs) {
+const ev = [];
+const prevCtx = mem.ctx;
+const live = () => mem.match && !!mem.players && !mem.spectator;
+if (p.online === true) mem.online = true;
+switch (p.event) {
+case 'MatchCreated': case 'MatchInitialized':
+if (!mem.match || mem.ended) startMatch(mem);
+mem.phase = mem.phase || 'pregame';
+if (mem.online === null) mem.online = p.online === true;
+break;
+case 'MatchDestroyed':
+Object.assign(mem, newMem(mem));
+break;
+case 'MatchPaused': if (mem.match) mem.paused = true; break;
+case 'MatchUnpaused': mem.paused = false; break;
+case 'CountdownBegin':
+if (!mem.match) startMatch(mem);
+mem.phase = 'kickoff'; mem.replay = false; mem.goalInRound = false;
+if (live()) ev.push({ type: 'kickoff' });
+break;
+case 'RoundStarted':
+if (!mem.match) startMatch(mem);
+mem.phase = mem.overtime ? 'overtime' : 'live'; mem.goalInRound = false;
+break;
+case 'GoalReplayStart': mem.replay = true; mem.phase = 'replay'; break;
+case 'GoalReplayWillEnd': break;
+case 'GoalReplayEnd': mem.replay = false; if (mem.phase === 'replay') mem.phase = 'goal'; break;
+case 'PodiumStart': mem.phase = 'podium'; break;
+case 'ReplayCreated': break;
+case 'MatchEnded': {
+if (!mem.match || mem.ended) break;
+mem.ended = true; mem.phase = 'post';
+const winner = p.winner === 'none' ? null : p.winner !== undefined ? p.winner : mem.game?.winner || 'blue';
+const us = mem.team ? mem.game?.teams?.[mem.team]?.score ?? null : null, them = mem.team ? mem.game?.teams?.[other(mem.team)]?.score ?? null : null;
+mem.result = winner && mem.team ? (winner === mem.team ? 'win' : 'loss') : null;
+if (live()) ev.push({ type: 'matchEnd', result: mem.result, winner, us, them });
+break;
+}
+case 'ClockUpdatedSeconds':
+if (!mem.match) break;
+mem.clock = p.time;
+if (p.overtime && !mem.overtime) { mem.overtime = true; if (live() && !mem.baseline) ev.push({ type: 'overtime' }); }
+break;
+case 'GoalScored': {
+if (!mem.match) startMatch(mem);
+if (mem.replay || mem.goalInRound || (!p.scorer && !p.lastTouch && !p.end)) break;
+mem.goalInRound = true;
+const team = p.end || p.scorer?.team || p.lastTouch?.team || null;
+mem.lastGoal = { team, ours: ours(mem, team), speed: p.speed };
+mem.phase = 'goal';
+if (live()) ev.push({ type: 'goal', team, ours: ours(mem, team), speed: p.speed, self: isSelf(mem, p.scorer), assist: isSelf(mem, p.assister), own: !!(p.scorer && team && p.scorer.team !== team), golden: !!mem.overtime });
+break;
+}
+case 'StatfeedEvent': {
+const type = RL_STATFEED[p.name];
+if (!type || !live()) break;
+const main = p.main, second = p.second;
+if (type === 'demo') {
+const victim = second ? (isSelf(mem, second) ? 'us' : ours(mem, second.team) ? 'ally' : ours(mem, second.team) === false ? 'foe' : null) : null;
+ev.push({ type, ours: ours(mem, main?.team ?? null), self: isSelf(mem, main), victim });
+} else if (type === 'mvp') {
+mem.mvp = { team: main?.team ?? null, self: isSelf(mem, main) };
+ev.push({ type, ours: ours(mem, main?.team ?? null), self: isSelf(mem, main) });
+} else ev.push({ type, ours: ours(mem, main?.team ?? null), self: isSelf(mem, main) });
+break;
+}
+case 'CrossbarHit': {
+if (!live()) break;
+const force = p.force === null ? null : Math.max(0, p.force);
+ev.push({ type: 'crossbar', impact: force === null ? 0.5 : Math.round(Math.min(1, force / RL_CROSSBAR_FULL) * 100) / 100, force: force === null ? null : Math.round(force), speed: p.speed });
+break;
+}
+case 'BallHit':
+if (p.speed !== null) mem.ballSpeed = p.speed;
+if (p.hitters.length) mem.ballTeam = p.hitters[p.hitters.length - 1].team;
+break;
+case 'UpdateState': {
+if (!mem.match) { startMatch(mem); mem.baseline = true; } 
+const gap = mem.lastUpdateAt !== null && nowMs - mem.lastUpdateAt > RL_GAP_MS;
+const prevGame = mem.game;
+if (gap && !mem.baseline) { ev.push({ type: 'resync' }); mem.baseline = true; }
+const replay = !!p.game?.replay || mem.replay;
+if (!replay || !mem.players) {
+const who = whoAmI(p.players, p.game, mem);
+mem.spectator = who.spectator;
+mem.team = who.spectator ? null : who.team || mem.team;
+mem.self = mem.team && who.team ? who.self : null;
+mem.selfBy = mem.self !== null ? who.selfBy : null;
+mem.players = p.players;
+} else mem.players = p.players.map((x) => ({ ...x, spec: (mem.players.find((o) => o.team === x.team && o.slot === x.slot) || {}).spec ?? null }));
+mem.game = p.game;
+superSonic(mem, nowMs);
+mem.lastUpdateAt = nowMs;
+if (p.game) {
+mem.clock = p.game.time;
+if (p.game.ball && !replay) { mem.ballSpeed = p.game.ball.speed; mem.ballTeam = p.game.ball.team; }
+if (p.game.overtime && !mem.overtime) { mem.overtime = true; if (!mem.baseline && prevGame && live()) ev.push({ type: 'overtime' }); }
+if (!mem.phase) mem.phase = p.game.overtime ? 'overtime' : 'live';
+}
+mem.baseline = false;
+break;
+}
+default: break;
+}
+mem.ctx = contextOf(mem);
+if (mem.ctx !== prevCtx) ev.unshift({ type: 'context', value: mem.ctx });
+return ev;
+}
+const RL_SS_GAP_MS = 1000;
+const ssKey = (p) => `${p.team}:${p.slot}`;
+function superSonic(mem, nowMs) {
+const next = {};
+for (const p of mem.players || []) {
+if (!p.spec || p.team !== mem.team) continue;
+const k = ssKey(p), was = !!mem.ss?.[k];
+if (!p.spec.supersonic) { next[k] = false; continue; }
+if (was) { next[k] = true; continue; }
+if (nowMs - mem.ssRiseAt >= RL_SS_GAP_MS) { next[k] = true; mem.ssRiseAt = nowMs; } else next[k] = false;
+}
+mem.ss = next;
+}
+const shownSs = (mem, p) => !!p && !!mem.ss?.[ssKey(p)];
+const STAT_KEYS = ['goals', 'assists', 'saves', 'shots', 'demos', 'touches', 'score'];
+function sum(list, k) { let s = 0, any = false; for (const p of list) if (Number.isFinite(p[k])) { s += p[k]; any = true; } return any ? s : null; }
+function build(mem) {
+const ctx = mem.ctx;
+const status = RL_STATUSES.includes(ctx) ? ctx : 'menu';
+const own = status === 'live' || status === 'paused';
+const g = mem.game;
+const team = own ? mem.team : null;
+const players = mem.players || [];
+const mates = team ? players.filter((p) => p.team === team) : [];
+const me = team && mem.self !== null ? mates.find((p) => p.slot === mem.self) || null : null;
+const spec = me?.spec || null;
+const us = team && g?.teams?.[team] ? g.teams[team].score : null, them = team && g?.teams?.[other(team)] ? g.teams[other(team)].score : null;
+const player = team ? {
+fresh: true, alive: spec ? spec.demolished !== true : null, team,
+health: null, armor: null, helmet: null, flashed: 0, smoked: 0, burning: 0, money: null, equip: null, activity: null,
+} : null;
+const stats = me ? { kills: null, assists: me.assists, deaths: null, mvps: mem.mvp ? (mem.mvp.self ? 1 : 0) : null, score: me.score, roundKills: null, roundHs: null } : null;
+const match = mem.match && g ? {
+map: g.arena, title: arenaTitle(g.arena), mode: mem.online === true ? 'online' : mem.online === false ? 'offline' : null,
+phase: mem.ended ? 'gameover' : 'live', side: team, ct: null, t: null,
+us, them, target: null, matchPoint: null, result: own && mem.ended ? mem.result : null,
+} : null;
+const inMatch = mem.match && status !== 'menu';
+const rl = {
+phase: inMatch ? mem.phase || (mem.players ? 'live' : 'pregame') : null,
+view: own ? (me ? 'player' : team ? 'team' : null) : null,
+clock: inMatch && mem.clock !== null ? { t: mem.clock, overtime: !!mem.overtime } : null,
+boost: spec ? spec.boost : null,
+supersonic: spec ? shownSs(mem, me) : null,
+boosting: spec ? spec.boosting : null,
+speed: spec ? spec.speed : null,
+onGround: spec ? spec.onGround : null,
+demolished: spec ? spec.demolished : null,
+mates: own && team ? mates.filter((p) => p.spec).sort((a, b) => (a.slot ?? 99) - (b.slot ?? 99)).slice(0, 4).map((p) => ({ slot: p.slot, boost: p.spec.boost, supersonic: shownSs(mem, p), demolished: p.spec.demolished, self: !!me && p === me })) : [],
+ball: inMatch && status !== 'watching' && (mem.ballSpeed !== null || mem.ballTeam) ? { speed: mem.ballSpeed, team: mem.ballTeam } : null,
+teamColor: team && g?.teams?.[team]?.color || null,
+foeColor: team && g?.teams?.[other(team)]?.color || null,
+scores: inMatch && g?.teams ? { blue: g.teams.blue?.score ?? null, orange: g.teams.orange?.score ?? null } : null,
+stats: me ? Object.fromEntries(STAT_KEYS.map((k) => [k, me[k]])) : null,
+team: own && team && mates.length ? Object.fromEntries(STAT_KEYS.filter((k) => k !== 'touches').map((k) => [k, sum(mates, k)])) : null,
+lastGoal: inMatch && mem.lastGoal ? { team: mem.lastGoal.team, ours: own ? mem.lastGoal.ours : null, speed: mem.lastGoal.speed } : null,
+mvp: own && mem.mvp ? { ours: ours(mem, mem.mvp.team), self: !!mem.mvp.self } : null, 
+replay: inMatch ? !!mem.replay : false,
+online: mem.match ? mem.online : null,
+};
+return { status, player, weapon: null, stats, round: null, match, rl };
+}
+function finish(prev, mem, raw, nowMs) {
+const core = build(mem);
+const events = raw.map((e) => ({ ...e, at: nowMs, seq: ++mem.evSeq }));
+const kept = [...(prev?.events || []).filter((e) => nowMs - e.at <= EVENT_TTL_MS), ...events].slice(-EVENT_MAX);
+if (prev && !events.length && deepEqual(coreOf(prev), core)) return { state: withMem({ ...prev }, mem), events: [] };
+mem.rev++;
+const state = withMem({ v: GAMELINK_VERSION, game: RL_GAME, at: nowMs, rev: mem.rev, ...core, events: kept }, mem);
+return { state, events };
+}
+const coreOf = (s) => ({ status: s.status, player: s.player, weapon: s.weapon, stats: s.stats, round: s.round, match: s.match, rl: s.rl });
+function rlView(state, nowMs) {
+return gameLinkView(state, nowMs);
+}
+const RL_INI_DIR = Object.freeze(['TAGame', 'Config']);
+const RL_INI_NAMES = Object.freeze(['TAStatsAPI.ini', 'DefaultStatsAPI.ini']); 
+const RL_INI_SECTION = 'TAGame.MatchStatsExporter_TA';
+const RL_TCP_PORT = 49123;
+const RL_WS_PORT = 49124;
+const RL_RATE = 30; 
+const RL_RATE_MAX = 120; 
+const RL_INI_KEYS = Object.freeze(['PacketSendRate', 'Port', 'WebPort']);
+const SECTION_RE = /^\s*\[([^\]\r\n]+)\]\s*$/;
+const KEY_RE = /^(\s*)([A-Za-z][A-Za-z0-9_]*)(\s*=\s*)(.*?)(\s*)$/;
+function linesOf(text) {
+const out = [];
+const re = /([^\r\n]*)(\r\n|\n|\r)/g;
+let m, last = 0;
+while ((m = re.exec(text))) { out.push({ body: m[1], eol: m[2] }); last = re.lastIndex; }
+if (last < text.length || !out.length) out.push({ body: text.slice(last), eol: '' });
+return out;
+}
+const joinLines = (lines) => lines.map((l) => l.body + l.eol).join('');
+const eolOf = (lines) => lines.find((l) => l.eol)?.eol || '\r\n';
+function sectionOf(lines) {
+let head = -1, end = lines.length;
+for (let i = 0; i < lines.length; i++) {
+const m = SECTION_RE.exec(lines[i].body);
+if (!m) continue;
+if (head < 0 && m[1].trim().toLowerCase() === RL_INI_SECTION.toLowerCase()) head = i;
+else if (head >= 0) { end = i; break; }
+}
+return { head, end };
+}
+function keyLine(lines, sec, key) {
+if (sec.head < 0) return -1;
+for (let i = sec.head + 1; i < sec.end; i++) { const m = KEY_RE.exec(lines[i].body); if (m && m[2].toLowerCase() === key.toLowerCase()) return i; }
+return -1;
+}
+function rlIniRead(text) {
+const lines = linesOf(String(text ?? '').replace(/^\uFEFF/, ''));
+const sec = sectionOf(lines);
+const out = { section: sec.head >= 0 };
+for (const k of RL_INI_KEYS) { const i = keyLine(lines, sec, k); out[k] = i < 0 ? null : KEY_RE.exec(lines[i].body)[4]; }
+return out;
+}
+function rlIniState(text, { rate = RL_RATE, port = RL_TCP_PORT, webPort = RL_WS_PORT } = {}) {
+if (text === null || text === undefined) return { state: 'absent', rate: null, port: null, webPort: null };
+const r = rlIniRead(text);
+const asInt = (v) => (v === null || !/^\s*\d{1,6}\s*$/.test(v) ? null : +v);
+const cur = { rate: asInt(r.PacketSendRate), port: asInt(r.Port), webPort: asInt(r.WebPort) };
+if (!((cur.rate ?? 0) > 0)) return { state: 'off', ...cur };
+return { state: cur.rate === rate && (cur.port ?? RL_TCP_PORT) === port && (cur.webPort ?? RL_WS_PORT) === webPort ? 'current' : 'on', ...cur };
+}
+function rlIniApply(text, { rate = RL_RATE, port = RL_TCP_PORT, webPort = RL_WS_PORT } = {}) {
+if (!Number.isInteger(rate) || rate < 1 || rate > RL_RATE_MAX) throw new Error(`rlIniApply: rate must be an integer 1–${RL_RATE_MAX}`);
+for (const p of [port, webPort]) if (!Number.isInteger(p) || p < 1024 || p > 65535) throw new Error('rlIniApply: ports must be integers 1024–65535');
+const src = String(text ?? '');
+const bom = src.startsWith('\uFEFF') ? '\uFEFF' : '';
+const body = src.slice(bom.length);
+const lines = body === '' ? [] : linesOf(body);
+const eol = eolOf(lines);
+const want = { PacketSendRate: String(rate), Port: String(port), WebPort: String(webPort) };
+let sec = sectionOf(lines);
+const record = { v: 1, section: sec.head >= 0, endedWithEol: body === '' || /[\r\n]$/.test(body), keys: {}, wrote: want };
+if (sec.head < 0) {
+if (lines.length) {
+if (!lines[lines.length - 1].eol) lines[lines.length - 1].eol = eol;
+if (lines[lines.length - 1].body.trim() !== '') lines.push({ body: '', eol });
+}
+lines.push({ body: `[${RL_INI_SECTION}]`, eol });
+sec = { head: lines.length - 1, end: lines.length };
+}
+for (const k of RL_INI_KEYS) {
+const i = keyLine(lines, sec, k);
+if (i >= 0) {
+const m = KEY_RE.exec(lines[i].body);
+record.keys[k] = { had: true, value: m[4] };
+lines[i].body = `${m[1]}${m[2]}${m[3]}${want[k]}${m[5]}`;
+continue;
+}
+record.keys[k] = { had: false, value: null };
+let at = sec.head; 
+for (let j = sec.head + 1; j < sec.end; j++) if (lines[j].body.trim() !== '') at = j;
+const wasLast = !lines[at].eol;
+if (wasLast) lines[at].eol = eol;
+lines.splice(at + 1, 0, { body: `${k}=${want[k]}`, eol: wasLast ? '' : eol });
+sec = { head: sec.head, end: sec.end + 1 };
+}
+return { text: bom + joinLines(lines), record };
+}
+function rlIniRestore(text, record) {
+if (!isObj(record) || !isObj(record.keys) || !isObj(record.wrote)) throw new Error('rlIniRestore: not a backup record');
+const src = String(text ?? '');
+const bom = src.startsWith('\uFEFF') ? '\uFEFF' : '';
+const lines = linesOf(src.slice(bom.length));
+const kept = [], restored = [];
+for (const k of RL_INI_KEYS) {
+const was = record.keys[k];
+if (!isObj(was)) continue;
+const i = keyLine(lines, sectionOf(lines), k);
+if (i < 0) { if (was.had) kept.push(k); continue; } 
+const m = KEY_RE.exec(lines[i].body);
+if (m[4] !== String(record.wrote[k])) { kept.push(k); continue; } 
+if (was.had) lines[i].body = `${m[1]}${m[2]}${m[3]}${was.value}${m[5]}`;
+else {
+const eol = lines[i].eol;
+lines.splice(i, 1);
+if (!eol && i > 0) lines[i - 1].eol = ''; 
+}
+restored.push(k);
+}
+if (record.section === false) {
+const sec = sectionOf(lines);
+if (sec.head >= 0 && lines.slice(sec.head + 1, sec.end).every((l) => l.body.trim() === '')) {
+let from = sec.head;
+if (from > 0 && lines[from - 1].body.trim() === '') from--;
+const toEnd = sec.end >= lines.length;
+lines.splice(from, sec.end - from);
+if (toEnd && lines.length && record.endedWithEol === false) lines[lines.length - 1].eol = '';
+}
+}
+return { text: bom + joinLines(lines), kept, restored };
+}
+function rlIniTarget(names) {
+const have = new Set((names || []).map((x) => String(x).toLowerCase()));
+return RL_INI_NAMES.find((x) => have.has(x.toLowerCase())) || null;
+}
+const sameKey = (platform, p) => (platform === 'win32' ? p.replace(/\//g, '\\').replace(/\\+$/, '').toLowerCase() : p.replace(/\/+$/, ''));
+const safeDir = (d) => (typeof d === 'string' && d && d.length <= 128 && !/[\\/:*?"<>|\u0000-\u001f]/.test(d) && d !== '.' && d !== '..' ? d : null);
+const EPIC_MANIFESTS = Object.freeze(['Epic', 'EpicGamesLauncher', 'Data', 'Manifests']);
+const EPIC_INSTALLED = Object.freeze(['Epic', 'UnrealEngineLauncher', 'LauncherInstalled.dat']);
+const isRlEpic = (o) => isObj(o) && (o.AppName === RL_EPIC_APP || o.MainGameAppName === RL_EPIC_APP || o.DisplayName === 'Rocket League' || o.DisplayName === 'Rocket League\u00ae');
+async function epicInstalls(io, J, read) {
+const out = [];
+const pd = io.env?.ProgramData || io.env?.PROGRAMDATA || 'C:\\ProgramData';
+const parse = (t) => { if (typeof t !== 'string') return null; try { return JSON.parse(t.replace(/^\uFEFF/, '')); } catch { return null; } };
+let names = [];
+try { names = (await io.listDir?.(J(pd, ...EPIC_MANIFESTS))) || []; } catch { names = []; }
+for (const f of names.filter((x) => typeof x === 'string' && /\.item$/i.test(x)).sort().slice(0, 512)) {
+const o = parse(await read(J(pd, ...EPIC_MANIFESTS, f)));
+if (isRlEpic(o) && typeof o.InstallLocation === 'string' && o.InstallLocation) out.push(o.InstallLocation);
+}
+const list = parse(await read(J(pd, ...EPIC_INSTALLED)));
+for (const o of Array.isArray(list?.InstallationList) ? list.InstallationList : []) if (isRlEpic(o) && typeof o.InstallLocation === 'string' && o.InstallLocation) out.push(o.InstallLocation);
+return out;
+}
+const SHELL_FOLDERS = 'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders';
+const RL_USER_CONFIG = Object.freeze(['My Games', 'Rocket League', 'TAGame', 'Config']);
+async function documentsDirs(io, J) {
+const out = [];
+let p = null;
+try { p = io.readRegistry ? await io.readRegistry(SHELL_FOLDERS, 'Personal') : null; } catch { p = null; }
+if (typeof p === 'string' && p.trim()) out.push(p.trim());
+const env = io.env || {};
+const home = env.USERPROFILE || io.home || '';
+if (env.OneDrive) out.push(J(env.OneDrive, 'Documents'));
+if (home) out.push(J(home, 'Documents'));
+const seen = new Set();
+return out.filter((d) => { const k = sameKey('win32', d); if (seen.has(k)) return false; seen.add(k); return true; });
+}
+async function rlIniFiles(io, configDir) {
+const platform = io.platform || 'win32';
+const J = (...a) => joinPath(platform, ...a);
+const isFile = async (f) => { try { return !!(await io.isFile?.(f)); } catch { return false; } };
+const out = [];
+for (const d of await documentsDirs(io, J)) { const f = J(d, ...RL_USER_CONFIG, 'TAStatsAPI.ini'); if (await isFile(f)) { out.push({ path: f, kind: 'user' }); break; } }
+if (await isFile(J(configDir, 'TAStatsAPI.ini'))) out.push({ path: J(configDir, 'TAStatsAPI.ini'), kind: 'install-ta' });
+if (await isFile(J(configDir, 'DefaultStatsAPI.ini'))) out.push({ path: J(configDir, 'DefaultStatsAPI.ini'), kind: 'install-default' });
+return out;
+}
+async function findRl(io = {}) {
+const platform = io.platform || 'win32';
+if (platform !== 'win32') return { found: false, reason: 'unsupported' };
+const J = (...a) => joinPath(platform, ...a);
+const read = async (f) => { try { const t = await io.readText?.(f); return typeof t === 'string' ? t : null; } catch { return null; } };
+const isFile = async (f) => { try { return !!(await io.isFile?.(f)); } catch { return false; } };
+const isDir = async (f) => { try { return !!(await io.isDir?.(f)); } catch { return false; } };
+const cands = [];
+const roots = await steamRoots({ ...io, platform, isDir });
+const libs = [], seen = new Set();
+const addLib = (p, apps) => { const lp = J(p); const k = sameKey(platform, lp); if (seen.has(k)) return; seen.add(k); libs.push({ path: lp, apps }); };
+for (const root of roots) {
+const text = await read(J(root, 'steamapps', 'libraryfolders.vdf'));
+for (const l of text ? libraryFolders(parseVdf(text)) : []) addLib(l.path, l.apps);
+addLib(root, null);
+}
+const id = String(RL_STEAM_APPID);
+for (const lib of [...libs.filter((l) => l.apps?.has(id)), ...libs.filter((l) => !l.apps?.has(id))]) {
+const manifest = await read(J(lib.path, 'steamapps', `appmanifest_${RL_STEAM_APPID}.acf`));
+if (!manifest) continue;
+const dir = safeDir(vdfGet(vdfGet(parseVdf(manifest), 'AppState'), 'installdir')) || RL_INSTALL_DIR;
+cands.push({ dir: J(lib.path, 'steamapps', 'common', dir), store: 'steam' });
+}
+for (const dir of await epicInstalls(io, J, read)) cands.push({ dir: J(dir), store: 'epic' });
+let reason = 'not-installed';
+const tried = new Set();
+for (const c of cands) {
+const k = sameKey(platform, c.dir);
+if (tried.has(k)) continue;
+tried.add(k);
+if (!(await isFile(J(c.dir, 'Binaries', 'Win64', 'RocketLeague.exe')))) { reason = 'no-binary'; continue; }
+const configDir = J(c.dir, ...RL_INI_DIR);
+if (!(await isDir(configDir))) { reason = 'no-config-dir'; continue; }
+const names = [];
+for (const nm of RL_INI_NAMES) if (await isFile(J(configDir, nm))) names.push(nm);
+const ini = rlIniTarget(names);
+const inis = await rlIniFiles({ ...io, platform }, configDir);
+return { found: true, store: c.store, gameDir: c.dir, configDir, ini, iniPath: inis[0]?.path || J(configDir, ini || 'DefaultStatsAPI.ini'), names, inis };
+}
+return { found: false, reason };
+}
+};
+__d[645] = function (__ns) {
+const { normalizeRl, rlView } = __m(644);
+__e(__ns, { "RL_SIM_LOOP": () => RL_SIM_LOOP, "rlDemoMessages": () => rlDemoMessages, "simRl": () => simRl }, [], ["RL_SIM_LOOP","rlDemoMessages","simRl"]);
+const RL_SIM_LOOP = 80;
+const ROSTER = [
+{ Name: 'Kestrel', PrimaryId: 'Steam|76500000000000101|0', Shortcut: 1, TeamNum: 0 },
+{ Name: 'Juniper', PrimaryId: 'Epic|00000000000000000000000000000102|0', Shortcut: 2, TeamNum: 0 },
+{ Name: 'Marlowe', PrimaryId: 'Steam|76500000000000103|0', Shortcut: 3, TeamNum: 0 },
+{ Name: 'Tamsin', PrimaryId: 'Epic|00000000000000000000000000000105|0', Shortcut: 5, TeamNum: 1 },
+{ Name: 'Oskar', PrimaryId: 'Steam|76500000000000106|0', Shortcut: 6, TeamNum: 1 },
+{ Name: 'Wren', PrimaryId: 'Steam|76500000000000107|0', Shortcut: 7, TeamNum: 1 },
+];
+const GUID = '00000000000000000000000000000000EXAMPLE';
+const omit = (o) => Object.fromEntries(Object.entries(o).filter(([, v]) => v !== false && v !== 0 && v !== ''));
+const ref = (i) => omit({ Name: ROSTER[i].Name, Shortcut: ROSTER[i].Shortcut, TeamNum: ROSTER[i].TeamNum });
+const NOBODY = { TeamNum: 255 };
+function director() {
+const out = [];
+const add = (atMs, Event, Data, note) => out.push({ atMs, payload: { Event, Data: omit(Data) }, note: note || null });
+const stats = ROSTER.map(() => ({ Score: 0, Goals: 0, Shots: 0, Assists: 0, Saves: 0, Touches: 0, CarTouches: 0, Demos: 0 }));
+const game = { blue: 0, orange: 0, overtime: false, ball: 0, ballTeam: 255, replay: false, winner: null };
+const car = ROSTER.map(() => ({ boost: 33, speed: 0, ss: false, demo: false, ground: true }));
+let clk = { at: 0, t: 300, run: false, up: false };
+const clock = (atMs, t, run, up = false) => { clk = { at: atMs, t, run, up }; };
+const timeAt = (atMs) => { if (!clk.run) return clk.t; const d = Math.floor((atMs - clk.at) / 1000); return clk.up ? clk.t + d : Math.max(0, clk.t - d); };
+const stop = (atMs) => clock(atMs, timeAt(atMs), false, clk.up);
+const update = (atMs, note) => {
+const Players = ROSTER.map((p, i) => {
+const o = { Name: p.Name, PrimaryId: p.PrimaryId, Shortcut: p.Shortcut, TeamNum: p.TeamNum, ...stats[i] };
+if (p.TeamNum === 0) Object.assign(o, { bHasCar: !car[i].demo, Speed: car[i].speed, Boost: Math.round(car[i].boost), bBoosting: car[i].boosting || false, bOnGround: car[i].ground, bOnWall: false, bPowersliding: false, bDemolished: car[i].demo, bSupersonic: car[i].ss });
+return omit(o);
+});
+add(atMs, 'UpdateState', {
+MatchGuid: GUID, Players,
+Game: omit({
+Teams: [omit({ Name: 'Blue', TeamNum: 0, Score: game.blue, ColorPrimary: '1873FF', ColorSecondary: 'E5E5E5' }), omit({ Name: 'Orange', TeamNum: 1, Score: game.orange, ColorPrimary: 'C26418', ColorSecondary: 'E5E5E5' })],
+TimeSeconds: timeAt(atMs), bOvertime: game.overtime, Ball: omit({ Speed: game.ball, TeamNum: game.ballTeam }), bReplay: game.replay,
+bHasWinner: !!game.winner, Winner: game.winner || '', Arena: 'Stadium_P', PlaylistId: 13, bHasTarget: false,
+}),
+}, note);
+};
+const ramp = (a, b, every, f) => { for (let t = a; t <= b; t += every) { f((t - a) / Math.max(1, b - a)); update(t); } };
+const fill = (a, b) => { for (let t = a; t < b; t += 1000) update(t); };
+const tick = (atMs, note) => add(atMs, 'ClockUpdatedSeconds', { MatchGuid: GUID, TimeSeconds: timeAt(atMs), bOvertime: game.overtime }, note);
+add(0, 'MatchCreated', { MatchGuid: GUID }, 'A match was created: the online 3v3 is about to load.');
+add(300, 'MatchInitialized', { MatchGuid: GUID }, 'The arena is loaded: Blue (us) vs Orange, DFH Stadium.');
+update(600, 'The first state: 5:00 on the clock, 0–0, every car on 33 boost. Only Blue (our team) carries boost and speed: the game withholds Orange\'s.');
+add(1000, 'CountdownBegin', { MatchGuid: GUID }, 'The kickoff countdown starts: 3 … 2 … 1.');
+update(2500);
+add(4000, 'RoundStarted', { MatchGuid: GUID }, 'GO: the kickoff. The clock runs.');
+clock(4000, 300, true);
+ramp(4000, 6400, 200, (k) => {
+car[0].boost = 33 * (1 - k); car[0].boosting = k < 1; car[0].speed = Math.round(20 + 80 * Math.min(1, k * 1.4)); car[0].ss = car[0].speed >= 80;
+car[1].boost = 33 - 12 * k; car[1].speed = Math.round(40 * k + 10); car[2].speed = Math.round(30 * k);
+});
+game.ball = 74; game.ballTeam = 0; stats[0].Touches++;
+add(6450, 'BallHit', { MatchGuid: GUID, Players: [ref(0)], Ball: { PreHitSpeed: 0, PostHitSpeed: 74.2, Location: { X: 0, Y: -120, Z: 93 } } }, 'Kestrel wins the kickoff: the ball leaves at 74 km/h.');
+car[0].boosting = false; car[0].speed = 72; car[0].ss = false;
+update(6600, 'Off supersonic: the boost is empty.');
+fill(7600, 9000);
+game.ball = 96; stats[1].Shots++; stats[1].Touches++;
+add(9000, 'StatfeedEvent', { MatchGuid: GUID, EventName: 'Shot', Type: 'Shot on Goal', MainTarget: ref(1), SecondaryTarget: NOBODY }, 'Juniper shoots.');
+stats[3].Saves++; stats[3].Score += 50; game.ballTeam = 1;
+add(9400, 'StatfeedEvent', { MatchGuid: GUID, EventName: 'Save', Type: 'Save', MainTarget: ref(3), SecondaryTarget: NOBODY }, 'Tamsin (Orange) saves.');
+update(9500);
+ramp(10000, 11200, 400, (k) => { car[0].boost = 100 * k; car[0].speed = 60; });
+ramp(12000, 13600, 400, (k) => { car[2].boost = 70 - 50 * k; car[2].boosting = true; car[2].speed = Math.round(70 + 20 * k); car[2].ss = k > 0.4; });
+stats[2].Demos++; stats[2].Score += 15;
+add(13700, 'StatfeedEvent', { MatchGuid: GUID, EventName: 'Demolish', Type: 'Demolition', MainTarget: ref(2), SecondaryTarget: ref(4) }, 'Marlowe (Blue) demolishes Oskar.');
+car[2].boosting = false; car[2].ss = false; car[2].speed = 55;
+fill(14000, 17000);
+game.ball = 103; game.ballTeam = 0;
+add(17000, 'CrossbarHit', { MatchGuid: GUID, BallLocation: { X: 300, Y: 5120, Z: 640 }, BallSpeed: 103.5, ImpactForce: 2050, BallLastTouch: { Player: ref(1), Speed: 103.5 } }, 'Off the crossbar: a hard hit (impact 2050).');
+fill(17200, 19000);
+ramp(19000, 21000, 250, (k) => { car[0].boost = 100 - 70 * k; car[0].boosting = true; car[0].speed = Math.round(60 + 30 * k); car[0].ss = k > 0.5; });
+game.blue = 1; game.ball = 108; stats[0].Goals++; stats[0].Shots++; stats[0].Score += 100; stats[1].Assists++; stats[1].Score += 50;
+stop(21200);
+add(21200, 'GoalScored', { MatchGuid: GUID, GoalSpeed: 108.4, GoalTime: 17.2, ImpactLocation: { X: -210, Y: 5180, Z: 320 }, Scorer: ref(0), Assister: ref(1), BallLastTouch: { Player: ref(0), Speed: 108.4 } }, 'GOAL, Blue: Kestrel at 108 km/h, assisted by Juniper. 1–0; the clock stops.');
+add(21250, 'StatfeedEvent', { MatchGuid: GUID, EventName: 'Goal', Type: 'Goal', MainTarget: ref(0), SecondaryTarget: NOBODY });
+add(21260, 'StatfeedEvent', { MatchGuid: GUID, EventName: 'Assist', Type: 'Assist', MainTarget: ref(1), SecondaryTarget: NOBODY }, 'Juniper\'s assist.');
+car[0].boosting = false; car[0].ss = false;
+update(21400);
+add(22500, 'GoalReplayStart', { MatchGuid: GUID }, 'The goal replay.');
+game.replay = true; update(23000); update(25000);
+add(25200, 'GoalScored', { MatchGuid: GUID, GoalSpeed: 108.4, GoalTime: 17.2, ImpactLocation: { X: -210, Y: 5180, Z: 320 }, Scorer: ref(0), Assister: ref(1), BallLastTouch: { Player: ref(0), Speed: 108.4 } }, 'Inside the replay the game sends GoalScored again: ignored (no second goal).');
+add(26500, 'GoalReplayWillEnd', { MatchGuid: GUID });
+add(27000, 'GoalReplayEnd', { MatchGuid: GUID });
+game.replay = false; game.ball = 0; game.ballTeam = 255; car.forEach((c) => { c.boost = 33; c.speed = 0; c.ss = false; c.demo = false; });
+update(27200, 'Back to kickoff positions: 33 boost each.');
+add(27500, 'CountdownBegin', { MatchGuid: GUID }, 'The second kickoff: 3 … 2 … 1.');
+update(29000);
+add(30500, 'RoundStarted', { MatchGuid: GUID }, 'GO.');
+clock(30500, timeAt(30500), true);
+update(31000);
+clock(32000, 160, true);
+game.ball = 112; game.ballTeam = 1;
+ramp(32000, 33200, 400, (k) => { car[2].boost = 60 - 40 * k; car[2].speed = 70; });
+stats[2].Saves++; stats[2].Score += 75;
+add(33400, 'StatfeedEvent', { MatchGuid: GUID, EventName: 'EpicSave', Type: 'Epic Save', MainTarget: ref(2), SecondaryTarget: NOBODY }, 'EPIC SAVE: Marlowe off the line. (The demo jumped the clock to 2:40.)');
+fill(33600, 37000);
+stats[5].Demos++;
+add(37000, 'StatfeedEvent', { MatchGuid: GUID, EventName: 'Demolish', Type: 'Demolition', MainTarget: ref(5), SecondaryTarget: ref(1) }, 'Wren (Orange) demolishes Juniper.');
+car[1].demo = true; car[1].boost = 0; car[1].speed = 0;
+update(37200, 'Juniper\'s car is out (bDemolished) until the respawn.');
+fill(38200, 40200);
+car[1].demo = false; car[1].boost = 33;
+update(40200, 'Juniper respawns with 33 boost.');
+clock(41000, 42, true);
+update(41000);
+game.orange = 1; game.ball = 93; game.ballTeam = 1; stats[4].Goals++; stats[4].Shots++; stats[4].Score += 100;
+stop(43000);
+add(43000, 'GoalScored', { MatchGuid: GUID, GoalSpeed: 93.1, GoalTime: 12.5, ImpactLocation: { X: 120, Y: -5180, Z: 210 }, Scorer: ref(4), Assister: NOBODY, BallLastTouch: { Player: ref(4), Speed: 93.1 } }, 'GOAL, Orange: Oskar at 93 km/h. 1–1, 0:40 left.');
+update(43200);
+add(44000, 'GoalReplayStart', { MatchGuid: GUID });
+game.replay = true; update(45000);
+add(47000, 'GoalReplayEnd', { MatchGuid: GUID });
+game.replay = false; game.ball = 0; game.ballTeam = 255; car.forEach((c) => { c.boost = 33; c.speed = 0; c.ss = false; });
+update(47100);
+add(47300, 'CountdownBegin', { MatchGuid: GUID });
+update(49000);
+add(50300, 'RoundStarted', { MatchGuid: GUID }, 'GO. (The demo jumps the clock to 0:04.)');
+clock(50000, 4, true);
+for (const at of [51000, 52000, 53000]) { tick(at); update(at + 100); }
+tick(54000, 'Time: 0:00 at 1–1 (the ball must touch the ground).');
+stop(54000);
+game.overtime = true;
+add(55000, 'ClockUpdatedSeconds', { MatchGuid: GUID, TimeSeconds: 0, bOvertime: true }, 'OVERTIME: the next goal wins (golden goal).');
+clock(55000, 0, false, true);
+car.forEach((c) => { c.boost = 33; c.speed = 0; });
+update(55200);
+add(55500, 'CountdownBegin', { MatchGuid: GUID }, 'The overtime kickoff.');
+update(57000);
+add(58500, 'RoundStarted', { MatchGuid: GUID });
+clock(58500, 0, true, true);
+for (const at of [59500, 60500, 61500]) { tick(at, at === 60500 ? 'The overtime clock counts UP (+0:02).' : null); update(at + 100); }
+ramp(62200, 63800, 200, (k) => { car[1].boost = 33 + 60 * k; car[1].speed = Math.round(50 + 45 * k); car[1].boosting = k > 0.3; car[1].ss = k > 0.6; });
+game.blue = 2; game.ball = 121.7; game.ballTeam = 0; stats[1].Goals++; stats[1].Shots++; stats[1].Score += 100; stats[0].Assists++; stats[0].Score += 50;
+stop(64000);
+add(64000, 'GoalScored', { MatchGuid: GUID, GoalSpeed: 121.7, GoalTime: 5.5, ImpactLocation: { X: 40, Y: 5180, Z: 560 }, Scorer: ref(1), Assister: ref(0), BallLastTouch: { Player: ref(1), Speed: 121.7 } }, 'GOLDEN GOAL, Blue: Juniper at 122 km/h, from Kestrel. 2–1.');
+car[1].boosting = false; car[1].ss = false;
+game.winner = 'Blue';
+update(64200);
+add(64500, 'MatchEnded', { MatchGuid: GUID, WinnerTeamNum: 0 }, 'The match ends: Blue wins 2–1 in overtime (WinnerTeamNum 0, left out like every zero).');
+add(65500, 'StatfeedEvent', { MatchGuid: GUID, EventName: 'MVP', Type: 'MVP', MainTarget: ref(1), SecondaryTarget: NOBODY }, 'MVP: Juniper (our team).');
+add(66500, 'PodiumStart', { MatchGuid: GUID }, 'The podium.');
+update(67000);
+fill(68000, 76000);
+add(76000, 'MatchDestroyed', { MatchGuid: GUID }, 'Back to the menus.');
+out.sort((a, b) => a.atMs - b.atMs);
+return out;
+}
+let MESSAGES = null;
+function rlDemoMessages() {
+if (!MESSAGES) MESSAGES = director().map((m, i) => ({ id: `${String(i).padStart(3, '0')}-${m.payload.Event}`, atMs: m.atMs, note: m.note, payload: m.payload }));
+return MESSAGES;
+}
+let STATES = null;
+function states() {
+if (STATES) return STATES;
+let s = null;
+STATES = rlDemoMessages().map((m) => { s = normalizeRl(m.payload, s, { nowMs: m.atMs }).state; return { at: m.atMs, state: s }; });
+return STATES;
+}
+function simRl(t) {
+const L = RL_SIM_LOOP * 1000;
+const ms = ((Math.round((Number.isFinite(t) ? t : 0) * 1000) % L) + L) % L;
+const all = states();
+let lo = 0, hi = all.length - 1, at = -1;
+while (lo <= hi) { const mid = (lo + hi) >> 1; if (all[mid].at <= ms) { at = mid; lo = mid + 1; } else hi = mid - 1; }
+if (at < 0) return rlView(all[all.length - 1].state, ms + L) && null;
+return rlView(all[at].state, ms);
+}
+};
+__d[646] = function (__ns) {
+const { simRl, RL_SIM_LOOP } = __m(645);
+__e(__ns, { "RL_GAME": () => RL_GAME, "DATA_SHAPE": () => DATA_SHAPE, "EFFECTS_PARAM": () => EFFECTS_PARAM, "rlOf": () => rlOf, "tierOf": () => tierOf, "faceOf": () => faceOf, "sideOf": () => sideOf, "newest": () => newest, "stepOf": () => stepOf, "DUR": () => DUR, "FLOOD_PEAK": () => FLOOD_PEAK, "RISE_S": () => RISE_S, "ONSET_GAP_S": () => ONSET_GAP_S, "BRIGHT": () => BRIGHT, "SHAKE": () => SHAKE, "SHAKE_MAX": () => SHAKE_MAX, "OT_PERIOD_S": () => OT_PERIOD_S, "brightOnsets": () => brightOnsets, "fxOf": () => fxOf, "fxBusy": () => fxBusy, "clockText": () => clockText, "kmhText": () => kmhText, "TEAM_NAME": () => TEAM_NAME, "SLOTS": () => SLOTS, "slotModel": () => slotModel, "layoutOf": () => layoutOf }, [], ["BRIGHT","DATA_SHAPE","DUR","EFFECTS_PARAM","FLOOD_PEAK","ONSET_GAP_S","OT_PERIOD_S","RISE_S","RL_GAME","SHAKE","SHAKE_MAX","SLOTS","TEAM_NAME","brightOnsets","clockText","faceOf","fxBusy","fxOf","kmhText","layoutOf","newest","rlOf","sideOf","slotModel","stepOf","tierOf"]);
+const RL_GAME = 'rl';
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const isObj = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+const DATA_SHAPE = Object.freeze({
+gamelink: 'Game Link v1 (src/apps/sources/README.md § Game Link) + gamelink.rl (Rocket League, lead/CONTRACT-moba.md addendum): { phase, view (player | team), clock { t, overtime }, boost, supersonic, boosting, speed, demolished, mates [{ slot, boost, supersonic, demolished, self }] (our team only), ball { speed, team }, teamColor, foeColor, scores { blue, orange }, stats, team, lastGoal { team, ours, speed }, replay, online } · match.us / them = goals · absent = demo match · null = waiting',
+});
+const EFFECTS_PARAM = Object.freeze({ type: 'select', default: 'soft', options: ['soft', 'full', 'off'], label: 'Effects (soft · full · off)' });
+function demoView(t) {
+const ms = ((Math.round(t * 1000) % (RL_SIM_LOOP * 1000)) + RL_SIM_LOOP * 1000) % (RL_SIM_LOOP * 1000);
+const s = simRl(ms / 1000);
+return { mode: 'demo', s, g: s?.rl || null, nowMs: ms };
+}
+function rlOf(ctx) {
+const d = ctx.data;
+if (!d || !Object.hasOwn(d, 'gamelink') || d.gamelink === undefined) return demoView(Number.isFinite(ctx.t) ? ctx.t : 0);
+const s = d.gamelink;
+if (!s || typeof s !== 'object') return { mode: 'waiting', s: null, g: null, nowMs: ctx.now };
+if (s.game !== RL_GAME) {
+if (Array.isArray(d.demo) && d.demo.includes('gamelink') && Number.isFinite(ctx.now)) return demoView(ctx.now / 1000);
+return { mode: 'other', s, g: null, game: typeof s.game === 'string' ? s.game : null, nowMs: ctx.now };
+}
+return { mode: 'live', s, g: isObj(s.rl) ? s.rl : null, nowMs: ctx.now };
+}
+function tierOf(ctx) {
+const e = ctx.params?.effects ?? 'soft';
+if (ctx.reduced || ctx.motion === 'still' || e === 'off') return 'still';
+if (ctx.motion === 'calm') return 'calm';
+return e === 'full' ? 'full' : 'soft';
+}
+function faceOf(view) {
+if (view.mode === 'waiting' || !view.s) return 'waiting';
+if (view.mode === 'other') return 'other';
+switch (view.s.status) {
+case 'menu': return 'menu';
+case 'loading': return 'loading';
+case 'watching': return 'watching';
+case 'paused': return 'paused';
+case 'live': return view.s.match?.phase === 'gameover' ? 'post' : 'live';
+default: return 'menu';
+}
+}
+const sideOf = (view) => (view.s?.player?.team === 'blue' || view.s?.player?.team === 'orange' ? view.s.player.team : view.s?.match?.side || null);
+function newest(view, types, win) {
+const list = view.s?.events;
+if (!Array.isArray(list)) return null;
+const set = typeof types === 'string' ? [types] : types;
+for (let i = list.length - 1; i >= 0; i--) {
+const e = list[i];
+if (!e || !set.includes(e.type) || !Number.isFinite(e.at)) continue;
+const a = (view.nowMs - e.at) / 1000;
+if (a < -0.05) continue;
+return a < win ? { e, a: Math.max(0, a) } : null;
+}
+return null;
+}
+const stepOf = (a, dur, n) => (a >= dur ? -1 : Math.min(n - 1, Math.floor((a / dur) * n + 1e-9)));
+const DUR = Object.freeze({ goal: 2.6, demo: 1.2, save: 1.0, epicSave: 1.6, shot: 0.6, crossbar: 0.7, mvp: 5.0, kickoff: 4.0, go: 0.8 });
+const FLOOD_PEAK = Object.freeze({ full: 0.6, soft: 0.46, calm: 0.24 });
+const RISE_S = Object.freeze({ full: 0.08, soft: 0.12, calm: 0.4 });
+const ONSET_GAP_S = 1;
+const BRIGHT = Object.freeze(['goal', 'demo', 'save', 'epicSave', 'mvp']);
+const SHAKE = Object.freeze([1, -0.55, 0.25, 0]); 
+const SHAKE_MAX = 0.035;
+const OT_PERIOD_S = 2;
+const BREATH = [0, 1, 2, 3, 3, 2, 1, 0];
+function brightOnsets(view) {
+const list = (view.s?.events || []).filter((e) => e && BRIGHT.includes(e.type) && Number.isFinite(e.at)).sort((a, b) => a.at - b.at || a.seq - b.seq);
+const out = new Map();
+let last = -Infinity;
+for (const e of list) {
+const dim = e.at - last < ONSET_GAP_S * 1000;
+out.set(e, dim);
+if (!dim) last = e.at;
+}
+return out;
+}
+function fxOf(view, tier) {
+const s = view.s, g = view.g, face = faceOf(view);
+const fx = { tier, face, phase: g?.phase || null, goal: null, demo: null, save: null, shot: null, crossbar: null, kickoff: null, go: null, ot: 0, otOn: false, mvp: null, dim: 0, shake: { dx: 0, dy: 0 } };
+if (face === 'watching' || face === 'paused' || face === 'other') fx.dim = 2;
+if (!s || face === 'waiting' || face === 'other' || face === 'menu' || face === 'loading' || face === 'watching') return fx;
+const still = tier === 'still', calm = tier === 'calm';
+fx.otOn = !!g?.clock?.overtime && face === 'live';
+if (still) return fx;
+const dims = brightOnsets(view);
+const isDim = (e) => dims.get(e) === true;
+if (fx.otOn) { const ph = (((view.nowMs / 1000) / OT_PERIOD_S) % 1 + 1) % 1; fx.ot = calm ? Math.min(1, BREATH[Math.floor(ph * 8)]) : BREATH[Math.min(7, Math.floor(ph * 8))]; }
+const go = newest(view, 'goal', DUR.goal);
+if (go) {
+const a = go.a, rise = RISE_S[tier];
+const n = calm ? 4 : 8;
+const k = stepOf(a, DUR.goal, n);
+const level = a < rise ? 3 : a < 0.9 ? 6 : Math.max(1, 6 - Math.ceil(((a - 0.9) / (DUR.goal - 0.9)) * 5));
+fx.goal = { k, n, level: calm ? Math.min(4, level) : level, team: go.e.team || null, ours: go.e.ours ?? null, speed: Number.isFinite(go.e.speed) ? go.e.speed : null, golden: !!go.e.golden, self: !!go.e.self, dim: isDim(go.e) };
+}
+const de = newest(view, 'demo', DUR.demo);
+if (de) { const n = calm ? 3 : 6; const k = stepOf(de.a, DUR.demo, n); if (k >= 0) fx.demo = { k, n, ours: de.e.ours ?? null, victim: de.e.victim || null, rise: de.a < RISE_S[tier], dim: isDim(de.e) }; }
+const sv = newest(view, ['save', 'epicSave'], DUR.epicSave);
+if (sv) {
+const epic = sv.e.type === 'epicSave', dur = epic ? DUR.epicSave : DUR.save;
+const n = calm ? 3 : 8;
+const k = stepOf(sv.a, dur, n);
+if (k >= 0) fx.save = { k, n, epic, ours: sv.e.ours ?? null, rise: sv.a < RISE_S[tier], dim: isDim(sv.e) };
+}
+const sh = newest(view, 'shot', DUR.shot);
+if (sh) { const k = stepOf(sh.a, DUR.shot, 4); if (k >= 0) fx.shot = { k, n: 4, ours: sh.e.ours ?? null }; }
+const cb = newest(view, 'crossbar', DUR.crossbar);
+if (cb) {
+const k = stepOf(cb.a, DUR.crossbar, SHAKE.length);
+if (k >= 0) {
+const amp = clamp(+cb.e.impact || 0.5, 0.15, 1) * (calm ? 0.45 : 1);
+const q = Math.round(SHAKE[k] * amp * 4) / 4; 
+fx.crossbar = { k, n: SHAKE.length, impact: clamp(+cb.e.impact || 0.5) };
+fx.shake = { dx: q, dy: k % 2 ? q * 0.4 : -q * 0.25 };
+}
+}
+const ko = newest(view, 'kickoff', DUR.kickoff);
+if (ko) {
+const a = ko.a;
+if (g?.phase === 'kickoff' || a < 3) fx.kickoff = { count: a < 1 ? 3 : a < 2 ? 2 : a < 3 ? 1 : 1, step: Math.min(2, Math.floor(a)) };
+else if ((g?.phase === 'live' || g?.phase === 'overtime') && a < 3 + DUR.go) fx.go = { k: stepOf(a - 3, DUR.go, calm ? 2 : 4), n: calm ? 2 : 4 };
+}
+const mv = newest(view, 'mvp', DUR.mvp);
+if (mv) { const n = calm ? 4 : 10; const k = stepOf(mv.a, DUR.mvp, n); if (k >= 0) fx.mvp = { k, n, ours: mv.e.ours ?? null, self: !!mv.e.self, dim: isDim(mv.e) }; }
+return fx;
+}
+const fxBusy = (fx) => !!(fx.goal || fx.demo || fx.save || fx.shot || fx.crossbar || fx.kickoff || fx.go || fx.mvp || fx.ot);
+function clockText(c) {
+if (!c || !Number.isFinite(c.t)) return '—';
+const t = Math.max(0, Math.round(c.t));
+return `${c.overtime ? '+' : ''}${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`;
+}
+const kmhText = (v) => (Number.isFinite(v) ? String(Math.round(v)) : '—');
+const TEAM_NAME = Object.freeze({ blue: 'Blue', orange: 'Orange' });
+const PHASE_WORD = { pregame: 'Ready', kickoff: 'Kickoff', live: 'Live', goal: 'Goal', replay: 'Replay', overtime: 'Overtime', post: 'Final', podium: 'Final' };
+const SLOTS = Object.freeze(['us', 'them', 'clock', 'boost', 'heat', 'ball', 'status', 'board', 'goals', 'assists', 'saves', 'shots', 'demos', 'score', 'mvp', 'blank']);
+const STAT_SLOTS = { goals: 'Goals', assists: 'Assists', saves: 'Saves', shots: 'Shots', demos: 'Demos', score: 'Score' };
+const STAT_PICT = { goals: 'goal', assists: 'star', saves: 'shield', shots: 'ball', demos: 'skull', score: 'star' };
+function slotModel(slot, view, fx) {
+const s = view.s, g = view.g, face = fx.face, m = s?.match;
+const off = face === 'waiting' || face === 'other' || face === 'menu' || face === 'loading' || face === 'watching';
+const side = sideOf(view);
+const out = { slot, title: '', value: '—', sub: null, team: null, tone: off ? 'off' : 'idle', pict: null, word: false, dim: off || face === 'paused' };
+switch (slot) {
+case 'us': case 'them': {
+const team = side ? (slot === 'us' ? side : side === 'blue' ? 'orange' : 'blue') : slot === 'us' ? 'blue' : 'orange';
+out.team = team;
+out.title = TEAM_NAME[team];
+const sc = g?.scores?.[team];
+if (face === 'waiting' || face === 'other' || face === 'menu' || !Number.isFinite(sc)) { out.tone = 'off'; break; }
+out.value = String(sc);
+out.sub = side ? (slot === 'us' ? 'Your team' : 'Them') : null;
+out.tone = face === 'watching' ? 'off' : fx.goal && fx.goal.team === team ? 'lit' : 'idle';
+if (face === 'post' && m?.result) { out.sub = slot === 'us' ? (m.result === 'win' ? 'Winner' : null) : (m.result === 'loss' ? 'Winner' : null); out.tone = (slot === 'us') === (m.result === 'win') ? 'lit' : 'idle'; }
+break;
+}
+case 'clock': {
+out.title = g?.clock?.overtime ? 'Overtime' : 'Time';
+out.pict = 'clock';
+if (face === 'waiting') { out.value = 'Waiting'; out.word = true; out.sub = 'for Rocket League'; out.tone = 'off'; break; }
+if (face === 'other') { out.value = 'Other game'; out.word = true; out.sub = view.game ? String(view.game).toUpperCase() : null; out.tone = 'off'; break; }
+if (face === 'menu') { out.value = 'Menu'; out.word = true; out.sub = 'no match'; out.tone = 'off'; break; }
+if (face === 'loading') { out.value = 'Loading'; out.word = true; out.sub = m?.title || null; out.tone = 'off'; break; }
+if (!g?.clock) { out.tone = 'off'; break; }
+out.value = clockText(g.clock);
+out.sub = face === 'watching' ? 'Watching' : face === 'paused' ? 'Paused' : g.replay ? 'Replay' : face === 'post' ? 'Final' : g.phase === 'overtime' ? 'Next goal wins' : PHASE_WORD[g.phase] || null;
+out.tone = face === 'watching' ? 'off' : g.clock.overtime ? 'warn' : 'idle';
+break;
+}
+case 'boost': {
+out.title = g?.view === 'team' ? 'Team boost' : 'Boost';
+out.pict = 'flame';
+if (off || !g) { out.tone = 'off'; break; }
+if (g.view === 'player' && Number.isFinite(g.boost)) { out.value = String(g.boost); out.sub = g.demolished ? 'Demolished' : g.supersonic ? 'Supersonic' : g.boosting ? 'Boosting' : null; out.tone = g.supersonic ? 'lit' : 'idle'; }
+else if (g.mates?.length) { out.value = g.mates.map((x) => (Number.isFinite(x.boost) ? x.boost : '—')).join(' · '); out.sub = 'your team'; out.tone = g.mates.some((x) => x.supersonic) ? 'lit' : 'idle'; }
+else out.tone = 'off';
+out.team = side;
+break;
+}
+case 'ball': {
+out.title = 'Ball';
+out.pict = 'ball';
+if (off || !g?.ball || !Number.isFinite(g.ball.speed)) { out.tone = 'off'; out.sub = 'km/h'; break; }
+out.value = kmhText(g.ball.speed);
+out.sub = 'km/h';
+out.team = g.ball.team;
+out.tone = g.ball.speed >= 100 ? 'warn' : g.ball.speed >= 60 ? 'lit' : 'idle';
+if (fx.goal && fx.goal.speed !== null) { out.title = 'Goal'; out.value = kmhText(fx.goal.speed); out.team = fx.goal.team; out.tone = 'lit'; }
+break;
+}
+case 'status': {
+out.word = true;
+out.title = m?.title || 'Rocket League';
+if (face === 'waiting') { out.value = 'Waiting'; out.sub = 'for Rocket League'; out.tone = 'off'; out.pict = 'ball'; break; }
+if (face === 'other') { out.value = 'Not RL'; out.sub = view.game ? `${String(view.game).toUpperCase()} is live` : 'another game'; out.tone = 'off'; break; }
+if (face === 'menu') { out.value = 'Menu'; out.sub = 'in Rocket League'; out.tone = 'off'; break; }
+if (face === 'loading') { out.value = 'Loading'; out.sub = m?.title || null; out.tone = 'off'; break; }
+if (face === 'watching') { out.value = 'Watching'; out.sub = 'not your match'; out.tone = 'off'; break; }
+if (face === 'paused') { out.value = 'Paused'; out.tone = 'off'; break; }
+if (face === 'post') { out.value = m?.result === 'win' ? 'Win' : m?.result === 'loss' ? 'Loss' : 'Final'; out.sub = g?.clock?.overtime ? 'in overtime' : m?.title || null; out.tone = m?.result === 'win' ? 'lit' : 'idle'; out.team = m?.result === 'win' ? side : null; break; }
+if (fx.kickoff) { out.value = String(fx.kickoff.count); out.word = false; out.sub = 'Kickoff'; out.tone = 'warn'; break; }
+if (fx.go) { out.value = 'GO'; out.sub = 'Kickoff'; out.tone = 'lit'; out.team = side; break; }
+if (fx.goal) { out.value = 'Goal'; out.sub = fx.goal.golden ? 'Golden goal' : fx.goal.team ? TEAM_NAME[fx.goal.team] : null; out.tone = 'lit'; out.team = fx.goal.team; break; }
+out.value = g?.replay ? 'Replay' : PHASE_WORD[g?.phase] || 'Live';
+out.sub = g?.view === 'team' ? 'team view' : g?.view === 'player' ? 'your car' : null;
+out.tone = g?.phase === 'overtime' || g?.clock?.overtime ? 'warn' : 'idle';
+break;
+}
+case 'mvp': {
+out.title = 'MVP';
+out.pict = 'crown';
+if (off) { out.tone = 'off'; break; }
+const mv = g?.mvp;
+if (mv) { out.value = mv.ours ? (mv.self ? 'You' : 'Ours') : 'Theirs'; out.word = true; out.tone = mv.ours ? 'lit' : 'idle'; out.team = mv.ours ? side : null; out.sub = mv.ours && !mv.self ? 'your team' : null; break; }
+out.sub = 'at full time';
+out.tone = 'off';
+break;
+}
+default: {
+if (!STAT_SLOTS[slot]) break;
+const mine = g?.view === 'player' ? g.stats : null, team = g?.team;
+const v = mine ? mine[slot] : team ? team[slot] : null;
+out.title = mine ? STAT_SLOTS[slot] : `Team ${STAT_SLOTS[slot].toLowerCase()}`;
+out.pict = STAT_PICT[slot];
+if (off || !Number.isFinite(v)) { out.tone = 'off'; break; }
+out.value = String(v);
+out.team = side;
+const hot = (slot === 'demos' && fx.demo && fx.demo.ours) || ((slot === 'saves') && fx.save && fx.save.ours) || (slot === 'goals' && fx.goal && fx.goal.ours) || (slot === 'shots' && fx.shot && fx.shot.ours);
+out.tone = hot ? 'lit' : 'idle';
+break;
+}
+}
+return out;
+}
+const L = (...rows) => rows;
+const B = (n) => Array(n).fill('boost');
+const HT = (n) => Array(n).fill('heat'); 
+const LAYOUTS = {
+galleon: { keys: L(['us', 'status', 'them'], B(3), ['goals', 'ball', 'saves'], ['demos', 'shots', 'mvp']), readout: ['clock', 'board', 'boost', 'ball'] },
+plus: { keys: L(['us', 'clock', 'them', 'status'], B(4)), readout: ['boost', 'ball', 'board', 'clock'] },
+plusxl: { keys: L(['us', 'clock', 'them', 'status', 'ball', 'goals', 'saves', 'shots', 'demos'], B(9), HT(9), ['assists', 'blank', 'blank', 'blank', 'mvp', 'blank', 'blank', 'blank', 'blank']), readout: ['boost', 'ball', 'board', 'clock', 'status', 'mvp'] },
+mk2: { keys: L(['us', 'clock', 'them', 'ball', 'status'], B(5), ['goals', 'assists', 'saves', 'shots', 'demos']) },
+xl: { keys: L(['us', 'clock', 'them', 'status', 'ball', 'goals', 'saves', 'demos'], B(8), HT(8), ['shots', 'assists', 'score', 'blank', 'blank', 'blank', 'blank', 'mvp']) },
+mini: { keys: L(['us', 'clock', 'them'], B(3)) },
+neo: { keys: L(['us', 'clock', 'them', 'status'], B(4)), readout: ['board'] },
+studio: { keys: L(['us', 'clock', 'them', 'status', 'ball', 'goals', 'assists', 'saves', 'shots', 'demos', 'score', 'mvp', 'blank', 'blank', 'blank', 'blank'], B(16)) },
+};
+const PRIORITY = ['us', 'clock', 'them', 'status', 'ball', 'goals', 'saves', 'shots', 'demos', 'assists', 'score', 'mvp'];
+function layoutOf(ctx, { back = false } = {}) {
+const cells = ctx.grid?.cells || [];
+const cols = Math.max(1, ...cells.map((c) => c.col + 1)), rows = Math.max(1, ...cells.map((c) => c.row + 1));
+const D = ctx.deck;
+const nRead = D?.screen?.kind === 'galleon' ? 4 : D?.strip ? D.strip.segments : D?.screen?.kind === 'infobar' ? 1 : 0;
+const known = LAYOUTS[ctx.device?.id] || LAYOUTS[ctx.device?.family];
+let grid = known && known.keys.length === rows && known.keys.every((r) => r.length === cols) ? known.keys : null;
+let readout = known?.readout && known.readout.length === nRead ? known.readout : null;
+if (!readout) readout = nRead === 1 ? ['board'] : ['boost', 'ball', 'board', 'clock', 'status', 'mvp'].slice(0, nRead);
+if (!grid) {
+const pool = [...PRIORITY];
+grid = Array.from({ length: rows }, (_, r) => Array.from({ length: cols }, () => (r === Math.min(1, rows - 1) && rows > 1 ? 'boost' : pool.shift() || 'blank')));
+}
+let slots = cells.map((c) => grid[c.row]?.[c.col] || 'blank');
+if (back && cells.length > 1) {
+const corner = cells.reduce((b, c, i) => (c.row > cells[b].row || (c.row === cells[b].row && c.col > cells[b].col) ? i : b), 0);
+slots = slots.map((x, i) => (i === corner ? 'blank' : x));
+}
+const boostRows = [...new Set(cells.filter((c, i) => slots[i] === 'boost').map((c) => c.row))].sort((a, b) => a - b);
+return { slots, readout, rows: { boost: boostRows } };
+}
+};
+__d[647] = function (__ns) {
+const { rect, path, linearGradient, radialGradient, url, n } = __m(5);
+const { textOutline, textPath, capHeight } = __m(11);
+const { transformPath } = __m(13);
+__e(__ns, { "SKINS": () => SKINS, "SKIN_PARAM": () => SKIN_PARAM, "TEAM_HEX": () => TEAM_HEX, "TEAM_INK": () => TEAM_INK, "paletteOf": () => paletteOf, "redSafe": () => redSafe, "floodHex": () => floodHex, "clubHex": () => clubHex, "bleedOf": () => bleedOf, "face": () => face, "say": () => say, "PICTS": () => PICTS, "PICT_STROKE": () => PICT_STROKE, "pict": () => pict }, [], ["PICTS","PICT_STROKE","SKINS","SKIN_PARAM","TEAM_HEX","TEAM_INK","bleedOf","clubHex","face","floodHex","paletteOf","pict","redSafe","say"]);
+const SKINS = Object.freeze(['game', 'prism']);
+const SKIN_PARAM = Object.freeze({ type: 'select', default: 'game', options: ['game', 'prism'], label: 'Skin (the game · Prism)' });
+const TEAM_HEX = Object.freeze({ blue: '#2f8cff', orange: '#ff9c2e' });
+const TEAM_INK = Object.freeze({ blue: '#a9d0ff', orange: '#ffd29a' });
+const ARENA = {
+name: 'game', themed: false,
+bg0: '#0d1526', bg1: '#060a13', panel0: '#0c1424', panel1: '#050811', turf: '#13213a', field: '#1c2c4a',
+ink: '#eef4ff', muted: '#a3b3cf', dim: '#5d6e8c', line: '#22314f', shade: '#000000',
+neon: '#5fe3ff', neon2: '#b07dff', gold: '#ffd25a', goldHi: '#fff1bf', white: '#ffffff',
+blue: TEAM_HEX.blue, blueHi: '#8cc4ff', orange: TEAM_HEX.orange, orangeHi: '#ffd08a',
+boost: '#ffad33', boostHot: '#ffe7a8', boostLow: '#6b7ea3', supersonic: '#fffaf0', skull: '#e9eefb', ok: '#7ee08a', warn: '#ffd25a',
+};
+function paletteOf(q, { skin = 'game', team = null } = {}) {
+let P;
+if (skin === 'prism') {
+const C = q.colors, T = q.theme;
+P = {
+name: 'prism', themed: true,
+bg0: C.surface, bg1: C.surface2, panel0: C.surface, panel1: C.surface2, turf: C.surface2, field: C.line,
+ink: C.ink, muted: C.muted, dim: C.dim, line: C.line, shade: q.dark ? '#000000' : C.ink,
+neon: T.spectral(191.3, { tier: 'vivid' }), neon2: T.spectral(296, { tier: 'vivid' }), gold: T.spectral(60.4, { tier: 'vivid' }), goldHi: T.spectral(60.4), white: q.dark ? '#ffffff' : C.ink,
+blue: T.spectral(243.6, { tier: 'vivid' }), blueHi: T.spectral(243.6, { tier: 'ink' }), orange: T.spectral(60.4, { tier: 'vivid' }), orangeHi: T.spectral(60.4, { tier: 'ink' }),
+boost: T.spectral(60.4, { tier: 'vivid' }), boostHot: T.spectral(86.5), boostLow: C.dim, supersonic: q.dark ? '#ffffff' : C.ink, skull: C.ink, ok: C.pos, warn: C.warn,
+};
+} else P = { ...ARENA };
+P.team = team === 'orange' || team === 'blue' ? team : null;
+P.ally = P.team === 'orange' ? P.orange : P.team === 'blue' ? P.blue : P.neon;
+P.allyHi = P.team === 'orange' ? P.orangeHi : P.team === 'blue' ? P.blueHi : P.ink;
+P.foe = P.team === 'orange' ? P.blue : P.team === 'blue' ? P.orange : P.muted;
+P.teamColor = (t) => (t === 'blue' ? P.blue : t === 'orange' ? P.orange : P.muted);
+P.teamHi = (t) => (t === 'blue' ? P.blueHi : t === 'orange' ? P.orangeHi : P.ink);
+return P;
+}
+function redSafe(hex) {
+const m = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(String(hex || ''));
+if (!m) return hex;
+const [r, g, b] = [m[1], m[2], m[3]].map((x) => parseInt(x, 16));
+if (!(r > 1.6 * g && r > 1.6 * b)) return hex.toLowerCase();
+const g2 = Math.min(255, Math.ceil(r / 1.6));
+return `#${[r, g2, b].map((x) => x.toString(16).padStart(2, '0')).join('')}`;
+}
+const floodHex = (P, team) => redSafe(team === 'orange' ? P.orange : team === 'blue' ? P.blue : P.neon);
+const clubHex = (v) => (typeof v === 'string' && /^#[0-9a-f]{6}$/i.test(v) ? v.toLowerCase() : null);
+const bleedOf = (q) => (q.ctx.kind === 'key' ? 0 : 1.6);
+function face(q, P, { tone = 'idle', glow = null, rim = null, dim = false, field = true, glowAlpha = 0.3 } = {}) {
+const W = q.w, H = q.h, u = q.m.u;
+const key = q.ctx.kind === 'key';
+const e = bleedOf(q), box = { x: n(e), y: n(e), width: n(W - 2 * e), height: n(H - 2 * e) };
+if (P.themed && key) {
+q.background({ tone: dim ? 'off' : tone });
+if (glow && !dim) { const id = q.id('rlg'); q.def(radialGradient(id, [[0, glow, q.dark ? glowAlpha : glowAlpha * 0.6], [1, glow, 0]], { cx: 0.5, cy: 1.05, r: 0.85 })); q.add(rect({ width: W, height: H, fill: url(id) })); }
+return;
+}
+const id = q.id('rlf');
+q.def(linearGradient(id, [[0, key ? P.bg0 : P.panel0], [1, key ? P.bg1 : P.panel1]], { x1: 0, y1: 0, x2: 0.2, y2: 1 }));
+q.add(rect({ ...box, fill: url(id) }));
+if (field && !dim && !P.themed) {
+const cx = W / 2, cy = H / 2, r = Math.min(W, H) * 0.3;
+q.add(path(`M${n(cx)} ${n(H * 0.08)}V${n(H * 0.92)}M${n(cx - r)} ${n(cy)}A${n(r)} ${n(r)} 0 0 1 ${n(cx + r)} ${n(cy)}A${n(r)} ${n(r)} 0 0 1 ${n(cx - r)} ${n(cy)}Z`, { fill: 'none', stroke: P.field, strokeWidth: n(Math.max(1, u * 0.8)), strokeOpacity: 0.55 }));
+}
+if (glow && !dim) { const gid = q.id('rlg'); q.def(radialGradient(gid, [[0, glow, P.themed && !q.dark ? glowAlpha * 0.6 : glowAlpha], [0.6, glow, glowAlpha * 0.25], [1, glow, 0]], { cx: 0.5, cy: 1.08, r: 0.9 })); q.add(rect({ ...box, fill: url(gid) })); }
+const sw = Math.max(1, u * (key ? 1.2 : 1));
+const ins = key ? Math.max(2, q.m.safe * 0.5) : Math.max(q.m.safe * 0.35, 2 * sw + 1 + e + 0.6); 
+q.add(rect({ x: n(ins), y: n(ins), width: n(W - ins * 2), height: n(H - ins * 2), rx: n(q.m.radius * (key ? 0.8 : 0.45)), fill: 'none', stroke: rim || P.line, strokeWidth: n(sw), strokeOpacity: n(dim ? 0.4 : rim ? 0.9 : 0.8, 3) }));
+}
+const SHEAR = -0.2; 
+const slanted = new Map(); 
+function shearPath(str, size, weight, tracking, caps, tabular) {
+const key = `${str}|${size.toFixed(2)}|${weight}|${tracking}|${caps ? 1 : 0}|${tabular ? 1 : 0}`;
+let hit = slanted.get(key);
+if (hit) return hit;
+const o = textOutline(str, { size, weight, tracking, caps, tabular });
+hit = { d: o.d ? transformPath(o.d, [1, 0, SHEAR, 1, 0, 0]) : '', width: o.width, embolden: o.embolden };
+if (slanted.size > 2000) slanted.clear();
+slanted.set(key, hit);
+return hit;
+}
+function fitSize(str, size, maxWidth, minSize, o) {
+if (!maxWidth) return size;
+const w = textOutline(str, { size, weight: o.weight, tracking: o.tracking, caps: o.caps, tabular: o.tabular }).width;
+return w <= maxWidth ? size : Math.max(minSize, (size * maxWidth) / w);
+}
+function say(q, P, str, o = {}) {
+if (str === null || str === undefined || String(str) === '') return;
+const s = String(str);
+const align = o.align || 'center';
+const size0 = o.size ?? 12 * q.m.u;
+const role = o.role || 'label';
+if (P.themed && !o.plain && (role === 'value' || role === 'hero' || role === 'label')) {
+const st = q.typeStyle(role, { size: size0 });
+const at = role === 'value' || role === 'hero' ? { cy: o.y - capHeight(st.size, st.weight) / 2 } : { y: o.y };
+q.text(role, s, { align, x: o.x, ...at, size: size0, maxWidth: o.maxWidth, color: o.color, opacity: o.opacity });
+return;
+}
+const weight = o.weight ?? 700, tracking = o.tracking ?? (o.caps ? 0.05 : 0), caps = !!o.caps, tabular = !!o.tabular;
+const size = fitSize(s, size0, o.maxWidth, size0 * 0.5, { weight, tracking, caps, tabular });
+const anchor = align === 'left' ? 'start' : align === 'right' ? 'end' : 'middle';
+if (o.slant === false || P.themed) {
+q.add(textPath(s, { x: o.x, y: o.y, size, weight, anchor, maxWidth: o.maxWidth, minSize: size * 0.9, fill: o.color || P.ink, caps, tracking, tabular, fillOpacity: o.opacity }));
+return;
+}
+const t = shearPath(s, size, weight, tracking, caps, tabular);
+if (!t.d) return;
+const x0 = (o.x ?? q.w / 2) - (anchor === 'middle' ? t.width / 2 : anchor === 'end' ? t.width : 0) + capHeight(size, weight) * -SHEAR * 0.5;
+const fill = o.color || P.ink;
+const op = typeof o.opacity === 'number' && o.opacity < 1 ? n(Math.max(0, o.opacity), 3) : null;
+const bold = t.embolden > 0.01 ? { stroke: fill, strokeWidth: n(t.embolden), strokeLinejoin: 'round', strokeOpacity: op } : null;
+q.add(path(t.d, { transform: `translate(${n(x0)} ${n(o.y)})`, fill, fillOpacity: op, ...bold }));
+}
+const PICTS = Object.freeze({
+ball: 'M24 8A16 16 0 1 1 23.99 8ZM24 17L30 20.5V27.5L24 31L18 27.5V20.5ZM24 8V17M30 20.5L38 16M30 27.5L37 33M18 27.5L11 33M18 20.5L10 16M24 31V40',
+shield: 'M24 7L38.5 12.5V23C38.5 31.5 32.5 38 24 41.5C15.5 38 9.5 31.5 9.5 23V12.5ZM24 15V34',
+skull: 'M24 7C15 7 9.5 13.2 9.5 21.2C9.5 26.4 12 29.8 15 31.6V36.5C15 38 16 39 17.5 39H30.5C32 39 33 38 33 36.5V31.6C36 29.8 38.5 26.4 38.5 21.2C38.5 13.2 33 7 24 7ZM17.6 19.5A3.8 3.8 0 1 1 17.59 27.1A3.8 3.8 0 1 1 17.6 19.5ZM30.4 19.5A3.8 3.8 0 1 1 30.39 27.1A3.8 3.8 0 1 1 30.4 19.5ZM24 26.5L26.4 31H21.6ZM19 35H20.4V39H19ZM23.3 35H24.7V39H23.3ZM27.6 35H29V39H27.6Z',
+crown: 'M9 34L7 15L16.5 23L24 10L31.5 23L41 15L39 34ZM9 37.5H39V41H9Z',
+flame: 'M24 6C25.5 12.5 33 16.5 33 26C33 33 29 41 24 41C19 41 15 33 15 26C15 21.5 17.5 18.5 19.5 16.5C19.5 21 21 23.5 23 24.5C22 18 22.5 11.5 24 6Z',
+clock: 'M24 9A15 15 0 1 1 23.99 9ZM24 15V24L30 28',
+star: 'M24 6L28.6 18.2L41.5 18.6L31.4 26.6L35 39L24 31.8L13 39L16.6 26.6L6.5 18.6L19.4 18.2Z',
+goal: 'M8 38V12H40V38M8 12L14 18H34L40 12M14 18V38M34 18V38',
+});
+const PICT_STROKE = Object.freeze(new Set(['ball', 'shield', 'clock', 'goal']));
+function pict(q, name, cx, cy, size, { color, opacity = 1, weight = 1 } = {}) {
+const d = PICTS[name];
+if (!d) return;
+const s = size / 48;
+const stroke = PICT_STROKE.has(name);
+const op = opacity < 1 ? n(Math.max(0, opacity), 3) : null;
+const tr = `translate(${n(cx - 24 * s)} ${n(cy - 24 * s)}) scale(${n(s, 4)})`;
+if (stroke) q.add(path(d, { transform: tr, fill: 'none', stroke: color, strokeWidth: n(2.6 * weight, 3), strokeLinecap: 'round', strokeLinejoin: 'round', strokeOpacity: op }));
+else q.add(path(d, { transform: tr, fill: color, fillRule: 'evenodd', fillOpacity: op }));
+}
+};
+__d[648] = function (__ns) {
+const { rect, path, linearGradient, radialGradient, url, n, P: pb } = __m(5);
+const { compose } = __m(274);
+const { capHeight, measureText } = __m(11);
+const { paletteOf, face, say, pict, floodHex, bleedOf } = __m(647);
+const { slotModel, clockText, kmhText, TEAM_NAME, SHAKE_MAX, FLOOD_PEAK, sideOf } = __m(646);
+__e(__ns, { "skinOf": () => skinOf, "into": () => into, "instrumentKey": () => instrumentKey, "boostLanes": () => boostLanes, "barKey": () => barKey, "panelInstrument": () => panelInstrument, "infobarLine": () => infobarLine, "paletteFor": () => paletteFor }, [], ["barKey","boostLanes","infobarLine","instrumentKey","into","paletteFor","panelInstrument","skinOf"]);
+const skinOf = (ctx) => (ctx.params?.skin === 'prism' ? 'prism' : 'game');
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const BALL_MAX_KMH = 140; 
+const HOT_KMH = 100;
+function into(parent, r, draw, { kind = 'key', tag, tone, hue } = {}) {
+const e = 0.02;
+return compose(parent, { x: r.x + e, y: r.y + e, w: r.w - 2 * e, h: r.h - 2 * e }, draw, { kind, tag: tag ?? `${kind[0]}${Math.round(r.x)}x${Math.round(r.y)}`, clip: false, tone, hue });
+}
+function shaken(q, fx, fn) {
+const mark = q._body.length;
+fn();
+const { dx, dy } = fx.shake || {};
+if (!dx && !dy) return;
+const S = SHAKE_MAX * Math.min(q.w, q.h);
+const inner = q._body.splice(mark).join('');
+if (inner) q.add(`<g transform="translate(${n(dx * S)} ${n(dy * S)})">${inner}</g>`);
+}
+function inkOf(P, M) {
+if (M.tone === 'off') return { value: P.dim, title: P.dim, sub: P.dim };
+if (M.tone === 'warn') return { value: P.warn, title: P.muted, sub: P.muted };
+return { value: M.team ? P.teamHi(M.team) : P.ink, title: P.muted, sub: P.muted };
+}
+function underlays(q, fx, P, r, F) {
+const W = q.w, H = q.h, e = bleedOf(q);
+const full = { x: n(e), y: n(e), width: n(W - 2 * e), height: n(H - 2 * e) };
+if (fx.goal) {
+const peak = FLOOD_PEAK[fx.tier] ?? 0.4;
+const op = peak * (fx.goal.level / 6) * (fx.goal.dim ? 0.5 : 1);
+if (op > 0.005) {
+const id = q.id('rlflood');
+const c = floodHex(P, fx.goal.team);
+const fromLeft = fx.goal.team !== 'orange';
+const x0 = F.x - r.x, x1 = F.x + F.w - r.x;
+q.def(linearGradient(id, [[0, c, op], [1, c, op * 0.72]], { gradientUnits: 'userSpaceOnUse', x1: n(fromLeft ? x0 : x1), y1: 0, x2: n(fromLeft ? x1 : x0), y2: 0 }));
+q.add(rect({ ...full, fill: url(id) }));
+}
+}
+if (fx.mvp) {
+const k = fx.mvp.k, n0 = fx.mvp.n;
+const front = F.x + F.w * Math.min(1, (k + 1) / Math.max(1, n0 * 0.5));
+if (r.x < front) {
+const op = (fx.mvp.dim ? 0.22 : 0.42) * (fx.tier === 'calm' ? 0.6 : 1) * (k >= n0 - 2 ? 0.55 : 1);
+const id = q.id('rlgold');
+q.def(radialGradient(id, [[0, P.gold, op], [0.55, P.gold, op * 0.35], [1, P.gold, 0]], { cx: 0.5, cy: 1.1, r: 0.95 }));
+q.add(rect({ ...full, fill: url(id) }));
+}
+}
+if (fx.save && F.origin) {
+const k = fx.save.k, R = Math.hypot(F.w, F.h) * ((k + 1) / fx.save.n) * (fx.save.epic ? 0.9 : 0.6);
+const op = (fx.save.dim ? 0.3 : 0.6) * (1 - k / fx.save.n) * (fx.save.ours === false ? 0.45 : 1);
+const ox = F.origin.x, oy = F.origin.y, w = 0.07;
+const dx = Math.max(r.x - ox, 0, ox - (r.x + r.w)), dy = Math.max(r.y - oy, 0, oy - (r.y + r.h));
+const near = Math.hypot(dx, dy), far = Math.max(Math.hypot(r.x - ox, r.y - oy), Math.hypot(r.x + r.w - ox, r.y - oy), Math.hypot(r.x - ox, r.y + r.h - oy), Math.hypot(r.x + r.w - ox, r.y + r.h - oy));
+if (R > 1 && op > 0.02 && R >= near && R * (1 - 2 * w) <= far) {
+const id = q.id('rlring');
+const col = fx.save.ours === false ? P.muted : P.neon;
+q.def(radialGradient(id, [[0, col, 0], [Math.max(0, 1 - w * 2), col, 0], [Math.max(0, 1 - w), col, op], [1, col, 0]], { gradientUnits: 'userSpaceOnUse', cx: n(F.origin.x - r.x), cy: n(F.origin.y - r.y), r: n(R) }));
+q.add(rect({ ...full, fill: url(id) }));
+}
+}
+}
+function instrumentKey(q, M, fx, P, { r, F } = {}) {
+const W = q.w, H = q.h, u = Math.min(W, H) / 72;
+const lit = M.tone === 'lit' || M.tone === 'warn';
+const glow = M.tone === 'lit' ? (M.team ? P.teamColor(M.team) : P.neon) : M.tone === 'warn' ? P.warn : null;
+face(q, P, { tone: M.tone === 'off' ? 'off' : lit ? 'active' : 'idle', glow, rim: M.slot === 'clock' && fx.otOn ? P.warn : lit ? glow : null, dim: M.tone === 'off', glowAlpha: 0.26 });
+if (r && F) underlays(q, fx, P, r, F);
+if (M.slot === 'blank') return;
+const ink = inkOf(P, M);
+shaken(q, fx, () => {
+if (M.slot === 'clock' && fx.ot) q.add(rect({ x: n(4 * u), y: n(4 * u), width: n(W - 8 * u), height: n(H - 8 * u), rx: n(8 * u), fill: 'none', stroke: P.warn, strokeWidth: n(2 * u), strokeOpacity: n(0.18 + 0.12 * fx.ot, 3) }));
+const top = 8 * u + capHeight(9 * u, 700);
+say(q, P, M.title, { x: W / 2, y: top, size: 9 * u, weight: 700, caps: true, tracking: 0.08, color: ink.title, maxWidth: W - 14 * u, slant: false, role: 'eyebrow' });
+if ((M.slot === 'us' || M.slot === 'them') && M.team) {
+const cw = (M.sub === 'Your team' ? 26 : 16) * u;
+q.add(rect({ x: n(W / 2 - cw / 2), y: n(top + 3 * u), width: n(cw), height: n(2.2 * u), rx: n(1.1 * u), fill: P.teamColor(M.team), fillOpacity: M.tone === 'off' ? 0.4 : null }));
+}
+if (M.pict && !M.word && !M.sub && M.slot !== 'us' && M.slot !== 'them' && M.slot !== 'clock') pict(q, M.pict, W / 2, H - 13 * u, 11 * u, { color: M.tone === 'off' ? P.dim : P.muted, opacity: 0.85 });
+const big = M.word ? (String(M.value).length > 7 ? 12 : 15) : String(M.value).length > 4 ? 19 : M.slot === 'status' ? 34 : 28;
+say(q, P, M.value, { x: W / 2, y: H * 0.5 + capHeight(big * u, 700) * 0.55 + 2 * u, size: big * u, weight: 700, color: ink.value, maxWidth: W - 12 * u, caps: M.word, role: M.word ? 'label' : 'value' });
+if (M.sub) say(q, P, M.sub, { x: W / 2, y: H - 9 * u, size: 8.5 * u, weight: 600, caps: true, tracking: 0.06, color: ink.sub, maxWidth: W - 12 * u, slant: false, role: 'caption' });
+});
+overlaysOver(q, fx, P, M);
+}
+function overlaysOver(q, fx, P, M) {
+const W = q.w, H = q.h, u = Math.min(W, H) / 72;
+const slot = M.slot;
+if (fx.demo && (slot === 'demos' || (slot === 'status' && fx.demoHome === 'status'))) {
+const k = fx.demo.k, steps = [0.55, 1, 0.8, 0.6, 0.4, 0.2];
+const a = (fx.demo.rise ? 0.5 : steps[Math.round((k / Math.max(1, fx.demo.n - 1)) * (steps.length - 1))]) * (fx.demo.dim ? 0.55 : 1);
+const col = fx.demo.ours === false ? P.muted : P.skull;
+q.add(rect({ x: n(3 * u), y: n(3 * u), width: n(W - 6 * u), height: n(H - 6 * u), rx: n(9 * u), fill: P.neon2, fillOpacity: n(0.16 * a, 3) }));
+pict(q, 'skull', W / 2, H / 2, Math.min(W, H) * (0.62 + 0.04 * (k % 2)), { color: col, opacity: clamp(a) });
+}
+if (fx.save && slot === 'saves') {
+const k = fx.save.k, R = Math.min(W, H) * (0.22 + 0.26 * ((k + 1) / fx.save.n));
+const op = (fx.save.dim ? 0.45 : 0.9) * (1 - k / (fx.save.n + 1));
+q.add(path(pb().M(W / 2 - R, H / 2).A(R, R, 0, 0, 1, W / 2 + R, H / 2).A(R, R, 0, 0, 1, W / 2 - R, H / 2).Z().d, { fill: 'none', stroke: fx.save.ours === false ? P.muted : P.neon, strokeWidth: n((fx.save.epic ? 3 : 2) * u), strokeOpacity: n(op, 3) }));
+if (fx.save.epic && k < fx.save.n - 2) pict(q, 'shield', W / 2, H / 2, Math.min(W, H) * 0.5, { color: P.neon, opacity: op });
+}
+if (fx.shot && slot === 'ball') {
+const k = fx.shot.k, x = 10 * u + k * 9 * u;
+q.add(path(pb().M(x, H * 0.36).H(x + 16 * u).M(x - 5 * u, H * 0.5).H(x + 20 * u).M(x, H * 0.64).H(x + 16 * u).d, { fill: 'none', stroke: fx.shot.ours === false ? P.muted : P.neon, strokeWidth: n(2 * u), strokeLinecap: 'round', strokeOpacity: n(0.8 - k * 0.18, 3) }));
+}
+if (fx.crossbar && slot === 'ball') pict(q, 'goal', W / 2, H / 2, Math.min(W, H) * 0.7, { color: P.warn, opacity: 0.5 * (1 - fx.crossbar.k / fx.crossbar.n) + 0.15 });
+if (fx.mvp && (slot === 'mvp' || slot === 'status') && fx.mvp.k >= 1) pict(q, 'crown', W / 2, H * 0.3, Math.min(W, H) * 0.32, { color: P.gold, opacity: fx.mvp.ours === false ? 0.5 : 0.95 });
+}
+function boostLanes(view) {
+const g = view.g;
+if (!g) return [];
+if (g.view === 'player' && Number.isFinite(g.boost)) return [{ slot: null, boost: g.boost, supersonic: !!g.supersonic, boosting: !!g.boosting, demolished: !!g.demolished, self: true }];
+return (g.mates || []).map((m) => ({ slot: m.slot, boost: Number.isFinite(m.boost) ? m.boost : 0, supersonic: !!m.supersonic, boosting: false, demolished: !!m.demolished, self: !!m.self }));
+}
+function barKey(q, view, fx, P, B, F) {
+const W = q.w, H = q.h, u = Math.min(W, H) / 72;
+const off = fx.face !== 'live' && fx.face !== 'post' && fx.face !== 'paused';
+face(q, P, { tone: off ? 'off' : 'idle', dim: off, field: false });
+underlays(q, fx, P, B.cell, F);
+const lx = (X) => X - B.cell.x; 
+const nLanes = B.kind === 'boost' ? boostLanes(view).length : 1;
+const bx0 = lx(B.x0) + (nLanes > 1 ? 15 : 6) * u, bx1 = lx(B.x1) - 6 * u; 
+const span = Math.max(1, bx1 - bx0);
+if (B.kind === 'boost' && (fx.kickoff || fx.go) && !off) return startLights(q, fx, P, B, u);
+const lanes = B.kind === 'heat' ? heatLane(view) : boostLanes(view);
+const label = B.kind === 'heat' ? 'Ball' : view.g?.view === 'team' ? 'Team boost' : 'Boost';
+shaken(q, fx, () => {
+if (B.first) {
+const v = off ? null : B.kind === 'heat' ? (lanes[0] ? kmhText(lanes[0].value) : null) : lanes.length === 1 ? String(lanes[0].boost) : null;
+const vw = v ? measureText(v, { size: 13 * u, weight: 700 }) + 5 * u : 0;
+say(q, P, label, { x: 9 * u, y: 8 * u + capHeight(8.5 * u, 700), size: 8.5 * u, weight: 700, caps: true, tracking: 0.08, color: off ? P.dim : P.muted, align: 'left', slant: false, role: 'eyebrow', maxWidth: Math.max(10 * u, W - 18 * u - vw) });
+if (v) say(q, P, v, { x: W - 9 * u, y: 8 * u + capHeight(13 * u, 700), size: 13 * u, weight: 700, color: lanes[0]?.supersonic || lanes[0]?.hot ? P.boostHot : P.ink, align: 'right' });
+}
+const n0 = Math.max(1, lanes.length);
+const bandTop = H * (n0 === 1 ? 0.42 : 0.36), bandBot = H - 9 * u;
+const gap = n0 > 1 ? 3 * u : 0;
+const laneH = (bandBot - bandTop - gap * (n0 - 1)) / n0;
+const segs = Math.max(8, Math.round((B.x1 - B.x0) / (W * 0.25))); 
+for (let i = 0; i < n0; i++) {
+const L0 = lanes[i] || { boost: 0, value: 0 };
+const y = bandTop + i * (laneH + gap);
+const frac = B.kind === 'heat' ? clamp((L0.value || 0) / BALL_MAX_KMH) : clamp((L0.boost || 0) / 100);
+const fillTo = bx0 + span * Math.round(frac * 50) / 50; 
+const tx0 = Math.max(0, bx0), tx1 = Math.min(W, bx1);
+if (tx1 > tx0) q.add(rect({ x: n(tx0), y: n(y), width: n(tx1 - tx0), height: n(laneH), fill: P.themed ? P.line : '#0a0f1a', fillOpacity: P.themed ? 0.55 : null }));
+const fx0 = Math.max(0, bx0), fx1 = Math.min(W, fillTo);
+if (!off && fx1 > fx0 && !L0.demolished) {
+const id = q.id(`rlbar${i}`);
+const hot = B.kind === 'heat' ? L0.hot : L0.supersonic;
+const base = B.kind === 'heat' ? P.neon : P.ally;
+const stops = hot ? [[0, P.boostHot], [0.4, P.supersonic], [1, P.white]] : B.kind === 'heat' ? [[0, base], [0.7, P.boost], [1, P.boostHot]] : [[0, base], [0.1, base], [0.22, P.boost], [1, P.boostHot]];
+q.def(linearGradient(id, stops, { gradientUnits: 'userSpaceOnUse', x1: n(bx0), y1: 0, x2: n(Math.max(bx0 + 1, bx1)), y2: 0 }));
+q.add(rect({ x: n(fx0), y: n(y), width: n(fx1 - fx0), height: n(laneH), fill: url(id) }));
+if (hot && fx.tier !== 'still' && fx.tier !== 'calm') {
+const ph = Math.floor((view.nowMs || 0) / 250) % 4;
+const hh = Math.min(laneH * 0.32, 5 * u), step = hh * 5, cy = y + laneH / 2;
+const d = pb();
+for (let x = bx0 + (ph * step) / 4; x < fillTo - hh; x += step) if (x - hh * 0.6 > 1 && x + hh * 0.4 < W - 1) d.M(x - hh * 0.6, cy - hh).L(x + hh * 0.4, cy).L(x - hh * 0.6, cy + hh);
+if (d.d) q.add(path(d.d, { fill: 'none', stroke: P.boost, strokeWidth: n(Math.max(1, hh * 0.4)), strokeLinecap: 'round', strokeLinejoin: 'round', strokeOpacity: 0.55 }));
+}
+if (L0.boosting && fillTo > 0 && fillTo < W + laneH) {
+const eid = q.id(`rlember${i}`);
+q.def(radialGradient(eid, [[0, P.boostHot, 0.9], [1, P.boost, 0]]));
+const ex = Math.min(W - laneH * 0.4, fillTo);
+q.add(rect({ x: n(Math.max(0, ex - laneH * 0.9)), y: n(y - laneH * 0.35), width: n(Math.min(laneH * 1.3, W - Math.max(0, ex - laneH * 0.9))), height: n(laneH * 1.7), fill: url(eid) }));
+}
+}
+const t = pb();
+for (let j = 1; j < segs; j++) { const x = bx0 + (span * j) / segs; if (x > 0.5 && x < W - 0.5) t.M(x, y).V(y + laneH); }
+if (t.d) q.add(path(t.d, { fill: 'none', stroke: P.themed ? P.bg1 : '#060a13', strokeWidth: n(Math.max(1, 1.4 * u)), strokeOpacity: 0.85 }));
+if (B.first && n0 > 1) say(q, P, L0.slot !== null && L0.slot !== undefined ? String(L0.slot) : '', { x: bx0 - 3 * u, y: y + laneH * 0.5 + capHeight(Math.min(laneH, 9 * u), 700) / 2, size: Math.min(laneH * 0.95, 9 * u), weight: 700, color: P.dim, align: 'right', slant: false });
+if (L0.demolished && !off && bx0 >= 0 && bx0 < W) pict(q, 'skull', bx0 + laneH * 0.9, y + laneH / 2, laneH * 1.15, { color: P.muted, opacity: 0.9 });
+}
+if (off && (B.first || B.index === 1)) {
+const M = slotModel('status', view, fx);
+const word = B.first ? M.value : M.sub;
+const one = B.first && B.count === 1 && M.sub ? `${M.value} · ${M.sub}` : word;
+if (one) say(q, P, one, { x: W / 2, y: H * 0.56 + capHeight(10 * u, 700) / 2, size: 10 * u, weight: 700, caps: true, tracking: 0.04, color: P.muted, maxWidth: W - 10 * u, slant: false, plain: true });
+}
+});
+}
+function heatLane(view) {
+const b = view.g?.ball;
+const v = Number.isFinite(b?.speed) ? b.speed : 0;
+return [{ value: v, hot: false, slot: null }];
+}
+function startLights(q, fx, P, B, u) {
+const W = q.w, H = q.h;
+const N = B.count, i = B.index;
+const light = Math.min(2, Math.floor((i * 3) / Math.max(1, N))); 
+const lit = fx.go ? true : fx.kickoff ? light <= fx.kickoff.step : false;
+const col = fx.go ? (P.team ? P.ally : P.ok) : P.warn;
+const calm = fx.tier === 'calm';
+const R = Math.min(W, H) * 0.24;
+const cx = W / 2, cy = H * 0.52;
+q.add(path(pb().M(cx - R, cy).A(R, R, 0, 0, 1, cx + R, cy).A(R, R, 0, 0, 1, cx - R, cy).Z().d, { fill: lit ? col : P.themed ? P.line : '#101a2c', fillOpacity: lit ? (calm ? 0.55 : 0.92) : 0.9, stroke: P.dim, strokeWidth: n(1.2 * u), strokeOpacity: 0.6 }));
+if (lit && !calm) { const id = q.id('rllite'); q.def(radialGradient(id, [[0, col, 0.35], [1, col, 0]])); q.add(rect({ x: n(cx - R * 1.9), y: n(cy - R * 1.9), width: n(R * 3.8), height: n(R * 3.8), fill: url(id) })); }
+if (B.first) say(q, P, fx.go ? 'Go' : 'Kickoff', { x: 9 * u, y: 8 * u + capHeight(8.5 * u, 700), size: 8.5 * u, weight: 700, caps: true, tracking: 0.08, color: P.muted, align: 'left', slant: false, role: 'eyebrow' });
+if (fx.go && i === Math.floor((N - 1) / 2)) say(q, P, 'GO', { x: cx, y: cy + capHeight(R * 1.1, 700) / 2, size: R * 1.1, weight: 700, color: P.themed ? P.bg0 : '#05080f' });
+else if (fx.kickoff && light === fx.kickoff.step && i === Math.min(N - 1, Math.ceil(((light + 0.5) * N) / 3) - 1)) say(q, P, String(fx.kickoff.count), { x: cx, y: cy + capHeight(R * 1.2, 700) / 2, size: R * 1.2, weight: 700, color: P.themed ? P.bg0 : '#05080f' });
+}
+function panelInstrument(p, slot, view, fx, P, { r, F } = {}) {
+const W = p.w, H = p.h, u = H / 100;
+const off = fx.face === 'waiting' || fx.face === 'other' || fx.face === 'menu' || fx.face === 'loading' || fx.face === 'watching';
+const g = view.g, s = view.s;
+const side = sideOf(view);
+const goal = fx.goal;
+const glow = goal && (slot === 'board' || slot === 'ball') ? floodHex(P, goal.team) : slot === 'clock' && fx.otOn ? P.warn : null;
+face(p, P, { tone: off ? 'off' : 'idle', glow, rim: glow, dim: off && slot !== 'clock' && slot !== 'board', glowAlpha: 0.22 });
+if (r && F) underlays(p, fx, P, r, F);
+const eyebrow = (t, color = P.muted) => say(p, P, t, { x: 12 * u, y: 10 * u + capHeight(10 * u, 700), size: 10 * u, weight: 700, caps: true, tracking: 0.1, color, align: 'left', slant: false, maxWidth: W * 0.6, role: 'eyebrow' });
+const meta = (t, color = P.dim) => { if (t) say(p, P, t, { x: W - 12 * u, y: 10 * u + capHeight(9 * u, 600), size: 9 * u, weight: 600, caps: true, tracking: 0.06, color, align: 'right', slant: false, maxWidth: W * 0.45, role: 'caption' }); };
+const offWord = off ? slotModel('status', view, fx).value : null; 
+shaken(p, fx, () => {
+switch (slot) {
+case 'clock': {
+const M = slotModel('clock', view, fx);
+eyebrow(M.title, fx.otOn ? P.warn : P.muted);
+meta(g?.online === true ? 'Online' : g?.online === false ? 'Offline' : null);
+if (fx.ot) p.add(rect({ x: n(8 * u), y: n(8 * u), width: n(W - 16 * u), height: n(H - 16 * u), rx: n(10 * u), fill: 'none', stroke: P.warn, strokeWidth: n(2.4 * u), strokeOpacity: n(0.16 + 0.12 * fx.ot, 3) }));
+const big = M.word ? 24 : 52;
+say(p, P, M.value, { x: W / 2, y: H * 0.58 + capHeight(big * u, 700) * 0.42, size: big * u, weight: 700, color: M.tone === 'off' ? P.dim : fx.otOn ? P.warn : P.ink, maxWidth: W - 24 * u, caps: M.word, role: M.word ? 'label' : 'hero' });
+const sub = fx.kickoff ? `Kickoff ${fx.kickoff.count}` : fx.go ? 'Go' : M.sub;
+if (sub) say(p, P, sub, { x: W / 2, y: H - 9 * u, size: 10 * u, weight: 600, caps: true, tracking: 0.08, color: fx.kickoff ? P.warn : P.muted, slant: false, maxWidth: W - 24 * u, role: 'caption' });
+break;
+}
+case 'board': {
+const left = side || 'blue', right = left === 'blue' ? 'orange' : 'blue';
+const sl = g?.scores?.[left], sr = g?.scores?.[right];
+const known = !off && Number.isFinite(sl) && Number.isFinite(sr);
+if (goal) eyebrow(goal.golden ? 'Golden goal' : 'Goal', floodHex(P, goal.team));
+else if (fx.face === 'post') eyebrow(s?.match?.result === 'win' ? 'Victory' : s?.match?.result === 'loss' ? 'Defeat' : 'Final', s?.match?.result === 'win' ? P.gold : P.muted);
+else eyebrow(s?.match?.title || 'Rocket League');
+meta(off ? offWord : goal && goal.speed !== null ? `${kmhText(goal.speed)} km/h` : side ? (g?.view === 'player' ? 'Your car' : 'Your team') : fx.face === 'watching' ? 'Watching' : null, goal ? P.ink : P.dim);
+const big = 46 * u, y = H * 0.66;
+say(p, P, known ? String(sl) : '—', { x: W * 0.3, y, size: big, weight: 700, color: known ? P.teamHi(left) : P.dim, role: 'hero' });
+say(p, P, known ? String(sr) : '—', { x: W * 0.7, y, size: big, weight: 700, color: known ? P.teamHi(right) : P.dim, role: 'hero' });
+p.add(rect({ x: n(W / 2 - 7 * u), y: n(y - capHeight(big, 700) * 0.5 - 2 * u), width: n(14 * u), height: n(4 * u), rx: n(2 * u), fill: P.dim }));
+for (const [t, x] of [[left, W * 0.3], [right, W * 0.7]]) {
+say(p, P, TEAM_NAME[t], { x, y: H - 15 * u, size: 8.5 * u, weight: 700, caps: true, tracking: 0.08, color: P.muted, slant: false, role: 'caption' });
+p.add(rect({ x: n(x - 18 * u), y: n(H - 11 * u), width: n(36 * u), height: n(3 * u), rx: n(1.5 * u), fill: P.teamColor(t), fillOpacity: known ? (side && t === side ? null : 0.6) : 0.3 }));
+}
+break;
+}
+case 'boost': {
+const lanes = boostLanes(view);
+const team = g?.view === 'team';
+eyebrow(team ? 'Team boost' : 'Boost');
+meta(off ? offWord : team ? 'your team only' : g?.supersonic ? 'Supersonic' : g?.demolished ? 'Demolished' : null, g?.supersonic ? P.boostHot : P.dim);
+if (off || !lanes.length) { say(p, P, '—', { x: W / 2, y: H * 0.62, size: 30 * u, weight: 700, color: P.dim }); break; }
+const x0 = 14 * u, x1 = W - 14 * u;
+if (!team) {
+const L0 = lanes[0];
+say(p, P, String(L0.boost), { x: x0, y: H * 0.62, size: 40 * u, weight: 700, color: L0.supersonic ? P.boostHot : P.ink, align: 'left' });
+miniBar(p, P, x0, H * 0.72, x1 - x0, 12 * u, L0, fx, view, u);
+} else {
+const n0 = lanes.length, top = H * 0.32, h = Math.min(16 * u, (H * 0.6) / n0 - 4 * u);
+lanes.forEach((L0, i) => {
+const y = top + i * (h + 5 * u);
+say(p, P, String(L0.slot ?? ''), { x: x0 + 6 * u, y: y + h * 0.5 + capHeight(9 * u, 700) / 2, size: 9 * u, weight: 700, color: P.dim, align: 'right', slant: false, plain: true });
+miniBar(p, P, x0 + 10 * u, y, x1 - x0 - 46 * u, h, L0, fx, view, u);
+say(p, P, L0.demolished ? 'X' : String(L0.boost), { x: x1, y: y + h * 0.5 + capHeight(11 * u, 700) / 2, size: 11 * u, weight: 700, color: L0.supersonic ? P.boostHot : P.ink, align: 'right', plain: true });
+});
+}
+break;
+}
+case 'ball': {
+const v = g?.ball?.speed;
+const showGoal = goal && goal.speed !== null;
+eyebrow(showGoal ? 'Goal speed' : 'Ball speed', showGoal ? floodHex(P, goal.team) : P.muted);
+const last = g?.lastGoal?.speed;
+meta(off ? offWord : !showGoal && Number.isFinite(last) ? `last goal ${kmhText(last)}` : null);
+const val = showGoal ? goal.speed : v;
+gauge(p, P, W / 2, H * 0.86, Math.min(W * 0.36, H * 0.62), off || !Number.isFinite(val) ? null : val, u, showGoal ? floodHex(P, goal.team) : null);
+say(p, P, off || !Number.isFinite(val) ? '—' : kmhText(val), { x: W / 2, y: H * 0.8, size: 30 * u, weight: 700, color: off ? P.dim : Number.isFinite(val) && val >= HOT_KMH ? P.boostHot : P.ink, role: 'value' });
+say(p, P, 'km/h', { x: W / 2, y: H - 4 * u, size: 8 * u, weight: 600, caps: true, color: P.dim, slant: false, role: 'caption' });
+break;
+}
+default: {
+const M = slotModel(slot, view, fx);
+eyebrow(M.title || '');
+const big = M.word ? 22 : 40;
+say(p, P, M.value, { x: W / 2, y: H * 0.6 + capHeight(big * u, 700) * 0.4, size: big * u, weight: 700, color: M.tone === 'off' ? P.dim : M.team ? P.teamHi(M.team) : P.ink, maxWidth: W - 24 * u, caps: M.word, role: M.word ? 'label' : 'value' });
+if (M.sub) say(p, P, M.sub, { x: W / 2, y: H - 9 * u, size: 9 * u, weight: 600, caps: true, color: P.muted, slant: false, maxWidth: W - 24 * u, role: 'caption' });
+if (fx.mvp && slot === 'mvp') pict(p, 'crown', W - 24 * u, 26 * u, 22 * u, { color: P.gold });
+}
+}
+});
+}
+function miniBar(p, P, x, y, w, h, L0, fx, view, u) {
+p.add(rect({ x: n(x), y: n(y), width: n(w), height: n(h), rx: n(h * 0.2), fill: P.themed ? P.line : '#0a0f1a' }));
+const frac = L0.demolished ? 0 : clamp((L0.boost || 0) / 100);
+const fw = w * Math.round(frac * 50) / 50;
+if (fw > 0.5) {
+const id = p.id('rlmini');
+p.def(linearGradient(id, L0.supersonic ? [[0, P.boostHot], [1, P.white]] : [[0, P.ally], [0.6, P.boost], [1, P.boostHot]], { x1: 0, y1: 0, x2: 1, y2: 0 }));
+p.add(rect({ x: n(x), y: n(y), width: n(fw), height: n(h), rx: n(h * 0.2), fill: url(id) }));
+}
+const t = pb();
+for (let j = 1; j < 10; j++) t.M(x + (w * j) / 10, y).V(y + h);
+p.add(path(t.d, { fill: 'none', stroke: P.themed ? P.bg1 : '#060a13', strokeWidth: n(Math.max(1, 1.2 * u)), strokeOpacity: 0.85 }));
+if (L0.demolished) pict(p, 'skull', x + h, y + h / 2, h * 1.2, { color: P.muted });
+}
+function gauge(p, P, cx, cy, R, v, u, col) {
+const pt = (f, rr = R) => { const a = Math.PI * (1 - f); return [cx + rr * Math.cos(a), cy - rr * Math.sin(a)]; };
+const arc = (f0, f1, rr = R) => { const [x0, y0] = pt(f0, rr), [x1, y1] = pt(f1, rr); return pb().M(x0, y0).A(rr, rr, 0, 0, 1, x1, y1).d; };
+const sw = Math.max(2, 7 * u);
+p.add(path(arc(0, 1), { fill: 'none', stroke: P.themed ? P.line : '#16223a', strokeWidth: n(sw), strokeLinecap: 'round' }));
+p.add(path(arc(HOT_KMH / BALL_MAX_KMH, 1), { fill: 'none', stroke: P.boost, strokeWidth: n(sw * 0.35), strokeOpacity: 0.55 }));
+if (v === null) return;
+const f = clamp(Math.round((v / BALL_MAX_KMH) * 40) / 40);
+if (f > 0.005) p.add(path(arc(0, Math.max(0.006, f)), { fill: 'none', stroke: col || (v >= HOT_KMH ? P.boostHot : P.neon), strokeWidth: n(sw), strokeLinecap: 'round' }));
+const [nx, ny] = pt(f, R * 1.08), [bx, by] = pt(f, R * 0.7);
+p.add(path(pb().M(bx, by).L(nx, ny).d, { fill: 'none', stroke: P.white, strokeWidth: n(Math.max(1.5, 2.2 * u)), strokeLinecap: 'round' }));
+}
+function infobarLine(p, view, fx, P) {
+const W = p.w, H = p.h, u = H / 50;
+const off = fx.face === 'waiting' || fx.face === 'other' || fx.face === 'menu' || fx.face === 'loading' || fx.face === 'watching';
+face(p, P, { tone: off ? 'off' : 'idle', glow: fx.goal ? floodHex(P, fx.goal.team) : null, dim: off, field: false });
+const g = view.g;
+let text;
+if (off) text = slotModel('status', view, fx).value + (fx.face === 'waiting' ? ' for Rocket League' : '');
+else {
+const sc = g?.scores;
+text = [sc ? `Blue ${sc.blue ?? '—'} – ${sc.orange ?? '—'} Orange` : null, fx.goal ? 'GOAL' : g?.clock ? clockText(g.clock) : null].filter(Boolean).join('  ·  ');
+}
+say(p, P, text, { x: W / 2, y: H / 2 + capHeight(17 * u, 700) / 2, size: 17 * u, weight: 700, color: off ? P.muted : P.ink, maxWidth: W - 16 * u, slant: !off, role: 'label' });
+}
+const paletteFor = (q, view) => paletteOf(q, { skin: skinOf(q.ctx), team: sideOf(view) });
+};
+__d[649] = function (__ns) {
+const { surface, rect } = __m(276);
+const { rlOf, tierOf, fxOf, slotModel, layoutOf, EFFECTS_PARAM, DATA_SHAPE } = __m(646);
+const { SKIN_PARAM } = __m(647);
+const { into, instrumentKey, barKey, panelInstrument, infobarLine, paletteFor } = __m(648);
+const { RL_SIM_LOOP } = __m(645);
+__e(__ns, { "rlReadoutRects": () => rlReadoutRects, "fieldOf": () => fieldOf, "barsOf": () => barsOf, "renderRlDeck": () => renderRlDeck, "default": () => __default }, [], ["barsOf","default","fieldOf","renderRlDeck","rlReadoutRects"]);
+function rlReadoutRects(ctx) {
+const D = ctx.deck;
+if (!D) return [];
+const S = D.screen;
+if (S?.kind === 'galleon') {
+const W = ctx.device.screen?.widgets || { w: 360, h: 180, pitchX: 360, pitchY: 192, insetX: 0, insetY: 6 };
+return [0, 1, 2, 3].map((j) => ({ x: S.x + (j % 2) * W.pitchX + (W.insetX || 0), y: S.y + (j >> 1) * W.pitchY + (W.insetY || 0), w: W.w, h: W.h, kind: 'screen' }));
+}
+if (D.strip) { const w = D.strip.w / D.strip.segments; return Array.from({ length: D.strip.segments }, (_, j) => ({ x: D.strip.x + j * w, y: D.strip.y, w, h: D.strip.h, kind: 'strip' })); }
+if (S?.kind === 'infobar') return [{ x: S.x, y: S.y, w: S.w, h: S.h, kind: 'infobar' }];
+return [];
+}
+function fieldOf(rects, origin) {
+const x0 = Math.min(...rects.map((r) => r.x)), y0 = Math.min(...rects.map((r) => r.y));
+const x1 = Math.max(...rects.map((r) => r.x + r.w)), y1 = Math.max(...rects.map((r) => r.y + r.h));
+return { x: x0, y: y0, w: x1 - x0, h: y1 - y0, origin: origin || { x: (x0 + x1) / 2, y: (y0 + y1) / 2 } };
+}
+function barsOf(cells, slots) {
+const out = new Map();
+const rows = new Map();
+cells.forEach((c, i) => { if (slots[i] === 'boost' || slots[i] === 'heat') { const k = `${slots[i]}|${c.row}`; if (!rows.has(k)) rows.set(k, []); rows.get(k).push(i); } });
+for (const [k, list] of rows) {
+const kind = k.split('|')[0];
+list.sort((a, b) => cells[a].col - cells[b].col);
+const first = cells[list[0]], last = cells[list[list.length - 1]];
+list.forEach((i, j) => out.set(i, { kind, x0: first.x, x1: last.x + last.w, first: j === 0, count: list.length, index: j, cell: cells[i] }));
+}
+return out;
+}
+function renderRlDeck(ctx, { back = false } = {}) {
+const view = rlOf(ctx), fx = fxOf(view, tierOf(ctx));
+const d = surface(ctx);
+if (ctx.kind === 'deck') d.add(rect({ width: ctx.w, height: ctx.h, fill: '#000000' }));
+const P = paletteFor(d, view);
+const { slots, readout } = layoutOf(ctx, { back });
+const cells = ctx.grid.cells;
+const reads = ctx.kind === 'deck' ? rlReadoutRects(ctx) : [];
+const savesAt = cells[slots.indexOf('saves')];
+const F = fieldOf([...cells, ...reads], savesAt ? { x: savesAt.x + savesAt.w / 2, y: savesAt.y + savesAt.h / 2 } : null);
+fx.demoHome = slots.includes('demos') ? 'demos' : 'status';
+const bars = barsOf(cells, slots);
+cells.forEach((c, i) => {
+const slot = slots[i];
+const bar = bars.get(i);
+if (bar) into(d, c, (q) => barKey(q, view, fx, P, bar, F), { tag: `k${c.i}` });
+else into(d, c, (q) => instrumentKey(q, slotModel(slot, view, fx), fx, P, { r: c, F }), { tag: `k${c.i}` });
+});
+reads.forEach((r, j) => {
+if (r.kind === 'infobar') into(d, r, (p) => infobarLine(p, view, fx, P), { kind: 'screen', tag: 'ib' });
+else into(d, r, (p) => panelInstrument(p, readout[j] || 'status', view, fx, P, { r, F }), { kind: r.kind, tag: `w${j}` });
+});
+return d.svg();
+}
+const __default = {
+id: 'gamelink-rl-deck',
+title: 'Rocket League Deck',
+category: 'Rocket League',
+description: 'Rocket League on the whole deck: your boost burning across the keys, white-hot at supersonic, goal floods in team color, demo skulls, saves, kickoff lights, overtime.',
+tags: ['rocket league', 'rl', 'game link', 'stats api', 'boost', 'supersonic', 'goal', 'car soccer', 'gaming', 'live'],
+surface: 'deck',
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 10,
+loop: RL_SIM_LOOP,
+still: 21.6,
+press: 'none',
+params: {
+effects: EFFECTS_PARAM,
+skin: SKIN_PARAM,
+back: { type: 'bool', default: false, label: 'Leave the bottom-right key free (a Back key)' },
+},
+order: 40,
+render(ctx) { return renderRlDeck(ctx, { back: ctx.params.back === true }); },
+};
+};
+__d[650] = function (__ns) {
+const { surface } = __m(276);
+const { rlOf, tierOf, fxOf, EFFECTS_PARAM, DATA_SHAPE } = __m(646);
+const { SKIN_PARAM } = __m(647);
+const { into, barKey, paletteFor } = __m(648);
+const { fieldOf, barsOf } = __m(649);
+const { RL_SIM_LOOP } = __m(645);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = {
+id: 'gamelink-rl-boost',
+title: 'Rocket League Boost Bar',
+category: 'Rocket League',
+description: 'Your Rocket League boost as one bar burning across a row of keys, white-hot at supersonic (your team’s lanes in 2v2 / 3v3), kickoff start lights, or the ball’s heat.',
+tags: ['rocket league', 'rl', 'game link', 'boost', 'supersonic', 'bar', 'span', 'kickoff'],
+surface: 'span',
+span: { cols: 'all', rows: 1 },
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 10,
+loop: RL_SIM_LOOP,
+still: 5.4,
+press: 'none',
+params: {
+bar: { type: 'select', default: 'boost', options: ['boost', 'heat'], label: 'Bar (boost · ball heat)' },
+effects: EFFECTS_PARAM,
+skin: SKIN_PARAM,
+},
+order: 20,
+render(ctx) {
+const view = rlOf(ctx), fx = fxOf(view, tierOf(ctx));
+const d = surface(ctx);
+const P = paletteFor(d, view);
+const cells = ctx.grid.cells;
+const kind = ctx.params.bar === 'heat' ? 'heat' : 'boost';
+const bars = barsOf(cells, cells.map(() => kind));
+const F = fieldOf(cells);
+cells.forEach((c, i) => into(d, c, (q) => barKey(q, view, fx, P, bars.get(i), F), { tag: `k${c.i}` }));
+return d.svg();
+},
+};
+};
+__d[651] = function (__ns) {
+const { rlOf, tierOf, fxOf, slotModel, EFFECTS_PARAM, DATA_SHAPE } = __m(646);
+const { SKIN_PARAM } = __m(647);
+const { instrumentKey, barKey, paletteFor } = __m(648);
+const { surface } = __m(276);
+const { RL_SIM_LOOP } = __m(645);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const SHOW = ['status', 'us', 'them', 'clock', 'ball', 'boost', 'goals', 'assists', 'saves', 'shots', 'demos', 'mvp'];
+const __default = {
+id: 'gamelink-rl-key',
+title: 'Rocket League Key',
+category: 'Rocket League',
+description: 'One Rocket League instrument on a key: the score, the clock, the match status and kickoff count, the ball speed, your boost or a stat, with the deck’s effects.',
+tags: ['rocket league', 'rl', 'game link', 'key', 'score', 'clock', 'boost', 'demo', 'save'],
+surface: 'key',
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 10,
+loop: RL_SIM_LOOP,
+still: 21.6,
+press: 'none',
+params: {
+show: { type: 'select', default: 'status', options: SHOW, label: 'Show' },
+effects: EFFECTS_PARAM,
+skin: SKIN_PARAM,
+},
+order: 30,
+render(ctx) {
+const view = rlOf(ctx), fx = fxOf(view, tierOf(ctx));
+const slot = SHOW.includes(ctx.params.show) ? ctx.params.show : 'status';
+fx.demoHome = slot === 'demos' ? 'demos' : 'status';
+const k = surface(ctx);
+const P = paletteFor(k, view);
+const me = { x: 0, y: 0, w: ctx.w, h: ctx.h };
+const F = { ...me, origin: { x: ctx.w / 2, y: ctx.h / 2 } };
+if (slot === 'boost') barKey(k, view, fx, P, { kind: 'boost', x0: 0, x1: ctx.w, first: true, count: 1, index: 0, cell: me }, F);
+else instrumentKey(k, slotModel(slot, view, fx), fx, P, { r: me, F });
+return k.svg();
+},
+};
+};
+__d[652] = function (__ns) {
+const { surface, rect } = __m(276);
+const { rlOf, tierOf, fxOf, EFFECTS_PARAM, DATA_SHAPE } = __m(646);
+const { SKIN_PARAM } = __m(647);
+const { into, panelInstrument, infobarLine, paletteFor } = __m(648);
+const { fieldOf } = __m(649);
+const { RL_SIM_LOOP } = __m(645);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const WIDGETS = ['clock', 'board', 'boost', 'ball'];
+const __default = {
+id: 'gamelink-rl-screen',
+title: 'Rocket League Screen',
+category: 'Rocket League',
+description: 'Rocket League on the Galleon screen: the clock (breathing in overtime), the scoreboard with GOAL and the shot speed, your boost and the ball speed gauge.',
+tags: ['rocket league', 'rl', 'game link', 'galleon', 'screen', 'scoreboard', 'clock', 'neo'],
+surface: 'screen',
+screens: ['galleon', 'infobar'],
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 10,
+loop: RL_SIM_LOOP,
+still: 21.6,
+press: 'none',
+params: { effects: EFFECTS_PARAM, skin: SKIN_PARAM },
+order: 53,
+render(ctx) {
+const view = rlOf(ctx), fx = fxOf(view, tierOf(ctx));
+const k = surface(ctx);
+const P = paletteFor(k, view);
+if (ctx.screen.kind === 'infobar') {
+into(k, { x: 0, y: 0, w: ctx.w, h: ctx.h }, (p) => infobarLine(p, view, fx, P), { kind: 'screen', tag: 'ib' });
+return k.svg();
+}
+k.add(rect({ width: ctx.w, height: ctx.h, fill: '#000000' }));
+const G = ctx.screen.widgets;
+const rects = [0, 1, 2, 3].map((j) => ({ x: (j % 2) * G.pitchX + G.insetX, y: (j >> 1) * G.pitchY + G.insetY, w: G.w, h: G.h }));
+const F = fieldOf(rects);
+rects.forEach((r, j) => into(k, r, (p) => panelInstrument(p, WIDGETS[j], view, fx, P, { r, F }), { kind: 'screen', tag: `w${j}` }));
+return k.svg();
+},
+};
+};
+__d[653] = function (__ns) {
+const { surface, rect } = __m(276);
+const { rlOf, tierOf, fxOf, EFFECTS_PARAM, DATA_SHAPE } = __m(646);
+const { SKIN_PARAM } = __m(647);
+const { into, panelInstrument, paletteFor } = __m(648);
+const { fieldOf } = __m(649);
+const { RL_SIM_LOOP } = __m(645);
+__e(__ns, { "renderRlStrip": () => renderRlStrip, "default": () => __default }, [], ["default","renderRlStrip"]);
+const STRIP_SLOTS = ['boost', 'ball', 'board', 'clock', 'status', 'mvp'];
+const SHOW = ['ball', 'boost', 'board', 'clock', 'status'];
+function renderRlStrip(ctx, slots) {
+const view = rlOf(ctx), fx = fxOf(view, tierOf(ctx));
+const k = surface(ctx);
+k.add(rect({ width: ctx.w, height: ctx.h, fill: '#000000' }));
+const P = paletteFor(k, view);
+const N = ctx.strip?.segments || Math.max(1, Math.round(ctx.w / 200)), sw = ctx.w / N;
+const rects = Array.from({ length: N }, (_, i) => ({ x: i * sw, y: 0, w: sw, h: ctx.h }));
+const F = fieldOf(rects);
+rects.forEach((r, i) => into(k, r, (p) => panelInstrument(p, slots[i % slots.length], view, fx, P, { r, F }), { kind: 'strip', tag: `s${i}` }));
+return k.svg();
+}
+const COMMON = {
+category: 'Rocket League',
+surface: 'strip',
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 10,
+loop: RL_SIM_LOOP,
+still: 21.6,
+press: 'none',
+};
+const __default = [
+{
+...COMMON,
+id: 'gamelink-rl-strip',
+title: 'Rocket League Strip',
+description: 'Rocket League across the touch strip: your boost, the ball speed on a gauge (the goal speed when one goes in), the scoreboard and the clock, breathing in overtime.',
+tags: ['rocket league', 'rl', 'game link', 'strip', 'boost', 'ball speed', 'score', 'clock'],
+segments: 'all',
+params: { effects: EFFECTS_PARAM, skin: SKIN_PARAM },
+order: 54,
+render: (ctx) => renderRlStrip(ctx, STRIP_SLOTS),
+},
+{
+...COMMON,
+id: 'gamelink-rl-dial',
+title: 'Rocket League Dial',
+description: 'One Rocket League readout on a dial’s strip segment: the ball speed gauge, your boost, the scoreboard, the clock or the match status.',
+tags: ['rocket league', 'rl', 'game link', 'dial', 'segment', 'ball speed', 'gauge', 'boost'],
+segments: 1,
+params: {
+show: { type: 'select', default: 'ball', options: SHOW, label: 'Show (ball · boost · board · clock · status)' },
+effects: EFFECTS_PARAM,
+skin: SKIN_PARAM,
+},
+order: 55,
+render: (ctx) => renderRlStrip(ctx, [SHOW.includes(ctx.params.show) ? ctx.params.show : 'ball']),
+},
+];
+};
+__d[654] = function (__ns) {
+const { surface, rect } = __m(276);
+const { textPath } = __m(11);
+const { panelInto } = __m(277);
+const { gameLinkOf, tierOf, fxOf, slotModel, money, EFFECTS_PARAM, DATA_SHAPE, SLOT_HUE } = __m(629);
+const { fieldOf, mid, panelInstrument, overlays } = __m(633);
+const { SKIN_PARAM, skinned, skinOf, gamePanelInstrument } = __m(632);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+function cards(view, fx) {
+const s = view.s, m = s?.match, st = s?.stats, p = s?.player;
+const score = slotModel('score', view, fx);
+score.title = m?.title || 'Score'; score.meta = m?.side ? `${m.side} side` : m?.mode || null; score.pict = 'score'; score.foot = score.sub; score.footTone = score.tone === 'warn' ? 'warn' : null;
+const round = slotModel('round', view, fx);
+round.meta = round.sub && round.sub === m?.title ? (m?.mode ? m.mode[0].toUpperCase() + m.mode.slice(1) : null) : round.sub; 
+const kda = slotModel('kda', view, fx);
+if (kda.kda) kda.value = `${kda.kda[0] ?? '—'} · ${kda.kda[1] ?? '—'} · ${kda.kda[2] ?? '—'}`;
+kda.meta = Number.isFinite(st?.mvps) && fx.face !== 'waiting' ? `${st.mvps} MVP` : null;
+kda.pict = 'mvp'; kda.foot = Number.isFinite(st?.score) && fx.face !== 'waiting' ? `score ${st.score}` : null;
+const cash = slotModel('money', view, fx);
+cash.meta = cash.sub || (Number.isFinite(p?.equip) ? `Gear ${money(p.equip)}` : null);
+return [score, round, kda, cash];
+}
+const __default = {
+id: 'gamelink-screen-match',
+title: 'CS2 Match Screen',
+category: 'Strips & Screens',
+description: 'The Counter-Strike 2 match on the Galleon screen: score and map, the round and why it ended, your K / A / D and MVPs, your money and gear.',
+tags: ['cs2', 'counter-strike', 'game link', 'galleon', 'screen', 'scoreboard', 'match', 'neo'],
+surface: 'screen',
+screens: ['galleon', 'infobar'],
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 10,
+loop: 60,
+still: 7.5,
+press: 'none',
+params: { effects: EFFECTS_PARAM, skin: SKIN_PARAM },
+order: 52,
+render(ctx0) {
+const view = gameLinkOf(ctx0), game = skinOf(ctx0) === 'game';
+const ctx = skinned(ctx0, view); 
+const panelI = game ? gamePanelInstrument : panelInstrument;
+const k = surface(ctx);
+const fx = fxOf(view, tierOf(ctx));
+const C = cards(view, fx);
+if (ctx.screen.kind === 'infobar') {
+k.background({ tone: 'idle' });
+const parts = [C[1].title && C[1].value !== '—' ? `${C[1].value}` : null, C[0].value !== '—' ? C[0].value : null, C[3].value !== '—' ? C[3].value : null].filter(Boolean);
+const stl = k.typeStyle('label'), size = Math.min(k.h * 0.4, stl.size * 1.25);
+k.add(textPath(parts.join('  ·  ') || 'Waiting for CS2', { x: k.w / 2, y: k.h / 2 + size * 0.36, size, weight: stl.weight, anchor: 'middle', maxWidth: k.w - k.m.text * 2, fill: k.colors.ink }));
+const me = { x: 0, y: 0, w: k.w, h: k.h };
+overlays(k, fx, me, fieldOf([me]), { slot: 'round' });
+return k.svg();
+}
+k.add(rect({ width: ctx.w, height: ctx.h, fill: '#000000' }));
+const G = ctx.screen.widgets;
+const rects = [0, 1, 2, 3].map((j) => ({ x: (j % 2) * G.pitchX + G.insetX, y: (j >> 1) * G.pitchY + G.insetY, w: G.w, h: G.h }));
+const F = fieldOf(rects, { origins: { kills: mid(rects[2]), round: mid(rects[1]), health: mid(rects[0]) }, K: 160 });
+const slots = ['score', 'round', 'kda', 'money'];
+C.forEach((M, j) => panelInto(k, rects[j], (p) => { panelI(p, M, fx, { meta: M.meta ?? undefined }); overlays(p, fx, rects[j], F, { slot: slots[j] === 'kda' ? 'kills' : slots[j] }); }, { kind: 'screen', tag: `w${j}`, hue: game ? undefined : SLOT_HUE[slots[j]], tone: M.tone }));
+return k.svg();
+},
+};
+};
+__d[655] = function (__ns) {
+const { renderDeck } = __m(634);
+const { EFFECTS_PARAM, DATA_SHAPE } = __m(629);
+const { SKIN_PARAM } = __m(632);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = {
+id: 'gamelink-span-prism',
+title: 'CS2 Vitals Span',
+category: 'Whole Deck',
+description: 'Your Counter-Strike 2 health and armor across a block of keys (the Prism skin: a prism whose Spectrum is your health), with every moment of the match played across it.',
+tags: ['cs2', 'counter-strike', 'game link', 'span', 'prism', 'spectrum', 'flashbang', 'ambient'],
+surface: 'span',
+span: { cols: 'all', rows: 2 },
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 12,
+loop: 60,
+still: 7.5,
+press: 'none',
+params: { effects: EFFECTS_PARAM, skin: SKIN_PARAM },
+order: 11,
+render: (ctx) => renderDeck(ctx, { sceneOnly: true }),
+};
+};
+__d[656] = function (__ns) {
+const { surface, rect } = __m(276);
+const { panelInto } = __m(277);
+const { gameLinkOf, tierOf, fxOf, slotModel, EFFECTS_PARAM, DATA_SHAPE } = __m(629);
+const { fieldOf, mid, panelInstrument, overlays } = __m(633);
+const { SKIN_PARAM, skinned, skinOf, gamePanelInstrument } = __m(632);
+__e(__ns, { "renderStrip": () => renderStrip, "default": () => __default }, [], ["default","renderStrip"]);
+const STRIP_SLOTS = ['health', 'armor', 'ammo', 'money', 'kills', 'score'];
+const SHOW = ['health', 'armor', 'ammo', 'money', 'kills', 'score', 'round'];
+function renderStrip(ctx0, slots) {
+const view = gameLinkOf(ctx0), game = skinOf(ctx0) === 'game';
+const ctx = skinned(ctx0, view); 
+const panelI = game ? gamePanelInstrument : panelInstrument;
+const k = surface(ctx);
+k.add(rect({ width: ctx.w, height: ctx.h, fill: '#000000' }));
+const fx = fxOf(view, tierOf(ctx));
+const N = ctx.strip.segments, sw = ctx.w / N;
+const rects = Array.from({ length: N }, (_, i) => ({ x: i * sw, y: 0, w: sw, h: ctx.h }));
+const at = (slot) => { const i = slots.indexOf(slot); return i >= 0 && i < N ? mid(rects[i]) : null; };
+const F = fieldOf(rects, { origins: { kills: at('kills'), round: at('round'), health: at('health') }, K: ctx.h });
+const st = view.s?.stats;
+rects.forEach((r, i) => {
+const slot = slots[i % slots.length];
+const M = slotModel(slot, view, fx);
+const meta = slot === 'money' && st && Number.isFinite(st.kills) && fx.face !== 'waiting' ? `K ${st.kills} · D ${st.deaths ?? '—'}` : undefined;
+panelInto(k, r, (p) => { panelI(p, M, fx, { meta }); overlays(p, fx, r, F, { slot }); }, { kind: 'strip', tag: `s${i}`, hue: game ? undefined : M.hue, tone: M.tone });
+});
+return k.svg();
+}
+const __default = [
+{
+id: 'gamelink-strip-vitals',
+title: 'CS2 Vitals Strip',
+category: 'Strips & Screens',
+description: 'Your Counter-Strike 2 vitals across the touch strip: health, armor, ammo and money as bars (+ XL adds kills and the score), flashing and cracking with the deck.',
+tags: ['cs2', 'counter-strike', 'game link', 'strip', 'health', 'armor', 'ammo', 'money', 'bars'],
+surface: 'strip',
+segments: 'all',
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 10,
+loop: 60,
+still: 7.5,
+press: 'none',
+params: { effects: EFFECTS_PARAM, skin: SKIN_PARAM },
+order: 50,
+render: (ctx) => renderStrip(ctx, STRIP_SLOTS),
+},
+{
+id: 'gamelink-dial-vital',
+title: 'CS2 Vital Dial',
+category: 'Strips & Screens',
+description: 'One Counter-Strike 2 vital on a dial’s strip segment: health, armor, ammo, money, kills, the score or the round, with the deck’s effects.',
+tags: ['cs2', 'counter-strike', 'game link', 'dial', 'segment', 'health', 'armor', 'ammo'],
+surface: 'strip',
+segments: 1,
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 10,
+loop: 60,
+still: 7.5,
+press: 'none',
+params: { show: { type: 'select', default: 'health', options: SHOW, label: 'Shows' }, effects: EFFECTS_PARAM, skin: SKIN_PARAM },
+order: 51,
+render: (ctx) => renderStrip(ctx, [ctx.params.show]),
+},
+];
+};
+__d[657] = function (__ns) {
+const { surface } = __m(276);
+const { gameLinkOf, tierOf, fxOf, slotModel, EFFECTS_PARAM, DATA_SHAPE, SLOT_HUE } = __m(629);
+const { fieldOf, keyInstrument, overlays } = __m(633);
+const { SKIN_PARAM, skinned, skinOf, gameKeyInstrument } = __m(632);
+__e(__ns, { "renderVital": () => renderVital, "default": () => __default }, [], ["default","renderVital"]);
+function renderVital(ctx0, slot) {
+const view = gameLinkOf(ctx0);
+const ctx = skinned(ctx0, view); 
+const k = surface(ctx);
+const fx = fxOf(view, tierOf(ctx));
+const M = slotModel(slot, view, fx);
+if (fx.face === 'waiting' && slot !== 'round') M.sub = 'Waiting'; 
+const me = { x: 0, y: 0, w: ctx.w, h: ctx.h };
+const away = [ctx.w * 0.5, ctx.h * 2.2];
+const c = [ctx.w / 2, ctx.h / 2];
+const F = fieldOf([me], { origins: { kills: slot === 'kills' ? c : away, round: slot === 'round' ? c : away, health: c } });
+(skinOf(ctx0) === 'game' ? gameKeyInstrument : keyInstrument)(k, M, fx);
+overlays(k, fx, me, F, { slot });
+return k.svg();
+}
+const vital = (slot, { title, category, description, tags, order }) => ({
+id: `gamelink-${slot}`,
+title,
+category,
+description,
+tags: ['cs2', 'counter-strike', 'game link', 'gaming', 'live', ...tags],
+surface: 'key',
+data: ['gamelink'],
+dataShape: DATA_SHAPE,
+animated: true,
+fps: 10,
+loop: 60,
+still: 7.5,
+press: 'none',
+params: { hue: { type: 'hue', default: SLOT_HUE[slot], label: 'Hue (Prism skin)' }, effects: EFFECTS_PARAM, skin: SKIN_PARAM },
+order,
+render: (ctx) => renderVital(ctx, slot),
+});
+const __default = [
+vital('health', { title: 'Health', category: 'Vitals', order: 20, tags: ['health', 'hp', 'vitals'], description: 'Your health from Counter-Strike 2 with a meter and the damage you just took; the key whites out when you are flashed and cracks when you go down.' }),
+vital('armor', { title: 'Armor', category: 'Vitals', order: 21, tags: ['armor', 'kevlar', 'helmet', 'vitals'], description: 'Your armor from Counter-Strike 2, with a shield that shows whether you have a helmet, and the deck’s flash and damage effects.' }),
+vital('ammo', { title: 'Ammo', category: 'Vitals', order: 22, tags: ['ammo', 'clip', 'magazine', 'reload', 'weapon'], description: 'The clip of the gun in your hand, prominent, with spare magazines shown as mags; warns when low, empty or reloading.' }),
+vital('money', { title: 'Money', category: 'Vitals', order: 23, tags: ['money', 'economy', 'buy'], description: 'Your money from Counter-Strike 2: up front during freeze time, with every reward and purchase shown as it lands.' }),
+vital('kills', { title: 'Round Kills', category: 'Match', order: 30, tags: ['kills', 'frags', 'headshot', 'multi-kill', 'ace'], description: 'Your kills this round: a spectral burst on every kill, a sharper one for headshots, and Double, Triple, Quad and Ace as they come.' }),
+vital('score', { title: 'Score', category: 'Match', order: 31, tags: ['score', 'match', 'team', 'match point'], description: 'Your team’s score against theirs with your side, the target and match point; the final result at the end of the match.' }),
+vital('round', { title: 'Round', category: 'Round & Bomb', order: 40, tags: ['round', 'bomb', 'planted', 'buy', 'freeze time'], description: 'The round and its phase: buy, live, planted (a steady pulse, no timer), won or lost and why, halftime, spectating.' }),
+];
+};
+__d[658] = function (__ns) {
+const m0 = __m(284);
+const m1 = __m(285);
+const m2 = __m(286);
+const m3 = __m(287);
+const m4 = __m(289);
+const m5 = __m(290);
+const m6 = __m(291);
+const m7 = __m(292);
+const m8 = __m(293);
+const m9 = __m(294);
+const m10 = __m(283);
+const m11 = __m(297);
+const m12 = __m(298);
+const m13 = __m(299);
+const m14 = __m(300);
+const m15 = __m(301);
+const m16 = __m(302);
+const m17 = __m(303);
+const m18 = __m(304);
+const m19 = __m(305);
+const m20 = __m(306);
+const m21 = __m(307);
+const m22 = __m(308);
+const m23 = __m(309);
+const m24 = __m(310);
+const m25 = __m(311);
+const m26 = __m(312);
+const m27 = __m(313);
+const m28 = __m(314);
+const m29 = __m(315);
+const m30 = __m(316);
+const m31 = __m(317);
+const m32 = __m(319);
+const m33 = __m(320);
+const m34 = __m(321);
+const m35 = __m(322);
+const m36 = __m(323);
+const m37 = __m(324);
+const m38 = __m(325);
+const m39 = __m(326);
+const m40 = __m(327);
+const m41 = __m(328);
+const m42 = __m(329);
+const m43 = __m(330);
+const m44 = __m(331);
+const m45 = __m(332);
+const m46 = __m(333);
+const m47 = __m(334);
+const m48 = __m(335);
+const m49 = __m(336);
+const m50 = __m(337);
+const m51 = __m(338);
+const m52 = __m(339);
+const m53 = __m(340);
+const m54 = __m(341);
+const m55 = __m(342);
+const m56 = __m(343);
+const m57 = __m(344);
+const m58 = __m(345);
+const m59 = __m(346);
+const m60 = __m(347);
+const m61 = __m(348);
+const m62 = __m(349);
+const m63 = __m(350);
+const m64 = __m(351);
+const m65 = __m(352);
+const m66 = __m(353);
+const m67 = __m(354);
+const m68 = __m(355);
+const m69 = __m(356);
+const m70 = __m(357);
+const m71 = __m(358);
+const m72 = __m(359);
+const m73 = __m(360);
+const m74 = __m(361);
+const m75 = __m(362);
+const m76 = __m(363);
+const m77 = __m(364);
+const m78 = __m(365);
+const m79 = __m(366);
+const m80 = __m(367);
+const m81 = __m(368);
+const m82 = __m(369);
+const m83 = __m(370);
+const m84 = __m(371);
+const m85 = __m(372);
+const m86 = __m(373);
+const m87 = __m(374);
+const m88 = __m(375);
+const m89 = __m(376);
+const m90 = __m(377);
+const m91 = __m(378);
+const m92 = __m(379);
+const m93 = __m(380);
+const m94 = __m(381);
+const m95 = __m(382);
+const m96 = __m(383);
+const m97 = __m(384);
+const m98 = __m(385);
+const m99 = __m(386);
+const m100 = __m(387);
+const m101 = __m(388);
+const m102 = __m(389);
+const m103 = __m(390);
+const m104 = __m(391);
+const m105 = __m(392);
+const m106 = __m(393);
+const m107 = __m(394);
+const m108 = __m(395);
+const m109 = __m(396);
+const m110 = __m(397);
+const m111 = __m(398);
+const m112 = __m(399);
+const m113 = __m(400);
+const m114 = __m(401);
+const m115 = __m(402);
+const m116 = __m(403);
+const m117 = __m(404);
+const m118 = __m(405);
+const m119 = __m(406);
+const m120 = __m(407);
+const m121 = __m(408);
+const m122 = __m(409);
+const m123 = __m(410);
+const m124 = __m(411);
+const m125 = __m(412);
+const m126 = __m(413);
+const m127 = __m(414);
+const m128 = __m(415);
+const m129 = __m(416);
+const m130 = __m(417);
+const m131 = __m(418);
+const m132 = __m(419);
+const m133 = __m(420);
+const m134 = __m(421);
+const m135 = __m(422);
+const m136 = __m(423);
+const m137 = __m(424);
+const m138 = __m(425);
+const m139 = __m(426);
+const m140 = __m(427);
+const m141 = __m(428);
+const m142 = __m(429);
+const m143 = __m(430);
+const m144 = __m(431);
+const m145 = __m(432);
+const m146 = __m(433);
+const m147 = __m(434);
+const m148 = __m(435);
+const m149 = __m(436);
+const m150 = __m(437);
+const m151 = __m(438);
+const m152 = __m(439);
+const m153 = __m(440);
+const m154 = __m(441);
+const m155 = __m(442);
+const m156 = __m(443);
+const m157 = __m(444);
+const m158 = __m(445);
+const m159 = __m(446);
+const m160 = __m(447);
+const m161 = __m(448);
+const m162 = __m(449);
+const m163 = __m(450);
+const m164 = __m(451);
+const m165 = __m(452);
+const m166 = __m(453);
+const m167 = __m(454);
+const m168 = __m(455);
+const m169 = __m(456);
+const m170 = __m(457);
+const m171 = __m(458);
+const m172 = __m(459);
+const m173 = __m(460);
+const m174 = __m(461);
+const m175 = __m(462);
+const m176 = __m(463);
+const m177 = __m(464);
+const m178 = __m(465);
+const m179 = __m(466);
+const m180 = __m(467);
+const m181 = __m(468);
+const m182 = __m(469);
+const m183 = __m(470);
+const m184 = __m(471);
+const m185 = __m(472);
+const m186 = __m(473);
+const m187 = __m(474);
+const m188 = __m(475);
+const m189 = __m(476);
+const m190 = __m(477);
+const m191 = __m(478);
+const m192 = __m(479);
+const m193 = __m(480);
+const m194 = __m(481);
+const m195 = __m(482);
+const m196 = __m(483);
+const m197 = __m(484);
+const m198 = __m(485);
+const m199 = __m(486);
+const m200 = __m(487);
+const m201 = __m(488);
+const m202 = __m(489);
+const m203 = __m(490);
+const m204 = __m(491);
+const m205 = __m(492);
+const m206 = __m(493);
+const m207 = __m(494);
+const m208 = __m(495);
+const m209 = __m(496);
+const m210 = __m(497);
+const m211 = __m(498);
+const m212 = __m(499);
+const m213 = __m(501);
+const m214 = __m(502);
+const m215 = __m(503);
+const m216 = __m(504);
+const m217 = __m(506);
+const m218 = __m(507);
+const m219 = __m(508);
+const m220 = __m(509);
+const m221 = __m(510);
+const m222 = __m(514);
+const m223 = __m(515);
+const m224 = __m(516);
+const m225 = __m(517);
+const m226 = __m(518);
+const m227 = __m(519);
+const m228 = __m(520);
+const m229 = __m(521);
+const m230 = __m(522);
+const m231 = __m(523);
+const m232 = __m(526);
+const m233 = __m(527);
+const m234 = __m(528);
+const m235 = __m(529);
+const m236 = __m(530);
+const m237 = __m(531);
+const m238 = __m(532);
+const m239 = __m(533);
+const m240 = __m(534);
+const m241 = __m(535);
+const m242 = __m(536);
+const m243 = __m(537);
+const m244 = __m(538);
+const m245 = __m(539);
+const m246 = __m(540);
+const m247 = __m(541);
+const m248 = __m(542);
+const m249 = __m(543);
+const m250 = __m(544);
+const m251 = __m(545);
+const m252 = __m(546);
+const m253 = __m(547);
+const m254 = __m(548);
+const m255 = __m(549);
+const m256 = __m(550);
+const m257 = __m(551);
+const m258 = __m(552);
+const m259 = __m(553);
+const m260 = __m(554);
+const m261 = __m(555);
+const m262 = __m(556);
+const m263 = __m(557);
+const m264 = __m(558);
+const m265 = __m(559);
+const m266 = __m(560);
+const m267 = __m(561);
+const m268 = __m(562);
+const m269 = __m(563);
+const m270 = __m(565);
+const m271 = __m(566);
+const m272 = __m(567);
+const m273 = __m(568);
+const m274 = __m(569);
+const m275 = __m(570);
+const m276 = __m(571);
+const m277 = __m(572);
+const m278 = __m(573);
+const m279 = __m(574);
+const m280 = __m(575);
+const m281 = __m(576);
+const m282 = __m(577);
+const m283 = __m(578);
+const m284 = __m(281);
+const m285 = __m(580);
+const m286 = __m(581);
+const m287 = __m(582);
+const m288 = __m(583);
+const m289 = __m(584);
+const m290 = __m(586);
+const m291 = __m(587);
+const m292 = __m(588);
+const m293 = __m(589);
+const m294 = __m(590);
+const m295 = __m(591);
+const m296 = __m(592);
+const m297 = __m(594);
+const m298 = __m(595);
+const m299 = __m(596);
+const m300 = __m(597);
+const m301 = __m(598);
+const m302 = __m(599);
+const m303 = __m(602);
+const m304 = __m(603);
+const m305 = __m(604);
+const m306 = __m(605);
+const m307 = __m(606);
+const m308 = __m(607);
+const m309 = __m(608);
+const m310 = __m(609);
+const m311 = __m(610);
+const m312 = __m(611);
+const m313 = __m(612);
+const m314 = __m(613);
+const m315 = __m(600);
+const m316 = __m(615);
+const m317 = __m(616);
+const m318 = __m(617);
+const m319 = __m(618);
+const m320 = __m(619);
+const m321 = __m(620);
+const m322 = __m(621);
+const m323 = __m(622);
+const m324 = __m(623);
+const m325 = __m(624);
+const m326 = __m(625);
+const m327 = __m(626);
+const m328 = __m(634);
+const m329 = __m(641);
+const m330 = __m(642);
+const m331 = __m(643);
+const m332 = __m(650);
+const m333 = __m(649);
+const m334 = __m(651);
+const m335 = __m(652);
+const m336 = __m(653);
+const m337 = __m(654);
+const m338 = __m(655);
+const m339 = __m(656);
+const m340 = __m(657);
 __e(__ns, { "FACET_MODULES": () => FACET_MODULES }, [], ["FACET_MODULES"]);
 const FACET_MODULES = [
 ['themes/aurora.js', m0],
@@ -12327,183 +19243,342 @@ const FACET_MODULES = [
 ['themes/pixel.js', m8],
 ['themes/porcelain.js', m9],
 ['themes/prism.js', m10],
-['icons/alarm.js', m11],
-['icons/alert.js', m12],
-['icons/back.js', m13],
-['icons/battery.js', m14],
-['icons/broadcast.js', m15],
-['icons/bug.js', m16],
-['icons/bulb.js', m17],
-['icons/calendar.js', m18],
-['icons/camera.js', m19],
-['icons/chat.js', m20],
-['icons/check.js', m21],
-['icons/clock.js', m22],
-['icons/cloud.js', m23],
-['icons/code.js', m24],
-['icons/coffee.js', m25],
-['icons/cpu.js', m26],
-['icons/disk.js', m27],
-['icons/equalizer.js', m28],
-['icons/fan.js', m29],
-['icons/folder.js', m30],
-['icons/git-branch.js', m31],
-['icons/gpu.js', m32],
-['icons/headphones.js', m33],
-['icons/home.js', m34],
-['icons/info.js', m35],
-['icons/lock.js', m36],
-['icons/mail.js', m37],
-['icons/marker.js', m38],
-['icons/memory.js', m39],
-['icons/mic.js', m40],
-['icons/mixer.js', m41],
-['icons/music-note.js', m42],
-['icons/network.js', m43],
-['icons/note.js', m44],
-['icons/pages.js', m45],
-['icons/play-pause.js', m46],
-['icons/plug.js', m47],
-['icons/power.js', m48],
-['icons/record.js', m49],
-['icons/rocket.js', m50],
-['icons/scene.js', m51],
-['icons/search.js', m52],
-['icons/shuffle.js', m53],
-['icons/skip-next.js', m54],
-['icons/skip-prev.js', m55],
-['icons/stop.js', m56],
-['icons/stopwatch.js', m57],
-['icons/sync.js', m58],
-['icons/target.js', m59],
-['icons/terminal.js', m60],
-['icons/thermostat.js', m61],
-['icons/timer.js', m62],
-['icons/viewers.js', m63],
-['icons/volume.js', m64],
-['icons/waveform.js', m65],
-['icons/wifi.js', m66],
-['motion/alert-countdown.js', m67],
-['motion/alert-pulse.js', m68],
-['motion/alert-shake.js', m69],
-['motion/alert-siren.js', m70],
-['motion/build-status.js', m71],
-['motion/clip-marker.js', m72],
-['motion/do-not-disturb.js', m73],
-['motion/hold-confirm.js', m74],
-['motion/idle-breathe.js', m75],
-['motion/idle-candle.js', m76],
-['motion/idle-firefly.js', m77],
-['motion/idle-heartbeat.js', m78],
-['motion/idle-lava.js', m79],
-['motion/idle-orbit.js', m80],
-['motion/idle-prompt.js', m81],
-['motion/idle-shimmer.js', m82],
-['motion/idle-snowglobe.js', m83],
-['motion/idle-tick.js', m84],
-['motion/on-air.js', m85],
-['motion/press-bloom.js', m86],
-['motion/press-refract.js', m87],
-['motion/press-ripple.js', m88],
-['motion/press-shutter.js', m89],
-['motion/press-sink.js', m90],
-['motion/state-crossfade.js', m91],
-['motion/state-flip.js', m92],
-['motion/state-iris.js', m93],
-['motion/state-morph.js', m94],
-['spans/aquarium.js', m95],
-['spans/aurora.js', m96],
-['spans/caustics.js', m97],
-['spans/chat-ticker.js', m98],
-['spans/clock.js', m99],
-['spans/constellation.js', m100],
-['spans/daylight.js', m101],
-['spans/digital-rain.js', m102],
-['spans/dispersion.js', m103],
-['spans/fireflies.js', m104],
-['spans/first-light.js', m105],
-['spans/flip-clock.js', m106],
-['spans/galaxy.js', m107],
-['spans/goal.js', m108],
-['spans/hearth.js', m109],
-['spans/lava.js', m110],
-['spans/life.js', m111],
-['spans/marquee.js', m112],
-['spans/power-on.js', m113],
-['spans/progress.js', m114],
-['spans/rain-glass.js', m115],
-['spans/rain.js', m116],
-['spans/ripple.js', m117],
-['spans/scoreboard.js', m118],
-['spans/snowfall.js', m119],
-['spans/spectrum.js', m120],
-['spans/swell.js', m121],
-['spans/warp.js', m122],
-['spans/waveform.js', m123],
-['dials/color-wheel.js', m124],
-['dials/eq.js', m125],
-['dials/gauge.js', m126],
-['dials/light.js', m127],
-['dials/refraction.js', m128],
-['dials/rundown.js', m129],
-['dials/score.js', m130],
-['dials/scrubber.js', m131],
-['dials/selector.js', m132],
-['dials/timeline.js', m133],
-['dials/value-bars.js', m134],
-['dials/volume-arc.js', m135],
-['dials/volume.js', m136],
-['dials/zoom.js', m137],
-['screens/galleon-dashboard.js', m138],
-['screens/galleon-game.js', m139],
-['screens/galleon-media.js', m140],
-['screens/galleon-meeting.js', m141],
-['screens/galleon-studio.js', m142],
-['screens/galleon-system.js', m143],
-['screens/galleon-weather.js', m144],
-['screens/neo-agenda.js', m145],
-['screens/neo-clock.js', m146],
-['screens/neo-now-playing.js', m147],
-['screens/neo-system.js', m148],
-['screens/strip-media.js', m149],
-['screens/strip-system.js', m150],
-['apps/clock-span.js', m151],
-['apps/clocks.js', m152],
-['apps/counter.js', m153],
-['apps/cpu-ring.js', m154],
-['apps/date-page.js', m155],
-['apps/focus-timer.js', m156],
-['apps/galleon-mix.js', m157],
-['apps/galleon-widgets.js', m158],
-['apps/meeting.js', m159],
-['apps/mic-meter.js', m160],
-['apps/neo-info.js', m161],
-['apps/pomodoro-set.js', m162],
-['apps/scene-countdown.js', m163],
-['apps/scenes.js', m164],
-['apps/spectrum.js', m165],
-['apps/system.js', m166],
-['apps/time-zones.js', m167],
-['apps/waveform-strip.js', m168],
-['apps/waveform.js', m169],
-['games/catch.js', m170],
-['games/coin.js', m171],
-['games/dice.js', m172],
-['games/echo.js', m173],
-['games/lights-out.js', m174],
-['games/memory.js', m175],
-['games/merge.js', m176],
-['games/oracle.js', m177],
-['games/reaction.js', m178],
-['games/slots.js', m179],
-['games/spectrum.js', m180],
-['games/tictactoe.js', m181],
+['icons/address-bar.js', m11],
+['icons/alarm.js', m12],
+['icons/alert.js', m13],
+['icons/align.js', m14],
+['icons/arrow-down.js', m15],
+['icons/arrow-left.js', m16],
+['icons/arrow-right.js', m17],
+['icons/arrow-up.js', m18],
+['icons/artist.js', m19],
+['icons/auto-complete.js', m20],
+['icons/back.js', m21],
+['icons/bank-left.js', m22],
+['icons/bank-level.js', m23],
+['icons/bank-right.js', m24],
+['icons/bank.js', m25],
+['icons/battery.js', m26],
+['icons/beam.js', m27],
+['icons/bold.js', m28],
+['icons/boost.js', m29],
+['icons/booster.js', m30],
+['icons/brake.js', m31],
+['icons/broadcast.js', m32],
+['icons/brush.js', m33],
+['icons/bucket.js', m34],
+['icons/bug.js', m35],
+['icons/build.js', m36],
+['icons/bulb.js', m37],
+['icons/calendar.js', m38],
+['icons/camera.js', m39],
+['icons/captions.js', m40],
+['icons/chain-lift.js', m41],
+['icons/chapter-next.js', m42],
+['icons/chapter-prev.js', m43],
+['icons/chat.js', m44],
+['icons/check.js', m45],
+['icons/clear.js', m46],
+['icons/clock.js', m47],
+['icons/close.js', m48],
+['icons/cloud.js', m49],
+['icons/cluster.js', m50],
+['icons/code.js', m51],
+['icons/coffee.js', m52],
+['icons/comment.js', m53],
+['icons/container.js', m54],
+['icons/copy.js', m55],
+['icons/cpu.js', m56],
+['icons/crouch.js', m57],
+['icons/cursor.js', m58],
+['icons/cut.js', m59],
+['icons/database.js', m60],
+['icons/definition.js', m61],
+['icons/delete.js', m62],
+['icons/diff.js', m63],
+['icons/disk.js', m64],
+['icons/dollar.js', m65],
+['icons/edit.js', m66],
+['icons/emoji.js', m67],
+['icons/equalizer.js', m68],
+['icons/exocraft.js', m69],
+['icons/eye.js', m70],
+['icons/fade.js', m71],
+['icons/falloff.js', m72],
+['icons/fan.js', m73],
+['icons/fit.js', m74],
+['icons/fold.js', m75],
+['icons/folder.js', m76],
+['icons/follow.js', m77],
+['icons/font-size.js', m78],
+['icons/format.js', m79],
+['icons/forward-10.js', m80],
+['icons/forward.js', m81],
+['icons/frame-next.js', m82],
+['icons/frame-prev.js', m83],
+['icons/freighter.js', m84],
+['icons/fullscreen.js', m85],
+['icons/function.js', m86],
+['icons/galaxy.js', m87],
+['icons/gamepad.js', m88],
+['icons/gif.js', m89],
+['icons/git-branch.js', m90],
+['icons/globe.js', m91],
+['icons/goto-line.js', m92],
+['icons/gpu.js', m93],
+['icons/hdr.js', m94],
+['icons/heading.js', m95],
+['icons/headphones.js', m96],
+['icons/heart.js', m97],
+['icons/heatmap.js', m98],
+['icons/height.js', m99],
+['icons/home.js', m100],
+['icons/indent.js', m101],
+['icons/info.js', m102],
+['icons/italic.js', m103],
+['icons/jetpack.js', m104],
+['icons/jump.js', m105],
+['icons/key.js', m106],
+['icons/keyboard.js', m107],
+['icons/land.js', m108],
+['icons/layers.js', m109],
+['icons/layout.js', m110],
+['icons/leaf.js', m111],
+['icons/length-minus.js', m112],
+['icons/length-plus.js', m113],
+['icons/link.js', m114],
+['icons/lock.js', m115],
+['icons/loop.js', m116],
+['icons/magnet.js', m117],
+['icons/mail.js', m118],
+['icons/marker.js', m119],
+['icons/maximize.js', m120],
+['icons/memory.js', m121],
+['icons/mic.js', m122],
+['icons/minimize.js', m123],
+['icons/mixer.js', m124],
+['icons/monitor.js', m125],
+['icons/move.js', m126],
+['icons/music-note.js', m127],
+['icons/network.js', m128],
+['icons/note.js', m129],
+['icons/pages.js', m130],
+['icons/panel.js', m131],
+['icons/paste.js', m132],
+['icons/path.js', m133],
+['icons/person.js', m134],
+['icons/pin.js', m135],
+['icons/pip.js', m136],
+['icons/pitch-down.js', m137],
+['icons/pitch-level.js', m138],
+['icons/pitch-up.js', m139],
+['icons/pitch.js', m140],
+['icons/play-pause.js', m141],
+['icons/plug.js', m142],
+['icons/power.js', m143],
+['icons/queue.js', m144],
+['icons/radial.js', m145],
+['icons/record.js', m146],
+['icons/references.js', m147],
+['icons/rename.js', m148],
+['icons/replace.js', m149],
+['icons/replay.js', m150],
+['icons/rewind-10.js', m151],
+['icons/rocket.js', m152],
+['icons/roll.js', m153],
+['icons/rotate.js', m154],
+['icons/scale.js', m155],
+['icons/scanner.js', m156],
+['icons/scene.js', m157],
+['icons/screenshot.js', m158],
+['icons/scroll-bottom.js', m159],
+['icons/scroll-top.js', m160],
+['icons/scroll.js', m161],
+['icons/search.js', m162],
+['icons/select.js', m163],
+['icons/settings.js', m164],
+['icons/shield.js', m165],
+['icons/shuffle.js', m166],
+['icons/sidebar.js', m167],
+['icons/skip-next.js', m168],
+['icons/skip-prev.js', m169],
+['icons/smooth.js', m170],
+['icons/snap-left.js', m171],
+['icons/snap-right.js', m172],
+['icons/snap.js', m173],
+['icons/special.js', m174],
+['icons/speed.js', m175],
+['icons/split-down.js', m176],
+['icons/split.js', m177],
+['icons/stairs.js', m178],
+['icons/star.js', m179],
+['icons/station.js', m180],
+['icons/step-into.js', m181],
+['icons/step-out.js', m182],
+['icons/sticker.js', m183],
+['icons/stop.js', m184],
+['icons/stopwatch.js', m185],
+['icons/strike.js', m186],
+['icons/sun.js', m187],
+['icons/symbol.js', m188],
+['icons/sync.js', m189],
+['icons/tab-group.js', m190],
+['icons/tab.js', m191],
+['icons/target.js', m192],
+['icons/terminal.js', m193],
+['icons/terrain.js', m194],
+['icons/theater.js', m195],
+['icons/thermostat.js', m196],
+['icons/timer.js', m197],
+['icons/track-curve-left.js', m198],
+['icons/track-curve-right.js', m199],
+['icons/track-straight.js', m200],
+['icons/view-details.js', m201],
+['icons/view-icons.js', m202],
+['icons/viewers.js', m203],
+['icons/volume.js', m204],
+['icons/walk.js', m205],
+['icons/warp.js', m206],
+['icons/waveform.js', m207],
+['icons/wifi.js', m208],
+['icons/window.js', m209],
+['icons/zoom-in.js', m210],
+['icons/zoom-out.js', m211],
+['icons/zoom-reset.js', m212],
+['motion/alert-countdown.js', m213],
+['motion/alert-pulse.js', m214],
+['motion/alert-shake.js', m215],
+['motion/alert-siren.js', m216],
+['motion/build-status.js', m217],
+['motion/clip-marker.js', m218],
+['motion/do-not-disturb.js', m219],
+['motion/hold-confirm.js', m220],
+['motion/idle-breathe.js', m221],
+['motion/idle-candle.js', m222],
+['motion/idle-firefly.js', m223],
+['motion/idle-heartbeat.js', m224],
+['motion/idle-lava.js', m225],
+['motion/idle-orbit.js', m226],
+['motion/idle-prompt.js', m227],
+['motion/idle-shimmer.js', m228],
+['motion/idle-snowglobe.js', m229],
+['motion/idle-tick.js', m230],
+['motion/on-air.js', m231],
+['motion/press-bloom.js', m232],
+['motion/press-refract.js', m233],
+['motion/press-ripple.js', m234],
+['motion/press-shutter.js', m235],
+['motion/press-sink.js', m236],
+['motion/state-crossfade.js', m237],
+['motion/state-flip.js', m238],
+['motion/state-iris.js', m239],
+['motion/state-morph.js', m240],
+['spans/aquarium.js', m241],
+['spans/aurora.js', m242],
+['spans/caustics.js', m243],
+['spans/chat-ticker.js', m244],
+['spans/clock.js', m245],
+['spans/constellation.js', m246],
+['spans/daylight.js', m247],
+['spans/digital-rain.js', m248],
+['spans/dispersion.js', m249],
+['spans/fireflies.js', m250],
+['spans/first-light.js', m251],
+['spans/flip-clock.js', m252],
+['spans/galaxy.js', m253],
+['spans/goal.js', m254],
+['spans/hearth.js', m255],
+['spans/lava.js', m256],
+['spans/life.js', m257],
+['spans/marquee.js', m258],
+['spans/power-on.js', m259],
+['spans/progress.js', m260],
+['spans/rain-glass.js', m261],
+['spans/rain.js', m262],
+['spans/ripple.js', m263],
+['spans/scoreboard.js', m264],
+['spans/snowfall.js', m265],
+['spans/spectrum.js', m266],
+['spans/swell.js', m267],
+['spans/warp.js', m268],
+['spans/waveform.js', m269],
+['dials/color-wheel.js', m270],
+['dials/eq.js', m271],
+['dials/gauge.js', m272],
+['dials/light.js', m273],
+['dials/refraction.js', m274],
+['dials/rundown.js', m275],
+['dials/score.js', m276],
+['dials/scrubber.js', m277],
+['dials/selector.js', m278],
+['dials/timeline.js', m279],
+['dials/value-bars.js', m280],
+['dials/volume-arc.js', m281],
+['dials/volume.js', m282],
+['dials/zoom.js', m283],
+['screens/galleon-dashboard.js', m284],
+['screens/galleon-game.js', m285],
+['screens/galleon-media.js', m286],
+['screens/galleon-meeting.js', m287],
+['screens/galleon-studio.js', m288],
+['screens/galleon-system.js', m289],
+['screens/galleon-weather.js', m290],
+['screens/neo-agenda.js', m291],
+['screens/neo-clock.js', m292],
+['screens/neo-now-playing.js', m293],
+['screens/neo-system.js', m294],
+['screens/strip-media.js', m295],
+['screens/strip-system.js', m296],
+['apps/clock-span.js', m297],
+['apps/clocks.js', m298],
+['apps/counter.js', m299],
+['apps/cpu-ring.js', m300],
+['apps/date-page.js', m301],
+['apps/focus-timer.js', m302],
+['apps/galleon-mix.js', m303],
+['apps/galleon-widgets.js', m304],
+['apps/meeting.js', m305],
+['apps/mic-meter.js', m306],
+['apps/neo-info.js', m307],
+['apps/pomodoro-set.js', m308],
+['apps/scene-countdown.js', m309],
+['apps/scenes.js', m310],
+['apps/spectrum.js', m311],
+['apps/system.js', m312],
+['apps/time-zones.js', m313],
+['apps/waveform-strip.js', m314],
+['apps/waveform.js', m315],
+['games/catch.js', m316],
+['games/coin.js', m317],
+['games/dice.js', m318],
+['games/echo.js', m319],
+['games/lights-out.js', m320],
+['games/memory.js', m321],
+['games/merge.js', m322],
+['games/oracle.js', m323],
+['games/reaction.js', m324],
+['games/slots.js', m325],
+['games/spectrum.js', m326],
+['games/tictactoe.js', m327],
+['gamelink/deck.js', m328],
+['gamelink/moba-deck.js', m329],
+['gamelink/moba-keys.js', m330],
+['gamelink/moba-panels.js', m331],
+['gamelink/rl-boost.js', m332],
+['gamelink/rl-deck.js', m333],
+['gamelink/rl-key.js', m334],
+['gamelink/rl-screen.js', m335],
+['gamelink/rl-strip.js', m336],
+['gamelink/screen.js', m337],
+['gamelink/span.js', m338],
+['gamelink/strip.js', m339],
+['gamelink/vitals.js', m340],
 ];
 };
-__d[318] = function (__ns) {
-const { FACET_MODULES } = __m(317);
+__d[659] = function (__ns) {
+const { FACET_MODULES } = __m(658);
 const { GALLERIES, GALLERY_IDS, getGallery } = __m(2);
-const { normalizeFacet, validateFacet } = __m(104);
+const { normalizeFacet, validateFacet } = __m(267);
 __e(__ns, { "facetsOfModule": () => facetsOfModule, "sortFacets": () => sortFacets, "allFacets": () => allFacets, "findFacet": () => findFacet, "catalogTree": () => catalogTree, "searchFacets": () => searchFacets, "GALLERIES": () => GALLERIES, "getGallery": () => getGallery }, [], ["GALLERIES","allFacets","catalogTree","facetsOfModule","findFacet","getGallery","searchFacets","sortFacets"]);
 let cache = null;
 function facetsOfModule(file, mod) {

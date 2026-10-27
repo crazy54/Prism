@@ -1,10 +1,10 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Reveal & Type — text that arrives: a human-paced typewriter, big-type
 // type/delete loops, decrypts, digital-rain reveals, letters that drop in
 // under gravity, a split-flap departures board and four scramble styles.
 const { mix, mixOklab } = __bm(0);
-import { drawBanner, measureBanner } from '../../text/banner.js';
-import { bannerMode, fitFont, hash } from './_text.js';
+import { drawBanner, measureBanner } from '../../text/banner.js?v=b7d3401196';
+import { bannerMode, fitFont, hash } from './_text.js?v=b7d3401196';
 
 const shared = { gallery: 'text', category: 'Reveal & Type', kind: 'text', glyphs: 'unicode', color: 'truecolor', animated: true };
 const asciiOnly = (ctx) => ctx.caps.unicode === false || ctx.mode === 'ascii';

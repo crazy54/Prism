@@ -11,7 +11,7 @@
 // a four-chord loop, a soft pad, a seeded 16th-note arpeggio; every 16 bars a 2-bar
 // breakdown drops the drums, so waveforms and spectra breathe instead of looping flat.
 
-import { Analyzer } from './analyzer.js';
+import { Analyzer } from './analyzer.js?v=b7d3401196';
 
 const TAU = Math.PI * 2;
 

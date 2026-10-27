@@ -6,25 +6,27 @@
 //
 // Zero dependencies; runs on the app's bundled Node 20 (no global WebSocket needed).
 
-import { StreamDeckConnection, parseLaunchArgs } from './connection.js';
-import { PrismRuntime } from './runtime.js';
-import { LiveController } from './control.js';
-import { createDataHub } from './data.js';
+import { StreamDeckConnection, parseLaunchArgs } from './connection.js?v=b7d3401196';
+import { PrismRuntime } from './runtime.js?v=b7d3401196';
+import { LiveController } from './control.js?v=b7d3401196';
+import { createDataHub } from './data.js?v=b7d3401196';
+import { GameLinkController, LolLinkController, RlLinkController } from './gamelink.js?v=b7d3401196';   // Game Link (prism-play)
 
-export { StreamDeckConnection, parseLaunchArgs, detectHost, hostFeatures } from './connection.js';
-export { PrismRuntime, createRuntime, PLUGIN_UUID } from './runtime.js';
-export { LiveController, API_VERSION as LIVE_API_VERSION } from './control.js';
-export { DeviceBudget, allocateFps, DEFAULT_LIMITS } from './budget.js';
+export { StreamDeckConnection, parseLaunchArgs, detectHost, hostFeatures } from './connection.js?v=b7d3401196';
+export { PrismRuntime, createRuntime, PLUGIN_UUID } from './runtime.js?v=b7d3401196';
+export { LiveController, API_VERSION as LIVE_API_VERSION } from './control.js?v=b7d3401196';
+export { DeviceBudget, allocateFps, DEFAULT_LIMITS } from './budget.js?v=b7d3401196';
 
-export const PLUGIN_VERSION = '0.7.0.0';
+export const PLUGIN_VERSION = '0.8.0.0';
 
 /**
  * Start the plugin. opts: { argv, env, connect, exit, log, controlFile, handleProcess,
- *   audio (an AudioSource, or null for none), data (a data hub; default createNodeHub()) } (tests inject these).
+ *   audio (an AudioSource, or null for none), data (a data hub; default createNodeHub()),
+ *   gamelink (Game Link, prism-play: a createGameLink() client; default data.gameLink; null = none) } (tests inject these).
  * Env: PRISM_DECK_AUDIO=off (no capture), PRISM_DECK_LIVE_DATA=off (no system probes / child processes).
  * Resolves with { conn, runtime, live, stop() } once registered.
  */
-export async function main({ argv = process.argv.slice(2), env = process.env, connect, exit = (code) => process.exit(code), controlFile, log, handleProcess = true, audio, data: injected } = {}) {
+export async function main({ argv = process.argv.slice(2), env = process.env, connect, exit = (code) => process.exit(code), controlFile, log, handleProcess = true, audio, data: injected, gamelink: injectedGameLink } = {}) {
   const args = parseLaunchArgs(argv);
   const conn = new StreamDeckConnection({ port: args.port, pluginUUID: args.pluginUUID, registerEvent: args.registerEvent || 'registerPlugin', info: args.info, ...(connect ? { connect } : {}) });
   const write = log || ((level, msg) => {
@@ -38,21 +40,31 @@ export async function main({ argv = process.argv.slice(2), env = process.env, co
   if (!data) {
     if (env.PRISM_DECK_LIVE_DATA === 'off') data = createDataHub();
     else {
-      try { const { createNodeHub } = await import('../apps/sources/node.js'); data = await createNodeHub({ audio: false }); } catch (e) { write('warn', 'live data hub unavailable: ' + e.message); data = createDataHub(); }
+      try { const { createNodeHub } = await import('../apps/sources/node.js?v=b7d3401196'); data = await createNodeHub({ audio: false, log: write }); } catch (e) { write('warn', 'live data hub unavailable: ' + e.message); data = createDataHub(); }
     }
   }
   // Qt output stage (scene/qt.js): clipPath → luminance mask, no preserveAspectRatio. Guarded: older engines lack it.
   let deviceSvg = null;
-  try { ({ toDeviceSvg: deviceSvg } = await import('../scene/qt.js')); } catch { write('warn', 'scene/qt.js missing: payloads are sent without the Qt output stage'); }
+  try { ({ toDeviceSvg: deviceSvg } = await import('../scene/qt.js?v=b7d3401196')); } catch { write('warn', 'scene/qt.js missing: payloads are sent without the Qt output stage'); }
   let raster = null;
-  try { raster = await import('../raster/index.js'); } catch { /* optional: only the 'png' format needs it */ }
+  try { raster = await import('../raster/index.js?v=b7d3401196'); } catch { /* optional: only the 'png' format needs it */ }
   // Live audio (src/audio): capture starts only while a visible facet draws audio / spectrum.
   let audioSource = env.PRISM_DECK_AUDIO === 'off' ? null : audio;   // PRISM_DECK_AUDIO=off: no capture (smoke tests, kiosks)
   if (audioSource === undefined) {
-    try { const { createAudioSource } = await import('../audio/index.js'); audioSource = createAudioSource({ input: 'monitor', onLog: (m) => write('debug', m) }); } catch { audioSource = null; }
+    try { const { createAudioSource } = await import('../audio/index.js?v=b7d3401196'); audioSource = createAudioSource({ input: 'monitor', onLog: (m) => write('debug', m) }); } catch { audioSource = null; }
   }
+  // Prism Control (the native companion plugin) feeds real output levels when it runs; capture or simulation otherwise.
+  if (env.PRISM_DECK_AUDIO !== "off" && data?.prismControl) audioSource = data.prismControl.wrapAudio(audioSource);
   const runtime = new PrismRuntime({ conn, data, log: write, version: PLUGIN_VERSION, raster, audio: audioSource, deviceSvg });
   const live = new LiveController({ runtime, controlFile, version: PLUGIN_VERSION, log: write, env });
+  // ── Game Link (prism-play) ──
+  // The CS2 GSI / companion listener (src/apps/sources/gamelink.js) lives in the node data hub (data.gameLink) and stops
+  // with it; tests inject their own (opts.gamelink), so they never bind a real port. The controller applies the
+  // gamelink globals and the PI's Connect CS2 / Disconnect clicks, and pushes data changes into the runtime.
+  const gameLink = injectedGameLink === undefined ? data?.gameLink || null : injectedGameLink;
+  new GameLinkController({ runtime, gameLink, log: write });
+  new LolLinkController({ runtime, gameLink, log: write });   // League of Legends: Riot's Live Client Data poller, off by default
+  new RlLinkController({ runtime, gameLink, log: write });    // Rocket League: Psyonix's Stats API client, off by default
   let stopping = false;
   const stop = async (code = 0) => {
     if (stopping) return;

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../core.bundle.js';
+import { __m as __bm } from '../../core.bundle.js?v=b7d3401196';
 // The hidraw runner: facets → engine render() → src/raster → HidDeck, at the
 // device's update budget; input reports → facet state.
 //
@@ -22,13 +22,13 @@ import { __m as __bm } from '../../core.bundle.js';
 // (not on the Galleon, where holds belong to the layer switch), and the slot renders only during a
 // transition or while the game ticks. opts.onGame({ slot, facet, event, snapshot }) lets a host persist it.
 
-const { render, nextState } = __bm(100);
-const { createScheduler, effectiveFps, quantize, FPS_CAP } = __bm(102);
-import { rasterize as defaultRasterize } from '../raster/index.js';
-import { pad, fillRect } from './pixels.js';
-const { SCREEN_TARGETS } = __bm(98);
-const { useTheme } = __bm(97);
-const { createGameHost, GAME_FPS, GAME_RESET_HOLD_S } = __bm(106);
+const { render, nextState } = __bm(263);
+const { createScheduler, effectiveFps, quantize, FPS_CAP } = __bm(265);
+import { rasterize as defaultRasterize } from '../raster/index.js?v=b7d3401196';
+import { pad, fillRect } from './pixels.js?v=b7d3401196';
+const { SCREEN_TARGETS } = __bm(261);
+const { useTheme } = __bm(260);
+const { createGameHost, GAME_FPS, GAME_RESET_HOLD_S } = __bm(269);
 
 const BURST_MS = 1200;   // render at the facet's (or 10) fps this long after an interaction
 const CLOCK_DATA = ['clock', 'timer'];

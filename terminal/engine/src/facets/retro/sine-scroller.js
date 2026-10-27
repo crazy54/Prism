@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // The classic sine scroller: a big bitmap-font message rides a sine wave from
 // right to left, each scanline tinted by a cycling copper gradient, over a
 // parallax starfield. Drop shadow included, as the law requires.

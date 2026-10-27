@@ -1,4 +1,4 @@
 // Bundled into core.bundle.js by website/build.mjs (the module itself is in the repository).
-import { __m } from '../../core.bundle.js';
-const __n = __m(105);
+import { __m } from '../../core.bundle.js?v=b7d3401196';
+const __n = __m(268);
 export const DIAL_SWEEP = __n.DIAL_SWEEP, DRAG_PX = __n.DRAG_PX, FAMILY = __n.FAMILY, HOLD_S = __n.HOLD_S, KEY_SIZE_DEVICES = __n.KEY_SIZE_DEVICES, TAP_SLOP = __n.TAP_SLOP, WHEEL_PX = __n.WHEEL_PX, clamp01 = __n.clamp01, devicesFor = __n.devicesFor, dialAngle = __n.dialAngle, dialStep = __n.dialStep, dragTicks = __n.dragTicks, fitWidth = __n.fitWidth, frameTime = __n.frameTime, gameAnnouncement = __n.gameAnnouncement, gameCell = __n.gameCell, inputState = __n.inputState, isTap = __n.isTap, keyPool = __n.keyPool, segmentAt = __n.segmentAt, showcaseLayout = __n.showcaseLayout, slotLabel = __n.slotLabel, stepValue = __n.stepValue, stripTouch = __n.stripTouch, wheelTicks = __n.wheelTicks;

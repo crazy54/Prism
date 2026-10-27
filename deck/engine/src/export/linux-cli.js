@@ -21,10 +21,10 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { SAMPLE_LAYOUTS } from './profile.js';
-import { loadRaster, resolveDevice } from './linux.js';
-import { buildOpenDeckProfiles, buildOpenDeckPlugin, openDeckPaths, OD_FLATPAK_ID, PLUGIN_DIR } from './linux-opendeck.js';
-import { buildStreamControllerBundle, streamControllerPaths, SC_FLATPAK_ID } from './linux-streamcontroller.js';
+import { SAMPLE_LAYOUTS } from './profile.js?v=b7d3401196';
+import { loadRaster, resolveDevice } from './linux.js?v=b7d3401196';
+import { buildOpenDeckProfiles, buildOpenDeckPlugin, openDeckPaths, OD_FLATPAK_ID, PLUGIN_DIR } from './linux-opendeck.js?v=b7d3401196';
+import { buildStreamControllerBundle, streamControllerPaths, SC_FLATPAK_ID } from './linux-streamcontroller.js?v=b7d3401196';
 
 const write = (file, data) => { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, data); return file; };
 
@@ -104,7 +104,7 @@ function listFiles(dir) {
 }
 
 export async function runAudioCommand(sub, opt = {}, { log = console.log, err = (m) => process.stderr.write(`prism-deck: ${m}\n`) } = {}) {
-  const audio = await import('../audio/index.js');
+  const audio = await import('../audio/index.js?v=b7d3401196');
   const input = opt.input === 'mic' ? 'mic' : 'monitor';
   try {
     if (sub === 'detect') {

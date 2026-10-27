@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A response streaming token by token: each new token flashes, the rate
 // wobbles like a real stream, then a tokenizer view tints token boundaries.
 const { ATTR, glyphs, uni, phase, mix, fit, tint, tokenize } = __bm(23);

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Transfers & ETA — bytes on the move, printed the way the real tools print
 // them, plus a few views of rate and ETA themselves.
 //
@@ -8,10 +8,10 @@ import { __m as __bm } from '../../../web.bundle.js';
 const { ATTR } = __bm(6);
 const { Canvas } = __bm(9);
 const { mix, gradient } = __bm(0);
-import { sparkline, gauge } from '../../widgets/index.js';
+import { sparkline, gauge } from '../../widgets/index.js?v=b7d3401196';
 const { truncate, stringWidth } = __bm(5);
-import { phase, transfer, glyphs, clamp01, commas, clock } from './_sim.js';
-import { segs, wrapRows } from './_log.js';
+import { phase, transfer, glyphs, clamp01, commas, clock } from './_sim.js?v=b7d3401196';
+import { segs, wrapRows } from './_log.js?v=b7d3401196';
 
 const C = 'Transfers & ETA';
 const MiB = 1048576;

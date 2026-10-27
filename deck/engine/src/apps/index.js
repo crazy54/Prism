@@ -1,14 +1,14 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=b7d3401196';
 // Prism Deck apps — live data for facets, routing, and the app catalog. Browser-safe entry
 // (Node-only live sources: ./sources/node.js → createNodeHub()).
 //
 //   import { createSimulatedHub, galleonPlan, planData, renderGalleon, APPS } from './src/apps/index.js';
 
-const { allFacets } = __bm(318);
+const { allFacets } = __bm(659);
 
-export * from './sources/index.js';
-export { GALLEON_SLOTS, DEFAULT_ROUTES, galleonPlan, planData, renderGalleon, composeScreen } from './routing.js';
-export { WIDGETS, WIDGET_KINDS } from '../facets/apps/_widgets.js';
+export * from './sources/index.js?v=b7d3401196';
+export { GALLEON_SLOTS, DEFAULT_ROUTES, galleonPlan, planData, renderGalleon, composeScreen } from './routing.js?v=b7d3401196';
+export { WIDGETS, WIDGET_KINDS } from '../facets/apps/_widgets.js?v=b7d3401196';
 
 /** The apps gallery's facets, with the data keys each consumes. */
 export const APPS = () => allFacets().filter((f) => f.gallery === 'apps').map((f) => ({ id: f.id, title: f.title, category: f.category, surface: f.surface, data: f.data || [] }));

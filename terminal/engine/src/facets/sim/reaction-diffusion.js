@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Gray-Scott reaction-diffusion: two chemicals, U fed in and V feeding on it
 // (U + 2V → 3V), diffusing at different rates. The feed and kill rates drift
 // slowly between the "mitosis", "coral" and "maze" regimes, so spots divide,

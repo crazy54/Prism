@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Billiard-ball physics under gravity: balls of different sizes (mass goes
 // with area) collide elastically with each other and the walls, integrated at
 // a fixed 240 Hz so it never tunnels or explodes. Every few seconds the floor

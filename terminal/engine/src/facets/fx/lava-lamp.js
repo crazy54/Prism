@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Lava lamps on a shelf: wax blobs warm at the bulb, rise, cool, stretch and
 // sink again — metaballs inside a tapered glass, lit from below, with the
 // metal cap and base. One lamp when narrow, a row of three when there's room.

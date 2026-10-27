@@ -1,5 +1,5 @@
 // GitHub-style alerts — NOTE, TIP, IMPORTANT, WARNING, CAUTION — revealed in turn.
-import { glyphs, uni, ATTR, wrapText, tint, phase, span } from './_admon.js';
+import { glyphs, uni, ATTR, wrapText, tint, phase, span } from './_admon.js?v=b7d3401196';
 
 const KINDS = [
   { key: 'NOTE', icon: ['ℹ', 'i'], color: 'info', body: 'The agent runs read-only diagnostics without asking. Changes always wait for a human.' },

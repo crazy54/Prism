@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A tiny deterministic chiptune for the music visualizers to dance to.
 // One 64-row pattern at 125 BPM / speed 6 (0.12 s a row, 7.68 s a loop):
 // drums, a square-wave bass, a pulse lead and hats over Am–F–C–G. Nothing is

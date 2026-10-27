@@ -1,5 +1,5 @@
 // Bars & pulses — block-element loaders that breathe, grow and bounce.
-import { spinnerFacet } from './_kit.js';
+import { spinnerFacet } from './_kit.js?v=b7d3401196';
 
 const C = 'Bars & Pulses';
 

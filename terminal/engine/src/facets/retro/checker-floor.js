@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // The infinite checkerboard floor: a perspective-mapped checker plane racing
 // toward the horizon and slowly banking, under a raster-gradient sunset sky.
 // Distance fog keeps the far squares from shimmering.

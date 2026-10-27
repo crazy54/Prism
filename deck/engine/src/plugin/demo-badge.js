@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../core.bundle.js';
+import { __m as __bm } from '../../core.bundle.js?v=b7d3401196';
 // The DEMO badge: a small amber "DEMO" tag the plugin stamps on a key, dial segment or screen
 // whose data is simulated (no live source on this machine: a demo calendar until you point the
 // plugin at an .ics file, an invented playlist where no media source exists, a simulated groove
@@ -15,7 +15,7 @@ const { textPath, measureText, capHeight } = __bm(11);
 const { n } = __bm(5);
 const { BEZEL_INSET } = __bm(14);
 
-export const DEMO_KEYS = new Set(['audio', 'spectrum', 'media', 'calendar', 'weather', 'cpu', 'mem', 'gpu', 'net', 'disk', 'temp', 'battery', 'uptime']);
+export const DEMO_KEYS = new Set(['audio', 'spectrum', 'media', 'calendar', 'weather', 'cpu', 'mem', 'gpu', 'net', 'disk', 'temp', 'battery', 'uptime', 'gamelink']);   // gamelink: Game Link (prism-play) — the demo round while it's off
 export const DEMO_TEXT = 'DEMO';
 const INK = '#0b0d14', AMBER = '#ffc861';
 

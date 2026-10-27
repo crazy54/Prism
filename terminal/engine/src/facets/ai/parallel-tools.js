@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Parallel tool calls as a live waterfall: four calls fan out at once, bars
 // grow while each runs, finish at different times, then fan back in.
 const { ATTR, glyphs, uni, phase, fit, spin, tint } = __bm(23);

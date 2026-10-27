@@ -1,7 +1,7 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Pure ASCII — living scenes: an aquarium, a steam train, a walker and digital rain.
 // Original takes on the asciiquarium and sl ideas, drawn from scratch.
-import { sprite, spriteWidth, mirror, hash } from './_ascii.js';
+import { sprite, spriteWidth, mirror, hash } from './_ascii.js?v=b7d3401196';
 const { mix } = __bm(0);
 
 const shared = { gallery: 'ascii', category: 'ASCII Animations', glyphs: 'ascii', color: '16', kind: 'art', size: { w: 80, h: 24 }, minSize: { w: 36, h: 12 } };

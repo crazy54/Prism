@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Boids: Reynolds flocking — separation, alignment, cohesion — plus soft
 // walls and a wandering predator that hunts the flock's center while every
 // boid within sight scatters. Boids are little oriented arrowheads colored by

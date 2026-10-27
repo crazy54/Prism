@@ -5,9 +5,9 @@
    :root[data-theme="prism-light"] + html[data-rf-mode="day"]. */
 
 /* ── Type: Inter, self-hosted (the same Latin faces Prism.html bundles) ──────── */
-@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-400-latin.woff2) format("woff2")}
-@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(fonts/inter-600-latin.woff2) format("woff2")}
-@font-face{font-family:Inter;font-style:normal;font-weight:700;font-display:swap;src:url(fonts/inter-700-latin.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-400-latin.woff2?v=8909904ab6) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(fonts/inter-600-latin.woff2?v=f9a06e79cd) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:700;font-display:swap;src:url(fonts/inter-700-latin.woff2?v=6f56409fd3) format("woff2")}
 
 /* ── Base ────────────────────────────────────────────────────────────────── */
 :root{--mono:var(--rf-mono);--site-max:1424px;--site-pad:32px;--header-h:60px;scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 12px)}
@@ -200,6 +200,25 @@ dialog.copy-dialog textarea{display:block;resize:vertical;width:100%;min-height:
 .search input:focus-visible{outline:0;box-shadow:none}
 .search:focus-within{border-color:var(--rf-focus);box-shadow:inset 0 -1px 0 var(--rf-focus),0 0 0 4px var(--rf-focus-halo)}
 .search input::-webkit-search-cancel-button{filter:grayscale(1);opacity:.6}
+
+/* ── Connectivity badges: what a feature needs ─────────────────────────────── */
+/* The same three classes as the README badges (docs/badges/) and Prism.html's Online / Offline chip:
+   Works offline · Local only (this PC's apps or devices, over 127.0.0.1) · Needs internet. A glyph and words,
+   never color alone; the text meets AA on every card surface, Night and Day. */
+.net-badges{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font:400 11.5px/1.4 var(--font);letter-spacing:0;color:var(--muted)}
+.net-item{display:inline-flex;align-items:center;gap:6px;min-width:0}
+.net-badge{display:inline-flex;align-items:center;gap:5px;flex:none;height:20px;padding:0 8px 0 6px;border:1px solid rgba(var(--nb-rgb),.42);border-radius:var(--rf-r-pill,999px);background:rgba(var(--nb-rgb),.1);color:var(--nb);font:600 11px/1 var(--font);letter-spacing:0;text-transform:none;white-space:nowrap;vertical-align:middle}
+.net-badge svg{flex:none;width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.net-badge.is-offline{--nb:var(--pos);--nb-rgb:var(--pos-rgb)}
+.net-badge.is-local{--nb:var(--warn);--nb-rgb:var(--warn-rgb)}
+.net-badge.is-online{--nb:var(--info);--nb-rgb:var(--info-rgb)}
+/* where they sit: landing quick start + agents, deck Game Link / Linux / agents, terminal command heads */
+.start-copy .net-badges{margin-top:18px}.start-copy .net-badges+.download-note{margin-top:10px}
+.agent-copy .net-badges{margin-top:10px}
+.d-gl-copy .net-badges{margin:-8px 0 20px}
+.d-linux .net-badges,.d-agents .net-badges,.t-panel .net-badges{margin-top:14px}
+.cmd-head>span:first-child{display:inline-flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-width:0}
+.cmd-note .net-badge{margin-right:7px}
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 @media(max-width:1050px){.header-links{display:none}.surface-nav .surface-count{display:none}}

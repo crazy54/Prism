@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../web.bundle.js';
+import { __m as __bm } from '../../web.bundle.js?v=b7d3401196';
 // Gauges: a braille arc (180°) or ring (270°) with colored zones, a needle
 // tick, and the value centered inside.
 

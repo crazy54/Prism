@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A psql-style result grid: full box-drawing junctions, double rule under the
 // header, and a spreadsheet cursor moving cell to cell.
 const { ATTR, uni, fit, phase, mix } = __bm(22);

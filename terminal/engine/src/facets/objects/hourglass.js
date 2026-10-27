@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // An hourglass in a turned-wood stand. The sand is conserved: each frame the
 // top level and the bottom heap are solved (by bisection over the glass's real
 // profile) so the two always hold exactly the sand there is. The top drains

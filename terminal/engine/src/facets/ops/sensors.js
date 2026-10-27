@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // lm-sensors — chip blocks with per-core temperatures, high/crit limits, NVMe composite and fan RPM.
 const { G, C, ATTR, writer, walk, fixed, lpad } = __bm(27);
 

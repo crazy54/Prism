@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A code panel stepping like a debugger: gutter line numbers, syntax color,
 // a breakpoint, diff markers and the current-line highlight walking down.
 const { ATTR, uni, panel, codeLine, phase, mix, fit } = __bm(22);

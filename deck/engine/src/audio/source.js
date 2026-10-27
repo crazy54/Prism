@@ -24,13 +24,13 @@
 //         deadlineMs = 8000, idleMs = 5000, follow = true (restart on default-device change),
 //         system (sys | Promise<sys>, see system.js), onLog }
 
-import { Analyzer } from './analyzer.js';
-import { createSynth } from './synthetic.js';
-import { createPcmDecoder } from './pcm.js';
-import { detectBackends } from './detect.js';
-import { BACKENDS, commandLine } from './backends.js';
-import { defaultSystem } from './system.js';
-import { createBridgeServer } from './bridge.js';
+import { Analyzer } from './analyzer.js?v=b7d3401196';
+import { createSynth } from './synthetic.js?v=b7d3401196';
+import { createPcmDecoder } from './pcm.js?v=b7d3401196';
+import { detectBackends } from './detect.js?v=b7d3401196';
+import { BACKENDS, commandLine } from './backends.js?v=b7d3401196';
+import { defaultSystem } from './system.js?v=b7d3401196';
+import { createBridgeServer } from './bridge.js?v=b7d3401196';
 
 const BACKOFF = [250, 500, 1000, 2000, 4000];
 const ANALYZER_KEYS = ['historySeconds', 'historyRate', 'bands', 'minHz', 'maxHz', 'fftSize', 'floorDb', 'bandFloorDb', 'tiltDb', 'levelsScale', 'agc'];

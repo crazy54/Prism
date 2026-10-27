@@ -10,34 +10,41 @@
 //                       glyph states that move → .gif (listed, the idle loop, ≥ 2 distinct frames) + a .png still
 //                       with the same basename (listed too, as "… · Still"; every GIF pack installed on the owner's
 //                       machine ships that twin — formats.md §4.4)
-//     license.txt     MIT (the art) + the SIL OFL 1.1 of Inter (the outlines labels are drawn from); OFL.txt too
+//     license.txt     NOTICE + Apache 2.0 (the art) + the SIL OFL 1.1 of Inter (the outlines labels are drawn from); OFL.txt too
+//     NOTICE.txt      the project NOTICE (Apache 2.0 §4(d))
 //     previews/       1280×720 PNG sheets (Night / Day)
 //
 // GIF/PNG come from src/raster (rasterize / encodePNG / encodeGIF). Without it the
 // pack is SVG-only (static) — pass { raster: null } to force that.
 
 import fs from 'node:fs';
-import { writeZip, readZip } from './plugin-zip.js';
-import { render, stillTime } from '../render.js';
-import { findFacet } from '../facets/index.js';
-import { allGlyphs } from '../glyphs/_registry.js';
-import { useTheme, themeRegistry } from '../themes/_registry.js';
-import { normalizeFacet } from '../facets/schema.js';
-import { surface } from '../scene/surface.js';
-import { svgInner, suffixIds, n } from '../scene/svg.js';
-import { validateSvg } from '../scene/validate.js';
+import { writeZip, readZip } from './plugin-zip.js?v=b7d3401196';
+import { render, stillTime } from '../render.js?v=b7d3401196';
+import { findFacet } from '../facets/index.js?v=b7d3401196';
+import { allGlyphs } from '../glyphs/_registry.js?v=b7d3401196';
+import { useTheme, themeRegistry } from '../themes/_registry.js?v=b7d3401196';
+import { normalizeFacet } from '../facets/schema.js?v=b7d3401196';
+import { surface } from '../scene/surface.js?v=b7d3401196';
+import { svgInner, suffixIds, n } from '../scene/svg.js?v=b7d3401196';
+import { validateSvg } from '../scene/validate.js?v=b7d3401196';
 
 export const PACK_PREFIX = 'com.jeremyfhall.prism.icons';
 export const ICON_PX = 144;
 export const GIF_FPS = 12;
 export const GIF_MAX_FRAMES = 60;
 const MODE_NAME = { dark: 'night', light: 'day' };
-const MIT = (year, author) => `MIT License\n\nCopyright (c) ${year} ${author}\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n`;
+/** prism-deck's LICENSE (Apache 2.0) or NOTICE, falling back to the repo root's copy. */
+const projectFile = (name, fallback) => {
+  for (const rel of [`../../${name}`, `../../../${name}`]) { try { return fs.readFileSync(new URL(rel, import.meta.url), 'utf8').trim(); } catch {} }
+  return fallback;
+};
+const APACHE = () => projectFile('LICENSE', 'Apache License, Version 2.0\nhttps://www.apache.org/licenses/LICENSE-2.0');
+const NOTICE = () => projectFile('NOTICE', 'Prism\nCopyright 2026 JFH Inc.\n\nCreated and authored by Jeremy Francis Hall\n  https://jeremyfhall.com\n\nLicensed under the Apache License, Version 2.0.');
 
 /** The src/raster backend, or null when it isn't available. */
 export async function loadRaster() {
   try {
-    const r = await import('../raster/index.js');
+    const r = await import('../raster/index.js?v=b7d3401196');
     return typeof r.rasterize === 'function' && typeof r.encodePNG === 'function' && typeof r.encodeGIF === 'function' ? r : null;
   } catch { return null; }
 }
@@ -105,10 +112,10 @@ export function previewSheet(svgs, bg) {
 
 /**
  * Build one theme's icon pack.
- * opts: { theme, version ('0.3.0'), author, url, raster (module | null | undefined = load), glyphs (subset), year }
+ * opts: { theme, version ('0.3.0'), author, url, raster (module | null | undefined = load), glyphs (subset) }
  * → { id, folder, zip, entries, icons (icons.json), manifest, stats }
  */
-export async function buildIconPack({ theme: themeId, version = '0.3.0', author = 'Jeremy F Hall', url = 'https://prism.jeremyfhall.com', raster, glyphs, year = 2026 } = {}) {
+export async function buildIconPack({ theme: themeId, version = '0.3.0', author = 'Jeremy F Hall', url = 'https://prism.jeremyfhall.com', raster, glyphs } = {}) {
   const R = raster === undefined ? await loadRaster() : raster;
   const { theme, list } = packPlan(themeId, { glyphs });
   const id = `${PACK_PREFIX}.${themeId}`;
@@ -153,8 +160,9 @@ export async function buildIconPack({ theme: themeId, version = '0.3.0', author 
     if (previews[mode].length) add(`previews/${MODE_NAME[mode] || mode}.png`, Buffer.from(R.encodePNG(R.rasterize(previewSheet(previews[mode], t.colors.bg), 1280, 720))));
   }
   const ofl = interOfl();
-  add('license.txt', Buffer.from(`${MIT(year, author)}\n\nThird-party: Inter typeface\n---------------------------\nThe icon labels and numerals are drawn from Inter outlines, licensed under the SIL Open Font License 1.1 (also in OFL.txt):\n\n${ofl}`));
+  add('license.txt', Buffer.from(`${NOTICE()}\n\n\n${APACHE()}\n\n\nThird-party: Inter typeface\n---------------------------\nThe icon labels and numerals are drawn from Inter outlines, licensed under the SIL Open Font License 1.1 (also in OFL.txt):\n\n${ofl}`));
   add('OFL.txt', Buffer.from(ofl));
+  add('NOTICE.txt', Buffer.from(`${NOTICE()}\n`));
   const glyphCount = new Set(list.map((x) => x.glyph)).size;
   const manifest = {
     Name: `Prism Deck · ${theme.title}`,

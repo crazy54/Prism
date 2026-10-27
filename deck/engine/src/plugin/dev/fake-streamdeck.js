@@ -13,7 +13,7 @@
 import http from 'node:http';
 import crypto from 'node:crypto';
 import { EventEmitter } from 'node:events';
-import { acceptWebSocket } from '../ws.js';
+import { acceptWebSocket } from '../ws.js?v=b7d3401196';
 
 /** The owner's devices as the real app reported them (hardware-lab session 20261015-134720, ids replaced). */
 export const OWNER_DEVICES = Object.freeze([

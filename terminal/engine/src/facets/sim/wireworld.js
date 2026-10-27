@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Wireworld on a generated circuit board. Clock loops (cut-corner rings, each
 // carrying one electron, period = ring length) fire pulses down tapped traces
 // that a router lays out PCB-style — straight runs, diagonal corners, fan-out

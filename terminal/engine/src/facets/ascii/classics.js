@@ -1,6 +1,6 @@
 // Pure ASCII — the classics: cowsay, banner(1), figlet, clocks, Life, a maze,
 // and two self-playing arcade games. Original art and code throughout.
-import { sprite, line, center, box, hash, figlet, blockText } from './_ascii.js';
+import { sprite, line, center, box, hash, figlet, blockText } from './_ascii.js?v=b7d3401196';
 
 const shared = { gallery: 'ascii', category: 'Classics', glyphs: 'ascii', color: '16', kind: 'art' };
 

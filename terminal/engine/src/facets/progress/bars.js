@@ -1,13 +1,13 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Progress bars — the shapes a bar can take, each driven by a seeded transfer
 // so fills move like real work (bursts, stalls, tail-off) and finish together
 // with their percentages.
-import { progressBar, meter } from '../../widgets/index.js';
+import { progressBar, meter } from '../../widgets/index.js?v=b7d3401196';
 const { Canvas } = __bm(9);
 const { mix, gradient, NONE } = __bm(0);
 const { ATTR } = __bm(6);
 const { truncate } = __bm(5);
-import { phase, transfer, glyphs, clamp01, clock } from './_sim.js';
+import { phase, transfer, glyphs, clamp01, clock } from './_sim.js?v=b7d3401196';
 const { light, lift } = __bm(24);
 
 const C = 'Progress Bars';

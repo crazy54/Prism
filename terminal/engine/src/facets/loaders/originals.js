@@ -1,7 +1,7 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Prism originals — spinners with a bit of personality, generated from small
 // formulas so every frame is exactly the same width.
-import { spinnerFacet, braille, range } from './_kit.js';
+import { spinnerFacet, braille, range } from './_kit.js?v=b7d3401196';
 const { mix, hsl } = __bm(0);
 
 const lerp = (a, b, k) => a + (b - a) * k;

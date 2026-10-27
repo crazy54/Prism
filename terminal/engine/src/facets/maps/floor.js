@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Grids & Floorplans: a data-hall rack floorplan with inlet temperatures and
 // airflow, and a warehouse floor of robots shuttling shelf pods.
 const { mix, gradient } = __bm(0);

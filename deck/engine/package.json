@@ -1,6 +1,6 @@
 {
   "name": "prism-deck",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Zero-dependency Stream Deck engine from Prism — glyphs × themes rendered as deterministic SVG for keys, spans of keys, touch strips, screens and whole devices (every Elgato model and the Corsair Galleon 100 SD), with text drawn from bundled Inter outlines.",
   "type": "module",
   "exports": {
@@ -20,7 +20,8 @@
     "src/",
     "docs/",
     "catalog/",
-    "linux/"
+    "linux/",
+    "NOTICE"
   ],
   "scripts": {
     "test": "node --test --test-timeout=600000 \"test/*.test.js\"",
@@ -52,7 +53,7 @@
     "dashboard",
     "prism"
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {},
   "bin": {
     "prism-deck": "./cli.js"

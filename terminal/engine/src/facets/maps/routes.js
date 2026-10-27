@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Routes & Arcs: great-circle flights, traceroute hops plotted on a map, a
 // schematic transit map with moving trains, and a GPS trail over contours.
 const { mix } = __bm(0);
 const { glyphs, put, putR, safe, clamp, smooth, ATTR } = __bm(24);
-import { project, landMask, coastOf, greatCircle, distanceKm, drawGeoPath, hub } from './_world.js';
+import { project, landMask, coastOf, greatCircle, distanceKm, drawGeoPath, hub } from './_world.js?v=b7d3401196';
 
 /** Land drawn as a sparse dot lattice plus a brighter coast, as flat pixel pairs. */
 function dottedLand(cv, P, every = 2) {

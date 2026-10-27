@@ -221,7 +221,8 @@ categories: ['Signature', 'Dark', 'Light', 'Experimental'],
 {
 id: 'icons', title: 'Icons', icon: 'grid', hue: 269.8, prefix: ['icon'], surfaces: ['key'],
 blurb: 'One facet per glyph — 48-unit geometry with states and idle motion, rendered in any theme.',
-categories: ['Media', 'Audio', 'Streaming', 'System', 'Status', 'Time', 'Navigation', 'Productivity', 'Dev & Ops', 'Home & Light'],
+categories: ['Media', 'Audio', 'Streaming', 'System', 'Status', 'Time', 'Navigation', 'Productivity', 'Dev & Ops', 'Home & Light',
+'Building', 'Editing', 'Windows', 'Games'],
 },
 {
 id: 'motion', title: 'Motion', icon: 'pulse', hue: 243.6, prefix: ['press', 'state', 'idle', 'alert'], surfaces: ['key'],
@@ -253,6 +254,11 @@ id: 'games', title: 'Games', icon: 'target', hue: 34.2, prefix: ['game'], surfac
 blurb: 'Games and toys played on the keys: puzzles across a block of keys, chance and reflex games on one — stateful facets (scene/game.js).',
 categories: ['Puzzles', 'Chance', 'Reflex', 'Board'],
 },
+{
+id: 'gamelink', title: 'Game Link', icon: 'link', hue: 217.5, prefix: ['gamelink'], surfaces: ['key', 'span', 'strip', 'screen', 'deck'],
+blurb: 'Your game on the deck: live Counter-Strike 2 data (Valve Game State Integration) and local companions drive health, ammo, money, rounds and whole-deck moments.',
+categories: ['Whole Deck', 'Vitals', 'Round & Bomb', 'Match', 'Strips & Screens', 'MOBA', 'Rocket League'], 
+},
 ];
 const GALLERY_IDS = GALLERIES.map((g) => g.id);
 const BY_ID = new Map(GALLERIES.map((g) => [g.id, g]));
@@ -260,6 +266,7 @@ const getGallery = (id) => BY_ID.get(id) || null;
 const GLYPH_CATEGORIES = {
 media: 'Media', audio: 'Audio', stream: 'Streaming', system: 'System', status: 'Status', time: 'Time',
 nav: 'Navigation', productivity: 'Productivity', dev: 'Dev & Ops', home: 'Home & Light',
+build: 'Building', edit: 'Editing', window: 'Windows', game: 'Games',
 };
 };
 __d[3] = function (__ns) {
@@ -2359,6 +2366,52 @@ g.line(x, 24 - a, x, 24 + a, { role: on ? 'accent' : 'line', weight: 1.1, cap: '
 });
 };
 __d[24] = function (__ns) {
+const { transformPath } = __m(13);
+const { arrive, clamp, outExpo } = __m(12);
+const { n } = __m(5);
+__e(__ns, { "rot": () => rot, "mirrorX": () => mirrorX, "mirrorY": () => mirrorY, "shift": () => shift, "xf": () => xf, "xfPts": () => xfPts, "enter": () => enter, "press": () => press, "chevron": () => chevron, "capsule": () => capsule, "polyD": () => polyD }, [], ["capsule","chevron","enter","mirrorX","mirrorY","polyD","press","rot","shift","xf","xfPts"]);
+const RAD = Math.PI / 180;
+function rot(deg, [ox, oy] = [24, 24]) {
+const c = Math.cos(deg * RAD), s = Math.sin(deg * RAD);
+return [c, s, -s, c, ox - c * ox + s * oy, oy - s * ox - c * oy];
+}
+const mirrorX = (cx = 24) => [-1, 0, 0, 1, 2 * cx, 0];
+const mirrorY = (cy = 24) => [1, 0, 0, -1, 0, 2 * cy];
+const shift = (dx, dy = 0) => [1, 0, 0, 1, dx, dy];
+const xf = (d, m) => transformPath(String(d), m);
+const xfPts = (pts, m) => pts.map(([x, y]) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]]);
+const enter = (s, dur = 0.45) => arrive(s.since, dur);
+const press = (s, dur = 0.45) => (s.pressed ? 1 : s.pressAge < dur ? 1 - outExpo(clamp(s.pressAge / dur)) : 0);
+function chevron([x, y], dir, arm = 7.5, half = 45) {
+const back = (a) => [x - arm * Math.sin((dir + a) * RAD), y + arm * Math.cos((dir + a) * RAD)];
+return [back(-half), [x, y], back(half)];
+}
+function capsule([x0, y0], [x1, y1], r) {
+const a = Math.atan2(y1 - y0, x1 - x0), nx = -Math.sin(a) * r, ny = Math.cos(a) * r;
+return `M${n(x0 + nx)} ${n(y0 + ny)}L${n(x1 + nx)} ${n(y1 + ny)}A${n(r)} ${n(r)} 0 0 0 ${n(x1 - nx)} ${n(y1 - ny)}L${n(x0 - nx)} ${n(y0 - ny)}A${n(r)} ${n(r)} 0 0 0 ${n(x0 + nx)} ${n(y0 + ny)}Z`;
+}
+const polyD = (pts, close = false) => pts.map((p, i) => `${i ? 'L' : 'M'}${n(p[0])} ${n(p[1])}`).join('') + (close ? 'Z' : '');
+};
+__d[25] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'align',
+title: 'Align',
+category: 'build',
+tags: ['align', 'surface', 'height', 'snap to ground', 'arrange', 'layout', 'build'],
+draw(g, s) {
+const p = press(s, 0.5);
+const k1 = enter(s, 0.5), k2 = enter({ since: s.since - 0.1 }, 0.5);
+g.line(7.5, 38, 40.5, 38, { role: 'accent', weight: 1.05 });
+g.rect(11, 10 - lerp(3.5, 0, k1) - 2 * p, 10.5, 24, { r: 3, opacity: lerp(0.3, 1, k1) });
+g.rect(26.5, 19 - lerp(3.5, 0, k2) - 2 * p, 10.5, 15, { r: 3, opacity: lerp(0.3, 1, k2) });
+},
+});
+};
+__d[26] = function (__ns) {
 const { n } = __m(5);
 const { arrive, clamp } = __m(12);
 __e(__ns, { "quadC": () => quadC, "curve": () => curve, "roundPoly": () => roundPoly, "polyLength": () => polyLength, "partialPolyline": () => partialPolyline, "alongPolyline": () => alongPolyline, "arcHead": () => arcHead, "strike": () => strike, "bump": () => bump, "blink": () => blink, "rowSpan": () => rowSpan, "rectAround": () => rectAround }, [], ["alongPolyline","arcHead","blink","bump","curve","partialPolyline","polyLength","quadC","rectAround","roundPoly","rowSpan","strike"]);
@@ -2456,267 +2509,412 @@ if (right.some(([, x]) => x < x1 - 0.05)) out.push(`M${n(x1)} ${n(y0)}${right.ma
 return out;
 }
 };
-__d[25] = function (__ns) {
-const { defineGlyph } = __m(16);
-const { arrive } = __m(12);
-const { curve } = __m(24);
-__e(__ns, { "default": () => __default }, [], ["default"]);
-const CX = 24, BY = 27.5, RX = 8.5, RY = 10.5; 
-const LEGS = [[16.2, 21.5, -6, -3, 0], [15.6, 27.5, -6.5, 0, 1], [16.4, 33.5, -6, 3.5, 0]];
-const LOOP = 1.2;
-const __default = defineGlyph({
-id: 'bug',
-title: 'Bug',
-category: 'dev',
-tags: ['bug', 'debug', 'debugger', 'issue', 'defect', 'testing'],
-states: { idle: 'idle', debugging: 'active' },
-loop: LOOP,
-draw(g, s) {
-const on = s.state === 'debugging';
-const k = on ? arrive(s.since, 0.3) : 0;
-const w = Math.sin(s.phase(LOOP) * Math.PI * 4) * k; 
-for (const side of [-1, 1]) for (const [hx, hy, fx, fy, grp] of LEGS) {
-const swing = (grp === (side < 0 ? 0 : 1) ? w : -w) * 2.2; 
-const x = side < 0 ? hx : 2 * CX - hx, dx = side < 0 ? fx : -fx;
-g.line(x, hy, x + dx, hy + fy + swing, { weight: 0.85 });
-}
-const tw = on ? Math.sin(s.phase(LOOP) * Math.PI * 2 * 3) * 1.2 * k : 0;
-g.path(curve([21.5, 14.5], [20, 11], [17, 9 + tw]), { role: 'dim', weight: 0.9 });
-g.path(curve([26.5, 14.5], [28, 11], [31, 9 - tw]), { role: 'dim', weight: 0.9 });
-g.path('M19 18.5a5 5 0 0 1 10 0', { role: 'line' });
-g.ellipse(CX, BY, RX, RY, { role: 'line' });
-g.line(CX, 19.5, CX, 36, { role: on ? 'accent' : 'dim', weight: 0.8 });
-if (on) { g.dot(20.5, 25, 1.4, { opacity: 0.8 * k }); g.dot(27.5, 30, 1.4, { opacity: 0.8 * k }); }
-},
-});
-};
-__d[26] = function (__ns) {
-const { defineGlyph } = __m(16);
-const { arrive, smoothstep } = __m(12);
-const { partialPolyline, strike } = __m(24);
-const { n } = __m(5);
-__e(__ns, { "default": () => __default }, [], ["default"]);
-const CL = [15.5, 28, 7], CM = [24, 21.5, 10.5], CR = [33, 27, 8];
-const BASE = 35;
-function meet(a, b) {
-const dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy);
-const l = (a[2] * a[2] - b[2] * b[2] + d * d) / (2 * d), h = Math.sqrt(Math.max(0, a[2] * a[2] - l * l));
-const mx = a[0] + (dx * l) / d, my = a[1] + (dy * l) / d;
-const p1 = [mx + (dy * h) / d, my - (dx * h) / d], p2 = [mx - (dy * h) / d, my + (dx * h) / d];
-return p1[1] < p2[1] ? p1 : p2;
-}
-function arcTo(c, p, q) {
-const ang = (pt) => (Math.atan2(pt[1] - c[1], pt[0] - c[0]) * 180) / Math.PI;
-const sweep = (((ang(q) - ang(p)) % 360) + 360) % 360;
-return `A${n(c[2])} ${n(c[2])} 0 ${sweep > 180 ? 1 : 0} 1 ${n(q[0])} ${n(q[1])}`;
-}
-const LM = meet(CL, CM), MR = meet(CM, CR);
-const OUTLINE = `M${n(CL[0])} ${BASE}${arcTo(CL, [CL[0], BASE], LM)}${arcTo(CM, LM, MR)}${arcTo(CR, MR, [CR[0], BASE])}Z`;
-const CHECK = [[18.5, 26.5], [22.5, 30.5], [30, 23]];
-const LOOP = 1.2;
-const __default = defineGlyph({
-id: 'cloud',
-title: 'Cloud',
-category: 'dev',
-tags: ['cloud', 'upload', 'backup', 'deploy', 'hosting', 'online', 'storage'],
-states: { online: 'active', uploading: 'busy', offline: 'neg' },
-loop: LOOP,
-draw(g, s) {
-const st = s.state;
-g.path(OUTLINE, { role: st === 'offline' ? 'dim' : 'line', join: 'round' });
-if (st === 'offline') { strike(g, s, { from: [10.5, 9.5], to: [37.5, 38.5] }); return; }
-if (st === 'online') {
-const pts = partialPolyline(CHECK, arrive(Math.max(0, s.since - 0.1), 0.4));
-if (pts.length > 1) g.polyline(pts, { role: 'accent', weight: 1.05 });
-return;
-}
-for (const off of [0, 0.5]) {
-const u = (s.phase(LOOP) + off) % 1;
-const y = 30 - u * 11; 
-const fade = smoothstep(0, 0.25, u) * (1 - smoothstep(0.65, 1, u));
-if (fade > 0.02) g.polyline([[19.5, y + 4.5], [24, y], [28.5, y + 4.5]], { role: 'line', opacity: fade });
-}
-},
-});
-};
 __d[27] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { arrive, lerp, smoothstep } = __m(12);
+const { clamp, inOutSine } = __m(12);
+const { flattenPath } = __m(13);
+const { enter } = __m(24);
+const { partialPolyline, alongPolyline, polyLength } = __m(26);
 __e(__ns, { "default": () => __default }, [], ["default"]);
-const S0 = [27, 11], S1 = [21, 37]; 
-const LOOP = 2.4;
+const D = 'M17 37H31A11 11 0 0 0 31 15H17A11 11 0 0 0 17 37Z';
+const LOOP = flattenPath(D, 0.2)[0].pts;
+const BUILT = 0.72; 
+function span(pts, a, b) {
+const head = partialPolyline(pts, b);
+const L = polyLength(pts) * a;
+let acc = 0;
+for (let i = 1; i < head.length; i++) {
+const l = Math.hypot(head[i][0] - head[i - 1][0], head[i][1] - head[i - 1][1]);
+if (acc + l >= L) { const f = l ? (L - acc) / l : 0; return [[head[i - 1][0] + (head[i][0] - head[i - 1][0]) * f, head[i - 1][1] + (head[i][1] - head[i - 1][1]) * f], ...head.slice(i)]; }
+acc += l;
+}
+return head.slice(-1);
+}
 const __default = defineGlyph({
-id: 'code',
-title: 'Code',
-category: 'dev',
-tags: ['code', 'editor', 'source', 'develop', 'programming', 'brackets'],
-states: { idle: 'idle', editing: 'active' },
-loop: LOOP,
+id: 'auto-complete',
+title: 'Auto-Complete',
+category: 'build',
+tags: ['auto', 'complete', 'finish', 'auto end', 'close circuit', 'track', 'coaster', 'build'],
 draw(g, s) {
-const on = s.state === 'editing';
-const k = arrive(s.since, 0.4);
-const o = on ? lerp(0, 1.5, k) : lerp(1.5, 0, k); 
-g.polyline([[16 - o, 14], [7.5 - o * 0.4, 24], [16 - o, 34]], { join: 'round' });
-g.polyline([[32 + o, 14], [40.5 + o * 0.4, 24], [32 + o, 34]], { join: 'round' });
-g.line(S0[0], S0[1], S1[0], S1[1], { role: on ? 'accent' : 'dim', weight: 1.05 });
-if (!on) return;
-const p = s.phase(LOOP);
-const fade = smoothstep(0, 0.12, p) * (1 - smoothstep(0.62, 0.8, p));
-if (fade < 0.02) return;
-const u = Math.min(1, p / 0.8);
-g.dot(lerp(S0[0], S1[0], u), lerp(S0[1], S1[1], u), 2, { opacity: fade * k });
+const k = enter(s, 0.7);
+const built = span(LOOP, 0, BUILT * k);
+if (built.length > 1) g.polyline(built, { role: 'line', join: 'round' });
+const rest = span(LOOP, BUILT * k, 1);
+if (rest.length > 1) g.polyline(rest, { role: 'accent', dash: [2.2, 2.8], weight: 0.9 });
+g.line(17, 33, 17, 41, { role: 'line', weight: 1.05 }); 
+if (!s.pressed && s.pressAge < 0.9) {
+const [x, y] = alongPolyline(LOOP, BUILT + (1 - BUILT) * inOutSine(clamp(s.pressAge / 0.9)));
+g.dot(x, y, 2.3);
+}
 },
 });
 };
 __d[28] = function (__ns) {
-const { defineGlyph } = __m(16);
-const { arrive, smoothstep } = __m(12);
-__e(__ns, { "default": () => __default }, [], ["default"]);
-const T = [14.5, 11.5], B = [14.5, 36.5], BR = [33.5, 15.5], NR = 3.6; 
-const C = [[BR[0], BR[1] + NR], [BR[0], 27.5], [B[0], 24], [B[0], B[1] - NR]];
-const LOOP = 1.8;
-const bez = (u) => {
-const v = 1 - u;
-return [0, 1].map((k) => v * v * v * C[0][k] + 3 * v * v * u * C[1][k] + 3 * v * u * u * C[2][k] + u * u * u * C[3][k]);
-};
-const __default = defineGlyph({
-id: 'git-branch',
-title: 'Branch',
-category: 'dev',
-tags: ['branch', 'git', 'version control', 'merge', 'commit', 'source control'],
-states: { idle: 'idle', active: 'active' },
-loop: LOOP,
-draw(g, s) {
-const on = s.state === 'active';
-const f = (p) => `${p[0]} ${p[1]}`;
-g.line(T[0], T[1] + NR, B[0], B[1] - NR);
-g.path(`M${f(C[0])}C${f(C[1])} ${f(C[2])} ${f(C[3])}`, { role: on ? 'accent' : 'dim' });
-g.circle(T[0], T[1], NR);
-g.circle(B[0], B[1], NR);
-const k = arrive(s.since, 0.35);
-g.circle(BR[0], BR[1], NR, { role: on ? 'accent' : 'line' });
-if (!on) return;
-g.circle(BR[0], BR[1], 1.6, { role: 'spark', opacity: k });
-for (const off of [0, 0.5]) {
-const u = (s.phase(LOOP) + off) % 1;
-const fade = smoothstep(0, 0.15, u) * (1 - smoothstep(0.85, 1, u));
-const [x, y] = bez(u);
-if (fade > 0.02) g.dot(x, y, 1.9, { opacity: fade * k });
+const { lerp, clamp, outCubic, inOutSine } = __m(12);
+const { alongPolyline } = __m(26);
+const { n } = __m(5);
+const { xfPts, mirrorX, chevron } = __m(24);
+__e(__ns, { "topTrack": () => topTrack, "straightAt": () => straightAt, "curveLeft": () => curveLeft, "sideTrack": () => sideTrack, "crossSection": () => crossSection, "horizon": () => horizon, "spiritLevel": () => spiritLevel, "arcArrow": () => arcArrow, "ride": () => ride, "mirrorX": () => mirrorX, "n": () => n }, [], ["arcArrow","crossSection","curveLeft","horizon","mirrorX","n","ride","sideTrack","spiritLevel","straightAt","topTrack"]);
+const RAD = Math.PI / 180;
+function topTrack(g, centerAt, length, { gauge = 12, pitch = 7.3, over = 2, run = 0, m = null, opacity = 1, ends = [1.5, 1.5] } = {}) {
+const T = (pts) => (m ? xfPts(pts, m) : pts);
+const off = (u, d) => { const { x, y, a } = centerAt(u); return [x + Math.cos(a) * d, y + Math.sin(a) * d]; }; 
+for (const side of [-1, 1]) {
+const pts = [];
+for (let i = 0; i <= 48; i++) pts.push(off((i / 48) * length, side * gauge / 2));
+g.polyline(T(pts), { role: 'line', join: 'round', opacity });
 }
-},
-});
+const h = gauge / 2 + over;
+for (let u = (run % 1) * pitch + pitch * 0.5; u < length; u += pitch) {
+if (u < ends[0] || u > length - ends[1]) continue;
+const fade = Math.min(1, (u - ends[0]) / 2.5, (length - ends[1] - u) / 2.5);
+g.line(...T([off(u, -h)])[0], ...T([off(u, h)])[0], { role: 'dim', weight: 0.85, opacity: opacity * Math.max(0, fade) });
+}
+}
+const straightAt = (x, y0) => (u) => ({ x, y: y0 - u, a: 0 });
+function curveLeft({ cx = 33, yb = 39, ya = 28, rc = 12, xe = 7 } = {}) {
+const L1 = yb - ya, L2 = (Math.PI / 2) * rc, ox = cx - rc, oy = ya, L3 = ox - xe;
+const at = (u) => {
+if (u <= L1) return { x: cx, y: yb - u, a: 0 }; 
+if (u <= L1 + L2) {
+const th = (u - L1) / rc; 
+return { x: ox + rc * Math.cos(th), y: oy - rc * Math.sin(th), a: -th };
+}
+return { x: ox - (u - L1 - L2), y: oy - rc, a: -Math.PI / 2 };
+};
+return { at, length: L1 + L2 + L3 };
+}
+function sideTrack(g, p0, p1, { gap = 4, opacity = 1, spine = true } = {}) {
+const dx = p1[0] - p0[0], dy = p1[1] - p0[1], L = Math.hypot(dx, dy);
+const nx = -dy / L, ny = dx / L; 
+const s = ny < 0 ? -1 : 1; 
+g.line(p0[0], p0[1], p1[0], p1[1], { role: 'line', weight: 1.05, opacity });
+if (spine) {
+g.line(p0[0] + nx * gap * s + dx / L * 2, p0[1] + ny * gap * s + dy / L * 2, p1[0] + nx * gap * s - dx / L * 2, p1[1] + ny * gap * s - dy / L * 2, { role: 'dim', opacity });
+for (let i = 1; i < 4; i++) {
+const f = i / 4, x = p0[0] + dx * f, y = p0[1] + dy * f;
+g.line(x, y, x + nx * gap * s, y + ny * gap * s, { role: 'dim', weight: 0.75, opacity });
+}
+}
+return Math.atan2(dx, -dy) / RAD;
+}
+function crossSection(g, cx, cy, deg, { half = 13, rail = 7.5, opacity = 1 } = {}) {
+const c = Math.cos(deg * RAD), s = Math.sin(deg * RAD);
+const P = (u, v) => [cx + u * c - v * s, cy + u * s + v * c];
+g.line(...P(-half, 0), ...P(half, 0), { role: 'line', weight: 1.1, opacity });
+for (const u of [-rail, rail]) { const [x, y] = P(u, -3.2); g.circle(x, y, 2.3, { role: 'fill', opacity }); }
+}
+const horizon = (g, y, x0 = 7, x1 = 41, opacity = 1) => g.line(x0, y, x1, y, { role: 'dim', opacity });
+function spiritLevel(g, cy, { k = 1, bubble = 0 } = {}) {
+g.rect(13, cy - 4.5, 22, 9, { r: 4.5 });
+g.line(20, cy - 4.5, 20, cy + 4.5, { role: 'dim', weight: 0.8 });
+g.line(28, cy - 4.5, 28, cy + 4.5, { role: 'dim', weight: 0.8 });
+g.circle(24 + bubble, cy, 2.4, { role: 'accent', fill: true, opacity: lerp(0.4, 1, k) });
+}
+function arcArrow(g, cx, cy, r, a0, a1, { role = 'accent', size = 4.2, weight = 1, opacity = 1 } = {}) {
+if (Math.abs(a1 - a0) < 1) return;
+const lo = Math.min(a0, a1), hi = Math.max(a0, a1);
+g.arc(cx, cy, r, lo, hi, { role, weight, opacity });
+const dir = a1 > a0 ? 90 : -90;
+const [x, y] = [cx + r * Math.sin(a1 * RAD), cy - r * Math.cos(a1 * RAD)];
+g.polyline(chevron([x + Math.sin((a1 + dir) * RAD) * 1, y - Math.cos((a1 + dir) * RAD) * 1], a1 + dir, size, 48), { role, weight, join: 'round', opacity });
+}
+function ride(g, s, pts, dur = 1.1) {
+if (s.pressed || !(s.pressAge < dur)) return;
+const u = clamp(s.pressAge / dur);
+const [x, y] = alongPolyline(pts, inOutSine(u));
+g.dot(x, y, 2.4, { opacity: 1 - outCubic(clamp((u - 0.85) / 0.15)) });
+}
 };
 __d[29] = function (__ns) {
-const { defineGlyph } = __m(16);
-const { arrive, clamp, smoothstep } = __m(12);
-const { quadC } = __m(24);
-__e(__ns, { "default": () => __default }, [], ["default"]);
-const LOOP = 1.2;
-const TAU = Math.PI * 2;
-const __default = defineGlyph({
-id: 'rocket',
-title: 'Rocket',
-category: 'dev',
-tags: ['rocket', 'launch', 'deploy', 'release', 'ship', 'start'],
-states: { ready: 'idle', launched: 'active' },
-loop: LOOP,
-draw(g, s) {
-const up = s.state === 'launched';
-const k = up ? arrive(s.since, 0.5) : 1 - arrive(s.since, 0.35);
-const p = s.phase(LOOP);
-const shake = up ? 0.35 * Math.sin(p * TAU * 6) * k : 0;
-const dy = -3 * k; 
-const X = (x) => +(x + shake).toFixed(2), Y = (y) => +(y + dy).toFixed(2);
-if (k > 0.02) {
-const fl = 5.5 + 1.6 * Math.sin(p * TAU * 5) + 0.9 * Math.sin(p * TAU * 7 + 1.3);
-const len = fl * k, y0 = Y(33.5);
-g.path(`M${X(20)} ${y0}${quadC([X(20), y0], [X(20.4), y0 + len * 0.6], [X(24), y0 + len])}${quadC([X(24), y0 + len], [X(27.6), y0 + len * 0.6], [X(28), y0])}Z`, { role: 'accent', fill: true, opacity: 0.9 });
-g.path(`M${X(22.3)} ${y0}${quadC([X(22.3), y0], [X(22.5), y0 + len * 0.4], [X(24), y0 + len * 0.62])}${quadC([X(24), y0 + len * 0.62], [X(25.5), y0 + len * 0.4], [X(25.7), y0])}Z`, { role: 'spark', opacity: 0.9 * k });
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+const { n } = __m(5);
+const { arcArrow } = __m(28);
+__e(__ns, { "ball": () => ball, "drawBank": () => drawBank }, [], ["ball","drawBank"]);
+const CX = 24, CY = 26.5, R = 12.5, RAD = Math.PI / 180;
+function ball(g, deg, { marks = 'dim' } = {}) {
+const c = Math.cos(deg * RAD), s = Math.sin(deg * RAD);
+const a = [CX - R * c, CY - R * s], b = [CX + R * c, CY + R * s];
+g.path(`M${n(a[0])} ${n(a[1])}L${n(b[0])} ${n(b[1])}A${R} ${R} 0 0 1 ${n(a[0])} ${n(a[1])}Z`, { role: 'dim', fill: true, opacity: 0.4 });
+g.circle(CX, CY, R);
+g.line(a[0], a[1], b[0], b[1], { role: 'line', weight: 1.05 });
+g.polyline([[16.5, CY], [21, CY], [24, CY + 3], [27, CY], [31.5, CY]], { role: 'accent', weight: 0.9, join: 'round' });
+g.line(7, CY, 10, CY, { role: marks, weight: 1.05 });
+g.line(38, CY, 41, CY, { role: marks, weight: 1.05 });
 }
-g.path(`M${X(24)} ${Y(9)}C${X(30.5)} ${Y(13)} ${X(32)} ${Y(18)} ${X(32)} ${Y(23)}V${Y(31.5)}H${X(16)}V${Y(23)}C${X(16)} ${Y(18)} ${X(17.5)} ${Y(13)} ${X(24)} ${Y(9)}Z`, { join: 'round' });
-g.circle(X(24), Y(20.5), 3.4, { role: up ? 'accent' : 'dim' });
-g.path(`M${X(16)} ${Y(24.5)}L${X(10.5)} ${Y(30)}V${Y(35)}L${X(16)} ${Y(31.5)}`, { join: 'round' });
-g.path(`M${X(32)} ${Y(24.5)}L${X(37.5)} ${Y(30)}V${Y(35)}L${X(32)} ${Y(31.5)}`, { join: 'round' });
-g.line(X(20.5), Y(33.5), X(27.5), Y(33.5), { role: 'dim' });
-if (k < 0.98) g.line(10, 39.5, 38, 39.5, { role: 'dim', opacity: 1 - k });
-if (up) for (const [x, off, len, ya, yb] of [[7, 0, 5, 10, 37], [41, 0.5, 5, 10, 37], [12, 0.3, 3.5, 8, 19], [36, 0.8, 3.5, 8, 19]]) {
-const u = (p * 2 + off) % 1; 
-const y = ya + u * (yb - ya);
-const fade = smoothstep(0, 0.2, u) * (1 - smoothstep(0.7, 1, u)) * k;
-if (fade > 0.02) g.line(x, y, x, clamp(y + len, 6, 41), { role: 'dim', opacity: fade });
+function drawBank(g, s, side) {
+const k = enter(s, 0.6), p = press(s, 0.5);
+const target = side === 0 ? -20 : side * 24;
+ball(g, lerp(0, target, k) + (side || -1) * 6 * p);
+if (side === 0) return;
+const a0 = -side * 42, a1 = side * 42;
+arcArrow(g, CX, CY, 17.5, a0, lerp(a0, a1, 0.3 + 0.7 * k), { role: 'line', size: 4.4 });
 }
-},
-});
 };
 __d[30] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { arrive, smoothstep } = __m(12);
-const { blink } = __m(24);
+const { drawBank } = __m(29);
 __e(__ns, { "default": () => __default }, [], ["default"]);
-const STEP = 1.2; 
-const OUT = [9, 6, 10.5, 7.5]; 
-const LOOP = STEP * OUT.length; 
-const PITCH = 5; 
-const Y_TOP = 15.5, Y_BOT = 32.5; 
 const __default = defineGlyph({
-id: 'terminal',
-title: 'Terminal',
-category: 'dev',
-tags: ['terminal', 'shell', 'console', 'command line', 'cli', 'prompt'],
-states: { idle: 'idle', running: 'active' },
-loop: LOOP,
-draw(g, s) {
-g.rect(7, 9.5, 34, 29, { r: 4.5 });
-const run = s.state === 'running';
-const k = arrive(s.since, 0.35);
-g.polyline([[13.5, 18.5], [19, 24], [13.5, 29.5]], { role: run ? 'accent' : 'line', join: 'round' });
-if (!run) {
-const on = blink(s.phase(STEP), 0.55, 0.08);
-g.line(23.5, 29.5, 31, 29.5, { role: 'line', opacity: 0.15 + 0.85 * on });
-return;
-}
-const u = s.phase(LOOP) * OUT.length, base = Math.floor(u), p = u - base;
-for (let j = -1; j < 5; j++) {
-const y = Y_BOT - (j + p) * PITCH;
-if (y < Y_TOP - 0.01 || y > Y_BOT + 0.01) continue;
-const fade = smoothstep(Y_TOP, Y_TOP + 4, y) * (1 - smoothstep(Y_BOT - 3, Y_BOT, y));
-const len = OUT[(((base - j) % OUT.length) + OUT.length) % OUT.length];
-g.line(23.5, y, 23.5 + len, y, { role: 'dim', opacity: fade * k });
-}
-},
+id: 'bank-left',
+title: 'Bank Left',
+category: 'build',
+tags: ['bank', 'left', 'roll', 'tilt', 'track', 'coaster', 'build'],
+draw(g, s) { drawBank(g, s, -1); },
 });
 };
 __d[31] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { arrive, pulse } = __m(12);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+const { ball } = __m(29);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
-id: 'bulb',
-title: 'Light Bulb',
-category: 'home',
-tags: ['light', 'lamp', 'bulb', 'home', 'scene'],
-states: { off: 'off', on: 'active' },
-hue: 60.4, 
-loop: 2.4,
+id: 'bank-level',
+title: 'Level Bank',
+category: 'build',
+tags: ['level', 'bank', 'flat', 'reset', 'horizon', 'track', 'coaster', 'build'],
 draw(g, s) {
-const on = s.state === 'on';
-g.path('M19 32.5C16 30.3 13.5 26.6 13.5 22.5a10.5 10.5 0 0 1 21 0c0 4.1-2.5 7.8-5.5 10');
-g.line(19, 32.5, 19, 35.5);
-g.line(29, 32.5, 29, 35.5);
-g.line(19, 35.5, 29, 35.5);
-g.line(20.5, 39.5, 27.5, 39.5, { role: 'dim' });
-g.polyline([[20.5, 28], [22.5, 23.5], [24, 27], [25.5, 23.5], [27.5, 28]], { role: on ? 'accent' : 'dim', weight: 0.8 });
-if (on) {
-const k = arrive(s.since, 0.4);
-for (const a of [-60, -30, 0, 30, 60]) {
-const [x1, y1] = g.polar(24, 22.5, 13, a), [x2, y2] = g.polar(24, 22.5, 13 + 3 * k, a);
-g.line(x1, y1, x2, y2, { role: 'accent', opacity: (0.45 + 0.55 * pulse(s.t + a / 120, 2.4)) * k, weight: 0.8 });
-}
-}
+const k = enter(s, 0.6), p = press(s, 0.5);
+ball(g, lerp(-22, 0, k) - 6 * p, { marks: k > 0.9 && p < 0.3 ? 'accent' : 'dim' });
 },
 });
 };
 __d[32] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawBank } = __m(29);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'bank-right',
+title: 'Bank Right',
+category: 'build',
+tags: ['bank', 'right', 'roll', 'tilt', 'track', 'coaster', 'build'],
+draw(g, s) { drawBank(g, s, 1); },
+});
+};
+__d[33] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawBank } = __m(29);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'bank',
+title: 'Bank',
+category: 'build',
+tags: ['bank', 'roll', 'tilt', 'angle', 'track', 'coaster', 'build'],
+draw(g, s) { drawBank(g, s, 0); },
+});
+};
+__d[34] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'booster',
+title: 'Booster',
+category: 'build',
+tags: ['booster', 'boost', 'launch', 'speed', 'accelerate', 'track', 'coaster', 'build'],
+draw(g, s) {
+const p = press(s, 0.45);
+[19.5, 28.5, 37.5].forEach((x, i) => {
+const k = enter({ since: s.since - i * 0.09 }, 0.45);
+const dx = lerp(-3, 0, k) + 2.2 * p;
+g.polyline(chevron([x + dx, 22], 90, 12, 45), { role: i === 2 ? 'accent' : 'line', join: 'round', opacity: lerp(0, [0.45, 0.75, 1][i], k), weight: 1.05 });
+});
+g.line(8, 37.5, 40, 37.5, { role: 'dim' });
+},
+});
+};
+__d[35] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'brake',
+title: 'Brakes',
+category: 'build',
+tags: ['brake', 'brakes', 'stop', 'slow', 'block', 'track', 'coaster', 'build'],
+states: { off: 'idle', on: 'active' },
+draw(g, s) {
+const on = s.state === 'on';
+const k = enter(s, 0.5), p = press(s, 0.4);
+const r = lerp(17.5, on ? 14.5 : 15.5, k) - 1.2 * p;
+g.circle(24, 24, 9.5);
+g.circle(24, 24, 2.6, { role: 'fill' });
+const role = on || p > 0.4 ? 'accent' : 'line';
+g.arc(24, 24, r, 222, 318, { role, weight: 1.05 });
+g.arc(24, 24, r, 42, 138, { role, weight: 1.05 });
+},
+});
+};
+__d[36] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, smoothstep } = __m(12);
+const { enter, xf, xfPts, rot, capsule, chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const M = rot(-45, [24, 24]); 
+const STEP = 8.2; 
+const FACE = [2.8, 3.8], EDGE = 5.8;
+const LO = -18, HI = 12.5; 
+const __default = defineGlyph({
+id: 'chain-lift',
+title: 'Chain Lift',
+category: 'build',
+tags: ['chain', 'lift', 'lift hill', 'climb', 'track', 'coaster', 'build'],
+states: { off: 'idle', on: 'active' },
+loop: 1.6,
+draw(g, s) {
+const on = s.state === 'on';
+const k = enter(s, 0.6);
+const run = on ? s.phase(1.6) * STEP * 2 : lerp(-STEP * 2, 0, k);
+for (let i = -2; i <= 3; i++) {
+const c = -11 + i * STEP + run;
+const face = ((i % 2) + 2) % 2 === 0;
+const half = face ? FACE[0] + FACE[1] : EDGE;
+const fade = smoothstep(LO - 4, LO, c - half) * (1 - smoothstep(HI, HI + 4, c + half));
+if (fade < 0.02) continue;
+if (face) g.path(xf(capsule([24 + c - FACE[0], 24], [24 + c + FACE[0], 24], FACE[1]), M), { role: 'line', opacity: fade });
+else { const [a, b] = xfPts([[24 + c - EDGE, 24], [24 + c + EDGE, 24]], M); g.line(a[0], a[1], b[0], b[1], { role: 'line', opacity: fade }); }
+}
+const [tip] = xfPts([[24 + 18.5, 24]], M);
+g.polyline(chevron(tip, 45, 6.5, 45), { role: on ? 'accent' : 'line', join: 'round', weight: 1.05 });
+},
+});
+};
+__d[37] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'falloff',
+title: 'Falloff',
+category: 'build',
+tags: ['falloff', 'fall off', 'brush', 'softness', 'hardness', 'centre', 'even', 'curve'],
+draw(g, s) {
+const k = enter(s, 0.6), p = press(s, 0.45);
+const top = lerp(34, 12, k) + 3 * p, base = 36;
+g.path(`M7 ${base}C14 ${base} 16 ${top} 24 ${top}C32 ${top} 34 ${base} 41 ${base}`, { role: 'line' });
+g.line(7, base + 2.5, 41, base + 2.5, { role: 'dim' });
+g.line(24, top + 4, 24, base, { role: 'accent', dash: [2, 2.6], opacity: k });
+},
+});
+};
+__d[38] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, pulse, clamp } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const HEAT = [[0.18, 0.4, 0.55], [0.4, 0.8, 1], [0.22, 0.52, 0.7]];
+const X = [8.5, 19.25, 30], S = 9.5;
+const __default = defineGlyph({
+id: 'heatmap',
+title: 'Heatmap',
+category: 'build',
+tags: ['heatmap', 'heat', 'map', 'overlay', 'density', 'ratings', 'view', 'build'],
+states: { off: 'idle', on: 'active' },
+loop: 2.4,
+draw(g, s) {
+const on = s.state === 'on';
+HEAT.forEach((row, j) => row.forEach((h, i) => {
+const k = clamp((s.since - Math.hypot(i - 2, j - 1) * 0.09) / 0.35); 
+const op = lerp(0.12, h, k) * (h === 1 && on ? 0.7 + 0.3 * pulse(s.t, 2.4) : 1);
+g.rect(X[i], X[j], S, S, { r: 2.5, role: h >= 0.5 ? 'accent' : 'dim', fill: true, opacity: op });
+}));
+},
+});
+};
+__d[39] = function (__ns) {
+const { lerp } = __m(12);
+const { enter, press, chevron } = __m(24);
+__e(__ns, { "drawLength": () => drawLength }, [], ["drawLength"]);
+const Y = 31, X0 = 8, X1 = 40;
+function drawLength(g, s, sign) {
+const k = enter(s, 0.55), p = press(s, 0.45);
+const pull = lerp(5, 0, k) - sign * 1.8 * p; 
+g.line(X0, Y - 6, X0, Y + 6, { role: 'dim' });
+g.line(X1, Y - 6, X1, Y + 6, { role: 'dim' });
+const a = X0 + 3.5 + pull, b = X1 - 3.5 - pull;
+g.line(a, Y, b, Y);
+g.polyline(chevron([a, Y], 270, 5.5, 45), { join: 'round' });
+g.polyline(chevron([b, Y], 90, 5.5, 45), { join: 'round' });
+const role = p > 0.3 ? 'accent' : 'accent';
+g.line(18, 14, 30, 14, { role, weight: 1.15, opacity: lerp(0.5, 1, k) });
+if (sign > 0) g.line(24, 8, 24, 20, { role, weight: 1.15, opacity: lerp(0.5, 1, k) });
+}
+};
+__d[40] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawLength } = __m(39);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'length-minus',
+title: 'Shorter',
+category: 'build',
+tags: ['length', 'shorter', 'shrink', 'minus', 'size', 'track', 'path', 'build'],
+draw(g, s) { drawLength(g, s, -1); },
+});
+};
+__d[41] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawLength } = __m(39);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'length-plus',
+title: 'Longer',
+category: 'build',
+tags: ['length', 'longer', 'extend', 'plus', 'size', 'track', 'path', 'build'],
+draw(g, s) { drawLength(g, s, 1); },
+});
+};
+__d[42] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { flattenPath } = __m(13);
+const { enter } = __m(24);
+const { partialPolyline } = __m(26);
+const { ride } = __m(28);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const D = 'M7 37.5H20C29 37.5 35 31 35 22.5C35 16 30 11 24 11C18 11 13 16 13 22.5C13 31 19 37.5 28 37.5H41';
+const PTS = flattenPath(D, 0.2)[0].pts;
+const __default = defineGlyph({
+id: 'loop',
+title: 'Loop',
+category: 'build',
+tags: ['loop', 'vertical loop', 'inversion', 'element', 'track', 'coaster', 'build'],
+draw(g, s) {
+const k = enter(s, 0.7);
+const pts = k > 0.999 ? PTS : partialPolyline(PTS, k);
+if (pts.length > 1) g.polyline(pts, { role: 'line', join: 'round', weight: 1.05 });
+ride(g, s, PTS);
+},
+});
+};
+__d[43] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'path',
+title: 'Path',
+category: 'build',
+tags: ['path', 'footpath', 'walkway', 'road', 'join', 'queue', 'build'],
+draw(g, s) {
+const k = enter(s, 0.6), p = press(s, 0.5);
+g.line(9.5, 39.5, 19.5, 8.5);
+g.line(38.5, 39.5, 28.5, 8.5);
+const run = (1 - k) + p;
+for (let i = -1; i < 4; i++) {
+const u = (i + (run % 1)) / 4; 
+if (u < 0 || u > 0.92) continue;
+const y0 = lerp(37, 10, u), len = lerp(6, 2.2, u);
+g.line(24, y0, 24, y0 - len, { role: 'dim', opacity: Math.min(1, (0.92 - u) / 0.15) });
+}
+},
+});
+};
+__d[44] = function (__ns) {
 const { P } = __m(5);
 const { polar } = __m(15);
 __e(__ns, { "wedge": () => wedge, "smooth": () => smooth, "along": () => along, "arcPoints": () => arcPoints, "roundedPoly": () => roundedPoly, "smoothClosed": () => smoothClosed }, [], ["along","arcPoints","roundedPoly","smooth","smoothClosed","wedge"]);
@@ -2771,11 +2969,1685 @@ p.C(b[0] + (c[0] - a[0]) / 6, b[1] + (c[1] - a[1]) / 6, c[0] - (d[0] - b[0]) / 6
 return p.Z().d;
 }
 };
-__d[33] = function (__ns) {
+__d[45] = function (__ns) {
+const { lerp } = __m(12);
+const { enter, press, chevron } = __m(24);
+const { horizon } = __m(28);
+const { wedge } = __m(44);
+__e(__ns, { "drawPitch": () => drawPitch }, [], ["drawPitch"]);
+const RAD = Math.PI / 180;
+const L = 32;
+function drawPitch(g, s, dir) {
+const k = enter(s, 0.6), p = press(s, 0.5);
+const up = dir >= 0;
+const deg = lerp(12, 32, k) + 5 * p; 
+const x0 = 8.5, y0 = up ? 34 : 14;
+const x1 = x0 + L * Math.cos(deg * RAD), y1 = y0 + (up ? -1 : 1) * L * Math.sin(deg * RAD);
+horizon(g, y0, x0 + 3, 40);
+g.line(x0, y0, x1, y1, { role: 'line', weight: 1.1 });
+const a = up ? 90 - deg : 90 + deg; 
+g.path(wedge(x0, y0, 11, Math.min(90, a), Math.max(90, a)), { role: 'dim', fill: true, opacity: 0.3 });
+g.arc(x0, y0, 13, Math.min(90, a), Math.max(90, a), { role: 'accent', weight: 0.95 });
+if (dir !== 0) g.polyline(chevron([x1, y1], a, 6.5, 45), { role: 'line', join: 'round', weight: 1.1 });
+else g.dot(x1, y1, 2.2, { role: 'fill' });
+}
+};
+__d[46] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawPitch } = __m(45);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'pitch-down',
+title: 'Pitch Down',
+category: 'build',
+tags: ['pitch', 'down', 'dive', 'drop', 'slope', 'track', 'coaster', 'build'],
+draw(g, s) { drawPitch(g, s, -1); },
+});
+};
+__d[47] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+const { spiritLevel } = __m(28);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'pitch-level',
+title: 'Flatten',
+category: 'build',
+tags: ['flat', 'level', 'pitch', 'flatten', 'reset', 'track', 'coaster', 'build'],
+draw(g, s) {
+const k = enter(s, 0.6), p = press(s, 0.5);
+const lift = lerp(7, 0, k) + 2.5 * p; 
+spiritLevel(g, 16.5, { k, bubble: lerp(6, 0, k) });
+g.line(8.5, 32.5, 39.5, 32.5 - lift, { role: 'line', weight: 1.1 });
+g.dot(8.5, 32.5, 2.2, { role: 'fill' });
+g.dot(39.5, 32.5 - lift, 2.2, { role: 'fill' });
+},
+});
+};
+__d[48] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawPitch } = __m(45);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'pitch-up',
+title: 'Pitch Up',
+category: 'build',
+tags: ['pitch', 'up', 'climb', 'slope', 'incline', 'track', 'coaster', 'build'],
+draw(g, s) { drawPitch(g, s, 1); },
+});
+};
+__d[49] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawPitch } = __m(45);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'pitch',
+title: 'Pitch',
+category: 'build',
+tags: ['pitch', 'slope', 'incline', 'angle', 'track', 'coaster', 'build'],
+draw(g, s) { drawPitch(g, s, 0); },
+});
+};
+__d[50] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+const { smooth: smoothPath } = __m(44);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const ROUGH = [[7, 29], [10, 23.5], [13.5, 30], [17, 22.5], [20.5, 28], [24, 24.5]];
+const CALM = [[7, 27], [10, 26.4], [13.5, 26], [17, 25.6], [20.5, 25.2], [24, 24.5]];
+const TAIL = [[24, 24.5], [29.5, 21.8], [35, 22.6], [41, 26]];
+const __default = defineGlyph({
+id: 'smooth',
+title: 'Smooth',
+category: 'build',
+tags: ['smooth', 'soften', 'flatten', 'terrain', 'sculpt', 'brush', 'build'],
+draw(g, s) {
+const k = enter(s, 0.7), p = press(s, 0.5);
+const rough = lerp(1, 0.75, k) * (1 - 0.45 * p); 
+g.polyline(ROUGH.map(([x, y], i) => [x, lerp(CALM[i][1], y, rough)]), { role: 'line', join: 'round' });
+g.path(smoothPath(TAIL), { role: 'line' });
+g.line(7, 37.5, 41, 37.5, { role: 'dim' });
+},
+});
+};
+__d[51] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { enter } = __m(24);
+const { partialPolyline } = __m(26);
+const { ride } = __m(28);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const R = 2.05, DD = 7.2, YC = 23;
+const PTS = (() => {
+const x0 = 24 - R * 3 * Math.PI, out = [[7, YC + DD]];
+for (let i = 0; i <= 120; i++) { const th = Math.PI + (4 * Math.PI * i) / 120; out.push([x0 + R * th - DD * Math.sin(th), YC - DD * Math.cos(th)]); }
+out.push([41, YC + DD]);
+return out;
+})();
+const __default = defineGlyph({
+id: 'special',
+title: 'Special Element',
+category: 'build',
+tags: ['special', 'corkscrew', 'roll', 'heartline', 'inversion', 'element', 'track', 'coaster', 'build'],
+draw(g, s) {
+const k = enter(s, 0.7);
+const pts = k > 0.999 ? PTS : partialPolyline(PTS, k);
+if (pts.length > 1) g.polyline(pts, { role: 'line', join: 'round', weight: 1.05 });
+g.line(9, 37, 39, 37, { role: 'dim', opacity: k });
+ride(g, s, PTS, 1.2);
+},
+});
+};
+__d[52] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { clamp } = __m(12);
+const { press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'stairs',
+title: 'Stairs',
+category: 'build',
+tags: ['stairs', 'steps', 'staircase', 'gate', 'queue', 'climb', 'path'],
+draw(g, s) {
+const p = press(s, 0.4);
+const pts = [[8, 39]];
+for (let i = 0; i < 4; i++) {
+const k = clamp((s.since - i * 0.08) / 0.3);
+const x = 8 + i * 7.5, y = 39 - i * 7;
+if (k <= 0.02) break;
+pts.push([x, y - 7 * k], [x + 7.5 * k, y - 7 * k]);
+}
+if (pts.length > 1) g.polyline(pts, { role: 'line', join: 'round' });
+g.line(9, 26, 27, 9.2, { role: p > 0.3 ? 'accent' : 'dim' });
+},
+});
+};
+__d[53] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const CAR = 'M15.5 34.5V31.5A2.5 2.5 0 0 1 18 29H24.5L26.5 26H30A2.5 2.5 0 0 1 32.5 28.5V34.5Z';
+const __default = defineGlyph({
+id: 'station',
+title: 'Station',
+category: 'build',
+tags: ['station', 'platform', 'queue', 'dispatch', 'entrance', 'ride', 'coaster', 'build'],
+draw(g, s) {
+const k = enter(s, 0.7), p = press(s, 0.5);
+g.path('M8 17L12.5 10.5H35.5L40 17Z', { join: 'round' });
+g.line(12.5, 17, 12.5, 37.5, { role: 'dim' });
+g.line(35.5, 17, 35.5, 37.5, { role: 'dim' });
+g.line(7.5, 37.5, 40.5, 37.5, { role: 'line' });
+g.group({ x: lerp(-7, 0, k) + 2.5 * p, opacity: k }, () => g.path(CAR, { role: p > 0.3 ? 'accent' : 'line', join: 'round' }));
+},
+});
+};
+__d[54] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+const { roundPoly } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const BASE = 37.5;
+const LAND = [[6.5, BASE], [17, 21.5], [22.5, 29], [29.5, 14], [41.5, BASE]];
+const SNOW = [[25.9, 21.7], [28, 24], [30, 21.9], [31.7, 24], [33.4, 21.9]];
+const __default = defineGlyph({
+id: 'terrain',
+title: 'Terrain',
+category: 'build',
+tags: ['terrain', 'land', 'mountain', 'raise', 'lower', 'sculpt', 'landscape', 'build'],
+draw(g, s) {
+const k = enter(s, 0.6), p = press(s, 0.5);
+const h = lerp(0.35, 1, k) * (1 + 0.06 * p);
+const up = (pts) => pts.map(([x, y]) => [x, BASE - (BASE - y) * h]);
+g.path(roundPoly(up(LAND), [1, 2.5, 2, 2.5, 1]), { join: 'round' });
+g.polyline(up(SNOW), { role: 'dim', join: 'round', opacity: k });
+},
+});
+};
+__d[55] = function (__ns) {
+const { enter, press, mirrorX } = __m(24);
+const { topTrack, curveLeft } = __m(28);
+__e(__ns, { "drawCurve": () => drawCurve }, [], ["drawCurve"]);
+const C = curveLeft({ cx: 34, yb: 40, ya: 30, rc: 14, xe: 7.5 });
+function drawCurve(g, s, dir) {
+const k = enter(s, 0.55), p = press(s, 0.5);
+topTrack(g, C.at, C.length, { gauge: 11, pitch: 8, over: 2, run: (1 - k) + p, m: dir > 0 ? mirrorX() : null, opacity: 0.35 + 0.65 * k });
+}
+};
+__d[56] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawCurve } = __m(55);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'track-curve-left',
+title: 'Curve Left',
+category: 'build',
+tags: ['track', 'curve', 'turn', 'left', 'coaster', 'piece', 'build'],
+draw(g, s) { drawCurve(g, s, -1); },
+});
+};
+__d[57] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawCurve } = __m(55);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'track-curve-right',
+title: 'Curve Right',
+category: 'build',
+tags: ['track', 'curve', 'turn', 'right', 'coaster', 'piece', 'build'],
+draw(g, s) { drawCurve(g, s, 1); },
+});
+};
+__d[58] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { enter, press } = __m(24);
+const { topTrack, straightAt } = __m(28);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'track-straight',
+title: 'Straight Track',
+category: 'build',
+tags: ['track', 'straight', 'straighten', 'rail', 'coaster', 'piece', 'build'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.5);
+topTrack(g, straightAt(24, 40), 32, { gauge: 12, pitch: 8, over: 2.5, run: (1 - k) + p, opacity: 0.35 + 0.65 * k });
+},
+});
+};
+__d[59] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const RIM_Y = 19.5, RIM_RX = 12.5, RIM_RY = 3.5; 
+const FOOT_Y = 37.5, FOOT_RX = 8.5, FOOT_RY = 2.5; 
+const BODY = `M${24 - RIM_RX} ${RIM_Y}L${24 - FOOT_RX} ${FOOT_Y}A${FOOT_RX} ${FOOT_RY} 0 0 0 ${24 + FOOT_RX} ${FOOT_Y}L${24 + RIM_RX} ${RIM_Y}`;
+const halfAt = (y) => RIM_RX - ((RIM_RX - FOOT_RX) * (y - RIM_Y)) / (FOOT_Y - RIM_Y);
+const __default = defineGlyph({
+id: 'bucket',
+title: 'Bucket',
+category: 'dev',
+tags: ['bucket', 'storage', 'object storage', 'blob', 'files', 'pail', 'upload', 'archive'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.5);
+const cy = +lerp(RIM_Y - 2, 5.5, k).toFixed(2);
+g.path(`M13 ${RIM_Y - 0.5}C13 ${cy} 35 ${cy} 35 ${RIM_Y - 0.5}`, { role: 'line', weight: 0.85, opacity: lerp(0.3, 1, k) });
+g.path(BODY, { role: 'line', join: 'round' });
+g.ellipse(24, RIM_Y, RIM_RX, RIM_RY, { role: 'line' });
+if (p > 0.02) {
+const y = +lerp(FOOT_Y - 1.5, 27, p).toFixed(2), h = +(halfAt(y) - 2.5).toFixed(2);
+g.line(24 - h, y, 24 + h, y, { role: 'accent', opacity: Math.min(1, p * 1.5) });
+}
+},
+});
+};
+__d[60] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive } = __m(12);
+const { curve } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const CX = 24, BY = 27.5, RX = 8.5, RY = 10.5; 
+const LEGS = [[16.2, 21.5, -6, -3, 0], [15.6, 27.5, -6.5, 0, 1], [16.4, 33.5, -6, 3.5, 0]];
+const LOOP = 1.2;
+const __default = defineGlyph({
+id: 'bug',
+title: 'Bug',
+category: 'dev',
+tags: ['bug', 'debug', 'debugger', 'issue', 'defect', 'testing'],
+states: { idle: 'idle', debugging: 'active' },
+loop: LOOP,
+draw(g, s) {
+const on = s.state === 'debugging';
+const k = on ? arrive(s.since, 0.3) : 0;
+const w = Math.sin(s.phase(LOOP) * Math.PI * 4) * k; 
+for (const side of [-1, 1]) for (const [hx, hy, fx, fy, grp] of LEGS) {
+const swing = (grp === (side < 0 ? 0 : 1) ? w : -w) * 2.2; 
+const x = side < 0 ? hx : 2 * CX - hx, dx = side < 0 ? fx : -fx;
+g.line(x, hy, x + dx, hy + fy + swing, { weight: 0.85 });
+}
+const tw = on ? Math.sin(s.phase(LOOP) * Math.PI * 2 * 3) * 1.2 * k : 0;
+g.path(curve([21.5, 14.5], [20, 11], [17, 9 + tw]), { role: 'dim', weight: 0.9 });
+g.path(curve([26.5, 14.5], [28, 11], [31, 9 - tw]), { role: 'dim', weight: 0.9 });
+g.path('M19 18.5a5 5 0 0 1 10 0', { role: 'line' });
+g.ellipse(CX, BY, RX, RY, { role: 'line' });
+g.line(CX, 19.5, CX, 36, { role: on ? 'accent' : 'dim', weight: 0.8 });
+if (on) { g.dot(20.5, 25, 1.4, { opacity: 0.8 * k }); g.dot(27.5, 30, 1.4, { opacity: 0.8 * k }); }
+},
+});
+};
+__d[61] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp } = __m(12);
+const { enter, xf, xfPts, rot, capsule } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const HEAD = 'M17 10.5H31A2.5 2.5 0 0 1 33.5 13V15A2.5 2.5 0 0 1 31 17.5H17L14.5 15.5V12.5Z';
+const HANDLE = capsule([24, 17.5], [24, 38.5], 2.6);
+const NUDGE = [-2.8, 1.6];
+const at = (deg) => { const m = rot(deg); return [m[0], m[1], m[2], m[3], m[4] + NUDGE[0], m[5] + NUDGE[1]]; };
+const __default = defineGlyph({
+id: 'build',
+title: 'Build',
+category: 'dev',
+tags: ['build', 'hammer', 'compile', 'make', 'construct', 'tools', 'task'],
+states: { idle: 'idle', building: 'busy' },
+loop: 0.8,
+draw(g, s) {
+const busy = s.state === 'building';
+const k = enter(s, 0.5);
+const tap = busy ? Math.max(0, Math.sin(s.phase(0.8) * Math.PI * 2)) : !s.pressed && s.pressAge < 0.35 ? Math.sin(Math.PI * clamp(s.pressAge / 0.35)) : 0;
+const M = at(45 + lerp(-20, 0, k) - 10 * tap);
+g.path(xf(HANDLE, M), { join: 'round' });
+g.path(xf(HEAD, M), { role: busy ? 'accent' : 'line', join: 'round' });
+if (busy && tap < 0.2) {
+const f = 1 - tap / 0.2, [fx, fy] = xfPts([[34.5, 14]], at(45))[0];
+for (const a of [20, 70, 120]) {
+const c = Math.cos((a * Math.PI) / 180), sn = Math.sin((a * Math.PI) / 180);
+g.line(fx + 2.5 * sn, fy - 2.5 * c, fx + 5 * sn, fy - 5 * c, { role: 'accent', weight: 0.7, opacity: f });
+}
+}
+},
+});
+};
+__d[62] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, smoothstep } = __m(12);
+const { partialPolyline, strike } = __m(26);
+const { n } = __m(5);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const CL = [15.5, 28, 7], CM = [24, 21.5, 10.5], CR = [33, 27, 8];
+const BASE = 35;
+function meet(a, b) {
+const dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy);
+const l = (a[2] * a[2] - b[2] * b[2] + d * d) / (2 * d), h = Math.sqrt(Math.max(0, a[2] * a[2] - l * l));
+const mx = a[0] + (dx * l) / d, my = a[1] + (dy * l) / d;
+const p1 = [mx + (dy * h) / d, my - (dx * h) / d], p2 = [mx - (dy * h) / d, my + (dx * h) / d];
+return p1[1] < p2[1] ? p1 : p2;
+}
+function arcTo(c, p, q) {
+const ang = (pt) => (Math.atan2(pt[1] - c[1], pt[0] - c[0]) * 180) / Math.PI;
+const sweep = (((ang(q) - ang(p)) % 360) + 360) % 360;
+return `A${n(c[2])} ${n(c[2])} 0 ${sweep > 180 ? 1 : 0} 1 ${n(q[0])} ${n(q[1])}`;
+}
+const LM = meet(CL, CM), MR = meet(CM, CR);
+const OUTLINE = `M${n(CL[0])} ${BASE}${arcTo(CL, [CL[0], BASE], LM)}${arcTo(CM, LM, MR)}${arcTo(CR, MR, [CR[0], BASE])}Z`;
+const CHECK = [[18.5, 26.5], [22.5, 30.5], [30, 23]];
+const LOOP = 1.2;
+const __default = defineGlyph({
+id: 'cloud',
+title: 'Cloud',
+category: 'dev',
+tags: ['cloud', 'upload', 'backup', 'deploy', 'hosting', 'online', 'storage'],
+states: { online: 'active', uploading: 'busy', offline: 'neg' },
+loop: LOOP,
+draw(g, s) {
+const st = s.state;
+g.path(OUTLINE, { role: st === 'offline' ? 'dim' : 'line', join: 'round' });
+if (st === 'offline') { strike(g, s, { from: [10.5, 9.5], to: [37.5, 38.5] }); return; }
+if (st === 'online') {
+const pts = partialPolyline(CHECK, arrive(Math.max(0, s.since - 0.1), 0.4));
+if (pts.length > 1) g.polyline(pts, { role: 'accent', weight: 1.05 });
+return;
+}
+for (const off of [0, 0.5]) {
+const u = (s.phase(LOOP) + off) % 1;
+const y = 30 - u * 11; 
+const fade = smoothstep(0, 0.25, u) * (1 - smoothstep(0.65, 1, u));
+if (fade > 0.02) g.polyline([[19.5, y + 4.5], [24, y], [28.5, y + 4.5]], { role: 'line', opacity: fade });
+}
+},
+});
+};
+__d[63] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const C = 24, RING = 15, NODE = 3.5, HOME = 7.5; 
+const ANGLES = [0, 120, 240];
+const __default = defineGlyph({
+id: 'cluster',
+title: 'Cluster',
+category: 'dev',
+tags: ['cluster', 'nodes', 'node group', 'kubernetes', 'k8s', 'orchestration', 'group', 'mesh'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.45);
+g.circle(C, C, RING, { role: 'dim', dash: [2.5, 2.2], opacity: lerp(0.3, 1, k) });
+const r = lerp(RING - NODE - 1, HOME, k);
+const pts = ANGLES.map((a) => g.polar(C, C, r, a).map((v) => +v.toFixed(2)));
+for (let i = 0; i < 3; i++) {
+const [a, b] = [pts[i], pts[(i + 1) % 3]];
+const d = Math.hypot(b[0] - a[0], b[1] - a[1]), ux = (b[0] - a[0]) / d, uy = (b[1] - a[1]) / d, m = NODE + 1;
+g.line(+(a[0] + ux * m).toFixed(2), +(a[1] + uy * m).toFixed(2), +(b[0] - ux * m).toFixed(2), +(b[1] - uy * m).toFixed(2), { role: p > 0.3 ? 'accent' : 'dim' });
+}
+for (const [x, y] of pts) g.circle(x, y, NODE, { role: 'line' });
+},
+});
+};
+__d[64] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, lerp, smoothstep } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const S0 = [27, 11], S1 = [21, 37]; 
+const LOOP = 2.4;
+const __default = defineGlyph({
+id: 'code',
+title: 'Code',
+category: 'dev',
+tags: ['code', 'editor', 'source', 'develop', 'programming', 'brackets'],
+states: { idle: 'idle', editing: 'active' },
+loop: LOOP,
+draw(g, s) {
+const on = s.state === 'editing';
+const k = arrive(s.since, 0.4);
+const o = on ? lerp(0, 1.5, k) : lerp(1.5, 0, k); 
+g.polyline([[16 - o, 14], [7.5 - o * 0.4, 24], [16 - o, 34]], { join: 'round' });
+g.polyline([[32 + o, 14], [40.5 + o * 0.4, 24], [32 + o, 34]], { join: 'round' });
+g.line(S0[0], S0[1], S1[0], S1[1], { role: on ? 'accent' : 'dim', weight: 1.05 });
+if (!on) return;
+const p = s.phase(LOOP);
+const fade = smoothstep(0, 0.12, p) * (1 - smoothstep(0.62, 0.8, p));
+if (fade < 0.02) return;
+const u = Math.min(1, p / 0.8);
+g.dot(lerp(S0[0], S1[0], u), lerp(S0[1], S1[1], u), 2, { opacity: fade * k });
+},
+});
+};
+__d[65] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const W = 25, H = 12;
+const TOP = [14.5, 11], BOTTOM = [8.5, 25.5]; 
+function box(g, [x, y], role) {
+g.rect(x, y, W, H, { r: 2, role });
+for (const dx of [6, 10.5, 15]) g.line(x + dx, y + 3, x + dx, y + H - 3, { role: 'dim', weight: 0.8 }); 
+g.line(x + W - 4.5, y + 2.5, x + W - 4.5, y + H - 2.5, { role, weight: 0.8 }); 
+}
+const __default = defineGlyph({
+id: 'container',
+title: 'Container',
+category: 'dev',
+tags: ['container', 'containers', 'shipping container', 'deploy', 'service', 'task', 'image', 'stack'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.45);
+box(g, BOTTOM, 'line');
+const dy = +Math.max(-4.5, lerp(-4.5, 0, k) - 2 * p).toFixed(2); 
+g.group({ y: dy }, () => box(g, TOP, p > 0.3 ? 'accent' : 'line'));
+},
+});
+};
+__d[66] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const X0 = 12, X1 = 36, RX = 12, RY = 4.5;
+const TOP = 12.5, BOTTOM = 35; 
+const BANDS = [20, 27.5];
+const side = (y) => `M${X0} ${y}A${RX} ${RY} 0 0 0 ${X1} ${y}`;
+const __default = defineGlyph({
+id: 'database',
+title: 'Database',
+category: 'dev',
+tags: ['database', 'db', 'sql', 'nosql', 'table', 'tables', 'data', 'records', 'storage', 'query'],
+draw(g, s) {
+const p = press(s, 0.4);
+g.path(`M${X0} ${TOP}V${BOTTOM}A${RX} ${RY} 0 0 0 ${X1} ${BOTTOM}V${TOP}`, { role: 'line', join: 'round' });
+BANDS.forEach((y, i) => {
+const k = enter({ since: s.since - 0.1 * i }, 0.4);
+g.path(side(y), { role: 'dim', opacity: lerp(0, 1, k) });
+});
+g.ellipse(24, TOP, RX, RY, { role: p > 0.3 ? 'accent' : 'line' });
+},
+});
+};
+__d[67] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'definition',
+title: 'Definition',
+category: 'dev',
+tags: ['definition', 'go to definition', 'declaration', 'jump', 'navigate', 'code', 'peek'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+g.rect(19.5, 9, 21, 30, { r: 4 });
+g.line(24.5, 16, 35.5, 16, { role: 'dim' });
+g.line(24.5, 23, 35.5, 23, { role: 'accent', weight: 1.05 });
+g.line(24.5, 30, 32, 30, { role: 'dim' });
+const d = lerp(-3, 0, k) + 1.2 * p;
+g.path(`M8 38C8 29 10.5 23 ${15.5 + d} 23`, { role: 'line', opacity: lerp(0.3, 1, k) });
+g.polyline(chevron([16 + d, 23], 90, 5, 45), { role: 'line', join: 'round', opacity: lerp(0.3, 1, k) });
+},
+});
+};
+__d[68] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'diff',
+title: 'Diff',
+category: 'dev',
+tags: ['diff', 'changes', 'compare', 'added', 'removed', 'show change', 'version control'],
+draw(g, s) {
+const p = press(s, 0.4);
+g.rect(10.5, 7.5, 27, 33, { r: 4 });
+const k1 = enter(s, 0.4), k2 = enter({ since: s.since - 0.1 }, 0.4);
+const h1 = lerp(1.5, 5.5, k1), h2 = lerp(1.5, 5.5, k2);
+g.line(24 - h1, 18.5, 24 + h1, 18.5, { role: 'accent', weight: 1.05 });
+g.line(24, 18.5 - h1, 24, 18.5 + h1, { role: 'accent', weight: 1.05 });
+g.line(24 - h2, 31, 24 + h2, 31, { role: p > 0.3 ? 'accent' : 'line', weight: 1.05 });
+},
+});
+};
+__d[69] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, lerp } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'fold',
+title: 'Fold',
+category: 'dev',
+tags: ['fold', 'collapse', 'unfold', 'expand', 'outline', 'region', 'code folding'],
+states: { unfolded: 'idle', folded: 'active' },
+draw(g, s) {
+const m = arrive(s.since, 0.4);
+const k = s.state === 'folded' ? m : 1 - m; 
+const o = lerp(11, 6.5, k);
+g.polyline([[15, 24 - o - 5.5], [24, 24 - o], [33, 24 - o - 5.5]], { role: 'line', join: 'round' });
+g.polyline([[15, 24 + o + 5.5], [24, 24 + o], [33, 24 + o + 5.5]], { role: 'line', join: 'round' });
+g.line(9, 24, 39, 24, { role: k > 0.5 ? 'accent' : 'dim', weight: k > 0.5 ? 1.05 : 1 });
+},
+});
+};
+__d[70] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, xf, mirrorX } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const PAREN = 'M15 9.5C10 15.5 10 32.5 15 38.5'; 
+const LAMBDA = 'M17.5 11.5H19C20.5 11.5 21.4 12.3 22 13.8L30 36.5'; 
+const LEG = 'M25.1 22.7L17.5 36.5'; 
+const __default = defineGlyph({
+id: 'function',
+title: 'Function',
+category: 'dev',
+tags: ['function', 'lambda', 'serverless', 'fn', 'f(x)', 'code', 'handler', 'run code'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+const o = lerp(-3, 0, k);
+g.group({ x: o }, () => g.path(PAREN, { role: 'line' }));
+g.group({ x: -o }, () => g.path(xf(PAREN, mirrorX()), { role: 'line' }));
+const role = p > 0.3 ? 'accent' : 'line';
+g.path(LAMBDA, { role, join: 'round', weight: 1.05, opacity: lerp(0.3, 1, k) });
+g.path(LEG, { role, weight: 1.05, opacity: lerp(0.3, 1, k) });
+},
+});
+};
+__d[71] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, smoothstep } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const T = [14.5, 11.5], B = [14.5, 36.5], BR = [33.5, 15.5], NR = 3.6; 
+const C = [[BR[0], BR[1] + NR], [BR[0], 27.5], [B[0], 24], [B[0], B[1] - NR]];
+const LOOP = 1.8;
+const bez = (u) => {
+const v = 1 - u;
+return [0, 1].map((k) => v * v * v * C[0][k] + 3 * v * v * u * C[1][k] + 3 * v * u * u * C[2][k] + u * u * u * C[3][k]);
+};
+const __default = defineGlyph({
+id: 'git-branch',
+title: 'Branch',
+category: 'dev',
+tags: ['branch', 'git', 'version control', 'merge', 'commit', 'source control'],
+states: { idle: 'idle', active: 'active' },
+loop: LOOP,
+draw(g, s) {
+const on = s.state === 'active';
+const f = (p) => `${p[0]} ${p[1]}`;
+g.line(T[0], T[1] + NR, B[0], B[1] - NR);
+g.path(`M${f(C[0])}C${f(C[1])} ${f(C[2])} ${f(C[3])}`, { role: on ? 'accent' : 'dim' });
+g.circle(T[0], T[1], NR);
+g.circle(B[0], B[1], NR);
+const k = arrive(s.since, 0.35);
+g.circle(BR[0], BR[1], NR, { role: on ? 'accent' : 'line' });
+if (!on) return;
+g.circle(BR[0], BR[1], 1.6, { role: 'spark', opacity: k });
+for (const off of [0, 0.5]) {
+const u = (s.phase(LOOP) + off) % 1;
+const fade = smoothstep(0, 0.15, u) * (1 - smoothstep(0.85, 1, u));
+const [x, y] = bez(u);
+if (fade > 0.02) g.dot(x, y, 1.9, { opacity: fade * k });
+}
+},
+});
+};
+__d[72] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const C = [33.5, 24];
+const FROM = [[11.5, 11.5], [10.5, 24], [11.5, 36.5]];
+const __default = defineGlyph({
+id: 'references',
+title: 'References',
+category: 'dev',
+tags: ['references', 'find references', 'usages', 'callers', 'who uses', 'code', 'navigate'],
+draw(g, s) {
+const p = press(s, 0.4);
+g.circle(C[0], C[1], 5, { role: p > 0.3 ? 'accent' : 'line' });
+g.dot(C[0], C[1], 1.8);
+FROM.forEach(([x, y], i) => {
+const k = enter({ since: s.since - i * 0.08 }, 0.4);
+const dx = C[0] - x, dy = C[1] - y, L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L;
+const tip = [C[0] - ux * 8, C[1] - uy * 8];
+const end = [lerp(x, tip[0], k), lerp(y, tip[1], k)];
+g.line(x, y, end[0] - ux, end[1] - uy, { role: 'dim', opacity: lerp(0.2, 1, k) });
+g.polyline(chevron(end, (Math.atan2(ux, -uy) * 180) / Math.PI, 4.5, 45), { role: 'line', join: 'round', opacity: k });
+});
+},
+});
+};
+__d[73] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, clamp, smoothstep } = __m(12);
+const { quadC } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const LOOP = 1.2;
+const TAU = Math.PI * 2;
+const __default = defineGlyph({
+id: 'rocket',
+title: 'Rocket',
+category: 'dev',
+tags: ['rocket', 'launch', 'deploy', 'release', 'ship', 'start'],
+states: { ready: 'idle', launched: 'active' },
+loop: LOOP,
+draw(g, s) {
+const up = s.state === 'launched';
+const k = up ? arrive(s.since, 0.5) : 1 - arrive(s.since, 0.35);
+const p = s.phase(LOOP);
+const shake = up ? 0.35 * Math.sin(p * TAU * 6) * k : 0;
+const dy = -3 * k; 
+const X = (x) => +(x + shake).toFixed(2), Y = (y) => +(y + dy).toFixed(2);
+if (k > 0.02) {
+const fl = 5.5 + 1.6 * Math.sin(p * TAU * 5) + 0.9 * Math.sin(p * TAU * 7 + 1.3);
+const len = fl * k, y0 = Y(33.5);
+g.path(`M${X(20)} ${y0}${quadC([X(20), y0], [X(20.4), y0 + len * 0.6], [X(24), y0 + len])}${quadC([X(24), y0 + len], [X(27.6), y0 + len * 0.6], [X(28), y0])}Z`, { role: 'accent', fill: true, opacity: 0.9 });
+g.path(`M${X(22.3)} ${y0}${quadC([X(22.3), y0], [X(22.5), y0 + len * 0.4], [X(24), y0 + len * 0.62])}${quadC([X(24), y0 + len * 0.62], [X(25.5), y0 + len * 0.4], [X(25.7), y0])}Z`, { role: 'spark', opacity: 0.9 * k });
+}
+g.path(`M${X(24)} ${Y(9)}C${X(30.5)} ${Y(13)} ${X(32)} ${Y(18)} ${X(32)} ${Y(23)}V${Y(31.5)}H${X(16)}V${Y(23)}C${X(16)} ${Y(18)} ${X(17.5)} ${Y(13)} ${X(24)} ${Y(9)}Z`, { join: 'round' });
+g.circle(X(24), Y(20.5), 3.4, { role: up ? 'accent' : 'dim' });
+g.path(`M${X(16)} ${Y(24.5)}L${X(10.5)} ${Y(30)}V${Y(35)}L${X(16)} ${Y(31.5)}`, { join: 'round' });
+g.path(`M${X(32)} ${Y(24.5)}L${X(37.5)} ${Y(30)}V${Y(35)}L${X(32)} ${Y(31.5)}`, { join: 'round' });
+g.line(X(20.5), Y(33.5), X(27.5), Y(33.5), { role: 'dim' });
+if (k < 0.98) g.line(10, 39.5, 38, 39.5, { role: 'dim', opacity: 1 - k });
+if (up) for (const [x, off, len, ya, yb] of [[7, 0, 5, 10, 37], [41, 0.5, 5, 10, 37], [12, 0.3, 3.5, 8, 19], [36, 0.8, 3.5, 8, 19]]) {
+const u = (p * 2 + off) % 1; 
+const y = ya + u * (yb - ya);
+const fade = smoothstep(0, 0.2, u) * (1 - smoothstep(0.7, 1, u)) * k;
+if (fade > 0.02) g.line(x, y, x, clamp(y + len, 6, 41), { role: 'dim', opacity: fade });
+}
+},
+});
+};
+__d[74] = function (__ns) {
+const { lerp } = __m(12);
+const { enter, press, chevron } = __m(24);
+__e(__ns, { "drawStep": () => drawStep }, [], ["drawStep"]);
+function drawStep(g, s, dir) {
+const k = enter(s, 0.45), p = press(s, 0.4);
+const d = lerp(-4, 0, k) + 1.8 * p;
+g.circle(24, 35.5, 4, { role: 'accent', weight: 1.05 });
+if (dir > 0) {
+g.line(24, 10.5 + d, 24, 26 + d);
+g.polyline(chevron([24, 27 + d], 180, 8, 45), { role: 'line', join: 'round' });
+} else {
+g.line(24, 28 - d, 24, 10 - d);
+g.polyline(chevron([24, 9 - d], 0, 8, 45), { role: 'line', join: 'round' });
+}
+}
+};
+__d[75] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawStep } = __m(74);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'step-into',
+title: 'Step Into',
+category: 'dev',
+tags: ['step into', 'debug', 'debugger', 'step', 'breakpoint', 'call'],
+draw(g, s) { drawStep(g, s, 1); },
+});
+};
+__d[76] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawStep } = __m(74);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'step-out',
+title: 'Step Out',
+category: 'dev',
+tags: ['step out', 'debug', 'debugger', 'step', 'return', 'call'],
+draw(g, s) { drawStep(g, s, -1); },
+});
+};
+__d[77] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, xf, mirrorX } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const BRACE = 'M18 9.5C14.5 9.5 14 12 14 15.5V19.5C14 22.2 12.8 24 10 24C12.8 24 14 25.8 14 28.5V32.5C14 36 14.5 38.5 18 38.5';
+const __default = defineGlyph({
+id: 'symbol',
+title: 'Symbol',
+category: 'dev',
+tags: ['symbol', 'go to symbol', 'outline', 'braces', 'function', 'class', 'code'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+const o = lerp(-3, 0, k);
+g.group({ x: o }, () => g.path(BRACE, { role: 'line', join: 'round' }));
+g.group({ x: -o }, () => g.path(xf(BRACE, mirrorX()), { role: 'line', join: 'round' }));
+g.polygon([[24, 18.5], [29.5, 24], [24, 29.5], [18.5, 24]], { role: p > 0.3 ? 'accent' : 'fill', join: 'round', opacity: lerp(0.3, 1, k) });
+},
+});
+};
+__d[78] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, smoothstep } = __m(12);
+const { blink } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const STEP = 1.2; 
+const OUT = [9, 6, 10.5, 7.5]; 
+const LOOP = STEP * OUT.length; 
+const PITCH = 5; 
+const Y_TOP = 15.5, Y_BOT = 32.5; 
+const __default = defineGlyph({
+id: 'terminal',
+title: 'Terminal',
+category: 'dev',
+tags: ['terminal', 'shell', 'console', 'command line', 'cli', 'prompt'],
+states: { idle: 'idle', running: 'active' },
+loop: LOOP,
+draw(g, s) {
+g.rect(7, 9.5, 34, 29, { r: 4.5 });
+const run = s.state === 'running';
+const k = arrive(s.since, 0.35);
+g.polyline([[13.5, 18.5], [19, 24], [13.5, 29.5]], { role: run ? 'accent' : 'line', join: 'round' });
+if (!run) {
+const on = blink(s.phase(STEP), 0.55, 0.08);
+g.line(23.5, 29.5, 31, 29.5, { role: 'line', opacity: 0.15 + 0.85 * on });
+return;
+}
+const u = s.phase(LOOP) * OUT.length, base = Math.floor(u), p = u - base;
+for (let j = -1; j < 5; j++) {
+const y = Y_BOT - (j + p) * PITCH;
+if (y < Y_TOP - 0.01 || y > Y_BOT + 0.01) continue;
+const fade = smoothstep(Y_TOP, Y_TOP + 4, y) * (1 - smoothstep(Y_BOT - 3, Y_BOT, y));
+const len = OUT[(((base - j) % OUT.length) + OUT.length) % OUT.length];
+g.line(23.5, y, 23.5 + len, y, { role: 'dim', opacity: fade * k });
+}
+},
+});
+};
+__d[79] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, capsule } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const TIP = 'M21.5 25.5C17.5 25.2 14.5 28.3 14.5 31.8C14.5 34.6 12.5 36.5 9.5 37C12 39.6 15.4 40.5 18.2 40.5C22.8 40.5 26.4 37 26.4 32.6C26.4 29.4 24.6 26.6 21.5 25.5Z';
+const __default = defineGlyph({
+id: 'brush',
+title: 'Brush',
+category: 'edit',
+tags: ['brush', 'paint', 'paintbrush', 'color', 'brush size', 'intensity', 'tool'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+const d = lerp(4, 0, k) - 1.4 * p;
+g.group({ x: d * 0.707, y: -d * 0.707, opacity: lerp(0.35, 1, k) }, () => {
+g.path(capsule([37, 11], [26.5, 21.5], 3.6), { join: 'round' });
+g.path(TIP, { role: 'accent', fill: true, opacity: 0.9 });
+g.path(TIP, { role: 'accent', join: 'round' });
+});
+},
+});
+};
+__d[80] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, xf, rot } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const M = rot(-40, [24, 24]);
+const BODY = xf('M12 18H33A3.5 3.5 0 0 1 36.5 21.5V28.5A3.5 3.5 0 0 1 33 32H12A3.5 3.5 0 0 1 8.5 28.5V21.5A3.5 3.5 0 0 1 12 18Z', M);
+const SPLIT = xf('M20 18V32', M);
+const SPLIT_FILL = xf('M12 18H20V32H12A3.5 3.5 0 0 1 8.5 28.5V21.5A3.5 3.5 0 0 1 12 18Z', M);
+const __default = defineGlyph({
+id: 'clear',
+title: 'Clear',
+category: 'edit',
+tags: ['clear', 'eraser', 'erase', 'wipe', 'clean', 'reset', 'clear formatting'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.45);
+const dx = lerp(-6, 0, k) + 2 * p;
+g.line(8, 39.5, lerp(8, 23, k), 39.5, { role: 'dim' });
+g.group({ x: dx, y: -dx * 0.3, opacity: lerp(0.3, 1, k) }, () => {
+g.path(SPLIT_FILL, { role: 'accent', fill: true, opacity: 0.85 });
+g.path(BODY, { join: 'round' });
+g.path(SPLIT, { role: 'line', weight: 0.85 });
+});
+},
+});
+};
+__d[81] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+const { P } = __m(5);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'copy',
+title: 'Copy',
+category: 'edit',
+tags: ['copy', 'duplicate', 'clone', 'dup', 'clipboard', 'copy shift'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.45);
+const o = lerp(0, 1, k) + 0.6 * p; 
+const bx = 9.5 + 8 * o, by = 17.5 - 8 * o;
+g.path(P().M(bx, 17.5).V(by + 4).A(4, 4, 0, 0, 1, bx + 4, by).H(bx + 17).A(4, 4, 0, 0, 1, bx + 21, by + 4).V(by + 17).A(4, 4, 0, 0, 1, bx + 17, by + 21).H(30.5).d, { role: p > 0.3 ? 'accent' : 'line', join: 'round', opacity: lerp(0.3, 1, k) });
+g.rect(9.5, 17.5, 21, 21, { r: 4 });
+},
+});
+};
+__d[82] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp } = __m(12);
+const { enter } = __m(24);
+const { blink } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const ROWS = [[13, 24], [24, 33], [35, 19]]; 
+const __default = defineGlyph({
+id: 'cursor',
+title: 'Cursors',
+category: 'edit',
+tags: ['cursor', 'cursors', 'multi-cursor', 'caret', 'add next', 'select matches', 'text'],
+loop: 1.2,
+draw(g, s) {
+const on = 0.25 + 0.75 * blink(s.phase(1.2), 0.6, 0.1);
+ROWS.forEach(([y, x1], i) => {
+g.line(8.5, y, x1, y, { role: 'dim' });
+const k = enter({ since: s.since - i * 0.08 }, 0.4);
+const op = k * lerp(1, on, clamp((s.since - 0.6) / 0.1)), dy = lerp(-2.5, 0, k), cx = x1 + 4.5;
+g.line(cx, y - 4.5 + dy, cx, y + 4.5 + dy, { role: 'accent', weight: 1.05, opacity: op });
+g.line(cx - 2.2, y - 4.5 + dy, cx + 2.2, y - 4.5 + dy, { role: 'accent', weight: 0.75, opacity: op });
+g.line(cx - 2.2, y + 4.5 + dy, cx + 2.2, y + 4.5 + dy, { role: 'accent', weight: 0.75, opacity: op });
+});
+},
+});
+};
+__d[83] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const PIV = [24, 24];
+const __default = defineGlyph({
+id: 'cut',
+title: 'Cut',
+category: 'edit',
+tags: ['cut', 'scissors', 'snip', 'trim', 'clip', 'transition'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.35);
+const open = lerp(4, 15, k) * (1 - 0.75 * p); 
+for (const side of [-1, 1]) {
+g.group({ rotate: side * (open - 15), origin: PIV }, () => {
+g.line(24 - side * 3.99, 31.22, 24 + side * 8, 9.5, { role: 'line' });
+g.circle(24 - side * 6.4, 35.6, 5, { role: 'line' });
+});
+}
+g.dot(PIV[0], PIV[1], 1.7, { role: 'fill' });
+},
+});
+};
+__d[84] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'delete',
+title: 'Delete',
+category: 'edit',
+tags: ['delete', 'trash', 'bin', 'remove', 'discard', 'demolish', 'erase'],
+states: { ready: 'idle', armed: 'warn' },
+draw(g, s) {
+const armed = s.state === 'armed';
+const k = enter(s, 0.45), p = press(s, 0.45);
+g.path('M12.5 16.5L14.3 36.5A3.5 3.5 0 0 0 17.8 39.5H30.2A3.5 3.5 0 0 0 33.7 36.5L35.5 16.5', { role: armed ? 'accent' : 'line', join: 'round' });
+g.line(20.5, 21.5, 21, 34, { role: 'dim' });
+g.line(27.5, 21.5, 27, 34, { role: 'dim' });
+g.group({ y: lerp(-3, 0, k), rotate: -16 * p, origin: [9.5, 12], opacity: lerp(0.3, 1, k) }, () => {
+g.line(9.5, 12, 38.5, 12, { role: 'line' });
+g.path('M19 12V10A2 2 0 0 1 21 8H27A2 2 0 0 1 29 10V12', { role: 'line', join: 'round' });
+});
+},
+});
+};
+__d[85] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, smoothstep } = __m(12);
+const { enter, press, xf, rot } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const M = rot(45);
+const BODY = 'M19 31.5V11A3 3 0 0 1 22 8H26A3 3 0 0 1 29 11V31.5L24 40.5Z';
+const BAND = 'M19 14.5H29';
+const LEAD = 'M22.1 37.1L25.9 37.1L24 40.5Z';
+const LOOP = 2.4;
+const __default = defineGlyph({
+id: 'edit',
+title: 'Edit',
+category: 'edit',
+tags: ['edit', 'pencil', 'write', 'modify', 'edit mode', 'draw', 'change'],
+states: { idle: 'idle', editing: 'active' },
+loop: LOOP,
+draw(g, s) {
+const on = s.state === 'editing';
+const k = enter(s, 0.5), p = press(s, 0.4);
+const d = lerp(4, 0, k) - 1.6 * p; 
+g.group({ x: -d * 0.707, y: d * 0.707, opacity: lerp(0.35, 1, k) }, () => {
+g.path(xf(BODY, M), { join: 'round' });
+g.path(xf(BAND, M), { role: 'dim' });
+g.path(xf(LEAD, M), { role: on ? 'accent' : 'fill', fill: true });
+});
+if (!on) return;
+const u = s.phase(LOOP);
+const w = smoothstep(0.05, 0.5, u), fade = 1 - smoothstep(0.75, 0.95, u);
+if (w > 0.02) g.line(10.5, 40, lerp(10.5, 22, w), 40, { role: 'accent', weight: 0.9, opacity: fade * k });
+},
+});
+};
+__d[86] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, outExpo, clamp } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'forward',
+title: 'Forward',
+category: 'edit',
+tags: ['forward', 'redo', 'next', 'repeat', 'navigation', 'forward message'],
+draw(g, s) {
+const k = arrive(s.since, 0.45);
+const push = s.pressed ? 1 : s.pressAge < 0.45 ? 1 - outExpo(clamp(s.pressAge / 0.45)) : 0;
+const dx = -4 * (1 - k) + 2.5 * push;
+g.group({ x: dx, opacity: 0.3 + 0.7 * k }, () => {
+g.path('M37 19H20.5A9 9 0 0 0 20.5 37H28.5');
+g.polyline([[30, 11.5], [37.5, 19], [30, 26.5]], { role: push > 0.3 ? 'accent' : 'line', join: 'round' });
+});
+},
+});
+};
+__d[87] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, pulse, clamp } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'magnet',
+title: 'Magnet',
+category: 'edit',
+tags: ['magnet', 'stick', 'attract', 'snap', 'lock axes', 'stick to surface'],
+states: { off: 'idle', on: 'active' },
+loop: 1.6,
+draw(g, s) {
+const on = s.state === 'on';
+const jolt = on ? -1.5 * Math.sin(Math.PI * clamp(s.since / 0.3)) : 0;
+g.group({ y: jolt }, () => {
+g.path('M11.5 15V26.5A12.5 12.5 0 0 0 36.5 26.5V15H29V26.5A5 5 0 0 1 19 26.5V15Z', { join: 'round' });
+g.line(11.5, 20.5, 19, 20.5, { role: on ? 'accent' : 'dim' });
+g.line(29, 20.5, 36.5, 20.5, { role: on ? 'accent' : 'dim' });
+if (on) {
+g.rect(11.5, 15, 7.5, 5.5, { role: 'accent', fill: true, opacity: 0.85 });
+g.rect(29, 15, 7.5, 5.5, { role: 'accent', fill: true, opacity: 0.85 });
+}
+});
+if (!on) return;
+const k = clamp(s.since / 0.4);
+for (const [r, ph] of [[4.6, 0], [8.4, 0.5]]) {
+g.arc(24, 15, r, -58, 58, { role: 'accent', weight: 0.8, opacity: k * lerp(0.25, 0.9, pulse(s.t + ph * 1.6, 1.6)) });
+}
+},
+});
+};
+__d[88] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'move',
+title: 'Move',
+category: 'edit',
+tags: ['move', 'drag', 'pan', 'nudge', 'position', 'translate', 'arrows'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.45);
+const R = lerp(17.5, 16, k) + 1.6 * p; 
+g.line(24, 24 - R + 1.5, 24, 24 + R - 1.5);
+g.line(24 - R + 1.5, 24, 24 + R - 1.5, 24);
+for (const dir of [0, 90, 180, 270]) {
+const tip = [24 + R * Math.sin((dir * Math.PI) / 180), 24 - R * Math.cos((dir * Math.PI) / 180)];
+g.polyline(chevron(tip, dir, 5.5, 45), { role: p > 0.3 ? 'accent' : 'line', join: 'round', opacity: lerp(0.3, 1, k) });
+}
+g.circle(24, 24, 3, { role: 'fill' });
+},
+});
+};
+__d[89] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'paste',
+title: 'Paste',
+category: 'edit',
+tags: ['paste', 'clipboard', 'insert', 'paste shift', 'clip'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.45);
+g.path('M17.5 11H14A3.5 3.5 0 0 0 10.5 14.5V36.5A3.5 3.5 0 0 0 14 40H34A3.5 3.5 0 0 0 37.5 36.5V14.5A3.5 3.5 0 0 0 34 11H30.5', { join: 'round' });
+g.rect(17.5, 7.5, 13, 7, { r: 2.5, role: 'line' });
+const dy = lerp(-5, 0, k) - 2.5 * p;
+g.group({ y: dy, opacity: lerp(0, 1, k) }, () => {
+g.line(16.5, 22.5, 31.5, 22.5, { role: p > 0.3 ? 'accent' : 'dim' });
+g.line(16.5, 28, 31.5, 28, { role: p > 0.3 ? 'accent' : 'dim' });
+g.line(16.5, 33.5, 26, 33.5, { role: p > 0.3 ? 'accent' : 'dim' });
+});
+},
+});
+};
+__d[90] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter } = __m(24);
+const { blink } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'rename',
+title: 'Rename',
+category: 'edit',
+tags: ['rename', 'name', 'label', 'title', 'edit text', 'field', 'refactor'],
+states: { idle: 'idle', editing: 'active' },
+loop: 1.2,
+draw(g, s) {
+const on = s.state === 'editing';
+const k = enter(s, 0.55);
+g.rect(7, 15, 34, 18, { r: 4 });
+const end = lerp(13, 27, k);
+g.line(13, 24, end, 24, { role: on ? 'line' : 'dim', weight: 1.05 });
+const b = on ? 0.2 + 0.8 * blink(s.phase(1.2), 0.55, 0.08) : 1;
+g.line(end + 3.5, 19, end + 3.5, 29, { role: 'accent', weight: 1.05, opacity: b });
+g.line(end + 1, 19, end + 6, 19, { role: 'accent', weight: 0.75, opacity: b });
+g.line(end + 1, 29, end + 6, 29, { role: 'accent', weight: 0.75, opacity: b });
+},
+});
+};
+__d[91] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+const { arcHead } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'replace',
+title: 'Replace',
+category: 'edit',
+tags: ['replace', 'swap', 'find and replace', 'substitute', 'exchange'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.45);
+g.rect(8, 8, 15, 15, { r: 3.5, role: 'dim' });
+g.rect(25, 25, 15, 15, { r: 3.5, role: p > 0.3 ? 'accent' : 'fill', fill: true, opacity: lerp(0.4, 1, k) });
+const end = lerp(20, 82, k);
+g.arc(26, 22, 10, 0, end, { role: 'line' });
+g.polyline(arcHead(26, 22, 10, end, { size: 4.2 }), { role: 'line', join: 'round' });
+},
+});
+};
+__d[92] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, outBack, clamp } = __m(12);
+const { enter, press, xf, rot } = __m(24);
+const { arcHead } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'rotate',
+title: 'Rotate',
+category: 'edit',
+tags: ['rotate', 'turn', 'spin', 'rotate 90', 'orientation', 'pivot'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.45);
+const end = 318, op = lerp(0.3, 1, k);
+g.arc(24, 24, 15, 42, end, { role: 'line', opacity: op });
+g.polyline(arcHead(24, 24, 15, end, { size: 4.4 }), { role: 'line', join: 'round', opacity: op });
+const turn = lerp(-30, 0, k) + 90 * (s.pressed ? 0 : s.pressAge < 0.5 ? outBack(clamp(s.pressAge / 0.5)) - 1 : 0) + 15;
+g.path(xf('M19.5 17H28.5A2.5 2.5 0 0 1 31 19.5V28.5A2.5 2.5 0 0 1 28.5 31H19.5A2.5 2.5 0 0 1 17 28.5V19.5A2.5 2.5 0 0 1 19.5 17Z', rot(turn)), { role: p > 0.3 ? 'accent' : 'dim', join: 'round' });
+},
+});
+};
+__d[93] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'scale',
+title: 'Scale',
+category: 'edit',
+tags: ['scale', 'resize', 'size', 'grow', 'shrink', 'enlarge', 'transform'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.45);
+g.rect(8.5, 8.5, 31, 31, { r: 4, role: 'dim', dash: [2.4, 2.8] });
+const w = lerp(10, 15, k) + 4 * p;
+g.rect(8.5, 39.5 - w, w, w, { r: 3.5, role: 'line' });
+const a = 8.5 + w + 3, b = 39.5 - w - 3; 
+g.line(a, b, 34.5, 13.5, { role: 'accent' }); 
+g.polyline(chevron([35.5, 12.5], 45, 7, 45), { role: 'accent', join: 'round' });
+},
+});
+};
+__d[94] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const POINTER = [[23.5, 21], [23.5, 39], [28, 34.8], [31.3, 41], [34.6, 39.4], [31.4, 33.3], [37.4, 33.3]];
+const __default = defineGlyph({
+id: 'select',
+title: 'Select',
+category: 'edit',
+tags: ['select', 'selection', 'marquee', 'pick', 'select all', 'multi-select', 'add', 'subtract'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+const w = lerp(12, 26, k), h = lerp(10, 22, k);
+g.rect(8, 8, w, h, { r: 3, role: p > 0.3 ? 'accent' : 'dim', dash: [2.6, 2.6] });
+g.group({ x: 1 * p, y: 1 * p }, () => g.polygon(POINTER, { role: 'line', join: 'round' }));
+},
+});
+};
+__d[95] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, outBack, clamp } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const G = [9, 19, 29, 39]; 
+const __default = defineGlyph({
+id: 'snap',
+title: 'Snap',
+category: 'edit',
+tags: ['snap', 'grid', 'grid snap', 'angle snap', 'align', 'magnet', 'guides'],
+states: { off: 'idle', on: 'active' },
+draw(g, s) {
+const on = s.state === 'on';
+const k = on ? outBack(clamp(s.since / 0.4), 2.2) : clamp(s.since / 0.3);
+for (const y of G) for (const x of G) {
+if ((x === 19 || x === 39) && (y === 19 || y === 39)) continue; 
+g.circle(x, y, 1.45, { role: 'dim', fill: true });
+}
+const o = on ? lerp(-3.5, 0, k) : 0;
+g.rect(19 + o, 19 + o, 20, 20, { r: 3.5, role: on ? 'accent' : 'line', opacity: on ? 1 : 0.4 + 0.6 * k });
+if (on) for (const [x, y] of [[19, 19], [39, 19], [19, 39], [39, 39]]) g.dot(x + o, y + o, 1.5, { opacity: clamp(k) });
+},
+});
+};
+__d[96] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp, pulse } = __m(12);
+const { enter } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'beam',
+title: 'Beam',
+category: 'game',
+tags: ['beam', 'beam size', 'ray', 'laser', 'terrain tool', 'cone', 'width'],
+states: { idle: 'idle', active: 'active' },
+loop: 1.2,
+draw(g, s) {
+const on = s.state === 'active';
+const k = enter(s, 0.5);
+g.rect(7, 19, 9, 10, { r: 2.5 });
+const half = lerp(3, 12, clamp(s.level)), x1 = lerp(18, 40, k);
+const h = lerp(1, half, k);
+g.path(`M17.5 22L${x1} ${24 - h}M17.5 26L${x1} ${24 + h}`, { role: on ? 'accent' : 'line' });
+g.line(x1, 24 - h, x1, 24 + h, { role: 'dim', opacity: on ? 0.6 + 0.4 * pulse(s.t, 1.2) : 1 });
+},
+});
+};
+__d[97] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, pulse } = __m(12);
+const { enter, press, chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'boost',
+title: 'Boost',
+category: 'game',
+tags: ['boost', 'sprint', 'speed', 'accelerate', 'thrust', 'afterburner', 'run'],
+states: { idle: 'idle', boosting: 'active' },
+loop: 0.6,
+draw(g, s) {
+const on = s.state === 'boosting';
+const k = enter(s, 0.45), p = press(s, 0.4);
+[[13, 'accent', 0], [25.5, 'line', 0.5]].forEach(([y, role, ph]) => {
+const lift = on ? 1.6 * pulse(s.t + ph * 0.6, 0.6) : 0;
+g.polyline(chevron([24, y - lift - 2 * p + lerp(4, 0, k)], 0, 13, 45), { role, join: 'round', weight: 1.1, opacity: lerp(0.3, 1, k) });
+});
+},
+});
+};
+__d[98] = function (__ns) {
+const { lerp } = __m(12);
+__e(__ns, { "figure": () => figure, "blend": () => blend }, [], ["blend","figure"]);
+function figure(g, pose, { role = 'line', opacity = 1 } = {}) {
+g.circle(pose.head[0], pose.head[1], 3.4, { role: 'fill', opacity });
+g.polyline(pose.spine, { role, weight: 1.15, join: 'round', opacity });
+for (const limb of [...pose.arms, ...pose.legs]) g.polyline(limb, { role, weight: 1.1, join: 'round', opacity });
+}
+function blend(a, b, t) {
+const P = (p, q) => [lerp(p[0], q[0], t), lerp(p[1], q[1], t)];
+const L = (x, y) => x.map((p, i) => P(p, y[i]));
+return { head: P(a.head, b.head), spine: L(a.spine, b.spine), arms: a.arms.map((x, i) => L(x, b.arms[i])), legs: a.legs.map((x, i) => L(x, b.legs[i])) };
+}
+};
+__d[99] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp } = __m(12);
+const { enter, chevron } = __m(24);
+const { figure, blend } = __m(98);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const STAND = { head: [24, 12.5], spine: [[24, 18], [24, 28.5]], arms: [[[24, 19.5], [19.5, 24.5], [18.5, 29]], [[24, 19.5], [28.5, 24.5], [29.5, 29]]], legs: [[[24, 28.5], [21.5, 34], [21, 39.5]], [[24, 28.5], [26.5, 34], [27, 39.5]]] };
+const LOW = { head: [24, 19], spine: [[24, 24.5], [24, 31]], arms: [[[24, 26], [18.5, 28.5], [17, 32.5]], [[24, 26], [29.5, 28.5], [31, 32.5]]], legs: [[[24, 31], [15.5, 32.5], [18.5, 39.5]], [[24, 31], [32.5, 32.5], [29.5, 39.5]]] };
+const __default = defineGlyph({
+id: 'crouch',
+title: 'Crouch',
+category: 'game',
+tags: ['crouch', 'duck', 'sneak', 'squat', 'kneel', 'person', 'action'],
+draw(g, s) {
+const k = enter(s, 0.5);
+const bob = !s.pressed && s.pressAge < 0.45 ? Math.sin(Math.PI * clamp(s.pressAge / 0.45)) : 0;
+figure(g, blend(STAND, LOW, clamp(k)));
+g.polyline(chevron([24, lerp(9.5, 12, k) + 1.5 * bob], 180, 5.5, 45), { role: 'accent', join: 'round', opacity: k });
+g.line(10, 40.5, 38, 40.5, { role: 'dim' });
+},
+});
+};
+__d[100] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp } = __m(12);
+const { enter } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'exocraft',
+title: 'Exocraft',
+category: 'game',
+tags: ['exocraft', 'rover', 'vehicle', 'buggy', 'summon vehicle', 'drive', 'car'],
+draw(g, s) {
+const k = enter(s, 0.7);
+const bump = !s.pressed && s.pressAge < 0.4 ? -2 * Math.sin(Math.PI * clamp(s.pressAge / 0.4)) : 0;
+const x = lerp(-6, 0, k);
+g.group({ x, opacity: lerp(0.3, 1, k) }, () => {
+g.group({ y: bump }, () => {
+g.path('M7.5 29V25.5A2 2 0 0 1 9.5 23.5H16L20.5 16H31.5A2 2 0 0 1 33.3 17.2L36.5 23.5H38.5A2 2 0 0 1 40.5 25.5V29Z', { join: 'round' });
+g.line(24.5, 16, 24.5, 23.5, { role: 'dim' });
+g.line(29, 16, 31, 9.5, { role: 'line', weight: 0.85 });
+g.dot(31.2, 9, 1.5);
+});
+for (const cx of [12.5, 24, 35.5]) {
+g.circle(cx, 34, 4.5, { role: 'line' });
+const a = (1 - k) * -540 + cx * 9;
+const [sx, sy] = g.polar(cx, 34, 2.2, a);
+g.line(cx, 34, sx, sy, { role: 'dim', weight: 0.8 });
+}
+});
+},
+});
+};
+__d[101] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'follow',
+title: 'Follow',
+category: 'game',
+tags: ['follow', 'pursue', 'chase', 'target', 'escort', 'track', 'lock on'],
+states: { idle: 'idle', following: 'active' },
+loop: 1.2,
+draw(g, s) {
+const on = s.state === 'following';
+const k = enter(s, 0.6);
+g.circle(33, 15, 6, { role: on ? 'accent' : 'line' });
+g.dot(33, 15, 1.8);
+const off = on ? s.phase(1.2) : 0;
+for (let i = 0; i < 3; i++) {
+const u0 = (i + off) / 3.2, u1 = u0 + 0.14;
+if (u1 > 0.95) continue;
+g.line(lerp(18, 28.5, u0), lerp(30, 19.5, u0), lerp(18, 28.5, u1), lerp(30, 19.5, u1), { role: 'dim' });
+}
+const d = lerp(-4, 0, k); 
+g.polyline(chevron([16.5 + 0.7 * d, 31.5 - 0.7 * d], 45, 7, 40), { role: 'line', join: 'round', weight: 1.1 });
+},
+});
+};
+__d[102] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, pulse } = __m(12);
+const { enter } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'freighter',
+title: 'Freighter',
+category: 'game',
+tags: ['freighter', 'capital ship', 'ship', 'fleet', 'summon freighter', 'mothership', 'space'],
+loop: 2.4,
+draw(g, s) {
+const k = enter(s, 0.8);
+g.group({ x: lerp(7, 0, k), opacity: lerp(0.25, 1, k) }, () => {
+g.path('M7 27.5L13 22H35L36.5 18H40V31.5H33L30 34H14Z', { join: 'round' });
+g.path('M24 22V15.5A1.5 1.5 0 0 1 25.5 14H29.5L31.5 17V22', { role: 'line', join: 'round' });
+g.line(13.5, 27.5, 31, 27.5, { role: 'dim' });
+});
+g.rect(40, 21, 2, 7, { r: 1, role: 'accent', fill: true, opacity: k * (0.45 + 0.55 * pulse(s.t, 2.4)) });
+},
+});
+};
+__d[103] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter } = __m(24);
+const { smooth } = __m(44);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+function arm(a0) {
+const pts = [];
+for (let i = 0; i <= 10; i++) {
+const u = i / 10, r = lerp(3, 15.5, u), a = ((a0 + u * 200) * Math.PI) / 180;
+pts.push([24 + r * Math.sin(a), 24 - r * Math.cos(a) * 0.82]);
+}
+return pts;
+}
+const ARMS = [arm(0), arm(180)];
+const STARS = [[10.5, 13, 1.1], [37.5, 35.5, 1.2], [38.5, 12.5, 0.9]];
+const __default = defineGlyph({
+id: 'galaxy',
+title: 'Galaxy Map',
+category: 'game',
+tags: ['galaxy', 'galaxy map', 'star map', 'spiral', 'space', 'navigate', 'universe'],
+draw(g, s) {
+const k = enter(s, 0.7);
+g.group({ rotate: lerp(-40, 0, k), opacity: lerp(0.3, 1, k) }, () => {
+for (const a of ARMS) g.path(smooth(a), { role: 'line' });
+});
+g.circle(24, 24, 3, { role: 'accent', fill: true });
+for (const [x, y, r] of STARS) g.dot(x, y, r, { opacity: k });
+},
+});
+};
+__d[104] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp } = __m(12);
+const { press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const BODY = 'M15 15H33C37.2 15 39.6 18.2 40 22.5L40.6 30.5C40.9 34 38.8 36.5 36 36.5C34 36.5 32.8 35.3 31.9 33.4L30.8 31H17.2L16.1 33.4C15.2 35.3 14 36.5 12 36.5C9.2 36.5 7.1 34 7.4 30.5L8 22.5C8.4 18.2 10.8 15 15 15Z';
+const __default = defineGlyph({
+id: 'gamepad',
+title: 'Gamepad',
+category: 'game',
+tags: ['gamepad', 'controller', 'game', 'game bar', 'joypad', 'play', 'console'],
+draw(g, s) {
+const p = press(s, 0.35);
+g.path(BODY, { join: 'round' });
+g.line(12.5, 23.5, 19.5, 23.5, { role: 'line' });
+g.line(16, 20, 16, 27, { role: 'line' });
+[[31.5, 21.5], [35, 25.5]].forEach(([x, y], i) => {
+const k = clamp((s.since - i * 0.12) / 0.3);
+g.circle(x, y, 2, { role: i === 0 && p > 0.3 ? 'accent' : 'fill', fill: true, opacity: lerp(0.25, 1, k) });
+});
+},
+});
+};
+__d[105] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const BASE = 38.5;
+const __default = defineGlyph({
+id: 'height',
+title: 'Height',
+category: 'game',
+tags: ['height', 'altitude', 'elevation', 'raise', 'lower', 'vertical', 'measure', 'path height'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.45);
+const top = lerp(26, 11, k) - 1.5 * p;
+g.line(8, BASE, 40, BASE, { role: 'dim' });
+g.rect(24, top, 13, BASE - top, { r: 3 });
+g.line(9.5, top, 18.5, top, { role: 'dim' });
+g.line(15, top + 3.5, 15, BASE - 3.5, { role: 'accent' });
+g.polyline(chevron([15, top + 2.5], 0, 4.8, 45), { role: 'accent', join: 'round' });
+g.polyline(chevron([15, BASE - 2.5], 180, 4.8, 45), { role: 'accent', join: 'round' });
+},
+});
+};
+__d[106] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'jetpack',
+title: 'Jetpack',
+category: 'game',
+tags: ['jetpack', 'jet pack', 'fly', 'thrust', 'boost', 'hover', 'jump'],
+states: { idle: 'idle', firing: 'active' },
+loop: 0.4,
+draw(g, s) {
+const on = s.state === 'firing';
+const k = enter(s, 0.5), p = press(s, 0.5);
+g.rect(11.5, 8, 10, 21, { r: 5 });
+g.rect(26.5, 8, 10, 21, { r: 5 });
+g.line(21.5, 14, 26.5, 14, { role: 'line' });
+g.line(21.5, 22, 26.5, 22, { role: 'dim' });
+g.polyline([[13.5, 29], [12.5, 32], [20.5, 32], [19.5, 29]], { role: 'line', join: 'round' });
+g.polyline([[28.5, 29], [27.5, 32], [35.5, 32], [34.5, 29]], { role: 'line', join: 'round' });
+const burn = on ? k : p;
+if (burn < 0.02) return;
+const flick = on ? 0.8 + 0.2 * Math.sin(s.phase(0.4) * Math.PI * 2) : 1;
+for (const cx of [16.5, 31.5]) {
+const h = lerp(2, 8.5, clamp(burn)) * flick;
+g.path(`M${cx - 3} 33.5C${cx - 3} ${33.5 + h * 0.5} ${cx - 1} ${33.5 + h * 0.8} ${cx} ${33.5 + h}C${cx + 1} ${33.5 + h * 0.8} ${cx + 3} ${33.5 + h * 0.5} ${cx + 3} 33.5Z`, { role: 'accent', fill: true, opacity: 0.9 });
+}
+},
+});
+};
+__d[107] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp } = __m(12);
+const { enter } = __m(24);
+const { figure, blend } = __m(98);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const AIR = { head: [24, 9], spine: [[24, 14.5], [24, 25]], arms: [[[24, 16], [19, 12.5], [16.5, 8.5]], [[24, 16], [29, 12.5], [31.5, 8.5]]], legs: [[[24, 25], [18.5, 29], [20, 34]], [[24, 25], [29.5, 29], [28, 34]]] };
+const LOW = { head: [24, 15], spine: [[24, 20.5], [24, 29]], arms: [[[24, 22], [18.5, 25], [16.5, 29.5]], [[24, 22], [29.5, 25], [31.5, 29.5]]], legs: [[[24, 29], [18, 33], [20, 38.5]], [[24, 29], [30, 33], [28, 38.5]]] };
+const __default = defineGlyph({
+id: 'jump',
+title: 'Jump',
+category: 'game',
+tags: ['jump', 'leap', 'hop', 'jetpack', 'person', 'action'],
+draw(g, s) {
+const k = enter(s, 0.5);
+const hop = !s.pressed && s.pressAge < 0.5 ? Math.sin(Math.PI * clamp(s.pressAge / 0.5)) : 0;
+const t = clamp(k - hop * 0.7);
+figure(g, blend(LOW, AIR, t));
+g.line(lerp(17, 18.5, t), 40, lerp(31, 29.5, t), 40, { role: 'dim', opacity: lerp(1, 0.7, t) });
+},
+});
+};
+__d[108] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'land',
+title: 'Land',
+category: 'game',
+tags: ['land', 'landing', 'touch down', 'exit ship', 'descend', 'pad', 'dock'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.45);
+const d = lerp(-4, 0, k) + 2 * p;
+g.line(24, 10.5 + d, 24, 25.5 + d);
+g.polyline(chevron([24, 27 + d], 180, 8, 45), { role: 'line', join: 'round' });
+g.ellipse(24, 35.5, 14, 4, { role: p > 0.3 ? 'accent' : 'line' });
+g.line(7, 35.5, 8.5, 35.5, { role: 'dim' });
+g.line(39.5, 35.5, 41, 35.5, { role: 'dim' });
+},
+});
+};
+__d[109] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp, outExpo } = __m(12);
+const { enter, chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const CX = 24, CY = 24, RX = 7.5, RY = 14;
+const __default = defineGlyph({
+id: 'roll',
+title: 'Roll',
+category: 'game',
+tags: ['roll', 'barrel roll', 'spin', 'rotate', 'bank', 'flip', 'rolls'],
+draw(g, s) {
+const k = enter(s, 0.55);
+const spin = s.pressed ? 0 : s.pressAge < 0.5 ? outExpo(clamp(s.pressAge / 0.5)) : 1;
+g.line(7.5, CY, 40, CY, { role: 'dim' });
+g.polyline(chevron([41, CY], 90, 4.5, 45), { role: 'dim', join: 'round' });
+g.path(`M${CX} ${CY - RY}A${RX} ${RY} 0 0 0 ${CX} ${CY + RY}`, { role: 'dim', dash: [2.2, 2.6], opacity: lerp(0.3, 1, k) });
+const a = lerp(40, 180, k) * (0.85 + 0.15 * spin); 
+const pts = [];
+for (let i = 0; i <= 16; i++) { const t = ((a * i) / 16) * Math.PI / 180; pts.push([CX + RX * Math.sin(t), CY - RY * Math.cos(t)]); }
+g.polyline(pts, { role: 'line', join: 'round' });
+const end = pts[pts.length - 1], prev = pts[pts.length - 2];
+const dir = (Math.atan2(end[0] - prev[0], -(end[1] - prev[1])) * 180) / Math.PI;
+g.polyline(chevron([end[0], end[1]], dir, 5.5, 45), { role: 'accent', join: 'round' });
+},
+});
+};
+__d[110] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter } = __m(24);
+const { wedge } = __m(44);
+const { bump } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const BLIPS = [[30.5, 17, 50], [17.5, 30.5, 225], [29, 32.5, 150]]; 
+const __default = defineGlyph({
+id: 'scanner',
+title: 'Scanner',
+category: 'game',
+tags: ['scanner', 'scan', 'radar', 'sonar', 'detect', 'ping', 'survey'],
+states: { idle: 'idle', scanning: 'active' },
+loop: 2,
+draw(g, s) {
+const on = s.state === 'scanning';
+const k = enter(s, 0.5);
+const a = on ? s.phase(2) * 360 : lerp(-30, 60, k);
+g.path(wedge(24, 24, 15, a - 50, a), { role: 'accent', fill: true, opacity: 0.22 });
+g.circle(24, 24, 15.5);
+g.circle(24, 24, 8.5, { role: 'dim' });
+const [x, y] = g.polar(24, 24, 15, a);
+g.line(24, 24, x, y, { role: 'accent', weight: 1.05 });
+for (const [bx, by, b] of BLIPS) {
+const hit = on ? bump(((a - b) / 360 + 1) % 1, 0.08, 0.3, true) : 0;
+g.dot(bx, by, 1.6 + hit, { opacity: on ? 0.35 + 0.65 * hit : 0.8 * k });
+}
+},
+});
+};
+__d[111] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, pulse } = __m(12);
+const { enter } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'sun',
+title: 'Sun',
+category: 'game',
+tags: ['sun', 'day', 'daylight', 'brightness', 'light', 'weather', 'time of day'],
+hue: 75, 
+loop: 2.4,
+draw(g, s) {
+const k = enter(s, 0.55);
+g.circle(24, 24, 7);
+for (let i = 0; i < 8; i++) {
+const a = i * 45, long = i % 2 === 0;
+const r0 = 11, r1 = r0 + lerp(0.3, long ? 5.5 : 3.5, k) * (long ? 0.85 + 0.15 * pulse(s.t, 2.4) : 1);
+const [x0, y0] = g.polar(24, 24, r0, a), [x1, y1] = g.polar(24, 24, r1, a);
+g.line(x0, y0, x1, y1, { role: long ? 'accent' : 'line' });
+}
+},
+});
+};
+__d[112] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter } = __m(24);
+const { figure, blend } = __m(98);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const A = { head: [26.5, 10], spine: [[25.5, 15.5], [23, 26]], arms: [[[25, 17], [19, 22.5], [16.5, 27]], [[25, 17], [30.5, 21.5], [33.5, 26]]], legs: [[[23, 26], [18.5, 32.5], [15.5, 39]], [[23, 26], [27.5, 32], [29, 39]]] };
+const B = { head: [26.5, 10], spine: [[25.5, 15.5], [23, 26]], arms: [[[25, 17], [28.5, 22], [31, 26.5]], [[25, 17], [21, 22.5], [19, 27]]], legs: [[[23, 26], [26, 32.5], [27.5, 39]], [[23, 26], [20.5, 32.5], [17.5, 39]]] };
+const __default = defineGlyph({
+id: 'walk',
+title: 'Walk',
+category: 'game',
+tags: ['walk', 'auto walk', 'move', 'person', 'stroll', 'pedestrian', 'guest'],
+states: { idle: 'idle', walking: 'active' },
+loop: 1,
+draw(g, s) {
+const on = s.state === 'walking';
+const k = enter(s, 0.5);
+const t = on ? 0.5 - 0.5 * Math.cos(s.phase(1) * Math.PI * 2) : 0;
+g.group({ x: lerp(-5, 0, k), opacity: lerp(0.3, 1, k) }, () => figure(g, blend(A, B, t), { role: on ? 'accent' : 'line' }));
+},
+});
+};
+__d[113] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, smoothstep } = __m(12);
+const { enter } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const RAYS = [0, 45, 90, 135, 180, 225, 270, 315].map((a, i) => [a + (i % 2 ? 8 : -4), i % 2 ? 0.5 : 0]);
+const __default = defineGlyph({
+id: 'warp',
+title: 'Warp',
+category: 'game',
+tags: ['warp', 'hyperdrive', 'jump', 'light speed', 'pulse', 'travel', 'space'],
+states: { ready: 'idle', warping: 'active' },
+loop: 0.8,
+draw(g, s) {
+const on = s.state === 'warping';
+const k = enter(s, 0.5);
+for (const [a, ph] of RAYS) {
+if (on) {
+const u = (s.phase(0.8) + ph) % 1;
+const r0 = lerp(5, 15, u), r1 = r0 + lerp(2.5, 6.5, u);
+const op = smoothstep(0, 0.15, u) * (1 - smoothstep(0.75, 1, u));
+const [x0, y0] = g.polar(24, 24, r0, a), [x1, y1] = g.polar(24, 24, Math.min(17.5, r1), a);
+g.line(x0, y0, x1, y1, { role: 'accent', opacity: op });
+} else {
+const r0 = ph ? 9 : 7, r1 = r0 + lerp(0.5, ph ? 6 : 9.5, k);
+const [x0, y0] = g.polar(24, 24, r0, a), [x1, y1] = g.polar(24, 24, r1, a);
+g.line(x0, y0, x1, y1, { role: ph ? 'dim' : 'line' });
+}
+}
+g.circle(24, 24, 2.6, { role: on ? 'accent' : 'fill', fill: true });
+},
+});
+};
+__d[114] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, pulse } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'bulb',
+title: 'Light Bulb',
+category: 'home',
+tags: ['light', 'lamp', 'bulb', 'home', 'scene'],
+states: { off: 'off', on: 'active' },
+hue: 60.4, 
+loop: 2.4,
+draw(g, s) {
+const on = s.state === 'on';
+g.path('M19 32.5C16 30.3 13.5 26.6 13.5 22.5a10.5 10.5 0 0 1 21 0c0 4.1-2.5 7.8-5.5 10');
+g.line(19, 32.5, 19, 35.5);
+g.line(29, 32.5, 29, 35.5);
+g.line(19, 35.5, 29, 35.5);
+g.line(20.5, 39.5, 27.5, 39.5, { role: 'dim' });
+g.polyline([[20.5, 28], [22.5, 23.5], [24, 27], [25.5, 23.5], [27.5, 28]], { role: on ? 'accent' : 'dim', weight: 0.8 });
+if (on) {
+const k = arrive(s.since, 0.4);
+for (const a of [-60, -30, 0, 30, 60]) {
+const [x1, y1] = g.polar(24, 22.5, 13, a), [x2, y2] = g.polar(24, 22.5, 13 + 3 * k, a);
+g.line(x1, y1, x2, y2, { role: 'accent', opacity: (0.45 + 0.55 * pulse(s.t + a / 120, 2.4)) * k, weight: 0.8 });
+}
+}
+},
+});
+};
+__d[115] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, phase, clamp } = __m(12);
 const { polar, arcPath } = __m(15);
-const { smoothClosed } = __m(32);
+const { smoothClosed } = __m(44);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const C = 24;
 const BLADE = [[4.6, 34], [10, 27], [15.2, 11], [16.6, -3], [14.8, -14], [9.5, -14], [5, -6]];
@@ -2804,10 +4676,35 @@ g.circle(C, C, 2.6, { role: on ? 'spark' : 'dim', fill: true });
 },
 });
 };
-__d[34] = function (__ns) {
+__d[116] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, lerp } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const LEAF = 'M10.5 37.5C10.5 21 20 10.5 38 9.5C38.5 27.5 28 37.5 12.5 37.5Z';
+const __default = defineGlyph({
+id: 'leaf',
+title: 'Efficiency',
+category: 'home',
+tags: ['leaf', 'eco', 'efficiency', 'efficiency mode', 'green', 'power saver', 'battery saver'],
+states: { off: 'idle', on: 'active' },
+hue: 150,
+loop: 2.4,
+draw(g, s) {
+const on = s.state === 'on';
+const k = arrive(s.since, 0.5);
+const sway = on ? 3 * Math.sin(s.phase(2.4) * Math.PI * 2) * k : 0;
+g.group({ rotate: sway + (on ? lerp(-12, 0, k) : 0), origin: [10.5, 37.5] }, () => {
+if (on) g.path(LEAF, { role: 'accent', fill: true, opacity: 0.35 * k });
+g.path(LEAF, { role: on ? 'accent' : 'line', join: 'round' });
+g.path('M10.5 37.5C17 29 23.5 22.5 31 16.5', { role: on ? 'line' : 'dim' });
+});
+},
+});
+};
+__d[117] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outBack, clamp, phase, smoothstep } = __m(12);
-const { along } = __m(32);
+const { along } = __m(44);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const CORD = [[35, 38.5], [27.5, 38.5], [24.7, 37.4], [23.5, 34.5], [23.5, 30.5]];
 const __default = defineGlyph({
@@ -2841,7 +4738,7 @@ g.dot(x, y, 1.5, { opacity: k * smoothstep(0, 0.12, p) * (1 - smoothstep(0.82, 1
 },
 });
 };
-__d[35] = function (__ns) {
+__d[118] = function (__ns) {
 const { P } = __m(5);
 __e(__ns, { "col": () => col, "row": () => row, "digits": () => digits }, [], ["col","digits","row"]);
 const K = 2 / 3; 
@@ -2884,10 +4781,10 @@ for (const st of D[ch]) g.path(strokePath(st, col(c0 + i * 4), row(top)), { role
 });
 }
 };
-__d[36] = function (__ns) {
+__d[119] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, phase, lerp, clamp, smoothstep } = __m(12);
-const { digits, col, row } = __m(35);
+const { digits, col, row } = __m(118);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const C = 24, R = 15, A0 = -135, A1 = 135;
 const __default = defineGlyph({
@@ -2924,7 +4821,144 @@ else g.line(L, row(11.5), Rx, row(11.5), { role: 'dim', weight: 0.85 });
 },
 });
 };
-__d[37] = function (__ns) {
+__d[120] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp } = __m(12);
+const { enter } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'artist',
+title: 'Artist',
+category: 'media',
+tags: ['artist', 'artists', 'musician', 'singer', 'performer', 'band', 'music'],
+draw(g, s) {
+const k = enter(s, 0.5);
+const hop = !s.pressed && s.pressAge < 0.4 ? -2.5 * Math.sin(Math.PI * clamp(s.pressAge / 0.4)) : 0;
+g.circle(19.5, 17.5, 6);
+g.path('M8 39.5A11.5 11 0 0 1 31 39.5', { role: 'line' });
+g.group({ y: lerp(4, 0, k) + hop, opacity: k }, () => {
+g.line(37.5, 9.5, 37.5, 22, { role: 'accent', weight: 0.95 });
+g.path('M37.5 9.5C39 11.5 41 12 41 15', { role: 'accent', weight: 0.85 });
+g.ellipse(35, 22.5, 2.9, 2.3, { role: 'accent', fill: true });
+});
+},
+});
+};
+__d[121] = function (__ns) {
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "drawChapter": () => drawChapter }, [], ["drawChapter"]);
+function drawChapter(g, s, dir) {
+const k = enter(s, 0.45), p = press(s, 0.4);
+const X = (x) => (dir > 0 ? x : 48 - x);
+const dx = lerp(-3, 0, k) + 1.5 * p;
+g.polygon([[X(15 + dx), 11], [X(27 + dx), 19.5], [X(15 + dx), 28]], { role: 'fill', join: 'round', opacity: lerp(0.4, 1, k) });
+g.rect(Math.min(X(29.5), X(33.5)), 11, 4, 17, { r: 1.5, role: 'fill' });
+[[8, 18], [21.5, 28.5], [32, 40]].forEach(([a, b], i) => {
+const lit = dir > 0 ? i === 2 : i === 0;
+g.line(X(a), 36.5, X(b), 36.5, { role: lit ? 'accent' : 'dim', weight: lit ? 1.1 : 1, opacity: lit ? lerp(0.6, 1, p) : 1 });
+});
+}
+};
+__d[122] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawChapter } = __m(121);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'chapter-next',
+title: 'Next Chapter',
+category: 'media',
+tags: ['next chapter', 'chapter', 'chapters', 'skip', 'section', 'timeline', 'video'],
+draw(g, s) { drawChapter(g, s, 1); },
+});
+};
+__d[123] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawChapter } = __m(121);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'chapter-prev',
+title: 'Previous Chapter',
+category: 'media',
+tags: ['previous chapter', 'chapter', 'chapters', 'back', 'section', 'timeline', 'video'],
+draw(g, s) { drawChapter(g, s, -1); },
+});
+};
+__d[124] = function (__ns) {
+const { lerp, clamp, outExpo } = __m(12);
+const { enter } = __m(24);
+const { arcHead } = __m(26);
+const { digits } = __m(118);
+__e(__ns, { "drawSeek": () => drawSeek }, [], ["drawSeek"]);
+const R = 13.5;
+function drawSeek(g, s, dir, mark) {
+const k = enter(s, 0.5);
+const spin = s.pressed ? 0 : s.pressAge < 0.45 ? 1 - outExpo(clamp(s.pressAge / 0.45)) : 0;
+const head = dir > 0 ? 360 : 0, tail = head - dir * lerp(150, 300, k);
+const turn = dir * 24 * spin;
+g.group({ rotate: turn, origin: [24, 24] }, () => {
+g.arc(24, 24, R, Math.min(head, tail), Math.max(head, tail), { role: 'line' });
+g.polyline(arcHead(24, 24, R, head, { size: 4.2, dir }), { role: spin > 0.3 ? 'accent' : 'line', join: 'round' });
+});
+if (mark === 'play') g.polygon([[21, 18.5], [30, 24], [21, 29.5]], { role: 'fill', join: 'round', opacity: lerp(0.3, 1, k) });
+else digits(g, mark, { top: 5, role: 'accent', weight: 0.85, opacity: lerp(0.3, 1, k) });
+}
+};
+__d[125] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawSeek } = __m(124);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'forward-10',
+title: 'Forward 10 s',
+category: 'media',
+tags: ['forward 10', 'skip forward', 'seek forward', 'fast forward', 'ff', '10 seconds', 'media'],
+draw(g, s) { drawSeek(g, s, 1, '10'); },
+});
+};
+__d[126] = function (__ns) {
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "drawFrameStep": () => drawFrameStep }, [], ["drawFrameStep"]);
+function drawFrameStep(g, s, dir) {
+const k = enter(s, 0.45), p = press(s, 0.4);
+const X = (x) => (dir > 0 ? x : 48 - x);
+const dx = (lerp(-3.5, 0, k) + 1.5 * p) * dir;
+g.group({ x: dx }, () => {
+const x0 = Math.min(X(7.5), X(29.5));
+g.rect(x0, 11, 22, 26, { r: 3.5 });
+for (const y of [14.5, 33.5]) for (const i of [0, 1, 2]) g.circle(x0 + 5.5 + i * 5.5, y, 1.1, { role: 'dim', fill: true });
+g.line(x0, 18.5, x0 + 22, 18.5, { role: 'dim' });
+g.line(x0, 29.5, x0 + 22, 29.5, { role: 'dim' });
+});
+g.polygon([[X(34), 18], [X(40.5), 24], [X(34), 30]], { role: p > 0.3 ? 'accent' : 'fill', join: 'round' });
+}
+};
+__d[127] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawFrameStep } = __m(126);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'frame-next',
+title: 'Next Frame',
+category: 'media',
+tags: ['next frame', 'frame', 'step', 'frame advance', 'film', 'video'],
+draw(g, s) { drawFrameStep(g, s, 1); },
+});
+};
+__d[128] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawFrameStep } = __m(126);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'frame-prev',
+title: 'Previous Frame',
+category: 'media',
+tags: ['previous frame', 'frame', 'step back', 'frame', 'film', 'video'],
+draw(g, s) { drawFrameStep(g, s, -1); },
+});
+};
+__d[129] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive } = __m(12);
 const { P } = __m(5);
@@ -2947,7 +4981,28 @@ g.path(p.d, { role: 'fill', join: 'round' });
 },
 });
 };
-__d[38] = function (__ns) {
+__d[130] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'queue',
+title: 'Queue',
+category: 'media',
+tags: ['queue', 'up next', 'playlist', 'list', 'next up', 'tracks', 'music'],
+draw(g, s) {
+const p = press(s, 0.45);
+[[12, 40], [20, 40], [28, 30]].forEach(([y, x1], i) => {
+const k = enter({ since: s.since - i * 0.07 }, 0.4);
+g.line(8, y + lerp(3, 0, k) - 2 * p, x1, y + lerp(3, 0, k) - 2 * p, { role: 'dim', opacity: lerp(0.2, 1, k) });
+});
+g.line(8, 36, 24, 36, { role: 'line' });
+g.polygon([[30, 31], [38.5, 36], [30, 41]], { role: p > 0.3 ? 'accent' : 'fill', join: 'round' });
+},
+});
+};
+__d[131] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse, lerp, outBack, clamp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -2992,7 +5047,31 @@ g.circle(24, 24, swell * beat, { role: 'accent', fill: true });
 },
 });
 };
-__d[39] = function (__ns) {
+__d[132] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawSeek } = __m(124);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'replay',
+title: 'Replay',
+category: 'media',
+tags: ['replay', 'instant replay', 'replay buffer', 'save replay', 'again', 'clip', 'media'],
+draw(g, s) { drawSeek(g, s, -1, 'play'); },
+});
+};
+__d[133] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawSeek } = __m(124);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'rewind-10',
+title: 'Back 10 s',
+category: 'media',
+tags: ['rewind 10', 'back 10', 'skip back', 'seek back', 'rewind', '10 seconds', 'media'],
+draw(g, s) { drawSeek(g, s, -1, '10'); },
+});
+};
+__d[134] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp, smoothstep } = __m(12);
 const { n } = __m(5);
@@ -3062,7 +5141,7 @@ if (!head[2]) g.dot(head[0], head[1], 2.5, { opacity: fade });
 },
 });
 };
-__d[40] = function (__ns) {
+__d[135] = function (__ns) {
 const { arrive, outExpo, clamp, lerp } = __m(12);
 __e(__ns, { "drawSkip": () => drawSkip }, [], ["drawSkip"]);
 const TRI_A = [[9, 13], [21, 24], [9, 35]];
@@ -3082,9 +5161,9 @@ g.polygon(pts(TRI_B, 2 + 6 * e), { role: 'fill', opacity: 0.6 * (1 - e) });
 }
 }
 };
-__d[41] = function (__ns) {
+__d[136] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawSkip } = __m(40);
+const { drawSkip } = __m(135);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'skip-next',
@@ -3094,9 +5173,9 @@ tags: ['next', 'skip', 'forward', 'track', 'transport', 'media'],
 draw(g, s) { drawSkip(g, s, 1); },
 });
 };
-__d[42] = function (__ns) {
+__d[137] = function (__ns) {
 const { defineGlyph } = __m(16);
-const { drawSkip } = __m(40);
+const { drawSkip } = __m(135);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
 id: 'skip-prev',
@@ -3106,7 +5185,34 @@ tags: ['previous', 'skip', 'back', 'rewind', 'track', 'transport', 'media'],
 draw(g, s) { drawSkip(g, s, -1); },
 });
 };
-__d[43] = function (__ns) {
+__d[138] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp } = __m(12);
+const { enter } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const CX = 24, CY = 27, R = 15, A0 = -120, A1 = 120;
+const __default = defineGlyph({
+id: 'speed',
+title: 'Speed',
+category: 'media',
+tags: ['speed', 'playback speed', 'game speed', 'fast', 'slow', 'pace', 'gauge', 'rate'],
+states: { normal: 'idle', fast: 'active' },
+loop: 0.6,
+draw(g, s) {
+const fast = s.state === 'fast';
+const k = enter(s, 0.6);
+const lv = clamp(fast ? Math.max(s.level, 0.8) : s.level);
+const a = lerp(A0, lerp(A0, A1, lv), k) + (fast ? 1.6 * Math.sin(s.phase(0.6) * Math.PI * 2) : 0);
+g.arc(CX, CY, R, A0, A1, { role: 'dim' });
+if (a > A0 + 1) g.arc(CX, CY, R, A0, a, { role: fast ? 'accent' : 'line' });
+for (const t of [-60, 0, 60]) { const [x0, y0] = g.polar(CX, CY, R - 4.5, t), [x1, y1] = g.polar(CX, CY, R - 2.5, t); g.line(x0, y0, x1, y1, { role: 'dim', weight: 0.8 }); }
+const [nx, ny] = g.polar(CX, CY, R - 5, a);
+g.line(CX, CY, nx, ny, { role: 'accent', weight: 1.05 });
+g.circle(CX, CY, 2.6, { role: 'fill' });
+},
+});
+};
+__d[139] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3131,7 +5237,90 @@ g.polyline([[cx, cy - sy * L], [cx, cy], [cx - sx * L, cy]], { role: 'accent', o
 },
 });
 };
-__d[44] = function (__ns) {
+__d[140] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'address-bar',
+title: 'Address Bar',
+category: 'nav',
+tags: ['address bar', 'url', 'omnibox', 'location', 'web address', 'browser', 'search'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.4);
+g.rect(6.5, 16, 35, 16, { r: 8, role: p > 0.3 ? 'accent' : 'line' });
+g.circle(14.5, 24, 2.8, { role: 'dim' });
+const end = lerp(20.5, 31, k);
+g.line(20.5, 24, end, 24, { role: 'line' });
+g.line(end + 3, 20, end + 3, 28, { role: 'accent', weight: 0.9, opacity: lerp(0.4, 1, k) });
+},
+});
+};
+__d[141] = function (__ns) {
+const { lerp } = __m(12);
+const { enter, press, chevron, xf, xfPts, rot } = __m(24);
+__e(__ns, { "drawArrow": () => drawArrow }, [], ["drawArrow"]);
+function drawArrow(g, s, dir, { bar = false } = {}) {
+const k = enter(s, 0.45), p = press(s, 0.45);
+const M = rot(dir);
+const d = lerp(-4, 0, k) + 2 * p; 
+const top = bar ? 15.5 : 10.5;
+const [a, b] = xfPts([[24, 38.5 - d], [24, top + 1 - d]], M);
+g.line(a[0], a[1], b[0], b[1], { opacity: lerp(0.3, 1, k) });
+g.polyline(xfPts(chevron([24, top - d], 0, 11, 45), M), { role: p > 0.3 ? 'accent' : 'line', join: 'round', opacity: lerp(0.3, 1, k) });
+if (bar) g.path(xf('M11 9.5H37', M), { role: 'accent', weight: 1.05 });
+}
+};
+__d[142] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawArrow } = __m(141);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'arrow-down',
+title: 'Arrow Down',
+category: 'nav',
+tags: ['down', 'lower', 'decrease', 'arrow', 'move down', 'navigation'],
+draw(g, s) { drawArrow(g, s, 180); },
+});
+};
+__d[143] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawArrow } = __m(141);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'arrow-left',
+title: 'Arrow Left',
+category: 'nav',
+tags: ['left', 'previous', 'arrow', 'move left', 'navigation'],
+draw(g, s) { drawArrow(g, s, 270); },
+});
+};
+__d[144] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawArrow } = __m(141);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'arrow-right',
+title: 'Arrow Right',
+category: 'nav',
+tags: ['right', 'next', 'arrow', 'move right', 'navigation'],
+draw(g, s) { drawArrow(g, s, 90); },
+});
+};
+__d[145] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawArrow } = __m(141);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'arrow-up',
+title: 'Arrow Up',
+category: 'nav',
+tags: ['up', 'raise', 'increase', 'higher', 'arrow', 'move up', 'navigation'],
+draw(g, s) { drawArrow(g, s, 0); },
+});
+};
+__d[146] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outExpo, clamp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3151,11 +5340,30 @@ g.polyline([[18, 11.5], [10.5, 19], [18, 26.5]], { role: pull > 0.3 ? 'accent' :
 },
 });
 };
-__d[45] = function (__ns) {
+__d[147] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'close',
+title: 'Close',
+category: 'nav',
+tags: ['close', 'x', 'dismiss', 'exit', 'close tab', 'close window', 'cancel', 'kill'],
+draw(g, s) {
+const k = enter(s, 0.4), p = press(s, 0.4);
+const h = lerp(3, 13, k) - 1.5 * p; 
+const role = p > 0.3 ? 'accent' : 'line';
+g.line(24 - h, 24 - h, 24 + h, 24 + h, { role, weight: 1.05 });
+g.line(24 + h, 24 - h, 24 - h, 24 + h, { role, weight: 1.05 });
+},
+});
+};
+__d[148] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 const { P } = __m(5);
-const { roundedPoly } = __m(32);
+const { roundedPoly } = __m(44);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const L = 8.5, TOP = 11, TAB = 14, BOT = 38;
 const __default = defineGlyph({
@@ -3180,7 +5388,51 @@ g.path(roundedPoly(front, [lerp(0, 2, k), lerp(0, 2, k), 3, 3]), { role: 'line',
 },
 });
 };
-__d[46] = function (__ns) {
+__d[149] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, lerp } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const L = 9; 
+const __default = defineGlyph({
+id: 'fullscreen',
+title: 'Full Screen',
+category: 'nav',
+tags: ['fullscreen', 'full screen', 'maximize', 'expand', 'theater', 'exit full screen', 'video'],
+states: { off: 'idle', on: 'active' },
+draw(g, s) {
+const on = s.state === 'on';
+const m = arrive(s.since, 0.4);
+const k = on ? m : 1 - m; 
+for (const [sx, sy] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+const cx = 24 + sx * lerp(15.5, 7.5, k), cy = 24 + sy * lerp(15.5, 7.5, k);
+const ax = lerp(-sx, sx, k) * L, ay = lerp(-sy, sy, k) * L;
+g.polyline([[cx + ax, cy], [cx, cy], [cx, cy + ay]], { role: on ? 'accent' : 'line', join: 'round', weight: 1.05 });
+}
+},
+});
+};
+__d[150] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'goto-line',
+title: 'Go to Line',
+category: 'nav',
+tags: ['go to line', 'line', 'jump', 'line number', 'navigate', 'code'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+g.line(20, 12, 40, 12, { role: 'dim' });
+g.line(20, 24, 40, 24, { role: 'accent', weight: 1.05 });
+g.line(20, 36, 34, 36, { role: 'dim' });
+const x = lerp(12.5, 15, k) + 1.2 * p;
+g.line(x - 6, 24, x - 0.5, 24, { role: 'line', opacity: k });
+g.polyline(chevron([x, 24], 90, 5.5, 45), { role: 'line', join: 'round', opacity: k });
+},
+});
+};
+__d[151] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outExpo, clamp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3201,7 +5453,28 @@ g.polyline([[8.5, 23.5], [24, 10], [39.5, 23.5]], { role: 'line', join: 'round',
 },
 });
 };
-__d[47] = function (__ns) {
+__d[152] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press, xf, rot } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const M = rot(-45);
+const __default = defineGlyph({
+id: 'link',
+title: 'Link',
+category: 'nav',
+tags: ['link', 'url', 'hyperlink', 'chain', 'copy link', 'insert link', 'attach'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+const o = lerp(3.5, 0, k) + 1.4 * p; 
+const op = lerp(0.35, 1, k);
+g.path(xf(`M${21 - o} 17H${14.5 - o}A7 7 0 0 0 ${14.5 - o} 31H${21 - o}`, M), { role: 'line', opacity: op });
+g.path(xf(`M${27 + o} 17H${33.5 + o}A7 7 0 0 1 ${33.5 + o} 31H${27 + o}`, M), { role: p > 0.3 ? 'accent' : 'line', opacity: op });
+g.path(xf('M18.5 24H29.5', M), { role: 'line', weight: 1.05 });
+},
+});
+};
+__d[153] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outExpo, clamp, lerp } = __m(12);
 const { P } = __m(5);
@@ -3227,7 +5500,100 @@ g.line(15.5, 31.5, 22.5, 31.5, { role: 'dim' });
 },
 });
 };
-__d[48] = function (__ns) {
+__d[154] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, lerp } = __m(12);
+const { xf, rot } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const HEAD = 'M17 8.5H31M19.5 8.5V18.5L14 25.5H34L28.5 18.5V8.5';
+const HEAD_FILL = 'M19.5 8.5H28.5V18.5L34 25.5H14L19.5 18.5Z';
+const __default = defineGlyph({
+id: 'pin',
+title: 'Pin',
+category: 'nav',
+tags: ['pin', 'pinned', 'keep on top', 'always on top', 'stick', 'favorite', 'tack'],
+states: { unpinned: 'idle', pinned: 'active' },
+draw(g, s) {
+const on = s.state === 'pinned';
+const m = arrive(s.since, 0.4);
+const k = on ? m : 1 - m; 
+const M = rot(lerp(30, 0, k), [24, 30]);
+const dy = lerp(0, 2, k);
+const T = (d) => xf(d, [M[0], M[1], M[2], M[3], M[4], M[5] + dy]);
+if (k > 0.02) g.path(T(HEAD_FILL), { role: 'accent', fill: true, opacity: 0.85 * k });
+g.path(T(HEAD), { role: on ? 'accent' : 'line', join: 'round' });
+g.path(T(`M24 25.5V${lerp(39.5, 37.5, k)}`), { role: 'line', weight: 1.05 });
+},
+});
+};
+__d[155] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'radial',
+title: 'Radial Menu',
+category: 'nav',
+tags: ['radial', 'radial menu', 'pie menu', 'wheel', 'quick menu', 'ring', 'select'],
+draw(g, s) {
+const k = enter(s, 0.5);
+const pick = !s.pressed && s.pressAge < 0.6 ? 1 : 0;
+const r = lerp(8, 15, k);
+[0, 90, 180, 270].forEach((a, i) => {
+const lit = i === pick;
+g.arc(24, 24, r, a - 33, a + 33, { role: lit ? 'accent' : 'line', weight: lit ? 1.15 : 1 });
+});
+g.circle(24, 24, 4.5, { role: 'line' });
+},
+});
+};
+__d[156] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawArrow } = __m(141);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'scroll-bottom',
+title: 'Scroll to Bottom',
+category: 'nav',
+tags: ['bottom', 'scroll to bottom', 'page bottom', 'last', 'end', 'navigation'],
+draw(g, s) { drawArrow(g, s, 180, { bar: true }); },
+});
+};
+__d[157] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawArrow } = __m(141);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'scroll-top',
+title: 'Scroll to Top',
+category: 'nav',
+tags: ['top', 'scroll to top', 'page top', 'first', 'home', 'navigation'],
+draw(g, s) { drawArrow(g, s, 0, { bar: true }); },
+});
+};
+__d[158] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'scroll',
+title: 'Scroll',
+category: 'nav',
+tags: ['scroll', 'mouse', 'wheel', 'page', 'scroll up', 'scroll down', 'navigation'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+g.rect(13.5, 7.5, 21, 33, { r: 10.5 });
+g.line(13.5, 21.5, 34.5, 21.5, { role: 'dim' });
+g.line(24, 7.5, 24, 12, { role: 'dim' });
+g.rect(21.5, 12 + 0.6 * p, 5, 7.5, { r: 2.5, role: p > 0.3 ? 'accent' : 'line', opacity: lerp(0.4, 1, k) });
+const tread = lerp(14, 17.5, clamp(s.level));
+g.line(23, tread, 25, tread, { role: 'accent', weight: 0.7, opacity: k });
+},
+});
+};
+__d[159] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, phase, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3254,10 +5620,162 @@ g.arc(CX, CY, 6.5, a - 32, a + 18, { role: busy ? 'accent' : 'dim', weight: 0.85
 },
 });
 };
-__d[49] = function (__ns) {
+__d[160] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const X0 = 7, Y0 = 9.5, X1 = 41, Y1 = 38.5, R = 4.5, ROW = 17.5, END = 31;
+const __default = defineGlyph({
+id: 'tab-group',
+title: 'Tab Group',
+category: 'nav',
+tags: ['tab group', 'group tabs', 'new group', 'tabs', 'organize', 'browser'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.4);
+g.rect(X0, Y0, X1 - X0, Y1 - Y0, { r: R });
+g.rect(10.5, 11.5, 5, 4, { r: 2, role: 'accent', fill: true, opacity: p > 0.3 ? 1 : 0.85 });
+g.line(22.5, Y0 + 2, 22.5, ROW - 2, { role: 'dim' });
+g.line(END, Y0, END, ROW, { role: 'line' });
+g.line(END, ROW, X1, ROW, { role: 'line' });
+g.line(X0, ROW, lerp(X0, END, k), ROW, { role: 'accent', weight: 1.1 });
+g.line(12, 25, 30, 25, { role: 'dim', opacity: k });
+g.line(12, 31.5, 24, 31.5, { role: 'dim', opacity: k });
+},
+});
+};
+__d[161] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+const { P } = __m(5);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const X0 = 7, Y0 = 9.5, X1 = 41, Y1 = 38.5, R = 4.5, ROW = 17;
+const __default = defineGlyph({
+id: 'tab',
+title: 'Tab',
+category: 'nav',
+tags: ['tab', 'tabs', 'switch tab', 'tab 1', 'browser', 'page', 'navigation'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+const w = lerp(6, 14, k); 
+g.path(P().M(X0 + w, ROW).V(Y0).H(X0 + R).A(R, R, 0, 0, 0, X0, Y0 + R).V(ROW).Z().d, { role: 'accent', fill: true, opacity: lerp(0.25, 0.4, p) });
+g.rect(X0, Y0, X1 - X0, Y1 - Y0, { r: R });
+g.line(X0 + w, ROW, X1, ROW, { role: 'line' });
+g.line(X0 + w, Y0, X0 + w, ROW, { role: p > 0.3 ? 'accent' : 'line' });
+g.line(X0 + w + 11, Y0 + 2.5, X0 + w + 11, ROW - 2.5, { role: 'dim', opacity: k });
+g.line(12, 24.5, 30, 24.5, { role: 'dim', opacity: k });
+},
+});
+};
+__d[162] = function (__ns) {
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+const { digits } = __m(118);
+__e(__ns, { "drawZoom": () => drawZoom }, [], ["drawZoom"]);
+const CX = 21, CY = 21, R = 11.5;
+function drawZoom(g, s, mode) {
+const k = enter(s, 0.45), p = press(s, 0.4);
+const r = R + (mode === 'out' ? -0.8 : 0.8) * p;
+g.circle(CX, CY, r);
+const [x0, y0] = g.polar(CX, CY, r + 1.6, 135), [x1, y1] = g.polar(CX, CY, 24.5, 135);
+g.line(x0, y0, x1, y1, { role: 'line', weight: 1.25 });
+const h = lerp(1.5, 5, k), role = 'accent';
+if (mode === 'in' || mode === 'out') g.line(CX - h, CY, CX + h, CY, { role, weight: 1.05 });
+if (mode === 'in') g.line(CX, CY - h, CX, CY + h, { role, weight: 1.05 });
+if (mode === 'reset') g.group({ x: CX - 24, y: 0, opacity: k }, () => {
+digits(g, '11', { top: 4, role: 'accent', weight: 0.85 });
+g.circle(22.8, 19.6, 1.2, { role: 'accent', fill: true });
+g.circle(22.8, 23.6, 1.2, { role: 'accent', fill: true });
+});
+}
+};
+__d[163] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawZoom } = __m(162);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'zoom-in',
+title: 'Zoom In',
+category: 'nav',
+tags: ['zoom in', 'zoom', 'magnify', 'enlarge', 'bigger', 'plus'],
+draw(g, s) { drawZoom(g, s, 'in'); },
+});
+};
+__d[164] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawZoom } = __m(162);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'zoom-out',
+title: 'Zoom Out',
+category: 'nav',
+tags: ['zoom out', 'zoom', 'shrink', 'smaller', 'minus'],
+draw(g, s) { drawZoom(g, s, 'out'); },
+});
+};
+__d[165] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawZoom } = __m(162);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'zoom-reset',
+title: 'Actual Size',
+category: 'nav',
+tags: ['zoom reset', 'actual size', '100%', '1:1', 'zoom', 'reset'],
+draw(g, s) { drawZoom(g, s, 'reset'); },
+});
+};
+__d[166] = function (__ns) {
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "typeGlyph": () => typeGlyph }, [], ["typeGlyph"]);
+function typeGlyph(g, s, fn) {
+const k = enter(s, 0.45), p = press(s, 0.4);
+g.group({ y: lerp(-3, 0, k), opacity: lerp(0.3, 1, k) }, () => fn(p > 0.3 ? 'accent' : 'line', k, p));
+return { k, p };
+}
+};
+__d[167] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { typeGlyph } = __m(166);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'bold',
+title: 'Bold',
+category: 'productivity',
+tags: ['bold', 'strong', 'weight', 'format', 'text style', 'b'],
+draw(g, s) {
+typeGlyph(g, s, (role) => {
+g.path('M16 10.5H25.5A6.75 6.75 0 0 1 25.5 24H16ZM16 24H27A6.75 6.75 0 0 1 27 37.5H16Z', { role, weight: 1.4, join: 'round', fill: false });
+});
+},
+});
+};
+__d[168] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'captions',
+title: 'Captions',
+category: 'productivity',
+tags: ['captions', 'subtitles', 'cc', 'closed captions', 'transcript', 'accessibility', 'video'],
+states: { off: 'idle', on: 'active' },
+draw(g, s) {
+const on = s.state === 'on';
+const k = arrive(s.since, 0.35);
+g.rect(6.5, 10.5, 35, 24, { r: 4, role: on ? 'accent' : 'line' });
+g.arc(18.5, 22.5, 5.2, 135, 405, { role: on ? 'accent' : 'line', weight: 1.05 });
+g.arc(30.5, 22.5, 5.2, 135, 405, { role: on ? 'accent' : 'line', weight: 1.05 });
+if (on && k > 0.02) g.line(24 - 9 * k, 40, 24 + 9 * k, 40, { role: 'accent', weight: 1.05 });
+},
+});
+};
+__d[169] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, phase, smoothstep } = __m(12);
-const { smooth } = __m(32);
+const { smooth } = __m(44);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const WISPS = [[16.5, 0], [21.75, 0.35], [27, 0.68]];
 const __default = defineGlyph({
@@ -3291,7 +5809,305 @@ g.path(smooth(pts), { role: 'accent', weight: 0.8, opacity: op });
 },
 });
 };
-__d[50] = function (__ns) {
+__d[170] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'comment',
+title: 'Comment',
+category: 'productivity',
+tags: ['comment', 'toggle comment', 'line comment', 'slashes', 'code', 'annotate', 'remark'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+const role = p > 0.3 ? 'accent' : 'line';
+g.line(9, 35, 15.5, 13, { role, weight: 1.1 });
+g.line(17.5, 35, 24, 13, { role, weight: 1.1 });
+g.line(29, 21, lerp(29, 39.5, k), 21, { role: 'dim' });
+g.line(29, 28.5, lerp(29, 36, k), 28.5, { role: 'dim' });
+},
+});
+};
+__d[171] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { clamp, lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const C = 24, R = 15; 
+const S = 'M29 18.8C28.2 17 26.4 16 24 16C21.1 16 19.2 17.5 19.2 19.8C19.2 25.1 28.8 22.7 28.8 28.3C28.8 30.7 26.8 32.2 24 32.2C21.4 32.2 19.6 31.1 18.8 29.3';
+const __default = defineGlyph({
+id: 'dollar',
+title: 'Dollar',
+category: 'productivity',
+tags: ['dollar', 'money', 'cost', 'costs', 'billing', 'bill', 'budget', 'price', 'pay', 'currency', 'coin', 'spend'],
+hue: 150, 
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.4);
+g.ellipse(C, C, +lerp(2.5, R, k).toFixed(2), R, { role: 'line' });
+const show = clamp((k - 0.55) / 0.35);
+if (show <= 0) return;
+const role = p > 0.3 ? 'accent' : 'line';
+g.path(S, { role, join: 'round', opacity: show });
+g.line(C, 12.5, C, 16, { role, opacity: show });
+g.line(C, 32.2, C, 35.5, { role, opacity: show });
+},
+});
+};
+__d[172] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'emoji',
+title: 'Emoji',
+category: 'productivity',
+tags: ['emoji', 'smile', 'smiley', 'face', 'reaction', 'react', 'emoticon'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.35);
+g.circle(24, 24, 16);
+const w = lerp(25, 62, k);
+g.arc(24, 24.5, 9.5, 180 - w, 180 + w, { role: 'accent', weight: 1.05 });
+g.circle(18.5, 19.5, 2.2, { role: 'fill' });
+if (p > 0.3) g.line(27.3, 19.5, 31.7, 19.5, { role: 'fill', weight: 1 });
+else g.circle(29.5, 19.5, 2.2, { role: 'fill' });
+},
+});
+};
+__d[173] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, lerp } = __m(12);
+const { strike } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const lids = (o) => {
+const h = lerp(1, 12.5, o);
+return `M6.5 24C11 ${24 - h * 0.68} 17 ${24 - h} 24 ${24 - h}C31 ${24 - h} 37 ${24 - h * 0.68} 41.5 24C37 ${24 + h * 0.68} 31 ${24 + h} 24 ${24 + h}C17 ${24 + h} 11 ${24 + h * 0.68} 6.5 24Z`;
+};
+const __default = defineGlyph({
+id: 'eye',
+title: 'Visibility',
+category: 'productivity',
+tags: ['eye', 'visible', 'show', 'hide', 'view', 'preview', 'visibility', 'hide ui', 'source'],
+states: { shown: 'active', hidden: 'idle' },
+draw(g, s) {
+if (s.state === 'hidden') {
+g.path(lids(1), { role: 'dim', join: 'round' });
+g.circle(24, 24, 6, { role: 'dim' });
+strike(g, s, { from: [10, 9.5], to: [38, 38.5] });
+return;
+}
+const o = arrive(s.since, 0.45);
+g.path(lids(o), { role: 'line', join: 'round' });
+if (o > 0.4) {
+const r = lerp(2, 6.5, (o - 0.4) / 0.6);
+g.circle(24, 24, r, { role: 'accent', weight: 1.05 });
+g.circle(24, 24, r * 0.4, { role: 'fill' });
+g.dot(26.6, 21.4, 1.3, { opacity: o });
+}
+},
+});
+};
+__d[174] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const BASE = 37.5;
+function A(g, x, h, o) {
+const w = h * 0.68, top = BASE - h;
+g.polyline([[x, BASE], [x + w / 2, top], [x + w, BASE]], { join: 'round', ...o });
+g.line(x + w * 0.2, BASE - h * 0.33, x + w * 0.8, BASE - h * 0.33, o);
+}
+const __default = defineGlyph({
+id: 'font-size',
+title: 'Font Size',
+category: 'productivity',
+tags: ['font size', 'text size', 'zoom text', 'bigger', 'smaller', 'font', 'type'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+A(g, 7.5, lerp(18, 26, k) + 1.5 * p, { role: p > 0.3 ? 'accent' : 'line', weight: 1.1 });
+A(g, 29, 14, { role: 'line', weight: 0.95 });
+},
+});
+};
+__d[175] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp, outBack } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const LINES = [[16, 21, 3], [23, 31, -2], [30, 27, 4], [37, 20, -3]]; 
+const SPARK = 'M35 7.5C35.6 11.4 36.6 12.4 40.5 13C36.6 13.6 35.6 14.6 35 18.5C34.4 14.6 33.4 13.6 29.5 13C33.4 12.4 34.4 11.4 35 7.5Z';
+const __default = defineGlyph({
+id: 'format',
+title: 'Format',
+category: 'productivity',
+tags: ['format', 'format document', 'prettify', 'beautify', 'tidy', 'align', 'code style'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.5);
+const rag = 1 - k + p;
+for (const [y, len, off] of LINES) g.line(8.5 + off * rag, y, 8.5 + off * rag + len, y, { role: y === 16 ? 'line' : 'dim' });
+const b = s.pressed ? 0.6 : outBack(clamp((s.since - 0.15) / 0.4), 2);
+g.group({ scale: Math.max(0.01, lerp(0.4, 1, b)), origin: [35, 13] }, () => g.path(SPARK, { role: 'accent', fill: true }));
+},
+});
+};
+__d[176] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+const { bump } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'gif',
+title: 'GIF',
+category: 'productivity',
+tags: ['gif', 'animated', 'animation', 'image', 'reaction', 'chat', 'media'],
+loop: 1.8,
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+g.rect(6.5, 13, 35, 22, { r: 4, role: p > 0.3 ? 'accent' : 'line' });
+const ph = s.phase(1.8);
+const op = (i) => lerp(0.3, 1, k) * (0.65 + 0.35 * bump(ph, i / 3 + 0.16, 0.3, true));
+g.path('M21 19.2C20.2 18.4 19 18 17.8 18C15.2 18 13 20.2 13 24C13 27.8 15.2 30 17.8 30C19.8 30 21.3 29 21.5 26.5V24.8H18', { role: 'line', join: 'round', opacity: op(0) });
+g.line(26, 18, 26, 30, { role: 'line', opacity: op(1) });
+g.polyline([[37, 18], [31, 18], [31, 30]], { role: 'line', join: 'round', opacity: op(2) });
+g.line(31, 24, 35.5, 24, { role: 'line', opacity: op(2) });
+},
+});
+};
+__d[177] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { typeGlyph } = __m(166);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'heading',
+title: 'Heading',
+category: 'productivity',
+tags: ['heading', 'title', 'h1', 'h2', 'header', 'outline', 'text style'],
+draw(g, s) {
+typeGlyph(g, s, (role) => {
+g.line(9.5, 11, 9.5, 37, { role, weight: 1.15 });
+g.line(24.5, 11, 24.5, 37, { role, weight: 1.15 });
+g.line(9.5, 24, 24.5, 24, { role, weight: 1.15 });
+});
+g.line(31, 26.5, 39.5, 26.5, { role: 'dim' });
+g.line(31, 34, 37, 34, { role: 'dim' });
+},
+});
+};
+__d[178] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, outBack, clamp, lerp } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const HEART = 'M24 38.5C24 38.5 8 29.5 8 18.5C8 13.5 11.8 10 16.2 10C19.5 10 22.4 12 24 14.8C25.6 12 28.5 10 31.8 10C36.2 10 40 13.5 40 18.5C40 29.5 24 38.5 24 38.5Z';
+const __default = defineGlyph({
+id: 'heart',
+title: 'Like',
+category: 'productivity',
+tags: ['heart', 'like', 'liked', 'love', 'favorite', 'save', 'follow'],
+states: { off: 'idle', on: 'active' },
+hue: 12, 
+draw(g, s) {
+const on = s.state === 'on';
+if (!on) {
+const f = 1 - arrive(s.since, 0.3);
+if (f > 0.02) g.path(HEART, { role: 'accent', fill: true, opacity: 0.9 * f });
+g.path(HEART, { role: 'line', join: 'round' });
+return;
+}
+const b = outBack(clamp(s.since / 0.45), 3);
+g.group({ scale: Math.max(0.01, lerp(0.7, 1, b)), origin: [24, 25] }, () => {
+g.path(HEART, { role: 'accent', fill: true, opacity: 0.9 });
+g.path(HEART, { role: 'accent', join: 'round' });
+});
+},
+});
+};
+__d[179] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'indent',
+title: 'Indent',
+category: 'productivity',
+tags: ['indent', 'tab in', 'increase indent', 'outdent', 'nest', 'format', 'text'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+const x = lerp(8.5, 21, k) + 1.5 * p;
+g.line(8.5, 11, 39.5, 11, { role: 'line' });
+g.line(x, 20, 39.5, 20, { role: 'dim' });
+g.line(x, 28, 39.5, 28, { role: 'dim' });
+g.line(8.5, 37, 39.5, 37, { role: 'line' });
+g.polyline([[9, 18.5], [14.5, 24], [9, 29.5]], { role: 'accent', join: 'round', opacity: k });
+},
+});
+};
+__d[180] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { typeGlyph } = __m(166);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'italic',
+title: 'Italic',
+category: 'productivity',
+tags: ['italic', 'emphasis', 'slant', 'oblique', 'format', 'text style', 'i'],
+draw(g, s) {
+typeGlyph(g, s, (role) => {
+g.line(21, 10.5, 34, 10.5, { role, weight: 1.1 });
+g.line(14, 37.5, 27, 37.5, { role, weight: 1.1 });
+g.line(27.5, 10.5, 20.5, 37.5, { role, weight: 1.1 });
+});
+},
+});
+};
+__d[181] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp } = __m(12);
+const { press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'keyboard',
+title: 'Keyboard',
+category: 'productivity',
+tags: ['keyboard', 'keys', 'shortcuts', 'hotkeys', 'keybindings', 'type', 'input'],
+draw(g, s) {
+const p = press(s, 0.35);
+g.rect(6.5, 13, 35, 22.5, { r: 4 });
+[12.5, 18.5, 24.5, 30.5, 35.5].forEach((x, i) => {
+for (const [j, y] of [[0, 19.5], [1, 24.5]]) {
+const k = clamp((s.since - (i + j) * 0.05) / 0.25);
+const hit = i === 2 && j === 0 && p > 0.3;
+g.circle(x, y, 1.45, { role: hit ? 'accent' : 'fill', fill: true, opacity: lerp(0.2, 1, k) });
+}
+});
+g.line(16.5, 30, 31.5, 30, { role: 'line' });
+},
+});
+};
+__d[182] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const SHEET = (y) => `M24 ${y - 8.5}L40 ${y}L24 ${y + 8.5}L8 ${y}Z`;
+const __default = defineGlyph({
+id: 'layers',
+title: 'Layers',
+category: 'productivity',
+tags: ['layers', 'order', 'arrange', 'stack', 'bring to front', 'send to back', 'z-order'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+const gap = lerp(0, 7, k);
+g.path(SHEET(24 + gap), { role: 'dim', join: 'round' });
+g.path(SHEET(24), { role: 'line', join: 'round' });
+g.path(SHEET(24 - gap - 2.5 * p), { role: p > 0.3 ? 'accent' : 'line', join: 'round' });
+},
+});
+};
+__d[183] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outBack, clamp, pulse } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3323,7 +6139,7 @@ if (r > 0.05) g.circle(BX, BY, r, { role: 'spark' });
 },
 });
 };
-__d[51] = function (__ns) {
+__d[184] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, phase, clamp, smoothstep, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3355,7 +6171,110 @@ if (w > 0.02) g.line(x0, y, lerp(x0, x1, w), y, { role: editing && i === LINES.l
 },
 });
 };
-__d[52] = function (__ns) {
+__d[185] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp, outBack } = __m(12);
+const { enter, press, xf, rot } = __m(24);
+const { roundPoly } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const GEAR = (() => {
+const pts = [], P = (r, a) => [24 + r * Math.sin((a * Math.PI) / 180), 24 - r * Math.cos((a * Math.PI) / 180)];
+for (let i = 0; i < 8; i++) {
+const a = i * 45;
+pts.push(P(12, a - 14), P(16, a - 8.5), P(16, a + 8.5), P(12, a + 14));
+}
+return roundPoly(pts, 1.4);
+})();
+const __default = defineGlyph({
+id: 'settings',
+title: 'Settings',
+category: 'productivity',
+tags: ['settings', 'gear', 'preferences', 'options', 'configure', 'cog', 'setup'],
+draw(g, s) {
+const k = enter(s, 0.6), p = press(s, 0.4);
+const turn = lerp(-30, 0, k) + 45 * (s.pressed ? 0 : s.pressAge < 0.55 ? outBack(clamp(s.pressAge / 0.55)) - 1 : 0);
+g.path(xf(GEAR, rot(turn)), { join: 'round' });
+g.circle(24, 24, 5.5, { role: p > 0.3 ? 'accent' : 'line' });
+},
+});
+};
+__d[186] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, outBack, clamp, lerp } = __m(12);
+const { roundPoly } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const STAR = (() => {
+const pts = [];
+for (let i = 0; i < 10; i++) {
+const r = i % 2 ? 7.4 : 16.5, a = (i * 36 * Math.PI) / 180;
+pts.push([24 + r * Math.sin(a), 25.5 - r * Math.cos(a)]);
+}
+return roundPoly(pts, [1.6, 0.6, 1.6, 0.6, 1.6, 0.6, 1.6, 0.6, 1.6, 0.6]);
+})();
+const __default = defineGlyph({
+id: 'star',
+title: 'Star',
+category: 'productivity',
+tags: ['star', 'starred', 'favorite', 'bookmark', 'rate', 'important', 'save'],
+states: { off: 'idle', on: 'active' },
+hue: 86.5, 
+draw(g, s) {
+const on = s.state === 'on';
+if (!on) {
+const f = 1 - arrive(s.since, 0.3);
+if (f > 0.02) g.path(STAR, { role: 'accent', fill: true, opacity: 0.9 * f });
+g.path(STAR, { role: 'line', join: 'round' });
+return;
+}
+const b = outBack(clamp(s.since / 0.45), 2.5);
+g.group({ scale: Math.max(0.01, lerp(0.6, 1, b)), rotate: lerp(-36, 0, clamp(s.since / 0.45)), origin: [24, 25.5] }, () => {
+g.path(STAR, { role: 'accent', fill: true, opacity: 0.9 });
+g.path(STAR, { role: 'accent', join: 'round' });
+});
+},
+});
+};
+__d[187] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'sticker',
+title: 'Sticker',
+category: 'productivity',
+tags: ['sticker', 'stickers', 'decal', 'reaction', 'emoji', 'chat'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+const c = lerp(3, 10, k) * (1 - 0.6 * p); 
+const X = 39.5, Y = 39.5;
+g.path(`M11.5 8.5H36.5A3 3 0 0 1 39.5 11.5V${Y - c}L${X - c} ${Y}H11.5A3 3 0 0 1 8.5 36.5V11.5A3 3 0 0 1 11.5 8.5Z`, { join: 'round' });
+g.path(`M${X} ${Y - c}H${X - c + 3}A3 3 0 0 0 ${X - c} ${Y - c + 3}V${Y}`, { role: 'line', weight: 0.9, join: 'round' });
+g.circle(18.5, 19.5, 2, { role: 'fill' });
+g.circle(28.5, 19.5, 2, { role: 'fill' });
+g.arc(23.5, 24, 7.5, 125, 235, { role: 'accent', weight: 1.05 });
+},
+});
+};
+__d[188] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { typeGlyph } = __m(166);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'strike',
+title: 'Strikethrough',
+category: 'productivity',
+tags: ['strikethrough', 'strike', 'cross out', 'delete text', 'format', 'text style'],
+draw(g, s) {
+const { k } = typeGlyph(g, s, (role) => {
+g.path('M32.5 15.5C31 12.3 27.8 10.5 24 10.5C19 10.5 15.5 13.2 15.5 17C15.5 21.3 19.6 22.8 24 24C28.4 25.2 32.5 26.7 32.5 31C32.5 35 29 37.5 24 37.5C20 37.5 16.8 35.8 15.5 32.5', { role, weight: 1.1 });
+});
+g.line(9, 24, lerp(9, 39, k), 24, { role: 'accent', weight: 1.05 });
+},
+});
+};
+__d[189] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, outBack, clamp, phase, lerp, smoothstep } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3385,10 +6304,10 @@ g.circle(C, C, 3 + (focus ? 0.8 * pop : 0), { role: focus ? 'accent' : 'fill', f
 },
 });
 };
-__d[53] = function (__ns) {
+__d[190] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { clamp, pulse } = __m(12);
-const { roundPoly, blink } = __m(24);
+const { roundPoly, blink } = __m(26);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const TRI = [[24, 6.5], [41, 37], [7, 37]];
 const LOOP = 2.4;
@@ -3418,10 +6337,10 @@ g.dot(24 + dx, 31.5, 2.1, { opacity: crit ? on : 0.55 + 0.45 * pulse(s.t, 1.2) }
 },
 });
 };
-__d[54] = function (__ns) {
+__d[191] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp, outCubic } = __m(12);
-const { alongPolyline, partialPolyline, polyLength } = __m(24);
+const { alongPolyline, partialPolyline, polyLength } = __m(26);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const MARK = [[9.5, 25], [19.5, 34.5], [38.5, 13.5]];
 const __default = defineGlyph({
@@ -3444,7 +6363,7 @@ if (b > 0 && b < 1) g.circle(24, 24, 13 + 4.5 * outCubic(b), { role: 'accent', w
 },
 });
 };
-__d[55] = function (__ns) {
+__d[192] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp, outBack, pulse } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3464,7 +6383,32 @@ g.dot(24, lerp(10.5, 16, d), 2.3, { opacity: (0.7 + 0.3 * pulse(s.t, 2.4)) * Mat
 },
 });
 };
-__d[56] = function (__ns) {
+__d[193] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const BOW = [17, 17], BR = 6.5; 
+const SHAFT = [[21.6, 21.6], [37, 37]]; 
+const TEETH = [[[30, 30], [33.5, 26.5]], [[34.5, 34.5], [38, 31]]];
+const __default = defineGlyph({
+id: 'key',
+title: 'Key',
+category: 'status',
+tags: ['key', 'credentials', 'password', 'secret', 'access key', 'api key', 'auth', 'sign in', 'login', 'unlock'],
+hue: 80, 
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.45);
+const o = +lerp(-3.5, 0, k).toFixed(2);
+g.group({ x: o, y: o }, () => g.group({ rotate: +(-10 * p * k).toFixed(2), origin: [27, 27] }, () => {
+g.circle(BOW[0], BOW[1], BR, { role: 'line' });
+g.polyline(SHAFT, { role: 'line' });
+for (const t of TEETH) g.polyline(t, { role: p > 0.3 ? 'accent' : 'line' });
+}));
+},
+});
+};
+__d[194] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp, outBack, outExpo } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3491,7 +6435,26 @@ g.line(24, 31, 24, 34.5, { role: on > 0.5 ? 'accent' : 'dim', weight: 0.9, opaci
 },
 });
 };
-__d[57] = function (__ns) {
+__d[195] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const HX = 24, HY = 15.5, HR = 5.5; 
+const SHOULDERS = 'M12.5 38.5V36.5A11.5 11.5 0 0 1 35.5 36.5V38.5'; 
+const __default = defineGlyph({
+id: 'person',
+title: 'Person',
+category: 'status',
+tags: ['person', 'user', 'account', 'profile', 'identity', 'who am i', 'whoami', 'me', 'member', 'contact', 'avatar'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+g.path(SHOULDERS, { role: 'line', join: 'round', opacity: lerp(0.35, 1, k) });
+g.circle(HX, +(HY - lerp(3.5, 0, k)).toFixed(2), HR, { role: p > 0.3 ? 'accent' : 'line' });
+},
+});
+};
+__d[196] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3511,10 +6474,33 @@ if (on) g.dot(24, 8.5, 1.5, { opacity: k });
 },
 });
 };
-__d[58] = function (__ns) {
+__d[197] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
-const { arcHead, partialPolyline } = __m(24);
+const { enter, press } = __m(24);
+const { partialPolyline } = __m(26);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const SHIELD = 'M24 8.5L36 13V23.5C36 31.2 31 36.6 24 39.5C17 36.6 12 31.2 12 23.5V13Z'; 
+const CHECK = [[18.5, 24], [22.5, 28], [30, 20.5]];
+const __default = defineGlyph({
+id: 'shield',
+title: 'Shield',
+category: 'status',
+tags: ['shield', 'security', 'secure', 'protect', 'protected', 'firewall', 'security group', 'guard', 'defense', 'safe'],
+draw(g, s) {
+const k = enter(s, 0.5), p = press(s, 0.4);
+g.group({ y: +lerp(2, 0, k).toFixed(2) }, () => {
+g.path(SHIELD, { role: p > 0.3 ? 'accent' : 'line', join: 'round' });
+const pts = partialPolyline(CHECK, arrive(Math.max(0, s.since - 0.15), 0.4));
+if (pts.length > 1) g.polyline(pts, { role: 'accent', weight: 1.05, join: 'round' });
+});
+},
+});
+};
+__d[198] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, lerp } = __m(12);
+const { arcHead, partialPolyline } = __m(26);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const R = 13;
 const ARCS = [[28, 152], [208, 332]]; 
@@ -3551,7 +6537,7 @@ g.dot(24, 30, 2, { role: 'spark', opacity: k });
 },
 });
 };
-__d[59] = function (__ns) {
+__d[199] = function (__ns) {
 const { defineGlyph } = __m(16);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
@@ -3573,7 +6559,7 @@ g.arc(24, 24, r, 222, 318, { role: i ? 'dim' : 'line', opacity: op });
 },
 });
 };
-__d[60] = function (__ns) {
+__d[200] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3597,7 +6583,7 @@ g.line(9, 8.5, 9 + 30 * k, 8.5 + 31 * k, { role: 'accent', weight: 1.15 });
 },
 });
 };
-__d[61] = function (__ns) {
+__d[201] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse, outBack, clamp, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3627,7 +6613,27 @@ g.circle(x, 21.5 - 2.6 * hop, 2.3, { role: active ? 'accent' : 'dim', fill: true
 },
 });
 };
-__d[62] = function (__ns) {
+__d[202] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { clamp, inOutSine } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const RAMP = [1, 0.62, 0.34, 0.14];
+const __default = defineGlyph({
+id: 'fade',
+title: 'Fade',
+category: 'stream',
+tags: ['fade', 'crossfade', 'transition', 'dissolve', 'blend', 'scene', 'stream'],
+draw(g, s) {
+const run = s.pressed ? 0 : s.pressAge < 0.7 ? clamp(s.pressAge / 0.7) : clamp(s.since / 0.7);
+g.rect(7, 10.5, 34, 27, { r: 4 });
+RAMP.forEach((o, i) => {
+const k = inOutSine(clamp(run * 1.6 - i * 0.2));
+if (k > 0.02) g.rect(11 + i * 6.75, 14.5, 5.75, 19, { r: i === 0 ? 1.8 : 0.8, role: 'fill', opacity: o * k });
+});
+},
+});
+};
+__d[203] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp, clamp, outExpo } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3658,7 +6664,7 @@ if (e > 0) g.ellipse(PX, BASE, lerp(2, 11, e), lerp(0.8, 3.2, e), { role: 'accen
 },
 });
 };
-__d[63] = function (__ns) {
+__d[204] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3682,7 +6688,30 @@ g.dot(26.5, 20.5, 1.9, { role: lit ? 'spark' : 'dim' });
 },
 });
 };
-__d[64] = function (__ns) {
+__d[205] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'screenshot',
+title: 'Screenshot',
+category: 'stream',
+tags: ['screenshot', 'capture', 'snip', 'screen capture', 'grab', 'photo', 'clip'],
+draw(g, s) {
+const k = enter(s, 0.45), p = press(s, 0.4);
+const o = lerp(2, 0, k) - 1.2 * p, L = 8;
+for (const [sx, sy] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) {
+const cx = 24 + sx * (16 + o), cy = 24 + sy * (14 + o);
+g.polyline([[cx, cy - sy * L], [cx, cy], [cx - sx * L, cy]], { role: 'line', join: 'round' });
+}
+g.circle(24, 24, 6.5, { role: p > 0.3 ? 'accent' : 'line' });
+if (p > 0.02) g.circle(24, 24, 3.2, { role: 'accent', fill: true, opacity: p });
+else g.dot(24, 24, 1.8, { role: 'fill' });
+},
+});
+};
+__d[206] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse, lerp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3713,10 +6742,10 @@ g.path(`M${14.5 + ox} 39A9.5 8.5 0 0 1 ${33.5 + ox} 39`, { role: 'line' });
 },
 });
 };
-__d[65] = function (__ns) {
+__d[207] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp, lerp, pulse, smoothstep } = __m(12);
-const { rectAround } = __m(24);
+const { rectAround } = __m(26);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const X0 = 10, W = 24, Y0 = 17, H = 14; 
 const BOLT = [[24.85, 16], [16.3, 25.37], [21.54, 25.37], [19.15, 32], [27.7, 22.63], [22.46, 22.63]];
@@ -3756,7 +6785,7 @@ if (w > 0.3) g.rect(X0, Y0, w, H, { r: Math.min(1.5, w / 2), role: 'accent', fil
 },
 });
 };
-__d[66] = function (__ns) {
+__d[208] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { clamp } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3786,7 +6815,7 @@ g.rect(x, y, 4.5, 4.5, { r: 1, role: on ? 'spark' : 'fill', fill: true, opacity:
 },
 });
 };
-__d[67] = function (__ns) {
+__d[209] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp, lerp, pulse } = __m(12);
 __e(__ns, { "default": () => __default }, [], ["default"]);
@@ -3832,10 +6861,32 @@ g.dot(15.5, 35, 1.5, { role: st === 'idle' ? 'dim' : 'spark', opacity: io });
 },
 });
 };
-__d[68] = function (__ns) {
+__d[210] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const C = 24, R = 14; 
+const LAT = 7, HALF = +Math.sqrt(R * R - LAT * LAT).toFixed(2); 
+const __default = defineGlyph({
+id: 'globe',
+title: 'Globe',
+category: 'system',
+tags: ['globe', 'world', 'earth', 'region', 'regions', 'global', 'international', 'internet', 'web', 'language', 'location'],
+draw(g, s) {
+const k = enter(s, 0.55), p = press(s, 0.45);
+g.circle(C, C, R);
+g.line(C - R, C, C + R, C, { role: 'dim' });
+for (const y of [C - LAT, C + LAT]) g.line(C - HALF, y, C + HALF, y, { role: 'dim', opacity: lerp(0.2, 1, k) });
+const rx = lerp(R - 1, 6.5, k) * (1 - 0.6 * p);
+g.ellipse(C, C, +Math.max(1.5, rx).toFixed(2), R, { role: p > 0.3 ? 'accent' : 'line' });
+},
+});
+};
+__d[211] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp } = __m(12);
-const { curve } = __m(24);
+const { curve } = __m(26);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const FX = 18, FY = 22, FR = 8; 
 const FINS = [16.5, 22, 27.5]; 
@@ -3872,10 +6923,10 @@ g.line(30, y, 36.5, y, { role: on ? 'accent' : 'dim', opacity: on ? 0.4 + 0.6 * 
 },
 });
 };
-__d[69] = function (__ns) {
+__d[212] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp } = __m(12);
-const { bump } = __m(24);
+const { bump } = __m(26);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const CHIPS = [11, 18, 25, 32]; 
 const CW = 5, CY = 15.5, CH = 10.5;
@@ -3908,10 +6959,10 @@ g.rect(x, CY + CH - h, CW, h, { r: Math.min(1.2, h / 2), role: 'accent', fill: t
 },
 });
 };
-__d[70] = function (__ns) {
+__d[213] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp } = __m(12);
-const { strike } = __m(24);
+const { strike } = __m(26);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const XD = 16.5, XU = 31.5; 
 const TOP = 10, BOT = 38, HW = 5.5; 
@@ -3951,10 +7002,10 @@ if (k < 1) { g.line(XD, TOP, XD, BOT, { role: 'line', opacity: 1 - k }); g.line(
 },
 });
 };
-__d[71] = function (__ns) {
+__d[214] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, clamp, pulse } = __m(12);
-const { bump, strike } = __m(24);
+const { bump, strike } = __m(26);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const CX = 24, CY = 34.5; 
 const R = [8, 15, 22]; 
@@ -4000,7 +7051,7 @@ g.circle(CX, CY, 2.6, { role: 'fill' });
 },
 });
 };
-__d[72] = function (__ns) {
+__d[215] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, phase, smoothstep } = __m(12);
 const { P } = __m(5);
@@ -4050,11 +7101,11 @@ for (const [a0, a1] of [[248, 292], [68, 112]]) g.arc(CX, CY, 16.5, a0, a1, { ro
 },
 });
 };
-__d[73] = function (__ns) {
+__d[216] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, lerp } = __m(12);
 const { P } = __m(5);
-const { digits } = __m(35);
+const { digits } = __m(118);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const X0 = 9.5, X1 = 38.5, Y0 = 11, Y1 = 40, HEAD = 19, RAD = 4;
 const __default = defineGlyph({
@@ -4079,7 +7130,7 @@ g.group({ y: 3.5 * (1 - k), opacity: k }, () => digits(g, day, { top: 7, role: e
 },
 });
 };
-__d[74] = function (__ns) {
+__d[217] = function (__ns) {
 const { defineGlyph } = __m(16);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = defineGlyph({
@@ -4103,10 +7154,10 @@ g.dot(24, 24, 1.8);
 },
 });
 };
-__d[75] = function (__ns) {
+__d[218] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse, clamp } = __m(12);
-const { wedge } = __m(32);
+const { wedge } = __m(44);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const CX = 24, CY = 26.5, R = 14;
 const LAP = 4; 
@@ -4148,10 +7199,10 @@ g.dot(CX, CY, 2, { role: 'fill' });
 },
 });
 };
-__d[76] = function (__ns) {
+__d[219] = function (__ns) {
 const { defineGlyph } = __m(16);
 const { arrive, pulse, phase, lerp, clamp, outExpo } = __m(12);
-const { wedge } = __m(32);
+const { wedge } = __m(44);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const C = 24, R = 16.5, W = 12.5; 
 const __default = defineGlyph({
@@ -4199,7 +7250,385 @@ g.line(x0, y0, x1, y1, { role: 'accent', weight: 0.75, opacity: op });
 },
 });
 };
-__d[77] = function (__ns) {
+__d[220] = function (__ns) {
+const { P } = __m(5);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "X0": () => X0, "Y0": () => Y0, "X1": () => X1, "Y1": () => Y1, "R": () => R, "HEAD": () => HEAD, "frame": () => frame, "header": () => header, "region": () => region, "motion": () => motion, "lerp": () => lerp }, [], ["HEAD","R","X0","X1","Y0","Y1","frame","header","lerp","motion","region"]);
+const X0 = 7;
+const Y0 = 9.5;
+const X1 = 41;
+const Y1 = 38.5;
+const R = 4.5;
+const HEAD = 16;
+const frame = (g, o = {}) => g.rect(X0, Y0, X1 - X0, Y1 - Y0, { r: R, ...o });
+const header = (g, o = {}) => g.line(X0, HEAD, X1, HEAD, { role: 'dim', ...o });
+function region(x0, y0, x1, y1) {
+const tl = x0 <= X0 && y0 <= Y0 ? R : 0, tr = x1 >= X1 && y0 <= Y0 ? R : 0;
+const br = x1 >= X1 && y1 >= Y1 ? R : 0, bl = x0 <= X0 && y1 >= Y1 ? R : 0;
+const p = P().M(x0 + tl, y0).H(x1 - tr);
+if (tr) p.A(tr, tr, 0, 0, 1, x1, y0 + tr);
+p.V(y1 - br);
+if (br) p.A(br, br, 0, 0, 1, x1 - br, y1);
+p.H(x0 + bl);
+if (bl) p.A(bl, bl, 0, 0, 1, x0, y1 - bl);
+p.V(y0 + tl);
+if (tl) p.A(tl, tl, 0, 0, 1, x0 + tl, y0);
+return p.Z().d;
+}
+const motion = (s) => ({ k: enter(s, 0.5), p: press(s, 0.4) });
+};
+__d[221] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { chevron } = __m(24);
+const { frame, motion, lerp } = __m(220);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'fit',
+title: 'Fit',
+category: 'window',
+tags: ['fit', 'fit to screen', 'stretch', 'scale to fit', 'bounds', 'resize', 'transform'],
+draw(g, s) {
+const { k, p } = motion(s);
+frame(g, { role: 'dim' });
+const o = lerp(7, 0, k) - 1 * p;
+const a = 12.5 + o, b = 35.5 - o;
+g.line(a, 24, b, 24, { role: 'line' });
+g.polyline(chevron([a, 24], 270, 6, 45), { role: 'accent', join: 'round' });
+g.polyline(chevron([b, 24], 90, 6, 45), { role: 'accent', join: 'round' });
+},
+});
+};
+__d[222] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, lerp } = __m(12);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'hdr',
+title: 'HDR',
+category: 'window',
+tags: ['hdr', 'high dynamic range', 'display', 'brightness', 'monitor', 'color'],
+states: { off: 'idle', on: 'active' },
+draw(g, s) {
+const on = s.state === 'on';
+const m = arrive(s.since, 0.45);
+const k = on ? m : 1 - m;
+g.rect(7, 9, 34, 23, { r: 4, role: on ? 'accent' : 'line' });
+g.line(24, 32, 24, 37.5, { role: 'line' });
+g.line(16, 38.5, 32, 38.5, { role: 'line' });
+const r = lerp(3.5, 5, k);
+g.path(`M${24 - r} 27.5A${r} ${r} 0 0 1 ${24 + r} 27.5`, { role: on ? 'accent' : 'dim', weight: 1.05 });
+for (const a of [-60, -30, 0, 30, 60]) {
+const [x0, y0] = g.polar(24, 27.5, r + 2.5, a), [x1, y1] = g.polar(24, 27.5, r + 2.5 + lerp(0.5, 3, k), a);
+g.line(x0, y0, x1, y1, { role: on ? 'accent' : 'dim', opacity: lerp(0.5, 1, k) });
+}
+},
+});
+};
+__d[223] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { frame, region, motion, lerp, X0, X1, Y0, Y1 } = __m(220);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const XS = 22, YS = 24;
+const ZONES = [[X0, Y0, XS, Y1], [XS, Y0, X1, YS], [XS, YS, X1, Y1]];
+const __default = defineGlyph({
+id: 'layout',
+title: 'Snap Layout',
+category: 'window',
+tags: ['layout', 'snap layout', 'snap', 'arrange', 'tile', 'zones', 'placer', 'window'],
+draw(g, s) {
+const { k } = motion(s);
+const lit = !s.pressed && s.pressAge < 0.6 ? 2 : 0;
+g.path(region(...ZONES[lit]), { role: 'accent', fill: true, opacity: 0.32 * k });
+frame(g);
+const x = lerp(X1 - 2, XS, k), y = lerp(Y1 - 2, YS, k);
+g.line(x, Y0, x, Y1, { role: 'line' });
+g.line(x, y, X1, y, { role: 'line' });
+},
+});
+};
+__d[224] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { chevron } = __m(24);
+const { frame, header, motion, lerp } = __m(220);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'maximize',
+title: 'Maximize',
+category: 'window',
+tags: ['maximize', 'enlarge', 'fill screen', 'restore', 'window', 'grow'],
+draw(g, s) {
+const { k, p } = motion(s);
+frame(g);
+header(g);
+const y = lerp(31.5, 23.5, k) - 1.8 * p;
+g.polyline(chevron([24, y], 0, 9, 45), { role: 'accent', join: 'round', weight: 1.05, opacity: lerp(0.3, 1, k) });
+},
+});
+};
+__d[225] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { chevron } = __m(24);
+const { frame, header, motion, lerp } = __m(220);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'minimize',
+title: 'Minimize',
+category: 'window',
+tags: ['minimize', 'hide', 'taskbar', 'shrink', 'window', 'iconify'],
+draw(g, s) {
+const { k, p } = motion(s);
+frame(g);
+header(g);
+const y = lerp(20.5, 27, k) + 1.5 * p;
+g.polyline(chevron([24, y], 180, 8, 45), { role: 'accent', join: 'round', weight: 1.05, opacity: lerp(0.3, 1, k) });
+g.line(17, 33, 31, 33, { role: 'accent', weight: 1.05 });
+},
+});
+};
+__d[226] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp, clamp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'monitor',
+title: 'Monitor',
+category: 'window',
+tags: ['monitor', 'display', 'screen', 'next monitor', 'move to monitor', 'desktop', 'output'],
+draw(g, s) {
+const k = enter(s, 0.6), p = press(s, 0.45);
+if (p > 0.02) g.rect(7, 9, 34, 23, { r: 4, role: 'accent', fill: true, opacity: 0.3 * p });
+g.rect(7, 9, 34, 23, { r: 4 });
+g.line(24, 32, 24, 37.5, { role: 'line' });
+g.line(16, 38.5, 32, 38.5, { role: 'line' });
+const y = lerp(13, 28, clamp(k));
+if (k < 0.99) g.line(11.5, y, 36.5, y, { role: 'accent', weight: 0.7, opacity: 1 - k });
+g.line(11.5, 13.5, 16.5, 13.5, { role: 'dim', opacity: k });
+},
+});
+};
+__d[227] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive } = __m(12);
+const { frame, region, lerp, X0, X1, Y1 } = __m(220);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'panel',
+title: 'Panel',
+category: 'window',
+tags: ['panel', 'bottom panel', 'toggle panel', 'output', 'console', 'bottom', 'dock'],
+states: { shown: 'active', hidden: 'idle' },
+draw(g, s) {
+const m = arrive(s.since, 0.4);
+const k = s.state === 'shown' ? m : 1 - m; 
+const y = lerp(Y1 - 1.5, 28.5, k);
+if (k > 0.02) g.path(region(X0, y, X1, Y1), { role: 'accent', fill: true, opacity: 0.28 * k });
+frame(g);
+g.line(X0, y, X1, y, { role: k > 0.5 ? 'line' : 'dim' });
+},
+});
+};
+__d[228] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, lerp } = __m(12);
+const { frame } = __m(220);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'pip',
+title: 'Picture in Picture',
+category: 'window',
+tags: ['pip', 'picture in picture', 'miniplayer', 'mini player', 'float', 'video', 'overlay'],
+states: { off: 'idle', on: 'active' },
+draw(g, s) {
+const on = s.state === 'on';
+const m = arrive(s.since, 0.4);
+const k = on ? m : 1 - m;
+frame(g);
+const w = lerp(11, 14, k), h = lerp(8, 10, k);
+g.rect(36.5 - w, 34 - h, w, h, { r: 2.5, role: on ? 'accent' : 'fill', fill: true, opacity: lerp(0.75, 1, k) });
+},
+});
+};
+__d[229] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive } = __m(12);
+const { frame, region, lerp, X0, Y0, Y1 } = __m(220);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'sidebar',
+title: 'Sidebar',
+category: 'window',
+tags: ['sidebar', 'side bar', 'explorer', 'toggle sidebar', 'panel', 'navigation pane', 'drawer'],
+states: { shown: 'active', hidden: 'idle' },
+draw(g, s) {
+const m = arrive(s.since, 0.4);
+const k = s.state === 'shown' ? m : 1 - m; 
+const x = lerp(X0 + 1.5, 18.5, k);
+if (k > 0.02) g.path(region(X0, Y0, x, Y1), { role: 'accent', fill: true, opacity: 0.28 * k });
+frame(g);
+g.line(x, Y0, x, Y1, { role: k > 0.5 ? 'line' : 'dim' });
+},
+});
+};
+__d[230] = function (__ns) {
+const { chevron } = __m(24);
+const { frame, region, motion, lerp, X0, X1, Y0, Y1 } = __m(220);
+__e(__ns, { "drawSnap": () => drawSnap }, [], ["drawSnap"]);
+function drawSnap(g, s, side) {
+const { k, p } = motion(s);
+const w = lerp(4, 17, k);
+const [a, b] = side < 0 ? [X0, X0 + w] : [X1 - w, X1];
+g.path(region(a, Y0, b, Y1), { role: 'accent', fill: true, opacity: 0.38 });
+frame(g);
+g.line(side < 0 ? b : a, Y0, side < 0 ? b : a, Y1, { role: 'line' });
+const cx = 24 - side * 8.5 + side * 1.5 * p;
+g.polyline(chevron([cx + side * 2.5, 24], side < 0 ? 270 : 90, 6, 45), { role: 'line', join: 'round', opacity: k });
+}
+};
+__d[231] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawSnap } = __m(230);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'snap-left',
+title: 'Snap Left',
+category: 'window',
+tags: ['snap', 'snap left', 'left half', 'tile', 'arrange', 'window'],
+draw(g, s) { drawSnap(g, s, -1); },
+});
+};
+__d[232] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { drawSnap } = __m(230);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'snap-right',
+title: 'Snap Right',
+category: 'window',
+tags: ['snap', 'snap right', 'right half', 'tile', 'arrange', 'window'],
+draw(g, s) { drawSnap(g, s, 1); },
+});
+};
+__d[233] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { frame, region, motion, lerp, X0, X1, Y1 } = __m(220);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'split-down',
+title: 'Split Down',
+category: 'window',
+tags: ['split', 'split down', 'horizontal split', 'pane', 'rows', 'stack'],
+draw(g, s) {
+const { k, p } = motion(s);
+const y = lerp(33.5, 24, k);
+if (p > 0.02) g.path(region(X0, y, X1, Y1), { role: 'accent', fill: true, opacity: 0.3 * p });
+frame(g);
+g.line(X0, y, X1, y, { role: 'line' });
+},
+});
+};
+__d[234] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { frame, region, motion, lerp, X1, Y0, Y1 } = __m(220);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'split',
+title: 'Split Right',
+category: 'window',
+tags: ['split', 'split right', 'split editor', 'side by side', 'pane', 'columns', 'split view'],
+draw(g, s) {
+const { k, p } = motion(s);
+const x = lerp(36, 24, k);
+if (p > 0.02) g.path(region(x, Y0, X1, Y1), { role: 'accent', fill: true, opacity: 0.3 * p });
+frame(g);
+g.line(x, Y0, x, Y1, { role: 'line' });
+},
+});
+};
+__d[235] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { arrive, lerp } = __m(12);
+const { chevron } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'theater',
+title: 'Theater Mode',
+category: 'window',
+tags: ['theater', 'theater mode', 'wide', 'cinema', 'wide player', 'video'],
+states: { off: 'idle', on: 'active' },
+draw(g, s) {
+const on = s.state === 'on';
+const m = arrive(s.since, 0.4);
+const k = on ? m : 1 - m;
+g.rect(6.5, 13, 35, 22, { r: 4, role: on ? 'accent' : 'line' });
+g.polygon([[21.5, 19], [29.5, 24], [21.5, 29]], { role: 'fill', join: 'round' });
+const o = lerp(0, 2.5, k);
+g.polyline(chevron([12 - o, 24], 270, 4.5, 45), { role: 'dim', join: 'round' });
+g.polyline(chevron([36 + o, 24], 90, 4.5, 45), { role: 'dim', join: 'round' });
+},
+});
+};
+__d[236] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'view-details',
+title: 'Details View',
+category: 'window',
+tags: ['details', 'list', 'list view', 'rows', 'columns', 'view'],
+draw(g, s) {
+const p = press(s, 0.4);
+[12.5, 24, 35.5].forEach((y, i) => {
+const k = enter({ since: s.since - i * 0.08 }, 0.4);
+g.rect(8, y - 3, 6, 6, { r: 1.8, role: i === 0 && p > 0.3 ? 'accent' : 'fill', fill: true, opacity: lerp(0.2, 1, k) });
+g.line(19, y, lerp(19, [40, 35, 38][i], k), y, { role: i === 0 && p > 0.3 ? 'accent' : 'line' });
+});
+},
+});
+};
+__d[237] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { lerp } = __m(12);
+const { enter, press } = __m(24);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'view-icons',
+title: 'Icons View',
+category: 'window',
+tags: ['icons', 'big icons', 'grid', 'thumbnails', 'tiles', 'view', 'icon size'],
+draw(g, s) {
+const p = press(s, 0.4);
+[[9, 9], [26, 9], [9, 26], [26, 26]].forEach(([x, y], i) => {
+const k = enter({ since: s.since - i * 0.07 }, 0.4), h = lerp(4.5, 0, k);
+g.rect(x + h, y + h, 13 - 2 * h, 13 - 2 * h, { r: 3, role: i === 0 && p > 0.3 ? 'accent' : 'line', opacity: lerp(0.2, 1, k) });
+});
+},
+});
+};
+__d[238] = function (__ns) {
+const { defineGlyph } = __m(16);
+const { frame, header, motion, lerp } = __m(220);
+__e(__ns, { "default": () => __default }, [], ["default"]);
+const __default = defineGlyph({
+id: 'window',
+title: 'Window',
+category: 'window',
+tags: ['window', 'app', 'switch window', 'window 1', 'focus', 'task', 'desktop'],
+draw(g, s) {
+const { k, p } = motion(s);
+frame(g);
+header(g, { role: p > 0.3 ? 'accent' : 'line' });
+g.dot(11.5, 12.75, 1.3, { role: 'fill' });
+g.dot(15.5, 12.75, 1.3, { role: 'fill', opacity: 0.6 });
+g.line(12.5, 23.5, lerp(12.5, 33, k), 23.5, { role: 'dim' });
+g.line(12.5, 30.5, lerp(12.5, 26, k), 30.5, { role: 'dim' });
+},
+});
+};
+__d[239] = function (__ns) {
 const m0 = __m(17);
 const m1 = __m(18);
 const m2 = __m(19);
@@ -4208,54 +7637,200 @@ const m4 = __m(21);
 const m5 = __m(22);
 const m6 = __m(23);
 const m7 = __m(25);
-const m8 = __m(26);
-const m9 = __m(27);
-const m10 = __m(28);
-const m11 = __m(29);
-const m12 = __m(30);
-const m13 = __m(31);
-const m14 = __m(33);
-const m15 = __m(34);
-const m16 = __m(36);
-const m17 = __m(37);
-const m18 = __m(38);
-const m19 = __m(39);
-const m20 = __m(41);
-const m21 = __m(42);
-const m22 = __m(43);
-const m23 = __m(44);
-const m24 = __m(45);
-const m25 = __m(46);
-const m26 = __m(47);
-const m27 = __m(48);
-const m28 = __m(49);
-const m29 = __m(50);
-const m30 = __m(51);
-const m31 = __m(52);
-const m32 = __m(53);
-const m33 = __m(54);
-const m34 = __m(55);
-const m35 = __m(56);
-const m36 = __m(57);
-const m37 = __m(58);
-const m38 = __m(59);
-const m39 = __m(60);
-const m40 = __m(61);
-const m41 = __m(62);
-const m42 = __m(63);
-const m43 = __m(64);
-const m44 = __m(65);
-const m45 = __m(66);
-const m46 = __m(67);
-const m47 = __m(68);
-const m48 = __m(69);
-const m49 = __m(70);
-const m50 = __m(71);
-const m51 = __m(72);
-const m52 = __m(73);
-const m53 = __m(74);
-const m54 = __m(75);
-const m55 = __m(76);
+const m8 = __m(27);
+const m9 = __m(30);
+const m10 = __m(31);
+const m11 = __m(32);
+const m12 = __m(33);
+const m13 = __m(34);
+const m14 = __m(35);
+const m15 = __m(36);
+const m16 = __m(37);
+const m17 = __m(38);
+const m18 = __m(40);
+const m19 = __m(41);
+const m20 = __m(42);
+const m21 = __m(43);
+const m22 = __m(46);
+const m23 = __m(47);
+const m24 = __m(48);
+const m25 = __m(49);
+const m26 = __m(50);
+const m27 = __m(51);
+const m28 = __m(52);
+const m29 = __m(53);
+const m30 = __m(54);
+const m31 = __m(56);
+const m32 = __m(57);
+const m33 = __m(58);
+const m34 = __m(59);
+const m35 = __m(60);
+const m36 = __m(61);
+const m37 = __m(62);
+const m38 = __m(63);
+const m39 = __m(64);
+const m40 = __m(65);
+const m41 = __m(66);
+const m42 = __m(67);
+const m43 = __m(68);
+const m44 = __m(69);
+const m45 = __m(70);
+const m46 = __m(71);
+const m47 = __m(72);
+const m48 = __m(73);
+const m49 = __m(75);
+const m50 = __m(76);
+const m51 = __m(77);
+const m52 = __m(78);
+const m53 = __m(79);
+const m54 = __m(80);
+const m55 = __m(81);
+const m56 = __m(82);
+const m57 = __m(83);
+const m58 = __m(84);
+const m59 = __m(85);
+const m60 = __m(86);
+const m61 = __m(87);
+const m62 = __m(88);
+const m63 = __m(89);
+const m64 = __m(90);
+const m65 = __m(91);
+const m66 = __m(92);
+const m67 = __m(93);
+const m68 = __m(94);
+const m69 = __m(95);
+const m70 = __m(96);
+const m71 = __m(97);
+const m72 = __m(99);
+const m73 = __m(100);
+const m74 = __m(101);
+const m75 = __m(102);
+const m76 = __m(103);
+const m77 = __m(104);
+const m78 = __m(105);
+const m79 = __m(106);
+const m80 = __m(107);
+const m81 = __m(108);
+const m82 = __m(109);
+const m83 = __m(110);
+const m84 = __m(111);
+const m85 = __m(112);
+const m86 = __m(113);
+const m87 = __m(114);
+const m88 = __m(115);
+const m89 = __m(116);
+const m90 = __m(117);
+const m91 = __m(119);
+const m92 = __m(120);
+const m93 = __m(122);
+const m94 = __m(123);
+const m95 = __m(125);
+const m96 = __m(127);
+const m97 = __m(128);
+const m98 = __m(129);
+const m99 = __m(130);
+const m100 = __m(131);
+const m101 = __m(132);
+const m102 = __m(133);
+const m103 = __m(134);
+const m104 = __m(136);
+const m105 = __m(137);
+const m106 = __m(138);
+const m107 = __m(139);
+const m108 = __m(140);
+const m109 = __m(142);
+const m110 = __m(143);
+const m111 = __m(144);
+const m112 = __m(145);
+const m113 = __m(146);
+const m114 = __m(147);
+const m115 = __m(148);
+const m116 = __m(149);
+const m117 = __m(150);
+const m118 = __m(151);
+const m119 = __m(152);
+const m120 = __m(153);
+const m121 = __m(154);
+const m122 = __m(155);
+const m123 = __m(156);
+const m124 = __m(157);
+const m125 = __m(158);
+const m126 = __m(159);
+const m127 = __m(160);
+const m128 = __m(161);
+const m129 = __m(163);
+const m130 = __m(164);
+const m131 = __m(165);
+const m132 = __m(167);
+const m133 = __m(168);
+const m134 = __m(169);
+const m135 = __m(170);
+const m136 = __m(171);
+const m137 = __m(172);
+const m138 = __m(173);
+const m139 = __m(174);
+const m140 = __m(175);
+const m141 = __m(176);
+const m142 = __m(177);
+const m143 = __m(178);
+const m144 = __m(179);
+const m145 = __m(180);
+const m146 = __m(181);
+const m147 = __m(182);
+const m148 = __m(183);
+const m149 = __m(184);
+const m150 = __m(185);
+const m151 = __m(186);
+const m152 = __m(187);
+const m153 = __m(188);
+const m154 = __m(189);
+const m155 = __m(190);
+const m156 = __m(191);
+const m157 = __m(192);
+const m158 = __m(193);
+const m159 = __m(194);
+const m160 = __m(195);
+const m161 = __m(196);
+const m162 = __m(197);
+const m163 = __m(198);
+const m164 = __m(199);
+const m165 = __m(200);
+const m166 = __m(201);
+const m167 = __m(202);
+const m168 = __m(203);
+const m169 = __m(204);
+const m170 = __m(205);
+const m171 = __m(206);
+const m172 = __m(207);
+const m173 = __m(208);
+const m174 = __m(209);
+const m175 = __m(210);
+const m176 = __m(211);
+const m177 = __m(212);
+const m178 = __m(213);
+const m179 = __m(214);
+const m180 = __m(215);
+const m181 = __m(216);
+const m182 = __m(217);
+const m183 = __m(218);
+const m184 = __m(219);
+const m185 = __m(221);
+const m186 = __m(222);
+const m187 = __m(223);
+const m188 = __m(224);
+const m189 = __m(225);
+const m190 = __m(226);
+const m191 = __m(227);
+const m192 = __m(228);
+const m193 = __m(229);
+const m194 = __m(231);
+const m195 = __m(232);
+const m196 = __m(233);
+const m197 = __m(234);
+const m198 = __m(235);
+const m199 = __m(236);
+const m200 = __m(237);
+const m201 = __m(238);
 __e(__ns, { "GLYPH_MODULES": () => GLYPH_MODULES }, [], ["GLYPH_MODULES"]);
 const GLYPH_MODULES = [
 ['audio/equalizer.js', m0],
@@ -4265,64 +7840,286 @@ const GLYPH_MODULES = [
 ['audio/music-note.js', m4],
 ['audio/volume.js', m5],
 ['audio/waveform.js', m6],
-['dev/bug.js', m7],
-['dev/cloud.js', m8],
-['dev/code.js', m9],
-['dev/git-branch.js', m10],
-['dev/rocket.js', m11],
-['dev/terminal.js', m12],
-['home/bulb.js', m13],
-['home/fan.js', m14],
-['home/plug.js', m15],
-['home/thermostat.js', m16],
-['media/play-pause.js', m17],
-['media/record.js', m18],
-['media/shuffle.js', m19],
-['media/skip-next.js', m20],
-['media/skip-prev.js', m21],
-['media/stop.js', m22],
-['nav/back.js', m23],
-['nav/folder.js', m24],
-['nav/home.js', m25],
-['nav/pages.js', m26],
-['nav/search.js', m27],
-['productivity/coffee.js', m28],
-['productivity/mail.js', m29],
-['productivity/note.js', m30],
-['productivity/target.js', m31],
-['status/alert.js', m32],
-['status/check.js', m33],
-['status/info.js', m34],
-['status/lock.js', m35],
-['status/power.js', m36],
-['status/sync.js', m37],
-['stream/broadcast.js', m38],
-['stream/camera.js', m39],
-['stream/chat.js', m40],
-['stream/marker.js', m41],
-['stream/scene.js', m42],
-['stream/viewers.js', m43],
-['system/battery.js', m44],
-['system/cpu.js', m45],
-['system/disk.js', m46],
-['system/gpu.js', m47],
-['system/memory.js', m48],
-['system/network.js', m49],
-['system/wifi.js', m50],
-['time/alarm.js', m51],
-['time/calendar.js', m52],
-['time/clock.js', m53],
-['time/stopwatch.js', m54],
-['time/timer.js', m55],
+['build/align.js', m7],
+['build/auto-complete.js', m8],
+['build/bank-left.js', m9],
+['build/bank-level.js', m10],
+['build/bank-right.js', m11],
+['build/bank.js', m12],
+['build/booster.js', m13],
+['build/brake.js', m14],
+['build/chain-lift.js', m15],
+['build/falloff.js', m16],
+['build/heatmap.js', m17],
+['build/length-minus.js', m18],
+['build/length-plus.js', m19],
+['build/loop.js', m20],
+['build/path.js', m21],
+['build/pitch-down.js', m22],
+['build/pitch-level.js', m23],
+['build/pitch-up.js', m24],
+['build/pitch.js', m25],
+['build/smooth.js', m26],
+['build/special.js', m27],
+['build/stairs.js', m28],
+['build/station.js', m29],
+['build/terrain.js', m30],
+['build/track-curve-left.js', m31],
+['build/track-curve-right.js', m32],
+['build/track-straight.js', m33],
+['dev/bucket.js', m34],
+['dev/bug.js', m35],
+['dev/build.js', m36],
+['dev/cloud.js', m37],
+['dev/cluster.js', m38],
+['dev/code.js', m39],
+['dev/container.js', m40],
+['dev/database.js', m41],
+['dev/definition.js', m42],
+['dev/diff.js', m43],
+['dev/fold.js', m44],
+['dev/function.js', m45],
+['dev/git-branch.js', m46],
+['dev/references.js', m47],
+['dev/rocket.js', m48],
+['dev/step-into.js', m49],
+['dev/step-out.js', m50],
+['dev/symbol.js', m51],
+['dev/terminal.js', m52],
+['edit/brush.js', m53],
+['edit/clear.js', m54],
+['edit/copy.js', m55],
+['edit/cursor.js', m56],
+['edit/cut.js', m57],
+['edit/delete.js', m58],
+['edit/edit.js', m59],
+['edit/forward.js', m60],
+['edit/magnet.js', m61],
+['edit/move.js', m62],
+['edit/paste.js', m63],
+['edit/rename.js', m64],
+['edit/replace.js', m65],
+['edit/rotate.js', m66],
+['edit/scale.js', m67],
+['edit/select.js', m68],
+['edit/snap.js', m69],
+['game/beam.js', m70],
+['game/boost.js', m71],
+['game/crouch.js', m72],
+['game/exocraft.js', m73],
+['game/follow.js', m74],
+['game/freighter.js', m75],
+['game/galaxy.js', m76],
+['game/gamepad.js', m77],
+['game/height.js', m78],
+['game/jetpack.js', m79],
+['game/jump.js', m80],
+['game/land.js', m81],
+['game/roll.js', m82],
+['game/scanner.js', m83],
+['game/sun.js', m84],
+['game/walk.js', m85],
+['game/warp.js', m86],
+['home/bulb.js', m87],
+['home/fan.js', m88],
+['home/leaf.js', m89],
+['home/plug.js', m90],
+['home/thermostat.js', m91],
+['media/artist.js', m92],
+['media/chapter-next.js', m93],
+['media/chapter-prev.js', m94],
+['media/forward-10.js', m95],
+['media/frame-next.js', m96],
+['media/frame-prev.js', m97],
+['media/play-pause.js', m98],
+['media/queue.js', m99],
+['media/record.js', m100],
+['media/replay.js', m101],
+['media/rewind-10.js', m102],
+['media/shuffle.js', m103],
+['media/skip-next.js', m104],
+['media/skip-prev.js', m105],
+['media/speed.js', m106],
+['media/stop.js', m107],
+['nav/address-bar.js', m108],
+['nav/arrow-down.js', m109],
+['nav/arrow-left.js', m110],
+['nav/arrow-right.js', m111],
+['nav/arrow-up.js', m112],
+['nav/back.js', m113],
+['nav/close.js', m114],
+['nav/folder.js', m115],
+['nav/fullscreen.js', m116],
+['nav/goto-line.js', m117],
+['nav/home.js', m118],
+['nav/link.js', m119],
+['nav/pages.js', m120],
+['nav/pin.js', m121],
+['nav/radial.js', m122],
+['nav/scroll-bottom.js', m123],
+['nav/scroll-top.js', m124],
+['nav/scroll.js', m125],
+['nav/search.js', m126],
+['nav/tab-group.js', m127],
+['nav/tab.js', m128],
+['nav/zoom-in.js', m129],
+['nav/zoom-out.js', m130],
+['nav/zoom-reset.js', m131],
+['productivity/bold.js', m132],
+['productivity/captions.js', m133],
+['productivity/coffee.js', m134],
+['productivity/comment.js', m135],
+['productivity/dollar.js', m136],
+['productivity/emoji.js', m137],
+['productivity/eye.js', m138],
+['productivity/font-size.js', m139],
+['productivity/format.js', m140],
+['productivity/gif.js', m141],
+['productivity/heading.js', m142],
+['productivity/heart.js', m143],
+['productivity/indent.js', m144],
+['productivity/italic.js', m145],
+['productivity/keyboard.js', m146],
+['productivity/layers.js', m147],
+['productivity/mail.js', m148],
+['productivity/note.js', m149],
+['productivity/settings.js', m150],
+['productivity/star.js', m151],
+['productivity/sticker.js', m152],
+['productivity/strike.js', m153],
+['productivity/target.js', m154],
+['status/alert.js', m155],
+['status/check.js', m156],
+['status/info.js', m157],
+['status/key.js', m158],
+['status/lock.js', m159],
+['status/person.js', m160],
+['status/power.js', m161],
+['status/shield.js', m162],
+['status/sync.js', m163],
+['stream/broadcast.js', m164],
+['stream/camera.js', m165],
+['stream/chat.js', m166],
+['stream/fade.js', m167],
+['stream/marker.js', m168],
+['stream/scene.js', m169],
+['stream/screenshot.js', m170],
+['stream/viewers.js', m171],
+['system/battery.js', m172],
+['system/cpu.js', m173],
+['system/disk.js', m174],
+['system/globe.js', m175],
+['system/gpu.js', m176],
+['system/memory.js', m177],
+['system/network.js', m178],
+['system/wifi.js', m179],
+['time/alarm.js', m180],
+['time/calendar.js', m181],
+['time/clock.js', m182],
+['time/stopwatch.js', m183],
+['time/timer.js', m184],
+['window/fit.js', m185],
+['window/hdr.js', m186],
+['window/layout.js', m187],
+['window/maximize.js', m188],
+['window/minimize.js', m189],
+['window/monitor.js', m190],
+['window/panel.js', m191],
+['window/pip.js', m192],
+['window/sidebar.js', m193],
+['window/snap-left.js', m194],
+['window/snap-right.js', m195],
+['window/split-down.js', m196],
+['window/split.js', m197],
+['window/theater.js', m198],
+['window/view-details.js', m199],
+['window/view-icons.js', m200],
+['window/window.js', m201],
 ];
 };
-__d[78] = function (__ns) {
-const { GLYPH_MODULES } = __m(77);
-__e(__ns, { "glyphRegistry": () => glyphRegistry, "allGlyphs": () => allGlyphs, "getGlyph": () => getGlyph, "glyphCategories": () => glyphCategories }, [], ["allGlyphs","getGlyph","glyphCategories","glyphRegistry"]);
+__d[240] = function (__ns) {
+
+__e(__ns, { "GLYPH_ALIASES": () => GLYPH_ALIASES }, [], ["GLYPH_ALIASES"]);
+const GLYPH_ALIASES = Object.freeze({
+account: { glyph: 'person' }, 
+axis: { glyph: 'move' }, 
+bottom: { glyph: 'scroll-bottom' },
+box: { glyph: 'scale' }, 
+clipboard: { glyph: 'paste' },
+'close-pane': { glyph: 'close' },
+cost: { glyph: 'dollar' },
+credentials: { glyph: 'key' },
+db: { glyph: 'database' },
+discard: { glyph: 'delete' },
+duplicate: { glyph: 'copy' },
+'eye-off': { glyph: 'eye', state: 'hidden' },
+firewall: { glyph: 'shield' },
+'folder-up': { glyph: 'arrow-up' },
+gear: { glyph: 'settings' },
+'hidden-files': { glyph: 'eye' },
+'hide-ui': { glyph: 'eye', state: 'hidden' },
+line: { glyph: 'goto-line' },
+'mail-down': { glyph: 'arrow-down' },
+'mail-up': { glyph: 'arrow-up' },
+money: { glyph: 'dollar' },
+'monitor-next': { glyph: 'monitor' },
+nodes: { glyph: 'cluster' },
+'page-scroll': { glyph: 'scroll' },
+'page-top': { glyph: 'scroll-top' },
+paint: { glyph: 'brush' },
+'pane-down': { glyph: 'arrow-down' },
+'pane-right': { glyph: 'arrow-right' },
+'pane-up': { glyph: 'arrow-up' },
+panes: { glyph: 'split' },
+'path-join': { glyph: 'path' },
+pause: { glyph: 'play-pause', state: 'playing' }, 
+play: { glyph: 'play-pause', state: 'paused' },
+preview: { glyph: 'eye' },
+properties: { glyph: 'info' },
+redo: { glyph: 'forward' },
+'refresh-rate': { glyph: 'monitor' },
+region: { glyph: 'globe' }, 
+reopen: { glyph: 'back' }, 
+resize: { glyph: 'scale' },
+revert: { glyph: 'back' },
+security: { glyph: 'shield' },
+'seek-back': { glyph: 'rewind-10' },
+'seek-forward': { glyph: 'forward-10' },
+'select-all': { glyph: 'select' },
+'select-block': { glyph: 'select' },
+'select-lines': { glyph: 'select' },
+'select-words': { glyph: 'select' },
+'split-auto': { glyph: 'split' },
+'split-right': { glyph: 'split' },
+'tab-1': { glyph: 'tab' },
+'tab-2': { glyph: 'tab' },
+'tab-close': { glyph: 'close' },
+'tab-last': { glyph: 'tab' },
+'tab-move': { glyph: 'tab' },
+'tab-next': { glyph: 'arrow-right' },
+'tab-prev': { glyph: 'arrow-left' },
+'tab-slot': { glyph: 'tab' },
+top: { glyph: 'scroll-top' },
+transform: { glyph: 'scale' },
+trash: { glyph: 'delete' },
+undo: { glyph: 'back' },
+user: { glyph: 'person' },
+'width-minus': { glyph: 'length-minus' },
+'width-plus': { glyph: 'length-plus' },
+'window-close': { glyph: 'close' },
+world: { glyph: 'globe' },
+zoom: { glyph: 'zoom-in' },
+});
+};
+__d[241] = function (__ns) {
+const { GLYPH_MODULES } = __m(239);
+const { GLYPH_ALIASES } = __m(240);
+__e(__ns, { "glyphRegistry": () => glyphRegistry, "allGlyphs": () => allGlyphs, "glyphCategories": () => glyphCategories, "resolveGlyph": () => resolveGlyph, "getGlyph": () => getGlyph, "glyphAliases": () => glyphAliases }, [], ["allGlyphs","getGlyph","glyphAliases","glyphCategories","glyphRegistry","resolveGlyph"]);
+const KEBAB = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 let cache = null;
 function glyphRegistry() {
 if (cache) return cache;
-const glyphs = new Map(), problems = [];
+const glyphs = new Map(), aliases = new Map(), problems = [];
 for (const [file, mod] of GLYPH_MODULES) {
 const g = mod.default;
 if (!g || typeof g.draw !== 'function' || !g.stateNames) { problems.push(`${file}: default export must be defineGlyph({...})`); continue; }
@@ -4332,21 +8129,38 @@ if (`${g.id}.js` !== name) problems.push(`${file}: glyph id "${g.id}" must match
 if (glyphs.has(g.id)) problems.push(`duplicate glyph id "${g.id}" (${file})`);
 glyphs.set(g.id, Object.freeze({ ...g, file }));
 }
-cache = { glyphs, problems };
+for (const [name, a] of Object.entries(GLYPH_ALIASES)) {
+const target = glyphs.get(a?.glyph);
+if (!KEBAB.test(name)) problems.push(`alias "${name}" must be kebab-case`);
+else if (glyphs.has(name)) problems.push(`alias "${name}" shadows the glyph of the same id`);
+else if (!target) problems.push(`alias "${name}" → unknown glyph "${a?.glyph}"`);
+else if (a.state != null && !target.states[a.state]) problems.push(`alias "${name}" → ${a.glyph} has no state "${a.state}"`);
+else aliases.set(name, Object.freeze({ glyph: a.glyph, state: a.state ?? null }));
+}
+cache = { glyphs, aliases, problems };
 return cache;
 }
 const allGlyphs = () => [...glyphRegistry().glyphs.values()];
-const getGlyph = (id) => glyphRegistry().glyphs.get(id) || null;
 const glyphCategories = () => [...new Set(allGlyphs().map((g) => g.category))];
+function resolveGlyph(name) {
+const id = typeof name === 'string' ? name.split('/').pop() : '';
+const { glyphs, aliases } = glyphRegistry();
+const g = glyphs.get(id);
+if (g) return { glyph: g, state: null, alias: null };
+const a = aliases.get(id);
+return a ? { glyph: glyphs.get(a.glyph), state: a.state, alias: id } : null;
+}
+const getGlyph = (id) => glyphRegistry().glyphs.get(id) || resolveGlyph(id)?.glyph || null;
+const glyphAliases = () => [...glyphRegistry().aliases].map(([name, a]) => ({ name, ...a }));
 };
-__d[79] = function (__ns) {
+__d[242] = function (__ns) {
 const { defineTheme, bezelCorner } = __m(14);
 const { rect, path, circle, polygon, url, linearGradient, radialGradient, n, P, attrs } = __m(5);
 const { mix } = __m(4);
 const { clamp, lerp, outCubic, outExpo, pulse, phase, arrive } = __m(12);
 const { hash } = __m(1);
 const { pathBounds } = __m(13);
-const { getGlyph } = __m(78);
+const { getGlyph } = __m(241);
 __e(__ns, { "curtainColors": () => curtainColors, "auroraLayer": () => auroraLayer, "frostLayer": () => frostLayer, "default": () => __default, "pane": () => pane, "paintAurora": () => paintAurora, "ENERGY": () => ENERGY }, [], ["ENERGY","auroraLayer","curtainColors","default","frostLayer","paintAurora","pane"]);
 const NIGHT = {
 bg: '#04060d', surface: '#0e1426', surface2: '#060912', line: '#1c2440',
@@ -4625,13 +8439,13 @@ press: breathPress,
 glyphs,
 });
 };
-__d[80] = function (__ns) {
+__d[243] = function (__ns) {
 const { defineTheme, defaultText, bezelCorner } = __m(14);
 const { rect, path, polygon, url, linearGradient, radialGradient, n, P, attrs } = __m(5);
 const { textPath, fitText, capHeight } = __m(11);
 const { clamp, lerp, outCubic, outExpo, pulse, phase, arrive } = __m(12);
 const { pathBounds, flattenPath } = __m(13);
-const { getGlyph } = __m(78);
+const { getGlyph } = __m(241);
 __e(__ns, { "draftGrid": () => draftGrid, "default": () => __default, "sheet": () => sheet, "paintBlueprint": () => paintBlueprint }, [], ["default","draftGrid","paintBlueprint","sheet"]);
 const CYANOTYPE = {
 bg: '#061733', surface: '#14407a', surface2: '#0b2a57', line: '#2d5d9c',
@@ -4991,7 +8805,7 @@ text: lettering,
 glyphs,
 });
 };
-__d[81] = function (__ns) {
+__d[244] = function (__ns) {
 const { attrs, n } = __m(5);
 const { pathBounds } = __m(13);
 __e(__ns, { "stack": () => stack, "onePen": () => onePen, "isLettering": () => isLettering, "minSide": () => minSide, "strokeOf": () => strokeOf, "fillOf": () => fillOf, "strokeOpts": () => strokeOpts, "once": () => once, "castText": () => castText }, [], ["castText","fillOf","isLettering","minSide","once","onePen","stack","strokeOf","strokeOpts"]);
@@ -5063,14 +8877,14 @@ const body = markup.replace(/ fill="#[0-9a-fA-F]{6}"/g, ` fill="${color}"`).repl
 return `<g transform="translate(${n(dx)} ${n(dy)})"${opacity < 1 ? ` opacity="${n(opacity, 3)}"` : ''}>${body}</g>`;
 }
 };
-__d[82] = function (__ns) {
+__d[245] = function (__ns) {
 const { defineTheme, defaultText, bezelCorner } = __m(14);
 const { rect, path, polygon, url, linearGradient, radialGradient, n, roundRectPath } = __m(5);
 const { mix } = __m(4);
 const { clamp, lerp, outCubic, pulse, phase, spring, arrive } = __m(12);
 const { hash } = __m(1);
-const { getGlyph } = __m(78);
-const { stack, onePen, isLettering, strokeOf, fillOf, strokeOpts, once, castText } = __m(81);
+const { getGlyph } = __m(241);
+const { stack, onePen, isLettering, strokeOf, fillOf, strokeOpts, once, castText } = __m(244);
 __e(__ns, { "default": () => __default, "keyFace": () => keyFace, "plate": () => plate, "paintChrome": () => paintChrome, "stateOf": () => stateOf }, [], ["default","keyFace","paintChrome","plate","stateOf"]);
 const NIGHT = {
 bg: '#07080a', surface: '#3b4048', surface2: '#1c1f24', line: '#4a5059',
@@ -5400,7 +9214,7 @@ g.dot(24, 24, 1.7);
 },
 });
 };
-__d[83] = function (__ns) {
+__d[246] = function (__ns) {
 const { attrs, n } = __m(5);
 const { pathBounds } = __m(13);
 __e(__ns, { "layered": () => layered, "coarse": () => coarse, "onePen": () => onePen, "isLettering": () => isLettering, "minSide": () => minSide, "strokeA": () => strokeA, "fillA": () => fillA }, [], ["coarse","fillA","isLettering","layered","minSide","onePen","strokeA"]);
@@ -5485,14 +9299,14 @@ strokeLinecap: cap, strokeLinejoin: join, strokeDasharray: dash, strokeDashoffse
 });
 const fillA = (color, opacity) => ({ fill: color, fillOpacity: opacity < 0.999 ? n(Math.max(0, opacity), 3) : null });
 };
-__d[84] = function (__ns) {
+__d[247] = function (__ns) {
 const { defineTheme, bezelCorner } = __m(14);
 const { rect, path, url, linearGradient, radialGradient, n, P, roundRectPath } = __m(5);
 const { mix } = __m(4);
 const { clamp, lerp, outCubic, pulse, phase } = __m(12);
 const { hash } = __m(1);
-const { getGlyph } = __m(78);
-const { layered, onePen, strokeA, fillA } = __m(83);
+const { getGlyph } = __m(241);
+const { layered, onePen, strokeA, fillA } = __m(246);
 __e(__ns, { "heatOf": () => heatOf, "bellows": () => bellows, "default": () => __default }, [], ["bellows","default","heatOf"]);
 const NIGHT = {
 bg: '#0b0605', surface: '#1c110c', surface2: '#0d0705', line: '#33211a',
@@ -5750,7 +9564,7 @@ g.polyline(pts, { role: i ? 'dim' : 'line', opacity: op });
 },
 });
 };
-__d[85] = function (__ns) {
+__d[248] = function (__ns) {
 const { attrs, n } = __m(5);
 const { clamp } = __m(12);
 const { rng } = __m(1);
@@ -5835,14 +9649,14 @@ f += `M${n(cx - rr, 1)} ${n(cy, 1)}a${n(rr, 2)} ${n(rr, 2)} 0 1 0 ${n(2 * rr, 2)
 return { fibers: d, flecks: f };
 }
 };
-__d[86] = function (__ns) {
+__d[249] = function (__ns) {
 const { defineTheme, defaultText, bezelCorner } = __m(14);
 const { rect, path, polygon, n, roundRectPath } = __m(5);
 const { clamp, outCubic, phase, arrive } = __m(12);
 const { pathBounds } = __m(13);
 const { capHeight, wrapText } = __m(11);
-const { layeredPaint, strokeA, fillA } = __m(85);
-const { getGlyph } = __m(78);
+const { layeredPaint, strokeA, fillA } = __m(248);
+const { getGlyph } = __m(241);
 __e(__ns, { "default": () => __default, "monoFace": () => face, "monoState": () => stateOf }, [], ["default","monoFace","monoState"]);
 const NIGHT = {
 bg: '#000000', surface: '#000000', surface2: '#000000', line: '#5e5e5e',
@@ -6058,14 +9872,14 @@ const lv = Math.round(clamp(s.level) * 3);
 },
 });
 };
-__d[87] = function (__ns) {
+__d[250] = function (__ns) {
 const { defineTheme, defaultText, defaultGlyphBox, bezelCorner } = __m(14);
 const { rect, path, url, linearGradient, radialGradient, n, P, roundRectPath } = __m(5);
 const { mix } = __m(4);
 const { clamp, lerp, outExpo, pulse, phase } = __m(12);
 const { hash } = __m(1);
-const { getGlyph } = __m(78);
-const { layered, onePen, isLettering, minSide, strokeA, fillA, coarse } = __m(83);
+const { getGlyph } = __m(241);
+const { layered, onePen, isLettering, minSide, strokeA, fillA, coarse } = __m(246);
 __e(__ns, { "current": () => current, "gas": () => gas, "default": () => __default }, [], ["current","default","gas"]);
 const NIGHT = {
 bg: '#030304', surface: '#0c0b10', surface2: '#050508', line: '#1d1b25',
@@ -6345,14 +10159,14 @@ g.line(x1, y1, x2, y2, { role: 'accent', weight: 0.8, opacity: n0 < 7 && i <= n0
 },
 });
 };
-__d[88] = function (__ns) {
+__d[251] = function (__ns) {
 const { defineTheme, defaultText, bezelCorner } = __m(14);
 const { rect, path, polygon, url, linearGradient, radialGradient, n, roundRectPath } = __m(5);
 const { mix } = __m(4);
 const { clamp, lerp, outCubic, pulse, phase, arrive } = __m(12);
-const { layeredPaint, strokeA, fillA, halftone, fibers, strHash } = __m(85);
+const { layeredPaint, strokeA, fillA, halftone, fibers, strHash } = __m(248);
 const { capHeight, wrapText } = __m(11);
-const { getGlyph } = __m(78);
+const { getGlyph } = __m(241);
 __e(__ns, { "default": () => __default, "paperStock": () => stock, "paperCard": () => card }, [], ["default","paperCard","paperStock"]);
 const DAY = {
 bg: '#e4d9c6', surface: '#f7f2e7', surface2: '#ede4d1', line: '#d6c8ad',
@@ -6591,7 +10405,7 @@ if (k > 0.02) g.line(x1, y1, x2, y2, { role: 'accent', weight: long ? 0.62 : 0.5
 },
 });
 };
-__d[89] = function (__ns) {
+__d[252] = function (__ns) {
 
 __e(__ns, { "FONT5": () => FONT5, "FONT3": () => FONT3, "charOf": () => charOf, "measureDots": () => measureDots, "textRuns": () => textRuns, "runsPath": () => runsPath, "pickFace": () => pickFace, "fallbackFaces": () => fallbackFaces, "fitFace": () => fitFace }, [], ["FONT3","FONT5","charOf","fallbackFaces","fitFace","measureDots","pickFace","runsPath","textRuns"]);
 const rows = (s) => s.trim().split(/\s+/);
@@ -6784,10 +10598,10 @@ const text = `${s.join('')}…`;
 return { ...f, text, width: measureDots(text, f.font, tracking) * f.d };
 }
 };
-__d[90] = function (__ns) {
+__d[253] = function (__ns) {
 const { path, n } = __m(5);
 const { capHeight } = __m(11);
-const { pickFace, fitFace, textRuns, runsPath, measureDots } = __m(89);
+const { pickFace, fitFace, textRuns, runsPath, measureDots } = __m(252);
 __e(__ns, { "bitmapText": () => bitmapText }, [], ["bitmapText"]);
 function bitmapText(k, role, str, o = {}, { paint } = {}) {
 const st = k.typeStyle(role, o);
@@ -6847,14 +10661,14 @@ out += path(runsPath(runs, f0.d), { fill: color, fillOpacity: o.opacity !== unde
 return out;
 }
 };
-__d[91] = function (__ns) {
+__d[254] = function (__ns) {
 const { defineTheme } = __m(14);
 const { rect, path, url, linearGradient, radialGradient, n, attrs } = __m(5);
 const { mix } = __m(4);
 const { clamp, phase, lerp } = __m(12);
 const { Pen } = __m(16);
-const { glyphRegistry } = __m(78);
-const { bitmapText } = __m(90);
+const { glyphRegistry } = __m(241);
+const { bitmapText } = __m(253);
 __e(__ns, { "default": () => __default, "tube": () => tube, "raster": () => raster, "scanPath": () => scanPath }, [], ["default","raster","scanPath","tube"]);
 function raster(k) {
 const m = k.ctx.kind === 'key' ? Math.min(k.w, k.h) : Math.max(72, 72 * k.m.u);
@@ -7121,7 +10935,7 @@ overlay: rect({ width: k.w, height: k.h, fill: k.dark ? C.ink : '#ffffff', fillO
 glyphs: GLYPHS,
 });
 };
-__d[92] = function (__ns) {
+__d[255] = function (__ns) {
 const { flattenPath, insidePolys, distToPolys, transformPath } = __m(13);
 __e(__ns, { "MATRIX": () => MATRIX, "LEVELS": () => LEVELS, "applyTf": () => applyTf, "flatD": () => flatD, "quantize": () => quantize, "rasterize": () => rasterize, "bayer": () => bayer, "latticePath": () => latticePath, "cellsToRuns": () => cellsToRuns }, [], ["LEVELS","MATRIX","applyTf","bayer","cellsToRuns","flatD","latticePath","quantize","rasterize"]);
 const MATRIX = Object.freeze({ n: 15, x0: 6, span: 36 });
@@ -7267,13 +11081,13 @@ if (i < xs.length) { s = xs[i]; p = xs[i]; }
 return runs;
 }
 };
-__d[93] = function (__ns) {
+__d[256] = function (__ns) {
 const { defineTheme } = __m(14);
 const { rect, path, n, attrs } = __m(5);
 const { mix } = __m(4);
 const { clamp, phase, smoothstep, arrive } = __m(12);
-const { rasterize, bayer, latticePath, cellsToRuns, MATRIX } = __m(92);
-const { bitmapText } = __m(90);
+const { rasterize, bayer, latticePath, cellsToRuns, MATRIX } = __m(255);
+const { bitmapText } = __m(253);
 __e(__ns, { "cellPx": () => cellPx, "default": () => __default, "lcd": () => lcd, "lattice": () => lattice, "frame": () => frame, "dither": () => dither }, [], ["cellPx","default","dither","frame","lattice","lcd"]);
 const N = MATRIX.n; 
 const CU = MATRIX.span / N; 
@@ -7684,13 +11498,13 @@ overlay: path(`M0 0H${k.w}V${c}H${c}V${k.h}H0Z`, { fill: k.dark ? '#000000' : mi
 glyphs: OVERRIDES,
 });
 };
-__d[94] = function (__ns) {
+__d[257] = function (__ns) {
 const { defineTheme, defaultText, bezelCorner } = __m(14);
 const { rect, path, polygon, url, linearGradient, radialGradient, n, roundRectPath } = __m(5);
 const { mix } = __m(4);
 const { clamp, lerp, pulse, phase, outCubic, arrive, outExpo } = __m(12);
-const { getGlyph } = __m(78);
-const { stack, onePen, isLettering, strokeOf, fillOf, strokeOpts, once } = __m(81);
+const { getGlyph } = __m(241);
+const { stack, onePen, isLettering, strokeOf, fillOf, strokeOpts, once } = __m(244);
 __e(__ns, { "default": () => __default, "keyTile": () => keyTile, "plaque": () => plaque, "paintPorcelain": () => paintPorcelain, "stateOf": () => stateOf }, [], ["default","keyTile","paintPorcelain","plaque","stateOf"]);
 const DAY = {
 bg: '#d6d9e1', surface: '#fbfcfe', surface2: '#d6deeb', line: '#c3cbdb',
@@ -7978,7 +11792,7 @@ g.polygon([[bx, by], [lx, ly], [tx, ty], [rx, ry]], { role: 'accent', fill: true
 },
 });
 };
-__d[95] = function (__ns) {
+__d[258] = function (__ns) {
 const { defineTheme, defaultPaint, cornerFlag } = __m(14);
 const { TOKENS } = __m(3);
 const { rect, path, polygon, url, linearGradient, radialGradient, n, roundRectPath } = __m(5);
@@ -8094,18 +11908,18 @@ overlay: ring(-split, h - 60, 0.7) + ring(split, h + 60, 0.7) + ring(0, h, 0.9),
 },
 });
 };
-__d[96] = function (__ns) {
-const m0 = __m(79);
-const m1 = __m(80);
-const m2 = __m(82);
-const m3 = __m(84);
-const m4 = __m(86);
-const m5 = __m(87);
-const m6 = __m(88);
-const m7 = __m(91);
-const m8 = __m(93);
-const m9 = __m(94);
-const m10 = __m(95);
+__d[259] = function (__ns) {
+const m0 = __m(242);
+const m1 = __m(243);
+const m2 = __m(245);
+const m3 = __m(247);
+const m4 = __m(249);
+const m5 = __m(250);
+const m6 = __m(251);
+const m7 = __m(254);
+const m8 = __m(256);
+const m9 = __m(257);
+const m10 = __m(258);
 __e(__ns, { "THEME_MODULES": () => THEME_MODULES }, [], ["THEME_MODULES"]);
 const THEME_MODULES = [
 ['aurora.js', m0],
@@ -8121,8 +11935,8 @@ const THEME_MODULES = [
 ['prism.js', m10],
 ];
 };
-__d[97] = function (__ns) {
-const { THEME_MODULES } = __m(96);
+__d[260] = function (__ns) {
+const { THEME_MODULES } = __m(259);
 __e(__ns, { "DEFAULT_THEME": () => DEFAULT_THEME, "themeRegistry": () => themeRegistry, "allThemes": () => allThemes, "THEME_IDS": () => THEME_IDS, "useTheme": () => useTheme }, [], ["DEFAULT_THEME","THEME_IDS","allThemes","themeRegistry","useTheme"]);
 const DEFAULT_THEME = 'prism';
 let cache = null;
@@ -8152,14 +11966,15 @@ if (!t) throw new Error('no themes registered');
 return Object.freeze({ ...t, ...t.resolve(m) });
 }
 };
-__d[98] = function (__ns) {
+__d[261] = function (__ns) {
 const { getDevice, keySize, spanGrid, stripGrid, deckLayout, screenOf } = __m(0);
 const { rng: makeRng, hash, noise1, noise2, fbm1, metric, series } = __m(1);
 const { getGallery } = __m(2);
-const { useTheme } = __m(97);
-const { glyphRegistry } = __m(78);
-__e(__ns, { "resolveParams": () => resolveParams, "clockOf": () => clockOf, "SCREEN_TARGETS": () => SCREEN_TARGETS, "screenTarget": () => screenTarget, "DEFAULT_DEVICE": () => DEFAULT_DEVICE, "createContext": () => createContext, "gameGrid": () => gameGrid }, [], ["DEFAULT_DEVICE","SCREEN_TARGETS","clockOf","createContext","gameGrid","resolveParams","screenTarget"]);
+const { useTheme } = __m(260);
+const { glyphRegistry } = __m(241);
+__e(__ns, { "MOTION_LEVELS": () => MOTION_LEVELS, "resolveParams": () => resolveParams, "clockOf": () => clockOf, "SCREEN_TARGETS": () => SCREEN_TARGETS, "screenTarget": () => screenTarget, "DEFAULT_DEVICE": () => DEFAULT_DEVICE, "createContext": () => createContext, "gameGrid": () => gameGrid }, [], ["DEFAULT_DEVICE","MOTION_LEVELS","SCREEN_TARGETS","clockOf","createContext","gameGrid","resolveParams","screenTarget"]);
 const DEFAULT_NOW = Date.UTC(2026, 3, 14, 9, 41, 0); 
+const MOTION_LEVELS = Object.freeze(['full', 'calm', 'still']);
 function resolveParams(decl = {}, overrides = {}) {
 const out = {};
 for (const [k, p] of Object.entries(decl)) {
@@ -8245,6 +12060,7 @@ now, clock: clockOf(now, opts.tzOffset ?? 0),
 data: opts.data || {},
 idPrefix, id: (name) => `${idPrefix}-${name}`,
 reduced: !!opts.reduced,
+motion: opts.reduced ? 'still' : MOTION_LEVELS.includes(opts.motion) ? opts.motion : 'full', 
 ...(facet.game ? gameFields(facet, opts, { kind, grid, device, seed, params }) : {}),
 };
 }
@@ -8261,7 +12077,7 @@ const ev = opts.gameEvent;
 return { game, gamePrev: opts.gamePrev ?? null, gameEvent: ev ? { ...ev, age: Number.isFinite(ev.age) ? Math.max(0, ev.age) : 0 } : null };
 }
 };
-__d[99] = function (__ns) {
+__d[262] = function (__ns) {
 const { parsePath, arcBounds } = __m(13);
 __e(__ns, { "splitElements": () => splitElements, "parseTransform": () => parseTransform, "pathHullBounds": () => pathHullBounds, "elementBounds": () => elementBounds, "prepareCull": () => prepareCull, "cullInner": () => cullInner }, [], ["cullInner","elementBounds","parseTransform","pathHullBounds","prepareCull","splitElements"]);
 const NUM = (v, d = 0) => { const x = parseFloat(v); return Number.isFinite(x) ? x : d; };
@@ -8439,10 +12255,10 @@ const defs = prep.defs.filter((d) => !d.id || want.has(d.id)).map((d) => d.str).
 return `${prep.title}${defs ? `<defs>${defs}</defs>` : ''}${kept.map((e) => e.str).join('')}`;
 }
 };
-__d[100] = function (__ns) {
-const { createContext } = __m(98);
+__d[263] = function (__ns) {
+const { createContext } = __m(261);
 const { svgWindow, suffixIds, n, SVG_NS } = __m(5);
-const { prepareCull, cullInner } = __m(99);
+const { prepareCull, cullInner } = __m(262);
 __e(__ns, { "renderFacet": () => renderFacet, "renderWithContext": () => renderWithContext, "render": () => render, "renderKey": () => renderKey, "renderSpan": () => renderSpan, "renderStrip": () => renderStrip, "renderScreen": () => renderScreen, "renderDeck": () => renderDeck, "stillTime": () => stillTime, "nextState": () => nextState }, [], ["nextState","render","renderDeck","renderFacet","renderKey","renderScreen","renderSpan","renderStrip","renderWithContext","stillTime"]);
 function renderFacet(facet, opts = {}) {
 const ctx = createContext(facet, opts);
@@ -8505,9 +12321,9 @@ if (!n || facet.press === 'momentary' || facet.press === 'none') return state;
 return (state + 1) % n;
 }
 };
-__d[101] = function (__ns) {
+__d[264] = function (__ns) {
 const { deviceLayout, getDevice } = __m(0);
-const { useTheme } = __m(97);
+const { useTheme } = __m(260);
 const { esc, n } = __m(5);
 const { textPath, pad2 } = __m(11);
 __e(__ns, { "DEVICE_CSS": () => DEVICE_CSS, "infobarSvg": () => infobarSvg, "deviceMarkup": () => deviceMarkup }, [], ["DEVICE_CSS","deviceMarkup","infobarSvg"]);
@@ -8612,7 +12428,7 @@ const cls = `pdk-device pdk-${d.id}${T.dark ? '' : ' pdk-day'}${interactive ? ' 
 return `<div class="${cls}"${opts.id ? ` id="${esc(opts.id)}"` : ''} data-model="${d.id}" role="group" aria-label="${esc(opts.label || `${d.name} (virtual)`)}" style="${style}">${inner}</div>`;
 }
 };
-__d[102] = function (__ns) {
+__d[265] = function (__ns) {
 const { TOKENS } = __m(3);
 __e(__ns, { "FPS_CAP": () => FPS_CAP, "effectiveFps": () => effectiveFps, "quantize": () => quantize, "createScheduler": () => createScheduler, "createChangeGovernor": () => createChangeGovernor }, [], ["FPS_CAP","createChangeGovernor","createScheduler","effectiveFps","quantize"]);
 const FPS_CAP = TOKENS.deck.fps.cap;
@@ -8693,7 +12509,7 @@ get history() { return [...hist]; },
 };
 }
 };
-__d[103] = function (__ns) {
+__d[266] = function (__ns) {
 
 __e(__ns, { "LINK_CHANNELS": () => LINK_CHANNELS, "linksOf": () => linksOf, "validateLink": () => validateLink, "readoutOf": () => readoutOf, "createLinkBus": () => createLinkBus }, [], ["LINK_CHANNELS","createLinkBus","linksOf","readoutOf","validateLink"]);
 const LINK_CHANNELS = Object.freeze(['mic.muted', 'camera.on', 'stream.live', 'volume.level', 'volume.muted', 'game']);
@@ -8808,15 +12624,15 @@ get size() { return vals.size; },
 return bus;
 }
 };
-__d[104] = function (__ns) {
+__d[267] = function (__ns) {
 const { GALLERIES, getGallery } = __m(2);
 const { KEY_SIZES, FAMILY_DEVICES, getDevice } = __m(0);
-const { validateLink } = __m(103);
+const { validateLink } = __m(266);
 __e(__ns, { "SURFACES": () => SURFACES, "PRESS": () => PRESS, "PARAM_TYPES": () => PARAM_TYPES, "DATA_KEYS": () => DATA_KEYS, "SCREENS": () => SCREENS, "TONES": () => TONES, "GAME_SURFACES": () => GAME_SURFACES, "GAME_TICK_MAX_HZ": () => GAME_TICK_MAX_HZ, "normalizeFacet": () => normalizeFacet, "validateFacet": () => validateFacet, "renderTargets": () => renderTargets }, [], ["DATA_KEYS","GAME_SURFACES","GAME_TICK_MAX_HZ","PARAM_TYPES","PRESS","SCREENS","SURFACES","TONES","normalizeFacet","renderTargets","validateFacet"]);
 const SURFACES = ['key', 'span', 'strip', 'screen', 'deck'];
 const PRESS = ['cycle', 'toggle', 'momentary', 'none'];
 const PARAM_TYPES = ['number', 'hue', 'text', 'select', 'bool', 'color', 'theme', 'glyph'];
-const DATA_KEYS = ['audio', 'spectrum', 'cpu', 'mem', 'gpu', 'net', 'disk', 'temp', 'battery', 'uptime', 'clock', 'timer', 'weather', 'calendar', 'media', 'mic', 'camera', 'volume', 'stream', 'game'];
+const DATA_KEYS = ['audio', 'spectrum', 'cpu', 'mem', 'gpu', 'net', 'disk', 'temp', 'battery', 'uptime', 'clock', 'timer', 'weather', 'calendar', 'media', 'mic', 'camera', 'volume', 'stream', 'game', 'gamelink']; 
 const SCREENS = ['galleon', 'galleon-widget', 'infobar', 'monitor'];
 const TONES = ['idle', 'active', 'ok', 'info', 'warn', 'neg', 'alert', 'crit', 'busy', 'off'];
 const GAME_SURFACES = ['key', 'span', 'deck'];
@@ -8919,11 +12735,11 @@ default: return [];
 }
 }
 };
-__d[105] = function (__ns) {
-const { stillTime } = __m(100);
-const { quantize } = __m(102);
+__d[268] = function (__ns) {
+const { stillTime } = __m(263);
+const { quantize } = __m(265);
 const { getDevice, deviceLayout } = __m(0);
-const { readoutOf } = __m(103);
+const { readoutOf } = __m(266);
 __e(__ns, { "DIAL_SWEEP": () => DIAL_SWEEP, "TAP_SLOP": () => TAP_SLOP, "DRAG_PX": () => DRAG_PX, "WHEEL_PX": () => WHEEL_PX, "clamp01": () => clamp01, "dialAngle": () => dialAngle, "dialStep": () => dialStep, "stepValue": () => stepValue, "wheelTicks": () => wheelTicks, "dragTicks": () => dragTicks, "isTap": () => isTap, "segmentAt": () => segmentAt, "HOLD_S": () => HOLD_S, "stripTouch": () => stripTouch, "inputState": () => inputState, "fitWidth": () => fitWidth, "frameTime": () => frameTime, "slotLabel": () => slotLabel, "gameCell": () => gameCell, "gameAnnouncement": () => gameAnnouncement, "keyPool": () => keyPool, "showcaseLayout": () => showcaseLayout, "KEY_SIZE_DEVICES": () => KEY_SIZE_DEVICES, "FAMILY": () => FAMILY, "devicesFor": () => devicesFor }, [], ["DIAL_SWEEP","DRAG_PX","FAMILY","HOLD_S","KEY_SIZE_DEVICES","TAP_SLOP","WHEEL_PX","clamp01","devicesFor","dialAngle","dialStep","dragTicks","fitWidth","frameTime","gameAnnouncement","gameCell","inputState","isTap","keyPool","segmentAt","showcaseLayout","slotLabel","stepValue","stripTouch","wheelTicks"]);
 const DIAL_SWEEP = 270;
 const TAP_SLOP = 5;
@@ -9012,7 +12828,7 @@ return !p || p.title !== c.title || String(p.value) !== String(c.value);
 });
 return changed.map((c, i) => `${c.title}: ${c.value}${i === 0 && c.sub ? ` (${c.sub})` : ''}`).join('. ');
 }
-const GALLERY_ORDER = ['icons', 'apps', 'motion', 'games', 'themes', 'spans', 'dials', 'screens'];
+const GALLERY_ORDER = ['icons', 'apps', 'motion', 'games', 'themes', 'spans', 'dials', 'screens', 'gamelink']; 
 const isKey = (f) => f.surface === 'key';
 const isDialSeg = (f) => f.surface === 'strip' && (f.segments === 1 || f.segments === '1');
 const isFullStrip = (f) => f.surface === 'strip' && !isDialSeg(f);
@@ -9068,8 +12884,8 @@ const t = (facet.targets || []).map((x) => x.device).filter(Boolean);
 return t.length ? [...new Set(t)] : FAMILY;
 }
 };
-__d[106] = function (__ns) {
-const { createContext, gameGrid } = __m(98);
+__d[269] = function (__ns) {
+const { createContext, gameGrid } = __m(261);
 __e(__ns, { "gameGrid": () => gameGrid, "GAME_EVENTS": () => GAME_EVENTS, "TICK_MAX_HZ": () => TICK_MAX_HZ, "GAME_STATE_MAX": () => GAME_STATE_MAX, "DEFAULT_ANIMATE": () => DEFAULT_ANIMATE, "GAME_FPS": () => GAME_FPS, "GAME_RESET_HOLD_S": () => GAME_RESET_HOLD_S, "rngSeed": () => rngSeed, "rngNext": () => rngNext, "rngInt": () => rngInt, "rngShuffle": () => rngShuffle, "mix32": () => mix32, "gameArgs": () => gameArgs, "isPlainJson": () => isPlainJson, "createGameHost": () => createGameHost, "replayGame": () => replayGame }, [], ["DEFAULT_ANIMATE","GAME_EVENTS","GAME_FPS","GAME_RESET_HOLD_S","GAME_STATE_MAX","TICK_MAX_HZ","createGameHost","gameArgs","gameGrid","isPlainJson","mix32","replayGame","rngInt","rngNext","rngSeed","rngShuffle"]);
 const GAME_EVENTS = ['press', 'release', 'rotate', 'touch', 'tick', 'reset'];
 const TICK_MAX_HZ = 4;
@@ -9194,16 +13010,16 @@ for (const ev of events) h.dispatch(ev);
 return h.state;
 }
 };
-__d[107] = function (__ns) {
-const { render, nextState } = __m(100);
+__d[270] = function (__ns) {
+const { render, nextState } = __m(263);
 const { getDevice, keySize } = __m(0);
-const { deviceMarkup, DEVICE_CSS } = __m(101);
-const { createScheduler, effectiveFps, createChangeGovernor } = __m(102);
-const { normalizeFacet } = __m(104);
+const { deviceMarkup, DEVICE_CSS } = __m(264);
+const { createScheduler, effectiveFps, createChangeGovernor } = __m(265);
+const { normalizeFacet } = __m(267);
 const { esc } = __m(5);
-const { dialAngle, dialStep, stepValue, wheelTicks, dragTicks, isTap, stripTouch, inputState, HOLD_S, fitWidth, frameTime, slotLabel, gameCell, gameAnnouncement } = __m(105);
-const { createGameHost, GAME_FPS, GAME_RESET_HOLD_S } = __m(106);
-const { createLinkBus, readoutOf, linksOf } = __m(103);
+const { dialAngle, dialStep, stepValue, wheelTicks, dragTicks, isTap, stripTouch, inputState, HOLD_S, fitWidth, frameTime, slotLabel, gameCell, gameAnnouncement } = __m(268);
+const { createGameHost, GAME_FPS, GAME_RESET_HOLD_S } = __m(269);
+const { createLinkBus, readoutOf, linksOf } = __m(266);
 __e(__ns, { "putSvg": () => putSvg, "prefersReducedMotion": () => prefersReducedMotion, "setGlobalMotion": () => setGlobalMotion, "isGlobalMotionPaused": () => isGlobalMotionPaused, "deckStats": () => deckStats, "gameInput": () => gameInput, "gameFps": () => gameFps, "DeckView": () => DeckView, "KeyView": () => KeyView, "mountDevice": () => mountDevice, "mountKey": () => mountKey }, [], ["DeckView","KeyView","deckStats","gameFps","gameInput","isGlobalMotionPaused","mountDevice","mountKey","prefersReducedMotion","putSvg","setGlobalMotion"]);
 const nowMs = () => performance.now();
 const BEAT_MS = 1000 / 15;
@@ -9373,7 +13189,7 @@ const rt = this.rt;
 return { device: rt.modelId, theme: rt.opts.theme, mode: rt.opts.mode, t, since: Math.max(0, t - this.stateAt), state: this.state, params: this.params, seed: this.seed,
 pressed: this.pressed, pressAge: this.pressAt === -Infinity ? Infinity : Math.max(0, t - this.pressAt), value: this.value, ticks: this.ticks, values: rt.dialValues?.(),
 pressKey: this.pressKey, heldFor: this.heldFor || 0, ...inputState(this, t),
-now: rt.opts.now ? rt.opts.now() : Date.now(), tzOffset: rt.opts.tzOffset ?? -new Date().getTimezoneOffset(), reduced: rt.still, idPrefix: this.prefix, data: rt.bus.data(this.facet, this.params, rt.opts.data?.() || {}), uniqueIds: true,
+now: rt.opts.now ? rt.opts.now() : Date.now(), tzOffset: rt.opts.tzOffset ?? -new Date().getTimezoneOffset(), reduced: rt.still, motion: rt.still ? 'still' : rt.opts.motion, idPrefix: this.prefix, data: rt.bus.data(this.facet, this.params, rt.opts.data?.() || {}), uniqueIds: true,
 ...(this.game ? this.game.renderOpts(rt.time()) : {}), ...this.extra };
 }
 draw(scheduled = false) {
@@ -9772,7 +13588,7 @@ set(next = {}) { Object.assign(this.opts, next); if (next.facet) this.sp = spec(
 const mountDevice = (el, opts) => new DeckView(el, opts);
 const mountKey = (el, facet, opts) => new KeyView(el, facet, opts);
 };
-__d[108] = function (__ns) {
+__d[271] = function (__ns) {
 
 __e(__ns, { "createModuleLoader": () => createModuleLoader, "loadIsland": () => loadIsland }, [], ["createModuleLoader","loadIsland"]);
 const IMPORT_RE = /(^|\n)(\s*(?:import|export)\s(?:[^'"]*?\sfrom\s*)?)(['"])([^'"]+)\3/g;
@@ -9822,15 +13638,15 @@ web: async () => loader.import('prism-deck/src/web/index.js'),
 };
 }
 };
-__d[109] = function (__ns) {
-const __r0 = __m(107);
-const __r1 = __m(108);
-const __r2 = __m(103);
-__m(105);
-__e(__ns, { "DeckView": () => __r0.DeckView, "KeyView": () => __r0.KeyView, "mountDevice": () => __r0.mountDevice, "mountKey": () => __r0.mountKey, "setGlobalMotion": () => __r0.setGlobalMotion, "isGlobalMotionPaused": () => __r0.isGlobalMotionPaused, "prefersReducedMotion": () => __r0.prefersReducedMotion, "deckStats": () => __r0.deckStats, "loadIsland": () => __r1.loadIsland, "createModuleLoader": () => __r1.createModuleLoader, "createLinkBus": () => __r2.createLinkBus }, [105], ["DIAL_SWEEP","DRAG_PX","DeckView","FAMILY","HOLD_S","KEY_SIZE_DEVICES","KeyView","TAP_SLOP","WHEEL_PX","clamp01","createLinkBus","createModuleLoader","deckStats","devicesFor","dialAngle","dialStep","dragTicks","fitWidth","frameTime","gameAnnouncement","gameCell","inputState","isGlobalMotionPaused","isTap","keyPool","loadIsland","mountDevice","mountKey","prefersReducedMotion","segmentAt","setGlobalMotion","showcaseLayout","slotLabel","stepValue","stripTouch","wheelTicks"]);
+__d[272] = function (__ns) {
+const __r0 = __m(270);
+const __r1 = __m(271);
+const __r2 = __m(266);
+__m(268);
+__e(__ns, { "DeckView": () => __r0.DeckView, "KeyView": () => __r0.KeyView, "mountDevice": () => __r0.mountDevice, "mountKey": () => __r0.mountKey, "setGlobalMotion": () => __r0.setGlobalMotion, "isGlobalMotionPaused": () => __r0.isGlobalMotionPaused, "prefersReducedMotion": () => __r0.prefersReducedMotion, "deckStats": () => __r0.deckStats, "loadIsland": () => __r1.loadIsland, "createModuleLoader": () => __r1.createModuleLoader, "createLinkBus": () => __r2.createLinkBus }, [268], ["DIAL_SWEEP","DRAG_PX","DeckView","FAMILY","HOLD_S","KEY_SIZE_DEVICES","KeyView","TAP_SLOP","WHEEL_PX","clamp01","createLinkBus","createModuleLoader","deckStats","devicesFor","dialAngle","dialStep","dragTicks","fitWidth","frameTime","gameAnnouncement","gameCell","inputState","isGlobalMotionPaused","isTap","keyPool","loadIsland","mountDevice","mountKey","prefersReducedMotion","segmentAt","setGlobalMotion","showcaseLayout","slotLabel","stepValue","stripTouch","wheelTicks"]);
 
 };
-__d[110] = function (__ns) {
+__d[273] = function (__ns) {
 const { SvgCanvas, svgDoc, n, attrs } = __m(5);
 const { drawGlyph, Pen } = __m(16);
 __e(__ns, { "metricsFor": () => metricsFor, "KeySurface": () => KeySurface, "PanelSurface": () => PanelSurface, "surface": () => surface }, [], ["KeySurface","PanelSurface","metricsFor","surface"]);
@@ -9960,8 +13776,8 @@ return svgDoc({ w: this.w, h: this.h, defs: this.defs, body: (fx.under || '') + 
 class PanelSurface extends Surface {}
 const surface = (ctx) => (ctx.kind === 'key' ? new KeySurface(ctx) : new PanelSurface(ctx));
 };
-__d[111] = function (__ns) {
-const { KeySurface, PanelSurface } = __m(110);
+__d[274] = function (__ns) {
+const { KeySurface, PanelSurface } = __m(273);
 const { n, attrs } = __m(5);
 __e(__ns, { "childContext": () => childContext, "compose": () => compose, "keyInto": () => keyInto }, [], ["childContext","compose","keyInto"]);
 function childContext(ctx, rect, { kind = 'key', tag = 'c', state, tone, hue } = {}) {
@@ -9983,8 +13799,8 @@ return out;
 }
 const keyInto = (parent, cell, draw, opts = {}) => compose(parent, cell, draw, { kind: 'key', tag: `k${cell.i ?? ''}`, ...opts });
 };
-__d[112] = function (__ns) {
-const { splitElements, elementBounds } = __m(99);
+__d[275] = function (__ns) {
+const { splitElements, elementBounds } = __m(262);
 const { n } = __m(5);
 __e(__ns, { "toDeviceSvg": () => toDeviceSvg }, [], ["toDeviceSvg"]);
 const PAINT = /\s(?:fill|stroke|fill-opacity|stroke-opacity|opacity|stroke-width|stroke-dasharray|stroke-dashoffset|stroke-linecap|stroke-linejoin|stroke-miterlimit|fill-rule|clip-rule)="[^"]*"/g;
@@ -10045,9 +13861,9 @@ return Math.abs(want - h) < 0.005 ? open : open.replace(/\sheight="[^"]*"/, ` he
 return out;
 }
 };
-__d[113] = function (__ns) {
-const __r0 = __m(110);
-const __r1 = __m(111);
+__d[276] = function (__ns) {
+const __r0 = __m(273);
+const __r1 = __m(274);
 const __r2 = __m(5);
 const __r3 = __m(11);
 const __r4 = __m(15);
@@ -10055,13 +13871,13 @@ const __r5 = __m(4);
 __m(12);
 const __r7 = __m(1);
 const __r8 = __m(13);
-const __r9 = __m(112);
+const __r9 = __m(275);
 __e(__ns, { "surface": () => __r0.surface, "KeySurface": () => __r0.KeySurface, "PanelSurface": () => __r0.PanelSurface, "metricsFor": () => __r0.metricsFor, "compose": () => __r1.compose, "keyInto": () => __r1.keyInto, "n": () => __r2.n, "esc": () => __r2.esc, "attrs": () => __r2.attrs, "el": () => __r2.el, "g": () => __r2.g, "defs": () => __r2.defs, "rect": () => __r2.rect, "circle": () => __r2.circle, "ellipse": () => __r2.ellipse, "line": () => __r2.line, "path": () => __r2.path, "polyline": () => __r2.polyline, "polygon": () => __r2.polygon, "points": () => __r2.points, "url": () => __r2.url, "linearGradient": () => __r2.linearGradient, "radialGradient": () => __r2.radialGradient, "fill": () => __r2.fill, "stroke": () => __r2.stroke, "translate": () => __r2.translate, "rotate": () => __r2.rotate, "scale": () => __r2.scale, "P": () => __r2.P, "roundRectPath": () => __r2.roundRectPath, "svgDoc": () => __r2.svgDoc, "SvgCanvas": () => __r2.SvgCanvas, "svgInner": () => __r2.svgInner, "svgWindow": () => __r2.svgWindow, "suffixIds": () => __r2.suffixIds, "base64": () => __r2.base64, "svgDataUrl": () => __r2.svgDataUrl, "textPath": () => __r3.textPath, "textOutline": () => __r3.textOutline, "measureText": () => __r3.measureText, "fitText": () => __r3.fitText, "wrapText": () => __r3.wrapText, "ellipsize": () => __r3.ellipsize, "capHeight": () => __r3.capHeight, "xHeight": () => __r3.xHeight, "compact": () => __r3.compact, "pad2": () => __r3.pad2, "clockText": () => __r3.clockText, "textLayout": () => __r3.layout, "polar": () => __r4.polar, "arcPath": () => __r4.arcPath, "sectorPath": () => __r4.sectorPath, "arc": () => __r4.arc, "ring": () => __r4.ring, "spectrumArc": () => __r4.spectrumArc, "ticks": () => __r4.ticks, "needle": () => __r4.needle, "sparkPoints": () => __r4.sparkPoints, "sparkPath": () => __r4.sparkPath, "sparkHead": () => __r4.sparkHead, "sparkline": () => __r4.sparkline, "bars": () => __r4.bars, "segments": () => __r4.segments, "hairline": () => __r4.hairline, "spectrumStops": () => __r4.spectrumStops, "glowStops": () => __r4.glowStops, "parseHex": () => __r5.parseHex, "toHex": () => __r5.toHex, "hexToOklab": () => __r5.hexToOklab, "oklabToHex": () => __r5.oklabToHex, "hexToOklch": () => __r5.hexToOklch, "oklch": () => __r5.oklch, "mix": () => __r5.mix, "shade": () => __r5.shade, "saturate": () => __r5.saturate, "luminance": () => __r5.luminance, "contrast": () => __r5.contrast, "bestInk": () => __r5.bestInk, "lambdaOf": () => __r5.lambdaOf, "hueRamp": () => __r5.hueRamp, "rng": () => __r7.rng, "hash": () => __r7.hash, "noise1": () => __r7.noise1, "noise2": () => __r7.noise2, "fbm1": () => __r7.fbm1, "metric": () => __r7.metric, "series": () => __r7.series, "parsePath": () => __r8.parsePath, "flattenPath": () => __r8.flattenPath, "pathBounds": () => __r8.pathBounds, "insidePolys": () => __r8.insidePolys, "distToPolys": () => __r8.distToPolys, "transformPath": () => __r8.transformPath, "toDeviceSvg": () => __r9.toDeviceSvg }, [12], ["KeySurface","P","PanelSurface","SvgCanvas","arc","arcPath","arrive","attrs","bars","base64","bestInk","capHeight","circle","clamp","clockText","compact","compose","contrast","defs","distToPolys","el","ellipse","ellipsize","esc","fbm1","fill","fitText","flattenPath","g","glowStops","hairline","hash","hexToOklab","hexToOklch","hueRamp","inCubic","inExpo","inOutCubic","inOutExpo","inOutQuad","inOutSine","inQuad","insidePolys","invLerp","keyInto","lambdaOf","lerp","line","linear","linearGradient","luminance","measureText","metric","metricsFor","mix","n","needle","noise1","noise2","oklabToHex","oklch","outBack","outCubic","outElastic","outExpo","outQuad","outQuart","pad2","parseHex","parsePath","path","pathBounds","phase","pingpong","points","polar","polygon","polyline","pulse","radialGradient","rect","remap","ring","rng","rotate","roundRectPath","saturate","scale","sectorPath","segments","series","shade","smoothstep","sparkHead","sparkPath","sparkPoints","sparkline","spectrumArc","spectrumStops","spring","stroke","suffixIds","surface","svgDataUrl","svgDoc","svgInner","svgWindow","textLayout","textOutline","textPath","ticks","toDeviceSvg","toHex","transformPath","translate","url","wrap360","wrapText","xHeight"]);
 
 };
-__d[114] = function (__ns) {
-const { compose, rect, path, circle, n, P, url, linearGradient, roundRectPath, PanelSurface } = __m(113);
-const { childContext } = __m(111);
+__d[277] = function (__ns) {
+const { compose, rect, path, circle, n, P, url, linearGradient, roundRectPath, PanelSurface } = __m(276);
+const { childContext } = __m(274);
 const { capHeight, measureText, pad2 } = __m(11);
 const { arcPath, polar, sparkPath, sparkPoints } = __m(15);
 const { clamp, lerp } = __m(12);
@@ -10266,7 +14082,7 @@ const day = doy - Math.floor((153 * mp + 2) / 5) + 1, month = mp < 10 ? mp + 3 :
 return { h: Math.floor(rem / 3600000), m: Math.floor((rem % 3600000) / 60000), dow: ((days % 7) + 11) % 7, day, month };
 }
 };
-__d[115] = function (__ns) {
+__d[278] = function (__ns) {
 const { hash, metric, fbm1 } = __m(1);
 const { clamp, smoothstep } = __m(12);
 __e(__ns, { "BPM": () => BPM, "BEAT": () => BEAT, "PHRASE": () => PHRASE, "pnoise": () => pnoise, "voices": () => voices, "grooveLevel": () => grooveLevel, "grooveBody": () => grooveBody, "simAudio": () => simAudio, "simSpectrum": () => simSpectrum, "SIM_MACHINE": () => SIM_MACHINE, "NET_MAX": () => NET_MAX, "simMetric": () => simMetric, "simSeries": () => simSeries, "simCores": () => simCores, "simSystem": () => simSystem, "PLAYLIST": () => PLAYLIST, "simMedia": () => simMedia, "AGENDA": () => AGENDA, "simCalendar": () => simCalendar }, [], ["AGENDA","BEAT","BPM","NET_MAX","PHRASE","PLAYLIST","SIM_MACHINE","grooveBody","grooveLevel","pnoise","simAudio","simCalendar","simCores","simMedia","simMetric","simSeries","simSpectrum","simSystem","voices"]);
@@ -10414,8 +14230,8 @@ const next = AGENDA.find((e) => e.at > mins);
 return { next: next ? ev(next) : ev(AGENDA[0], 1), ...(current ? { current: ev(current) } : {}) };
 }
 };
-__d[116] = function (__ns) {
-const { simAudio, simSpectrum, simSeries, simMetric, simSystem, simMedia, simCalendar, NET_MAX, SIM_MACHINE } = __m(115);
+__d[279] = function (__ns) {
+const { simAudio, simSpectrum, simSeries, simMetric, simSystem, simMedia, simCalendar, NET_MAX, SIM_MACHINE } = __m(278);
 const { clamp } = __m(12);
 __e(__ns, { "audioOf": () => audioOf, "resample": () => resample, "spectrumOf": () => spectrumOf, "metricOf": () => metricOf, "tempOf": () => tempOf, "netOf": () => netOf, "seriesOf": () => seriesOf, "sysOf": () => sysOf, "mediaOf": () => mediaOf, "calendarOf": () => calendarOf, "rateText": () => rateText, "bytesText": () => bytesText, "pct": () => pct }, [], ["audioOf","bytesText","calendarOf","mediaOf","metricOf","netOf","pct","rateText","resample","seriesOf","spectrumOf","sysOf","tempOf"]);
 const has = (o, k) => o && Object.hasOwn(o, k);
@@ -10519,11 +14335,11 @@ return `${x >= 100 || i === 0 ? Math.round(x) : x.toFixed(1)} ${u[i]}`;
 }
 const pct = (v) => (v === null || v === undefined ? '—' : `${Math.round(clamp(v) * 100)}%`);
 };
-__d[117] = function (__ns) {
-const { path, roundRectPath } = __m(113);
+__d[280] = function (__ns) {
+const { path, roundRectPath } = __m(276);
 const { capHeight } = __m(11);
-const { metricOf, tempOf, netOf, seriesOf, sysOf, rateText, calendarOf } = __m(116);
-const { header, stat, meter, segmented, gauge, spark, hhmm, localParts, DAYS, MONTHS, HUE, clamp } = __m(114);
+const { metricOf, tempOf, netOf, seriesOf, sysOf, rateText, calendarOf } = __m(279);
+const { header, stat, meter, segmented, gauge, spark, hhmm, localParts, DAYS, MONTHS, HUE, clamp } = __m(277);
 __e(__ns, { "cpuCores": () => cpuCores, "cpuGauge": () => cpuGauge, "gpuGauge": () => gpuGauge, "memory": () => memory, "network": () => network, "volume": () => volume, "clock": () => clock }, [], ["clock","cpuCores","cpuGauge","gpuGauge","memory","network","volume"]);
 const split = (s) => { const i = s.lastIndexOf(' '); return i < 0 ? [s, ''] : [s.slice(0, i), s.slice(i + 1)]; };
 const pctOf = (v) => (v === null ? '—' : Math.round(v * 100));
@@ -10625,10 +14441,10 @@ const dow = ((c.dow + 6) % 7) + 1;
 return Math.max(1, Math.floor((doy - dow + 10) / 7));
 }
 };
-__d[118] = function (__ns) {
-const { surface } = __m(113);
-const { galleon, HUE, GALLEON_PARAMS, clamp } = __m(114);
-const { clock, volume, cpuGauge, network } = __m(117);
+__d[281] = function (__ns) {
+const { surface } = __m(276);
+const { galleon, HUE, GALLEON_PARAMS, clamp } = __m(277);
+const { clock, volume, cpuGauge, network } = __m(280);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = {
 id: 'screen-galleon-dashboard',
@@ -10663,14 +14479,14 @@ return galleon(ctx, surface(ctx), [
 },
 };
 };
-__d[119] = function (__ns) {
-const { surface, compose, keyInto, svgInner, n } = __m(113);
-const { createContext } = __m(98);
-const { normalizeFacet } = __m(104);
-const { default: dashboardModule } = __m(118);
-const { glyphRegistry } = __m(78);
+__d[282] = function (__ns) {
+const { surface, compose, keyInto, svgInner, n } = __m(276);
+const { createContext } = __m(261);
+const { normalizeFacet } = __m(267);
+const { default: dashboardModule } = __m(281);
+const { glyphRegistry } = __m(241);
 const { arc } = __m(15);
-const { splitElements } = __m(99);
+const { splitElements } = __m(262);
 const { lerp } = __m(12);
 __e(__ns, { "SHOWCASE": () => SHOWCASE, "showcaseKey": () => showcaseKey, "themeFacet": () => themeFacet }, [], ["SHOWCASE","showcaseKey","themeFacet"]);
 const SHOWCASE = [
@@ -10739,8 +14555,8 @@ return d.svg();
 };
 }
 };
-__d[120] = function (__ns) {
-const { themeFacet } = __m(119);
+__d[283] = function (__ns) {
+const { themeFacet } = __m(282);
 __e(__ns, { "default": () => __default }, [], ["default"]);
 const __default = themeFacet('prism', {
 title: 'Prism',

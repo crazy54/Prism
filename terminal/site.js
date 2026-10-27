@@ -16,7 +16,10 @@ export function initChrome() {}
 
 /** The prism-term engine base (<meta name="prism-engine">; the site build points it at ./engine/). */
 export const engineBase = new URL(document.querySelector('meta[name="prism-engine"]')?.content || './engine/', location.href);
-export const engineUrl = (rel) => new URL(rel, engineBase).href;
+// cache-safe (website/build.mjs): the built page's <meta name="prism-build" data-engine> versions every engine URL, as the
+// engine's own imports are versioned; absent in the repository
+const ENGINE_V = document.querySelector('meta[name="prism-build"]')?.dataset.engine || '';
+export const engineUrl = (rel) => { const u = new URL(rel, engineBase).href; return ENGINE_V ? `${u}?v=${ENGINE_V}` : u; };
 
 /**
  * The terminal theme that matches the page: prism-dark at Night, prism-light by Day — whichever of

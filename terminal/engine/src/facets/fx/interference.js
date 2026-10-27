@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Ripple-tank interference: three point sources on slow Lissajous orbits, each
 // sending out concentric waves. Where crests meet they reinforce, where crest
 // meets trough they cancel — the moiré of nodal lines sweeps as sources move.

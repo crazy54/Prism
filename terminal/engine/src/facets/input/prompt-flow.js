@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A clack-style prompt flow: text, select, confirm and multiselect prompts
 // chained down one gutter, each collapsing to its answer, then a spinner.
 const { ATTR, glyphs, uni, phase, typed, blink, spin, clip, stringWidth } = __bm(25);

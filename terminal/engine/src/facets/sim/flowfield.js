@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Flow field: particles drift through a slowly evolving curl-noise field (the
 // curl of a Perlin potential is divergence-free, so streams swirl without
 // collapsing into sinks), painting silky braille trails on a persistent canvas

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // watch -n2 uptime — the watch header, the uptime line, and a braille chart of the 1-minute load.
 const { C, ATTR, writer, walk, clock, fixed } = __bm(27);
 

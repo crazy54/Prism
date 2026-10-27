@@ -3,8 +3,8 @@
 // from the site (../tty, ../t/<gallery>, ../f/<facet>, plus .24 / .txt), parsed
 // as ANSI and drawn by the engine's browser renderer at 80 columns.
 
-import { esc, initChrome, engineUrl, mode, onMode, copyButton, curlHtml, applyShell } from './site.js';
-import { TERMINAL as POSITIONS } from '../assets/rf/positions.mjs';
+import { esc, initChrome, engineUrl, mode, onMode, copyButton, curlHtml, applyShell } from './site.js?v=f1a0aa01b3';
+import { TERMINAL as POSITIONS } from '../assets/rf/positions.mjs?v=3f7c1031f2';
 
 const byId = (id) => document.getElementById(id);
 const siteRoot = new URL('../', location.href);

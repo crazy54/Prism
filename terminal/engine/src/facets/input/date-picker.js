@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A calendar date-range picker: arrow keys walk the grid, Enter sets the start,
 // the range previews as the cursor moves, Enter again sets the end.
 const { ATTR, glyphs, uni, phase, tint, fit, panel } = __bm(25);

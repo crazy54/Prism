@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../web.bundle.js';
+import { __m as __bm } from '../../web.bundle.js?v=b7d3401196';
 // The curl-able terminal site — static pages you read with `curl -sL`.
 //
 // Every page is composed as an 80-column CellBuffer, then serialized three ways:
@@ -19,11 +19,11 @@ import { __m as __bm } from '../../web.bundle.js';
 
 const { CellBuffer, ATTR } = __bm(6);
 const { NONE, mix } = __bm(0);
-import { renderScene } from '../render.js';
+import { renderScene } from '../render.js?v=b7d3401196';
 const { stringWidth, truncate, wrap } = __bm(5);
 const { getTheme } = __bm(3);
-import { TOKENS, spectral, siteTone, galleryHue, lambdaLabel, rampHue } from '../refraction.js';
-import { FORMATS, themeFileName } from '../theme-export.js';
+import { TOKENS, spectral, siteTone, galleryHue, lambdaLabel, rampHue } from '../refraction.js?v=b7d3401196';
+import { FORMATS, themeFileName } from '../theme-export.js?v=b7d3401196';
 
 export const WIDTH = 80;
 const SNAP_MAX_H = 20;
@@ -397,7 +397,7 @@ function helpPage(ctx, plain) {
   footer(p, site, [
     ['home', `curl -sL ${h}/tty`],
     ['catalog', `${site}/terminal/`],
-    ['source', 'https://github.com/crazy54/Prism (prism-term/, MIT)'],
+    ['source', 'https://github.com/crazy54/Prism (prism-term/, Apache-2.0)'],
   ]);
   return p;
 }

@@ -63,4 +63,4 @@ FOR AGENTS AND TOOLS ----------------------------
 --------------------------------------------------------------------------------
 home      curl -sL prism.jeremyfhall.com/tty
 catalog   https://prism.jeremyfhall.com/terminal/
-source    https://github.com/crazy54/Prism (prism-term/, MIT)
+source    https://github.com/crazy54/Prism (prism-term/, Apache-2.0)

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Between channels on an old CRT: snow, a darker hum bar crawling up the
 // tube, scanlines and a vignette — then the set catches a station for a beat,
 // a test card rolls into lock with the channel number, and it's gone again.

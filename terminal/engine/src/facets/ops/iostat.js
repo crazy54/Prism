@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // iostat -dx 2 — avg-cpu plus a device table (r/s, w/s, kB/s, await, aqu-sz, %util) with util bars.
 const { G, C, ATTR, writer, walk, pad, lpad, fixed } = __bm(27);
 

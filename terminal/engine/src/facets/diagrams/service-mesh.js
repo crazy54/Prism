@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A service mesh on a braille canvas: services ring the frame, diagonal call
 // edges carry traffic comets, and one edge turns hot during a latency spike.
 const { ATTR, glyphs, uni, phase, mix, fit, stringWidth } = __bm(22);

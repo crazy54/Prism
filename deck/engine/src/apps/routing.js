@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=b7d3401196';
 // Galleon 100 SD per-widget routing — which facet (and which of its widgets) each dial layer shows,
 // which ctx.data keys that needs, and the frames. Browser-safe.
 //
@@ -13,8 +13,8 @@ import { __m as __bm } from '../../facets.bundle.js';
 //   const { widgets, screen } = renderGalleon(plan, { data: hub.pick(planData(plan)), theme: 'prism', t, now });
 //   // widgets: [{ dial, layer, svg (360 × 180, 2:1) }] for encoder canvases · screen: one 720 × 384 SVG for hidraw
 
-const { findFacet } = __bm(318);
-const { render } = __bm(100);
+const { findFacet } = __bm(659);
+const { render } = __bm(263);
 const { svgInner, suffixIds, svgDoc, n } = __bm(5);
 
 /** The four slots, as the Stream Deck app reports Galleon coordinates ("dial,layer"). */

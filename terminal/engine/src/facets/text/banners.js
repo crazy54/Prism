@@ -1,11 +1,11 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Banner styles — a figlet session (standard / small / block), gradient swatch
 // book, outlined / hollow lettering, and a rotating 3D extrusion built from
 // stacked offset copies.
 const { NONE, mix, mixOklab } = __bm(0);
-import { drawBanner, measureBanner } from '../../text/banner.js';
-import { bannerMode, fitScale, fitFont } from './_text.js';
-import { figlet, bitmap } from '../ascii/_ascii.js';
+import { drawBanner, measureBanner } from '../../text/banner.js?v=b7d3401196';
+import { bannerMode, fitScale, fitFont } from './_text.js?v=b7d3401196';
+import { figlet, bitmap } from '../ascii/_ascii.js?v=b7d3401196';
 
 const shared = { gallery: 'text', category: 'Banners & Fonts', kind: 'text', glyphs: 'unicode', color: 'truecolor', animated: true };
 const asciiOnly = (ctx) => ctx.caps.unicode === false || ctx.mode === 'ascii';

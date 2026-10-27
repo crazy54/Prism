@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=b7d3401196';
 // .streamDeckProfile export — ProfilesV3 "FormatVersion 1" (formats.md §5.2–5.5).
 //
 // The structure mirrors the bundled profiles the hardware lab installed and switched
@@ -19,17 +19,18 @@ import { __m as __bm } from '../../facets.bundle.js';
 //
 //   buildProfile({ device, name, pages, pluginVersion }) → { zip, files, package, manifest, pages }
 //   sampleProfiles() → the Prism sample profile for Galleon 100 SD, Stream Deck +, MK.2, XL, Mini, Neo, + XL
+//   gameProfiles()   → the Game Link profiles "Prism · CS2 — <device>" (Galleon, +, MK.2, XL, Mini, Neo, + XL), each with a Back key — Game Link (prism-play)
 //   checkProfile(zip) → structural problems ([] = ok)
 //   SAMPLE_LAYOUTS     the Prism-only showcase layouts (also the Linux exports' and the MCP server's samples)
 //   HOME_LAYOUTS       the built-in Home page (and Galleon / + / + XL dials) of each sample profile
 
 import crypto from 'node:crypto';
-import { writeZip, readZip } from './plugin-zip.js';
+import { writeZip, readZip } from './plugin-zip.js?v=b7d3401196';
 const { getDevice } = __bm(0);
-const { findFacet } = __bm(318);
-import { facetMode } from '../plugin/settings.js';
-const { render, stillTime } = __bm(100);
-import { rasterize, encodePNG } from '../raster/index.js';
+const { findFacet } = __bm(659);
+import { facetMode } from '../plugin/settings.js?v=b7d3401196';
+const { render, stillTime } = __bm(263);
+import { rasterize, encodePNG } from '../raster/index.js?v=b7d3401196';
 
 export const PLUGIN_UUID = 'com.jeremyfhall.prism';
 export const PLUGIN_NAME = 'Prism Deck';
@@ -391,12 +392,65 @@ export function samplePages(device) {
     name: showcaseName(p.name, i),
     keys: [...(p.keys || []).filter((k) => !(k.col === nc && k.row === nr)), b(nc, nr, 'page.home')],
   }));
+  homePage.keys = withCs2Jump(device, homePage.keys);   // Game Link (prism-play): the CS2 jump key
   return [homePage, ...showcases];
 }
 
 export function sampleProfiles({ pluginVersion = '0.3.0.0' } = {}) {
   return Object.entries(SAMPLE_LAYOUTS).map(([device, l]) => ({ device, deviceType: l.deviceType, name: l.name, file: l.file, ...buildProfile({ device, name: l.name, pages: samplePages(device), pluginVersion, seed: `sample:${device}` }) }));
 }
+
+// ── Game Link (prism-play) ──
+/**
+ * The game profiles, a separate list from the samples ("Prism · CS2 — <device>"): one page where every key and every
+ * dial is Prism Display on gamelink-cs2-deck, so the whole device is one Game Link deck unit (keys, the Galleon's four
+ * widgets or the + strip), except the bottom-right key: Back (switchToProfile with no name = the profile you came
+ * from, hardware lab §2), in the same corner on every device; the deck's `back` param leaves that key to it. The
+ * Neo's info bar shows the match (gamelink-screen-match). The plugin bundles them beside the samples (settings.js
+ * GAME_PROFILES are their manifest names, the ones switchToProfile and a key's press { kind: 'profile', profile: 'cs2' } reach).
+ */
+const CS2 = 'gamelink-cs2-deck';
+/** The CS2 profiles' way out (gamelink-fix). */
+export const CS2_BACK_KEY = Object.freeze({ facet: 'icon-back', params: Object.freeze({ label: 'Back' }), press: Object.freeze({ kind: 'back' }) });
+const cs2Deck = () => ({ facet: CS2, params: { back: true } });
+/** One CS2 page: the deck facet on every key but the bottom-right (Back) and on every dial ('galleon' = 2 dials × 2 layers). */
+function cs2Page(cols, rows, dials = 0, extra = {}) {
+  const keys = Array.from({ length: cols * rows }, (_, i) => ({ col: i % cols, row: Math.floor(i / cols) }))
+    .map(({ col, row }) => ({ col, row, settings: col === cols - 1 && row === rows - 1 ? { ...CS2_BACK_KEY } : cs2Deck() }));
+  const dl = dials === 'galleon' ? [[0, 0], [1, 0], [0, 1], [1, 1]] : Array.from({ length: dials }, (_, i) => [i, 0]);
+  return { name: 'CS2', keys, dials: dl.map(([d, layer]) => ({ dial: d, layer, settings: cs2Deck() })), ...extra };
+}
+export const GAMELINK_LAYOUTS = Object.freeze({
+  galleon: { name: 'Prism · CS2 — Galleon 100 SD', file: 'Prism - CS2 - Galleon 100 SD', deviceType: 12, pages: [cs2Page(3, 4, 'galleon')] },
+  plus: { name: 'Prism · CS2 — Stream Deck +', file: 'Prism - CS2 - Stream Deck +', deviceType: 7, pages: [cs2Page(4, 2, 4)] },
+  mk2: { name: 'Prism · CS2 — Stream Deck MK.2', file: 'Prism - CS2 - Stream Deck MK.2', deviceType: 0, pages: [cs2Page(5, 3)] },
+  'xl-2022': { name: 'Prism · CS2 — Stream Deck XL', file: 'Prism - CS2 - Stream Deck XL', deviceType: 2, pages: [cs2Page(8, 4)] },
+  'mini-2022': { name: 'Prism · CS2 — Stream Deck Mini', file: 'Prism - CS2 - Stream Deck Mini', deviceType: 1, pages: [cs2Page(3, 2)] },
+  neo: { name: 'Prism · CS2 — Stream Deck Neo', file: 'Prism - CS2 - Stream Deck Neo', deviceType: 9, pages: [cs2Page(4, 2, 0, { infobar: { facet: 'gamelink-screen-match' } })] },
+  plusxl: { name: 'Prism · CS2 — Stream Deck + XL', file: 'Prism - CS2 - Stream Deck + XL', deviceType: 13, pages: [cs2Page(9, 4, 6)] },
+});
+
+/**
+ * The CS2 jump key on each sample Home page (Prism Display with press { kind: 'profile', profile: 'cs2' }), beside the
+ * Showcase key. It takes the key listed in `at`; the Mini trades its volume pair for Mute + CS2.
+ */
+export const CS2_JUMP_KEY = Object.freeze({ facet: 'icon-target', params: Object.freeze({ label: 'CS2' }), press: Object.freeze({ kind: 'profile', profile: 'cs2' }) });
+export const CS2_JUMP = Object.freeze({
+  galleon: { at: [0, 3] }, plus: { at: [1, 1] }, mk2: { at: [3, 2] }, 'xl-2022': { at: [6, 3] }, neo: { at: [2, 1] }, plusxl: { at: [5, 3] },
+  'mini-2022': { at: [1, 1], also: [[0, 1, 'media.mute']] },
+});
+function withCs2Jump(device, keys) {
+  const j = CS2_JUMP[device];
+  if (!j) return keys;
+  const put = [[...j.at, null], ...(j.also || [])];
+  return [...keys.filter((k) => !put.some(([c, r]) => k.col === c && k.row === r)), ...put.map(([col, row, id]) => (id ? { col, row, builtin: id } : { col, row, settings: { ...CS2_JUMP_KEY } }))];
+}
+
+/** The Game Link profiles: [{ device, deviceType, name, file, game: 'cs2', zip, … }] (buildProfile's output). */
+export function gameProfiles({ pluginVersion = '0.3.0.0' } = {}) {
+  return Object.entries(GAMELINK_LAYOUTS).map(([device, l]) => ({ device, deviceType: l.deviceType, name: l.name, file: l.file, game: 'cs2', ...buildProfile({ device, name: l.name, pages: l.pages, pluginVersion, seed: `gamelink:cs2:${device}` }) }));
+}
+// ── /Game Link (prism-play) ──
 
 const UUIDU = /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/;
 const UUIDL = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

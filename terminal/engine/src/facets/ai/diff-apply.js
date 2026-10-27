@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // An agent applying an edit: a unified diff streams in hunk by hunk with
 // line numbers and +/- gutters, then the edit is applied and summarized.
 const { ATTR, glyphs, uni, phase, fit, spin, tint, stringWidth } = __bm(23);

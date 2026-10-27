@@ -1,7 +1,7 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Pure ASCII — spinners and bars: the progress vocabulary of classic Unix tools,
 // all in 7-bit characters.
-import { hash, center } from './_ascii.js';
+import { hash, center } from './_ascii.js?v=b7d3401196';
 const { mix } = __bm(0);
 
 const shared = { gallery: 'ascii', category: 'ASCII Spinners & Bars', glyphs: 'ascii', color: '16' };

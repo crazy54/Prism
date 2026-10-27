@@ -11,8 +11,8 @@
 
 import { spawn as nodeSpawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { HidError } from './claim.js';
-import { checkFeature, ALLOWED_GET } from './features.js';
+import { HidError } from './claim.js?v=b7d3401196';
+import { checkFeature, ALLOWED_GET } from './features.js?v=b7d3401196';
 
 export const HELPER_PATH = fileURLToPath(new URL('../../linux/prism-deck-hidfeature.py', import.meta.url));
 const hex = (b) => Array.from(b, (x) => x.toString(16).padStart(2, '0')).join('');

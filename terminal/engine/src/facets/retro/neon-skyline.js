@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A neon city at night drifting past in three parallax layers: hazy far
 // towers, mid-rise blocks full of lit windows, near buildings trimmed in neon
 // with flickering signs — searchlights sweeping the clouds, traffic streaming

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A recursive blossom tree: ten generations of branches, each a little shorter
 // and thinner, swaying more the further they are from the trunk. Blossoms at
 // the tips, petals drifting down on the wind.

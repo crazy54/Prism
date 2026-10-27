@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../facets.bundle.js';
+import { __m as __bm } from '../../facets.bundle.js?v=b7d3401196';
 // OpenDeck export — Prism Deck on Linux through OpenDeck (Rust/Tauri; Flathub
 // me.amankhanna.opendeck, Arch extra/opendeck, .deb/.rpm/AppImage).
 //
@@ -23,11 +23,11 @@ import { __m as __bm } from '../../facets.bundle.js';
 //   buildOpenDeckProfile(setup, { deviceId, profile, images, raster, manifest })
 //                                                        → { json, path, files, dropped, warnings }
 
-import { readZip, writeZip } from './plugin-zip.js';
-import { PLUGIN_UUID, ACTION_FACET, ACTION_INFOBAR } from './profile.js';
-import { normalizeSetup, renderPage, safeName, svgDataUrl } from './linux.js';
-const { render, stillTime } = __bm(100);
-const { findFacet } = __bm(318);
+import { readZip, writeZip } from './plugin-zip.js?v=b7d3401196';
+import { PLUGIN_UUID, ACTION_FACET, ACTION_INFOBAR } from './profile.js?v=b7d3401196';
+import { normalizeSetup, renderPage, safeName, svgDataUrl } from './linux.js?v=b7d3401196';
+const { render, stillTime } = __bm(263);
+const { findFacet } = __bm(659);
 
 export const OD_FLATPAK_ID = 'me.amankhanna.opendeck';
 export const PLUGIN_DIR = `${PLUGIN_UUID}.sdPlugin`;

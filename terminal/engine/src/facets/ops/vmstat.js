@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // vmstat 1 — the two-line header pinned on top, a new sample every second scrolling beneath it.
 const { C, ATTR, writer, walk, lpad } = __bm(27);
 

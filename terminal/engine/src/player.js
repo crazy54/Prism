@@ -1,4 +1,4 @@
-import { __m as __bm } from '../web.bundle.js';
+import { __m as __bm } from '../web.bundle.js?v=b7d3401196';
 // Player — runs facets fullscreen with live controls, a HUD and transitions.
 //
 //   ← / →  or p / n   previous / next facet
@@ -21,18 +21,18 @@ import { __m as __bm } from '../web.bundle.js';
 // The HUD follows the Refraction grammar (src/refraction.js): the facet's
 // gallery hue and wavelength, instrument labels, key hints on glass.
 
-import { Screen } from './screen.js';
+import { Screen } from './screen.js?v=b7d3401196';
 const { createContext } = __bm(13);
 const { THEME_IDS, getTheme } = __bm(3);
 const { MODE_NAMES } = __bm(9);
-import { detect, withOverrides } from './caps.js';
+import { detect, withOverrides } from './caps.js?v=b7d3401196';
 const { NONE, mix } = __bm(0);
 const { ATTR } = __bm(6);
 const { easing } = __bm(10);
 const { truncate, stringWidth, charWidth } = __bm(5);
 const { foldChar } = __bm(12);
 const { getGallery } = __bm(17);
-import { chrome, glyphs, lambdaLabel, instrument, sweep, SWEEP_S, rampHue } from './refraction.js';
+import { chrome, glyphs, lambdaLabel, instrument, sweep, SWEEP_S, rampHue } from './refraction.js?v=b7d3401196';
 
 const MODE_CYCLE = [null, ...MODE_NAMES];
 const SMALL_KINDS = new Set(['spinner', 'progress', 'text']);

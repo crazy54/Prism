@@ -229,3 +229,15 @@ dialog.dd[open]{display:flex;flex-direction:column}
   .d-hero .hero-note{order:6}
 }
 @media(max-width:480px){.d-hero h1{font-size:44px}.d-grid{grid-template-columns:1fr 1fr;gap:10px}.d-tile-stage{height:160px;padding:30px 8px 8px}.d-tile-name a::after{height:calc(100% - 160px)}.d-tile-desc{display:none}.d-tile-coord{display:none}.closing{flex-wrap:wrap}.closing p{font-size:19px}.d-models{max-width:100%}}
+
+/* ── Game Link (prism-play): the link card to game-link.html (the CS2 replay demo) ── */
+.d-gl-wrap{margin-top:48px}
+.d-gl-card{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:40px;align-items:center;padding:32px 36px;border:1px solid var(--line);border-radius:var(--r-xl);background:radial-gradient(90% 130% at 0% 0%,rgba(var(--rf-hue-rgb),.13),transparent 60%),var(--card);box-shadow:var(--elev-1);color:inherit;transition:border-color var(--rf-dur-base) var(--rf-ease-out-expo),box-shadow var(--rf-dur-base) var(--rf-ease-out-expo)}
+.d-gl-card:hover,.d-gl-card:focus-visible{border-color:rgba(var(--rf-hue-rgb),.6);box-shadow:var(--elev-2)}
+.d-gl-card .eyebrow .sc-badge{margin-right:2px}
+.d-gl-card h2{margin:14px 0 10px;font-size:30px;line-height:1.12;letter-spacing:-.04em;font-weight:700}
+.d-gl-copy>p:not(.eyebrow){max-width:56ch;margin:0 0 20px;font-size:13.5px;line-height:1.7;color:var(--muted)}
+.d-gl-card .button .ic{transition:transform var(--rf-dur-fast) var(--rf-ease-out)}
+.d-gl-card:hover .button .ic{transform:translateX(2px)}
+@media(max-width:860px){.d-gl-card{grid-template-columns:1fr;gap:22px;padding:24px}}
+/* ── /Game Link (prism-play) ── */

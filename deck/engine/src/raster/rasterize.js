@@ -15,16 +15,16 @@
 // opts: { background: '#rrggbb' (composite onto an opaque color — device keys),
 //         premultiplied: false, tolerance: 0.15 (curve flattening, device px) }
 
-import { parseXml } from '../scene/validate.js';
+import { parseXml } from '../scene/validate.js?v=b7d3401196';
 import {
   RasterError, IDENTITY, mul, scaleOf, numbers, parseTransform,
   flattenPathData, ellipseSub, rectSub, subsBBox, strokeSubs,
-} from './geometry.js';
-import { Filler, SUB } from './scan.js';
+} from './geometry.js?v=b7d3401196';
+import { Filler, SUB } from './scan.js?v=b7d3401196';
 
 /** Curve flattening tolerance in device px (arcs are error-split, so their deviation is about half). */
 export const TOLERANCE = 0.1;
-import { parsePaint, parseOpacity, gradientPaint, shadeRow } from './paint.js';
+import { parsePaint, parseOpacity, gradientPaint, shadeRow } from './paint.js?v=b7d3401196';
 
 export { RasterError };
 

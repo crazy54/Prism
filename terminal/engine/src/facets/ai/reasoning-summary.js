@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A collapsible reasoning block: "Thinking…" expands with summary lines
 // streaming in dim italics, collapses to "Thought for 14s", then the answer streams.
 const { ATTR, glyphs, uni, phase, fit, mix, reveal, wrapLines, thinkGlyph, shimmer } = __bm(23);

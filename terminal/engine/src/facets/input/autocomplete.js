@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Shell completion: a fish-style ghost suggestion from history, then a
 // zsh-style completion menu that Tab cycles through, then the command runs.
 const { ATTR, glyphs, uni, phase, typed, blink, tint, mix, fit } = __bm(25);

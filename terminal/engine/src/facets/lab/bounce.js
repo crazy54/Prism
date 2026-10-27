@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // The animator's bouncing-ball exercise: a ball thrown across the stage,
 // losing a little height each bounce (restitution 0.7), stretching along its
 // speed in the air and squashing on every impact — with an onion skin of where

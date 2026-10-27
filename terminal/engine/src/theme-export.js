@@ -1,4 +1,4 @@
-import { __m as __bm } from '../web.bundle.js';
+import { __m as __bm } from '../web.bundle.js?v=b7d3401196';
 // Terminal emulator color schemes for Prism's themes.
 //
 //   exportTheme('alacritty', 'prism-light')  → the file's text

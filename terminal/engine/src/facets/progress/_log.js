@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Scrolling-log presentation for tool-output facets (apt, cargo, docker, git…).
 //
 // A facet builds a script of timed lines for one loop; at time t we show the

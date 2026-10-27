@@ -63,4 +63,4 @@
 [38;5;243m────────────────────────────────────────────────────────────────────────────────[0m
 [0;2;39;49mhome      [0;38;5;31;49mcurl -sL prism.jeremyfhall.com/tty[0m
 [0;2;39;49mcatalog   [0;38;5;31;49mhttps://prism.jeremyfhall.com/terminal/[0m
-[0;2;39;49msource    [0;38;5;31;49mhttps://github.com/crazy54/Prism (prism-term/, MIT)[0m[0m
+[0;2;39;49msource    [0;38;5;31;49mhttps://github.com/crazy54/Prism (prism-term/, Apache-2.0)[0m[0m

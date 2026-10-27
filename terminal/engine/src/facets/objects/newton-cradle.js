@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Newton's cradle: five chrome balls on strings. The end ball swings in on a
 // pendulum arc, the momentum passes through the row, and the far ball swings
 // out — with a glint at each strike, faint motion ghosts on the moving balls,

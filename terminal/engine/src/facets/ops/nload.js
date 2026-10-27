@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // nload — Incoming and Outgoing traffic graphs drawn with # and |, and Curr/Avg/Min/Max/Ttl on the right.
 const { C, ATTR, writer, walk, hash, fixed } = __bm(27);
 

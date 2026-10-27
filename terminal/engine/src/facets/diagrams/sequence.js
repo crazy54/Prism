@@ -1,8 +1,8 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A sequence diagram: lifelines for four participants, call arrows that grow
 // from caller to callee, dashed returns, activation bars and a note.
 const { ATTR, glyphs, uni, phase, ease, fit, clip, stringWidth } = __bm(22);
-import { nodeBox } from './_lines.js';
+import { nodeBox } from './_lines.js?v=b7d3401196';
 
 const WHO = ['client', 'gateway', 'checkout', 'postgres'];
 // [from, to, label, kind, start]

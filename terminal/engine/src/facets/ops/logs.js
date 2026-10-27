@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Logs & journals: journalctl -f, an lnav-style access log, dmesg -wH, and an lnav-style histogram.
 const { G, C, ATTR, writer, walk, hash, typed, clock, bashPrompt, wrapParts, pad, lpad, fixed, blink } = __bm(27);
 

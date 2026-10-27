@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Vector balls: 64 shaded spheres arranged in 3D, morphing cube → sphere →
 // torus → helix while the formation tumbles. Painter's-sorted, Phong-lit,
 // sized by perspective — the Amiga demo effect that made people buy Amigas.
 const { lerpc } = __bm(29);
-import { rotate } from '../../math3d.js';
+import { rotate } from '../../math3d.js?v=b7d3401196';
 const { easing } = __bm(10);
 
 const N = 64;

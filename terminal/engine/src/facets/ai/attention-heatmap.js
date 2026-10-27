@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // An attention heatmap for one sentence: rows attend to earlier columns
 // (causal mask), the query row walks down, and the view flips between a
 // previous-token head and a coreference head.

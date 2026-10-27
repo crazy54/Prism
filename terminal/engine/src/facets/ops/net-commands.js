@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Typed network commands with authentic output: `ss -tulpn`, `ip -br -c addr`, and a hop-by-hop traceroute.
 const { C, ATTR, writer, session, drawSession, typed, hash, pad, lpad, fixed } = __bm(27);
 

@@ -81,6 +81,7 @@
         <option value="">Nothing else (visual only)</option>
         <option value="url">Open a web page</option>
         <option value="profile">Switch to the Prism profile</option>
+        <option value="profile-cs2">Switch to the CS2 profile</option><!-- Game Link (prism-play) -->
         <option value="back">Back to the previous profile</option>
       </select>
     </div>
@@ -142,6 +143,54 @@
     </div>
     <p class="pi-help">The full path of a local <code>.ics</code> file. Outlook, Google Calendar and Apple Calendar can export or sync one. Prism reads only the event titles and times, every 60 s, and nothing leaves your computer. Leave it empty for the demo day.</p>
     <p class="pi-status" id="calStatus" aria-live="polite"></p>
+
+    <!-- Game Link (prism-play) -->
+    <div class="pi-gamelink" id="glBox">
+      <h3 class="pi-sub" id="hGameLink">Game Link</h3>
+      <p class="pi-help">Counter-Strike 2 can send your own game state (health, ammo, money, the round) to Game Link keys through Valve's Game State Integration, and local companions such as Prism Control's Prism Sight can send theirs. It only reads: nothing is ever sent to a game, and nothing leaves your computer.</p>
+      <div class="pi-row pi-switch-row">
+        <label for="glListen">Listen for game data</label>
+        <button type="button" role="switch" aria-checked="false" class="pi-switch" id="glListen"><span class="pi-knob"></span></button>
+      </div>
+      <p class="pi-help">Off by default: no port is open. On, Prism Deck listens on this computer only (127.0.0.1), for CS2 and for companions. Connect CS2 turns it on for you.</p>
+      <p class="pi-status" id="glStatus" aria-live="polite"></p>
+      <div class="pi-actions">
+        <button type="button" class="pi-btn" id="glConnect">Connect CS2</button>
+        <button type="button" class="pi-btn" id="glDisconnect" hidden>Disconnect</button>
+      </div>
+      <div class="pi-row">
+        <label for="glPort">Port</label>
+        <input id="glPort" type="number" min="1024" max="65535" step="1" placeholder="38140" inputmode="numeric" autocomplete="off">
+      </div>
+      <p class="pi-help"><strong>Connect CS2</strong> adds one file, <code>gamestate_integration_prism.cfg</code>, to your CS2 <code>cfg</code> folder and never touches other apps' files. Restart CS2 afterwards. <strong>Disconnect</strong> removes it. Change the port only if another app already uses it, then click Connect CS2 again.</p>
+      <!-- Game Link · Dota 2 (prism-play, MOBAs) -->
+      <p class="pi-status" id="glDotaStatus" aria-live="polite"></p>
+      <div class="pi-actions">
+        <button type="button" class="pi-btn" id="glDotaConnect">Connect Dota 2</button>
+        <button type="button" class="pi-btn" id="glDotaDisconnect" hidden>Disconnect Dota 2</button>
+      </div>
+      <p class="pi-help"><strong>Connect Dota 2</strong> adds one file, <code>gamestate_integration_prism.cfg</code>, to Dota 2's <code>cfg/gamestate_integration</code> folder (and makes that folder if needed). Dota 2 also needs the launch option <code>-gamestateintegration</code>: in Steam, right-click Dota 2 → Properties → General → Launch Options, add it, then restart Dota 2. Prism never changes Steam's settings for you. Your own hero only: never anything about other players that the game doesn't show you.</p>
+      <!-- Game Link · League of Legends (prism-play, MOBAs) -->
+      <div class="pi-row pi-switch-row" id="glLolRow" hidden>
+        <label for="glLol">League of Legends</label>
+        <button type="button" role="switch" aria-checked="false" class="pi-switch" id="glLol"><span class="pi-knob"></span></button>
+      </div>
+      <p class="pi-status" id="glLolStatus" aria-live="polite" hidden></p>
+      <p class="pi-help" id="glLolHelp" hidden>Reads your own match from the game client's local Live Client Data API (127.0.0.1:2999, Riot's certificate checked) while a match runs. Off by default; turning it on also turns listening on. Ability cooldowns aren't reported by the game, so Prism never shows or guesses them.</p>
+      <p class="pi-help pi-legal" id="glLolLegal" hidden>Prism isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games, and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
+      <!-- Game Link · Rocket League (prism-play) -->
+      <div class="pi-row pi-switch-row" id="glRlRow" hidden>
+        <label for="glRl">Rocket League</label>
+        <button type="button" role="switch" aria-checked="false" class="pi-switch" id="glRl"><span class="pi-knob"></span></button>
+      </div>
+      <p class="pi-status" id="glRlStatus" aria-live="polite" hidden></p>
+      <div class="pi-actions" id="glRlActions" hidden>
+        <button type="button" class="pi-btn" id="glRlConnect">Connect Rocket League</button>
+        <button type="button" class="pi-btn" id="glRlDisconnect" hidden>Disconnect Rocket League</button>
+      </div>
+      <p class="pi-help" id="glRlHelp" hidden>Uses Psyonix's official Stats API; display-only, never sends commands to the game. <strong>Connect Rocket League</strong> backs up the game's Stats API settings file first, then sets only <code>PacketSendRate</code>, <code>Port</code> and <code>WebPort</code>; <strong>Disconnect</strong> puts back what those keys held. Rocket League must be restarted after Connect.</p>
+      <p class="pi-help pi-legal" id="glRlLegal" hidden>Prism isn't affiliated with or endorsed by Psyonix or Epic Games.</p>
+    </div>
 
     <div class="pi-live" id="liveBox">
       <div class="pi-row pi-switch-row">

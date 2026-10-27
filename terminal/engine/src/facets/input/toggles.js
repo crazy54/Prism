@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A settings pane of switches that flip with a sliding knob.
 const { ATTR, uni, glyphs, phase, ease, panel, tint, mix, fit } = __bm(25);
 

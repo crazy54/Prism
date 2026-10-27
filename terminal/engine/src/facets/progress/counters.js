@@ -1,13 +1,13 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Counters & odometers — numbers that roll, tick, light up and fill rings.
 const { ATTR } = __bm(6);
 const { Canvas } = __bm(9);
 const { mix, gradient } = __bm(0);
-import { sparkline, progressBar, box } from '../../widgets/index.js';
+import { sparkline, progressBar, box } from '../../widgets/index.js?v=b7d3401196';
 const { truncate, stringWidth } = __bm(5);
-import { phase, transfer, glyphs, clamp01, commas, clock } from './_sim.js';
+import { phase, transfer, glyphs, clamp01, commas, clock } from './_sim.js?v=b7d3401196';
 const { lift } = __bm(24);
-import { FONT47, FONT35, width35, SEG7, SEG7_RECTS, seg7Ascii, ring, ringCells } from './_fonts.js';
+import { FONT47, FONT35, width35, SEG7, SEG7_RECTS, seg7Ascii, ring, ringCells } from './_fonts.js?v=b7d3401196';
 
 const C = 'Counters & Odometers';
 const pctInt = (f) => Math.floor(clamp01(f) * 100);

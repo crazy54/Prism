@@ -5,8 +5,8 @@
 //   <script type="application/json" id="prism-deck-catalog"> the lean deck catalog; when it's empty (in the
 //       repository) the adapter imports <engine>/catalog/deck-catalog.json instead
 // Rendering is prism-deck's own browser runtime (src/web): the same frames the plugin sends to hardware.
-import { loadDeck } from '../assets/deck/adapter.js';
-import { hueColors, lambdaFor } from '../assets/deck/hue.js';
+import { loadDeck } from '../assets/deck/adapter.js?v=45f8efd71d';
+import { hueColors, lambdaFor } from '../assets/deck/hue.js?v=1ab169b353';
 
 const root = document.documentElement;
 const byId = (id) => document.getElementById(id);
@@ -26,7 +26,8 @@ const NOTES = { galleon: '12 keys · 2 dials · dashboard screen', plus: '8 keys
 const engine = document.querySelector('meta[name="prism-engine"]')?.content || './engine/';
 const islandText = byId('prism-deck-catalog')?.textContent.trim();
 const deck = await loadDeck({ engine, catalog: islandText ? JSON.parse(islandText) : null });
-const engineAt = (rel) => new URL(rel, new URL(engine, location.href)).href;
+const ENGINE_V = document.querySelector('meta[name="prism-build"]')?.dataset.engine || '';   // cache-safe engine URLs (website/build.mjs)
+const engineAt = (rel) => { const u = new URL(rel, new URL(engine, location.href)).href; return ENGINE_V ? `${u}?v=${ENGINE_V}` : u; };
 // λ labels come from design/tokens.json positions (assets/deck/hue.js), like every other page.
 let layoutOf = null;
 const lambdaOf = lambdaFor;
@@ -36,7 +37,7 @@ if (deck.source === 'prism-deck') {
     layoutOf = (id) => dv.deviceLayout(id);
   } catch { /* fall back to the site's approximations */ }
 }
-if (!layoutOf) { const dv = await import('../assets/deck/devices.js'); layoutOf = (id) => dv.deviceLayout(id); }
+if (!layoutOf) { const dv = await import('../assets/deck/devices.js?v=b46177968c'); layoutOf = (id) => dv.deviceLayout(id); }
 
 const facets = deck.facets.map((f, i) => ({ ...f, _i: i, surface: f.surface || 'key' }));
 const recById = new Map(facets.map((f) => [f.id, f]));
@@ -339,6 +340,7 @@ const DATA_NOTES = [
   [['timer'], 'Timers are real: the key keeps its own time.'],
   [['clock'], 'Clocks are real: your computer’s time.'],
   [['mic', 'camera'], 'Mic and camera keys show the key’s own on/muted state; they don’t switch your microphone or camera.'],
+  [['gamelink'], 'Game Link reads Counter-Strike 2 live, through Valve’s Game State Integration (read-only, on your own computer), once you connect CS2. It arrives with Prism Deck 0.8; the Game Link demo page replays a whole fictional match.'],   // Game Link (prism-play)
 ];
 function honestHtml(f) {
   const keys = new Set(f.data || []);

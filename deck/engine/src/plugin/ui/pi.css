@@ -95,6 +95,7 @@ input[type="color"] { width: 44px; height: 28px; padding: 0 2px; border-radius: 
 
 .pi-btn { min-height: 30px; padding: 6px 12px; border-radius: var(--r-md); border: 1px solid var(--line-control); background: var(--panel2); color: var(--ink); font: 600 12px Inter, system-ui, sans-serif; cursor: pointer; }
 .pi-btn:hover { border-color: var(--accent-line); background: #1d2130; }
+.pi-btn:disabled { opacity: .55; cursor: default; }   /* Game Link (prism-play): Connect CS2 while busy */
 .pi-help-inline { margin: 6px 0 0; }
 .pi-audio { margin: 0 0 6px; font-size: 12px; color: var(--muted); }
 .pi-audio strong { color: var(--ink); font-weight: 600; }

@@ -1,5 +1,5 @@
 // Braille spinners — eight dots per cell, the npm/ora generation of loaders.
-import { spinnerFacet } from './_kit.js';
+import { spinnerFacet } from './_kit.js?v=b7d3401196';
 
 const C = 'Braille Spinners';
 

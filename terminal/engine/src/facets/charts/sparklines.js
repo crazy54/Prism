@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Sparklines: word-sized trend lines — eighth-block bars, braille, dots, and a wall of them.
 const { mix, scale } = __bm(0);
 const { signal, glyphs, safe, vbar, put, putR, num, clamp, light, lift, ATTR, VBLOCKS } = __bm(24);

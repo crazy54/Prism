@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Refraction — the Prism principle, drawn as a hero. A hairline of white light
 // rises out of the dark, strikes the left face of a glass prism (apex up), runs
 // level through the glass and leaves the far face as a fanned spectrum that

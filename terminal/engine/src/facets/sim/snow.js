@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Snow over a cabin. Three parallax layers of flakes sway down through a gusty
 // wind; the near layer actually lands, building drifts on the ground and a
 // cap on the roof, and the drifts slump downwind once they get too steep.

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // An `npm ls --all` dependency tree that prints line by line, then `npm audit`
 // lights the path to a vulnerable transitive package (a fictional one).
 const { ATTR, glyphs, uni, phase, blink, clip, stringWidth } = __bm(22);

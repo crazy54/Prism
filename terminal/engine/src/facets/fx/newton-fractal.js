@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Newton's method as art: every point is a guess that slides toward one of a
 // polynomial's roots. Color says which root it reaches, shade says how fast.
 // The roots orbit and breathe, so the fractal basin boundaries writhe.

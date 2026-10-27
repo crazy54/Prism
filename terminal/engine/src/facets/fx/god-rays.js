@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Crepuscular rays through a forest: the low sun behind swaying canopy and
 // trunks, its light marched pixel by pixel back toward the sun through the
 // gaps, so shafts of light fan out through the haze. Dust motes drift in them.

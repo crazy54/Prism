@@ -1,6 +1,6 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Text wrapping + the kit, re-exported for prose-heavy callouts.
-export * from './_kit.js';
+export * from './_kit.js?v=b7d3401196';
 const { stringWidth } = __bm(22);
 
 /** Greedy word wrap to `w` columns; hard-splits words longer than a line. */

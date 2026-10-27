@@ -11,7 +11,7 @@
 // Events: { type: 'down' | 'up', key, sensor? } · { type: 'rotate', dial, ticks } · { type: 'dialDown' | 'dialUp', dial }
 //         { type: 'touch', gesture: 'tap' | 'press' | 'flick', x, y, x2?, y2? } · { type: 'nfc', id }
 
-import { hidKey } from './models.js';
+import { hidKey } from './models.js?v=b7d3401196';
 
 const GESTURES = [null, 'tap', 'press', 'flick'];
 

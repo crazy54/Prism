@@ -16,7 +16,7 @@
 
 import nodeFs from 'node:fs';
 import path from 'node:path';
-import { modelForUsb } from './models.js';
+import { modelForUsb } from './models.js?v=b7d3401196';
 
 const BUS_USB = 0x0003;
 

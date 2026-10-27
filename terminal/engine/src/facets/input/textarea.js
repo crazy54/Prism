@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A multi-line editor: a commit message gets typed with soft line numbers,
 // a 50/72 ruler and a character count.
 const { ATTR, uni, phase, typed, blink, panel, mix } = __bm(25);

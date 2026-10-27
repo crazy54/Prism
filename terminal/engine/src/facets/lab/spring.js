@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Spring and damper tuning: four masses on identical springs, differing only
 // in damping ratio ζ — underdamped (rings), lightly damped, critically damped
 // (fastest with no overshoot) and overdamped (sluggish). The target steps back

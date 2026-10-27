@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A vim-style statusline that changes color with the mode: NORMAL motions,
 // an INSERT edit, a VISUAL LINE indent and a :w COMMAND, with showcmd echo.
 const { ATTR, uni, phase, mix, fit } = __bm(25);

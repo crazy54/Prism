@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // The figure-eight three-body choreography (Chenciner & Montgomery, 2000):
 // three equal masses chasing each other round one figure-eight, integrated
 // with velocity Verlet. A ring of massless dust starts in orbit around the

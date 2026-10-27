@@ -1,5 +1,5 @@
 // Classic spinners — the single-glyph loops every CLI has shipped since the 80s.
-import { spinnerFacet } from './_kit.js';
+import { spinnerFacet } from './_kit.js?v=b7d3401196';
 
 const C = 'Classic Spinners';
 

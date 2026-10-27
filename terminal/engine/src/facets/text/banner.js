@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Big gradient text over a soft spotlight, with twinkling sparkles. Cycles
 // through fonts and resolution modes, revealing each with a glowing wipe.
 const { mix, mixOklab, NONE } = __bm(0);
-import { drawBanner, measureBanner } from '../../text/banner.js';
-import { shimmer } from '../../text/effects.js';
+import { drawBanner, measureBanner } from '../../text/banner.js?v=b7d3401196';
+import { shimmer } from '../../text/effects.js?v=b7d3401196';
 
 const PERIOD = 6;
 

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Login & MOTD: an ssh login with a landscape-style MOTD, a fastfetch-style card, a getty console login and fail2ban.
 const { C, G, ATTR, writer, walk, typed, blink, clock, bashPrompt, session, drawSession, pad, fixed, uni } = __bm(27);
 

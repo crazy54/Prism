@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A rotary harmonograph: two damped pendulums per axis (near-integer frequency
 // ratios with a little detune) trace a decaying Lissajous figure. Each cycle a
 // pen draws the curve in, the figure breathes as its phases drift, then it

@@ -1,5 +1,5 @@
 // Truecolor spinners — multi-cell loaders with a palette sweeping through them.
-import { spinnerFacet } from './_kit.js';
+import { spinnerFacet } from './_kit.js?v=b7d3401196';
 
 const C = 'Truecolor Spinners';
 

@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../web.bundle.js';
+import { __m as __bm } from '../../web.bundle.js?v=b7d3401196';
 // Big text. Text is laid out in font pixels, then rasterized onto a Canvas so
 // one banner renders in any resolution mode:
 //
@@ -16,7 +16,7 @@ const { Canvas, pickMode, MODES } = __bm(9);
 const { CellBuffer } = __bm(6);
 const { NONE, parse, mix, gradient, fgParam, normalizeDepth, luminance } = __bm(0);
 const { getTheme, palette: makePalette, PALETTES, legible } = __bm(3);
-import { detect } from '../caps.js';
+import { detect } from '../caps.js?v=b7d3401196';
 const { getFont, glyph } = __bm(28);
 
 export const BANNER_MODES = ['half', 'quad', 'sextant', 'braille', 'block', 'ascii'];

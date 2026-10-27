@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Hand-authored display faces for the Text Effects gallery, in the same
 // '#'/'.' source format as src/text/fonts.js. Pass the exported object as
 // `font:` to drawBanner / measureBanner / layoutText (getFont passes objects

@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A moonlit lake painted the way ANSI artists did it: a procedural scene
 // encoded cell by cell into VGA colors and ░▒▓ shading. Moonlit ridges,
 // pine silhouettes, twinkling stars, a shivering reflection, the odd meteor.
 const { bbsPalette, lerpc, hash2 } = __bm(29);
-import { ansify } from './_bbs.js';
+import { ansify } from './_bbs.js?v=b7d3401196';
 
 export default {
   title: 'ANSI Moonlit Lake',

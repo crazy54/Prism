@@ -1,9 +1,9 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // A DNA double helix spinning about its axis while the whole molecule slowly
 // yaws and rolls in perspective. Backbones, base-pair rungs (A–T / G–C colored
 // halves) and nucleotide beads are depth-sorted and shaded front-to-back, so
 // the near strand reads in front of the far one even at braille resolution.
-import { rotate, projector } from '../../math3d.js';
+import { rotate, projector } from '../../math3d.js?v=b7d3401196';
 const { mix, NONE } = __bm(0);
 const { fadeMark } = __bm(3);
 

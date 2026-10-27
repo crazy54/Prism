@@ -1,4 +1,4 @@
-import { __m as __bm } from '../../../web.bundle.js';
+import { __m as __bm } from '../../../web.bundle.js?v=b7d3401196';
 // Every border style prism-term draws, side by side, with a focus ring walking the grid.
 const { panel, ATTR, center, phase } = __bm(22);
 
