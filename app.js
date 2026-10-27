@@ -262,18 +262,6 @@
     }
   }
 
-  // ── blog announcement: dismissed for this post only ─────────────────────
-  // Stores the post slug in localStorage 'prism-site-blog-dismissed'; the <head> snippet reads it before first paint,
-  // so a dismissed strip never flashes, and a new post (a new data-blog-slug) shows again.
-  const blogBanner = document.querySelector('.blog-banner[data-blog-slug]');
-  blogBanner?.querySelector('[data-blog-dismiss]')?.addEventListener('click', () => {
-    try { localStorage.setItem('prism-site-blog-dismissed', blogBanner.dataset.blogSlug); } catch { /* storage is optional: hidden for this visit */ }
-    root.classList.add('blog-dismissed');
-    // focus would fall back to <body>: hand it to the hero heading instead
-    const next = byId('hero-title');
-    if (next) { next.setAttribute('tabindex', '-1'); next.focus({ preventScroll: true }); next.addEventListener('blur', () => next.removeAttribute('tabindex'), { once: true }); }
-  });
-
   site?.onMode(() => { readTokens(); refreshFrames(); });
   setMotion(paused);
 })();

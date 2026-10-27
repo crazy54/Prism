@@ -4,7 +4,6 @@
   <meta charset="utf-8"><meta name="prism-build" content="552df34343" data-engine="b7d3401196"><script>/* cache-safe (website/build.mjs): a copy of this page from an older deploy reloads once */(function(){if(!window.fetch)return;var id="552df34343",k='prism-build-reload:'+location.pathname;fetch("./build.json"+'?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(b){if(!b||typeof b.site!=='string'||b.site===id)return;try{if(sessionStorage.getItem(k)===b.site)return;sessionStorage.setItem(k,b.site)}catch(e){return}location.reload()}).catch(function(){})})()</script>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <script>(function(d){var v,day,m='none',q=location.search;try{v=localStorage.getItem('prism-site-theme')}catch(e){}day=v?(v==='light'||v==='day'):matchMedia('(prefers-color-scheme: light)').matches;d.setAttribute('data-theme',day?'prism-light':'prism-dark');d.setAttribute('data-rf-mode',day?'day':'night');try{if(!/[?&]fl=off/.test(q)){if(matchMedia('(prefers-reduced-motion: reduce)').matches)m='fade';else{m=/[?&]fl=echo/.test(q)?'echo':/[?&]fl=\d/.test(q)||!(sessionStorage.getItem('prismFirstLight')||localStorage.getItem('prism-site-fl-seen'))?'full':'echo';d.classList.add('pfl-armed')}}}catch(e){}d.setAttribute('data-fl',m)})(document.documentElement)</script>
-  <script>/* blog banner: hidden before first paint once dismissed for this post (app.js) */(function(d){try{if(localStorage.getItem('prism-site-blog-dismissed')==="building-prism-situational-graphics-on-demand")d.classList.add('blog-dismissed')}catch(e){}})(document.documentElement)</script>
   <meta name="description" content="Prism is one offline library of living facets for three surfaces: thousands of CSS and SVG effects for the web, hundreds of terminal facets, and animated keys, dials and screens for the Stream Deck. Browse, copy, and compose them, with a zero-dependency MCP server for your agents.">
   <meta name="theme-color" content="#0a0c12">
   <title>Prism — One library. Every possibility.</title>
@@ -28,10 +27,10 @@
   <link rel="stylesheet" href="assets/rf/prism-mark.css?v=3ae018aa3d">
   <link rel="stylesheet" href="assets/rf/first-light.css?v=3408c9c807">
   <link rel="stylesheet" href="assets/site.css?v=231b506135">
-  <link rel="stylesheet" href="styles.css?v=a38bfec376">
+  <link rel="stylesheet" href="styles.css?v=05c5257129">
   <script src="assets/rf/first-light.js?v=c079f9f8c4" defer></script>
   <script src="assets/site.js?v=e4f4d32520" defer></script>
-  <script src="app.js?v=f1332a2f79" defer></script>
+  <script src="app.js?v=2ee2b95585" defer></script>
   <script src="assets/vendor/traceway-1.2.1.js?v=e4855ae392" defer></script>
   <script src="assets/vendor/web-vitals-6.2.3.js?v=1e5e9b9af6" defer></script>
   <script src="assets/telemetry.js?v=360d538038" defer></script>
@@ -59,14 +58,8 @@
   </header>
 
   <main id="main">
-    <section class="blog-banner wrap" aria-label="New on the blog" data-blog-slug="building-prism-situational-graphics-on-demand" data-fl="text">
-      <div class="blog-banner-in">
-        <span class="blog-banner-tag"><svg class="ic s12" aria-hidden="true"><use href="#i-sparkle"/></svg>New on the blog</span>
-        <p class="blog-banner-copy"><strong class="blog-banner-title">Building Prism: Situational Graphics on Demand</strong> <span class="blog-banner-line">How Prism started as an MCP server for UI pieces, grew into a terminal toolkit, and ended up driving two Stream Decks.</span></p>
-        <a class="button primary sm blog-banner-link" href="https://blog.jeremyfhall.com/posts/building-prism-situational-graphics-on-demand/" target="_blank" rel="noopener">Read the post <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg><span class="sr-only"> (opens in a new tab)</span></a>
-        <button type="button" class="icon-link blog-banner-close" data-blog-dismiss aria-label="Dismiss the blog announcement"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
-      </div>
-    </section>
+    <div data-jfhkit-slot></div>
+    <script src="https://jeremyfhall.com/kit/site-kit.v1.js" integrity="sha384-XSpQk1dubcVV4dWVZL3B8R6EsmEa4vwZ8PlVTkEmE+RY28H8OP2Y36BpTK7vCJI2" crossorigin="anonymous" data-site="prism"></script>
     <section class="hero wrap" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow" data-fl="text"><span class="status-dot"></span>THE OFFLINE VISUAL LIBRARY<span class="rf-sep">·</span><span class="meta">WEB · TERMINAL · STREAM DECK</span></p>
