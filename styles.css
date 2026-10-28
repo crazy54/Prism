@@ -57,31 +57,14 @@ main>section:not(.hero),.site-footer{content-visibility:auto;contain-intrinsic-s
 :root[data-rf-mode="day"] .hero-new-tag{background:var(--rf-surf-deck);color:#fff}
 .hero-new .ic{color:var(--rf-surf-deck)}
 
-/* Blog announcement: a slim strip above the hero. The <head> snippet hides it before first paint once it was dismissed
-   for this post (localStorage 'prism-site-blog-dismissed' = the post slug; app.js stores it), so a new post shows again.
-   Static: the prismatic rim and the fringe glint never move; the only motion is the primary button's hover glint. */
-.blog-banner{content-visibility:visible;padding-top:20px}
-.blog-dismissed .blog-banner{display:none}
-.blog-banner-in{position:relative;isolation:isolate;display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;grid-template-areas:"tag copy link close";align-items:center;gap:12px 20px;padding:12px 12px 12px 14px;border:1px solid var(--line);border-radius:var(--r-lg);background:linear-gradient(100deg,rgba(var(--accent-rgb),.11),rgba(var(--accent-rgb),0) 46%),var(--panel);box-shadow:var(--elev-1)}
-.blog-banner-in::before{content:"";position:absolute;inset:-1px;z-index:-1;padding:1px;border-radius:inherit;background:var(--rf-spectrum);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.5;pointer-events:none}
-.blog-banner-in::after{content:"";position:absolute;top:-1px;left:7%;width:26%;height:3px;background:var(--rf-fringe);filter:blur(1px);opacity:.8;pointer-events:none}
-.blog-banner-tag{grid-area:tag;display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px 0 8px;border:1px solid rgba(var(--accent-rgb),.42);border-radius:var(--rf-r-pill);background:rgba(var(--accent-rgb),.12);color:var(--accent);font:600 10px/1 var(--rf-mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
-:root[data-rf-mode="day"] .blog-banner-tag{color:var(--rf-accent-hi)}
-.blog-banner-copy{grid-area:copy;min-width:0;font-size:12.5px;line-height:1.45;color:var(--muted)}
-.blog-banner-title{display:block;color:var(--ink);font-size:14px;font-weight:600;letter-spacing:-.01em}
-.blog-banner-link{grid-area:link}
-.blog-banner-close{grid-area:close}
-:root:not(.blog-dismissed) .blog-banner+.hero{padding-top:52px}
-@media(min-width:1500px){:root:not(.blog-dismissed) .blog-banner+.hero{padding-top:64px}}
-@media(max-width:860px){:root:not(.blog-dismissed) .blog-banner+.hero{padding-top:36px}}
-@media(max-width:720px){
-  .blog-banner-in{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"tag close" "copy copy" "link link";gap:10px 12px;padding:10px 10px 14px 14px}
-  .blog-banner-tag{justify-self:start}
-  .blog-banner-copy{padding-right:4px}
-  .blog-banner-link{justify-self:start}
-}
-@media(max-width:600px){.blog-banner{padding-top:16px}.blog-banner-in{gap:8px 12px}.blog-banner-title{font-size:13.5px;line-height:1.35}.blog-banner-line{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;line-clamp:1;overflow:hidden}.blog-banner-link{--h:36px;margin-top:2px}:root:not(.blog-dismissed) .blog-banner+.hero{padding-top:22px}}
-@media(forced-colors:active){.blog-banner-in::before,.blog-banner-in::after{display:none}}
+/* Banners from the site kit (jeremyfhall.com/kit): an in-flow banner lands in [data-jfhkit-slot] above the hero,
+   before first paint, and the slot is empty (no height) otherwise. The kit's script tag sits between the slot and the
+   hero. The host gets the page's column and the old strip's spacing; the look comes from the banner's style. */
+[data-jfhkit-slot]>.jk-p-inline{max-width:var(--site-max);padding:20px var(--site-pad) 0}
+[data-jfhkit-slot]:not(:empty)+script+.hero{padding-top:52px}
+@media(min-width:1500px){[data-jfhkit-slot]:not(:empty)+script+.hero{padding-top:64px}}
+@media(max-width:860px){[data-jfhkit-slot]:not(:empty)+script+.hero{padding-top:36px}}
+@media(max-width:600px){[data-jfhkit-slot]>.jk-p-inline{padding-top:16px}[data-jfhkit-slot]:not(:empty)+script+.hero{padding-top:22px}}
 
 /* The art: FIG. 001. A beam of white light, the glass pyramid (design/brand), the spectrum.
    Night is volumetric light on ink; Day is a printed optics diagram on pearl paper. */
