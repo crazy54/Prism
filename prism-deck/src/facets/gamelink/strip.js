@@ -32,6 +32,7 @@ export function renderStrip(ctx, slots) {
 export default [
   {
     id: 'gamelink-strip-vitals',
+    since: '0.8.0',
     title: 'CS2 Vitals Strip',
     category: 'Strips & Screens',
     description: 'Your Counter-Strike 2 vitals across the touch strip: health, armor, ammo and money as bars (+ XL adds kills and the score), flashing and cracking with the deck.',
@@ -51,6 +52,7 @@ export default [
   },
   {
     id: 'gamelink-dial-vital',
+    since: '0.8.0',
     title: 'CS2 Vital Dial',
     category: 'Strips & Screens',
     description: 'One Counter-Strike 2 vital on a dial’s strip segment: health, armor, ammo, money, kills, the score or the round, with the deck’s effects.',

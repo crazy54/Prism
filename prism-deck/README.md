@@ -4,9 +4,9 @@
 
 Version <!--n:version-->0.7.0<!--/n--> (plugin <!--n:pluginVersion-->0.7.0.0<!--/n-->). The numbers below are rewritten from the package on every plugin build (`scripts/doc-counts.mjs`).
 
-- **<!--n:facets-->210<!--/n--> facets** in <!--n:galleries-->8<!--/n--> galleries: Themes, Icons, Motion, Spans, Dials & Strips, Screens, Apps and Games.
+- **<!--n:facets-->358<!--/n--> facets** in <!--n:galleries-->9<!--/n--> galleries: Themes, Icons, Motion, Spans, Dials & Strips, Screens, Apps and Games.
 - **<!--n:themes-->11<!--/n--> themes**, each in Night and Day: Prism, Aurora, Blueprint, Chrome, Ember, Mono, Neon, Paper, Phosphor, Pixel and Porcelain.
-- **<!--n:glyphs-->56<!--/n--> glyphs**. Every glyph renders in every theme.
+- **<!--n:glyphs-->192<!--/n--> glyphs**. Every glyph renders in every theme.
 - **<!--n:devices-->30<!--/n--> devices**, from the hardware research ([`docs/devices.md`](./docs/devices.md)).
 
 Facets render as **deterministic SVG** in a strict SVG subset, so a frame looks the same in the Stream Deck app, in any browser and through the raster backend (hidraw devices, PNG and GIF exports). Text is drawn as paths from the Inter outlines in Prism.html, so nothing depends on installed fonts.
@@ -27,7 +27,7 @@ Prism Deck ships as three kinds of files. You install each one by double-clickin
 | File | What it is |
 |---|---|
 | `com.jeremyfhall.prism.streamDeckPlugin` | The plugin. It adds the **Prism Display** action (keys and dials) and **Prism Info Bar** (Stream Deck Neo). Prism Display is visual: it shows a facet. It can also open a web page or switch profile when pressed, and nothing else. |
-| `com.jeremyfhall.prism.icons.<theme>.streamDeckIconPack` | One icon pack per theme (<!--n:packs-->11<!--/n-->: `prism`, `aurora`, `blueprint`, `chrome`, `ember`, `mono`, `neon`, `paper`, `phosphor`, `pixel`, `porcelain`). Each covers <!--n:packStates-->240<!--/n--> glyph states (every glyph and its states, Night and Day). States that move are animated GIFs, each listed with its still PNG; the rest are static SVGs. Give them to any Stream Deck action. |
+| `com.jeremyfhall.prism.icons.<theme>.streamDeckIconPack` | One icon pack per theme (<!--n:packs-->11<!--/n-->: `prism`, `aurora`, `blueprint`, `chrome`, `ember`, `mono`, `neon`, `paper`, `phosphor`, `pixel`, `porcelain`). Each covers <!--n:packStates-->572<!--/n--> glyph states (every glyph and its states, Night and Day). States that move are animated GIFs, each listed with its still PNG; the rest are static SVGs. Give them to any Stream Deck action. |
 | `Prism - <Device>.streamDeckProfile` | <!--n:profiles-->7<!--/n--> ready-made profiles: `Prism - Galleon 100 SD`, `Prism - Stream Deck +`, `Prism - Stream Deck + XL`, `Prism - Stream Deck MK.2`, `Prism - Stream Deck XL`, `Prism - Stream Deck Mini` and `Prism - Stream Deck Neo`. Page 1, **Home**, is built from Stream Deck's own actions (media, volume, screen snip, desktop, files, clipboard, the Prism site) in Prism art, so every key does what it shows. The live Prism facets are on the **Showcase** pages. |
 | `com.jeremyfhall.prism.opendeck.streamDeckPlugin` | The same plugin for OpenDeck on Linux (adds `manifest.linux.json`). |
 

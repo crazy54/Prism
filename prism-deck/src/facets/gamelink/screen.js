@@ -27,6 +27,7 @@ function cards(view, fx) {
 
 export default {
   id: 'gamelink-screen-match',
+  since: '0.8.0',
   title: 'CS2 Match Screen',
   category: 'Strips & Screens',
   description: 'The Counter-Strike 2 match on the Galleon screen: score and map, the round and why it ended, your K / A / D and MVPs, your money and gear.',

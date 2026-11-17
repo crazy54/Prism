@@ -83,6 +83,7 @@ export function renderDeck(ctx, { hud = false, sceneOnly = false, back = false }
 
 export default {
   id: 'gamelink-cs2-deck',
+  since: '0.8.0',
   title: 'CS2 Deck',
   category: 'Whole Deck',
   description: 'Counter-Strike 2 on the whole deck: vitals on keys and screens, plus flashbang whiteouts that disperse into the Spectrum, kill ripples, damage, death and round sweeps.',

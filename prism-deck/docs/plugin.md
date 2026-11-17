@@ -6,7 +6,7 @@ Prism Deck puts the whole Prism Deck catalog on real hardware: animated, themed 
 |---|---|---|
 | `com.jeremyfhall.prism.streamDeckPlugin` | The plugin (version <!--n:pluginVersion-->0.7.0.0<!--/n-->): the **Prism Display** action (keys and dials) and **Prism Info Bar** (Stream Deck Neo) | `plugin/dist/` (`node scripts/build-plugin.mjs`) |
 | `com.jeremyfhall.prism.opendeck.streamDeckPlugin` | The same plugin for OpenDeck on Linux (adds `manifest.linux.json`) | `plugin/dist/` (same script) |
-| `com.jeremyfhall.prism.icons.<theme>.streamDeckIconPack` | One icon pack per deck theme (<!--n:packs-->11<!--/n-->). Each covers <!--n:packStates-->240<!--/n--> glyph states (every glyph × its states × Night/Day). States that move are GIF loops (at least 2 frames), each listed with its still PNG; the others are static SVGs | `plugin/dist/iconpacks/` (`node scripts/build-iconpacks.mjs`) |
+| `com.jeremyfhall.prism.icons.<theme>.streamDeckIconPack` | One icon pack per deck theme (<!--n:packs-->11<!--/n-->). Each covers <!--n:packStates-->572<!--/n--> glyph states (every glyph × its states × Night/Day). States that move are GIF loops (at least 2 frames), each listed with its still PNG; the others are static SVGs | `plugin/dist/iconpacks/` (`node scripts/build-iconpacks.mjs`) |
 | `Prism - <device>.streamDeckProfile` | <!--n:profiles-->7<!--/n--> sample profiles: Galleon 100 SD, Stream Deck +, Stream Deck + XL, MK.2, XL, Mini and Neo. **Home** works on day one (Stream Deck's own actions in Prism art); the **Showcase** pages hold the live Prism facets | `plugin/dist/profiles/` (same script) |
 
 Requirements: Stream Deck app **7.6** or later on Windows 10/11 or macOS 13 or later. Build with `--min-software 7.1` for apps 7.1–7.5; that build drops the Neo info-bar action. The plugin runs on the app's bundled Node 20 and needs no other software.
@@ -42,7 +42,7 @@ Each profile has a **Home** page that works on day one, then one or more **Showc
 
 Drag **Prism Display** onto a key or a dial. It is visual: it draws a Prism facet. It doesn't play music, change the volume or send keys. For those, use a Stream Deck action and give it a Prism icon. The property inspector (the panel under the canvas) shows a live preview and lets you choose:
 
-- **Facet.** Search, or pick a gallery: Icons, Motion, Spans, Dials & Strips, Screens, Apps, Games, Themes (<!--n:facets-->210<!--/n--> facets in <!--n:galleries-->8<!--/n--> galleries). You only see facets that fit this slot. Keys get key, span and whole-deck facets. Dials get dial segments, strip panoramas and Galleon screens. The Neo info bar gets info-bar facets.
+- **Facet.** Search, or pick a gallery: Icons, Motion, Spans, Dials & Strips, Screens, Apps, Games, Themes (<!--n:facets-->358<!--/n--> facets in <!--n:galleries-->9<!--/n--> galleries). You only see facets that fit this slot. Keys get key, span and whole-deck facets. Dials get dial segments, strip panoramas and Galleon screens. The Neo info bar gets info-bar facets.
 - **Theme and mode.** Pick any deck theme in Night or Day, or leave it on the plugin default (set under *Plugin settings*).
 - **Motion.** *Full* plays the facet's own animation. *Calm* idles at about 4 fps. *Still* shows a static frame. Presses and dial turns always animate their feedback.
 - **Parameters.** The controls come straight from the facet: labels, hues, speeds, toggles.

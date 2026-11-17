@@ -8,6 +8,7 @@ import { EFFECTS_PARAM, DATA_SHAPE } from './_gl-kit.js';
 
 export default {
   id: 'gamelink-span-prism',
+  since: '0.8.0',
   title: 'CS2 Prism Span',
   category: 'Whole Deck',
   description: 'The Game Link prism across a block of keys: a white beam dispersed into a Spectrum that is your health, with every Counter-Strike 2 moment played across it.',

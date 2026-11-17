@@ -38,6 +38,7 @@ const vital = (slot, { title, category, description, tags, order }) => ({
   loop: 60,
   still: 7.5,
   press: 'none',
+  since: '0.8.0',
   params: { hue: { type: 'hue', default: SLOT_HUE[slot], label: 'Hue' }, effects: EFFECTS_PARAM },
   order,
   render: (ctx) => renderVital(ctx, slot),

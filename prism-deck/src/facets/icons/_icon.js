@@ -36,6 +36,7 @@ export function iconFacet(glyphId, extra = {}) {
       hue: { type: 'hue', default: g.hue ?? 269.8, min: 0, max: 360, step: 1, label: 'Hue' },
     },
     order: extra.order ?? 50,
+    ...(extra.since ? { since: extra.since } : {}),
     render(ctx) {
       const k = surface(ctx);
       const state = ctx.stateName || g.defaultState;

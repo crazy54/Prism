@@ -13,7 +13,7 @@ import { GLYPH_CATEGORIES } from '../galleries.js';
 const NEAREST = { build: 'Productivity', edit: 'Productivity', window: 'System', game: 'Navigation' };
 
 export function moreIcon(glyphId, extra = {}) {
-  const f = iconFacet(glyphId, { order: 60, ...extra });
+  const f = iconFacet(glyphId, { order: 60, since: '0.8.0', ...extra });
   const cat = getGlyph(glyphId).category;
   return GLYPH_CATEGORIES[cat] || !NEAREST[cat] ? f : { ...f, category: NEAREST[cat] };
 }
